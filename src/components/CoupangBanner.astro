@@ -1,0 +1,37 @@
+---
+interface CoupangLink {
+  title: string;
+  url: string;
+  imageUrl?: string;
+}
+
+interface Props {
+  links: CoupangLink[];
+}
+
+const { links } = Astro.props;
+---
+
+<aside class="coupang-banner">
+  <h4>추천 상품</h4>
+  <div class="coupang-links">
+    {
+      links.map((link) => (
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          class="coupang-link-item"
+        >
+          {link.imageUrl && (
+            <img src={link.imageUrl} alt={link.title} loading="lazy" />
+          )}
+          <span>{link.title}</span>
+        </a>
+      ))
+    }
+  </div>
+  <p class="coupang-disclaimer">
+    이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+  </p>
+</aside>

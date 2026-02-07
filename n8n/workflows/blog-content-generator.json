@@ -1,0 +1,247 @@
+{
+  "name": "AI Revenue Blog - Content Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9 * * *"
+            }
+          ]
+        }
+      },
+      "id": "schedule_trigger",
+      "name": "Daily 09:00 Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 카테고리별 키워드 시드\nconst categories = [\n  {\n    category: 'AI',\n    keywords: ['AI 도구 추천', 'ChatGPT 활용법', 'Claude 사용법', 'AI 이미지 생성', 'AI 코딩', 'AI 자동화', 'AI 부업'],\n    coupangCategory: 'tech'\n  },\n  {\n    category: 'Dev',\n    keywords: ['프로그래밍 입문', 'React 튜토리얼', 'Python 자동화', 'Next.js 배포', 'Supabase 가이드', '개발자 생산성'],\n    coupangCategory: 'books'\n  },\n  {\n    category: 'Review',\n    keywords: ['노트북 추천', '모니터 비교', '키보드 리뷰', '개발자 장비', '태블릿 추천', '이어폰 비교'],\n    coupangCategory: 'electronics'\n  }\n];\n\n// 오늘 날짜 기반 카테고리 로테이션\nconst today = new Date();\nconst dayIndex = today.getDate() % categories.length;\nconst selected = categories[dayIndex];\n\n// 카테고리 내에서 랜덤 키워드 선택\nconst keywordIndex = Math.floor(Math.random() * selected.keywords.length);\nconst keyword = selected.keywords[keywordIndex];\n\nreturn [{\n  json: {\n    category: selected.category,\n    keyword: keyword,\n    coupangCategory: selected.coupangCategory,\n    date: today.toISOString().split('T')[0],\n    dateKR: `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`\n  }\n}];"
+      },
+      "id": "select_topic",
+      "name": "Select Topic & Category",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [420, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.exa.ai/search",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": \"{{ $json.keyword }} 2026\",\n  \"num_results\": 5,\n  \"use_autoprompt\": true,\n  \"type\": \"neural\",\n  \"contents\": {\n    \"text\": true\n  }\n}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "exa_search",
+      "name": "EXA Trend Search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [640, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "exa_api_key",
+          "name": "EXA API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const topic = $('Select Topic & Category').first().json;\nconst searchResults = $input.first().json;\n\n// 검색 결과에서 참고 정보 추출\nlet references = '';\nif (searchResults.results && searchResults.results.length > 0) {\n  references = searchResults.results\n    .slice(0, 3)\n    .map((r, i) => `${i + 1}. ${r.title}: ${(r.text || '').substring(0, 200)}`)\n    .join('\\n');\n}\n\nreturn [{\n  json: {\n    ...topic,\n    references: references || '최신 트렌드 정보를 참고하여 작성해주세요.'\n  }\n}];"
+      },
+      "id": "prepare_context",
+      "name": "Prepare AI Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [860, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "={{ $credentials.httpHeaderAuth.value }}"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"max_tokens\": 4000,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"당신은 한국어 테크 블로그 전문 작가입니다. 다음 주제로 SEO 최적화된 블로그 글을 작성해주세요.\\n\\n주제: {{ $json.keyword }}\\n카테고리: {{ $json.category }}\\n날짜: {{ $json.dateKR }}\\n\\n참고 자료:\\n{{ $json.references }}\\n\\n요구사항:\\n1. 제목은 클릭을 유도하면서도 정확한 정보를 담아야 합니다\\n2. 서론(문제 제기) → 본론(해결책/비교) → 결론(추천) 구조\\n3. H2, H3 소제목을 활용하여 구조화\\n4. 표(테이블)를 1개 이상 포함\\n5. 실제 경험에 기반한 듯한 자연스러운 어투\\n6. 1,500~2,500자 분량\\n7. SEO를 위해 주요 키워드를 자연스럽게 3~5회 반복\\n\\n출력 형식 (반드시 이 JSON 형식으로):\\n{\\n  \\\"title\\\": \\\"글 제목\\\",\\n  \\\"description\\\": \\\"150자 이내 메타 설명\\\",\\n  \\\"tags\\\": [\\\"태그1\\\", \\\"태그2\\\", \\\"태그3\\\", \\\"태그4\\\"],\\n  \\\"content\\\": \\\"마크다운 형식의 본문 내용 (프론트매터 제외)\\\"\\n}\\n\\nJSON만 출력하고 다른 텍스트는 포함하지 마세요.\"\n    }\n  ]\n}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "claude_generate",
+      "name": "Claude Haiku - Generate Post",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1080, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "anthropic_api_key",
+          "name": "Anthropic API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const topic = $('Select Topic & Category').first().json;\nconst response = $input.first().json;\n\n// Claude 응답에서 JSON 추출\nlet content;\ntry {\n  const text = response.content[0].text;\n  // JSON 블록 추출 (```json ... ``` 또는 순수 JSON)\n  const jsonMatch = text.match(/```json\\s*([\\s\\S]*?)\\s*```/) || text.match(/\\{[\\s\\S]*\\}/);\n  const jsonStr = jsonMatch ? (jsonMatch[1] || jsonMatch[0]) : text;\n  content = JSON.parse(jsonStr);\n} catch (e) {\n  // 파싱 실패 시 기본값\n  content = {\n    title: `${topic.keyword} - 완전 가이드 (${topic.date})`,\n    description: `${topic.keyword}에 대한 최신 정보와 실용적인 가이드를 제공합니다.`,\n    tags: [topic.keyword, topic.category, '가이드', '2026'],\n    content: response.content[0].text\n  };\n}\n\n// 쿠팡 추천 상품 매핑\nconst coupangProducts = {\n  tech: [\n    { title: '로지텍 MX Keys S 무선 키보드', url: 'https://link.coupang.com/re/AFFSDP?lptag=AF0000000' },\n    { title: 'LG 울트라와이드 34인치 모니터', url: 'https://link.coupang.com/re/AFFSDP?lptag=AF0000000' }\n  ],\n  books: [\n    { title: '모던 자바스크립트 Deep Dive', url: 'https://link.coupang.com/re/AFFSDP?lptag=AF0000000' },\n    { title: '클린 코드 (로버트 C. 마틴)', url: 'https://link.coupang.com/re/AFFSDP?lptag=AF0000000' }\n  ],\n  electronics: [\n    { title: '삼성 갤럭시북4 프로 16인치', url: 'https://link.coupang.com/re/AFFSDP?lptag=AF0000000' },\n    { title: '애플 맥북 에어 M3', url: 'https://link.coupang.com/re/AFFSDP?lptag=AF0000000' }\n  ]\n};\n\nconst products = coupangProducts[topic.coupangCategory] || coupangProducts.tech;\n\n// Slug 생성 (날짜-제목)\nconst slug = `${topic.date}-${content.title\n  .replace(/[^a-zA-Z0-9가-힣\\s]/g, '')\n  .replace(/\\s+/g, '-')\n  .substring(0, 50)\n  .toLowerCase()}`;\n\n// Frontmatter + Content 조합\nconst coupangYaml = products.map(p => `  - title: \"${p.title}\"\\n    url: \"${p.url}\"`).join('\\n');\n\nconst markdown = `---\ntitle: \"${content.title}\"\ndescription: \"${content.description}\"\npubDate: ${topic.date}\ncategory: \"${topic.category}\"\ntags: ${JSON.stringify(content.tags)}\nauthor: \"TechFlow\"\ncoupangLinks:\n${coupangYaml}\n---\n\n${content.content}`;\n\nreturn [{\n  json: {\n    slug: slug,\n    filename: `${slug}.md`,\n    markdown: markdown,\n    title: content.title,\n    category: topic.category,\n    date: topic.date\n  }\n}];"
+      },
+      "id": "format_post",
+      "name": "Format Blog Post",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1300, 300]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://api.github.com/repos/{{ $credentials.httpHeaderAuth.owner }}/ai-revenue-blog/contents/src/blog/{{ $json.filename }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"message\": \"[auto] Add blog post: {{ $json.title }}\",\n  \"content\": \"{{ Buffer.from($json.markdown).toString('base64') }}\",\n  \"branch\": \"main\"\n}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "github_commit",
+      "name": "GitHub - Commit Post",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1520, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "github_pat",
+          "name": "GitHub PAT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const post = $('Format Blog Post').first().json;\n\n// 성공 로그 기록\nconst result = {\n  status: 'success',\n  title: post.title,\n  slug: post.slug,\n  category: post.category,\n  date: post.date,\n  publishedAt: new Date().toISOString(),\n  message: `Blog post \"${post.title}\" published successfully.`\n};\n\nreturn [{ json: result }];"
+      },
+      "id": "log_success",
+      "name": "Log Success",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1740, 300]
+    }
+  ],
+  "connections": {
+    "Daily 09:00 Trigger": {
+      "main": [
+        [
+          {
+            "node": "Select Topic & Category",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select Topic & Category": {
+      "main": [
+        [
+          {
+            "node": "EXA Trend Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EXA Trend Search": {
+      "main": [
+        [
+          {
+            "node": "Prepare AI Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare AI Context": {
+      "main": [
+        [
+          {
+            "node": "Claude Haiku - Generate Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude Haiku - Generate Post": {
+      "main": [
+        [
+          {
+            "node": "Format Blog Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Blog Post": {
+      "main": [
+        [
+          {
+            "node": "GitHub - Commit Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub - Commit Post": {
+      "main": [
+        [
+          {
+            "node": "Log Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Seoul"
+  },
+  "tags": [
+    {
+      "name": "revenue",
+      "id": "revenue"
+    },
+    {
+      "name": "blog",
+      "id": "blog"
+    }
+  ]
+}

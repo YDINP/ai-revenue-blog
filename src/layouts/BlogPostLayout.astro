@@ -1,0 +1,81 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import CoupangBanner from '../components/CoupangBanner.astro';
+import AdSlot from '../components/AdSlot.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  author: string;
+  category: string;
+  tags: string[];
+  image?: { url: string; alt: string };
+  coupangLinks?: { title: string; url: string; imageUrl?: string }[];
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  author,
+  category,
+  tags,
+  image,
+  coupangLinks,
+} = Astro.props;
+
+const formattedDate = new Date(pubDate).toLocaleDateString('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={description} image={image?.url}>
+  <article class="blog-post">
+    <header class="post-header">
+      <div class="post-meta">
+        <span class="post-category">{category}</span>
+        <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+        {
+          updatedDate && (
+            <span class="post-updated">
+              (수정:{' '}
+              {new Date(updatedDate).toLocaleDateString('ko-KR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+              )
+            </span>
+          )
+        }
+      </div>
+      <h1>{title}</h1>
+      <p class="post-description">{description}</p>
+      <div class="post-tags">
+        {tags.map((tag) => <span class="tag">#{tag}</span>)}
+      </div>
+    </header>
+
+    {image && <img src={image.url} alt={image.alt} class="post-hero-image" />}
+
+    <!-- 상단 광고 슬롯 -->
+    <AdSlot position="top" />
+
+    <div class="post-content">
+      <slot />
+    </div>
+
+    <!-- 하단 쿠팡 배너 -->
+    {coupangLinks && coupangLinks.length > 0 && (
+      <CoupangBanner links={coupangLinks} />
+    )}
+
+    <!-- 하단 광고 슬롯 -->
+    <AdSlot position="bottom" />
+  </article>
+</BaseLayout>

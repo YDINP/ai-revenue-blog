@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ai-revenue-blog.vercel.app/sitemap-index.xml

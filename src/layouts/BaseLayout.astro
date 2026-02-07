@@ -1,0 +1,88 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  canonicalUrl?: string;
+}
+
+const { title, description, image, canonicalUrl } = Astro.props;
+const siteTitle = 'TechFlow - AI & 테크 인사이트';
+const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
+const ogImage = image || '/og-default.png';
+const canonical = canonicalUrl || Astro.url.href;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:site_name" content={siteTitle} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={siteTitle}
+      href="/rss.xml"
+    />
+
+    <!-- Google AdSense (승인 후 ID 교체) -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+    <!-- Google Analytics (선택) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav-container">
+        <a href="/" class="site-logo">TechFlow</a>
+        <div class="nav-links">
+          <a href="/blog/">Blog</a>
+          <a href="/blog/?category=ai">AI</a>
+          <a href="/blog/?category=dev">Dev</a>
+          <a href="/blog/?category=review">Review</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-container">
+        <p>&copy; {new Date().getFullYear()} TechFlow. All rights reserved.</p>
+        <p class="footer-note">
+          이 사이트의 일부 링크는 제휴 마케팅 링크이며, 구매 시 소정의 수수료를
+          받을 수 있습니다.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
