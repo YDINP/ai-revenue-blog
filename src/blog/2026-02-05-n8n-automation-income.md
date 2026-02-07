@@ -10,7 +10,7 @@ image:
   alt: "자동화 워크플로우"
 coupangLinks:
   - title: "삼성 갤럭시북4 프로 (개발용 노트북)"
-    url: "https://link.coupang.com/re/AFFSDP?lptag=AF0000000"
+    url: "https://link.coupang.com/a/dH4Nbg"
 ---
 
 ## n8n이란?

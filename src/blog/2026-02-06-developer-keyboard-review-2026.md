@@ -7,9 +7,9 @@ tags: ["키보드추천", "개발자키보드", "기계식키보드", "코딩장
 author: "TechFlow"
 coupangLinks:
   - title: "로지텍 MX Keys S 무선 키보드"
-    url: "https://link.coupang.com/re/AFFSDP?lptag=AF0000000"
+    url: "https://link.coupang.com/a/dH4Nbg"
   - title: "키크론 K3 Pro 저소음 적축"
-    url: "https://link.coupang.com/re/AFFSDP?lptag=AF0000000"
+    url: "https://link.coupang.com/a/dH4Nbg"
 ---
 
 ## 개발자에게 키보드가 중요한 이유

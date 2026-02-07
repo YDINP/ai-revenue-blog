@@ -10,7 +10,7 @@ image:
   alt: "Supabase 개발"
 coupangLinks:
   - title: "Do it! 백엔드 입문 (Node.js + Supabase)"
-    url: "https://link.coupang.com/re/AFFSDP?lptag=AF0000000"
+    url: "https://link.coupang.com/a/dH4Nbg"
 ---
 
 ## Supabase란?
