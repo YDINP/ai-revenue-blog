@@ -118,12 +118,12 @@
     {
       "parameters": {
         "method": "PUT",
-        "url": "=https://api.github.com/repos/{{ $credentials.httpHeaderAuth.owner }}/ai-revenue-blog/contents/src/blog/{{ $json.filename }}",
+        "url": "=https://api.github.com/repos/YDINP/ai-revenue-blog/contents/src/blog/{{ $json.filename }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"message\": \"[auto] Add blog post: {{ $json.title }}\",\n  \"content\": \"{{ Buffer.from($json.markdown).toString('base64') }}\",\n  \"branch\": \"main\"\n}",
+        "jsonBody": "={\n  \"message\": \"[auto] Add blog post: {{ $json.title }}\",\n  \"content\": \"{{ Buffer.from($json.markdown).toString('base64') }}\",\n  \"branch\": \"master\"\n}",
         "options": {
           "timeout": 30000
         }
