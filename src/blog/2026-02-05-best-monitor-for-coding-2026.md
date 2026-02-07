@@ -7,9 +7,9 @@ tags: ["모니터추천", "코딩모니터", "울트라와이드", "개발자장
 author: "TechFlow"
 coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"
-    url: "https://link.coupang.com/a/dH4Nbg"
+    url: "https://link.coupang.com/a/dH5E6K"
   - title: "삼성 뷰피니티 S8 32인치 4K"
-    url: "https://link.coupang.com/a/dH5lih"
+    url: "https://link.coupang.com/a/dH5FDM"
 ---
 
 ## 개발자에게 모니터 크기가 중요한 이유

@@ -31,12 +31,12 @@
 ### 4. LG 울트라와이드 34인치
 - 검색어: `LG 울트라와이드 34인치`
 - 사용 글: 모니터 추천
-- 링크:
+- 링크:https://link.coupang.com/a/dH5E6K
 
 ### 5. 삼성 뷰피니티 S8
 - 검색어: `삼성 뷰피니티 S8`
 - 사용 글: 모니터 추천
-- 링크:https://link.coupang.com/a/dH5lih
+- 링크:https://link.coupang.com/a/dH5FDM
 
 ---
 
@@ -50,7 +50,7 @@
 ### 7. 삼성 갤럭시북4 프로
 - 검색어: `갤럭시북4 프로`
 - 사용 글: n8n 워크플로우 (Review 카테고리 자동생성용)
-- 링크:
+- 링크:https://link.coupang.com/a/dH5FWj
 
 ### 8. 아이패드 에어 M2
 - 검색어: `아이패드 에어 M2`
