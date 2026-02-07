@@ -32,9 +32,44 @@ const formattedDate = new Date(pubDate).toLocaleDateString('ko-KR', {
   month: 'long',
   day: 'numeric',
 });
+
+// JSON-LD structured data for SEO
+const canonicalUrl = Astro.url.href;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description: description,
+  datePublished: pubDate.toISOString(),
+  ...(updatedDate && { dateModified: updatedDate.toISOString() }),
+  author: {
+    '@type': 'Person',
+    name: author,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'TechFlow Blog',
+    url: 'https://ai-revenue-blog.vercel.app',
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalUrl,
+  },
+  keywords: tags.join(', '),
+  ...(image && {
+    image: {
+      '@type': 'ImageObject',
+      url: image.url,
+      alt: image.alt,
+    },
+  }),
+};
 ---
 
 <BaseLayout title={title} description={description} image={image?.url}>
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  
   <article class="blog-post">
     <header class="post-header">
       <div class="post-meta">

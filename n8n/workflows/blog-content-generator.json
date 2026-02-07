@@ -142,13 +142,119 @@
     },
     {
       "parameters": {
-        "jsCode": "const post = $('Format Blog Post').first().json;\n\n// 성공 로그 기록\nconst result = {\n  status: 'success',\n  title: post.title,\n  slug: post.slug,\n  category: post.category,\n  date: post.date,\n  publishedAt: new Date().toISOString(),\n  message: `Blog post \"${post.title}\" published successfully.`\n};\n\nreturn [{ json: result }];"
+        "jsCode": "const post = $('Format Blog Post').first().json;\nconst claudeResponse = $('Claude Haiku - Generate Post').first().json;\n\n// Claude 응답에서 tags 추출\nlet tags = [];\ntry {\n  const text = claudeResponse.content[0].text;\n  const jsonMatch = text.match(/```json\\s*([\\s\\S]*?)\\s*```/) || text.match(/\\{[\\s\\S]*\\}/);\n  const jsonStr = jsonMatch ? (jsonMatch[1] || jsonMatch[0]) : text;\n  const parsed = JSON.parse(jsonStr);\n  tags = parsed.tags || [];\n} catch (e) {\n  // 파싱 실패 시 frontmatter에서 추출 시도\n  const tagsMatch = post.markdown.match(/tags:\\s*\\[([^\\]]+)\\]/);\n  if (tagsMatch) {\n    tags = tagsMatch[1].split(',').map(t => t.trim().replace(/\"/g, ''));\n  } else {\n    tags = [post.category, '가이드'];\n  }\n}\n\n// Supabase blog_posts 테이블에 삽입할 데이터 준비\n// 한국어 content를 안전하게 처리하기 위해 JSON을 미리 생성\nconst supabaseBody = JSON.stringify({\n  title: post.title,\n  slug: post.slug,\n  content: post.markdown,\n  category: post.category,\n  tags: tags,\n  status: 'published',\n  page_views: 0,\n  estimated_revenue: 0\n});\n\nreturn [{\n  json: {\n    ...post,\n    supabaseBody: supabaseBody\n  }\n}];"
+      },
+      "id": "prepare_supabase",
+      "name": "Prepare Supabase Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1740, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://mkatzcmsrdntsmnykxpt.supabase.co/rest/v1/blog_posts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYXR6Y21zcmRudHNtbnlreHB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyMDY3NTgsImV4cCI6MjA4NTc4Mjc1OH0.L58E2kOIBEfMwxOlgKPpnxjS0OTKhLqE0whF-xRNMGE"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYXR6Y21zcmRudHNtbnlreHB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyMDY3NTgsImV4cCI6MjA4NTc4Mjc1OH0.L58E2kOIBEfMwxOlgKPpnxjS0OTKhLqE0whF-xRNMGE"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=minimal"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.supabaseBody }}",
+        "options": {
+          "timeout": 15000
+        }
+      },
+      "id": "save_to_supabase",
+      "name": "Save to Supabase",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1960, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const post = $('Format Blog Post').first().json;\n\n// 성공 로그 기록\nconst result = {\n  status: 'success',\n  title: post.title,\n  slug: post.slug,\n  category: post.category,\n  date: post.date,\n  publishedAt: new Date().toISOString(),\n  message: `Blog post \"${post.title}\" published successfully to GitHub and Supabase.`\n};\n\nreturn [{ json: result }];"
       },
       "id": "log_success",
       "name": "Log Success",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1740, 300]
+      "position": [2180, 300]
+    },
+    {
+      "parameters": {},
+      "id": "error_trigger",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [200, 520]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 에러 정보 포맷\nconst errorInfo = $input.first().json;\n\nconst errorData = {\n  event_type: 'workflow_error',\n  source: 'tool',\n  error_node: errorInfo.node?.name || 'Unknown',\n  error_message: errorInfo.error?.message || JSON.stringify(errorInfo.error),\n  workflow_id: errorInfo.workflow?.id || 'blog-content-generator',\n  timestamp: new Date().toISOString(),\n  metadata: {\n    execution_id: errorInfo.execution?.id,\n    workflow_name: errorInfo.workflow?.name\n  }\n};\n\nconst supabaseErrorBody = JSON.stringify(errorData);\n\nreturn [{\n  json: {\n    supabaseErrorBody: supabaseErrorBody,\n    errorData: errorData\n  }\n}];"
+      },
+      "id": "format_error",
+      "name": "Format Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [420, 520]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://mkatzcmsrdntsmnykxpt.supabase.co/rest/v1/analytics",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYXR6Y21zcmRudHNtbnlreHB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyMDY3NTgsImV4cCI6MjA4NTc4Mjc1OH0.L58E2kOIBEfMwxOlgKPpnxjS0OTKhLqE0whF-xRNMGE"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYXR6Y21zcmRudHNtbnlreHB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyMDY3NTgsImV4cCI6MjA4NTc4Mjc1OH0.L58E2kOIBEfMwxOlgKPpnxjS0OTKhLqE0whF-xRNMGE"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=minimal"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.supabaseErrorBody }}",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "log_error_supabase",
+      "name": "Log Error to Supabase",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [640, 520]
     }
   ],
   "connections": {
@@ -222,7 +328,51 @@
       "main": [
         [
           {
+            "node": "Prepare Supabase Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Supabase Data": {
+      "main": [
+        [
+          {
+            "node": "Save to Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save to Supabase": {
+      "main": [
+        [
+          {
             "node": "Log Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Format Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Error": {
+      "main": [
+        [
+          {
+            "node": "Log Error to Supabase",
             "type": "main",
             "index": 0
           }

@@ -58,6 +58,28 @@ const canonical = canonicalUrl || Astro.url.href;
     <!-- Google Analytics (선택) -->
     <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
   </head>
+  <script>
+    // 페이지뷰 추적 (Supabase Edge Function)
+    (function() {
+      const ANALYTICS_URL = 'https://mkatzcmsrdntsmnykxpt.supabase.co/functions/v1/analytics-ingest';
+      const slug = window.location.pathname.replace(/^\/blog\//, '').replace(/\/$/, '');
+
+      fetch(ANALYTICS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event_type: 'pageview',
+          source: 'blog',
+          metadata: {
+            slug: slug,
+            path: window.location.pathname,
+            referrer: document.referrer || 'direct',
+            user_agent: navigator.userAgent
+          }
+        })
+      }).catch(() => {});
+    })();
+  </script>
   <body>
     <header class="site-header">
       <nav class="nav-container">
