@@ -7,9 +7,9 @@ tags: ["Python자동화", "파이썬", "업무자동화", "코딩입문", "자�
 author: "TechFlow"
 coupangLinks:
   - title: "혼자 공부하는 파이썬"
-    url: "https://link.coupang.com/a/dH4Nbg"
-  - title: "파이썬 자동화 교과서"
-    url: "https://link.coupang.com/a/dH4Nbg"
+    url: "https://link.coupang.com/a/dH5mU8"
+  - title: "점프 투 파이썬"
+    url: "https://link.coupang.com/a/dH5nbS"
 ---
 
 ## 왜 Python 자동화인가?

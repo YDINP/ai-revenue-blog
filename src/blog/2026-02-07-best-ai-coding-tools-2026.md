@@ -10,9 +10,9 @@ image:
   alt: "AI 코딩 도구"
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드 (개발자 추천)"
-    url: "https://link.coupang.com/a/dH4Nbg"
-  - title: "LG 울트라와이드 34인치 모니터"
-    url: "https://link.coupang.com/a/dH4Nbg"
+    url: "https://link.coupang.com/a/dH5kCz"
+  - title: "모던 자바스크립트 Deep Dive"
+    url: "https://link.coupang.com/a/dH5mpm"
 ---
 
 ## 2026년, AI 코딩 도구의 현주소

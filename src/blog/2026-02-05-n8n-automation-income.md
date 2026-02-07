@@ -9,8 +9,10 @@ image:
   url: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800"
   alt: "자동화 워크플로우"
 coupangLinks:
-  - title: "삼성 갤럭시북4 프로 (개발용 노트북)"
-    url: "https://link.coupang.com/a/dH4Nbg"
+  - title: "LG 그램 17 (개발용 노트북)"
+    url: "https://link.coupang.com/a/dH5l7D"
+  - title: "챗GPT 활용법 도서"
+    url: "https://link.coupang.com/a/dH5n1h"
 ---
 
 ## n8n이란?

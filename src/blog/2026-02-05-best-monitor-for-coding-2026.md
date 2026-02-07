@@ -9,7 +9,7 @@ coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"
     url: "https://link.coupang.com/a/dH4Nbg"
   - title: "삼성 뷰피니티 S8 32인치 4K"
-    url: "https://link.coupang.com/a/dH4Nbg"
+    url: "https://link.coupang.com/a/dH5lih"
 ---
 
 ## 개발자에게 모니터 크기가 중요한 이유

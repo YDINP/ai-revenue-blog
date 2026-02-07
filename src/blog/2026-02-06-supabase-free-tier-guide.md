@@ -9,8 +9,10 @@ image:
   url: "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800"
   alt: "Supabase 개발"
 coupangLinks:
-  - title: "Do it! 백엔드 입문 (Node.js + Supabase)"
-    url: "https://link.coupang.com/a/dH4Nbg"
+  - title: "삼성 SSD 980 PRO 1TB"
+    url: "https://link.coupang.com/a/dH5nqe"
+  - title: "모던 자바스크립트 Deep Dive"
+    url: "https://link.coupang.com/a/dH5mpm"
 ---
 
 ## Supabase란?

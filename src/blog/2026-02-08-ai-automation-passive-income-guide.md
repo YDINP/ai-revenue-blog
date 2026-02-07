@@ -9,10 +9,10 @@ image:
   url: "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800"
   alt: "AI 자동화 수익"
 coupangLinks:
-  - title: "로지텍 MX Keys S 무선 키보드"
-    url: "https://link.coupang.com/a/dH4Nbg"
-  - title: "삼성 갤럭시북4 프로 16인치"
-    url: "https://link.coupang.com/a/dH4Nbg"
+  - title: "아이패드 에어 M2"
+    url: "https://link.coupang.com/a/dH5lSP"
+  - title: "챗GPT 활용법 도서"
+    url: "https://link.coupang.com/a/dH5n1h"
 ---
 
 안녕하세요. 작년부터 AI 자동화 도구들을 직접 활용해서 부업 수익을 만들고 있는 개발자입니다. 솔직히 처음에는 AI 자동화가 정말 돈이 될까 의심했어요. 하지만 지난 1년간 실험하면서 AI 자동화로 월 300만 원대의 패시브 인컴을 만드는 데 성공했습니다. 오늘은 제 경험을 바탕으로 AI 자동화를 통한 수익 창출 방법을 정리해서 공유하려고 합니다.
