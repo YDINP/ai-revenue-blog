@@ -11,7 +11,8 @@ interface Props {
 const { title, description, image, canonicalUrl } = Astro.props;
 const siteTitle = 'TechFlow - AI & 테크 인사이트';
 const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
-const ogImage = image || '/og-default.png';
+const defaultOgImage = 'https://images.pexels.com/photos/18068768/pexels-photo-18068768.png?auto=compress&cs=tinysrgb&w=1200&h=630&dpr=1';
+const ogImage = image || defaultOgImage;
 const canonical = canonicalUrl || Astro.url.href;
 const currentPath = Astro.url.pathname;
 ---
@@ -26,6 +27,9 @@ const currentPath = Astro.url.pathname;
     <!-- SEO -->
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="author" content="TechFlow" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#2563eb" />
     <link rel="canonical" href={canonical} />
 
     <!-- Open Graph -->

@@ -37,6 +37,8 @@ coupangLinks:
 | API 입력 가격 | $12/M 토큰 | $15/M 토큰 |
 | API 출력 가격 | $60/M 토큰 | $75/M 토큰 |
 
+<div class="chart-radar" data-title="GPT-5.3 Codex vs Claude Opus 4.6 — 종합 능력 비교" data-items='[{"name":"GPT-5.3 Codex","scores":[{"label":"코딩","value":9.5,"color":"#10b981"},{"label":"글쓰기","value":8.5,"color":"#10b981"},{"label":"분석","value":8,"color":"#10b981"},{"label":"속도","value":9,"color":"#10b981"},{"label":"가성비","value":8.5,"color":"#10b981"}]},{"name":"Claude Opus 4.6","scores":[{"label":"코딩","value":9,"color":"#3b82f6"},{"label":"글쓰기","value":9,"color":"#3b82f6"},{"label":"분석","value":9.5,"color":"#3b82f6"},{"label":"속도","value":7.5,"color":"#3b82f6"},{"label":"가성비","value":7,"color":"#3b82f6"}]}]'></div>
+
 ## 코딩 능력 비교: 개발자 필독
 
 ### GPT-5.3 Codex의 강점
@@ -109,6 +111,8 @@ Claude Opus 4.6은 **기술 문서**, **분석 보고서**, **학술적 글쓰�
 | Claude Opus 4.6 | $15/M | $75/M | 큰 컨텍스트, 에이전트 팀 |
 | GPT-4o mini | 매우 저렴 | 매우 저렴 | 간단한 작업용 |
 | Claude Haiku | 저렴 | 저렴 | 가성비 좋은 복잡한 작업 |
+
+<div class="chart-bar" data-title="API 출력 가격 비교 ($/M 토큰)" data-labels="GPT-5.3 Codex,Claude Opus 4.6,GPT-4o mini,Claude Haiku" data-values="60,75,2,4" data-colors="#10b981,#3b82f6,#94a3b8,#94a3b8" data-unit="$"></div>
 
 단순 비용만 보면 GPT-5.3이 유리하지만, 대규모 프로젝트에서는 Claude의 100만 토큰 컨텍스트가 여러 번 호출을 한 번으로 줄여주어 오히려 경제적일 수 있습니다.
 

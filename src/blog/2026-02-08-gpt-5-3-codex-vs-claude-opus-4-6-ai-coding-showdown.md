@@ -35,6 +35,8 @@ coupangLinks:
 | 코딩 벤치마크 | SWE-Bench Pro 1위 | 2위 |
 | 한국어 코딩 | 우수 | 매우 우수 |
 
+<div class="chart-radar" data-title="코딩 능력 종합 비교" data-items='[{"name":"GPT-5.3 Codex","scores":[{"label":"벤치마크","value":9.5,"color":"#10b981"},{"label":"속도","value":9,"color":"#10b981"},{"label":"컨텍스트","value":7,"color":"#10b981"},{"label":"에이전트","value":8,"color":"#10b981"},{"label":"가성비","value":8.5,"color":"#10b981"}]},{"name":"Claude Opus 4.6","scores":[{"label":"벤치마크","value":9,"color":"#3b82f6"},{"label":"속도","value":7.5,"color":"#3b82f6"},{"label":"컨텍스트","value":10,"color":"#3b82f6"},{"label":"에이전트","value":9.5,"color":"#3b82f6"},{"label":"가성비","value":7,"color":"#3b82f6"}]}]'></div>
+
 ## 벤치마크 성능 비교
 
 ### SWE-Bench Pro (실제 소프트웨어 엔지니어링)
@@ -115,6 +117,10 @@ Claude Opus 4.6은 **"개발 팀"** 컨셉입니다. 복잡한 작업을 여러 
 | API 입력 | $12/M 토큰 | $15/M 토큰 |
 | API 출력 | $60/M 토큰 | $75/M 토큰 |
 | 토큰 효율 | 더 적은 토큰 사용 | 더 많은 컨텍스트 활용 |
+
+<div class="chart-bar" data-title="API 가격 비교 (입력 $/M 토큰)" data-labels="GPT-5.3 Codex,Claude Opus 4.6" data-values="12,15" data-colors="#10b981,#3b82f6" data-unit="$"></div>
+
+<div class="chart-bar" data-title="컨텍스트 윈도우 (K 토큰)" data-labels="GPT-5.3 Codex,Claude Opus 4.6" data-values="256,1000" data-colors="#10b981,#3b82f6" data-unit="K"></div>
 
 GPT-5.3 Codex가 API 가격 면에서 약 20% 저렴하며, 동일 작업에 더 적은 토큰을 사용합니다.
 

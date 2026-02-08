@@ -31,6 +31,8 @@ coupangLinks:
 | Adobe Firefly 3 | $5~ | 상업용 | 빠름 | 우수 | 상업 디자인 |
 | Ideogram 2.0 | 무료~ | 텍스트+이미지 | 빠름 | 보통 | 로고/텍스트 |
 
+<div class="chart-radar" data-title="AI 이미지 생성 도구 종합 평가" data-items='[{"name":"Midjourney v6","scores":[{"label":"품질","value":10,"color":"#8b5cf6"},{"label":"속도","value":7,"color":"#8b5cf6"},{"label":"가격","value":5,"color":"#8b5cf6"},{"label":"접근성","value":6,"color":"#8b5cf6"},{"label":"한국어","value":4,"color":"#8b5cf6"}]},{"name":"DALL-E 3","scores":[{"label":"품질","value":8,"color":"#10b981"},{"label":"속도","value":9,"color":"#10b981"},{"label":"가격","value":8,"color":"#10b981"},{"label":"접근성","value":10,"color":"#10b981"},{"label":"한국어","value":9,"color":"#10b981"}]},{"name":"Stable Diffusion 3","scores":[{"label":"품질","value":8,"color":"#f59e0b"},{"label":"속도","value":6,"color":"#f59e0b"},{"label":"가격","value":10,"color":"#f59e0b"},{"label":"접근성","value":4,"color":"#f59e0b"},{"label":"한국어","value":5,"color":"#f59e0b"}]}]'></div>
+
 ## 1. Midjourney v6: 아트워크의 제왕
 
 Midjourney는 **예술적 품질**에서 여전히 최고입니다. v6 버전에서는 사실적인 인물 표현과 조명 처리가 비약적으로 향상되었습니다.
