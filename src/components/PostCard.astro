@@ -32,7 +32,7 @@ const formattedDate = new Date(pubDate).toLocaleDateString('ko-KR', {
       <h3>{title}</h3>
       <p>{description}</p>
       <div class="post-card-footer">
-        <span class="post-category">{category}</span>
+        <span class="post-category" data-cat={category.toLowerCase()}>{category}</span>
         <time datetime={pubDate.toISOString()}>{formattedDate}</time>
       </div>
     </div>

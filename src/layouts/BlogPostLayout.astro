@@ -33,6 +33,14 @@ const formattedDate = new Date(pubDate).toLocaleDateString('ko-KR', {
   day: 'numeric',
 });
 
+// Reading time estimate (Korean: ~500 chars/min)
+const categoryLabel: Record<string, string> = {
+  ai: 'AI & 인공지능',
+  dev: '개발 & 프로그래밍',
+  review: '제품 리뷰',
+};
+const catLabel = categoryLabel[category.toLowerCase()] || category;
+
 // JSON-LD structured data for SEO
 const canonicalUrl = Astro.url.href;
 const jsonLd = {
@@ -71,10 +79,14 @@ const jsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   
   <article class="blog-post">
+    <!-- 뒤로가기 -->
+    <a href={`/blog/${category.toLowerCase()}/`} class="post-back">&larr; {catLabel} 목록</a>
+
     <header class="post-header">
       <div class="post-meta">
-        <span class="post-category">{category}</span>
+        <span class="post-category" data-cat={category.toLowerCase()}>{category}</span>
         <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+        <span class="post-reading-time">읽기 약 3분</span>
         {
           updatedDate && (
             <span class="post-updated">
@@ -98,10 +110,13 @@ const jsonLd = {
 
     {image && <img src={image.url} alt={image.alt} class="post-hero-image" />}
 
+    <!-- 목차 (ToC) - JS로 자동 생성 -->
+    <nav class="toc" id="toc"></nav>
+
     <!-- 상단 광고 슬롯 -->
     <AdSlot position="top" />
 
-    <div class="post-content">
+    <div class="post-content" id="post-content">
       <slot />
     </div>
 
@@ -112,10 +127,43 @@ const jsonLd = {
 
     <!-- 관련 글 안내 -->
     <div class="post-cta">
-      <p>이 글이 도움이 되셨다면 <a href="/blog/">다른 글</a>도 확인해보세요.</p>
+      <h3>이 글이 도움이 되셨나요?</h3>
+      <p>더 많은 유용한 콘텐츠를 확인해보세요.</p>
+      <div class="post-cta-buttons">
+        <a href="/blog/" class="btn-primary">전체 글 보기</a>
+        <a href={`/blog/${category.toLowerCase()}/`} class="btn-secondary">{catLabel} 더 보기</a>
+      </div>
     </div>
 
     <!-- 하단 광고 슬롯 -->
     <AdSlot position="bottom" />
   </article>
+
+  <script>
+    // Auto-generate Table of Contents
+    (function() {
+      const content = document.getElementById('post-content');
+      const toc = document.getElementById('toc');
+      if (!content || !toc) return;
+
+      const headings = content.querySelectorAll('h2, h3');
+      if (headings.length < 2) { toc.style.display = 'none'; return; }
+
+      let html = '<h4>목차</h4><ul>';
+      headings.forEach((h, i) => {
+        const id = 'heading-' + i;
+        h.id = id;
+        const indent = h.tagName === 'H3' ? ' class="toc-sub"' : '';
+        html += `<li${indent}><a href="#${id}">${h.textContent}</a></li>`;
+      });
+      html += '</ul>';
+      toc.innerHTML = html;
+
+      // Estimate reading time
+      const text = content.textContent || '';
+      const minutes = Math.max(1, Math.round(text.length / 500));
+      const readingEl = document.querySelector('.post-reading-time');
+      if (readingEl) readingEl.textContent = `읽기 약 ${minutes}분`;
+    })();
+  </script>
 </BaseLayout>

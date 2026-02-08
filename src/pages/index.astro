@@ -20,7 +20,10 @@ const recentPosts = sortedPosts.slice(0, 6);
   </section>
 
   <section>
-    <h2>최신 글</h2>
+    <div class="section-header">
+      <h2>최신 글</h2>
+      <a href="/blog/" class="section-link">전체 보기 &rarr;</a>
+    </div>
     <div class="post-grid">
       {
         recentPosts.map((post) => (
