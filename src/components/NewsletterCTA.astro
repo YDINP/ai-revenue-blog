@@ -11,7 +11,7 @@ const isCompact = variant === 'compact';
   <h3>TechFlow 뉴스레터 구독</h3>
   <p>매주 최신 AI/개발 트렌드와 실용적인 팁을 받아보세요.</p>
 
-  <form class="newsletter-form" id="newsletter-form" method="POST" action="https://buttondown.com/api/emails/embed-subscribe/techflow">
+  <form class="newsletter-form" id="newsletter-form">
     <input
       type="email"
       name="email"
@@ -55,6 +55,13 @@ const isCompact = variant === 'compact';
 
     if (!form || !successMsg || !errorMsg || !emailInput) return;
 
+    // 이미 구독한 사용자
+    if (localStorage.getItem('newsletter-subscribed') === 'true') {
+      successMsg.style.display = 'block';
+      form.style.display = 'none';
+      return;
+    }
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -69,28 +76,27 @@ const isCompact = variant === 'compact';
       }
 
       try {
-        // For now, use a placeholder endpoint (Buttondown will be configured later)
-        const formData = new FormData();
-        formData.append('email', email);
+        const ANALYTICS_URL = 'https://mkatzcmsrdntsmnykxpt.supabase.co/functions/v1/analytics-ingest';
 
-        const response = await fetch(form.action, {
+        const response = await fetch(ANALYTICS_URL, {
           method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event_type: 'newsletter_subscribe',
+            source: 'blog',
+            metadata: {
+              email: email,
+              page: window.location.pathname,
+              subscribed_at: new Date().toISOString()
+            }
+          })
         });
 
-        if (response.ok) {
-          // Success
-          successMsg.style.display = 'block';
-          form.style.display = 'none';
-        } else {
-          // Error
-          errorMsg.style.display = 'block';
-        }
+        // Success (analytics-ingest returns 200 even on insert)
+        successMsg.style.display = 'block';
+        form.style.display = 'none';
+        localStorage.setItem('newsletter-subscribed', 'true');
       } catch (error) {
-        // Network error or other issue
         console.error('Newsletter subscription error:', error);
         errorMsg.style.display = 'block';
       }
