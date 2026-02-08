@@ -6,8 +6,8 @@ category: "Dev"
 tags: ["Supabase", "백엔드", "무료", "서버리스", "데이터베이스"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800"
-  alt: "Supabase 개발"
+  url: "https://images.pexels.com/photos/5203849/pexels-photo-5203849.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  alt: "현대적인 데이터 센터의 네트워크 서버 랙 상세 보기, 기술 인프라 강조"
 coupangLinks:
   - title: "삼성 SSD 980 PRO 1TB"
     url: "https://link.coupang.com/a/dH5nqe"

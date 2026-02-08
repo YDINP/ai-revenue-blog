@@ -6,8 +6,8 @@ category: "AI"
 tags: ["AI 자동화", "패시브 인컴", "수익 창출", "AI 기술"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800"
-  alt: "AI 자동화 수익"
+  url: "https://images.pexels.com/photos/6598982/pexels-photo-6598982.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  alt: "소파에서 집에서 헤드폰을 쓰고 화상 통화 중 하트 제스처를 하는 웃는 남자"
 coupangLinks:
   - title: "아이패드 에어 M2"
     url: "https://link.coupang.com/a/dH5lSP"

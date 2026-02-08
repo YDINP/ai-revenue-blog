@@ -6,8 +6,8 @@ category: "Dev"
 tags: ["프론트엔드", "React", "Next.js", "웹 개발 트렌드"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-  alt: "프론트엔드 웹 개발 트렌드"
+  url: "https://images.pexels.com/photos/574069/pexels-photo-574069.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  alt: "웹 개발 및 프로그래밍 개념을 보여주는 노트북에서 코딩하는 사람의 클로즈업"
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
     url: "https://link.coupang.com/a/dH5mpm"

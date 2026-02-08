@@ -6,8 +6,8 @@ category: "AI"
 tags: ["ChatGPT", "Claude", "GPT-5.3", "Claude Opus 4.6", "AI 비교"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-  alt: "ChatGPT vs Claude AI 어시스턴트 비교"
+  url: "https://images.pexels.com/photos/30479283/pexels-photo-30479283.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  alt: "DeepSeek라는 AI 챗봇 인터페이스를 보여주는 나무 테이블 위의 스마트폰"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
     url: "https://link.coupang.com/a/dH5n1h"

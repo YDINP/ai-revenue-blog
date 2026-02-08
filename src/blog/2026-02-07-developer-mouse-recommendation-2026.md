@@ -6,8 +6,8 @@ category: "Review"
 tags: ["마우스 추천", "개발자 마우스", "로지텍 MX Master", "인체공학 마우스"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/5765833/pexels-photo-5765833.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-  alt: "인체공학 마우스 개발자 추천"
+  url: "https://images.pexels.com/photos/31915115/pexels-photo-31915115.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  alt: "생동감 있는 노란색 배경 위의 측면 버튼이 있는 현대적인 무선 검은색 마우스"
 coupangLinks:
   - title: "로지텍 MX Master 3S"
     url: "https://link.coupang.com/a/dH5k3n"

@@ -6,8 +6,8 @@ category: "Review"
 tags: ["SSD 추천", "삼성 980 PRO", "개발자 스토리지", "NVMe SSD"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/117729/pexels-photo-117729.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-  alt: "SSD 저장장치 하드웨어"
+  url: "https://images.pexels.com/photos/28666524/pexels-photo-28666524.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  alt: "회색 배경 위의 고성능 NVMe SSD 두 개"
 coupangLinks:
   - title: "삼성 SSD 980 PRO 1TB"
     url: "https://link.coupang.com/a/dH5nqe"

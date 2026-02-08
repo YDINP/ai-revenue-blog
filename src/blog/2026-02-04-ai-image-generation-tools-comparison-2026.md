@@ -6,8 +6,8 @@ category: "AI"
 tags: ["AI 이미지 생성", "미드저니", "DALL-E", "Stable Diffusion", "AI 그림"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/8438922/pexels-photo-8438922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-  alt: "AI 이미지 생성 디지털 아트"
+  url: "https://images.pexels.com/photos/18068728/pexels-photo-18068728.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  alt: "생동감 있는 AI 생성 디자인 요소를 보여주는 화려한 추상 예술 작품"
 coupangLinks:
   - title: "아이패드 에어 M2"
     url: "https://link.coupang.com/a/dH5lSP"

@@ -6,8 +6,8 @@ category: "AI"
 tags: ["GPT-5.3 Codex", "Claude Opus 4.6", "AI 코딩", "AI 모델 비교"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-  alt: "AI 코딩 대결 프로그래밍"
+  url: "https://images.pexels.com/photos/34804018/pexels-photo-34804018.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  alt: "디버깅 및 문제 해결을 위한 메뉴 옵션이 있는 AI 보조 코딩 클로즈업"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
     url: "https://link.coupang.com/a/dH5n1h"

@@ -6,8 +6,8 @@ category: "Review"
 tags: ["노트북 추천", "개발용 노트북", "맥북 에어", "LG 그램", "갤럭시북"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/18105/pexels-photo-18105.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-  alt: "개발자 노트북 맥북 비교"
+  url: "https://images.pexels.com/photos/693859/pexels-photo-693859.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  alt: "사무용품과 창의적인 장식으로 책상 위에 코드가 표시된 세련된 MacBook Pro"
 coupangLinks:
   - title: "맥북 에어 M3"
     url: "https://link.coupang.com/a/dH5lzw"

@@ -6,8 +6,8 @@ category: "Review"
 tags: ["모니터추천", "코딩모니터", "울트라와이드", "개발자장비", "리뷰"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-  alt: "코딩용 듀얼 모니터 셋업"
+  url: "https://images.pexels.com/photos/5380591/pexels-photo-5380591.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  alt: "듀얼 모니터에 코드가 표시된 무지개 조명 키보드로 타이핑하는 손"
 coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"
     url: "https://link.coupang.com/a/dH5E6K"
