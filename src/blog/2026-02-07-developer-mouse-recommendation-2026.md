@@ -5,6 +5,9 @@ pubDate: 2026-02-07
 category: "Review"
 tags: ["마우스 추천", "개발자 마우스", "로지텍 MX Master", "인체공학 마우스"]
 author: "TechFlow"
+image:
+  url: "https://images.pexels.com/photos/5765833/pexels-photo-5765833.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  alt: "인체공학 마우스 개발자 추천"
 coupangLinks:
   - title: "로지텍 MX Master 3S"
     url: "https://link.coupang.com/a/dH5k3n"

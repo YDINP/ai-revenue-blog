@@ -5,6 +5,9 @@ pubDate: 2026-02-05
 category: "Dev"
 tags: ["프론트엔드", "React", "Next.js", "웹 개발 트렌드"]
 author: "TechFlow"
+image:
+  url: "https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  alt: "프론트엔드 웹 개발 트렌드"
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
     url: "https://link.coupang.com/a/dH5mpm"

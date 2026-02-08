@@ -5,6 +5,9 @@ pubDate: 2026-02-04
 category: "Review"
 tags: ["노트북 추천", "개발용 노트북", "맥북 에어", "LG 그램", "갤럭시북"]
 author: "TechFlow"
+image:
+  url: "https://images.pexels.com/photos/18105/pexels-photo-18105.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  alt: "개발자 노트북 맥북 비교"
 coupangLinks:
   - title: "맥북 에어 M3"
     url: "https://link.coupang.com/a/dH5lzw"

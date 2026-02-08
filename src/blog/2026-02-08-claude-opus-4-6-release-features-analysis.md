@@ -5,6 +5,9 @@ pubDate: 2026-02-08
 category: "AI"
 tags: ["Claude Opus 4.6", "Anthropic", "AI 모델", "에이전틱 코딩"]
 author: "TechFlow"
+image:
+  url: "https://images.pexels.com/photos/8849295/pexels-photo-8849295.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  alt: "Claude AI 인공지능 기술"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
     url: "https://link.coupang.com/a/dH5n1h"

@@ -5,6 +5,9 @@ pubDate: 2026-02-04
 category: "Dev"
 tags: ["Git 입문", "GitHub 사용법", "버전 관리", "개발 입문"]
 author: "TechFlow"
+image:
+  url: "https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  alt: "코드 버전 관리 프로그래밍"
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
     url: "https://link.coupang.com/a/dH5mpm"

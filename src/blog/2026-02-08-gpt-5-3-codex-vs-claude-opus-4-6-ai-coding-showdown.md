@@ -5,6 +5,9 @@ pubDate: 2026-02-08
 category: "AI"
 tags: ["GPT-5.3 Codex", "Claude Opus 4.6", "AI 코딩", "AI 모델 비교"]
 author: "TechFlow"
+image:
+  url: "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  alt: "AI 코딩 대결 프로그래밍"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
     url: "https://link.coupang.com/a/dH5n1h"

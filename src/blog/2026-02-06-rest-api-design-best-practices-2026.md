@@ -5,6 +5,9 @@ pubDate: 2026-02-06
 category: "Dev"
 tags: ["REST API", "API 설계", "백엔드 개발", "웹 개발"]
 author: "TechFlow"
+image:
+  url: "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  alt: "REST API 설계 코딩"
 coupangLinks:
   - title: "클린 코드"
     url: "https://link.coupang.com/a/dH5mF4"

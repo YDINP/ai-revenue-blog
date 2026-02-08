@@ -5,6 +5,9 @@ pubDate: 2026-02-06
 category: "Dev"
 tags: ["Python자동화", "파이썬", "업무자동화", "코딩입문", "자동화"]
 author: "TechFlow"
+image:
+  url: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  alt: "Python 프로그래밍 자동화"
 coupangLinks:
   - title: "혼자 공부하는 파이썬"
     url: "https://link.coupang.com/a/dH5mU8"

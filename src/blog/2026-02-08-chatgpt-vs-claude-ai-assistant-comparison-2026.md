@@ -5,6 +5,9 @@ pubDate: 2026-02-08
 category: "AI"
 tags: ["ChatGPT", "Claude", "GPT-5.3", "Claude Opus 4.6", "AI 비교"]
 author: "TechFlow"
+image:
+  url: "https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  alt: "ChatGPT vs Claude AI 어시스턴트 비교"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
     url: "https://link.coupang.com/a/dH5n1h"

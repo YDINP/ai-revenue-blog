@@ -5,6 +5,9 @@ pubDate: 2026-02-06
 category: "Review"
 tags: ["키보드추천", "개발자키보드", "기계식키보드", "코딩장비", "리뷰"]
 author: "TechFlow"
+image:
+  url: "https://images.pexels.com/photos/1772123/pexels-photo-1772123.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  alt: "기계식 키보드 개발자 리뷰"
 coupangLinks:
   - title: "로지텍 MX Keys S 무선 키보드"
     url: "https://link.coupang.com/a/dH5kCz"

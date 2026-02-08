@@ -5,6 +5,9 @@ pubDate: 2026-02-03
 category: "AI"
 tags: ["프롬프트 엔지니어링", "ChatGPT 활용법", "AI 프롬프트", "AI 팁"]
 author: "TechFlow"
+image:
+  url: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  alt: "AI 프롬프트 엔지니어링 작업 화면"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
     url: "https://link.coupang.com/a/dH5n1h"
