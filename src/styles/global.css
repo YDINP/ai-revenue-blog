@@ -315,7 +315,7 @@ section > h2::after {
   padding: 0.75rem 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   flex: 1;
   min-width: 0;
   min-height: unset;
@@ -346,7 +346,7 @@ section > h2::after {
 
 .post-list .post-card-footer {
   flex-shrink: 0;
-  margin-top: 0.5rem;
+  margin-top: auto;
   padding-top: 0.5rem;
   width: 100%;
 }
