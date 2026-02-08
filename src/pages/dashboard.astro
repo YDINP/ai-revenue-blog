@@ -345,6 +345,45 @@ import '../styles/global.css';
       .status-badge.offline { background: rgba(239,68,68,0.2); color: #f87171; }
 
       /* Loading */
+      .data-banner {
+        padding: 1rem 1.25rem;
+        border-radius: 10px;
+        margin-bottom: 1.25rem;
+        font-size: 0.85rem;
+        line-height: 1.6;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+
+      .data-banner.info {
+        background: rgba(59,130,246,0.1);
+        border: 1px solid rgba(59,130,246,0.25);
+        color: #93bbfd;
+      }
+
+      .data-banner.warning {
+        background: rgba(234,179,8,0.1);
+        border: 1px solid rgba(234,179,8,0.25);
+        color: #fde68a;
+      }
+
+      .data-banner .banner-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 1px; }
+
+      .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 140px;
+        color: var(--dash-text-dim);
+        text-align: center;
+        gap: 0.5rem;
+      }
+
+      .empty-state .empty-icon { font-size: 2rem; opacity: 0.5; }
+      .empty-state .empty-text { font-size: 0.8125rem; }
+
       .loading {
         display: flex;
         align-items: center;
@@ -384,6 +423,9 @@ import '../styles/global.css';
     </header>
 
     <div class="dash-container">
+      <!-- Data Status Banner -->
+      <div id="data-banner" class="data-banner" style="display:none;"></div>
+
       <!-- Summary Cards -->
       <div class="summary-grid" id="summary-cards">
         <div class="summary-card">
@@ -459,20 +501,20 @@ import '../styles/global.css';
               <span class="status-badge online">Online</span>
             </div>
             <div class="status-row">
-              <span>n8n Automation</span>
+              <span>Supabase DB</span>
+              <span class="status-badge" id="supabase-status">Checking...</span>
+            </div>
+            <div class="status-row">
+              <span>Pageview Tracking</span>
               <span class="status-badge online">Active</span>
             </div>
             <div class="status-row">
-              <span>Supabase DB</span>
-              <span class="status-badge online">Connected</span>
-            </div>
-            <div class="status-row">
               <span>AdSense</span>
-              <span class="status-badge pending">Pending Approval</span>
+              <span class="status-badge pending">미신청</span>
             </div>
             <div class="status-row">
               <span>Coupang Partners</span>
-              <span class="status-badge pending">Setup Required</span>
+              <span class="status-badge pending">연동 필요</span>
             </div>
           </div>
         </div>
@@ -502,6 +544,19 @@ import '../styles/global.css';
         return res.json();
       }
 
+      function showBanner(type, message) {
+        const banner = document.getElementById('data-banner');
+        if (!banner) return;
+        banner.className = `data-banner ${type}`;
+        const icon = type === 'warning' ? '⚠️' : 'ℹ️';
+        banner.innerHTML = `<span class="banner-icon">${icon}</span><div>${message}</div>`;
+        banner.style.display = 'flex';
+      }
+
+      function emptyState(icon, text) {
+        return `<div class="empty-state"><span class="empty-icon">${icon}</span><span class="empty-text">${text}</span></div>`;
+      }
+
       async function loadDashboard() {
         try {
           const [summary, daily, channels, posts, activity] = await Promise.all([
@@ -511,6 +566,23 @@ import '../styles/global.css';
             rpc('get_top_posts', { limit_count: 5 }),
             rpc('get_recent_activity', { limit_count: 10 })
           ]);
+
+          // Determine data status
+          const hasRevenue = daily && daily.length > 0;
+          const hasViews = summary && summary.total_views > 0;
+          const hasActivity = activity && activity.length > 0;
+
+          if (!hasRevenue && !hasViews) {
+            showBanner('info',
+              '<strong>데이터 수집이 시작되었습니다.</strong><br>' +
+              '블로그 방문자가 발생하면 실시간으로 페이지뷰가 기록됩니다. ' +
+              'AdSense/쿠팡파트너스 수익은 해당 서비스 연동 후 반영됩니다.'
+            );
+          } else if (!hasRevenue) {
+            showBanner('info',
+              '<strong>페이지뷰 추적 중.</strong> 수익 데이터는 AdSense 승인 및 쿠팡파트너스 연동 후 표시됩니다.'
+            );
+          }
 
           renderSummary(summary);
           renderBarChart(daily);
@@ -522,23 +594,33 @@ import '../styles/global.css';
             `Updated: ${new Date().toLocaleString('ko-KR')}`;
         } catch (e) {
           console.error('Dashboard load error:', e);
+          showBanner('warning', '<strong>데이터 로드 실패.</strong> Supabase 연결을 확인해주세요.');
         }
       }
 
       function renderSummary(s) {
-        document.getElementById('total-revenue').textContent = fmt(s.total_revenue) + '원';
-        document.getElementById('total-views').textContent = fmt(s.total_views);
-        document.getElementById('total-posts').textContent = s.total_posts;
-        document.getElementById('avg-daily').textContent = fmt(s.avg_daily_revenue) + '원';
-        document.getElementById('revenue-change').textContent = `${s.active_days}일 누적`;
-        document.getElementById('views-change').textContent = `${s.total_posts}편 평균 ${fmt(Math.round(s.total_views / Math.max(s.total_posts, 1)))}`;
-        document.getElementById('posts-change').textContent = `${s.total_workflow_runs}회 자동 생성`;
-        document.getElementById('daily-change').textContent = `쿠팡 클릭 ${s.total_coupang_clicks}회`;
+        if (!s) return;
+        const rev = Number(s.total_revenue) || 0;
+        const views = Number(s.total_views) || 0;
+        const posts = Number(s.total_posts) || 0;
+        const avgDaily = Number(s.avg_daily_revenue) || 0;
+        const activeDays = Number(s.active_days) || 0;
+        const clicks = Number(s.total_coupang_clicks) || 0;
+        const workflows = Number(s.total_workflow_runs) || 0;
+
+        document.getElementById('total-revenue').textContent = rev > 0 ? fmt(rev) + '원' : '0원';
+        document.getElementById('total-views').textContent = fmt(views);
+        document.getElementById('total-posts').textContent = posts;
+        document.getElementById('avg-daily').textContent = avgDaily > 0 ? fmt(avgDaily) + '원' : '0원';
+        document.getElementById('revenue-change').textContent = activeDays > 0 ? `${activeDays}일 누적` : '수익 연동 대기중';
+        document.getElementById('views-change').textContent = views > 0 ? `${posts}편 평균 ${fmt(Math.round(views / Math.max(posts, 1)))}` : '방문자 수집 시작';
+        document.getElementById('posts-change').textContent = workflows > 0 ? `${workflows}회 자동 생성` : `총 ${posts}편 발행`;
+        document.getElementById('daily-change').textContent = clicks > 0 ? `쿠팡 클릭 ${clicks}회` : '쿠팡 클릭 추적 중';
       }
 
       function renderBarChart(daily) {
         const container = document.getElementById('bar-chart');
-        if (!daily.length) { container.innerHTML = '<div class="loading">No data</div>'; return; }
+        if (!daily || !daily.length) { container.innerHTML = emptyState('📊', '수익 데이터가 아직 없습니다'); return; }
 
         const maxVal = Math.max(...daily.map(d => d.total || 1));
 
@@ -559,6 +641,7 @@ import '../styles/global.css';
 
       function renderDonut(channels) {
         const container = document.getElementById('donut-chart');
+        if (!channels || !channels.length) { container.innerHTML = emptyState('🍩', '채널별 수익 데이터 없음'); return; }
         const total = channels.reduce((s, c) => s + Number(c.total), 0) || 1;
         const colors = { adsense: '#3b82f6', coupang: '#22c55e', saas: '#a855f7', game_iap: '#eab308', game_ads: '#f97316', templates: '#ec4899', sponsors: '#06b6d4' };
         const names = { adsense: 'AdSense', coupang: 'Coupang', saas: 'SaaS', game_iap: 'Game IAP', game_ads: 'Game Ads', templates: 'Templates', sponsors: 'Sponsors' };
@@ -599,7 +682,7 @@ import '../styles/global.css';
 
       function renderTopPosts(posts) {
         const tbody = document.getElementById('top-posts-body');
-        if (!posts.length) { tbody.innerHTML = '<tr><td colspan="5">No data</td></tr>'; return; }
+        if (!posts || !posts.length) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--dash-text-dim)">등록된 포스트가 없습니다</td></tr>'; return; }
 
         tbody.innerHTML = posts.map((p, i) => {
           const catClass = p.category === 'AI' ? 'cat-ai' : p.category === 'Dev' ? 'cat-dev' : 'cat-review';
@@ -615,7 +698,7 @@ import '../styles/global.css';
 
       function renderActivity(events) {
         const container = document.getElementById('activity-list');
-        if (!events.length) { container.innerHTML = '<div class="loading">No activity</div>'; return; }
+        if (!events || !events.length) { container.innerHTML = emptyState('📋', '아직 기록된 활동이 없습니다'); return; }
 
         container.innerHTML = events.map(e => {
           const icons = { page_view: ['view', '👁'], coupang_click: ['click', '🛒'], workflow_run: ['run', '⚡'] };
@@ -633,8 +716,30 @@ import '../styles/global.css';
         }).join('');
       }
 
+      // Check Supabase connection
+      async function checkSupabase() {
+        const badge = document.getElementById('supabase-status');
+        if (!badge) return;
+        try {
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/blog_posts?select=id&limit=1`, {
+            headers: { 'apikey': SUPABASE_ANON_KEY }
+          });
+          if (res.ok) {
+            badge.textContent = 'Connected';
+            badge.className = 'status-badge online';
+          } else {
+            badge.textContent = 'Error';
+            badge.className = 'status-badge offline';
+          }
+        } catch {
+          badge.textContent = 'Offline';
+          badge.className = 'status-badge offline';
+        }
+      }
+
       // Load on page ready
       loadDashboard();
+      checkSupabase();
       // Auto-refresh every 5 minutes
       setInterval(loadDashboard, 300000);
     </script>
