@@ -18,16 +18,20 @@ const formattedDate = new Date(pubDate).toLocaleDateString('ko-KR', {
 
 <div class="post-card">
   <a href={`/blog/${slug}/`}>
-    {
-      image && (
+    <div class="post-card-image-wrap">
+      {image ? (
         <img
           src={image.url}
           alt={image.alt}
           class="post-card-image"
           loading="lazy"
         />
-      )
-    }
+      ) : (
+        <div class="post-card-image-placeholder">
+          <span>{category}</span>
+        </div>
+      )}
+    </div>
     <div class="post-card-body">
       <h3>{title}</h3>
       <p>{description}</p>
