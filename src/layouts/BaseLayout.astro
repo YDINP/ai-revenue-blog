@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { getCollection } from 'astro:content';
 
 interface Props {
   title: string;
@@ -15,6 +16,21 @@ const defaultOgImage = 'https://images.pexels.com/photos/18068768/pexels-photo-1
 const ogImage = image || defaultOgImage;
 const canonical = canonicalUrl || Astro.url.href;
 const currentPath = Astro.url.pathname;
+
+// 동적 카테고리 생성
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const categoryMap: Record<string, { label: string; count: number }> = {};
+allPosts.forEach(post => {
+  const cat = post.data.category;
+  const key = cat.toLowerCase();
+  if (!categoryMap[key]) {
+    categoryMap[key] = { label: cat, count: 0 };
+  }
+  categoryMap[key].count++;
+});
+const categories = Object.entries(categoryMap)
+  .sort((a, b) => b[1].count - a[1].count)
+  .map(([key, val]) => ({ slug: key, label: val.label, count: val.count }));
 
 // WebSite JSON-LD schema with SearchAction
 const websiteSchema = {
@@ -105,9 +121,9 @@ const websiteSchema = {
         <div class="nav-right">
           <div class="nav-links" id="nav-menu">
             <a href="/blog/" class={currentPath === '/blog/' ? 'active' : ''}>Blog</a>
-            <a href="/blog/ai/" class={currentPath.includes('/blog/ai') ? 'active' : ''}>AI</a>
-            <a href="/blog/dev/" class={currentPath.includes('/blog/dev') ? 'active' : ''}>Dev</a>
-            <a href="/blog/review/" class={currentPath.includes('/blog/review') ? 'active' : ''}>Review</a>
+            {categories.map(cat => (
+              <a href={`/blog/${cat.slug}/`} class={currentPath.includes(`/blog/${cat.slug}`) ? 'active' : ''}>{cat.label}</a>
+            ))}
             <a href="/blog/tags/" class={currentPath.includes('/blog/tags') ? 'active' : ''}>태그</a>
           </div>
           <button class="theme-toggle" id="theme-toggle" aria-label="다크 모드 토글">
@@ -128,9 +144,9 @@ const websiteSchema = {
           <div class="footer-section">
             <h4>카테고리</h4>
             <ul>
-              <li><a href="/blog/ai/">AI & 인공지능</a></li>
-              <li><a href="/blog/dev/">개발 & 프로그래밍</a></li>
-              <li><a href="/blog/review/">제품 리뷰</a></li>
+              {categories.map(cat => (
+                <li><a href={`/blog/${cat.slug}/`}>{cat.label} ({cat.count})</a></li>
+              ))}
             </ul>
           </div>
           <div class="footer-section">
