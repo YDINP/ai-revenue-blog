@@ -6,8 +6,8 @@ category: "Game"
 tags: ["Phaser", "웹게임", "JavaScript", "HTML5게임", "게임개발"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/1293261/pexels-photo-1293261.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  alt: "웹 게임 개발 코드 화면"
+  url: "https://images.pexels.com/photos/270488/pexels-photo-270488.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  alt: "Close-up of HTML code lines highlighting web development concepts and techniques."
 coupangLinks:
   - title: "자바스크립트 완벽 가이드 도서"
     url: "https://link.coupang.com/a/dH5n1h"

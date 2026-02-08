@@ -6,8 +6,8 @@ category: "Game"
 tags: ["게임엔진", "Unity", "Unreal Engine", "Godot", "Phaser", "게임개발"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  alt: "게임 엔진 비교 이미지"
+  url: "https://images.pexels.com/photos/4792726/pexels-photo-4792726.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  alt: "Crop anonymous male using contemporary computer with big monitors and typing on backlit keyboard"
 coupangLinks:
   - title: "게임 프로그래밍 패턴 도서"
     url: "https://link.coupang.com/a/dH5mF4"

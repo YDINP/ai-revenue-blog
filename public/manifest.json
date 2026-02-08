@@ -1,0 +1,17 @@
+{
+  "name": "TechFlow - AI & 개발 블로그",
+  "short_name": "TechFlow",
+  "description": "AI, 개발, 기술 리뷰 전문 블로그",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

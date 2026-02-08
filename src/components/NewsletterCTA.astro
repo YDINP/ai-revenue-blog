@@ -1,0 +1,99 @@
+---
+interface Props {
+  variant?: 'default' | 'compact';
+}
+
+const { variant = 'default' } = Astro.props;
+const isCompact = variant === 'compact';
+---
+
+<div class={`newsletter-cta ${isCompact ? 'newsletter-cta-compact' : ''}`}>
+  <h3>TechFlow 뉴스레터 구독</h3>
+  <p>매주 최신 AI/개발 트렌드와 실용적인 팁을 받아보세요.</p>
+
+  <form class="newsletter-form" id="newsletter-form" method="POST" action="https://buttondown.com/api/emails/embed-subscribe/techflow">
+    <input
+      type="email"
+      name="email"
+      id="newsletter-email"
+      placeholder="이메일 주소를 입력하세요"
+      required
+      aria-label="이메일 주소"
+    />
+    <button type="submit">구독하기</button>
+  </form>
+
+  <div class="newsletter-success" id="newsletter-success">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: inline-block; vertical-align: middle; margin-right: 0.5rem;">
+      <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="2" fill="none"/>
+      <path d="M6 10L9 13L14 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    <span>구독 신청이 완료되었습니다! 이메일을 확인해주세요.</span>
+  </div>
+
+  <div class="newsletter-error" id="newsletter-error">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: inline-block; vertical-align: middle; margin-right: 0.5rem;">
+      <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="2" fill="none"/>
+      <path d="M10 6V11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="10" cy="14" r="1" fill="currentColor"/>
+    </svg>
+    <span>오류가 발생했습니다. 다시 시도해주세요.</span>
+  </div>
+
+  <p class="newsletter-privacy">
+    구독 시 <a href="/privacy/">개인정보 처리방침</a>에 동의합니다.
+  </p>
+</div>
+
+<script>
+  // Newsletter form submission
+  (function() {
+    const form = document.getElementById('newsletter-form') as HTMLFormElement;
+    const successMsg = document.getElementById('newsletter-success');
+    const errorMsg = document.getElementById('newsletter-error');
+    const emailInput = document.getElementById('newsletter-email') as HTMLInputElement;
+
+    if (!form || !successMsg || !errorMsg || !emailInput) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Hide previous messages
+      successMsg.style.display = 'none';
+      errorMsg.style.display = 'none';
+
+      const email = emailInput.value.trim();
+      if (!email) {
+        errorMsg.style.display = 'block';
+        return;
+      }
+
+      try {
+        // For now, use a placeholder endpoint (Buttondown will be configured later)
+        const formData = new FormData();
+        formData.append('email', email);
+
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          // Success
+          successMsg.style.display = 'block';
+          form.style.display = 'none';
+        } else {
+          // Error
+          errorMsg.style.display = 'block';
+        }
+      } catch (error) {
+        // Network error or other issue
+        console.error('Newsletter subscription error:', error);
+        errorMsg.style.display = 'block';
+      }
+    });
+  })();
+</script>

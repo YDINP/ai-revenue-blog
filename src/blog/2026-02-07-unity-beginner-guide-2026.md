@@ -6,8 +6,8 @@ category: "Game"
 tags: ["Unity", "게임개발", "C#", "입문가이드"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  alt: "Unity 게임 개발 환경"
+  url: "https://images.pexels.com/photos/4581902/pexels-photo-4581902.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  alt: "A close-up view of modern GPU units, ideal for gaming and tech visuals."
 coupangLinks:
   - title: "유니티 교과서 도서"
     url: "https://link.coupang.com/a/dH5n1h"

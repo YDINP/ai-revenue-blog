@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
+import NewsletterCTA from '../../components/NewsletterCTA.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -61,6 +62,9 @@ const sortedPosts = allPosts.sort(
       ))
     }
   </div>
+
+  <!-- Newsletter CTA -->
+  <NewsletterCTA />
 
   <script>
     (function() {

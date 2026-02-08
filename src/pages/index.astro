@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
+import NewsletterCTA from '../components/NewsletterCTA.astro';
+import PopularPosts from '../components/PopularPosts.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -38,5 +40,15 @@ const recentPosts = sortedPosts.slice(0, 6);
         ))
       }
     </div>
+  </section>
+
+  <!-- Popular Posts Widget -->
+  <section>
+    <PopularPosts />
+  </section>
+
+  <!-- Newsletter CTA -->
+  <section>
+    <NewsletterCTA />
   </section>
 </BaseLayout>

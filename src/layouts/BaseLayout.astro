@@ -71,6 +71,9 @@ const websiteSchema = {
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title={siteTitle} href="/rss.xml" />
 
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
     <!-- WebSite Schema -->
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 
@@ -210,6 +213,11 @@ const websiteSchema = {
       const navToggle = document.getElementById('nav-toggle');
       const navMenu = document.getElementById('nav-menu');
       navToggle?.addEventListener('click', () => navMenu?.classList.toggle('open'));
+
+      // Service Worker Registration (PWA)
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      }
     </script>
   </body>
 </html>

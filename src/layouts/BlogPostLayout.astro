@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import CoupangBanner from '../components/CoupangBanner.astro';
 import AdSlot from '../components/AdSlot.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
+import NewsletterCTA from '../components/NewsletterCTA.astro';
 
 interface Props {
   title: string;
@@ -240,6 +241,9 @@ const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1]
       <RelatedPosts currentSlug={slug} category={category} tags={tags} />
     )}
 
+    <!-- Newsletter CTA -->
+    <NewsletterCTA />
+
     <!-- 이전/다음 글 네비게이션 -->
     {(prevPost || nextPost) && (
       <nav class="post-navigation" aria-label="Post navigation">
@@ -276,6 +280,33 @@ const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1]
 
     <!-- 하단 광고 슬롯 -->
     <AdSlot position="bottom" />
+
+    <!-- Giscus 댓글 -->
+    <section class="comments-section">
+      <h3>댓글</h3>
+      <!--
+        TODO: Giscus 설정 완료 필요
+        1. https://giscus.app 에서 GitHub 저장소 연결
+        2. data-repo-id 및 data-category-id 값 받아오기
+        3. 아래 스크립트의 빈 값 채우기
+      -->
+      <script src="https://giscus.app/client.js"
+        data-repo="YDINP/ai-revenue-blog"
+        data-repo-id=""
+        data-category="General"
+        data-category-id=""
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+      </script>
+    </section>
   </article>
 
   <script>
