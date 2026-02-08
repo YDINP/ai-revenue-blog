@@ -317,7 +317,7 @@ section > h2::after {
   padding: 1rem 1.25rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   flex: 1;
   min-width: 0;
 }
@@ -329,11 +329,17 @@ section > h2::after {
   text-overflow: ellipsis;
   display: block;
   -webkit-line-clamp: unset;
+  flex-shrink: 0;
 }
 
 .post-list .post-card-body p {
   font-size: 0.85rem;
   -webkit-line-clamp: 2;
+  flex: 1;
+}
+
+.post-list .post-card-footer {
+  flex-shrink: 0;
 }
 
 @media (max-width: 640px) {

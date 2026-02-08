@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import CoupangBanner from '../components/CoupangBanner.astro';
 import AdSlot from '../components/AdSlot.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
 
 interface Props {
   title: string;
@@ -13,6 +14,7 @@ interface Props {
   tags: string[];
   image?: { url: string; alt: string };
   coupangLinks?: { title: string; url: string; imageUrl?: string }[];
+  slug?: string;
 }
 
 const {
@@ -25,6 +27,7 @@ const {
   tags,
   image,
   coupangLinks,
+  slug,
 } = Astro.props;
 
 const formattedDate = new Date(pubDate).toLocaleDateString('ko-KR', {
@@ -123,6 +126,11 @@ const jsonLd = {
     <!-- 쿠팡 추천 상품 -->
     {coupangLinks && coupangLinks.length > 0 && (
       <CoupangBanner links={coupangLinks} />
+    )}
+
+    <!-- 관련 글 추천 -->
+    {slug && (
+      <RelatedPosts currentSlug={slug} category={category} tags={tags} />
     )}
 
     <!-- 관련 글 안내 -->
