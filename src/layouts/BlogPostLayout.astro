@@ -105,10 +105,15 @@ const jsonLd = {
       <slot />
     </div>
 
-    <!-- 하단 쿠팡 배너 -->
+    <!-- 쿠팡 추천 상품 -->
     {coupangLinks && coupangLinks.length > 0 && (
       <CoupangBanner links={coupangLinks} />
     )}
+
+    <!-- 관련 글 안내 -->
+    <div class="post-cta">
+      <p>이 글이 도움이 되셨다면 <a href="/blog/">다른 글</a>도 확인해보세요.</p>
+    </div>
 
     <!-- 하단 광고 슬롯 -->
     <AdSlot position="bottom" />

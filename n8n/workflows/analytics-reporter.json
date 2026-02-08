@@ -1,0 +1,211 @@
+{
+  "name": "AI Revenue Blog - Analytics Reporter",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 14 * * *"
+            }
+          ]
+        }
+      },
+      "id": "a1b2c3d4-e5f6-4a1b-8c9d-0e1f2a3b4c5d",
+      "name": "Daily Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://mkatzcmsrdntsmnykxpt.supabase.co/rest/v1/rpc/get_dashboard_summary",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYXR6Y21zcmRudHNtbnlreHB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyMDY3NTgsImV4cCI6MjA4NTc4Mjc1OH0.L58E2kOIBEfMwxOlgKPpnxjS0OTKhLqE0whF-xRNMGE"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYXR6Y21zcmRudHNtbnlreHB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyMDY3NTgsImV4cCI6MjA4NTc4Mjc1OH0.L58E2kOIBEfMwxOlgKPpnxjS0OTKhLqE0whF-xRNMGE"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b2c3d4e5-f6a7-4b2c-9d0e-1f2a3b4c5d6e",
+      "name": "Fetch Today Stats",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://mkatzcmsrdntsmnykxpt.supabase.co/rest/v1/rpc/get_daily_revenue",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYXR6Y21zcmRudHNtbnlreHB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyMDY3NTgsImV4cCI6MjA4NTc4Mjc1OH0.L58E2kOIBEfMwxOlgKPpnxjS0OTKhLqE0whF-xRNMGE"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYXR6Y21zcmRudHNtbnlreHB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyMDY3NTgsImV4cCI6MjA4NTc4Mjc1OH0.L58E2kOIBEfMwxOlgKPpnxjS0OTKhLqE0whF-xRNMGE"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "days_back",
+              "value": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c3d4e5f6-a7b8-4c3d-0e1f-2a3b4c5d6e7f",
+      "name": "Fetch Daily Revenue",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const summary = $('Fetch Today Stats').first().json;\nconst revenue = $('Fetch Daily Revenue').first().json;\n\nconst today = new Date().toISOString().split('T')[0];\n\nconst report = {\n  event_type: 'daily_report',\n  source: 'tool',\n  data: JSON.stringify({\n    date: today,\n    total_posts: summary.total_posts || 0,\n    total_views: summary.total_views || 0,\n    total_revenue: summary.total_revenue || 0,\n    total_coupang_clicks: summary.total_coupang_clicks || 0,\n    total_workflow_runs: summary.total_workflow_runs || 0,\n    daily_revenue: revenue || []\n  })\n};\n\nconst body = JSON.stringify(report);\nreturn [{ json: { body } }];"
+      },
+      "id": "d4e5f6a7-b8c9-4d5e-1f2a-3b4c5d6e7f8a",
+      "name": "Build Report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://mkatzcmsrdntsmnykxpt.supabase.co/rest/v1/analytics",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYXR6Y21zcmRudHNtbnlreHB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyMDY3NTgsImV4cCI6MjA4NTc4Mjc1OH0.L58E2kOIBEfMwxOlgKPpnxjS0OTKhLqE0whF-xRNMGE"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYXR6Y21zcmRudHNtbnlreHB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyMDY3NTgsImV4cCI6MjA4NTc4Mjc1OH0.L58E2kOIBEfMwxOlgKPpnxjS0OTKhLqE0whF-xRNMGE"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=minimal"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "string",
+        "body": "={{ $json.body }}",
+        "options": {}
+      },
+      "id": "e5f6a7b8-c9d0-4e6f-2a3b-4c5d6e7f8a9b",
+      "name": "Save Report",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1050,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Daily Trigger": {
+      "main": [
+        [
+          {
+            "node": "Fetch Today Stats",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Today Stats": {
+      "main": [
+        [
+          {
+            "node": "Fetch Daily Revenue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Daily Revenue": {
+      "main": [
+        [
+          {
+            "node": "Build Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Report": {
+      "main": [
+        [
+          {
+            "node": "Save Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-02-08T00:00:00.000Z",
+  "versionId": "1"
+}

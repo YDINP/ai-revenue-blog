@@ -359,60 +359,25 @@ main {
   font-size: 0.75rem;
 }
 
-/* Coupang Banner */
-.coupang-banner {
+/* Post CTA */
+.post-cta {
   margin: 2rem 0;
-  padding: 1.5rem;
+  padding: 1.25rem;
+  text-align: center;
   background: var(--color-bg-secondary);
-  border-radius: 12px;
-  border: 1px solid var(--color-border);
-}
-
-.coupang-banner h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--color-text);
-}
-
-.coupang-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.coupang-link-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.75rem;
-  background: white;
   border-radius: 8px;
-  border: 1px solid var(--color-border);
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}
+
+.post-cta a {
+  color: var(--color-primary);
+  font-weight: 600;
   text-decoration: none;
-  color: var(--color-text);
-  transition: box-shadow 0.2s;
 }
 
-.coupang-link-item:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.coupang-link-item img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 6px;
-}
-
-.coupang-link-item span {
-  font-weight: 500;
-}
-
-.coupang-disclaimer {
-  margin-top: 0.75rem;
-  font-size: 0.6875rem;
-  color: #94a3b8;
+.post-cta a:hover {
+  text-decoration: underline;
 }
 
 /* Responsive */
