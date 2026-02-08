@@ -319,6 +319,7 @@ section > h2::after {
   flex: 1;
   min-width: 0;
   min-height: unset;
+  width: 100%;
 }
 
 .post-list .post-card-body h3 {
@@ -332,6 +333,7 @@ section > h2::after {
   -webkit-box-orient: unset;
   flex-shrink: 0;
   margin-bottom: 0.25rem;
+  width: 100%;
 }
 
 .post-list .post-card-body p {
@@ -339,12 +341,14 @@ section > h2::after {
   -webkit-line-clamp: 1;
   flex: 0;
   margin-bottom: 0;
+  width: 100%;
 }
 
 .post-list .post-card-footer {
   flex-shrink: 0;
   margin-top: 0.5rem;
   padding-top: 0.5rem;
+  width: 100%;
 }
 
 .post-list .post-card-image-placeholder {
