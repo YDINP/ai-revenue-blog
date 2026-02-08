@@ -1,0 +1,365 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'About';
+const description = 'TechFlow는 최신 AI, 개발, 기술 트렌드를 다루는 전문 블로그입니다. 실용적인 개발 팁과 심층 기술 리뷰를 제공합니다.';
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="blog-post about-page">
+    <header class="post-header">
+      <h1>About TechFlow</h1>
+      <p class="tagline">AI & 테크 인사이트로 개발자의 성장을 돕는 블로그</p>
+    </header>
+
+    <div class="post-content">
+      <section class="intro-section">
+        <h2>블로그 소개</h2>
+        <p>
+          <strong>TechFlow</strong>는 AI, 개발, 기술 리뷰를 전문으로 다루는 블로그입니다.
+          빠르게 변화하는 기술 트렌드 속에서 개발자와 기술 애호가들이 실질적으로 활용할 수 있는 정보를 제공하는 것을 목표로 합니다.
+        </p>
+        <p>
+          우리는 단순한 소식 전달을 넘어, 심층적인 분석과 실전 경험을 바탕으로 한 인사이트를 공유합니다.
+        </p>
+      </section>
+
+      <section>
+        <h2>다루는 주제</h2>
+        <div class="category-showcase">
+          <div class="category-card">
+            <h3>🤖 AI & 인공지능</h3>
+            <p>ChatGPT, Claude, Gemini 등 최신 AI 모델 분석 및 활용법</p>
+            <ul>
+              <li>대화형 AI 비교 및 벤치마크</li>
+              <li>AI 도구 실전 활용 가이드</li>
+              <li>AI 윤리 및 트렌드 분석</li>
+            </ul>
+          </div>
+
+          <div class="category-card">
+            <h3>💻 개발 & 프로그래밍</h3>
+            <p>웹 개발, 프레임워크, 개발 도구 심층 리뷰</p>
+            <ul>
+              <li>프론트엔드/백엔드 기술 스택 가이드</li>
+              <li>개발 생산성 도구 리뷰</li>
+              <li>실전 코딩 팁 & 트러블슈팅</li>
+            </ul>
+          </div>
+
+          <div class="category-card">
+            <h3>⭐ 제품 리뷰</h3>
+            <p>개발자 도구, SaaS 서비스, 하드웨어 실사용 리뷰</p>
+            <ul>
+              <li>개발자 노트북, 키보드, 마우스 비교</li>
+              <li>클라우드 서비스 및 개발 플랫폼 분석</li>
+              <li>가성비 제품 추천 및 구매 가이드</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>운영 철학</h2>
+        <div class="philosophy-grid">
+          <div class="philosophy-item">
+            <h3>🎯 실용성 우선</h3>
+            <p>이론보다 실전에서 바로 적용할 수 있는 내용을 다룹니다.</p>
+          </div>
+          <div class="philosophy-item">
+            <h3>🔍 깊이 있는 분석</h3>
+            <p>표면적인 소개를 넘어 본질과 맥락을 파헤칩니다.</p>
+          </div>
+          <div class="philosophy-item">
+            <h3>📊 데이터 기반</h3>
+            <p>주관적인 의견보다 벤치마크와 실험 결과를 중시합니다.</p>
+          </div>
+          <div class="philosophy-item">
+            <h3>🚀 최신 트렌드</h3>
+            <p>빠르게 변화하는 기술 트렌드를 신속하게 전달합니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>저자 소개</h2>
+        <div class="author-bio">
+          <p>
+            <strong>TechFlow Team</strong>은 AI 및 개발 기술 전문 블로거로, 다양한 기술 스택과 AI 도구를 실무에서 활용한 경험을 바탕으로 글을 작성합니다.
+          </p>
+          <p>
+            웹 개발, 클라우드 아키텍처, AI 엔지니어링 분야에서 실전 경험을 쌓아왔으며,
+            복잡한 기술을 쉽고 명확하게 전달하는 것을 목표로 합니다.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>연락 및 협업</h2>
+        <p>기술 리뷰 협업, 기고 제안, 문의사항은 아래 연락처로 보내주세요:</p>
+        <ul class="contact-list">
+          <li>📧 <strong>이메일:</strong> techflow.blog@gmail.com</li>
+          <li>🐙 <strong>GitHub:</strong> <a href="https://github.com/YDINP" target="_blank" rel="noopener">github.com/YDINP</a></li>
+          <li>🌐 <strong>웹사이트:</strong> <a href="https://ai-revenue-blog.vercel.app">ai-revenue-blog.vercel.app</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>제휴 및 광고 정책</h2>
+        <p>
+          본 블로그는 Google AdSense 및 쿠팡파트너스 활동을 통해 수익을 창출하고 있습니다.
+          제휴 링크를 통한 구매 시 소정의 수수료를 받을 수 있으며, 이는 블로그 운영 및 콘텐츠 제작에 사용됩니다.
+        </p>
+        <p>
+          제휴 관계와 무관하게 객관적이고 정직한 리뷰를 작성하며, 독자의 신뢰를 최우선으로 합니다.
+        </p>
+      </section>
+
+      <section class="cta-section">
+        <h2>함께 성장하는 커뮤니티</h2>
+        <p>
+          TechFlow는 독자들과 함께 성장하는 블로그입니다.
+          최신 기술 트렌드, 개발 팁, 제품 리뷰가 궁금하다면 지금 바로 시작하세요!
+        </p>
+        <div class="cta-buttons">
+          <a href="/blog/" class="btn-primary">전체 글 보기</a>
+          <a href="/rss.xml" class="btn-secondary">RSS 구독</a>
+        </div>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .about-page {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .post-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--color-border);
+    text-align: center;
+  }
+
+  .post-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+
+  .tagline {
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+  }
+
+  .intro-section p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .category-showcase {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .category-card {
+    padding: 1.5rem;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .category-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
+  }
+
+  .category-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .category-card > p {
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .category-card ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .category-card li {
+    padding-left: 1.25rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+    font-size: 0.9rem;
+  }
+
+  .category-card li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: bold;
+  }
+
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .philosophy-item {
+    padding: 1.25rem;
+    background: var(--color-bg-secondary);
+    border-radius: 10px;
+    border-left: 4px solid var(--color-primary);
+  }
+
+  .philosophy-item h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .philosophy-item p {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .author-bio {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--color-bg-secondary), var(--color-bg));
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    margin-top: 1rem;
+  }
+
+  .author-bio p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text);
+  }
+
+  .contact-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+  }
+
+  .contact-list li {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    color: var(--color-text);
+  }
+
+  .contact-list a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .cta-section {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    border-radius: 16px;
+    text-align: center;
+    color: white;
+  }
+
+  .cta-section h2 {
+    color: white;
+    border-bottom: none;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0;
+  }
+
+  .cta-section p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary {
+    background: white;
+    color: #2563eb;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 640px) {
+    .post-header h1 {
+      font-size: 2rem;
+    }
+
+    .tagline {
+      font-size: 1rem;
+    }
+
+    .philosophy-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-section {
+      padding: 1.5rem;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      width: 100%;
+    }
+  }
+</style>

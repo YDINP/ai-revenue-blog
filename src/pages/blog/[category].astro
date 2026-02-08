@@ -23,6 +23,7 @@ const categoryLabels: Record<string, string> = {
   ai: 'AI & 인공지능',
   dev: '개발 & 프로그래밍',
   review: '제품 리뷰',
+  game: '게임 개발',
 };
 const label = categoryLabels[category.toLowerCase()] || category;
 ---
@@ -49,6 +50,22 @@ const label = categoryLabels[category.toLowerCase()] || category;
     </div>
   </div>
 
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <circle cx="9" cy="9" r="5.5" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M13 13L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <input
+      type="text"
+      id="search-input"
+      class="search-input"
+      placeholder="제목, 설명, 태그로 검색..."
+      aria-label="블로그 글 검색"
+    />
+    <span class="search-count" id="search-count"></span>
+  </div>
+
   <div class="post-grid" id="post-container">
     {
       filteredPosts.map((post) => (
@@ -59,6 +76,7 @@ const label = categoryLabels[category.toLowerCase()] || category;
           category={post.data.category}
           slug={post.id}
           image={post.data.image}
+          tags={post.data.tags}
         />
       ))
     }
@@ -79,6 +97,42 @@ const label = categoryLabels[category.toLowerCase()] || category;
 
       setView(saved);
       buttons.forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
+
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchCount = document.getElementById('search-count');
+      const allCards = Array.from(document.querySelectorAll('.post-card'));
+
+      function performSearch() {
+        const query = searchInput.value.toLowerCase().trim();
+
+        if (!query) {
+          // Show all cards
+          allCards.forEach(card => card.style.display = '');
+          searchCount.textContent = '';
+          return;
+        }
+
+        let visibleCount = 0;
+        allCards.forEach(card => {
+          const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+          const description = card.querySelector('p')?.textContent.toLowerCase() || '';
+          const category = card.querySelector('.post-category')?.textContent.toLowerCase() || '';
+          const tags = card.dataset.tags?.toLowerCase() || '';
+
+          const searchText = `${title} ${description} ${category} ${tags}`;
+          const isMatch = searchText.includes(query);
+
+          card.style.display = isMatch ? '' : 'none';
+          if (isMatch) visibleCount++;
+        });
+
+        searchCount.textContent = `${visibleCount}개의 검색 결과`;
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', performSearch);
+      }
     })();
   </script>
 </BaseLayout>
