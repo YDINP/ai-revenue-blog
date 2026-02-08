@@ -1,7 +1,7 @@
 ---
 title: "프롬프트 엔지니어링 완벽 가이드: AI에게 정확한 답을 얻는 7가지 기법"
 description: "ChatGPT, Claude 등 AI에서 원하는 결과를 얻기 위한 프롬프트 엔지니어링 7가지 핵심 기법을 실전 예제와 함께 설명합니다."
-pubDate: 2026-02-09
+pubDate: 2026-02-03
 category: "AI"
 tags: ["프롬프트 엔지니어링", "ChatGPT 활용법", "AI 프롬프트", "AI 팁"]
 author: "TechFlow"

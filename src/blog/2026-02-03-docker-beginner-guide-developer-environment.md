@@ -1,7 +1,7 @@
 ---
 title: "Docker 입문: 개발 환경을 컨테이너로 통일하는 실전 가이드"
 description: "Docker를 처음 접하는 개발자를 위한 실전 입문 가이드입니다. 설치부터 Dockerfile 작성, docker-compose까지 단계별로 설명합니다."
-pubDate: 2026-02-09
+pubDate: 2026-02-03
 category: "Dev"
 tags: ["Docker", "컨테이너", "개발 환경", "DevOps 입문"]
 author: "TechFlow"

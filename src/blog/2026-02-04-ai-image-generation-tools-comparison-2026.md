@@ -1,7 +1,7 @@
 ---
 title: "AI 이미지 생성 도구 TOP 5: 미드저니, DALL-E, Stable Diffusion 완벽 비교 (2026)"
 description: "2026년 최고의 AI 이미지 생성 도구 5가지를 비교합니다. 미드저니, DALL-E 3, Stable Diffusion 등 각 도구의 장단점과 활용법을 상세히 알려드립니다."
-pubDate: 2026-02-09
+pubDate: 2026-02-04
 category: "AI"
 tags: ["AI 이미지 생성", "미드저니", "DALL-E", "Stable Diffusion", "AI 그림"]
 author: "TechFlow"

@@ -1,7 +1,7 @@
 ---
 title: "2026년 프론트엔드 개발 트렌드: React 19, Next.js 15, 그리고 AI 통합"
 description: "2026년 프론트엔드 개발의 최신 트렌드를 정리합니다. React 19의 새 기능, Next.js 15, AI 코파일럿 통합까지 개발자가 알아야 할 모든 것."
-pubDate: 2026-02-09
+pubDate: 2026-02-05
 category: "Dev"
 tags: ["프론트엔드", "React", "Next.js", "웹 개발 트렌드"]
 author: "TechFlow"

@@ -1,7 +1,7 @@
 ---
 title: "REST API 설계 베스트 프랙티스: 2026년 실무 가이드"
 description: "실무에서 바로 적용할 수 있는 REST API 설계 원칙과 베스트 프랙티스를 예제와 함께 정리합니다. URL 설계, 에러 처리, 인증, 버전 관리까지."
-pubDate: 2026-02-10
+pubDate: 2026-02-06
 category: "Dev"
 tags: ["REST API", "API 설계", "백엔드 개발", "웹 개발"]
 author: "TechFlow"

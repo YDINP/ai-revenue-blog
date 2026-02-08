@@ -1,7 +1,7 @@
 ---
 title: "개발자를 위한 SSD 추천 2026: 삼성 980 PRO vs 990 PRO 스토리지 완벽 가이드"
 description: "개발 환경에 최적화된 SSD를 추천합니다. 삼성 980 PRO, 990 PRO 등 인기 제품을 빌드 속도, 내구성, 가격 기준으로 비교 분석합니다."
-pubDate: 2026-02-10
+pubDate: 2026-02-03
 category: "Review"
 tags: ["SSD 추천", "삼성 980 PRO", "개발자 스토리지", "NVMe SSD"]
 author: "TechFlow"

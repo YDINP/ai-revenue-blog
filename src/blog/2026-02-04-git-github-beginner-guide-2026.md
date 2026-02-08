@@ -1,7 +1,7 @@
 ---
 title: "2026년 Git & GitHub 완벽 입문 가이드: 초보자도 10분만에 시작"
 description: "Git과 GitHub를 처음 배우는 분을 위한 완벽 입문 가이드입니다. 설치부터 첫 커밋, PR까지 10분만에 마스터하세요."
-pubDate: 2026-02-09
+pubDate: 2026-02-04
 category: "Dev"
 tags: ["Git 입문", "GitHub 사용법", "버전 관리", "개발 입문"]
 author: "TechFlow"
