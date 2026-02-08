@@ -31,6 +31,10 @@ coupangLinks:
 | Excel 데이터 처리 | ★★☆ | 10분 | 매출 집계, 데이터 정제 | openpyxl, pandas |
 | 스케줄 자동 실행 | ★☆☆ | 10분 | 정기 백업, 알림 발송 | schedule |
 
+<div class="chart-radar" data-title="Python 자동화 예제 난이도 vs 효과" data-items='[{"name":"파일/이메일 자동화","scores":[{"label":"난이도","value":3,"color":"#10b981"},{"label":"시간절약","value":7,"color":"#10b981"},{"label":"범용성","value":9,"color":"#10b981"},{"label":"학습가치","value":6,"color":"#10b981"},{"label":"실무적용","value":9,"color":"#10b981"}]},{"name":"웹 스크래핑","scores":[{"label":"난이도","value":7,"color":"#3b82f6"},{"label":"시간절약","value":9,"color":"#3b82f6"},{"label":"범용성","value":7,"color":"#3b82f6"},{"label":"학습가치","value":9,"color":"#3b82f6"},{"label":"실무적용","value":8,"color":"#3b82f6"}]},{"name":"Excel/스케줄 자동화","scores":[{"label":"난이도","value":4,"color":"#f59e0b"},{"label":"시간절약","value":10,"color":"#f59e0b"},{"label":"범용성","value":8,"color":"#f59e0b"},{"label":"학습가치","value":7,"color":"#f59e0b"},{"label":"실무적용","value":10,"color":"#f59e0b"}]}]'></div>
+
+<div class="chart-bar" data-title="예제별 소요 시간 (분)" data-labels="파일명 변경,스케줄 실행,Excel 처리,이메일 발송,웹 스크래핑" data-values="5,10,10,15,20" data-colors="#10b981,#10b981,#f59e0b,#3b82f6,#8b5cf6" data-unit="분"></div>
+
 ## 1. 파일명 일괄 변경 - 다운로드 폴더 정리
 
 ### 문제 상황

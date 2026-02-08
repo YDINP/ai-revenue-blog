@@ -32,6 +32,10 @@ coupangLinks:
 | 긴 컨텍스트 검색 정확도 | 18.5% | **76%** |
 | 코딩 벤치마크 | 우수 | **대폭 향상** |
 
+<div class="chart-bar" data-title="Opus 4.5 vs 4.6 성능 비교" data-labels="컨텍스트 (만 토큰),최대 출력 (K 토큰),긴 컨텍스트 정확도 (%),에이전트 팀 지원" data-values="100,128,76,100" data-colors="#8b5cf6,#8b5cf6,#10b981,#3b82f6" data-unit=""></div>
+
+<div class="chart-radar" data-title="Claude Opus 4.6 핵심 기능 평가" data-items='[{"name":"코딩 & 에이전틱","scores":[{"label":"추론 능력","value":10,"color":"#8b5cf6"},{"label":"컨텍스트 활용","value":10,"color":"#8b5cf6"},{"label":"속도","value":6,"color":"#8b5cf6"},{"label":"비용 효율","value":5,"color":"#8b5cf6"},{"label":"실무 적용성","value":10,"color":"#8b5cf6"}]},{"name":"문서 & 분석","scores":[{"label":"추론 능력","value":9,"color":"#3b82f6"},{"label":"컨텍스트 활용","value":10,"color":"#3b82f6"},{"label":"속도","value":7,"color":"#3b82f6"},{"label":"비용 효율","value":6,"color":"#3b82f6"},{"label":"실무 적용성","value":9,"color":"#3b82f6"}]},{"name":"일반 대화","scores":[{"label":"추론 능력","value":8,"color":"#10b981"},{"label":"컨텍스트 활용","value":7,"color":"#10b981"},{"label":"속도","value":8,"color":"#10b981"},{"label":"비용 효율","value":7,"color":"#10b981"},{"label":"실무 적용성","value":8,"color":"#10b981"}]}]'></div>
+
 ## 100만 토큰 컨텍스트: 전체 코드베이스를 한 번에
 
 Opus 4.6의 100만 토큰(약 75만 단어) 컨텍스트 윈도우는 실무적으로 엄청난 의미를 가집니다.

@@ -57,6 +57,8 @@ DELETE /users/123          # 사용자 삭제
 | PATCH | 리소스 부분 수정 | 예 | 있음 |
 | DELETE | 리소스 삭제 | 예 | 없음 |
 
+<div class="chart-bar" data-title="HTTP 메서드 실무 사용 비중 (%)" data-labels="GET,POST,PUT/PATCH,DELETE,OPTIONS" data-values="45,25,15,10,5" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#94a3b8" data-unit="%"></div>
+
 ### PUT vs PATCH
 
 ```json
@@ -143,6 +145,8 @@ PATCH /users/123
 | 422 | Unprocessable Entity | 문법은 맞지만 처리 불가 |
 | 429 | Too Many Requests | 요청 횟수 초과 |
 | 500 | Internal Server Error | 서버 오류 |
+
+<div class="chart-radar" data-title="REST API 설계 원칙별 중요도" data-items='[{"name":"URL & 메서드 설계","scores":[{"label":"구현 난이도","value":3,"color":"#10b981"},{"label":"유지보수 영향","value":10,"color":"#10b981"},{"label":"DX 향상","value":9,"color":"#10b981"},{"label":"보안 기여","value":4,"color":"#10b981"},{"label":"표준 준수","value":10,"color":"#10b981"}]},{"name":"응답 구조 & 에러 처리","scores":[{"label":"구현 난이도","value":5,"color":"#3b82f6"},{"label":"유지보수 영향","value":9,"color":"#3b82f6"},{"label":"DX 향상","value":10,"color":"#3b82f6"},{"label":"보안 기여","value":6,"color":"#3b82f6"},{"label":"표준 준수","value":8,"color":"#3b82f6"}]},{"name":"인증 & 버전 관리","scores":[{"label":"구현 난이도","value":8,"color":"#8b5cf6"},{"label":"유지보수 영향","value":8,"color":"#8b5cf6"},{"label":"DX 향상","value":7,"color":"#8b5cf6"},{"label":"보안 기여","value":10,"color":"#8b5cf6"},{"label":"표준 준수","value":9,"color":"#8b5cf6"}]}]'></div>
 
 ### 안티패턴: 모든 응답에 200 반환
 

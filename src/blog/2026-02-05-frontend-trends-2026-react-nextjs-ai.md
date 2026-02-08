@@ -145,6 +145,8 @@ CSS도 혁신적으로 발전하고 있습니다.
 | 생태계 | 풍부한 플러그인 | Next.js 중심 |
 | 사용처 | 범용 | Next.js 전용 |
 
+<div class="chart-radar" data-title="프론트엔드 프레임워크 종합 비교" data-items='[{"name":"Next.js 15","scores":[{"label":"SSR","value":10,"color":"#10b981"},{"label":"생태계","value":10,"color":"#10b981"},{"label":"학습곡선","value":6,"color":"#10b981"},{"label":"빌드속도","value":9,"color":"#10b981"},{"label":"풀스택","value":10,"color":"#10b981"}]},{"name":"Astro 5","scores":[{"label":"SSR","value":8,"color":"#8b5cf6"},{"label":"생태계","value":7,"color":"#8b5cf6"},{"label":"학습곡선","value":9,"color":"#8b5cf6"},{"label":"빌드속도","value":10,"color":"#8b5cf6"},{"label":"풀스택","value":5,"color":"#8b5cf6"}]},{"name":"Vite 6","scores":[{"label":"SSR","value":5,"color":"#f59e0b"},{"label":"생태계","value":9,"color":"#f59e0b"},{"label":"학습곡선","value":8,"color":"#f59e0b"},{"label":"빌드속도","value":10,"color":"#f59e0b"},{"label":"풀스택","value":4,"color":"#f59e0b"}]}]'></div>
+
 **독립 프로젝트**라면 Vite, **Next.js 프로젝트**라면 Turbopack이 자연스러운 선택입니다.
 
 ## 트렌드 6: 타입 안전성의 강화

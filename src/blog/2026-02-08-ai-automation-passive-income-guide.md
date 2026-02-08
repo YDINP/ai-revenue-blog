@@ -61,6 +61,10 @@ Convertkit이나 ActiveCampaign 같은 도구로 이메일 시퀀스를 자동�
 | 이메일 마케팅 자동화 | 20만 원 | 중간 | 100-200만 원 | 6-9개월 |
 | 채팅봇 서비스 | 30만 원 | 높음 | 200-500만 원 | 3-6개월 |
 
+<div class="chart-bar" data-title="AI 자동화 방법별 월 수익 기대치 (만원)" data-labels="콘텐츠 자동 생성,이미지 라이선싱,SNS 자동 운영,이메일 마케팅,채팅봇 서비스" data-values="75,100,150,150,350" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6,#ef4444" data-unit="만원"></div>
+
+<div class="chart-radar" data-title="AI 자동화 수익 방법 비교" data-items='[{"name":"콘텐츠 + 이미지 생성","scores":[{"label":"초기 투자","value":9,"color":"#10b981"},{"label":"난이도","value":8,"color":"#10b981"},{"label":"수익성","value":6,"color":"#10b981"},{"label":"자동화율","value":9,"color":"#10b981"},{"label":"확장성","value":7,"color":"#10b981"}]},{"name":"SNS + 이메일 마케팅","scores":[{"label":"초기 투자","value":6,"color":"#3b82f6"},{"label":"난이도","value":5,"color":"#3b82f6"},{"label":"수익성","value":8,"color":"#3b82f6"},{"label":"자동화율","value":8,"color":"#3b82f6"},{"label":"확장성","value":9,"color":"#3b82f6"}]},{"name":"채팅봇 서비스","scores":[{"label":"초기 투자","value":4,"color":"#8b5cf6"},{"label":"난이도","value":3,"color":"#8b5cf6"},{"label":"수익성","value":10,"color":"#8b5cf6"},{"label":"자동화율","value":7,"color":"#8b5cf6"},{"label":"확장성","value":10,"color":"#8b5cf6"}]}]'></div>
+
 ## 성공하기 위한 AI 자동화 팁
 
 ### 품질 관리가 핵심입니다

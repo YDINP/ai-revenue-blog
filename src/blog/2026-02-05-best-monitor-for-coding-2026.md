@@ -29,6 +29,10 @@ coupangLinks:
 | 32인치 | 3840x2160 (4K) | 138 | 60-100만원 | 최고 선명도, 넓은 작업 공간 | 고사양 그래픽카드 필요 |
 | 34인치 울트라와이드 | 3440x1440 (UWQHD) | 110 | 50-80만원 | 좌우 분할 최적, 몰입감 | 세로 공간 부족, 호환성 이슈 |
 
+<div class="chart-radar" data-title="코딩 모니터 크기별 종합 비교" data-items='[{"name":"27인치 QHD","scores":[{"label":"선명도","value":7,"color":"#10b981"},{"label":"작업공간","value":6,"color":"#10b981"},{"label":"가성비","value":9,"color":"#10b981"},{"label":"휴대성","value":8,"color":"#10b981"},{"label":"눈 피로도","value":8,"color":"#10b981"}]},{"name":"32인치 4K","scores":[{"label":"선명도","value":10,"color":"#3b82f6"},{"label":"작업공간","value":9,"color":"#3b82f6"},{"label":"가성비","value":6,"color":"#3b82f6"},{"label":"휴대성","value":5,"color":"#3b82f6"},{"label":"눈 피로도","value":6,"color":"#3b82f6"}]},{"name":"34인치 UW","scores":[{"label":"선명도","value":7,"color":"#f59e0b"},{"label":"작업공간","value":10,"color":"#f59e0b"},{"label":"가성비","value":7,"color":"#f59e0b"},{"label":"휴대성","value":4,"color":"#f59e0b"},{"label":"눈 피로도","value":7,"color":"#f59e0b"}]}]'></div>
+
+<div class="chart-bar" data-title="가격대 비교 (만원)" data-labels="27인치 QHD,34인치 UW,32인치 4K" data-values="40,65,80" data-colors="#10b981,#f59e0b,#3b82f6" data-unit="만원"></div>
+
 ## 27인치 QHD - 가성비와 실용성의 균형
 
 ### 장점

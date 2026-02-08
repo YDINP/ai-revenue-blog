@@ -31,6 +31,10 @@ coupangLinks:
 | 키크론 K3 Pro | 12만원대 | 로우프로 적축 | 무선(BT) | 약 2개월 | 초슬림, Mac/Win 호환 |
 | 리얼포스 R3 | 25만원대 | 정전용량 무접점 | 유무선 | 약 2개월 | 최고급 타이핑감, 무음 |
 
+<div class="chart-radar" data-title="개발자 키보드 TOP 5 종합 평가" data-items='[{"name":"MX Keys S","scores":[{"label":"타이핑감","value":7,"color":"#10b981"},{"label":"소음","value":9,"color":"#10b981"},{"label":"무선","value":10,"color":"#10b981"},{"label":"가성비","value":7,"color":"#10b981"},{"label":"내구성","value":8,"color":"#10b981"}]},{"name":"레오폴드 FC660M","scores":[{"label":"타이핑감","value":10,"color":"#3b82f6"},{"label":"소음","value":5,"color":"#3b82f6"},{"label":"무선","value":1,"color":"#3b82f6"},{"label":"가성비","value":7,"color":"#3b82f6"},{"label":"내구성","value":10,"color":"#3b82f6"}]},{"name":"리얼포스 R3","scores":[{"label":"타이핑감","value":10,"color":"#8b5cf6"},{"label":"소음","value":10,"color":"#8b5cf6"},{"label":"무선","value":8,"color":"#8b5cf6"},{"label":"가성비","value":4,"color":"#8b5cf6"},{"label":"내구성","value":10,"color":"#8b5cf6"}]}]'></div>
+
+<div class="chart-bar" data-title="가격대 비교 (만원)" data-labels="한성 GK898B,키크론 K3 Pro,MX Keys S,레오폴드 FC660M,리얼포스 R3" data-values="10,12,15,18,25" data-colors="#f59e0b,#ef4444,#10b981,#3b82f6,#8b5cf6" data-unit="만"></div>
+
 ## 1. 로지텍 MX Keys S - 멀티 디바이스 환경 최적화
 
 **개발자 키보드** 중 멀티 태스킹에 가장 강력한 제품입니다. 3대 기기를 버튼 하나로 전환하며, 백라이트가 손 감지로 자동 점등됩니다. 팬터그래프 방식이지만 키감이 탄탄하고, 사무실에서도 조용히 사용할 수 있는 점이 장점입니다. 단, **기계식 키보드** 특유의 찰랑한 피드백은 약합니다.

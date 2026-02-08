@@ -33,6 +33,8 @@ coupangLinks:
 | 성능 | 오버헤드 큼 | 거의 네이티브 |
 | 비유 | 아파트 한 채 | 방 하나 |
 
+<div class="chart-radar" data-title="VM vs Docker 비교" data-items='[{"name":"가상머신 (VM)","scores":[{"label":"격리성","value":10,"color":"#ef4444"},{"label":"속도","value":4,"color":"#ef4444"},{"label":"경량성","value":2,"color":"#ef4444"},{"label":"이식성","value":6,"color":"#ef4444"},{"label":"학습곡선","value":5,"color":"#ef4444"}]},{"name":"Docker 컨테이너","scores":[{"label":"격리성","value":7,"color":"#10b981"},{"label":"속도","value":10,"color":"#10b981"},{"label":"경량성","value":10,"color":"#10b981"},{"label":"이식성","value":9,"color":"#10b981"},{"label":"학습곡선","value":7,"color":"#10b981"}]}]'></div>
+
 Docker 컨테이너는 가상머신보다 **가볍고 빠릅니다**. OS를 통째로 띄우는 대신, 앱에 필요한 것만 담아서 실행합니다.
 
 ## Step 1: Docker 설치

@@ -166,6 +166,10 @@ AI에게 **프롬프트 자체를 개선**하도록 요청하는 고급 기법�
 - 실용적인 팁과 예시를 반드시 포함
 ```
 
+<div class="chart-bar" data-title="프롬프트 기법별 결과 품질 향상도 (%)" data-labels="역할 부여,단계별 사고,예시 제공,제약 조건,출력 형식,반복 개선,메타 프롬프트" data-values="60,80,70,50,40,90,85" data-colors="#3b82f6,#10b981,#f59e0b,#8b5cf6,#ef4444,#10b981,#3b82f6" data-unit="%"></div>
+
+<div class="chart-radar" data-title="프롬프트 기법별 활용 평가" data-items='[{"name":"역할 부여 + 단계별 사고","scores":[{"label":"효과","value":9,"color":"#10b981"},{"label":"난이도","value":3,"color":"#10b981"},{"label":"범용성","value":9,"color":"#10b981"},{"label":"코딩 활용","value":10,"color":"#10b981"},{"label":"글쓰기 활용","value":8,"color":"#10b981"}]},{"name":"예시 제공 + 출력 형식","scores":[{"label":"효과","value":8,"color":"#3b82f6"},{"label":"난이도","value":4,"color":"#3b82f6"},{"label":"범용성","value":7,"color":"#3b82f6"},{"label":"코딩 활용","value":6,"color":"#3b82f6"},{"label":"글쓰기 활용","value":9,"color":"#3b82f6"}]},{"name":"반복 개선 + 메타 프롬프트","scores":[{"label":"효과","value":10,"color":"#8b5cf6"},{"label":"난이도","value":6,"color":"#8b5cf6"},{"label":"범용성","value":10,"color":"#8b5cf6"},{"label":"코딩 활용","value":9,"color":"#8b5cf6"},{"label":"글쓰기 활용","value":10,"color":"#8b5cf6"}]}]'></div>
+
 ## 결론: 프롬프트 엔지니어링은 AI 시대의 핵심 스킬
 
 프롬프트 엔지니어링은 단순한 "질문 기술"이 아닙니다. AI와 효과적으로 협업하기 위한 **커뮤니케이션 스킬**입니다.

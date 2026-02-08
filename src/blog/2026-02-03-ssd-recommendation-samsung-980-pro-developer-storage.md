@@ -42,6 +42,10 @@ SSD를 HDD에서 NVMe SSD로 교체하면 빌드 시간이 **3~5배** 단축됩�
 | 4 | SK하이닉스 P41 | 1TB | 7,000 | 6,500 | 750 | ~10만 |
 | 5 | 크루셜 T500 | 1TB | 7,300 | 6,800 | 600 | ~10만 |
 
+<div class="chart-bar" data-title="순차 읽기 속도 비교 (MB/s)" data-labels="삼성 980 PRO,SK하이닉스 P41,크루셜 T500,WD Black SN850X,삼성 990 PRO" data-values="7000,7000,7300,7300,7450" data-colors="#3b82f6,#f59e0b,#94a3b8,#ef4444,#10b981" data-unit=""></div>
+
+<div class="chart-radar" data-title="개발자용 SSD 종합 평가" data-items='[{"name":"삼성 990 PRO","scores":[{"label":"읽기속도","value":10,"color":"#10b981"},{"label":"쓰기속도","value":10,"color":"#10b981"},{"label":"내구성","value":9,"color":"#10b981"},{"label":"가성비","value":7,"color":"#10b981"},{"label":"안정성","value":10,"color":"#10b981"}]},{"name":"삼성 980 PRO","scores":[{"label":"읽기속도","value":9,"color":"#3b82f6"},{"label":"쓰기속도","value":7,"color":"#3b82f6"},{"label":"내구성","value":9,"color":"#3b82f6"},{"label":"가성비","value":9,"color":"#3b82f6"},{"label":"안정성","value":10,"color":"#3b82f6"}]},{"name":"SK하이닉스 P41","scores":[{"label":"읽기속도","value":9,"color":"#f59e0b"},{"label":"쓰기속도","value":9,"color":"#f59e0b"},{"label":"내구성","value":10,"color":"#f59e0b"},{"label":"가성비","value":9,"color":"#f59e0b"},{"label":"안정성","value":8,"color":"#f59e0b"}]}]'></div>
+
 ## 1위: 삼성 990 PRO — 최고의 올라운더
 
 삼성 990 PRO는 **속도, 안정성, 내구성** 모든 면에서 최고입니다.

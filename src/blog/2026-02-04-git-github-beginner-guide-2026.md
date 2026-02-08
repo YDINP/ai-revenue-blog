@@ -153,6 +153,8 @@ main ─────────────────────────
 4. 변경 내용 설명 작성
 5. 리뷰어 지정 → 승인 후 Merge
 
+<div class="chart-bar" data-title="Git 명령어 사용 빈도 (주간 평균)" data-labels="git status,git add,git commit,git push,git pull,git log,git branch,git diff" data-values="50,40,35,20,15,12,10,8" data-colors="#10b981,#10b981,#3b82f6,#3b82f6,#f59e0b,#94a3b8,#94a3b8,#94a3b8" data-unit="회"></div>
+
 ## 자주 쓰는 Git 명령어 모음
 
 | 명령어 | 설명 | 사용 빈도 |
