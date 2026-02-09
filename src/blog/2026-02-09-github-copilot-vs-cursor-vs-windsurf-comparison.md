@@ -1,7 +1,7 @@
 ---
 title: "2026 AI 코딩 어시스턴트 비교: GitHub Copilot vs Cursor vs Windsurf"
 description: "2026년 가장 인기 있는 AI 코딩 어시스턴트 3종을 코드 품질, 속도, 가격, 언어 지원, IDE 통합 5가지 기준으로 비교 분석합니다."
-pubDate: 2026-02-08
+pubDate: 2026-02-09
 category: "AI"
 tags: ["AI 코딩", "GitHub Copilot", "Cursor", "Windsurf", "개발 도구"]
 author: "TechFlow"

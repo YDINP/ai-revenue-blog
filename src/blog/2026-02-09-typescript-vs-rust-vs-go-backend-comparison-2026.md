@@ -1,7 +1,7 @@
 ---
 title: "2026 백엔드 언어 대전: TypeScript vs Rust vs Go 실전 비교"
 description: "TypeScript(Node.js), Rust, Go 세 언어의 성능, 생산성, 생태계, 러닝커브를 실제 프로젝트 기준으로 비교합니다. 2026년 백엔드 언어 선택 가이드."
-pubDate: 2026-02-08
+pubDate: 2026-02-09
 category: "Dev"
 tags: ["TypeScript", "Rust", "Go", "백엔드", "프로그래밍 언어"]
 author: "TechFlow"
