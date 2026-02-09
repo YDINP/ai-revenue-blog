@@ -10,11 +10,17 @@ image:
   alt: "사무용품과 창의적인 장식으로 책상 위에 코드가 표시된 세련된 MacBook Pro"
 coupangLinks:
   - title: "맥북 에어 M3"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJjWan"
   - title: "삼성 갤럭시북4 프로"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJjWzN"
   - title: "LG 그램 17"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJjWZQ"
+  - title: "HOHO 휴대용 노트북 거치대 (화이트)"
+    url: "https://link.coupang.com/a/dJjCfq"
+  - title: "규랩 쿨링 홀 노트북 스탠드 거치대"
+    url: "https://link.coupang.com/a/dJjEY6"
+  - title: "토라픽 초경량 노트북 거치대"
+    url: "https://link.coupang.com/a/dJjIe9"
 ---
 
 ## 개발자의 영원한 고민: 어떤 노트북을 살까?

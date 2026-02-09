@@ -10,9 +10,9 @@ image:
   alt: "Git 스티커를 들고 있는 사람의 클로즈업, 소프트웨어 개발 강조"
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJjX0Z"
   - title: "클린 코드"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJjVjr"
 ---
 
 ## Git, 왜 배워야 할까?

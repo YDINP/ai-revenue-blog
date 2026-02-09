@@ -10,9 +10,9 @@ image:
   alt: "Scrabble tiles spelling 'AdWords' on a wooden surface, symbolizing digital marketing concepts."
 coupangLinks:
   - title: "게임 프로그래밍 패턴 도서"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJj5U5"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJjUUj"
 ---
 
 ## 게임 개발은 도구의 조합이다

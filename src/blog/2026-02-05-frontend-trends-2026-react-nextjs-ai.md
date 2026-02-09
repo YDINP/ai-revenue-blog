@@ -10,9 +10,9 @@ image:
   alt: "웹 개발 및 프로그래밍 개념을 보여주는 노트북에서 코딩하는 사람의 클로즈업"
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJjX0Z"
   - title: "로지텍 MX Keys S 무선 키보드"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJj0zg"
 ---
 
 ## 2026년 프론트엔드 생태계, 무엇이 변했나

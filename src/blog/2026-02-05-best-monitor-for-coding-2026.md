@@ -10,9 +10,9 @@ image:
   alt: "듀얼 모니터에 코드가 표시된 무지개 조명 키보드로 타이핑하는 손"
 coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJjYpL"
   - title: "삼성 뷰피니티 S8 32인치 4K"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJjYRb"
 ---
 
 ## 개발자에게 모니터 크기가 중요한 이유

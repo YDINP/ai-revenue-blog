@@ -10,11 +10,17 @@ image:
   alt: "깔끔한 데스크 셋업과 모니터가 있는 작업 공간"
 coupangLinks:
   - title: "ASUS ZenScreen MB16ACV"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJj9S4"
   - title: "모니터 거치대"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJkajT"
   - title: "USB-C 케이블"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJkaKD"
+  - title: "HOHO 휴대용 노트북 거치대 (블랙)"
+    url: "https://link.coupang.com/a/dJjDkd"
+  - title: "멜리언스 노트북 거치대 ML-MDD03"
+    url: "https://link.coupang.com/a/dJjD93"
+  - title: "규랩 쿨링 홀 노트북 스탠드 거치대"
+    url: "https://link.coupang.com/a/dJjEY6"
 ---
 
 ## 개발자에게 듀얼 모니터는 사치가 아닌 생존 도구

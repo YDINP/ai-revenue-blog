@@ -10,9 +10,9 @@ image:
   alt: "노트북 화면의 프로그래밍 코드와 개발 환경"
 coupangLinks:
   - title: "러스트 프로그래밍 도서"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJj7h9"
   - title: "개발자 노트북 맥북 프로"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJj7HT"
 ---
 
 ## 백엔드 언어, 2026년에는 무엇을 써야 할까?

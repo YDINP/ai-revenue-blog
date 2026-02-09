@@ -10,9 +10,9 @@ image:
   alt: "Crop anonymous male using contemporary computer with big monitors and typing on backlit keyboard"
 coupangLinks:
   - title: "게임 프로그래밍 패턴 도서"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJj5U5"
   - title: "로지텍 G Pro X 게이밍 마우스"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJj6m6"
 ---
 
 ## 들어가며

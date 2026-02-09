@@ -10,9 +10,9 @@ image:
   alt: "회색 배경 위의 고성능 NVMe SSD 두 개"
 coupangLinks:
   - title: "삼성 SSD 980 PRO 1TB"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJjVJy"
   - title: "삼성 갤럭시북4 프로"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJjWzN"
 ---
 
 ## 개발자에게 SSD가 중요한 이유

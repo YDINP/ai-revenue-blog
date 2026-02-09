@@ -10,9 +10,9 @@ image:
   alt: "Close-up of HTML code lines highlighting web development concepts and techniques."
 coupangLinks:
   - title: "자바스크립트 완벽 가이드 도서"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJjZe2"
   - title: "모니터 LG 울트라와이드"
-    url: "https://link.coupang.com/a/dJhOT3"
+    url: "https://link.coupang.com/a/dJjYpL"
 ---
 
 ## Phaser.js가 웹 게임 개발의 정답인 이유
