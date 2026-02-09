@@ -1,0 +1,24 @@
+{
+  "categories": [
+    {
+      "name": "AI",
+      "keywords": ["AI 코딩 도구 추천", "ChatGPT 활용법", "Claude AI 사용법", "AI 이미지 생성 도구 비교", "AI 자동화 수익화", "프롬프트 엔지니어링 팁", "AI 페어 프로그래밍", "로컬 LLM 구축"],
+      "searchTerms": ["AI coding tools", "ChatGPT tips", "AI automation", "prompt engineering", "AI programming", "local LLM", "AI image generation", "AI productivity"]
+    },
+    {
+      "name": "Dev",
+      "keywords": ["프로그래밍 입문 가이드", "React 최신 트렌드", "Python 자동화 실전", "Next.js 배포 가이드", "Supabase 활용법", "개발자 생산성 향상", "TypeScript 마이그레이션"],
+      "searchTerms": ["programming tutorial", "React trends", "Python automation", "Next.js deploy", "Supabase guide", "developer productivity", "TypeScript migration"]
+    },
+    {
+      "name": "Review",
+      "keywords": ["개발용 노트북 추천", "코딩 모니터 비교", "개발자 키보드 리뷰", "개발자 마우스 추천", "SSD 추천", "포터블 모니터 비교"],
+      "searchTerms": ["developer laptop", "coding monitor", "mechanical keyboard", "developer mouse", "SSD review", "portable monitor"]
+    },
+    {
+      "name": "Game",
+      "keywords": ["게임 엔진 비교", "Unity 입문 가이드", "Godot 4 튜토리얼", "Phaser 웹 게임", "인디 게임 개발 도구"],
+      "searchTerms": ["game engine comparison", "Unity tutorial", "Godot 4 guide", "Phaser web game", "indie game development"]
+    }
+  ]
+}
