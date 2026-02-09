@@ -10,9 +10,9 @@ image:
   alt: "컴퓨터 화면에 표시된 AI 채팅 인터페이스"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dH5n1h"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dH5lSP"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## 같은 AI, 다른 결과 — 프롬프트가 전부다

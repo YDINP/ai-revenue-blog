@@ -10,9 +10,9 @@ image:
   alt: "A close-up view of modern GPU units, ideal for gaming and tech visuals."
 coupangLinks:
   - title: "유니티 교과서 도서"
-    url: "https://link.coupang.com/a/dH5n1h"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dH5lSP"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## Unity가 인기 있는 이유

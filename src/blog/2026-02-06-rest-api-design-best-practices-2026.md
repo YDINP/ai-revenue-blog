@@ -10,9 +10,9 @@ image:
   alt: "어두운 테마의 컴퓨터 화면에 표시된 프로그래밍 코드의 상세 보기"
 coupangLinks:
   - title: "클린 코드"
-    url: "https://link.coupang.com/a/dH5mF4"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dH5mpm"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## 좋은 API vs 나쁜 API, 차이는 설계에 있다

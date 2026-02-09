@@ -10,9 +10,9 @@ image:
   alt: "야외에서 DevOps 스티커를 들고 있는 사람을 특징으로 하는 클로즈업 이미지"
 coupangLinks:
   - title: "LG 그램 17 (개발용 노트북)"
-    url: "https://link.coupang.com/a/dH5l7D"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dH5n1h"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## n8n이란?

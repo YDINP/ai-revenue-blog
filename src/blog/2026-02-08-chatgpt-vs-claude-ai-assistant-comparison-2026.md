@@ -10,9 +10,9 @@ image:
   alt: "DeepSeek라는 AI 챗봇 인터페이스를 보여주는 나무 테이블 위의 스마트폰"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dH5n1h"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dH5lSP"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## 2026년 2월, AI 어시스턴트 역대급 경쟁

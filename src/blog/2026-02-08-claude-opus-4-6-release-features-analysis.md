@@ -10,9 +10,9 @@ image:
   alt: "눈으로 가득 찬 실루엣 머리와 함께 AI의 추상적인 일러스트, 관찰과 기술 상징"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dH5n1h"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dH5lSP"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## Anthropic, Claude Opus 4.6 공식 출시

@@ -10,11 +10,11 @@ image:
   alt: "깔끔한 데스크 셋업과 모니터가 있는 작업 공간"
 coupangLinks:
   - title: "ASUS ZenScreen MB16ACV"
-    url: "https://link.coupang.com/a/dH5lSP"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "모니터 거치대"
-    url: "https://link.coupang.com/a/dH5k3n"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "USB-C 케이블"
-    url: "https://link.coupang.com/a/dH5n1h"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## 개발자에게 듀얼 모니터는 사치가 아닌 생존 도구

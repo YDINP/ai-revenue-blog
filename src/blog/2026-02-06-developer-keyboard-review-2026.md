@@ -10,9 +10,9 @@ image:
   alt: "대형 모니터를 사용하여 현대적인 컴퓨터로 백라이트 키보드에서 타이핑하는 익명의 남성"
 coupangLinks:
   - title: "로지텍 MX Keys S 무선 키보드"
-    url: "https://link.coupang.com/a/dH5kCz"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "키크론 K3 Pro 저소음 적축"
-    url: "https://link.coupang.com/a/dH5kgx"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## 개발자에게 키보드가 중요한 이유

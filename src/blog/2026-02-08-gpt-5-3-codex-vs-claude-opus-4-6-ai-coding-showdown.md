@@ -10,9 +10,9 @@ image:
   alt: "디버깅 및 문제 해결을 위한 메뉴 옵션이 있는 AI 보조 코딩 클로즈업"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dH5n1h"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "로지텍 MX Keys S 무선 키보드"
-    url: "https://link.coupang.com/a/dH5kCz"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## 2월 5일, AI 역사상 가장 치열한 하루

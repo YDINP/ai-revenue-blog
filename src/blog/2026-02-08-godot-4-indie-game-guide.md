@@ -10,9 +10,9 @@ image:
   alt: "Illuminated 'Game Over' sign in pixel art style with neon green and white colors on a dark background."
 coupangLinks:
   - title: "게임 프로그래밍 패턴 도서"
-    url: "https://link.coupang.com/a/dH5mF4"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "로지텍 MX Master 3S 마우스"
-    url: "https://link.coupang.com/a/dH5k3n"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## Godot는 왜 인디 개발자의 선택인가?

@@ -10,9 +10,9 @@ image:
   alt: "생동감 있는 노란색 배경 위의 측면 버튼이 있는 현대적인 무선 검은색 마우스"
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dH5k3n"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "로지텍 MX Keys S 무선 키보드"
-    url: "https://link.coupang.com/a/dH5kCz"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## 개발자에게 마우스가 중요한 이유

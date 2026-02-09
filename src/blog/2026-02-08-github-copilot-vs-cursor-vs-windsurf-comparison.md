@@ -10,11 +10,11 @@ image:
   alt: "모니터에 표시된 코드와 프로그래밍 화면"
 coupangLinks:
   - title: "AI 시대의 프로그래밍 도서"
-    url: "https://link.coupang.com/a/dH5n1h"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "개발자 모니터 LG 27인치"
-    url: "https://link.coupang.com/a/dH5lSP"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "로지텍 MX Keys 키보드"
-    url: "https://link.coupang.com/a/dH5k3n"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## AI가 코드를 쓰는 시대, 어떤 도구를 써야 할까?

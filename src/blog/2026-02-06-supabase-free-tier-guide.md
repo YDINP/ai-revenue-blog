@@ -10,9 +10,9 @@ image:
   alt: "현대적인 데이터 센터의 네트워크 서버 랙 상세 보기, 기술 인프라 강조"
 coupangLinks:
   - title: "삼성 SSD 980 PRO 1TB"
-    url: "https://link.coupang.com/a/dH5nqe"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dH5mpm"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## Supabase란?

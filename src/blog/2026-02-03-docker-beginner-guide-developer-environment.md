@@ -10,9 +10,9 @@ image:
   alt: "함부르크 항구의 컨테이너와 크레인"
 coupangLinks:
   - title: "클린 코드"
-    url: "https://link.coupang.com/a/dH5mF4"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "삼성 SSD 980 PRO 1TB"
-    url: "https://link.coupang.com/a/dH5nqe"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## "내 컴퓨터에서는 되는데요?" 의 종말

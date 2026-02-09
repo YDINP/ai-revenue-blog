@@ -10,9 +10,9 @@ image:
   alt: "디버깅 및 문제 해결을 위한 메뉴 옵션이 있는 AI 보조 코딩 클로즈업"
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드 (개발자 추천)"
-    url: "https://link.coupang.com/a/dH5kCz"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dH5mpm"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## 2026년, AI 코딩 도구의 현주소

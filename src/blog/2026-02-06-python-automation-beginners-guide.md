@@ -10,9 +10,9 @@ image:
   alt: "노트북 키보드에서 타이핑하는 손의 클로즈업, Python 책이 보이며 코딩 진행 중"
 coupangLinks:
   - title: "혼자 공부하는 파이썬"
-    url: "https://link.coupang.com/a/dH5mU8"
+    url: "https://link.coupang.com/a/dJhOT3"
   - title: "점프 투 파이썬"
-    url: "https://link.coupang.com/a/dH5nbS"
+    url: "https://link.coupang.com/a/dJhOT3"
 ---
 
 ## 왜 Python 자동화인가?
