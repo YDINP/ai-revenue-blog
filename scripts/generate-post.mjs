@@ -93,21 +93,16 @@ async function generatePostContent(categoryName, keyword, searchTerm) {
 
   const chartInstruction = isComparison
     ? `
-이 글은 비교/리뷰 성격이므로, 본문 중간에 아래 형태의 HTML 차트를 반드시 포함해 주세요:
+이 글은 비교/리뷰 성격이므로, 본문 중간에 아래 형태의 HTML 차트를 반드시 1~2개 포함해 주세요:
 
-1) chart-bar (막대 차트):
-<div class="chart-bar">
-  <div class="chart-bar-item" style="--value: 85; --color: ${CHART_COLORS[0]}"><span class="chart-bar-label">항목1</span><span class="chart-bar-value">85점</span></div>
-  <div class="chart-bar-item" style="--value: 72; --color: ${CHART_COLORS[1]}"><span class="chart-bar-label">항목2</span><span class="chart-bar-value">72점</span></div>
-</div>
+1) chart-bar (막대 차트) - data 속성으로 데이터를 전달:
+<div class="chart-bar" data-title="차트 제목" data-labels="항목1,항목2,항목3" data-values="85,72,90" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="점"></div>
 
-2) chart-radar (비교 점수):
-<div class="chart-radar">
-  <div class="chart-radar-item"><span class="chart-radar-label">성능</span><span class="chart-radar-score" style="--score: 90; --color: ${CHART_COLORS[0]}">90</span></div>
-  <div class="chart-radar-item"><span class="chart-radar-label">가격</span><span class="chart-radar-score" style="--score: 75; --color: ${CHART_COLORS[1]}">75</span></div>
-</div>
+2) chart-radar (비교 점수) - data-items JSON으로 데이터를 전달:
+<div class="chart-radar" data-title="종합 비교" data-items='[{"name":"제품A","scores":[{"label":"성능","value":9,"color":"#10b981"},{"label":"가격","value":7,"color":"#3b82f6"}]},{"name":"제품B","scores":[{"label":"성능","value":8,"color":"#f59e0b"},{"label":"가격","value":9,"color":"#ef4444"}]}]'></div>
 
-차트의 항목과 점수는 글 주제에 맞게 3~5개 항목으로 구성하세요.`
+주의: chart-bar의 value는 실제 숫자, chart-radar의 value는 1~10 범위 점수입니다.
+항목은 3~5개로 구성하세요. div 안에 자식 요소를 넣지 마세요.`
     : "차트는 필요 없습니다.";
 
   const prompt = `당신은 한국어 기술 블로그 전문 작가입니다. 아래 주제로 SEO 최적화된 블로그 포스트를 작성하세요.
