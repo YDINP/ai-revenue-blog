@@ -21,7 +21,7 @@ coupangLinks:
 
 ## 종합 점수 비교
 
-<div class="chart-radar" data-title="백엔드 언어 종합 비교 (10점 만점)" data-items='[{"name":"TypeScript","scores":{"성능":6,"생산성":9,"생태계":10,"러닝커브":9,"채용시장":9}},{"name":"Rust","scores":{"성능":10,"생산성":5,"생태계":7,"러닝커브":3,"채용시장":6}},{"name":"Go","scores":{"성능":8,"생산성":8,"생태계":8,"러닝커브":8,"채용시장":7}}]'></div>
+<div class="chart-radar" data-title="백엔드 언어 종합 비교 (10점 만점)" data-items='[{"name":"TypeScript","scores":[{"label":"성능","value":6,"color":"#10b981"},{"label":"생산성","value":9,"color":"#3b82f6"},{"label":"생태계","value":10,"color":"#f59e0b"},{"label":"러닝커브","value":9,"color":"#ef4444"},{"label":"채용시장","value":9,"color":"#8b5cf6"}]},{"name":"Rust","scores":[{"label":"성능","value":10,"color":"#10b981"},{"label":"생산성","value":5,"color":"#3b82f6"},{"label":"생태계","value":7,"color":"#f59e0b"},{"label":"러닝커브","value":3,"color":"#ef4444"},{"label":"채용시장","value":6,"color":"#8b5cf6"}]},{"name":"Go","scores":[{"label":"성능","value":8,"color":"#10b981"},{"label":"생산성","value":8,"color":"#3b82f6"},{"label":"생태계","value":8,"color":"#f59e0b"},{"label":"러닝커브","value":8,"color":"#ef4444"},{"label":"채용시장","value":7,"color":"#8b5cf6"}]}]'></div>
 
 ## TypeScript — 풀스택의 왕
 
