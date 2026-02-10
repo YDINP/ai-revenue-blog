@@ -14,7 +14,7 @@
  *   SUPABASE_ANON_KEY - Supabase anon key (선택)
  */
 
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -145,7 +145,7 @@ ${chartInstruction}
     },
     body: JSON.stringify({
       model: CLAUDE_MODEL,
-      max_tokens: 4096,
+      max_tokens: 8192,
       messages: [{ role: "user", content: prompt }],
     }),
   });
@@ -159,13 +159,61 @@ ${chartInstruction}
   const data = await response.json();
   const text = data.content[0].text.trim();
 
-  // JSON 파싱 (코드블록 감싸기 대응)
-  const jsonStr = text.replace(/^```json?\s*/, "").replace(/\s*```$/, "");
+  // JSON 파싱 (코드블록 감싸기 + 잘림 대응)
+  let jsonStr = text.replace(/^```json?\s*/, "").replace(/\s*```$/, "");
+
   try {
     return JSON.parse(jsonStr);
   } catch (e) {
+    // JSON이 잘린 경우 content 필드를 잘라서라도 파싱 시도
+    console.warn("[WARN] Direct JSON parse failed, attempting recovery...");
+    try {
+      // content 필드에서 마지막 유효한 위치를 찾아 잘라내기
+      const contentMatch = jsonStr.match(/"content"\s*:\s*"/);
+      if (contentMatch) {
+        const contentStart = contentMatch.index + contentMatch[0].length;
+        // 마지막으로 닫히지 않은 문자열을 강제로 닫기
+        let truncated = jsonStr.slice(0, contentStart);
+        // content의 마지막 유효한 텍스트까지 찾기
+        const remaining = jsonStr.slice(contentStart);
+        // 이스케이프되지 않은 마지막 따옴표 위치 찾기, 없으면 그냥 자르기
+        const lastGoodPos = remaining.lastIndexOf('\\n');
+        const safeContent = lastGoodPos > 0 ? remaining.slice(0, lastGoodPos) : remaining.slice(0, -50);
+        truncated += safeContent + '"\n}';
+        return JSON.parse(truncated);
+      }
+    } catch (e2) {
+      // 최종 fallback: 정규식으로 각 필드 추출
+      console.warn("[WARN] Recovery failed, extracting fields manually...");
+      const titleMatch = jsonStr.match(/"title"\s*:\s*"([^"]+)"/);
+      const slugMatch = jsonStr.match(/"slug"\s*:\s*"([^"]+)"/);
+      const descMatch = jsonStr.match(/"description"\s*:\s*"([^"]+)"/);
+      const tagsMatch = jsonStr.match(/"tags"\s*:\s*\[([^\]]+)\]/);
+      const contentMatch = jsonStr.match(/"content"\s*:\s*"([\s\S]+)/);
+
+      if (titleMatch && contentMatch) {
+        const tags = tagsMatch
+          ? tagsMatch[1].match(/"([^"]+)"/g).map(t => t.replace(/"/g, ''))
+          : ["자동생성"];
+        // content에서 마지막 닫는 따옴표 전까지
+        let rawContent = contentMatch[1];
+        const lastQuote = rawContent.lastIndexOf('"');
+        if (lastQuote > 0) rawContent = rawContent.slice(0, lastQuote);
+        // JSON 이스케이프 해제
+        rawContent = rawContent.replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+
+        return {
+          title: titleMatch[1],
+          slug: slugMatch ? slugMatch[1] : null,
+          description: descMatch ? descMatch[1] : titleMatch[1],
+          tags,
+          content: rawContent,
+        };
+      }
+    }
+
     console.error("[ERROR] Failed to parse Claude response as JSON:");
-    console.error(text);
+    console.error(text.slice(0, 500));
     process.exit(1);
   }
 }
@@ -307,6 +355,17 @@ async function main() {
 
   const today = getToday();
   console.log(`[Info] Date: ${today}`);
+
+  // 0. 중복 확인 - 같은 날짜 파일이 이미 있으면 스킵
+  const blogDir = join(PROJECT_ROOT, "src", "blog");
+  if (existsSync(blogDir)) {
+    const existing = readdirSync(blogDir).filter(f => f.startsWith(today));
+    if (existing.length > 0) {
+      console.log(`[Skip] Today's post already exists: ${existing[0]}`);
+      console.log("=== Done (skipped) ===");
+      process.exit(0);
+    }
+  }
 
   // 1. Load data files
   const seeds = loadJSON("category-seeds.json");
