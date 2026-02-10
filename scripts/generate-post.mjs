@@ -86,24 +86,26 @@ async function generatePostContent(categoryName, keyword, searchTerm) {
     process.exit(1);
   }
 
-  const isComparison =
-    keyword.includes("비교") ||
-    keyword.includes("추천") ||
-    keyword.includes("리뷰");
+  const chartInstruction = `
+본문 중간에 아래 5가지 차트 유형 중 주제에 맞는 것을 1~2개 선택하여 반드시 포함하세요:
 
-  const chartInstruction = isComparison
-    ? `
-이 글은 비교/리뷰 성격이므로, 본문 중간에 아래 형태의 HTML 차트를 반드시 1~2개 포함해 주세요:
-
-1) chart-bar (막대 차트) - data 속성으로 데이터를 전달:
+1) chart-bar (막대 차트) - 항목별 수치 비교:
 <div class="chart-bar" data-title="차트 제목" data-labels="항목1,항목2,항목3" data-values="85,72,90" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="점"></div>
 
-2) chart-radar (비교 점수) - data-items JSON으로 데이터를 전달:
+2) chart-radar (카드형 점수 비교) - 제품/서비스 다항목 평가:
 <div class="chart-radar" data-title="종합 비교" data-items='[{"name":"제품A","scores":[{"label":"성능","value":9,"color":"#10b981"},{"label":"가격","value":7,"color":"#3b82f6"}]},{"name":"제품B","scores":[{"label":"성능","value":8,"color":"#f59e0b"},{"label":"가격","value":9,"color":"#ef4444"}]}]'></div>
 
-주의: chart-bar의 value는 실제 숫자, chart-radar의 value는 1~10 범위 점수입니다.
-항목은 3~5개로 구성하세요. div 안에 자식 요소를 넣지 마세요.`
-    : "차트는 필요 없습니다.";
+3) chart-donut (도넛 차트) - 비율/점유율/구성비 시각화:
+<div class="chart-donut" data-title="시장 점유율" data-labels="항목1,항목2,항목3" data-values="60,25,15" data-colors="#3b82f6,#10b981,#f59e0b" data-unit="%"></div>
+
+4) chart-versus (VS 비교) - 두 대상 1:1 대결 비교:
+<div class="chart-versus" data-title="A vs B" data-name-a="제품A" data-name-b="제품B" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"성능","a":85,"b":90},{"label":"가격","a":70,"b":80}]'></div>
+
+5) chart-progress (원형 게이지) - 개별 점수/달성률:
+<div class="chart-progress" data-title="평가 점수" data-labels="항목1,항목2,항목3" data-values="85,72,90" data-colors="#10b981,#3b82f6,#f59e0b" data-max="100" data-unit="점"></div>
+
+선택 가이드: 비율/점유율→donut, 1:1 대결→versus, 개별 평점→progress, 수치 비교→bar, 다항목 제품 평가→radar.
+주의: div 안에 자식 요소를 넣지 마세요. 항목 3~5개. chart-bar만 반복하지 말고 다양한 유형을 활용하세요.`;
 
   const prompt = `당신은 한국어 기술 블로그 전문 작가입니다. 아래 주제로 SEO 최적화된 블로그 포스트를 작성하세요.
 
