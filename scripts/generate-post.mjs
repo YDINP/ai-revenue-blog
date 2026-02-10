@@ -128,6 +128,7 @@ ${chartInstruction}
 반드시 아래 JSON 형식으로만 응답하세요 (JSON 외 텍스트 금지):
 {
   "title": "포스트 제목 (40~60자)",
+  "slug": "english-slug-for-url (영문 소문자, 하이픈으로 연결, 예: best-coding-monitors-2026)",
   "description": "메타 설명 (120~160자)",
   "tags": ["태그1", "태그2", "태그3", "태그4"],
   "content": "마크다운 본문 (H2/H3/표/차트 포함)"
@@ -220,7 +221,7 @@ function selectCoupangLinks(coupangData, categoryKey) {
 // ─── Frontmatter + File Assembly ──────────────────────────────────────
 
 function buildMarkdownFile(post, category, heroImage, coupangLinks, date) {
-  const slug = toSlug(post.title);
+  const slug = post.slug || toSlug(post.title);
   const filename = `${date}-${slug}.md`;
 
   // Coupang links YAML
@@ -234,7 +235,7 @@ function buildMarkdownFile(post, category, heroImage, coupangLinks, date) {
 
   // Hero image
   const imageLine = heroImage
-    ? `image: "${heroImage.url}"\nimageAlt: "${heroImage.alt}"`
+    ? `image:\n  url: "${heroImage.url}"\n  alt: "${heroImage.alt}"`
     : "";
 
   const frontmatter = `---
@@ -270,7 +271,6 @@ async function registerToSupabase(post, category, slug, date, heroImage) {
     category: category.toLowerCase(),
     tags: post.tags,
     pub_date: date,
-    author: AUTHOR,
     image_url: heroImage?.url || null,
     views: 0,
   };
