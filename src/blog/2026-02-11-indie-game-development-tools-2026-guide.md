@@ -5,9 +5,8 @@ pubDate: "2026-02-11"
 author: "TechFlow"
 category: "Game"
 tags: ["인디 게임", "게임 개발 도구", "게임 엔진", "Unity", "Godot"]
-image:
-  url: "https://images.pexels.com/photos/12832570/pexels-photo-12832570.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  alt: "Focused gamer with headset playing a video game on a desktop computer indoors."
+image:"https://images.pexels.com/photos/12832570/pexels-photo-12832570.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+imagealt: "Focused gamer with headset playing a video game on a desktop computer indoors."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
     url: "https://link.coupang.com/a/dJj5uu"
