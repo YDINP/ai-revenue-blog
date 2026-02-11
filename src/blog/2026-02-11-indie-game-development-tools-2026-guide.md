@@ -1,12 +1,13 @@
 ---
 title: "2026년 인디 게임 개발 도구 완벽 가이드: 초보자부터 전문가까지"
 description: "인디 게임 개발 도구의 최신 트렌드와 추천 프로그램을 비교 분석합니다. 무료/유료 도구, 2D/3D 게임 엔진, 그래픽 소프트웨어까지 완벽 정리."
-pubDate: "2026-02-11"
+pubDate: 2026-02-11
 author: "TechFlow"
 category: "Game"
 tags: ["인디 게임", "게임 개발 도구", "게임 엔진", "Unity", "Godot"]
-image: "https://images.pexels.com/photos/12832570/pexels-photo-12832570.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-imagealt: "Focused gamer with headset playing a video game on a desktop computer indoors."
+image:
+  url: "https://images.pexels.com/photos/12832570/pexels-photo-12832570.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  alt: "Focused gamer with headset playing a video game on a desktop computer indoors."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
     url: "https://link.coupang.com/a/dJj5uu"
