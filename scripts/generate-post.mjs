@@ -286,7 +286,7 @@ function buildMarkdownFile(post, category, heroImage, coupangLinks, date) {
   const frontmatter = `---
 title: "${post.title}"
 description: "${post.description}"
-pubDate: "${date}"
+pubDate: ${date}
 author: "${AUTHOR}"
 category: "${category}"
 tags: [${post.tags.map((t) => `"${t}"`).join(", ")}]

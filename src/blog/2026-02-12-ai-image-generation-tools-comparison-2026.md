@@ -1,7 +1,7 @@
 ---
 title: "AI 이미지 생성 도구 비교 2026: DALL-E, Midjourney, Stable Diffusion"
 description: "2026년 최신 AI 이미지 생성 도구 비교 분석. DALL-E, Midjourney, Stable Diffusion의 성능, 가격, 사용성을 상세히 비교하고 선택 가이드를 제공합니다."
-pubDate: "2026-02-12"
+pubDate: 2026-02-12
 author: "TechFlow"
 category: "AI"
 tags: ["AI", "이미지생성", "AI도구", "2026트렌드"]
