@@ -96,8 +96,7 @@ function loadJSON(filename) {
 
 async function generatePostContent(categoryName, keyword, searchTerm) {
   if (!ANTHROPIC_API_KEY) {
-    console.error("[ERROR] ANTHROPIC_API_KEY is not set");
-    process.exit(1);
+    throw new Error("ANTHROPIC_API_KEY is not set");
   }
 
   const chartInstruction = `
@@ -168,8 +167,7 @@ ${chartInstruction}
 
   if (!response.ok) {
     const errorText = await response.text();
-    console.error(`[ERROR] Claude API ${response.status}: ${errorText}`);
-    process.exit(1);
+    throw new Error(`Claude API ${response.status}: ${errorText}`);
   }
 
   const data = await response.json();
@@ -228,9 +226,7 @@ ${chartInstruction}
       }
     }
 
-    console.error("[ERROR] Failed to parse Claude response as JSON:");
-    console.error(text.slice(0, 500));
-    process.exit(1);
+    throw new Error(`Failed to parse Claude response as JSON: ${text.slice(0, 200)}`);
   }
 }
 
@@ -286,7 +282,7 @@ function selectCoupangLinks(coupangData, categoryKey) {
 
 function buildMarkdownFile(post, category, heroImage, coupangLinks, date) {
   const slug = post.slug || toSlug(post.title);
-  const filename = `${date}-${slug}.md`;
+  const filename = `${date}-${category.toLowerCase()}-${slug}.md`;
 
   // Coupang links YAML
   let coupangYaml = "";
@@ -402,45 +398,51 @@ async function main() {
 
     console.log(`\n--- Post ${i + 1}/3: ${categoryName} ---`);
 
-    // Pick random keyword and search term
-    const keywordIndex = Math.floor(
-      Math.random() * categoryData.keywords.length
-    );
-    const keyword = categoryData.keywords[keywordIndex];
-    const searchTerm =
-      categoryData.searchTerms[keywordIndex % categoryData.searchTerms.length];
+    try {
+      // Pick random keyword and search term
+      const keywordIndex = Math.floor(
+        Math.random() * categoryData.keywords.length
+      );
+      const keyword = categoryData.keywords[keywordIndex];
+      const searchTerm =
+        categoryData.searchTerms[keywordIndex % categoryData.searchTerms.length];
 
-    console.log(`[Info] Keyword: ${keyword}`);
-    console.log(`[Info] Search term: ${searchTerm}`);
+      console.log(`[Info] Keyword: ${keyword}`);
+      console.log(`[Info] Search term: ${searchTerm}`);
 
-    // Generate content via Claude API
-    const post = await generatePostContent(categoryName, keyword, searchTerm);
-    console.log(`[Claude] Generated: "${post.title}"`);
+      // Generate content via Claude API
+      const post = await generatePostContent(categoryName, keyword, searchTerm);
+      console.log(`[Claude] Generated: "${post.title}"`);
 
-    // Fetch hero image via Pexels
-    const heroImage = await fetchHeroImage(searchTerm);
+      // Fetch hero image via Pexels
+      const heroImage = await fetchHeroImage(searchTerm);
 
-    // Select coupang links
-    const categoryKey = categoryName.toLowerCase();
-    const coupangLinks = selectCoupangLinks(coupangData, categoryKey);
-    console.log(`[Coupang] Selected ${coupangLinks.length} product links`);
+      // Select coupang links
+      const categoryKey = categoryName.toLowerCase();
+      const coupangLinks = selectCoupangLinks(coupangData, categoryKey);
+      console.log(`[Coupang] Selected ${coupangLinks.length} product links`);
 
-    // Assemble markdown file
-    const { filename, slug, content } = buildMarkdownFile(
-      post,
-      categoryName,
-      heroImage,
-      coupangLinks,
-      today
-    );
+      // Assemble markdown file
+      const { filename, slug, content } = buildMarkdownFile(
+        post,
+        categoryName,
+        heroImage,
+        coupangLinks,
+        today
+      );
 
-    // Write file
-    const outputPath = join(PROJECT_ROOT, "src", "blog", filename);
-    writeFileSync(outputPath, content, "utf-8");
-    console.log(`[File] Written: src/blog/${filename}`);
+      // Write file
+      const outputPath = join(PROJECT_ROOT, "src", "blog", filename);
+      writeFileSync(outputPath, content, "utf-8");
+      console.log(`[File] Written: src/blog/${filename}`);
 
-    // Register to Supabase
-    await registerToSupabase(post, categoryName, slug, today, heroImage);
+      // Register to Supabase
+      await registerToSupabase(post, categoryName, slug, today, heroImage);
+    } catch (err) {
+      console.error(`[ERROR] Post ${i + 1}/3 (${categoryName}) failed: ${err.message}`);
+      console.log(`[Info] Continuing to next post...`);
+      continue;
+    }
   }
 
   console.log("\n=== Done! (3 posts generated) ===");
