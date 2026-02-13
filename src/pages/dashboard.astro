@@ -670,6 +670,93 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         font-size: 0.8125rem;
       }
 
+      /* Source Filter Tabs */
+      .source-tabs {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .source-tab {
+        padding: 0.375rem 0.875rem;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1px solid var(--dash-border);
+        background: transparent;
+        color: var(--dash-text-dim);
+        transition: all 0.2s;
+      }
+
+      .source-tab:hover { border-color: var(--dash-accent); color: var(--dash-text); }
+      .source-tab.active { background: var(--dash-accent); border-color: var(--dash-accent); color: #fff; }
+      .source-tab.active-tf { background: var(--dash-accent); border-color: var(--dash-accent); color: #fff; }
+      .source-tab.active-lf { background: var(--dash-green); border-color: var(--dash-green); color: #fff; }
+
+      /* Source Badge in traffic items */
+      .src-badge {
+        display: inline-block;
+        padding: 0.0625rem 0.375rem;
+        border-radius: 3px;
+        font-size: 0.5625rem;
+        font-weight: 700;
+        flex-shrink: 0;
+        letter-spacing: 0.02em;
+      }
+
+      .src-badge.tf { background: rgba(59,130,246,0.2); color: #60a5fa; }
+      .src-badge.lf { background: rgba(34,197,94,0.2); color: #4ade80; }
+
+      /* Source breakdown row under metric */
+      .metric-breakdown {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 0.375rem;
+        font-size: 0.5625rem;
+      }
+
+      .metric-breakdown span {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .dot-tf { width: 6px; height: 6px; border-radius: 50%; background: var(--dash-accent); display: inline-block; }
+      .dot-lf { width: 6px; height: 6px; border-radius: 50%; background: var(--dash-green); display: inline-block; }
+
+      /* Improved top-page-title */
+      .top-page-title {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 0.75rem;
+      }
+
+      /* Improved event detail */
+      .event-content {
+        flex: 1;
+        overflow: hidden;
+        min-width: 0;
+      }
+
+      .event-action {
+        font-size: 0.6875rem;
+        font-weight: 600;
+        color: var(--dash-text);
+        margin-bottom: 0.0625rem;
+      }
+
+      .event-page-title {
+        font-size: 0.625rem;
+        color: var(--dash-text-dim);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
       /* Loading / Empty */
       .loading {
         display: flex;
@@ -738,6 +825,10 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           <div class="label">Page Views</div>
           <div class="value" id="total-views">--</div>
           <div class="sub" id="views-sub">Supabase 로딩 중...</div>
+          <div class="metric-breakdown" id="views-source-split" style="justify-content:flex-start; margin-top:0.25rem;">
+            <span><i class="dot-tf"></i> TF: <b id="tf-total-views">--</b></span>
+            <span><i class="dot-lf"></i> LF: <b id="lf-total-views">--</b></span>
+          </div>
         </div>
         <div class="summary-card accent-yellow">
           <div class="label">Coupang Clicks</div>
@@ -759,11 +850,19 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
               <div class="metric-label">Today Views</div>
               <div class="metric-value" id="t-today-views">--</div>
               <div class="metric-delta neutral" id="t-views-delta">loading...</div>
+              <div class="metric-breakdown" id="t-views-breakdown">
+                <span><i class="dot-tf"></i> TF: --</span>
+                <span><i class="dot-lf"></i> LF: --</span>
+              </div>
             </div>
             <div class="metric-box">
               <div class="metric-label">Coupang Clicks</div>
               <div class="metric-value" id="t-today-clicks">--</div>
               <div class="metric-delta neutral" id="t-clicks-delta">loading...</div>
+              <div class="metric-breakdown" id="t-clicks-breakdown">
+                <span><i class="dot-tf"></i> TF: --</span>
+                <span><i class="dot-lf"></i> LF: --</span>
+              </div>
             </div>
             <div class="metric-box">
               <div class="metric-label">Likes</div>
@@ -787,12 +886,22 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           <div class="traffic-grid">
             <div class="traffic-panel">
               <h4>Top Pages</h4>
+              <div class="source-tabs" id="top-pages-tabs">
+                <button class="source-tab active" data-filter="all">All</button>
+                <button class="source-tab" data-filter="blog">TechFlow</button>
+                <button class="source-tab" data-filter="lifeflow">LifeFlow</button>
+              </div>
               <div class="top-page-list" id="top-pages">
                 <div class="no-data">Loading...</div>
               </div>
             </div>
             <div class="traffic-panel">
               <h4>Live Activity</h4>
+              <div class="source-tabs" id="event-tabs">
+                <button class="source-tab active" data-filter="all">All</button>
+                <button class="source-tab" data-filter="blog">TechFlow</button>
+                <button class="source-tab" data-filter="lifeflow">LifeFlow</button>
+              </div>
               <div class="event-feed" id="event-feed">
                 <div class="no-data">Loading...</div>
               </div>
@@ -1059,47 +1168,128 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         container.innerHTML = html;
       }
 
-      function renderTopPages(data) {
+      // Slug을 읽기 좋은 제목으로 변환
+      function decodeSlug(slug) {
+        if (!slug) return '';
+        try {
+          let decoded = decodeURIComponent(slug);
+          // 날짜 접두사 제거 (2026-02-13-)
+          decoded = decoded.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+          // 하이픈을 공백으로
+          decoded = decoded.replace(/-/g, ' ');
+          // 카테고리 접두사 제거 (ai/, dev/ 등)
+          decoded = decoded.replace(/^(ai|dev|review|game|lifestyle|finance|health|education|travel)\//i, '');
+          return decoded;
+        } catch {
+          return slug;
+        }
+      }
+
+      // 페이지 제목 가져오기: title 필드 우선, 없으면 slug 디코딩
+      function getPageTitle(item) {
+        if (item.title && item.title !== 'null' && !item.title.startsWith('TechFlow') && !item.title.startsWith('LifeFlow')) {
+          // "포스트 제목 | TechFlow - AI & 테크 인사이트" 형태에서 제목만 추출
+          return item.title.split(' | ')[0].split(' - ')[0];
+        }
+        return decodeSlug(item.slug || item.path || '');
+      }
+
+      function sourceBadge(source) {
+        if (source === 'blog') return '<span class="src-badge tf">TF</span>';
+        if (source === 'lifeflow') return '<span class="src-badge lf">LF</span>';
+        return '';
+      }
+
+      // === Top Pages 전역 데이터 & 필터 ===
+      let _topPagesData = [];
+      let _topPagesFilter = 'all';
+
+      function renderTopPages(data, filter) {
+        if (data !== undefined) _topPagesData = data || [];
+        if (filter !== undefined) _topPagesFilter = filter;
+
         const container = document.getElementById('top-pages');
         if (!container) return;
 
-        if (!data || data.length === 0) {
+        let filtered = _topPagesData;
+        if (_topPagesFilter !== 'all') {
+          filtered = filtered.filter(p => p.source === _topPagesFilter);
+        }
+
+        if (filtered.length === 0) {
           container.innerHTML = '<div class="no-data">No page data yet</div>';
           return;
         }
 
-        container.innerHTML = data.slice(0, 8).map((p, i) => {
-          const slug = (p.slug || '').replace(/^\/blog\//, '').replace(/\/$/, '');
-          const display = slug.length > 35 ? slug.substring(0, 35) + '...' : slug;
+        container.innerHTML = filtered.slice(0, 8).map((p, i) => {
+          const title = getPageTitle(p);
+          const displayTitle = title.length > 40 ? title.substring(0, 40) + '…' : title;
           return `<div class="top-page-item">
             <span class="top-page-rank">${i + 1}</span>
-            <span class="top-page-slug" title="${slug}">${display || '(home)'}</span>
-            <span class="top-page-views">${p.views}</span>
+            ${sourceBadge(p.source)}
+            <span class="top-page-title" title="${title}">${displayTitle || '(home)'}</span>
+            <span class="top-page-views">${p.views}회</span>
           </div>`;
         }).join('');
       }
 
-      function renderEventFeed(data) {
+      // === Event Feed 전역 데이터 & 필터 ===
+      let _eventsData = [];
+      let _eventsFilter = 'all';
+
+      function renderEventFeed(data, filter) {
+        if (data !== undefined) _eventsData = data || [];
+        if (filter !== undefined) _eventsFilter = filter;
+
         const container = document.getElementById('event-feed');
         if (!container) return;
 
-        if (!data || data.length === 0) {
+        let filtered = _eventsData;
+        if (_eventsFilter !== 'all') {
+          filtered = filtered.filter(e => e.source === _eventsFilter);
+        }
+
+        if (filtered.length === 0) {
           container.innerHTML = '<div class="no-data">No events yet. Visit the blog to generate data!</div>';
           return;
         }
 
-        container.innerHTML = data.slice(0, 12).map(e => {
+        container.innerHTML = filtered.slice(0, 12).map(e => {
           const icon = EVENT_ICONS[e.event_type] || '\u2022';
           const label = EVENT_LABELS[e.event_type] || e.event_type;
-          const detail = e.slug || e.product || e.path || '';
-          const shortDetail = detail.length > 30 ? detail.substring(0, 30) + '...' : detail;
+          const title = getPageTitle(e);
+          const shortTitle = title.length > 35 ? title.substring(0, 35) + '…' : title;
+          const srcBadge = sourceBadge(e.source);
+
           return `<div class="event-item">
             <span class="event-icon ${e.event_type}">${icon}</span>
-            <span class="event-detail" title="${detail}">${label}: ${shortDetail}</span>
+            <div class="event-content">
+              <div class="event-action">${srcBadge} ${label}</div>
+              <div class="event-page-title" title="${title}">${shortTitle || '홈페이지'}</div>
+            </div>
             <span class="event-time">${timeAgo(e.created_at)}</span>
           </div>`;
         }).join('');
       }
+
+      // 소스 필터 탭 이벤트
+      document.getElementById('top-pages-tabs')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('.source-tab');
+        if (!btn) return;
+        document.querySelectorAll('#top-pages-tabs .source-tab').forEach(b => b.className = 'source-tab');
+        const f = btn.dataset.filter;
+        btn.className = 'source-tab ' + (f === 'blog' ? 'active-tf' : f === 'lifeflow' ? 'active-lf' : 'active');
+        renderTopPages(undefined, f);
+      });
+
+      document.getElementById('event-tabs')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('.source-tab');
+        if (!btn) return;
+        document.querySelectorAll('#event-tabs .source-tab').forEach(b => b.className = 'source-tab');
+        const f = btn.dataset.filter;
+        btn.className = 'source-tab ' + (f === 'blog' ? 'active-tf' : f === 'lifeflow' ? 'active-lf' : 'active');
+        renderEventFeed(undefined, f);
+      });
 
       async function loadTraffic() {
         try {
@@ -1134,11 +1324,29 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           document.getElementById('t-subscribers').textContent = fmt(Number(summary?.total_subscribers) || 0);
           document.getElementById('t-subs-today').textContent = `today: +${ts}`;
 
+          // Source breakdown
+          const tfTv = Number(summary?.tf_today_views) || 0;
+          const lfTv = Number(summary?.lf_today_views) || 0;
+          const tfTc = Number(summary?.tf_today_clicks) || 0;
+          const lfTc = Number(summary?.lf_today_clicks) || 0;
+
+          const vbEl = document.getElementById('t-views-breakdown');
+          if (vbEl) vbEl.innerHTML = `<span><i class="dot-tf"></i> TF: ${fmt(tfTv)}</span><span><i class="dot-lf"></i> LF: ${fmt(lfTv)}</span>`;
+
+          const cbEl = document.getElementById('t-clicks-breakdown');
+          if (cbEl) cbEl.innerHTML = `<span><i class="dot-tf"></i> TF: ${fmt(tfTc)}</span><span><i class="dot-lf"></i> LF: ${fmt(lfTc)}</span>`;
+
           // Also update summary cards
           document.getElementById('total-views').textContent = fmt(Number(summary?.total_views) || 0);
           document.getElementById('views-sub').textContent = tv > 0 ? `today +${tv}` : 'Collecting...';
           document.getElementById('total-clicks').textContent = fmt(Number(summary?.total_clicks) || 0);
           document.getElementById('clicks-sub').textContent = tc > 0 ? `today +${tc}` : 'Waiting...';
+
+          // Summary card source split
+          const tfTotalEl = document.getElementById('tf-total-views');
+          const lfTotalEl = document.getElementById('lf-total-views');
+          if (tfTotalEl) tfTotalEl.textContent = fmt(Number(summary?.tf_total_views) || 0);
+          if (lfTotalEl) lfTotalEl.textContent = fmt(Number(summary?.lf_total_views) || 0);
 
           // Charts & feeds
           renderHourlyChart(hourly);

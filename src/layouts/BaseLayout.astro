@@ -193,7 +193,7 @@ const websiteSchema = {
           body: JSON.stringify({
             event_type: 'pageview',
             source: 'blog',
-            metadata: { slug, path: window.location.pathname, referrer: document.referrer || 'direct', user_agent: navigator.userAgent }
+            metadata: { slug, title: document.title, path: window.location.pathname, referrer: document.referrer || 'direct', user_agent: navigator.userAgent }
           })
         }).catch(() => {});
       })();
