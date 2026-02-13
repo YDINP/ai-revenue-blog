@@ -37,7 +37,7 @@ coupangLinks:
 | API 입력 가격 | $12/M 토큰 | $15/M 토큰 |
 | API 출력 가격 | $60/M 토큰 | $75/M 토큰 |
 
-<div class="chart-radar" data-title="GPT-5.3 Codex vs Claude Opus 4.6 — 종합 능력 비교" data-items='[{"name":"GPT-5.3 Codex","scores":[{"label":"코딩","value":9.5,"color":"#10b981"},{"label":"글쓰기","value":8.5,"color":"#10b981"},{"label":"분석","value":8,"color":"#10b981"},{"label":"속도","value":9,"color":"#10b981"},{"label":"가성비","value":8.5,"color":"#10b981"}]},{"name":"Claude Opus 4.6","scores":[{"label":"코딩","value":9,"color":"#3b82f6"},{"label":"글쓰기","value":9,"color":"#3b82f6"},{"label":"분석","value":9.5,"color":"#3b82f6"},{"label":"속도","value":7.5,"color":"#3b82f6"},{"label":"가성비","value":7,"color":"#3b82f6"}]}]'></div>
+<div class="chart-versus" data-title="GPT-5.3 Codex vs Claude Opus 4.6 — 종합 능력 비교" data-name-a="GPT-5.3 Codex" data-name-b="Claude Opus 4.6" data-color-a="#10b981" data-color-b="#3b82f6" data-items='[{"label":"코딩","a":95,"b":90},{"label":"글쓰기","a":85,"b":90},{"label":"분석","a":80,"b":95},{"label":"속도","a":90,"b":75},{"label":"가성비","a":85,"b":70}]'></div>
 
 ## 코딩 능력 비교: 개발자 필독
 

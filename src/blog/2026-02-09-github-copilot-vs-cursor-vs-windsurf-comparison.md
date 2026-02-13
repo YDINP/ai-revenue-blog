@@ -70,7 +70,7 @@ Codeium 팀이 만든 Windsurf는 2025년 말 출시되어 빠르게 성장 중�
 
 ## 가격 비교
 
-<div class="chart-bar" data-title="월 구독료 비교 (USD)" data-labels="Copilot,Cursor,Windsurf" data-values="19,20,15" data-colors="#3b82f6,#22c55e,#f59e0b" data-unit="$"></div>
+<div class="chart-progress" data-title="월 구독료 비교 (USD)" data-labels="Copilot,Cursor,Windsurf" data-values="19,20,15" data-colors="#3b82f6,#22c55e,#f59e0b" data-max="25" data-unit="$"></div>
 
 ## 어떤 상황에 어떤 도구?
 

@@ -136,9 +136,9 @@ Cocos Creator는 중국에서 개발된 엔진으로, 특히 아시아 모바일
 
 ## 엔진별 핵심 지표 비교
 
-<div class="chart-bar" data-title="게임 엔진 학습 난이도 (낮을수록 쉬움, 점수 역순)" data-labels="Unity,Unreal,Godot,Phaser,Cocos" data-values="60,85,40,30,50" data-colors="#3b82f6,#10b981,#8b5cf6,#f59e0b,#ef4444" data-unit="점"></div>
+<div class="chart-progress" data-title="게임 엔진 학습 난이도 (낮을수록 쉬움, 점수 역순)" data-labels="Unity,Unreal,Godot,Phaser,Cocos" data-values="60,85,40,30,50" data-colors="#3b82f6,#10b981,#8b5cf6,#f59e0b,#ef4444" data-max="100" data-unit="점"></div>
 
-<div class="chart-bar" data-title="게임 엔진 커뮤니티 크기" data-labels="Unity,Unreal,Godot,Phaser,Cocos" data-values="95,85,70,60,45" data-colors="#3b82f6,#10b981,#8b5cf6,#f59e0b,#ef4444" data-unit="점"></div>
+<div class="chart-donut" data-title="게임 엔진 커뮤니티 크기" data-labels="Unity,Unreal,Godot,Phaser,Cocos" data-values="95,85,70,60,45" data-colors="#3b82f6,#10b981,#8b5cf6,#f59e0b,#ef4444" data-unit="점"></div>
 
 <div class="chart-bar" data-title="게임 엔진 2D 게임 지원 강도" data-labels="Unity,Unreal,Godot,Phaser,Cocos" data-values="90,65,85,95,90" data-colors="#3b82f6,#10b981,#8b5cf6,#f59e0b,#ef4444" data-unit="점"></div>
 

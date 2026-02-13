@@ -57,7 +57,7 @@ DELETE /users/123          # 사용자 삭제
 | PATCH | 리소스 부분 수정 | 예 | 있음 |
 | DELETE | 리소스 삭제 | 예 | 없음 |
 
-<div class="chart-bar" data-title="HTTP 메서드 실무 사용 비중 (%)" data-labels="GET,POST,PUT/PATCH,DELETE,OPTIONS" data-values="45,25,15,10,5" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#94a3b8" data-unit="%"></div>
+<div class="chart-donut" data-title="HTTP 메서드 실무 사용 비중 (%)" data-labels="GET,POST,PUT/PATCH,DELETE,OPTIONS" data-values="45,25,15,10,5" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#94a3b8" data-unit="%"></div>
 
 ### PUT vs PATCH
 

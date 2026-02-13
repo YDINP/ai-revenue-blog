@@ -35,7 +35,7 @@ coupangLinks:
 | 코딩 벤치마크 | SWE-Bench Pro 1위 | 2위 |
 | 한국어 코딩 | 우수 | 매우 우수 |
 
-<div class="chart-radar" data-title="코딩 능력 종합 비교" data-items='[{"name":"GPT-5.3 Codex","scores":[{"label":"벤치마크","value":9.5,"color":"#10b981"},{"label":"속도","value":9,"color":"#10b981"},{"label":"컨텍스트","value":7,"color":"#10b981"},{"label":"에이전트","value":8,"color":"#10b981"},{"label":"가성비","value":8.5,"color":"#10b981"}]},{"name":"Claude Opus 4.6","scores":[{"label":"벤치마크","value":9,"color":"#3b82f6"},{"label":"속도","value":7.5,"color":"#3b82f6"},{"label":"컨텍스트","value":10,"color":"#3b82f6"},{"label":"에이전트","value":9.5,"color":"#3b82f6"},{"label":"가성비","value":7,"color":"#3b82f6"}]}]'></div>
+<div class="chart-versus" data-title="코딩 능력 종합 비교" data-name-a="GPT-5.3 Codex" data-name-b="Claude Opus 4.6" data-color-a="#10b981" data-color-b="#3b82f6" data-items='[{"label":"벤치마크","a":95,"b":90},{"label":"속도","a":90,"b":75},{"label":"컨텍스트","a":70,"b":100},{"label":"에이전트","a":80,"b":95},{"label":"가성비","a":85,"b":70}]'></div>
 
 ## 벤치마크 성능 비교
 

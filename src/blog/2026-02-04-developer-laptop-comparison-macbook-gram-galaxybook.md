@@ -133,7 +133,7 @@ coupangLinks:
 | LG 그램 17 | 35초 | 보통 |
 | 갤럭시북4 프로 | 33초 | 보통 |
 
-<div class="chart-bar" data-title="Next.js 빌드 시간 비교 (초, 낮을수록 좋음)" data-labels="맥북 에어 M3,갤럭시북4 프로,LG 그램 17" data-values="28,33,35" data-colors="#10b981,#f59e0b,#3b82f6" data-unit="초"></div>
+<div class="chart-progress" data-title="Next.js 빌드 시간 비교 (초, 낮을수록 좋음)" data-labels="맥북 에어 M3,갤럭시북4 프로,LG 그램 17" data-values="28,33,35" data-colors="#10b981,#f59e0b,#3b82f6" data-max="40" data-unit="초"></div>
 
 ## 최종 추천
 

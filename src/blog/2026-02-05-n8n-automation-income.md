@@ -28,7 +28,7 @@ n8n(노드에이트엔)은 **오픈소스 워크플로우 자동화 도구**입�
 | 커스텀 코드 | 제한적 | 제한적 | **완전 자유** |
 | AI 연동 | 가능 | 가능 | **완전 자유** |
 
-<div class="chart-bar" data-title="자동화 도구 월 비용 비교 ($)" data-labels="n8n (Self-hosted),Make (무료),Make (유료),Zapier (무료),Zapier (유료)" data-values="0,0,9,0,20" data-colors="#10b981,#f59e0b,#f59e0b,#ef4444,#ef4444" data-unit="$"></div>
+<div class="chart-donut" data-title="자동화 도구 월 비용 비교 ($)" data-labels="n8n (Self-hosted),Make (무료),Make (유료),Zapier (무료),Zapier (유료)" data-values="0,0,9,0,20" data-colors="#10b981,#f59e0b,#f59e0b,#ef4444,#ef4444" data-unit="$"></div>
 
 <div class="chart-bar" data-title="월 실행 가능 횟수" data-labels="Zapier 무료,Make 무료,n8n Self-hosted" data-values="750,1000,99999" data-colors="#ef4444,#f59e0b,#10b981" data-unit=""></div>
 
