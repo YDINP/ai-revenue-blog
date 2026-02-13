@@ -25,7 +25,7 @@ coupangLinks:
 
 프로그래밍 입문의 첫 단계는 적절한 언어를 선택하는 것입니다. 2026년 기준으로 초보자들이 선택해야 할 언어들의 특성을 비교했습니다.
 
-<div class="chart-versus" data-title="Python vs JavaScript" data-name-a="Python" data-name-b="JavaScript" data-color-a="#3b82f6" data-color-b="#f59e0b" data-items='[{"label":"학습 난이도","a":95,"b":75},{"label":"실무 수요","a":92,"b":95},{"label":"커뮤니티","a":90,"b":93},{"label":"취업률","a":88,"b":90}]'></div>
+<div class="chart-versus" data-title="Python vs JavaScript" data-name-a="Python" data-name-b="JavaScript" data-color-a="#3b82f6" data-color-b="#f59e0b" data-items='[{"label":"초보자 친화도","a":95,"b":75},{"label":"실무 수요","a":92,"b":95},{"label":"커뮤니티","a":90,"b":93},{"label":"취업률","a":88,"b":90}]'></div>
 
 ### Python: 가장 인기 있는 프로그래밍 입문 언어
 

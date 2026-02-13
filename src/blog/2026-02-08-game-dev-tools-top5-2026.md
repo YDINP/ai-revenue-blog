@@ -290,7 +290,7 @@ coupangLinks:
 
 <div class="chart-bar" data-title="게임 개발 도구 카테고리별 중요도" data-labels="게임 엔진,그래픽 도구,사운드 도구,버전 관리,프로젝트 관리,에셋 스토어" data-values="100,90,70,85,75,65" data-colors="#3b82f6,#10b981,#8b5cf6,#f59e0b,#ef4444,#06b6d4" data-unit="점"></div>
 
-<div class="chart-bar" data-title="게임 개발 도구 학습 난이도 (낮을수록 쉬움)" data-labels="Unity,Blender,Audacity,Git,Trello,Phaser" data-values="60,80,30,50,20,55" data-colors="#3b82f6,#10b981,#8b5cf6,#f59e0b,#ef4444,#06b6d4" data-unit="점"></div>
+<div class="chart-bar" data-title="게임 개발 도구 학습 난이도 (높을수록 어려움)" data-labels="Unity,Blender,Audacity,Git,Trello,Phaser" data-values="60,80,30,50,20,40" data-colors="#3b82f6,#10b981,#8b5cf6,#f59e0b,#ef4444,#06b6d4" data-unit="점"></div>
 
 ## 무료 vs 유료 도구 비교
 
