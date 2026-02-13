@@ -757,6 +757,203 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         white-space: nowrap;
       }
 
+      /* ====== VISUAL ENHANCEMENTS ====== */
+
+      /* Source Split Bar */
+      .source-split-bar {
+        display: flex;
+        height: 8px;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-top: 0.5rem;
+        background: var(--dash-surface-hover);
+      }
+
+      .split-tf {
+        background: linear-gradient(90deg, #3b82f6, #60a5fa);
+        transition: width 0.6s ease;
+      }
+
+      .split-lf {
+        background: linear-gradient(90deg, #22c55e, #4ade80);
+        transition: width 0.6s ease;
+      }
+
+      .split-legend {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.625rem;
+        color: var(--dash-text-dim);
+        margin-top: 0.25rem;
+      }
+
+      /* Category Donut (CSS) */
+      .cat-donut-wrap {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .cat-donut {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .cat-donut-hole {
+        position: absolute;
+        inset: 20%;
+        border-radius: 50%;
+        background: var(--dash-surface);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .cat-donut-hole .donut-num {
+        font-size: 1.25rem;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .cat-donut-hole .donut-label {
+        font-size: 0.5625rem;
+        color: var(--dash-text-dim);
+      }
+
+      .cat-legend {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        flex: 1;
+      }
+
+      .cat-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-size: 0.6875rem;
+      }
+
+      .cat-legend-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+
+      .cat-legend-name {
+        flex: 1;
+      }
+
+      .cat-legend-count {
+        font-weight: 700;
+        min-width: 20px;
+        text-align: right;
+      }
+
+      .cat-legend-pct {
+        color: var(--dash-text-dim);
+        font-size: 0.5625rem;
+        min-width: 30px;
+        text-align: right;
+      }
+
+      /* 7-Day Trend Chart */
+      .trend-section {
+        background: var(--dash-surface);
+        border: 1px solid var(--dash-border);
+        border-radius: 12px;
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .trend-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+      }
+
+      .trend-header h3 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--dash-text-dim);
+      }
+
+      .trend-total {
+        font-size: 0.75rem;
+        color: var(--dash-text-dim);
+      }
+
+      .trend-total b { color: var(--dash-text); font-size: 1rem; }
+
+      .trend-chart {
+        position: relative;
+        height: 120px;
+        width: 100%;
+      }
+
+      .trend-chart svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .trend-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.5625rem;
+        color: var(--dash-text-dim);
+        margin-top: 0.25rem;
+        padding: 0 0.5rem;
+      }
+
+      .trend-legend {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 0.5rem;
+        font-size: 0.6875rem;
+      }
+
+      .trend-legend span {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      /* Stacked hourly bars */
+      .chart-bar-stack {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border-radius: 3px 3px 0 0;
+        overflow: hidden;
+      }
+
+      .bar-tf {
+        background: linear-gradient(to top, #3b82f6, #60a5fa);
+        transition: height 0.4s ease;
+      }
+
+      .bar-lf {
+        background: linear-gradient(to top, #22c55e, #4ade80);
+        transition: height 0.4s ease;
+      }
+
+      /* Summary card icon */
+      .card-icon {
+        font-size: 1.5rem;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        opacity: 0.15;
+      }
+
       /* Loading / Empty */
       .loading {
         display: flex;
@@ -812,28 +1009,60 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
       <!-- 상단: 통합 요약 카드 -->
       <div class="summary-grid">
         <div class="summary-card accent-blue">
+          <span class="card-icon">&#128196;</span>
           <div class="label">Total Posts</div>
           <div class="value">{totalPosts}</div>
           <div class="sub">TechFlow {tfPostCount} + LifeFlow {lfPostCount}</div>
+          <div class="source-split-bar" style="margin-top:0.5rem;">
+            <div class="split-tf" style={`width:${Math.round(tfPostCount / totalPosts * 100)}%`}></div>
+            <div class="split-lf" style={`width:${Math.round(lfPostCount / totalPosts * 100)}%`}></div>
+          </div>
+          <div class="split-legend">
+            <span>TF {Math.round(tfPostCount / totalPosts * 100)}%</span>
+            <span>LF {Math.round(lfPostCount / totalPosts * 100)}%</span>
+          </div>
         </div>
         <div class="summary-card accent-green">
+          <span class="card-icon">&#128194;</span>
           <div class="label">Categories</div>
           <div class="value">{totalCategories}</div>
           <div class="sub">TechFlow {tfCategoryStats.length} + LifeFlow {lfCategoryCount}</div>
         </div>
         <div class="summary-card accent-purple">
+          <span class="card-icon">&#128065;</span>
           <div class="label">Page Views</div>
           <div class="value" id="total-views">--</div>
           <div class="sub" id="views-sub">Supabase 로딩 중...</div>
-          <div class="metric-breakdown" id="views-source-split" style="justify-content:flex-start; margin-top:0.25rem;">
-            <span><i class="dot-tf"></i> TF: <b id="tf-total-views">--</b></span>
-            <span><i class="dot-lf"></i> LF: <b id="lf-total-views">--</b></span>
+          <div class="source-split-bar" id="views-split-bar">
+            <div class="split-tf" id="views-split-tf" style="width:50%"></div>
+            <div class="split-lf" id="views-split-lf" style="width:50%"></div>
+          </div>
+          <div class="split-legend">
+            <span>TF: <b id="tf-total-views">--</b></span>
+            <span>LF: <b id="lf-total-views">--</b></span>
           </div>
         </div>
         <div class="summary-card accent-yellow">
+          <span class="card-icon">&#128722;</span>
           <div class="label">Coupang Clicks</div>
           <div class="value" id="total-clicks">--</div>
           <div class="sub" id="clicks-sub">추적 중...</div>
+        </div>
+      </div>
+
+      <!-- 7일 트렌드 -->
+      <div class="trend-section">
+        <div class="trend-header">
+          <h3>7-Day Views Trend</h3>
+          <div class="trend-total">7일 합계: <b id="trend-total-num">--</b></div>
+        </div>
+        <div class="trend-chart" id="trend-chart">
+          <div class="no-data">Loading trend...</div>
+        </div>
+        <div class="trend-labels" id="trend-labels"></div>
+        <div class="trend-legend">
+          <span><i class="dot-tf"></i> TechFlow</span>
+          <span><i class="dot-lf"></i> LifeFlow</span>
         </div>
       </div>
 
@@ -921,14 +1150,31 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
             <span class="section-badge badge-tf">{tfPostCount}편</span>
           </div>
           <div class="section-body">
-            <div class="cat-grid cat-grid-4">
-              {tfCategoryStats.map(c => (
-                <div class="cat-item">
-                  <div class="cat-name">{c.name}</div>
-                  <div class="cat-count">{c.count}</div>
-                  <div class="cat-pct">{Math.round((c.count / tfPostCount) * 100)}%</div>
+            <div class="cat-donut-wrap">
+              <div class="cat-donut" style={`background: conic-gradient(${tfCategoryStats.map((c, i) => {
+                const colors = ['#3b82f6','#22c55e','#eab308','#a855f7','#f97316','#ec4899','#06b6d4'];
+                const pctBefore = tfCategoryStats.slice(0, i).reduce((s, x) => s + x.count, 0) / tfPostCount * 100;
+                const pct = c.count / tfPostCount * 100;
+                return `${colors[i % colors.length]} ${pctBefore}% ${pctBefore + pct}%`;
+              }).join(', ')})`}>
+                <div class="cat-donut-hole">
+                  <span class="donut-num">{tfPostCount}</span>
+                  <span class="donut-label">포스트</span>
                 </div>
-              ))}
+              </div>
+              <div class="cat-legend">
+                {tfCategoryStats.map((c, i) => {
+                  const colors = ['#3b82f6','#22c55e','#eab308','#a855f7','#f97316','#ec4899','#06b6d4'];
+                  return (
+                    <div class="cat-legend-item">
+                      <span class="cat-legend-dot" style={`background:${colors[i % colors.length]}`}></span>
+                      <span class="cat-legend-name">{c.name}</span>
+                      <span class="cat-legend-count">{c.count}</span>
+                      <span class="cat-legend-pct">{Math.round(c.count / tfPostCount * 100)}%</span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
             <div class="recent-list">
               {tfRecentPosts.map((p, i) => (
@@ -952,14 +1198,27 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
             <span class="section-badge badge-lf">{lfPostCount}편</span>
           </div>
           <div class="section-body">
-            <div class="cat-grid cat-grid-5">
-              {lfCategories.map(c => (
-                <div class="cat-item">
-                  <div class="cat-name">{c.name}</div>
-                  <div class="cat-count">{c.count}</div>
-                  <div class="cat-pct">{Math.round((c.count / lfPostCount) * 100)}%</div>
+            <div class="cat-donut-wrap">
+              <div class="cat-donut" style={`background: conic-gradient(${lfCategories.map((c, i) => {
+                const pctBefore = lfCategories.slice(0, i).reduce((s, x) => s + x.count, 0) / lfPostCount * 100;
+                const pct = c.count / lfPostCount * 100;
+                return `${c.color} ${pctBefore}% ${pctBefore + pct}%`;
+              }).join(', ')})`}>
+                <div class="cat-donut-hole">
+                  <span class="donut-num">{lfPostCount}</span>
+                  <span class="donut-label">포스트</span>
                 </div>
-              ))}
+              </div>
+              <div class="cat-legend">
+                {lfCategories.map(c => (
+                  <div class="cat-legend-item">
+                    <span class="cat-legend-dot" style={`background:${c.color}`}></span>
+                    <span class="cat-legend-name">{c.name}</span>
+                    <span class="cat-legend-count">{c.count}</span>
+                    <span class="cat-legend-pct">{Math.round(c.count / lfPostCount * 100)}%</span>
+                  </div>
+                ))}
+              </div>
             </div>
             <div class="recent-list" id="lf-recent-list">
               <div class="loading"><div class="spinner"></div>정적 데이터</div>
@@ -1151,21 +1410,116 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         }
 
         const hourMap = {};
-        data.forEach(d => { hourMap[d.hour] = d.views; });
-        const maxViews = Math.max(...Object.values(hourMap), 1);
+        data.forEach(d => {
+          hourMap[d.hour] = { total: d.views || 0, tf: d.tf_views || 0, lf: d.lf_views || 0 };
+        });
+        const maxViews = Math.max(...Object.values(hourMap).map(h => h.total), 1);
 
         let html = '';
         for (let h = 0; h < 24; h++) {
-          const views = hourMap[h] || 0;
-          const height = views > 0 ? Math.max((views / maxViews) * 90, 4) : 2;
-          const opacity = views > 0 ? 1 : 0.2;
+          const d = hourMap[h] || { total: 0, tf: 0, lf: 0 };
+          const totalH = d.total > 0 ? Math.max((d.total / maxViews) * 90, 4) : 2;
+          const tfH = d.total > 0 ? (d.tf / d.total) * totalH : 0;
+          const lfH = d.total > 0 ? (d.lf / d.total) * totalH : 0;
+          const otherH = totalH - tfH - lfH;
+          const opacity = d.total > 0 ? 1 : 0.2;
           html += `<div class="chart-bar-col">
-            <div class="chart-bar-tooltip">${h}:00 — ${views} views</div>
-            <div class="chart-bar" style="height:${height}px; opacity:${opacity}"></div>
+            <div class="chart-bar-tooltip">${h}:00 — TF:${d.tf} LF:${d.lf} (${d.total})</div>
+            <div class="chart-bar-stack" style="height:${totalH}px; opacity:${opacity}">
+              ${lfH > 0 ? `<div class="bar-lf" style="height:${lfH}px"></div>` : ''}
+              ${tfH > 0 ? `<div class="bar-tf" style="height:${tfH}px"></div>` : ''}
+              ${otherH > 0 ? `<div style="height:${otherH}px;background:#475569;"></div>` : ''}
+            </div>
             <span class="chart-bar-label">${h % 3 === 0 ? h : ''}</span>
           </div>`;
         }
         container.innerHTML = html;
+      }
+
+      // 7-Day Trend SVG Line Chart
+      function renderTrendChart(data) {
+        const container = document.getElementById('trend-chart');
+        const labelsEl = document.getElementById('trend-labels');
+        const totalEl = document.getElementById('trend-total-num');
+        if (!container) return;
+
+        if (!data || data.length === 0) {
+          container.innerHTML = '<div class="no-data">No trend data yet</div>';
+          return;
+        }
+
+        const total7d = data.reduce((s, d) => s + (d.views || 0), 0);
+        if (totalEl) totalEl.textContent = fmt(total7d);
+
+        const maxV = Math.max(...data.map(d => d.views || 0), 1);
+        const w = 100;
+        const h = 100;
+        const pad = 5;
+
+        function toPoints(vals) {
+          return vals.map((v, i) => {
+            const x = pad + (i / Math.max(vals.length - 1, 1)) * (w - 2 * pad);
+            const y = h - pad - ((v || 0) / maxV) * (h - 2 * pad);
+            return `${x},${y}`;
+          }).join(' ');
+        }
+
+        const tfVals = data.map(d => d.tf_views || 0);
+        const lfVals = data.map(d => d.lf_views || 0);
+        const totalVals = data.map(d => d.views || 0);
+
+        // SVG with gradient fills
+        let svg = `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">`;
+        svg += `<defs>
+          <linearGradient id="gTf" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.02"/>
+          </linearGradient>
+          <linearGradient id="gLf" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#22c55e" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#22c55e" stop-opacity="0.02"/>
+          </linearGradient>
+        </defs>`;
+
+        // Grid lines
+        for (let i = 0; i <= 4; i++) {
+          const y = pad + (i / 4) * (h - 2 * pad);
+          svg += `<line x1="${pad}" y1="${y}" x2="${w-pad}" y2="${y}" stroke="#334155" stroke-width="0.3" stroke-dasharray="2,2"/>`;
+        }
+
+        // Area fill + Line for TechFlow
+        const tfPts = toPoints(tfVals);
+        const firstTfX = pad;
+        const lastTfX = pad + ((data.length - 1) / Math.max(data.length - 1, 1)) * (w - 2 * pad);
+        svg += `<polygon points="${firstTfX},${h-pad} ${tfPts} ${lastTfX},${h-pad}" fill="url(#gTf)"/>`;
+        svg += `<polyline points="${tfPts}" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+        // Area fill + Line for LifeFlow
+        const lfPts = toPoints(lfVals);
+        const firstLfX = firstTfX;
+        const lastLfX = lastTfX;
+        svg += `<polygon points="${firstLfX},${h-pad} ${lfPts} ${lastLfX},${h-pad}" fill="url(#gLf)"/>`;
+        svg += `<polyline points="${lfPts}" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+        // Dots
+        data.forEach((d, i) => {
+          const x = pad + (i / Math.max(data.length - 1, 1)) * (w - 2 * pad);
+          const yTf = h - pad - ((d.tf_views || 0) / maxV) * (h - 2 * pad);
+          const yLf = h - pad - ((d.lf_views || 0) / maxV) * (h - 2 * pad);
+          svg += `<circle cx="${x}" cy="${yTf}" r="1.5" fill="#3b82f6"/>`;
+          svg += `<circle cx="${x}" cy="${yLf}" r="1.5" fill="#22c55e"/>`;
+        });
+
+        svg += '</svg>';
+        container.innerHTML = svg;
+
+        // Labels
+        if (labelsEl) {
+          labelsEl.innerHTML = data.map(d => {
+            const day = d.day ? new Date(d.day) : null;
+            return day ? `<span>${day.getMonth()+1}/${day.getDate()}</span>` : '<span></span>';
+          }).join('');
+        }
       }
 
       // Slug을 읽기 좋은 제목으로 변환
@@ -1293,11 +1647,12 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
 
       async function loadTraffic() {
         try {
-          const [summary, hourly, topPages, events] = await Promise.all([
+          const [summary, hourly, topPages, events, trend] = await Promise.all([
             rpc('get_traffic_summary'),
             rpc('get_hourly_views'),
             rpc('get_top_pages', { p_limit: 10 }),
-            rpc('get_recent_events', { p_limit: 20 })
+            rpc('get_recent_events', { p_limit: 20 }),
+            rpc('get_daily_trend')
           ]);
 
           // Metrics
@@ -1343,15 +1698,25 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           document.getElementById('clicks-sub').textContent = tc > 0 ? `today +${tc}` : 'Waiting...';
 
           // Summary card source split
+          const tfTotal = Number(summary?.tf_total_views) || 0;
+          const lfTotal = Number(summary?.lf_total_views) || 0;
+          const totalV = Number(summary?.total_views) || 1;
           const tfTotalEl = document.getElementById('tf-total-views');
           const lfTotalEl = document.getElementById('lf-total-views');
-          if (tfTotalEl) tfTotalEl.textContent = fmt(Number(summary?.tf_total_views) || 0);
-          if (lfTotalEl) lfTotalEl.textContent = fmt(Number(summary?.lf_total_views) || 0);
+          if (tfTotalEl) tfTotalEl.textContent = fmt(tfTotal);
+          if (lfTotalEl) lfTotalEl.textContent = fmt(lfTotal);
+
+          // Animated split bar
+          const splitTfEl = document.getElementById('views-split-tf');
+          const splitLfEl = document.getElementById('views-split-lf');
+          if (splitTfEl) splitTfEl.style.width = Math.round(tfTotal / totalV * 100) + '%';
+          if (splitLfEl) splitLfEl.style.width = Math.round(lfTotal / totalV * 100) + '%';
 
           // Charts & feeds
           renderHourlyChart(hourly);
           renderTopPages(topPages);
           renderEventFeed(events);
+          renderTrendChart(trend);
 
           document.getElementById('last-updated').textContent =
             `Updated: ${new Date().toLocaleString('ko-KR')}`;
