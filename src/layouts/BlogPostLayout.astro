@@ -268,9 +268,18 @@ const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1]
       </nav>
     )}
 
+    <!-- 추천 버튼 -->
+    <div class="like-section">
+      <button class="like-btn" id="like-btn" aria-label="추천">
+        <span class="like-icon" id="like-icon">&#9825;</span>
+        <span class="like-count" id="like-count">0</span>
+      </button>
+      <span class="like-label">이 글이 도움이 되었나요?</span>
+    </div>
+
     <!-- 관련 글 안내 -->
     <div class="post-cta">
-      <h3>이 글이 도움이 되셨나요?</h3>
+      <h3>더 많은 글을 둘러보세요</h3>
       <p>더 많은 유용한 콘텐츠를 확인해보세요.</p>
       <div class="post-cta-buttons">
         <a href="/blog/" class="btn-primary">전체 글 보기</a>
@@ -328,6 +337,59 @@ const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1]
           }
         });
       }
+    })();
+
+    // Like button logic
+    (function() {
+      const likeBtn = document.getElementById('like-btn');
+      const likeIcon = document.getElementById('like-icon');
+      const likeCount = document.getElementById('like-count');
+      if (!likeBtn || !likeIcon || !likeCount) return;
+
+      const slug = window.location.pathname.replace(/^\/blog\//, '').replace(/\/$/, '');
+      const storageKey = 'liked_' + slug;
+      const countKey = 'like_count_' + slug;
+
+      // Load state
+      const isLiked = localStorage.getItem(storageKey) === 'true';
+      let count = parseInt(localStorage.getItem(countKey) || '0', 10);
+
+      function render() {
+        likeCount.textContent = String(count);
+        if (isLiked) {
+          likeIcon.innerHTML = '&#9829;';
+          likeBtn.classList.add('liked');
+          likeBtn.disabled = true;
+        }
+      }
+      render();
+
+      likeBtn.addEventListener('click', () => {
+        if (localStorage.getItem(storageKey) === 'true') return;
+        localStorage.setItem(storageKey, 'true');
+        count++;
+        localStorage.setItem(countKey, String(count));
+        likeIcon.innerHTML = '&#9829;';
+        likeBtn.classList.add('liked');
+        likeBtn.disabled = true;
+        likeCount.textContent = String(count);
+
+        // Animation
+        likeBtn.classList.add('like-pop');
+        setTimeout(() => likeBtn.classList.remove('like-pop'), 600);
+
+        // Optional: send to analytics
+        const ANALYTICS_URL = 'https://mkatzcmsrdntsmnykxpt.supabase.co/functions/v1/analytics-ingest';
+        fetch(ANALYTICS_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event_type: 'like',
+            source: 'blog',
+            metadata: { slug, path: window.location.pathname }
+          })
+        }).catch(() => {});
+      });
     })();
 
     // Auto-generate Table of Contents

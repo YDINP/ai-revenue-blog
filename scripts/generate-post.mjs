@@ -67,6 +67,20 @@ function selectCategory() {
   return CATEGORY_ORDER[index];
 }
 
+/**
+ * 3개의 서로 다른 카테고리를 날짜 기반으로 선택
+ * dayOfMonth를 기준으로 연속 3개 카테고리를 순환 선택
+ */
+function selectCategories(count = 3) {
+  const dayOfMonth = new Date().getDate();
+  const categories = [];
+  for (let i = 0; i < count; i++) {
+    const index = (dayOfMonth + i) % CATEGORY_ORDER.length;
+    categories.push(CATEGORY_ORDER[index]);
+  }
+  return categories;
+}
+
 // ─── Data Loading ─────────────────────────────────────────────────────
 
 function loadJSON(filename) {
@@ -111,6 +125,11 @@ async function generatePostContent(categoryName, keyword, searchTerm) {
 
 카테고리: ${categoryName}
 키워드: ${keyword}
+
+**중요**: 2026년 2월 기준 가장 최신 뉴스, 트렌드, 이슈를 기반으로 작성하세요.
+- 최신 제품 출시, 업데이트, 시장 변화를 반영
+- 단순 일반론이 아닌 구체적인 시의성 있는 내용 위주
+- 제목에 "2026" 또는 구체적 시점을 포함
 
 요구사항:
 - 한국어로 작성
@@ -348,17 +367,17 @@ async function registerToSupabase(post, category, slug, date, heroImage) {
 // ─── Main ─────────────────────────────────────────────────────────────
 
 async function main() {
-  console.log("=== Daily Blog Post Generator ===\n");
+  console.log("=== Daily Blog Post Generator (3 posts) ===\n");
 
   const today = getToday();
   console.log(`[Info] Date: ${today}`);
 
-  // 0. 중복 확인 - 같은 날짜 파일이 이미 있으면 스킵
+  // 0. 중복 확인 - 같은 날짜 파일이 3개 이상이면 스킵
   const blogDir = join(PROJECT_ROOT, "src", "blog");
   if (existsSync(blogDir)) {
     const existing = readdirSync(blogDir).filter(f => f.startsWith(today));
-    if (existing.length > 0) {
-      console.log(`[Skip] Today's post already exists: ${existing[0]}`);
+    if (existing.length >= 3) {
+      console.log(`[Skip] Today's 3 posts already exist: ${existing.join(", ")}`);
       console.log("=== Done (skipped) ===");
       process.exit(0);
     }
@@ -368,57 +387,63 @@ async function main() {
   const seeds = loadJSON("category-seeds.json");
   const coupangData = loadJSON("coupang-links.json");
 
-  // 2. Select category by day-of-month rotation
-  const categoryName = selectCategory();
-  const categoryData = seeds.categories.find((c) => c.name === categoryName);
-  if (!categoryData) {
-    console.error(`[ERROR] Category "${categoryName}" not found in seeds`);
-    process.exit(1);
+  // 2. Select 3 different categories by day-of-month rotation
+  const categoryNames = selectCategories(3);
+  console.log(`[Info] Categories: ${categoryNames.join(", ")}`);
+
+  // 3. Generate 3 posts sequentially
+  for (let i = 0; i < categoryNames.length; i++) {
+    const categoryName = categoryNames[i];
+    const categoryData = seeds.categories.find((c) => c.name === categoryName);
+    if (!categoryData) {
+      console.error(`[ERROR] Category "${categoryName}" not found in seeds`);
+      continue;
+    }
+
+    console.log(`\n--- Post ${i + 1}/3: ${categoryName} ---`);
+
+    // Pick random keyword and search term
+    const keywordIndex = Math.floor(
+      Math.random() * categoryData.keywords.length
+    );
+    const keyword = categoryData.keywords[keywordIndex];
+    const searchTerm =
+      categoryData.searchTerms[keywordIndex % categoryData.searchTerms.length];
+
+    console.log(`[Info] Keyword: ${keyword}`);
+    console.log(`[Info] Search term: ${searchTerm}`);
+
+    // Generate content via Claude API
+    const post = await generatePostContent(categoryName, keyword, searchTerm);
+    console.log(`[Claude] Generated: "${post.title}"`);
+
+    // Fetch hero image via Pexels
+    const heroImage = await fetchHeroImage(searchTerm);
+
+    // Select coupang links
+    const categoryKey = categoryName.toLowerCase();
+    const coupangLinks = selectCoupangLinks(coupangData, categoryKey);
+    console.log(`[Coupang] Selected ${coupangLinks.length} product links`);
+
+    // Assemble markdown file
+    const { filename, slug, content } = buildMarkdownFile(
+      post,
+      categoryName,
+      heroImage,
+      coupangLinks,
+      today
+    );
+
+    // Write file
+    const outputPath = join(PROJECT_ROOT, "src", "blog", filename);
+    writeFileSync(outputPath, content, "utf-8");
+    console.log(`[File] Written: src/blog/${filename}`);
+
+    // Register to Supabase
+    await registerToSupabase(post, categoryName, slug, today, heroImage);
   }
 
-  console.log(`[Info] Category: ${categoryName}`);
-
-  // 3. Pick random keyword and search term
-  const keywordIndex = Math.floor(
-    Math.random() * categoryData.keywords.length
-  );
-  const keyword = categoryData.keywords[keywordIndex];
-  const searchTerm =
-    categoryData.searchTerms[keywordIndex % categoryData.searchTerms.length];
-
-  console.log(`[Info] Keyword: ${keyword}`);
-  console.log(`[Info] Search term: ${searchTerm}`);
-
-  // 4. Generate content via Claude API
-  const post = await generatePostContent(categoryName, keyword, searchTerm);
-  console.log(`[Claude] Generated: "${post.title}"`);
-
-  // 5. Fetch hero image via Pexels
-  const heroImage = await fetchHeroImage(searchTerm);
-
-  // 6. Select coupang links
-  const categoryKey = categoryName.toLowerCase();
-  const coupangLinks = selectCoupangLinks(coupangData, categoryKey);
-  console.log(`[Coupang] Selected ${coupangLinks.length} product links`);
-
-  // 7. Assemble markdown file
-  const { filename, slug, content } = buildMarkdownFile(
-    post,
-    categoryName,
-    heroImage,
-    coupangLinks,
-    today
-  );
-
-  // 8. Write file
-  const outputPath = join(PROJECT_ROOT, "src", "blog", filename);
-  writeFileSync(outputPath, content, "utf-8");
-  console.log(`[File] Written: src/blog/${filename}`);
-
-  // 9. Register to Supabase
-  await registerToSupabase(post, categoryName, slug, today, heroImage);
-
-  console.log("\n=== Done! ===");
+  console.log("\n=== Done! (3 posts generated) ===");
 }
 
 main().catch((err) => {

@@ -17,8 +17,8 @@
     },
     {
       "name": "Game",
-      "keywords": ["게임 엔진 비교", "Unity 입문 가이드", "Godot 4 튜토리얼", "Phaser 웹 게임", "인디 게임 개발 도구"],
-      "searchTerms": ["game engine comparison", "Unity tutorial", "Godot 4 guide", "Phaser web game", "indie game development"]
+      "keywords": ["HTML5 웹게임 개발 가이드", "Phaser 3 웹게임 만들기", "PixiJS 2D 게임 개발", "웹 게임 수익화 전략", "H5 모바일 게임 배포", "JavaScript 게임 프레임워크 비교", "Canvas WebGL 게임 개발", "웹게임 최적화 기법", "인디 웹게임 성공 사례", "Cocos Creator 웹게임"],
+      "searchTerms": ["HTML5 game development", "Phaser 3 tutorial", "PixiJS game", "web game monetization", "H5 mobile game", "JavaScript game framework", "Canvas WebGL game", "web game optimization", "indie web game", "Cocos Creator web"]
     }
   ]
 }

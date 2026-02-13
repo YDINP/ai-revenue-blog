@@ -2,32 +2,46 @@
 import '../styles/global.css';
 import { getCollection } from 'astro:content';
 
-// 실제 블로그 포스트 파일 기반 통계 (빌드 타임)
+// TechFlow 실제 블로그 포스트 파일 기반 통계 (빌드 타임)
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
-const totalPostCount = allPosts.length;
+const tfPostCount = allPosts.length;
 
-// 카테고리별 포스트 수 계산
-const categoryMap: Record<string, number> = {};
+// TechFlow 카테고리별 포스트 수
+const tfCategoryMap: Record<string, number> = {};
 for (const post of allPosts) {
   const cat = post.data.category;
-  categoryMap[cat] = (categoryMap[cat] || 0) + 1;
+  tfCategoryMap[cat] = (tfCategoryMap[cat] || 0) + 1;
 }
 
-// 카테고리별 통계 배열 (정렬)
-const categoryStats = Object.entries(categoryMap)
+const tfCategoryStats = Object.entries(tfCategoryMap)
   .sort((a, b) => b[1] - a[1])
   .map(([name, count]) => ({ name, count }));
 
-// 최근 포스트 목록 (최신 10개)
-const recentPosts = allPosts
+// TechFlow 최근 포스트 (최신 5개)
+const tfRecentPosts = allPosts
   .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
-  .slice(0, 10)
+  .slice(0, 5)
   .map(p => ({
     title: p.data.title,
     category: p.data.category,
     pubDate: p.data.pubDate.toISOString().split('T')[0],
     slug: p.id,
   }));
+
+// LifeFlow 정적 데이터 (cross-repo 접근 불가, 빌드 타임 하드코딩)
+const lfCategories = [
+  { name: 'Lifestyle', count: 4, icon: 'sparkles', color: '#ec4899' },
+  { name: 'Finance', count: 4, icon: 'banknotes', color: '#3b82f6' },
+  { name: 'Health', count: 3, icon: 'heart', color: '#22c55e' },
+  { name: 'Education', count: 3, icon: 'book', color: '#a855f7' },
+  { name: 'Travel', count: 3, icon: 'plane', color: '#f97316' },
+];
+const lfPostCount = lfCategories.reduce((s, c) => s + c.count, 0);
+const lfCategoryCount = lfCategories.length;
+
+// 통합 통계
+const totalPosts = tfPostCount + lfPostCount;
+const totalCategories = tfCategoryStats.length + lfCategoryCount;
 ---
 
 <!doctype html>
@@ -35,7 +49,7 @@ const recentPosts = allPosts
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Revenue Dashboard | TechFlow</title>
+    <title>Blog Dashboard | TechFlow + LifeFlow</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <style>
@@ -51,6 +65,9 @@ const recentPosts = allPosts
         --dash-yellow: #eab308;
         --dash-red: #ef4444;
         --dash-purple: #a855f7;
+        --dash-orange: #f97316;
+        --dash-pink: #ec4899;
+        --dash-cyan: #06b6d4;
       }
 
       * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -62,6 +79,7 @@ const recentPosts = allPosts
         min-height: 100vh;
       }
 
+      /* Header */
       .dash-header {
         background: var(--dash-surface);
         border-bottom: 1px solid var(--dash-border);
@@ -79,7 +97,9 @@ const recentPosts = allPosts
         gap: 0.5rem;
       }
 
-      .dash-header .logo { color: var(--dash-accent); }
+      .dash-header .logo-tf { color: var(--dash-accent); }
+      .dash-header .logo-lf { color: var(--dash-green); }
+      .dash-header .logo-sep { color: var(--dash-text-dim); font-weight: 400; }
 
       .dash-header .meta {
         font-size: 0.8125rem;
@@ -107,7 +127,7 @@ const recentPosts = allPosts
         padding: 1.5rem;
       }
 
-      /* Summary Cards */
+      /* Summary Cards - 상단 통합 요약 */
       .summary-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -120,7 +140,23 @@ const recentPosts = allPosts
         border: 1px solid var(--dash-border);
         border-radius: 12px;
         padding: 1.25rem;
+        position: relative;
+        overflow: hidden;
       }
+
+      .summary-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+      }
+
+      .summary-card.accent-blue::before { background: var(--dash-accent); }
+      .summary-card.accent-green::before { background: var(--dash-green); }
+      .summary-card.accent-purple::before { background: var(--dash-purple); }
+      .summary-card.accent-yellow::before { background: var(--dash-yellow); }
 
       .summary-card .label {
         font-size: 0.75rem;
@@ -137,166 +173,114 @@ const recentPosts = allPosts
         margin-bottom: 0.25rem;
       }
 
-      .summary-card .change {
-        font-size: 0.75rem;
-        font-weight: 600;
+      .summary-card .sub {
+        font-size: 0.7rem;
+        color: var(--dash-text-dim);
       }
 
-      .change.up { color: var(--dash-green); }
-      .change.down { color: var(--dash-red); }
-
-      /* Chart Section */
-      .chart-grid {
+      /* Blog Sections - 블로그별 탭 */
+      .blog-sections {
         display: grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 1rem;
         margin-bottom: 1.5rem;
       }
 
-      .chart-panel {
+      .blog-section {
         background: var(--dash-surface);
         border: 1px solid var(--dash-border);
         border-radius: 12px;
-        padding: 1.25rem;
-      }
-
-      .chart-panel h3 {
-        font-size: 0.875rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
-        color: var(--dash-text-dim);
-      }
-
-      /* Bar Chart */
-      .bar-chart {
-        display: flex;
-        align-items: flex-end;
-        gap: 4px;
-        height: 180px;
-        padding-top: 1rem;
-      }
-
-      .bar-group {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
-        height: 100%;
-        justify-content: flex-end;
-      }
-
-      .bar-stack {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 1px;
-        border-radius: 4px 4px 0 0;
         overflow: hidden;
       }
 
-      .bar-segment {
-        width: 100%;
-        min-height: 2px;
-        transition: height 0.5s ease;
-      }
-
-      .bar-segment.adsense { background: var(--dash-accent); }
-      .bar-segment.coupang { background: var(--dash-green); }
-      .bar-segment.saas { background: var(--dash-purple); }
-
-      .bar-label {
-        font-size: 0.625rem;
-        color: var(--dash-text-dim);
-        margin-top: 4px;
-      }
-
-      /* Donut Chart */
-      .donut-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-      }
-
-      .donut-svg { width: 160px; height: 160px; }
-
-      .donut-legend {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        width: 100%;
-      }
-
-      .legend-item {
+      .section-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: 0.8125rem;
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid var(--dash-border);
       }
 
-      .legend-dot {
-        width: 10px; height: 10px;
-        border-radius: 50%;
-        margin-right: 0.5rem;
-      }
-
-      .legend-name {
+      .section-header .section-title {
         display: flex;
         align-items: center;
-        color: var(--dash-text-dim);
+        gap: 0.5rem;
+        font-size: 0.9375rem;
+        font-weight: 700;
       }
 
-      .legend-value { font-weight: 600; }
-
-      /* Table */
-      .table-panel {
-        background: var(--dash-surface);
-        border: 1px solid var(--dash-border);
-        border-radius: 12px;
-        padding: 1.25rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .table-panel h3 {
-        font-size: 0.875rem;
+      .section-header .section-badge {
+        font-size: 0.6875rem;
+        padding: 0.125rem 0.5rem;
+        border-radius: 9999px;
         font-weight: 600;
+      }
+
+      .badge-tf { background: rgba(59,130,246,0.2); color: #60a5fa; }
+      .badge-lf { background: rgba(34,197,94,0.2); color: #4ade80; }
+
+      .section-body { padding: 1rem 1.25rem; }
+
+      /* Category Grid */
+      .cat-grid {
+        display: grid;
+        gap: 0.5rem;
         margin-bottom: 1rem;
-        color: var(--dash-text-dim);
       }
 
-      .dash-table {
-        width: 100%;
-        border-collapse: collapse;
+      .cat-grid-4 { grid-template-columns: repeat(4, 1fr); }
+      .cat-grid-5 { grid-template-columns: repeat(5, 1fr); }
+
+      .cat-item {
+        text-align: center;
+        padding: 0.75rem 0.5rem;
+        border-radius: 8px;
+        background: var(--dash-surface-hover);
+        transition: transform 0.15s;
       }
 
-      .dash-table th {
-        text-align: left;
+      .cat-item:hover { transform: translateY(-2px); }
+
+      .cat-item .cat-name {
         font-size: 0.6875rem;
         color: var(--dash-text-dim);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        padding: 0.5rem 0.75rem;
-        border-bottom: 1px solid var(--dash-border);
+        margin-bottom: 0.25rem;
       }
 
-      .dash-table td {
-        padding: 0.75rem;
+      .cat-item .cat-count {
+        font-size: 1.25rem;
+        font-weight: 800;
+      }
+
+      .cat-item .cat-pct {
+        font-size: 0.625rem;
+        color: var(--dash-text-dim);
+      }
+
+      /* Recent Posts */
+      .recent-list { display: flex; flex-direction: column; gap: 0; }
+
+      .recent-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.625rem 0;
+        border-bottom: 1px solid var(--dash-border);
         font-size: 0.8125rem;
-        border-bottom: 1px solid var(--dash-border);
       }
 
-      .dash-table tr:last-child td { border-bottom: none; }
+      .recent-item:last-child { border-bottom: none; }
 
-      .dash-table tr:hover td { background: var(--dash-surface-hover); }
-
-      .rank {
+      .recent-rank {
         font-weight: 700;
         color: var(--dash-accent);
+        width: 20px;
+        text-align: center;
+        flex-shrink: 0;
       }
 
-      .post-title-cell {
-        max-width: 300px;
+      .recent-title {
+        flex: 1;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -306,61 +290,59 @@ const recentPosts = allPosts
         display: inline-block;
         padding: 0.125rem 0.5rem;
         border-radius: 4px;
-        font-size: 0.6875rem;
+        font-size: 0.625rem;
         font-weight: 600;
+        flex-shrink: 0;
       }
 
       .cat-ai { background: rgba(59,130,246,0.2); color: #60a5fa; }
       .cat-dev { background: rgba(34,197,94,0.2); color: #4ade80; }
       .cat-review { background: rgba(234,179,8,0.2); color: #facc15; }
       .cat-game { background: rgba(168,85,247,0.2); color: #c084fc; }
+      .cat-lifestyle { background: rgba(236,72,153,0.2); color: #f472b6; }
+      .cat-finance { background: rgba(59,130,246,0.2); color: #60a5fa; }
+      .cat-health { background: rgba(34,197,94,0.2); color: #4ade80; }
+      .cat-education { background: rgba(168,85,247,0.2); color: #c084fc; }
+      .cat-travel { background: rgba(249,115,22,0.2); color: #fb923c; }
 
-      /* Bottom Grid */
-      .bottom-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-      }
-
-      .activity-item {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 0.625rem 0;
-        border-bottom: 1px solid var(--dash-border);
-        font-size: 0.8125rem;
-      }
-
-      .activity-item:last-child { border-bottom: none; }
-
-      .activity-icon {
-        width: 32px; height: 32px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.875rem;
+      .recent-date {
+        font-size: 0.6875rem;
+        color: var(--dash-text-dim);
+        white-space: nowrap;
         flex-shrink: 0;
       }
 
-      .activity-icon.view { background: rgba(59,130,246,0.15); }
-      .activity-icon.click { background: rgba(34,197,94,0.15); }
-      .activity-icon.run { background: rgba(168,85,247,0.15); }
+      /* Supabase Status Section */
+      .status-section {
+        background: var(--dash-surface);
+        border: 1px solid var(--dash-border);
+        border-radius: 12px;
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
 
-      .activity-text { color: var(--dash-text-dim); }
-      .activity-time { font-size: 0.6875rem; color: var(--dash-text-dim); margin-left: auto; white-space: nowrap; }
+      .status-section h3 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--dash-text-dim);
+      }
 
-      /* System Status */
-      .status-row {
+      .status-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.75rem;
+      }
+
+      .status-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0.75rem 0;
-        border-bottom: 1px solid var(--dash-border);
+        padding: 0.625rem 0.75rem;
+        background: var(--dash-surface-hover);
+        border-radius: 8px;
         font-size: 0.8125rem;
       }
-
-      .status-row:last-child { border-bottom: none; }
 
       .status-badge {
         padding: 0.125rem 0.5rem;
@@ -373,7 +355,52 @@ const recentPosts = allPosts
       .status-badge.pending { background: rgba(234,179,8,0.2); color: #facc15; }
       .status-badge.offline { background: rgba(239,68,68,0.2); color: #f87171; }
 
-      /* Loading */
+      /* Quick Links */
+      .links-section {
+        background: var(--dash-surface);
+        border: 1px solid var(--dash-border);
+        border-radius: 12px;
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .links-section h3 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--dash-text-dim);
+      }
+
+      .links-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      .link-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.625rem 1rem;
+        border-radius: 8px;
+        background: var(--dash-surface-hover);
+        border: 1px solid var(--dash-border);
+        color: var(--dash-text);
+        text-decoration: none;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        transition: border-color 0.2s, background 0.2s;
+      }
+
+      .link-btn:hover {
+        border-color: var(--dash-accent);
+        background: rgba(59,130,246,0.1);
+      }
+
+      .link-btn .link-icon { font-size: 1rem; }
+      .link-btn .link-label { color: var(--dash-text-dim); font-size: 0.6875rem; margin-left: 0.25rem; }
+
+      /* Banner */
       .data-banner {
         padding: 1rem 1.25rem;
         border-radius: 10px;
@@ -399,35 +426,23 @@ const recentPosts = allPosts
 
       .data-banner .banner-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 1px; }
 
-      .empty-state {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 140px;
-        color: var(--dash-text-dim);
-        text-align: center;
-        gap: 0.5rem;
-      }
-
-      .empty-state .empty-icon { font-size: 2rem; opacity: 0.5; }
-      .empty-state .empty-text { font-size: 0.8125rem; }
-
+      /* Loading / Empty */
       .loading {
         display: flex;
         align-items: center;
         justify-content: center;
-        min-height: 100px;
+        min-height: 60px;
         color: var(--dash-text-dim);
+        font-size: 0.8125rem;
       }
 
       .spinner {
-        width: 24px; height: 24px;
-        border: 3px solid var(--dash-border);
+        width: 20px; height: 20px;
+        border: 2px solid var(--dash-border);
         border-top-color: var(--dash-accent);
         border-radius: 50%;
         animation: spin 0.8s linear infinite;
-        margin-right: 0.75rem;
+        margin-right: 0.5rem;
       }
 
       @keyframes spin { to { transform: rotate(360deg); } }
@@ -435,15 +450,21 @@ const recentPosts = allPosts
       /* Responsive */
       @media (max-width: 768px) {
         .summary-grid { grid-template-columns: repeat(2, 1fr); }
-        .chart-grid { grid-template-columns: 1fr; }
-        .bottom-grid { grid-template-columns: 1fr; }
+        .blog-sections { grid-template-columns: 1fr; }
+        .cat-grid-4 { grid-template-columns: repeat(2, 1fr); }
+        .cat-grid-5 { grid-template-columns: repeat(3, 1fr); }
         .dash-header { flex-direction: column; gap: 0.5rem; }
       }
     </style>
   </head>
   <body>
     <header class="dash-header">
-      <h1><span class="logo">TechFlow</span> Revenue Dashboard</h1>
+      <h1>
+        <span class="logo-tf">TechFlow</span>
+        <span class="logo-sep">+</span>
+        <span class="logo-lf">LifeFlow</span>
+        Dashboard
+      </h1>
       <div class="meta">
         <span class="live-dot"></span>
         <span id="last-updated">Loading...</span>
@@ -455,140 +476,147 @@ const recentPosts = allPosts
       <!-- Data Status Banner -->
       <div id="data-banner" class="data-banner" style="display:none;"></div>
 
-      <!-- Summary Cards -->
-      <div class="summary-grid" id="summary-cards">
-        <div class="summary-card">
-          <div class="label">Total Revenue</div>
-          <div class="value" id="total-revenue">--</div>
-          <div class="change up" id="revenue-change"></div>
+      <!-- 상단: 통합 요약 카드 -->
+      <div class="summary-grid">
+        <div class="summary-card accent-blue">
+          <div class="label">Total Posts</div>
+          <div class="value">{totalPosts}</div>
+          <div class="sub">TechFlow {tfPostCount} + LifeFlow {lfPostCount}</div>
         </div>
-        <div class="summary-card">
+        <div class="summary-card accent-green">
+          <div class="label">Categories</div>
+          <div class="value">{totalCategories}</div>
+          <div class="sub">TechFlow {tfCategoryStats.length} + LifeFlow {lfCategoryCount}</div>
+        </div>
+        <div class="summary-card accent-purple">
           <div class="label">Page Views</div>
           <div class="value" id="total-views">--</div>
-          <div class="change up" id="views-change"></div>
+          <div class="sub" id="views-sub">Supabase 로딩 중...</div>
         </div>
-        <div class="summary-card">
-          <div class="label">Published Posts</div>
-          <div class="value">{totalPostCount}</div>
-          <div class="change" id="posts-change" style="font-size:0.7rem; color:var(--dash-text-dim);">
-            {categoryStats.map(c => `${c.name} ${c.count}`).join(' · ')}
-          </div>
-        </div>
-        <div class="summary-card">
-          <div class="label">Avg Daily Revenue</div>
-          <div class="value" id="avg-daily">--</div>
-          <div class="change" id="daily-change"></div>
+        <div class="summary-card accent-yellow">
+          <div class="label">Coupang Clicks</div>
+          <div class="value" id="total-clicks">--</div>
+          <div class="sub" id="clicks-sub">추적 중...</div>
         </div>
       </div>
 
-      <!-- Charts -->
-      <div class="chart-grid">
-        <div class="chart-panel">
-          <h3>Daily Revenue Trend (KRW)</h3>
-          <div id="bar-chart" class="bar-chart">
-            <div class="loading"><div class="spinner"></div>Loading...</div>
+      <!-- 중단: 블로그별 섹션 -->
+      <div class="blog-sections">
+        <!-- TechFlow Section -->
+        <div class="blog-section">
+          <div class="section-header">
+            <div class="section-title">
+              TechFlow
+            </div>
+            <span class="section-badge badge-tf">{tfPostCount}편</span>
+          </div>
+          <div class="section-body">
+            <div class="cat-grid cat-grid-4">
+              {tfCategoryStats.map(c => (
+                <div class="cat-item">
+                  <div class="cat-name">{c.name}</div>
+                  <div class="cat-count">{c.count}</div>
+                  <div class="cat-pct">{Math.round((c.count / tfPostCount) * 100)}%</div>
+                </div>
+              ))}
+            </div>
+            <div class="recent-list">
+              {tfRecentPosts.map((p, i) => (
+                <div class="recent-item">
+                  <span class="recent-rank">{i + 1}</span>
+                  <span class="recent-title">{p.title}</span>
+                  <span class={`cat-badge cat-${p.category.toLowerCase()}`}>{p.category}</span>
+                  <span class="recent-date">{p.pubDate}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        <div class="chart-panel">
-          <h3>Revenue by Channel</h3>
-          <div id="donut-chart" class="donut-container">
-            <div class="loading"><div class="spinner"></div>Loading...</div>
+
+        <!-- LifeFlow Section -->
+        <div class="blog-section">
+          <div class="section-header">
+            <div class="section-title">
+              LifeFlow
+            </div>
+            <span class="section-badge badge-lf">{lfPostCount}편</span>
+          </div>
+          <div class="section-body">
+            <div class="cat-grid cat-grid-5">
+              {lfCategories.map(c => (
+                <div class="cat-item">
+                  <div class="cat-name">{c.name}</div>
+                  <div class="cat-count">{c.count}</div>
+                  <div class="cat-pct">{Math.round((c.count / lfPostCount) * 100)}%</div>
+                </div>
+              ))}
+            </div>
+            <div class="recent-list" id="lf-recent-list">
+              <div class="loading"><div class="spinner"></div>정적 데이터</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Top Posts -->
-      <div class="table-panel">
-        <h3>Top Posts by Views</h3>
-        <table class="dash-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Title</th>
-              <th>Category</th>
-              <th>Views</th>
-              <th>Revenue (KRW)</th>
-            </tr>
-          </thead>
-          <tbody id="top-posts-body">
-            <tr><td colspan="5" class="loading"><div class="spinner"></div>Loading...</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Recent Posts (실제 파일 기반) -->
-      <div class="table-panel">
-        <h3>Recent Posts (파일 기반 · 총 {totalPostCount}편)</h3>
-        <table class="dash-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Title</th>
-              <th>Category</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {recentPosts.map((p, i) => (
-              <tr>
-                <td class="rank">{i + 1}</td>
-                <td class="post-title-cell">{p.title}</td>
-                <td><span class={`cat-badge cat-${p.category.toLowerCase()}`}>{p.category}</span></td>
-                <td style="white-space:nowrap; color:var(--dash-text-dim);">{p.pubDate}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Category Distribution -->
-      <div class="table-panel">
-        <h3>Category Distribution</h3>
-        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-          {categoryStats.map(c => (
-            <div style="flex:1; min-width:120px; background:var(--dash-surface-hover); border-radius:8px; padding:1rem; text-align:center;">
-              <div style="font-size:0.75rem; color:var(--dash-text-dim); margin-bottom:0.25rem;">{c.name}</div>
-              <div style="font-size:1.75rem; font-weight:800;">{c.count}</div>
-              <div style="font-size:0.6875rem; color:var(--dash-text-dim);">
-                {Math.round((c.count / totalPostCount) * 100)}%
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <!-- Bottom -->
-      <div class="bottom-grid">
-        <div class="chart-panel">
-          <h3>Recent Activity</h3>
-          <div id="activity-list">
-            <div class="loading"><div class="spinner"></div>Loading...</div>
+      <!-- 시스템 상태 -->
+      <div class="status-section">
+        <h3>System Status</h3>
+        <div class="status-grid">
+          <div class="status-item">
+            <span>TechFlow (Vercel)</span>
+            <span class="status-badge online">Online</span>
+          </div>
+          <div class="status-item">
+            <span>LifeFlow (Vercel)</span>
+            <span class="status-badge pending">미배포</span>
+          </div>
+          <div class="status-item">
+            <span>Supabase DB</span>
+            <span class="status-badge" id="supabase-status">Checking...</span>
+          </div>
+          <div class="status-item">
+            <span>Pageview Tracking</span>
+            <span class="status-badge online">Active</span>
+          </div>
+          <div class="status-item">
+            <span>AdSense</span>
+            <span class="status-badge pending">미신청</span>
+          </div>
+          <div class="status-item">
+            <span>Coupang Partners</span>
+            <span class="status-badge pending">연동 필요</span>
           </div>
         </div>
-        <div class="chart-panel">
-          <h3>System Status</h3>
-          <div id="system-status">
-            <div class="status-row">
-              <span>Blog (Vercel)</span>
-              <span class="status-badge online">Online</span>
-            </div>
-            <div class="status-row">
-              <span>Supabase DB</span>
-              <span class="status-badge" id="supabase-status">Checking...</span>
-            </div>
-            <div class="status-row">
-              <span>Pageview Tracking</span>
-              <span class="status-badge online">Active</span>
-            </div>
-            <div class="status-row">
-              <span>AdSense</span>
-              <span class="status-badge pending">미신청</span>
-            </div>
-            <div class="status-row">
-              <span>Coupang Partners</span>
-              <span class="status-badge pending">연동 필요</span>
-            </div>
-          </div>
+      </div>
+
+      <!-- 하단: 바로가기 링크 -->
+      <div class="links-section">
+        <h3>Quick Links</h3>
+        <div class="links-grid">
+          <a href="https://github.com/YDINP/ai-revenue-blog" target="_blank" rel="noopener" class="link-btn">
+            <span class="link-icon">&#128187;</span>
+            GitHub TechFlow
+          </a>
+          <a href="https://github.com/YDINP/life-revenue-blog" target="_blank" rel="noopener" class="link-btn">
+            <span class="link-icon">&#128187;</span>
+            GitHub LifeFlow
+          </a>
+          <a href="https://ai-revenue-blog.vercel.app" target="_blank" rel="noopener" class="link-btn">
+            <span class="link-icon">&#9650;</span>
+            Vercel TechFlow
+          </a>
+          <a href="https://supabase.com/dashboard" target="_blank" rel="noopener" class="link-btn">
+            <span class="link-icon">&#9889;</span>
+            Supabase
+          </a>
+          <a href="https://search.google.com/search-console" target="_blank" rel="noopener" class="link-btn">
+            <span class="link-icon">&#128270;</span>
+            Search Console
+          </a>
+          <a href="https://analytics.google.com" target="_blank" rel="noopener" class="link-btn">
+            <span class="link-icon">&#128200;</span>
+            Google Analytics
+          </a>
         </div>
       </div>
     </div>
@@ -596,9 +624,13 @@ const recentPosts = allPosts
     <script define:vars={{
       SUPABASE_URL: 'https://mkatzcmsrdntsmnykxpt.supabase.co',
       SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYXR6Y21zcmRudHNtbnlreHB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxOTM4MzQsImV4cCI6MjA4NTc2OTgzNH0.rl_c2-29eA9RNSnQGM9S1XeYG2sl6m2UpsMuhWZiRhQ',
-      ACTUAL_POST_COUNT: totalPostCount,
-      ACTUAL_CATEGORY_STATS: categoryStats,
-      ACTUAL_RECENT_POSTS: recentPosts
+      LF_POSTS: [
+        { slug: 'effective-foreign-language-learning-strategies-2025', title: '효과적인 외국어 학습 전략 가이드', category: 'Education', date: '2026-02-13' },
+        { slug: 'healthy-diet-guide-2024-nutrition', title: '건강한 식단 관리 완벽 가이드', category: 'Health', date: '2026-02-12' },
+        { slug: 'saving-habits-guide-2026', title: '2026 저축 습관 만들기 가이드', category: 'Finance', date: '2026-02-11' },
+        { slug: '시간-관리-전략-7가지', title: '시간 관리 전략 7가지: 하루 2시간 절약법', category: 'Lifestyle', date: '2026-02-10' },
+        { slug: 'jeju-island-one-month-living-guide', title: '제주도 한 달 살기 완벽 가이드', category: 'Travel', date: '2026-02-09' },
+      ]
     }}>
       const API = `${SUPABASE_URL}/rest/v1/rpc`;
       const headers = {
@@ -623,175 +655,63 @@ const recentPosts = allPosts
         const banner = document.getElementById('data-banner');
         if (!banner) return;
         banner.className = `data-banner ${type}`;
-        const icon = type === 'warning' ? '⚠️' : 'ℹ️';
+        const icon = type === 'warning' ? '\u26A0\uFE0F' : '\u2139\uFE0F';
         banner.innerHTML = `<span class="banner-icon">${icon}</span><div>${message}</div>`;
         banner.style.display = 'flex';
       }
 
-      function emptyState(icon, text) {
-        return `<div class="empty-state"><span class="empty-icon">${icon}</span><span class="empty-text">${text}</span></div>`;
+      // LifeFlow 최근 포스트 렌더링
+      function renderLfRecentPosts() {
+        const container = document.getElementById('lf-recent-list');
+        if (!container) return;
+        const catMap = {
+          'Lifestyle': 'lifestyle', 'Finance': 'finance', 'Health': 'health',
+          'Education': 'education', 'Travel': 'travel'
+        };
+        container.innerHTML = LF_POSTS.map((p, i) =>
+          `<div class="recent-item">
+            <span class="recent-rank">${i + 1}</span>
+            <span class="recent-title">${p.title}</span>
+            <span class="cat-badge cat-${catMap[p.category] || p.category.toLowerCase()}">${p.category}</span>
+            <span class="recent-date">${p.date}</span>
+          </div>`
+        ).join('');
       }
 
       async function loadDashboard() {
         try {
-          const [summary, daily, channels, posts, activity] = await Promise.all([
+          const [summary] = await Promise.all([
             rpc('get_dashboard_summary'),
-            rpc('get_daily_revenue', { days_back: 30 }),
-            rpc('get_channel_revenue'),
-            rpc('get_top_posts', { limit_count: 5 }),
-            rpc('get_recent_activity', { limit_count: 10 })
           ]);
 
-          // Determine data status
-          const hasRevenue = daily && daily.length > 0;
-          const hasViews = summary && summary.total_views > 0;
-          const hasActivity = activity && activity.length > 0;
+          const views = Number(summary?.total_views) || 0;
+          const clicks = Number(summary?.total_coupang_clicks) || 0;
 
-          if (!hasRevenue && !hasViews) {
+          document.getElementById('total-views').textContent = views > 0 ? fmt(views) : '0';
+          document.getElementById('views-sub').textContent = views > 0 ? '실시간 추적 중' : '방문자 수집 시작';
+          document.getElementById('total-clicks').textContent = fmt(clicks);
+          document.getElementById('clicks-sub').textContent = clicks > 0 ? '쿠팡파트너스' : '클릭 대기 중';
+
+          if (views === 0) {
             showBanner('info',
               '<strong>데이터 수집이 시작되었습니다.</strong><br>' +
               '블로그 방문자가 발생하면 실시간으로 페이지뷰가 기록됩니다. ' +
               'AdSense/쿠팡파트너스 수익은 해당 서비스 연동 후 반영됩니다.'
             );
-          } else if (!hasRevenue) {
-            showBanner('info',
-              '<strong>페이지뷰 추적 중.</strong> 수익 데이터는 AdSense 승인 및 쿠팡파트너스 연동 후 표시됩니다.'
-            );
           }
-
-          renderSummary(summary);
-          renderBarChart(daily);
-          renderDonut(channels);
-          renderTopPosts(posts);
-          renderActivity(activity);
 
           document.getElementById('last-updated').textContent =
             `Updated: ${new Date().toLocaleString('ko-KR')}`;
         } catch (e) {
           console.error('Dashboard load error:', e);
+          document.getElementById('total-views').textContent = '-';
+          document.getElementById('total-clicks').textContent = '-';
+          document.getElementById('views-sub').textContent = '연결 실패';
+          document.getElementById('clicks-sub').textContent = '연결 실패';
           showBanner('warning', '<strong>데이터 로드 실패.</strong> Supabase 연결을 확인해주세요.');
         }
       }
 
-      function renderSummary(s) {
-        if (!s) return;
-        const rev = Number(s.total_revenue) || 0;
-        const views = Number(s.total_views) || 0;
-        // 포스트 수는 Supabase DB가 아닌 실제 파일 기반 수치 사용
-        const posts = ACTUAL_POST_COUNT;
-        const avgDaily = Number(s.avg_daily_revenue) || 0;
-        const activeDays = Number(s.active_days) || 0;
-        const clicks = Number(s.total_coupang_clicks) || 0;
-        const workflows = Number(s.total_workflow_runs) || 0;
-
-        document.getElementById('total-revenue').textContent = rev > 0 ? fmt(rev) + '원' : '0원';
-        document.getElementById('total-views').textContent = fmt(views);
-        document.getElementById('avg-daily').textContent = avgDaily > 0 ? fmt(avgDaily) + '원' : '0원';
-        document.getElementById('revenue-change').textContent = activeDays > 0 ? `${activeDays}일 누적` : '수익 연동 대기중';
-        document.getElementById('views-change').textContent = views > 0 ? `${posts}편 평균 ${fmt(Math.round(views / Math.max(posts, 1)))}` : '방문자 수집 시작';
-        // posts-change는 이미 정적 렌더링됨 (카테고리별 분포)
-        document.getElementById('daily-change').textContent = clicks > 0 ? `쿠팡 클릭 ${clicks}회` : '쿠팡 클릭 추적 중';
-      }
-
-      function renderBarChart(daily) {
-        const container = document.getElementById('bar-chart');
-        if (!daily || !daily.length) { container.innerHTML = emptyState('📊', '수익 데이터가 아직 없습니다'); return; }
-
-        const maxVal = Math.max(...daily.map(d => d.total || 1));
-
-        container.innerHTML = daily.map(d => {
-          const h = (v) => Math.max(2, (v / maxVal) * 160);
-          const date = new Date(d.date);
-          const label = `${date.getMonth()+1}/${date.getDate()}`;
-          return `<div class="bar-group">
-            <div class="bar-stack">
-              ${d.saas ? `<div class="bar-segment saas" style="height:${h(d.saas)}px" title="SaaS: ${fmt(d.saas)}원"></div>` : ''}
-              ${d.coupang ? `<div class="bar-segment coupang" style="height:${h(d.coupang)}px" title="Coupang: ${fmt(d.coupang)}원"></div>` : ''}
-              <div class="bar-segment adsense" style="height:${h(d.adsense)}px" title="AdSense: ${fmt(d.adsense)}원"></div>
-            </div>
-            <span class="bar-label">${label}</span>
-          </div>`;
-        }).join('');
-      }
-
-      function renderDonut(channels) {
-        const container = document.getElementById('donut-chart');
-        if (!channels || !channels.length) { container.innerHTML = emptyState('🍩', '채널별 수익 데이터 없음'); return; }
-        const total = channels.reduce((s, c) => s + Number(c.total), 0) || 1;
-        const colors = { adsense: '#3b82f6', coupang: '#22c55e', saas: '#a855f7', game_iap: '#eab308', game_ads: '#f97316', templates: '#ec4899', sponsors: '#06b6d4' };
-        const names = { adsense: 'AdSense', coupang: 'Coupang', saas: 'SaaS', game_iap: 'Game IAP', game_ads: 'Game Ads', templates: 'Templates', sponsors: 'Sponsors' };
-
-        let offset = 0;
-        const segments = channels.map(c => {
-          const pct = (Number(c.total) / total) * 100;
-          const seg = { channel: c.channel, pct, offset, color: colors[c.channel] || '#64748b', total: c.total };
-          offset += pct;
-          return seg;
-        });
-
-        const r = 60, cx = 80, cy = 80, sw = 20;
-        const circumference = 2 * Math.PI * r;
-
-        const arcs = segments.map(s => {
-          const dashLen = (s.pct / 100) * circumference;
-          const dashOff = -(s.offset / 100) * circumference;
-          return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.color}" stroke-width="${sw}"
-            stroke-dasharray="${dashLen} ${circumference - dashLen}" stroke-dashoffset="${dashOff}"
-            transform="rotate(-90 ${cx} ${cy})" />`;
-        }).join('');
-
-        const legend = channels.map(c =>
-          `<div class="legend-item">
-            <span class="legend-name"><span class="legend-dot" style="background:${colors[c.channel] || '#64748b'}"></span>${names[c.channel] || c.channel}</span>
-            <span class="legend-value">${fmt(Number(c.total))}원</span>
-          </div>`
-        ).join('');
-
-        container.innerHTML = `
-          <svg class="donut-svg" viewBox="0 0 160 160">${arcs}
-            <text x="${cx}" y="${cy-6}" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="800">${fmt(total)}원</text>
-            <text x="${cx}" y="${cy+12}" text-anchor="middle" fill="#94a3b8" font-size="9">Total</text>
-          </svg>
-          <div class="donut-legend">${legend}</div>`;
-      }
-
-      function renderTopPosts(posts) {
-        const tbody = document.getElementById('top-posts-body');
-        if (!posts || !posts.length) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--dash-text-dim)">등록된 포스트가 없습니다</td></tr>'; return; }
-
-        tbody.innerHTML = posts.map((p, i) => {
-          const catClass = p.category === 'AI' ? 'cat-ai' : p.category === 'Dev' ? 'cat-dev' : p.category === 'Game' ? 'cat-game' : 'cat-review';
-          return `<tr>
-            <td class="rank">${i + 1}</td>
-            <td class="post-title-cell">${p.title}</td>
-            <td><span class="cat-badge ${catClass}">${p.category}</span></td>
-            <td>${fmt(p.page_views)}</td>
-            <td>${fmt(p.estimated_revenue)}원</td>
-          </tr>`;
-        }).join('');
-      }
-
-      function renderActivity(events) {
-        const container = document.getElementById('activity-list');
-        if (!events || !events.length) { container.innerHTML = emptyState('📋', '아직 기록된 활동이 없습니다'); return; }
-
-        container.innerHTML = events.map(e => {
-          const icons = { page_view: ['view', '👁'], coupang_click: ['click', '🛒'], workflow_run: ['run', '⚡'] };
-          const [cls, icon] = icons[e.event_type] || ['view', '📌'];
-          const desc = e.event_type === 'page_view' ? `Page view: ${e.data?.slug?.substring(0, 40) || 'unknown'}...`
-            : e.event_type === 'coupang_click' ? `Coupang click: ${e.data?.product || 'unknown'}`
-            : e.event_type === 'workflow_run' ? `Workflow: ${e.data?.workflow || 'unknown'} (${e.data?.status})`
-            : e.event_type;
-          const time = new Date(e.created_at).toLocaleString('ko-KR', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-          return `<div class="activity-item">
-            <div class="activity-icon ${cls}">${icon}</div>
-            <span class="activity-text">${desc}</span>
-            <span class="activity-time">${time}</span>
-          </div>`;
-        }).join('');
-      }
-
-      // Check Supabase connection
       async function checkSupabase() {
         const badge = document.getElementById('supabase-status');
         if (!badge) return;
@@ -812,10 +732,10 @@ const recentPosts = allPosts
         }
       }
 
-      // Load on page ready
+      // Init
+      renderLfRecentPosts();
       loadDashboard();
       checkSupabase();
-      // Auto-refresh every 5 minutes
       setInterval(loadDashboard, 300000);
     </script>
   </body>

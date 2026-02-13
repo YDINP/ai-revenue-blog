@@ -1,33 +1,33 @@
 {
   "ai": [
-    {"title": "챗GPT 활용법 도서", "url": "https://link.coupang.com/a/dJjUsG"},
-    {"title": "아이패드 에어 M2", "url": "https://link.coupang.com/a/dJjUUj"},
-    {"title": "로지텍 MX Keys S 키보드", "url": "https://link.coupang.com/a/dJj0zg"}
+    {"title": "챗GPT 활용법 도서", "url": "https://link.coupang.com/a/dJjUsG", "imageUrl": "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "아이패드 에어 M2", "url": "https://link.coupang.com/a/dJjUUj", "imageUrl": "https://images.pexels.com/photos/1334597/pexels-photo-1334597.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "로지텍 MX Keys S 키보드", "url": "https://link.coupang.com/a/dJj0zg", "imageUrl": "https://images.pexels.com/photos/1772123/pexels-photo-1772123.jpeg?auto=compress&cs=tinysrgb&w=200"}
   ],
   "dev": [
-    {"title": "모던 자바스크립트 Deep Dive", "url": "https://link.coupang.com/a/dJjX0Z"},
-    {"title": "클린 코드", "url": "https://link.coupang.com/a/dJjVjr"},
-    {"title": "혼자 공부하는 파이썬", "url": "https://link.coupang.com/a/dJjZFZ"},
-    {"title": "점프 투 파이썬", "url": "https://link.coupang.com/a/dJjZ7z"},
-    {"title": "자바스크립트 완벽 가이드", "url": "https://link.coupang.com/a/dJjZe2"},
-    {"title": "러스트 프로그래밍", "url": "https://link.coupang.com/a/dJj7h9"}
+    {"title": "모던 자바스크립트 Deep Dive", "url": "https://link.coupang.com/a/dJjX0Z", "imageUrl": "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "클린 코드", "url": "https://link.coupang.com/a/dJjVjr", "imageUrl": "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "혼자 공부하는 파이썬", "url": "https://link.coupang.com/a/dJjZFZ", "imageUrl": "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "점프 투 파이썬", "url": "https://link.coupang.com/a/dJjZ7z", "imageUrl": "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "자바스크립트 완벽 가이드", "url": "https://link.coupang.com/a/dJjZe2", "imageUrl": "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "러스트 프로그래밍", "url": "https://link.coupang.com/a/dJj7h9", "imageUrl": "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=200"}
   ],
   "review": [
-    {"title": "맥북 에어 M3", "url": "https://link.coupang.com/a/dJjWan"},
-    {"title": "삼성 갤럭시북4 프로", "url": "https://link.coupang.com/a/dJjWzN"},
-    {"title": "LG 그램 17", "url": "https://link.coupang.com/a/dJjWZQ"},
-    {"title": "LG 울트라와이드 34인치 모니터", "url": "https://link.coupang.com/a/dJjYpL"},
-    {"title": "삼성 뷰피니티 S8 32인치 4K", "url": "https://link.coupang.com/a/dJjYRb"},
-    {"title": "로지텍 MX Keys S", "url": "https://link.coupang.com/a/dJj0zg"},
-    {"title": "키크론 K3 Pro", "url": "https://link.coupang.com/a/dJj42U"},
-    {"title": "로지텍 MX Master 3S", "url": "https://link.coupang.com/a/dJj5uu"},
-    {"title": "삼성 SSD 980 PRO 1TB", "url": "https://link.coupang.com/a/dJjVJy"},
-    {"title": "ASUS ZenScreen MB16ACV", "url": "https://link.coupang.com/a/dJj9S4"}
+    {"title": "맥북 에어 M3", "url": "https://link.coupang.com/a/dJjWan", "imageUrl": "https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "삼성 갤럭시북4 프로", "url": "https://link.coupang.com/a/dJjWzN", "imageUrl": "https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "LG 그램 17", "url": "https://link.coupang.com/a/dJjWZQ", "imageUrl": "https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "LG 울트라와이드 34인치 모니터", "url": "https://link.coupang.com/a/dJjYpL", "imageUrl": "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "삼성 뷰피니티 S8 32인치 4K", "url": "https://link.coupang.com/a/dJjYRb", "imageUrl": "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "로지텍 MX Keys S", "url": "https://link.coupang.com/a/dJj0zg", "imageUrl": "https://images.pexels.com/photos/1772123/pexels-photo-1772123.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "키크론 K3 Pro", "url": "https://link.coupang.com/a/dJj42U", "imageUrl": "https://images.pexels.com/photos/1772123/pexels-photo-1772123.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "로지텍 MX Master 3S", "url": "https://link.coupang.com/a/dJj5uu", "imageUrl": "https://images.pexels.com/photos/5765655/pexels-photo-5765655.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "삼성 SSD 980 PRO 1TB", "url": "https://link.coupang.com/a/dJjVJy", "imageUrl": "https://images.pexels.com/photos/4792733/pexels-photo-4792733.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "ASUS ZenScreen MB16ACV", "url": "https://link.coupang.com/a/dJj9S4", "imageUrl": "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=200"}
   ],
   "game": [
-    {"title": "게임 프로그래밍 패턴", "url": "https://link.coupang.com/a/dJj5U5"},
-    {"title": "유니티 교과서", "url": "https://link.coupang.com/a/dJj8Bn"},
-    {"title": "로지텍 G Pro X 게이밍 마우스", "url": "https://link.coupang.com/a/dJj6m6"},
-    {"title": "로지텍 MX Master 3S", "url": "https://link.coupang.com/a/dJj5uu"}
+    {"title": "게임 프로그래밍 패턴", "url": "https://link.coupang.com/a/dJj5U5", "imageUrl": "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "유니티 교과서", "url": "https://link.coupang.com/a/dJj8Bn", "imageUrl": "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "로지텍 G Pro X 게이밍 마우스", "url": "https://link.coupang.com/a/dJj6m6", "imageUrl": "https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=200"},
+    {"title": "로지텍 MX Master 3S", "url": "https://link.coupang.com/a/dJj5uu", "imageUrl": "https://images.pexels.com/photos/5765655/pexels-photo-5765655.jpeg?auto=compress&cs=tinysrgb&w=200"}
   ]
 }

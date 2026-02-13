@@ -16,12 +16,23 @@ const recentPosts = sortedPosts.slice(0, 6);
   title="TechFlow - AI & 테크 인사이트"
   description="AI, 개발, 테크 트렌드에 대한 실용적인 인사이트와 리뷰를 제공합니다."
 >
-  <section class="hero">
-    <h1>AI & 테크 인사이트</h1>
+  <!-- JSON-LD ItemList for SEO -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": recentPosts.map((post, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "url": `https://ai-revenue-blog.vercel.app/blog/${post.id}/`
+    }))
+  })} />
+
+  <section class="hero" aria-label="사이트 소개">
+    <h1>AI & 테크 인사이트 - 최신 기술 트렌드 블로그</h1>
     <p>최신 AI 도구, 개발 팁, 테크 제품 리뷰를 매일 업데이트합니다.</p>
   </section>
 
-  <section>
+  <section aria-label="최신 글 목록">
     <div class="section-header">
       <h2>최신 글</h2>
       <a href="/blog/" class="section-link">전체 보기 &rarr;</a>
@@ -43,12 +54,12 @@ const recentPosts = sortedPosts.slice(0, 6);
   </section>
 
   <!-- Popular Posts Widget -->
-  <section>
+  <section aria-label="인기 글">
     <PopularPosts />
   </section>
 
   <!-- Newsletter CTA -->
-  <section>
+  <section aria-label="뉴스레터 구독">
     <NewsletterCTA />
   </section>
 </BaseLayout>
