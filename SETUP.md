@@ -87,7 +87,7 @@ coupangLinks:
 | 블로그 | https://ai-revenue-blog.vercel.app |
 | GitHub | https://github.com/YDINP/ai-revenue-blog |
 | n8n | http://localhost:5678 |
-| Supabase | https://mkatzcmsrdntsmnykxpt.supabase.co |
+| Supabase | https://xyprbsmagtlzebxyxsvj.supabase.co |
 | 쿠팡파트너스 | https://partners.coupang.com |
 | AdSense | https://adsense.google.com |
 

@@ -379,7 +379,7 @@ const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1]
         setTimeout(() => likeBtn.classList.remove('like-pop'), 600);
 
         // Optional: send to analytics
-        const ANALYTICS_URL = 'https://mkatzcmsrdntsmnykxpt.supabase.co/functions/v1/analytics-ingest';
+        const ANALYTICS_URL = 'https://xyprbsmagtlzebxyxsvj.supabase.co/functions/v1/analytics-ingest';
         fetch(ANALYTICS_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
