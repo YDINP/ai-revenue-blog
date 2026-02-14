@@ -360,17 +360,46 @@ async function registerToSupabase(post, category, slug, date, heroImage) {
   }
 }
 
+// ─── Workflow Dispatch 입력 처리 ──────────────────────────────────────
+
+function resolveInputs(seeds) {
+  const inputCategory = process.env.INPUT_CATEGORY || "auto";
+  const inputTopic = process.env.INPUT_TOPIC || "";
+  const inputCount = parseInt(process.env.INPUT_COUNT || "3", 10);
+  const count = Math.min(Math.max(inputCount, 1), 3);
+
+  let categoryNames;
+  if (inputCategory !== "auto") {
+    // 수동 선택: 같은 카테고리를 count만큼 반복
+    categoryNames = Array(count).fill(inputCategory);
+  } else {
+    // 자동: 날짜 기반 순환 선택
+    categoryNames = selectCategories(count);
+  }
+
+  // 수동 주제 입력 시: 첫 번째 포스트에만 적용
+  const customTopic = inputTopic.trim();
+
+  return { categoryNames, customTopic, count };
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────
 
 async function main() {
-  console.log("=== Daily Blog Post Generator (3 posts) ===\n");
+  const inputCategory = process.env.INPUT_CATEGORY || "auto";
+  const inputTopic = process.env.INPUT_TOPIC || "";
+  const inputCount = process.env.INPUT_COUNT || "3";
+
+  console.log("=== Blog Post Generator ===");
+  console.log(`[Mode] category=${inputCategory}, topic="${inputTopic}", count=${inputCount}\n`);
 
   const today = getToday();
   console.log(`[Info] Date: ${today}`);
 
-  // 0. 중복 확인 - 같은 날짜 파일이 3개 이상이면 스킵
+  // 0. 스케줄 실행 시 중복 확인 (수동 트리거는 항상 실행)
+  const isManual = inputCategory !== "auto" || inputTopic.trim() !== "";
   const blogDir = join(PROJECT_ROOT, "src", "blog");
-  if (existsSync(blogDir)) {
+  if (!isManual && existsSync(blogDir)) {
     const existing = readdirSync(blogDir).filter(f => f.startsWith(today));
     if (existing.length >= 3) {
       console.log(`[Skip] Today's 3 posts already exist: ${existing.join(", ")}`);
@@ -383,11 +412,13 @@ async function main() {
   const seeds = loadJSON("category-seeds.json");
   const coupangData = loadJSON("coupang-links.json");
 
-  // 2. Select 3 different categories by day-of-month rotation
-  const categoryNames = selectCategories(3);
-  console.log(`[Info] Categories: ${categoryNames.join(", ")}`);
+  // 2. Resolve inputs
+  const { categoryNames, customTopic, count } = resolveInputs(seeds);
+  console.log(`[Info] Categories: ${categoryNames.join(", ")} (${count}편)`);
+  if (customTopic) console.log(`[Info] Custom topic: "${customTopic}"`);
 
-  // 3. Generate 3 posts sequentially
+  // 3. Generate posts sequentially
+  let generated = 0;
   for (let i = 0; i < categoryNames.length; i++) {
     const categoryName = categoryNames[i];
     const categoryData = seeds.categories.find((c) => c.name === categoryName);
@@ -396,16 +427,22 @@ async function main() {
       continue;
     }
 
-    console.log(`\n--- Post ${i + 1}/3: ${categoryName} ---`);
+    console.log(`\n--- Post ${i + 1}/${count}: ${categoryName} ---`);
 
     try {
-      // Pick random keyword and search term
-      const keywordIndex = Math.floor(
-        Math.random() * categoryData.keywords.length
-      );
-      const keyword = categoryData.keywords[keywordIndex];
-      const searchTerm =
-        categoryData.searchTerms[keywordIndex % categoryData.searchTerms.length];
+      // 수동 주제가 있으면 첫 번째 포스트에 적용
+      let keyword, searchTerm;
+      if (customTopic && i === 0) {
+        keyword = customTopic;
+        searchTerm = customTopic;
+      } else {
+        const keywordIndex = Math.floor(
+          Math.random() * categoryData.keywords.length
+        );
+        keyword = categoryData.keywords[keywordIndex];
+        searchTerm =
+          categoryData.searchTerms[keywordIndex % categoryData.searchTerms.length];
+      }
 
       console.log(`[Info] Keyword: ${keyword}`);
       console.log(`[Info] Search term: ${searchTerm}`);
@@ -438,14 +475,15 @@ async function main() {
 
       // Register to Supabase
       await registerToSupabase(post, categoryName, slug, today, heroImage);
+      generated++;
     } catch (err) {
-      console.error(`[ERROR] Post ${i + 1}/3 (${categoryName}) failed: ${err.message}`);
+      console.error(`[ERROR] Post ${i + 1}/${count} (${categoryName}) failed: ${err.message}`);
       console.log(`[Info] Continuing to next post...`);
       continue;
     }
   }
 
-  console.log("\n=== Done! (3 posts generated) ===");
+  console.log(`\n=== Done! (${generated}/${count} posts generated) ===`);
 }
 
 main().catch((err) => {
