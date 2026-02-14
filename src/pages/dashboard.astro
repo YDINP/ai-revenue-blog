@@ -925,6 +925,29 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         padding: 0 0.5rem;
       }
 
+      .trend-label-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+      }
+
+      .trend-label-date {
+        color: var(--dash-text-dim);
+      }
+
+      .trend-label-count {
+        font-size: 0.6875rem;
+        font-weight: 700;
+        color: var(--dash-text);
+      }
+
+      .trend-label-split {
+        font-size: 0.5rem;
+        font-weight: 400;
+        opacity: 0.8;
+      }
+
       .trend-legend {
         display: flex;
         gap: 1rem;
@@ -1914,11 +1937,19 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         svg += '</svg>';
         container.innerHTML = svg;
 
-        // Labels
+        // Labels with view counts
         if (labelsEl) {
           labelsEl.innerHTML = data.map(d => {
             const day = d.day ? new Date(d.day) : null;
-            return day ? `<span>${day.getMonth()+1}/${day.getDate()}</span>` : '<span></span>';
+            const views = d.views || 0;
+            const tf = d.tf_views || 0;
+            const lf = d.lf_views || 0;
+            const dateStr = day ? `${day.getMonth()+1}/${day.getDate()}` : '';
+            return `<span class="trend-label-item">
+              <span class="trend-label-date">${dateStr}</span>
+              <span class="trend-label-count">${views > 0 ? views : '-'}</span>
+              ${views > 0 ? `<span class="trend-label-split"><span style="color:#3b82f6">${tf}</span>/<span style="color:#22c55e">${lf}</span></span>` : ''}
+            </span>`;
           }).join('');
         }
       }
