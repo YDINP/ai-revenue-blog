@@ -261,6 +261,7 @@ ${dupeGuard}${engagingInstruction}${revenueInstruction}${internalLinkInstruction
 - SEO 키워드를 자연스럽게 포함
 - 실용적이고 구체적인 정보 위주
 - 2026년 최신 트렌드 반영
+- 본문 마지막에 "## 참고 자료" 섹션을 추가하고, 글에서 참고한 공식 사이트·문서·벤치마크 등 2~4개의 출처를 하이퍼링크로 제공하세요. 형식: "- [출처 이름](https://실제URL)"
 ${chartInstruction}
 
 **메타 설명(description) 작성 규칙**:
