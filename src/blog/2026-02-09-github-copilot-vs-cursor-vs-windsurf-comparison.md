@@ -16,7 +16,6 @@ coupangLinks:
   - title: "로지텍 MX Keys 키보드"
     url: "https://link.coupang.com/a/dJj0zg"
 ---
-
 ## AI가 코드를 쓰는 시대, 어떤 도구를 써야 할까?
 
 2026년, AI 코딩 어시스턴트는 선택이 아닌 **필수**가 되었습니다. 하지만 GitHub Copilot, Cursor, Windsurf 중 어떤 도구가 나에게 맞을까요? 각 도구를 실제로 사용하며 5가지 핵심 기준으로 비교해봤습니다.
@@ -68,6 +67,8 @@ Codeium 팀이 만든 Windsurf는 2025년 말 출시되어 빠르게 성장 중�
 - 아직 지원 언어가 상대적으로 적음
 - 복잡한 프로젝트에서 맥락 이해 부족
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: 무료 티어</div>
+
 ## 가격 비교
 
 <div class="chart-progress" data-title="월 구독료 비교 (USD)" data-labels="Copilot Pro,Cursor Pro,Windsurf Pro" data-values="10,20,15" data-colors="#3b82f6,#22c55e,#f59e0b" data-max="25" data-unit="$"></div>
@@ -91,3 +92,12 @@ Codeium 팀이 만든 Windsurf는 2025년 말 출시되어 빠르게 성장 중�
 3. **파워 유저라면** Cursor의 에이전트 기능이 생산성을 극대화합니다
 
 어떤 도구를 선택하든, AI 코딩 어시스턴트를 사용하지 않는 것은 2026년에 더 이상 옵션이 아닙니다. 지금 바로 무료 체험부터 시작해보세요.
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: 입문자라면</div>
+
+
+## 참고 자료
+
+- [OpenAI 공식 블로그](https://openai.com/blog)
+- [Anthropic Research](https://www.anthropic.com/research)
+- [Hugging Face](https://huggingface.co/)

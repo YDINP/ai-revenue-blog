@@ -16,7 +16,6 @@ coupangLinks:
   - title: "러스트 프로그래밍"
     url: "https://link.coupang.com/a/dJj7h9"
 ---
-
 ## 프로그래밍 입문, 어렵지 않습니다
 
 프로그래밍 입문은 많은 사람들이 두려워하는 도전이지만, 올바른 방향과 전략이 있다면 누구든 성공할 수 있습니다. 2026년은 AI와 자동화 도구의 발전으로 초보자들이 프로그래밍을 배우기 가장 좋은 시점입니다. 이 가이드는 프로그래밍 입문을 고민하는 분들을 위해 실제로 필요한 정보들을 정리했습니다.
@@ -46,6 +45,8 @@ JavaScript는 웹 개발을 목표로 하는 프로그래밍 입문자들에게 
 - 프론트엔드와 백엔드 모두 개발 가능 (Node.js)
 - 즉각적인 시각적 피드백으로 동기부여 유지
 - 프레임워크 선택의 폭이 넓음 (React, Vue.js 등)
+
+<div class="callout-tip">💡 <strong>핵심 포인트</strong>: Python을 선택해야 하는 이유:</div>
 
 ## 프로그래밍 입문 학습 경로
 
@@ -95,6 +96,8 @@ GitHub의 오픈소스 프로젝트를 읽으면서 프로그래밍 입문 지�
 
 Stack Overflow, Reddit, 한국 개발자 커뮤니티 등에 참여하면서 질문하고 답변하는 경험을 쌓으세요.
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: 프로그래밍 입문자들이 가장 많이 하는 실수는 너무 큰 프로젝트를 시도하는 것입니다. "To-Do 리스트", "계산기", "간단한 게임" 같은 작은 프로젝트부터 시작하세요.</div>
+
 ## 프로그래밍 입문 학습 자원
 
 <div class="chart-donut" data-title="추천 학습 방법 분포" data-labels="온라인 강의,코딩 실습,프로젝트,커뮤니티" data-values="25,35,25,15" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444" data-unit="%"></div>
@@ -117,3 +120,12 @@ Stack Overflow, Reddit, 한국 개발자 커뮤니티 등에 참여하면서 질
 프로그래밍 입문은 생각보다 어렵지 않습니다. 2026년은 AI 도구의 도움과 풍부한 학습 자원이 있어 시작하기 가장 좋은 시점입니다. 중요한 것은 지금 시작하고, 꾸준히 학습하며, 작은 성과에 만족하지 않고 지속적으로 성장하는 것입니다.
 
 프로그래밍 입문을 위한 당신의 첫 번째 작은 프로그램은 무엇이 될까요? 오늘 바로 시작해보세요!
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: 프로그래밍 입문은 생각보다 어렵지 않습니다. 2026년은 AI 도구의 도움과 풍부한 학습 자원이 있어 시작하기 가장 좋은 시점입니다. 중요한 것은 지금 시작하고, 꾸준히 학습하며,</div>
+
+
+## 참고 자료
+
+- [MDN Web Docs](https://developer.mozilla.org/)
+- [GitHub Trending](https://github.com/trending)
+- [Stack Overflow](https://stackoverflow.com/)

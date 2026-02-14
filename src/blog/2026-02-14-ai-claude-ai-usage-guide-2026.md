@@ -14,7 +14,6 @@ coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
     url: "https://link.coupang.com/a/dJj0zg"
 ---
-
 ## Claude AI, 2026년 현황과 주목할 변화
 
 2026년 2월 기준, Anthropic의 Claude AI는 단순한 챗봇을 넘어 엔터프라이즈급 AI 솔루션으로 자리잡았습니다. 특히 2월 5일 출시된 최신 모델 **Claude Opus 4.6**은 SWE-bench Verified 80.8%를 기록하며 GPT-5.3 Codex와의 경쟁에서 코드 생성, 데이터 분석, 창의 콘텐츠 작성에서 업계 최고 수준의 성능을 보여주고 있습니다.
@@ -26,6 +25,8 @@ coupangLinks:
 <div class="chart-versus" data-title="Claude Opus 4.6 vs Sonnet 4.5" data-name-a="Opus 4.6" data-name-b="Sonnet 4.5" data-color-a="#8b5cf6" data-color-b="#3b82f6" data-items='[{"label":"코드 생성","a":96,"b":90},{"label":"한국어 처리","a":94,"b":91},{"label":"이미지 분석","a":92,"b":85},{"label":"응답 속도","a":60,"b":90}]'></div>
 
 **Opus 4.6**은 SWE-bench 80.8%, 200K(1M 베타) 컨텍스트, 에이전트 팀 기능을 갖춘 최상위 모델입니다. **Sonnet 4.5**는 빠른 응답 속도와 합리적 비용으로 일상 작업에 적합합니다. 정확도 우선이면 Opus, 속도/비용 우선이면 Sonnet을 선택하세요.
+
+<div class="callout-tip">💡 <strong>핵심 포인트</strong>: Opus 4.6</div>
 
 ## 실무 중심의 Claude AI 사용법
 
@@ -114,6 +115,8 @@ Claude Opus 4.6도 최신 정보나 한국 지역 정보(예: 서울 강남역 �
 - 계약서, 소송 판례서 자동 요약 및 리스크 분석
 - 결과: 사전 검토 시간 3일 → 4시간으로 단축
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: 사례 1: 전자상거래 기업</div>
+
 ## Claude AI 시작하기: 2026년 추천 플랜
 
 **초보자 (개인/소규모팀)**
@@ -141,3 +144,12 @@ Claude Opus 4.6도 최신 정보나 한국 지역 정보(예: 서울 강남역 �
 3. 팀이 AI 도구 사용에 준비되어 있는가?
 
 이 세 가지를 확인한다면, Claude AI는 당신의 생산성을 **30~50% 향상**시킬 수 있는 강력한 파트너가 될 것입니다.
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: Claude AI는 한국 시장에서 가장 신뢰할 수 있는 생성형 AI 도구</div>
+
+
+## 참고 자료
+
+- [OpenAI 공식 블로그](https://openai.com/blog)
+- [Anthropic Research](https://www.anthropic.com/research)
+- [Hugging Face](https://huggingface.co/)

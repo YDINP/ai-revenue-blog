@@ -23,7 +23,6 @@ faq:
   - q: "배포 후 성능 저하가 생기면 어떻게 해야 하나요?"
     a: "먼저 배포 플랫폼의 모니터링 도구(Vercel의 Analytics, 또는 Google PageSpeed Insights)로 병목 지점을 파악하세요. 대부분 이미지 최적화 누락, API 응답 지연, 과도한 JavaScript 번들 크기가 원인입니다. Next.js Image 컴포넌트 사용, API 캐싱, 동적 임포트(Dynamic Import) 활용으로 개선할 수 있습니다."
 ---
-
 # Next.js 배포 5가지 방법 비교: Vercel, AWS, Docker 실전 가이드
 
 Next.js로 멋진 프로젝트를 완성하셨는데, 배포를 어떻게 할지 고민이시죠? 저도 처음에는 어디에 배포해야 할지, 어떤 방법이 가장 효율적인지 몰랐는데요. 실제로 여러 배포 방식을 경험해본 결과, 프로젝트 규모와 팀의 기술 스택에 따라 최적의 선택이 달라진다는 걸 깨달았습니다. 이 글에서는 2026년 현재 가장 많이 사용되는 Next.js 배포 방법 5가지를 성능, 가격, 편의성 중심으로 비교해드리겠습니다.
@@ -221,3 +220,10 @@ Vercel 대시보드에서 이 지표들을 실시간으로 볼 수 있으며, �
 먼저 배포 플랫폼의 모니터링 도구(Vercel의 Analytics, 또는 Google PageSpeed Insights)로 병목 지점을 파악하세요. 대부분 이미지 최적화 누락, API 응답 지연, 과도한 JavaScript 번들 크기가 원인입니다. Next.js Image 컴포넌트 사용, API 캐싱, 동적 임포트(Dynamic Import) 활용으로 개선할 수 있습니다.
 
 
+
+
+## 참고 자료
+
+- [MDN Web Docs](https://developer.mozilla.org/)
+- [GitHub Trending](https://github.com/trending)
+- [Stack Overflow](https://stackoverflow.com/)

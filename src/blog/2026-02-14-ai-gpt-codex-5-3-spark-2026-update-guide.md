@@ -14,7 +14,6 @@ coupangLinks:
   - title: "아이패드 에어 M2"
     url: "https://link.coupang.com/a/dJjUUj"
 ---
-
 ## 2026년 2월, AI 코딩 어시스턴트 빅뱅
 
 2026년 2월은 AI 코딩 도구 역사에서 가장 격변의 시기입니다. **2월 5일 Anthropic의 Claude Opus 4.6**, **2월 12일 OpenAI의 GPT-5.3 Codex Spark**가 일주일 간격으로 출시되며 개발자들의 선택지가 근본적으로 바뀌었습니다.
@@ -42,6 +41,8 @@ Codex Spark는 Cerebras 웨이퍼 스케일 엔진 위에서 초당 1,000+ 토�
 | **가격** | ChatGPT Pro $20/월 | API $5/$25 per MTok |
 
 > 핵심 인사이트: Codex Spark는 속도에서 **15~20배** 앞서지만, Claude Opus 4.6은 코딩 정확도(SWE-bench)에서 **44% 포인트** 앞섭니다. 이는 "빠르게 반복" vs "정확하게 한번에"라는 근본적으로 다른 개발 철학을 반영합니다.
+
+<div class="callout-tip">💡 <strong>핵심 포인트</strong>: 15~20배</div>
 
 ## 먼저 알아야 할 것: GPT-5.3 Codex(풀) vs Codex Spark
 
@@ -132,6 +133,8 @@ Claude Opus 4.6은 **100만 토큰 컨텍스트**(베타)를 지원합니다. MR
 
 새로운 적응형 사고(Adaptive Thinking) 기능은 문제 난이도에 따라 추론 깊이를 자동 조절합니다. 단순 자동완성에는 빠르게, 복잡한 아키텍처 결정에는 깊이 생각하는 **동적 리소스 배분**이 가능합니다.
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: 에이전트 팀(Agent Teams)</div>
+
 ## 가격 비교: 어떤 선택이 경제적인가?
 
 | 도구 | 가격 | 포함 기능 | 타겟 |
@@ -184,3 +187,12 @@ AI 코딩 어시스턴트는 2026년 2월을 기점으로 **"자동완성 도구
 - 도구를 잘 활용하는 개발자가 **3~5배 생산적**인 시대
 
 어떤 도구를 선택하든, 중요한 것은 **"어떻게 활용하느냐"**입니다. 두 도구 모두 무료 체험이 가능하니 직접 비교해보시길 권장합니다.
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: "자동완성 도구"에서 "자율 에이전트"로</div>
+
+
+## 참고 자료
+
+- [OpenAI 공식 블로그](https://openai.com/blog)
+- [Anthropic Research](https://www.anthropic.com/research)
+- [Hugging Face](https://huggingface.co/)

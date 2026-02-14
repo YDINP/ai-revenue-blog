@@ -22,7 +22,6 @@ coupangLinks:
   - title: "규랩 쿨링 홀 노트북 스탠드 거치대"
     url: "https://link.coupang.com/a/dJjEY6"
 ---
-
 ## 개발자에게 듀얼 모니터는 사치가 아닌 생존 도구
 
 카페에서, 공유 오피스에서, 출장 중에도 코딩을 해야 하는 2026년. **포터블 모니터** 하나만 있으면 어디서든 듀얼 모니터 환경을 만들 수 있습니다.
@@ -93,6 +92,8 @@ coupangLinks:
 - gram 노트북과 자석 부착 가능
 - 외장 배터리 없음 (노트북에서 전원 공급)
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: 초경량 프리미엄</div>
+
 ## 5. Innocn 15K1F (15.6인치)
 
 **가성비 최강**
@@ -130,3 +131,12 @@ coupangLinks:
 4. **무게 vs 화질 트레이드오프** — 매일 들고 다닐 건지 고려
 
 듀얼 모니터 한 번 경험하면 절대 싱글로 돌아갈 수 없습니다. 투자 대비 생산성 향상이 가장 확실한 장비입니다.
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: 노트북 USB-C가 DP Alt Mode를 지원하는지</div>
+
+
+## 참고 자료
+
+- [다나와 가격비교](https://www.danawa.com/)
+- [뽐뿌 (PPOMPPU)](https://www.ppomppu.co.kr/)
+- [쿠팡 공식 사이트](https://www.coupang.com/)

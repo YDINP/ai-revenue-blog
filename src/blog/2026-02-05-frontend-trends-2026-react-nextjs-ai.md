@@ -14,7 +14,6 @@ coupangLinks:
   - title: "로지텍 MX Keys S 무선 키보드"
     url: "https://link.coupang.com/a/dJj0zg"
 ---
-
 ## 2026년 프론트엔드 생태계, 무엇이 변했나
 
 프론트엔드 개발은 매년 빠르게 변화합니다. 2026년에는 **AI 통합**, **서버 컴포넌트의 표준화**, **번들러 혁신**이 핵심 트렌드입니다. 이 글에서는 현업 개발자가 반드시 알아야 할 2026년 프론트엔드 트렌드를 정리합니다.
@@ -44,6 +43,8 @@ async function ProductList() {
 
 ### 실무 영향
 번들 크기가 평균 30~50% 감소하고, 초기 로딩 속도가 크게 개선됩니다. SEO도 자연스럽게 향상됩니다.
+
+<div class="callout-tip">💡 <strong>핵심 포인트</strong>: React Server Components (RSC)</div>
 
 ## 트렌드 2: Next.js 15 — 풀스택 프레임워크의 진화
 
@@ -149,6 +150,8 @@ CSS도 혁신적으로 발전하고 있습니다.
 
 **독립 프로젝트**라면 Vite, **Next.js 프로젝트**라면 Turbopack이 자연스러운 선택입니다.
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: 독립 프로젝트</div>
+
 ## 트렌드 6: 타입 안전성의 강화
 
 TypeScript 사용률이 90%를 넘으면서, **타입 안전성**이 프론트엔드의 기본이 되었습니다.
@@ -186,3 +189,12 @@ type User = z.infer<typeof UserSchema>  // 자동 타입 추론
 2026년 프론트엔드의 키워드는 **서버 컴포넌트**, **AI 통합**, **타입 안전성**입니다.
 
 모든 트렌드를 한꺼번에 따라갈 필요는 없습니다. 현재 프로젝트에 가장 임팩트가 큰 것부터 하나씩 도입해보세요. 가장 중요한 건 **계속 학습하는 습관**입니다.
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: 서버 컴포넌트</div>
+
+
+## 참고 자료
+
+- [MDN Web Docs](https://developer.mozilla.org/)
+- [GitHub Trending](https://github.com/trending)
+- [Stack Overflow](https://stackoverflow.com/)

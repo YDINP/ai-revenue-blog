@@ -14,7 +14,6 @@ coupangLinks:
   - title: "로지텍 MX Master 3S"
     url: "https://link.coupang.com/a/dJj5uu"
 ---
-
 ## 2026년 개발자 키보드 시장의 변화
 
 2026년 상반기 개발자 커뮤니티는 기계식 키보드 선택에서 새로운 기준을 요구하고 있습니다. 단순한 타이핑 경험을 넘어 **AI 기반 키맵 커스터마이징**, **USB-C 80Gbps 고속 연결**, **저지연 무선 기술** 등이 핵심 요소로 떠올랐습니다.
@@ -72,6 +71,8 @@ coupangLinks:
 - Karabiner-Elements 지원
 - 무선 + 유선 듀얼 모드
 - 가격대: 49만 5,000원
+
+<div class="callout-tip">💡 <strong>핵심 포인트</strong>: AI 기반 타이핑 패턴 분석 기능</div>
 
 ## 개발자 키보드 비교: 주요 평가 항목
 
@@ -159,3 +160,12 @@ AI 기반 자동 최적화로 진입장벽을 낮췄으면서도 프리미엄 �
 가격과 사이즈 제약이 크지만, 손목 건강이 최우선 가치라면 투자할 가치가 충분합니다. 장기 생산성 관점에서는 가장 현명한 선택입니다.
 
 2026년 2월 현재, 개발자 커뮤니티는 "올바른 키보드 선택이 코딩 생산성의 30%를 좌우한다"는 인식에 점차 동의하고 있습니다. 자신의 업무 환경, 건강 상태, 예산을 종합 고려하여 선택하기 바랍니다.
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: 종합 1위: SteelSeries Apex Pro Mini 2</div>
+
+
+## 참고 자료
+
+- [다나와 가격비교](https://www.danawa.com/)
+- [뽐뿌 (PPOMPPU)](https://www.ppomppu.co.kr/)
+- [쿠팡 공식 사이트](https://www.coupang.com/)

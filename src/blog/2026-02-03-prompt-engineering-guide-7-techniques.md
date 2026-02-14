@@ -14,7 +14,6 @@ coupangLinks:
   - title: "아이패드 에어 M2"
     url: "https://link.coupang.com/a/dJjUUj"
 ---
-
 ## 같은 AI, 다른 결과 — 프롬프트가 전부다
 
 ChatGPT나 Claude를 사용할 때 "왜 내가 원하는 답이 안 나오지?"라고 느낀 적 있으신가요? 문제는 AI가 아니라 **질문 방식**에 있습니다.
@@ -37,6 +36,8 @@ AI에게 **전문가 역할**을 부여하면 해당 분야에 맞는 답변을 
 - 구체적인 전문 분야를 지정
 - 경력이나 수준을 명시
 - 기대하는 품질 기준을 포함
+
+<div class="callout-tip">💡 <strong>핵심 포인트</strong>: 전문가 역할</div>
 
 ## 기법 2: 단계별 사고 유도 (Chain of Thought)
 
@@ -113,6 +114,8 @@ AI에게 **전문가 역할**을 부여하면 해당 분야에 맞는 답변을 
 ### 마크다운 테이블 요청
 > "비교 결과를 마크다운 테이블로 정리해주세요. 열: 제품명, 가격, 장점, 단점, 추천도(별 5개 기준)"
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: 출력 형식</div>
+
 ## 기법 6: 반복 개선 (Iterative Refinement)
 
 한 번에 완벽한 결과를 기대하지 마세요. **대화를 통해 점진적으로 개선**하는 것이 프롬프트 엔지니어링의 핵심입니다.
@@ -185,3 +188,12 @@ AI에게 **프롬프트 자체를 개선**하도록 요청하는 고급 기법�
 7. **메타 프롬프트** — AI에게 프롬프트 최적화 요청
 
 오늘부터 이 기법들을 하나씩 적용해보세요. AI가 당신의 가장 강력한 조수가 될 것입니다!
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: 커뮤니케이션 스킬</div>
+
+
+## 참고 자료
+
+- [OpenAI 공식 블로그](https://openai.com/blog)
+- [Anthropic Research](https://www.anthropic.com/research)
+- [Hugging Face](https://huggingface.co/)

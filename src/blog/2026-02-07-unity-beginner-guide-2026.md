@@ -14,7 +14,6 @@ coupangLinks:
   - title: "아이패드 에어 M2"
     url: "https://link.coupang.com/a/dJjUUj"
 ---
-
 ## Unity가 인기 있는 이유
 
 Unity는 전 세계에서 가장 많이 사용되는 게임 엔진입니다. 2026년 현재, 모바일 게임의 약 60% 이상이 Unity로 개발되었으며, 《포켓몬 고》, 《할로우 나이트》, 《컵헤드》 등 수많은 히트작이 Unity로 만들어졌습니다.
@@ -49,6 +48,8 @@ Unity Hub에서 LTS(Long Term Support) 버전을 설치하는 것을 권장합�
 - **Visual Studio**: C# 코드 에디터 (Windows)
 
 전체 설치에는 약 10~15GB 디스크 공간이 필요합니다.
+
+<div class="callout-tip">💡 <strong>핵심 포인트</strong>: 설치 시 선택 모듈:</div>
 
 ## Unity 에디터 인터페이스
 
@@ -227,3 +228,12 @@ Unity는 게임 개발 입문자에게 최고의 선택입니다. 방대한 학�
 첫 게임을 완성하는 데 집중하세요. 완벽하지 않아도 괜찮습니다. 작은 프로젝트를 여러 개 완성하면서 실력을 쌓는 것이 가장 빠른 성장 방법입니다.
 
 오늘 Unity Hub를 설치하고, 공식 튜토리얼 하나를 따라 해보세요. 여러분의 게임 개발 여정이 시작됩니다!
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: Unity는 게임 개발 입문자에게 최고의 선택입니다. 방대한 학습 자료와 활발한 커뮤니티 덕분에 혼자서도 충분히 학습할 수 있습니다.</div>
+
+
+## 참고 자료
+
+- [Unity Documentation](https://docs.unity3d.com/)
+- [Godot Engine Docs](https://docs.godotengine.org/)
+- [게임메카](https://www.gamemeca.com/)

@@ -14,7 +14,6 @@ coupangLinks:
   - title: "아이패드 에어 M2"
     url: "https://link.coupang.com/a/dJjUUj"
 ---
-
 ## AI 이미지 생성 도구 시장의 현황
 
 2026년 현재 AI 이미지 생성 도구는 이미 대중화를 넘어 전문가 영역까지 확대되고 있습니다. 개인 창작자부터 대규모 엔터프라이즈까지 다양한 규모의 사용자들이 AI 이미지 생성 기술을 활용하고 있으며, 각 도구마다 고유한 강점과 특징을 갖추고 있습니다.
@@ -52,6 +51,8 @@ Stable Diffusion은 오픈소스 기반으로 로컬 환경에서도 실행 가�
 - 로컬 실행으로 개인정보 보호
 - 월 $10 미만의 저렴한 가격
 - 빠른 생성 속도와 높은 확장성
+
+<div class="callout-tip">💡 <strong>핵심 포인트</strong>: 주요 특징:</div>
 
 ## AI 이미지 생성 도구 성능 비교
 
@@ -102,3 +103,12 @@ ChatGPT를 이미 사용 중인 초보자라면 DALL-E 3이 최적의 선택입�
 AI 이미지 생성 도구 비교에서 최적의 선택은 사용자의 목적과 기술 수준에 따라 달라집니다. 빠르고 쉬운 사용을 원한다면 DALL-E 3, 예술적 완성도를 추구한다면 Midjourney, 완전한 자유도와 저비용을 원한다면 Stable Diffusion을 추천합니다.
 
 2026년의 AI 이미지 생성 시장은 여전히 빠르게 성장 중이며, 각 도구의 기능 격차도 점점 줄어들고 있습니다. 따라서 무료 체험판을 직접 사용해본 후 자신의 워크플로우에 가장 잘 맞는 도구를 선택하는 것이 가장 현명한 결정입니다.
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: AI 이미지 생성 도구 비교에서 최적의 선택은 사용자의 목적과 기술 수준에 따라 달라집니다. 빠르고 쉬운 사용을 원한다면 DALL-E 3, 예술적 완성도를 추구한다면 Midjour</div>
+
+
+## 참고 자료
+
+- [OpenAI 공식 블로그](https://openai.com/blog)
+- [Anthropic Research](https://www.anthropic.com/research)
+- [Hugging Face](https://huggingface.co/)

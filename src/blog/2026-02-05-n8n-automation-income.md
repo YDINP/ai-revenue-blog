@@ -14,7 +14,6 @@ coupangLinks:
   - title: "챗GPT 활용법 도서"
     url: "https://link.coupang.com/a/dJjUsG"
 ---
-
 ## n8n이란?
 
 n8n(노드에이트엔)은 **오픈소스 워크플로우 자동화 도구**입니다. Zapier나 Make(구 Integromat)와 비슷하지만, 셀프 호스팅이 가능하여 **무제한 무료 사용**이 가능합니다.
@@ -117,6 +116,8 @@ n8n의 실행 로그에서 성공/실패를 추적하고, 에러 발생 시 이�
 
 **손익분기점**: 월 1만원 이상 수익이면 흑자!
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: 손익분기점</div>
+
 ## 주의사항
 
 - AI 생성 콘텐츠는 반드시 **품질 검수 로직**을 추가하세요
@@ -128,3 +129,12 @@ n8n의 실행 로그에서 성공/실패를 추적하고, 에러 발생 시 이�
 n8n + AI API 조합은 **가장 낮은 진입장벽**으로 자동 수익 파이프라인을 구축할 수 있는 방법입니다. 셀프 호스팅으로 비용을 최소화하면서, AI의 콘텐츠 생성 능력을 최대한 활용할 수 있습니다.
 
 생산성을 높이려면 좋은 장비도 중요합니다. 특히 여러 워크플로우를 동시에 돌리려면 충분한 RAM과 프로세서 성능이 필요하죠.
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: 가장 낮은 진입장벽</div>
+
+
+## 참고 자료
+
+- [OpenAI 공식 블로그](https://openai.com/blog)
+- [Anthropic Research](https://www.anthropic.com/research)
+- [Hugging Face](https://huggingface.co/)

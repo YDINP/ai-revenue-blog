@@ -14,7 +14,6 @@ coupangLinks:
   - title: "유니티 교과서"
     url: "https://link.coupang.com/a/dJj8Bn"
 ---
-
 ## 2026년 Canvas WebGL 게임 개발 시장의 새로운 변화
 
 2026년 현재, 웹 기반 게임 개발 생태계는 역사적 전환점을 맞이하고 있습니다. 전통적인 Canvas API와 고성능 WebGL의 경계가 점점 좁혀지고 있으며, 이 과정에서 새로운 표준과 도구들이 급속도로 등장하고 있습니다.
@@ -114,3 +113,10 @@ WebAssembly와 Canvas의 결합으로 메모리 효율이 중요해졌습니다.
 - **성능 최우선**: PixiJS + WebAssembly 조합
 
 WebGPU 지원 폴백을 항상 준비하되, 2026년 신규 게임은 WebGPU를 기본으로 개발하는 것을 권장합니다. 이는 향후 3년간의 주류 표준이 될 것이 확실하기 때문입니다.
+
+
+## 참고 자료
+
+- [Unity Documentation](https://docs.unity3d.com/)
+- [Godot Engine Docs](https://docs.godotengine.org/)
+- [게임메카](https://www.gamemeca.com/)

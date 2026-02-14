@@ -14,7 +14,6 @@ coupangLinks:
   - title: "아이패드 에어 M2"
     url: "https://link.coupang.com/a/dJjUUj"
 ---
-
 ## 2026년 2월, AI 어시스턴트 역대급 경쟁
 
 2026년 2월 5일, OpenAI와 Anthropic이 **같은 날** 차세대 모델을 동시 출시했습니다. OpenAI의 **GPT-5.3 Codex**와 Anthropic의 **Claude Opus 4.6** — 이 두 모델이 AI 어시스턴트 시장의 판도를 다시 쓰고 있습니다.
@@ -116,6 +115,8 @@ Claude Opus 4.6은 **기술 문서**, **분석 보고서**, **학술적 글쓰�
 
 단순 비용만 보면 GPT-5.3이 유리하지만, 대규모 프로젝트에서는 Claude의 100만 토큰 컨텍스트가 여러 번 호출을 한 번으로 줄여주어 오히려 경제적일 수 있습니다.
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: 두 서비스 모두 월 $20입니다. 무료 티어에서는 ChatGPT가 좀 더 넉넉하므로, 가볍게 시작한다면 ChatGPT 무료 버전이 합리적입니다.</div>
+
 ## 개발 도구 통합
 
 | 도구 | GPT-5.3 Codex | Claude Opus 4.6 |
@@ -152,3 +153,12 @@ Claude Opus 4.6은 **기술 문서**, **분석 보고서**, **학술적 글쓰�
 | 보안/코드리뷰 전문가 | **Claude Opus 4.6** |
 
 2026년 AI의 가장 현명한 전략은 **두 모델을 병행 사용**하는 것입니다. 작업의 성격에 따라 최적의 도구를 선택하세요. AI 경쟁이 치열해질수록 **개발자가 얻는 혜택**은 커집니다!
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: 두 모델을 병행 사용</div>
+
+
+## 참고 자료
+
+- [OpenAI 공식 블로그](https://openai.com/blog)
+- [Anthropic Research](https://www.anthropic.com/research)
+- [Hugging Face](https://huggingface.co/)

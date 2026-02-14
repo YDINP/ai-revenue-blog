@@ -16,7 +16,6 @@ coupangLinks:
   - title: "게임 프로그래밍 패턴"
     url: "https://link.coupang.com/a/dJj5U5"
 ---
-
 ## 2026년 인디 게임 개발 도구의 변화
 
 인디 게임 개발은 더 이상 큰 자본과 팀 없이도 가능한 시대입니다. 2026년 현재, 인디 게임 개발 도구는 AI 기술 통합, 클라우드 협업, 실시간 렌더링 기술 등으로 빠르게 진화하고 있습니다. 특히 생성형 AI를 활용한 자동 에셋 생성과 개발 자동화 기능이 대표적입니다.
@@ -61,6 +60,8 @@ Unreal Engine은 인디 게임 개발 도구 중 가장 강력한 렌더링과 �
 - Blueprints로 코딩 없이 게임 개발 가능
 - 실시간 협업 기능
 - 100달러 이하 매출은 로열티 면제
+
+<div class="callout-tip">💡 <strong>핵심 포인트</strong>: 주요 특징:</div>
 
 ## 인디 게임 개발 도구 카테고리별 추천
 
@@ -116,6 +117,8 @@ Unreal Engine은 인디 게임 개발 도구 중 가장 강력한 렌더링과 �
 
 고사양 3D 게임을 목표한다면 **Unreal Engine**으로 나아가세요. 더 깊이 있는 최적화와 고급 기능을 활용할 수 있습니다.
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: GameMaker</div>
+
 ## 효율적인 인디 게임 개발을 위한 팁
 
 ### 1. 적절한 스코프 설정
@@ -139,3 +142,12 @@ Unity 에셋 스토어, Itch.io, Godot Asset Library 등에서 기존 에셋과 
 2026년 현재, 인디 게임 개발 도구의 진입장벽은 역사상 가장 낮습니다. 무료 게임 엔진, AI 기반 자동화, 클라우드 협업 기능 등이 모두 가능해졌습니다. 당신의 아이디어와 열정만 있다면, 누구나 성공적인 인디 게임을 만들 수 있습니다.
 
 최적의 인디 게임 개발 도구 선택은 당신의 목표와 현재 수준을 정직하게 평가한 후 이루어져야 합니다. Godot의 무료성, Unity의 안정성, Unreal Engine의 성능 중 어떤 것을 우선시할지 결정하고, 꾸준히 학습하며 발전해나가길 바랍니다. 당신의 게임 개발 여정이 성공적이기를 응원합니다.
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: 2026년 현재, 인디 게임 개발 도구의 진입장벽은 역사상 가장 낮습니다. 무료 게임 엔진, AI 기반 자동화, 클라우드 협업 기능 등이 모두 가능해졌습니다. 당신의 아이디어와 열</div>
+
+
+## 참고 자료
+
+- [Unity Documentation](https://docs.unity3d.com/)
+- [Godot Engine Docs](https://docs.godotengine.org/)
+- [게임메카](https://www.gamemeca.com/)

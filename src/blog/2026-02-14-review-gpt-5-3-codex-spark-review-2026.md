@@ -14,7 +14,6 @@ coupangLinks:
   - title: "로지텍 MX Keys S"
     url: "https://link.coupang.com/a/dJj0zg"
 ---
-
 ## GPT-5.3 Codex Spark: AI 코딩 어시스턴트의 새로운 기준
 
 2026년 초 OpenAI가 공개한 GPT-5.3 Codex Spark는 기존 모델에서 한 단계 도약한 AI 코딩 도구입니다. 이번 리뷰에서는 실제 개발 환경에서의 성능, 정확도, 실용성을 중심으로 검증했습니다.
@@ -124,3 +123,10 @@ GPT-5.3 Codex Spark는 생성된 코드의 출처를 추적할 수 있는 **코�
 2026년 AI 코딩 도구 시장에서 GPT-5.3 Codex Spark는 **가성비와 성능 모두에서 최고 수준**입니다. 특히 다양한 프로젝트를 병행하는 개발자라면 생산성 향상 효과가 매우 클 것으로 예상됩니다.
 
 $20/월의 투자는 개발 시간 단축으로 충분히 회수 가능하며, 장기적으로는 코드 품질 향상으로 유지보수 비용 절감까지 기대할 수 있습니다.
+
+
+## 참고 자료
+
+- [다나와 가격비교](https://www.danawa.com/)
+- [뽐뿌 (PPOMPPU)](https://www.ppomppu.co.kr/)
+- [쿠팡 공식 사이트](https://www.coupang.com/)

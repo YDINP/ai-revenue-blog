@@ -14,7 +14,6 @@ coupangLinks:
   - title: "챗GPT 활용법 도서"
     url: "https://link.coupang.com/a/dJjUsG"
 ---
-
 ## AI가 그림을 그리는 시대
 
 2026년, AI 이미지 생성 기술은 상상 이상으로 발전했습니다. 텍스트 한 줄만 입력하면 전문 디자이너 수준의 이미지를 몇 초 만에 만들어냅니다. 블로그 썸네일, 소셜 미디어 콘텐츠, 제품 목업까지 — **AI 이미지 생성** 도구는 이제 크리에이터의 필수 도구가 되었습니다.
@@ -109,6 +108,8 @@ Adobe Firefly는 **상업적으로 안전한** 유일한 AI 이미지 생성 도
 - 예술적 표현력은 Midjourney 대비 부족
 - 무료 크레딧 제한적
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: 상업적으로 안전한</div>
+
 ## 5. Ideogram 2.0: 텍스트 렌더링 최강자
 
 Ideogram은 **이미지 안에 텍스트를 정확하게 넣는** 능력이 뛰어납니다. 로고, 포스터, 배너 제작에 최적입니다.
@@ -153,3 +154,12 @@ Ideogram은 **이미지 안에 텍스트를 정확하게 넣는** 능력이 뛰�
 **개발자/DIY 성향**이라면 **Stable Diffusion**의 무한한 가능성을 탐험해보세요.
 
 AI 이미지 생성 기술은 계속 발전하고 있습니다. 지금 시작해서 자신만의 워크플로우를 만들어보는 것을 추천합니다!
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: 라면 ChatGPT에 포함된 </div>
+
+
+## 참고 자료
+
+- [OpenAI 공식 블로그](https://openai.com/blog)
+- [Anthropic Research](https://www.anthropic.com/research)
+- [Hugging Face](https://huggingface.co/)

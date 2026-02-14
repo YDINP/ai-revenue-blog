@@ -14,7 +14,6 @@ coupangLinks:
   - title: "삼성 갤럭시북4 프로"
     url: "https://link.coupang.com/a/dJjWzN"
 ---
-
 ## 개발자에게 SSD가 중요한 이유
 
 개발 작업은 **디스크 I/O 집약적**입니다. npm install, Docker 이미지 빌드, Git 작업, IDE 인덱싱, 컴파일 — 이 모든 작업이 스토리지 속도에 직접적인 영향을 받습니다.
@@ -31,6 +30,8 @@ SSD를 HDD에서 NVMe SSD로 교체하면 빌드 시간이 **3~5배** 단축됩�
 | NVMe Gen5 | PCIe 5.0 | 12,000 MB/s | ~20만 |
 
 개발자에게는 **NVMe Gen4**가 가성비 최적입니다. Gen5는 아직 가격 대비 체감 차이가 크지 않습니다.
+
+<div class="callout-tip">💡 <strong>핵심 포인트</strong>: NVMe Gen4</div>
 
 ## 추천 SSD TOP 5 비교
 
@@ -81,6 +82,8 @@ SSD를 HDD에서 NVMe SSD로 교체하면 빌드 시간이 **3~5배** 단축됩�
 
 순차 쓰기 속도에서 차이가 있지만, 일반 개발 작업(랜덤 I/O 중심)에서는 **체감 차이가 미미**합니다.
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: 가성비를 중시한다면 최고의 선택</div>
+
 ## 개발자를 위한 SSD 선택 가이드
 
 ### 용량 선택
@@ -123,3 +126,12 @@ SSD 업그레이드는 **가장 체감이 큰 하드웨어 투자**입니다. 10
 - **대용량 필요**: SK하이닉스 P41 2TB
 
 개발 환경의 병목이 스토리지에 있다면, 지금이 업그레이드할 때입니다!
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: 가장 체감이 큰 하드웨어 투자</div>
+
+
+## 참고 자료
+
+- [다나와 가격비교](https://www.danawa.com/)
+- [뽐뿌 (PPOMPPU)](https://www.ppomppu.co.kr/)
+- [쿠팡 공식 사이트](https://www.coupang.com/)

@@ -16,7 +16,6 @@ coupangLinks:
   - title: "유니티 교과서"
     url: "https://link.coupang.com/a/dJj8Bn"
 ---
-
 ## Cocos Creator란? 2026년 기준 현황
 
 Cocos Creator는 Cocos 엔진의 공식 편집기로, 웹 기반의 2D/3D 게임 개발을 위한 완전 무료 오픈소스 플랫폼입니다. 중국의 Cocos2d-x 기반으로 진화했으며, 현재 3.8.x 버전대가 안정화 버전으로 운영 중입니다.
@@ -62,6 +61,8 @@ Cocos Creator는 C++ 기반 네이티브 엔진과 JavaScript/TypeScript VM을 �
 - **메모리 사용량**: 약 40MB (앱 최소 설정)
 - **초기 로딩 시간**: 평균 2~3초 (모바일 4G 기준)
 - **프레임 유지율**: 2D 게임 기준 60fps 안정성 98% 이상
+
+<div class="callout-tip">💡 <strong>핵심 포인트</strong>: 메모리 사용량</div>
 
 ## Cocos Creator vs 경쟁 플랫폼 비교
 
@@ -134,6 +135,8 @@ export class GameManager extends Component {
 - **Spine 애니메이션**: 최신 4.1 버전 완전 호환
 - **클라우드 빌드**: 깃허브 연동 자동 배포 시스템 정식 출시
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: 공식 한글 문서</div>
+
 ## Cocos Creator가 적합한 프로젝트 유형
 
 <div class="chart-bar" data-title="게임 장르별 추천도" data-labels="캐주얼 게임,하이퍼 캐주얼,퍼즐,액션,RPG" data-values="95,98,90,75,65" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#8b5cf6" data-unit="점"></div>
@@ -188,3 +191,12 @@ export class ObjectPool {
 Cocos Creator는 **웹 게임과 경량 모바일 게임** 개발 분야에서 최고의 선택지입니다. 완전 무료이면서도 프로페셔널한 수준의 기능을 제공하며, 특히 초보 개발자부터 중급 개발자까지 진입 장벽이 매우 낮습니다.
 
 2026년 기준 하이퍼 캐주얼 게임 시장이 지속 성장 중이고, 웹 게임의 부활이 이어지는 만큼, Cocos Creator는 인디 개발자에게 가장 실용적인 도구로 평가됩니다. 특히 **빠른 프로토타입** 개발과 **멀티플랫폼 배포**가 필요한 팀이라면 강력히 추천합니다.
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: 웹 게임과 경량 모바일 게임</div>
+
+
+## 참고 자료
+
+- [Unity Documentation](https://docs.unity3d.com/)
+- [Godot Engine Docs](https://docs.godotengine.org/)
+- [게임메카](https://www.gamemeca.com/)

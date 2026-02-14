@@ -14,7 +14,6 @@ coupangLinks:
   - title: "로지텍 MX Master 3S 마우스"
     url: "https://link.coupang.com/a/dJj5uu"
 ---
-
 ## Godot는 왜 인디 개발자의 선택인가?
 
 Godot Engine은 100% 무료 오픈소스 게임 엔진으로, 최근 인디 게임 개발자들 사이에서 폭발적으로 성장하고 있습니다. 2023년 Unity의 Runtime Fee 논란 이후 수많은 개발자가 Godot로 이주했으며, 현재 GitHub에서 가장 활발한 게임 엔진 프로젝트입니다.
@@ -66,6 +65,8 @@ Godot 4는 2023년 출시된 메이저 업데이트로, 3.x 대비 획기적인 
 - 애니메이션 블렌딩 개선
 - 스켈레탈 애니메이션 성능 향상
 - 2D 뼈대(Bone) 애니메이션 지원
+
+<div class="callout-tip">💡 <strong>핵심 포인트</strong>: Godot 4는 2023년 출시된 메이저 업데이트로, 3.x 대비 획기적인 개선이 이루어졌습니다.</div>
 
 ## Godot 설치 및 시작하기
 
@@ -321,3 +322,12 @@ Godot는 자유를 원하는 인디 개발자에게 최고의 선택입니다. �
 Unity나 Unreal의 강력한 생태계가 부러울 수 있지만, Godot의 자유로움과 경량성은 그 이상의 가치를 제공합니다. 특히 2D 게임이나 중소 규모 3D 게임을 만든다면 Godot는 완벽한 도구입니다.
 
 오늘 Godot를 다운로드하고, 공식 튜토리얼 하나를 따라 해보세요. 놀라울 정도로 쉽고 빠르게 게임을 만들 수 있다는 것을 경험하게 될 것입니다.
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: Godot는 자유를 원하는 인디 개발자에게 최고의 선택입니다. 로열티 걱정 없이, 엔진 정책 변경 걱정 없이, 순수하게 게임 개발에만 집중할 수 있습니다.</div>
+
+
+## 참고 자료
+
+- [Unity Documentation](https://docs.unity3d.com/)
+- [Godot Engine Docs](https://docs.godotengine.org/)
+- [게임메카](https://www.gamemeca.com/)

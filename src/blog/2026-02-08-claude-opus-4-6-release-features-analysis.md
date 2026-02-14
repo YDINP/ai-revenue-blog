@@ -14,7 +14,6 @@ coupangLinks:
   - title: "아이패드 에어 M2"
     url: "https://link.coupang.com/a/dJjUUj"
 ---
-
 ## Anthropic, Claude Opus 4.6 공식 출시
 
 2026년 2월 5일, Anthropic이 차세대 AI 모델 **Claude Opus 4.6**을 공식 출시했습니다. 이번 업데이트는 단순한 성능 향상을 넘어, AI가 **팀으로 일하는 시대**를 열었다는 평가를 받고 있습니다.
@@ -105,6 +104,8 @@ Claude Code(CLI 도구)에서 Opus 4.6을 사용하면:
 - 대규모 프로젝트에서도 컨텍스트 누락 없이 작업
 - GitHub Copilot에서도 Opus 4.6 사용 가능 (2월 5일 출시)
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: 장기 작업 지속성</div>
+
 ## 코딩 외 활용 분야
 
 Opus 4.6은 코딩 이외에도 다양한 분야에서 향상되었습니다:
@@ -132,3 +133,12 @@ Claude Opus 4.6은 "AI 어시스턴트"에서 **"AI 동료"**로의 전환을 �
 2026년 AI 코딩의 핵심 키워드는 **"에이전틱(Agentic)"**입니다. AI가 단순히 코드를 제안하는 것이 아니라, 계획하고, 실행하고, 검증하는 전체 프로세스를 수행합니다.
 
 아직 Opus 4.6을 사용해보지 않았다면, 지금이 시작할 때입니다!
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: "AI 동료"</div>
+
+
+## 참고 자료
+
+- [OpenAI 공식 블로그](https://openai.com/blog)
+- [Anthropic Research](https://www.anthropic.com/research)
+- [Hugging Face](https://huggingface.co/)

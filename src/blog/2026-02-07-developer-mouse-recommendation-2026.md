@@ -14,7 +14,6 @@ coupangLinks:
   - title: "로지텍 MX Keys S 무선 키보드"
     url: "https://link.coupang.com/a/dJj0zg"
 ---
-
 ## 개발자에게 마우스가 중요한 이유
 
 개발자는 하루 8시간 이상 마우스를 사용합니다. 코드 편집, 브라우저 탭 전환, 디자인 리뷰, 문서 작업까지 — 마우스는 키보드만큼 중요한 도구입니다.
@@ -100,6 +99,8 @@ coupangLinks:
 
 소형 인체공학 마우스를 원한다면 좋은 선택입니다. 크기 대비 그립감이 우수합니다.
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: 소형 인체공학 마우스를 원한다면 좋은 선택입니다. 크기 대비 그립감이 우수합니다.</div>
+
 ## 5위: 애플 Magic Mouse 3 — 맥 생태계 전용
 
 맥 전용이라면 제스처 기능이 유용하지만, 충전 포트 위치(바닥)와 인체공학의 부재로 개발자에게는 비추천입니다.
@@ -125,3 +126,12 @@ coupangLinks:
 하나만 고르라면 **로지텍 MX Master 3S**입니다. 인체공학, 멀티디바이스, 스크롤 성능, 커스터마이징 모든 면에서 개발자의 니즈를 완벽히 충족합니다.
 
 마우스는 매일 수천 번 클릭하는 도구입니다. 좋은 마우스에 투자하는 것은 건강과 생산성에 대한 투자입니다!
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: 로지텍 MX Master 3S</div>
+
+
+## 참고 자료
+
+- [다나와 가격비교](https://www.danawa.com/)
+- [뽐뿌 (PPOMPPU)](https://www.ppomppu.co.kr/)
+- [쿠팡 공식 사이트](https://www.coupang.com/)

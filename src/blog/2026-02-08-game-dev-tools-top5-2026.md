@@ -14,7 +14,6 @@ coupangLinks:
   - title: "아이패드 에어 M2"
     url: "https://link.coupang.com/a/dJjUUj"
 ---
-
 ## 게임 개발은 도구의 조합이다
 
 성공적인 게임 개발은 올바른 도구 선택에서 시작됩니다. 2026년 현재, 게임 개발 도구는 그 어느 때보다 풍부하고 접근 가능합니다. 이 글에서는 게임 개발의 전 과정에 필요한 필수 도구들을 카테고리별로 소개하고, 무료와 유료 옵션을 비교 분석합니다.
@@ -112,6 +111,8 @@ coupangLinks:
 - 네이티브 앱 수준 성능 불가
 
 **추천 대상:** 웹 게임, 미니게임, 광고 게임
+
+<div class="callout-tip">💡 <strong>핵심 포인트</strong>: 추천 대상:</div>
 
 ## 2. 그래픽 도구: 비주얼 아트의 핵심
 
@@ -429,3 +430,12 @@ A. 아닙니다. GIMP, Krita, Affinity 등 훌륭한 대체재가 있습니다. 
 게임 개발은 마라톤입니다. 도구 선택에 너무 많은 시간을 쓰지 말고, 빠르게 선택해서 실제로 게임을 만들기 시작하세요. 완벽한 도구를 찾는 것보다, 도구를 완벽하게 익히는 것이 훨씬 중요합니다.
 
 오늘부터 여러분의 게임 개발 도구 스택을 구축하고, 첫 게임 프로젝트를 시작해보세요!
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: 완벽한 도구를 찾는 것이 아니라, 선택한 도구를 잘 익히는 것</div>
+
+
+## 참고 자료
+
+- [Unity Documentation](https://docs.unity3d.com/)
+- [Godot Engine Docs](https://docs.godotengine.org/)
+- [게임메카](https://www.gamemeca.com/)

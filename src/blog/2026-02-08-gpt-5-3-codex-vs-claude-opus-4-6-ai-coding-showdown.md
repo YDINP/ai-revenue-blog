@@ -14,7 +14,6 @@ coupangLinks:
   - title: "로지텍 MX Keys S 무선 키보드"
     url: "https://link.coupang.com/a/dJj0zg"
 ---
-
 ## 2월 5일, AI 역사상 가장 치열한 하루
 
 2026년 2월 5일, **OpenAI**와 **Anthropic**이 같은 날 차세대 AI 모델을 출시했습니다. OpenAI의 **GPT-5.3 Codex**와 Anthropic의 **Claude Opus 4.6** — 두 모델 모두 **에이전틱 코딩**에 초점을 맞추며, AI 개발 도구 시장의 패권을 놓고 치열한 경쟁을 벌이고 있습니다.
@@ -124,6 +123,8 @@ Claude Opus 4.6은 **"개발 팀"** 컨셉입니다. 복잡한 작업을 여러 
 
 GPT-5.3 Codex가 API 가격 면에서 약 20% 저렴하며, 동일 작업에 더 적은 토큰을 사용합니다.
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: GPT-5.3 Codex가 API 가격 면에서 약 20% 저렴하며, 동일 작업에 더 적은 토큰을 사용합니다.</div>
+
 ## 보안 고려사항
 
 ### GPT-5.3 Codex
@@ -159,3 +160,12 @@ Anthropic의 Constitutional AI 프레임워크를 기반으로, 보안 취약점
 | 멀티파일 동시 수정 | Claude Opus 4.6 |
 
 2026년 AI 코딩의 가장 현명한 전략은 **두 모델을 병행 사용**하는 것입니다. 작업의 성격에 따라 최적의 도구를 선택하세요. AI 경쟁이 치열해질수록 **개발자가 얻는 혜택**은 커집니다!
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: 정답은 "둘 다"입니다.</div>
+
+
+## 참고 자료
+
+- [OpenAI 공식 블로그](https://openai.com/blog)
+- [Anthropic Research](https://www.anthropic.com/research)
+- [Hugging Face](https://huggingface.co/)

@@ -14,7 +14,6 @@ coupangLinks:
   - title: "삼성 SSD 980 PRO 1TB"
     url: "https://link.coupang.com/a/dJjVJy"
 ---
-
 ## "내 컴퓨터에서는 되는데요?" 의 종말
 
 개발자라면 한 번쯤 들어봤을 이 문장. **Docker**는 이 문제를 근본적으로 해결합니다. 개발 환경을 **컨테이너**라는 독립된 상자에 담아서, 어떤 컴퓨터에서든 동일하게 실행되도록 보장합니다.
@@ -36,6 +35,8 @@ coupangLinks:
 <div class="chart-radar" data-title="VM vs Docker 비교" data-items='[{"name":"가상머신 (VM)","scores":[{"label":"격리성","value":10,"color":"#ef4444"},{"label":"속도","value":4,"color":"#ef4444"},{"label":"경량성","value":2,"color":"#ef4444"},{"label":"이식성","value":6,"color":"#ef4444"},{"label":"학습곡선","value":5,"color":"#ef4444"}]},{"name":"Docker 컨테이너","scores":[{"label":"격리성","value":7,"color":"#10b981"},{"label":"속도","value":10,"color":"#10b981"},{"label":"경량성","value":10,"color":"#10b981"},{"label":"이식성","value":9,"color":"#10b981"},{"label":"학습곡선","value":7,"color":"#10b981"}]}]'></div>
 
 Docker 컨테이너는 가상머신보다 **가볍고 빠릅니다**. OS를 통째로 띄우는 대신, 앱에 필요한 것만 담아서 실행합니다.
+
+<div class="callout-tip">💡 <strong>핵심 포인트</strong>: 가볍고 빠릅니다</div>
 
 ## Step 1: Docker 설치
 
@@ -146,6 +147,8 @@ docker run -p 3000:3000 my-app:1.0
 3. **.dockerignore 설정**: `node_modules`, `.git` 제외
 4. **멀티스테이지 빌드**: 빌드 도구를 최종 이미지에서 제거
 
+<div class="callout-warning">⚠️ <strong>주의사항</strong>: Dockerfile</div>
+
 ## Step 5: Docker Compose로 멀티 서비스 관리
 
 실제 앱은 웹 서버 + DB + 캐시 등 여러 서비스로 구성됩니다. **Docker Compose**는 이를 한 파일로 관리합니다.
@@ -229,3 +232,12 @@ A: WSL2 기반으로 잘 동작합니다. 다만 Mac/Linux 대비 약간의 성�
 Docker는 "있으면 좋은 도구"가 아니라 **"없으면 안 되는 도구"**입니다. 환경 설정에 시간을 낭비하지 않고, 코딩에만 집중할 수 있게 해줍니다.
 
 오늘 배운 5단계를 순서대로 따라해보세요. 한 번 익숙해지면 Docker 없이는 개발하기 싫어질 것입니다!
+
+<div class="callout-info">ℹ️ <strong>참고</strong>: "없으면 안 되는 도구"</div>
+
+
+## 참고 자료
+
+- [MDN Web Docs](https://developer.mozilla.org/)
+- [GitHub Trending](https://github.com/trending)
+- [Stack Overflow](https://stackoverflow.com/)
