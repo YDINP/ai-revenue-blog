@@ -7,7 +7,7 @@ category: "AI"
 tags: ["GPT-Codex-5.3-Spark", "AI개발", "코딩어시스턴트", "2026기술트렌드"]
 image:
   url: "https://images.pexels.com/photos/30869075/pexels-photo-30869075.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  alt: "Scrabble tiles spelling "CHATGPT" on wooden surface, emphasizing AI language models."
+  alt: "Scrabble tiles spelling CHATGPT on wooden surface, emphasizing AI language models."
 coupangLinks:
   - title: "챗GPT 활용법 도서"
     url: "https://link.coupang.com/a/dJjUsG"

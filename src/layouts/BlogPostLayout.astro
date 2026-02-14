@@ -5,6 +5,21 @@ import AdSlot from '../components/AdSlot.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
 import NewsletterCTA from '../components/NewsletterCTA.astro';
 
+interface ChartBarData {
+  type: 'chart-bar';
+  title?: string;
+  unit?: string;
+  data: { label: string; value: number }[];
+  colors?: string[];
+}
+
+interface ChartRadarData {
+  type: 'chart-radar';
+  title?: string;
+  categories: string[];
+  datasets: { name: string; values: number[]; color?: string }[];
+}
+
 interface Props {
   title: string;
   description: string;
@@ -15,6 +30,7 @@ interface Props {
   tags: string[];
   image?: { url: string; alt: string };
   coupangLinks?: { title: string; url: string; imageUrl?: string }[];
+  chartData?: (ChartBarData | ChartRadarData)[];
   slug?: string;
 }
 
@@ -28,6 +44,7 @@ const {
   tags,
   image,
   coupangLinks,
+  chartData,
   slug,
 } = Astro.props;
 

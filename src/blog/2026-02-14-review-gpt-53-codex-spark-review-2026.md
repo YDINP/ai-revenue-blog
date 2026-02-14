@@ -7,7 +7,7 @@ category: "Review"
 tags: ["AI코딩어시스턴트", "GPT5.3", "CodexSpark", "개발자도구"]
 image:
   url: "https://images.pexels.com/photos/30869075/pexels-photo-30869075.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  alt: "Scrabble tiles spelling "CHATGPT" on wooden surface, emphasizing AI language models."
+  alt: "Scrabble tiles spelling CHATGPT on wooden surface, emphasizing AI language models."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
     url: "https://link.coupang.com/a/dJj5uu"

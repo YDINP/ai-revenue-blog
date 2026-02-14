@@ -333,9 +333,9 @@ function buildMarkdownFile(post, category, heroImage, coupangLinks, date) {
     }
   }
 
-  // Hero image
+  // Hero image (alt 내부 따옴표 제거 - YAML 파싱 에러 방지)
   const imageLine = heroImage
-    ? `image:\n  url: "${heroImage.url}"\n  alt: "${heroImage.alt}"`
+    ? `image:\n  url: "${heroImage.url}"\n  alt: "${(heroImage.alt || '').replace(/"/g, '')}"`
     : "";
 
   const frontmatter = `---
