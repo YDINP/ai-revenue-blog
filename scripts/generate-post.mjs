@@ -128,7 +128,7 @@ function loadExistingPostTitles(category) {
 
 // ─── Claude API ───────────────────────────────────────────────────────
 
-async function generatePostContent(categoryName, keyword, searchTerm, existingTitles) {
+async function generatePostContent(categoryName, keyword, searchTerm, existingTitles, engaging = false) {
   if (!ANTHROPIC_API_KEY) {
     throw new Error("ANTHROPIC_API_KEY is not set");
   }
@@ -164,11 +164,24 @@ async function generatePostContent(categoryName, keyword, searchTerm, existingTi
     ? `\n**중복 방지**: 아래는 이미 발행된 같은 카테고리 포스트입니다. 이들과 겹치지 않는 새로운 각도/주제로 작성하세요:\n${existingTitles.map(t => `- ${t}`).join('\n')}\n`
     : '';
 
+  // 독자 유입 극대화 모드: 호기심 자극 + 클릭 유도 스타일
+  const engagingInstruction = engaging ? `
+**독자 유입 극대화 스타일 (필수 적용)**:
+- 제목: 호기심을 자극하는 파워 워드 사용 ("아직도 모르세요?", "진짜 비교해봤습니다", "이것만 알면 충분합니다", "충격적인 차이", "당신이 놓치고 있는")
+- 제목에 숫자 활용 ("TOP 5", "3가지 이유", "7가지 실수")
+- 첫 문단(도입부): 독자의 고민/불만을 정확히 짚는 공감 문장으로 시작 ("~하고 계신가요?", "~로 고민이신 분들 많으시죠")
+- 중간중간 궁금증 유발 문장 배치 ("여기서 반전이 있습니다", "하지만 가장 중요한 건 따로 있습니다")
+- 비교/대결 구도 강조 ("A vs B, 승자는?", "가성비 끝판왕은?")
+- 개인 경험담 톤 ("직접 써보니", "솔직히 말하면", "처음엔 저도 몰랐는데")
+- 결론부에 행동 유도 ("지금 바로 시작하세요", "더 이상 시간 낭비하지 마세요")
+- 단, 허위/과장 금지 — 팩트 기반으로 흥미롭게 포장
+` : '';
+
   const prompt = `당신은 한국어 기술 블로그 전문 작가입니다. 아래 주제로 SEO 최적화된 블로그 포스트를 작성하세요.
 
 카테고리: ${categoryName}
 키워드: ${keyword}
-${dupeGuard}
+${dupeGuard}${engagingInstruction}
 **최우선 원칙 — 최신 데이터 기반 작성 (정보 신뢰도가 핵심)**:
 - 오늘은 ${dateStr}입니다. 이 시점 기준 실제 존재하는 제품, 서비스, 벤치마크 수치만 사용
 - 허구의 수치나 제품명을 만들어내지 말 것. 확실하지 않으면 "공식 발표 예정" 등으로 표기
@@ -415,6 +428,7 @@ function resolveInputs(seeds) {
   const inputCategory = process.env.INPUT_CATEGORY || "auto";
   const inputTopic = process.env.INPUT_TOPIC || "";
   const inputCount = parseInt(process.env.INPUT_COUNT || "3", 10);
+  const inputEngaging = process.env.INPUT_ENGAGING === "true";
   const count = Math.min(Math.max(inputCount, 1), 3);
 
   let categoryNames;
@@ -429,7 +443,7 @@ function resolveInputs(seeds) {
   // 수동 주제 입력 시: 첫 번째 포스트에만 적용
   const customTopic = inputTopic.trim();
 
-  return { categoryNames, customTopic, count };
+  return { categoryNames, customTopic, count, engaging: inputEngaging };
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────
@@ -462,9 +476,10 @@ async function main() {
   const coupangData = loadJSON("coupang-links.json");
 
   // 2. Resolve inputs
-  const { categoryNames, customTopic, count } = resolveInputs(seeds);
+  const { categoryNames, customTopic, count, engaging } = resolveInputs(seeds);
   console.log(`[Info] Categories: ${categoryNames.join(", ")} (${count}편)`);
   if (customTopic) console.log(`[Info] Custom topic: "${customTopic}"`);
+  if (engaging) console.log(`[Info] Engaging mode: ON (독자 유입 극대화)`);
 
   // 3. Generate posts sequentially
   let generated = 0;
@@ -501,7 +516,7 @@ async function main() {
       console.log(`[Info] Existing ${categoryName} posts: ${existingTitles.length}개`);
 
       // Generate content via Claude API
-      const post = await generatePostContent(categoryName, keyword, searchTerm, existingTitles);
+      const post = await generatePostContent(categoryName, keyword, searchTerm, existingTitles, engaging);
       console.log(`[Claude] Generated: "${post.title}"`);
 
       // Fetch hero image via Pexels
