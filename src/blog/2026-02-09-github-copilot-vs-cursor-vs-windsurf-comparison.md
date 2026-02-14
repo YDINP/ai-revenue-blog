@@ -36,7 +36,7 @@ Microsoft와 OpenAI의 합작품인 Copilot은 2026년 현재 **가장 많은 �
 - Workspace 모드로 전체 프로젝트 맥락 이해
 
 ### 단점
-- 월 $19 (Business $39)로 가격 상승
+- Pro $10/월, Pro+ $39/월, Business $19/월, Enterprise $39/월의 다양한 요금제
 - 대규모 리팩토링에서 간혹 맥락을 놓침
 
 ## 2. Cursor — 파워 유저의 선택
@@ -70,7 +70,7 @@ Codeium 팀이 만든 Windsurf는 2025년 말 출시되어 빠르게 성장 중�
 
 ## 가격 비교
 
-<div class="chart-progress" data-title="월 구독료 비교 (USD)" data-labels="Copilot,Cursor,Windsurf" data-values="19,20,15" data-colors="#3b82f6,#22c55e,#f59e0b" data-max="25" data-unit="$"></div>
+<div class="chart-progress" data-title="월 구독료 비교 (USD)" data-labels="Copilot Pro,Cursor Pro,Windsurf Pro" data-values="10,20,15" data-colors="#3b82f6,#22c55e,#f59e0b" data-max="25" data-unit="$"></div>
 
 ## 어떤 상황에 어떤 도구?
 
