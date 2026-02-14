@@ -1712,8 +1712,15 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           });
 
           // 도넛 차트 & 범례 업데이트
-          const colors = { 'Lifestyle': '#ec4899', 'Finance': '#3b82f6', 'Health': '#22c55e', 'Education': '#a855f7', 'Travel': '#f97316' };
-          const cats = Object.entries(catCounts).map(([name, count]) => ({ name, count, color: colors[name] || '#94a3b8' }));
+          const colors = {
+            'Lifestyle': '#ec4899', 'lifestyle': '#ec4899',
+            'Finance': '#3b82f6', 'finance': '#3b82f6',
+            'Health': '#22c55e', 'health': '#22c55e',
+            'Education': '#a855f7', 'education': '#a855f7',
+            'Travel': '#f97316', 'travel': '#f97316',
+          };
+          const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
+          const cats = Object.entries(catCounts).map(([name, count]) => ({ name: capitalize(name), count, color: colors[name] || '#94a3b8' }));
           const totalLf = posts.length;
 
           // 포스트 수 업데이트
