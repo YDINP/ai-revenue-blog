@@ -92,9 +92,43 @@ function loadJSON(filename) {
   return JSON.parse(readFileSync(filepath, "utf-8"));
 }
 
+/**
+ * 기존 블로그 포스트 제목+카테고리 목록을 읽어서 중복 방지에 활용
+ */
+function loadExistingPostTitles(category) {
+  const blogDir = join(PROJECT_ROOT, "src", "blog");
+  if (!existsSync(blogDir)) return [];
+
+  const files = readdirSync(blogDir).filter(f => f.endsWith(".md"));
+  const posts = [];
+
+  for (const file of files) {
+    try {
+      const content = readFileSync(join(blogDir, file), "utf-8");
+      const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
+      if (!fmMatch) continue;
+
+      const fm = fmMatch[1];
+      const titleMatch = fm.match(/^title:\s*"?(.+?)"?\s*$/m);
+      const catMatch = fm.match(/^category:\s*"?(.+?)"?\s*$/m);
+      if (!titleMatch) continue;
+
+      const postCat = catMatch ? catMatch[1] : "";
+      const postTitle = titleMatch[1];
+
+      // 같은 카테고리 포스트는 항상 포함, 다른 카테고리도 최근 것만
+      if (postCat === category) {
+        posts.push(`[${postCat}] ${postTitle}`);
+      }
+    } catch { /* skip unreadable files */ }
+  }
+
+  return posts;
+}
+
 // ─── Claude API ───────────────────────────────────────────────────────
 
-async function generatePostContent(categoryName, keyword, searchTerm) {
+async function generatePostContent(categoryName, keyword, searchTerm, existingTitles) {
   if (!ANTHROPIC_API_KEY) {
     throw new Error("ANTHROPIC_API_KEY is not set");
   }
@@ -120,14 +154,20 @@ async function generatePostContent(categoryName, keyword, searchTerm) {
 선택 가이드: 비율/점유율→donut, 1:1 대결→versus, 개별 평점→progress, 수치 비교→bar, 다항목 제품 평가→radar.
 주의: div 안에 자식 요소를 넣지 마세요. 항목 3~5개. chart-bar만 반복하지 말고 다양한 유형을 활용하세요.`;
 
+  // 기존 포스트 중복 방지 지시
+  const dupeGuard = existingTitles && existingTitles.length > 0
+    ? `\n**중복 방지**: 아래는 이미 발행된 같은 카테고리 포스트입니다. 이들과 겹치지 않는 새로운 각도/주제로 작성하세요:\n${existingTitles.map(t => `- ${t}`).join('\n')}\n`
+    : '';
+
   const prompt = `당신은 한국어 기술 블로그 전문 작가입니다. 아래 주제로 SEO 최적화된 블로그 포스트를 작성하세요.
 
 카테고리: ${categoryName}
 키워드: ${keyword}
-
+${dupeGuard}
 **중요**: 2026년 2월 기준 가장 최신 뉴스, 트렌드, 이슈를 기반으로 작성하세요.
 - 최신 제품 출시, 업데이트, 시장 변화를 반영
 - 단순 일반론이 아닌 구체적인 시의성 있는 내용 위주
+- 기존 포스트와 제목이나 핵심 내용이 유사하면 안 됩니다
 - 제목에 "2026" 또는 구체적 시점을 포함
 
 요구사항:
@@ -447,8 +487,12 @@ async function main() {
       console.log(`[Info] Keyword: ${keyword}`);
       console.log(`[Info] Search term: ${searchTerm}`);
 
+      // 기존 같은 카테고리 포스트 제목 로드 (중복 방지)
+      const existingTitles = loadExistingPostTitles(categoryName);
+      console.log(`[Info] Existing ${categoryName} posts: ${existingTitles.length}개`);
+
       // Generate content via Claude API
-      const post = await generatePostContent(categoryName, keyword, searchTerm);
+      const post = await generatePostContent(categoryName, keyword, searchTerm, existingTitles);
       console.log(`[Claude] Generated: "${post.title}"`);
 
       // Fetch hero image via Pexels
