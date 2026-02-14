@@ -133,6 +133,11 @@ async function generatePostContent(categoryName, keyword, searchTerm, existingTi
     throw new Error("ANTHROPIC_API_KEY is not set");
   }
 
+  // 동적 날짜 (프롬프트에서 사용)
+  const now = new Date();
+  const yyyy = now.getFullYear();
+  const dateStr = `${yyyy}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+
   const chartInstruction = `
 본문 중간에 아래 5가지 차트 유형 중 주제에 맞는 것을 1~2개 선택하여 반드시 포함하세요:
 
@@ -165,13 +170,13 @@ async function generatePostContent(categoryName, keyword, searchTerm, existingTi
 키워드: ${keyword}
 ${dupeGuard}
 **최우선 원칙 — 최신 데이터 기반 작성 (정보 신뢰도가 핵심)**:
-- 2026년 2월 기준 실제 존재하는 제품, 서비스, 벤치마크 수치만 사용
+- 오늘은 ${dateStr}입니다. 이 시점 기준 실제 존재하는 제품, 서비스, 벤치마크 수치만 사용
 - 허구의 수치나 제품명을 만들어내지 말 것. 확실하지 않으면 "공식 발표 예정" 등으로 표기
 - 가격, 성능 수치, 출시일 등은 반드시 실제 데이터를 근거로 작성
 - 비교 글 작성 시 각 제품의 공식 벤치마크(SWE-bench, Terminal-Bench 등)를 인용
 - 단순 일반론이 아닌 구체적인 시의성 있는 최신 내용 위주
 - 기존 포스트와 제목이나 핵심 내용이 유사하면 안 됩니다
-- 제목에 "2026" 또는 구체적 시점을 포함
+- 제목에 "${yyyy}년" 또는 구체적 시점을 포함
 - 출처가 불분명한 통계나 수치는 사용하지 말 것
 
 요구사항:
