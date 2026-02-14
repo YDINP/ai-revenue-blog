@@ -20,6 +20,11 @@ interface ChartRadarData {
   datasets: { name: string; values: number[]; color?: string }[];
 }
 
+interface FaqItem {
+  q: string;
+  a: string;
+}
+
 interface Props {
   title: string;
   description: string;
@@ -32,6 +37,7 @@ interface Props {
   coupangLinks?: { title: string; url: string; imageUrl?: string }[];
   chartData?: (ChartBarData | ChartRadarData)[];
   slug?: string;
+  faq?: FaqItem[];
 }
 
 const {
@@ -46,6 +52,7 @@ const {
   coupangLinks,
   chartData,
   slug,
+  faq,
 } = Astro.props;
 
 const formattedDate = new Date(pubDate).toLocaleDateString('ko-KR', {
@@ -129,6 +136,20 @@ const breadcrumbLd = {
   ],
 };
 
+// FAQPage JSON-LD (구글 FAQ 리치 스니펫)
+const faqLd = faq && faq.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+} : null;
+
 // Get previous/next posts for navigation
 import { getCollection } from 'astro:content';
 const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
@@ -142,6 +163,7 @@ const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1]
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+  {faqLd && <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />}
 
   <article class="blog-post">
     <!-- Breadcrumb Navigation -->

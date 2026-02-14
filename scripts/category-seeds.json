@@ -2,23 +2,23 @@
   "categories": [
     {
       "name": "AI",
-      "keywords": ["AI 코딩 도구 추천", "ChatGPT 활용법", "Claude AI 사용법", "AI 이미지 생성 도구 비교", "AI 자동화 수익화", "프롬프트 엔지니어링 팁", "AI 페어 프로그래밍", "로컬 LLM 구축"],
-      "searchTerms": ["AI coding tools", "ChatGPT tips", "AI automation", "prompt engineering", "AI programming", "local LLM", "AI image generation", "AI productivity"]
+      "keywords": ["AI 코딩 도구 추천", "ChatGPT 활용법", "Claude AI 사용법", "AI 이미지 생성 도구 비교", "AI 자동화 수익화", "프롬프트 엔지니어링 팁", "AI 페어 프로그래밍", "로컬 LLM 구축", "AI 도구 가격 비교", "ChatGPT Plus 구독 가치", "AI 서비스 무료 vs 유료"],
+      "searchTerms": ["AI coding tools", "ChatGPT tips", "AI automation", "prompt engineering", "AI programming", "local LLM", "AI image generation", "AI productivity", "AI tools pricing", "ChatGPT Plus value", "free vs paid AI"]
     },
     {
       "name": "Dev",
-      "keywords": ["프로그래밍 입문 가이드", "React 최신 트렌드", "Python 자동화 실전", "Next.js 배포 가이드", "Supabase 활용법", "개발자 생산성 향상", "TypeScript 마이그레이션"],
-      "searchTerms": ["programming tutorial", "React trends", "Python automation", "Next.js deploy", "Supabase guide", "developer productivity", "TypeScript migration"]
+      "keywords": ["프로그래밍 입문 가이드", "React 최신 트렌드", "Python 자동화 실전", "Next.js 배포 가이드", "Supabase 활용법", "개발자 생산성 향상", "TypeScript 마이그레이션", "개발자 장비 가성비 추천", "코딩 입문 도서 추천", "개발 환경 세팅 비용"],
+      "searchTerms": ["programming tutorial", "React trends", "Python automation", "Next.js deploy", "Supabase guide", "developer productivity", "TypeScript migration", "developer gear budget", "coding books recommendation", "dev setup cost"]
     },
     {
       "name": "Review",
-      "keywords": ["개발용 노트북 추천", "코딩 모니터 비교", "개발자 키보드 리뷰", "개발자 마우스 추천", "SSD 추천", "포터블 모니터 비교"],
-      "searchTerms": ["developer laptop", "coding monitor", "mechanical keyboard", "developer mouse", "SSD review", "portable monitor"]
+      "keywords": ["개발용 노트북 추천", "코딩 모니터 비교", "개발자 키보드 리뷰", "개발자 마우스 추천", "SSD 추천", "포터블 모니터 비교", "가성비 노트북 TOP 5", "개발자 모니터 구매 가이드", "키보드 마우스 세트 추천"],
+      "searchTerms": ["developer laptop", "coding monitor", "mechanical keyboard", "developer mouse", "SSD review", "portable monitor", "budget laptop top 5", "developer monitor buying guide", "keyboard mouse combo"]
     },
     {
       "name": "Game",
-      "keywords": ["HTML5 웹게임 개발 가이드", "Phaser 3 웹게임 만들기", "PixiJS 2D 게임 개발", "웹 게임 수익화 전략", "H5 모바일 게임 배포", "JavaScript 게임 프레임워크 비교", "Canvas WebGL 게임 개발", "웹게임 최적화 기법", "인디 웹게임 성공 사례", "Cocos Creator 웹게임"],
-      "searchTerms": ["HTML5 game development", "Phaser 3 tutorial", "PixiJS game", "web game monetization", "H5 mobile game", "JavaScript game framework", "Canvas WebGL game", "web game optimization", "indie web game", "Cocos Creator web"]
+      "keywords": ["HTML5 웹게임 개발 가이드", "Phaser 3 웹게임 만들기", "PixiJS 2D 게임 개발", "웹 게임 수익화 전략", "H5 모바일 게임 배포", "JavaScript 게임 프레임워크 비교", "Canvas WebGL 게임 개발", "웹게임 최적화 기법", "인디 웹게임 성공 사례", "Cocos Creator 웹게임", "게임 개발 입문 장비", "인디게임 수익화 현실", "게임 에셋 스토어 비교"],
+      "searchTerms": ["HTML5 game development", "Phaser 3 tutorial", "PixiJS game", "web game monetization", "H5 mobile game", "JavaScript game framework", "Canvas WebGL game", "web game optimization", "indie web game", "Cocos Creator web", "game dev starter gear", "indie game revenue", "game asset store comparison"]
     }
   ]
 }

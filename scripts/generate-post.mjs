@@ -126,9 +126,32 @@ function loadExistingPostTitles(category) {
   return posts;
 }
 
+/**
+ * 기존 블로그 포스트 슬러그 + 제목 목록 (내부 링크용)
+ */
+function loadExistingPostSlugs() {
+  const blogDir = join(PROJECT_ROOT, "src", "blog");
+  if (!existsSync(blogDir)) return [];
+  const files = readdirSync(blogDir).filter(f => f.endsWith(".md"));
+  const posts = [];
+  for (const file of files) {
+    try {
+      const content = readFileSync(join(blogDir, file), "utf-8");
+      const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
+      if (!fmMatch) continue;
+      const fm = fmMatch[1];
+      const titleMatch = fm.match(/^title:\s*"?(.+?)"?\s*$/m);
+      if (!titleMatch) continue;
+      const slug = file.replace('.md', '');
+      posts.push({ title: titleMatch[1], slug });
+    } catch { /* skip */ }
+  }
+  return posts;
+}
+
 // ─── Claude API ───────────────────────────────────────────────────────
 
-async function generatePostContent(categoryName, keyword, searchTerm, existingTitles, engaging = false) {
+async function generatePostContent(categoryName, keyword, searchTerm, existingTitles, engaging = false, revenue = false, allPosts = []) {
   if (!ANTHROPIC_API_KEY) {
     throw new Error("ANTHROPIC_API_KEY is not set");
   }
@@ -177,11 +200,31 @@ async function generatePostContent(categoryName, keyword, searchTerm, existingTi
 - 단, 허위/과장 금지 — 팩트 기반으로 흥미롭게 포장
 ` : '';
 
+  // 수익 극대화 모드: 자연스러운 상품 추천 + 구매 유도
+  const revenueInstruction = revenue ? `
+**수익 극대화 모드 (필수 적용)**:
+- 본문 중간에 자연스럽게 관련 상품/서비스를 추천하세요 ("이 작업에는 **[상품명]**이 가장 적합했습니다")
+- "추천 이유", "실사용 후기" 톤으로 제품을 언급하세요
+- 비교표에 "구매 포인트" 또는 "추천 대상" 컬럼을 추가하세요
+- 결론부에 "가장 추천하는 제품/서비스"를 명시하세요
+- "가성비", "최저가", "할인", "무료 체험" 등 구매 전환 키워드를 자연스럽게 사용하세요
+- 단, 광고처럼 보이지 않게 정보 제공 위주로 작성하세요
+` : '';
+
+  // 내부 링크 지시 (기존 포스트 슬러그 활용)
+  const internalLinkInstruction = allPosts.length > 0 ? `
+**내부 링크 삽입 (필수)**:
+아래 기존 포스트 중 관련된 글이 있다면 본문에 자연스럽게 1~2개 링크를 삽입하세요.
+형식: "더 자세한 내용은 [관련 글 제목](/blog/슬러그/)을 참고하세요"
+기존 포스트 목록:
+${allPosts.slice(-20).map(p => `- "${p.title}" → /blog/${p.slug}/`).join('\n')}
+` : '';
+
   const prompt = `당신은 한국어 기술 블로그 전문 작가입니다. 아래 주제로 SEO 최적화된 블로그 포스트를 작성하세요.
 
 카테고리: ${categoryName}
 키워드: ${keyword}
-${dupeGuard}${engagingInstruction}
+${dupeGuard}${engagingInstruction}${revenueInstruction}${internalLinkInstruction}
 **최우선 원칙 — 최신 데이터 기반 작성 (정보 신뢰도가 핵심)**:
 - 오늘은 ${dateStr}입니다. 이 시점 기준 실제 존재하는 제품, 서비스, 벤치마크 수치만 사용
 - 허구의 수치나 제품명을 만들어내지 말 것. 확실하지 않으면 "공식 발표 예정" 등으로 표기
@@ -202,13 +245,24 @@ ${dupeGuard}${engagingInstruction}
 - 2026년 최신 트렌드 반영
 ${chartInstruction}
 
+**메타 설명(description) 작성 규칙**:
+- 반드시 숫자 포함 ("TOP 5", "3가지", "7단계")
+- 행동 유도 문구 포함 ("지금 확인하세요", "바로 비교해보세요")
+- 궁금증 유발 ("이것만 알면 충분합니다", "모르면 손해")
+- 120~160자 범위 엄수
+
 반드시 아래 JSON 형식으로만 응답하세요 (JSON 외 텍스트 금지):
 {
   "title": "포스트 제목 (40~60자)",
   "slug": "english-slug-for-url (영문 소문자, 하이픈으로 연결, 예: best-coding-monitors-2026)",
-  "description": "메타 설명 (120~160자)",
+  "description": "메타 설명 (120~160자, 위 규칙 적용)",
   "tags": ["태그1", "태그2", "태그3", "태그4"],
-  "content": "마크다운 본문 (H2/H3/표/차트 포함)"
+  "content": "마크다운 본문 (H2/H3/표/차트 포함)",
+  "faq": [
+    {"q": "자주 묻는 질문 1", "a": "답변 1 (2~3문장)"},
+    {"q": "자주 묻는 질문 2", "a": "답변 2 (2~3문장)"},
+    {"q": "자주 묻는 질문 3", "a": "답변 3 (2~3문장)"}
+  ]
 }`;
 
   console.log(`[Claude] Generating post for "${keyword}"...`);
@@ -238,8 +292,9 @@ ${chartInstruction}
   // JSON 파싱 (코드블록 감싸기 + 잘림 대응)
   let jsonStr = text.replace(/^```json?\s*/, "").replace(/\s*```$/, "");
 
+  let result;
   try {
-    return JSON.parse(jsonStr);
+    result = JSON.parse(jsonStr);
   } catch (e) {
     // JSON이 잘린 경우 content 필드를 잘라서라도 파싱 시도
     console.warn("[WARN] Direct JSON parse failed, attempting recovery...");
@@ -248,15 +303,12 @@ ${chartInstruction}
       const contentMatch = jsonStr.match(/"content"\s*:\s*"/);
       if (contentMatch) {
         const contentStart = contentMatch.index + contentMatch[0].length;
-        // 마지막으로 닫히지 않은 문자열을 강제로 닫기
         let truncated = jsonStr.slice(0, contentStart);
-        // content의 마지막 유효한 텍스트까지 찾기
         const remaining = jsonStr.slice(contentStart);
-        // 이스케이프되지 않은 마지막 따옴표 위치 찾기, 없으면 그냥 자르기
         const lastGoodPos = remaining.lastIndexOf('\\n');
         const safeContent = lastGoodPos > 0 ? remaining.slice(0, lastGoodPos) : remaining.slice(0, -50);
         truncated += safeContent + '"\n}';
-        return JSON.parse(truncated);
+        result = JSON.parse(truncated);
       }
     } catch (e2) {
       // 최종 fallback: 정규식으로 각 필드 추출
@@ -271,14 +323,12 @@ ${chartInstruction}
         const tags = tagsMatch
           ? tagsMatch[1].match(/"([^"]+)"/g).map(t => t.replace(/"/g, ''))
           : ["자동생성"];
-        // content에서 마지막 닫는 따옴표 전까지
         let rawContent = contentMatch[1];
         const lastQuote = rawContent.lastIndexOf('"');
         if (lastQuote > 0) rawContent = rawContent.slice(0, lastQuote);
-        // JSON 이스케이프 해제
         rawContent = rawContent.replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\\\/g, '\\');
 
-        return {
+        result = {
           title: titleMatch[1],
           slug: slugMatch ? slugMatch[1] : null,
           description: descMatch ? descMatch[1] : titleMatch[1],
@@ -288,8 +338,21 @@ ${chartInstruction}
       }
     }
 
-    throw new Error(`Failed to parse Claude response as JSON: ${text.slice(0, 200)}`);
+    if (!result) {
+      throw new Error(`Failed to parse Claude response as JSON: ${text.slice(0, 200)}`);
+    }
   }
+
+  // FAQ가 있으면 본문 하단에 "자주 묻는 질문" 섹션 추가
+  if (result.faq && Array.isArray(result.faq) && result.faq.length > 0) {
+    let faqSection = '\n\n---\n\n## 자주 묻는 질문\n\n';
+    for (const item of result.faq) {
+      faqSection += `### ${item.q}\n\n${item.a}\n\n`;
+    }
+    result.content += faqSection;
+  }
+
+  return result;
 }
 
 // ─── Pexels API ───────────────────────────────────────────────────────
@@ -360,6 +423,15 @@ function buildMarkdownFile(post, category, heroImage, coupangLinks, date) {
     ? `image:\n  url: "${heroImage.url}"\n  alt: "${(heroImage.alt || '').replace(/"/g, '')}"`
     : "";
 
+  // FAQ YAML
+  let faqYaml = "";
+  if (post.faq && Array.isArray(post.faq) && post.faq.length > 0) {
+    faqYaml = `faq:\n`;
+    for (const item of post.faq) {
+      faqYaml += `  - q: "${item.q.replace(/"/g, '\\"')}"\n    a: "${item.a.replace(/"/g, '\\"')}"\n`;
+    }
+  }
+
   const frontmatter = `---
 title: "${post.title}"
 description: "${post.description}"
@@ -368,7 +440,7 @@ author: "${AUTHOR}"
 category: "${category}"
 tags: [${post.tags.map((t) => `"${t}"`).join(", ")}]
 ${imageLine}
-${coupangYaml}---`;
+${coupangYaml}${faqYaml}---`;
 
   const content = `${frontmatter}
 
@@ -429,6 +501,7 @@ function resolveInputs(seeds) {
   const inputTopic = process.env.INPUT_TOPIC || "";
   const inputCount = parseInt(process.env.INPUT_COUNT || "3", 10);
   const inputEngaging = process.env.INPUT_ENGAGING === "true";
+  const inputRevenue = process.env.INPUT_REVENUE === "true";
   const count = Math.min(Math.max(inputCount, 1), 3);
 
   let categoryNames;
@@ -443,7 +516,7 @@ function resolveInputs(seeds) {
   // 수동 주제 입력 시: 첫 번째 포스트에만 적용
   const customTopic = inputTopic.trim();
 
-  return { categoryNames, customTopic, count, engaging: inputEngaging };
+  return { categoryNames, customTopic, count, engaging: inputEngaging, revenue: inputRevenue };
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────
@@ -476,10 +549,13 @@ async function main() {
   const coupangData = loadJSON("coupang-links.json");
 
   // 2. Resolve inputs
-  const { categoryNames, customTopic, count, engaging } = resolveInputs(seeds);
+  const { categoryNames, customTopic, count, engaging, revenue } = resolveInputs(seeds);
+  const allPosts = loadExistingPostSlugs();
   console.log(`[Info] Categories: ${categoryNames.join(", ")} (${count}편)`);
+  console.log(`[Info] Existing posts for internal linking: ${allPosts.length}개`);
   if (customTopic) console.log(`[Info] Custom topic: "${customTopic}"`);
   if (engaging) console.log(`[Info] Engaging mode: ON (독자 유입 극대화)`);
+  if (revenue) console.log(`[Info] Revenue mode: ON (수익 극대화)`);
 
   // 3. Generate posts sequentially
   let generated = 0;
@@ -516,7 +592,7 @@ async function main() {
       console.log(`[Info] Existing ${categoryName} posts: ${existingTitles.length}개`);
 
       // Generate content via Claude API
-      const post = await generatePostContent(categoryName, keyword, searchTerm, existingTitles, engaging);
+      const post = await generatePostContent(categoryName, keyword, searchTerm, existingTitles, engaging, revenue, allPosts);
       console.log(`[Claude] Generated: "${post.title}"`);
 
       // Fetch hero image via Pexels
