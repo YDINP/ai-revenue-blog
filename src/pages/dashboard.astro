@@ -28,15 +28,16 @@ const tfRecentPosts = allPosts
     slug: p.id,
   }));
 
-// LifeFlow 정적 데이터 (cross-repo 접근 불가, 빌드 타임 하드코딩)
+// LifeFlow 데이터: RSS 피드에서 가져오기 (클라이언트 사이드)
+// 빌드 타임에는 기본값 사용, 브라우저에서 실시간 로드
 const lfCategories = [
-  { name: 'Lifestyle', count: 4, icon: 'sparkles', color: '#ec4899' },
-  { name: 'Finance', count: 4, icon: 'banknotes', color: '#3b82f6' },
-  { name: 'Health', count: 3, icon: 'heart', color: '#22c55e' },
-  { name: 'Education', count: 3, icon: 'book', color: '#a855f7' },
-  { name: 'Travel', count: 3, icon: 'plane', color: '#f97316' },
+  { name: 'Lifestyle', count: 0, icon: 'sparkles', color: '#ec4899' },
+  { name: 'Finance', count: 0, icon: 'banknotes', color: '#3b82f6' },
+  { name: 'Health', count: 0, icon: 'heart', color: '#22c55e' },
+  { name: 'Education', count: 0, icon: 'book', color: '#a855f7' },
+  { name: 'Travel', count: 0, icon: 'plane', color: '#f97316' },
 ];
-const lfPostCount = lfCategories.reduce((s, c) => s + c.count, 0);
+const lfPostCount = 17; // RSS에서 동적 로드
 const lfCategoryCount = lfCategories.length;
 
 // 통합 통계
@@ -52,7 +53,7 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
     <title>Blog Dashboard | TechFlow + LifeFlow</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <style>
+    <style is:global>
       :root {
         --dash-bg: #0f172a;
         --dash-surface: #1e293b;
@@ -518,6 +519,7 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
 
       .chart-bars {
         display: flex;
+        flex-direction: row;
         align-items: flex-end;
         gap: 2px;
         height: 100px;
@@ -626,9 +628,10 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        padding: 0.375rem 0;
+        padding: 0.5rem 0;
         border-bottom: 1px solid rgba(51,65,85,0.3);
         font-size: 0.75rem;
+        min-height: 36px;
       }
 
       .event-item:last-child { border-bottom: none; }
@@ -740,13 +743,19 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         flex: 1;
         overflow: hidden;
         min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
       }
 
       .event-action {
         font-size: 0.6875rem;
         font-weight: 600;
         color: var(--dash-text);
-        margin-bottom: 0.0625rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.3;
       }
 
       .event-page-title {
@@ -755,6 +764,7 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        line-height: 1.3;
       }
 
       /* ====== VISUAL ENHANCEMENTS ====== */
@@ -896,11 +906,14 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         position: relative;
         height: 120px;
         width: 100%;
+        overflow: hidden;
+        contain: content;
       }
 
       .trend-chart svg {
         width: 100%;
         height: 100%;
+        display: block;
       }
 
       .trend-labels {
@@ -975,15 +988,114 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
 
       @keyframes spin { to { transform: rotate(360deg); } }
 
+      /* Main Tabs */
+      .main-tabs {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .main-tab {
+        padding: 0.625rem 1.25rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1px solid var(--dash-border);
+        background: var(--dash-surface);
+        color: var(--dash-text-dim);
+        transition: all 0.2s;
+      }
+
+      .main-tab:hover {
+        border-color: var(--dash-accent);
+        color: var(--dash-text);
+      }
+
+      .main-tab.active {
+        background: var(--dash-accent);
+        border-color: var(--dash-accent);
+        color: #fff;
+      }
+
+      .main-tab.active-tf {
+        background: var(--dash-accent);
+        border-color: var(--dash-accent);
+        color: #fff;
+      }
+
+      .main-tab.active-lf {
+        background: var(--dash-green);
+        border-color: var(--dash-green);
+        color: #fff;
+      }
+
+      .main-tab.active-coupang {
+        background: var(--dash-orange);
+        border-color: var(--dash-orange);
+        color: #fff;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      /* Coupang Tab 전용 스타일 */
+      .coupang-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .coupang-card {
+        background: var(--dash-surface);
+        border: 1px solid var(--dash-border);
+        border-radius: 12px;
+        padding: 1.25rem;
+      }
+
+      .coupang-card h4 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--dash-text-dim);
+        margin-bottom: 0.75rem;
+      }
+
+      .conversion-rate {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--dash-orange);
+        line-height: 1;
+        margin-bottom: 0.5rem;
+      }
+
       /* Responsive */
       @media (max-width: 768px) {
-        .summary-grid { grid-template-columns: repeat(2, 1fr); }
+        .summary-grid { grid-template-columns: 1fr; }
         .blog-sections { grid-template-columns: 1fr; }
         .cat-grid-4 { grid-template-columns: repeat(2, 1fr); }
-        .cat-grid-5 { grid-template-columns: repeat(3, 1fr); }
-        .dash-header { flex-direction: column; gap: 0.5rem; }
-        .metric-row { grid-template-columns: repeat(2, 1fr); }
+        .cat-grid-5 { grid-template-columns: repeat(2, 1fr); }
+        .dash-header { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+        .metric-row { grid-template-columns: 1fr; }
         .traffic-grid { grid-template-columns: 1fr; }
+        .main-tabs {
+          overflow-x: auto;
+          flex-wrap: nowrap;
+          -webkit-overflow-scrolling: touch;
+        }
+        .main-tab {
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+        .coupang-stats { grid-template-columns: 1fr; }
+        .summary-card .value { font-size: 1.5rem; }
+        .summary-card .sub { font-size: 0.6875rem; }
       }
     </style>
   </head>
@@ -1006,6 +1118,16 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
       <!-- Data Status Banner -->
       <div id="data-banner" class="data-banner" style="display:none;"></div>
 
+      <!-- Main Tabs -->
+      <div class="main-tabs">
+        <button class="main-tab active" data-tab="all">📊 전체 요약</button>
+        <button class="main-tab" data-tab="techflow">💻 TechFlow</button>
+        <button class="main-tab" data-tab="lifeflow">🌱 LifeFlow</button>
+        <button class="main-tab" data-tab="coupang">🛒 쿠팡</button>
+      </div>
+
+      <!-- Tab: 전체 요약 -->
+      <div class="tab-content active" id="tab-all">
       <!-- 상단: 통합 요약 카드 -->
       <div class="summary-grid">
         <div class="summary-card accent-blue">
@@ -1288,6 +1410,189 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           </a>
         </div>
       </div>
+      </div>
+      <!-- End Tab: 전체 요약 -->
+
+      <!-- Tab: TechFlow -->
+      <div class="tab-content" id="tab-techflow">
+        <div class="summary-grid">
+          <div class="summary-card accent-blue">
+            <span class="card-icon">📝</span>
+            <div class="label">TechFlow Posts</div>
+            <div class="value">{tfPostCount}</div>
+            <div class="sub">{tfCategoryStats.length} 카테고리</div>
+          </div>
+          <div class="summary-card accent-purple">
+            <span class="card-icon">👁</span>
+            <div class="label">조회수</div>
+            <div class="value" id="tf-tab-views">--</div>
+            <div class="sub" id="tf-tab-views-sub">로딩 중...</div>
+          </div>
+          <div class="summary-card accent-yellow">
+            <span class="card-icon">🛒</span>
+            <div class="label">쿠팡 클릭</div>
+            <div class="value" id="tf-tab-clicks">--</div>
+            <div class="sub" id="tf-tab-clicks-sub">로딩 중...</div>
+          </div>
+          <div class="summary-card accent-green">
+            <span class="card-icon">📈</span>
+            <div class="label">전환율</div>
+            <div class="value" id="tf-tab-cvr">--</div>
+            <div class="sub">클릭 / 조회</div>
+          </div>
+        </div>
+
+        <div class="blog-section">
+          <div class="section-header">
+            <div class="section-title">TechFlow 콘텐츠</div>
+            <span class="section-badge badge-tf">{tfPostCount}편</span>
+          </div>
+          <div class="section-body">
+            <div class="cat-donut-wrap">
+              <div class="cat-donut" style={`background: conic-gradient(${tfCategoryStats.map((c, i) => {
+                const colors = ['#3b82f6','#22c55e','#eab308','#a855f7','#f97316','#ec4899','#06b6d4'];
+                const pctBefore = tfCategoryStats.slice(0, i).reduce((s, x) => s + x.count, 0) / tfPostCount * 100;
+                const pct = c.count / tfPostCount * 100;
+                return `${colors[i % colors.length]} ${pctBefore}% ${pctBefore + pct}%`;
+              }).join(', ')})`}>
+                <div class="cat-donut-hole">
+                  <span class="donut-num">{tfPostCount}</span>
+                  <span class="donut-label">포스트</span>
+                </div>
+              </div>
+              <div class="cat-legend">
+                {tfCategoryStats.map((c, i) => {
+                  const colors = ['#3b82f6','#22c55e','#eab308','#a855f7','#f97316','#ec4899','#06b6d4'];
+                  return (
+                    <div class="cat-legend-item">
+                      <span class="cat-legend-dot" style={`background:${colors[i % colors.length]}`}></span>
+                      <span class="cat-legend-name">{c.name}</span>
+                      <span class="cat-legend-count">{c.count}</span>
+                      <span class="cat-legend-pct">{Math.round(c.count / tfPostCount * 100)}%</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div class="recent-list">
+              {tfRecentPosts.map((p, i) => (
+                <div class="recent-item">
+                  <span class="recent-rank">{i + 1}</span>
+                  <span class="recent-title">{p.title}</span>
+                  <span class={`cat-badge cat-${p.category.toLowerCase()}`}>{p.category}</span>
+                  <span class="recent-date">{p.pubDate}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: LifeFlow -->
+      <div class="tab-content" id="tab-lifeflow">
+        <div class="summary-grid">
+          <div class="summary-card accent-green">
+            <span class="card-icon">📝</span>
+            <div class="label">LifeFlow Posts</div>
+            <div class="value" id="lf-post-count">{lfPostCount}</div>
+            <div class="sub">{lfCategoryCount} 카테고리</div>
+          </div>
+          <div class="summary-card accent-purple">
+            <span class="card-icon">👁</span>
+            <div class="label">조회수</div>
+            <div class="value" id="lf-tab-views">--</div>
+            <div class="sub" id="lf-tab-views-sub">로딩 중...</div>
+          </div>
+          <div class="summary-card accent-yellow">
+            <span class="card-icon">🛒</span>
+            <div class="label">쿠팡 클릭</div>
+            <div class="value" id="lf-tab-clicks">--</div>
+            <div class="sub" id="lf-tab-clicks-sub">로딩 중...</div>
+          </div>
+          <div class="summary-card accent-cyan">
+            <span class="card-icon">📈</span>
+            <div class="label">전환율</div>
+            <div class="value" id="lf-tab-cvr">--</div>
+            <div class="sub">클릭 / 조회</div>
+          </div>
+        </div>
+
+        <div class="blog-section">
+          <div class="section-header">
+            <div class="section-title">LifeFlow 콘텐츠</div>
+            <span class="section-badge badge-lf"><span id="lf-badge-count">{lfPostCount}</span>편</span>
+          </div>
+          <div class="section-body">
+            <div class="cat-donut-wrap" id="lf-donut-wrap">
+              <div class="cat-donut" style={`background: conic-gradient(${lfCategories.map((c, i) => {
+                const pctBefore = lfCategories.slice(0, i).reduce((s, x) => s + x.count, 0) / lfPostCount * 100;
+                const pct = c.count / lfPostCount * 100;
+                return `${c.color} ${pctBefore}% ${pctBefore + pct}%`;
+              }).join(', ')})`}>
+                <div class="cat-donut-hole">
+                  <span class="donut-num">{lfPostCount}</span>
+                  <span class="donut-label">포스트</span>
+                </div>
+              </div>
+              <div class="cat-legend" id="lf-cat-legend">
+                {lfCategories.map(c => (
+                  <div class="cat-legend-item">
+                    <span class="cat-legend-dot" style={`background:${c.color}`}></span>
+                    <span class="cat-legend-name">{c.name}</span>
+                    <span class="cat-legend-count">{c.count}</span>
+                    <span class="cat-legend-pct">{Math.round(c.count / lfPostCount * 100)}%</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div class="recent-list" id="lf-recent-list-tab">
+              <div class="loading"><div class="spinner"></div>RSS 로딩 중...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: 쿠팡 -->
+      <div class="tab-content" id="tab-coupang">
+        <div class="coupang-stats">
+          <div class="coupang-card">
+            <h4>총 클릭 수</h4>
+            <div class="conversion-rate" id="coup-total-clicks">--</div>
+            <div class="sub">누적 쿠팡 링크 클릭</div>
+          </div>
+          <div class="coupang-card">
+            <h4>오늘 클릭</h4>
+            <div class="conversion-rate" id="coup-today-clicks">--</div>
+            <div class="sub">금일 클릭 수</div>
+          </div>
+          <div class="coupang-card">
+            <h4>전환율 (CTR)</h4>
+            <div class="conversion-rate" id="coup-ctr">--%</div>
+            <div class="sub">조회 대비 클릭 비율</div>
+          </div>
+          <div class="coupang-card">
+            <h4>TechFlow CTR</h4>
+            <div class="conversion-rate" id="coup-tf-ctr">--%</div>
+            <div class="sub" id="coup-tf-detail">TF 클릭 / 조회</div>
+          </div>
+          <div class="coupang-card">
+            <h4>LifeFlow CTR</h4>
+            <div class="conversion-rate" id="coup-lf-ctr">--%</div>
+            <div class="sub" id="coup-lf-detail">LF 클릭 / 조회</div>
+          </div>
+        </div>
+
+        <div class="traffic-section">
+          <div class="traffic-header">
+            <h3>쿠팡 클릭 트래킹</h3>
+          </div>
+          <div class="traffic-body">
+            <div class="event-feed" id="coupang-events">
+              <div class="no-data">쿠팡 클릭 데이터 로딩 중...</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script define:vars={{
@@ -1329,22 +1634,107 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         banner.style.display = 'flex';
       }
 
-      // LifeFlow 최근 포스트 렌더링
-      function renderLfRecentPosts() {
-        const container = document.getElementById('lf-recent-list');
+      // LifeFlow RSS 피드 파싱
+      let lfRssData = [];
+
+      async function fetchLifeFlowRSS() {
+        try {
+          const res = await fetch('https://life-revenue-blog.vercel.app/rss.xml');
+          const text = await res.text();
+          const parser = new DOMParser();
+          const xml = parser.parseFromString(text, 'text/xml');
+          const items = xml.querySelectorAll('item');
+
+          const posts = Array.from(items).map(item => ({
+            title: item.querySelector('title')?.textContent || '',
+            link: item.querySelector('link')?.textContent || '',
+            category: item.querySelector('category')?.textContent || 'Lifestyle',
+            pubDate: item.querySelector('pubDate')?.textContent || '',
+          }));
+
+          lfRssData = posts;
+
+          // 카테고리별 집계
+          const catCounts = {};
+          posts.forEach(p => {
+            catCounts[p.category] = (catCounts[p.category] || 0) + 1;
+          });
+
+          // 도넛 차트 & 범례 업데이트
+          const colors = { 'Lifestyle': '#ec4899', 'Finance': '#3b82f6', 'Health': '#22c55e', 'Education': '#a855f7', 'Travel': '#f97316' };
+          const cats = Object.entries(catCounts).map(([name, count]) => ({ name, count, color: colors[name] || '#94a3b8' }));
+          const totalLf = posts.length;
+
+          // 포스트 수 업데이트
+          document.getElementById('lf-post-count').textContent = totalLf;
+          document.getElementById('lf-badge-count').textContent = totalLf;
+
+          // 도넛 차트 배경 재생성
+          const donutWrap = document.getElementById('lf-donut-wrap');
+          if (donutWrap) {
+            let gradient = 'conic-gradient(';
+            let pctBefore = 0;
+            cats.forEach((c, i) => {
+              const pct = (c.count / totalLf) * 100;
+              gradient += `${c.color} ${pctBefore}% ${pctBefore + pct}%`;
+              if (i < cats.length - 1) gradient += ', ';
+              pctBefore += pct;
+            });
+            gradient += ')';
+            const donutEl = donutWrap.querySelector('.cat-donut');
+            if (donutEl) donutEl.style.background = gradient;
+            const donutNum = donutWrap.querySelector('.donut-num');
+            if (donutNum) donutNum.textContent = totalLf;
+          }
+
+          // 범례 업데이트
+          const legendEl = document.getElementById('lf-cat-legend');
+          if (legendEl) {
+            legendEl.innerHTML = cats.map(c =>
+              `<div class="cat-legend-item">
+                <span class="cat-legend-dot" style="background:${c.color}"></span>
+                <span class="cat-legend-name">${c.name}</span>
+                <span class="cat-legend-count">${c.count}</span>
+                <span class="cat-legend-pct">${Math.round((c.count / totalLf) * 100)}%</span>
+              </div>`
+            ).join('');
+          }
+
+          // 최근 포스트 렌더링 (전체 요약 탭)
+          renderLfRecentPosts(posts.slice(0, 5), 'lf-recent-list');
+          // LifeFlow 탭
+          renderLfRecentPosts(posts.slice(0, 10), 'lf-recent-list-tab');
+
+        } catch (e) {
+          console.error('Failed to fetch LifeFlow RSS:', e);
+          const containers = ['lf-recent-list', 'lf-recent-list-tab'];
+          containers.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = '<div class="no-data">RSS 로드 실패 (정적 데이터 표시)</div>';
+          });
+          // Fallback to static data
+          renderLfRecentPosts(LF_POSTS, 'lf-recent-list');
+          renderLfRecentPosts(LF_POSTS, 'lf-recent-list-tab');
+        }
+      }
+
+      function renderLfRecentPosts(posts, containerId) {
+        const container = document.getElementById(containerId);
         if (!container) return;
         const catMap = {
           'Lifestyle': 'lifestyle', 'Finance': 'finance', 'Health': 'health',
           'Education': 'education', 'Travel': 'travel'
         };
-        container.innerHTML = LF_POSTS.map((p, i) =>
-          `<div class="recent-item">
+        container.innerHTML = posts.map((p, i) => {
+          const date = p.date || p.pubDate || '';
+          const formattedDate = date ? new Date(date).toISOString().split('T')[0] : '';
+          return `<div class="recent-item">
             <span class="recent-rank">${i + 1}</span>
             <span class="recent-title">${p.title}</span>
             <span class="cat-badge cat-${catMap[p.category] || p.category.toLowerCase()}">${p.category}</span>
-            <span class="recent-date">${p.date}</span>
-          </div>`
-        ).join('');
+            <span class="recent-date">${formattedDate}</span>
+          </div>`;
+        }).join('');
       }
 
       // loadDashboard replaced by loadTraffic
@@ -1437,15 +1827,26 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
       }
 
       // 7-Day Trend SVG Line Chart
-      function renderTrendChart(data) {
+      function renderTrendChart(rawData) {
         const container = document.getElementById('trend-chart');
         const labelsEl = document.getElementById('trend-labels');
         const totalEl = document.getElementById('trend-total-num');
         if (!container) return;
 
-        if (!data || data.length === 0) {
+        if (!rawData || rawData.length === 0) {
           container.innerHTML = '<div class="no-data">No trend data yet</div>';
           return;
+        }
+
+        // 7일치 데이터로 패딩 (데이터 없는 날은 0으로 채움)
+        const dataMap = {};
+        rawData.forEach(d => { if (d.day) dataMap[d.day] = d; });
+        const data = [];
+        for (let i = 6; i >= 0; i--) {
+          const date = new Date();
+          date.setDate(date.getDate() - i);
+          const key = date.toISOString().split('T')[0];
+          data.push(dataMap[key] || { day: key, views: 0, tf_views: 0, lf_views: 0 });
         }
 
         const total7d = data.reduce((s, d) => s + (d.views || 0), 0);
@@ -1545,7 +1946,10 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           // "포스트 제목 | TechFlow - AI & 테크 인사이트" 형태에서 제목만 추출
           return item.title.split(' | ')[0].split(' - ')[0];
         }
-        return decodeSlug(item.slug || item.path || '');
+        const raw = decodeSlug(item.slug || item.path || '');
+        // "/" 또는 빈 경로는 홈페이지로 표시
+        if (!raw || raw === '/' || raw === '/blog' || raw === '/blog/') return '홈페이지';
+        return raw;
       }
 
       function sourceBadge(source) {
@@ -1712,6 +2116,87 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           if (splitTfEl) splitTfEl.style.width = Math.round(tfTotal / totalV * 100) + '%';
           if (splitLfEl) splitLfEl.style.width = Math.round(lfTotal / totalV * 100) + '%';
 
+          // === 탭별 데이터 업데이트 ===
+          // TechFlow 탭
+          const tfTabViewsEl = document.getElementById('tf-tab-views');
+          const tfTabClicksEl = document.getElementById('tf-tab-clicks');
+          const tfTabCvrEl = document.getElementById('tf-tab-cvr');
+          if (tfTabViewsEl) tfTabViewsEl.textContent = fmt(tfTotal);
+          if (tfTabClicksEl) tfTabClicksEl.textContent = fmt(Number(summary?.tf_total_clicks) || 0);
+          if (tfTabCvrEl) {
+            const tfCvr = tfTotal > 0 ? ((Number(summary?.tf_total_clicks) || 0) / tfTotal * 100).toFixed(2) : 0;
+            tfTabCvrEl.textContent = tfCvr + '%';
+          }
+          const tfTabViewsSubEl = document.getElementById('tf-tab-views-sub');
+          const tfTabClicksSubEl = document.getElementById('tf-tab-clicks-sub');
+          if (tfTabViewsSubEl) tfTabViewsSubEl.textContent = tfTv > 0 ? `오늘 +${fmt(tfTv)}` : '수집 중...';
+          if (tfTabClicksSubEl) tfTabClicksSubEl.textContent = tfTc > 0 ? `오늘 +${fmt(tfTc)}` : '대기 중...';
+
+          // LifeFlow 탭
+          const lfTabViewsEl = document.getElementById('lf-tab-views');
+          const lfTabClicksEl = document.getElementById('lf-tab-clicks');
+          const lfTabCvrEl = document.getElementById('lf-tab-cvr');
+          if (lfTabViewsEl) lfTabViewsEl.textContent = fmt(lfTotal);
+          if (lfTabClicksEl) lfTabClicksEl.textContent = fmt(Number(summary?.lf_total_clicks) || 0);
+          if (lfTabCvrEl) {
+            const lfCvr = lfTotal > 0 ? ((Number(summary?.lf_total_clicks) || 0) / lfTotal * 100).toFixed(2) : 0;
+            lfTabCvrEl.textContent = lfCvr + '%';
+          }
+          const lfTabViewsSubEl = document.getElementById('lf-tab-views-sub');
+          const lfTabClicksSubEl = document.getElementById('lf-tab-clicks-sub');
+          if (lfTabViewsSubEl) lfTabViewsSubEl.textContent = lfTv > 0 ? `오늘 +${fmt(lfTv)}` : '수집 중...';
+          if (lfTabClicksSubEl) lfTabClicksSubEl.textContent = lfTc > 0 ? `오늘 +${fmt(lfTc)}` : '대기 중...';
+
+          // 쿠팡 탭
+          const coupTotalClicksEl = document.getElementById('coup-total-clicks');
+          const coupTodayClicksEl = document.getElementById('coup-today-clicks');
+          const coupCtrEl = document.getElementById('coup-ctr');
+          const coupTfCtrEl = document.getElementById('coup-tf-ctr');
+          const coupLfCtrEl = document.getElementById('coup-lf-ctr');
+          const totalClicks = Number(summary?.total_clicks) || 0;
+          if (coupTotalClicksEl) coupTotalClicksEl.textContent = fmt(totalClicks);
+          if (coupTodayClicksEl) coupTodayClicksEl.textContent = fmt(tc);
+          if (coupCtrEl) {
+            const overallCtr = totalV > 0 ? (totalClicks / totalV * 100).toFixed(2) : 0;
+            coupCtrEl.textContent = overallCtr + '%';
+          }
+          if (coupTfCtrEl) {
+            const tfCtr = tfTotal > 0 ? ((Number(summary?.tf_total_clicks) || 0) / tfTotal * 100).toFixed(2) : 0;
+            coupTfCtrEl.textContent = tfCtr + '%';
+          }
+          if (coupLfCtrEl) {
+            const lfCtr = lfTotal > 0 ? ((Number(summary?.lf_total_clicks) || 0) / lfTotal * 100).toFixed(2) : 0;
+            coupLfCtrEl.textContent = lfCtr + '%';
+          }
+          const coupTfDetailEl = document.getElementById('coup-tf-detail');
+          const coupLfDetailEl = document.getElementById('coup-lf-detail');
+          if (coupTfDetailEl) coupTfDetailEl.textContent = `${fmt(Number(summary?.tf_total_clicks) || 0)} / ${fmt(tfTotal)}`;
+          if (coupLfDetailEl) coupLfDetailEl.textContent = `${fmt(Number(summary?.lf_total_clicks) || 0)} / ${fmt(lfTotal)}`;
+
+          // 쿠팡 클릭 이벤트 필터
+          const coupangEvents = events.filter(e => e.event_type === 'coupang_click');
+          const coupangEventsEl = document.getElementById('coupang-events');
+          if (coupangEventsEl) {
+            if (coupangEvents.length === 0) {
+              coupangEventsEl.innerHTML = '<div class="no-data">아직 쿠팡 클릭 데이터가 없습니다.</div>';
+            } else {
+              coupangEventsEl.innerHTML = coupangEvents.slice(0, 15).map(e => {
+                const icon = '🛒';
+                const title = getPageTitle(e);
+                const shortTitle = title.length > 40 ? title.substring(0, 40) + '…' : title;
+                const srcBadge = sourceBadge(e.source);
+                return `<div class="event-item">
+                  <span class="event-icon coupang_click">${icon}</span>
+                  <div class="event-content">
+                    <div class="event-action">${srcBadge} Coupang Click</div>
+                    <div class="event-page-title" title="${title}">${shortTitle || '홈페이지'}</div>
+                  </div>
+                  <span class="event-time">${timeAgo(e.created_at)}</span>
+                </div>`;
+              }).join('');
+            }
+          }
+
           // Charts & feeds
           renderHourlyChart(hourly);
           renderTopPages(topPages);
@@ -1730,8 +2215,45 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         loadTraffic();
       });
 
+      // === 탭 전환 로직 ===
+      const mainTabs = document.querySelectorAll('.main-tab');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      mainTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const targetTab = tab.dataset.tab;
+
+          // 모든 탭 비활성화
+          mainTabs.forEach(t => {
+            t.classList.remove('active', 'active-tf', 'active-lf', 'active-coupang');
+          });
+
+          // 클릭한 탭 활성화
+          if (targetTab === 'techflow') {
+            tab.classList.add('active-tf');
+          } else if (targetTab === 'lifeflow') {
+            tab.classList.add('active-lf');
+          } else if (targetTab === 'coupang') {
+            tab.classList.add('active-coupang');
+          } else {
+            tab.classList.add('active');
+          }
+
+          // 모든 탭 콘텐츠 숨김
+          tabContents.forEach(content => {
+            content.classList.remove('active');
+          });
+
+          // 선택한 탭 콘텐츠 표시
+          const targetContent = document.getElementById(`tab-${targetTab}`);
+          if (targetContent) {
+            targetContent.classList.add('active');
+          }
+        });
+      });
+
       // Init
-      renderLfRecentPosts();
+      fetchLifeFlowRSS();
       loadTraffic();
       checkSupabase();
       setInterval(loadTraffic, 30000);
