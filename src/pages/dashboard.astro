@@ -903,49 +903,78 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
       .trend-total b { color: var(--dash-text); font-size: 1rem; }
 
       .trend-chart {
-        position: relative;
-        height: 120px;
-        width: 100%;
-        overflow: hidden;
-        contain: content;
-      }
-
-      .trend-chart svg {
-        width: 100%;
-        height: 100%;
-        display: block;
-      }
-
-      .trend-labels {
         display: flex;
-        justify-content: space-between;
-        font-size: 0.5625rem;
-        color: var(--dash-text-dim);
-        margin-top: 0.25rem;
-        padding: 0 5%;
+        align-items: flex-end;
+        gap: 0.75rem;
+        height: 140px;
+        padding: 0 0.5rem;
       }
 
-      .trend-label-item {
+      .trend-bar-col {
+        flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 2px;
+        gap: 6px;
+        height: 100%;
       }
 
-      .trend-label-date {
+      .trend-bar-wrap {
+        flex: 1;
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+      }
+
+      .trend-bar-stack {
+        width: 70%;
+        max-width: 48px;
+        border-radius: 6px 6px 0 0;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        position: relative;
+      }
+
+      .trend-bar-stack:hover {
+        filter: brightness(1.2);
+        transform: scaleX(1.1);
+      }
+
+      .trend-bar-tf {
+        background: linear-gradient(to top, #2563eb, #60a5fa);
+      }
+
+      .trend-bar-lf {
+        background: linear-gradient(to top, #16a34a, #4ade80);
+      }
+
+      .trend-bar-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1px;
+        flex-shrink: 0;
+      }
+
+      .trend-bar-date {
+        font-size: 0.625rem;
         color: var(--dash-text-dim);
       }
 
-      .trend-label-count {
-        font-size: 0.6875rem;
+      .trend-bar-count {
+        font-size: 0.75rem;
         font-weight: 700;
         color: var(--dash-text);
       }
 
-      .trend-label-split {
-        font-size: 0.5rem;
-        font-weight: 400;
+      .trend-bar-split {
+        font-size: 0.5625rem;
         opacity: 0.8;
+      }
+
+      .trend-bar-today {
+        box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
       }
 
       .trend-legend {
@@ -1204,7 +1233,6 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         <div class="trend-chart" id="trend-chart">
           <div class="no-data">Loading trend...</div>
         </div>
-        <div class="trend-labels" id="trend-labels"></div>
         <div class="trend-legend">
           <span><i class="dot-tf"></i> TechFlow</span>
           <span><i class="dot-lf"></i> LifeFlow</span>
@@ -1849,10 +1877,9 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         container.innerHTML = html;
       }
 
-      // 7-Day Trend SVG Line Chart
+      // 7-Day Trend Bar Chart
       function renderTrendChart(rawData) {
         const container = document.getElementById('trend-chart');
-        const labelsEl = document.getElementById('trend-labels');
         const totalEl = document.getElementById('trend-total-num');
         if (!container) return;
 
@@ -1861,10 +1888,11 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           return;
         }
 
-        // 7일치 데이터로 패딩 (데이터 없는 날은 0으로 채움)
+        // 7일치 데이터로 패딩
         const dataMap = {};
         rawData.forEach(d => { if (d.day) dataMap[d.day] = d; });
         const data = [];
+        const today = new Date().toISOString().split('T')[0];
         for (let i = 6; i >= 0; i--) {
           const date = new Date();
           date.setDate(date.getDate() - i);
@@ -1876,82 +1904,33 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         if (totalEl) totalEl.textContent = fmt(total7d);
 
         const maxV = Math.max(...data.map(d => d.views || 0), 1);
-        const w = 100;
-        const h = 100;
-        const pad = 5;
 
-        function toPoints(vals) {
-          return vals.map((v, i) => {
-            const x = pad + (i / Math.max(vals.length - 1, 1)) * (w - 2 * pad);
-            const y = h - pad - ((v || 0) / maxV) * (h - 2 * pad);
-            return `${x},${y}`;
-          }).join(' ');
-        }
+        container.innerHTML = data.map(d => {
+          const day = d.day ? new Date(d.day) : null;
+          const dateStr = day ? `${day.getMonth()+1}/${day.getDate()}` : '';
+          const views = d.views || 0;
+          const tf = d.tf_views || 0;
+          const lf = d.lf_views || 0;
+          const pct = views > 0 ? Math.max((views / maxV) * 100, 8) : 4;
+          const tfPct = views > 0 ? (tf / views) * 100 : 0;
+          const lfPct = views > 0 ? (lf / views) * 100 : 0;
+          const isToday = d.day === today;
 
-        const tfVals = data.map(d => d.tf_views || 0);
-        const lfVals = data.map(d => d.lf_views || 0);
-        const totalVals = data.map(d => d.views || 0);
-
-        // SVG with gradient fills
-        let svg = `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">`;
-        svg += `<defs>
-          <linearGradient id="gTf" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/>
-            <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.02"/>
-          </linearGradient>
-          <linearGradient id="gLf" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#22c55e" stop-opacity="0.3"/>
-            <stop offset="100%" stop-color="#22c55e" stop-opacity="0.02"/>
-          </linearGradient>
-        </defs>`;
-
-        // Grid lines
-        for (let i = 0; i <= 4; i++) {
-          const y = pad + (i / 4) * (h - 2 * pad);
-          svg += `<line x1="${pad}" y1="${y}" x2="${w-pad}" y2="${y}" stroke="#334155" stroke-width="0.3" stroke-dasharray="2,2"/>`;
-        }
-
-        // Area fill + Line for TechFlow
-        const tfPts = toPoints(tfVals);
-        const firstTfX = pad;
-        const lastTfX = pad + ((data.length - 1) / Math.max(data.length - 1, 1)) * (w - 2 * pad);
-        svg += `<polygon points="${firstTfX},${h-pad} ${tfPts} ${lastTfX},${h-pad}" fill="url(#gTf)"/>`;
-        svg += `<polyline points="${tfPts}" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`;
-
-        // Area fill + Line for LifeFlow
-        const lfPts = toPoints(lfVals);
-        const firstLfX = firstTfX;
-        const lastLfX = lastTfX;
-        svg += `<polygon points="${firstLfX},${h-pad} ${lfPts} ${lastLfX},${h-pad}" fill="url(#gLf)"/>`;
-        svg += `<polyline points="${lfPts}" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`;
-
-        // Dots
-        data.forEach((d, i) => {
-          const x = pad + (i / Math.max(data.length - 1, 1)) * (w - 2 * pad);
-          const yTf = h - pad - ((d.tf_views || 0) / maxV) * (h - 2 * pad);
-          const yLf = h - pad - ((d.lf_views || 0) / maxV) * (h - 2 * pad);
-          svg += `<circle cx="${x}" cy="${yTf}" r="1.5" fill="#3b82f6"/>`;
-          svg += `<circle cx="${x}" cy="${yLf}" r="1.5" fill="#22c55e"/>`;
-        });
-
-        svg += '</svg>';
-        container.innerHTML = svg;
-
-        // Labels with view counts
-        if (labelsEl) {
-          labelsEl.innerHTML = data.map(d => {
-            const day = d.day ? new Date(d.day) : null;
-            const views = d.views || 0;
-            const tf = d.tf_views || 0;
-            const lf = d.lf_views || 0;
-            const dateStr = day ? `${day.getMonth()+1}/${day.getDate()}` : '';
-            return `<span class="trend-label-item">
-              <span class="trend-label-date">${dateStr}</span>
-              <span class="trend-label-count">${views > 0 ? views : '-'}</span>
-              ${views > 0 ? `<span class="trend-label-split"><span style="color:#3b82f6">${tf}</span>/<span style="color:#22c55e">${lf}</span></span>` : ''}
-            </span>`;
-          }).join('');
-        }
+          return `<div class="trend-bar-col">
+            <div class="trend-bar-wrap">
+              <div class="trend-bar-stack ${isToday ? 'trend-bar-today' : ''}" style="height:${pct}%;opacity:${views > 0 ? 1 : 0.25}">
+                ${lfPct > 0 ? `<div class="trend-bar-lf" style="height:${lfPct}%"></div>` : ''}
+                ${tfPct > 0 ? `<div class="trend-bar-tf" style="height:${tfPct}%"></div>` : ''}
+                ${views === 0 ? `<div style="height:100%;background:#334155;border-radius:6px 6px 0 0;"></div>` : ''}
+              </div>
+            </div>
+            <div class="trend-bar-label">
+              <span class="trend-bar-date">${dateStr}</span>
+              <span class="trend-bar-count">${views > 0 ? views : '-'}</span>
+              ${views > 0 ? `<span class="trend-bar-split"><span style="color:#60a5fa">${tf}</span><span style="color:var(--dash-text-dim)">/</span><span style="color:#4ade80">${lf}</span></span>` : ''}
+            </div>
+          </div>`;
+        }).join('');
       }
 
       // Slug을 읽기 좋은 제목으로 변환
