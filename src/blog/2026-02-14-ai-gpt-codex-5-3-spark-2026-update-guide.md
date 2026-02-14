@@ -43,6 +43,41 @@ Codex Spark는 Cerebras 웨이퍼 스케일 엔진 위에서 초당 1,000+ 토�
 
 > 핵심 인사이트: Codex Spark는 속도에서 **15~20배** 앞서지만, Claude Opus 4.6은 코딩 정확도(SWE-bench)에서 **44% 포인트** 앞섭니다. 이는 "빠르게 반복" vs "정확하게 한번에"라는 근본적으로 다른 개발 철학을 반영합니다.
 
+## 먼저 알아야 할 것: GPT-5.3 Codex(풀) vs Codex Spark
+
+Codex Spark를 제대로 이해하려면 같은 날 출시된 **풀 GPT-5.3 Codex**와의 차이를 먼저 파악해야 합니다. 이 둘은 같은 "5.3" 이름을 공유하지만 **완전히 다른 설계 철학**을 가진 모델입니다.
+
+<div class="chart-versus" data-title="GPT-5.3 Codex(풀) vs Codex Spark" data-name-a="Codex(풀)" data-name-b="Codex Spark" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"Terminal-Bench 2.0(%)","a":77,"b":58},{"label":"SWE-bench Pro(%)","a":57,"b":56},{"label":"컨텍스트(K)","a":400,"b":128},{"label":"최대출력(K)","a":128,"b":32},{"label":"속도(tok/s ×10)","a":7,"b":100}]'></div>
+
+| 항목 | GPT-5.3 Codex (풀) | GPT-5.3 Codex Spark |
+|------|:-------------------:|:-------------------:|
+| **출시일** | 2026년 2월 5일 | 2026년 2월 12일 |
+| **하드웨어** | Nvidia GPU | **Cerebras WSE-3** |
+| **설계 목적** | 깊은 추론 + 코딩 통합 | 실시간 속도 최적화 |
+| **속도** | ~65 tok/s | **1,000+ tok/s (15배)** |
+| **SWE-bench Pro** | **56.8%** | ~56% |
+| **Terminal-Bench 2.0** | **77.3%** | 58.4% |
+| **컨텍스트 윈도우** | **400K** | 128K |
+| **최대 출력** | **128K** | ~32K |
+| **멀티모달** | **텍스트 + 이미지** | 텍스트 전용 |
+| **SWE-bench 작업 시간** | 15~17분 | **2~3분** |
+| **토큰 효율성** | 역대 최소 출력 토큰 | 빠르지만 더 많은 토큰 사용 |
+| **가격** | ChatGPT 유료 구독 | ChatGPT Pro $20/월 |
+| **API 접근** | 순차 공개 예정 | 리서치 프리뷰 (제한적) |
+
+### 핵심 차이: 정확도 vs 속도의 트레이드오프
+
+풀 GPT-5.3 Codex는 GPT-5.2 Codex의 코딩 성능과 GPT-5.2의 추론·지식 능력을 **하나로 통합**한 모델입니다. GPT-5.2 대비 25% 빠르면서도 Terminal-Bench에서 **77.3%**를 달성해 복잡한 터미널 작업과 시스템 관리에서 압도적입니다.
+
+반면 Spark는 풀 모델의 추론력을 의도적으로 **축소**하는 대신, Cerebras의 전용 칩 위에서 **15배의 속도**를 얻었습니다. Terminal-Bench 격차(77.3% vs 58.4%)가 이를 명확히 보여줍니다 — 복잡한 멀티스텝 작업에서는 풀 모델이 월등하지만, 단순 코드 생성에서는 Spark가 같은 작업을 **5~8배 빨리** 끝냅니다.
+
+### 언제 풀 Codex를, 언제 Spark를?
+
+- **풀 GPT-5.3 Codex**: 대규모 리팩토링, 복잡한 디버깅, 아키텍처 설계, 400K 컨텍스트가 필요한 대형 프로젝트
+- **Codex Spark**: 빠른 코드 스니펫, UI 프로토타이핑, 반복적 실험, 실시간 대화형 코딩
+
+OpenAI는 이 두 모델을 **상호 보완적으로 사용하도록** 설계했습니다. 복잡한 작업은 풀 Codex에게, 빠른 반복은 Spark에게 맡기는 **Two-Tier 전략**이 권장됩니다.
+
 ## GPT-5.3 Codex Spark: 속도가 곧 생산성인 시대
 
 ### Cerebras WSE-3가 만든 차이
@@ -50,7 +85,7 @@ Codex Spark는 Cerebras 웨이퍼 스케일 엔진 위에서 초당 1,000+ 토�
 Codex Spark는 OpenAI 최초로 **Nvidia가 아닌 Cerebras 칩** 위에서 구동됩니다. Cerebras의 웨이퍼 스케일 엔진 3(WSE-3)는 단일 반도체 웨이퍼 전체를 하나의 칩으로 사용하여 메모리 병목 없이 초고속 추론을 가능하게 합니다.
 
 결과적으로 달성한 성능:
-- **초당 1,000+ 토큰** 생성 (기존 GPT-5.3 Codex 대비 15배)
+- **초당 1,000+ 토큰** 생성 (풀 GPT-5.3 Codex 대비 15배)
 - **Time-to-first-token 50% 단축**
 - **라운드트립 오버헤드 80% 감소**
 - SWE-Bench Pro 작업 완료: 2~3분 (풀 모델 15~17분 대비)
@@ -63,11 +98,11 @@ Codex Spark가 빛나는 순간은 **빠른 반복 코딩**입니다:
 - 코드 리뷰 보조: 대량의 PR을 빠르게 분석
 - 학습/실험: 다양한 접근법을 빠르게 시도
 
-### 한계점
+### 한계점 (풀 Codex 대비)
 
-- **128K 컨텍스트**: 대규모 코드베이스 전체를 한번에 분석 불가
-- **텍스트 전용**: 다이어그램, 스크린샷 기반 코딩 불가
-- **정확도 트레이드오프**: 복잡한 아키텍처 작업에서 풀 모델 대비 약한 추론력
+- **128K 컨텍스트** (풀 모델 400K의 1/3): 대규모 코드베이스 전체를 한번에 분석 불가
+- **텍스트 전용** (풀 모델은 멀티모달): 다이어그램, 스크린샷 기반 코딩 불가
+- **Terminal-Bench 58.4%** (풀 모델 77.3%): 복잡한 멀티스텝 시스템 작업에서 약함
 - **ChatGPT Pro 전용**: 리서치 프리뷰 단계, 일반 API 접근 불가
 
 ## Claude Code Opus 4.6: 정확도와 에이전틱 코딩의 정점
@@ -101,8 +136,9 @@ Claude Opus 4.6은 **100만 토큰 컨텍스트**(베타)를 지원합니다. MR
 
 | 도구 | 가격 | 포함 기능 | 타겟 |
 |------|------|----------|------|
-| **GPT-5.3 Codex Spark** | ChatGPT Pro $20/월 | Codex 앱, CLI, VS Code | 빠른 반복 코딩 |
-| **Claude Code (Opus 4.6)** | Max $100/월 또는 API 종량제 | 터미널 에이전트, 팀 모드 | 복잡한 프로젝트 |
+| **GPT-5.3 Codex (풀)** | ChatGPT 유료 구독 | 400K 컨텍스트, 멀티모달, 심층 추론 | 복잡한 코딩 + 추론 |
+| **GPT-5.3 Codex Spark** | ChatGPT Pro $20/월 | 1,000+ tok/s, Codex 앱, CLI, VS Code | 빠른 반복 코딩 |
+| **Claude Code (Opus 4.6)** | Max $100/월 또는 API 종량제 | 터미널 에이전트, 팀 모드, 1M 컨텍스트 | 대규모 프로젝트 |
 | **GitHub Copilot Pro** | $10/월 | IDE 인라인 완성, 300 프리미엄 요청 | 일상 코딩 |
 | **GitHub Copilot Pro+** | $39/월 | 모든 AI 모델 접근, 1,500 프리미엄 요청 | 파워 유저 |
 
@@ -114,7 +150,7 @@ Claude Opus 4.6은 **100만 토큰 컨텍스트**(베타)를 지원합니다. MR
 
 ## 2026년 현실적 추천: 상황별 최적 도구
 
-<div class="chart-radar" data-title="2026년 AI 코딩 도구 종합 평가" data-items='[{"name":"GPT-5.3 Codex Spark","scores":[{"label":"속도","value":10,"color":"#10b981"},{"label":"정확도","value":6.5,"color":"#3b82f6"},{"label":"컨텍스트","value":6.5,"color":"#f59e0b"},{"label":"에이전틱","value":7,"color":"#ef4444"},{"label":"가격","value":8.5,"color":"#8b5cf6"}]},{"name":"Claude Code Opus 4.6","scores":[{"label":"속도","value":5,"color":"#10b981"},{"label":"정확도","value":9.5,"color":"#3b82f6"},{"label":"컨텍스트","value":9.5,"color":"#f59e0b"},{"label":"에이전틱","value":10,"color":"#ef4444"},{"label":"가격","value":6,"color":"#8b5cf6"}]},{"name":"GitHub Copilot Pro+","scores":[{"label":"속도","value":7.5,"color":"#10b981"},{"label":"정확도","value":7.5,"color":"#3b82f6"},{"label":"컨텍스트","value":7,"color":"#f59e0b"},{"label":"에이전틱","value":7,"color":"#ef4444"},{"label":"가격","value":7,"color":"#8b5cf6"}]}]'></div>
+<div class="chart-radar" data-title="2026년 AI 코딩 도구 종합 평가" data-items='[{"name":"GPT-5.3 Codex(풀)","scores":[{"label":"속도","value":6,"color":"#3b82f6"},{"label":"정확도","value":8.5,"color":"#3b82f6"},{"label":"컨텍스트","value":9,"color":"#3b82f6"},{"label":"에이전틱","value":8,"color":"#3b82f6"},{"label":"가격","value":7.5,"color":"#3b82f6"}]},{"name":"GPT-5.3 Codex Spark","scores":[{"label":"속도","value":10,"color":"#10b981"},{"label":"정확도","value":6.5,"color":"#10b981"},{"label":"컨텍스트","value":6.5,"color":"#10b981"},{"label":"에이전틱","value":7,"color":"#10b981"},{"label":"가격","value":8.5,"color":"#10b981"}]},{"name":"Claude Code Opus 4.6","scores":[{"label":"속도","value":5,"color":"#8b5cf6"},{"label":"정확도","value":9.5,"color":"#8b5cf6"},{"label":"컨텍스트","value":9.5,"color":"#8b5cf6"},{"label":"에이전틱","value":10,"color":"#8b5cf6"},{"label":"가격","value":6,"color":"#8b5cf6"}]}]'></div>
 
 ### Codex Spark를 선택해야 할 때
 - 프론트엔드 UI를 빠르게 프로토타이핑할 때
