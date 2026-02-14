@@ -873,6 +873,61 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         text-align: right;
       }
 
+      /* Category Traffic */
+      .cat-traffic-section {
+        margin-top: 1.25rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--dash-border);
+      }
+      .cat-traffic-title {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--dash-text);
+        margin-bottom: 0.75rem;
+        letter-spacing: 0.03em;
+      }
+      .cat-traffic-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .cat-traffic-name {
+        font-size: 0.6875rem;
+        font-weight: 600;
+        color: var(--dash-text);
+        min-width: 64px;
+        flex-shrink: 0;
+      }
+      .cat-traffic-bar-wrap {
+        flex: 1;
+        height: 18px;
+        background: var(--dash-bg);
+        border-radius: 9px;
+        overflow: hidden;
+      }
+      .cat-traffic-bar {
+        height: 100%;
+        border-radius: 9px;
+        transition: width 0.6s ease;
+        min-width: 4px;
+      }
+      .cat-traffic-value {
+        font-size: 0.6875rem;
+        font-weight: 700;
+        color: var(--dash-text);
+        min-width: 48px;
+        text-align: right;
+        flex-shrink: 0;
+      }
+      .cat-traffic-share {
+        font-size: 0.625rem;
+        color: var(--dash-text-dim);
+        min-width: 28px;
+        text-align: right;
+        flex-shrink: 0;
+      }
+
       /* 7-Day Trend Chart */
       .trend-section {
         background: var(--dash-surface);
@@ -1525,6 +1580,12 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
                 })}
               </div>
             </div>
+            <div class="cat-traffic-section" id="tf-cat-traffic">
+              <div class="cat-traffic-title">카테고리별 트래픽</div>
+              <div class="cat-traffic-bars" id="tf-cat-traffic-bars">
+                <div class="loading"><div class="spinner"></div>로딩 중...</div>
+              </div>
+            </div>
             <div class="recent-list">
               {tfRecentPosts.map((p, i) => (
                 <div class="recent-item">
@@ -1596,6 +1657,12 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
                 ))}
               </div>
             </div>
+            <div class="cat-traffic-section" id="lf-cat-traffic">
+              <div class="cat-traffic-title">카테고리별 트래픽</div>
+              <div class="cat-traffic-bars" id="lf-cat-traffic-bars">
+                <div class="loading"><div class="spinner"></div>로딩 중...</div>
+              </div>
+            </div>
             <div class="recent-list" id="lf-recent-list-tab">
               <div class="loading"><div class="spinner"></div>RSS 로딩 중...</div>
             </div>
@@ -1649,6 +1716,7 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
     <script define:vars={{
       SUPABASE_URL: 'https://xyprbsmagtlzebxyxsvj.supabase.co',
       SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5cHJic21hZ3RsemVieHl4c3ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjY4NTQsImV4cCI6MjA4NjA0Mjg1NH0.dajN0n0IWzOgYOSCglxVLzddg7jJFRHNCHwTWMG62uU',
+      TF_SLUG_CAT: Object.fromEntries(allPosts.map(p => [p.id, p.data.category])),
       LF_POSTS: [
         { slug: 'effective-foreign-language-learning-strategies-2025', title: '효과적인 외국어 학습 전략 가이드', category: 'Education', date: '2026-02-13' },
         { slug: 'healthy-diet-guide-2024-nutrition', title: '건강한 식단 관리 완벽 가이드', category: 'Health', date: '2026-02-12' },
@@ -2008,6 +2076,94 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         }).join('');
       }
 
+      // === 카테고리별 트래픽 렌더링 ===
+      function renderCategoryTraffic() {
+        const tfColors = { 'AI': '#3b82f6', 'Dev': '#22c55e', 'Review': '#eab308', 'Game': '#a855f7' };
+        const lfColors = {
+          'Lifestyle': '#ec4899', 'Finance': '#3b82f6',
+          'Health': '#22c55e', 'Education': '#a855f7', 'Travel': '#f97316',
+        };
+
+        const tfCatViews = {};
+        const lfCatViews = {};
+
+        _topPagesData.forEach(p => {
+          const rawSlug = (p.slug || p.path || '').replace(/^\/blog\//, '').replace(/\/$/, '');
+          const slug = decodeURIComponent(rawSlug);
+
+          // TechFlow 매칭: TF_SLUG_CAT에서 찾기
+          const tfCat = TF_SLUG_CAT[slug] || TF_SLUG_CAT[rawSlug];
+          if (tfCat) {
+            tfCatViews[tfCat] = (tfCatViews[tfCat] || 0) + (p.views || 0);
+            return;
+          }
+
+          // LifeFlow 매칭: LF_POSTS 또는 RSS 데이터에서 카테고리 매핑
+          const lfPost = LF_POSTS.find(lp => slug.includes(lp.slug) || rawSlug.includes(lp.slug));
+          const rssPost = lfRssData.find(rp => {
+            const rssSlug = (rp.link || '').split('/').filter(Boolean).pop() || '';
+            return slug.includes(rssSlug) || rssSlug.includes(slug);
+          });
+          const lfCat = lfPost?.category || rssPost?.category || '';
+          if (lfCat) {
+            const capCat = lfCat.charAt(0).toUpperCase() + lfCat.slice(1);
+            lfCatViews[capCat] = (lfCatViews[capCat] || 0) + (p.views || 0);
+          }
+        });
+
+        // TechFlow 바 렌더링
+        const tfContainer = document.getElementById('tf-cat-traffic-bars');
+        if (tfContainer) {
+          const tfEntries = Object.entries(tfCatViews).sort((a, b) => b[1] - a[1]);
+          const tfMax = tfEntries.length > 0 ? tfEntries[0][1] : 1;
+          const tfTotal = tfEntries.reduce((s, [, v]) => s + v, 0);
+
+          if (tfEntries.length === 0) {
+            tfContainer.innerHTML = '<div class="no-data">아직 트래픽 데이터가 없습니다</div>';
+          } else {
+            tfContainer.innerHTML = tfEntries.map(([cat, views]) => {
+              const pct = Math.max((views / tfMax) * 100, 8);
+              const color = tfColors[cat] || '#94a3b8';
+              const share = tfTotal > 0 ? Math.round(views / tfTotal * 100) : 0;
+              return `<div class="cat-traffic-row">
+                <span class="cat-traffic-name">${cat}</span>
+                <div class="cat-traffic-bar-wrap">
+                  <div class="cat-traffic-bar" style="width:${pct}%;background:${color}"></div>
+                </div>
+                <span class="cat-traffic-value">${fmt(views)}회</span>
+                <span class="cat-traffic-share">${share}%</span>
+              </div>`;
+            }).join('');
+          }
+        }
+
+        // LifeFlow 바 렌더링
+        const lfContainer = document.getElementById('lf-cat-traffic-bars');
+        if (lfContainer) {
+          const lfEntries = Object.entries(lfCatViews).sort((a, b) => b[1] - a[1]);
+          const lfMax = lfEntries.length > 0 ? lfEntries[0][1] : 1;
+          const lfTotal = lfEntries.reduce((s, [, v]) => s + v, 0);
+
+          if (lfEntries.length === 0) {
+            lfContainer.innerHTML = '<div class="no-data">아직 트래픽 데이터가 없습니다</div>';
+          } else {
+            lfContainer.innerHTML = lfEntries.map(([cat, views]) => {
+              const pct = Math.max((views / lfMax) * 100, 8);
+              const color = lfColors[cat] || '#94a3b8';
+              const share = lfTotal > 0 ? Math.round(views / lfTotal * 100) : 0;
+              return `<div class="cat-traffic-row">
+                <span class="cat-traffic-name">${cat}</span>
+                <div class="cat-traffic-bar-wrap">
+                  <div class="cat-traffic-bar" style="width:${pct}%;background:${color}"></div>
+                </div>
+                <span class="cat-traffic-value">${fmt(views)}회</span>
+                <span class="cat-traffic-share">${share}%</span>
+              </div>`;
+            }).join('');
+          }
+        }
+      }
+
       // === Event Feed 전역 데이터 & 필터 ===
       let _eventsData = [];
       let _eventsFilter = 'all';
@@ -2071,7 +2227,7 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           const [summary, hourly, topPages, events, trend] = await Promise.all([
             rpc('get_traffic_summary'),
             rpc('get_hourly_views'),
-            rpc('get_top_pages', { p_limit: 10 }),
+            rpc('get_top_pages', { p_limit: 50 }),
             rpc('get_recent_events', { p_limit: 20 }),
             rpc('get_daily_trend')
           ]);
@@ -2219,6 +2375,7 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           renderTopPages(topPages);
           renderEventFeed(events);
           renderTrendChart(trend);
+          renderCategoryTraffic();
 
           document.getElementById('last-updated').textContent =
             `Updated: ${new Date().toLocaleString('ko-KR')}`;
