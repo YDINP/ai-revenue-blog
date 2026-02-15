@@ -4,6 +4,7 @@ import CoupangBanner from '../components/CoupangBanner.astro';
 import AdSlot from '../components/AdSlot.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
 import NewsletterCTA from '../components/NewsletterCTA.astro';
+import CommentSection from '../components/CommentSection.astro';
 
 interface ChartBarData {
   type: 'chart-bar';
@@ -296,6 +297,9 @@ const seriesTotal = seriesPosts.length;
 
     <!-- Newsletter CTA -->
     <NewsletterCTA />
+
+    <!-- 댓글 섹션 -->
+    {slug && <CommentSection slug={slug} source="blog" />}
 
     <!-- 이전/다음 글 네비게이션 -->
     {(prevPost || nextPost) && (

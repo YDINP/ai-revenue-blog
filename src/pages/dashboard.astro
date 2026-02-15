@@ -158,6 +158,8 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
       .summary-card.accent-green::before { background: var(--dash-green); }
       .summary-card.accent-purple::before { background: var(--dash-purple); }
       .summary-card.accent-yellow::before { background: var(--dash-yellow); }
+      .summary-card.accent-red::before { background: var(--dash-red); }
+      .summary-card.accent-cyan::before { background: var(--dash-cyan); }
 
       .summary-card .label {
         font-size: 0.75rem;
@@ -1144,6 +1146,12 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         color: #fff;
       }
 
+      .main-tab.active-comments {
+        background: var(--dash-cyan);
+        border-color: var(--dash-cyan);
+        color: #fff;
+      }
+
       .tab-content {
         display: none;
       }
@@ -1182,6 +1190,321 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         margin-bottom: 0.5rem;
       }
 
+      /* Comment Tab 전용 스타일 */
+      .comment-auth-gate {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 300px;
+      }
+
+      .auth-box {
+        background: var(--dash-surface);
+        border: 1px solid var(--dash-border);
+        border-radius: 16px;
+        padding: 2.5rem;
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+      }
+
+      .auth-box h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .auth-box p {
+        color: var(--dash-text-dim);
+        font-size: 0.875rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .auth-input-row {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .auth-input-row input {
+        flex: 1;
+        padding: 0.625rem 1rem;
+        background: var(--dash-bg);
+        border: 1px solid var(--dash-border);
+        border-radius: 8px;
+        color: var(--dash-text);
+        font-size: 0.875rem;
+        outline: none;
+      }
+
+      .auth-input-row input:focus {
+        border-color: var(--dash-cyan);
+      }
+
+      .auth-input-row button {
+        padding: 0.625rem 1.25rem;
+        background: var(--dash-cyan);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+
+      .auth-input-row button:hover {
+        opacity: 0.85;
+      }
+
+      .auth-error {
+        color: var(--dash-red);
+        font-size: 0.8125rem;
+        margin-top: 0.75rem;
+      }
+
+      .comment-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .comment-filters {
+        display: flex;
+        gap: 0.375rem;
+      }
+
+      .filter-btn {
+        padding: 0.375rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1px solid var(--dash-border);
+        background: var(--dash-surface);
+        color: var(--dash-text-dim);
+        transition: all 0.2s;
+      }
+
+      .filter-btn:hover {
+        border-color: var(--dash-cyan);
+        color: var(--dash-text);
+      }
+
+      .filter-btn.active {
+        background: var(--dash-cyan);
+        border-color: var(--dash-cyan);
+        color: #fff;
+      }
+
+      .comment-trend-chart {
+        display: flex;
+        align-items: flex-end;
+        gap: 0.75rem;
+        height: 160px;
+        padding: 1rem 0;
+      }
+
+      .trend-bar-group {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        height: 100%;
+        justify-content: flex-end;
+      }
+
+      .trend-bars {
+        display: flex;
+        gap: 2px;
+        align-items: flex-end;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .trend-bar {
+        width: 14px;
+        border-radius: 3px 3px 0 0;
+        min-height: 4px;
+        transition: height 0.3s;
+      }
+
+      .trend-bar.tf { background: var(--dash-accent); }
+      .trend-bar.lf { background: var(--dash-green); }
+
+      .trend-label {
+        font-size: 0.625rem;
+        color: var(--dash-text-dim);
+      }
+
+      .trend-count {
+        font-size: 0.6875rem;
+        font-weight: 700;
+        color: var(--dash-text);
+      }
+
+      .comment-list {
+        max-height: 600px;
+        overflow-y: auto;
+      }
+
+      .cm-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1rem;
+        border-bottom: 1px solid var(--dash-border);
+        transition: background 0.2s;
+      }
+
+      .cm-item:hover {
+        background: var(--dash-surface-hover);
+      }
+
+      .cm-source {
+        font-size: 0.625rem;
+        font-weight: 700;
+        padding: 0.125rem 0.375rem;
+        border-radius: 4px;
+        white-space: nowrap;
+        flex-shrink: 0;
+        margin-top: 0.125rem;
+      }
+
+      .cm-source.tf {
+        background: rgba(59, 130, 246, 0.15);
+        color: var(--dash-accent);
+      }
+
+      .cm-source.lf {
+        background: rgba(34, 197, 94, 0.15);
+        color: var(--dash-green);
+      }
+
+      .cm-body {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .cm-meta {
+        font-size: 0.75rem;
+        color: var(--dash-text-dim);
+        margin-bottom: 0.25rem;
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      .cm-nickname {
+        font-weight: 700;
+        color: var(--dash-text);
+      }
+
+      .cm-admin-badge {
+        font-size: 0.625rem;
+        background: var(--dash-accent);
+        color: #fff;
+        padding: 0 0.375rem;
+        border-radius: 4px;
+        font-weight: 600;
+      }
+
+      .cm-report-badge {
+        font-size: 0.625rem;
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--dash-red);
+        padding: 0 0.375rem;
+        border-radius: 4px;
+        font-weight: 600;
+      }
+
+      .cm-content {
+        font-size: 0.875rem;
+        color: var(--dash-text);
+        line-height: 1.5;
+        word-break: break-word;
+      }
+
+      .cm-slug {
+        font-size: 0.6875rem;
+        color: var(--dash-text-dim);
+        margin-top: 0.25rem;
+      }
+
+      .cm-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.375rem;
+        flex-shrink: 0;
+      }
+
+      .cm-btn {
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1px solid var(--dash-border);
+        background: var(--dash-surface);
+        color: var(--dash-text-dim);
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+
+      .cm-btn:hover { border-color: var(--dash-cyan); color: var(--dash-text); }
+      .cm-btn.danger { color: var(--dash-red); }
+      .cm-btn.danger:hover { background: rgba(239, 68, 68, 0.1); border-color: var(--dash-red); }
+
+      .cm-reply-form {
+        margin-top: 0.5rem;
+        display: flex;
+        gap: 0.375rem;
+      }
+
+      .cm-reply-form input {
+        flex: 1;
+        padding: 0.375rem 0.625rem;
+        background: var(--dash-bg);
+        border: 1px solid var(--dash-border);
+        border-radius: 6px;
+        color: var(--dash-text);
+        font-size: 0.8125rem;
+        outline: none;
+      }
+
+      .cm-reply-form input:focus { border-color: var(--dash-cyan); }
+
+      .cm-reply-form button {
+        padding: 0.375rem 0.75rem;
+        background: var(--dash-cyan);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.8125rem;
+        cursor: pointer;
+      }
+
+      .trend-legend {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 0.5rem;
+        font-size: 0.6875rem;
+        color: var(--dash-text-dim);
+      }
+
+      .trend-legend span::before {
+        content: '';
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        margin-right: 0.25rem;
+        vertical-align: middle;
+      }
+
+      .trend-legend .leg-tf::before { background: var(--dash-accent); }
+      .trend-legend .leg-lf::before { background: var(--dash-green); }
+
       /* Responsive */
       @media (max-width: 768px) {
         .summary-grid { grid-template-columns: 1fr; }
@@ -1201,6 +1524,10 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           flex-shrink: 0;
         }
         .coupang-stats { grid-template-columns: 1fr; }
+        .comment-stats-grid { grid-template-columns: 1fr; }
+        .comment-filters { flex-wrap: wrap; }
+        .cm-item { flex-direction: column; gap: 0.5rem; }
+        .cm-actions { flex-direction: row; }
         .summary-card .value { font-size: 1.5rem; }
         .summary-card .sub { font-size: 0.6875rem; }
       }
@@ -1231,6 +1558,7 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         <button class="main-tab" data-tab="techflow">💻 TechFlow</button>
         <button class="main-tab" data-tab="lifeflow">🌱 LifeFlow</button>
         <button class="main-tab" data-tab="coupang">🛒 쿠팡</button>
+        <button class="main-tab" data-tab="comments">💬 댓글</button>
       </div>
 
       <!-- Tab: 전체 요약 -->
@@ -1707,6 +2035,78 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           <div class="traffic-body">
             <div class="event-feed" id="coupang-events">
               <div class="no-data">쿠팡 클릭 데이터 로딩 중...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: 댓글 관리 -->
+      <div class="tab-content" id="tab-comments">
+        <!-- 관리자 인증 -->
+        <div id="comment-auth" class="comment-auth-gate">
+          <div class="auth-box">
+            <h3>🔐 관리자 인증</h3>
+            <p>댓글 관리 기능을 사용하려면 관리자 키를 입력하세요.</p>
+            <div class="auth-input-row">
+              <input type="password" id="admin-key-input" placeholder="관리자 키 입력" />
+              <button id="admin-key-submit">인증</button>
+            </div>
+            <div id="auth-error" class="auth-error" style="display:none;">인증 키가 올바르지 않습니다.</div>
+          </div>
+        </div>
+
+        <!-- 인증 후 표시 -->
+        <div id="comment-dashboard" style="display:none;">
+          <!-- 요약 카드 -->
+          <div class="comment-stats-grid">
+            <div class="summary-card accent-cyan">
+              <span class="card-icon">💬</span>
+              <div class="label">전체 댓글</div>
+              <div class="value" id="cm-total">--</div>
+              <div class="sub" id="cm-by-source">TechFlow -- / LifeFlow --</div>
+            </div>
+            <div class="summary-card accent-green">
+              <span class="card-icon">📅</span>
+              <div class="label">오늘 댓글</div>
+              <div class="value" id="cm-today">--</div>
+              <div class="sub">금일 작성된 댓글 수</div>
+            </div>
+            <div class="summary-card accent-red">
+              <span class="card-icon">🚨</span>
+              <div class="label">신고된 댓글</div>
+              <div class="value" id="cm-reports">--</div>
+              <div class="sub">사용자 신고 접수</div>
+            </div>
+          </div>
+
+          <!-- 7일 트렌드 차트 -->
+          <div class="traffic-section" style="margin-top:1.5rem;">
+            <div class="traffic-header">
+              <h3>📈 7일 댓글 트렌드</h3>
+              <button class="refresh-btn" id="refresh-comments">↻ 새로고침</button>
+            </div>
+            <div class="traffic-body">
+              <div class="comment-trend-chart" id="comment-trend-chart">
+                <div class="no-data">트렌드 데이터 로딩 중...</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 소스 필터 -->
+          <div class="traffic-section" style="margin-top:1.5rem;">
+            <div class="traffic-header">
+              <h3>📋 전체 댓글 목록</h3>
+              <div class="comment-filters">
+                <button class="filter-btn active" data-source="all">전체</button>
+                <button class="filter-btn" data-source="blog">TechFlow</button>
+                <button class="filter-btn" data-source="lifeflow">LifeFlow</button>
+                <button class="filter-btn" data-source="reported">🚨 신고</button>
+              </div>
+            </div>
+            <div class="traffic-body">
+              <div class="comment-list" id="comment-list">
+                <div class="no-data">댓글 데이터 로딩 중...</div>
+              </div>
             </div>
           </div>
         </div>
@@ -2409,6 +2809,9 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
             tab.classList.add('active-lf');
           } else if (targetTab === 'coupang') {
             tab.classList.add('active-coupang');
+          } else if (targetTab === 'comments') {
+            tab.classList.add('active-comments');
+            loadCommentDashboard();
           } else {
             tab.classList.add('active');
           }
@@ -2424,6 +2827,254 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
             targetContent.classList.add('active');
           }
         });
+      });
+
+      // ========== 댓글 관리 ==========
+      let adminKey = localStorage.getItem('dash-admin-key') || '';
+      let allComments = [];
+      let currentFilter = 'all';
+
+      // 관리자 인증
+      document.getElementById('admin-key-submit')?.addEventListener('click', verifyAdminKey);
+      document.getElementById('admin-key-input')?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') verifyAdminKey();
+      });
+
+      function verifyAdminKey() {
+        const input = document.getElementById('admin-key-input');
+        const key = input?.value?.trim();
+        if (!key) return;
+        adminKey = key;
+        localStorage.setItem('dash-admin-key', key);
+        showCommentDashboard();
+      }
+
+      function showCommentDashboard() {
+        const gate = document.getElementById('comment-auth');
+        const dash = document.getElementById('comment-dashboard');
+        if (gate) gate.style.display = 'none';
+        if (dash) dash.style.display = 'block';
+        loadCommentData();
+      }
+
+      // 저장된 키가 있으면 자동 인증
+      function loadCommentDashboard() {
+        if (adminKey) {
+          showCommentDashboard();
+        }
+      }
+
+      async function loadCommentData() {
+        try {
+          // 통계 + 목록 + 트렌드 병렬 로드
+          const [stats, comments, trend] = await Promise.all([
+            rpc('get_comment_stats'),
+            rpc('get_all_comments', { p_limit: 100, p_offset: 0 }),
+            rpc('get_comment_trend')
+          ]);
+
+          // 통계 카드 업데이트
+          if (stats && typeof stats === 'object') {
+            document.getElementById('cm-total').textContent = fmt(stats.total || 0);
+            document.getElementById('cm-today').textContent = fmt(stats.today || 0);
+            document.getElementById('cm-reports').textContent = fmt(stats.reports || 0);
+            document.getElementById('cm-by-source').textContent =
+              `TechFlow ${stats.blog_count || 0} / LifeFlow ${stats.lifeflow_count || 0}`;
+          }
+
+          // 댓글 목록 저장 + 렌더
+          allComments = Array.isArray(comments) ? comments : [];
+          renderComments();
+
+          // 트렌드 차트
+          renderTrend(Array.isArray(trend) ? trend : []);
+
+        } catch (e) {
+          console.error('Comment data load error:', e);
+        }
+      }
+
+      function renderComments() {
+        const container = document.getElementById('comment-list');
+        if (!container) return;
+
+        let filtered = allComments;
+        if (currentFilter === 'blog') {
+          filtered = allComments.filter(c => c.source === 'blog');
+        } else if (currentFilter === 'lifeflow') {
+          filtered = allComments.filter(c => c.source === 'lifeflow');
+        } else if (currentFilter === 'reported') {
+          filtered = allComments.filter(c => (c.report_count || 0) > 0);
+        }
+
+        if (filtered.length === 0) {
+          container.innerHTML = '<div class="no-data">표시할 댓글이 없습니다.</div>';
+          return;
+        }
+
+        container.innerHTML = filtered.map(c => {
+          const srcClass = c.source === 'blog' ? 'tf' : 'lf';
+          const srcLabel = c.source === 'blog' ? 'TF' : 'LF';
+          const date = new Date(c.created_at).toLocaleString('ko-KR', {
+            month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
+          });
+          const reportBadge = (c.report_count || 0) > 0
+            ? `<span class="cm-report-badge">신고 ${c.report_count}</span>` : '';
+          const adminBadge = c.is_admin
+            ? '<span class="cm-admin-badge">관리자</span>' : '';
+          const parentNote = c.parent_id
+            ? '<span style="color:var(--dash-cyan);">↩ 답글</span>' : '';
+
+          return `
+            <div class="cm-item" data-id="${c.id}" data-slug="${c.post_slug}" data-source="${c.source}">
+              <span class="cm-source ${srcClass}">${srcLabel}</span>
+              <div class="cm-body">
+                <div class="cm-meta">
+                  <span class="cm-nickname">${escHtml(c.nickname)}</span>
+                  ${adminBadge}${reportBadge}${parentNote}
+                  <span>${date}</span>
+                </div>
+                <div class="cm-content">${escHtml(c.content)}</div>
+                <div class="cm-slug">📄 ${escHtml(c.post_slug)}</div>
+              </div>
+              <div class="cm-actions">
+                <button class="cm-btn" onclick="toggleReplyForm('${c.id}')">💬 답변</button>
+                <button class="cm-btn danger" onclick="adminDeleteComment('${c.id}')">🗑 삭제</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function escHtml(s) {
+        if (!s) return '';
+        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      }
+
+      // 답변 폼 토글
+      window.toggleReplyForm = function(commentId) {
+        const item = document.querySelector(`.cm-item[data-id="${commentId}"]`);
+        if (!item) return;
+        const existing = item.querySelector('.cm-reply-form');
+        if (existing) { existing.remove(); return; }
+
+        const body = item.querySelector('.cm-body');
+        const form = document.createElement('div');
+        form.className = 'cm-reply-form';
+        form.innerHTML = `
+          <input type="text" placeholder="관리자 답변 입력..." id="reply-input-${commentId}" />
+          <button onclick="submitAdminReply('${commentId}')">전송</button>
+        `;
+        body.appendChild(form);
+        form.querySelector('input').focus();
+      };
+
+      // 관리자 답변 전송
+      window.submitAdminReply = async function(commentId) {
+        const input = document.getElementById(`reply-input-${commentId}`);
+        const content = input?.value?.trim();
+        if (!content) return;
+
+        const item = document.querySelector(`.cm-item[data-id="${commentId}"]`);
+        const slug = item?.dataset.slug;
+        const source = item?.dataset.source;
+
+        try {
+          const result = await rpc('admin_reply', {
+            p_parent_id: commentId,
+            p_slug: slug,
+            p_source: source || 'blog',
+            p_content: content,
+            p_admin_key: adminKey
+          });
+
+          if (result?.success) {
+            loadCommentData();
+          } else if (result?.error === 'unauthorized') {
+            alert('관리자 키가 올바르지 않습니다. 다시 인증해 주세요.');
+            localStorage.removeItem('dash-admin-key');
+            adminKey = '';
+            document.getElementById('comment-auth').style.display = 'flex';
+            document.getElementById('comment-dashboard').style.display = 'none';
+          } else {
+            alert('답변 전송 실패: ' + (result?.error || 'unknown'));
+          }
+        } catch (e) {
+          alert('답변 전송 중 오류가 발생했습니다.');
+          console.error(e);
+        }
+      };
+
+      // 관리자 삭제
+      window.adminDeleteComment = async function(commentId) {
+        if (!confirm('이 댓글을 삭제하시겠습니까?')) return;
+        try {
+          const result = await rpc('admin_delete_comment', {
+            p_id: commentId,
+            p_admin_key: adminKey
+          });
+
+          if (result?.success) {
+            loadCommentData();
+          } else if (result?.error === 'unauthorized') {
+            alert('관리자 키가 올바르지 않습니다.');
+            localStorage.removeItem('dash-admin-key');
+            adminKey = '';
+          } else {
+            alert('삭제 실패: ' + (result?.error || 'unknown'));
+          }
+        } catch (e) {
+          alert('삭제 중 오류가 발생했습니다.');
+          console.error(e);
+        }
+      };
+
+      // 트렌드 차트 렌더
+      function renderTrend(data) {
+        const container = document.getElementById('comment-trend-chart');
+        if (!container) return;
+
+        if (data.length === 0) {
+          container.innerHTML = '<div class="no-data">최근 7일간 댓글이 없습니다.</div>';
+          return;
+        }
+
+        const maxCount = Math.max(...data.map(d => d.count), 1);
+        const maxH = 120;
+
+        const barsHtml = data.map(d => {
+          const tfH = Math.max((d.blog_count / maxCount) * maxH, 4);
+          const lfH = Math.max((d.lf_count / maxCount) * maxH, 4);
+          const dayLabel = new Date(d.day).toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' });
+          return `
+            <div class="trend-bar-group">
+              <div class="trend-count">${d.count}</div>
+              <div class="trend-bars">
+                <div class="trend-bar tf" style="height:${tfH}px" title="TF: ${d.blog_count}"></div>
+                <div class="trend-bar lf" style="height:${lfH}px" title="LF: ${d.lf_count}"></div>
+              </div>
+              <div class="trend-label">${dayLabel}</div>
+            </div>
+          `;
+        }).join('');
+
+        container.innerHTML = barsHtml +
+          '<div class="trend-legend"><span class="leg-tf">TechFlow</span><span class="leg-lf">LifeFlow</span></div>';
+      }
+
+      // 필터 버튼
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFilter = btn.dataset.source;
+          renderComments();
+        });
+      });
+
+      // 새로고침 버튼
+      document.getElementById('refresh-comments')?.addEventListener('click', () => {
+        loadCommentData();
       });
 
       // Init
