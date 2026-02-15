@@ -81,8 +81,6 @@ Google이 만든 Go는 **심플함**이 최고의 무기입니다. 배우기 쉽
 - 에러 처리가 장황함 (`if err != nil` 패턴)
 - 프론트엔드 코드 공유 불가
 
-<div class="callout-warning">⚠️ <strong>주의사항</strong>: Google이 만든 Go는 심플함이 최고의 무기입니다. 배우기 쉽고, 빠르고, 동시성(concurrency) 처리가 탁월합니다.</div>
-
 ## 벤치마크: HTTP 요청 처리 성능
 
 <div class="chart-bar" data-title="초당 HTTP 요청 처리량 (req/sec)" data-labels="TypeScript (Bun),Rust (Actix),Go (Gin)" data-values="145000,312000,198000" data-colors="#3178c6,#dea584,#00add8" data-unit="req/s"></div>
@@ -104,9 +102,6 @@ Google이 만든 Go는 **심플함**이 최고의 무기입니다. 배우기 쉽
 - **빠르게 배우고 안정적이어야 한다면** → Go
 
 2026년에는 하나만 고집할 필요 없습니다. TypeScript로 프로토타입을 만들고, 병목 구간만 Rust나 Go로 최적화하는 **폴리글랏 접근**이 현실적인 최선입니다.
-
-<div class="callout-info">ℹ️ <strong>참고</strong>: 빠르게 만들어야 한다면</div>
-
 
 ## 참고 자료
 

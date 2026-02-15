@@ -40,8 +40,6 @@ Unity는 전 세계에서 가장 많이 사용되는 게임 엔진으로, 특히
 - VR/AR 애플리케이션
 - 인디 게임 전반
 
-<div class="callout-tip">💡 <strong>핵심 포인트</strong>: 주요 장점:</div>
-
 ## Unreal Engine: AAA급 그래픽의 강자
 
 Epic Games의 Unreal Engine은 최고 수준의 그래픽 품질을 자랑하며, 대작 게임 개발에 주로 사용됩니다.
@@ -135,8 +133,6 @@ Cocos Creator는 중국에서 개발된 엔진으로, 특히 아시아 모바일
 - 슬롯 게임, 카지노 게임
 - 경량 퍼즐 게임
 
-<div class="callout-warning">⚠️ <strong>주의사항</strong>: 주요 장점:</div>
-
 ## 엔진별 핵심 지표 비교
 
 <div class="chart-progress" data-title="게임 엔진 학습 난이도 (높을수록 어려움)" data-labels="Unity,Unreal,Godot,Phaser,Cocos" data-values="60,85,40,30,50" data-colors="#3b82f6,#10b981,#8b5cf6,#f59e0b,#ef4444" data-max="100" data-unit="점"></div>
@@ -191,9 +187,6 @@ Cocos Creator는 중국에서 개발된 엔진으로, 특히 아시아 모바일
 **비용이 걱정된다면** Godot를 고려하세요. 로열티 걱정 없이 자유롭게 개발할 수 있습니다.
 
 어떤 엔진을 선택하든, 중요한 것은 꾸준히 프로젝트를 완성하는 것입니다. 완벽한 엔진을 찾는 것보다, 선택한 엔진을 깊이 있게 학습하는 것이 성공적인 게임 개발의 비결입니다.
-
-<div class="callout-info">ℹ️ <strong>참고</strong>: 입문자라면</div>
-
 
 ## 참고 자료
 

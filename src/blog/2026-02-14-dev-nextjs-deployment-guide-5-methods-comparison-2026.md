@@ -31,8 +31,6 @@ Next.js로 멋진 프로젝트를 완성하셨는데, 배포를 어떻게 할지
 
 Next.js를 배포할 때는 단순히 '어디에 올릴 것인가'만 고민해서는 안 됩니다. 여기서 주목할 점이 있습니다. **Edge Runtime, 이미지 최적화, 자동 스케일링** 같은 Next.js의 강력한 기능을 제대로 활용할 수 있는 환경을 선택해야 한다는 겁니다. 잘못된 배포 방식을 선택하면 성능 최적화 기능을 전혀 쓰지 못하거나, 수동으로 설정해야 하는 번거로움이 생깁니다.
 
-<div class="callout-tip">💡 <strong>핵심 포인트</strong>: Next.js 특화 기능(Image Optimization, API Routes, Middleware)을 최대한 활용할 수 있는 플랫폼을 선택하는 것이 성능과 유지보수 효율성을 좌우합니다.</div>
-
 ## Next.js 배포 5가지 방법 비교
 
 ### 1. Vercel: 공식 플랫폼 (가장 추천)
@@ -142,8 +140,6 @@ Vercel의 주요 경쟁자로, JAMstack 배포에 특화되어 있습니다.
 | Docker (EC2) | 1.8초 | ⭐⭐⭐ | 90ms | 어려움 | $7~30 |
 | Fly.io | 1.5초 | ⭐⭐⭐⭐ | 88ms | 보통 | $2~15 |
 
-<div class="callout-warning">⚠️ <strong>주의사항</strong>: 초기 로딩 속도는 프로젝트 크기, 라우팅 구조, 외부 API 호출에 따라 크게 달라집니다. 위 수치는 참고용으로만 사용하세요.</div>
-
 ## 프로젝트 규모별 추천 배포 방식
 
 ### 개인 프로젝트 또는 사이드 프로젝트 → Vercel
@@ -179,8 +175,6 @@ DynamoDB, Lambda, RDS 같은 AWS 서비스를 함께 사용해야 한다면 Ampl
 **5단계:** 배포 완료 (약 1-2분 소요)
 
 정말로 이것뿐입니다. 환경 변수가 필요하면 대시보드에서 추가하고, git push하면 자동으로 재배포됩니다.
-
-<div class="callout-info">ℹ️ <strong>참고</strong>: Next.js 프로젝트를 Docker로 배포하려면 Dockerfile이 필요합니다. 기본 형태는 Node.js 이미지에서 빌드 후 실행하는 멀티스테이지 빌드 구조입니다. 더 자세한 설정은 Docker 공식 문서를 참고하세요.</div>
 
 ## 배포 후 모니터링과 최적화
 
@@ -218,9 +212,6 @@ Vercel 대시보드에서 이 지표들을 실시간으로 볼 수 있으며, �
 ### 배포 후 성능 저하가 생기면 어떻게 해야 하나요?
 
 먼저 배포 플랫폼의 모니터링 도구(Vercel의 Analytics, 또는 Google PageSpeed Insights)로 병목 지점을 파악하세요. 대부분 이미지 최적화 누락, API 응답 지연, 과도한 JavaScript 번들 크기가 원인입니다. Next.js Image 컴포넌트 사용, API 캐싱, 동적 임포트(Dynamic Import) 활용으로 개선할 수 있습니다.
-
-
-
 
 ## 참고 자료
 

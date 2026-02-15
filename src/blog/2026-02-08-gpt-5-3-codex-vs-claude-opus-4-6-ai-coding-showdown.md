@@ -123,8 +123,6 @@ Claude Opus 4.6은 **"개발 팀"** 컨셉입니다. 복잡한 작업을 여러 
 
 GPT-5.3 Codex가 API 가격 면에서 약 20% 저렴하며, 동일 작업에 더 적은 토큰을 사용합니다.
 
-<div class="callout-warning">⚠️ <strong>주의사항</strong>: GPT-5.3 Codex가 API 가격 면에서 약 20% 저렴하며, 동일 작업에 더 적은 토큰을 사용합니다.</div>
-
 ## 보안 고려사항
 
 ### GPT-5.3 Codex
@@ -160,9 +158,6 @@ Anthropic의 Constitutional AI 프레임워크를 기반으로, 보안 취약점
 | 멀티파일 동시 수정 | Claude Opus 4.6 |
 
 2026년 AI 코딩의 가장 현명한 전략은 **두 모델을 병행 사용**하는 것입니다. 작업의 성격에 따라 최적의 도구를 선택하세요. AI 경쟁이 치열해질수록 **개발자가 얻는 혜택**은 커집니다!
-
-<div class="callout-info">ℹ️ <strong>참고</strong>: 정답은 "둘 다"입니다.</div>
-
 
 ## 참고 자료
 

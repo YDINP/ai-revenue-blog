@@ -31,8 +31,6 @@ coupangLinks:
 
 쉽게 말해, **Git**은 도구이고 **GitHub**는 그 도구로 만든 작업물을 저장하고 공유하는 플랫폼입니다.
 
-<div class="callout-tip">💡 <strong>핵심 포인트</strong>: 은 도구이고 </div>
-
 ## Step 1: Git 설치하기
 
 ### Windows
@@ -144,8 +142,6 @@ main ─────────────────────────
                          └──── merge
 ```
 
-<div class="callout-warning">⚠️ <strong>주의사항</strong>: 독립된 작업 공간</div>
-
 ## Step 6: Pull Request (PR) 만들기
 
 **Pull Request**는 "내 코드를 검토하고 합쳐주세요"라는 요청입니다. 팀 협업의 핵심 기능입니다.
@@ -212,9 +208,6 @@ echo ".DS_Store" >> .gitignore
 Git을 모르고 개발하는 것은 안전벨트 없이 운전하는 것과 같습니다. 처음에는 명령어가 낯설지만, 일주일만 사용하면 습관이 됩니다.
 
 오늘 배운 6단계를 순서대로 따라해보세요. **첫 커밋**을 하는 순간, Git의 매력에 빠지게 될 것입니다!
-
-<div class="callout-info">ℹ️ <strong>참고</strong>: Git을 모르고 개발하는 것은 안전벨트 없이 운전하는 것과 같습니다. 처음에는 명령어가 낯설지만, 일주일만 사용하면 습관이 됩니다.</div>
-
 
 ## 참고 자료
 

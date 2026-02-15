@@ -59,8 +59,6 @@ Phaser는 2D 게임 전문 프레임워크입니다.
 - 대규모 멀티플레이어 (네이티브 앱 권장)
 - 고성능 액션 (네이티브 앱 권장)
 
-<div class="callout-tip">💡 <strong>핵심 포인트</strong>: 적합한 장르:</div>
-
 ## Phaser 프로젝트 시작하기
 
 ### Vite + Phaser 프로젝트 설정
@@ -430,9 +428,6 @@ Phaser는 웹 게임 개발의 최고 선택입니다. 특히 다음 경우에 �
 - **소셜 플랫폼 게임**: Facebook, Discord 등에 통합
 
 설치 없이 링크 하나로 전 세계 누구나 플레이할 수 있다는 점은 Phaser만의 독보적인 강점입니다. 오늘 Vite + Phaser 프로젝트를 시작하고, 여러분의 첫 웹 게임을 세상에 공개해보세요!
-
-<div class="callout-info">ℹ️ <strong>참고</strong>: 웹 개발자라면</div>
-
 
 ## 참고 자료
 

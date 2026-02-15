@@ -114,7 +114,6 @@ WebAssembly와 Canvas의 결합으로 메모리 효율이 중요해졌습니다.
 
 WebGPU 지원 폴백을 항상 준비하되, 2026년 신규 게임은 WebGPU를 기본으로 개발하는 것을 권장합니다. 이는 향후 3년간의 주류 표준이 될 것이 확실하기 때문입니다.
 
-
 ## 참고 자료
 
 - [Unity Documentation](https://docs.unity3d.com/)

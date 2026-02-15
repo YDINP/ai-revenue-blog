@@ -52,8 +52,6 @@ Stable Diffusion은 오픈소스 기반으로 로컬 환경에서도 실행 가�
 - 월 $10 미만의 저렴한 가격
 - 빠른 생성 속도와 높은 확장성
 
-<div class="callout-tip">💡 <strong>핵심 포인트</strong>: 주요 특징:</div>
-
 ## AI 이미지 생성 도구 성능 비교
 
 <div class="chart-radar" data-title="AI 이미지 생성 도구 종합 평가" data-items='[{"name":"DALL-E 3","scores":[{"label":"이미지 품질","value":9,"color":"#10b981"},{"label":"텍스트 이해","value":9.5,"color":"#3b82f6"},{"label":"사용 편의성","value":8.5,"color":"#f59e0b"},{"label":"가격 경쟁력","value":8,"color":"#ef4444"},{"label":"커스터마이징","value":7,"color":"#8b5cf6"}]},{"name":"Midjourney","scores":[{"label":"이미지 품질","value":9.5,"color":"#10b981"},{"label":"텍스트 이해","value":8,"color":"#3b82f6"},{"label":"사용 편의성","value":7,"color":"#f59e0b"},{"label":"가격 경쟁력","value":6,"color":"#ef4444"},{"label":"커스터마이징","value":8.5,"color":"#8b5cf6"}]},{"name":"Stable Diffusion","scores":[{"label":"이미지 품질","value":8,"color":"#10b981"},{"label":"텍스트 이해","value":7.5,"color":"#3b82f6"},{"label":"사용 편의성","value":6.5,"color":"#f59e0b"},{"label":"가격 경쟁력","value":9.5,"color":"#ef4444"},{"label":"커스터마이징","value":9.5,"color":"#8b5cf6"}]}]'></div>
@@ -103,9 +101,6 @@ ChatGPT를 이미 사용 중인 초보자라면 DALL-E 3이 최적의 선택입�
 AI 이미지 생성 도구 비교에서 최적의 선택은 사용자의 목적과 기술 수준에 따라 달라집니다. 빠르고 쉬운 사용을 원한다면 DALL-E 3, 예술적 완성도를 추구한다면 Midjourney, 완전한 자유도와 저비용을 원한다면 Stable Diffusion을 추천합니다.
 
 2026년의 AI 이미지 생성 시장은 여전히 빠르게 성장 중이며, 각 도구의 기능 격차도 점점 줄어들고 있습니다. 따라서 무료 체험판을 직접 사용해본 후 자신의 워크플로우에 가장 잘 맞는 도구를 선택하는 것이 가장 현명한 결정입니다.
-
-<div class="callout-info">ℹ️ <strong>참고</strong>: AI 이미지 생성 도구 비교에서 최적의 선택은 사용자의 목적과 기술 수준에 따라 달라집니다. 빠르고 쉬운 사용을 원한다면 DALL-E 3, 예술적 완성도를 추구한다면 Midjour</div>
-
 
 ## 참고 자료
 

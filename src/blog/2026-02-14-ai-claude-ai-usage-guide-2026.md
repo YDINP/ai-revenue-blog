@@ -26,8 +26,6 @@ coupangLinks:
 
 **Opus 4.6**은 SWE-bench 80.8%, 200K(1M 베타) 컨텍스트, 에이전트 팀 기능을 갖춘 최상위 모델입니다. **Sonnet 4.5**는 빠른 응답 속도와 합리적 비용으로 일상 작업에 적합합니다. 정확도 우선이면 Opus, 속도/비용 우선이면 Sonnet을 선택하세요.
 
-<div class="callout-tip">💡 <strong>핵심 포인트</strong>: Opus 4.6</div>
-
 ## 실무 중심의 Claude AI 사용법
 
 ### 1단계: 효과적인 프롬프트 엔지니어링
@@ -115,8 +113,6 @@ Claude Opus 4.6도 최신 정보나 한국 지역 정보(예: 서울 강남역 �
 - 계약서, 소송 판례서 자동 요약 및 리스크 분석
 - 결과: 사전 검토 시간 3일 → 4시간으로 단축
 
-<div class="callout-warning">⚠️ <strong>주의사항</strong>: 사례 1: 전자상거래 기업</div>
-
 ## Claude AI 시작하기: 2026년 추천 플랜
 
 **초보자 (개인/소규모팀)**
@@ -144,9 +140,6 @@ Claude Opus 4.6도 최신 정보나 한국 지역 정보(예: 서울 강남역 �
 3. 팀이 AI 도구 사용에 준비되어 있는가?
 
 이 세 가지를 확인한다면, Claude AI는 당신의 생산성을 **30~50% 향상**시킬 수 있는 강력한 파트너가 될 것입니다.
-
-<div class="callout-info">ℹ️ <strong>참고</strong>: Claude AI는 한국 시장에서 가장 신뢰할 수 있는 생성형 AI 도구</div>
-
 
 ## 참고 자료
 

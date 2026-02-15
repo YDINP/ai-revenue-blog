@@ -34,8 +34,6 @@ Claude Code는 CLI 기반의 AI 코딩 어시스턴트로, 터미널에서 직�
 - CLI 기반이라 초기 진입장벽 존재
 - API 비용이 누적될 수 있음
 
-<div class="callout-tip">💡 <strong>핵심 포인트</strong>: 가격: 월 $20 (Pro) / 사용량 기반 (API)</div>
-
 ## 2. GitHub Copilot
 
 **가격**: 월 $10 (Individual) / $19 (Business)
@@ -81,8 +79,6 @@ Codeium이 만든 AI 코딩 에디터로, 무료 사용량이 넉넉합니다.
 - Claude Code나 Cursor 대비 추론 능력 부족
 - 커뮤니티 규모가 작음
 
-<div class="callout-warning">⚠️ <strong>주의사항</strong>: Codeium이 만든 AI 코딩 에디터로, 무료 사용량이 넉넉합니다.</div>
-
 ## 5. Amazon Q Developer
 
 **가격**: 무료 (개인) / $19 (Pro)
@@ -117,9 +113,6 @@ AWS 생태계에 최적화된 AI 코딩 도구입니다.
 프로젝트 규모와 개발 스타일에 따라 선택이 달라집니다. **빠른 프로토타이핑**에는 Cursor, **대규모 프로젝트 관리**에는 Claude Code, **가성비**를 원한다면 Windsurf를 추천합니다.
 
 개발 생산성을 높이는 것은 도구만이 아닙니다. 좋은 키보드와 넓은 모니터도 중요하죠!
-
-<div class="callout-info">ℹ️ <strong>참고</strong>: 빠른 프로토타이핑</div>
-
 
 ## 참고 자료
 

@@ -46,8 +46,6 @@ DELETE /users/123          # 사용자 삭제
 - **소문자**와 **하이픈** 사용: `/user-profiles` (카멜케이스 금지)
 - 계층 관계는 중첩으로 표현: `/users/123/orders`
 
-<div class="callout-tip">💡 <strong>핵심 포인트</strong>: GET    /users/123          # 사용자 조회</div>
-
 ## 원칙 2: HTTP 메서드를 올바르게 사용하라
 
 | 메서드 | 용도 | 멱등성 | 요청 바디 |
@@ -215,8 +213,6 @@ POST /auth/refresh
 - CORS 설정
 - 민감 정보 로깅 금지
 
-<div class="callout-warning">⚠️ <strong>주의사항</strong>: → { "accessToken": "eyJ...", "refreshToken": "..." }</div>
-
 ## 원칙 7: API 버전 관리
 
 ### URL 방식 (추천)
@@ -275,9 +271,6 @@ router.post('/', validate(createUserSchema), async (req, res) => {
 API 설계는 단순한 기술 결정이 아니라 **개발자 경험(DX) 설계**입니다. 이 글에서 소개한 7가지 원칙을 적용하면, 사용하기 쉽고 유지보수가 편한 API를 만들 수 있습니다.
 
 핵심을 요약하면: **일관성**, **명확성**, **표준 준수**. 이 세 가지만 지켜도 상위 20%의 API가 됩니다.
-
-<div class="callout-info">ℹ️ <strong>참고</strong>: 개발자 경험(DX) 설계</div>
-
 
 ## 참고 자료
 

@@ -108,8 +108,6 @@ Adobe Firefly는 **상업적으로 안전한** 유일한 AI 이미지 생성 도
 - 예술적 표현력은 Midjourney 대비 부족
 - 무료 크레딧 제한적
 
-<div class="callout-warning">⚠️ <strong>주의사항</strong>: 상업적으로 안전한</div>
-
 ## 5. Ideogram 2.0: 텍스트 렌더링 최강자
 
 Ideogram은 **이미지 안에 텍스트를 정확하게 넣는** 능력이 뛰어납니다. 로고, 포스터, 배너 제작에 최적입니다.
@@ -154,9 +152,6 @@ Ideogram은 **이미지 안에 텍스트를 정확하게 넣는** 능력이 뛰�
 **개발자/DIY 성향**이라면 **Stable Diffusion**의 무한한 가능성을 탐험해보세요.
 
 AI 이미지 생성 기술은 계속 발전하고 있습니다. 지금 시작해서 자신만의 워크플로우를 만들어보는 것을 추천합니다!
-
-<div class="callout-info">ℹ️ <strong>참고</strong>: 라면 ChatGPT에 포함된 </div>
-
 
 ## 참고 자료
 

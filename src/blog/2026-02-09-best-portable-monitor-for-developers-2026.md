@@ -92,8 +92,6 @@ coupangLinks:
 - gram 노트북과 자석 부착 가능
 - 외장 배터리 없음 (노트북에서 전원 공급)
 
-<div class="callout-warning">⚠️ <strong>주의사항</strong>: 초경량 프리미엄</div>
-
 ## 5. Innocn 15K1F (15.6인치)
 
 **가성비 최강**
@@ -131,9 +129,6 @@ coupangLinks:
 4. **무게 vs 화질 트레이드오프** — 매일 들고 다닐 건지 고려
 
 듀얼 모니터 한 번 경험하면 절대 싱글로 돌아갈 수 없습니다. 투자 대비 생산성 향상이 가장 확실한 장비입니다.
-
-<div class="callout-info">ℹ️ <strong>참고</strong>: 노트북 USB-C가 DP Alt Mode를 지원하는지</div>
-
 
 ## 참고 자료
 
