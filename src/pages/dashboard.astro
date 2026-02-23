@@ -625,6 +625,53 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         flex-shrink: 0;
       }
 
+      /* 추천 TOP 패널 */
+      .like-top-panel {
+        margin-top: 1rem;
+      }
+
+      .like-top-total {
+        font-size: 0.75rem;
+        font-weight: 400;
+        color: var(--dash-text-dim);
+        margin-left: 0.25rem;
+      }
+
+      .like-top-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(51,65,85,0.5);
+        font-size: 0.8125rem;
+      }
+
+      .like-top-item:last-child { border-bottom: none; }
+
+      .like-bar-wrap {
+        flex: 1;
+        height: 6px;
+        background: rgba(51,65,85,0.6);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+
+      .like-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #ef4444, #f97316);
+        border-radius: 3px;
+        transition: width 0.4s ease;
+      }
+
+      .like-top-count {
+        font-weight: 700;
+        font-size: 0.75rem;
+        color: #ef4444;
+        flex-shrink: 0;
+        min-width: 48px;
+        text-align: right;
+      }
+
       /* Event Feed */
       .event-item {
         display: flex;
@@ -1692,6 +1739,14 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
               </div>
             </div>
           </div>
+
+          <!-- 추천 TOP 패널 -->
+          <div class="traffic-panel like-top-panel">
+            <h4>&#10084;&#65039; 추천 TOP <span class="like-top-total" id="like-top-total"></span></h4>
+            <div class="top-page-list" id="top-liked-posts">
+              <div class="no-data">Loading...</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2476,6 +2531,44 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         }).join('');
       }
 
+      // === 추천 TOP 렌더링 ===
+      function renderTopLikedPosts(data) {
+        const container = document.getElementById('top-liked-posts');
+        const totalEl = document.getElementById('like-top-total');
+        if (!container) return;
+
+        const list = Array.isArray(data) ? data : [];
+
+        if (list.length === 0) {
+          container.innerHTML = '<div class="no-data">아직 추천 데이터가 없습니다 &#10084;</div>';
+          if (totalEl) totalEl.textContent = '';
+          return;
+        }
+
+        const totalLikes = list.reduce((s, p) => s + Number(p.like_count || 0), 0);
+        if (totalEl) totalEl.textContent = `(총 ${fmt(totalLikes)}개)`;
+
+        container.innerHTML = list.map((p, i) => {
+          const title = p.title && p.title !== 'null'
+            ? p.title.split(' | ')[0].split(' - ')[0]
+            : decodeSlug(p.slug || p.path || '');
+          const displayTitle = title.length > 40 ? title.substring(0, 40) + '…' : title;
+          const count = Number(p.like_count || 0);
+          const maxCount = Number(list[0].like_count || 1);
+          const barPct = Math.max(Math.round((count / maxCount) * 100), 4);
+          const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}`;
+          return `<div class="like-top-item">
+            <span class="top-page-rank">${medal}</span>
+            ${sourceBadge(p.source)}
+            <span class="top-page-title" title="${title}">${displayTitle || '(홈)'}</span>
+            <div class="like-bar-wrap">
+              <div class="like-bar-fill" style="width:${barPct}%"></div>
+            </div>
+            <span class="like-top-count">&#10084; ${fmt(count)}</span>
+          </div>`;
+        }).join('');
+      }
+
       // === 카테고리별 트래픽 렌더링 ===
       function renderCategoryTraffic() {
         const tfColors = { 'AI': '#3b82f6', 'Dev': '#22c55e', 'Review': '#eab308', 'Game': '#a855f7' };
@@ -2624,12 +2717,13 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
 
       async function loadTraffic() {
         try {
-          const [summary, hourly, topPages, events, trend] = await Promise.all([
+          const [summary, hourly, topPages, events, trend, topLiked] = await Promise.all([
             rpc('get_traffic_summary'),
             rpc('get_hourly_views'),
             rpc('get_top_pages', { p_limit: 50 }),
             rpc('get_recent_events', { p_limit: 20 }),
-            rpc('get_daily_trend')
+            rpc('get_daily_trend'),
+            rpc('get_top_liked_posts', { p_limit: 10 })
           ]);
 
           // Metrics
@@ -2776,6 +2870,7 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           renderEventFeed(events);
           renderTrendChart(trend);
           renderCategoryTraffic();
+          renderTopLikedPosts(topLiked);
 
           document.getElementById('last-updated').textContent =
             `Updated: ${new Date().toLocaleString('ko-KR')}`;
