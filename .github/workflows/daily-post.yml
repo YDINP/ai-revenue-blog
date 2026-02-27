@@ -1,9 +1,9 @@
 name: Blog Post Generator
 
 on:
-  # 자동 스케줄: 매일 한국시간 09:00 (UTC 00:00)
+  # 자동 스케줄: 매주 월요일 한국시간 09:00 (UTC 00:00)
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * 1'
 
   # 수동 트리거: GitHub 모바일/웹에서 "Run workflow" 클릭
   workflow_dispatch:
@@ -66,7 +66,7 @@ jobs:
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           INPUT_CATEGORY: ${{ github.event.inputs.category || 'auto' }}
           INPUT_TOPIC: ${{ github.event.inputs.topic || '' }}
-          INPUT_COUNT: ${{ github.event.inputs.count || '3' }}
+          INPUT_COUNT: ${{ github.event.inputs.count || '1' }}
           INPUT_ENGAGING: ${{ github.event.inputs.engaging || 'false' }}
           INPUT_REVENUE: ${{ github.event.inputs.revenue || 'false' }}
 
