@@ -388,42 +388,6 @@ const seriesTotal = seriesPosts.length;
       <p>이 글은 AI 기술을 활용하여 작성되었습니다. 핵심 정보와 데이터는 검증을 거쳤으나, 정확한 의사결정을 위해 공식 출처를 통한 추가 확인을 권장합니다.</p>
     </aside>
 
-    <!-- 익명 댓글 시스템 -->
-    <section class="comments-section" id="comments-section" data-slug={slug} data-blog="techflow">
-      <h3>댓글 <span class="comment-count" id="comment-count"></span></h3>
-
-      <!-- 댓글 작성 폼 -->
-      <form class="comment-form" id="comment-form">
-        <div class="comment-form-row">
-          <input type="text" id="comment-name" placeholder="이름 (선택, 미입력 시 '익명')" maxlength="20" class="comment-input" />
-          <input type="password" id="comment-password" placeholder="삭제용 비밀번호 (필수)" maxlength="30" required class="comment-input" />
-        </div>
-        <textarea id="comment-content" placeholder="댓글을 입력하세요..." rows="3" maxlength="1000" required class="comment-textarea"></textarea>
-        <div class="comment-form-footer">
-          <span class="comment-char-count" id="comment-char-count">0 / 1000</span>
-          <button type="submit" class="comment-submit-btn" id="comment-submit-btn">댓글 등록</button>
-        </div>
-      </form>
-
-      <!-- 댓글 목록 -->
-      <div class="comment-list" id="comment-list">
-        <p class="comment-loading" id="comment-loading">댓글을 불러오는 중...</p>
-      </div>
-
-      <!-- 삭제 모달 -->
-      <div class="comment-modal-overlay" id="delete-modal" style="display:none;">
-        <div class="comment-modal">
-          <h4>댓글 삭제</h4>
-          <p>작성 시 입력한 비밀번호를 입력하세요.</p>
-          <input type="password" id="delete-password" placeholder="비밀번호" class="comment-input" />
-          <div class="comment-modal-btns">
-            <button type="button" class="comment-cancel-btn" id="delete-cancel">취소</button>
-            <button type="button" class="comment-delete-btn" id="delete-confirm">삭제</button>
-          </div>
-          <p class="comment-error" id="delete-error" style="display:none;"></p>
-        </div>
-      </div>
-    </section>
   </article>
 
   <script is:inline src="/js/blog-post.js"></script>
