@@ -37,7 +37,7 @@ faq:
 - **멀티 소스 데이터 파이프라인**: 여러 API와 데이터베이스에서 수집·변환·적재
 - **조건부 워크플로우**: 데이터 상태에 따른 자동 의사결정 및 액션
 
-더 자세한 자동화 기초는 [Python 자동화 입문: 반복 업무를 코드로 해결하는 5가지 실전 예제](/blog/dev-python-automation-5-practical-examples/)를 참고하면, 이 글과의 연계학습이 가능합니다.
+더 자세한 자동화 기초는 [Python 자동화 입문: 반복 업무를 코드로 해결하는 5가지 실전 예제](/blog/2026-02-06-python-automation-beginners-guide/)를 참고하면, 이 글과의 연계학습이 가능합니다.
 
 <div class="chart-bar" data-title="2026년 기업 자동화 투자 영역별 비중" data-labels="API 통합,데이터 파이프라인,RPA,모니터링,기타" data-values="28,24,22,18,8" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="%"></div>
 

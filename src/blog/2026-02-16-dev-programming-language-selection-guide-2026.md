@@ -36,7 +36,7 @@ faq:
 
 <div class="chart-bar" data-title="프로그래밍 언어 학습 난이도 (1~10점, 낮을수록 쉬움)" data-labels="Python,JavaScript,TypeScript,Java,Rust,Go" data-values="2,3,4,5,8,6" data-colors="#10b981,#3b82f6,#8b5cf6,#f59e0b,#ef4444,#06b6d4" data-unit="난이도"></div>
 
-**Python**은 자연스러운 영어 같은 문법으로 가장 배우기 쉽습니다. 초보자 입문용으로는 더 없이 좋은 선택이며, [Python 자동화 입문 가이드](/blog/dev-python-automation-5-practical-examples/)에서 실제 활용 사례를 배울 수 있습니다.
+**Python**은 자연스러운 영어 같은 문법으로 가장 배우기 쉽습니다. 초보자 입문용으로는 더 없이 좋은 선택이며, [Python 자동화 입문 가이드](/blog/2026-02-06-python-automation-beginners-guide/)에서 실제 활용 사례를 배울 수 있습니다.
 
 **JavaScript**는 웹 브라우저에서 즉시 실행 결과를 볼 수 있어 동기부여가 크지만, 비동기 처리와 프로토타입 기반 언어라는 개념이 초보자에게는 혼란스러울 수 있습니다.
 
@@ -54,7 +54,7 @@ faq:
 3. **Node.js + Express** (4주) - 백엔드 기초
 4. **TypeScript** (2주) - 타입 안정성 추가
 
-2026년 현재 **React 19**와 **Next.js 15**가 가장 인기 있는 프레임워크이며, [2026년 프론트엔드 개발 트렌드](/blog/2026-02-09-frontend-trends-2026-react-19-nextjs-15/)에서 최신 정보를 확인할 수 있습니다.
+2026년 현재 **React 19**와 **Next.js 15**가 가장 인기 있는 프레임워크이며, [2026년 프론트엔드 개발 트렌드](/blog/2026-02-05-frontend-trends-2026-react-nextjs-ai/)에서 최신 정보를 확인할 수 있습니다.
 
 ### 2. 데이터 분석/AI 개발자를 목표로: Python
 
@@ -68,7 +68,7 @@ Python은 데이터 과학, 머신러닝, AI 분야에서 압도적 표준입니
 
 ### 3. 시스템/성능 최적화 개발자를 목표로: Rust/Go
 
-2026년 클라우드 인프라와 고성능 서버 구축에서 Rust와 Go의 수요가 급증하고 있습니다. [2026 백엔드 언어 대전: TypeScript vs Rust vs Go](/blog/2026-02-10-backend-languages-2026-comparison/)에서 자세히 비교할 수 있습니다.
+2026년 클라우드 인프라와 고성능 서버 구축에서 Rust와 Go의 수요가 급증하고 있습니다. [2026 백엔드 언어 대전: TypeScript vs Rust vs Go](/blog/2026-02-09-typescript-vs-rust-vs-go-backend-comparison-2026/)에서 자세히 비교할 수 있습니다.
 
 **Rust**: 메모리 안정성과 성능이 필요한 시스템 소프트웨어, 블록체인 개발
 **Go**: 마이크로서비스, 클라우드 인프라, DevOps 도구
@@ -117,7 +117,7 @@ GitHub, 개발자 커뮤니티, 스터디 모임은 단순 네트워킹이 아�
 
 ### 5. 환경 설정에 너무 오래 머물기
 
-IDE, 컴파일러, 라이브러리 설치... 입문자는 종종 개발 환경 설정에 2주를 소비합니다. [Docker 입문 가이드](/blog/dev-docker-beginners-guide/)처럼 표준화된 개발 환경을 빠르게 구축하고, **가능하면 온라인 코드 에디터(Replit, CodePen, CodeSandbox)부터 시작**하세요.
+IDE, 컴파일러, 라이브러리 설치... 입문자는 종종 개발 환경 설정에 2주를 소비합니다. [Docker 입문 가이드](/blog/2026-02-03-docker-beginner-guide-developer-environment/)처럼 표준화된 개발 환경을 빠르게 구축하고, **가능하면 온라인 코드 에디터(Replit, CodePen, CodeSandbox)부터 시작**하세요.
 
 ## 2026년 초보자가 꼭 알아야 할 3가지 트렌드
 

@@ -126,7 +126,7 @@ faq:
 
 > **라이선스 조건을 꼭 확인하세요.** 일부 무료 에셋은 상업용 게임 판매 시 별도의 크레딧 표기나 개발자 허가가 필요합니다. Godot Asset Library의 경우 오픈소스 라이선스가 다양하므로, 프로젝트 라이선스와 충돌하지 않는지 미리 검토해야 합니다.
 
-더 자세한 내용은 [2026년 게임 개발 필수 도구 TOP 5: 엔진부터 에셋 스토어까지](/blog/2026-02-23-game-2026-essential-game-development-tools-top-5/)을 참고하세요.
+더 자세한 내용은 [2026년 게임 개발 필수 도구 TOP 5: 엔진부터 에셋 스토어까지](/blog/2026-02-08-game-dev-tools-top5-2026/)을 참고하세요.
 
 또한 [2026년 JavaScript 게임 프레임워크 선택 가이드: 성능·학습곡선·커뮤니티 비교](/blog/2026-02-27-game-2026-javascript-game-framework-comparison-guide-performance-learning-curve/)에서 웹 기반 게임 개발의 에셋 활용 방식을 살펴볼 수 있습니다.
 

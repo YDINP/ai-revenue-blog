@@ -129,7 +129,7 @@ faq:
 
 충전 빈도가 생산성에 직접 영향을 미칩니다. **최소 주 1회 이상 충전이 필요 없는 제품**을 선택하는 것이 좋습니다.
 
-더 자세한 내용은 [2026년 개발자용 키보드 추천 TOP 5: 코딩 생산성을 높이는 최고의 선택](/blog/2026-02-18-review-developer-keyboard-recommendation-top-5/)과 [2026년 개발자 마우스 추천 TOP 5: 손목 건강부터 생산성까지](/blog/2026-02-18-review-developer-mouse-recommendation-top-5/)를 참고하세요.
+더 자세한 내용은 [2026년 개발자용 키보드 추천 TOP 5: 코딩 생산성을 높이는 최고의 선택](/blog/2026-02-14-review-best-developer-keyboards-2026-review/)과 [2026년 개발자 마우스 추천 TOP 5: 손목 건강부터 생산성까지](/blog/2026-02-07-developer-mouse-recommendation-2026/)를 참고하세요.
 
 ## 2026년 키보드 마우스 시장 트렌드
 

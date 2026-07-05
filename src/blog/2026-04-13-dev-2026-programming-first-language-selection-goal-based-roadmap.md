@@ -55,7 +55,7 @@ Python으로 2주 안에 만들 수 있는 프로젝트:
 - 데이터 시각화 대시보드 (Matplotlib, Streamlit)
 - 자동화 스크립트
 
-더 자세한 내용은 [Python 자동화 입문: 반복 업무를 코드로 해결하는 5가지 실전 예제](/blog/python-automation-beginner-5-practical-examples/)를 참고하세요.
+더 자세한 내용은 [Python 자동화 입문: 반복 업무를 코드로 해결하는 5가지 실전 예제](/blog/2026-02-06-python-automation-beginners-guide/)를 참고하세요.
 
 ### 2. "웹/앱 개발자로 취업하고 싶어요"
 
@@ -128,7 +128,7 @@ WebAssembly와 Node.js의 성숙으로, JavaScript는 더 이상 "브라우저 �
 - Go: 간단한 REST API 서버
 
 **4단계: Git과 협업 익히기 (2주)**
-- 더 자세한 내용은 [2026년 Git & GitHub 완벽 입문 가이드: 초보자도 10분만에 시작](/blog/2026-git-github-complete-beginner-guide-10-minutes/)를 참고하세요.
+- 더 자세한 내용은 [2026년 Git & GitHub 완벽 입문 가이드: 초보자도 10분만에 시작](/blog/2026-02-04-git-github-beginner-guide-2026/)를 참고하세요.
 
 **5단계: 프레임워크/라이브러리 심화 (계속)**
 - Python + Django/FastAPI

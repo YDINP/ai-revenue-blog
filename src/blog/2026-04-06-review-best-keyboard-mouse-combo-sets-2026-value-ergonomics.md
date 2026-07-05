@@ -80,7 +80,7 @@ faq:
 
 **적합 대상:** 매일 8시간 이상 타이핑하는 개발자/작가, 손목 통증 경력자
 
-더 자세한 내용은 [2026년 개발자 마우스 심화 가이드: 인체공학과 생산성을 모두 잡기](/blog/2026-02-25-review-developer-mouse-advanced-guide-ergonomics-productivity/)를 참고하세요.
+더 자세한 내용은 [2026년 개발자 마우스 심화 가이드: 인체공학과 생산성을 모두 잡기](/blog/2026-02-17-review-developer-mouse-ergonomic-productivity-guide-2026/)를 참고하세요.
 
 ### 4. 레이저 Pro Click & Pro Pad - 생산성 고급형
 

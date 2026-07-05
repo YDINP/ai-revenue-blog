@@ -162,7 +162,7 @@ OpenAI는 공식적으로 연간 구독 할인을 제공하지 않지만:
 - 관리 기능
 - 더 높은 사용 한도
 
-[ChatGPT Plus와 Claude API의 차이](/blog/2026-02-26-ai-chatgpt-vs-claude-2026-selection-guide/)도 함께 검토해 구독 결정을 내리세요.
+[ChatGPT Plus와 Claude API의 차이](/blog/2026-02-08-chatgpt-vs-claude-ai-assistant-comparison-2026/)도 함께 검토해 구독 결정을 내리세요.
 
 ## 2026년 최종 결론: Plus 구독은 투자, 소비가 아니다
 

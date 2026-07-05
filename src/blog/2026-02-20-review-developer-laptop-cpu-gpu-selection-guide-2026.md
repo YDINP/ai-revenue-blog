@@ -153,7 +153,7 @@ CPU만 좋아도 부족합니다. 메모리와 SSD 속도가 더 중요합니다
 
 개발자용 노트북의 SSD는 **최소 NVMe Gen 4** (읽기 속도 5000MB/s 이상)를 권장합니다. 대규모 프로젝트 로딩 속도가 체감상 다릅니다.
 
-더 자세한 내용은 [개발자를 위한 SSD 추천 2026: 삼성 980 PRO vs 990 PRO 스토리지 완벽 가이드](/blog/2026-02-14-review-best-developer-ssd-2026-samsung-980-pro-vs-990-pro/)를 참고하세요.
+더 자세한 내용은 [개발자를 위한 SSD 추천 2026: 삼성 980 PRO vs 990 PRO 스토리지 완벽 가이드](/blog/2026-02-03-ssd-recommendation-samsung-980-pro-developer-storage/)를 참고하세요.
 
 ## 2026년 최신 트렌드: AI 코딩 어시스턴트와 프로세서
 

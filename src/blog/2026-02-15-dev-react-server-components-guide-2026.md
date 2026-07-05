@@ -224,7 +224,7 @@ Server Components는 **선택이 아닌 필수**로 가고 있습니다. Vercel,
 
 특히 **성능이 비즈니스 지표와 직결되는 프로덕션 환경**에서는 Server Components 도입이 CTR 개선, 이탈율 감소, SEO 순위 향상으로 이어지는 경향을 보이고 있습니다.
 
-더 자세한 프론트엔드 최신 트렌드는 [2026년 프론트엔드 개발 트렌드: React 19, Next.js 15, 그리고 AI 통합](/blog/2026-02-09-dev-frontend-trends-react-19-nextjs-15-ai-integration/)에서 확인할 수 있습니다.
+더 자세한 프론트엔드 최신 트렌드는 [2026년 프론트엔드 개발 트렌드: React 19, Next.js 15, 그리고 AI 통합](/blog/2026-02-05-frontend-trends-2026-react-nextjs-ai/)에서 확인할 수 있습니다.
 
 ## 참고 자료
 

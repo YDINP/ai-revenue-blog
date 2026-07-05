@@ -55,7 +55,7 @@ Vercel은 Next.js를 만든 Vercel사에서 직접 운영하는 호스팅 플랫
 
 ### 2. Docker + Self-hosted (AWS EC2, 라이노드 등)
 
-Docker를 사용한 자체 호스팅은 가장 유연한 방식입니다. 더 자세한 내용은 [Docker 입문: 개발 환경을 컨테이너로 통일하는 실전 가이드](/blog/docker-beginner-guide/)를 참고하세요.
+Docker를 사용한 자체 호스팅은 가장 유연한 방식입니다. 더 자세한 내용은 [Docker 입문: 개발 환경을 컨테이너로 통일하는 실전 가이드](/blog/2026-02-03-docker-beginner-guide-developer-environment/)를 참고하세요.
 
 **주요 특징:**
 - 완전한 통제권과 커스터마이징 가능
