@@ -46,7 +46,7 @@ coupangLinks:
 - **에픽(12%)**은 수수료가 매력적이지만 자연 유입 트래픽이 스팀보다 적어, 별도의 유입 노력이 필요하다.
 - **itch.io(10% 이하)**는 수익 극대화 채널이라기보다 데모·번들·실험적 출시에 적합하다.
 
-결론적으로 인디 대부분은 **스팀을 메인으로 삼되, 에픽·itch.io를 보조 채널로 병행**하는 전략이 현실적이다. 웹 기반 배포까지 고려한다면 [웹 게임 수익화 전략](/blog/2026-02-18-game-web-game-monetization-strategies-2026-complete-guide/)도 함께 검토하자.
+결론적으로 인디 대부분은 **스팀을 메인으로 삼되, 에픽·itch.io를 보조 채널로 병행**하는 전략이 현실적이다. 웹 기반 배포까지 고려한다면 [웹 게임 수익화 전략](/blog/2026-02-18-game-web-game-monetization-strategies-2026-complete-guide/)도, 정산 구조가 완전히 다른 [로블록스·UEFN 같은 UGC 플랫폼](/blog/2026-07-05-game-ugc-creator-economy-2026-roblox-uefn-monetization/)도 함께 검토하자.
 
 ## 실수령액 시뮬레이션
 

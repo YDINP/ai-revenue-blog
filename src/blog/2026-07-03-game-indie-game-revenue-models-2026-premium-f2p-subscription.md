@@ -52,7 +52,7 @@ coupangLinks:
 
 ## 플랫폼 수수료를 반드시 함께 계산하라
 
-수익 모델을 정할 때는 [게임 플랫폼 수수료 비교](/blog/2026-07-02-game-game-platform-fees-comparison-2026-steam-epic-mobile-itch/)에서 다룬 정산 구조를 함께 고려해야 한다. 예컨대 소액 인앱결제 위주의 F2P는 결제 건당 수수료 영향이 크고, 프리미엄 단품 판매는 플랫폼 노출 알고리즘에 더 민감하다. 웹 기반 배포 모델까지 보려면 [웹 게임 수익화 전략](/blog/2026-02-18-game-web-game-monetization-strategies-2026-complete-guide/)을 참고하자.
+수익 모델을 정할 때는 [게임 플랫폼 수수료 비교](/blog/2026-07-02-game-game-platform-fees-comparison-2026-steam-epic-mobile-itch/)에서 다룬 정산 구조를 함께 고려해야 한다. 예컨대 소액 인앱결제 위주의 F2P는 결제 건당 수수료 영향이 크고, 프리미엄 단품 판매는 플랫폼 노출 알고리즘에 더 민감하다. 웹 기반 배포 모델까지 보려면 [웹 게임 수익화 전략](/blog/2026-02-18-game-web-game-monetization-strategies-2026-complete-guide/)을, 스팀 밖의 대안 수익화가 궁금하다면 [로블록스·UEFN 크리에이터 이코노미](/blog/2026-07-05-game-ugc-creator-economy-2026-roblox-uefn-monetization/)를 참고하자.
 
 ## 결론: 장르가 모델을 결정한다
 
