@@ -136,6 +136,10 @@
     let html = '';
     if (title) html += `<div class="chart-title">${title}</div>`;
     html += '<div class="chart-radar-grid">';
+    // 척도 자동 감지 (10점 척도 vs 100점 척도 혼용 대응)
+    const radarAllVals = items.flatMap(it => (it.scores || []).map(s => Number(s.value) || 0));
+    const radarRawMax = Math.max(...radarAllVals, 1);
+    const radarScaleMax = radarRawMax <= 10 ? 10 : (radarRawMax <= 100 ? 100 : Math.ceil(radarRawMax / 50) * 50);
     items.forEach(item => {
       const scores = item.scores || [];
       const avg = scores.length > 0 ? (scores.reduce((a,s) => a + s.value, 0) / scores.length).toFixed(1) : '0';
@@ -145,12 +149,12 @@
         <div class="radar-name" style="color:${mainColor}">${item.name}</div>
         <div class="radar-avg">
           <span class="radar-avg-badge" style="background:${hexToRgba(mainColor, 0.12)};color:${mainColor}">
-            평균 ${avg}/10
+            평균 ${avg}/${radarScaleMax}
           </span>
         </div>
         <div class="radar-scores">`;
       scores.forEach(s => {
-        const pct = (s.value / 10) * 100;
+        const pct = Math.min((s.value / radarScaleMax) * 100, 100);
         const grad = `linear-gradient(90deg, ${s.color || '#3b82f6'}, ${hexToRgba(s.color || '#3b82f6', 0.6)})`;
         html += `<div class="radar-score-row">
           <span class="radar-score-label">${s.label}</span>

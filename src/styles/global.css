@@ -1208,13 +1208,26 @@ section > h2::after {
 .chart-versus,
 .chart-progress {
   margin: 2rem 0;
-  padding: 1.75rem;
-  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg) 100%);
+  padding: 1.9rem 1.75rem;
+  background:
+    radial-gradient(120% 100% at 0% 0%, rgba(59,130,246,0.05) 0%, transparent 55%),
+    linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg) 100%);
   border: 1px solid var(--color-border);
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 10px 30px -12px rgba(15,23,42,0.15);
   position: relative;
   overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.chart-bar:hover,
+.chart-radar:hover,
+.chart-donut:hover,
+.chart-versus:hover,
+.chart-progress:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05), 0 20px 40px -16px rgba(59,130,246,0.25);
+  border-color: rgba(59,130,246,0.35);
 }
 
 .chart-bar::before,
@@ -1227,9 +1240,9 @@ section > h2::after {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #f59e0b);
-  border-radius: 16px 16px 0 0;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1, #3b82f6, #06b6d4, #10b981);
+  opacity: 0.9;
 }
 
 :root.dark .chart-bar,
@@ -1237,8 +1250,18 @@ section > h2::after {
 :root.dark .chart-donut,
 :root.dark .chart-versus,
 :root.dark .chart-progress {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  background:
+    radial-gradient(120% 100% at 0% 0%, rgba(59,130,246,0.10) 0%, transparent 55%),
+    linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2), 0 14px 34px -12px rgba(0,0,0,0.5);
+}
+
+:root.dark .chart-bar:hover,
+:root.dark .chart-radar:hover,
+:root.dark .chart-donut:hover,
+:root.dark .chart-versus:hover,
+:root.dark .chart-progress:hover {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 22px 44px -16px rgba(59,130,246,0.4);
 }
 
 .chart-title {
