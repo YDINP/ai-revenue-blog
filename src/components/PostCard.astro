@@ -25,7 +25,10 @@ const formattedDate = new Date(pubDate).toLocaleDateString('ko-KR', {
           src={image.url}
           alt={image.alt}
           class="post-card-image"
+          width="1200"
+          height="675"
           loading="lazy"
+          decoding="async"
         />
       ) : (
         <div class="post-card-image-placeholder">

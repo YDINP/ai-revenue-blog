@@ -97,6 +97,8 @@ const jsonLd = {
     '@id': canonicalUrl,
   },
   keywords: tags.join(', '),
+  articleSection: category,
+  inLanguage: 'ko-KR',
   ...(image && {
     image: {
       '@type': 'ImageObject',
@@ -273,7 +275,7 @@ const seriesTotal = seriesPosts.length;
       </div>
     </header>
 
-    {image && <img src={image.url} alt={image.alt} class="post-hero-image" />}
+    {image && <img src={image.url} alt={image.alt} class="post-hero-image" width="1200" height="675" fetchpriority="high" decoding="async" />}
 
     <!-- 목차 (ToC) - JS로 자동 생성 -->
     <nav class="toc" id="toc"></nav>
