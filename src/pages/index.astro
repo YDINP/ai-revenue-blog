@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
 import NewsletterCTA from '../components/NewsletterCTA.astro';
 import PopularPosts from '../components/PopularPosts.astro';
+import PaperdocBanner from '../components/PaperdocBanner.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -26,6 +27,8 @@ const recentPosts = sortedPosts.slice(0, 6);
       "url": `https://ai-revenue-blog.vercel.app/blog/${post.id}/`
     }))
   })} />
+
+  <PaperdocBanner />
 
   <section class="hero" aria-label="사이트 소개">
     <h1>AI & 테크 인사이트 - 최신 기술 트렌드 블로그</h1>
