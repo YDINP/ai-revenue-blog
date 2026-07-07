@@ -1,129 +1,205 @@
 ---
-// 페이퍼닥 프로모션 배너 (홈 + 모든 포스팅 상단 고정) — 클릭 유도 연출 포함
+// 페이퍼닥 프로모션 배너 (홈 + 모든 포스팅 상단 고정)
+// Aurora Glass 테마 — 이미지 없는 HTML/CSS 배너
 ---
-<a class="paperdoc-banner-link" href="https://paperdoc-web.vercel.app/" target="_blank" rel="noopener sponsored" aria-label="페이퍼닥 - 계약서 AI 분석 플랫폼 바로가기">
-  <span class="paperdoc-banner-frame">
-    <img class="paperdoc-banner" src="/banner.webp" alt="페이퍼닥 - 계약서 AI 분석 플랫폼 배너" width="1200" height="514" loading="eager" />
-    <span class="paperdoc-shine" aria-hidden="true"></span>
-    <span class="paperdoc-cta" aria-hidden="true">
-      지금 무료로 계약서 검토받기
-      <span class="paperdoc-cta-arrow">→</span>
+<a
+  class="pd-banner"
+  href="https://paperdoc-web.vercel.app/"
+  target="_blank"
+  rel="noopener sponsored"
+  aria-label="페이퍼닥 - 계약서 AI 분석 플랫폼 바로가기"
+>
+  <span class="pd-shine" aria-hidden="true"></span>
+
+  <span class="pd-main">
+    <span class="pd-badge">
+      <span class="pd-plus" aria-hidden="true">＋</span> 페이퍼닥 · AI 계약서 분석
+    </span>
+    <span class="pd-title">중요한 계약, <b>꼼꼼한 검토</b>가 시작됩니다</span>
+    <span class="pd-sub">임대차·매매·근로 계약서의 핵심 조항과 위험 요소를 AI가 몇 초 만에 정리해 드립니다.</span>
+  </span>
+
+  <span class="pd-side">
+    <span class="pd-score" aria-hidden="true">
+      <span class="pd-score-num">89<i>/100</i></span>
+      <span class="pd-score-label">종합 평가 · 양호</span>
+    </span>
+    <span class="pd-cta">
+      무료로 검토받기 <span class="pd-arrow" aria-hidden="true">→</span>
     </span>
   </span>
 </a>
 
 <style>
-  .paperdoc-banner-link {
-    display: block;
-    width: auto;
-    margin: -0.5rem -0.5rem 1.5rem;
-  }
-
-  .paperdoc-banner-frame {
+  .pd-banner {
     position: relative;
-    display: block;
-    border-radius: 12px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1.5rem 2rem;
+    margin: -0.5rem -0.5rem 1.5rem;
+    padding: 1.5rem 1.75rem;
+    border-radius: 20px;
     overflow: hidden;
-    /* 숨쉬기 글로우 — 시선 유도 */
-    animation: paperdoc-breathe 3.2s ease-in-out infinite;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    color: var(--color-text, #10132a);
+    background: var(--glass-bg, rgba(255,255,255,0.62));
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    backdrop-filter: blur(16px) saturate(1.4);
+    border: 1px solid var(--glass-border, rgba(255,255,255,0.7));
+    box-shadow: var(--glass-shadow, 0 8px 32px -8px rgba(60,50,130,0.18));
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   }
 
-  .paperdoc-banner {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-  }
-
-  /* 주기적 광택 스윕 */
-  .paperdoc-shine {
+  /* 오로라 글로우 배경 */
+  .pd-banner::before {
+    content: '';
     position: absolute;
-    top: 0;
-    left: -60%;
-    width: 45%;
-    height: 100%;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(60% 120% at 6% 0%, rgba(99,102,241,0.22), transparent 55%),
+      radial-gradient(50% 120% at 98% 100%, rgba(34,211,238,0.20), transparent 55%),
+      radial-gradient(50% 130% at 60% 0%, rgba(168,85,247,0.14), transparent 60%);
     pointer-events: none;
-    background: linear-gradient(
-      100deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.05) 35%,
-      rgba(255, 255, 255, 0.35) 50%,
-      rgba(255, 255, 255, 0.05) 65%,
-      transparent 100%
-    );
+  }
+  /* 상단 그라디언트 헤어라인 */
+  .pd-banner::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--aurora-3,#22d3ee), var(--aurora-1,#6366f1), var(--aurora-2,#a855f7));
+    opacity: 0.9;
+    z-index: 1;
+  }
+  .pd-banner > * { position: relative; z-index: 2; }
+
+  .pd-banner > .pd-shine {
+    position: absolute;
+    top: 0; left: -60%;
+    width: 45%; height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(100deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
     transform: skewX(-18deg);
-    animation: paperdoc-shine 4.5s ease-in-out infinite;
+    animation: pd-shine 5s ease-in-out infinite;
   }
 
-  /* 우하단 CTA 칩 */
-  .paperdoc-cta {
-    position: absolute;
-    right: 3%;
-    bottom: 8%;
+  .pd-main { min-width: 0; }
+
+  .pd-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.4em;
-    padding: 0.5em 1em;
-    font-size: clamp(0.7rem, 1.6vw, 0.95rem);
+    gap: 0.45rem;
+    font-size: 0.72rem;
     font-weight: 700;
-    color: #1e293b;
-    background: #ffd400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary, #6d5cf0);
+    padding: 0.3rem 0.7rem;
     border-radius: 999px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    background: var(--glass-hi, rgba(255,255,255,0.9));
+    border: 1px solid var(--glass-border, rgba(255,255,255,0.7));
+    margin-bottom: 0.7rem;
+  }
+  .pd-plus {
+    font-weight: 900;
+    background: linear-gradient(120deg, var(--aurora-1,#6366f1), var(--aurora-2,#a855f7));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .pd-title {
+    display: block;
+    font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.35rem;
+  }
+  .pd-title b {
+    background: linear-gradient(120deg, var(--aurora-1,#6366f1), var(--aurora-2,#a855f7) 60%, var(--aurora-3,#22d3ee));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .pd-sub {
+    display: block;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--color-text-secondary, #5b6079);
+    max-width: 46ch;
+  }
+
+  .pd-side {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+  }
+  .pd-score {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    line-height: 1.1;
+  }
+  .pd-score-num {
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(120deg, var(--aurora-1,#6366f1), var(--aurora-2,#a855f7));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .pd-score-num i { font-size: 0.95rem; font-style: normal; font-weight: 700; color: var(--color-text-muted, #8a90ab); -webkit-text-fill-color: initial; }
+  .pd-score-label { font-size: 0.68rem; font-weight: 600; color: var(--color-text-muted, #8a90ab); margin-top: 0.15rem; }
+
+  .pd-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.7rem 1.3rem;
+    border-radius: 999px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #fff;
     white-space: nowrap;
-    animation: paperdoc-cta-pulse 1.6s ease-in-out infinite;
+    background: linear-gradient(120deg, var(--aurora-1,#6366f1), var(--aurora-2,#a855f7));
+    box-shadow: 0 8px 22px -6px rgba(109,92,240,0.6);
   }
+  .pd-arrow { display: inline-block; animation: pd-arrow 1.2s ease-in-out infinite; }
 
-  .paperdoc-cta-arrow {
-    display: inline-block;
-    animation: paperdoc-arrow 1.1s ease-in-out infinite;
-  }
-
-  /* 호버: 살짝 떠오르고 CTA 강조, 연출 일시정지 */
-  .paperdoc-banner-link:hover .paperdoc-banner-frame {
+  /* Hover */
+  .pd-banner:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.35);
-    animation-play-state: paused;
+    box-shadow: var(--shadow-glow, 0 12px 48px -8px rgba(109,92,240,0.5));
+    border-color: color-mix(in srgb, var(--color-primary, #6d5cf0) 45%, transparent);
   }
-  .paperdoc-banner-link:hover .paperdoc-cta {
-    background: #ffe14d;
-    transform: scale(1.06);
-  }
+  .pd-banner:hover .pd-cta { filter: brightness(1.06); transform: scale(1.03); }
+  .pd-banner:hover .pd-shine { animation-play-state: paused; }
 
-  @keyframes paperdoc-breathe {
-    0%, 100% { box-shadow: 0 0 0 rgba(37, 99, 235, 0); }
-    50%      { box-shadow: 0 6px 26px rgba(37, 99, 235, 0.35); }
+  @keyframes pd-shine {
+    0% { left: -60%; }
+    45%, 100% { left: 130%; }
   }
-
-  @keyframes paperdoc-shine {
-    0%   { left: -60%; }
-    45%  { left: 120%; }
-    100% { left: 120%; }
-  }
-
-  @keyframes paperdoc-cta-pulse {
-    0%, 100% { transform: scale(1); }
-    50%      { transform: scale(1.05); }
-  }
-
-  @keyframes paperdoc-arrow {
+  @keyframes pd-arrow {
     0%, 100% { transform: translateX(0); }
-    50%      { transform: translateX(4px); }
+    50% { transform: translateX(4px); }
   }
 
-  /* 작은 화면에서는 CTA 칩 숨김(가독성) */
-  @media (max-width: 480px) {
-    .paperdoc-cta { display: none; }
+  /* Tablet / mobile */
+  @media (max-width: 640px) {
+    .pd-banner { grid-template-columns: 1fr; padding: 1.25rem 1.25rem; gap: 1rem; }
+    .pd-side { justify-content: space-between; }
+    .pd-score { align-items: flex-start; }
+    .pd-score-num { font-size: 1.5rem; }
+  }
+  @media (max-width: 400px) {
+    .pd-score { display: none; }
+    .pd-cta { width: 100%; justify-content: center; }
   }
 
-  /* 모션 최소화 선호 사용자 존중 */
   @media (prefers-reduced-motion: reduce) {
-    .paperdoc-banner-frame,
-    .paperdoc-shine,
-    .paperdoc-cta,
-    .paperdoc-cta-arrow {
-      animation: none;
-    }
+    .pd-shine, .pd-arrow { animation: none; }
+    .pd-banner { transition: none; }
   }
 </style>
