@@ -10,18 +10,47 @@ const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const sortedPosts = allPosts.sort(
   (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
 );
-const recentPosts = sortedPosts.slice(0, 6);
+
+// Featured = latest post
+const featured = sortedPosts[0];
+// Feed = the rest (bento)
+const feedPosts = sortedPosts.slice(1, 19);
+
+// Live stats
+const totalPosts = allPosts.length;
+const categoryMap: Record<string, number> = {};
+allPosts.forEach((p) => {
+  const key = p.data.category.toLowerCase();
+  categoryMap[key] = (categoryMap[key] || 0) + 1;
+});
+const catCount = Object.keys(categoryMap).length;
+
+// Filter rail counts reflect the visible feed subset
+const feedCatMap: Record<string, number> = {};
+feedPosts.forEach((p) => {
+  const key = p.data.category.toLowerCase();
+  feedCatMap[key] = (feedCatMap[key] || 0) + 1;
+});
+const categories = Object.entries(feedCatMap)
+  .sort((a, b) => b[1] - a[1])
+  .map(([slug, count]) => ({ slug, label: slug.toUpperCase(), count }));
+const latestDate = new Date(featured.data.pubDate).toLocaleDateString('ko-KR', {
+  month: 'short',
+  day: 'numeric',
+});
+
+const fmtDate = (d: Date) =>
+  new Date(d).toLocaleDateString('ko-KR', { year: 'numeric', month: 'short', day: 'numeric' });
 ---
 
 <BaseLayout
   title="TechFlow - AI & 테크 인사이트"
   description="AI, 개발, 테크 트렌드에 대한 실용적인 인사이트와 리뷰를 제공합니다."
 >
-  <!-- JSON-LD ItemList for SEO -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "itemListElement": recentPosts.map((post, i) => ({
+    "itemListElement": [featured, ...feedPosts].map((post, i) => ({
       "@type": "ListItem",
       "position": i + 1,
       "url": `https://ai-revenue-blog.vercel.app/blog/${post.id}/`
@@ -30,19 +59,65 @@ const recentPosts = sortedPosts.slice(0, 6);
 
   <PaperdocBanner />
 
-  <section class="hero" aria-label="사이트 소개">
-    <h1>AI & 테크 인사이트 - 최신 기술 트렌드 블로그</h1>
-    <p>최신 AI 도구, 개발 팁, 테크 제품 리뷰를 매일 업데이트합니다.</p>
+  <!-- ══ Signal Deck ══ -->
+  <section class="deck" aria-label="사이트 소개">
+    <span class="deck-eyebrow"><span class="pulse"></span> LIVE · 매일 업데이트</span>
+    <h1 class="deck-title">첨단 기술을 <span class="grad">한눈에 읽는</span> 인텔리전스 덱</h1>
+    <p class="deck-sub">
+      AI 도구·개발 트렌드·테크 제품 리뷰를 한 화면에서 탐색하세요. 검색하고, 필터링하고, 바로 깊이 들어갑니다.
+    </p>
+
+    <div class="deck-stats">
+      <div class="stat-chip"><span class="stat-num">{totalPosts}</span><span class="stat-label">Articles</span></div>
+      <div class="stat-chip"><span class="stat-num">{catCount}</span><span class="stat-label">Topics</span></div>
+      <div class="stat-chip"><span class="stat-num">{latestDate}</span><span class="stat-label">Updated</span></div>
+    </div>
+
+    <form class="deck-search" action="/blog/" method="get" role="search">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <circle cx="9" cy="9" r="5.5" stroke="currentColor" stroke-width="1.5" />
+        <path d="M13 13L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      </svg>
+      <input type="text" name="q" placeholder="무엇을 찾고 계신가요? (예: Claude, RAG, 모니터)" aria-label="사이트 검색" />
+      <button type="submit">탐색</button>
+    </form>
   </section>
 
-  <section aria-label="최신 글 목록">
-    <div class="section-header">
-      <h2>최신 글</h2>
-      <a href="/blog/" class="section-link">전체 보기 &rarr;</a>
+  <!-- ══ Spotlight (featured) ══ -->
+  <a class="spotlight" href={`/blog/${featured.id}/`} aria-label={`추천 글: ${featured.data.title}`}>
+    <div class="spotlight-media">
+      {featured.data.image && (
+        <img src={featured.data.image.url} alt={featured.data.image.alt} width="1200" height="675" fetchpriority="high" />
+      )}
     </div>
-    <div class="post-grid">
-      {
-        recentPosts.map((post) => (
+    <div class="spotlight-body">
+      <span class="spotlight-tag">◆ Featured · {featured.data.category}</span>
+      <h3>{featured.data.title}</h3>
+      <p>{featured.data.description}</p>
+      <div class="spotlight-meta">
+        <time datetime={new Date(featured.data.pubDate).toISOString()}>{fmtDate(featured.data.pubDate)}</time>
+        <span class="spotlight-cta">자세히 읽기 &rarr;</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- ══ Explore Feed (filter + bento) ══ -->
+  <section aria-label="글 탐색">
+    <div class="section-header">
+      <h2>탐색</h2>
+      <a href="/blog/" class="section-link">전체 아카이브 &rarr;</a>
+    </div>
+
+    <div class="filter-rail" id="filter-rail" role="tablist">
+      <button class="filter-pill active" data-cat="all" role="tab">전체 <span class="cnt">{feedPosts.length}</span></button>
+      {categories.map((c) => (
+        <button class="filter-pill" data-cat={c.slug} role="tab">{c.label} <span class="cnt">{c.count}</span></button>
+      ))}
+    </div>
+
+    <div class="bento" id="bento-feed">
+      {feedPosts.map((post) => (
+        <div class="bento-cell" data-cat={post.data.category.toLowerCase()} data-search={`${post.data.title} ${post.data.description} ${(post.data.tags || []).join(' ')}`.toLowerCase()}>
           <PostCard
             title={post.data.title}
             description={post.data.description}
@@ -50,13 +125,15 @@ const recentPosts = sortedPosts.slice(0, 6);
             category={post.data.category}
             slug={post.id}
             image={post.data.image}
+            tags={post.data.tags}
           />
-        ))
-      }
+        </div>
+      ))}
+      <p class="bento-empty" id="bento-empty" style="display:none;">해당 주제의 글이 아직 없어요.</p>
     </div>
   </section>
 
-  <!-- Popular Posts Widget -->
+  <!-- Popular Posts -->
   <section aria-label="인기 글">
     <PopularPosts />
   </section>
@@ -65,4 +142,29 @@ const recentPosts = sortedPosts.slice(0, 6);
   <section aria-label="뉴스레터 구독">
     <NewsletterCTA />
   </section>
+
+  <script>
+    (function () {
+      const rail = document.getElementById('filter-rail');
+      const cells = Array.from(document.querySelectorAll('#bento-feed .bento-cell'));
+      const empty = document.getElementById('bento-empty');
+      if (!rail) return;
+
+      rail.addEventListener('click', (e) => {
+        const btn = (e.target as HTMLElement).closest('.filter-pill') as HTMLElement | null;
+        if (!btn) return;
+        const cat = btn.dataset.cat;
+        rail.querySelectorAll('.filter-pill').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        let visible = 0;
+        cells.forEach((cell) => {
+          const match = cat === 'all' || (cell as HTMLElement).dataset.cat === cat;
+          cell.classList.toggle('hide', !match);
+          if (match) visible++;
+        });
+        if (empty) empty.style.display = visible === 0 ? 'block' : 'none';
+      });
+    })();
+  </script>
 </BaseLayout>
