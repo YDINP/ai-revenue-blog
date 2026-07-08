@@ -34,6 +34,25 @@
     }
   }
   render();
+  function spawnHearts() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const rect = likeBtn.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+    for (let i = 0; i < 9; i++) {
+      const h = document.createElement('span');
+      h.className = 'heart-particle';
+      h.textContent = '♥';
+      h.style.left = cx + 'px'; h.style.top = cy + 'px';
+      const ang = (-90 + (Math.random() * 90 - 45)) * Math.PI / 180;
+      const dist = 42 + Math.random() * 55;
+      h.style.setProperty('--tx', (Math.cos(ang) * dist).toFixed(1) + 'px');
+      h.style.setProperty('--ty', (Math.sin(ang) * dist).toFixed(1) + 'px');
+      h.style.setProperty('--r', (Math.random() * 70 - 35).toFixed(0) + 'deg');
+      h.style.fontSize = (10 + Math.random() * 11).toFixed(0) + 'px';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 950);
+    }
+  }
   likeBtn.addEventListener('click', () => {
     if (localStorage.getItem(storageKey) === 'true') return;
     localStorage.setItem(storageKey, 'true');
@@ -45,6 +64,7 @@
     likeCount.textContent = String(count);
     likeBtn.classList.add('like-pop');
     setTimeout(() => likeBtn.classList.remove('like-pop'), 600);
+    spawnHearts();
     fetch('https://xyprbsmagtlzebxyxsvj.supabase.co/functions/v1/analytics-ingest', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

@@ -4562,3 +4562,52 @@ body.list-open { overflow: hidden; }
     right: max(12px, calc((100vw - 820px) / 2 - 206px));
   }
 }
+
+/* ==========================================================================
+   MICRO-INTERACTIONS + HERO MOTION
+   ========================================================================== */
+/* 좋아요 하트버스트 */
+.heart-particle {
+  position: fixed; z-index: 1500; pointer-events: none;
+  color: #ef4444; line-height: 1;
+  transform: translate(-50%, -50%);
+  animation: heart-fly 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+  text-shadow: 0 2px 6px rgba(239,68,68,0.4);
+}
+@keyframes heart-fly {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+  15%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.15) rotate(var(--r)); }
+}
+
+/* 히어로 이미지 래퍼 + 스크롤 패럴랙스(켄번즈) */
+.post-hero {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  background: var(--color-bg-secondary);
+}
+.post-hero .post-hero-image {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  margin: 0;
+  display: block;
+  aspect-ratio: auto;
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .post-hero .post-hero-image {
+      animation: hero-parallax linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+      will-change: transform;
+    }
+  }
+  @keyframes hero-parallax {
+    from { transform: scale(1.16) translateY(-4.5%); }
+    to   { transform: scale(1.16) translateY(4.5%); }
+  }
+}

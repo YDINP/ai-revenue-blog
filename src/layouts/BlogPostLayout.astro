@@ -279,7 +279,11 @@ const seriesTotal = seriesPosts.length;
       </div>
     </header>
 
-    {image && <img src={image.url} alt={image.alt} class="post-hero-image" width="1200" height="675" fetchpriority="high" decoding="async" />}
+    {image && (
+      <div class="post-hero">
+        <img src={image.url} alt={image.alt} class="post-hero-image" width="1200" height="675" fetchpriority="high" decoding="async" />
+      </div>
+    )}
 
     <!-- 목차 (ToC) - JS로 자동 생성 -->
     <nav class="toc" id="toc"></nav>
