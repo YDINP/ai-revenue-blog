@@ -4805,3 +4805,12 @@ html { overflow-x: clip; }
   border-radius: 3px;
 }
 @media (prefers-reduced-motion: reduce) { .stream-autoplay { display: none; } }
+
+/* 카드 → 글 팝업 모프(View Transitions) */
+.qv-overlay.vt-morph .qv-modal { transition: none; }
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(article-morph) {
+    animation-duration: 0.46s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}

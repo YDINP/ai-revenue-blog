@@ -472,13 +472,37 @@ const fmtDate = (d: Date) =>
         curIdx = orderedHrefs.indexOf(clean);
       }
 
-      function openModal(href: string) {
+      function openModal(href: string, triggerEl?: HTMLElement | null) {
         if (!overlay || !qvContent) return;
         qvLastFocus = document.activeElement as HTMLElement;
-        overlay.hidden = false;
-        document.body.classList.add('qv-open');
-        requestAnimationFrame(() => { overlay.classList.add('open'); (qvClose as HTMLElement)?.focus(); });
-        loadInFrame(href);
+        const media = triggerEl
+          ? ((triggerEl.querySelector('.stream-card-media, .list-row-media') as HTMLElement | null) || triggerEl)
+          : null;
+        const qvModal = overlay.querySelector('.qv-modal') as HTMLElement | null;
+        const startVT = (document as any).startViewTransition;
+        if (startVT && media && qvModal && !reduce) {
+          // 카드 미디어 → 팝업 컨테이너 모프(View Transitions)
+          media.style.viewTransitionName = 'article-morph';
+          overlay.classList.add('vt-morph');
+          const vt = startVT.call(document, () => {
+            media.style.viewTransitionName = '';
+            overlay.hidden = false;
+            document.body.classList.add('qv-open');
+            overlay.classList.add('open');
+            loadInFrame(href);
+            qvModal.style.viewTransitionName = 'article-morph';
+            (qvClose as HTMLElement)?.focus();
+          });
+          vt.finished.finally(() => {
+            qvModal.style.viewTransitionName = '';
+            overlay.classList.remove('vt-morph');
+          });
+        } else {
+          overlay.hidden = false;
+          document.body.classList.add('qv-open');
+          requestAnimationFrame(() => { overlay.classList.add('open'); (qvClose as HTMLElement)?.focus(); });
+          loadInFrame(href);
+        }
       }
 
       // 팝업 내 이전/다음 글 (모바일 스와이프 → iframe이 부모에 postMessage)
@@ -632,7 +656,7 @@ const fmtDate = (d: Date) =>
       rows.forEach((row) => {
         row.addEventListener('click', (e) => {
           e.preventDefault();
-          openModal(row.getAttribute('href') || (row as HTMLAnchorElement).href);
+          openModal(row.getAttribute('href') || (row as HTMLAnchorElement).href, row);
         });
       });
 
@@ -666,7 +690,7 @@ const fmtDate = (d: Date) =>
         a.addEventListener('click', (e) => {
           e.preventDefault();
           if (dragging || moved > DRAG_MIN) return;
-          if (mode === 'grid') { openModal(a.getAttribute('href') || a.href); return; }
+          if (mode === 'grid') { openModal(a.getAttribute('href') || a.href, card); return; }
           const N = vis.length;
           const j = vis.indexOf(card);
           if (j < 0) return;
@@ -674,7 +698,7 @@ const fmtDate = (d: Date) =>
           let d = ((j - cur) % N + N) % N;
           if (d > N / 2) d -= N;
           // 정면 카드 → 팝업 / 옆 카드 → 그 카드로 회전
-          if (Math.abs(d) < 0.5) openModal(a.getAttribute('href') || a.href);
+          if (Math.abs(d) < 0.5) openModal(a.getAttribute('href') || a.href, card);
           else animateTo(Math.round(target) + d);
         });
       });
