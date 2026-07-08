@@ -21,6 +21,8 @@
   .pd-promo-frame {
     position: relative;
     display: block;
+    /* CTA를 배너 너비에 비례시키기 위한 컨테이너 (cqw 기준) */
+    container-type: inline-size;
     border-radius: 16px;
     overflow: hidden;
     /* 숨쉬기 글로우 — 시선 유도 */
@@ -66,7 +68,8 @@
     gap: 0.4em;
     padding: 0.52em 1.05em;
     border-radius: 999px;
-    font-size: clamp(0.62rem, 1.25vw, 0.85rem);
+    /* 배너 너비에 비례(1.35% of banner width) → 배너 축소 시 동일 비율로 축소 */
+    font-size: 1.35cqw;
     font-weight: 800;
     color: #0b1020;
     background: #ffd400;
