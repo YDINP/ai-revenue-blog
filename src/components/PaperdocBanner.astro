@@ -5,7 +5,10 @@
 ---
 <a class="pd-promo-link" href="https://paperdoc-web.vercel.app/" target="_blank" rel="noopener sponsored" aria-label="페이퍼닥 - 계약서 AI 분석 플랫폼 바로가기">
   <span class="pd-promo-frame">
-    <img class="pd-promo-img" src="/pd-promo.png" alt="페이퍼닥 - 계약서 AI 분석 플랫폼" width="2172" height="724" loading="eager" decoding="async" />
+    <picture>
+      <source media="(max-width: 767px)" srcset="/pd-promo-m.png" width="1916" height="679" />
+      <img class="pd-promo-img" src="/pd-promo.png" alt="페이퍼닥 - 계약서 AI 분석 플랫폼" width="2172" height="724" loading="eager" decoding="async" />
+    </picture>
     <span class="pd-promo-shine" aria-hidden="true"></span>
     <span class="pd-promo-cta">무료로 검토받기 <span class="pd-promo-arrow" aria-hidden="true">→</span></span>
   </span>
@@ -113,8 +116,9 @@
     100% { left: 120%; }
   }
 
-  /* 초소형 화면: 배너가 작아 CTA가 콘텐츠를 가림 → 숨김 */
-  @media (max-width: 480px) {
+  /* 모바일(≤767px): 전용 배너 이미지(pd-promo-m)로 전환되며 레이아웃이
+     달라 데스크톱 좌표의 오버레이 CTA를 숨김 */
+  @media (max-width: 767px) {
     .pd-promo-cta { display: none; }
   }
 
