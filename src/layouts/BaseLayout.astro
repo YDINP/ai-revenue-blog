@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { getCollection } from 'astro:content';
+import CommandPalette from '../components/CommandPalette.astro';
 
 interface Props {
   title: string;
@@ -185,6 +186,9 @@ const websiteSchema = {
 
     <!-- Back to Top -->
     <button class="back-to-top" id="back-to-top" aria-label="맨 위로">↑</button>
+
+    <!-- 전역 커맨드 팔레트 (⌘K, 모든 페이지) -->
+    <CommandPalette />
 
     <script>
       // Pageview tracking
