@@ -168,9 +168,12 @@ const seriesPosts = allPosts
   .sort((a, b) => new Date(a.data.pubDate).getTime() - new Date(b.data.pubDate).getTime());
 const seriesIndex = seriesPosts.findIndex(p => p.id === slug);
 const seriesTotal = seriesPosts.length;
+
+// 소셜 공유용 브랜드 OG 카드(빌드 생성). 없으면 히어로 이미지로 폴백.
+const ogImageUrl = slug ? new URL(`/open-graph/${slug}.png`, Astro.site).href : image?.url;
 ---
 
-<BaseLayout title={title} description={description} image={image?.url}>
+<BaseLayout title={title} description={description} image={ogImageUrl}>
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
