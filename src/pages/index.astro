@@ -441,30 +441,30 @@ const fmtDate = (d: Date) =>
         document.body.classList.add('qv-open');
         requestAnimationFrame(() => { overlay.classList.add('open'); (qvClose as HTMLElement)?.focus(); });
         qvContent.scrollTop = 0;
-        if (cache[href]) { qvContent.innerHTML = cache[href]; return; }
-        qvContent.innerHTML = '<div class="qv-loading"><span class="spin"></span><br>글을 불러오는 중…</div>';
-        fetch(href)
-          .then((r) => r.text())
-          .then((html) => {
-            const doc = new DOMParser().parseFromString(html, 'text/html');
-            const article = doc.querySelector('.blog-post') || doc.querySelector('article') || doc.querySelector('main');
-            if (!article) throw new Error('no content');
-            // 불필요 요소 제거(광고/댓글/네비 등)
-            article.querySelectorAll('.ad-slot, .comments-section, .post-navigation, .newsletter-cta, script, .breadcrumb, .share-buttons, .toc-sidebar, .pd-promo-link, .paperdoc-banner-link, .coupang-banner, .related-posts').forEach((n) => n.remove());
-            const out = article.innerHTML;
-            cache[href] = out;
-            qvContent.innerHTML = out;
-            qvContent.scrollTop = 0;
-          })
-          .catch(() => {
-            qvContent.innerHTML = '<div class="qv-error">미리보기를 불러오지 못했어요.<br>“전체 페이지로 열기”를 눌러주세요.</div>';
+        // iframe 임베드: 실제 글 페이지를 그대로 렌더 → 차트·비교 등 JS 위젯 정상 동작
+        const src = href + (href.indexOf('?') >= 0 ? '&' : '?') + 'embed=1';
+        qvContent.classList.add('has-frame');
+        qvContent.innerHTML =
+          '<div class="qv-loading"><span class="spin"></span><br>글을 불러오는 중…</div>' +
+          '<iframe class="qv-frame" title="글 미리보기" loading="eager"></iframe>';
+        const frame = qvContent.querySelector('.qv-frame') as HTMLIFrameElement | null;
+        if (frame) {
+          frame.addEventListener('load', () => {
+            const l = qvContent.querySelector('.qv-loading');
+            if (l) l.remove();
+            frame.style.opacity = '1';
           });
+          frame.src = src;
+        }
       }
       function closeModal() {
         if (!overlay) return;
         overlay.classList.remove('open');
         document.body.classList.remove('qv-open');
-        setTimeout(() => { overlay.hidden = true; }, 260);
+        setTimeout(() => {
+          overlay.hidden = true;
+          if (qvContent) { qvContent.innerHTML = ''; qvContent.classList.remove('has-frame'); }  // iframe 정리
+        }, 260);
         qvLastFocus?.focus();
       }
       qvClose?.addEventListener('click', closeModal);

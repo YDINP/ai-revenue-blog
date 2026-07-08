@@ -4371,3 +4371,45 @@ body.list-open { overflow: hidden; }
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
+
+/* ==========================================================================
+   EMBED MODE (글 팝업 iframe 전용: 크롬 제거, 배경 투명 → 모달 글래스 노출)
+   ========================================================================== */
+:root.embed .site-header,
+:root.embed .site-footer,
+:root.embed .back-to-top,
+:root.embed .reading-progress,
+:root.embed .pd-promo-link,
+:root.embed .breadcrumb,
+:root.embed .post-back,
+:root.embed .comments-section,
+:root.embed .post-navigation,
+:root.embed .related-posts,
+:root.embed .newsletter-cta,
+:root.embed .toc-sidebar,
+:root.embed .ad-slot,
+:root.embed .post-cta,
+:root.embed .share-buttons { display: none !important; }
+:root.embed body { background: transparent !important; }
+:root.embed body::before,
+:root.embed body::after { display: none !important; }
+:root.embed main { padding: 0.5rem 1.25rem 1.5rem !important; max-width: 100% !important; }
+:root.embed .blog-post { max-width: 100% !important; }
+
+/* 글 팝업 iframe */
+.qv-content.has-frame { padding: 0; overflow: hidden; display: flex; }
+.qv-frame {
+  width: 100%;
+  height: 74vh;
+  max-height: 74vh;
+  border: 0;
+  display: block;
+  background: transparent;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+@media (max-width: 640px) {
+  .qv-frame { height: 78vh; max-height: 78vh; }
+}
+.qv-content.has-frame { position: relative; }
+.qv-content.has-frame .qv-loading { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0; }
