@@ -313,23 +313,30 @@
   if (!content) return;
   content.querySelectorAll('pre').forEach(pre => {
     if (pre.parentElement.classList.contains('code-block-wrapper')) return;
+    const lang = (pre.dataset.language || 'code').toLowerCase();
     const wrapper = document.createElement('div');
     wrapper.className = 'code-block-wrapper';
     pre.parentNode.insertBefore(wrapper, pre);
-    wrapper.appendChild(pre);
+    // 터미널 창 헤더(신호등 + 언어 + 복사)
+    const header = document.createElement('div');
+    header.className = 'code-header';
+    header.innerHTML = '<span class="code-dots"><i></i><i></i><i></i></span><span class="code-lang">' + lang + '</span>';
     const btn = document.createElement('button');
+    btn.type = 'button';
     btn.className = 'code-copy-btn';
-    btn.textContent = '복사';
+    btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5" y="5" width="8.5" height="9.5" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-5A1.5 1.5 0 0 0 3 3.5v7A1.5 1.5 0 0 0 4.5 12" stroke="currentColor" stroke-width="1.4"/></svg><span>복사</span>';
+    header.appendChild(btn);
+    wrapper.appendChild(header);
+    wrapper.appendChild(pre);
     btn.addEventListener('click', async () => {
       const code = pre.querySelector('code') || pre;
+      const lbl = btn.querySelector('span');
       try {
         await navigator.clipboard.writeText(code.textContent);
-        btn.textContent = '복사됨!';
-        btn.classList.add('copied');
-        setTimeout(() => { btn.textContent = '복사'; btn.classList.remove('copied'); }, 2000);
-      } catch(e) { btn.textContent = '실패'; }
+        btn.classList.add('copied'); if (lbl) lbl.textContent = '복사됨!';
+        setTimeout(() => { btn.classList.remove('copied'); if (lbl) lbl.textContent = '복사'; }, 2000);
+      } catch (e) { if (lbl) lbl.textContent = '실패'; }
     });
-    wrapper.appendChild(btn);
   });
 })();
 

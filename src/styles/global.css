@@ -4466,3 +4466,83 @@ body.list-open { overflow: hidden; }
   .versus-fill.animated::after,
   .radar-score-fill.animated::after { display: none; }
 }
+
+/* ==========================================================================
+   POST CONTENT TRENDY (코드 터미널 헤더 · 드롭캡 · 풀쿼트 · 뉴스레터 오로라)
+   ========================================================================== */
+/* 코드블록: 터미널 창 스타일 */
+.code-block-wrapper {
+  position: relative; margin: 1.6rem 0;
+  border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.09);
+  box-shadow: 0 10px 28px -12px rgba(0,0,0,0.5);
+}
+.code-header {
+  display: flex; align-items: center; gap: 0.7rem;
+  padding: 0.5rem 0.9rem;
+  background: #161b26;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.code-dots { display: flex; gap: 6px; }
+.code-dots i { width: 11px; height: 11px; border-radius: 50%; }
+.code-dots i:nth-child(1) { background: #ff5f56; }
+.code-dots i:nth-child(2) { background: #ffbd2e; }
+.code-dots i:nth-child(3) { background: #27c93f; }
+.code-lang {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #7f8bad;
+}
+.code-header .code-copy-btn {
+  position: static; margin-left: auto; opacity: 1;
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 7px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
+  color: #c3cce2; font-size: 0.72rem; font-weight: 600; cursor: pointer; transition: all 0.18s ease;
+}
+.code-header .code-copy-btn:hover { background: rgba(255,255,255,0.18); color: #fff; }
+.code-header .code-copy-btn.copied { background: #10b981; border-color: #10b981; color: #fff; }
+.code-block-wrapper pre { margin: 0 !important; border-radius: 0 !important; }
+
+/* 드롭캡: 본문 첫 문단 첫 글자 */
+.post-content > p:first-of-type::first-letter {
+  float: left; font-size: 3.1em; line-height: 0.82; font-weight: 800;
+  padding: 0.06em 0.14em 0 0;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+/* 풀쿼트: blockquote 강화 */
+.post-content blockquote {
+  position: relative;
+  border-left: none;
+  padding: 1.5rem 1.5rem 1.5rem 3.2rem;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  font-size: 1.08rem;
+}
+.post-content blockquote::before {
+  content: '\201C';
+  position: absolute; left: 0.7rem; top: 0.1rem;
+  font-family: Georgia, serif; font-size: 3rem; line-height: 1;
+  background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  opacity: 0.85;
+}
+
+/* 콜아웃: 글래스 라운드 */
+.post-content .callout-tip,
+.post-content .callout-warning,
+.post-content .callout-info {
+  border-radius: 12px;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+
+/* 뉴스레터 CTA: 오로라 그라디언트 + 메시 글로우 */
+.newsletter-cta {
+  background: linear-gradient(120deg, var(--aurora-1), var(--aurora-2) 55%, var(--aurora-3)) !important;
+}
+
+@media (max-width: 640px) {
+  .post-content > p:first-of-type::first-letter { font-size: 2.6em; }
+}
