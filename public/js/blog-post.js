@@ -84,6 +84,26 @@
     return `rgba(${r},${g},${b},${alpha})`;
   }
 
+  // 숫자 카운트업 애니메이션(트렌디)
+  function countUp(el, delay) {
+    const m = (el.textContent || '').trim().match(/^(-?\d+(?:\.\d+)?)(.*)$/);
+    if (!m) return;
+    const target = parseFloat(m[1]);
+    const suffix = m[2] || '';
+    const dec = (m[1].split('.')[1] || '').length;
+    const dur = 1000;
+    let startT = 0;
+    el.textContent = '0' + (dec ? '.' + '0'.repeat(dec) : '') + suffix;
+    function step(t) {
+      if (!startT) startT = t;
+      const p = Math.min((t - startT) / dur, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * e).toFixed(dec) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    setTimeout(() => requestAnimationFrame(step), delay || 0);
+  }
+
   // IntersectionObserver for scroll animation
   const chartObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -94,6 +114,11 @@
         entry.target.querySelectorAll('.progress-ring').forEach(ring => {
           ring.style.strokeDashoffset = ring.dataset.target;
         });
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!reduce) {
+          const vals = entry.target.querySelectorAll('.chart-value, .versus-val, .radar-score-val, .progress-value, .donut-total');
+          vals.forEach((v, i) => countUp(v, 150 + i * 40));
+        }
         chartObserver.unobserve(entry.target);
       }
     });
@@ -225,19 +250,20 @@
     items.forEach(item => {
       const pctA = maxVal > 0 ? (item.a / maxVal) * 100 : 0;
       const pctB = maxVal > 0 ? (item.b / maxVal) * 100 : 0;
+      const aWin = item.a > item.b, bWin = item.b > item.a;
       html += `<div class="versus-row">
         <div class="versus-bar-left">
-          <span class="versus-val">${item.a}</span>
+          <span class="versus-val${aWin ? ' versus-win' : ''}">${item.a}</span>
           <div class="versus-track versus-track-left">
-            <div class="versus-fill" style="width:${pctA}%;background:linear-gradient(270deg, ${colorA}, ${hexToRgba(colorA, 0.6)})"></div>
+            <div class="versus-fill${aWin ? ' win' : ''}" style="width:${pctA}%;background:linear-gradient(270deg, ${colorA}, ${hexToRgba(colorA, 0.6)})"></div>
           </div>
         </div>
         <div class="versus-label">${item.label}</div>
         <div class="versus-bar-right">
           <div class="versus-track">
-            <div class="versus-fill" style="width:${pctB}%;background:linear-gradient(90deg, ${colorB}, ${hexToRgba(colorB, 0.6)})"></div>
+            <div class="versus-fill${bWin ? ' win' : ''}" style="width:${pctB}%;background:linear-gradient(90deg, ${colorB}, ${hexToRgba(colorB, 0.6)})"></div>
           </div>
-          <span class="versus-val">${item.b}</span>
+          <span class="versus-val${bWin ? ' versus-win' : ''}">${item.b}</span>
         </div>
       </div>`;
     });

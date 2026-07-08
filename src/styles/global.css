@@ -4413,3 +4413,56 @@ body.list-open { overflow: hidden; }
 }
 .qv-content.has-frame { position: relative; }
 .qv-content.has-frame .qv-loading { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0; }
+
+/* ==========================================================================
+   CHART TRENDY UPGRADE (카운트업 대비 tabular · sheen · winner · hover)
+   ========================================================================== */
+/* 숫자 정렬 안정(카운트업 중 흔들림 방지) */
+.chart-value, .versus-val, .radar-score-val, .progress-value, .donut-total {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* 막대 내부 상단 하이라이트 + sheen 컨테이너 */
+.chart-fill, .versus-fill, .radar-score-fill {
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 2px 8px rgba(0,0,0,0.14);
+}
+/* 등장 후 1회 광택 스윕 */
+.chart-fill.animated::after,
+.versus-fill.animated::after,
+.radar-score-fill.animated::after {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 45%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: translateX(-140%) skewX(-18deg);
+  animation: chart-sheen 1.05s ease 0.45s 1;
+  pointer-events: none;
+}
+@keyframes chart-sheen {
+  to { transform: translateX(320%) skewX(-18deg); }
+}
+
+/* hover: 해당 행 강조 */
+.chart-row, .versus-row, .radar-score-row { transition: filter 0.2s ease; }
+.chart-row:hover .chart-fill,
+.radar-score-row:hover .radar-score-fill { filter: brightness(1.1) saturate(1.1); }
+.chart-row:hover .chart-value { color: var(--color-primary); }
+
+/* versus 승자 강조 */
+.versus-val.versus-win {
+  font-size: 1.05em;
+  font-weight: 900;
+  color: var(--color-primary);
+  text-shadow: 0 0 14px rgba(109,92,240,0.35);
+}
+.versus-val.versus-win::after { content: ' ▲'; font-size: 0.6em; vertical-align: 2px; opacity: 0.7; }
+.versus-fill.win { box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 0 14px -2px currentColor; }
+
+@media (prefers-reduced-motion: reduce) {
+  .chart-fill.animated::after,
+  .versus-fill.animated::after,
+  .radar-score-fill.animated::after { display: none; }
+}
