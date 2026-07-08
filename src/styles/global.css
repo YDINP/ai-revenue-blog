@@ -3980,5 +3980,130 @@ body.qv-open { overflow: hidden; }
   .stream-spacer { flex-basis: calc(50% - 120px); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .stream-card { transform: none !important; opacity: 1 !important; }
+  .stream-card { transition: none !important; }
+}
+
+/* ==========================================================================
+   CIRCULAR CAROUSEL — 좌우 슬라이드 대신 원형 3D 회전
+   ========================================================================== */
+.stream-viewport { perspective: 1300px; }
+.stream-viewport::before,
+.stream-viewport::after { display: none; }
+
+.stream {
+  position: relative;
+  display: block;
+  height: 468px;
+  overflow: visible;
+  padding: 0;
+  scroll-snap-type: none;
+  transform-style: preserve-3d;
+  cursor: grab;
+  touch-action: pan-y;
+}
+.stream.dragging { cursor: grabbing; }
+.stream-spacer { display: none; }
+
+.stream-card {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  width: clamp(250px, 30vw, 320px);
+  height: 436px;
+  flex: none;
+  scroll-snap-align: none;
+  transition: opacity 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+.stream-card .stream-card-media { aspect-ratio: 16 / 10; flex-shrink: 0; }
+
+.stream-empty {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .stream { height: 430px; }
+  .stream-card { width: 74vw; height: 402px; }
+}
+
+/* ==========================================================================
+   VIEW MODE TOGGLE (카루셀 ↔ 전체보기 그리드)
+   ========================================================================== */
+.stream-tools { display: flex; align-items: center; gap: 0.75rem; }
+.stream-modes {
+  display: flex;
+  gap: 3px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.mode-btn {
+  padding: 6px 13px;
+  border: none;
+  background: transparent;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+.mode-btn:hover { color: var(--color-text); }
+.mode-btn.active {
+  background: var(--gradient-primary);
+  color: #fff;
+  box-shadow: 0 4px 12px -4px rgba(109,92,240,0.6);
+}
+
+/* 전체보기(그리드) 모드: 3D 해제하고 반응형 카드 그리드 */
+.stream-section.grid-mode .stream-nav,
+.stream-section.grid-mode .stream-progress,
+.stream-section.grid-mode .stream-hint { display: none; }
+
+.stream-viewport.grid-mode { perspective: none; margin: 0; }
+
+.stream.grid-mode {
+  position: static;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.1rem;
+  height: auto;
+  overflow: visible;
+  transform-style: flat;
+  cursor: default;
+  padding: 0.5rem 0;
+}
+.stream.grid-mode .stream-card {
+  position: static;
+  top: auto;
+  left: auto;
+  width: auto;
+  height: 100%;
+  margin: 0 !important;
+  transform: none !important;
+  opacity: 1 !important;
+  z-index: auto !important;
+  pointer-events: auto !important;
+  transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.stream.grid-mode .stream-card:hover { transform: translateY(-5px) !important; }
+.stream.grid-mode .stream-empty {
+  position: static;
+  grid-column: 1 / -1;
+  padding: 3rem 1rem;
+}
+
+@media (max-width: 640px) {
+  .stream-tools { gap: 0.5rem; }
+  .mode-btn { padding: 5px 10px; font-size: 0.74rem; }
+  .stream.grid-mode { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
 }

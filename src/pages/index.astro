@@ -104,10 +104,16 @@ const fmtDate = (d: Date) =>
   <section class="stream-section" aria-label="글 탐색 스트림">
     <div class="section-header stream-head">
       <h2>탐색 스트림</h2>
-      <div class="stream-nav">
-        <span class="stream-counter"><b id="stream-idx">01</b> / {feedPosts.length}</span>
-        <button class="stream-arrow" id="stream-prev" aria-label="이전 글" disabled>&larr;</button>
-        <button class="stream-arrow" id="stream-next" aria-label="다음 글">&rarr;</button>
+      <div class="stream-tools">
+        <div class="stream-modes" id="stream-modes" role="tablist" aria-label="보기 방식">
+          <button class="mode-btn active" data-mode="carousel" role="tab" aria-selected="true">◐ 카루셀</button>
+          <button class="mode-btn" data-mode="grid" role="tab" aria-selected="false">▦ 전체보기</button>
+        </div>
+        <div class="stream-nav">
+          <span class="stream-counter"><b id="stream-idx">01</b> / {feedPosts.length}</span>
+          <button class="stream-arrow" id="stream-prev" aria-label="이전 글">&larr;</button>
+          <button class="stream-arrow" id="stream-next" aria-label="다음 글">&rarr;</button>
+        </div>
       </div>
     </div>
 
@@ -190,113 +196,125 @@ const fmtDate = (d: Date) =>
       if (!stream || !viewport) return;
 
       const cards = Array.from(stream.querySelectorAll('.stream-card')) as HTMLElement[];
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const visCards = () => cards.filter((c) => !c.classList.contains('hide'));
+      // ── 원형 3D 카루셀 상태 ──
+      let cardW = 300, R = 340, pos = 0, target = 0, raf: number | null = null;
+      let vis = cards.slice();
+      const STEP = 20;    // 인접 카드 각도(deg)
+      const MAXVIS = 3;   // 앞쪽 ±3장만 노출, 나머지는 원 뒤로 순환
 
-      const step = () => {
-        const vis = visCards();
-        if (vis.length < 2) return vis[0]?.offsetWidth || 300;
-        return vis[1].offsetLeft - vis[0].offsetLeft;
-      };
-
-      // ── 3D coverflow: 각 카드 transform을 뷰포트 중심 기준 거리로 갱신 ──
-      function coverflow() {
-        if (reduce || !stream) return;
-        const center = stream.scrollLeft + stream.clientWidth / 2;
-        cards.forEach((card) => {
-          if (card.classList.contains('hide')) return;
-          const cc = card.offsetLeft + card.offsetWidth / 2;
-          let d = (cc - center) / card.offsetWidth;
-          d = Math.max(-2.4, Math.min(2.4, d));
-          const ad = Math.abs(d);
-          const rot = -d * 26;
-          const scale = 1 - Math.min(ad, 1.5) * 0.16;
-          const tz = -Math.min(ad, 2.2) * 66;
-          card.style.transform = `perspective(1200px) rotateY(${rot}deg) scale(${scale}) translateZ(${tz}px)`;
-          card.style.opacity = String(Math.max(0.28, 1 - ad * 0.32));
-          card.style.zIndex = String(100 - Math.round(ad * 10));
-        });
+      // ── 보기 모드(카루셀 ↔ 전체보기 그리드) ──
+      const modeBtns = Array.from(document.querySelectorAll('#stream-modes .mode-btn')) as HTMLElement[];
+      const section = document.querySelector('.stream-section') as HTMLElement | null;
+      let mode: 'carousel' | 'grid' = 'carousel';
+      const clearCardStyles = () => cards.forEach((c) => {
+        c.style.transform = ''; c.style.opacity = ''; c.style.marginLeft = ''; c.style.zIndex = ''; c.style.pointerEvents = '';
+      });
+      function setMode(m: 'carousel' | 'grid') {
+        mode = m;
+        modeBtns.forEach((b) => { const on = b.dataset.mode === m; b.classList.toggle('active', on); b.setAttribute('aria-selected', String(on)); });
+        const grid = m === 'grid';
+        stream.classList.toggle('grid-mode', grid);
+        viewport?.classList.toggle('grid-mode', grid);
+        section?.classList.toggle('grid-mode', grid);
+        if (grid) { if (raf != null) { cancelAnimationFrame(raf); raf = null; } clearCardStyles(); }
+        else { measure(); target = Math.round(pos); render(); }
       }
+
+      function measure() {
+        cardW = cards.find((c) => !c.classList.contains('hide'))?.offsetWidth || 300;
+        cards.forEach((c) => { c.style.marginLeft = (-cardW / 2) + 'px'; });
+        R = Math.round(cardW * 1.45);
+      }
+      const refreshVis = () => { vis = cards.filter((c) => !c.classList.contains('hide')); };
 
       function hud() {
-        if (!stream || !viewport) return;
-        const max = stream.scrollWidth - stream.clientWidth;
-        const atStart = stream.scrollLeft <= 2;
-        const atEnd = stream.scrollLeft >= max - 2;
-        viewport.classList.toggle('at-start', atStart);
-        viewport.classList.toggle('at-end', atEnd);
-        if (prev) prev.disabled = atStart;
-        if (next) next.disabled = atEnd || max <= 0;
-        // current = 중앙에 가장 가까운 카드
-        const center = stream.scrollLeft + stream.clientWidth / 2;
-        const vis = visCards();
-        let cur = 1, best = Infinity;
-        vis.forEach((c, i) => {
-          const dist = Math.abs(c.offsetLeft + c.offsetWidth / 2 - center);
-          if (dist < best) { best = dist; cur = i + 1; }
+        const N = vis.length;
+        if (!N) return;
+        const cur = ((Math.round(pos) % N) + N) % N;
+        if (idxEl) idxEl.textContent = String(cur + 1).padStart(2, '0');
+        if (bar) { bar.style.width = (100 / N) + '%'; bar.style.marginLeft = (cur / N) * 100 + '%'; }
+        if (prev) prev.disabled = false;
+        if (next) next.disabled = false;
+      }
+
+      // 각 카드를 원(circle) 위 각도에 배치 → pos 회전으로 순환
+      function render() {
+        const N = vis.length;
+        cards.forEach((c) => { if (c.classList.contains('hide')) { c.style.opacity = '0'; c.style.pointerEvents = 'none'; } });
+        if (!N) return;
+        vis.forEach((card, j) => {
+          let rel = ((j - pos) % N + N) % N;
+          if (rel > N / 2) rel -= N;
+          const a = rel * STEP;
+          const ar = (a * Math.PI) / 180;
+          const ad = Math.abs(a);
+          if (Math.abs(rel) > MAXVIS + 0.5) {
+            card.style.opacity = '0';
+            card.style.pointerEvents = 'none';
+            card.style.transform = 'translateZ(-1400px)';
+            card.style.zIndex = '0';
+            return;
+          }
+          const x = R * Math.sin(ar);
+          const z = R * Math.cos(ar) - R;
+          const sc = 0.6 + 0.4 * Math.max(Math.cos(ar), 0);
+          card.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${-a}deg) scale(${sc})`;
+          card.style.opacity = String(Math.max(0.2, Math.cos(ar) * 0.9 + 0.1));
+          card.style.pointerEvents = 'auto';
+          card.style.zIndex = String(200 - Math.round(ad));
         });
-        if (idxEl) idxEl.textContent = String(cur).padStart(2, '0');
-        if (bar && stream.scrollWidth > 0) {
-          const frac = max > 0 ? stream.scrollLeft / max : 0;
-          const thumb = (stream.clientWidth / stream.scrollWidth) * 100;
-          bar.style.width = thumb + '%';
-          bar.style.marginLeft = frac * (100 - thumb) + '%';
-        }
+        hud();
       }
 
-      let ticking = false;
-      function onScroll() {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => { coverflow(); hud(); ticking = false; });
+      function tick() {
+        pos += (target - pos) * 0.2;
+        if (Math.abs(target - pos) < 0.0008) { pos = target; render(); raf = null; return; }
+        render();
+        raf = requestAnimationFrame(tick);
       }
-      stream.addEventListener('scroll', onScroll, { passive: true });
+      function animateTo(t: number) { target = t; if (raf == null) raf = requestAnimationFrame(tick); }
+      const go = (dir: number) => { if (mode !== 'carousel') return; animateTo(Math.round(target) + dir); };
 
-      const scrollByStep = (dir: number) => stream.scrollBy({ left: dir * step(), behavior: 'smooth' });
-      prev?.addEventListener('click', () => scrollByStep(-1));
-      next?.addEventListener('click', () => scrollByStep(1));
+      prev?.addEventListener('click', () => go(-1));
+      next?.addEventListener('click', () => go(1));
 
       stream.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') { e.preventDefault(); scrollByStep(1); }
-        else if (e.key === 'ArrowLeft') { e.preventDefault(); scrollByStep(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
       });
 
+      let wheelLock = false;
       stream.addEventListener('wheel', (e) => {
-        const dy = e.deltaY;
-        if (Math.abs(dy) <= Math.abs(e.deltaX)) return;
-        const max = stream.scrollWidth - stream.clientWidth;
-        if ((dy > 0 && stream.scrollLeft < max) || (dy < 0 && stream.scrollLeft > 0)) {
-          e.preventDefault();
-          stream.scrollLeft += dy;
-        }
+        if (mode !== 'carousel') return;
+        if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+        e.preventDefault();
+        if (wheelLock) return;
+        wheelLock = true; setTimeout(() => { wheelLock = false; }, 160);
+        go(e.deltaY > 0 ? 1 : -1);
       }, { passive: false });
 
-      // ── 드래그: 실제 이동(임계값)을 넘을 때만 시작 → 단순 클릭은 통과 ──
+      // ── 드래그로 원형 회전 (임계값 넘을 때만 → 단순 클릭 통과) ──
       const DRAG_MIN = 6;
-      let down = false, startX = 0, startScroll = 0, moved = 0, dragging = false;
+      let down = false, startX = 0, startPos = 0, moved = 0, dragging = false;
       stream.addEventListener('pointerdown', (e) => {
+        if (mode !== 'carousel') return;
         if (e.button !== undefined && e.button !== 0) return;
         down = true; moved = 0; dragging = false;
-        startX = e.clientX; startScroll = stream.scrollLeft;
+        startX = e.clientX;
+        if (raf != null) { cancelAnimationFrame(raf); raf = null; }
+        startPos = pos;
       });
       window.addEventListener('pointermove', (e) => {
         if (!down) return;
-        const d = e.clientX - startX;
-        moved = Math.abs(d);
-        if (!dragging && moved > DRAG_MIN) {
-          dragging = true;
-          stream.classList.add('dragging');   // 이때만 링크 pointer-events 차단
-        }
-        if (dragging) stream.scrollLeft = startScroll - d;
+        const dx = e.clientX - startX;
+        moved = Math.abs(dx);
+        if (!dragging && moved > DRAG_MIN) { dragging = true; stream.classList.add('dragging'); }
+        if (dragging) { pos = startPos - dx / (cardW * 0.9); target = pos; render(); }
       });
       window.addEventListener('pointerup', () => {
         if (!down) return;
         down = false;
-        if (dragging) {
-          stream.classList.remove('dragging');
-          const s = step();
-          stream.scrollTo({ left: Math.round(stream.scrollLeft / s) * s, behavior: 'smooth' });
-        }
+        if (dragging) { stream.classList.remove('dragging'); animateTo(Math.round(pos)); }
       });
 
       // ── 카드 클릭 → 팝업(모달)로 글 표시 ──
@@ -346,9 +364,18 @@ const fmtDate = (d: Date) =>
         const a = card.querySelector('a') as HTMLAnchorElement | null;
         if (!a) return;
         a.addEventListener('click', (e) => {
-          if (dragging || moved > DRAG_MIN) { e.preventDefault(); return; }
           e.preventDefault();
-          openModal(a.getAttribute('href') || a.href);
+          if (dragging || moved > DRAG_MIN) return;
+          if (mode === 'grid') { openModal(a.getAttribute('href') || a.href); return; }
+          const N = vis.length;
+          const j = vis.indexOf(card);
+          if (j < 0) return;
+          const cur = ((Math.round(pos) % N) + N) % N;
+          let d = ((j - cur) % N + N) % N;
+          if (d > N / 2) d -= N;
+          // 정면 카드 → 팝업 / 옆 카드 → 그 카드로 회전
+          if (Math.abs(d) < 0.5) openModal(a.getAttribute('href') || a.href);
+          else animateTo(Math.round(target) + d);
         });
       });
 
@@ -366,13 +393,18 @@ const fmtDate = (d: Date) =>
           if (match) visible++;
         });
         if (empty) empty.style.display = visible === 0 ? 'flex' : 'none';
-        stream.scrollTo({ left: 0, behavior: 'smooth' });
-        requestAnimationFrame(() => { coverflow(); hud(); });
+        refreshVis();
+        if (mode === 'grid') { clearCardStyles(); }
+        else { pos = 0; target = 0; measure(); render(); }
       });
 
-      window.addEventListener('resize', () => requestAnimationFrame(() => { coverflow(); hud(); }));
-      window.addEventListener('load', () => { coverflow(); hud(); });
-      requestAnimationFrame(() => { coverflow(); hud(); });
+      // 모드 토글
+      modeBtns.forEach((b) => b.addEventListener('click', () => setMode((b.dataset.mode as 'carousel' | 'grid') || 'carousel')));
+
+      window.addEventListener('resize', () => { if (mode === 'carousel') { measure(); render(); } });
+      window.addEventListener('load', () => { if (mode === 'carousel') { measure(); render(); } });
+      measure();
+      requestAnimationFrame(() => { measure(); render(); });
     })();
   </script>
 </BaseLayout>
