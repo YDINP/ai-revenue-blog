@@ -151,7 +151,6 @@ const fmtDate = (d: Date) =>
     </div>
 
     <div class="stream-progress"><div class="stream-progress-bar" id="stream-bar"></div></div>
-    <p class="stream-hint">&larr; 드래그 · 휠 · 방향키로 넘겨보세요 &rarr;</p>
   </section>
 
   <!-- Popular Posts -->
@@ -341,13 +340,22 @@ const fmtDate = (d: Date) =>
         hud();
       }
 
-      function tick() {
-        pos += (target - pos) * 0.2;
-        if (Math.abs(target - pos) < 0.0008) { pos = target; render(); raf = null; return; }
+      // 시간 기반 easing(easeOutCubic)로 부드러운 회전 연출
+      let animFrom = 0, animTo = 0, animStart = 0;
+      const ANIM_DUR = 460;
+      const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+      function tick(now: number) {
+        const t = Math.min((now - animStart) / ANIM_DUR, 1);
+        pos = animFrom + (animTo - animFrom) * easeOutCubic(t);
         render();
+        if (t < 1) { raf = requestAnimationFrame(tick); }
+        else { pos = animTo; target = animTo; render(); raf = null; }
+      }
+      function animateTo(tp: number) {
+        animFrom = pos; animTo = tp; target = tp; animStart = performance.now();
+        if (raf != null) cancelAnimationFrame(raf);
         raf = requestAnimationFrame(tick);
       }
-      function animateTo(t: number) { target = t; if (raf == null) raf = requestAnimationFrame(tick); }
       const go = (dir: number) => { if (mode !== 'carousel') return; animateTo(Math.round(target) + dir); };
 
       prev?.addEventListener('click', () => go(-1));
@@ -556,6 +564,16 @@ const fmtDate = (d: Date) =>
       listOverlay?.addEventListener('keydown', (e) => trapTab(e, listOverlay));
 
       pInput?.addEventListener('input', () => { pQuery = pInput.value.trim().toLowerCase(); applyPalette(); });
+
+      // 히어로 "탐색" → 블로그 이동 대신 팔레트 검색 열기(입력 반영)
+      const deckForm = document.querySelector('.deck-search') as HTMLFormElement | null;
+      const deckInput = deckForm?.querySelector('input') as HTMLInputElement | null;
+      deckForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        openPalette();
+        const q = (deckInput?.value || '').trim();
+        if (pInput) { pInput.value = q; pQuery = q.toLowerCase(); applyPalette(); }
+      });
       pChips?.addEventListener('click', (e) => {
         const btn = (e.target as HTMLElement).closest('.pchip') as HTMLElement | null;
         if (!btn) return;
