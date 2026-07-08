@@ -18,6 +18,7 @@
 <a class="pd-side" href="https://paperdoc-web.vercel.app/" target="_blank" rel="noopener sponsored" aria-label="페이퍼닥 - 계약서 AI 분석 플랫폼 바로가기">
   <img class="pd-side-img" src="/pd-side.png" alt="페이퍼닥 - 계약서 AI 분석 플랫폼" width="887" height="1774" loading="lazy" decoding="async" />
   <span class="pd-side-shine" aria-hidden="true"></span>
+  <span class="pd-side-cta">무료로 검토받기 <span class="pd-promo-arrow" aria-hidden="true">→</span></span>
 </a>
 
 <style>
@@ -177,6 +178,16 @@
       transform: skewY(-12deg); pointer-events: none;
       animation: pd-side-shine 5s ease-in-out infinite;
     }
+    .pd-side-cta {
+      position: absolute; left: 50%; bottom: 8.5%; transform: translateX(-50%);
+      display: inline-flex; align-items: center; gap: 0.3em;
+      padding: 0.5em 1em; border-radius: 999px;
+      font-size: clamp(0.6rem, 0.95vw, 0.76rem); font-weight: 800; white-space: nowrap;
+      color: #0b1020; background: #ffd400;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+      animation: pd-promo-cta-pulse 1.8s ease-in-out infinite;
+    }
+    .pd-side:hover .pd-side-cta { background: #ffe14d; }
   }
   @keyframes pd-side-shine {
     0% { top: -60%; }
