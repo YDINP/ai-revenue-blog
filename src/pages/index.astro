@@ -719,4 +719,33 @@ const fmtDate = (d: Date) =>
       }
     })();
   </script>
+
+  <script>
+    // 히어로 타이틀 split-text 리빌(글자 순차 등장). 그라디언트 span은 통째로 등장.
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const title = document.querySelector('.deck-title');
+      if (!title) return;
+      let idx = 0;
+      Array.from(title.childNodes).forEach((node) => {
+        if (node.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          Array.from(node.textContent || '').forEach((ch) => {
+            const s = document.createElement('span');
+            s.className = 'ch';
+            s.textContent = ch;
+            s.style.animationDelay = (idx * 0.035).toFixed(3) + 's';
+            if (ch === ' ') s.style.width = '0.28em';
+            idx++;
+            frag.appendChild(s);
+          });
+          title.replaceChild(frag, node);
+        } else if (node.nodeType === 1) {
+          (node as HTMLElement).classList.add('ch');
+          (node as HTMLElement).style.animationDelay = (idx * 0.035).toFixed(3) + 's';
+          idx++;
+        }
+      });
+    })();
+  </script>
 </BaseLayout>

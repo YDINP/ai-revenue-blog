@@ -4744,3 +4744,19 @@ html { overflow-x: clip; }
   /* 카루셀 진행바도 흐름 */
   .stream-progress-bar { background-size: 200% auto; animation: grad-flow 4s linear infinite; }
 }
+
+/* ==========================================================================
+   LIVELY MOTION — 배치4: 히어로 타이틀 split-text 리빌
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  .deck-title .ch {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.55em) rotate(3deg);
+    filter: blur(4px);
+    animation: ch-reveal 0.55s cubic-bezier(0.2, 0.85, 0.3, 1) forwards;
+  }
+  @keyframes ch-reveal {
+    to { opacity: 1; transform: none; filter: blur(0); }
+  }
+}
