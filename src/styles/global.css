@@ -69,7 +69,7 @@
 }
 
 html {
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: var(--color-text);
   background-color: var(--color-bg);
   line-height: 1.7;
@@ -808,12 +808,14 @@ section > h2::after {
   display: none;
 }
 
-@media (min-width: 1360px) {
+@media (min-width: 1400px) {
   .toc-sidebar {
     display: block;
     position: fixed;
     top: 100px;
-    right: max(16px, calc((100vw - 820px) / 2 - 280px));
+    /* 우측은 사이드 배너가 점유 → 목차는 좌측 여백에 배치(충돌 원천 차단) */
+    left: max(16px, calc((100vw - 820px) / 2 - 260px));
+    right: auto;
     width: 240px;
     max-height: calc(100vh - 140px);
     overflow-y: auto;
@@ -4551,5 +4553,5 @@ body.list-open { overflow: hidden; }
 .stream-card { background: rgba(255, 255, 255, 0.94); }
 :root.dark .stream-card { background: rgba(12, 16, 34, 0.95); }
 
-/* 포스트 페이지에서는 목차(toc-sidebar)가 우측을 사용하므로 사이드 배너 숨김(충돌 방지) */
-body:has(.blog-post) .pd-side { display: none !important; }
+/* 사이드 배너는 표시 가능한 해상도(≥1200)에선 포스트 포함 항상 표시.
+   목차(toc-sidebar)는 사이드 배너와 겹치지 않도록 더 넓은 폭에서만·왼쪽에 배치(아래 재정의). */
