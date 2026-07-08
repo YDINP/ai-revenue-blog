@@ -4705,3 +4705,42 @@ html { overflow-x: clip; }
 .qv-overlay.open .qv-modal {
   transition: transform 0.44s cubic-bezier(0.34, 1.5, 0.5, 1);
 }
+
+/* ==========================================================================
+   LIVELY MOTION — 배치3: 포스트 스크롤 스토리텔링 · 진행바 플로우
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .post-content > h2,
+    .post-content .code-block-wrapper,
+    .post-content blockquote,
+    .post-content .callout-tip,
+    .post-content .callout-warning,
+    .post-content .callout-info,
+    .post-content .chart-bar,
+    .post-content .chart-versus,
+    .post-content .chart-radar,
+    .post-content .chart-donut,
+    .post-content .chart-progress,
+    .post-content table,
+    .post-content .faq-item,
+    .post-content .series-box,
+    .post-content > img {
+      animation: content-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 32%;
+    }
+  }
+  @keyframes content-reveal {
+    from { opacity: 0; transform: translateY(26px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* 읽기 진행바 그라디언트 흐름 */
+  .reading-progress {
+    background-size: 200% auto;
+    animation: grad-flow 3s linear infinite;
+  }
+  /* 카루셀 진행바도 흐름 */
+  .stream-progress-bar { background-size: 200% auto; animation: grad-flow 4s linear infinite; }
+}
