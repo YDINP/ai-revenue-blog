@@ -310,10 +310,12 @@ const fmtDate = (d: Date) =>
         if (next) next.disabled = false;
       }
 
-      // 각 카드를 원(circle) 위 각도에 배치 → pos 회전으로 순환
+      // 각 카드를 원(circle) 위 각도에 배치 → pos 회전으로 순환 (스페이셜: 회전↓·깊이·블러·틸트)
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let tiltX = 0, tiltY = 0, tiltRaf: number | null = null;
       function render() {
         const N = vis.length;
-        cards.forEach((c) => { if (c.classList.contains('hide')) { c.style.opacity = '0'; c.style.pointerEvents = 'none'; } });
+        cards.forEach((c) => { if (c.classList.contains('hide')) { c.style.opacity = '0'; c.style.pointerEvents = 'none'; c.classList.remove('is-front'); } });
         if (!N) return;
         vis.forEach((card, j) => {
           let rel = ((j - pos) % N + N) % N;
@@ -326,15 +328,22 @@ const fmtDate = (d: Date) =>
             card.style.pointerEvents = 'none';
             card.style.transform = 'translateZ(-1400px)';
             card.style.zIndex = '0';
+            card.style.filter = 'none';
+            card.classList.remove('is-front');
             return;
           }
           const x = R * Math.sin(ar);
           const z = R * Math.cos(ar) - R;
           const sc = 0.6 + 0.4 * Math.max(Math.cos(ar), 0);
-          card.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${-a}deg) scale(${sc})`;
+          const ry = -a * (reduce ? 1 : 0.62);                 // 회전 완화 → 평면 커버플로우 티 제거
+          const isFront = Math.abs(rel) < 0.5;
+          const tilt = (isFront && !reduce) ? ` rotateX(${tiltY.toFixed(2)}deg) rotateY(${tiltX.toFixed(2)}deg)` : '';
+          card.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${ry}deg)${tilt} scale(${sc})`;
           card.style.opacity = String(Math.max(0.2, Math.cos(ar) * 0.9 + 0.1));
           card.style.pointerEvents = 'auto';
           card.style.zIndex = String(200 - Math.round(ad));
+          card.style.filter = (!reduce && ad > 1) ? `blur(${(Math.min(ad / STEP, 3) * 1.25).toFixed(2)}px)` : 'none';   // 거리별 심도 블러
+          card.classList.toggle('is-front', isFront);
         });
         hud();
       }
@@ -389,6 +398,23 @@ const fmtDate = (d: Date) =>
         down = false;
         if (dragging) { stream.classList.remove('dragging'); animateTo(Math.round(pos)); }
       });
+
+      // 포인터 패럴랙스: 앞 카드가 마우스를 따라 미세 틸트(스페이셜)
+      if (!reduce) {
+        stream.addEventListener('pointermove', (e) => {
+          if (dragging || mode !== 'carousel') return;
+          const r = stream.getBoundingClientRect();
+          const nx = (e.clientX - r.left) / r.width - 0.5;
+          const ny = (e.clientY - r.top) / r.height - 0.5;
+          tiltX = nx * 9;
+          tiltY = -ny * 7;
+          if (tiltRaf == null) tiltRaf = requestAnimationFrame(() => { tiltRaf = null; render(); });
+        });
+        stream.addEventListener('pointerleave', () => {
+          tiltX = 0; tiltY = 0;
+          if (tiltRaf == null) tiltRaf = requestAnimationFrame(() => { tiltRaf = null; render(); });
+        });
+      }
 
       // ── 카드 클릭 → 팝업(모달)로 글 표시 ──
       const overlay = document.getElementById('qv-overlay') as HTMLElement | null;

@@ -4318,3 +4318,17 @@ body.list-open { overflow: hidden; }
   .palette-foot { gap: 0.65rem; font-size: 0.66rem; padding: 0.6rem 1rem; }
   .list-modal { max-height: 92vh; }
 }
+
+/* ==========================================================================
+   CAROUSEL SPATIAL (스페이셜 고도화): 앞 카드 반사 + reduced-motion
+   ========================================================================== */
+.stream-card.is-front {
+  -webkit-box-reflect: below 8px linear-gradient(transparent 58%, rgba(7,10,23,0.14));
+}
+:root.dark .stream-card.is-front {
+  -webkit-box-reflect: below 8px linear-gradient(transparent 55%, rgba(0,0,0,0.28));
+}
+@media (prefers-reduced-motion: reduce) {
+  .stream-card { filter: none !important; }
+  .stream-card.is-front { -webkit-box-reflect: none; }
+}
