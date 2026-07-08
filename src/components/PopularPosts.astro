@@ -34,7 +34,6 @@ const catLabel = (c: string) => ({ ai: 'AI', dev: 'Dev', review: 'Review', game:
       </li>
     ))}
   </ol>
-  <p class="popular-posts-note" id="popular-note">* 대시보드 데이터를 불러오는 중…</p>
 </aside>
 
 <script define:vars={{ SUPABASE_URL, SUPABASE_ANON_KEY, SLUG_META }}>
@@ -85,13 +84,8 @@ const catLabel = (c: string) => ({ ai: 'AI', dev: 'Dev', review: 'Review', game:
             </li>`).join('');
           if (cid) ol.querySelectorAll('*').forEach((el) => el.setAttribute(cid, ''));
         }
-        const note = document.getElementById('popular-note');
-        if (note) note.textContent = '* 대시보드 조회수 기준 (실시간)';
       })
-      .catch(() => {
-        const note = document.getElementById('popular-note');
-        if (note) note.textContent = '* 최신 글 기준 (분석 데이터 로드 실패)';
-      });
+      .catch(() => {});
   })();
 </script>
 
@@ -179,12 +173,6 @@ const catLabel = (c: string) => ({ ai: 'AI', dev: 'Dev', review: 'Review', game:
   .popular-post-views {
     font-size: 0.68rem; font-weight: 700; color: var(--color-text-muted);
     font-family: ui-monospace, Menlo, monospace;
-  }
-  .popular-posts-note {
-    margin-top: 1rem; padding-top: 0.75rem;
-    border-top: 1px solid var(--glass-border);
-    font-size: 0.72rem; color: var(--color-text-secondary);
-    text-align: center; opacity: 0.75;
   }
   @media (max-width: 640px) {
     .popular-posts-widget { padding: 1.25rem 1rem; margin: 1.5rem 0; }
