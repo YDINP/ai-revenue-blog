@@ -4555,3 +4555,10 @@ body.list-open { overflow: hidden; }
 
 /* 사이드 배너는 표시 가능한 해상도(≥1200)에선 포스트 포함 항상 표시.
    목차(toc-sidebar)는 사이드 배너와 겹치지 않도록 더 넓은 폭에서만·왼쪽에 배치(아래 재정의). */
+
+/* 포스트 페이지: 본문(820px)이 좁아 사이드 배너가 멀어 보임 → 본문 우측 가까이 배치 */
+@media (min-width: 1200px) {
+  body:has(.blog-post) .pd-side {
+    right: max(12px, calc((100vw - 820px) / 2 - 178px));
+  }
+}
