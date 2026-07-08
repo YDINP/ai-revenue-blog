@@ -346,8 +346,7 @@ const fmtDate = (d: Date) =>
           const sc = 0.6 + 0.4 * Math.max(Math.cos(ar), 0);
           const ry = -a * (reduce ? 1 : 0.62);                 // 회전 완화 → 평면 커버플로우 티 제거
           const isFront = Math.abs(rel) < 0.5;
-          const tilt = (isFront && !reduce) ? ` rotateX(${tiltY.toFixed(2)}deg) rotateY(${tiltX.toFixed(2)}deg)` : '';
-          card.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${ry}deg)${tilt} scale(${sc})`;
+          card.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${ry}deg) scale(${sc})`;
           card.style.opacity = String(Math.max(0.2, Math.cos(ar) * 0.9 + 0.1));
           card.style.pointerEvents = 'auto';
           card.style.zIndex = String(200 - Math.round(ad));
@@ -394,6 +393,7 @@ const fmtDate = (d: Date) =>
         startX = e.clientX;
         if (raf != null) { cancelAnimationFrame(raf); raf = null; }
         startPos = pos;
+        tiltX = 0; tiltY = 0; render();   // 누르는 순간 틸트 해제 → 앞카드가 커서 아래에서 움직여 클릭이 빗나가는 문제 방지
       });
       window.addEventListener('pointermove', (e) => {
         if (!down) return;
@@ -408,22 +408,8 @@ const fmtDate = (d: Date) =>
         if (dragging) { stream.classList.remove('dragging'); animateTo(Math.round(pos)); }
       });
 
-      // 포인터 패럴랙스: 앞 카드가 마우스를 따라 미세 틸트(스페이셜)
-      if (!reduce) {
-        stream.addEventListener('pointermove', (e) => {
-          if (dragging || mode !== 'carousel') return;
-          const r = stream.getBoundingClientRect();
-          const nx = (e.clientX - r.left) / r.width - 0.5;
-          const ny = (e.clientY - r.top) / r.height - 0.5;
-          tiltX = nx * 9;
-          tiltY = -ny * 7;
-          if (tiltRaf == null) tiltRaf = requestAnimationFrame(() => { tiltRaf = null; render(); });
-        });
-        stream.addEventListener('pointerleave', () => {
-          tiltX = 0; tiltY = 0;
-          if (tiltRaf == null) tiltRaf = requestAnimationFrame(() => { tiltRaf = null; render(); });
-        });
-      }
+      // (포인터 틸트는 3D로 카드가 커서 아래에서 이동해 클릭을 빗나가게 하므로 제거.
+      //  심도 블러·반사·회전완화만으로 스페이셜 깊이 유지)
 
       // ── 카드 클릭 → 팝업(모달)로 글 표시 ──
       const overlay = document.getElementById('qv-overlay') as HTMLElement | null;
