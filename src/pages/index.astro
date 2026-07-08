@@ -10,10 +10,10 @@ const sortedPosts = allPosts.sort(
   (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
 );
 
-// Featured = latest post
+// 최신 글(통계/날짜용)
 const featured = sortedPosts[0];
-// Feed = the rest (bento)
-const feedPosts = sortedPosts.slice(1, 19);
+// Feed = 최신 포함 카루셀
+const feedPosts = sortedPosts.slice(0, 18);
 
 // Live stats
 const totalPosts = allPosts.length;
@@ -59,7 +59,7 @@ const fmtDate = (d: Date) =>
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "itemListElement": [featured, ...feedPosts].map((post, i) => ({
+    "itemListElement": feedPosts.map((post, i) => ({
       "@type": "ListItem",
       "position": i + 1,
       "url": `https://ai-revenue-blog.vercel.app/blog/${post.id}/`
@@ -68,18 +68,18 @@ const fmtDate = (d: Date) =>
 
   <PaperdocBanner />
 
-  <!-- ══ Signal Deck ══ -->
-  <section class="deck" aria-label="사이트 소개">
-    <span class="deck-eyebrow"><span class="pulse"></span> LIVE · 매일 업데이트</span>
-    <h1 class="deck-title">첨단 기술을 <span class="grad">한눈에 읽는</span> 인텔리전스 덱</h1>
-    <p class="deck-sub">
-      AI 도구·개발 트렌드·테크 제품 리뷰를 한 화면에서 탐색하세요. 검색하고, 필터링하고, 바로 깊이 들어갑니다.
-    </p>
-
-    <div class="deck-stats">
-      <div class="stat-chip"><span class="stat-num">{totalPosts}</span><span class="stat-label">Articles</span></div>
-      <div class="stat-chip"><span class="stat-num">{catCount}</span><span class="stat-label">Topics</span></div>
-      <div class="stat-chip"><span class="stat-num">{latestDate}</span><span class="stat-label">Updated</span></div>
+  <!-- ══ Deck: 컴팩트 검색 히어로 ══ -->
+  <section class="deck deck-compact" aria-label="사이트 검색">
+    <div class="deck-row">
+      <div class="deck-headline">
+        <span class="deck-eyebrow"><span class="pulse"></span> LIVE · 매일 업데이트</span>
+        <h1 class="deck-title">AI · 개발 · 테크,<br /><span class="grad">흐름을 읽다</span></h1>
+      </div>
+      <div class="deck-stats">
+        <div class="stat-chip"><span class="stat-num">{totalPosts}</span><span class="stat-label">Articles</span></div>
+        <div class="stat-chip"><span class="stat-num">{catCount}</span><span class="stat-label">Topics</span></div>
+        <div class="stat-chip"><span class="stat-num">{latestDate}</span><span class="stat-label">Updated</span></div>
+      </div>
     </div>
 
     <form class="deck-search" action="/blog/" method="get" role="search">
@@ -91,24 +91,6 @@ const fmtDate = (d: Date) =>
       <button type="submit">탐색</button>
     </form>
   </section>
-
-  <!-- ══ Spotlight (featured) ══ -->
-  <a class="spotlight" href={`/blog/${featured.id}/`} aria-label={`추천 글: ${featured.data.title}`}>
-    <div class="spotlight-media">
-      {featured.data.image && (
-        <img src={featured.data.image.url} alt={featured.data.image.alt} width="1200" height="675" fetchpriority="high" />
-      )}
-    </div>
-    <div class="spotlight-body">
-      <span class="spotlight-tag">◆ Featured · {featured.data.category}</span>
-      <h3>{featured.data.title}</h3>
-      <p>{featured.data.description}</p>
-      <div class="spotlight-meta">
-        <time datetime={new Date(featured.data.pubDate).toISOString()}>{fmtDate(featured.data.pubDate)}</time>
-        <span class="spotlight-cta">자세히 읽기 &rarr;</span>
-      </div>
-    </div>
-  </a>
 
   <!-- ══ Explore Stream (가로 슬라이드) ══ -->
   <section class="stream-section" aria-label="글 탐색 스트림">

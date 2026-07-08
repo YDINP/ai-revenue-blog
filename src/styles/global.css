@@ -4611,3 +4611,21 @@ body.list-open { overflow: hidden; }
     to   { transform: scale(1.16) translateY(4.5%); }
   }
 }
+
+/* Deck 컴팩트 히어로(스포트라이트 제거, 타이틀 정제) */
+.deck-compact { padding: 2rem 2rem 1.75rem; }
+.deck-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem 2rem; flex-wrap: wrap; margin-bottom: 1.4rem;
+}
+.deck-headline .deck-eyebrow { margin-bottom: 0.7rem; }
+.deck-headline .deck-title {
+  font-size: clamp(1.55rem, 3vw, 2.35rem);
+  line-height: 1.16; margin-bottom: 0;
+}
+.deck-compact .deck-stats { margin-bottom: 0; }
+@media (max-width: 640px) {
+  .deck-compact { padding: 1.7rem 1.25rem; }
+  .deck-row { gap: 1rem; }
+  .deck-headline .deck-stats { display: none; }
+}
