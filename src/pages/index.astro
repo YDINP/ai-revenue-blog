@@ -151,6 +151,7 @@ const fmtDate = (d: Date) =>
     </div>
 
     <div class="stream-progress"><div class="stream-progress-bar" id="stream-bar"></div></div>
+    <div class="stream-autoplay" aria-hidden="true"><i class="stream-autoplay-fill" id="ap-fill"></i></div>
   </section>
 
   <!-- Popular Posts -->
@@ -380,6 +381,7 @@ const fmtDate = (d: Date) =>
       // ── 드래그로 원형 회전 (임계값 넘을 때만 → 단순 클릭 통과) ──
       const DRAG_MIN = 6;
       let down = false, startX = 0, startPos = 0, moved = 0, dragging = false;
+      let lastMoveT = 0, lastMovePos = 0, velo = 0;   // 관성용 속도(steps/ms)
       stream.addEventListener('pointerdown', (e) => {
         if (mode !== 'carousel') return;
         if (e.button !== undefined && e.button !== 0) return;
@@ -387,6 +389,7 @@ const fmtDate = (d: Date) =>
         startX = e.clientX;
         if (raf != null) { cancelAnimationFrame(raf); raf = null; }
         startPos = pos;
+        lastMoveT = performance.now(); lastMovePos = pos; velo = 0;
         tiltX = 0; tiltY = 0; render();   // 누르는 순간 틸트 해제 → 앞카드가 커서 아래에서 움직여 클릭이 빗나가는 문제 방지
       });
       window.addEventListener('pointermove', (e) => {
@@ -394,12 +397,21 @@ const fmtDate = (d: Date) =>
         const dx = e.clientX - startX;
         moved = Math.abs(dx);
         if (!dragging && moved > DRAG_MIN) { dragging = true; stream.classList.add('dragging'); }
-        if (dragging) { pos = startPos - dx / (cardW * 0.9); target = pos; render(); }
+        if (dragging) {
+          pos = startPos - dx / (cardW * 0.9); target = pos; render();
+          const now = performance.now(), dt = now - lastMoveT;
+          if (dt > 0) { velo = 0.7 * velo + 0.3 * ((pos - lastMovePos) / dt); lastMoveT = now; lastMovePos = pos; }
+        }
       });
       window.addEventListener('pointerup', () => {
         if (!down) return;
         down = false;
-        if (dragging) { stream.classList.remove('dragging'); animateTo(Math.round(pos)); }
+        if (dragging) {
+          stream.classList.remove('dragging');
+          // 플릭 속도로 모멘텀 투영(최대 ±3칸) → 관성 스냅
+          const momentum = Math.max(-3, Math.min(3, velo * 210));
+          animateTo(Math.round(pos + momentum));
+        }
       });
 
       // (포인터 틸트는 3D로 카드가 커서 아래에서 이동해 클릭을 빗나가게 하므로 제거.
@@ -694,17 +706,31 @@ const fmtDate = (d: Date) =>
       measure();
       requestAnimationFrame(() => { measure(); render(); });
 
-      // ── 카루셀 오토플레이(호버·드래그·팝업·비활성 탭 시 정지) ──
+      // ── 카루셀 오토플레이 + 진행바(호버·드래그·팝업·비활성 탭 시 정지) ──
       let streamHover = false;
       stream.addEventListener('mouseenter', () => { streamHover = true; });
       stream.addEventListener('mouseleave', () => { streamHover = false; });
+      const apFill = document.getElementById('ap-fill') as HTMLElement | null;
+      const AP_INTERVAL = 4600;
       if (!reduce) {
-        setInterval(() => {
-          if (mode !== 'carousel' || document.hidden || streamHover || down || dragging) return;
-          if (listOverlay && !listOverlay.hidden) return;
-          if (overlay && !overlay.hidden) return;
-          go(1);
-        }, 4600);
+        let apAcc = 0, apLast = performance.now();
+        const apTick = (now: number) => {
+          const dt = now - apLast; apLast = now;
+          const paused = mode !== 'carousel' || document.hidden || streamHover || down || dragging
+            || (listOverlay && !listOverlay.hidden) || (overlay && !overlay.hidden);
+          if (!paused) {
+            apAcc += dt;
+            if (apAcc >= AP_INTERVAL) { apAcc = 0; go(1); }
+          }
+          if (apFill) apFill.style.width = (Math.min(apAcc / AP_INTERVAL, 1) * 100).toFixed(1) + '%';
+          requestAnimationFrame(apTick);
+        };
+        requestAnimationFrame(apTick);
+        // 사용자가 화살표/드래그로 넘기면 진행바 리셋
+        const resetAp = () => { apAcc = 0; };
+        prev?.addEventListener('click', resetAp);
+        next?.addEventListener('click', resetAp);
+        stream.addEventListener('pointerup', resetAp);
       }
 
       // ── 홈 통계 카운트업 ──

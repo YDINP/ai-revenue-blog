@@ -4791,3 +4791,17 @@ html { overflow-x: clip; }
 .qv-skeleton .sk-w90 { width: 90%; }
 
 /* 마그네틱 버튼: transition은 batch1에서 이미 부여됨(transform) */
+
+/* 카루셀 오토플레이 진행바 */
+.stream-autoplay {
+  width: 100%; max-width: 200px; height: 3px;
+  margin: 0.55rem auto 0;
+  background: var(--glass-border);
+  border-radius: 3px; overflow: hidden;
+}
+.stream-autoplay-fill {
+  display: block; height: 100%; width: 0%;
+  background: var(--gradient-primary, linear-gradient(90deg, #6366f1, #a855f7));
+  border-radius: 3px;
+}
+@media (prefers-reduced-motion: reduce) { .stream-autoplay { display: none; } }
