@@ -4559,6 +4559,6 @@ body.list-open { overflow: hidden; }
 /* 포스트 페이지: 본문(820px)이 좁아 사이드 배너가 멀어 보임 → 본문 우측 가까이 배치 */
 @media (min-width: 1200px) {
   body:has(.blog-post) .pd-side {
-    right: max(12px, calc((100vw - 820px) / 2 - 178px));
+    right: max(12px, calc((100vw - 820px) / 2 - 206px));
   }
 }
