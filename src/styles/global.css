@@ -4612,20 +4612,25 @@ body.list-open { overflow: hidden; }
   }
 }
 
-/* Deck 컴팩트 히어로(스포트라이트 제거, 타이틀 정제) */
-.deck-compact { padding: 2rem 2rem 1.75rem; }
+/* Deck 컴팩트 히어로(스포트라이트 제거, 타이틀 정제, 세로 축소) */
+.deck-compact { padding: 1.3rem 2rem 1.3rem; }
 .deck-row {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 1.5rem 2rem; flex-wrap: wrap; margin-bottom: 1.4rem;
+  gap: 1rem 2rem; flex-wrap: wrap; margin-bottom: 1rem;
 }
-.deck-headline .deck-eyebrow { margin-bottom: 0.7rem; }
+.deck-headline .deck-eyebrow { margin-bottom: 0.55rem; }
 .deck-headline .deck-title {
-  font-size: clamp(1.55rem, 3vw, 2.35rem);
-  line-height: 1.16; margin-bottom: 0;
+  font-size: clamp(1.45rem, 2.6vw, 2rem);
+  line-height: 1.2; margin-bottom: 0; white-space: nowrap;
 }
 .deck-compact .deck-stats { margin-bottom: 0; }
-@media (max-width: 640px) {
-  .deck-compact { padding: 1.7rem 1.25rem; }
-  .deck-row { gap: 1rem; }
-  .deck-headline .deck-stats { display: none; }
+@media (max-width: 720px) {
+  .deck-headline .deck-title { white-space: normal; }
 }
+@media (max-width: 640px) {
+  .deck-compact { padding: 1.2rem 1.25rem; }
+  .deck-row { gap: 0.7rem; }
+}
+
+/* 카루셀 옆 카드가 뷰포트 밖으로 나가 생기는 가로 스크롤 차단(sticky 유지 위해 clip) */
+html { overflow-x: clip; }

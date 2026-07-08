@@ -73,7 +73,7 @@ const fmtDate = (d: Date) =>
     <div class="deck-row">
       <div class="deck-headline">
         <span class="deck-eyebrow"><span class="pulse"></span> LIVE · 매일 업데이트</span>
-        <h1 class="deck-title">AI · 개발 · 테크,<br /><span class="grad">흐름을 읽다</span></h1>
+        <h1 class="deck-title">AI · 개발 · 테크, <span class="grad">흐름을 읽다</span></h1>
       </div>
       <div class="deck-stats">
         <div class="stat-chip"><span class="stat-num">{totalPosts}</span><span class="stat-label">Articles</span></div>
@@ -327,14 +327,15 @@ const fmtDate = (d: Date) =>
           }
           const x = R * Math.sin(ar);
           const z = R * Math.cos(ar) - R;
-          const sc = 0.6 + 0.4 * Math.max(Math.cos(ar), 0);
+          const ar2 = Math.abs(rel);                            // 중앙에서 몇 칸 떨어졌나(연속값)
+          const sc = Math.max(0.52, 1.07 - ar2 * 0.24);         // 메인 확대(1.07)·옆칸 급격 축소 → 중앙 포커스
           const ry = -a * (reduce ? 1 : 0.62);                 // 회전 완화 → 평면 커버플로우 티 제거
-          const isFront = Math.abs(rel) < 0.5;
-          card.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${ry}deg) scale(${sc})`;
-          card.style.opacity = String(Math.max(0.2, Math.cos(ar) * 0.9 + 0.1));
+          const isFront = ar2 < 0.5;
+          card.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${ry}deg) scale(${sc.toFixed(3)})`;
+          card.style.opacity = String(Math.max(0.24, 1 - ar2 * 0.34));   // 옆칸 더 흐리게
           card.style.pointerEvents = 'auto';
           card.style.zIndex = String(200 - Math.round(ad));
-          card.style.filter = (!reduce && ad > 1) ? `blur(${(Math.min(ad / STEP, 3) * 1.25).toFixed(2)}px)` : 'none';   // 거리별 심도 블러
+          card.style.filter = (!reduce && ar2 > 0.3) ? `blur(${(Math.min(ar2, 3) * 1.7).toFixed(2)}px)` : 'none';   // 거리별 심도 블러(강화)
           card.classList.toggle('is-front', isFront);
         });
         hud();
