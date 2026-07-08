@@ -606,3 +606,21 @@
     list.innerHTML = '<p class="popular-posts-empty">인기글을 불러올 수 없습니다.</p>';
   });
 })();
+
+// 임베드 팝업 전용: 좌/우 스와이프 → 부모(홈)에 이전/다음 글 요청
+(function () {
+  if (!document.documentElement.classList.contains('embed')) return;
+  let sx = 0, sy = 0, st = 0, tracking = false;
+  window.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) { tracking = false; return; }
+    tracking = true; sx = e.touches[0].clientX; sy = e.touches[0].clientY; st = Date.now();
+  }, { passive: true });
+  window.addEventListener('touchend', function (e) {
+    if (!tracking) return; tracking = false;
+    var t = e.changedTouches[0]; var dx = t.clientX - sx, dy = t.clientY - sy;
+    if (Date.now() - st > 700) return;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.6) {
+      try { parent.postMessage({ source: 'pd-post-swipe', dir: dx < 0 ? 'next' : 'prev' }, '*'); } catch (err) {}
+    }
+  }, { passive: true });
+})();

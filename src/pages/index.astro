@@ -248,6 +248,9 @@ const fmtDate = (d: Date) =>
     </div>
   </div>
 
+  <!-- 전체 글 순서(팝업 이전/다음 스와이프용) -->
+  <script type="application/json" id="post-order" set:html={JSON.stringify(sortedPosts.map((p) => `/blog/${p.id}/`))}></script>
+
   <!-- ══ Quick-view Modal (글 팝업) ══ -->
   <div class="qv-overlay" id="qv-overlay" hidden>
     <div class="qv-modal" role="dialog" aria-modal="true" aria-label="글 미리보기">
@@ -433,16 +436,16 @@ const fmtDate = (d: Date) =>
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
 
-      function openModal(href: string) {
-        if (!overlay || !qvContent) return;
-        qvLastFocus = document.activeElement as HTMLElement;
-        if (qvFull) qvFull.href = href;
-        overlay.hidden = false;
-        document.body.classList.add('qv-open');
-        requestAnimationFrame(() => { overlay.classList.add('open'); (qvClose as HTMLElement)?.focus(); });
+      // 전체 글 순서(이전/다음 스와이프용)
+      let orderedHrefs: string[] = [];
+      try { orderedHrefs = JSON.parse(document.getElementById('post-order')?.textContent || '[]'); } catch (e) {}
+      let curIdx = -1;
+
+      function loadInFrame(href: string) {
+        if (!qvContent) return;
+        const clean = href.replace(/[?#].*$/, '');
+        if (qvFull) qvFull.href = clean;
         qvContent.scrollTop = 0;
-        // iframe 임베드: 실제 글 페이지를 그대로 렌더 → 차트·비교 등 JS 위젯 정상 동작
-        const src = href + (href.indexOf('?') >= 0 ? '&' : '?') + 'embed=1';
         qvContent.classList.add('has-frame');
         qvContent.innerHTML =
           '<div class="qv-loading"><span class="spin"></span><br>글을 불러오는 중…</div>' +
@@ -454,9 +457,32 @@ const fmtDate = (d: Date) =>
             if (l) l.remove();
             frame.style.opacity = '1';
           });
-          frame.src = src;
+          frame.src = clean + (clean.indexOf('?') >= 0 ? '&' : '?') + 'embed=1';
         }
+        curIdx = orderedHrefs.indexOf(clean);
       }
+
+      function openModal(href: string) {
+        if (!overlay || !qvContent) return;
+        qvLastFocus = document.activeElement as HTMLElement;
+        overlay.hidden = false;
+        document.body.classList.add('qv-open');
+        requestAnimationFrame(() => { overlay.classList.add('open'); (qvClose as HTMLElement)?.focus(); });
+        loadInFrame(href);
+      }
+
+      // 팝업 내 이전/다음 글 (모바일 스와이프 → iframe이 부모에 postMessage)
+      function navigatePost(dir: 'next' | 'prev') {
+        if (curIdx < 0 || !orderedHrefs.length) return;
+        const n = curIdx + (dir === 'next' ? 1 : -1);
+        if (n < 0 || n >= orderedHrefs.length) return;   // 끝에서 멈춤
+        loadInFrame(orderedHrefs[n]);
+      }
+      window.addEventListener('message', (e) => {
+        if (e.data && e.data.source === 'pd-post-swipe' && overlay && !overlay.hidden) {
+          navigatePost(e.data.dir === 'next' ? 'next' : 'prev');
+        }
+      });
       function closeModal() {
         if (!overlay) return;
         overlay.classList.remove('open');
