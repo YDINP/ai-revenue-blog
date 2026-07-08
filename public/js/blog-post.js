@@ -446,27 +446,36 @@
   if (!faqHeading) return;
   const items = [];
   let el = faqHeading.nextElementSibling;
-  let currentQ = null;
-  let currentA = [];
+  let currentQ = null, currentId = '', currentA = [];
   while (el && el.tagName !== 'H2') {
     if (el.tagName === 'H3') {
-      if (currentQ) items.push({ q: currentQ, a: currentA.join('') });
+      if (currentQ) items.push({ q: currentQ, a: currentA.join(''), id: currentId });
       currentQ = el.textContent.replace(/^Q\d*[\.\:]\s*/, '').replace(/^\d+\.\s*/, '');
+      currentId = el.id || '';   // 목차 앵커(heading-N) 이관용
       currentA = [];
     } else if (currentQ) {
       currentA.push(el.outerHTML);
     }
     el = el.nextElementSibling;
   }
-  if (currentQ) items.push({ q: currentQ, a: currentA.join('') });
+  if (currentQ) items.push({ q: currentQ, a: currentA.join(''), id: currentId });
   if (items.length === 0) return;
   const container = document.createElement('div');
   container.className = 'faq-accordion';
   items.forEach(item => {
     const details = document.createElement('details');
     details.className = 'faq-item';
+    if (item.id) details.id = item.id;   // 삭제된 h3의 id를 이관 → 목차 링크가 여기로 스크롤
     details.innerHTML = `<summary>${item.q}</summary><div class="faq-answer">${item.a}</div>`;
     container.appendChild(details);
+  });
+  // 목차에서 FAQ 항목 클릭 시 해당 아코디언 자동 열림
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest && e.target.closest('.toc a, .toc-sidebar a');
+    if (!a) return;
+    const id = (a.getAttribute('href') || '').replace(/^#/, '');
+    const t = id && document.getElementById(id);
+    if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
   let removeEl = faqHeading.nextElementSibling;
   while (removeEl && removeEl.tagName !== 'H2') {
