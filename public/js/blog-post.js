@@ -591,27 +591,36 @@
   if (!widget || !list) return;
   const SUPABASE_URL = 'https://xyprbsmagtlzebxyxsvj.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5cHJic21hZ3RsemVieHl4c3ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjY4NTQsImV4cCI6MjA4NjA0Mjg1NH0.dajN0n0IWzOgYOSCglxVLzddg7jJFRHNCHwTWMG62uU';
-  fetch(`${SUPABASE_URL}/rest/v1/analytics?select=page_path,page_views&order=page_views.desc&limit=5&page_path=like./blog/*`, {
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+  const esc = function (s) { return String(s).replace(/[&<>"]/g, function (m) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[m]; }); };
+  // 홈 인기글과 동일한 정상 RPC(get_top_pages) 사용 — 기존 analytics 직접 쿼리는 400
+  fetch(`${SUPABASE_URL}/rest/v1/rpc/get_top_pages`, {
+    method: 'POST',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ p_limit: 40 })
   })
-  .then(r => r.json())
-  .then(function(data) {
-    if (!Array.isArray(data) || data.length === 0) {
-      list.innerHTML = '<p class="popular-posts-empty">아직 충분한 데이터가 없습니다.</p>';
-      return;
+  .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+  .then(function (data) {
+    if (!Array.isArray(data)) throw new Error('bad');
+    const seen = {}; const top = [];
+    for (var i = 0; i < data.length; i++) {
+      var p = data[i];
+      var raw = (p.slug || p.path || '').replace(/^\/blog\//, '').replace(/\/$/, '');
+      if (!raw || raw.indexOf('/') >= 0 || seen[raw]) continue;   // /blog/ 하위 글만, 중복 제거
+      seen[raw] = 1;
+      var title = (p.title && p.title !== 'null') ? String(p.title).split(' | ')[0].split(' - ')[0]
+        : decodeURIComponent(raw).replace(/-/g, ' ');
+      top.push({ slug: raw, views: Number(p.views) || 0, title: title });
+      if (top.length >= 5) break;
     }
-    list.innerHTML = data.map(function(item, i) {
-      const path = item.page_path || '';
-      const title = path.replace(/^\/blog\//, '').replace(/\/$/, '').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-      const views = item.page_views || 0;
-      return `<a href="${path}" class="popular-post-item">
-        <span class="popular-post-rank">${i + 1}</span>
-        <span class="popular-post-title">${title}</span>
-        <span class="popular-post-views">${views.toLocaleString()} views</span>
-      </a>`;
+    if (top.length === 0) { list.innerHTML = '<p class="popular-posts-empty">아직 충분한 데이터가 없습니다.</p>'; return; }
+    list.innerHTML = top.map(function (item, i) {
+      return '<a href="/blog/' + item.slug + '/" class="popular-post-item">' +
+        '<span class="popular-post-rank">' + (i + 1) + '</span>' +
+        '<span class="popular-post-title">' + esc(item.title) + '</span>' +
+        '<span class="popular-post-views">' + item.views.toLocaleString() + ' views</span></a>';
     }).join('');
   })
-  .catch(function() {
+  .catch(function () {
     list.innerHTML = '<p class="popular-posts-empty">인기글을 불러올 수 없습니다.</p>';
   });
 })();
