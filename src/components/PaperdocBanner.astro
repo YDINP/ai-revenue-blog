@@ -120,10 +120,11 @@
      CTA 위치를 하단 URL 오른쪽 빈 공간으로 재배치(+가독 위해 vw 기준 크기) */
   @media (max-width: 767px) {
     .pd-promo-cta {
-      left: 47%;
-      right: auto;
-      bottom: 12%;
-      font-size: clamp(0.6rem, 3vw, 0.82rem);
+      left: auto;
+      right: 4%;
+      bottom: 10%;
+      /* 모바일 배너 너비에 비례(3% of banner width) → 배너 크기에 동적 비례 */
+      font-size: 3cqw;
       padding: 0.45em 0.95em;
     }
   }
