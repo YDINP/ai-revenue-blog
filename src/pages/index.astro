@@ -105,10 +105,7 @@ const fmtDate = (d: Date) =>
     <div class="section-header stream-head">
       <h2>탐색 스트림</h2>
       <div class="stream-tools">
-        <div class="stream-modes" id="stream-modes" role="tablist" aria-label="보기 방식">
-          <button class="mode-btn active" data-mode="carousel" role="tab" aria-selected="true">◐ 카루셀</button>
-          <button class="mode-btn" data-mode="grid" role="tab" aria-selected="false">▦ 전체보기</button>
-        </div>
+        <button class="list-open-btn" id="list-open" aria-haspopup="dialog">▦ 전체보기</button>
         <div class="stream-nav">
           <span class="stream-counter"><b id="stream-idx">01</b> / {feedPosts.length}</span>
           <button class="stream-arrow" id="stream-prev" aria-label="이전 글">&larr;</button>
@@ -173,6 +170,35 @@ const fmtDate = (d: Date) =>
   <section aria-label="뉴스레터 구독">
     <NewsletterCTA />
   </section>
+
+  <!-- ══ List Modal (전체보기 리스트 팝업) ══ -->
+  <div class="list-overlay" id="list-overlay" hidden>
+    <div class="list-modal" role="dialog" aria-modal="true" aria-label="전체 글 목록">
+      <div class="list-head">
+        <h3>전체 글 <span class="list-count">{sortedPosts.length}</span></h3>
+        <button class="list-close" id="list-close" aria-label="닫기">✕</button>
+      </div>
+      <div class="list-body" id="list-body">
+        {sortedPosts.map((post) => (
+          <a class="list-row" href={`/blog/${post.id}/`}>
+            <div class="list-row-media">
+              {post.data.image ? (
+                <img src={post.data.image.url} alt={post.data.image.alt} width="320" height="180" loading="lazy" decoding="async" />
+              ) : (
+                <span class="ph" data-cat={post.data.category.toLowerCase()}>{post.data.category}</span>
+              )}
+            </div>
+            <div class="list-row-text">
+              <span class="list-row-cat" data-cat={post.data.category.toLowerCase()}>{post.data.category}</span>
+              <h4>{post.data.title}</h4>
+              <p>{post.data.description}</p>
+              <time datetime={new Date(post.data.pubDate).toISOString()}>{fmtDate(post.data.pubDate)}</time>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
 
   <!-- ══ Quick-view Modal (글 팝업) ══ -->
   <div class="qv-overlay" id="qv-overlay" hidden>
@@ -359,6 +385,35 @@ const fmtDate = (d: Date) =>
       qvClose?.addEventListener('click', closeModal);
       overlay?.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay && !overlay.hidden) closeModal(); });
+
+      // ── 전체보기 리스트 팝업 ──
+      const listOpenBtn = document.getElementById('list-open');
+      const listOverlay = document.getElementById('list-overlay') as HTMLElement | null;
+      const listClose = document.getElementById('list-close');
+      function openList() {
+        if (!listOverlay) return;
+        listOverlay.hidden = false;
+        document.body.classList.add('list-open');
+        requestAnimationFrame(() => listOverlay.classList.add('open'));
+      }
+      function closeList() {
+        if (!listOverlay) return;
+        listOverlay.classList.remove('open');
+        document.body.classList.remove('list-open');
+        setTimeout(() => { listOverlay.hidden = true; }, 260);
+      }
+      listOpenBtn?.addEventListener('click', openList);
+      listClose?.addEventListener('click', closeList);
+      listOverlay?.addEventListener('click', (e) => { if (e.target === listOverlay) closeList(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && listOverlay && !listOverlay.hidden && (!overlay || overlay.hidden)) closeList(); });
+      // 리스트 행 클릭 → 글 팝업(article modal), 리스트는 뒤에 유지
+      listOverlay?.querySelectorAll('.list-row').forEach((row) => {
+        row.addEventListener('click', (e) => {
+          e.preventDefault();
+          const href = (row as HTMLAnchorElement).getAttribute('href') || (row as HTMLAnchorElement).href;
+          openModal(href);
+        });
+      });
 
       cards.forEach((card) => {
         const a = card.querySelector('a') as HTMLAnchorElement | null;
