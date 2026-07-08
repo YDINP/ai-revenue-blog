@@ -439,7 +439,14 @@ const fmtDate = (d: Date) =>
         qvContent.scrollTop = 0;
         qvContent.classList.add('has-frame');
         qvContent.innerHTML =
-          '<div class="qv-loading"><span class="spin"></span><br>글을 불러오는 중…</div>' +
+          '<div class="qv-loading qv-skeleton" aria-label="불러오는 중">' +
+            '<div class="skeleton sk-img"></div>' +
+            '<div class="skeleton sk-line sk-w70"></div>' +
+            '<div class="skeleton sk-line sk-w90"></div>' +
+            '<div class="skeleton sk-line sk-w40"></div>' +
+            '<div class="skeleton sk-line"></div>' +
+            '<div class="skeleton sk-line sk-w85"></div>' +
+          '</div>' +
           '<iframe class="qv-frame" title="글 미리보기" loading="eager"></iframe>';
         const frame = qvContent.querySelector('.qv-frame') as HTMLIFrameElement | null;
         if (frame) {

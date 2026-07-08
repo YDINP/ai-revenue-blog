@@ -133,6 +133,7 @@ const websiteSchema = {
               <a href={`/blog/${cat.slug}/`} class={currentPath.includes(`/blog/${cat.slug}`) ? 'active' : ''}>{cat.label}</a>
             ))}
             <a href="/blog/tags/" class={currentPath.includes('/blog/tags') ? 'active' : ''}>태그</a>
+            <a href="https://life-revenue-blog.vercel.app/" target="_blank" rel="noopener" class="nav-external">LifeFlow ↗</a>
           </div>
           <button class="theme-toggle" id="theme-toggle" aria-label="다크 모드 토글">
             <span id="theme-icon">🌙</span>
@@ -265,6 +266,22 @@ const websiteSchema = {
       // Service Worker Registration (PWA)
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').catch(() => {});
+      }
+
+      // 마그네틱 버튼: 커서 쪽으로 살짝 끌림
+      if (window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const MAG = '.deck-search button, .list-open-btn, .btn-primary, .qv-full, .pd-side-cta';
+        let magEl = null;
+        document.addEventListener('pointermove', (e) => {
+          const el = (e.target instanceof Element) ? e.target.closest(MAG) : null;
+          if (el) {
+            const r = el.getBoundingClientRect();
+            const dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+            const dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+            el.style.transform = 'translate(' + (dx * 8).toFixed(1) + 'px,' + (dy * 6).toFixed(1) + 'px)';
+            magEl = el;
+          } else if (magEl) { magEl.style.transform = ''; magEl = null; }
+        }, { passive: true });
       }
 
       // 카드 커서 스포트라이트: 카드 위에서 빛이 커서를 따라 이동(--mx/--my)
