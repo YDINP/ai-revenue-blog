@@ -4684,3 +4684,24 @@ html { overflow-x: clip; }
   border-radius: 8px;
 }
 @keyframes skeleton-shimmer { to { background-position: -200% 0; } }
+
+/* ==========================================================================
+   LIVELY MOTION — 배치2: 카드 커서 스포트라이트 · 스프링 오픈
+   ========================================================================== */
+.post-card, .list-row, .popular-post-item, .stat-chip { position: relative; }
+@media (prefers-reduced-motion: no-preference) {
+  .post-card::after, .list-row::after, .popular-post-item::after, .stat-chip::after {
+    content: '';
+    position: absolute; inset: 0; border-radius: inherit;
+    pointer-events: none; z-index: 2;
+    background: radial-gradient(170px circle at var(--mx, 50%) var(--my, 50%), rgba(139,124,246,0.16), transparent 62%);
+    opacity: 0; transition: opacity 0.3s ease;
+  }
+  .post-card:hover::after, .list-row:hover::after,
+  .popular-post-item:hover::after, .stat-chip:hover::after { opacity: 1; }
+}
+/* 팔레트/글 팝업 스프링 오픈(살짝 오버슈트) */
+.list-overlay.open .list-modal,
+.qv-overlay.open .qv-modal {
+  transition: transform 0.44s cubic-bezier(0.34, 1.5, 0.5, 1);
+}
