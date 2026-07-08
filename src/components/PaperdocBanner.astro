@@ -1,35 +1,36 @@
 ---
-// 페이퍼닥 프로모션 배너 (홈 + 모든 포스팅 상단 고정) — 기존 연출(브리드/샤인/호버) 복원
-// 이미지: /banner.png (Aurora Glass 배너)
+// 페이퍼닥 프로모션 (홈 + 모든 포스팅 상단 고정) — 이미지 연출(브리드/샤인/호버)
+// ⚠️ 파일명/클래스에 "banner"·"ad" 금지: 광고 차단기가 /banner.* 를 네트워크 차단해
+//    이미지가 안 뜨고 링크 alt 텍스트만 노출됨. → pd-promo 네이밍 사용.
 ---
-<a class="paperdoc-banner-link" href="https://paperdoc-web.vercel.app/" target="_blank" rel="noopener sponsored" aria-label="페이퍼닥 - 계약서 AI 분석 플랫폼 바로가기">
-  <span class="paperdoc-banner-frame">
+<a class="pd-promo-link" href="https://paperdoc-web.vercel.app/" target="_blank" rel="noopener sponsored" aria-label="페이퍼닥 - 계약서 AI 분석 플랫폼 바로가기">
+  <span class="pd-promo-frame">
     <picture>
-      <source media="(max-width: 639px)" srcset="/banner-mobile.png" width="2000" height="930" />
-      <img class="paperdoc-banner" src="/banner.png" alt="페이퍼닥 - 계약서 AI 분석 플랫폼 배너" width="2240" height="350" loading="eager" decoding="async" />
+      <source media="(max-width: 639px)" srcset="/pd-promo-m.png" width="2000" height="930" />
+      <img class="pd-promo-img" src="/pd-promo.png" alt="페이퍼닥 - 계약서 AI 분석 플랫폼" width="2240" height="350" loading="eager" decoding="async" />
     </picture>
-    <span class="paperdoc-shine" aria-hidden="true"></span>
+    <span class="pd-promo-shine" aria-hidden="true"></span>
   </span>
 </a>
 
 <style>
-  .paperdoc-banner-link {
+  .pd-promo-link {
     display: block;
     width: auto;
     margin: -0.5rem -0.5rem 1.5rem;
   }
 
-  .paperdoc-banner-frame {
+  .pd-promo-frame {
     position: relative;
     display: block;
     border-radius: 16px;
     overflow: hidden;
     /* 숨쉬기 글로우 — 시선 유도 */
-    animation: paperdoc-breathe 3.2s ease-in-out infinite;
+    animation: pd-promo-breathe 3.2s ease-in-out infinite;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .paperdoc-banner {
+  .pd-promo-img {
     display: block;
     width: 100%;
     height: auto;
@@ -37,7 +38,7 @@
   }
 
   /* 주기적 광택 스윕 */
-  .paperdoc-shine {
+  .pd-promo-shine {
     position: absolute;
     top: 0;
     left: -60%;
@@ -53,31 +54,30 @@
       transparent 100%
     );
     transform: skewX(-18deg);
-    animation: paperdoc-shine 4.5s ease-in-out infinite;
+    animation: pd-promo-shine 4.5s ease-in-out infinite;
   }
 
   /* 호버: 살짝 떠오르고 연출 일시정지 */
-  .paperdoc-banner-link:hover .paperdoc-banner-frame {
+  .pd-promo-link:hover .pd-promo-frame {
     transform: translateY(-3px);
     box-shadow: 0 14px 34px -10px rgba(109, 92, 240, 0.5);
     animation-play-state: paused;
   }
 
-  @keyframes paperdoc-breathe {
+  @keyframes pd-promo-breathe {
     0%, 100% { box-shadow: 0 0 0 rgba(109, 92, 240, 0); }
     50%      { box-shadow: 0 8px 30px -6px rgba(109, 92, 240, 0.4); }
   }
 
-  @keyframes paperdoc-shine {
+  @keyframes pd-promo-shine {
     0%   { left: -60%; }
     45%  { left: 120%; }
     100% { left: 120%; }
   }
 
-  /* 모션 최소화 선호 사용자 존중 */
   @media (prefers-reduced-motion: reduce) {
-    .paperdoc-banner-frame,
-    .paperdoc-shine {
+    .pd-promo-frame,
+    .pd-promo-shine {
       animation: none;
     }
   }
