@@ -38,6 +38,16 @@ const latestDate = new Date(featured.data.pubDate).toLocaleDateString('ko-KR', {
   day: 'numeric',
 });
 
+// 커맨드 팔레트용 전체 카테고리 집계
+const paletteCatMap: Record<string, number> = {};
+sortedPosts.forEach((p) => {
+  const k = p.data.category.toLowerCase();
+  paletteCatMap[k] = (paletteCatMap[k] || 0) + 1;
+});
+const paletteCats = Object.entries(paletteCatMap)
+  .sort((a, b) => b[1] - a[1])
+  .map(([slug, count]) => ({ slug, label: slug.toUpperCase(), count }));
+
 const fmtDate = (d: Date) =>
   new Date(d).toLocaleDateString('ko-KR', { year: 'numeric', month: 'short', day: 'numeric' });
 ---
@@ -173,14 +183,41 @@ const fmtDate = (d: Date) =>
 
   <!-- ══ List Modal (전체보기 리스트 팝업) ══ -->
   <div class="list-overlay" id="list-overlay" hidden>
-    <div class="list-modal" role="dialog" aria-modal="true" aria-label="전체 글 목록">
-      <div class="list-head">
-        <h3>전체 글 <span class="list-count">{sortedPosts.length}</span></h3>
-        <button class="list-close" id="list-close" aria-label="닫기">✕</button>
+    <div class="list-modal" role="dialog" aria-modal="true" aria-label="전체 글 검색">
+      <div class="palette-searchbar">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="5.5" stroke="currentColor" stroke-width="1.5" />
+          <path d="M13 13L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+        <input id="palette-input" type="text" placeholder="제목·내용·태그로 검색…" aria-label="글 검색" autocomplete="off" />
+        <span class="palette-hint" id="palette-count">{sortedPosts.length}</span>
+        <button class="list-close" id="list-close" aria-label="닫기">Esc</button>
       </div>
-      <div class="list-body" id="list-body">
-        {sortedPosts.map((post) => (
-          <a class="list-row" href={`/blog/${post.id}/`}>
+      <div class="palette-controls">
+        <div class="palette-chips" id="palette-chips" role="tablist">
+          <button class="pchip active" data-cat="all">전체</button>
+          {paletteCats.map((c) => (
+            <button class="pchip" data-cat={c.slug}>{c.label} <i>{c.count}</i></button>
+          ))}
+        </div>
+        <div class="palette-sort" id="palette-sort">
+          <button class="psort active" data-sort="date">최신순</button>
+          <button class="psort" data-sort="views">조회수</button>
+        </div>
+      </div>
+      <div class="list-body" id="list-body" role="listbox" aria-label="검색 결과">
+        {sortedPosts.map((post, i) => (
+          <a
+            class="list-row"
+            href={`/blog/${post.id}/`}
+            role="option"
+            data-cat={post.data.category.toLowerCase()}
+            data-title={post.data.title.toLowerCase()}
+            data-search={`${post.data.title} ${post.data.description} ${(post.data.tags || []).join(' ')}`.toLowerCase()}
+            data-date={new Date(post.data.pubDate).getTime()}
+            data-slug={post.id}
+            data-idx={i}
+          >
             <div class="list-row-media">
               {post.data.image ? (
                 <img src={post.data.image.url} alt={post.data.image.alt} width="320" height="180" loading="lazy" decoding="async" />
@@ -189,13 +226,23 @@ const fmtDate = (d: Date) =>
               )}
             </div>
             <div class="list-row-text">
-              <span class="list-row-cat" data-cat={post.data.category.toLowerCase()}>{post.data.category}</span>
-              <h4>{post.data.title}</h4>
+              <div class="list-row-top">
+                <span class="list-row-cat" data-cat={post.data.category.toLowerCase()}>{post.data.category}</span>
+                <span class="list-row-views" hidden></span>
+              </div>
+              <h4 data-orig={post.data.title}>{post.data.title}</h4>
               <p>{post.data.description}</p>
               <time datetime={new Date(post.data.pubDate).toISOString()}>{fmtDate(post.data.pubDate)}</time>
             </div>
           </a>
         ))}
+        <div class="palette-empty" id="palette-empty" hidden>검색 결과가 없어요.</div>
+      </div>
+      <div class="palette-foot">
+        <span><kbd>↑</kbd><kbd>↓</kbd> 이동</span>
+        <span><kbd>Enter</kbd> 열기</span>
+        <span><kbd>Esc</kbd> 닫기</span>
+        <span class="palette-kbd-open"><kbd>⌘</kbd><kbd>K</kbd> 어디서나 열기</span>
       </div>
     </div>
   </div>
@@ -386,34 +433,144 @@ const fmtDate = (d: Date) =>
       overlay?.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay && !overlay.hidden) closeModal(); });
 
-      // ── 전체보기 리스트 팝업 ──
+      // ── 커맨드 팔레트(전체보기: 검색·필터·정렬·키보드·⌘K) ──
       const listOpenBtn = document.getElementById('list-open');
       const listOverlay = document.getElementById('list-overlay') as HTMLElement | null;
       const listClose = document.getElementById('list-close');
-      function openList() {
+      const pInput = document.getElementById('palette-input') as HTMLInputElement | null;
+      const pChips = document.getElementById('palette-chips');
+      const pSort = document.getElementById('palette-sort');
+      const pCount = document.getElementById('palette-count');
+      const pEmpty = document.getElementById('palette-empty') as HTMLElement | null;
+      const listBody = document.getElementById('list-body') as HTMLElement | null;
+      const rows = Array.from(listOverlay?.querySelectorAll('.list-row') || []) as HTMLElement[];
+      let pQuery = '', pCat = 'all', pSortKey: 'date' | 'views' = 'date', activeIdx = -1;
+      const viewsMap: Record<string, number> = {};
+      const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5cHJic21hZ3RsemVieHl4c3ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjY4NTQsImV4cCI6MjA4NjA0Mjg1NH0.dajN0n0IWzOgYOSCglxVLzddg7jJFRHNCHwTWMG62uU';
+
+      function highlight(el: HTMLElement | null, q: string) {
+        if (!el) return;
+        const orig = el.getAttribute('data-orig') || el.textContent || '';
+        if (!q) { el.textContent = orig; return; }
+        const i = orig.toLowerCase().indexOf(q);
+        if (i < 0) { el.textContent = orig; return; }
+        const esc = (s: string) => s.replace(/[&<>]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m] as string));
+        el.innerHTML = esc(orig.slice(0, i)) + '<mark>' + esc(orig.slice(i, i + q.length)) + '</mark>' + esc(orig.slice(i + q.length));
+      }
+      const getVisible = () => rows.filter((r) => !r.hidden);
+
+      function applyPalette() {
+        const visible: HTMLElement[] = [];
+        rows.forEach((row) => {
+          const okCat = pCat === 'all' || row.dataset.cat === pCat;
+          const okQ = !pQuery || (row.dataset.search || '').includes(pQuery);
+          const show = okCat && okQ;
+          row.hidden = !show;
+          row.classList.remove('active');
+          if (show) { visible.push(row); highlight(row.querySelector('h4'), pQuery); }
+        });
+        visible.sort((a, b) => pSortKey === 'views'
+          ? (viewsMap[b.dataset.slug || ''] || 0) - (viewsMap[a.dataset.slug || ''] || 0)
+          : Number(b.dataset.date) - Number(a.dataset.date));
+        visible.forEach((row) => listBody?.appendChild(row));
+        if (pEmpty) { listBody?.appendChild(pEmpty); pEmpty.hidden = visible.length > 0; }
+        if (pCount) pCount.textContent = String(visible.length);
+        activeIdx = -1;
+        if (listBody) listBody.scrollTop = 0;
+      }
+
+      function setActive(i: number) {
+        const vis = getVisible();
+        rows.forEach((r) => r.classList.remove('active'));
+        if (!vis.length) { activeIdx = -1; return; }
+        activeIdx = (i + vis.length) % vis.length;
+        const el = vis[activeIdx];
+        el.classList.add('active');
+        el.scrollIntoView({ block: 'nearest' });
+      }
+
+      function openPalette() {
         if (!listOverlay) return;
         listOverlay.hidden = false;
         document.body.classList.add('list-open');
-        requestAnimationFrame(() => listOverlay.classList.add('open'));
+        requestAnimationFrame(() => { listOverlay.classList.add('open'); pInput?.focus(); pInput?.select(); });
       }
-      function closeList() {
+      function closePalette() {
         if (!listOverlay) return;
         listOverlay.classList.remove('open');
         document.body.classList.remove('list-open');
         setTimeout(() => { listOverlay.hidden = true; }, 260);
       }
-      listOpenBtn?.addEventListener('click', openList);
-      listClose?.addEventListener('click', closeList);
-      listOverlay?.addEventListener('click', (e) => { if (e.target === listOverlay) closeList(); });
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && listOverlay && !listOverlay.hidden && (!overlay || overlay.hidden)) closeList(); });
-      // 리스트 행 클릭 → 글 팝업(article modal), 리스트는 뒤에 유지
-      listOverlay?.querySelectorAll('.list-row').forEach((row) => {
+      listOpenBtn?.addEventListener('click', openPalette);
+      listClose?.addEventListener('click', closePalette);
+      listOverlay?.addEventListener('click', (e) => { if (e.target === listOverlay) closePalette(); });
+
+      pInput?.addEventListener('input', () => { pQuery = pInput.value.trim().toLowerCase(); applyPalette(); });
+      pChips?.addEventListener('click', (e) => {
+        const btn = (e.target as HTMLElement).closest('.pchip') as HTMLElement | null;
+        if (!btn) return;
+        pChips.querySelectorAll('.pchip').forEach((x) => x.classList.remove('active'));
+        btn.classList.add('active');
+        pCat = btn.dataset.cat || 'all';
+        applyPalette();
+      });
+      pSort?.addEventListener('click', (e) => {
+        const btn = (e.target as HTMLElement).closest('.psort') as HTMLElement | null;
+        if (!btn) return;
+        pSort.querySelectorAll('.psort').forEach((x) => x.classList.remove('active'));
+        btn.classList.add('active');
+        pSortKey = (btn.dataset.sort as 'date' | 'views') || 'date';
+        applyPalette();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+          e.preventDefault();
+          if (listOverlay && listOverlay.hidden) openPalette(); else closePalette();
+          return;
+        }
+        if (!listOverlay || listOverlay.hidden) return;
+        if (overlay && !overlay.hidden) return;   // 글 팝업이 위에 있으면 무시
+        if (e.key === 'Escape') { e.preventDefault(); closePalette(); }
+        else if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1); }
+        else if (e.key === 'Enter') {
+          const vis = getVisible();
+          const el = activeIdx >= 0 ? vis[activeIdx] : vis[0];
+          if (el) { e.preventDefault(); openModal(el.getAttribute('href') || (el as HTMLAnchorElement).href); }
+        }
+      });
+
+      rows.forEach((row) => {
         row.addEventListener('click', (e) => {
           e.preventDefault();
-          const href = (row as HTMLAnchorElement).getAttribute('href') || (row as HTMLAnchorElement).href;
-          openModal(href);
+          openModal(row.getAttribute('href') || (row as HTMLAnchorElement).href);
         });
       });
+
+      // 조회수(대시보드) → 조회수 정렬·행별 표시
+      fetch('https://xyprbsmagtlzebxyxsvj.supabase.co/rest/v1/rpc/get_top_pages', {
+        method: 'POST',
+        headers: { apikey: ANON, Authorization: `Bearer ${ANON}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_limit: 200 }),
+      })
+        .then((r) => (r.ok ? r.json() : Promise.reject()))
+        .then((data) => {
+          if (!Array.isArray(data)) return;
+          data.forEach((p) => {
+            const raw = (p.slug || p.path || '').replace(/^\/blog\//, '').replace(/\/$/, '');
+            let slug = raw; try { slug = decodeURIComponent(raw); } catch (err) {}
+            viewsMap[slug] = Number(p.views) || 0;
+          });
+          rows.forEach((row) => {
+            const v = viewsMap[row.dataset.slug || ''];
+            const el = row.querySelector('.list-row-views') as HTMLElement | null;
+            if (v && el) { el.textContent = (v >= 1000 ? (v / 1000).toFixed(1) + '천' : String(v)) + '회'; el.hidden = false; }
+          });
+        })
+        .catch(() => {});
+
+      applyPalette();
 
       cards.forEach((card) => {
         const a = card.querySelector('a') as HTMLAnchorElement | null;

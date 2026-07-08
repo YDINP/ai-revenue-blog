@@ -4230,3 +4230,91 @@ body.list-open { overflow: hidden; }
   .list-row-text h4 { font-size: 0.88rem; white-space: normal; -webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; }
   .list-head { padding: 1rem 1.1rem; }
 }
+
+/* ==========================================================================
+   COMMAND PALETTE (전체보기 = 검색·필터·정렬·키보드)
+   ========================================================================== */
+.list-modal .list-body { flex: 1 1 auto; min-height: 0; }
+
+.palette-searchbar {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--glass-border);
+  flex-shrink: 0;
+}
+.palette-searchbar svg { color: var(--color-text-muted); flex-shrink: 0; }
+.palette-searchbar input {
+  flex: 1; min-width: 0; border: none; background: transparent;
+  color: var(--color-text); font-size: 1.05rem; font-family: inherit; padding: 0.3rem 0;
+}
+.palette-searchbar input:focus { outline: none; }
+.palette-searchbar input::placeholder { color: var(--color-text-muted); }
+.palette-hint { font-family: ui-monospace, Menlo, monospace; font-size: 0.78rem; color: var(--color-text-muted); }
+.palette-searchbar .list-close {
+  width: auto; height: 30px; padding: 0 0.7rem; border-radius: 8px;
+  font-family: ui-monospace, Menlo, monospace; font-size: 0.72rem;
+}
+
+.palette-controls {
+  display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+  padding: 0.7rem 1.25rem;
+  border-bottom: 1px solid var(--glass-border);
+  flex-shrink: 0; flex-wrap: wrap;
+}
+.palette-chips { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.pchip {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  padding: 0.35rem 0.75rem; border-radius: 999px;
+  border: 1px solid var(--glass-border); background: var(--glass-bg);
+  font-size: 0.78rem; font-weight: 700; color: var(--color-text-secondary);
+  cursor: pointer; transition: all 0.18s ease;
+}
+.pchip i { font-style: normal; font-size: 0.68rem; opacity: 0.7; }
+.pchip:hover { color: var(--color-text); }
+.pchip.active { background: var(--gradient-primary); color: #fff; border-color: transparent; }
+.pchip.active i { opacity: 0.85; }
+.palette-sort {
+  display: flex; gap: 2px; padding: 2px; flex-shrink: 0;
+  border-radius: 999px; background: var(--glass-bg); border: 1px solid var(--glass-border);
+}
+.psort {
+  padding: 0.35rem 0.75rem; border: none; background: transparent; border-radius: 999px;
+  font-size: 0.76rem; font-weight: 700; color: var(--color-text-secondary); cursor: pointer; white-space: nowrap;
+}
+.psort.active { background: var(--gradient-primary); color: #fff; }
+
+.palette-empty { padding: 3rem 1rem; text-align: center; color: var(--color-text-muted); font-size: 0.9rem; }
+
+.list-row-top { display: flex; align-items: center; gap: 0.5rem; }
+.list-row-views {
+  font-family: ui-monospace, Menlo, monospace; font-size: 0.66rem; font-weight: 700; color: var(--color-text-muted);
+}
+.list-row-text h4 mark, .list-row-text mark {
+  background: rgba(139, 124, 246, 0.28); color: inherit; border-radius: 3px; padding: 0 1px;
+}
+.list-row.active {
+  background: var(--glass-hi);
+  outline: 2px solid color-mix(in srgb, var(--color-primary) 55%, transparent);
+  outline-offset: -2px;
+}
+
+.palette-foot {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.7rem 1.25rem;
+  border-top: 1px solid var(--glass-border);
+  flex-shrink: 0; font-size: 0.72rem; color: var(--color-text-muted); flex-wrap: wrap;
+}
+.palette-foot kbd {
+  font-family: ui-monospace, Menlo, monospace; font-size: 0.68rem;
+  padding: 1px 5px; border-radius: 4px; background: var(--glass-hi); border: 1px solid var(--glass-border); margin-right: 2px;
+}
+.palette-kbd-open { margin-left: auto; }
+
+@media (max-width: 640px) {
+  .palette-searchbar { padding: 0.85rem 1rem; }
+  .palette-searchbar input { font-size: 1rem; }
+  .palette-controls { padding: 0.6rem 1rem; }
+  .palette-kbd-open { display: none; }
+  .palette-foot { gap: 0.65rem; font-size: 0.66rem; padding: 0.6rem 1rem; }
+  .list-modal { max-height: 92vh; }
+}
