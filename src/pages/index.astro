@@ -686,6 +686,37 @@ const fmtDate = (d: Date) =>
       window.addEventListener('load', () => { if (mode === 'carousel') { measure(); render(); } });
       measure();
       requestAnimationFrame(() => { measure(); render(); });
+
+      // ── 카루셀 오토플레이(호버·드래그·팝업·비활성 탭 시 정지) ──
+      let streamHover = false;
+      stream.addEventListener('mouseenter', () => { streamHover = true; });
+      stream.addEventListener('mouseleave', () => { streamHover = false; });
+      if (!reduce) {
+        setInterval(() => {
+          if (mode !== 'carousel' || document.hidden || streamHover || down || dragging) return;
+          if (listOverlay && !listOverlay.hidden) return;
+          if (overlay && !overlay.hidden) return;
+          go(1);
+        }, 4600);
+      }
+
+      // ── 홈 통계 카운트업 ──
+      if (!reduce) {
+        document.querySelectorAll('.deck-stats .stat-num').forEach((el, i) => {
+          const raw = (el.textContent || '').trim();
+          if (!/^\d+$/.test(raw)) return;           // 순수 숫자만(날짜 제외)
+          const target = parseInt(raw, 10);
+          const dur = 900; let start = 0;
+          el.textContent = '0';
+          const step = (t: number) => {
+            if (!start) start = t;
+            const p = Math.min((t - start) / dur, 1);
+            el.textContent = String(Math.round(target * (1 - Math.pow(1 - p, 3))));
+            if (p < 1) requestAnimationFrame(step);
+          };
+          setTimeout(() => requestAnimationFrame(step), 200 + i * 120);
+        });
+      }
     })();
   </script>
 </BaseLayout>

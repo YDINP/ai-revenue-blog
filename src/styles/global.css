@@ -4634,3 +4634,53 @@ body.list-open { overflow: hidden; }
 
 /* 카루셀 옆 카드가 뷰포트 밖으로 나가 생기는 가로 스크롤 차단(sticky 유지 위해 clip) */
 html { overflow-x: clip; }
+
+/* ==========================================================================
+   LIVELY MOTION — 배치1: 그라디언트 플로우 · 버튼 마이크로 · 앰비언트
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  /* 그라디언트 텍스트/버튼 흐름 */
+  .grad, .site-logo, .deck-title .grad, .stat-num, .spotlight-body h3 {
+    background-size: 220% auto;
+    animation: grad-flow 7s ease-in-out infinite;
+  }
+  .deck-search button, .list-open-btn, .btn-primary, .qv-full, .pd-side-cta {
+    background-size: 180% auto;
+    animation: grad-flow 6s ease-in-out infinite;
+  }
+  @keyframes grad-flow {
+    0%, 100% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+  }
+}
+
+/* 버튼/칩 press + hover 마이크로 */
+.deck-search button, .list-open-btn, .btn-primary, .btn-secondary, .pchip, .psort,
+.filter-pill, .stream-arrow, .mode-btn, .qv-full, .list-close, .comment-submit,
+.newsletter-form button, .search-btn, .theme-toggle, .nav-toggle {
+  transition: transform 0.16s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.22s ease, filter 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.deck-search button:active, .list-open-btn:active, .btn-primary:active, .btn-secondary:active,
+.pchip:active, .psort:active, .filter-pill:active, .stream-arrow:active:not(:disabled),
+.mode-btn:active, .qv-full:active, .list-close:active, .comment-submit:active,
+.newsletter-form button:active, .theme-toggle:active {
+  transform: scale(0.93);
+}
+
+/* 링크/카드 hover 시 은은한 상승 가속감 */
+.filter-pill:hover, .pchip:hover { transform: translateY(-1px); }
+
+/* 인기글 순위 배지 살짝 맥동 */
+@media (prefers-reduced-motion: no-preference) {
+  .popular-post-item:hover .popular-post-rank { animation: rank-pop 0.4s ease; }
+  @keyframes rank-pop { 40% { transform: scale(1.18) rotate(-4deg); } }
+}
+
+/* 스켈레톤 쉬머(로딩 상태 재사용) */
+.skeleton {
+  background: linear-gradient(100deg, var(--glass-bg) 30%, var(--glass-hi) 50%, var(--glass-bg) 70%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.3s ease-in-out infinite;
+  border-radius: 8px;
+}
+@keyframes skeleton-shimmer { to { background-position: -200% 0; } }
