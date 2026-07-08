@@ -4332,3 +4332,36 @@ body.list-open { overflow: hidden; }
   .stream-card { filter: none !important; }
   .stream-card.is-front { -webkit-box-reflect: none; }
 }
+
+/* ==========================================================================
+   SCROLL-DRIVEN ENTRANCE (네이티브 스크롤 타임라인, 점진적 향상)
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .deck,
+    .spotlight,
+    .stream-section,
+    .popular-posts-widget,
+    .newsletter-cta,
+    section > .section-header {
+      animation: sd-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 2% cover 22%;
+    }
+  }
+  @keyframes sd-reveal {
+    from { opacity: 0; transform: translateY(34px) scale(0.985); }
+    to   { opacity: 1; transform: none; }
+  }
+}
+
+/* ==========================================================================
+   NATIVE VIEW TRANSITIONS (cross-document MPA — ClientRouter 없이 안전)
+   페이지 이동을 부드러운 크로스페이드로. 미지원 브라우저는 무시(점진적 향상).
+   ========================================================================== */
+@view-transition { navigation: auto; }
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: 0.34s; }
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
