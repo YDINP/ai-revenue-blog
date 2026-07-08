@@ -808,7 +808,7 @@ section > h2::after {
   display: none;
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1360px) {
   .toc-sidebar {
     display: block;
     position: fixed;
@@ -4550,3 +4550,6 @@ body.list-open { overflow: hidden; }
 /* 카루셀 카드: 3D 겹침 시 뒤 카드가 비쳐 가독성 저하 → 본문 패널 불투명도 상향 */
 .stream-card { background: rgba(255, 255, 255, 0.94); }
 :root.dark .stream-card { background: rgba(12, 16, 34, 0.95); }
+
+/* 포스트 페이지에서는 목차(toc-sidebar)가 우측을 사용하므로 사이드 배너 숨김(충돌 방지) */
+body:has(.blog-post) .pd-side { display: none !important; }
