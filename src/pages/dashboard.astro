@@ -58,9 +58,9 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         --dash-bg: #0f172a;
         --dash-surface: #1e293b;
         --dash-surface-hover: #334155;
-        --dash-border: #334155;
+        --dash-border: #3b4b64;
         --dash-text: #f1f5f9;
-        --dash-text-dim: #94a3b8;
+        --dash-text-dim: #aab8cc;
         --dash-accent: #3b82f6;
         --dash-green: #22c55e;
         --dash-yellow: #eab308;
@@ -1636,6 +1636,57 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         .summary-card .value { font-size: 1.5rem; }
         .summary-card .sub { font-size: 0.6875rem; }
       }
+      /* ===== 가시성 개선 패스 (visibility pass) ===== */
+      /* 카드 입체감: 어두운 배경과 명확히 분리 */
+      .summary-card,
+      .blog-section,
+      .trend-section,
+      .traffic-section,
+      .status-section,
+      .links-section,
+      .coupang-card {
+        box-shadow: 0 1px 2px rgba(0,0,0,0.35), 0 6px 16px rgba(0,0,0,0.20);
+      }
+
+      /* 요약 카드 강조: 상단 accent 바 굵게 + 핵심 수치 컬러 코딩 */
+      .summary-card::before { height: 4px; }
+      .summary-card.accent-blue .value { color: #93bbfd; }
+      .summary-card.accent-green .value { color: #6ee7a5; }
+      .summary-card.accent-purple .value { color: #c9a4f5; }
+      .summary-card.accent-yellow .value { color: #f5cf5a; }
+      .card-icon { opacity: 0.22; }
+
+      /* 섹션 제목을 흐린 회색 → 본문색으로 또렷하게 */
+      .trend-header h3,
+      .status-section h3,
+      .links-section h3,
+      .hourly-chart h4,
+      .traffic-panel h4 { color: var(--dash-text); }
+
+      /* 9~10px 초소형 라벨 → 11px 이상으로 상향 (가독성) */
+      .metric-breakdown { font-size: 0.6875rem; }
+      .metric-box .metric-delta { font-size: 0.6875rem; }
+      .split-legend { font-size: 0.6875rem; }
+      .trend-bar-date { font-size: 0.6875rem; }
+      .trend-bar-split { font-size: 0.625rem; }
+      .event-time { font-size: 0.6875rem; }
+      .cat-item .cat-name { font-size: 0.75rem; }
+      .cat-item .cat-pct { font-size: 0.6875rem; }
+      .cat-legend-pct { font-size: 0.625rem; }
+      .src-badge { font-size: 0.625rem; }
+      .cat-item { border: 1px solid rgba(148,163,184,0.12); }
+
+      /* 히트맵: 레벨 간 밝기 차이 확대 + 셀 경계로 구분 */
+      .hm-cell { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05); }
+      .hm-cell.l0 { background: #26334a; }
+      .hm-cell.l1 { background: #2f4f96; }
+      .hm-cell.l2 { background: #3b74d8; }
+      .hm-cell.l3 { background: #5c9bf6; }
+      .hm-cell.l4 { background: #a9cdfd; }
+
+      /* 날짜별 상세 테이블: 헤더/구분선 또렷하게 */
+      .daily-detail-table thead th { color: var(--dash-text); background: #24344c; }
+      .daily-detail-table tbody td { border-top-color: rgba(148,163,184,0.18); }
     </style>
   </head>
   <body>
