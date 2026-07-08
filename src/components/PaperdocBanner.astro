@@ -14,6 +14,12 @@
   </span>
 </a>
 
+<!-- 웹(데스크톱) 전용 사이드 스카이스크래퍼 배너 -->
+<a class="pd-side" href="https://paperdoc-web.vercel.app/" target="_blank" rel="noopener sponsored" aria-label="페이퍼닥 - 계약서 AI 분석 플랫폼 바로가기">
+  <img class="pd-side-img" src="/pd-side.png" alt="페이퍼닥 - 계약서 AI 분석 플랫폼" width="887" height="1774" loading="lazy" decoding="async" />
+  <span class="pd-side-shine" aria-hidden="true"></span>
+</a>
+
 <style>
   .pd-promo-link {
     display: block;
@@ -136,5 +142,47 @@
     .pd-promo-arrow {
       animation: none;
     }
+  }
+
+  /* ── 사이드 배너(데스크톱 전용) ── */
+  .pd-side { display: none; }
+  .pd-side-img { display: block; width: 100%; height: auto; border-radius: 16px; }
+
+  @media (min-width: 1200px) {
+    /* 웹(데스크톱)에서는 상단 배너 숨기고 사이드 배너로 대체 */
+    .pd-promo-link { display: none; }
+    .pd-side {
+      display: block;
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      right: max(12px, calc((100vw - 1080px) / 2 - 188px));
+      width: clamp(150px, 13vw, 178px);
+      z-index: 80;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 14px 40px -12px rgba(30, 25, 90, 0.4);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      animation: pd-promo-breathe 3.2s ease-in-out infinite;
+    }
+    :root.dark .pd-side { box-shadow: 0 14px 40px -12px rgba(0, 0, 0, 0.6); }
+    .pd-side:hover {
+      transform: translateY(-50%) translateY(-3px);
+      box-shadow: 0 18px 44px -12px rgba(109, 92, 240, 0.55);
+      animation-play-state: paused;
+    }
+    .pd-side-shine {
+      position: absolute; top: -60%; left: 0; width: 100%; height: 45%;
+      background: linear-gradient(180deg, transparent, rgba(255,255,255,0.22), transparent);
+      transform: skewY(-12deg); pointer-events: none;
+      animation: pd-side-shine 5s ease-in-out infinite;
+    }
+  }
+  @keyframes pd-side-shine {
+    0% { top: -60%; }
+    45%, 100% { top: 130%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pd-side, .pd-side-shine { animation: none; }
   }
 </style>
