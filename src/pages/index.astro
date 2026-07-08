@@ -131,8 +131,9 @@ const fmtDate = (d: Date) =>
       ))}
     </div>
 
+    <span class="sr-only" aria-live="polite" id="stream-live"></span>
     <div class="stream-viewport at-start" id="stream-viewport">
-      <div class="stream" id="stream" tabindex="0" role="list" aria-label="블로그 글 가로 스트림">
+      <div class="stream" id="stream" tabindex="0" role="group" aria-roledescription="carousel" aria-label="블로그 글 카루셀 (방향키로 탐색)">
         <div class="stream-spacer" aria-hidden="true"></div>
         {feedPosts.map((post, i) => (
           <article
@@ -308,7 +309,15 @@ const fmtDate = (d: Date) =>
         if (bar) { bar.style.width = (100 / N) + '%'; bar.style.marginLeft = (cur / N) * 100 + '%'; }
         if (prev) prev.disabled = false;
         if (next) next.disabled = false;
+        // 스크린리더: 현재 카드 안내(변경 시에만)
+        if (cur !== lastAnnounced) {
+          lastAnnounced = cur;
+          const live = document.getElementById('stream-live');
+          const title = vis[cur]?.querySelector('h3')?.textContent || '';
+          if (live && title) live.textContent = `${cur + 1} / ${N}: ${title}`;
+        }
       }
+      let lastAnnounced = -1;
 
       // 각 카드를 원(circle) 위 각도에 배치 → pos 회전으로 순환 (스페이셜: 회전↓·깊이·블러·틸트)
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -422,13 +431,29 @@ const fmtDate = (d: Date) =>
       const qvFull = document.getElementById('qv-full') as HTMLAnchorElement | null;
       const qvClose = document.getElementById('qv-close');
       const cache: Record<string, string> = {};
+      let qvLastFocus: HTMLElement | null = null;
+      let listLastFocus: HTMLElement | null = null;
+
+      // 접근성: 포커스 트랩
+      const focusablesIn = (c: HTMLElement) =>
+        (Array.from(c.querySelectorAll('a[href], button:not([disabled]), input, textarea, [tabindex]:not([tabindex="-1"])')) as HTMLElement[])
+          .filter((el) => !el.hasAttribute('hidden') && el.offsetParent !== null);
+      function trapTab(e: KeyboardEvent, c: HTMLElement) {
+        if (e.key !== 'Tab') return;
+        const f = focusablesIn(c);
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
 
       function openModal(href: string) {
         if (!overlay || !qvContent) return;
+        qvLastFocus = document.activeElement as HTMLElement;
         if (qvFull) qvFull.href = href;
         overlay.hidden = false;
         document.body.classList.add('qv-open');
-        requestAnimationFrame(() => overlay.classList.add('open'));
+        requestAnimationFrame(() => { overlay.classList.add('open'); (qvClose as HTMLElement)?.focus(); });
         qvContent.scrollTop = 0;
         if (cache[href]) { qvContent.innerHTML = cache[href]; return; }
         qvContent.innerHTML = '<div class="qv-loading"><span class="spin"></span><br>글을 불러오는 중…</div>';
@@ -454,9 +479,11 @@ const fmtDate = (d: Date) =>
         overlay.classList.remove('open');
         document.body.classList.remove('qv-open');
         setTimeout(() => { overlay.hidden = true; }, 260);
+        qvLastFocus?.focus();
       }
       qvClose?.addEventListener('click', closeModal);
       overlay?.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+      overlay?.addEventListener('keydown', (e) => trapTab(e, overlay));
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay && !overlay.hidden) closeModal(); });
 
       // ── 커맨드 팔레트(전체보기: 검색·필터·정렬·키보드·⌘K) ──
@@ -517,6 +544,7 @@ const fmtDate = (d: Date) =>
 
       function openPalette() {
         if (!listOverlay) return;
+        listLastFocus = document.activeElement as HTMLElement;
         listOverlay.hidden = false;
         document.body.classList.add('list-open');
         requestAnimationFrame(() => { listOverlay.classList.add('open'); pInput?.focus(); pInput?.select(); });
@@ -526,10 +554,12 @@ const fmtDate = (d: Date) =>
         listOverlay.classList.remove('open');
         document.body.classList.remove('list-open');
         setTimeout(() => { listOverlay.hidden = true; }, 260);
+        listLastFocus?.focus();
       }
       listOpenBtn?.addEventListener('click', openPalette);
       listClose?.addEventListener('click', closePalette);
       listOverlay?.addEventListener('click', (e) => { if (e.target === listOverlay) closePalette(); });
+      listOverlay?.addEventListener('keydown', (e) => trapTab(e, listOverlay));
 
       pInput?.addEventListener('input', () => { pQuery = pInput.value.trim().toLowerCase(); applyPalette(); });
       pChips?.addEventListener('click', (e) => {
