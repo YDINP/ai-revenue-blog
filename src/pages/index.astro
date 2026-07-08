@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PostCard from '../components/PostCard.astro';
 import NewsletterCTA from '../components/NewsletterCTA.astro';
 import PopularPosts from '../components/PopularPosts.astro';
 import PaperdocBanner from '../components/PaperdocBanner.astro';
@@ -101,11 +100,15 @@ const fmtDate = (d: Date) =>
     </div>
   </a>
 
-  <!-- ══ Explore Feed (filter + bento) ══ -->
-  <section aria-label="글 탐색">
-    <div class="section-header">
-      <h2>탐색</h2>
-      <a href="/blog/" class="section-link">전체 아카이브 &rarr;</a>
+  <!-- ══ Explore Stream (가로 슬라이드) ══ -->
+  <section class="stream-section" aria-label="글 탐색 스트림">
+    <div class="section-header stream-head">
+      <h2>탐색 스트림</h2>
+      <div class="stream-nav">
+        <span class="stream-counter"><b id="stream-idx">01</b> / {feedPosts.length}</span>
+        <button class="stream-arrow" id="stream-prev" aria-label="이전 글" disabled>&larr;</button>
+        <button class="stream-arrow" id="stream-next" aria-label="다음 글">&rarr;</button>
+      </div>
     </div>
 
     <div class="filter-rail" id="filter-rail" role="tablist">
@@ -115,22 +118,42 @@ const fmtDate = (d: Date) =>
       ))}
     </div>
 
-    <div class="bento" id="bento-feed">
-      {feedPosts.map((post) => (
-        <div class="bento-cell" data-cat={post.data.category.toLowerCase()} data-search={`${post.data.title} ${post.data.description} ${(post.data.tags || []).join(' ')}`.toLowerCase()}>
-          <PostCard
-            title={post.data.title}
-            description={post.data.description}
-            pubDate={post.data.pubDate}
-            category={post.data.category}
-            slug={post.id}
-            image={post.data.image}
-            tags={post.data.tags}
-          />
-        </div>
-      ))}
-      <p class="bento-empty" id="bento-empty" style="display:none;">해당 주제의 글이 아직 없어요.</p>
+    <div class="stream-viewport at-start" id="stream-viewport">
+      <div class="stream" id="stream" tabindex="0" role="list" aria-label="블로그 글 가로 스트림">
+        {feedPosts.map((post, i) => (
+          <article
+            class="stream-card"
+            role="listitem"
+            data-cat={post.data.category.toLowerCase()}
+            data-search={`${post.data.title} ${post.data.description} ${(post.data.tags || []).join(' ')}`.toLowerCase()}
+          >
+            <a href={`/blog/${post.id}/`}>
+              <div class="stream-card-media">
+                {post.data.image ? (
+                  <img src={post.data.image.url} alt={post.data.image.alt} width="640" height="400" loading="lazy" decoding="async" />
+                ) : (
+                  <span class="ph">{post.data.category}</span>
+                )}
+                <span class="stream-index">{String(i + 1).padStart(2, '0')}</span>
+                <span class="stream-cat" data-cat={post.data.category.toLowerCase()}>{post.data.category}</span>
+              </div>
+              <div class="stream-card-body">
+                <h3>{post.data.title}</h3>
+                <p>{post.data.description}</p>
+                <div class="stream-card-foot">
+                  <time datetime={new Date(post.data.pubDate).toISOString()}>{fmtDate(post.data.pubDate)}</time>
+                  <span class="go">읽기 &rarr;</span>
+                </div>
+              </div>
+            </a>
+          </article>
+        ))}
+        <div class="stream-empty" id="stream-empty" style="display:none;">해당 주제의 글이 아직 없어요.</div>
+      </div>
     </div>
+
+    <div class="stream-progress"><div class="stream-progress-bar" id="stream-bar"></div></div>
+    <p class="stream-hint">&larr; 드래그 · 휠 · 방향키로 넘겨보세요 &rarr;</p>
   </section>
 
   <!-- Popular Posts -->
@@ -145,26 +168,116 @@ const fmtDate = (d: Date) =>
 
   <script>
     (function () {
-      const rail = document.getElementById('filter-rail');
-      const cells = Array.from(document.querySelectorAll('#bento-feed .bento-cell'));
-      const empty = document.getElementById('bento-empty');
-      if (!rail) return;
+      const stream = document.getElementById('stream') as HTMLElement | null;
+      const viewport = document.getElementById('stream-viewport') as HTMLElement | null;
+      const rail = document.getElementById('filter-rail') as HTMLElement | null;
+      const prev = document.getElementById('stream-prev') as HTMLButtonElement | null;
+      const next = document.getElementById('stream-next') as HTMLButtonElement | null;
+      const idxEl = document.getElementById('stream-idx');
+      const bar = document.getElementById('stream-bar') as HTMLElement | null;
+      const empty = document.getElementById('stream-empty');
+      if (!stream || !viewport) return;
 
-      rail.addEventListener('click', (e) => {
+      const cards = Array.from(stream.querySelectorAll('.stream-card')) as HTMLElement[];
+
+      const step = () => {
+        const vis = cards.filter((c) => !c.classList.contains('hide'));
+        if (vis.length < 2) return vis[0]?.offsetWidth || 300;
+        return vis[1].offsetLeft - vis[0].offsetLeft;
+      };
+      const visibleCount = () => cards.filter((c) => !c.classList.contains('hide')).length;
+
+      function update() {
+        if (!stream || !viewport) return;
+        const max = stream.scrollWidth - stream.clientWidth;
+        const atStart = stream.scrollLeft <= 2;
+        const atEnd = stream.scrollLeft >= max - 2;
+        viewport.classList.toggle('at-start', atStart);
+        viewport.classList.toggle('at-end', atEnd);
+        if (prev) prev.disabled = atStart;
+        if (next) next.disabled = atEnd || max <= 0;
+        const total = visibleCount();
+        const cur = Math.min(total, Math.round(stream.scrollLeft / step()) + 1);
+        if (idxEl) idxEl.textContent = String(Math.max(1, cur)).padStart(2, '0');
+        if (bar) {
+          const frac = max > 0 ? stream.scrollLeft / max : 0;
+          const thumb = stream.clientWidth / stream.scrollWidth * 100;
+          bar.style.width = thumb + '%';
+          bar.style.marginLeft = frac * (100 - thumb) + '%';
+        }
+      }
+
+      const scrollByStep = (dir: number) => stream.scrollBy({ left: dir * step(), behavior: 'smooth' });
+      prev?.addEventListener('click', () => scrollByStep(-1));
+      next?.addEventListener('click', () => scrollByStep(1));
+
+      stream.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+
+      // keyboard
+      stream.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); scrollByStep(1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); scrollByStep(-1); }
+      });
+
+      // wheel -> horizontal (page scroll still works at edges)
+      stream.addEventListener('wheel', (e) => {
+        const dy = e.deltaY;
+        if (Math.abs(dy) <= Math.abs(e.deltaX)) return;
+        const max = stream.scrollWidth - stream.clientWidth;
+        const atStart = stream.scrollLeft <= 0;
+        const atEnd = stream.scrollLeft >= max;
+        if ((dy > 0 && !atEnd) || (dy < 0 && !atStart)) {
+          e.preventDefault();
+          stream.scrollLeft += dy;
+        }
+      }, { passive: false });
+
+      // drag to scroll
+      let down = false, startX = 0, startScroll = 0, moved = 0;
+      stream.addEventListener('pointerdown', (e) => {
+        down = true; moved = 0;
+        startX = e.clientX; startScroll = stream.scrollLeft;
+        stream.classList.add('dragging');
+      });
+      window.addEventListener('pointermove', (e) => {
+        if (!down) return;
+        const d = e.clientX - startX;
+        moved = Math.max(moved, Math.abs(d));
+        stream.scrollLeft = startScroll - d;
+      });
+      window.addEventListener('pointerup', () => {
+        if (!down) return;
+        down = false;
+        stream.classList.remove('dragging');
+        // snap to nearest card
+        const s = step();
+        stream.scrollTo({ left: Math.round(stream.scrollLeft / s) * s, behavior: 'smooth' });
+      });
+      // suppress click right after a drag
+      stream.addEventListener('click', (e) => {
+        if (moved > 6) { e.preventDefault(); e.stopPropagation(); }
+      }, true);
+
+      // filter
+      rail?.addEventListener('click', (e) => {
         const btn = (e.target as HTMLElement).closest('.filter-pill') as HTMLElement | null;
         if (!btn) return;
         const cat = btn.dataset.cat;
         rail.querySelectorAll('.filter-pill').forEach((b) => b.classList.remove('active'));
         btn.classList.add('active');
-
         let visible = 0;
-        cells.forEach((cell) => {
-          const match = cat === 'all' || (cell as HTMLElement).dataset.cat === cat;
-          cell.classList.toggle('hide', !match);
+        cards.forEach((c) => {
+          const match = cat === 'all' || c.dataset.cat === cat;
+          c.classList.toggle('hide', !match);
           if (match) visible++;
         });
-        if (empty) empty.style.display = visible === 0 ? 'block' : 'none';
+        if (empty) empty.style.display = visible === 0 ? 'flex' : 'none';
+        stream.scrollTo({ left: 0, behavior: 'smooth' });
+        requestAnimationFrame(update);
       });
+
+      window.addEventListener('resize', () => requestAnimationFrame(update));
+      requestAnimationFrame(update);
     })();
   </script>
 </BaseLayout>

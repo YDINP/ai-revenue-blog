@@ -3630,3 +3630,225 @@ section > h2::after { background: linear-gradient(90deg, var(--color-border), tr
   .bento { grid-template-columns: 1fr; gap: 0.8rem; }
   .bento .bento-cell:nth-child(6n+1) { grid-column: span 1; }
 }
+
+/* ==========================================================================
+   HORIZONTAL STREAM — 가로 슬라이드 포스트 덱 (tech/HUD)
+   ========================================================================== */
+.stream-section { margin-top: 0.5rem; }
+
+.stream-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.stream-head h2 { margin: 0; }
+
+.stream-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.stream-counter {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+.stream-counter b {
+  color: var(--color-primary);
+  font-size: 0.95rem;
+}
+.stream-arrow {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.stream-arrow:hover:not(:disabled) {
+  border-color: transparent;
+  background: var(--gradient-primary);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px -6px rgba(109,92,240,0.6);
+}
+.stream-arrow:disabled { opacity: 0.35; cursor: default; }
+
+/* viewport + track */
+.stream-viewport {
+  position: relative;
+  margin: 0 -0.5rem;
+}
+/* edge fade masks */
+.stream-viewport::before,
+.stream-viewport::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 12px;
+  width: 42px;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.stream-viewport::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--color-bg), transparent);
+}
+.stream-viewport::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--color-bg), transparent);
+}
+.stream-viewport.at-start::before { opacity: 0; }
+.stream-viewport.at-end::after { opacity: 0; }
+
+.stream {
+  display: flex;
+  gap: 1.1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 0.5rem 0.5rem 1rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+.stream::-webkit-scrollbar { display: none; }
+.stream.dragging { cursor: grabbing; scroll-behavior: auto; scroll-snap-type: none; }
+.stream.dragging a { pointer-events: none; }
+
+.stream-card {
+  flex: 0 0 clamp(260px, 32%, 340px);
+  scroll-snap-align: start;
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  box-shadow: var(--glass-shadow);
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+}
+.stream-card.hide { display: none; }
+.stream-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-glow);
+  border-color: rgba(139,124,246,0.5);
+}
+.stream-card a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.stream-card-media {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: var(--gradient-primary);
+}
+.stream-card-media img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.stream-card:hover .stream-card-media img { transform: scale(1.06); }
+.stream-card-media .ph {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.85); font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; font-size: 0.9rem;
+}
+.stream-index {
+  position: absolute;
+  top: 10px; left: 12px;
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 7px;
+  background: rgba(7,10,23,0.55);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.16);
+}
+.stream-cat {
+  position: absolute;
+  top: 10px; right: 12px;
+  font-size: 0.66rem; font-weight: 800; letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 3px 8px; border-radius: 7px;
+  color: #fff;
+  background: rgba(7,10,23,0.45);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.16);
+}
+.stream-card-body {
+  padding: 1rem 1.15rem 1.15rem;
+  display: flex; flex-direction: column; gap: 0.5rem;
+  flex: 1;
+}
+.stream-card-body h3 {
+  font-size: 1.02rem; font-weight: 700; line-height: 1.35;
+  letter-spacing: -0.01em;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.stream-card-body p {
+  font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.55;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  flex: 1;
+}
+.stream-card-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: auto; padding-top: 0.6rem;
+  border-top: 1px solid var(--glass-border);
+  font-size: 0.76rem; color: var(--color-text-muted);
+}
+.stream-card-foot .go { color: var(--color-primary); font-weight: 700; }
+
+.stream-empty {
+  flex: 0 0 100%;
+  text-align: center; padding: 3rem 1rem; color: var(--color-text-muted); font-size: 0.95rem;
+}
+
+/* progress + hint */
+.stream-progress {
+  height: 3px; border-radius: 3px;
+  background: var(--glass-border);
+  overflow: hidden;
+  margin: 0.25rem 0.5rem 0;
+}
+.stream-progress-bar {
+  height: 100%;
+  width: 20%;
+  border-radius: 3px;
+  background: var(--gradient-aurora);
+  transition: width 0.15s ease, margin-left 0.15s ease;
+}
+.stream-hint {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: 0.7rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 640px) {
+  .stream-card { flex-basis: 78%; }
+  .stream-nav .stream-counter { display: none; }
+  .stream-hint { font-size: 0.66rem; }
+}
