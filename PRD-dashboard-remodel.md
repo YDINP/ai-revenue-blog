@@ -80,3 +80,39 @@ Phase 1은 색·타이포·애니메이션(표면)만 정비. 전체 요약 탭�
 1. build 성공 / 22개 JS ID 보존
 2. 데스크톱 벤토 정상, 태블릿·모바일 오버플로 없음(1000=1000, 390=390)
 
+---
+
+## Phase 3 — 컬러풀 다크 비주얼 리디자인
+
+> 요청: "스타일 자체를 전체적으로 눈에 보기 쉽게, 트렌디하게 리디자인 및 항목 재구성"
+> 사용자 선택(AskUserQuestion): **컬러풀 다크** — 다크 배경 유지 + 컬러 강조
+
+### 배경
+
+Phase 1~2가 미니멀·플랫이라 "밋밋하다"는 피드백(3번째 리디자인 요청).
+다크는 유지하되 시각 에너지·스캔성을 높이는 방향으로 전환.
+
+### 적용
+
+- **KPI 아이콘 칩**: 카드마다 틴트 배경 라운드 칩 + Lucide 계열 라인 아이콘
+  (file-text/layers/eye/cart). frontmatter `ICONS` 맵 + `set:html` 주입
+- **컬러 수치**: KPI 값을 카드 테마색으로(밝은 톤 유지, 가독성 확보).
+  카드 우상단 은은한 컬러 글로우(`::after` radial, opacity 0.12)
+- **델타 칩**: Page Views=오늘/어제 %(↑초록/↓빨강 화살표+색 이중 인코딩),
+  Coupang=오늘 클릭 수. `setDeltaChip()` 헬퍼
+- **미니 스파크라인**: Page Views 카드에 실제 7일 조회수 CSS 바(오늘 강조).
+  `renderKpiSpark()` — 실데이터만(허위 차트 금지), 어제/오늘은 trend RPC 재사용
+- **섹션 라인 아이콘**: 12개 섹션/패널 헤더에 테마색 아이콘
+  (trending-up/clock/bar-chart/grid/list/activity/heart/table/pie/server/link)
+- **전 탭 일관 적용**: TechFlow·LifeFlow·쿠팡·댓글 탭 KPI 카드도 동일 처리
+  (color-cyan/red 변형 추가, message/calendar/alert/percent 아이콘 추가)
+- **무애니메이션 원칙 유지**: transition 0개, keyframes는 로딩 스피너만.
+  아이콘·글로우·스파크라인 전부 정적
+
+### 완료 기준 (Phase 3)
+
+1. build 성공, transition 0 / keyframes=spin만
+2. 데스크톱·전 탭·모바일 정상, 오버플로 없음(390=390)
+3. 스파크라인은 실제 데이터만(허위 시각화 없음)
+
+
