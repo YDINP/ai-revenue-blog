@@ -1432,6 +1432,77 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         .cm-actions { flex-direction: row; }
         .summary-card .value { font-size: 1.5rem; }
       }
+
+      /* ── 벤토 그리드 (12컬럼 재구성) ───────────────────── */
+      .dash-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 1.25rem;
+        margin-bottom: 1.25rem;
+        align-items: stretch;
+      }
+      /* 그리드 셀은 자체 margin-bottom 제거(간격은 gap이 담당) + 축소 허용 */
+      .dash-grid > * { margin-bottom: 0; min-width: 0; }
+
+      .col-3 { grid-column: span 3; }
+      .col-4 { grid-column: span 4; }
+      .col-6 { grid-column: span 6; }
+      .col-7 { grid-column: span 7; }
+      .col-8 { grid-column: span 8; }
+      .col-12 { grid-column: span 12; }
+
+      /* 범용 패널 카드 — 독립 셀이 된 위젯에 카드 크롬 부여 */
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 1.125rem 1.25rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .panel-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .panel-head h3, .panel-head h4 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .panel > .source-tabs { margin-top: -0.25rem; }
+      .panel .hourly-chart { margin-bottom: 0; }
+      .panel .top-page-list, .panel .event-feed { flex: 1; }
+
+      /* 오늘 현황 = 2x2 스탯 그리드 */
+      .today-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        flex: 1;
+      }
+
+      .today-grid .metric-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      /* 태블릿(≤1100): 벤토 해제 → 단일 컬럼(가독성 우선) */
+      @media (max-width: 1100px) {
+        .col-3 { grid-column: span 6; }
+        .col-4, .col-6, .col-7, .col-8 { grid-column: span 12; }
+      }
+
+      @media (max-width: 768px) {
+        .dash-grid { grid-template-columns: 1fr; gap: 1rem; }
+        .dash-grid > * { grid-column: 1 / -1; }
+      }
     </style>
   </head>
   <body>
@@ -1464,7 +1535,7 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
 
       <!-- Tab: 전체 요약 -->
       <div class="tab-content active" id="tab-all">
-      <!-- 상단: 통합 요약 카드 -->
+      <!-- ══ Row 1: KPI 히어로 스트립 ══ -->
       <div class="summary-grid">
         <div class="summary-card accent-blue">
           <div class="label">Total Posts</div>
@@ -1504,64 +1575,28 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         </div>
       </div>
 
-      <!-- 7일 트렌드 -->
-      <div class="trend-section">
-        <div class="trend-header">
-          <h3>7-Day Views Trend</h3>
-          <div class="trend-total">7일 합계: <b id="trend-total-num">--</b></div>
-        </div>
-        <div class="trend-chart" id="trend-chart">
-          <div class="no-data">Loading trend...</div>
-        </div>
-        <div class="trend-legend">
-          <span><i class="dot-tf"></i> TechFlow</span>
-          <span><i class="dot-lf"></i> LifeFlow</span>
-        </div>
-      </div>
-
-      <!-- 날짜별 상세 (30일) -->
-      <div class="trend-section">
-        <div class="trend-header">
-          <h3>날짜별 상세 (최근 30일, KST)</h3>
-          <div class="trend-total">합계: <b id="daily-detail-total">--</b></div>
-        </div>
-        <div class="daily-detail-wrap">
-          <table class="daily-detail-table">
-            <thead>
-              <tr><th>날짜</th><th>조회수</th><th>방문자</th><th>TF</th><th>LF</th><th class="dd-bar-col"></th></tr>
-            </thead>
-            <tbody id="daily-detail-body">
-              <tr><td colspan="6" class="no-data">Loading...</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="dd-note">※ 방문자 = 고유 브라우저(User-Agent) 기준 추정치. 조회수 ≥ 방문자.</p>
-      </div>
-
-      <!-- 날짜 x 시간대 히트맵 (14일) -->
-      <div class="trend-section">
-        <div class="trend-header">
-          <h3>날짜 × 시간대 히트맵 (최근 14일, KST)</h3>
-          <div class="heatmap-legend">
-            <span>적음</span>
-            <i class="hm-cell l0"></i><i class="hm-cell l1"></i><i class="hm-cell l2"></i><i class="hm-cell l3"></i><i class="hm-cell l4"></i>
-            <span>많음</span>
+      <!-- ══ Row 2: 7일 트렌드(8) + 오늘 현황(4) ══ -->
+      <div class="dash-grid">
+        <div class="trend-section col-8">
+          <div class="trend-header">
+            <h3>7-Day Views Trend</h3>
+            <div class="trend-total">7일 합계: <b id="trend-total-num">--</b></div>
+          </div>
+          <div class="trend-chart" id="trend-chart">
+            <div class="no-data">Loading trend...</div>
+          </div>
+          <div class="trend-legend">
+            <span class="leg-tf">TechFlow</span>
+            <span class="leg-lf">LifeFlow</span>
           </div>
         </div>
-        <div class="heatmap-wrap" id="heatmap-wrap">
-          <div class="no-data">Loading...</div>
-        </div>
-      </div>
 
-      <!-- 실시간 트래픽 -->
-      <div class="traffic-section">
-        <div class="traffic-header">
-          <h3>Real-time Traffic</h3>
-          <button class="refresh-btn" id="refresh-traffic">Refresh</button>
-        </div>
-        <div class="traffic-body">
-          <!-- 트래픽 지표 -->
-          <div class="metric-row">
+        <div class="panel col-4">
+          <div class="panel-head">
+            <h3>오늘 현황</h3>
+            <button class="refresh-btn" id="refresh-traffic">Refresh</button>
+          </div>
+          <div class="today-grid">
             <div class="metric-box">
               <div class="metric-label">Today Views</div>
               <div class="metric-value" id="t-today-views">--</div>
@@ -1591,50 +1626,89 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
               <div class="metric-delta neutral" id="t-subs-today">today: --</div>
             </div>
           </div>
+        </div>
+      </div>
 
-          <!-- 시간대별 차트 -->
+      <!-- ══ Row 3: 시간대별(4) + 히트맵(8) ══ -->
+      <div class="dash-grid">
+        <div class="panel col-4">
+          <div class="panel-head"><h4>시간대별 조회 (오늘)</h4></div>
           <div class="hourly-chart">
-            <h4>Hourly Pageviews (Today)</h4>
             <div class="chart-bars" id="hourly-chart"></div>
           </div>
+        </div>
 
-          <!-- Top Pages + Live Feed -->
-          <div class="traffic-grid">
-            <div class="traffic-panel">
-              <h4>Top Pages</h4>
-              <div class="source-tabs" id="top-pages-tabs">
-                <button class="source-tab active" data-filter="all">All</button>
-                <button class="source-tab" data-filter="blog">TechFlow</button>
-                <button class="source-tab" data-filter="lifeflow">LifeFlow</button>
-              </div>
-              <div class="top-page-list" id="top-pages">
-                <div class="no-data">Loading...</div>
-              </div>
-            </div>
-            <div class="traffic-panel">
-              <h4>Live Activity</h4>
-              <div class="source-tabs" id="event-tabs">
-                <button class="source-tab active" data-filter="all">All</button>
-                <button class="source-tab" data-filter="blog">TechFlow</button>
-                <button class="source-tab" data-filter="lifeflow">LifeFlow</button>
-              </div>
-              <div class="event-feed" id="event-feed">
-                <div class="no-data">Loading...</div>
-              </div>
+        <div class="panel col-8">
+          <div class="panel-head">
+            <h4>날짜 × 시간대 히트맵 (14일, KST)</h4>
+            <div class="heatmap-legend">
+              <span>적음</span>
+              <i class="hm-cell l0"></i><i class="hm-cell l1"></i><i class="hm-cell l2"></i><i class="hm-cell l3"></i><i class="hm-cell l4"></i>
+              <span>많음</span>
             </div>
           </div>
-
-          <!-- 추천 TOP 패널 -->
-          <div class="traffic-panel like-top-panel">
-            <h4>&#10084;&#65039; 추천 TOP <span class="like-top-total" id="like-top-total"></span></h4>
-            <div class="top-page-list" id="top-liked-posts">
-              <div class="no-data">Loading...</div>
-            </div>
+          <div class="heatmap-wrap" id="heatmap-wrap">
+            <div class="no-data">Loading...</div>
           </div>
         </div>
       </div>
 
-      <!-- 중단: 블로그별 섹션 -->
+      <!-- ══ Row 4: Top Pages(4) + Live(4) + 추천 TOP(4) ══ -->
+      <div class="dash-grid">
+        <div class="panel col-4">
+          <div class="panel-head"><h4>Top Pages</h4></div>
+          <div class="source-tabs" id="top-pages-tabs">
+            <button class="source-tab active" data-filter="all">All</button>
+            <button class="source-tab" data-filter="blog">TechFlow</button>
+            <button class="source-tab" data-filter="lifeflow">LifeFlow</button>
+          </div>
+          <div class="top-page-list" id="top-pages">
+            <div class="no-data">Loading...</div>
+          </div>
+        </div>
+
+        <div class="panel col-4">
+          <div class="panel-head"><h4>Live Activity</h4></div>
+          <div class="source-tabs" id="event-tabs">
+            <button class="source-tab active" data-filter="all">All</button>
+            <button class="source-tab" data-filter="blog">TechFlow</button>
+            <button class="source-tab" data-filter="lifeflow">LifeFlow</button>
+          </div>
+          <div class="event-feed" id="event-feed">
+            <div class="no-data">Loading...</div>
+          </div>
+        </div>
+
+        <div class="panel col-4">
+          <div class="panel-head">
+            <h4>&#10084;&#65039; 추천 TOP <span class="like-top-total" id="like-top-total"></span></h4>
+          </div>
+          <div class="top-page-list" id="top-liked-posts">
+            <div class="no-data">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ Row 5: 날짜별 상세 30일 (full) ══ -->
+      <div class="trend-section">
+        <div class="trend-header">
+          <h3>날짜별 상세 (최근 30일, KST)</h3>
+          <div class="trend-total">합계: <b id="daily-detail-total">--</b></div>
+        </div>
+        <div class="daily-detail-wrap">
+          <table class="daily-detail-table">
+            <thead>
+              <tr><th>날짜</th><th>조회수</th><th>방문자</th><th>TF</th><th>LF</th><th class="dd-bar-col"></th></tr>
+            </thead>
+            <tbody id="daily-detail-body">
+              <tr><td colspan="6" class="no-data">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="dd-note">※ 방문자 = 고유 브라우저(User-Agent) 기준 추정치. 조회수 ≥ 방문자.</p>
+      </div>
+
+      <!-- ══ Row 6: TechFlow(6) + LifeFlow(6) 콘텐츠 구성 ══ -->
       <div class="blog-sections">
         <!-- TechFlow Section -->
         <div class="blog-section">
@@ -1720,65 +1794,66 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
         </div>
       </div>
 
-      <!-- 시스템 상태 -->
-      <div class="status-section">
-        <h3>System Status</h3>
-        <div class="status-grid">
-          <div class="status-item">
-            <span>TechFlow (Vercel)</span>
-            <span class="status-badge online">Online</span>
-          </div>
-          <div class="status-item">
-            <span>LifeFlow (Vercel)</span>
-            <span class="status-badge pending">미배포</span>
-          </div>
-          <div class="status-item">
-            <span>Supabase DB</span>
-            <span class="status-badge" id="supabase-status">Checking...</span>
-          </div>
-          <div class="status-item">
-            <span>Pageview Tracking</span>
-            <span class="status-badge online">Active</span>
-          </div>
-          <div class="status-item">
-            <span>AdSense</span>
-            <span class="status-badge pending">미신청</span>
-          </div>
-          <div class="status-item">
-            <span>Coupang Partners</span>
-            <span class="status-badge pending">연동 필요</span>
+      <!-- ══ Row 7: 시스템 상태(8) + 바로가기(4) ══ -->
+      <div class="dash-grid">
+        <div class="status-section col-8">
+          <h3>System Status</h3>
+          <div class="status-grid">
+            <div class="status-item">
+              <span>TechFlow (Vercel)</span>
+              <span class="status-badge online">Online</span>
+            </div>
+            <div class="status-item">
+              <span>LifeFlow (Vercel)</span>
+              <span class="status-badge pending">미배포</span>
+            </div>
+            <div class="status-item">
+              <span>Supabase DB</span>
+              <span class="status-badge" id="supabase-status">Checking...</span>
+            </div>
+            <div class="status-item">
+              <span>Pageview Tracking</span>
+              <span class="status-badge online">Active</span>
+            </div>
+            <div class="status-item">
+              <span>AdSense</span>
+              <span class="status-badge pending">미신청</span>
+            </div>
+            <div class="status-item">
+              <span>Coupang Partners</span>
+              <span class="status-badge pending">연동 필요</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- 하단: 바로가기 링크 -->
-      <div class="links-section">
-        <h3>Quick Links</h3>
-        <div class="links-grid">
-          <a href="https://github.com/YDINP/ai-revenue-blog" target="_blank" rel="noopener" class="link-btn">
-            <span class="link-icon">&#128187;</span>
-            GitHub TechFlow
-          </a>
-          <a href="https://github.com/YDINP/life-revenue-blog" target="_blank" rel="noopener" class="link-btn">
-            <span class="link-icon">&#128187;</span>
-            GitHub LifeFlow
-          </a>
-          <a href="https://ai-revenue-blog.vercel.app" target="_blank" rel="noopener" class="link-btn">
-            <span class="link-icon">&#9650;</span>
-            Vercel TechFlow
-          </a>
-          <a href="https://supabase.com/dashboard" target="_blank" rel="noopener" class="link-btn">
-            <span class="link-icon">&#9889;</span>
-            Supabase
-          </a>
-          <a href="https://search.google.com/search-console" target="_blank" rel="noopener" class="link-btn">
-            <span class="link-icon">&#128270;</span>
-            Search Console
-          </a>
-          <a href="https://analytics.google.com" target="_blank" rel="noopener" class="link-btn">
-            <span class="link-icon">&#128200;</span>
-            Google Analytics
-          </a>
+        <div class="links-section col-4">
+          <h3>Quick Links</h3>
+          <div class="links-grid">
+            <a href="https://github.com/YDINP/ai-revenue-blog" target="_blank" rel="noopener" class="link-btn">
+              <span class="link-icon">&#128187;</span>
+              GitHub TechFlow
+            </a>
+            <a href="https://github.com/YDINP/life-revenue-blog" target="_blank" rel="noopener" class="link-btn">
+              <span class="link-icon">&#128187;</span>
+              GitHub LifeFlow
+            </a>
+            <a href="https://ai-revenue-blog.vercel.app" target="_blank" rel="noopener" class="link-btn">
+              <span class="link-icon">&#9650;</span>
+              Vercel TechFlow
+            </a>
+            <a href="https://supabase.com/dashboard" target="_blank" rel="noopener" class="link-btn">
+              <span class="link-icon">&#9889;</span>
+              Supabase
+            </a>
+            <a href="https://search.google.com/search-console" target="_blank" rel="noopener" class="link-btn">
+              <span class="link-icon">&#128270;</span>
+              Search Console
+            </a>
+            <a href="https://analytics.google.com" target="_blank" rel="noopener" class="link-btn">
+              <span class="link-icon">&#128200;</span>
+              Google Analytics
+            </a>
+          </div>
         </div>
       </div>
       </div>
