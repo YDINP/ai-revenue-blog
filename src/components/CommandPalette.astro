@@ -1,16 +1,16 @@
 ---
 // 전역 커맨드 팔레트(⌘K) — 모든 페이지에서 글 검색·필터·정렬·키보드 이동.
 // 홈에는 로컬 팔레트(#list-overlay)가 있으므로, 그게 존재하면 전역은 양보(가드).
+//
+// ⚡ 성능: 전체 글 목록을 페이지마다 DOM으로 인라인하면 HTML이 수백 KB로 불어나
+// 모바일에서 파싱/스크롤 렉을 유발한다. 목록은 /search-index.json 으로 분리하고
+// 팔레트를 "열 때" 한 번만 fetch → 렌더한다(칩 카운트만 서버에서 계산).
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
-
+const posts = await getCollection('blog', ({ data }) => !data.draft);
 const catMap: Record<string, number> = {};
 posts.forEach((p) => { const k = p.data.category.toLowerCase(); catMap[k] = (catMap[k] || 0) + 1; });
 const cats = Object.entries(catMap).sort((a, b) => b[1] - a[1]).map(([slug, count]) => ({ slug, label: slug.toUpperCase(), count }));
-
-const fmtDate = (d: Date) => new Date(d).toLocaleDateString('ko-KR', { year: 'numeric', month: 'short', day: 'numeric' });
 ---
 
 <div class="list-overlay" id="gp-overlay" hidden>
@@ -35,29 +35,7 @@ const fmtDate = (d: Date) => new Date(d).toLocaleDateString('ko-KR', { year: 'nu
       </div>
     </div>
     <div class="list-body" id="gp-body" role="listbox" aria-label="검색 결과">
-      {posts.map((post) => (
-        <a
-          class="list-row"
-          href={`/blog/${post.id}/`}
-          role="option"
-          data-cat={post.data.category.toLowerCase()}
-          data-title={post.data.title.toLowerCase()}
-          data-search={`${post.data.title} ${post.data.description} ${(post.data.tags || []).join(' ')}`.toLowerCase()}
-          data-date={new Date(post.data.pubDate).getTime()}
-        >
-          <div class="list-row-media">
-            {post.data.image ? (
-              <img src={post.data.image.url} alt={post.data.image.alt} width="320" height="180" loading="lazy" decoding="async" />
-            ) : (<span class="ph" data-cat={post.data.category.toLowerCase()}>{post.data.category}</span>)}
-          </div>
-          <div class="list-row-text">
-            <div class="list-row-top"><span class="list-row-cat" data-cat={post.data.category.toLowerCase()}>{post.data.category}</span></div>
-            <h4 data-orig={post.data.title}>{post.data.title}</h4>
-            <p>{post.data.description}</p>
-            <time datetime={new Date(post.data.pubDate).toISOString()}>{fmtDate(post.data.pubDate)}</time>
-          </div>
-        </a>
-      ))}
+      <div class="palette-empty" id="gp-loading">불러오는 중…</div>
       <div class="palette-empty" id="gp-empty" hidden>검색 결과가 없어요.</div>
     </div>
     <div class="palette-foot">
@@ -77,12 +55,51 @@ const fmtDate = (d: Date) => new Date(d).toLocaleDateString('ko-KR', { year: 'nu
     const chips = document.getElementById('gp-chips');
     const sortEl = document.getElementById('gp-sort');
     const countEl = document.getElementById('gp-count');
-    const empty = document.getElementById('gp-empty') as HTMLElement | null;
     const body = document.getElementById('gp-body') as HTMLElement | null;
+    const loadingEl = document.getElementById('gp-loading') as HTMLElement | null;
+    let empty = document.getElementById('gp-empty') as HTMLElement | null;
     const closeBtn = document.getElementById('gp-close');
-    const rows = Array.from(overlay.querySelectorAll('.list-row')) as HTMLElement[];
     let query = '', cat = 'all', sortKey: 'date' | 'title' = 'date', active = -1, lastFocus: HTMLElement | null = null;
     const isHomeLocal = () => !!document.getElementById('list-overlay');   // 홈 로컬 팔레트가 있으면 전역은 양보
+
+    type Row = { id: string; t: string; c: string; d: string; g: string; p: number; i: string; a: string };
+    let DATA: Row[] | null = null;
+    let rows: HTMLElement[] = [];
+    let rendered = false, loading = false;
+
+    const esc = (s: string) => s.replace(/[&<>"]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m] as string));
+    const fmtDate = (ms: number) => new Date(ms).toLocaleDateString('ko-KR', { year: 'numeric', month: 'short', day: 'numeric' });
+
+    function rowHtml(o: Row) {
+      const catL = (o.c || '').toLowerCase();
+      const media = o.i
+        ? `<img src="${esc(o.i)}" alt="${esc(o.a)}" width="320" height="180" loading="lazy" decoding="async">`
+        : `<span class="ph" data-cat="${catL}">${esc(o.c)}</span>`;
+      const search = esc(`${o.t} ${o.d} ${o.g}`.toLowerCase());
+      return `<a class="list-row" href="/blog/${o.id}/" role="option" data-cat="${catL}" data-title="${esc(o.t.toLowerCase())}" data-search="${search}" data-date="${o.p}">`
+        + `<div class="list-row-media">${media}</div>`
+        + `<div class="list-row-text"><div class="list-row-top"><span class="list-row-cat" data-cat="${catL}">${esc(o.c)}</span></div>`
+        + `<h4 data-orig="${esc(o.t)}">${esc(o.t)}</h4><p>${esc(o.d)}</p>`
+        + `<time datetime="${new Date(o.p).toISOString()}">${fmtDate(o.p)}</time></div></a>`;
+    }
+
+    async function ensure() {
+      if (DATA || loading) return !!DATA;
+      loading = true;
+      try {
+        const r = await fetch('/search-index.json');
+        DATA = await r.json();
+      } catch (e) { DATA = null; }
+      loading = false;
+      return !!DATA;
+    }
+    function renderAll() {
+      if (!DATA || !body) return;
+      body.innerHTML = DATA.map(rowHtml).join('') + '<div class="palette-empty" id="gp-empty" hidden>검색 결과가 없어요.</div>';
+      rows = Array.from(body.querySelectorAll('.list-row')) as HTMLElement[];
+      empty = document.getElementById('gp-empty') as HTMLElement | null;
+      rendered = true;
+    }
 
     function highlight(el: HTMLElement | null, q: string) {
       if (!el) return;
@@ -90,11 +107,11 @@ const fmtDate = (d: Date) => new Date(d).toLocaleDateString('ko-KR', { year: 'nu
       if (!q) { el.textContent = orig; return; }
       const i = orig.toLowerCase().indexOf(q);
       if (i < 0) { el.textContent = orig; return; }
-      const esc = (s: string) => s.replace(/[&<>]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m] as string));
       el.innerHTML = esc(orig.slice(0, i)) + '<mark>' + esc(orig.slice(i, i + q.length)) + '</mark>' + esc(orig.slice(i + q.length));
     }
     const visible = () => rows.filter((r) => !r.hidden);
     function apply() {
+      if (!rendered) return;
       const vis: HTMLElement[] = [];
       rows.forEach((r) => {
         const ok = (cat === 'all' || r.dataset.cat === cat) && (!query || (r.dataset.search || '').includes(query));
@@ -115,10 +132,13 @@ const fmtDate = (d: Date) => new Date(d).toLocaleDateString('ko-KR', { year: 'nu
       active = (i + vis.length) % vis.length;
       vis[active].classList.add('active'); vis[active].scrollIntoView({ block: 'nearest' });
     }
-    function open() {
+    async function open() {
       lastFocus = document.activeElement as HTMLElement;
       overlay.hidden = false; document.body.classList.add('list-open');
       requestAnimationFrame(() => { overlay.classList.add('open'); input?.focus(); input?.select(); });
+      const ok = await ensure();
+      if (loadingEl) loadingEl.hidden = true;
+      if (ok && !rendered) { renderAll(); apply(); }
     }
     function close() {
       overlay.classList.remove('open'); document.body.classList.remove('list-open');
@@ -126,7 +146,7 @@ const fmtDate = (d: Date) => new Date(d).toLocaleDateString('ko-KR', { year: 'nu
     }
     closeBtn?.addEventListener('click', close);
     overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
-    input?.addEventListener('input', () => { query = input.value.trim().toLowerCase(); apply(); });
+    input?.addEventListener('input', () => { query = (input.value || '').trim().toLowerCase(); apply(); });
     chips?.addEventListener('click', (e) => {
       const b = (e.target as HTMLElement).closest('.pchip') as HTMLElement | null; if (!b) return;
       chips.querySelectorAll('.pchip').forEach((x) => x.classList.remove('active')); b.classList.add('active');
@@ -161,6 +181,5 @@ const fmtDate = (d: Date) => new Date(d).toLocaleDateString('ko-KR', { year: 'nu
     });
     // 외부(예: /blog 페이지 버튼)에서 열 수 있도록 전역 노출
     (window as any).openCommandPalette = () => { if (!isHomeLocal()) open(); };
-    apply();
   })();
 </script>
