@@ -400,6 +400,8 @@
   `;
   document.body.appendChild(sidebar);
   sidebar.querySelector('.toc-sidebar-close').addEventListener('click', function() {
+    // visObserver가 심은 인라인 opacity가 .toc-hidden의 opacity:0을 덮지 않게 제거
+    sidebar.style.opacity = '';
     sidebar.classList.add('toc-hidden');
   });
   const sidebarLinks = sidebar.querySelectorAll('a');
