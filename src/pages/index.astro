@@ -189,36 +189,7 @@ const fmtDate = (d: Date) =>
         </div>
       </div>
       <div class="list-body" id="list-body" role="listbox" aria-label="검색 결과">
-        {sortedPosts.map((post, i) => (
-          <a
-            class="list-row"
-            href={`/blog/${post.id}/`}
-            role="option"
-            data-cat={post.data.category.toLowerCase()}
-            data-title={post.data.title.toLowerCase()}
-            data-search={`${post.data.title} ${post.data.description} ${(post.data.tags || []).join(' ')}`.toLowerCase()}
-            data-date={new Date(post.data.pubDate).getTime()}
-            data-slug={post.id}
-            data-idx={i}
-          >
-            <div class="list-row-media">
-              {post.data.image ? (
-                <img src={post.data.image.url} alt={post.data.image.alt} width="320" height="180" loading="lazy" decoding="async" />
-              ) : (
-                <span class="ph" data-cat={post.data.category.toLowerCase()}>{post.data.category}</span>
-              )}
-            </div>
-            <div class="list-row-text">
-              <div class="list-row-top">
-                <span class="list-row-cat" data-cat={post.data.category.toLowerCase()}>{post.data.category}</span>
-                <span class="list-row-views" hidden></span>
-              </div>
-              <h4 data-orig={post.data.title}>{post.data.title}</h4>
-              <p>{post.data.description}</p>
-              <time datetime={new Date(post.data.pubDate).toISOString()}>{fmtDate(post.data.pubDate)}</time>
-            </div>
-          </a>
-        ))}
+        <div class="palette-empty" id="palette-loading">불러오는 중…</div>
         <div class="palette-empty" id="palette-empty" hidden>검색 결과가 없어요.</div>
       </div>
       <div class="palette-foot">
@@ -542,9 +513,50 @@ const fmtDate = (d: Date) =>
       const pCount = document.getElementById('palette-count');
       const pEmpty = document.getElementById('palette-empty') as HTMLElement | null;
       const listBody = document.getElementById('list-body') as HTMLElement | null;
-      const rows = Array.from(listOverlay?.querySelectorAll('.list-row') || []) as HTMLElement[];
+      const listLoading = document.getElementById('palette-loading') as HTMLElement | null;
+      let pEmptyEl = pEmpty;
+      let rows: HTMLElement[] = [];
+      let rendered = false, rendering = false;
       let pQuery = '', pCat = 'all', pSortKey: 'date' | 'views' = 'date', activeIdx = -1;
       const viewsMap: Record<string, number> = {};
+      const escH = (s: string) => s.replace(/[&<>"]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m] as string));
+      const fmtDateJs = (ms: number) => new Date(ms).toLocaleDateString('ko-KR', { year: 'numeric', month: 'short', day: 'numeric' });
+      type PRow = { id: string; t: string; c: string; d: string; g: string; p: number; i: string; a: string };
+      function pRowHtml(o: PRow) {
+        const catL = (o.c || '').toLowerCase();
+        const media = o.i
+          ? `<img src="${escH(o.i)}" alt="${escH(o.a)}" width="320" height="180" loading="lazy" decoding="async">`
+          : `<span class="ph" data-cat="${catL}">${escH(o.c)}</span>`;
+        const search = escH(`${o.t} ${o.d} ${o.g}`.toLowerCase());
+        return `<a class="list-row" href="/blog/${o.id}/" role="option" data-cat="${catL}" data-title="${escH(o.t.toLowerCase())}" data-search="${search}" data-date="${o.p}" data-slug="${escH(o.id)}">`
+          + `<div class="list-row-media">${media}</div>`
+          + `<div class="list-row-text"><div class="list-row-top"><span class="list-row-cat" data-cat="${catL}">${escH(o.c)}</span><span class="list-row-views" hidden></span></div>`
+          + `<h4 data-orig="${escH(o.t)}">${escH(o.t)}</h4><p>${escH(o.d)}</p>`
+          + `<time datetime="${new Date(o.p).toISOString()}">${fmtDateJs(o.p)}</time></div></a>`;
+      }
+      function applyViews() {
+        rows.forEach((row) => {
+          const v = viewsMap[row.dataset.slug || ''];
+          const el = row.querySelector('.list-row-views') as HTMLElement | null;
+          if (v && el) { el.textContent = (v >= 1000 ? (v / 1000).toFixed(1) + '천' : String(v)) + '회'; el.hidden = false; }
+        });
+      }
+      async function ensureRendered() {
+        if (rendered) return true;
+        if (rendering) return false;
+        rendering = true;
+        let data: PRow[] | null = null;
+        try { data = await (await fetch('/search-index.json')).json(); } catch (e) { data = null; }
+        rendering = false;
+        if (!data || !listBody) return false;
+        listBody.innerHTML = data.map(pRowHtml).join('') + '<div class="palette-empty" id="palette-empty" hidden>검색 결과가 없어요.</div>';
+        rows = Array.from(listBody.querySelectorAll('.list-row')) as HTMLElement[];
+        pEmptyEl = document.getElementById('palette-empty') as HTMLElement | null;
+        if (listLoading) listLoading.hidden = true;
+        applyViews();
+        rendered = true;
+        return true;
+      }
       const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5cHJic21hZ3RsemVieHl4c3ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjY4NTQsImV4cCI6MjA4NjA0Mjg1NH0.dajN0n0IWzOgYOSCglxVLzddg7jJFRHNCHwTWMG62uU';
 
       function highlight(el: HTMLElement | null, q: string) {
@@ -572,7 +584,7 @@ const fmtDate = (d: Date) =>
           ? (viewsMap[b.dataset.slug || ''] || 0) - (viewsMap[a.dataset.slug || ''] || 0)
           : Number(b.dataset.date) - Number(a.dataset.date));
         visible.forEach((row) => listBody?.appendChild(row));
-        if (pEmpty) { listBody?.appendChild(pEmpty); pEmpty.hidden = visible.length > 0; }
+        if (pEmptyEl) { listBody?.appendChild(pEmptyEl); pEmptyEl.hidden = visible.length > 0; }
         if (pCount) pCount.textContent = String(visible.length);
         activeIdx = -1;
         if (listBody) listBody.scrollTop = 0;
@@ -588,12 +600,14 @@ const fmtDate = (d: Date) =>
         el.scrollIntoView({ block: 'nearest' });
       }
 
-      function openPalette() {
+      async function openPalette() {
         if (!listOverlay) return;
         listLastFocus = document.activeElement as HTMLElement;
         listOverlay.hidden = false;
         document.body.classList.add('list-open');
         requestAnimationFrame(() => { listOverlay.classList.add('open'); pInput?.focus(); pInput?.select(); });
+        const ok = await ensureRendered();
+        if (ok) applyPalette();
       }
       function closePalette() {
         if (!listOverlay) return;
@@ -612,9 +626,9 @@ const fmtDate = (d: Date) =>
       // 히어로 "탐색" → 블로그 이동 대신 팔레트 검색 열기(입력 반영)
       const deckForm = document.querySelector('.deck-search') as HTMLFormElement | null;
       const deckInput = deckForm?.querySelector('input') as HTMLInputElement | null;
-      deckForm?.addEventListener('submit', (e) => {
+      deckForm?.addEventListener('submit', async (e) => {
         e.preventDefault();
-        openPalette();
+        await openPalette();
         const q = (deckInput?.value || '').trim();
         if (pInput) { pInput.value = q; pQuery = q.toLowerCase(); applyPalette(); }
       });
@@ -653,11 +667,11 @@ const fmtDate = (d: Date) =>
         }
       });
 
-      rows.forEach((row) => {
-        row.addEventListener('click', (e) => {
-          e.preventDefault();
-          openModal(row.getAttribute('href') || (row as HTMLAnchorElement).href, row);
-        });
+      listBody?.addEventListener('click', (e) => {
+        const row = (e.target as HTMLElement).closest('.list-row') as HTMLElement | null;
+        if (!row) return;
+        e.preventDefault();
+        openModal(row.getAttribute('href') || (row as HTMLAnchorElement).href, row);
       });
 
       // 조회수(대시보드) → 조회수 정렬·행별 표시
@@ -674,15 +688,9 @@ const fmtDate = (d: Date) =>
             let slug = raw; try { slug = decodeURIComponent(raw); } catch (err) {}
             viewsMap[slug] = Number(p.views) || 0;
           });
-          rows.forEach((row) => {
-            const v = viewsMap[row.dataset.slug || ''];
-            const el = row.querySelector('.list-row-views') as HTMLElement | null;
-            if (v && el) { el.textContent = (v >= 1000 ? (v / 1000).toFixed(1) + '천' : String(v)) + '회'; el.hidden = false; }
-          });
+          if (rendered) applyViews();
         })
         .catch(() => {});
-
-      applyPalette();
 
       cards.forEach((card) => {
         const a = card.querySelector('a') as HTMLAnchorElement | null;
