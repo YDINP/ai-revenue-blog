@@ -92,7 +92,7 @@ const fmtDate = (d: Date) =>
     </form>
   </section>
 
-  <!-- ══ Explore Stream (가로 슬라이드) ══ -->
+  <!-- ══ Explore Stream (2D 가로 슬라이드) ══ -->
   <section class="stream-section" aria-label="글 탐색 스트림">
     <div class="section-header stream-head">
       <h2>탐색 스트림</h2>
@@ -116,7 +116,6 @@ const fmtDate = (d: Date) =>
     <span class="sr-only" aria-live="polite" id="stream-live"></span>
     <div class="stream-viewport at-start" id="stream-viewport">
       <div class="stream" id="stream" tabindex="0" role="group" aria-roledescription="carousel" aria-label="블로그 글 카루셀 (방향키로 탐색)">
-        <div class="stream-spacer" aria-hidden="true"></div>
         {feedPosts.map((post, i) => (
           <article
             class="stream-card"
@@ -146,12 +145,10 @@ const fmtDate = (d: Date) =>
           </article>
         ))}
         <div class="stream-empty" id="stream-empty" style="display:none;">해당 주제의 글이 아직 없어요.</div>
-        <div class="stream-spacer" aria-hidden="true"></div>
       </div>
     </div>
 
     <div class="stream-progress"><div class="stream-progress-bar" id="stream-bar"></div></div>
-    <div class="stream-autoplay" aria-hidden="true"><i class="stream-autoplay-fill" id="ap-fill"></i></div>
   </section>
 
   <!-- Popular Posts -->
@@ -201,20 +198,9 @@ const fmtDate = (d: Date) =>
     </div>
   </div>
 
-  <!-- 전체 글 순서(팝업 이전/다음 스와이프용) -->
-  <script type="application/json" id="post-order" set:html={JSON.stringify(sortedPosts.map((p) => `/blog/${p.id}/`))}></script>
-
-  <!-- ══ Quick-view Modal (글 팝업) ══ -->
-  <div class="qv-overlay" id="qv-overlay" hidden>
-    <div class="qv-modal" role="dialog" aria-modal="true" aria-label="글 미리보기">
-      <button class="qv-close" id="qv-close" aria-label="닫기">✕</button>
-      <div class="qv-content" id="qv-content"></div>
-      <div class="qv-foot"><a class="qv-full" id="qv-full" href="#" rel="bookmark">전체 페이지로 열기 &rarr;</a></div>
-    </div>
-  </div>
-
   <script>
     (function () {
+      // ══ 2D 가로 슬라이드 캐러셀: 네이티브 스크롤/스냅. HUD·화살표·필터만 JS로. ══
       const stream = document.getElementById('stream') as HTMLElement | null;
       const viewport = document.getElementById('stream-viewport') as HTMLElement | null;
       const rail = document.getElementById('filter-rail') as HTMLElement | null;
@@ -222,288 +208,87 @@ const fmtDate = (d: Date) =>
       const next = document.getElementById('stream-next') as HTMLButtonElement | null;
       const idxEl = document.getElementById('stream-idx');
       const bar = document.getElementById('stream-bar') as HTMLElement | null;
-      const empty = document.getElementById('stream-empty');
-      if (!stream || !viewport) return;
-
-      const cards = Array.from(stream.querySelectorAll('.stream-card')) as HTMLElement[];
-      // ── 원형 3D 카루셀 상태 ──
-      let cardW = 300, R = 340, pos = 0, target = 0, raf: number | null = null;
-      let vis = cards.slice();
-      const STEP = 20;    // 인접 카드 각도(deg)
-      const MAXVIS = 3;   // 앞쪽 ±3장만 노출, 나머지는 원 뒤로 순환
-
-      // ── 보기 모드(카루셀 ↔ 전체보기 그리드) ──
-      const modeBtns = Array.from(document.querySelectorAll('#stream-modes .mode-btn')) as HTMLElement[];
-      const section = document.querySelector('.stream-section') as HTMLElement | null;
-      let mode: 'carousel' | 'grid' = 'carousel';
-      const clearCardStyles = () => cards.forEach((c) => {
-        c.style.transform = ''; c.style.opacity = ''; c.style.marginLeft = ''; c.style.zIndex = ''; c.style.pointerEvents = '';
-      });
-      function setMode(m: 'carousel' | 'grid') {
-        mode = m;
-        modeBtns.forEach((b) => { const on = b.dataset.mode === m; b.classList.toggle('active', on); b.setAttribute('aria-selected', String(on)); });
-        const grid = m === 'grid';
-        stream.classList.toggle('grid-mode', grid);
-        viewport?.classList.toggle('grid-mode', grid);
-        section?.classList.toggle('grid-mode', grid);
-        if (grid) { if (raf != null) { cancelAnimationFrame(raf); raf = null; } clearCardStyles(); }
-        else { measure(); target = Math.round(pos); render(); }
-      }
-
-      function measure() {
-        cardW = cards.find((c) => !c.classList.contains('hide'))?.offsetWidth || 300;
-        cards.forEach((c) => { c.style.marginLeft = (-cardW / 2) + 'px'; });
-        R = Math.round(cardW * 1.45);
-      }
-      const refreshVis = () => { vis = cards.filter((c) => !c.classList.contains('hide')); };
-
-      function hud() {
-        const N = vis.length;
-        if (!N) return;
-        const cur = ((Math.round(pos) % N) + N) % N;
-        if (idxEl) idxEl.textContent = String(cur + 1).padStart(2, '0');
-        if (bar) { bar.style.width = (100 / N) + '%'; bar.style.marginLeft = (cur / N) * 100 + '%'; }
-        if (prev) prev.disabled = false;
-        if (next) next.disabled = false;
-        // 스크린리더: 현재 카드 안내(변경 시에만)
-        if (cur !== lastAnnounced) {
-          lastAnnounced = cur;
-          const live = document.getElementById('stream-live');
-          const title = vis[cur]?.querySelector('h3')?.textContent || '';
-          if (live && title) live.textContent = `${cur + 1} / ${N}: ${title}`;
-        }
-      }
+      const empty = document.getElementById('stream-empty') as HTMLElement | null;
+      const cards = stream ? (Array.from(stream.querySelectorAll('.stream-card')) as HTMLElement[]) : [];
       let lastAnnounced = -1;
 
-      // 각 카드를 원(circle) 위 각도에 배치 → pos 회전으로 순환 (스페이셜: 회전↓·깊이·블러·틸트)
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      let tiltX = 0, tiltY = 0, tiltRaf: number | null = null;
-      function render() {
+      let hudTick = false;
+      function updateHud() {
+        hudTick = false;
+        if (!stream) return;
+        const vis = cards.filter((c) => !c.classList.contains('hide'));
         const N = vis.length;
-        cards.forEach((c) => { if (c.classList.contains('hide')) { c.style.opacity = '0'; c.style.pointerEvents = 'none'; c.classList.remove('is-front'); } });
         if (!N) return;
-        vis.forEach((card, j) => {
-          let rel = ((j - pos) % N + N) % N;
-          if (rel > N / 2) rel -= N;
-          const a = rel * STEP;
-          const ar = (a * Math.PI) / 180;
-          const ad = Math.abs(a);
-          if (Math.abs(rel) > MAXVIS + 0.5) {
-            card.style.opacity = '0';
-            card.style.pointerEvents = 'none';
-            card.style.transform = 'translateZ(-1400px)';
-            card.style.zIndex = '0';
-            card.style.filter = 'none';
-            card.classList.remove('is-front');
-            return;
-          }
-          const x = R * Math.sin(ar);
-          const z = R * Math.cos(ar) - R;
-          const ar2 = Math.abs(rel);                            // 중앙에서 몇 칸 떨어졌나(연속값)
-          const sc = Math.max(0.52, 1.07 - ar2 * 0.24);         // 메인 확대(1.07)·옆칸 급격 축소 → 중앙 포커스
-          const ry = -a * (reduce ? 1 : 0.62);                 // 회전 완화 → 평면 커버플로우 티 제거
-          const isFront = ar2 < 0.5;
-          card.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${ry}deg) scale(${sc.toFixed(3)})`;
-          card.style.opacity = String(Math.max(0.24, 1 - ar2 * 0.34));   // 옆칸 더 흐리게
-          card.style.pointerEvents = 'auto';
-          card.style.zIndex = String(200 - Math.round(ad));
-          card.style.filter = (!reduce && ar2 > 0.3) ? `blur(${(Math.min(ar2, 3) * 1.7).toFixed(2)}px)` : 'none';   // 거리별 심도 블러(강화)
-          card.classList.toggle('is-front', isFront);
+        const mid = stream.scrollLeft + stream.clientWidth / 2;
+        let best = 0, bestD = Infinity;
+        vis.forEach((c, i) => {
+          const cc = c.offsetLeft + c.offsetWidth / 2;
+          const d = Math.abs(cc - mid);
+          if (d < bestD) { bestD = d; best = i; }
         });
-        hud();
-      }
-
-      // 시간 기반 easing(easeOutCubic)로 부드러운 회전 연출
-      let animFrom = 0, animTo = 0, animStart = 0;
-      const ANIM_DUR = 460;
-      const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
-      function tick(now: number) {
-        const t = Math.min((now - animStart) / ANIM_DUR, 1);
-        pos = animFrom + (animTo - animFrom) * easeOutCubic(t);
-        render();
-        if (t < 1) { raf = requestAnimationFrame(tick); }
-        else { pos = animTo; target = animTo; render(); raf = null; }
-      }
-      function animateTo(tp: number) {
-        animFrom = pos; animTo = tp; target = tp; animStart = performance.now();
-        if (raf != null) cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(tick);
-      }
-      const go = (dir: number) => { if (mode !== 'carousel') return; animateTo(Math.round(target) + dir); };
-
-      prev?.addEventListener('click', () => go(-1));
-      next?.addEventListener('click', () => go(1));
-
-      stream.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
-        else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
-      });
-
-      let wheelLock = false;
-      stream.addEventListener('wheel', (e) => {
-        if (mode !== 'carousel') return;
-        if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
-        e.preventDefault();
-        if (wheelLock) return;
-        wheelLock = true; setTimeout(() => { wheelLock = false; }, 160);
-        go(e.deltaY > 0 ? 1 : -1);
-      }, { passive: false });
-
-      // ── 드래그로 원형 회전 (임계값 넘을 때만 → 단순 클릭 통과) ──
-      const DRAG_MIN = 6;
-      let down = false, startX = 0, startPos = 0, moved = 0, dragging = false;
-      let lastMoveT = 0, lastMovePos = 0, velo = 0;   // 관성용 속도(steps/ms)
-      stream.addEventListener('pointerdown', (e) => {
-        if (mode !== 'carousel') return;
-        if (e.button !== undefined && e.button !== 0) return;
-        down = true; moved = 0; dragging = false;
-        startX = e.clientX;
-        if (raf != null) { cancelAnimationFrame(raf); raf = null; }
-        startPos = pos;
-        lastMoveT = performance.now(); lastMovePos = pos; velo = 0;
-        tiltX = 0; tiltY = 0; render();   // 누르는 순간 틸트 해제 → 앞카드가 커서 아래에서 움직여 클릭이 빗나가는 문제 방지
-      });
-      window.addEventListener('pointermove', (e) => {
-        if (!down) return;
-        const dx = e.clientX - startX;
-        moved = Math.abs(dx);
-        if (!dragging && moved > DRAG_MIN) { dragging = true; stream.classList.add('dragging'); }
-        if (dragging) {
-          pos = startPos - dx / (cardW * 0.9); target = pos; render();
-          const now = performance.now(), dt = now - lastMoveT;
-          if (dt > 0) { velo = 0.7 * velo + 0.3 * ((pos - lastMovePos) / dt); lastMoveT = now; lastMovePos = pos; }
+        if (idxEl) idxEl.textContent = String(best + 1).padStart(2, '0');
+        if (bar) { bar.style.width = (100 / N) + '%'; bar.style.marginLeft = (best / N) * 100 + '%'; }
+        if (viewport) {
+          viewport.classList.toggle('at-start', stream.scrollLeft <= 4);
+          viewport.classList.toggle('at-end', stream.scrollLeft + stream.clientWidth >= stream.scrollWidth - 4);
         }
-      });
-      window.addEventListener('pointerup', () => {
-        if (!down) return;
-        down = false;
-        if (dragging) {
-          stream.classList.remove('dragging');
-          // 플릭 속도로 모멘텀 투영(최대 ±3칸) → 관성 스냅
-          const momentum = Math.max(-3, Math.min(3, velo * 210));
-          animateTo(Math.round(pos + momentum));
+        if (best !== lastAnnounced) {
+          lastAnnounced = best;
+          const live = document.getElementById('stream-live');
+          const title = vis[best]?.querySelector('h3')?.textContent || '';
+          if (live && title) live.textContent = `${best + 1} / ${N}: ${title}`;
         }
+      }
+      const queueHud = () => { if (!hudTick) { hudTick = true; requestAnimationFrame(updateHud); } };
+      stream?.addEventListener('scroll', queueHud, { passive: true });
+      window.addEventListener('resize', queueHud, { passive: true });
+
+      function stepBy(dir: number) {
+        if (!stream) return;
+        const first = cards.find((c) => !c.classList.contains('hide'));
+        const w = first ? first.offsetWidth + 18 : stream.clientWidth * 0.8;
+        stream.scrollBy({ left: dir * w, behavior: 'smooth' });
+      }
+      prev?.addEventListener('click', () => stepBy(-1));
+      next?.addEventListener('click', () => stepBy(1));
+      stream?.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); stepBy(1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); stepBy(-1); }
       });
 
-      // (포인터 틸트는 3D로 카드가 커서 아래에서 이동해 클릭을 빗나가게 하므로 제거.
-      //  심도 블러·반사·회전완화만으로 스페이셜 깊이 유지)
+      // ── 필터 ──
+      rail?.addEventListener('click', (e) => {
+        const btn = (e.target as HTMLElement).closest('.filter-pill') as HTMLElement | null;
+        if (!btn) return;
+        const cat = btn.dataset.cat;
+        rail.querySelectorAll('.filter-pill').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        let visible = 0;
+        cards.forEach((c) => {
+          const match = cat === 'all' || c.dataset.cat === cat;
+          c.classList.toggle('hide', !match);
+          if (match) visible++;
+        });
+        if (empty) empty.style.display = visible === 0 ? 'flex' : 'none';
+        if (stream) stream.scrollLeft = 0;
+        updateHud();
+      });
+      updateHud();
 
-      // ── 카드 클릭 → 팝업(모달)로 글 표시 ──
-      const overlay = document.getElementById('qv-overlay') as HTMLElement | null;
-      const qvContent = document.getElementById('qv-content');
-      const qvFull = document.getElementById('qv-full') as HTMLAnchorElement | null;
-      const qvClose = document.getElementById('qv-close');
-      const cache: Record<string, string> = {};
-      let qvLastFocus: HTMLElement | null = null;
-      let listLastFocus: HTMLElement | null = null;
+      // 카드 클릭은 기본 <a> 동작(포스트 페이지로 이동) — 별도 JS 없음.
 
-      // 접근성: 포커스 트랩
-      const focusablesIn = (c: HTMLElement) =>
-        (Array.from(c.querySelectorAll('a[href], button:not([disabled]), input, textarea, [tabindex]:not([tabindex="-1"])')) as HTMLElement[])
-          .filter((el) => !el.hasAttribute('hidden') && el.offsetParent !== null);
+      // ── 접근성: 포커스 트랩(팔레트용) ──
       function trapTab(e: KeyboardEvent, c: HTMLElement) {
         if (e.key !== 'Tab') return;
-        const f = focusablesIn(c);
+        const f = (Array.from(c.querySelectorAll('a[href], button:not([disabled]), input, textarea, [tabindex]:not([tabindex="-1"])')) as HTMLElement[])
+          .filter((el) => !el.hasAttribute('hidden') && el.offsetParent !== null);
         if (!f.length) return;
         const first = f[0], last = f[f.length - 1];
         if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
 
-      // 전체 글 순서(이전/다음 스와이프용)
-      let orderedHrefs: string[] = [];
-      try { orderedHrefs = JSON.parse(document.getElementById('post-order')?.textContent || '[]'); } catch (e) {}
-      let curIdx = -1;
-
-      function loadInFrame(href: string) {
-        if (!qvContent) return;
-        const clean = href.replace(/[?#].*$/, '');
-        if (qvFull) qvFull.href = clean;
-        qvContent.scrollTop = 0;
-        qvContent.classList.add('has-frame');
-        qvContent.innerHTML =
-          '<div class="qv-loading qv-skeleton" aria-label="불러오는 중">' +
-            '<div class="skeleton sk-img"></div>' +
-            '<div class="skeleton sk-line sk-w70"></div>' +
-            '<div class="skeleton sk-line sk-w90"></div>' +
-            '<div class="skeleton sk-line sk-w40"></div>' +
-            '<div class="skeleton sk-line"></div>' +
-            '<div class="skeleton sk-line sk-w85"></div>' +
-          '</div>' +
-          '<iframe class="qv-frame" title="글 미리보기" loading="eager"></iframe>';
-        const frame = qvContent.querySelector('.qv-frame') as HTMLIFrameElement | null;
-        if (frame) {
-          frame.addEventListener('load', () => {
-            const l = qvContent.querySelector('.qv-loading');
-            if (l) l.remove();
-            frame.style.opacity = '1';
-          });
-          frame.src = clean + (clean.indexOf('?') >= 0 ? '&' : '?') + 'embed=1';
-        }
-        curIdx = orderedHrefs.indexOf(clean);
-      }
-
-      function openModal(href: string, triggerEl?: HTMLElement | null) {
-        if (!overlay || !qvContent) return;
-        qvLastFocus = document.activeElement as HTMLElement;
-        const media = triggerEl
-          ? ((triggerEl.querySelector('.stream-card-media, .list-row-media') as HTMLElement | null) || triggerEl)
-          : null;
-        const qvModal = overlay.querySelector('.qv-modal') as HTMLElement | null;
-        const startVT = (document as any).startViewTransition;
-        if (startVT && media && qvModal && !reduce) {
-          // 카드 미디어 → 팝업 컨테이너 모프(View Transitions)
-          media.style.viewTransitionName = 'article-morph';
-          overlay.classList.add('vt-morph');
-          const vt = startVT.call(document, () => {
-            media.style.viewTransitionName = '';
-            overlay.hidden = false;
-            document.body.classList.add('qv-open');
-            overlay.classList.add('open');
-            loadInFrame(href);
-            qvModal.style.viewTransitionName = 'article-morph';
-            (qvClose as HTMLElement)?.focus();
-          });
-          vt.finished.finally(() => {
-            qvModal.style.viewTransitionName = '';
-            overlay.classList.remove('vt-morph');
-          });
-        } else {
-          overlay.hidden = false;
-          document.body.classList.add('qv-open');
-          requestAnimationFrame(() => { overlay.classList.add('open'); (qvClose as HTMLElement)?.focus(); });
-          loadInFrame(href);
-        }
-      }
-
-      // 팝업 내 이전/다음 글 (모바일 스와이프 → iframe이 부모에 postMessage)
-      function navigatePost(dir: 'next' | 'prev') {
-        if (curIdx < 0 || !orderedHrefs.length) return;
-        const n = curIdx + (dir === 'next' ? 1 : -1);
-        if (n < 0 || n >= orderedHrefs.length) return;   // 끝에서 멈춤
-        loadInFrame(orderedHrefs[n]);
-      }
-      window.addEventListener('message', (e) => {
-        if (e.data && e.data.source === 'pd-post-swipe' && overlay && !overlay.hidden) {
-          navigatePost(e.data.dir === 'next' ? 'next' : 'prev');
-        }
-      });
-      function closeModal() {
-        if (!overlay) return;
-        overlay.classList.remove('open');
-        document.body.classList.remove('qv-open');
-        setTimeout(() => {
-          overlay.hidden = true;
-          if (qvContent) { qvContent.innerHTML = ''; qvContent.classList.remove('has-frame'); }  // iframe 정리
-        }, 260);
-        qvLastFocus?.focus();
-      }
-      qvClose?.addEventListener('click', closeModal);
-      overlay?.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
-      overlay?.addEventListener('keydown', (e) => trapTab(e, overlay));
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay && !overlay.hidden) closeModal(); });
-
-      // ── 커맨드 팔레트(전체보기: 검색·필터·정렬·키보드·⌘K) ──
+      // ══ 전체보기 팔레트(검색·필터·정렬) — 클릭 시 포스트 페이지로 직접 이동 ══
       const listOpenBtn = document.getElementById('list-open');
       const listOverlay = document.getElementById('list-overlay') as HTMLElement | null;
       const listClose = document.getElementById('list-close');
@@ -511,10 +296,10 @@ const fmtDate = (d: Date) =>
       const pChips = document.getElementById('palette-chips');
       const pSort = document.getElementById('palette-sort');
       const pCount = document.getElementById('palette-count');
-      const pEmpty = document.getElementById('palette-empty') as HTMLElement | null;
       const listBody = document.getElementById('list-body') as HTMLElement | null;
       const listLoading = document.getElementById('palette-loading') as HTMLElement | null;
-      let pEmptyEl = pEmpty;
+      let pEmptyEl = document.getElementById('palette-empty') as HTMLElement | null;
+      let listLastFocus: HTMLElement | null = null;
       let rows: HTMLElement[] = [];
       let rendered = false, rendering = false;
       let pQuery = '', pCat = 'all', pSortKey: 'date' | 'views' = 'date', activeIdx = -1;
@@ -621,9 +406,9 @@ const fmtDate = (d: Date) =>
       listOverlay?.addEventListener('click', (e) => { if (e.target === listOverlay) closePalette(); });
       listOverlay?.addEventListener('keydown', (e) => trapTab(e, listOverlay));
 
-      pInput?.addEventListener('input', () => { pQuery = pInput.value.trim().toLowerCase(); applyPalette(); });
+      pInput?.addEventListener('input', () => { pQuery = (pInput.value || '').trim().toLowerCase(); applyPalette(); });
 
-      // 히어로 "탐색" → 블로그 이동 대신 팔레트 검색 열기(입력 반영)
+      // 히어로 "탐색" → 팔레트 검색 열기(입력 반영)
       const deckForm = document.querySelector('.deck-search') as HTMLFormElement | null;
       const deckInput = deckForm?.querySelector('input') as HTMLInputElement | null;
       deckForm?.addEventListener('submit', async (e) => {
@@ -656,23 +441,17 @@ const fmtDate = (d: Date) =>
           return;
         }
         if (!listOverlay || listOverlay.hidden) return;
-        if (overlay && !overlay.hidden) return;   // 글 팝업이 위에 있으면 무시
         if (e.key === 'Escape') { e.preventDefault(); closePalette(); }
         else if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1); }
         else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1); }
         else if (e.key === 'Enter') {
           const vis = getVisible();
           const el = activeIdx >= 0 ? vis[activeIdx] : vis[0];
-          if (el) { e.preventDefault(); openModal(el.getAttribute('href') || (el as HTMLAnchorElement).href); }
+          if (el) { e.preventDefault(); window.location.href = (el as HTMLAnchorElement).href; }
         }
       });
 
-      listBody?.addEventListener('click', (e) => {
-        const row = (e.target as HTMLElement).closest('.list-row') as HTMLElement | null;
-        if (!row) return;
-        e.preventDefault();
-        openModal(row.getAttribute('href') || (row as HTMLAnchorElement).href, row);
-      });
+      // 검색결과 클릭은 기본 <a> 동작(포스트 페이지로 이동) — 별도 JS 없음.
 
       // 조회수(대시보드) → 조회수 정렬·행별 표시
       fetch('https://xyprbsmagtlzebxyxsvj.supabase.co/rest/v1/rpc/get_top_pages', {
@@ -691,107 +470,6 @@ const fmtDate = (d: Date) =>
           if (rendered) applyViews();
         })
         .catch(() => {});
-
-      cards.forEach((card) => {
-        const a = card.querySelector('a') as HTMLAnchorElement | null;
-        if (!a) return;
-        a.addEventListener('click', (e) => {
-          e.preventDefault();
-          if (dragging || moved > DRAG_MIN) return;
-          if (mode === 'grid') { openModal(a.getAttribute('href') || a.href, card); return; }
-          const N = vis.length;
-          const j = vis.indexOf(card);
-          if (j < 0) return;
-          const cur = ((Math.round(pos) % N) + N) % N;
-          let d = ((j - cur) % N + N) % N;
-          if (d > N / 2) d -= N;
-          // 정면 카드 → 팝업 / 옆 카드 → 그 카드로 회전
-          if (Math.abs(d) < 0.5) openModal(a.getAttribute('href') || a.href, card);
-          else animateTo(Math.round(target) + d);
-        });
-      });
-
-      // ── 필터 ──
-      rail?.addEventListener('click', (e) => {
-        const btn = (e.target as HTMLElement).closest('.filter-pill') as HTMLElement | null;
-        if (!btn) return;
-        const cat = btn.dataset.cat;
-        rail.querySelectorAll('.filter-pill').forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-        let visible = 0;
-        cards.forEach((c) => {
-          const match = cat === 'all' || c.dataset.cat === cat;
-          c.classList.toggle('hide', !match);
-          if (match) visible++;
-        });
-        if (empty) empty.style.display = visible === 0 ? 'flex' : 'none';
-        refreshVis();
-        if (mode === 'grid') { clearCardStyles(); }
-        else { pos = 0; target = 0; measure(); render(); }
-      });
-
-      // 모드 토글
-      modeBtns.forEach((b) => b.addEventListener('click', () => setMode((b.dataset.mode as 'carousel' | 'grid') || 'carousel')));
-
-      window.addEventListener('resize', () => { if (mode === 'carousel') { measure(); render(); } });
-      window.addEventListener('load', () => { if (mode === 'carousel') { measure(); render(); } });
-      measure();
-      requestAnimationFrame(() => { measure(); render(); });
-
-      // ── 카루셀 오토플레이 + 진행바(호버·드래그·팝업·비활성 탭 시 정지) ──
-      //   기존 apTick은 화면 밖/그리드 모드/비활성 탭에도 매 프레임 rAF 스핀 → 모바일 CPU 상시 점유.
-      //   IntersectionObserver·visibilitychange로 게이팅해 필요할 때만 루프를 돌린다.
-      let streamHover = false;
-      stream.addEventListener('mouseenter', () => { streamHover = true; });
-      stream.addEventListener('mouseleave', () => { streamHover = false; });
-      const apFill = document.getElementById('ap-fill') as HTMLElement | null;
-      const AP_INTERVAL = 4600;
-      if (!reduce) {
-        let apAcc = 0, apLast = 0, apRaf = 0, inView = true;
-        const apStructuralIdle = () => document.hidden || !inView || mode !== 'carousel';
-        const apTick = (now: number) => {
-          if (apStructuralIdle()) { apRaf = 0; return; }   // 조건 이탈 시 루프 자체를 중단
-          const dt = apLast ? now - apLast : 0; apLast = now;
-          const paused = streamHover || down || dragging
-            || (listOverlay && !listOverlay.hidden) || (overlay && !overlay.hidden);
-          if (!paused) {
-            apAcc += dt;
-            if (apAcc >= AP_INTERVAL) { apAcc = 0; go(1); }
-          }
-          if (apFill) apFill.style.width = (Math.min(apAcc / AP_INTERVAL, 1) * 100).toFixed(1) + '%';
-          apRaf = requestAnimationFrame(apTick);
-        };
-        const apStart = () => { if (!apRaf && !apStructuralIdle()) { apLast = 0; apRaf = requestAnimationFrame(apTick); } };
-        if ('IntersectionObserver' in window) {
-          new IntersectionObserver((ents) => { inView = ents[0].isIntersecting; if (inView) apStart(); }, { threshold: 0.01 }).observe(stream);
-        }
-        document.addEventListener('visibilitychange', () => { if (!document.hidden) apStart(); });
-        modeBtns.forEach((b) => b.addEventListener('click', () => requestAnimationFrame(apStart)));  // carousel 복귀 시 재개
-        apStart();
-        // 사용자가 화살표/드래그로 넘기면 진행바 리셋
-        const resetAp = () => { apAcc = 0; };
-        prev?.addEventListener('click', resetAp);
-        next?.addEventListener('click', resetAp);
-        stream.addEventListener('pointerup', resetAp);
-      }
-
-      // ── 홈 통계 카운트업 ──
-      if (!reduce) {
-        document.querySelectorAll('.deck-stats .stat-num').forEach((el, i) => {
-          const raw = (el.textContent || '').trim();
-          if (!/^\d+$/.test(raw)) return;           // 순수 숫자만(날짜 제외)
-          const target = parseInt(raw, 10);
-          const dur = 900; let start = 0;
-          el.textContent = '0';
-          const step = (t: number) => {
-            if (!start) start = t;
-            const p = Math.min((t - start) / dur, 1);
-            el.textContent = String(Math.round(target * (1 - Math.pow(1 - p, 3))));
-            if (p < 1) requestAnimationFrame(step);
-          };
-          setTimeout(() => requestAnimationFrame(step), 200 + i * 120);
-        });
-      }
     })();
   </script>
 </BaseLayout>
