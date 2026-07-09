@@ -731,25 +731,35 @@ const fmtDate = (d: Date) =>
       requestAnimationFrame(() => { measure(); render(); });
 
       // ── 카루셀 오토플레이 + 진행바(호버·드래그·팝업·비활성 탭 시 정지) ──
+      //   기존 apTick은 화면 밖/그리드 모드/비활성 탭에도 매 프레임 rAF 스핀 → 모바일 CPU 상시 점유.
+      //   IntersectionObserver·visibilitychange로 게이팅해 필요할 때만 루프를 돌린다.
       let streamHover = false;
       stream.addEventListener('mouseenter', () => { streamHover = true; });
       stream.addEventListener('mouseleave', () => { streamHover = false; });
       const apFill = document.getElementById('ap-fill') as HTMLElement | null;
       const AP_INTERVAL = 4600;
       if (!reduce) {
-        let apAcc = 0, apLast = performance.now();
+        let apAcc = 0, apLast = 0, apRaf = 0, inView = true;
+        const apStructuralIdle = () => document.hidden || !inView || mode !== 'carousel';
         const apTick = (now: number) => {
-          const dt = now - apLast; apLast = now;
-          const paused = mode !== 'carousel' || document.hidden || streamHover || down || dragging
+          if (apStructuralIdle()) { apRaf = 0; return; }   // 조건 이탈 시 루프 자체를 중단
+          const dt = apLast ? now - apLast : 0; apLast = now;
+          const paused = streamHover || down || dragging
             || (listOverlay && !listOverlay.hidden) || (overlay && !overlay.hidden);
           if (!paused) {
             apAcc += dt;
             if (apAcc >= AP_INTERVAL) { apAcc = 0; go(1); }
           }
           if (apFill) apFill.style.width = (Math.min(apAcc / AP_INTERVAL, 1) * 100).toFixed(1) + '%';
-          requestAnimationFrame(apTick);
+          apRaf = requestAnimationFrame(apTick);
         };
-        requestAnimationFrame(apTick);
+        const apStart = () => { if (!apRaf && !apStructuralIdle()) { apLast = 0; apRaf = requestAnimationFrame(apTick); } };
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver((ents) => { inView = ents[0].isIntersecting; if (inView) apStart(); }, { threshold: 0.01 }).observe(stream);
+        }
+        document.addEventListener('visibilitychange', () => { if (!document.hidden) apStart(); });
+        modeBtns.forEach((b) => b.addEventListener('click', () => requestAnimationFrame(apStart)));  // carousel 복귀 시 재개
+        apStart();
         // 사용자가 화살표/드래그로 넘기면 진행바 리셋
         const resetAp = () => { apAcc = 0; };
         prev?.addEventListener('click', resetAp);

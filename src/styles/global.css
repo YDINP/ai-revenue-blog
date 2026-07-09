@@ -4814,3 +4814,58 @@ html { overflow-x: clip; }
     animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
+
+/* ==========================================================================
+   MOBILE PERF — 터치/저사양 GPU 렉 완화 (데스크톱 pointer:fine 비주얼은 유지)
+   상시 blur 애니메이션·backdrop-filter는 모바일 GPU 프레임드랍의 주원인.
+   mag/spotlight JS가 이미 pointer:fine 게이트라 이 정책과 일관됨.
+   ========================================================================== */
+@media (pointer: coarse) {
+  /* 1) 오로라 배경: 매 프레임 blur 재래스터화되는 무한 애니메이션 정지.
+        정적 radial-gradient는 그대로 두되 20px blur는 제거(합성 1회로 캐시). */
+  body::before { animation: none !important; filter: saturate(1.1); }
+  :root.dark body::before { filter: saturate(1.2); }
+
+  /* 2) 유리질감 blur 제거 + 배경 불투명도 상향(가독성 보정).
+        blur(var(--glass-blur)) 전 구간이 이 변수로 한 번에 무력화됨. */
+  :root {
+    --glass-blur: 0px;
+    --glass-bg: rgba(255, 255, 255, 0.92);
+    --glass-bg-strong: rgba(255, 255, 255, 0.95);
+  }
+  :root.dark {
+    --glass-bg: rgba(20, 24, 48, 0.92);
+    --glass-bg-strong: rgba(18, 22, 44, 0.96);
+  }
+
+  /* blur(0px)도 일부 엔진은 backdrop 합성 패스를 유지 → 하드코딩 blur 표면은 명시 해제.
+        (var 미사용으로 위 2)에서 안 잡히는 셀렉터들) */
+  .site-header,
+  .post-card,
+  .btn-secondary,
+  .comment-item,
+  .filter-pill,
+  .spotlight,
+  .stream-arrow,
+  .stream-card,
+  .stream-index,
+  .stream-cat,
+  .stream-modes,
+  .qv-overlay,
+  .qv-modal,
+  .list-open-btn,
+  .list-overlay,
+  .list-modal,
+  .post-content blockquote,
+  .post-content .callout-info {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* 3) 상시 흐르는 그라디언트 애니메이션 정지(고정 진행바가 매 프레임 repaint) */
+  .reading-progress,
+  .stream-progress-bar {
+    animation: none !important;
+    background-size: 100% 100% !important;
+  }
+}
