@@ -13,9 +13,31 @@ for (const post of allPosts) {
   tfCategoryMap[cat] = (tfCategoryMap[cat] || 0) + 1;
 }
 
+// 카테고리 고정 색상 (엔티티 기준 — 정렬 순서가 바뀌어도 색은 따라가지 않음)
+// 다크 서피스(#1e293b) 대비 검증 통과 팔레트
+const TF_CAT_COLORS: Record<string, string> = {
+  AI: '#3b82f6',
+  Dev: '#16a34a',
+  Review: '#bf8700',
+  Game: '#a855f7',
+};
+const CAT_FALLBACK_COLORS = ['#ea580c', '#ec4899', '#0891b2'];
+
 const tfCategoryStats = Object.entries(tfCategoryMap)
   .sort((a, b) => b[1] - a[1])
   .map(([name, count]) => ({ name, count }));
+
+// 고정 매핑에 없는 카테고리는 이름순으로 폴백 색상 할당 (결정적)
+{
+  const unknown = tfCategoryStats
+    .filter(c => !TF_CAT_COLORS[c.name])
+    .map(c => c.name)
+    .sort();
+  unknown.forEach((name, i) => {
+    TF_CAT_COLORS[name] = CAT_FALLBACK_COLORS[i % CAT_FALLBACK_COLORS.length];
+  });
+}
+const tfCatColor = (name: string) => TF_CAT_COLORS[name] || '#94a3b8';
 
 // TechFlow 최근 포스트 (최신 5개)
 const tfRecentPosts = allPosts
@@ -33,9 +55,9 @@ const tfRecentPosts = allPosts
 const lfCategories = [
   { name: 'Lifestyle', count: 4, icon: 'sparkles', color: '#ec4899' },
   { name: 'Finance', count: 4, icon: 'banknotes', color: '#3b82f6' },
-  { name: 'Health', count: 3, icon: 'heart', color: '#22c55e' },
+  { name: 'Health', count: 3, icon: 'heart', color: '#16a34a' },
   { name: 'Education', count: 3, icon: 'book', color: '#a855f7' },
-  { name: 'Travel', count: 3, icon: 'plane', color: '#f97316' },
+  { name: 'Travel', count: 3, icon: 'plane', color: '#ea580c' },
 ];
 const lfPostCount = 17; // RSS에서 동적 로드
 const lfCategoryCount = lfCategories.length;
@@ -53,6 +75,8 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
     <title>Blog Dashboard | TechFlow + LifeFlow</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet" />
     <style is:global>
       :root {
         --dash-bg: #0f172a;
@@ -1687,6 +1711,167 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
       /* 날짜별 상세 테이블: 헤더/구분선 또렷하게 */
       .daily-detail-table thead th { color: var(--dash-text); background: #24344c; }
       .daily-detail-table tbody td { border-top-color: rgba(148,163,184,0.18); }
+
+      /* ===== 다듬기 패스 (polish pass) ===== */
+      /* 타이포: Pretendard Variable 우선 + 숫자 고정폭(자릿수 흔들림 방지) */
+      body {
+        font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        background:
+          radial-gradient(1100px 480px at 50% -12%, rgba(59,130,246,0.09), transparent 60%),
+          var(--dash-bg);
+      }
+
+      ::selection { background: rgba(59,130,246,0.35); }
+
+      .summary-card .value,
+      .metric-box .metric-value,
+      .conversion-rate,
+      .donut-num,
+      .trend-bar-count,
+      .trend-total,
+      .top-page-views,
+      .like-top-count,
+      .cat-legend-count,
+      .cat-traffic-value,
+      .daily-detail-table {
+        font-variant-numeric: tabular-nums;
+      }
+
+      .summary-card .value { letter-spacing: -0.02em; }
+      .conversion-rate { letter-spacing: -0.02em; }
+
+      /* 헤더: 스크롤해도 따라오는 반투명 블러 바 */
+      .dash-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(30,41,59,0.82);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .live-dot { box-shadow: 0 0 8px rgba(34,197,94,0.7); }
+
+      /* 카드: 라운드/보더 통일 + 호버 리프트 */
+      .summary-card,
+      .blog-section,
+      .trend-section,
+      .traffic-section,
+      .status-section,
+      .links-section,
+      .coupang-card,
+      .auth-box {
+        border-radius: 14px;
+        border-color: rgba(148,163,184,0.16);
+      }
+
+      .summary-card { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+      .summary-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.35), 0 12px 28px rgba(0,0,0,0.30);
+      }
+
+      /* 탭: 필 형태 + 활성 탭 글로우 */
+      .main-tab { border-radius: 9999px; padding: 0.5rem 1.125rem; }
+      .source-tab, .filter-btn { border-radius: 9999px; }
+      .main-tab.active, .main-tab.active-tf { box-shadow: 0 4px 14px rgba(59,130,246,0.35); }
+      .main-tab.active-lf { box-shadow: 0 4px 14px rgba(34,197,94,0.35); }
+      .main-tab.active-coupang { box-shadow: 0 4px 14px rgba(249,115,22,0.35); }
+      .main-tab.active-comments { box-shadow: 0 4px 14px rgba(6,182,212,0.35); }
+
+      /* 도넛: 입체 링 + 부드러운 그림자 */
+      .cat-donut {
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06), 0 4px 14px rgba(0,0,0,0.30);
+      }
+
+      /* 스택 막대: 세그먼트 사이 2px 서피스 갭 (TF/LF 경계 명확화) */
+      .chart-bar-stack > div + div,
+      .trend-bar-stack > div + div {
+        box-shadow: inset 0 2px 0 var(--dash-surface);
+      }
+
+      /* TF/LF 시리즈 색: 다크 서피스 대비 검증 범위로 보정 */
+      .bar-tf, .trend-bar-tf { background: linear-gradient(to top, #2563eb, #3b82f6); }
+      .bar-lf, .trend-bar-lf { background: linear-gradient(to top, #15803d, #16a34a); }
+      .split-tf { background: #3b82f6; }
+      .split-lf { background: #16a34a; }
+      .dot-lf { background: #16a34a; }
+
+      /* 리스트 행: 호버 하이라이트 */
+      .recent-item, .top-page-item, .like-top-item, .event-item {
+        padding-left: 0.375rem;
+        padding-right: 0.375rem;
+        margin-left: -0.375rem;
+        margin-right: -0.375rem;
+        border-radius: 6px;
+        transition: background 0.15s;
+      }
+
+      .recent-item:hover, .top-page-item:hover, .like-top-item:hover, .event-item:hover {
+        background: rgba(51,65,85,0.35);
+      }
+
+      /* 상태 배지: 컬러 점 표시 (색+텍스트 이중 인코딩) */
+      .status-badge::before {
+        content: '';
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        margin-right: 0.375rem;
+        vertical-align: middle;
+        background: currentColor;
+      }
+
+      /* 링크 버튼: 호버 리프트 */
+      .link-btn { transition: border-color 0.2s, background 0.2s, transform 0.15s; }
+      .link-btn:hover { transform: translateY(-1px); }
+
+      /* 스크롤 영역: 다크 테마 스크롤바 */
+      .daily-detail-wrap, .comment-list, .heatmap-wrap, .main-tabs {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(148,163,184,0.30) transparent;
+      }
+      .daily-detail-wrap::-webkit-scrollbar,
+      .comment-list::-webkit-scrollbar,
+      .heatmap-wrap::-webkit-scrollbar,
+      .main-tabs::-webkit-scrollbar { width: 8px; height: 8px; }
+      .daily-detail-wrap::-webkit-scrollbar-thumb,
+      .comment-list::-webkit-scrollbar-thumb,
+      .heatmap-wrap::-webkit-scrollbar-thumb,
+      .main-tabs::-webkit-scrollbar-thumb {
+        background: rgba(148,163,184,0.28);
+        border-radius: 4px;
+      }
+      .daily-detail-wrap::-webkit-scrollbar-track,
+      .comment-list::-webkit-scrollbar-track,
+      .heatmap-wrap::-webkit-scrollbar-track,
+      .main-tabs::-webkit-scrollbar-track { background: transparent; }
+
+      /* 차트 툴팁: 그림자 */
+      .chart-bar-tooltip { box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+
+      /* 키보드 포커스 */
+      button:focus-visible, a:focus-visible, input:focus-visible {
+        outline: 2px solid var(--dash-accent);
+        outline-offset: 2px;
+      }
+
+      /* 날짜별 상세: 좁은 화면에서 테이블이 컨테이너를 밀어내지 않도록 내부 스크롤 */
+      .daily-detail-wrap { overflow-x: auto; }
+      .daily-detail-table { min-width: 560px; }
+
+      /* global.css의 body{display:flex} 때문에 컨테이너가 min-content(탭 줄 604px)
+         아래로 줄어들지 못해 모바일에서 우측이 잘림 → flex item 최소폭 해제 */
+      body { flex-direction: column; }
+      .dash-header, .dash-container { min-width: 0; width: 100%; }
+
+      /* 중간 폭(769~1100px): 요약 카드 4열이 좁아지므로 2열로 */
+      @media (max-width: 1100px) and (min-width: 769px) {
+        .summary-grid { grid-template-columns: repeat(2, 1fr); }
+        .metric-row { grid-template-columns: repeat(2, 1fr); }
+      }
     </style>
   </head>
   <body>
@@ -1906,10 +2091,10 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           <div class="section-body">
             <div class="cat-donut-wrap">
               <div class="cat-donut" style={`background: conic-gradient(${tfCategoryStats.map((c, i) => {
-                const colors = ['#3b82f6','#22c55e','#eab308','#a855f7','#f97316','#ec4899','#06b6d4'];
                 const pctBefore = tfCategoryStats.slice(0, i).reduce((s, x) => s + x.count, 0) / tfPostCount * 100;
                 const pct = c.count / tfPostCount * 100;
-                return `${colors[i % colors.length]} ${pctBefore}% ${pctBefore + pct}%`;
+                const g = tfCategoryStats.length > 1 ? Math.min(1, pct / 4) : 0;
+                return `#1e293b ${pctBefore}% ${pctBefore + g}%, ${tfCatColor(c.name)} ${pctBefore + g}% ${pctBefore + pct}%`;
               }).join(', ')})`}>
                 <div class="cat-donut-hole">
                   <span class="donut-num">{tfPostCount}</span>
@@ -1917,17 +2102,14 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
                 </div>
               </div>
               <div class="cat-legend">
-                {tfCategoryStats.map((c, i) => {
-                  const colors = ['#3b82f6','#22c55e','#eab308','#a855f7','#f97316','#ec4899','#06b6d4'];
-                  return (
-                    <div class="cat-legend-item">
-                      <span class="cat-legend-dot" style={`background:${colors[i % colors.length]}`}></span>
-                      <span class="cat-legend-name">{c.name}</span>
-                      <span class="cat-legend-count">{c.count}</span>
-                      <span class="cat-legend-pct">{Math.round(c.count / tfPostCount * 100)}%</span>
-                    </div>
-                  );
-                })}
+                {tfCategoryStats.map((c) => (
+                  <div class="cat-legend-item">
+                    <span class="cat-legend-dot" style={`background:${tfCatColor(c.name)}`}></span>
+                    <span class="cat-legend-name">{c.name}</span>
+                    <span class="cat-legend-count">{c.count}</span>
+                    <span class="cat-legend-pct">{Math.round(c.count / tfPostCount * 100)}%</span>
+                  </div>
+                ))}
               </div>
             </div>
             <div class="recent-list">
@@ -1956,7 +2138,8 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
               <div class="cat-donut" style={`background: conic-gradient(${lfCategories.map((c, i) => {
                 const pctBefore = lfCategories.slice(0, i).reduce((s, x) => s + x.count, 0) / lfPostCount * 100;
                 const pct = c.count / lfPostCount * 100;
-                return `${c.color} ${pctBefore}% ${pctBefore + pct}%`;
+                const g = lfCategories.length > 1 ? Math.min(1, pct / 4) : 0;
+                return `#1e293b ${pctBefore}% ${pctBefore + g}%, ${c.color} ${pctBefore + g}% ${pctBefore + pct}%`;
               }).join(', ')})`}>
                 <div class="cat-donut-hole">
                   <span class="donut-num">{lfPostCount}</span>
@@ -2082,10 +2265,10 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           <div class="section-body">
             <div class="cat-donut-wrap">
               <div class="cat-donut" style={`background: conic-gradient(${tfCategoryStats.map((c, i) => {
-                const colors = ['#3b82f6','#22c55e','#eab308','#a855f7','#f97316','#ec4899','#06b6d4'];
                 const pctBefore = tfCategoryStats.slice(0, i).reduce((s, x) => s + x.count, 0) / tfPostCount * 100;
                 const pct = c.count / tfPostCount * 100;
-                return `${colors[i % colors.length]} ${pctBefore}% ${pctBefore + pct}%`;
+                const g = tfCategoryStats.length > 1 ? Math.min(1, pct / 4) : 0;
+                return `#1e293b ${pctBefore}% ${pctBefore + g}%, ${tfCatColor(c.name)} ${pctBefore + g}% ${pctBefore + pct}%`;
               }).join(', ')})`}>
                 <div class="cat-donut-hole">
                   <span class="donut-num">{tfPostCount}</span>
@@ -2093,17 +2276,14 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
                 </div>
               </div>
               <div class="cat-legend">
-                {tfCategoryStats.map((c, i) => {
-                  const colors = ['#3b82f6','#22c55e','#eab308','#a855f7','#f97316','#ec4899','#06b6d4'];
-                  return (
-                    <div class="cat-legend-item">
-                      <span class="cat-legend-dot" style={`background:${colors[i % colors.length]}`}></span>
-                      <span class="cat-legend-name">{c.name}</span>
-                      <span class="cat-legend-count">{c.count}</span>
-                      <span class="cat-legend-pct">{Math.round(c.count / tfPostCount * 100)}%</span>
-                    </div>
-                  );
-                })}
+                {tfCategoryStats.map((c) => (
+                  <div class="cat-legend-item">
+                    <span class="cat-legend-dot" style={`background:${tfCatColor(c.name)}`}></span>
+                    <span class="cat-legend-name">{c.name}</span>
+                    <span class="cat-legend-count">{c.count}</span>
+                    <span class="cat-legend-pct">{Math.round(c.count / tfPostCount * 100)}%</span>
+                  </div>
+                ))}
               </div>
             </div>
             <div class="cat-traffic-section" id="tf-cat-traffic">
@@ -2165,7 +2345,8 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
               <div class="cat-donut" style={`background: conic-gradient(${lfCategories.map((c, i) => {
                 const pctBefore = lfCategories.slice(0, i).reduce((s, x) => s + x.count, 0) / lfPostCount * 100;
                 const pct = c.count / lfPostCount * 100;
-                return `${c.color} ${pctBefore}% ${pctBefore + pct}%`;
+                const g = lfCategories.length > 1 ? Math.min(1, pct / 4) : 0;
+                return `#1e293b ${pctBefore}% ${pctBefore + g}%, ${c.color} ${pctBefore + g}% ${pctBefore + pct}%`;
               }).join(', ')})`}>
                 <div class="cat-donut-hole">
                   <span class="donut-num">{lfPostCount}</span>
@@ -2377,13 +2558,13 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
             catCounts[p.category] = (catCounts[p.category] || 0) + 1;
           });
 
-          // 도넛 차트 & 범례 업데이트
+          // 도넛 차트 & 범례 업데이트 (엔티티 고정 색, 검증 팔레트)
           const colors = {
             'Lifestyle': '#ec4899', 'lifestyle': '#ec4899',
             'Finance': '#3b82f6', 'finance': '#3b82f6',
-            'Health': '#22c55e', 'health': '#22c55e',
+            'Health': '#16a34a', 'health': '#16a34a',
             'Education': '#a855f7', 'education': '#a855f7',
-            'Travel': '#f97316', 'travel': '#f97316',
+            'Travel': '#ea580c', 'travel': '#ea580c',
           };
           const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
           const cats = Object.entries(catCounts).map(([name, count]) => ({ name: capitalize(name), count, color: colors[name] || '#94a3b8' }));
@@ -2393,14 +2574,15 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
           document.getElementById('lf-post-count').textContent = totalLf;
           document.getElementById('lf-badge-count').textContent = totalLf;
 
-          // 도넛 차트 배경 재생성
+          // 도넛 차트 배경 재생성 (세그먼트 사이 서피스 갭 포함)
           const donutWrap = document.getElementById('lf-donut-wrap');
           if (donutWrap) {
             let gradient = 'conic-gradient(';
             let pctBefore = 0;
             cats.forEach((c, i) => {
               const pct = (c.count / totalLf) * 100;
-              gradient += `${c.color} ${pctBefore}% ${pctBefore + pct}%`;
+              const g = cats.length > 1 ? Math.min(1, pct / 4) : 0;
+              gradient += `#1e293b ${pctBefore}% ${pctBefore + g}%, ${c.color} ${pctBefore + g}% ${pctBefore + pct}%`;
               if (i < cats.length - 1) gradient += ', ';
               pctBefore += pct;
             });
@@ -2801,10 +2983,10 @@ const totalCategories = tfCategoryStats.length + lfCategoryCount;
 
       // === 카테고리별 트래픽 렌더링 ===
       function renderCategoryTraffic() {
-        const tfColors = { 'AI': '#3b82f6', 'Dev': '#22c55e', 'Review': '#eab308', 'Game': '#a855f7' };
+        const tfColors = { 'AI': '#3b82f6', 'Dev': '#16a34a', 'Review': '#bf8700', 'Game': '#a855f7' };
         const lfColors = {
           'Lifestyle': '#ec4899', 'Finance': '#3b82f6',
-          'Health': '#22c55e', 'Education': '#a855f7', 'Travel': '#f97316',
+          'Health': '#16a34a', 'Education': '#a855f7', 'Travel': '#ea580c',
         };
 
         const tfCatViews = {};
