@@ -1,0 +1,17 @@
+{
+  "task": "dashboard-remodel",
+  "created": "2026-07-09",
+  "items": [
+    { "id": 1, "title": "PRD/TASKS 문서", "status": "done" },
+    { "id": 2, "title": "팔레트 새 서피스(#131316) 재검증", "status": "done" },
+    { "id": 3, "title": "style 블록 단일 시스템 재작성 (플랫/무애니메이션/뉴트럴 다크)", "status": "done" },
+    { "id": 4, "title": "마크업 데코 정리 (카드 아이콘·탭 이모지 제거)", "status": "done" },
+    { "id": 5, "title": "JS 인라인 그라데이션/색 잔재 정리", "status": "done" },
+    { "id": 6, "title": "빌드 + 데스크톱/모바일/전탭 스크린샷 + 오버플로 체크", "status": "done" },
+    { "id": 7, "title": "커밋", "status": "in_progress" }
+  ],
+  "notes": [
+    "hourly chart 깨짐 원인: global.css .chart-bars{flex-direction:column} 클래스명 충돌 → .hourly-chart 스코프로 특이도 상향 해결",
+    "완료기준: build OK / transition 0 / @keyframes=spin 1개 / 모바일 overflow 없음(390=390) / 팔레트 validator PASS"
+  ]
+}
