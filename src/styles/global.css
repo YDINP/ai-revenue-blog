@@ -3415,13 +3415,6 @@ section > h2::after { background: linear-gradient(90deg, var(--color-border), tr
 .deck-eyebrow .pulse {
   width: 7px; height: 7px; border-radius: 50%;
   background: #22d3ee;
-  box-shadow: 0 0 0 0 rgba(34,211,238,0.6);
-  animation: pulseDot 2s infinite;
-}
-@keyframes pulseDot {
-  0% { box-shadow: 0 0 0 0 rgba(34,211,238,0.55); }
-  70% { box-shadow: 0 0 0 8px rgba(34,211,238,0); }
-  100% { box-shadow: 0 0 0 0 rgba(34,211,238,0); }
 }
 
 .deck-title {
@@ -4612,20 +4605,6 @@ body.list-open { overflow: hidden; }
   display: block;
   aspect-ratio: auto;
 }
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .post-hero .post-hero-image {
-      animation: hero-parallax linear both;
-      animation-timeline: view();
-      animation-range: cover 0% cover 100%;
-      will-change: transform;
-    }
-  }
-  @keyframes hero-parallax {
-    from { transform: scale(1.16) translateY(-4.5%); }
-    to   { transform: scale(1.16) translateY(4.5%); }
-  }
-}
 
 /* Deck 컴팩트 히어로(스포트라이트 제거, 타이틀 정제, 세로 축소) */
 .deck-compact { padding: 1.3rem 2rem 1.3rem; }
@@ -4654,15 +4633,6 @@ html { overflow-x: clip; }
    LIVELY MOTION — 배치1: 그라디언트 플로우 · 버튼 마이크로 · 앰비언트
    ========================================================================== */
 @media (prefers-reduced-motion: no-preference) {
-  /* 그라디언트 텍스트/버튼 흐름 */
-  .grad, .site-logo, .deck-title .grad, .stat-num, .spotlight-body h3 {
-    background-size: 220% auto;
-    animation: grad-flow 7s ease-in-out infinite;
-  }
-  .deck-search button, .list-open-btn, .btn-primary, .qv-full, .pd-side-cta {
-    background-size: 180% auto;
-    animation: grad-flow 6s ease-in-out infinite;
-  }
   @keyframes grad-flow {
     0%, 100% { background-position: 0% center; }
     50% { background-position: 100% center; }
@@ -4758,22 +4728,6 @@ html { overflow-x: clip; }
   }
   /* 카루셀 진행바도 흐름 */
   .stream-progress-bar { background-size: 200% auto; animation: grad-flow 4s linear infinite; }
-}
-
-/* ==========================================================================
-   LIVELY MOTION — 배치4: 히어로 타이틀 split-text 리빌
-   ========================================================================== */
-@media (prefers-reduced-motion: no-preference) {
-  .deck-title .ch {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(0.55em) rotate(3deg);
-    filter: blur(4px);
-    animation: ch-reveal 0.55s cubic-bezier(0.2, 0.85, 0.3, 1) forwards;
-  }
-  @keyframes ch-reveal {
-    to { opacity: 1; transform: none; filter: blur(0); }
-  }
 }
 
 /* ==========================================================================
