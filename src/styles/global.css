@@ -4775,10 +4775,10 @@ html { overflow-x: clip; }
    mag/spotlight JS가 이미 pointer:fine 게이트라 이 정책과 일관됨.
    ========================================================================== */
 @media (pointer: coarse) {
-  /* 1) 오로라 배경: 매 프레임 blur 재래스터화되는 무한 애니메이션 정지.
-        정적 radial-gradient는 그대로 두되 20px blur는 제거(합성 1회로 캐시). */
-  body::before { animation: none !important; filter: saturate(1.1); }
-  :root.dark body::before { filter: saturate(1.2); }
+  /* 1) 오로라·그리드 배경: fixed + filter 레이어가 스크롤마다 재합성 → 깜빡임/렉.
+        모바일에선 장식 배경 자체를 제거(단색 배경으로). */
+  body::before,
+  body::after { display: none !important; }
 
   /* 2) 유리질감 blur 제거 + 배경 불투명도 상향(가독성 보정).
         blur(var(--glass-blur)) 전 구간이 이 변수로 한 번에 무력화됨. */
@@ -4792,8 +4792,7 @@ html { overflow-x: clip; }
     --glass-bg-strong: rgba(18, 22, 44, 0.96);
   }
 
-  /* blur(0px)도 일부 엔진은 backdrop 합성 패스를 유지 → 하드코딩 blur 표면은 명시 해제.
-        (var 미사용으로 위 2)에서 안 잡히는 셀렉터들) */
+  /* blur(0px)도 일부 엔진은 backdrop 합성 패스를 유지 → 하드코딩 blur 표면은 명시 해제. */
   .site-header,
   .post-card,
   .btn-secondary,
@@ -4822,4 +4821,38 @@ html { overflow-x: clip; }
     animation: none !important;
     background-size: 100% 100% !important;
   }
+
+  /* 4) 스크롤 연동 리빌(animation-timeline: view()): 스크롤 위치에 opacity/transform이
+        묶여 드래그마다 요소가 나타났다 사라짐(깜빡임) + 본문이 opacity:0에서 시작해
+        늦게 보임 + 스크롤 중 스타일 상시 재계산. 모바일 전면 비활성. */
+  .deck,
+  .spotlight,
+  .stream-section,
+  .popular-posts-widget,
+  .newsletter-cta,
+  section > .section-header,
+  .post-content > h2,
+  .post-content .code-block-wrapper,
+  .post-content blockquote,
+  .post-content .callout-tip,
+  .post-content .callout-warning,
+  .post-content .callout-info,
+  .post-content .chart-bar,
+  .post-content .chart-versus,
+  .post-content .chart-radar,
+  .post-content .chart-donut,
+  .post-content .chart-progress,
+  .post-content table,
+  .post-content .faq-item,
+  .post-content .series-box,
+  .post-content > img {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* 모바일: 페이지 이동 크로스페이드(view transition) 비활성 → 포스트가 즉시 열림 */
+@media (pointer: coarse) {
+  @view-transition { navigation: none; }
 }
