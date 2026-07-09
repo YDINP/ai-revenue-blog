@@ -1648,6 +1648,45 @@ const ICONS: Record<string, string> = {
       .sec-ico.i-cyan { color: #22d3ee; }
       .sec-ico.i-pink { color: #f472b6; }
       .sec-ico.i-red { color: #fb7185; }
+
+      /* ── 세그먼트 토글 (일/주/월, 오늘/14일) ── */
+      .th-right { display: flex; align-items: center; gap: 0.875rem; flex-wrap: wrap; }
+      .seg-toggle {
+        display: inline-flex;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 2px;
+        gap: 2px;
+      }
+      .seg-btn {
+        padding: 0.3rem 0.7rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        border: none;
+        background: transparent;
+        color: var(--text-2);
+        border-radius: 6px;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .seg-btn:hover { color: var(--text); }
+      .seg-btn.active { background: var(--accent); color: #fff; }
+
+      /* ── 방문 추이: 차트 | 표 2단 ── */
+      .traffic-split {
+        display: grid;
+        grid-template-columns: 1.55fr 1fr;
+        gap: 1.25rem;
+        align-items: start;
+      }
+      .traffic-chart-wrap { min-width: 0; }
+      .traffic-table-wrap { min-width: 0; }
+      .traffic-table-wrap .daily-detail-wrap { max-height: 268px; }
+      .tp-view { min-width: 0; }
+      @media (max-width: 900px) {
+        .traffic-split { grid-template-columns: 1fr; }
+      }
     </style>
   </head>
   <body>
@@ -1744,22 +1783,47 @@ const ICONS: Record<string, string> = {
       </div>
 
 
-      <!-- ══ Row 2: 7일 트렌드(8) + 오늘 현황(4) ══ -->
-      <div class="dash-grid">
-        <div class="trend-section col-8">
-          <div class="trend-header">
-            <h3><svg class="ico sec-ico i-blue" viewBox="0 0 24 24" set:html={ICONS['trending-up']}></svg> 7-Day Views Trend</h3>
-            <div class="trend-total">7일 합계: <b id="trend-total-num">--</b></div>
-          </div>
-          <div class="trend-chart" id="trend-chart">
-            <div class="no-data">Loading trend...</div>
-          </div>
-          <div class="trend-legend">
-            <span class="leg-tf">TechFlow</span>
-            <span class="leg-lf">LifeFlow</span>
+      <!-- ══ Row 2: 방문 추이 (일간/주간/월간 토글) ══ -->
+      <div class="trend-section">
+        <div class="trend-header">
+          <h3><svg class="ico sec-ico i-blue" viewBox="0 0 24 24" set:html={ICONS['trending-up']}></svg> 방문 추이</h3>
+          <div class="th-right">
+            <div class="seg-toggle" id="traffic-period">
+              <button class="seg-btn active" data-period="daily">일간</button>
+              <button class="seg-btn" data-period="weekly">주간</button>
+              <button class="seg-btn" data-period="monthly">월간</button>
+            </div>
+            <div class="trend-total"><b id="traffic-total">--</b></div>
           </div>
         </div>
+        <div class="traffic-split">
+          <div class="traffic-chart-wrap">
+            <div class="trend-chart" id="traffic-chart">
+              <div class="no-data">Loading...</div>
+            </div>
+            <div class="trend-legend">
+              <span class="leg-tf">TechFlow</span>
+              <span class="leg-lf">LifeFlow</span>
+            </div>
+          </div>
+          <div class="traffic-table-wrap">
+            <div class="daily-detail-wrap">
+              <table class="daily-detail-table">
+                <thead>
+                  <tr><th id="tt-col0">기간</th><th>조회수</th><th>방문자</th><th>TF</th><th>LF</th><th class="dd-bar-col"></th></tr>
+                </thead>
+                <tbody id="traffic-table-body">
+                  <tr><td colspan="6" class="no-data">Loading...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p class="dd-note">※ 방문자 = 고유 브라우저(User-Agent) 기준 추정치. 주간·월간은 일자 합산이라 실제 순방문자보다 클 수 있음.</p>
+      </div>
 
+      <!-- ══ Row 3: 오늘 현황(4) + 시간대 패턴(8, 오늘/14일 토글) ══ -->
+      <div class="dash-grid">
         <div class="panel col-4">
           <div class="panel-head">
             <h3><svg class="ico sec-ico i-amber" viewBox="0 0 24 24" set:html={ICONS['clock']}></svg> 오늘 현황</h3>
@@ -1796,28 +1860,29 @@ const ICONS: Record<string, string> = {
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- ══ Row 3: 시간대별(4) + 히트맵(8) ══ -->
-      <div class="dash-grid">
-        <div class="panel col-4">
-          <div class="panel-head"><h4><svg class="ico sec-ico i-blue" viewBox="0 0 24 24" set:html={ICONS['bar-chart']}></svg> 시간대별 조회 (오늘)</h4></div>
-          <div class="hourly-chart">
-            <div class="chart-bars" id="hourly-chart"></div>
-          </div>
-        </div>
 
         <div class="panel col-8">
           <div class="panel-head">
-            <h4><svg class="ico sec-ico i-purple" viewBox="0 0 24 24" set:html={ICONS['grid']}></svg> 날짜 × 시간대 히트맵 (14일, KST)</h4>
-            <div class="heatmap-legend">
+            <h4><svg class="ico sec-ico i-purple" viewBox="0 0 24 24" set:html={ICONS['clock']}></svg> 시간대 패턴</h4>
+            <div class="seg-toggle" id="timepattern-toggle">
+              <button class="seg-btn active" data-view="hourly">오늘 시간대</button>
+              <button class="seg-btn" data-view="heatmap">14일 히트맵</button>
+            </div>
+          </div>
+          <div class="tp-view" id="tp-hourly">
+            <div class="hourly-chart">
+              <div class="chart-bars" id="hourly-chart"></div>
+            </div>
+          </div>
+          <div class="tp-view" id="tp-heatmap" style="display:none;">
+            <div class="heatmap-legend" style="justify-content:flex-end;margin-bottom:0.6rem;">
               <span>적음</span>
               <i class="hm-cell l0"></i><i class="hm-cell l1"></i><i class="hm-cell l2"></i><i class="hm-cell l3"></i><i class="hm-cell l4"></i>
               <span>많음</span>
             </div>
-          </div>
-          <div class="heatmap-wrap" id="heatmap-wrap">
-            <div class="no-data">Loading...</div>
+            <div class="heatmap-wrap" id="heatmap-wrap">
+              <div class="no-data">Loading...</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1856,25 +1921,6 @@ const ICONS: Record<string, string> = {
             <div class="no-data">Loading...</div>
           </div>
         </div>
-      </div>
-
-      <!-- ══ Row 5: 날짜별 상세 30일 (full) ══ -->
-      <div class="trend-section">
-        <div class="trend-header">
-          <h3><svg class="ico sec-ico i-blue" viewBox="0 0 24 24" set:html={ICONS['table']}></svg> 날짜별 상세 (최근 30일, KST)</h3>
-          <div class="trend-total">합계: <b id="daily-detail-total">--</b></div>
-        </div>
-        <div class="daily-detail-wrap">
-          <table class="daily-detail-table">
-            <thead>
-              <tr><th>날짜</th><th>조회수</th><th>방문자</th><th>TF</th><th>LF</th><th class="dd-bar-col"></th></tr>
-            </thead>
-            <tbody id="daily-detail-body">
-              <tr><td colspan="6" class="no-data">Loading...</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="dd-note">※ 방문자 = 고유 브라우저(User-Agent) 기준 추정치. 조회수 ≥ 방문자.</p>
       </div>
 
       <!-- ══ Row 6: TechFlow(6) + LifeFlow(6) 콘텐츠 구성 ══ -->
@@ -2203,7 +2249,18 @@ const ICONS: Record<string, string> = {
 
         <div class="traffic-section">
           <div class="traffic-header">
-            <h3>쿠팡 클릭 트래킹</h3>
+            <h3><svg class="ico sec-ico i-amber" viewBox="0 0 24 24" set:html={ICONS['cart']}></svg> 상품별 클릭 순위 <span class="like-top-total" id="coup-prod-total"></span></h3>
+          </div>
+          <div class="traffic-body">
+            <div class="top-page-list" id="coupang-products">
+              <div class="no-data">상품 클릭 데이터 로딩 중...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="traffic-section">
+          <div class="traffic-header">
+            <h3><svg class="ico sec-ico i-amber" viewBox="0 0 24 24" set:html={ICONS['cart']}></svg> 쿠팡 클릭 트래킹</h3>
           </div>
           <div class="traffic-body">
             <div class="event-feed" id="coupang-events">
@@ -2649,61 +2706,118 @@ const ICONS: Record<string, string> = {
         ).join('');
       }
 
-      // 7-Day Trend Bar Chart
-      function renderTrendChart(rawData) {
-        const container = document.getElementById('trend-chart');
-        const totalEl = document.getElementById('trend-total-num');
+      // ── 방문 추이 (일간/주간/월간 통합) ──
+      let _trafficDetail = [];
+      let _trafficPeriod = 'daily';
+
+      function bucketDetail(rows, period) {
+        const buckets = {};
+        (rows || []).forEach(d => {
+          if (!d.day) return;
+          const date = new Date(d.day + 'T00:00:00');
+          let key, label, sortKey;
+          if (period === 'weekly') {
+            const wd = (date.getDay() + 6) % 7;            // 0=월
+            const mon = new Date(date); mon.setDate(date.getDate() - wd);
+            key = mon.toISOString().split('T')[0];
+            label = `${mon.getMonth()+1}/${mon.getDate()}~`;
+            sortKey = key;
+          } else if (period === 'monthly') {
+            key = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}`;
+            label = `${String(date.getFullYear()).slice(2)}.${String(date.getMonth()+1).padStart(2,'0')}`;
+            sortKey = key;
+          } else {
+            key = d.day;
+            label = `${date.getMonth()+1}/${date.getDate()}`;
+            sortKey = key;
+          }
+          if (!buckets[key]) buckets[key] = { key, label, views:0, visitors:0, tf:0, lf:0, sortKey };
+          const b = buckets[key];
+          b.views += Number(d.views)||0;
+          b.visitors += Number(d.visitors)||0;
+          b.tf += Number(d.tf_views)||0;
+          b.lf += Number(d.lf_views)||0;
+        });
+        return Object.values(buckets).sort((a,b) => a.sortKey < b.sortKey ? -1 : 1);
+      }
+
+      function renderTrafficChart(buckets) {
+        const container = document.getElementById('traffic-chart');
         if (!container) return;
-
-        if (!rawData || rawData.length === 0) {
-          container.innerHTML = '<div class="no-data">No trend data yet</div>';
-          return;
-        }
-
-        // 7일치 데이터로 패딩
-        const dataMap = {};
-        rawData.forEach(d => { if (d.day) dataMap[d.day] = d; });
-        const data = [];
-        const today = new Date().toISOString().split('T')[0];
-        for (let i = 6; i >= 0; i--) {
-          const date = new Date();
-          date.setDate(date.getDate() - i);
-          const key = date.toISOString().split('T')[0];
-          data.push(dataMap[key] || { day: key, views: 0, tf_views: 0, lf_views: 0 });
-        }
-
-        const total7d = data.reduce((s, d) => s + (d.views || 0), 0);
-        if (totalEl) totalEl.textContent = fmt(total7d);
-
-        const maxV = Math.max(...data.map(d => d.views || 0), 1);
-
-        container.innerHTML = data.map(d => {
-          const day = d.day ? new Date(d.day) : null;
-          const dateStr = day ? `${day.getMonth()+1}/${day.getDate()}` : '';
-          const views = d.views || 0;
-          const tf = d.tf_views || 0;
-          const lf = d.lf_views || 0;
-          const pct = views > 0 ? Math.max((views / maxV) * 100, 8) : 4;
-          const tfPct = views > 0 ? (tf / views) * 100 : 0;
-          const lfPct = views > 0 ? (lf / views) * 100 : 0;
-          const isToday = d.day === today;
-
+        if (!buckets.length) { container.innerHTML = '<div class="no-data">데이터 없음</div>'; return; }
+        const maxV = Math.max(...buckets.map(b => b.views), 1);
+        const lastKey = buckets[buckets.length - 1].key;
+        container.innerHTML = buckets.map(b => {
+          const views = b.views;
+          const pct = views > 0 ? Math.max((views / maxV) * 100, 6) : 3;
+          const tfPct = views > 0 ? (b.tf / views) * 100 : 0;
+          const lfPct = views > 0 ? (b.lf / views) * 100 : 0;
+          const cur = b.key === lastKey;
           return `<div class="trend-bar-col">
             <div class="trend-bar-wrap">
-              <div class="trend-bar-stack ${isToday ? 'trend-bar-today' : ''}" style="height:${pct}%;opacity:${views > 0 ? 1 : 0.25}">
-                ${lfPct > 0 ? `<div class="trend-bar-lf" style="height:${lfPct}%"></div>` : ''}
-                ${tfPct > 0 ? `<div class="trend-bar-tf" style="height:${tfPct}%"></div>` : ''}
-                ${views === 0 ? `<div style="height:100%;background:var(--surface-2);border-radius:4px 4px 0 0;"></div>` : ''}
+              <div class="trend-bar-stack ${cur ? 'trend-bar-today' : ''}" style="height:${pct}%;opacity:${views>0?1:0.25}">
+                ${lfPct>0?`<div class="trend-bar-lf" style="height:${lfPct}%"></div>`:''}
+                ${tfPct>0?`<div class="trend-bar-tf" style="height:${tfPct}%"></div>`:''}
+                ${views===0?`<div style="height:100%;background:var(--surface-2);border-radius:4px 4px 0 0;"></div>`:''}
               </div>
             </div>
             <div class="trend-bar-label">
-              <span class="trend-bar-date">${dateStr}</span>
-              <span class="trend-bar-count">${views > 0 ? views : '-'}</span>
-              ${views > 0 ? `<span class="trend-bar-split"><span style="color:var(--tf)">${tf}</span><span style="color:var(--text-3)">/</span><span style="color:#4ade80">${lf}</span></span>` : ''}
+              <span class="trend-bar-date">${b.label}</span>
+              <span class="trend-bar-count">${views>0?fmt(views):'-'}</span>
             </div>
           </div>`;
         }).join('');
       }
+
+      function renderTrafficTable(buckets) {
+        const body = document.getElementById('traffic-table-body');
+        const col0 = document.getElementById('tt-col0');
+        if (!body) return;
+        if (col0) col0.textContent = _trafficPeriod === 'weekly' ? '주 시작' : _trafficPeriod === 'monthly' ? '월' : '날짜';
+        if (!buckets.length) { body.innerHTML = '<tr><td colspan="6" class="no-data">데이터 없음</td></tr>'; return; }
+        const maxV = Math.max(...buckets.map(b => b.views), 1);
+        const lastKey = buckets[buckets.length - 1].key;
+        body.innerHTML = buckets.slice().reverse().map(b => {          // 최신 위로
+          const barW = Math.max(Math.round((b.views / maxV) * 90), 2);
+          const cur = b.key === lastKey;
+          return `<tr class="${cur ? 'dd-today' : ''}">
+            <td>${b.label}${cur ? ' ·현재' : ''}</td>
+            <td class="dd-views">${fmt(b.views)}</td>
+            <td class="dd-visitors">${fmt(b.visitors)}</td>
+            <td>${fmt(b.tf)}</td>
+            <td>${fmt(b.lf)}</td>
+            <td class="dd-bar-col"><span class="dd-minibar" style="width:${barW}px"></span></td>
+          </tr>`;
+        }).join('');
+      }
+
+      function renderTrafficPanel() {
+        const limits = { daily: 14, weekly: 10, monthly: 6 };
+        let buckets = bucketDetail(_trafficDetail, _trafficPeriod);
+        if (_trafficPeriod === 'daily') {
+          // 최근 14 캘린더일로 패딩(빈 날 0 표시 → 연속 축)
+          const map = {}; buckets.forEach(b => map[b.key] = b);
+          const padded = [];
+          for (let i = 13; i >= 0; i--) {
+            const dt = new Date(); dt.setDate(dt.getDate() - i);
+            const k = dt.toISOString().split('T')[0];
+            padded.push(map[k] || { key:k, label:`${dt.getMonth()+1}/${dt.getDate()}`, views:0, visitors:0, tf:0, lf:0, sortKey:k });
+          }
+          buckets = padded;
+        } else {
+          buckets = buckets.slice(-limits[_trafficPeriod]);
+        }
+        renderTrafficChart(buckets);
+        renderTrafficTable(buckets);
+        const totalEl = document.getElementById('traffic-total');
+        if (totalEl) {
+          const sv = buckets.reduce((s,b)=>s+b.views,0);
+          const svis = buckets.reduce((s,b)=>s+b.visitors,0);
+          const unit = _trafficPeriod === 'weekly' ? '주' : _trafficPeriod === 'monthly' ? '개월' : '일';
+          totalEl.textContent = `${buckets.length}${unit} 합계: ${fmt(sv)} 조회 / ${fmt(svis)} 방문`;
+        }
+      }
+
 
       // Slug을 읽기 좋은 제목으로 변환
       function decodeSlug(slug) {
@@ -2769,6 +2883,85 @@ const ICONS: Record<string, string> = {
             ${sourceBadge(p.source)}
             <span class="top-page-title" title="${title}">${displayTitle || '(home)'}</span>
             <span class="top-page-views">${p.views}회</span>
+          </div>`;
+        }).join('');
+      }
+
+      // === 쿠팡 상품별 클릭 (analytics 테이블 직접 조회 → metadata.product 집계) ===
+      async function fetchCoupangProducts() {
+        try {
+          const res = await fetch(
+            `${SUPABASE_URL}/rest/v1/analytics?event_type=eq.coupang_click&select=metadata,source,created_at&order=created_at.desc&limit=2000`,
+            { headers }
+          );
+          if (!res.ok) return [];
+          return await res.json();
+        } catch { return []; }
+      }
+
+      function renderCoupangProducts(rows) {
+        const container = document.getElementById('coupang-products');
+        const totalEl = document.getElementById('coup-prod-total');
+        if (!container) return;
+        const list = Array.isArray(rows) ? rows : [];
+        if (!list.length) {
+          container.innerHTML = '<div class="no-data">아직 상품 클릭 데이터가 없습니다. 🛒</div>';
+          if (totalEl) totalEl.textContent = '';
+          return;
+        }
+        const by = {};
+        const todayKst = new Date(Date.now() + 9 * 3600 * 1000).toISOString().split('T')[0];
+        list.forEach(r => {
+          const m = r.metadata || {};
+          const p = m.product || '(상품 미상)';
+          if (!by[p]) by[p] = { product: p, count: 0, today: 0, url: m.url || '' };
+          by[p].count++;
+          const day = new Date(new Date(r.created_at).getTime() + 9 * 3600 * 1000).toISOString().split('T')[0];
+          if (day === todayKst) by[p].today++;
+        });
+        const arr = Object.values(by).sort((a, b) => b.count - a.count);
+        const total = arr.reduce((s, x) => s + x.count, 0);
+        if (totalEl) totalEl.textContent = `(총 ${fmt(total)}클릭 · ${arr.length}종)`;
+        const max = arr[0].count || 1;
+        container.innerHTML = arr.map((p, i) => {
+          const barPct = Math.max(Math.round((p.count / max) * 100), 4);
+          const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}`;
+          const name = p.product.length > 42 ? p.product.slice(0, 42) + '…' : p.product;
+          const nameEl = p.url
+            ? `<a href="${p.url}" target="_blank" rel="noopener" class="top-page-title" title="${p.product}">${name}</a>`
+            : `<span class="top-page-title" title="${p.product}">${name}</span>`;
+          const todayBadge = p.today > 0 ? `<span class="delta-chip up" style="margin-left:0;">오늘 +${p.today}</span>` : '';
+          return `<div class="like-top-item">
+            <span class="top-page-rank">${medal}</span>
+            ${nameEl}
+            ${todayBadge}
+            <div class="like-bar-wrap"><div class="like-bar-fill" style="width:${barPct}%;background:linear-gradient(90deg,#ea580c,#facc15)"></div></div>
+            <span class="like-top-count" style="color:#facc15">${fmt(p.count)}</span>
+          </div>`;
+        }).join('');
+      }
+
+      // === 쿠팡 클릭 트래킹 피드 (analytics 전체 → 최근순 + 상품명) ===
+      function renderCoupangFeed(rows) {
+        const container = document.getElementById('coupang-events');
+        if (!container) return;
+        const list = (Array.isArray(rows) ? rows : []).slice(0, 20);
+        if (!list.length) {
+          container.innerHTML = '<div class="no-data">아직 쿠팡 클릭 데이터가 없습니다.</div>';
+          return;
+        }
+        container.innerHTML = list.map(r => {
+          const m = r.metadata || {};
+          const prod = m.product || '(상품 미상)';
+          const path = m.path || m.slug || '';
+          const src = r.source === 'lifeflow' ? 'lifeflow' : 'blog';
+          return `<div class="event-item">
+            <span class="event-icon coupang_click">🛒</span>
+            <div class="event-content">
+              <div class="event-action" style="color:#facc15">${prod.length > 44 ? prod.slice(0,44)+'…' : prod}</div>
+              <div class="event-page-title" title="${path}">${sourceBadge(src)} ${path || '홈페이지'}</div>
+            </div>
+            <span class="event-time">${timeAgo(r.created_at)}</span>
           </div>`;
         }).join('');
       }
@@ -2926,12 +3119,17 @@ const ICONS: Record<string, string> = {
           const title = getPageTitle(e);
           const shortTitle = title.length > 35 ? title.substring(0, 35) + '…' : title;
           const srcBadge = sourceBadge(e.source);
+          const isCoup = e.event_type === 'coupang_click';
+          const prod = isCoup ? (e.product || (e.metadata && e.metadata.product) || '') : '';
+          const detail = isCoup && prod
+            ? `<div class="event-page-title" title="${prod}" style="color:#facc15">🛒 ${prod.length > 30 ? prod.slice(0,30)+'…' : prod}</div>`
+            : `<div class="event-page-title" title="${title}">${shortTitle || '홈페이지'}</div>`;
 
           return `<div class="event-item">
             <span class="event-icon ${e.event_type}">${icon}</span>
             <div class="event-content">
               <div class="event-action">${srcBadge} ${label}</div>
-              <div class="event-page-title" title="${title}">${shortTitle || '홈페이지'}</div>
+              ${detail}
             </div>
             <span class="event-time">${timeAgo(e.created_at)}</span>
           </div>`;
@@ -2957,6 +3155,27 @@ const ICONS: Record<string, string> = {
         renderEventFeed(undefined, f);
       });
 
+      // 방문 추이 기간 토글 (일간/주간/월간)
+      document.getElementById('traffic-period')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('.seg-btn');
+        if (!btn) return;
+        _trafficPeriod = btn.dataset.period;
+        document.querySelectorAll('#traffic-period .seg-btn').forEach(b => b.classList.toggle('active', b === btn));
+        renderTrafficPanel();
+      });
+
+      // 시간대 패턴 토글 (오늘 시간대 / 14일 히트맵)
+      document.getElementById('timepattern-toggle')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('.seg-btn');
+        if (!btn) return;
+        const view = btn.dataset.view;
+        document.querySelectorAll('#timepattern-toggle .seg-btn').forEach(b => b.classList.toggle('active', b === btn));
+        const hourly = document.getElementById('tp-hourly');
+        const heatmap = document.getElementById('tp-heatmap');
+        if (hourly) hourly.style.display = view === 'hourly' ? '' : 'none';
+        if (heatmap) heatmap.style.display = view === 'heatmap' ? '' : 'none';
+      });
+
       async function loadTraffic() {
         try {
           const [summary, hourly, topPages, events, trend, topLiked, dailyDetail, heatmap] = await Promise.all([
@@ -2966,7 +3185,7 @@ const ICONS: Record<string, string> = {
             rpc('get_recent_events', { p_limit: 20 }),
             rpc('get_daily_trend'),
             rpc('get_top_liked_posts', { p_limit: 10 }),
-            rpc('get_daily_detail', { p_days: 30 }),
+            rpc('get_daily_detail', { p_days: 180 }),
             rpc('get_daily_hourly_heatmap', { p_days: 14 })
           ]);
 
@@ -3098,13 +3317,16 @@ const ICONS: Record<string, string> = {
               coupangEventsEl.innerHTML = coupangEvents.slice(0, 15).map(e => {
                 const icon = '🛒';
                 const title = getPageTitle(e);
-                const shortTitle = title.length > 40 ? title.substring(0, 40) + '…' : title;
+                const prod = e.product || (e.metadata && e.metadata.product) || '';
                 const srcBadge = sourceBadge(e.source);
+                const prodLine = prod
+                  ? `<div class="event-action" style="color:#facc15">${prod.length > 44 ? prod.slice(0,44)+'…' : prod}</div>`
+                  : `<div class="event-action">상품 미상</div>`;
                 return `<div class="event-item">
                   <span class="event-icon coupang_click">${icon}</span>
                   <div class="event-content">
-                    <div class="event-action">${srcBadge} Coupang Click</div>
-                    <div class="event-page-title" title="${title}">${shortTitle || '홈페이지'}</div>
+                    ${prodLine}
+                    <div class="event-page-title" title="${title}">${srcBadge} ${title}</div>
                   </div>
                   <span class="event-time">${timeAgo(e.created_at)}</span>
                 </div>`;
@@ -3116,13 +3338,13 @@ const ICONS: Record<string, string> = {
           renderHourlyChart(hourly);
           renderTopPages(topPages);
           renderEventFeed(events);
-          renderTrendChart(trend);
           renderKpiSpark(trend);
-          renderDailyDetail(dailyDetail);
+          _trafficDetail = Array.isArray(dailyDetail) ? dailyDetail : [];
+          renderTrafficPanel();
           renderHeatmap(heatmap);
           renderCategoryTraffic();
           renderTopLikedPosts(topLiked);
-
+          fetchCoupangProducts().then(rows => { renderCoupangProducts(rows); renderCoupangFeed(rows); });
           document.getElementById('last-updated').textContent =
             `Updated: ${new Date().toLocaleString('ko-KR')}`;
 
