@@ -102,9 +102,9 @@ const websiteSchema = {
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet" />
 
-    <!-- Google AdSense -->
+    <!-- Google AdSense (auto-ads) — 스크립트는 body에서 첫 상호작용/idle 시 지연 로드
+         (진입 직후 메인스레드 롱태스크 방지) -->
     <meta name="google-adsense-account" content="ca-pub-9400779918671270">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9400779918671270" crossorigin="anonymous"></script>
 
     <!-- Dark Mode Init (FOUC 방지) -->
     <script is:inline>
@@ -190,6 +190,28 @@ const websiteSchema = {
 
     <!-- 전역 커맨드 팔레트 (⌘K, 모든 페이지) -->
     <CommandPalette />
+
+    <script>
+      // AdSense(auto-ads) 지연 로드 — 진입 직후 메인스레드 롱태스크(측정상 최대 553ms) 방지.
+      // 첫 상호작용(스크롤·터치·클릭) 또는 idle(최대 5s) 시 스크립트를 삽입한다.
+      (function () {
+        if (new URLSearchParams(location.search).has('embed')) return;   // 팝업 임베드는 광고 제외
+        let loaded = false;
+        function loadAds() {
+          if (loaded) return; loaded = true;
+          const s = document.createElement('script');
+          s.async = true;
+          s.crossOrigin = 'anonymous';
+          s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9400779918671270';
+          document.head.appendChild(s);
+        }
+        const evs = ['scroll', 'pointerdown', 'touchstart', 'keydown', 'mousemove'];
+        const on = () => { loadAds(); evs.forEach((e) => window.removeEventListener(e, on)); };
+        evs.forEach((e) => window.addEventListener(e, on, { once: true, passive: true }));
+        if ('requestIdleCallback' in window) (window as any).requestIdleCallback(loadAds, { timeout: 5000 });
+        else setTimeout(loadAds, 5000);
+      })();
+    </script>
 
     <script>
       // Pageview tracking
