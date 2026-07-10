@@ -1687,6 +1687,65 @@ const ICONS: Record<string, string> = {
       @media (max-width: 900px) {
         .traffic-split { grid-template-columns: 1fr; }
       }
+
+      /* ── 고도화: AI 인사이트 / 퍼널 / 목표 / 스켈레톤 / 날짜범위 ── */
+      .ai-insight {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(90deg, rgba(234,179,8,0.10), rgba(59,130,246,0.06));
+        border: 1px solid rgba(234,179,8,0.22);
+        border-radius: var(--r);
+        padding: 0.75rem 1rem;
+        margin-bottom: 1.25rem;
+        font-size: 0.875rem;
+        color: var(--text);
+      }
+      .ai-insight b { color: var(--text); font-weight: 700; }
+
+      /* 날짜 범위 입력 */
+      .date-range { display: inline-flex; align-items: center; gap: 0.375rem; color: var(--text-2); font-size: 0.75rem; }
+      .date-range input[type=date] {
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        font-size: 0.72rem;
+        padding: 0.28rem 0.4rem;
+        font-family: inherit;
+        color-scheme: dark;
+      }
+      .date-range input[type=date]:focus { border-color: var(--accent); outline: none; }
+
+      /* 오디언스 3열(기기/브라우저/OS) */
+      .audience-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+      .mini-title { font-size: 0.6875rem; font-weight: 700; color: var(--text-2); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+      @media (max-width: 640px) { .audience-3 { grid-template-columns: 1fr; } }
+
+      /* 전환 퍼널 */
+      .funnel-split { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1.25rem; align-items: start; }
+      @media (max-width: 720px) { .funnel-split { grid-template-columns: 1fr; } }
+      .funnel-step { margin-bottom: 0.875rem; }
+      .funnel-step-head { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.375rem; }
+      .funnel-step-label { font-size: 0.8125rem; font-weight: 600; color: var(--text); }
+      .funnel-step-count { font-size: 0.9375rem; font-weight: 800; color: var(--text); font-variant-numeric: tabular-nums; }
+      .funnel-rate { font-size: 0.6875rem; font-weight: 700; color: #facc15; margin-left: auto; }
+      .funnel-bar-wrap { height: 14px; background: var(--surface-2); border-radius: 7px; overflow: hidden; }
+      .funnel-bar { height: 100%; border-radius: 7px; min-width: 4px; }
+
+      /* 목표 카드 */
+      .goal-cards { display: flex; flex-direction: column; gap: 0.75rem; }
+      .goal-card { background: var(--surface-2); border-radius: var(--r-sm); padding: 0.75rem 0.875rem; }
+      .goal-name { font-size: 0.75rem; color: var(--text-2); margin-bottom: 0.25rem; }
+      .goal-val { font-size: 1.25rem; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+      .goal-rate { font-size: 0.6875rem; color: var(--text-3); margin-top: 0.25rem; }
+
+      /* 스켈레톤 (정적, 무애니메이션) */
+      .skeleton { display: inline-block; background: var(--surface-2); border-radius: 5px; }
+      .skel-list { display: flex; flex-direction: column; gap: 0.6rem; padding: 0.4rem 0; }
+      .skel-row { height: 0.85rem; width: 100%; }
+      .skel-row:nth-child(2) { width: 82%; }
+      .skel-row:nth-child(3) { width: 66%; }
     </style>
   </head>
   <body>
@@ -1719,6 +1778,11 @@ const ICONS: Record<string, string> = {
 
       <!-- Tab: 전체 요약 -->
       <div class="tab-content active" id="tab-all">
+      <!-- AI 인사이트 한 줄 (규칙 기반 요약) -->
+      <div class="ai-insight" id="ai-insight">
+        <span class="skeleton" style="width:60%;height:1rem;"></span>
+      </div>
+
       <!-- ══ Row 1: KPI 히어로 스트립 ══ -->
       <div class="summary-grid">
         <div class="summary-card accent-blue color-blue">
@@ -1793,6 +1857,14 @@ const ICONS: Record<string, string> = {
               <button class="seg-btn" data-period="weekly">주간</button>
               <button class="seg-btn" data-period="monthly">월간</button>
             </div>
+            <div class="date-range">
+              <input type="date" id="range-from" aria-label="시작일" />
+              <span>~</span>
+              <input type="date" id="range-to" aria-label="종료일" />
+              <button class="seg-btn" id="range-clear" title="범위 초기화" style="display:none;">✕</button>
+            </div>
+            <button class="refresh-btn" id="csv-export" title="현재 기간 CSV 내보내기">CSV</button>
+            <span class="delta-chip flat" id="traffic-compare" title="이전 동기간 대비">--</span>
             <div class="trend-total"><b id="traffic-total">--</b></div>
           </div>
         </div>
@@ -1921,6 +1993,49 @@ const ICONS: Record<string, string> = {
             <div class="no-data">Loading...</div>
           </div>
         </div>
+      </div>
+
+      <!-- ══ Row 5: 유입경로(6) + 기기·브라우저·OS(6) ══ -->
+      <div class="dash-grid">
+        <div class="panel col-6">
+          <div class="panel-head"><h4><svg class="ico sec-ico i-cyan" viewBox="0 0 24 24" set:html={ICONS['link']}></svg> 유입경로</h4></div>
+          <div class="cat-traffic-bars" id="ref-bars">
+            <div class="skel-list"><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span></div>
+          </div>
+        </div>
+        <div class="panel col-6">
+          <div class="panel-head"><h4><svg class="ico sec-ico i-purple" viewBox="0 0 24 24" set:html={ICONS['grid']}></svg> 기기 · 브라우저 · OS</h4></div>
+          <div class="audience-3">
+            <div>
+              <div class="mini-title">기기</div>
+              <div class="cat-traffic-bars" id="device-bars"><div class="skel-list"><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span></div></div>
+            </div>
+            <div>
+              <div class="mini-title">브라우저</div>
+              <div class="cat-traffic-bars" id="browser-bars"><div class="skel-list"><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span></div></div>
+            </div>
+            <div>
+              <div class="mini-title">OS</div>
+              <div class="cat-traffic-bars" id="os-bars"><div class="skel-list"><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ Row 5b: 전환 퍼널 + 목표 ══ -->
+      <div class="trend-section">
+        <div class="trend-header">
+          <h3><svg class="ico sec-ico i-amber" viewBox="0 0 24 24" set:html={ICONS['trending-up']}></svg> 전환 퍼널 &amp; 목표</h3>
+        </div>
+        <div class="funnel-split">
+          <div class="funnel-steps" id="funnel-steps">
+            <div class="skel-list"><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span></div>
+          </div>
+          <div class="goal-cards" id="goal-cards">
+            <div class="skel-list"><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span></div>
+          </div>
+        </div>
+        <p class="dd-note">※ 전환율 = 목표 이벤트 수 ÷ 전체 페이지뷰. 페이지뷰 대비 클릭/구독 비율(세션 기반 아님).</p>
       </div>
 
       <!-- ══ Row 6: TechFlow(6) + LifeFlow(6) 콘텐츠 구성 ══ -->
@@ -2791,12 +2906,26 @@ const ICONS: Record<string, string> = {
         }).join('');
       }
 
+      let _trafficBuckets = [];
+      let _trafficCustom = null;   // {from, to} 설정 시 커스텀 범위
+
       function renderTrafficPanel() {
         const limits = { daily: 14, weekly: 10, monthly: 6 };
-        let buckets = bucketDetail(_trafficDetail, _trafficPeriod);
-        if (_trafficPeriod === 'daily') {
-          // 최근 14 캘린더일로 패딩(빈 날 0 표시 → 연속 축)
-          const map = {}; buckets.forEach(b => map[b.key] = b);
+        let buckets, prevSum = 0, currLabel;
+
+        if (_trafficCustom) {
+          // 커스텀 날짜 범위: [from, to] 일자 필터 → 일간 버킷
+          const inRange = _trafficDetail.filter(d => d.day >= _trafficCustom.from && d.day <= _trafficCustom.to);
+          buckets = bucketDetail(inRange, 'daily');
+          // 이전 동기간(같은 일수만큼 앞) 합계
+          const days = Math.max(1, Math.round((new Date(_trafficCustom.to) - new Date(_trafficCustom.from)) / 86400000) + 1);
+          const pTo = new Date(new Date(_trafficCustom.from).getTime() - 86400000).toISOString().split('T')[0];
+          const pFrom = new Date(new Date(_trafficCustom.from).getTime() - days * 86400000).toISOString().split('T')[0];
+          prevSum = _trafficDetail.filter(d => d.day >= pFrom && d.day <= pTo).reduce((s, d) => s + (Number(d.views) || 0), 0);
+          currLabel = `${days}일 (${_trafficCustom.from}~${_trafficCustom.to})`;
+        } else if (_trafficPeriod === 'daily') {
+          const raw = bucketDetail(_trafficDetail, 'daily');
+          const map = {}; raw.forEach(b => map[b.key] = b);
           const padded = [];
           for (let i = 13; i >= 0; i--) {
             const dt = new Date(); dt.setDate(dt.getDate() - i);
@@ -2804,18 +2933,26 @@ const ICONS: Record<string, string> = {
             padded.push(map[k] || { key:k, label:`${dt.getMonth()+1}/${dt.getDate()}`, views:0, visitors:0, tf:0, lf:0, sortKey:k });
           }
           buckets = padded;
+          for (let i = 27; i >= 14; i--) { const dt = new Date(); dt.setDate(dt.getDate() - i); prevSum += (map[dt.toISOString().split('T')[0]] || {}).views || 0; }
+          currLabel = '14일';
         } else {
-          buckets = buckets.slice(-limits[_trafficPeriod]);
+          const n = limits[_trafficPeriod];
+          const all = bucketDetail(_trafficDetail, _trafficPeriod);
+          buckets = all.slice(-n);
+          prevSum = all.slice(-2 * n, -n).reduce((s, b) => s + b.views, 0);
+          currLabel = `${buckets.length}${_trafficPeriod === 'weekly' ? '주' : '개월'}`;
         }
+
+        _trafficBuckets = buckets;
         renderTrafficChart(buckets);
         renderTrafficTable(buckets);
+
+        const sv = buckets.reduce((s, b) => s + b.views, 0);
+        const svis = buckets.reduce((s, b) => s + b.visitors, 0);
         const totalEl = document.getElementById('traffic-total');
-        if (totalEl) {
-          const sv = buckets.reduce((s,b)=>s+b.views,0);
-          const svis = buckets.reduce((s,b)=>s+b.visitors,0);
-          const unit = _trafficPeriod === 'weekly' ? '주' : _trafficPeriod === 'monthly' ? '개월' : '일';
-          totalEl.textContent = `${buckets.length}${unit} 합계: ${fmt(sv)} 조회 / ${fmt(svis)} 방문`;
-        }
+        if (totalEl) totalEl.textContent = `${currLabel} 합계: ${fmt(sv)} 조회 / ${fmt(svis)} 방문`;
+        // 이전 동기간 대비 델타
+        setDeltaChip('traffic-compare', sv, prevSum);
       }
 
 
@@ -2885,6 +3022,201 @@ const ICONS: Record<string, string> = {
             <span class="top-page-views">${p.views}회</span>
           </div>`;
         }).join('');
+      }
+
+      // === 오디언스: 유입경로 / 기기·브라우저·OS (analytics pageview 조회) ===
+      let _audienceRows = [];
+      let _funnelCounts = { pageviews: 0, coupang: 0, newsletter: 0 };
+
+      async function fetchAudience() {
+        try {
+          const res = await fetch(
+            `${SUPABASE_URL}/rest/v1/analytics?event_type=eq.pageview&select=created_at,ref:metadata->>referrer,ua:metadata->>user_agent&order=created_at.desc&limit=5000`,
+            { headers }
+          );
+          if (!res.ok) return [];
+          return await res.json();
+        } catch { return []; }
+      }
+
+      async function fetchNewsletterCount() {
+        try {
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/analytics?event_type=eq.newsletter_subscribe&select=id&limit=2000`, { headers });
+          const a = await res.json();
+          return Array.isArray(a) ? a.length : 0;
+        } catch { return 0; }
+      }
+
+      // 유입경로 분류 (자기도메인=직접, localhost/사설IP=로컬개발로 분리)
+      function classifyReferrer(ref) {
+        if (!ref || ref === 'direct') return { key: '직접 유입', kind: 'direct' };
+        let host = ref;
+        try { host = new URL(ref).hostname.replace(/^www\./, ''); } catch {}
+        const h = host.toLowerCase();
+        // 로컬/개발 트래픽
+        if (h === 'localhost' || h === '127.0.0.1' || /^192\.168\.|^10\.|^172\.(1[6-9]|2\d|3[01])\./.test(h) || h.endsWith('.local')) return { key: '로컬/개발', kind: 'internal' };
+        // 자기 도메인(내부 이동) → 직접 유입으로 합산(GA self-referral 처리)
+        if (h.includes('ai-revenue-blog') || h.includes('life-revenue-blog')) return { key: '직접 유입', kind: 'direct' };
+        if (h.includes('google')) return { key: 'Google', kind: 'search' };
+        if (h.includes('naver')) return { key: 'Naver', kind: 'search' };
+        if (h.includes('daum') || h.includes('kakao')) return { key: 'Daum/Kakao', kind: 'search' };
+        if (h.includes('bing')) return { key: 'Bing', kind: 'search' };
+        if (/facebook|instagram|t\.co|twitter|x\.com|threads|linkedin|youtube|reddit/.test(h)) return { key: host, kind: 'social' };
+        return { key: host || '기타', kind: 'referral' };
+      }
+
+      // user_agent 파싱 → 기기/브라우저/OS
+      function parseUA(ua) {
+        ua = ua || '';
+        let device = 'Desktop';
+        if (/iPad|Tablet/i.test(ua)) device = 'Tablet';
+        else if (/Mobi|iPhone|Android/i.test(ua)) device = 'Mobile';
+        let browser = '기타';
+        if (/Edg\//.test(ua)) browser = 'Edge';
+        else if (/SamsungBrowser/.test(ua)) browser = 'Samsung';
+        else if (/KAKAOTALK/i.test(ua)) browser = 'KakaoTalk';
+        else if (/FBAN|FBAV|Instagram/.test(ua)) browser = 'In-App';
+        else if (/Firefox\//.test(ua)) browser = 'Firefox';
+        else if (/Chrome\//.test(ua)) browser = 'Chrome';
+        else if (/Safari\//.test(ua)) browser = 'Safari';
+        let os = '기타';
+        if (/Windows/.test(ua)) os = 'Windows';
+        else if (/iPhone|iPad|iOS/.test(ua)) os = 'iOS';
+        else if (/Mac OS X/.test(ua)) os = 'macOS';
+        else if (/Android/.test(ua)) os = 'Android';
+        else if (/Linux/.test(ua)) os = 'Linux';
+        return { device, browser, os };
+      }
+
+      // 막대 랭킹 렌더 (공용): items=[{name,count,color?}]
+      function renderRankBars(containerId, items, opts) {
+        const el = document.getElementById(containerId);
+        if (!el) return;
+        opts = opts || {};
+        if (!items.length) { el.innerHTML = `<div class="no-data">${opts.empty || '데이터 없음'}</div>`; return; }
+        const total = items.reduce((s, x) => s + x.count, 0) || 1;
+        const max = items[0].count || 1;
+        el.innerHTML = items.map(it => {
+          const pct = Math.round(it.count / total * 100);
+          const barPct = Math.max(Math.round(it.count / max * 100), 3);
+          const color = it.color || opts.color || '#60a5fa';
+          return `<div class="cat-traffic-row">
+            <span class="cat-traffic-name" title="${it.name}">${it.name.length > 14 ? it.name.slice(0,14)+'…' : it.name}</span>
+            <div class="cat-traffic-bar-wrap"><div class="cat-traffic-bar" style="width:${barPct}%;background:${color}"></div></div>
+            <span class="cat-traffic-value">${fmt(it.count)}</span>
+            <span class="cat-traffic-share">${pct}%</span>
+          </div>`;
+        }).join('');
+      }
+
+      const REF_COLORS = { direct: '#94a3b8', search: '#60a5fa', social: '#f472b6', referral: '#4ade80', internal: '#64748b' };
+
+      function renderAudience(rows) {
+        _audienceRows = Array.isArray(rows) ? rows : [];
+        // 유입경로
+        const refBy = {};
+        _audienceRows.forEach(r => {
+          const c = classifyReferrer(r.ref);
+          if (!refBy[c.key]) refBy[c.key] = { name: c.key, count: 0, color: REF_COLORS[c.kind] };
+          refBy[c.key].count++;
+        });
+        const refArr = Object.values(refBy).sort((a,b) => b.count - a.count).slice(0, 8);
+        renderRankBars('ref-bars', refArr, { empty: '유입 데이터 없음' });
+        // 기기 / 브라우저 / OS
+        const dev = {}, br = {}, os = {};
+        _audienceRows.forEach(r => {
+          const p = parseUA(r.ua);
+          dev[p.device] = (dev[p.device]||0)+1;
+          br[p.browser] = (br[p.browser]||0)+1;
+          os[p.os] = (os[p.os]||0)+1;
+        });
+        const toArr = (o) => Object.entries(o).map(([name,count])=>({name,count})).sort((a,b)=>b.count-a.count);
+        const DEV_COLORS = { Mobile:'#60a5fa', Desktop:'#c084fc', Tablet:'#facc15' };
+        renderRankBars('device-bars', toArr(dev).map(x=>({...x,color:DEV_COLORS[x.name]||'#60a5fa'})), { empty: '기기 데이터 없음' });
+        renderRankBars('browser-bars', toArr(br).slice(0,6), { color: '#c084fc', empty: '브라우저 데이터 없음' });
+        renderRankBars('os-bars', toArr(os).slice(0,6), { color: '#4ade80', empty: 'OS 데이터 없음' });
+      }
+
+      // === 전환 퍼널 + 목표 ===
+      function renderFunnelGoals() {
+        const pv = _funnelCounts.pageviews || 0;
+        const cc = _funnelCounts.coupang || 0;
+        const nl = _funnelCounts.newsletter || 0;
+        const el = document.getElementById('funnel-steps');
+        if (el) {
+          const cvr = pv > 0 ? (cc / pv * 100) : 0;
+          const max = pv || 1;
+          const steps = [
+            { label: '페이지뷰', count: pv, color: 'linear-gradient(90deg,#2563eb,#60a5fa)', rate: null },
+            { label: '쿠팡 클릭', count: cc, color: 'linear-gradient(90deg,#ea580c,#facc15)', rate: cvr },
+          ];
+          el.innerHTML = steps.map((s, i) => {
+            const w = Math.max(s.count / max * 100, 2.5);
+            const rate = s.rate !== null ? `<span class="funnel-rate">전환 ${s.rate.toFixed(2)}%</span>` : '';
+            return `<div class="funnel-step">
+              <div class="funnel-step-head">
+                <span class="funnel-step-label">${s.label}</span>
+                <span class="funnel-step-count">${fmt(s.count)}</span>
+                ${rate}
+              </div>
+              <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:${w}%;background:${s.color}"></div></div>
+            </div>`;
+          }).join('');
+        }
+        const gc = document.getElementById('goal-cards');
+        if (gc) {
+          const goals = [
+            { name: '쿠팡 클릭', count: cc, color: '#facc15' },
+            { name: '뉴스레터 구독', count: nl, color: '#4ade80' },
+          ];
+          gc.innerHTML = goals.map(g => {
+            const rate = pv > 0 ? (g.count / pv * 100).toFixed(2) : '0.00';
+            return `<div class="goal-card">
+              <div class="goal-name">${g.name}</div>
+              <div class="goal-val" style="color:${g.color}">${fmt(g.count)}</div>
+              <div class="goal-rate">전환율 ${rate}%</div>
+            </div>`;
+          }).join('');
+        }
+      }
+
+      // === AI 인사이트 한 줄 (규칙 기반) ===
+      function computeInsight() {
+        const el = document.getElementById('ai-insight');
+        if (!el) return;
+        const map = {};
+        _trafficDetail.forEach(d => { if (d.day) map[d.day] = Number(d.views) || 0; });
+        const sum = (start, len) => { let s = 0; for (let i = 0; i < len; i++) { const dt = new Date(); dt.setDate(dt.getDate() - start - i); s += map[dt.toISOString().split('T')[0]] || 0; } return s; };
+        const last7 = sum(0, 7), prev7 = sum(7, 7);
+        let trend;
+        if (prev7 > 0) { const p = Math.round((last7 - prev7) / prev7 * 100); trend = p >= 0 ? `지난주 대비 <b style="color:#4ade80">+${p}%</b>` : `지난주 대비 <b style="color:#f87171">${p}%</b>`; }
+        else trend = '<b>집계 초기</b>';
+        let topRef = '';
+        if (_audienceRows.length) {
+          const by = {}; _audienceRows.forEach(r => { const c = classifyReferrer(r.ref); by[c.key] = (by[c.key] || 0) + 1; });
+          const top = Object.entries(by).sort((a, b) => b[1] - a[1])[0];
+          if (top) topRef = ` · 최다 유입 <b>${top[0]}</b>`;
+        }
+        const pv = _funnelCounts.pageviews || 0, cc = _funnelCounts.coupang || 0;
+        const cvr = pv > 0 ? (cc / pv * 100).toFixed(2) : '0.00';
+        const bulb = '<svg viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.05rem;height:1.05rem;flex-shrink:0"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg>';
+        el.innerHTML = `${bulb}<span>최근 7일 조회 <b>${fmt(last7)}</b> (${trend})${topRef} · 쿠팡 전환율 <b>${cvr}%</b></span>`;
+      }
+
+      // === CSV 내보내기 (현재 방문 추이 기간) ===
+      function exportTrafficCSV() {
+        const buckets = _trafficBuckets || [];
+        if (!buckets.length) return;
+        const head = ['기간', '조회수', '방문자', 'TF', 'LF'];
+        const lines = [head.join(',')].concat(
+          buckets.slice().reverse().map(b => [b.label, b.views, b.visitors, b.tf, b.lf].join(','))
+        );
+        const blob = new Blob(['﻿' + lines.join('\n')], { type: 'text/csv;charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `traffic-${_trafficPeriod}-${new Date().toISOString().split('T')[0]}.csv`;
+        document.body.appendChild(a); a.click(); a.remove();
+        URL.revokeObjectURL(a.href);
       }
 
       // === 쿠팡 상품별 클릭 (analytics 테이블 직접 조회 → metadata.product 집계) ===
@@ -3160,9 +3492,37 @@ const ICONS: Record<string, string> = {
         const btn = e.target.closest('.seg-btn');
         if (!btn) return;
         _trafficPeriod = btn.dataset.period;
+        _trafficCustom = null;                      // 프리셋 선택 시 커스텀 해제
+        const rf = document.getElementById('range-from'); const rt = document.getElementById('range-to');
+        if (rf) rf.value = ''; if (rt) rt.value = '';
+        const rc = document.getElementById('range-clear'); if (rc) rc.style.display = 'none';
         document.querySelectorAll('#traffic-period .seg-btn').forEach(b => b.classList.toggle('active', b === btn));
         renderTrafficPanel();
       });
+
+      // 커스텀 날짜 범위
+      function applyCustomRange() {
+        const from = document.getElementById('range-from')?.value;
+        const to = document.getElementById('range-to')?.value;
+        if (!from || !to) return;
+        _trafficCustom = { from: from <= to ? from : to, to: from <= to ? to : from };
+        document.querySelectorAll('#traffic-period .seg-btn').forEach(b => b.classList.remove('active'));
+        const rc = document.getElementById('range-clear'); if (rc) rc.style.display = '';
+        renderTrafficPanel();
+      }
+      document.getElementById('range-from')?.addEventListener('change', applyCustomRange);
+      document.getElementById('range-to')?.addEventListener('change', applyCustomRange);
+      document.getElementById('range-clear')?.addEventListener('click', () => {
+        _trafficCustom = null;
+        const rf = document.getElementById('range-from'); const rt = document.getElementById('range-to');
+        if (rf) rf.value = ''; if (rt) rt.value = '';
+        document.getElementById('range-clear').style.display = 'none';
+        const daily = document.querySelector('#traffic-period .seg-btn[data-period="daily"]');
+        document.querySelectorAll('#traffic-period .seg-btn').forEach(b => b.classList.toggle('active', b === daily));
+        _trafficPeriod = 'daily';
+        renderTrafficPanel();
+      });
+      document.getElementById('csv-export')?.addEventListener('click', exportTrafficCSV);
 
       // 시간대 패턴 토글 (오늘 시간대 / 14일 히트맵)
       document.getElementById('timepattern-toggle')?.addEventListener('click', (e) => {
@@ -3344,7 +3704,17 @@ const ICONS: Record<string, string> = {
           renderHeatmap(heatmap);
           renderCategoryTraffic();
           renderTopLikedPosts(topLiked);
-          fetchCoupangProducts().then(rows => { renderCoupangProducts(rows); renderCoupangFeed(rows); });
+          // 오디언스(유입경로·기기) + 쿠팡 + 뉴스레터 → 퍼널·인사이트 일괄 렌더
+          _funnelCounts.pageviews = Number(summary?.total_views) || 0;   // 퍼널 분모=실제 총 페이지뷰
+          Promise.all([fetchAudience(), fetchCoupangProducts(), fetchNewsletterCount()]).then(([aud, coup, nl]) => {
+            renderAudience(aud);
+            renderCoupangProducts(coup);
+            renderCoupangFeed(coup);
+            _funnelCounts.coupang = Array.isArray(coup) ? coup.length : 0;
+            _funnelCounts.newsletter = nl;
+            renderFunnelGoals();
+            computeInsight();
+          });
           document.getElementById('last-updated').textContent =
             `Updated: ${new Date().toLocaleString('ko-KR')}`;
 
