@@ -1736,6 +1736,30 @@ const ICONS: Record<string, string> = {
       .tl-bar { height: 5px; background: var(--surface-2); border-radius: 3px; overflow: hidden; margin-bottom: 0.3rem; }
       .tl-fill { height: 100%; border-radius: 3px; min-width: 3px; }
       .tl-sub { font-size: 0.6875rem; color: var(--text-3); font-variant-numeric: tabular-nums; }
+
+      /* 시간대 그룹 막대 (TF/LF 분리) */
+      .hourly-grouped { align-items: flex-end; }
+      .hourly-grouped .chart-bar-col { justify-content: flex-end; }
+      .hbar-group { display: flex; align-items: flex-end; justify-content: center; gap: 1px; width: 100%; height: 90px; }
+      .hbar { width: 46%; max-width: 9px; border-radius: 2px 2px 0 0; }
+      .hbar.bar-tf { background: var(--tf); }
+      .hbar.bar-lf { background: var(--lf); }
+
+      /* 히트맵 컨트롤 + 고정 프레임 */
+      .hm-controls { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.85rem; flex-wrap: wrap; }
+      .heatmap-fixed { min-height: 300px; }
+
+      /* 도넛 compact (기기/브라우저/OS 3열) */
+      .cat-donut-wrap.donut-compact { flex-direction: column; align-items: center; gap: 0.55rem; }
+      .donut-compact .cat-donut { width: 84px; height: 84px; }
+      .donut-compact .cat-legend { width: 100%; gap: 0.2rem; }
+      .donut-compact .cat-legend-name { font-size: 0.6875rem; }
+
+      /* Top Pages 클릭 이동 */
+      a.top-page-item { text-decoration: none; color: inherit; }
+      .tp-go { color: var(--text-3); font-size: 0.75rem; margin-left: 0.15rem; }
+      a.top-page-item:hover .top-page-title { color: var(--accent); }
+      a.top-page-item:hover .tp-go { color: var(--accent); }
       @media (max-width: 900px) {
         .traffic-split { grid-template-columns: 1fr; }
       }
@@ -1949,18 +1973,41 @@ const ICONS: Record<string, string> = {
           </div>
         </div>
         <!-- 시간대(오늘 시간대별) / 히트맵 뷰 — 토글로 전환 -->
-        <div class="tp-view line-chart" id="tp-hourly-view" style="display:none;">
-          <div class="hourly-chart">
-            <div class="chart-bars" id="hourly-chart"></div>
+        <div class="tp-view" id="tp-hourly-view" style="display:none;">
+          <div class="traffic-split">
+            <div class="traffic-chart-wrap">
+              <div class="hourly-chart">
+                <div class="chart-bars hourly-grouped" id="hourly-chart"></div>
+              </div>
+              <div class="trend-legend">
+                <span class="leg-tf">TechFlow</span>
+                <span class="leg-lf">LifeFlow</span>
+              </div>
+            </div>
+            <div class="traffic-table-wrap">
+              <div class="traffic-list-head">
+                <span>🔥 핫한 시간대</span>
+                <span id="hot-metric-label">조회수</span>
+              </div>
+              <div class="traffic-list" id="hourly-hot">
+                <div class="skel-list"><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="tp-view line-chart" id="tp-heatmap-view" style="display:none;">
-          <div class="heatmap-legend" style="justify-content:flex-end;margin-bottom:0.6rem;">
-            <span>적음</span>
-            <i class="hm-cell l0"></i><i class="hm-cell l1"></i><i class="hm-cell l2"></i><i class="hm-cell l3"></i><i class="hm-cell l4"></i>
-            <span>많음</span>
+        <div class="tp-view" id="tp-heatmap-view" style="display:none;">
+          <div class="hm-controls">
+            <div class="seg-toggle" id="heatmap-mode">
+              <button class="seg-btn active" data-hm="daily">일간 (14일)</button>
+              <button class="seg-btn" data-hm="weekly">주간 (요일)</button>
+            </div>
+            <div class="heatmap-legend">
+              <span>적음</span>
+              <i class="hm-cell l0"></i><i class="hm-cell l1"></i><i class="hm-cell l2"></i><i class="hm-cell l3"></i><i class="hm-cell l4"></i>
+              <span>많음</span>
+            </div>
           </div>
-          <div class="heatmap-wrap" id="heatmap-wrap">
+          <div class="heatmap-wrap heatmap-fixed" id="heatmap-wrap">
             <div class="no-data">Loading...</div>
           </div>
         </div>
@@ -2742,91 +2789,140 @@ const ICONS: Record<string, string> = {
       }
 
       // 날짜 x 시간대 히트맵 (최근 14일)
-      function renderHeatmap(data) {
+      let _heatmapData = [];
+      let _heatmapMode = 'daily';   // 'daily'(14일) | 'weekly'(요일)
+
+      function renderHeatmap(data) { _heatmapData = Array.isArray(data) ? data : []; drawHeatmap(); }
+
+      function drawHeatmap() {
         const wrap = document.getElementById('heatmap-wrap');
         if (!wrap) return;
-        if (!data || data.length === 0) {
-          wrap.innerHTML = '<div class="no-data">데이터 없음</div>';
-          return;
-        }
-        // {day, hour, views} -> map[day][hour]
-        const dayMap = {};
-        let maxV = 1;
-        data.forEach(d => {
-          const day = d.day, hour = Number(d.hour), v = Number(d.views) || 0;
-          if (!dayMap[day]) dayMap[day] = {};
-          dayMap[day][hour] = v;
-          if (v > maxV) maxV = v;
-        });
-        // 최근 14일 날짜 목록 (오늘 KST 기준, 최신이 위로)
-        const todayKst = new Date(Date.now() + 9 * 3600 * 1000);
-        const days = [];
-        for (let i = 0; i < 14; i++) {
-          const dt = new Date(todayKst.getTime() - i * 86400000);
-          days.push(dt.toISOString().split('T')[0]);
-        }
-        const level = (v) => {
-          if (!v) return 0;
-          const r = v / maxV;
-          if (r <= 0.15) return 1;
-          if (r <= 0.4) return 2;
-          if (r <= 0.7) return 3;
-          return 4;
-        };
-        // 시간 헤더 (0,3,6,...,21)
+        const data = _heatmapData;
+        if (!data.length) { wrap.innerHTML = '<div class="no-data">데이터 없음</div>'; return; }
+        const level = (v, maxV) => { if (!v) return 0; const r = v / maxV; return r <= 0.15 ? 1 : r <= 0.4 ? 2 : r <= 0.7 ? 3 : 4; };
         let hourHead = '<div class="hm-hourhead">';
         for (let h = 0; h < 24; h++) hourHead += `<span class="hm-hourlabel">${h % 3 === 0 ? h : ''}</span>`;
         hourHead += '</div>';
         let rows = '';
-        days.forEach(day => {
-          const dObj = new Date(day + 'T00:00:00');
-          const wd = ['일','월','화','수','목','금','토'][dObj.getDay()];
-          const label = `${dObj.getMonth()+1}/${dObj.getDate()}(${wd})`;
-          let cells = '';
-          for (let h = 0; h < 24; h++) {
-            const v = (dayMap[day] && dayMap[day][h]) || 0;
-            cells += `<i class="hm-cell l${level(v)}" title="${label} ${h}시: ${v}회"></i>`;
+
+        if (_heatmapMode === 'weekly') {
+          // 요일 × 시간대 집계 (14일치 누적)
+          const dow = {}; let maxV = 1;
+          data.forEach(d => {
+            const dt = new Date(d.day + 'T00:00:00'); const wd = dt.getDay(); const h = Number(d.hour); const v = Number(d.views) || 0;
+            if (!dow[wd]) dow[wd] = {}; dow[wd][h] = (dow[wd][h] || 0) + v; if (dow[wd][h] > maxV) maxV = dow[wd][h];
+          });
+          const names = ['일', '월', '화', '수', '목', '금', '토'];
+          for (let wd = 0; wd < 7; wd++) {
+            let cells = '';
+            for (let h = 0; h < 24; h++) {
+              const v = (dow[wd] && dow[wd][h]) || 0;
+              cells += `<i class="hm-cell l${level(v, maxV)}" title="${names[wd]}요일 ${h}시: ${v}회"></i>`;
+            }
+            rows += `<div class="hm-row"><span class="hm-rowlabel">${names[wd]}</span>${cells}</div>`;
           }
-          rows += `<div class="hm-row"><span class="hm-rowlabel">${dObj.getMonth()+1}/${dObj.getDate()}</span>${cells}</div>`;
-        });
+        } else {
+          // 최근 14일 × 시간대
+          const dayMap = {}; let maxV = 1;
+          data.forEach(d => { const day = d.day, hour = Number(d.hour), v = Number(d.views) || 0; if (!dayMap[day]) dayMap[day] = {}; dayMap[day][hour] = v; if (v > maxV) maxV = v; });
+          const todayKst = new Date(Date.now() + 9 * 3600 * 1000);
+          const days = [];
+          for (let i = 0; i < 14; i++) { const dt = new Date(todayKst.getTime() - i * 86400000); days.push(dt.toISOString().split('T')[0]); }
+          days.forEach(day => {
+            const dObj = new Date(day + 'T00:00:00');
+            const label = `${dObj.getMonth() + 1}/${dObj.getDate()}`;
+            let cells = '';
+            for (let h = 0; h < 24; h++) {
+              const v = (dayMap[day] && dayMap[day][h]) || 0;
+              cells += `<i class="hm-cell l${level(v, maxV)}" title="${label} ${h}시: ${v}회"></i>`;
+            }
+            rows += `<div class="hm-row"><span class="hm-rowlabel">${label}</span>${cells}</div>`;
+          });
+        }
         wrap.innerHTML = `<div class="heatmap-grid">${hourHead}${rows}</div>`;
       }
 
-      function renderHourlyChart(data) {
+
+      let _hourlyViews = [];       // get_hourly_views {hour, views, tf_views, lf_views}
+      let _hourlyVisitors = [];    // analytics 계산 {hour, tf, lf}
+
+      // 오늘(KST) 시간대별 방문자(고유 UA) 소스별 집계 — RPC엔 시간별 방문자가 없어 계산
+      function computeHourlyVisitors(rows) {
+        const todayKst = new Date(Date.now() + 9 * 3600 * 1000).toISOString().split('T')[0];
+        const byHour = {};
+        (rows || []).forEach(r => {
+          const t = new Date(new Date(r.created_at).getTime() + 9 * 3600 * 1000);
+          if (t.toISOString().split('T')[0] !== todayKst) return;
+          const h = t.getUTCHours();
+          if (!byHour[h]) byHour[h] = { tf: new Set(), lf: new Set() };
+          const ua = r.ua || '?';
+          if (r.source === 'lifeflow') byHour[h].lf.add(ua); else byHour[h].tf.add(ua);
+        });
+        const arr = [];
+        for (let h = 0; h < 24; h++) { const b = byHour[h]; arr.push({ hour: h, tf: b ? b.tf.size : 0, lf: b ? b.lf.size : 0 }); }
+        return arr;
+      }
+
+      // 시간대 막대 — TF/LF 분리(그룹) + 조회수/방문자 + 핫한 시간대
+      function renderHourlyChart() {
         const container = document.getElementById('hourly-chart');
         if (!container) return;
-
-        if (!data || data.length === 0) {
-          container.innerHTML = '<div class="no-data" style="width:100%">No pageviews today yet</div>';
+        const metric = _trafficMetric || 'views';
+        const map = {};
+        if (metric === 'visitors') {
+          _hourlyVisitors.forEach(d => { map[d.hour] = { tf: d.tf || 0, lf: d.lf || 0 }; });
+        } else {
+          _hourlyViews.forEach(d => { map[d.hour] = { tf: d.tf_views || 0, lf: d.lf_views || 0 }; });
+        }
+        const hasData = Object.values(map).some(h => h.tf + h.lf > 0);
+        if (!hasData) {
+          container.innerHTML = `<div class="no-data" style="width:100%">오늘 ${metric === 'visitors' ? '방문자' : '조회'} 데이터 없음</div>`;
+          renderHourlyHot(map, metric);
           return;
         }
-
-        const hourMap = {};
-        data.forEach(d => {
-          hourMap[d.hour] = { total: d.views || 0, tf: d.tf_views || 0, lf: d.lf_views || 0 };
-        });
-        const maxViews = Math.max(...Object.values(hourMap).map(h => h.total), 1);
-
+        const maxV = Math.max(1, ...Object.values(map).flatMap(h => [h.tf, h.lf]));
+        const unit = metric === 'visitors' ? '명' : '회';
         let html = '';
         for (let h = 0; h < 24; h++) {
-          const d = hourMap[h] || { total: 0, tf: 0, lf: 0 };
-          const totalH = d.total > 0 ? Math.max((d.total / maxViews) * 90, 4) : 2;
-          const tfH = d.total > 0 ? (d.tf / d.total) * totalH : 0;
-          const lfH = d.total > 0 ? (d.lf / d.total) * totalH : 0;
-          const otherH = totalH - tfH - lfH;
-          const opacity = d.total > 0 ? 1 : 0.2;
+          const d = map[h] || { tf: 0, lf: 0 };
+          const tfH = d.tf > 0 ? Math.max(d.tf / maxV * 90, 2) : 0;
+          const lfH = d.lf > 0 ? Math.max(d.lf / maxV * 90, 2) : 0;
           html += `<div class="chart-bar-col">
-            <div class="chart-bar-tooltip">${h}:00 — TF:${d.tf} LF:${d.lf} (${d.total})</div>
-            <div class="chart-bar-stack" style="height:${totalH}px; opacity:${opacity}">
-              ${lfH > 0 ? `<div class="bar-lf" style="height:${lfH}px"></div>` : ''}
-              ${tfH > 0 ? `<div class="bar-tf" style="height:${tfH}px"></div>` : ''}
-              ${otherH > 0 ? `<div style="height:${otherH}px;background:var(--surface-2);"></div>` : ''}
+            <div class="chart-bar-tooltip">${h}:00 · TF ${fmt(d.tf)} · LF ${fmt(d.lf)} ${unit}</div>
+            <div class="hbar-group">
+              <div class="hbar bar-tf" style="height:${tfH}px"></div>
+              <div class="hbar bar-lf" style="height:${lfH}px"></div>
             </div>
             <span class="chart-bar-label">${h % 3 === 0 ? h : ''}</span>
           </div>`;
         }
         container.innerHTML = html;
+        renderHourlyHot(map, metric);
       }
+
+      // 우측: 가장 핫한 시간대 랭킹
+      function renderHourlyHot(map, metric) {
+        const el = document.getElementById('hourly-hot');
+        const lbl = document.getElementById('hot-metric-label');
+        if (lbl) lbl.textContent = metric === 'visitors' ? '방문자' : '조회수';
+        if (!el) return;
+        const arr = [];
+        for (let h = 0; h < 24; h++) { const d = map[h] || { tf: 0, lf: 0 }; arr.push({ h, tf: d.tf, lf: d.lf, total: d.tf + d.lf }); }
+        const active = arr.filter(a => a.total > 0).sort((a, b) => b.total - a.total);
+        if (!active.length) { el.innerHTML = '<div class="no-data">오늘 데이터 없음</div>'; return; }
+        const max = active[0].total;
+        const unit = metric === 'visitors' ? '명' : '회';
+        el.innerHTML = active.slice(0, 8).map((a, i) => {
+          const bw = Math.max(a.total / max * 100, 4);
+          const medal = i === 0 ? '🔥' : `${i + 1}`;
+          return `<div class="tl-row ${i === 0 ? 'tl-cur' : ''}">
+            <div class="tl-top"><span class="tl-date">${medal} ${a.h}:00~${a.h}:59</span><span class="tl-val" style="color:#facc15">${fmt(a.total)}${unit}</span></div>
+            <div class="tl-bar"><div class="tl-fill" style="width:${bw}%;background:linear-gradient(90deg,#ea580c,#facc15)"></div></div>
+            <div class="tl-sub"><span style="color:#60a5fa">TF ${fmt(a.tf)}</span> · <span style="color:#4ade80">LF ${fmt(a.lf)}</span></div>
+          </div>`;
+        }).join('');
+      }
+
 
       // KPI 델타 칩: 색+화살표 이중 인코딩. yesterday=null이면 override 텍스트 사용
       function setDeltaChip(id, today, yesterday, override) {
@@ -3147,12 +3243,14 @@ const ICONS: Record<string, string> = {
         container.innerHTML = filtered.slice(0, 8).map((p, i) => {
           const title = getPageTitle(p);
           const displayTitle = title.length > 40 ? title.substring(0, 40) + '…' : title;
-          return `<div class="top-page-item">
+          const path = p.path || (p.slug ? `/blog/${p.slug}` : '/');
+          const href = p.source === 'lifeflow' ? `https://life-revenue-blog.vercel.app${path}` : path;
+          return `<a class="top-page-item" href="${href}" target="_blank" rel="noopener">
             <span class="top-page-rank">${i + 1}</span>
             ${sourceBadge(p.source)}
             <span class="top-page-title" title="${title}">${displayTitle || '(home)'}</span>
-            <span class="top-page-views">${p.views}회</span>
-          </div>`;
+            <span class="top-page-views">${p.views}회 <span class="tp-go">↗</span></span>
+          </a>`;
         }).join('');
       }
 
@@ -3163,7 +3261,7 @@ const ICONS: Record<string, string> = {
       async function fetchAudience() {
         try {
           const res = await fetch(
-            `${SUPABASE_URL}/rest/v1/analytics?event_type=eq.pageview&select=created_at,ref:metadata->>referrer,ua:metadata->>user_agent&order=created_at.desc&limit=5000`,
+            `${SUPABASE_URL}/rest/v1/analytics?event_type=eq.pageview&select=created_at,source,ref:metadata->>referrer,ua:metadata->>user_agent&order=created_at.desc&limit=5000`,
             { headers }
           );
           if (!res.ok) return [];
@@ -3241,32 +3339,69 @@ const ICONS: Record<string, string> = {
         }).join('');
       }
 
+      // 도넛 분포 렌더 (conic-gradient + 범례). opts.compact=세로(도넛 위·범례 아래)
+      const DONUT_PALETTE = ['#60a5fa', '#4ade80', '#c084fc', '#facc15', '#f472b6', '#22d3ee', '#fb7185', '#94a3b8'];
+      function renderDonut(containerId, items, opts) {
+        const el = document.getElementById(containerId);
+        if (!el) return;
+        opts = opts || {};
+        const list = items.filter(x => x.count > 0);
+        if (!list.length) { el.innerHTML = `<div class="no-data">${opts.empty || '데이터 없음'}</div>`; return; }
+        const total = list.reduce((s, x) => s + x.count, 0);
+        let pctBefore = 0;
+        const seg = list.map((c, i) => {
+          const color = c.color || DONUT_PALETTE[i % DONUT_PALETTE.length];
+          const pct = c.count / total * 100;
+          const g = list.length > 1 ? Math.min(1, pct / 4) : 0;
+          const s = `#131316 ${pctBefore}% ${pctBefore + g}%, ${color} ${pctBefore + g}% ${pctBefore + pct}%`;
+          pctBefore += pct; return s;
+        }).join(', ');
+        const legend = list.map((c, i) => {
+          const color = c.color || DONUT_PALETTE[i % DONUT_PALETTE.length];
+          const nm = c.name.length > 12 ? c.name.slice(0, 12) + '…' : c.name;
+          return `<div class="cat-legend-item">
+            <span class="cat-legend-dot" style="background:${color}"></span>
+            <span class="cat-legend-name" title="${c.name}">${nm}</span>
+            <span class="cat-legend-count">${fmt(c.count)}</span>
+            <span class="cat-legend-pct">${Math.round(c.count / total * 100)}%</span>
+          </div>`;
+        }).join('');
+        el.innerHTML = `<div class="cat-donut-wrap${opts.compact ? ' donut-compact' : ''}">
+          <div class="cat-donut" style="background: conic-gradient(${seg})">
+            <div class="cat-donut-hole"><span class="donut-num">${fmt(total)}</span><span class="donut-label">${opts.label || ''}</span></div>
+          </div>
+          <div class="cat-legend">${legend}</div>
+        </div>`;
+      }
+
       const REF_COLORS = { direct: '#94a3b8', search: '#60a5fa', social: '#f472b6', referral: '#4ade80', internal: '#64748b' };
+      const DEV_COLORS = { Mobile: '#60a5fa', Desktop: '#c084fc', Tablet: '#facc15' };
+      const OS_COLORS = { Windows: '#60a5fa', macOS: '#c084fc', Android: '#4ade80', iOS: '#f472b6', Linux: '#facc15', 기타: '#94a3b8' };
+      const BR_COLORS = { Chrome: '#60a5fa', Safari: '#4ade80', Edge: '#22d3ee', Firefox: '#fb923c', Samsung: '#c084fc', KakaoTalk: '#facc15', 'In-App': '#f472b6', 기타: '#94a3b8' };
 
       function renderAudience(rows) {
         _audienceRows = Array.isArray(rows) ? rows : [];
-        // 유입경로
+        // 유입경로 (도넛)
         const refBy = {};
         _audienceRows.forEach(r => {
           const c = classifyReferrer(r.ref);
           if (!refBy[c.key]) refBy[c.key] = { name: c.key, count: 0, color: REF_COLORS[c.kind] };
           refBy[c.key].count++;
         });
-        const refArr = Object.values(refBy).sort((a,b) => b.count - a.count).slice(0, 8);
-        renderRankBars('ref-bars', refArr, { empty: '유입 데이터 없음' });
-        // 기기 / 브라우저 / OS
+        const refArr = Object.values(refBy).sort((a, b) => b.count - a.count).slice(0, 8);
+        renderDonut('ref-bars', refArr, { empty: '유입 데이터 없음', label: '유입' });
+        // 기기 / 브라우저 / OS (도넛)
         const dev = {}, br = {}, os = {};
         _audienceRows.forEach(r => {
           const p = parseUA(r.ua);
-          dev[p.device] = (dev[p.device]||0)+1;
-          br[p.browser] = (br[p.browser]||0)+1;
-          os[p.os] = (os[p.os]||0)+1;
+          dev[p.device] = (dev[p.device] || 0) + 1;
+          br[p.browser] = (br[p.browser] || 0) + 1;
+          os[p.os] = (os[p.os] || 0) + 1;
         });
-        const toArr = (o) => Object.entries(o).map(([name,count])=>({name,count})).sort((a,b)=>b.count-a.count);
-        const DEV_COLORS = { Mobile:'#60a5fa', Desktop:'#c084fc', Tablet:'#facc15' };
-        renderRankBars('device-bars', toArr(dev).map(x=>({...x,color:DEV_COLORS[x.name]||'#60a5fa'})), { empty: '기기 데이터 없음' });
-        renderRankBars('browser-bars', toArr(br).slice(0,6), { color: '#c084fc', empty: '브라우저 데이터 없음' });
-        renderRankBars('os-bars', toArr(os).slice(0,6), { color: '#4ade80', empty: 'OS 데이터 없음' });
+        const toArr = (o, colors) => Object.entries(o).map(([name, count]) => ({ name, count, color: colors && colors[name] })).sort((a, b) => b.count - a.count);
+        renderDonut('device-bars', toArr(dev, DEV_COLORS), { compact: true, empty: '기기 데이터 없음' });
+        renderDonut('browser-bars', toArr(br, BR_COLORS).slice(0, 6), { compact: true, empty: '브라우저 데이터 없음' });
+        renderDonut('os-bars', toArr(os, OS_COLORS).slice(0, 6), { compact: true, empty: 'OS 데이터 없음' });
       }
 
       // === 전환 퍼널 + 목표 ===
@@ -3619,13 +3754,15 @@ const ICONS: Record<string, string> = {
         renderEventFeed(undefined, f);
       });
 
-      // 방문 추이 지표 토글 (조회수/방문자)
+      // 방문 추이 지표 토글 (조회수/방문자) — 일/주/월 라인 & 시간대 막대 공통
       document.getElementById('traffic-metric')?.addEventListener('click', (e) => {
         const btn = e.target.closest('.seg-btn');
         if (!btn) return;
         _trafficMetric = btn.dataset.metric;
         document.querySelectorAll('#traffic-metric .seg-btn').forEach(b => b.classList.toggle('active', b === btn));
-        renderTrafficPanel();
+        const activePeriod = document.querySelector('#traffic-period .seg-btn.active')?.dataset.period;
+        if (activePeriod === 'hourly') renderHourlyChart();
+        else renderTrafficPanel();
       });
 
       // 방문 추이 기간 토글 (일간/주간/월간)
@@ -3644,17 +3781,25 @@ const ICONS: Record<string, string> = {
         if (split) split.style.display = isTime ? 'none' : '';
         if (hv) hv.style.display = period === 'hourly' ? '' : 'none';
         if (mv) mv.style.display = period === 'heatmap' ? '' : 'none';
-        // 날짜기반 전용 컨트롤 표시/숨김
-        const ctl = isTime ? 'none' : '';
-        const metricT = document.getElementById('traffic-metric'); if (metricT) metricT.style.display = ctl;
-        const dr = document.querySelector('.date-range'); if (dr) dr.style.display = ctl;
-        const csv = document.getElementById('csv-export'); if (csv) csv.style.display = ctl;
-        const cmp = document.getElementById('traffic-compare'); if (cmp) cmp.style.display = ctl;
+        // 지표 토글: 히트맵만 숨김(일/주/월 라인 + 시간대 막대는 조회수/방문자 지원)
+        const metricT = document.getElementById('traffic-metric'); if (metricT) metricT.style.display = period === 'heatmap' ? 'none' : '';
+        // 날짜기반 전용 컨트롤(범위/CSV/비교): 시간대·히트맵에선 숨김
+        const dateCtl = isTime ? 'none' : '';
+        const dr = document.querySelector('.date-range'); if (dr) dr.style.display = dateCtl;
+        const csv = document.getElementById('csv-export'); if (csv) csv.style.display = dateCtl;
+        const cmp = document.getElementById('traffic-compare'); if (cmp) cmp.style.display = dateCtl;
         const total = document.getElementById('traffic-total');
         const note = document.getElementById('traffic-note');
         if (isTime) {
-          if (total) total.textContent = period === 'hourly' ? '오늘(KST) 시간대별 조회' : '최근 14일 시간대 히트맵';
-          if (note) note.textContent = period === 'hourly' ? '※ 오늘(KST) 시간대별 페이지뷰. 막대는 TF/LF 누적.' : '※ 날짜 × 시간대(KST) 페이지뷰 밀도(최근 14일). 색이 진할수록 많음.';
+          if (period === 'hourly') {
+            if (total) total.textContent = '오늘(KST) 시간대별';
+            if (note) note.textContent = '※ 오늘(KST) 시간대별. TF/LF 막대 분리. 방문자는 고유 UA 기준(당일 계산).';
+            renderHourlyChart();
+          } else {
+            if (total) total.textContent = _heatmapMode === 'weekly' ? '요일 × 시간대 (14일 누적)' : '최근 14일 × 시간대';
+            if (note) note.textContent = '※ 날짜/요일 × 시간대(KST) 페이지뷰 밀도. 색이 진할수록 많음.';
+            drawHeatmap();
+          }
         } else {
           _trafficPeriod = period;
           _trafficCustom = null;
@@ -3689,6 +3834,17 @@ const ICONS: Record<string, string> = {
         renderTrafficPanel();
       });
       document.getElementById('csv-export')?.addEventListener('click', exportTrafficCSV);
+
+      // 히트맵 일간/주간 토글
+      document.getElementById('heatmap-mode')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('.seg-btn');
+        if (!btn) return;
+        _heatmapMode = btn.dataset.hm;
+        document.querySelectorAll('#heatmap-mode .seg-btn').forEach(b => b.classList.toggle('active', b === btn));
+        drawHeatmap();
+        const total = document.getElementById('traffic-total');
+        if (total) total.textContent = _heatmapMode === 'weekly' ? '요일 × 시간대 (14일 누적)' : '최근 14일 × 시간대';
+      });
 
       // 방문 추이 실시간 새로고침
       document.getElementById('refresh-traffic-panel')?.addEventListener('click', () => {
@@ -3858,7 +4014,8 @@ const ICONS: Record<string, string> = {
           }
 
           // Charts & feeds
-          renderHourlyChart(hourly);
+          _hourlyViews = Array.isArray(hourly) ? hourly : [];
+          renderHourlyChart();
           renderTopPages(topPages);
           renderEventFeed(events);
           renderKpiSpark(trend);
@@ -3871,6 +4028,8 @@ const ICONS: Record<string, string> = {
           _funnelCounts.pageviews = Number(summary?.total_views) || 0;   // 퍼널 분모=실제 총 페이지뷰
           Promise.all([fetchAudience(), fetchCoupangProducts(), fetchNewsletterCount()]).then(([aud, coup, nl]) => {
             renderAudience(aud);
+            _hourlyVisitors = computeHourlyVisitors(aud);   // 시간대 방문자(방문자 모드용)
+            if (_trafficMetric === 'visitors') renderHourlyChart();
             renderCoupangProducts(coup);
             renderCoupangFeed(coup);
             _funnelCounts.coupang = Array.isArray(coup) ? coup.length : 0;
