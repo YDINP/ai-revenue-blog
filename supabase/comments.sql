@@ -144,17 +144,21 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- 9. 대시보드: 관리자 삭제 (비밀번호 없이)
+-- ⚠️ SECURITY DEFINER 필수: comments_delete RLS가 USING(false)라 INVOKER면 삭제가
+--    차단되면서도 success를 반환함. DEFINER로 RLS 우회 + 실제 삭제행수 반환.
 CREATE OR REPLACE FUNCTION admin_delete_comment(p_id uuid, p_admin_key text)
 RETURNS json AS $$
+DECLARE n int;
 BEGIN
   -- 간단한 관리자 키 검증 (환경변수 대신 하드코딩, 추후 변경 가능)
   IF p_admin_key != 'blog-admin-2026!' THEN
     RETURN json_build_object('success', false, 'error', 'unauthorized');
   END IF;
-  DELETE FROM comments WHERE id = p_id;
-  RETURN json_build_object('success', true);
+  DELETE FROM comments WHERE id = p_id OR parent_id = p_id;  -- 대상 + 자식 답글 함께 삭제
+  GET DIAGNOSTICS n = ROW_COUNT;
+  RETURN json_build_object('success', true, 'deleted', n);
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- 10. 대시보드: 관리자 답변
 CREATE OR REPLACE FUNCTION admin_reply(
@@ -176,7 +180,7 @@ BEGIN
   RETURNING id INTO new_id;
   RETURN json_build_object('id', new_id, 'success', true);
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- 11. 신고 등록
 CREATE OR REPLACE FUNCTION report_comment(p_comment_id uuid, p_reason text DEFAULT '')
