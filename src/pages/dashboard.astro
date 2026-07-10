@@ -4423,6 +4423,9 @@ const ICONS: Record<string, string> = {
         const input = document.getElementById(`reply-input-${commentId}`);
         const content = input?.value?.trim();
         if (!content) return;
+        // content CHECK 제약: 2~500자 (초과/미만이면 comments_content_check 위반)
+        if (content.length < 2) { alert('답변은 2자 이상 입력해 주세요.'); return; }
+        if (content.length > 500) { alert(`답변은 500자 이내여야 합니다. (현재 ${content.length}자 — ${content.length - 500}자 초과)`); return; }
 
         const item = document.querySelector(`.cm-item[data-id="${commentId}"]`);
         // dataset이 없으면 로드된 댓글 데이터에서 보완
