@@ -4425,19 +4425,22 @@ const ICONS: Record<string, string> = {
         if (!content) return;
 
         const item = document.querySelector(`.cm-item[data-id="${commentId}"]`);
-        const slug = item?.dataset.slug;
-        const source = item?.dataset.source;
+        // dataset이 없으면 로드된 댓글 데이터에서 보완
+        const c = (allComments || []).find(x => String(x.id) === String(commentId));
+        const slug = item?.dataset.slug || c?.post_slug || '';
+        const source = item?.dataset.source || c?.source || 'blog';
 
         try {
           const result = await rpc('admin_reply', {
             p_parent_id: commentId,
             p_slug: slug,
-            p_source: source || 'blog',
+            p_source: source,
             p_content: content,
             p_admin_key: adminKey
           });
 
-          if (result?.success) {
+          if (result && (result.success || result.id)) {
+            if (input) input.value = '';
             loadCommentData();
           } else if (result?.error === 'unauthorized') {
             alert('관리자 키가 올바르지 않습니다. 다시 인증해 주세요.');
@@ -4446,17 +4449,19 @@ const ICONS: Record<string, string> = {
             document.getElementById('comment-auth').style.display = 'flex';
             document.getElementById('comment-dashboard').style.display = 'none';
           } else {
-            alert('답변 전송 실패: ' + (result?.error || 'unknown'));
+            const msg = result?.message || result?.error || result?.hint || JSON.stringify(result);
+            alert('답변 전송 실패: ' + msg);
+            console.error('admin_reply 실패:', result);
           }
         } catch (e) {
-          alert('답변 전송 중 오류가 발생했습니다.');
+          alert('답변 전송 중 오류: ' + (e?.message || e));
           console.error(e);
         }
       };
 
       // 관리자 삭제
       window.adminDeleteComment = async function(commentId) {
-        if (!confirm('이 댓글을 삭제하시겠습니까?')) return;
+        if (!confirm('이 댓글을 삭제하시겠습니까? (답글도 함께 삭제됩니다)')) return;
         try {
           const result = await rpc('admin_delete_comment', {
             p_id: commentId,
@@ -4464,16 +4469,22 @@ const ICONS: Record<string, string> = {
           });
 
           if (result?.success) {
+            // SECURITY DEFINER 적용 후엔 deleted 행수 반환. 0이면 서버 미적용 안내.
+            if (result.deleted === 0) {
+              alert('삭제 요청은 처리됐으나 실제로 지워지지 않았습니다.\nSupabase에 admin 함수 SECURITY DEFINER 마이그레이션이 필요합니다.');
+            }
             loadCommentData();
           } else if (result?.error === 'unauthorized') {
             alert('관리자 키가 올바르지 않습니다.');
             localStorage.removeItem('dash-admin-key');
             adminKey = '';
           } else {
-            alert('삭제 실패: ' + (result?.error || 'unknown'));
+            const msg = result?.message || result?.error || JSON.stringify(result);
+            alert('삭제 실패: ' + msg);
+            console.error('admin_delete_comment 실패:', result);
           }
         } catch (e) {
-          alert('삭제 중 오류가 발생했습니다.');
+          alert('삭제 중 오류: ' + (e?.message || e));
           console.error(e);
         }
       };

@@ -39,4 +39,5 @@ END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- (선택) 진단 중 삽입된 테스트 댓글 정리
-DELETE FROM comments WHERE post_slug = '__diagtest__' OR content IN ('diag-delete-me','diag','테스트 답변 diag');
+DELETE FROM comments WHERE post_slug = '__diagtest__'
+  OR content IN ('diag-delete-me','diag','테스트 답변 diag','diag reply raw','diag-ui-reply','live diag reply');
