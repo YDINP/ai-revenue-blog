@@ -1336,8 +1336,16 @@ const ICONS: Record<string, string> = {
         line-height: 1.5;
         word-break: break-word;
       }
+      .cm-content.cm-goto { cursor: pointer; }
+      .cm-content.cm-goto:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 
-      .cm-slug { font-size: 0.6875rem; color: var(--text-3); margin-top: 0.25rem; }
+      .cm-slug {
+        display: inline-flex; align-items: center; gap: 0.2rem;
+        font-size: 0.6875rem; color: var(--text-3); margin-top: 0.25rem;
+        text-decoration: none;
+      }
+      .cm-slug:hover { color: var(--accent); }
+      .cm-goto-arrow { font-size: 0.75rem; }
 
       .cm-actions {
         display: flex;
@@ -4374,6 +4382,7 @@ const ICONS: Record<string, string> = {
           const parentNote = c.parent_id
             ? '<span style="color:var(--dash-cyan);">↩ 답글</span>' : '';
 
+          const postHref = (c.source === 'lifeflow' ? 'https://life-revenue-blog.vercel.app' : '') + '/blog/' + encodeURIComponent(c.post_slug) + '/';
           return `
             <div class="cm-item" data-id="${c.id}" data-slug="${c.post_slug}" data-source="${c.source}">
               <span class="cm-source ${srcClass}">${srcLabel}</span>
@@ -4383,8 +4392,8 @@ const ICONS: Record<string, string> = {
                   ${adminBadge}${reportBadge}${parentNote}
                   <span>${date}</span>
                 </div>
-                <div class="cm-content">${escHtml(c.content)}</div>
-                <div class="cm-slug">📄 ${escHtml(c.post_slug)}</div>
+                <div class="cm-content cm-goto" onclick="window.open('${postHref}','_blank','noopener')" title="글로 이동 ↗">${escHtml(c.content)}</div>
+                <a class="cm-slug" href="${postHref}" target="_blank" rel="noopener" title="글로 이동">📄 ${escHtml(c.post_slug)} <span class="cm-goto-arrow">↗</span></a>
               </div>
               <div class="cm-actions">
                 <button class="cm-btn" onclick="toggleReplyForm('${c.id}')">💬 답변</button>
