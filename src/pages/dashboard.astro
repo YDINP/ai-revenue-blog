@@ -355,6 +355,8 @@ const ICONS: Record<string, string> = {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 0.75rem;
+        flex-wrap: wrap;
         margin-bottom: 1rem;
       }
 
@@ -362,6 +364,8 @@ const ICONS: Record<string, string> = {
         font-size: 0.875rem;
         font-weight: 600;
         color: var(--text);
+        white-space: nowrap;
+        flex-shrink: 0;
       }
 
       .trend-total {
@@ -1509,6 +1513,11 @@ const ICONS: Record<string, string> = {
         gap: 0.75rem;
         flex: 1;
       }
+      /* 전폭 오늘 현황: 4열 스트립 */
+      .today-panel { margin-bottom: 1.25rem; }
+      .today-grid-4 { grid-template-columns: repeat(4, 1fr); }
+      @media (max-width: 900px) { .today-grid-4 { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 520px) { .today-grid-4 { grid-template-columns: 1fr; } }
 
       .today-grid .metric-box {
         display: flex;
@@ -1680,13 +1689,35 @@ const ICONS: Record<string, string> = {
         gap: 1.25rem;
         align-items: start;
       }
-      .traffic-chart-wrap { min-width: 0; }
+      .traffic-chart-wrap { min-width: 0; position: relative; }
       .traffic-table-wrap { min-width: 0; }
       .traffic-table-wrap .daily-detail-wrap { max-height: 268px; }
       .tp-view { min-width: 0; }
 
       /* 라인 차트: 막대용 flex/height 오버라이드 + 살짝 아래로 */
       .line-chart { display: block; height: auto; padding: 0; margin-top: 0.9rem; }
+
+      /* 차트 호버 툴팁 */
+      .chart-tip {
+        display: none;
+        position: absolute;
+        top: 6px;
+        z-index: 20;
+        pointer-events: none;
+        background: var(--surface-2);
+        border: 1px solid var(--border-strong);
+        border-radius: 8px;
+        padding: 0.5rem 0.625rem;
+        font-size: 0.75rem;
+        min-width: 116px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+      }
+      .chart-tip .ct-date { font-weight: 700; color: var(--text); margin-bottom: 0.35rem; font-size: 0.75rem; }
+      .chart-tip .ct-row { display: flex; align-items: center; gap: 0.4rem; color: var(--text-2); line-height: 1.7; }
+      .chart-tip .ct-row i { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+      .chart-tip .ct-row b { margin-left: auto; color: var(--text); font-variant-numeric: tabular-nums; }
+      .chart-tip .ct-total { border-top: 1px solid var(--border); margin-top: 0.25rem; padding-top: 0.25rem; }
+      .chart-tip .ct-total b { color: var(--text); }
 
       /* 우측 날짜별 리스트 (표 → 2줄 리스트) */
       .traffic-list-head {
@@ -1881,6 +1912,8 @@ const ICONS: Record<string, string> = {
               <button class="seg-btn active" data-period="daily">일간</button>
               <button class="seg-btn" data-period="weekly">주간</button>
               <button class="seg-btn" data-period="monthly">월간</button>
+              <button class="seg-btn" data-period="hourly">시간대</button>
+              <button class="seg-btn" data-period="heatmap">히트맵</button>
             </div>
             <div class="date-range">
               <input type="date" id="range-from" aria-label="시작일" />
@@ -1889,12 +1922,14 @@ const ICONS: Record<string, string> = {
               <button class="seg-btn" id="range-clear" title="범위 초기화" style="display:none;">✕</button>
             </div>
             <button class="refresh-btn" id="csv-export" title="현재 기간 CSV 내보내기">CSV</button>
+            <button class="refresh-btn" id="refresh-traffic-panel" title="실시간 새로고침">↻ 새로고침</button>
             <span class="delta-chip flat" id="traffic-compare" title="이전 동기간 대비">--</span>
             <div class="trend-total"><b id="traffic-total">--</b></div>
           </div>
         </div>
         <div class="traffic-split">
           <div class="traffic-chart-wrap">
+            <div class="chart-tip" id="chart-tip"></div>
             <div class="trend-chart line-chart" id="traffic-chart">
               <div class="no-data">Loading...</div>
             </div>
@@ -1913,70 +1948,59 @@ const ICONS: Record<string, string> = {
             </div>
           </div>
         </div>
-        <p class="dd-note">※ 방문자 = 고유 브라우저(User-Agent) 기준 추정치. 주간·월간은 일자 합산이라 실제 순방문자보다 클 수 있음.</p>
-      </div>
-
-      <!-- ══ Row 3: 오늘 현황(4) + 시간대 패턴(8, 오늘/14일 토글) ══ -->
-      <div class="dash-grid">
-        <div class="panel col-4">
-          <div class="panel-head">
-            <h3><svg class="ico sec-ico i-amber" viewBox="0 0 24 24" set:html={ICONS['clock']}></svg> 오늘 현황</h3>
-            <button class="refresh-btn" id="refresh-traffic">Refresh</button>
-          </div>
-          <div class="today-grid">
-            <div class="metric-box">
-              <div class="metric-label">Today Views</div>
-              <div class="metric-value" id="t-today-views">--</div>
-              <div class="metric-delta neutral" id="t-views-delta">loading...</div>
-              <div class="metric-breakdown" id="t-views-breakdown">
-                <span><i class="dot-tf"></i> TF: --</span>
-                <span><i class="dot-lf"></i> LF: --</span>
-              </div>
-            </div>
-            <div class="metric-box">
-              <div class="metric-label">Coupang Clicks</div>
-              <div class="metric-value" id="t-today-clicks">--</div>
-              <div class="metric-delta neutral" id="t-clicks-delta">loading...</div>
-              <div class="metric-breakdown" id="t-clicks-breakdown">
-                <span><i class="dot-tf"></i> TF: --</span>
-                <span><i class="dot-lf"></i> LF: --</span>
-              </div>
-            </div>
-            <div class="metric-box">
-              <div class="metric-label">Likes</div>
-              <div class="metric-value" id="t-today-likes">--</div>
-              <div class="metric-delta neutral" id="t-likes-total">total: --</div>
-            </div>
-            <div class="metric-box">
-              <div class="metric-label">Subscribers</div>
-              <div class="metric-value" id="t-subscribers">--</div>
-              <div class="metric-delta neutral" id="t-subs-today">today: --</div>
-            </div>
+        <!-- 시간대(오늘 시간대별) / 히트맵 뷰 — 토글로 전환 -->
+        <div class="tp-view line-chart" id="tp-hourly-view" style="display:none;">
+          <div class="hourly-chart">
+            <div class="chart-bars" id="hourly-chart"></div>
           </div>
         </div>
+        <div class="tp-view line-chart" id="tp-heatmap-view" style="display:none;">
+          <div class="heatmap-legend" style="justify-content:flex-end;margin-bottom:0.6rem;">
+            <span>적음</span>
+            <i class="hm-cell l0"></i><i class="hm-cell l1"></i><i class="hm-cell l2"></i><i class="hm-cell l3"></i><i class="hm-cell l4"></i>
+            <span>많음</span>
+          </div>
+          <div class="heatmap-wrap" id="heatmap-wrap">
+            <div class="no-data">Loading...</div>
+          </div>
+        </div>
+        <p class="dd-note" id="traffic-note">※ 방문자 = 고유 브라우저(User-Agent) 기준 추정치. 방문자 TF/LF는 조회 비율로 안분한 추정. 주간·월간은 일자 합산이라 실제 순방문자보다 클 수 있음.</p>
+      </div>
 
-        <div class="panel col-8">
-          <div class="panel-head">
-            <h4><svg class="ico sec-ico i-purple" viewBox="0 0 24 24" set:html={ICONS['clock']}></svg> 시간대 패턴</h4>
-            <div class="seg-toggle" id="timepattern-toggle">
-              <button class="seg-btn active" data-view="hourly">오늘 시간대</button>
-              <button class="seg-btn" data-view="heatmap">14일 히트맵</button>
+      <!-- ══ Row 3: 오늘 현황 (전폭 4-스탯) ══ -->
+      <div class="panel today-panel">
+        <div class="panel-head">
+          <h3><svg class="ico sec-ico i-amber" viewBox="0 0 24 24" set:html={ICONS['clock']}></svg> 오늘 현황</h3>
+          <button class="refresh-btn" id="refresh-traffic">Refresh</button>
+        </div>
+        <div class="today-grid today-grid-4">
+          <div class="metric-box">
+            <div class="metric-label">Today Views</div>
+            <div class="metric-value" id="t-today-views">--</div>
+            <div class="metric-delta neutral" id="t-views-delta">loading...</div>
+            <div class="metric-breakdown" id="t-views-breakdown">
+              <span><i class="dot-tf"></i> TF: --</span>
+              <span><i class="dot-lf"></i> LF: --</span>
             </div>
           </div>
-          <div class="tp-view" id="tp-hourly">
-            <div class="hourly-chart">
-              <div class="chart-bars" id="hourly-chart"></div>
+          <div class="metric-box">
+            <div class="metric-label">Coupang Clicks</div>
+            <div class="metric-value" id="t-today-clicks">--</div>
+            <div class="metric-delta neutral" id="t-clicks-delta">loading...</div>
+            <div class="metric-breakdown" id="t-clicks-breakdown">
+              <span><i class="dot-tf"></i> TF: --</span>
+              <span><i class="dot-lf"></i> LF: --</span>
             </div>
           </div>
-          <div class="tp-view" id="tp-heatmap" style="display:none;">
-            <div class="heatmap-legend" style="justify-content:flex-end;margin-bottom:0.6rem;">
-              <span>적음</span>
-              <i class="hm-cell l0"></i><i class="hm-cell l1"></i><i class="hm-cell l2"></i><i class="hm-cell l3"></i><i class="hm-cell l4"></i>
-              <span>많음</span>
-            </div>
-            <div class="heatmap-wrap" id="heatmap-wrap">
-              <div class="no-data">Loading...</div>
-            </div>
+          <div class="metric-box">
+            <div class="metric-label">Likes</div>
+            <div class="metric-value" id="t-today-likes">--</div>
+            <div class="metric-delta neutral" id="t-likes-total">total: --</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">Subscribers</div>
+            <div class="metric-value" id="t-subscribers">--</div>
+            <div class="metric-delta neutral" id="t-subs-today">today: --</div>
           </div>
         </div>
       </div>
@@ -2879,16 +2903,26 @@ const ICONS: Record<string, string> = {
         return Object.values(buckets).sort((a,b) => a.sortKey < b.sortKey ? -1 : 1);
       }
 
-      // 점선(dashed) 라인 차트 — 조회수(TF/LF 2선) / 방문자(단일선)
+      // 방문자를 TF/LF로 안분(조회 비율 추정) — 방문자엔 소스별 원본이 없음
+      function splitVisitors(b) {
+        if (!b.views) return { tf: 0, lf: 0 };
+        const tf = Math.round(b.visitors * b.tf / b.views);
+        return { tf, lf: Math.max(0, b.visitors - tf) };
+      }
+
+      let _chartHover = null;
+
+      // 점선(dashed) 라인 차트 — 조회수/방문자 모두 TF·LF 2선 + 호버 툴팁
       function renderTrafficChart(buckets) {
         const container = document.getElementById('traffic-chart');
         const legend = document.getElementById('traffic-legend');
         if (!container) return;
-        if (!buckets.length) { container.innerHTML = '<div class="no-data">데이터 없음</div>'; return; }
+        if (!buckets.length) { container.innerHTML = '<div class="no-data">데이터 없음</div>'; _chartHover = null; return; }
 
         const metric = _trafficMetric || 'views';
         const series = metric === 'visitors'
-          ? [{ name: '방문자', color: '#c084fc', vals: buckets.map(b => b.visitors) }]
+          ? [{ name: 'TechFlow', color: '#3b82f6', vals: buckets.map(b => splitVisitors(b).tf) },
+             { name: 'LifeFlow', color: '#22c55e', vals: buckets.map(b => splitVisitors(b).lf) }]
           : [{ name: 'TechFlow', color: '#3b82f6', vals: buckets.map(b => b.tf) },
              { name: 'LifeFlow', color: '#22c55e', vals: buckets.map(b => b.lf) }];
         if (legend) {
@@ -2909,13 +2943,15 @@ const ICONS: Record<string, string> = {
           grid += `<line x1="${padL}" y1="${gy}" x2="${W - padR}" y2="${gy}" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>`;
         });
         grid += `<text x="${padL}" y="${padT - 9}" fill="#7c7c87" font-size="12">최대 ${fmt(maxV)}</text>`;
+        // 호버 크로스헤어(숨김)
+        grid += `<line id="chart-cross" x1="0" y1="${padT}" x2="0" y2="${H - padB}" stroke="rgba(255,255,255,0.28)" stroke-width="1" stroke-dasharray="3 3" style="display:none"/>`;
 
         let lines = '';
         series.forEach(s => {
           const pts = s.vals.map((v, i) => `${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
           lines += `<polyline points="${pts}" fill="none" stroke="${s.color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>`;
           s.vals.forEach((v, i) => {
-            lines += `<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="3.6" fill="#131316" stroke="${s.color}" stroke-width="2"><title>${buckets[i].label}: ${fmt(v)}</title></circle>`;
+            lines += `<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="3.6" fill="#131316" stroke="${s.color}" stroke-width="2"/>`;
           });
         });
 
@@ -2929,6 +2965,7 @@ const ICONS: Record<string, string> = {
         });
 
         container.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${metric === 'visitors' ? '방문자' : '조회수'} 추이 선그래프">${grid}${lines}${xl}</svg>`;
+        _chartHover = { buckets, series, n, W, padL, padR, metric };
       }
 
       // 우측 리스트 (표 → 읽기 쉬운 2줄 리스트)
@@ -2949,8 +2986,9 @@ const ICONS: Record<string, string> = {
           const val = primary(b);
           const barW = Math.max(Math.round(val / maxV * 100), 2);
           const cur = b.key === lastKey;
+          const vis = splitVisitors(b);
           const sub = metric === 'visitors'
-            ? `조회 ${fmt(b.views)}`
+            ? `<span style="color:#60a5fa">TF ${fmt(vis.tf)}</span> · <span style="color:#4ade80">LF ${fmt(vis.lf)}</span> <span style="color:var(--text-3)">· 조회 ${fmt(b.views)}</span>`
             : `<span style="color:#60a5fa">TF ${fmt(b.tf)}</span> · <span style="color:#4ade80">LF ${fmt(b.lf)}</span>`;
           return `<div class="tl-row ${cur ? 'tl-cur' : ''}">
             <div class="tl-top">
@@ -2962,6 +3000,43 @@ const ICONS: Record<string, string> = {
           </div>`;
         }).join('');
       }
+
+      // 차트 호버: 크로스헤어 + 툴팁(전 시리즈 수치)
+      function initChartHover() {
+        const wrap = document.querySelector('.traffic-chart-wrap');
+        const tip = document.getElementById('chart-tip');
+        if (!wrap || !tip) return;
+        wrap.addEventListener('mousemove', (e) => {
+          if (!_chartHover) return;
+          const svg = wrap.querySelector('svg'); if (!svg) return;
+          const { buckets, series, n, W, padL, padR } = _chartHover;
+          const rect = svg.getBoundingClientRect();
+          const scale = rect.width / W;
+          const plotLeft = rect.left + padL * scale;
+          const plotW = (W - padL - padR) * scale;
+          let f = plotW > 0 ? (e.clientX - plotLeft) / plotW : 0;
+          f = Math.max(0, Math.min(1, f));
+          const idx = Math.round(f * (n - 1));
+          const b = buckets[idx];
+          const xv = padL + (n === 1 ? (W - padL - padR) / 2 : idx * (W - padL - padR) / (n - 1));
+          const cross = document.getElementById('chart-cross');
+          if (cross) { cross.setAttribute('x1', xv); cross.setAttribute('x2', xv); cross.style.display = ''; }
+          const total = series.reduce((s, se) => s + (se.vals[idx] || 0), 0);
+          tip.innerHTML = `<div class="ct-date">${b.label}</div>` +
+            series.map(se => `<div class="ct-row"><i style="background:${se.color}"></i>${se.name}<b>${fmt(se.vals[idx])}</b></div>`).join('') +
+            (series.length > 1 ? `<div class="ct-row ct-total">합계<b>${fmt(total)}</b></div>` : '');
+          tip.style.display = 'block';
+          const wr = wrap.getBoundingClientRect();
+          let left = e.clientX - wr.left + 14;
+          if (left > wr.width - 130) left = e.clientX - wr.left - 130;
+          tip.style.left = Math.max(4, left) + 'px';
+        });
+        wrap.addEventListener('mouseleave', () => {
+          tip.style.display = 'none';
+          const cross = document.getElementById('chart-cross'); if (cross) cross.style.display = 'none';
+        });
+      }
+
 
       let _trafficBuckets = [];
       let _trafficCustom = null;   // {from, to} 설정 시 커스텀 범위
@@ -3554,16 +3629,41 @@ const ICONS: Record<string, string> = {
       });
 
       // 방문 추이 기간 토글 (일간/주간/월간)
+      // 방문 추이 뷰 토글 (일간/주간/월간 + 시간대/히트맵)
+      const TRAFFIC_NOTE = '※ 방문자 = 고유 브라우저(User-Agent) 기준 추정치. 방문자 TF/LF는 조회 비율로 안분한 추정. 주간·월간은 일자 합산이라 실제 순방문자보다 클 수 있음.';
       document.getElementById('traffic-period')?.addEventListener('click', (e) => {
         const btn = e.target.closest('.seg-btn');
         if (!btn) return;
-        _trafficPeriod = btn.dataset.period;
-        _trafficCustom = null;                      // 프리셋 선택 시 커스텀 해제
-        const rf = document.getElementById('range-from'); const rt = document.getElementById('range-to');
-        if (rf) rf.value = ''; if (rt) rt.value = '';
-        const rc = document.getElementById('range-clear'); if (rc) rc.style.display = 'none';
+        const period = btn.dataset.period;
         document.querySelectorAll('#traffic-period .seg-btn').forEach(b => b.classList.toggle('active', b === btn));
-        renderTrafficPanel();
+        const isTime = period === 'hourly' || period === 'heatmap';
+        // 뷰 전환
+        const split = document.querySelector('.traffic-split');
+        const hv = document.getElementById('tp-hourly-view');
+        const mv = document.getElementById('tp-heatmap-view');
+        if (split) split.style.display = isTime ? 'none' : '';
+        if (hv) hv.style.display = period === 'hourly' ? '' : 'none';
+        if (mv) mv.style.display = period === 'heatmap' ? '' : 'none';
+        // 날짜기반 전용 컨트롤 표시/숨김
+        const ctl = isTime ? 'none' : '';
+        const metricT = document.getElementById('traffic-metric'); if (metricT) metricT.style.display = ctl;
+        const dr = document.querySelector('.date-range'); if (dr) dr.style.display = ctl;
+        const csv = document.getElementById('csv-export'); if (csv) csv.style.display = ctl;
+        const cmp = document.getElementById('traffic-compare'); if (cmp) cmp.style.display = ctl;
+        const total = document.getElementById('traffic-total');
+        const note = document.getElementById('traffic-note');
+        if (isTime) {
+          if (total) total.textContent = period === 'hourly' ? '오늘(KST) 시간대별 조회' : '최근 14일 시간대 히트맵';
+          if (note) note.textContent = period === 'hourly' ? '※ 오늘(KST) 시간대별 페이지뷰. 막대는 TF/LF 누적.' : '※ 날짜 × 시간대(KST) 페이지뷰 밀도(최근 14일). 색이 진할수록 많음.';
+        } else {
+          _trafficPeriod = period;
+          _trafficCustom = null;
+          const rf = document.getElementById('range-from'); const rt = document.getElementById('range-to');
+          if (rf) rf.value = ''; if (rt) rt.value = '';
+          const rc = document.getElementById('range-clear'); if (rc) rc.style.display = 'none';
+          if (note) note.textContent = TRAFFIC_NOTE;
+          renderTrafficPanel();
+        }
       });
 
       // 커스텀 날짜 범위
@@ -3590,16 +3690,13 @@ const ICONS: Record<string, string> = {
       });
       document.getElementById('csv-export')?.addEventListener('click', exportTrafficCSV);
 
-      // 시간대 패턴 토글 (오늘 시간대 / 14일 히트맵)
-      document.getElementById('timepattern-toggle')?.addEventListener('click', (e) => {
-        const btn = e.target.closest('.seg-btn');
-        if (!btn) return;
-        const view = btn.dataset.view;
-        document.querySelectorAll('#timepattern-toggle .seg-btn').forEach(b => b.classList.toggle('active', b === btn));
-        const hourly = document.getElementById('tp-hourly');
-        const heatmap = document.getElementById('tp-heatmap');
-        if (hourly) hourly.style.display = view === 'hourly' ? '' : 'none';
-        if (heatmap) heatmap.style.display = view === 'heatmap' ? '' : 'none';
+      // 방문 추이 실시간 새로고침
+      document.getElementById('refresh-traffic-panel')?.addEventListener('click', () => {
+        const btn = document.getElementById('refresh-traffic-panel');
+        if (btn) { btn.textContent = '갱신 중…'; btn.disabled = true; }
+        Promise.resolve(loadTraffic()).finally(() => {
+          setTimeout(() => { if (btn) { btn.textContent = '↻ 새로고침'; btn.disabled = false; } }, 400);
+        });
       });
 
       async function loadTraffic() {
@@ -4085,6 +4182,7 @@ const ICONS: Record<string, string> = {
       fetchLifeFlowRSS();
       loadTraffic();
       checkSupabase();
+      initChartHover();
       setInterval(loadTraffic, 30000);
     </script>
   </body>
