@@ -1411,28 +1411,34 @@ const ICONS: Record<string, string> = {
       @keyframes spin { to { transform: rotate(360deg); } }
 
       /* ── 스크롤바 ─────────────────────────────────────── */
-      .daily-detail-wrap, .comment-list, .heatmap-wrap, .main-tabs {
+      .daily-detail-wrap, .comment-list, .heatmap-wrap, .main-tabs, .traffic-list {
         scrollbar-width: thin;
-        scrollbar-color: rgba(161, 161, 170, 0.3) transparent;
+        scrollbar-color: rgba(161, 161, 170, 0.35) transparent;
       }
 
       .daily-detail-wrap::-webkit-scrollbar,
       .comment-list::-webkit-scrollbar,
       .heatmap-wrap::-webkit-scrollbar,
-      .main-tabs::-webkit-scrollbar { width: 8px; height: 8px; }
+      .main-tabs::-webkit-scrollbar,
+      .traffic-list::-webkit-scrollbar { width: 9px; height: 9px; }
 
       .daily-detail-wrap::-webkit-scrollbar-thumb,
       .comment-list::-webkit-scrollbar-thumb,
       .heatmap-wrap::-webkit-scrollbar-thumb,
-      .main-tabs::-webkit-scrollbar-thumb {
-        background: rgba(161, 161, 170, 0.28);
-        border-radius: 4px;
+      .main-tabs::-webkit-scrollbar-thumb,
+      .traffic-list::-webkit-scrollbar-thumb {
+        background: rgba(161, 161, 170, 0.32);
+        border-radius: 5px;
+        border: 2px solid transparent;
+        background-clip: padding-box;
       }
+      .traffic-list::-webkit-scrollbar-thumb:hover { background: rgba(161, 161, 170, 0.55); background-clip: padding-box; }
 
       .daily-detail-wrap::-webkit-scrollbar-track,
       .comment-list::-webkit-scrollbar-track,
       .heatmap-wrap::-webkit-scrollbar-track,
-      .main-tabs::-webkit-scrollbar-track { background: transparent; }
+      .main-tabs::-webkit-scrollbar-track,
+      .traffic-list::-webkit-scrollbar-track { background: transparent; }
 
       /* ── 반응형 ───────────────────────────────────────── */
       @media (max-width: 1100px) and (min-width: 769px) {
@@ -1747,13 +1753,69 @@ const ICONS: Record<string, string> = {
 
       /* 히트맵 컨트롤 + 고정 프레임 */
       .hm-controls { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.85rem; flex-wrap: wrap; }
-      .heatmap-fixed { min-height: 300px; }
+      .heatmap-fixed {
+        min-height: 300px;
+        border: 1px solid var(--border);
+        border-radius: var(--r-sm);
+        padding: 0.85rem 0.75rem;
+        background: rgba(0,0,0,0.12);
+      }
+      #tp-heatmap-view { position: relative; }
+
+      /* 시간대 막대: 우측 핫 리스트와 세로 중앙 정렬 */
+      #tp-hourly-view .traffic-chart-wrap { min-height: 300px; display: flex; flex-direction: column; justify-content: center; }
+
+      /* 히트맵 호버 팝업 */
+      .hm-tip {
+        display: none;
+        position: absolute;
+        z-index: 30;
+        pointer-events: none;
+        background: var(--surface-2);
+        border: 1px solid var(--border-strong);
+        border-radius: 8px;
+        padding: 0.45rem 0.6rem;
+        font-size: 0.75rem;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+        white-space: nowrap;
+      }
+
+      /* 방문추이 우측 리스트: 드래그 스크롤 */
+      .traffic-list { cursor: grab; }
+      .traffic-list.dragging { cursor: grabbing; user-select: none; }
 
       /* 도넛 compact (기기/브라우저/OS 3열) */
       .cat-donut-wrap.donut-compact { flex-direction: column; align-items: center; gap: 0.55rem; }
       .donut-compact .cat-donut { width: 84px; height: 84px; }
       .donut-compact .cat-legend { width: 100%; gap: 0.2rem; }
       .donut-compact .cat-legend-name { font-size: 0.6875rem; }
+
+      /* SVG 도넛 (큰 사이즈 + 중앙 총합 텍스트 안겹침 + 세그먼트 호버) */
+      .donut-svg-wrap { position: relative; width: 150px; height: 150px; flex-shrink: 0; }
+      .donut-svg { width: 150px; height: 150px; display: block; transform: rotate(0deg); }
+      .donut-seg { cursor: pointer; }
+      .donut-seg:hover { opacity: 0.82; }
+      .donut-center {
+        position: absolute; inset: 0;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        pointer-events: none;
+      }
+      .donut-center .donut-num { font-size: 1.375rem; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+      .donut-center .donut-label { font-size: 0.6875rem; color: var(--text-2); margin-top: 2px; }
+
+      /* 도넛 세그먼트 호버 툴팁 */
+      .donut-tip {
+        display: none; position: fixed; z-index: 90; pointer-events: none;
+        align-items: center; gap: 0.4rem;
+        background: var(--surface-2); border: 1px solid var(--border-strong);
+        border-radius: 8px; padding: 0.4rem 0.6rem; font-size: 0.75rem;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.45); white-space: nowrap;
+      }
+      .donut-tip .dt-dot { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+      .donut-tip b { color: var(--text); font-weight: 700; }
+
+      /* 오디언스 도넛 패널: 도넛 왼쪽 + 범례 오른쪽, 세로 중앙 */
+      #audience-donut .cat-donut-wrap, #ref-bars .cat-donut-wrap { align-items: center; gap: 1.5rem; min-height: 158px; }
 
       /* Top Pages 클릭 이동 */
       a.top-page-item { text-decoration: none; color: inherit; }
@@ -1997,19 +2059,20 @@ const ICONS: Record<string, string> = {
         </div>
         <div class="tp-view" id="tp-heatmap-view" style="display:none;">
           <div class="hm-controls">
-            <div class="seg-toggle" id="heatmap-mode">
-              <button class="seg-btn active" data-hm="daily">일간 (14일)</button>
-              <button class="seg-btn" data-hm="weekly">주간 (요일)</button>
-            </div>
             <div class="heatmap-legend">
               <span>적음</span>
               <i class="hm-cell l0"></i><i class="hm-cell l1"></i><i class="hm-cell l2"></i><i class="hm-cell l3"></i><i class="hm-cell l4"></i>
               <span>많음</span>
             </div>
+            <div class="seg-toggle" id="heatmap-mode">
+              <button class="seg-btn active" data-hm="daily">일간 (14일)</button>
+              <button class="seg-btn" data-hm="weekly">주간 (요일)</button>
+            </div>
           </div>
           <div class="heatmap-wrap heatmap-fixed" id="heatmap-wrap">
             <div class="no-data">Loading...</div>
           </div>
+          <div class="hm-tip" id="hm-tip"></div>
         </div>
         <p class="dd-note" id="traffic-note">※ 방문자 = 고유 브라우저(User-Agent) 기준 추정치. 방문자 TF/LF는 조회 비율로 안분한 추정. 주간·월간은 일자 합산이라 실제 순방문자보다 클 수 있음.</p>
       </div>
@@ -2097,20 +2160,16 @@ const ICONS: Record<string, string> = {
           </div>
         </div>
         <div class="panel col-6">
-          <div class="panel-head"><h4><svg class="ico sec-ico i-purple" viewBox="0 0 24 24" set:html={ICONS['grid']}></svg> 기기 · 브라우저 · OS</h4></div>
-          <div class="audience-3">
-            <div>
-              <div class="mini-title">기기</div>
-              <div class="cat-traffic-bars" id="device-bars"><div class="skel-list"><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span></div></div>
+          <div class="panel-head">
+            <h4><svg class="ico sec-ico i-purple" viewBox="0 0 24 24" set:html={ICONS['grid']}></svg> 기기 · 브라우저 · OS</h4>
+            <div class="seg-toggle" id="audience-toggle">
+              <button class="seg-btn active" data-aud="device">기기</button>
+              <button class="seg-btn" data-aud="browser">브라우저</button>
+              <button class="seg-btn" data-aud="os">OS</button>
             </div>
-            <div>
-              <div class="mini-title">브라우저</div>
-              <div class="cat-traffic-bars" id="browser-bars"><div class="skel-list"><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span></div></div>
-            </div>
-            <div>
-              <div class="mini-title">OS</div>
-              <div class="cat-traffic-bars" id="os-bars"><div class="skel-list"><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span></div></div>
-            </div>
+          </div>
+          <div id="audience-donut">
+            <div class="skel-list"><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span></div>
           </div>
         </div>
       </div>
@@ -2817,7 +2876,7 @@ const ICONS: Record<string, string> = {
             let cells = '';
             for (let h = 0; h < 24; h++) {
               const v = (dow[wd] && dow[wd][h]) || 0;
-              cells += `<i class="hm-cell l${level(v, maxV)}" title="${names[wd]}요일 ${h}시: ${v}회"></i>`;
+              cells += `<i class="hm-cell l${level(v, maxV)}" data-lbl="${names[wd]}요일" data-h="${h}" data-v="${v}"></i>`;
             }
             rows += `<div class="hm-row"><span class="hm-rowlabel">${names[wd]}</span>${cells}</div>`;
           }
@@ -2834,7 +2893,7 @@ const ICONS: Record<string, string> = {
             let cells = '';
             for (let h = 0; h < 24; h++) {
               const v = (dayMap[day] && dayMap[day][h]) || 0;
-              cells += `<i class="hm-cell l${level(v, maxV)}" title="${label} ${h}시: ${v}회"></i>`;
+              cells += `<i class="hm-cell l${level(v, maxV)}" data-lbl="${label}" data-h="${h}" data-v="${v}"></i>`;
             }
             rows += `<div class="hm-row"><span class="hm-rowlabel">${label}</span>${cells}</div>`;
           });
@@ -3133,6 +3192,42 @@ const ICONS: Record<string, string> = {
         });
       }
 
+      // 히트맵 셀 호버 팝업
+      function initHeatmapHover() {
+        const view = document.getElementById('tp-heatmap-view');
+        const wrap = document.getElementById('heatmap-wrap');
+        const tip = document.getElementById('hm-tip');
+        if (!view || !wrap || !tip) return;
+        wrap.addEventListener('mousemove', (e) => {
+          const cell = e.target.closest && e.target.closest('.hm-cell');
+          if (!cell || cell.dataset.h === undefined) { tip.style.display = 'none'; return; }
+          tip.innerHTML = `<b>${cell.dataset.lbl} ${cell.dataset.h}시</b> · 조회 ${fmt(+cell.dataset.v)}회`;
+          tip.style.display = 'block';
+          const vr = view.getBoundingClientRect();
+          let left = e.clientX - vr.left + 14; if (left > vr.width - 150) left = e.clientX - vr.left - 150;
+          tip.style.left = Math.max(4, left) + 'px';
+          tip.style.top = (e.clientY - vr.top + 16) + 'px';
+        });
+        wrap.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+      }
+
+      // 드래그 스크롤(세로) — 방문추이 우측 리스트
+      function enableDragScroll(el) {
+        if (!el) return;
+        let down = false, startY = 0, startTop = 0, moved = false;
+        el.addEventListener('mousedown', (e) => {
+          if (e.target.closest('a')) return;         // 링크는 방해 안 함
+          down = true; moved = false; startY = e.clientY; startTop = el.scrollTop; el.classList.add('dragging');
+        });
+        window.addEventListener('mousemove', (e) => {
+          if (!down) return;
+          const dy = e.clientY - startY;
+          if (Math.abs(dy) > 3) moved = true;
+          el.scrollTop = startTop - dy;
+        });
+        window.addEventListener('mouseup', () => { if (down) { down = false; el.classList.remove('dragging'); } });
+      }
+
 
       let _trafficBuckets = [];
       let _trafficCustom = null;   // {from, to} 설정 시 커스텀 범위
@@ -3339,8 +3434,14 @@ const ICONS: Record<string, string> = {
         }).join('');
       }
 
-      // 도넛 분포 렌더 (conic-gradient + 범례). opts.compact=세로(도넛 위·범례 아래)
+      // SVG 도넛 (세그먼트 호버 가능, 큰 사이즈, 중앙 총합 텍스트)
       const DONUT_PALETTE = ['#60a5fa', '#4ade80', '#c084fc', '#facc15', '#f472b6', '#22d3ee', '#fb7185', '#94a3b8'];
+      function donutArc(cx, cy, rO, rI, a0, a1) {
+        const P = (r, a) => [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+        const large = (a1 - a0) > Math.PI ? 1 : 0;
+        const [x0, y0] = P(rO, a0), [x1, y1] = P(rO, a1), [x2, y2] = P(rI, a1), [x3, y3] = P(rI, a0);
+        return `M${x0.toFixed(2)} ${y0.toFixed(2)} A${rO} ${rO} 0 ${large} 1 ${x1.toFixed(2)} ${y1.toFixed(2)} L${x2.toFixed(2)} ${y2.toFixed(2)} A${rI} ${rI} 0 ${large} 0 ${x3.toFixed(2)} ${y3.toFixed(2)} Z`;
+      }
       function renderDonut(containerId, items, opts) {
         const el = document.getElementById(containerId);
         if (!el) return;
@@ -3348,17 +3449,25 @@ const ICONS: Record<string, string> = {
         const list = items.filter(x => x.count > 0);
         if (!list.length) { el.innerHTML = `<div class="no-data">${opts.empty || '데이터 없음'}</div>`; return; }
         const total = list.reduce((s, x) => s + x.count, 0);
-        let pctBefore = 0;
-        const seg = list.map((c, i) => {
+        const cx = 50, cy = 50, rO = 46, rI = 30;
+        let a0 = -Math.PI / 2, segs = '';
+        list.forEach((c, i) => {
           const color = c.color || DONUT_PALETTE[i % DONUT_PALETTE.length];
-          const pct = c.count / total * 100;
-          const g = list.length > 1 ? Math.min(1, pct / 4) : 0;
-          const s = `#131316 ${pctBefore}% ${pctBefore + g}%, ${color} ${pctBefore + g}% ${pctBefore + pct}%`;
-          pctBefore += pct; return s;
-        }).join(', ');
+          const frac = c.count / total;
+          const pctTxt = Math.round(frac * 100);
+          const attrs = `class="donut-seg" data-name="${c.name}" data-val="${c.count}" data-pct="${pctTxt}" data-color="${color}"`;
+          if (list.length === 1) {
+            segs += `<circle cx="${cx}" cy="${cy}" r="${(rO + rI) / 2}" fill="none" stroke="${color}" stroke-width="${rO - rI}" ${attrs}/>`;
+          } else {
+            const a1 = a0 + frac * 2 * Math.PI;
+            const gap = 0.028;
+            segs += `<path d="${donutArc(cx, cy, rO, rI, a0 + gap, a1 - gap)}" fill="${color}" ${attrs}/>`;
+            a0 = a1;
+          }
+        });
         const legend = list.map((c, i) => {
           const color = c.color || DONUT_PALETTE[i % DONUT_PALETTE.length];
-          const nm = c.name.length > 12 ? c.name.slice(0, 12) + '…' : c.name;
+          const nm = c.name.length > 14 ? c.name.slice(0, 14) + '…' : c.name;
           return `<div class="cat-legend-item">
             <span class="cat-legend-dot" style="background:${color}"></span>
             <span class="cat-legend-name" title="${c.name}">${nm}</span>
@@ -3366,12 +3475,32 @@ const ICONS: Record<string, string> = {
             <span class="cat-legend-pct">${Math.round(c.count / total * 100)}%</span>
           </div>`;
         }).join('');
-        el.innerHTML = `<div class="cat-donut-wrap${opts.compact ? ' donut-compact' : ''}">
-          <div class="cat-donut" style="background: conic-gradient(${seg})">
-            <div class="cat-donut-hole"><span class="donut-num">${fmt(total)}</span><span class="donut-label">${opts.label || ''}</span></div>
+        el.innerHTML = `<div class="cat-donut-wrap">
+          <div class="donut-svg-wrap">
+            <svg viewBox="0 0 100 100" class="donut-svg">${segs}</svg>
+            <div class="donut-center"><span class="donut-num">${fmt(total)}</span><span class="donut-label">${opts.label || ''}</span></div>
           </div>
           <div class="cat-legend">${legend}</div>
         </div>`;
+        // 세그먼트 호버 툴팁 (직접 바인딩)
+        const tip = ensureDonutTip();
+        el.querySelectorAll('.donut-seg').forEach(seg => {
+          seg.addEventListener('mouseenter', () => {
+            tip.innerHTML = `<span class="dt-dot" style="background:${seg.dataset.color}"></span><b>${seg.dataset.name}</b> ${fmt(+seg.dataset.val)} · ${seg.dataset.pct}%`;
+            tip.style.display = 'flex';
+          });
+          seg.addEventListener('mousemove', (e) => {
+            tip.style.left = (e.clientX + 14) + 'px';
+            tip.style.top = (e.clientY + 14) + 'px';
+          });
+          seg.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+        });
+      }
+
+      function ensureDonutTip() {
+        let tip = document.getElementById('donut-tip');
+        if (!tip) { tip = document.createElement('div'); tip.id = 'donut-tip'; tip.className = 'donut-tip'; document.body.appendChild(tip); }
+        return tip;
       }
 
       const REF_COLORS = { direct: '#94a3b8', search: '#60a5fa', social: '#f472b6', referral: '#4ade80', internal: '#64748b' };
@@ -3379,9 +3508,13 @@ const ICONS: Record<string, string> = {
       const OS_COLORS = { Windows: '#60a5fa', macOS: '#c084fc', Android: '#4ade80', iOS: '#f472b6', Linux: '#facc15', 기타: '#94a3b8' };
       const BR_COLORS = { Chrome: '#60a5fa', Safari: '#4ade80', Edge: '#22d3ee', Firefox: '#fb923c', Samsung: '#c084fc', KakaoTalk: '#facc15', 'In-App': '#f472b6', 기타: '#94a3b8' };
 
+      let _audDist = { device: [], browser: [], os: [] };
+      let _audActive = 'device';
+      const AUD_LABEL = { device: '기기', browser: '브라우저', os: 'OS' };
+
       function renderAudience(rows) {
         _audienceRows = Array.isArray(rows) ? rows : [];
-        // 유입경로 (도넛)
+        // 유입경로 도넛
         const refBy = {};
         _audienceRows.forEach(r => {
           const c = classifyReferrer(r.ref);
@@ -3390,7 +3523,7 @@ const ICONS: Record<string, string> = {
         });
         const refArr = Object.values(refBy).sort((a, b) => b.count - a.count).slice(0, 8);
         renderDonut('ref-bars', refArr, { empty: '유입 데이터 없음', label: '유입' });
-        // 기기 / 브라우저 / OS (도넛)
+        // 기기/브라우저/OS 집계 저장 후 활성 항목만 도넛
         const dev = {}, br = {}, os = {};
         _audienceRows.forEach(r => {
           const p = parseUA(r.ua);
@@ -3399,9 +3532,12 @@ const ICONS: Record<string, string> = {
           os[p.os] = (os[p.os] || 0) + 1;
         });
         const toArr = (o, colors) => Object.entries(o).map(([name, count]) => ({ name, count, color: colors && colors[name] })).sort((a, b) => b.count - a.count);
-        renderDonut('device-bars', toArr(dev, DEV_COLORS), { compact: true, empty: '기기 데이터 없음' });
-        renderDonut('browser-bars', toArr(br, BR_COLORS).slice(0, 6), { compact: true, empty: '브라우저 데이터 없음' });
-        renderDonut('os-bars', toArr(os, OS_COLORS).slice(0, 6), { compact: true, empty: 'OS 데이터 없음' });
+        _audDist = { device: toArr(dev, DEV_COLORS), browser: toArr(br, BR_COLORS).slice(0, 7), os: toArr(os, OS_COLORS).slice(0, 7) };
+        renderAudienceDonut();
+      }
+
+      function renderAudienceDonut() {
+        renderDonut('audience-donut', _audDist[_audActive] || [], { empty: '데이터 없음', label: AUD_LABEL[_audActive] });
       }
 
       // === 전환 퍼널 + 목표 ===
@@ -3834,6 +3970,15 @@ const ICONS: Record<string, string> = {
         renderTrafficPanel();
       });
       document.getElementById('csv-export')?.addEventListener('click', exportTrafficCSV);
+
+      // 기기/브라우저/OS 토글
+      document.getElementById('audience-toggle')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('.seg-btn');
+        if (!btn) return;
+        _audActive = btn.dataset.aud;
+        document.querySelectorAll('#audience-toggle .seg-btn').forEach(b => b.classList.toggle('active', b === btn));
+        renderAudienceDonut();
+      });
 
       // 히트맵 일간/주간 토글
       document.getElementById('heatmap-mode')?.addEventListener('click', (e) => {
@@ -4342,6 +4487,9 @@ const ICONS: Record<string, string> = {
       loadTraffic();
       checkSupabase();
       initChartHover();
+      initHeatmapHover();
+      enableDragScroll(document.getElementById('traffic-list'));
+      enableDragScroll(document.getElementById('hourly-hot'));
       setInterval(loadTraffic, 30000);
     </script>
   </body>
