@@ -1665,11 +1665,16 @@ const ICONS: Record<string, string> = {
       .sec-ico.i-red { color: #fb7185; }
 
       /* ── 세그먼트 토글 (일/주/월, 오늘/14일) ── */
-      .th-right { display: flex; align-items: center; gap: 0.875rem; flex-wrap: wrap; flex: 1; }
+      .th-right { display: flex; align-items: center; gap: 0.875rem; flex-wrap: wrap; width: 100%; }
       /* 합계 텍스트를 우측 끝으로 밀어 토글 위치를 고정(텍스트 길이 변해도 안 밀림) */
       .th-right .trend-total { margin-left: auto; text-align: right; }
-      /* 방문추이 헤더 높이 고정: 합계 텍스트 길이에 따라 줄바꿈돼도 패널 높이 안 변함 */
-      .trend-header:has(.th-right) { min-height: 68px; align-content: center; }
+      /* 방문추이 헤더: 제목(좌상단 고정) 위 / 토글 영역 아래 별도 라인 */
+      .trend-header:has(.th-right) {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.7rem;
+      }
+      .trend-header:has(.th-right) h3 { align-self: flex-start; }
       .seg-toggle {
         display: inline-flex;
         background: var(--surface-2);
