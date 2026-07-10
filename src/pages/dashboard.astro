@@ -519,17 +519,17 @@ const ICONS: Record<string, string> = {
       /* ── 히트맵 ───────────────────────────────────────── */
       .heatmap-wrap { overflow-x: auto; padding-bottom: 6px; }
       .heatmap-grid { display: inline-block; min-width: 100%; }
-      .hm-row { display: flex; align-items: center; gap: 2px; margin-bottom: 2px; }
+      .hm-row { display: flex; align-items: center; gap: 3px; margin-bottom: 3px; }
       .hm-rowlabel {
-        width: 44px; flex: 0 0 44px;
-        font-size: 0.6875rem; color: var(--text-2);
+        width: 46px; flex: 0 0 46px;
+        font-size: 0.72rem; color: var(--text-2);
         text-align: right; padding-right: 6px;
         font-variant-numeric: tabular-nums;
       }
-      .hm-hourhead { display: flex; gap: 2px; margin: 0 0 4px 50px; }
+      .hm-hourhead { display: flex; gap: 3px; margin: 0 0 5px 52px; }
       .hm-cell {
-        width: 15px; height: 15px; flex: 0 0 15px;
-        border-radius: 3px;
+        width: 21px; height: 21px; flex: 0 0 21px;
+        border-radius: 4px;
         display: inline-block;
       }
       /* 단일 색상(블루) 순차 램프 — 밝기 단조 증가 */
@@ -539,7 +539,7 @@ const ICONS: Record<string, string> = {
       .hm-cell.l3 { background: #3b82f6; }
       .hm-cell.l4 { background: #93c5fd; }
       .hm-hourlabel {
-        width: 15px; flex: 0 0 15px;
+        width: 21px; flex: 0 0 21px;
         font-size: 0.625rem; color: var(--text-3);
         text-align: center;
       }
@@ -1665,7 +1665,11 @@ const ICONS: Record<string, string> = {
       .sec-ico.i-red { color: #fb7185; }
 
       /* ── 세그먼트 토글 (일/주/월, 오늘/14일) ── */
-      .th-right { display: flex; align-items: center; gap: 0.875rem; flex-wrap: wrap; }
+      .th-right { display: flex; align-items: center; gap: 0.875rem; flex-wrap: wrap; flex: 1; }
+      /* 합계 텍스트를 우측 끝으로 밀어 토글 위치를 고정(텍스트 길이 변해도 안 밀림) */
+      .th-right .trend-total { margin-left: auto; text-align: right; }
+      /* 방문추이 헤더 높이 고정: 합계 텍스트 길이에 따라 줄바꿈돼도 패널 높이 안 변함 */
+      .trend-header:has(.th-right) { min-height: 68px; align-content: center; }
       .seg-toggle {
         display: inline-flex;
         background: var(--surface-2);
@@ -1743,27 +1747,34 @@ const ICONS: Record<string, string> = {
       .tl-fill { height: 100%; border-radius: 3px; min-width: 3px; }
       .tl-sub { font-size: 0.6875rem; color: var(--text-3); font-variant-numeric: tabular-nums; }
 
-      /* 시간대 그룹 막대 (TF/LF 분리) */
+      /* 방문 추이: 모든 뷰 세로높이 고정(뷰 전환 시 패널 안 줄어듦) */
+      .traffic-split { height: 400px; }
+      #tp-heatmap-view { height: 400px; display: flex; flex-direction: column; }
+      .traffic-list { max-height: 352px; }
+
+      /* 시간대 그룹 막대 (TF/LF 분리) — 2줄로 채움 */
+      #tp-hourly-view .traffic-chart-wrap { display: flex; flex-direction: column; justify-content: center; }
+      .hourly-2row { display: flex; flex-direction: column; gap: 0.5rem; width: 100%; }
+      .hourly-2row .chart-bars { height: 128px; padding-bottom: 1.35rem; }
       .hourly-grouped { align-items: flex-end; }
       .hourly-grouped .chart-bar-col { justify-content: flex-end; }
-      .hbar-group { display: flex; align-items: flex-end; justify-content: center; gap: 1px; width: 100%; height: 90px; }
-      .hbar { width: 46%; max-width: 9px; border-radius: 2px 2px 0 0; }
+      .hbar-group { display: flex; align-items: flex-end; justify-content: center; gap: 1px; width: 100%; height: 96px; }
+      .hbar { width: 42%; max-width: 11px; border-radius: 2px 2px 0 0; }
       .hbar.bar-tf { background: var(--tf); }
       .hbar.bar-lf { background: var(--lf); }
 
-      /* 히트맵 컨트롤 + 고정 프레임 */
+      /* 히트맵 컨트롤 + 고정 프레임(내부 스크롤) */
       .hm-controls { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.85rem; flex-wrap: wrap; }
       .heatmap-fixed {
-        min-height: 300px;
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: auto;
         border: 1px solid var(--border);
         border-radius: var(--r-sm);
-        padding: 0.85rem 0.75rem;
+        padding: 0.85rem 0.85rem;
         background: rgba(0,0,0,0.12);
       }
       #tp-heatmap-view { position: relative; }
-
-      /* 시간대 막대: 우측 핫 리스트와 세로 중앙 정렬 */
-      #tp-hourly-view .traffic-chart-wrap { min-height: 300px; display: flex; flex-direction: column; justify-content: center; }
 
       /* 히트맵 호버 팝업 */
       .hm-tip {
@@ -2039,7 +2050,7 @@ const ICONS: Record<string, string> = {
           <div class="traffic-split">
             <div class="traffic-chart-wrap">
               <div class="hourly-chart">
-                <div class="chart-bars hourly-grouped" id="hourly-chart"></div>
+                <div class="hourly-2row" id="hourly-chart"></div>
               </div>
               <div class="trend-legend">
                 <span class="leg-tf">TechFlow</span>
@@ -2941,21 +2952,24 @@ const ICONS: Record<string, string> = {
         }
         const maxV = Math.max(1, ...Object.values(map).flatMap(h => [h.tf, h.lf]));
         const unit = metric === 'visitors' ? '명' : '회';
-        let html = '';
-        for (let h = 0; h < 24; h++) {
-          const d = map[h] || { tf: 0, lf: 0 };
-          const tfH = d.tf > 0 ? Math.max(d.tf / maxV * 90, 2) : 0;
-          const lfH = d.lf > 0 ? Math.max(d.lf / maxV * 90, 2) : 0;
-          html += `<div class="chart-bar-col">
-            <div class="chart-bar-tooltip">${h}:00 · TF ${fmt(d.tf)} · LF ${fmt(d.lf)} ${unit}</div>
-            <div class="hbar-group">
-              <div class="hbar bar-tf" style="height:${tfH}px"></div>
-              <div class="hbar bar-lf" style="height:${lfH}px"></div>
-            </div>
-            <span class="chart-bar-label">${h % 3 === 0 ? h : ''}</span>
-          </div>`;
-        }
-        container.innerHTML = html;
+        const rowHtml = (h0, h1) => {
+          let html = '';
+          for (let h = h0; h <= h1; h++) {
+            const d = map[h] || { tf: 0, lf: 0 };
+            const tfH = d.tf > 0 ? Math.max(d.tf / maxV * 82, 2) : 0;
+            const lfH = d.lf > 0 ? Math.max(d.lf / maxV * 82, 2) : 0;
+            html += `<div class="chart-bar-col">
+              <div class="chart-bar-tooltip">${h}:00 · TF ${fmt(d.tf)} · LF ${fmt(d.lf)} ${unit}</div>
+              <div class="hbar-group">
+                <div class="hbar bar-tf" style="height:${tfH}px"></div>
+                <div class="hbar bar-lf" style="height:${lfH}px"></div>
+              </div>
+              <span class="chart-bar-label">${h}</span>
+            </div>`;
+          }
+          return `<div class="chart-bars hourly-grouped">${html}</div>`;
+        };
+        container.innerHTML = rowHtml(0, 11) + rowHtml(12, 23);
         renderHourlyHot(map, metric);
       }
 
@@ -3917,13 +3931,13 @@ const ICONS: Record<string, string> = {
         if (split) split.style.display = isTime ? 'none' : '';
         if (hv) hv.style.display = period === 'hourly' ? '' : 'none';
         if (mv) mv.style.display = period === 'heatmap' ? '' : 'none';
-        // 지표 토글: 히트맵만 숨김(일/주/월 라인 + 시간대 막대는 조회수/방문자 지원)
-        const metricT = document.getElementById('traffic-metric'); if (metricT) metricT.style.display = period === 'heatmap' ? 'none' : '';
-        // 날짜기반 전용 컨트롤(범위/CSV/비교): 시간대·히트맵에선 숨김
-        const dateCtl = isTime ? 'none' : '';
-        const dr = document.querySelector('.date-range'); if (dr) dr.style.display = dateCtl;
-        const csv = document.getElementById('csv-export'); if (csv) csv.style.display = dateCtl;
-        const cmp = document.getElementById('traffic-compare'); if (cmp) cmp.style.display = dateCtl;
+        // 토글/컨트롤 위치 고정: 숨김은 visibility(공간 유지)로 → 레이아웃 안 밀림
+        const metricT = document.getElementById('traffic-metric'); if (metricT) metricT.style.visibility = period === 'heatmap' ? 'hidden' : 'visible';
+        // 날짜기반 전용 컨트롤(범위/CSV/비교): 시간대·히트맵에선 숨김(공간 유지)
+        const vis = isTime ? 'hidden' : 'visible';
+        const dr = document.querySelector('.date-range'); if (dr) dr.style.visibility = vis;
+        const csv = document.getElementById('csv-export'); if (csv) csv.style.visibility = vis;
+        const cmp = document.getElementById('traffic-compare'); if (cmp) cmp.style.visibility = vis;
         const total = document.getElementById('traffic-total');
         const note = document.getElementById('traffic-note');
         if (isTime) {
