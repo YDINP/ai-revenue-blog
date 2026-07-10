@@ -4264,13 +4264,35 @@ const ICONS: Record<string, string> = {
         if (e.key === 'Enter') verifyAdminKey();
       });
 
-      function verifyAdminKey() {
+      // 서버 검증: 존재하지 않는 id로 admin_delete_comment 호출 → 키만 확인(부작용 없음)
+      const ADMIN_VALIDATE_ID = '00000000-0000-0000-0000-000000000000';
+      async function checkAdminKey(key) {
+        if (!key) return false;
+        try {
+          const res = await rpc('admin_delete_comment', { p_id: ADMIN_VALIDATE_ID, p_admin_key: key });
+          return !!(res && res.success);
+        } catch { return false; }
+      }
+
+      async function verifyAdminKey() {
         const input = document.getElementById('admin-key-input');
+        const errEl = document.getElementById('auth-error');
+        const btn = document.getElementById('admin-key-submit');
         const key = input?.value?.trim();
         if (!key) return;
-        adminKey = key;
-        localStorage.setItem('dash-admin-key', key);
-        showCommentDashboard();
+        if (btn) { btn.disabled = true; btn.textContent = '확인 중…'; }
+        const ok = await checkAdminKey(key);
+        if (btn) { btn.disabled = false; btn.textContent = '인증'; }
+        if (ok) {
+          adminKey = key;
+          localStorage.setItem('dash-admin-key', key);
+          if (errEl) errEl.style.display = 'none';
+          showCommentDashboard();
+        } else {
+          adminKey = '';
+          localStorage.removeItem('dash-admin-key');
+          if (errEl) { errEl.textContent = '관리자 키가 올바르지 않습니다.'; errEl.style.display = 'block'; }
+        }
       }
 
       function showCommentDashboard() {
@@ -4281,10 +4303,13 @@ const ICONS: Record<string, string> = {
         loadCommentData();
       }
 
-      // 저장된 키가 있으면 자동 인증
-      function loadCommentDashboard() {
-        if (adminKey) {
+      // 저장된 키가 있으면 서버 재검증 후 자동 인증(예전 잘못된 키 자동 정리)
+      async function loadCommentDashboard() {
+        if (adminKey && await checkAdminKey(adminKey)) {
           showCommentDashboard();
+        } else {
+          adminKey = '';
+          localStorage.removeItem('dash-admin-key');
         }
       }
 
