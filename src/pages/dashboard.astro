@@ -1684,6 +1684,27 @@ const ICONS: Record<string, string> = {
       .traffic-table-wrap { min-width: 0; }
       .traffic-table-wrap .daily-detail-wrap { max-height: 268px; }
       .tp-view { min-width: 0; }
+
+      /* 라인 차트: 막대용 flex/height 오버라이드 + 살짝 아래로 */
+      .line-chart { display: block; height: auto; padding: 0; margin-top: 0.9rem; }
+
+      /* 우측 날짜별 리스트 (표 → 2줄 리스트) */
+      .traffic-list-head {
+        display: flex; justify-content: space-between;
+        font-size: 0.6875rem; font-weight: 700; color: var(--text-2);
+        text-transform: uppercase; letter-spacing: 0.04em;
+        padding: 0 0.4rem 0.5rem; border-bottom: 1px solid var(--border); margin-bottom: 0.15rem;
+      }
+      .traffic-list { max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; }
+      .tl-row { padding: 0.55rem 0.4rem; border-bottom: 1px solid var(--border); }
+      .tl-row:last-child { border-bottom: none; }
+      .tl-row.tl-cur { background: rgba(59,130,246,0.09); border-radius: 6px; }
+      .tl-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.35rem; }
+      .tl-date { font-size: 0.8125rem; color: var(--text-2); font-weight: 600; }
+      .tl-val { font-size: 1.0625rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+      .tl-bar { height: 5px; background: var(--surface-2); border-radius: 3px; overflow: hidden; margin-bottom: 0.3rem; }
+      .tl-fill { height: 100%; border-radius: 3px; min-width: 3px; }
+      .tl-sub { font-size: 0.6875rem; color: var(--text-3); font-variant-numeric: tabular-nums; }
       @media (max-width: 900px) {
         .traffic-split { grid-template-columns: 1fr; }
       }
@@ -1852,6 +1873,10 @@ const ICONS: Record<string, string> = {
         <div class="trend-header">
           <h3><svg class="ico sec-ico i-blue" viewBox="0 0 24 24" set:html={ICONS['trending-up']}></svg> 방문 추이</h3>
           <div class="th-right">
+            <div class="seg-toggle" id="traffic-metric">
+              <button class="seg-btn active" data-metric="views">조회수</button>
+              <button class="seg-btn" data-metric="visitors">방문자</button>
+            </div>
             <div class="seg-toggle" id="traffic-period">
               <button class="seg-btn active" data-period="daily">일간</button>
               <button class="seg-btn" data-period="weekly">주간</button>
@@ -1870,24 +1895,21 @@ const ICONS: Record<string, string> = {
         </div>
         <div class="traffic-split">
           <div class="traffic-chart-wrap">
-            <div class="trend-chart" id="traffic-chart">
+            <div class="trend-chart line-chart" id="traffic-chart">
               <div class="no-data">Loading...</div>
             </div>
-            <div class="trend-legend">
+            <div class="trend-legend" id="traffic-legend">
               <span class="leg-tf">TechFlow</span>
               <span class="leg-lf">LifeFlow</span>
             </div>
           </div>
           <div class="traffic-table-wrap">
-            <div class="daily-detail-wrap">
-              <table class="daily-detail-table">
-                <thead>
-                  <tr><th id="tt-col0">기간</th><th>조회수</th><th>방문자</th><th>TF</th><th>LF</th><th class="dd-bar-col"></th></tr>
-                </thead>
-                <tbody id="traffic-table-body">
-                  <tr><td colspan="6" class="no-data">Loading...</td></tr>
-                </tbody>
-              </table>
+            <div class="traffic-list-head">
+              <span id="tl-col0">날짜</span>
+              <span id="tl-metric-label">조회수</span>
+            </div>
+            <div class="traffic-list" id="traffic-list">
+              <div class="skel-list"><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span></div>
             </div>
           </div>
         </div>
@@ -2824,6 +2846,7 @@ const ICONS: Record<string, string> = {
       // ── 방문 추이 (일간/주간/월간 통합) ──
       let _trafficDetail = [];
       let _trafficPeriod = 'daily';
+      let _trafficMetric = 'views';   // 'views' | 'visitors'
 
       function bucketDetail(rows, period) {
         const buckets = {};
@@ -2856,53 +2879,87 @@ const ICONS: Record<string, string> = {
         return Object.values(buckets).sort((a,b) => a.sortKey < b.sortKey ? -1 : 1);
       }
 
+      // 점선(dashed) 라인 차트 — 조회수(TF/LF 2선) / 방문자(단일선)
       function renderTrafficChart(buckets) {
         const container = document.getElementById('traffic-chart');
+        const legend = document.getElementById('traffic-legend');
         if (!container) return;
         if (!buckets.length) { container.innerHTML = '<div class="no-data">데이터 없음</div>'; return; }
-        const maxV = Math.max(...buckets.map(b => b.views), 1);
-        const lastKey = buckets[buckets.length - 1].key;
-        container.innerHTML = buckets.map(b => {
-          const views = b.views;
-          const pct = views > 0 ? Math.max((views / maxV) * 100, 6) : 3;
-          const tfPct = views > 0 ? (b.tf / views) * 100 : 0;
-          const lfPct = views > 0 ? (b.lf / views) * 100 : 0;
-          const cur = b.key === lastKey;
-          return `<div class="trend-bar-col">
-            <div class="trend-bar-wrap">
-              <div class="trend-bar-stack ${cur ? 'trend-bar-today' : ''}" style="height:${pct}%;opacity:${views>0?1:0.25}">
-                ${lfPct>0?`<div class="trend-bar-lf" style="height:${lfPct}%"></div>`:''}
-                ${tfPct>0?`<div class="trend-bar-tf" style="height:${tfPct}%"></div>`:''}
-                ${views===0?`<div style="height:100%;background:var(--surface-2);border-radius:4px 4px 0 0;"></div>`:''}
-              </div>
-            </div>
-            <div class="trend-bar-label">
-              <span class="trend-bar-date">${b.label}</span>
-              <span class="trend-bar-count">${views>0?fmt(views):'-'}</span>
-            </div>
-          </div>`;
-        }).join('');
+
+        const metric = _trafficMetric || 'views';
+        const series = metric === 'visitors'
+          ? [{ name: '방문자', color: '#c084fc', vals: buckets.map(b => b.visitors) }]
+          : [{ name: 'TechFlow', color: '#3b82f6', vals: buckets.map(b => b.tf) },
+             { name: 'LifeFlow', color: '#22c55e', vals: buckets.map(b => b.lf) }];
+        if (legend) {
+          legend.innerHTML = series.map(s =>
+            `<span style="display:flex;align-items:center;gap:0.3rem"><i style="width:14px;height:0;border-top:2.5px dashed ${s.color};display:inline-block"></i>${s.name}</span>`
+          ).join('');
+        }
+
+        const n = buckets.length;
+        const W = 700, H = 232, padL = 10, padR = 10, padT = 26, padB = 30;
+        const maxV = Math.max(1, ...series.flatMap(s => s.vals));
+        const X = i => padL + (n === 1 ? (W - padL - padR) / 2 : i * (W - padL - padR) / (n - 1));
+        const Y = v => H - padB - (v / maxV) * (H - padT - padB);
+
+        let grid = '';
+        [0, 0.5, 1].forEach(t => {
+          const gy = (H - padB - t * (H - padT - padB)).toFixed(1);
+          grid += `<line x1="${padL}" y1="${gy}" x2="${W - padR}" y2="${gy}" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>`;
+        });
+        grid += `<text x="${padL}" y="${padT - 9}" fill="#7c7c87" font-size="12">최대 ${fmt(maxV)}</text>`;
+
+        let lines = '';
+        series.forEach(s => {
+          const pts = s.vals.map((v, i) => `${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
+          lines += `<polyline points="${pts}" fill="none" stroke="${s.color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>`;
+          s.vals.forEach((v, i) => {
+            lines += `<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="3.6" fill="#131316" stroke="${s.color}" stroke-width="2"><title>${buckets[i].label}: ${fmt(v)}</title></circle>`;
+          });
+        });
+
+        const step = n > 10 ? Math.ceil(n / 8) : 1;
+        let xl = '';
+        buckets.forEach((b, i) => {
+          if (i % step === 0 || i === n - 1) {
+            const anchor = i === 0 ? 'start' : i === n - 1 ? 'end' : 'middle';
+            xl += `<text x="${X(i).toFixed(1)}" y="${H - 9}" fill="#7c7c87" font-size="11.5" text-anchor="${anchor}">${b.label}</text>`;
+          }
+        });
+
+        container.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${metric === 'visitors' ? '방문자' : '조회수'} 추이 선그래프">${grid}${lines}${xl}</svg>`;
       }
 
-      function renderTrafficTable(buckets) {
-        const body = document.getElementById('traffic-table-body');
-        const col0 = document.getElementById('tt-col0');
-        if (!body) return;
-        if (col0) col0.textContent = _trafficPeriod === 'weekly' ? '주 시작' : _trafficPeriod === 'monthly' ? '월' : '날짜';
-        if (!buckets.length) { body.innerHTML = '<tr><td colspan="6" class="no-data">데이터 없음</td></tr>'; return; }
-        const maxV = Math.max(...buckets.map(b => b.views), 1);
+      // 우측 리스트 (표 → 읽기 쉬운 2줄 리스트)
+      function renderTrafficList(buckets) {
+        const el = document.getElementById('traffic-list');
+        const col0 = document.getElementById('tl-col0');
+        const mLabel = document.getElementById('tl-metric-label');
+        const metric = _trafficMetric || 'views';
+        if (col0) col0.textContent = _trafficPeriod === 'weekly' && !_trafficCustom ? '주' : _trafficPeriod === 'monthly' && !_trafficCustom ? '월' : '날짜';
+        if (mLabel) mLabel.textContent = metric === 'visitors' ? '방문자' : '조회수';
+        if (!el) return;
+        if (!buckets.length) { el.innerHTML = '<div class="no-data">데이터 없음</div>'; return; }
+        const primary = b => metric === 'visitors' ? b.visitors : b.views;
+        const maxV = Math.max(1, ...buckets.map(primary));
         const lastKey = buckets[buckets.length - 1].key;
-        body.innerHTML = buckets.slice().reverse().map(b => {          // 최신 위로
-          const barW = Math.max(Math.round((b.views / maxV) * 90), 2);
+        const valColor = metric === 'visitors' ? '#c084fc' : '#7cb0fb';
+        el.innerHTML = buckets.slice().reverse().map(b => {           // 최신 위로
+          const val = primary(b);
+          const barW = Math.max(Math.round(val / maxV * 100), 2);
           const cur = b.key === lastKey;
-          return `<tr class="${cur ? 'dd-today' : ''}">
-            <td>${b.label}${cur ? ' ·현재' : ''}</td>
-            <td class="dd-views">${fmt(b.views)}</td>
-            <td class="dd-visitors">${fmt(b.visitors)}</td>
-            <td>${fmt(b.tf)}</td>
-            <td>${fmt(b.lf)}</td>
-            <td class="dd-bar-col"><span class="dd-minibar" style="width:${barW}px"></span></td>
-          </tr>`;
+          const sub = metric === 'visitors'
+            ? `조회 ${fmt(b.views)}`
+            : `<span style="color:#60a5fa">TF ${fmt(b.tf)}</span> · <span style="color:#4ade80">LF ${fmt(b.lf)}</span>`;
+          return `<div class="tl-row ${cur ? 'tl-cur' : ''}">
+            <div class="tl-top">
+              <span class="tl-date">${b.label}${cur ? ' ·현재' : ''}</span>
+              <span class="tl-val" style="color:${valColor}">${fmt(val)}</span>
+            </div>
+            <div class="tl-bar"><div class="tl-fill" style="width:${barW}%;background:${valColor}"></div></div>
+            <div class="tl-sub">${sub}</div>
+          </div>`;
         }).join('');
       }
 
@@ -2945,7 +3002,7 @@ const ICONS: Record<string, string> = {
 
         _trafficBuckets = buckets;
         renderTrafficChart(buckets);
-        renderTrafficTable(buckets);
+        renderTrafficList(buckets);
 
         const sv = buckets.reduce((s, b) => s + b.views, 0);
         const svis = buckets.reduce((s, b) => s + b.visitors, 0);
@@ -3485,6 +3542,15 @@ const ICONS: Record<string, string> = {
         const f = btn.dataset.filter;
         btn.className = 'source-tab ' + (f === 'blog' ? 'active-tf' : f === 'lifeflow' ? 'active-lf' : 'active');
         renderEventFeed(undefined, f);
+      });
+
+      // 방문 추이 지표 토글 (조회수/방문자)
+      document.getElementById('traffic-metric')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('.seg-btn');
+        if (!btn) return;
+        _trafficMetric = btn.dataset.metric;
+        document.querySelectorAll('#traffic-metric .seg-btn').forEach(b => b.classList.toggle('active', b === btn));
+        renderTrafficPanel();
       });
 
       // 방문 추이 기간 토글 (일간/주간/월간)
