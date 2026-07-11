@@ -10,9 +10,9 @@ image:
   alt: "검은 화면에 표시된 컬러풀한 프로그래밍 코드"
 coupangLinks:
   - title: "함께 자라기"
-    url: "https://www.coupang.com/np/search?component=&q=%ED%95%A8%EA%BB%98+%EC%9E%90%EB%9D%BC%EA%B8%B0&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%95%A8%EA%BB%98%20%EC%9E%90%EB%9D%BC%EA%B8%B0&src=1139000&spec=10799999&addtag=200&ctag=%ED%95%A8%EA%BB%98%20%EC%9E%90%EB%9D%BC%EA%B8%B0&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%95%A8%EA%BB%98%20%EC%9E%90%EB%9D%BC%EA%B8%B0"
   - title: "클린 코드"
-    url: "https://www.coupang.com/np/search?component=&q=%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C"
 faq:
   - q: "바이브 코딩으로 실제 앱을 만들 수 있나요?"
     a: "예. 프로토타입과 MVP 수준의 앱은 충분히 만들 수 있습니다. 단, 수십만 줄 규모의 엔터프라이즈 시스템이나 고성능 요구 로직은 개발자 검수가 필수입니다. '아이디어 검증용 앱'으로 접근하면 생산성을 극대화할 수 있습니다."
@@ -33,7 +33,7 @@ faq:
 2026년 Stack Overflow 개발자 설문에 따르면, 응답자의 76%가 AI 코딩 보조 도구를 매일 사용하며, 이 중 41%가 바이브 코딩 방식을 주요 워크플로우로 채택했다고 답했다. 개발자의 역할이 **'코드 작성자'에서 'AI 워크플로우 설계자'로** 이동하고 있다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%ED%95%A8%EA%BB%98+%EC%9E%90%EB%9D%BC%EA%B8%B0&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%ED%95%A8%EA%BB%98%20%EC%9E%90%EB%9D%BC%EA%B8%B0&src=1139000&spec=10799999&addtag=200&ctag=%ED%95%A8%EA%BB%98%20%EC%9E%90%EB%9D%BC%EA%B8%B0&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%95%A8%EA%BB%98%20%EC%9E%90%EB%9D%BC%EA%B8%B0" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -100,7 +100,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -11,9 +11,9 @@ image:
   alt: "웹 개발 및 프로그래밍 개념을 보여주는 노트북에서 코딩하는 사람의 클로즈업"
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive"
   - title: "로지텍 MX Keys S 무선 키보드"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%EB%AC%B4%EC%84%A0+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%EB%AC%B4%EC%84%A0%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%EB%AC%B4%EC%84%A0%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%EB%AC%B4%EC%84%A0%20%ED%82%A4%EB%B3%B4%EB%93%9C"
 ---
 > 2026년 7월 업데이트: 신흥 프레임워크·AI 통합 트렌드 반영
 
@@ -22,7 +22,7 @@ coupangLinks:
 프론트엔드 개발은 매년 빠르게 변화합니다. 2026년에는 **AI 통합**, **서버 컴포넌트의 표준화**, **번들러 혁신**이 핵심 트렌드입니다. 이 글에서는 현업 개발자가 반드시 알아야 할 2026년 프론트엔드 트렌드를 정리합니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -243,7 +243,7 @@ AI가 반복 코드를 처리하면서, 개발자의 경쟁력은 **"좋은 코�
 모든 트렌드를 한꺼번에 따라갈 필요는 없습니다. 현재 프로젝트에 가장 임팩트가 큰 것부터 하나씩 도입해보세요. 가장 중요한 건 **계속 학습하는 습관**입니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%EB%AC%B4%EC%84%A0+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%EB%AC%B4%EC%84%A0%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%EB%AC%B4%EC%84%A0%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%EB%AC%B4%EC%84%A0%20%ED%82%A4%EB%B3%B4%EB%93%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

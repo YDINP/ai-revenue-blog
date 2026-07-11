@@ -10,9 +10,9 @@ image:
   alt: "마케팅이라는 단어를 나타내는 나무 글자 타일"
 coupangLinks:
   - title: "무기가 되는 스토리"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%AC%B4%EA%B8%B0%EA%B0%80+%EB%90%98%EB%8A%94+%EC%8A%A4%ED%86%A0%EB%A6%AC&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%AC%B4%EA%B8%B0%EA%B0%80%20%EB%90%98%EB%8A%94%20%EC%8A%A4%ED%86%A0%EB%A6%AC&src=1139000&spec=10799999&addtag=200&ctag=%EB%AC%B4%EA%B8%B0%EA%B0%80%20%EB%90%98%EB%8A%94%20%EC%8A%A4%ED%86%A0%EB%A6%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AC%B4%EA%B8%B0%EA%B0%80%20%EB%90%98%EB%8A%94%20%EC%8A%A4%ED%86%A0%EB%A6%AC"
   - title: "로지텍 MX Master 3S"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
 faq:
   - q: "숏폼은 어떤 플랫폼부터 시작해야 하나?"
     a: "한 곳에 올린 영상을 틱톡·릴스·쇼츠에 동시 배포하는 것이 효율적이다. 초기에는 어디서 터질지 모르므로 3곳에 함께 올리고, 반응이 좋은 채널에 집중하는 방식이 좋다."
@@ -29,7 +29,7 @@ faq:
 이 글은 광고비 0원으로 스팀 위시리스트 1만 개를 목표로 하는 실전 채널 전략을 다룬다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%AC%B4%EA%B8%B0%EA%B0%80+%EB%90%98%EB%8A%94+%EC%8A%A4%ED%86%A0%EB%A6%AC&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%AC%B4%EA%B8%B0%EA%B0%80%20%EB%90%98%EB%8A%94%20%EC%8A%A4%ED%86%A0%EB%A6%AC&src=1139000&spec=10799999&addtag=200&ctag=%EB%AC%B4%EA%B8%B0%EA%B0%80%20%EB%90%98%EB%8A%94%20%EC%8A%A4%ED%86%A0%EB%A6%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AC%B4%EA%B8%B0%EA%B0%80%20%EB%90%98%EB%8A%94%20%EC%8A%A4%ED%86%A0%EB%A6%AC" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -95,7 +95,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

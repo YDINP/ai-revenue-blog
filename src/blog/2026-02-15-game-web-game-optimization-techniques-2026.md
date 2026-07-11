@@ -10,9 +10,9 @@ image:
   alt: "SEO spelled with Scrabble tiles on a black surface, representing search engine optimization concepts."
 coupangLinks:
   - title: "유니티 교과서"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C"
   - title: "게임 프로그래밍 패턴"
-    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4"
 faq:
   - q: "웹게임에서 프레임 드롭이 발생하는 주된 원인은?"
     a: "프레임 드롭은 주로 과도한 드로우콜, 메모리 누수로 인한 가비지 컬렉션 정지, 메인 스레드 블로킹 때문에 발생합니다. Chrome DevTools의 Performance 탭에서 병목 지점을 파악할 수 있습니다."
@@ -33,7 +33,7 @@ faq:
 > 구글의 웹 성능 가이드에 따르면, 로딩 시간이 1초 증가할 때마다 사용자 이탈률이 7% 증가합니다. 게임의 경우 이 수치가 더욱 심각합니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -282,7 +282,7 @@ class PerformanceMonitor {
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

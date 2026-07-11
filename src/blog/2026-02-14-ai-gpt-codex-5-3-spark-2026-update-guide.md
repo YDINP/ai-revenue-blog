@@ -10,9 +10,9 @@ image:
   alt: "Scrabble tiles spelling CHATGPT on wooden surface emphasizing AI language models"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C"
   - title: "아이패드 에어 M2"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&src=1139000&spec=10799999&addtag=200&ctag=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2"
 ---
 ## 2026년 2월, AI 코딩 어시스턴트 빅뱅
 
@@ -21,7 +21,7 @@ coupangLinks:
 Codex Spark는 Cerebras 웨이퍼 스케일 엔진 위에서 초당 1,000+ 토큰을 생성하는 **속도의 혁명**을, Claude Opus 4.6은 SWE-bench Verified 80.8%를 기록하며 **정확도의 새 기준**을 제시합니다. 이 글에서는 실제 벤치마크 데이터를 기반으로 두 모델을 심층 비교합니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -195,7 +195,7 @@ AI 코딩 어시스턴트는 2026년 2월을 기점으로 **"자동완성 도구
 어떤 도구를 선택하든, 중요한 것은 **"어떻게 활용하느냐"**입니다. 두 도구 모두 무료 체험이 가능하니 직접 비교해보시길 권장합니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&src=1139000&spec=10799999&addtag=200&ctag=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -10,9 +10,9 @@ image:
   alt: "형형색색 블록으로 노는 두 아이"
 coupangLinks:
   - title: "로블록스 게임 제작 무작정 따라하기"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4+%EA%B2%8C%EC%9E%84+%EC%A0%9C%EC%9E%91+%EB%AC%B4%EC%9E%91%EC%A0%95+%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4%20%EA%B2%8C%EC%9E%84%20%EC%A0%9C%EC%9E%91%20%EB%AC%B4%EC%9E%91%EC%A0%95%20%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4%20%EA%B2%8C%EC%9E%84%20%EC%A0%9C%EC%9E%91%20%EB%AC%B4%EC%9E%91%EC%A0%95%20%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4%20%EA%B2%8C%EC%9E%84%20%EC%A0%9C%EC%9E%91%20%EB%AC%B4%EC%9E%91%EC%A0%95%20%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0"
   - title: "돈의 심리학"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%8F%88%EC%9D%98+%EC%8B%AC%EB%A6%AC%ED%95%99&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&src=1139000&spec=10799999&addtag=200&ctag=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99"
 faq:
   - q: "Roblox Studio는 무료인가?"
     a: "그렇다. Roblox Studio는 완전 무료로 제공된다. Roblox 계정만 만들면 Studio를 즉시 설치·사용할 수 있으며, 별도 구독료나 라이선스 비용이 없다."
@@ -29,7 +29,7 @@ faq:
 2026년 현재 로블록스의 월간 활성 이용자(MAU)는 3억 명을 넘어섰으며, 하루 평균 접속자도 수천만 명 수준이다(Roblox Corporation 공식 발표 기준). 10~20대 초반이 주 이용층이고, 유저가 직접 만든 '경험(Experience)'이 플랫폼의 핵심 콘텐츠다. 개발 도구인 **Roblox Studio**는 무료이고, 별도 서버 인프라 없이 로블록스 플랫폼 위에서 게임을 배포·운영할 수 있다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4+%EA%B2%8C%EC%9E%84+%EC%A0%9C%EC%9E%91+%EB%AC%B4%EC%9E%91%EC%A0%95+%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4%20%EA%B2%8C%EC%9E%84%20%EC%A0%9C%EC%9E%91%20%EB%AC%B4%EC%9E%91%EC%A0%95%20%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4%20%EA%B2%8C%EC%9E%84%20%EC%A0%9C%EC%9E%91%20%EB%AC%B4%EC%9E%91%EC%A0%95%20%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4%20%EA%B2%8C%EC%9E%84%20%EC%A0%9C%EC%9E%91%20%EB%AC%B4%EC%9E%91%EC%A0%95%20%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -111,7 +111,7 @@ end)
 - [Roblox Developer Hub — DevEx 가이드](https://create.roblox.com/docs/production/earning-on-roblox) — DevEx 참여 조건·환전 절차 공식 안내
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%8F%88%EC%9D%98+%EC%8B%AC%EB%A6%AC%ED%95%99&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&src=1139000&spec=10799999&addtag=200&ctag=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -10,11 +10,11 @@ image:
   alt: "A variety of game controllers and a keyboard arranged on a white textured surface, offering a minimalist gaming setup."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
   - title: "유니티 교과서"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C"
   - title: "게임 프로그래밍 패턴"
-    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4"
 faq:
   - q: "무료 에셋만으로도 상업용 게임을 만들 수 있나요?"
     a: "충분히 가능합니다. 특히 Godot Asset Library와 Itch.io에는 상업용 무료 에셋이 풍부합니다. 다만 게임의 규모와 그래픽 퀄리티에 따라 일부 프리미엄 에셋 투자가 도움이 될 수 있습니다. 처음에는 무료 에셋으로 프로토타입을 만들고, 수익화 이후 프리미엄 에셋으로 업그레이드하는 전략을 추천합니다."
@@ -31,7 +31,7 @@ faq:
 인디 게임 개발자들은 이제 **유료 에셋 투자**와 **무료 리소스 활용** 사이에서 전략적 선택이 필요한 시대입니다. 각 마켓플레이스마다 가격 정책, 에셋 품질, 개발사 지원, 라이선스 정책이 크게 다르기 때문입니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -172,7 +172,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

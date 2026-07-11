@@ -10,11 +10,11 @@ image:
   alt: "Flat lay of real estate brochures, checklists, and a calculator for home buying."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
   - title: "LG 그램 17"
-    url: "https://www.coupang.com/np/search?component=&q=LG+%EA%B7%B8%EB%9E%A8+17&channel=user"
+    url: "https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017"
   - title: "삼성 갤럭시북4 프로"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814+%ED%94%84%EB%A1%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C"
 faq:
   - q: "개발자가 꼭 고가 모니터를 써야 할까요?"
     a: "순수 코딩만 한다면 50만원대 중급 모니터도 충분합니다. 하지만 UI 디자인, 색상 확인이 필요하면 sRGB 98% 이상의 중급~고급 모니터(60~100만원)가 필요합니다. 색감 정확도 부족은 생산성 손실로 이어지므로 용도에 맞게 투자하세요."
@@ -61,7 +61,7 @@ VESA 마운트를 지원하는지도 확인하세요. 모니터 암을 사용하
 개발 환경은 보통 어두운 편이므로, **350 nits 이상의 밝기**는 필요하지 않습니다. 하지만 일반 사무 환경에서 작업한다면 300 nits 이상을 추천합니다. 명암비는 1000:1 이상이면 충분합니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -143,7 +143,7 @@ UI 색상 확인이 중요하므로 **sRGB 98% 이상, 100Hz 이상의 중급 �
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=LG+%EA%B7%B8%EB%9E%A8+17&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

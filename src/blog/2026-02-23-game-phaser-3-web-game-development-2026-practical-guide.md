@@ -10,11 +10,11 @@ image:
   alt: "A Muslim woman in a hijab applies makeup for a tutorial indoors."
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4"
   - title: "유니티 교과서"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C"
   - title: "로지텍 MX Master 3S"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
 faq:
   - q: "Phaser 3은 정말 완전 무료인가요?"
     a: "네, Phaser 3는 MIT 라이선스 오픈소스입니다. 상업적 게임 개발에도 제한이 없으며, 저작권 표시만 해주면 됩니다."
@@ -31,7 +31,7 @@ Phaser 3는 2018년 출시 이후 웹게임 개발자들 사이에서 가장 인
 이 가이드에서는 **Phaser 3로 처음부터 완성도 있는 웹게임을 만드는 실전 방법**을 다룹니다. 기존 완벽 가이드와 달리, 실제 프로젝트 구조 설계, 디버깅 팁, 그리고 배포 최적화에 중점을 두었습니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -377,7 +377,7 @@ Phaser 3는 **JavaScript 기반의 가장 성숙한 2D 게임 엔진**입니다.
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

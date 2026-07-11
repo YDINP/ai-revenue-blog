@@ -10,11 +10,11 @@ image:
   alt: "A MacBook displaying the DeepSeek AI interface, showcasing digital innovation."
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C"
   - title: "아이패드 에어 M2"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&src=1139000&spec=10799999&addtag=200&ctag=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2"
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C"
 faq:
   - q: "정말 초보자도 월 100만원 이상 벌 수 있나요?"
     a: "네, 가능합니다. 가장 간단한 모델인 API 래퍼 서비스 (모델 2)는 기본 JavaScript 지식만으로 구현 가능합니다. 일 100건의 요청에 각 $0.10씩 판매하면 월 300만원이 됩니다. 핵심은 \"자동화율\"과 \"마진율\" 관리입니다."
@@ -33,7 +33,7 @@ faq:
 기존의 "AI 에이전트로 자동화하기" 포스트들이 고수준의 기술을 다뤘다면, 이번 글은 **API 비용 구조를 정확히 이해하고, 실제 수익화까지 연결하는 구체적인 5가지 모델**을 제시합니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -243,7 +243,7 @@ def generate_product_description(product_info):
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&src=1139000&spec=10799999&addtag=200&ctag=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

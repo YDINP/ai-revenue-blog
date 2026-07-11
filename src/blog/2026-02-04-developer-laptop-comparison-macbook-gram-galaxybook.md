@@ -10,17 +10,17 @@ image:
   alt: "사무용품과 창의적인 장식으로 책상 위에 코드가 표시된 세련된 MacBook Pro"
 coupangLinks:
   - title: "맥북 에어 M3"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A7%A5%EB%B6%81+%EC%97%90%EC%96%B4+M3&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&src=1139000&spec=10799999&addtag=200&ctag=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3"
   - title: "삼성 갤럭시북4 프로"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814+%ED%94%84%EB%A1%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C"
   - title: "LG 그램 17"
-    url: "https://www.coupang.com/np/search?component=&q=LG+%EA%B7%B8%EB%9E%A8+17&channel=user"
+    url: "https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017"
   - title: "HOHO 휴대용 노트북 거치대 (화이트)"
-    url: "https://www.coupang.com/np/search?component=&q=HOHO+%ED%9C%B4%EB%8C%80%EC%9A%A9+%EB%85%B8%ED%8A%B8%EB%B6%81+%EA%B1%B0%EC%B9%98%EB%8C%80&channel=user"
+    url: "https://www.coupang.com/np/search?q=HOHO%20%ED%9C%B4%EB%8C%80%EC%9A%A9%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EA%B1%B0%EC%B9%98%EB%8C%80&src=1139000&spec=10799999&addtag=200&ctag=HOHO%20%ED%9C%B4%EB%8C%80%EC%9A%A9%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EA%B1%B0%EC%B9%98%EB%8C%80&lptag=AF7838146&pageType=SEARCH&pageValue=HOHO%20%ED%9C%B4%EB%8C%80%EC%9A%A9%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EA%B1%B0%EC%B9%98%EB%8C%80"
   - title: "규랩 쿨링 홀 노트북 스탠드 거치대"
-    url: "https://www.coupang.com/np/search?component=&q=%EA%B7%9C%EB%9E%A9+%EC%BF%A8%EB%A7%81+%ED%99%80+%EB%85%B8%ED%8A%B8%EB%B6%81+%EC%8A%A4%ED%83%A0%EB%93%9C+%EA%B1%B0%EC%B9%98%EB%8C%80&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B7%9C%EB%9E%A9%20%EC%BF%A8%EB%A7%81%20%ED%99%80%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%EA%B1%B0%EC%B9%98%EB%8C%80&src=1139000&spec=10799999&addtag=200&ctag=%EA%B7%9C%EB%9E%A9%20%EC%BF%A8%EB%A7%81%20%ED%99%80%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%EA%B1%B0%EC%B9%98%EB%8C%80&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B7%9C%EB%9E%A9%20%EC%BF%A8%EB%A7%81%20%ED%99%80%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%EA%B1%B0%EC%B9%98%EB%8C%80"
   - title: "토라픽 초경량 노트북 거치대"
-    url: "https://www.coupang.com/np/search?component=&q=%ED%86%A0%EB%9D%BC%ED%94%BD+%EC%B4%88%EA%B2%BD%EB%9F%89+%EB%85%B8%ED%8A%B8%EB%B6%81+%EA%B1%B0%EC%B9%98%EB%8C%80&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%86%A0%EB%9D%BC%ED%94%BD%20%EC%B4%88%EA%B2%BD%EB%9F%89%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EA%B1%B0%EC%B9%98%EB%8C%80&src=1139000&spec=10799999&addtag=200&ctag=%ED%86%A0%EB%9D%BC%ED%94%BD%20%EC%B4%88%EA%B2%BD%EB%9F%89%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EA%B1%B0%EC%B9%98%EB%8C%80&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%86%A0%EB%9D%BC%ED%94%BD%20%EC%B4%88%EA%B2%BD%EB%9F%89%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EA%B1%B0%EC%B9%98%EB%8C%80"
 ---
 ## 개발자의 영원한 고민: 어떤 노트북을 살까?
 
@@ -29,7 +29,7 @@ coupangLinks:
 이 글에서는 실제 개발 환경(IDE, Docker, 브라우저, 터미널)에서의 성능을 기준으로 세 노트북을 비교합니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A7%A5%EB%B6%81+%EC%97%90%EC%96%B4+M3&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&src=1139000&spec=10799999&addtag=200&ctag=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -167,7 +167,7 @@ SSD는 512GB면 시작은 가능하지만, 프로젝트가 늘어나면 1TB가 �
 가장 확실한 조언: 매장에서 직접 타이핑해보세요. 키보드 타건감과 화면 느낌은 스펙으로 알 수 없습니다!
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814+%ED%94%84%EB%A1%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

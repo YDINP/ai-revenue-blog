@@ -10,9 +10,9 @@ image:
   alt: "함부르크 항구의 컨테이너와 크레인"
 coupangLinks:
   - title: "클린 코드"
-    url: "https://www.coupang.com/np/search?component=&q=%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C"
   - title: "삼성 SSD 980 PRO 1TB"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+SSD+980+PRO+1TB&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB"
 ---
 ## "내 컴퓨터에서는 되는데요?" 의 종말
 
@@ -21,7 +21,7 @@ coupangLinks:
 2026년 현재, Docker는 개발자의 필수 도구입니다. 이 글에서는 Docker를 처음 접하는 분도 바로 실무에 적용할 수 있도록 단계별로 안내합니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -240,7 +240,7 @@ Docker는 "있으면 좋은 도구"가 아니라 **"없으면 안 되는 도구"
 오늘 배운 5단계를 순서대로 따라해보세요. 한 번 익숙해지면 Docker 없이는 개발하기 싫어질 것입니다!
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+SSD+980+PRO+1TB&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

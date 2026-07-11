@@ -10,11 +10,11 @@ image:
   alt: "Flat lay of real estate brochures, checklists, and a calculator for home buying."
 coupangLinks:
   - title: "ASUS ZenScreen MB16ACV"
-    url: "https://www.coupang.com/np/search?component=&q=ASUS+ZenScreen+MB16ACV&channel=user"
+    url: "https://www.coupang.com/np/search?q=ASUS%20ZenScreen%20MB16ACV&src=1139000&spec=10799999&addtag=200&ctag=ASUS%20ZenScreen%20MB16ACV&lptag=AF7838146&pageType=SEARCH&pageValue=ASUS%20ZenScreen%20MB16ACV"
   - title: "삼성 뷰피니티 S8 32인치 4K"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0+S8+32%EC%9D%B8%EC%B9%98+4K&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K"
   - title: "LG 그램 17"
-    url: "https://www.coupang.com/np/search?component=&q=LG+%EA%B7%B8%EB%9E%A8+17&channel=user"
+    url: "https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017"
 faq:
   - q: "개발자는 정말 색정확도 좋은 모니터가 필요한가요?"
     a: "웹 개발만 한다면 일반 모니터도 괜찮지만, UI/UX 작업이나 영상·이미지 편집을 병행한다면 sRGB 95% 이상은 필수입니다. 특히 클라이언트에게 전달할 색감이 정확해야 할 때 차이가 명확합니다."
@@ -54,7 +54,7 @@ faq:
 <div class="chart-progress" data-title="개발자 모니터 선택 기준 중요도" data-labels="색정확도,응답속도,밝기균일성,블루라이트,인체공학" data-values="95,78,82,75,88" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#8b5cf6" data-max="100" data-unit="점"></div>
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=ASUS+ZenScreen+MB16ACV&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=ASUS%20ZenScreen%20MB16ACV&src=1139000&spec=10799999&addtag=200&ctag=ASUS%20ZenScreen%20MB16ACV&lptag=AF7838146&pageType=SEARCH&pageValue=ASUS%20ZenScreen%20MB16ACV" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -208,7 +208,7 @@ Dell, LG, BenQ, ASUS 등 주요 제조사 모니터라면 기본 품질은 보�
 3440x1440 울트라와이드는 IDE와 브라우저를 나란히 띄울 수 있어 매우 편합니다. 다만 가격이 높고, 일부 애플리케이션에서 호환성 이슈가 있을 수 있으니 구매 전 충분히 검토하세요.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0+S8+32%EC%9D%B8%EC%B9%98+4K&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

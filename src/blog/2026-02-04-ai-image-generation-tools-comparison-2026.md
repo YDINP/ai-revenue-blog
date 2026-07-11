@@ -10,9 +10,9 @@ image:
   alt: "생동감 있는 AI 생성 디자인 요소를 보여주는 화려한 추상 예술 작품"
 coupangLinks:
   - title: "아이패드 에어 M2"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&src=1139000&spec=10799999&addtag=200&ctag=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2"
   - title: "챗GPT 활용법 도서"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C"
 ---
 ## AI가 그림을 그리는 시대
 
@@ -21,7 +21,7 @@ coupangLinks:
 하지만 도구마다 스타일, 가격, 사용성이 크게 다릅니다. 이 글에서는 2026년 가장 인기 있는 **AI 이미지 생성 도구** 5가지를 실제 사용 경험을 바탕으로 비교합니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&src=1139000&spec=10799999&addtag=200&ctag=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -164,7 +164,7 @@ Ideogram은 **이미지 안에 텍스트를 정확하게 넣는** 능력이 뛰�
 AI 이미지 생성 기술은 계속 발전하고 있습니다. 지금 시작해서 자신만의 워크플로우를 만들어보는 것을 추천합니다!
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

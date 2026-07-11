@@ -10,11 +10,11 @@ image:
   alt: "Aerial shot of a modern workspace with a laptop, budget report, and eyeglasses on a desk."
 coupangLinks:
   - title: "키크론 K3 Pro"
-    url: "https://www.coupang.com/np/search?component=&q=%ED%82%A4%ED%81%AC%EB%A1%A0+K3+Pro&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro&src=1139000&spec=10799999&addtag=200&ctag=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro"
   - title: "LG 울트라와이드 34인치 모니터"
-    url: "https://www.coupang.com/np/search?component=&q=LG+%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C+34%EC%9D%B8%EC%B9%98+%EB%AA%A8%EB%8B%88%ED%84%B0&channel=user"
+    url: "https://www.coupang.com/np/search?q=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0"
   - title: "LG 그램 17"
-    url: "https://www.coupang.com/np/search?component=&q=LG+%EA%B7%B8%EB%9E%A8+17&channel=user"
+    url: "https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017"
 faq:
   - q: "2026년 가성비 노트북을 선택할 때 가장 중요한 기준은 무엇인가요?"
     a: "용도에 맞는 성능 선택이 핵심입니다. 웹 브라우징과 문서 작업이면 Core Ultra 5, 개발이나 멀티태스킹이면 Core Ultra 7 이상을 권장합니다. 가격과 성능 균형을 맞춘 후 화면 크기, 무게, 배터리 지속시간을 고려하세요. 직접 만져보고 키보드 감촉을 확인하는 것도 중요합니다."
@@ -35,7 +35,7 @@ faq:
 특히 가성비를 따질 때는 단순 스펙이 아닌 **실제 사용 환경에서의 만족도**를 기준으로 봐야 합니다. 같은 가격대에서도 화면 품질, 키보드 감촉, 냉각 효율 등이 일상 경험에 미치는 영향이 큽니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%ED%82%A4%ED%81%AC%EB%A1%A0+K3+Pro&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro&src=1139000&spec=10799999&addtag=200&ctag=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -188,7 +188,7 @@ ThinkPad 시리즈는 **업무용 노트북의 표준**으로 평가받습니다
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=LG+%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C+34%EC%9D%B8%EC%B9%98+%EB%AA%A8%EB%8B%88%ED%84%B0&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -10,9 +10,9 @@ image:
   alt: "Close-up of HTML code lines highlighting web development concepts and techniques."
 coupangLinks:
   - title: "자바스크립트 완벽 가이드 도서"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+%EC%99%84%EB%B2%BD+%EA%B0%80%EC%9D%B4%EB%93%9C+%EB%8F%84%EC%84%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C%20%EB%8F%84%EC%84%9C"
   - title: "모니터 LG 울트라와이드"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8B%88%ED%84%B0+LG+%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C"
 ---
 ## Phaser.js가 웹 게임 개발의 정답인 이유
 
@@ -42,7 +42,7 @@ Phaser는 HTML5 게임 개발을 위한 가장 인기 있는 JavaScript 프레�
 - 사운드 관리, 입력 처리 완벽 지원
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+%EC%99%84%EB%B2%BD+%EA%B0%80%EC%9D%B4%EB%93%9C+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C%20%EB%8F%84%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -440,7 +440,7 @@ Phaser는 웹 게임 개발의 최고 선택입니다. 특히 다음 경우에 �
 설치 없이 링크 하나로 전 세계 누구나 플레이할 수 있다는 점은 Phaser만의 독보적인 강점입니다. 오늘 Vite + Phaser 프로젝트를 시작하고, 여러분의 첫 웹 게임을 세상에 공개해보세요!
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8B%88%ED%84%B0+LG+%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -10,9 +10,9 @@ image:
   alt: "Close-up of mechanical keyboard switches and springs organized in containers on a desk setup."
 coupangLinks:
   - title: "키크론 K3 Pro"
-    url: "https://www.coupang.com/np/search?component=&q=%ED%82%A4%ED%81%AC%EB%A1%A0+K3+Pro&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro&src=1139000&spec=10799999&addtag=200&ctag=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro"
   - title: "맥북 에어 M3"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A7%A5%EB%B6%81+%EC%97%90%EC%96%B4+M3&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&src=1139000&spec=10799999&addtag=200&ctag=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3"
 faq:
   - q: "멤브레인 키보드의 러버돔은 얼마나 오래 사용할 수 있나요?"
     a: "현대 고급 멤브레인 키보드는 평균 800만~1000만 회의 입력을 견딘다. 하루 평균 5시간 타이핑 기준으로 약 4~5년 사용이 가능하다. 러버돔의 경화로 입력감이 변할 수 있지만, 교체 부품이 저렴하면 인생 기한까지 쓸 수 있다."
@@ -29,7 +29,7 @@ faq:
 이 글에서는 **단순한 순위 나열이 아닌, 각 축의 기술적 원리와 실제 개발 업무에서의 체감 차이**를 분석한다. 당신이 장시간 코딩 중심 업무를 하는지, 문서 작성과 병행하는지, 혹은 원격근무로 소음 관리가 중요한지에 따라 최적의 선택이 달라진다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%ED%82%A4%ED%81%AC%EB%A1%A0+K3+Pro&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro&src=1139000&spec=10799999&addtag=200&ctag=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -182,7 +182,7 @@ Algorithm 경진대회, 대규모 리팩토링, 또는 데이터 마이그레이
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A7%A5%EB%B6%81+%EC%97%90%EC%96%B4+M3&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&src=1139000&spec=10799999&addtag=200&ctag=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

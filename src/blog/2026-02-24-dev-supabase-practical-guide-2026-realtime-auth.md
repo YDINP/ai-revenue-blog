@@ -10,11 +10,11 @@ image:
   alt: "Top view of Pantone color guides showcasing vibrant shades for creative design projects."
 coupangLinks:
   - title: "점프 투 파이썬"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%A0%90%ED%94%84+%ED%88%AC+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
   - title: "혼자 공부하는 파이썬"
-    url: "https://www.coupang.com/np/search?component=&q=%ED%98%BC%EC%9E%90+%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
   - title: "클린 코드"
-    url: "https://www.coupang.com/np/search?component=&q=%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C"
 faq:
   - q: "Supabase 무료 티어로 충분한가요?"
     a: "프로토타입이나 소규모 개인 프로젝트(월 10만 행 이하)라면 충분합니다. 하지만 실시간 기능을 많이 사용하거나 1만 명 이상의 활성 사용자가 있다면 Pro 플랜 이상을 권장합니다."
@@ -35,7 +35,7 @@ Supabase는 Firebase의 오픈소스 대안으로, PostgreSQL 기반의 완전�
 더 자세한 내용은 [Supabase 무료 티어로 프로덕션 서비스 운영하기 완전 가이드](/blog/2026-02-06-supabase-free-tier-guide/)을 참고하세요.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%A0%90%ED%94%84+%ED%88%AC+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -314,7 +314,7 @@ Supabase는 2026년 기준으로 **가장 완성도 높은 오픈소스 백엔�
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%ED%98%BC%EC%9E%90+%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

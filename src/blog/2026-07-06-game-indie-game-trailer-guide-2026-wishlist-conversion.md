@@ -10,9 +10,9 @@ image:
   alt: "카메라와 모니터를 갖춘 전문 영상 촬영 세팅"
 coupangLinks:
   - title: "무기가 되는 스토리"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%AC%B4%EA%B8%B0%EA%B0%80+%EB%90%98%EB%8A%94+%EC%8A%A4%ED%86%A0%EB%A6%AC&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%AC%B4%EA%B8%B0%EA%B0%80%20%EB%90%98%EB%8A%94%20%EC%8A%A4%ED%86%A0%EB%A6%AC&src=1139000&spec=10799999&addtag=200&ctag=%EB%AC%B4%EA%B8%B0%EA%B0%80%20%EB%90%98%EB%8A%94%20%EC%8A%A4%ED%86%A0%EB%A6%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AC%B4%EA%B8%B0%EA%B0%80%20%EB%90%98%EB%8A%94%20%EC%8A%A4%ED%86%A0%EB%A6%AC"
   - title: "로지텍 MX Master 3S"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
 faq:
   - q: "트레일러는 몇 초가 적당한가?"
     a: "스팀 정식 트레일러는 60~90초가 표준이다. 숏폼 버전은 15~30초로 따로 편집해야 한다. 2분을 넘기면 이탈률이 급격히 올라간다."
@@ -29,7 +29,7 @@ faq:
 트레일러가 실패하면 아무리 좋은 캡슐 이미지와 스크린샷을 준비해도 소용없다. 반대로 트레일러가 강렬하면, 다른 마케팅 요소가 부족해도 위시리스트가 쌓인다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%AC%B4%EA%B8%B0%EA%B0%80+%EB%90%98%EB%8A%94+%EC%8A%A4%ED%86%A0%EB%A6%AC&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%AC%B4%EA%B8%B0%EA%B0%80%20%EB%90%98%EB%8A%94%20%EC%8A%A4%ED%86%A0%EB%A6%AC&src=1139000&spec=10799999&addtag=200&ctag=%EB%AC%B4%EA%B8%B0%EA%B0%80%20%EB%90%98%EB%8A%94%20%EC%8A%A4%ED%86%A0%EB%A6%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AC%B4%EA%B8%B0%EA%B0%80%20%EB%90%98%EB%8A%94%20%EC%8A%A4%ED%86%A0%EB%A6%AC" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -91,7 +91,7 @@ faq:
 - [Valve: Steam Discovery Update 공식 발표](https://store.steampowered.com/news/)
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

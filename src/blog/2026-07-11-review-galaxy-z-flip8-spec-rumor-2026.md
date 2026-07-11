@@ -10,9 +10,9 @@ image:
   alt: "어두운 배경의 삼성 갤럭시 스마트폰 — 갤럭시 Z 플립8 예상 이미지"
 coupangLinks:
   - title: "갤럭시 Z 플립 케이스·강화 보호필름"
-    url: "https://www.coupang.com/np/search?component=&q=%EA%B0%A4%EB%9F%AD%EC%8B%9C+Z+%ED%94%8C%EB%A6%BD+%EC%BC%80%EC%9D%B4%EC%8A%A4+%EA%B0%95%ED%99%94+%EB%B3%B4%ED%98%B8%ED%95%84%EB%A6%84&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B0%A4%EB%9F%AD%EC%8B%9C%20Z%20%ED%94%8C%EB%A6%BD%20%EC%BC%80%EC%9D%B4%EC%8A%A4%20%EA%B0%95%ED%99%94%20%EB%B3%B4%ED%98%B8%ED%95%84%EB%A6%84&src=1139000&spec=10799999&addtag=200&ctag=%EA%B0%A4%EB%9F%AD%EC%8B%9C%20Z%20%ED%94%8C%EB%A6%BD%20%EC%BC%80%EC%9D%B4%EC%8A%A4%20%EA%B0%95%ED%99%94%20%EB%B3%B4%ED%98%B8%ED%95%84%EB%A6%84&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B0%A4%EB%9F%AD%EC%8B%9C%20Z%20%ED%94%8C%EB%A6%BD%20%EC%BC%80%EC%9D%B4%EC%8A%A4%20%EA%B0%95%ED%99%94%20%EB%B3%B4%ED%98%B8%ED%95%84%EB%A6%84"
   - title: "삼성 정품 25W 고속 충전기"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EC%A0%95%ED%92%88+25W+%EA%B3%A0%EC%86%8D+%EC%B6%A9%EC%A0%84%EA%B8%B0&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EC%A0%95%ED%92%88%2025W%20%EA%B3%A0%EC%86%8D%20%EC%B6%A9%EC%A0%84%EA%B8%B0&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EC%A0%95%ED%92%88%2025W%20%EA%B3%A0%EC%86%8D%20%EC%B6%A9%EC%A0%84%EA%B8%B0&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EC%A0%95%ED%92%88%2025W%20%EA%B3%A0%EC%86%8D%20%EC%B6%A9%EC%A0%84%EA%B8%B0"
 faq:
   - q: "갤럭시 Z 플립8은 언제 공개되나요?"
     a: "2026년 7월 22일 삼성 갤럭시 언팩에서 공개될 것이란 관측이 유력합니다. 삼성은 매년 여름과 겨울 두 차례 언팩을 여는데, 폴더블 라인업(Z 플립·Z 폴드)은 통상 여름 언팩에서 발표됩니다. 정식 출시(판매 개시)는 공개 후 1~2주 뒤가 일반적입니다. 다만 아직 공식 발표 전이므로 날짜는 바뀔 수 있습니다."
@@ -48,7 +48,7 @@ faq:
 
 배터리·충전·카메라가 그대로라는 점에서 다소 아쉽다는 반응도 있지만, 프로세서 세대 교체와 디스플레이·힌지 완성도, 그리고 AI 기능 개선에 무게가 실릴 전망입니다.
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B0%A4%EB%9F%AD%EC%8B%9C+Z+%ED%94%8C%EB%A6%BD+%EC%BC%80%EC%9D%B4%EC%8A%A4+%EA%B0%95%ED%99%94+%EB%B3%B4%ED%98%B8%ED%95%84%EB%A6%84+%EB%B3%B4%EA%B8%B0&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EA%B0%A4%EB%9F%AD%EC%8B%9C%20Z%20%ED%94%8C%EB%A6%BD%20%EC%BC%80%EC%9D%B4%EC%8A%A4%20%EA%B0%95%ED%99%94%20%EB%B3%B4%ED%98%B8%ED%95%84%EB%A6%84%20%EB%B3%B4%EA%B8%B0&src=1139000&spec=10799999&addtag=200&ctag=%EA%B0%A4%EB%9F%AD%EC%8B%9C%20Z%20%ED%94%8C%EB%A6%BD%20%EC%BC%80%EC%9D%B4%EC%8A%A4%20%EA%B0%95%ED%99%94%20%EB%B3%B4%ED%98%B8%ED%95%84%EB%A6%84%20%EB%B3%B4%EA%B8%B0&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B0%A4%EB%9F%AD%EC%8B%9C%20Z%20%ED%94%8C%EB%A6%BD%20%EC%BC%80%EC%9D%B4%EC%8A%A4%20%EA%B0%95%ED%99%94%20%EB%B3%B4%ED%98%B8%ED%95%84%EB%A6%84%20%EB%B3%B4%EA%B8%B0" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">📱</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -72,7 +72,7 @@ faq:
 
 당장 폴더블이 필요하고 검증된 완성도를 원한다면 Z 플립7도 여전히 좋은 선택입니다. 반대로 최신 프로세서와 개선된 AI 기능을 원하거나, 아이폰 폴더블과 비교해보고 싶다면 언팩까지 기다릴 이유가 충분합니다.
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EC%A0%95%ED%92%88+%EA%B3%A0%EC%86%8D+%EC%B6%A9%EC%A0%84%EA%B8%B0+%ED%8F%B4%EB%8D%94%EB%B8%94+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC+%EB%B3%B4%EA%B8%B0&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EC%A0%95%ED%92%88%20%EA%B3%A0%EC%86%8D%20%EC%B6%A9%EC%A0%84%EA%B8%B0%20%ED%8F%B4%EB%8D%94%EB%B8%94%20%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%20%EB%B3%B4%EA%B8%B0&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EC%A0%95%ED%92%88%20%EA%B3%A0%EC%86%8D%20%EC%B6%A9%EC%A0%84%EA%B8%B0%20%ED%8F%B4%EB%8D%94%EB%B8%94%20%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%20%EB%B3%B4%EA%B8%B0&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EC%A0%95%ED%92%88%20%EA%B3%A0%EC%86%8D%20%EC%B6%A9%EC%A0%84%EA%B8%B0%20%ED%8F%B4%EB%8D%94%EB%B8%94%20%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%20%EB%B3%B4%EA%B8%B0" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🔌</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

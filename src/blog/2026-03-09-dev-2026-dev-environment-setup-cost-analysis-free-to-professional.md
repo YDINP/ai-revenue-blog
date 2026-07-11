@@ -10,11 +10,11 @@ image:
   alt: "Overhead view of business tools including a phone calculator, pricing formula document, and eyeglasses on a desk."
 coupangLinks:
   - title: "클린 코드"
-    url: "https://www.coupang.com/np/search?component=&q=%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C"
   - title: "러스트 프로그래밍"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%9F%AC%EC%8A%A4%ED%8A%B8+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D"
   - title: "혼자 공부하는 파이썬"
-    url: "https://www.coupang.com/np/search?component=&q=%ED%98%BC%EC%9E%90+%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
 faq:
   - q: "개발을 시작하려면 최소 얼마를 투자해야 하나요?"
     a: "개발 시작에는 0원이 필요합니다. VS Code, Git, Python, Docker 모두 무료이며, 클라우드도 AWS/Google Cloud 무료 크레딧으로 시작할 수 있습니다. 프로덕션 배포 후 트래픽이 발생할 때 비용이 생깁니다."
@@ -31,7 +31,7 @@ faq:
 개발 환경 세팅 비용은 단순히 소프트웨어 구매가가 아닙니다. **하드웨어, 클라우드 서비스, 개발 도구, 학습 자료** 등 여러 항목이 복합적으로 작용합니다. 프로젝트 규모, 팀 구성, 배포 환경에 따라 비용이 극명하게 달라집니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -241,7 +241,7 @@ A: 개발/테스트 환경은 온디맨드, 프로덕션은 예약 인스턴스�
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%9F%AC%EC%8A%A4%ED%8A%B8+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

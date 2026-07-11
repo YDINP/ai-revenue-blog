@@ -10,9 +10,9 @@ image:
   alt: "컴퓨터 화면에 표시된 AI 채팅 인터페이스"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C"
   - title: "아이패드 에어 M2"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&src=1139000&spec=10799999&addtag=200&ctag=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2"
 ---
 ## 같은 AI, 다른 결과 — 프롬프트가 전부다
 
@@ -23,7 +23,7 @@ ChatGPT나 Claude를 사용할 때 "왜 내가 원하는 답이 안 나오지?"�
 이 글에서는 실무에서 바로 활용할 수 있는 **7가지 핵심 프롬프트 기법**을 구체적인 예제와 함께 소개합니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -196,7 +196,7 @@ AI에게 **프롬프트 자체를 개선**하도록 요청하는 고급 기법�
 오늘부터 이 기법들을 하나씩 적용해보세요. AI가 당신의 가장 강력한 조수가 될 것입니다!
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&src=1139000&spec=10799999&addtag=200&ctag=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

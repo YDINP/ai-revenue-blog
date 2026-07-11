@@ -10,9 +10,9 @@ image:
   alt: "Close-up of a red Nintendo Game Boy Color on a dark backdrop, showcasing retro gaming nostalgia."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
   - title: "유니티 교과서"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C"
 faq:
   - q: "PixiJS와 Phaser.js 중 뭘 선택해야 하나요?"
     a: "순수 렌더링 성능을 최우선으로 한다면 PixiJS, 완전한 게임 프레임워크(물리, 입력, 사운드 등)가 필요하면 Phaser.js를 추천합니다. PixiJS는 더 빠르지만 추가 라이브러리 연동이 필요합니다."
@@ -43,7 +43,7 @@ Texture Atlas, Spritesheets, 애니메이션 프레임워크를 내장하고 있
 블러, 색상 변환, 왜곡 효과 등을 GPU에서 직접 처리하므로 성능 저하가 적습니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -213,7 +213,7 @@ PixiJS의 강점을 최대한 활용하면 **개발 기간 30% 단축**과 **게
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

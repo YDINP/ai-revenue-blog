@@ -10,11 +10,11 @@ image:
   alt: "Close-up of an AI-driven chat interface on a computer screen, showcasing modern AI technology."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C"
   - title: "아이패드 에어 M2"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&src=1139000&spec=10799999&addtag=200&ctag=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2"
   - title: "챗GPT 활용법 도서"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C"
 faq:
   - q: "로컬 LLM으로도 ChatGPT 수준의 성능을 낼 수 있나요?"
     a: "13B 규모 모델(OpenHermes, Mistral)은 일반적인 질문-답변 작업에서 ChatGPT-3.5와 비슷한 성능을 보입니다. 다만 복잡한 추론이나 멀티스텝 문제는 70B 이상 모델이 필요하며, 현재는 클라우드가 더 효율적입니다."
@@ -31,7 +31,7 @@ faq:
 더 자세한 내용은 [프롬프트 엔지니어링 심화 기법: 2026년 AI 출력 품질 10배 향상법](/blog/2026-02-16-ai-prompt-engineering-advanced-techniques-2026-quality-optimization/)을 참고하면, 로컬 환경에서도 프롬프트 최적화로 모델 성능을 극대화할 수 있습니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -203,7 +203,7 @@ Prometheus + Grafana 스택으로 GPU 사용률, 응답 시간, 에러율을 실
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&src=1139000&spec=10799999&addtag=200&ctag=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

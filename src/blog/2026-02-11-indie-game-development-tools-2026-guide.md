@@ -10,11 +10,11 @@ image:
   alt: "Focused gamer with headset playing a video game on a desktop computer indoors."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
   - title: "유니티 교과서"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C"
   - title: "게임 프로그래밍 패턴"
-    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4"
 ---
 ## 2026년 인디 게임 개발 도구의 변화
 
@@ -27,7 +27,7 @@ coupangLinks:
 올바른 인디 게임 개발 도구 선택은 프로젝트의 성패를 좌우합니다. 팀 규모, 게임 장르, 기술 수준, 예산 등 여러 요소를 고려해야 합니다. 2026년 인디 게임 개발 도구는 더욱 접근성 좋아지면서도 전문성은 깊어졌습니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -150,7 +150,7 @@ Unity 에셋 스토어, Itch.io, Godot Asset Library 등에서 기존 에셋과 
 최적의 인디 게임 개발 도구 선택은 당신의 목표와 현재 수준을 정직하게 평가한 후 이루어져야 합니다. Godot의 무료성, Unity의 안정성, Unreal Engine의 성능 중 어떤 것을 우선시할지 결정하고, 꾸준히 학습하며 발전해나가길 바랍니다. 당신의 게임 개발 여정이 성공적이기를 응원합니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

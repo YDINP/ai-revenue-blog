@@ -10,9 +10,9 @@ image:
   alt: "TV 앞에서 콘솔 컨트롤러로 게임하는 모습 — 2026 하반기 콘솔 대작"
 coupangLinks:
   - title: "PS5 듀얼센스 무선 컨트롤러"
-    url: "https://www.coupang.com/np/search?component=&q=PS5+%EB%93%80%EC%96%BC%EC%84%BC%EC%8A%A4+%EB%AC%B4%EC%84%A0+%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC&channel=user"
+    url: "https://www.coupang.com/np/search?q=PS5%20%EB%93%80%EC%96%BC%EC%84%BC%EC%8A%A4%20%EB%AC%B4%EC%84%A0%20%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC&src=1139000&spec=10799999&addtag=200&ctag=PS5%20%EB%93%80%EC%96%BC%EC%84%BC%EC%8A%A4%20%EB%AC%B4%EC%84%A0%20%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC&lptag=AF7838146&pageType=SEARCH&pageValue=PS5%20%EB%93%80%EC%96%BC%EC%84%BC%EC%8A%A4%20%EB%AC%B4%EC%84%A0%20%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC"
   - title: "게이밍 헤드셋"
-    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9D%B4%EB%B0%8D+%ED%97%A4%EB%93%9C%EC%85%8B&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%ED%97%A4%EB%93%9C%EC%85%8B&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%ED%97%A4%EB%93%9C%EC%85%8B&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%ED%97%A4%EB%93%9C%EC%85%8B"
 faq:
   - q: "GTA 6는 언제, 어떤 기기로 나오나요?"
     a: "GTA 6는 2026년 11월 19일 PS5와 Xbox 시리즈 X/S로 발매될 것으로 알려졌습니다. 한국어를 지원해 국내 이용자도 편하게 즐길 수 있습니다. PC판은 콘솔 출시 이후 별도 시점에 나오는 것이 락스타의 관례라, PC 유저는 다소 기다려야 할 가능성이 큽니다. 발매일은 개발사 사정에 따라 변동될 수 있으니 공식 발표를 확인하세요."
@@ -47,7 +47,7 @@ GTA 6 외에도 놓치기 아까운 대작이 가득합니다.
 | 팬텀 블레이드 제로 | 액션 | PC·콘솔 | 무협 액션 |
 | 신더시티 | 오픈월드 슈터 | 글로벌 | 엔씨 첫 오픈월드 슈터 |
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=PS5+%EB%93%80%EC%96%BC%EC%84%BC%EC%8A%A4+%EB%AC%B4%EC%84%A0+%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC+%EC%B5%9C%EC%A0%80%EA%B0%80+%EB%B3%B4%EA%B8%B0&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=PS5%20%EB%93%80%EC%96%BC%EC%84%BC%EC%8A%A4%20%EB%AC%B4%EC%84%A0%20%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC%20%EC%B5%9C%EC%A0%80%EA%B0%80%20%EB%B3%B4%EA%B8%B0&src=1139000&spec=10799999&addtag=200&ctag=PS5%20%EB%93%80%EC%96%BC%EC%84%BC%EC%8A%A4%20%EB%AC%B4%EC%84%A0%20%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC%20%EC%B5%9C%EC%A0%80%EA%B0%80%20%EB%B3%B4%EA%B8%B0&lptag=AF7838146&pageType=SEARCH&pageValue=PS5%20%EB%93%80%EC%96%BC%EC%84%BC%EC%8A%A4%20%EB%AC%B4%EC%84%A0%20%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC%20%EC%B5%9C%EC%A0%80%EA%B0%80%20%EB%B3%B4%EA%B8%B0" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🎮</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -72,7 +72,7 @@ GTA 6 외에도 놓치기 아까운 대작이 가득합니다.
 
 이렇게 대작이 몰릴 땐 출시·할인 알림을 놓치기 쉽습니다. 스팀·콘솔 스토어의 **위시리스트**에 미리 담아두면 알림을 받을 수 있고, 예약 구매 시 얼리 액세스나 사전 특전을 주는 경우도 많아요. 인디·중소 신작까지 폭넓게 챙기고 싶다면 [2026 하반기 스팀 기대 신작 총정리](/blog/2026-07-07-game-steam-upcoming-games-2026-h2-wishlist/)도 함께 보면 좋습니다.
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%AA%B0%EC%9E%85%EA%B0%90+%EA%B2%8C%EC%9D%B4%EB%B0%8D+%ED%97%A4%EB%93%9C%EC%85%8B+%EC%9D%B8%EA%B8%B0%EC%88%9C+%EB%B3%B4%EA%B8%B0&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%AA%B0%EC%9E%85%EA%B0%90%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%ED%97%A4%EB%93%9C%EC%85%8B%20%EC%9D%B8%EA%B8%B0%EC%88%9C%20%EB%B3%B4%EA%B8%B0&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%B0%EC%9E%85%EA%B0%90%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%ED%97%A4%EB%93%9C%EC%85%8B%20%EC%9D%B8%EA%B8%B0%EC%88%9C%20%EB%B3%B4%EA%B8%B0&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%B0%EC%9E%85%EA%B0%90%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%ED%97%A4%EB%93%9C%EC%85%8B%20%EC%9D%B8%EA%B8%B0%EC%88%9C%20%EB%B3%B4%EA%B8%B0" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🎧</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

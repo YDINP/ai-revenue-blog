@@ -10,16 +10,16 @@ image:
   alt: "야외에서 DevOps 스티커를 들고 있는 사람을 특징으로 하는 클로즈업 이미지"
 coupangLinks:
   - title: "LG 그램 17 (개발용 노트북)"
-    url: "https://www.coupang.com/np/search?component=&q=LG+%EA%B7%B8%EB%9E%A8+17&channel=user"
+    url: "https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017"
   - title: "챗GPT 활용법 도서"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C"
 ---
 ## n8n이란?
 
 n8n(노드에이트엔)은 **오픈소스 워크플로우 자동화 도구**입니다. Zapier나 Make(구 Integromat)와 비슷하지만, 셀프 호스팅이 가능하여 **무제한 무료 사용**이 가능합니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=LG+%EA%B7%B8%EB%9E%A8+17&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -139,7 +139,7 @@ n8n + AI API 조합은 **가장 낮은 진입장벽**으로 자동 수익 파이
 생산성을 높이려면 좋은 장비도 중요합니다. 특히 여러 워크플로우를 동시에 돌리려면 충분한 RAM과 프로세서 성능이 필요하죠.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

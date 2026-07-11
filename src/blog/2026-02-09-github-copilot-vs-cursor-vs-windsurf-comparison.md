@@ -10,18 +10,18 @@ image:
   alt: "모니터에 표시된 코드와 프로그래밍 화면"
 coupangLinks:
   - title: "AI 시대의 프로그래밍 도서"
-    url: "https://www.coupang.com/np/search?component=&q=AI+%EC%8B%9C%EB%8C%80%EC%9D%98+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%EB%8F%84%EC%84%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C"
   - title: "개발자 모니터 LG 27인치"
-    url: "https://www.coupang.com/np/search?component=&q=%EA%B0%9C%EB%B0%9C%EC%9E%90+%EB%AA%A8%EB%8B%88%ED%84%B0+LG+27%EC%9D%B8%EC%B9%98&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%2027%EC%9D%B8%EC%B9%98&src=1139000&spec=10799999&addtag=200&ctag=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%2027%EC%9D%B8%EC%B9%98&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%2027%EC%9D%B8%EC%B9%98"
   - title: "로지텍 MX Keys 키보드"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20%ED%82%A4%EB%B3%B4%EB%93%9C"
 ---
 ## AI가 코드를 쓰는 시대, 어떤 도구를 써야 할까?
 
 2026년, AI 코딩 어시스턴트는 선택이 아닌 **필수**가 되었습니다. 하지만 GitHub Copilot, Cursor, Windsurf 중 어떤 도구가 나에게 맞을까요? 각 도구를 실제로 사용하며 5가지 핵심 기준으로 비교해봤습니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=AI+%EC%8B%9C%EB%8C%80%EC%9D%98+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -102,7 +102,7 @@ Codeium 팀이 만든 Windsurf는 2025년 말 출시되어 빠르게 성장 중�
 어떤 도구를 선택하든, AI 코딩 어시스턴트를 사용하지 않는 것은 2026년에 더 이상 옵션이 아닙니다. 지금 바로 무료 체험부터 시작해보세요.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B0%9C%EB%B0%9C%EC%9E%90+%EB%AA%A8%EB%8B%88%ED%84%B0+LG+27%EC%9D%B8%EC%B9%98&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%2027%EC%9D%B8%EC%B9%98&src=1139000&spec=10799999&addtag=200&ctag=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%2027%EC%9D%B8%EC%B9%98&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%2027%EC%9D%B8%EC%B9%98" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

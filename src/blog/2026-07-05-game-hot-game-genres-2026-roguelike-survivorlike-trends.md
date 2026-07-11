@@ -10,9 +10,9 @@ image:
   alt: "화려한 네온 불빛의 빈티지 아케이드 게임기"
 coupangLinks:
   - title: "게임 기획자의 생각법"
-    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98+%EC%83%9D%EA%B0%81%EB%B2%95&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98%20%EC%83%9D%EA%B0%81%EB%B2%95&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98%20%EC%83%9D%EA%B0%81%EB%B2%95&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98%20%EC%83%9D%EA%B0%81%EB%B2%95"
   - title: "게임, 이렇게 만들어야 팔린다"
-    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%EC%9D%B4%EB%A0%87%EA%B2%8C+%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC+%ED%8C%94%EB%A6%B0%EB%8B%A4&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4"
 faq:
   - q: "1인 개발자에게 가장 효율적인 장르는?"
     a: "로그라이크(로그라이트)류가 대표적이다. 랜덤성과 빌드 조합으로 적은 콘텐츠로도 높은 리플레이성을 확보할 수 있어 리소스가 한정된 개인에게 유리하다."
@@ -29,7 +29,7 @@ faq:
 이 글은 2026년 스팀에서 실제로 통하고 있는 인디 장르 트렌드를 정리한다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98+%EC%83%9D%EA%B0%81%EB%B2%95&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98%20%EC%83%9D%EA%B0%81%EB%B2%95&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98%20%EC%83%9D%EA%B0%81%EB%B2%95&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98%20%EC%83%9D%EA%B0%81%EB%B2%95" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -83,7 +83,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%EC%9D%B4%EB%A0%87%EA%B2%8C+%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC+%ED%8C%94%EB%A6%B0%EB%8B%A4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

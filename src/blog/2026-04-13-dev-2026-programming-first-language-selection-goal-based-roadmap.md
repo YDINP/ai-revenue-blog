@@ -10,11 +10,11 @@ image:
   alt: "A dimly lit home study setup with laptop displaying coding notes on a hollow square pattern."
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive"
   - title: "클린 코드"
-    url: "https://www.coupang.com/np/search?component=&q=%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C"
   - title: "러스트 프로그래밍"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%9F%AC%EC%8A%A4%ED%8A%B8+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D"
 faq:
   - q: "프로그래밍을 배운 적 없는데, 어떤 언어를 선택해야 할까요?"
     a: "비전공자나 프로그래밍 경험이 전혀 없다면 Python을 강력 추천합니다. 문법이 영어처럼 읽기 쉽고, 온라인 자료가 가장 많으며, 2~3주 안에 첫 프로젝트를 만들 수 있습니다. Python으로 기초를 다진 후 필요에 따라 다른 언어를 배우면 됩니다."
@@ -37,7 +37,7 @@ faq:
 Stack Overflow 2025 개발자 설문 결과, Python이 여전히 압도적인 1위를 차지하고 있습니다. 그러나 **언어의 인기도가 반드시 여러분에게 최적이라는 의미는 아닙니다.** 취업 목표, 희망 분야, 학습 속도에 따라 최적의 선택은 완전히 달라집니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -201,7 +201,7 @@ LeetCode 200문제를 풀었는데 웹사이트를 못 만들면 취업 면접�
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -10,11 +10,11 @@ image:
   alt: "Close-up of a person coding on a laptop, showcasing web development and programming concepts."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
   - title: "삼성 갤럭시북4 프로"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814+%ED%94%84%EB%A1%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C"
   - title: "맥북 에어 M3"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A7%A5%EB%B6%81+%EC%97%90%EC%96%B4+M3&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&src=1139000&spec=10799999&addtag=200&ctag=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3"
 faq:
   - q: "개발자용 노트북에서 GPU는 정말 중요한가요?"
     a: "일반 웹/백엔드 개발자라면 내장 GPU만으로 충분합니다. GPU는 주로 화면 표시와 가벼운 3D 렌더링을 담당하며, CPU 성능이 훨씬 더 중요합니다. 게임 엔진 개발이나 CUDA 기반 AI 학습을 한다면 고급 GPU가 필요합니다."
@@ -69,7 +69,7 @@ Apple Silicon은 **에너지 효율**과 **발열 관리**에서 타의 추종�
 Swift, Objective-C 개발자와 AI/ML 엔지니어에게 최적입니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -193,7 +193,7 @@ GPT-5.3 Codex Spark, Claude 3 같은 AI 코딩 도구를 로컬에서 실행하�
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814+%ED%94%84%EB%A1%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

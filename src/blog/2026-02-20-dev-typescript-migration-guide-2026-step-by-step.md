@@ -10,11 +10,11 @@ image:
   alt: "Bright vibrant colorful abstract background with white and yellow with blue soft lights"
 coupangLinks:
   - title: "러스트 프로그래밍"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%9F%AC%EC%8A%A4%ED%8A%B8+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D"
   - title: "자바스크립트 완벽 가이드"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+%EC%99%84%EB%B2%BD+%EA%B0%80%EC%9D%B4%EB%93%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C"
   - title: "점프 투 파이썬"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%A0%90%ED%94%84+%ED%88%AC+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
 faq:
   - q: "기존 JavaScript 프로젝트를 TypeScript로 마이그레이션하면 성능이 저하되나요?"
     a: "아니요. TypeScript는 컴파일 타임에만 타입 검사를 수행하고, 최종 산출물은 JavaScript입니다. 따라서 런타임 성능은 동일하며, 오히려 타입 검사로 인한 버그 감소로 안정성이 향상됩니다."
@@ -43,7 +43,7 @@ TypeScript는 정적 타입 검사를 통해 **런타임 에러를 개발 단계
 [2026년 React 상태 관리 전쟁: Zustand vs Jotai vs TanStack Query 실전 비교](/blog/2026-02-19-dev-react-state-management-comparison-2026-zustand-jotai-tanstack/)에서도 언급했듯이, 현대적 JavaScript 생태계의 대부분의 도구가 TypeScript를 기본으로 제공합니다. 이는 TypeScript 도입이 더 이상 선택이 아닌 필수임을 의미합니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%9F%AC%EC%8A%A4%ED%8A%B8+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -305,7 +305,7 @@ describe('formatCurrency', () => {
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+%EC%99%84%EB%B2%BD+%EA%B0%80%EC%9D%B4%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

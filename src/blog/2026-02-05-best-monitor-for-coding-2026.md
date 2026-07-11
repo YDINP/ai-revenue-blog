@@ -10,9 +10,9 @@ image:
   alt: "듀얼 모니터에 코드가 표시된 무지개 조명 키보드로 타이핑하는 손"
 coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"
-    url: "https://www.coupang.com/np/search?component=&q=LG+%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C+34%EC%9D%B8%EC%B9%98+%EB%AA%A8%EB%8B%88%ED%84%B0&channel=user"
+    url: "https://www.coupang.com/np/search?q=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0"
   - title: "삼성 뷰피니티 S8 32인치 4K"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0+S8+32%EC%9D%B8%EC%B9%98+4K&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K"
 ---
 ## 개발자에게 모니터 크기가 중요한 이유
 
@@ -21,7 +21,7 @@ coupangLinks:
 3년간 세 가지 크기를 모두 사용해본 개발자의 관점에서, 실전에서 체감되는 장단점을 비교 분석했습니다. 화면 크기별 최적 해상도, 가격대, 사용 시나리오를 중심으로 **모니터추천**을 정리했습니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=LG+%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C+34%EC%9D%B8%EC%B9%98+%EB%AA%A8%EB%8B%88%ED%84%B0&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -106,7 +106,7 @@ LG 34WN80C, 삼성 S34CG50 등은 **코딩 모니터**로서 곡면 디스플레
 > 이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0+S8+32%EC%9D%B8%EC%B9%98+4K&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

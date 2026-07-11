@@ -10,9 +10,9 @@ image:
   alt: "디지털 뉴럴 네트워크를 형상화한 3D 추상 이미지"
 coupangLinks:
   - title: "AI 2041"
-    url: "https://www.coupang.com/np/search?component=&q=AI+2041&channel=user"
+    url: "https://www.coupang.com/np/search?q=AI%202041&src=1139000&spec=10799999&addtag=200&ctag=AI%202041&lptag=AF7838146&pageType=SEARCH&pageValue=AI%202041"
   - title: "슈퍼인텔리전스"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%8A%88%ED%8D%BC%EC%9D%B8%ED%85%94%EB%A6%AC%EC%A0%84%EC%8A%A4&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%8A%88%ED%8D%BC%EC%9D%B8%ED%85%94%EB%A6%AC%EC%A0%84%EC%8A%A4&src=1139000&spec=10799999&addtag=200&ctag=%EC%8A%88%ED%8D%BC%EC%9D%B8%ED%85%94%EB%A6%AC%EC%A0%84%EC%8A%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%8A%88%ED%8D%BC%EC%9D%B8%ED%85%94%EB%A6%AC%EC%A0%84%EC%8A%A4"
 faq:
   - q: "에이전틱 AI와 일반 AI 챗봇은 어떻게 다른가?"
     a: "챗봇은 질문에 답하는 '반응형'이지만, 에이전틱 AI는 목표를 부여받으면 계획 수립·도구 사용·결과 검증까지 스스로 진행하는 '행동형'이다. 사용자 개입 없이 여러 단계 작업을 완료할 수 있다는 점이 핵심 차이다."
@@ -31,7 +31,7 @@ faq:
 핵심 구분점은 세 가지다. 첫째, **다단계 계획 수립** — 에이전트는 목표를 받으면 이를 순서 있는 하위 작업으로 분해한다. 둘째, **도구 사용** — 웹 검색, 코드 실행, 파일 읽기/쓰기, 외부 API 호출 등 실제 환경과 상호작용한다. 셋째, **자기 검증** — 결과가 목표에 맞는지 스스로 판단하고 루프를 반복한다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=AI+2041&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=AI%202041&src=1139000&spec=10799999&addtag=200&ctag=AI%202041&lptag=AF7838146&pageType=SEARCH&pageValue=AI%202041" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -105,7 +105,7 @@ faq:
 - Gartner, *Top 10 Strategic Technology Trends 2026* — 에이전틱 AI 1위 선정 보고서
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%8A%88%ED%8D%BC%EC%9D%B8%ED%85%94%EB%A6%AC%EC%A0%84%EC%8A%A4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%8A%88%ED%8D%BC%EC%9D%B8%ED%85%94%EB%A6%AC%EC%A0%84%EC%8A%A4&src=1139000&spec=10799999&addtag=200&ctag=%EC%8A%88%ED%8D%BC%EC%9D%B8%ED%85%94%EB%A6%AC%EC%A0%84%EC%8A%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%8A%88%ED%8D%BC%EC%9D%B8%ED%85%94%EB%A6%AC%EC%A0%84%EC%8A%A4" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -10,11 +10,11 @@ image:
   alt: "Close-up of HTML and JavaScript code on a computer screen in Visual Studio Code."
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive"
   - title: "점프 투 파이썬"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%A0%90%ED%94%84+%ED%88%AC+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
   - title: "러스트 프로그래밍"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%9F%AC%EC%8A%A4%ED%8A%B8+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D"
 faq:
   - q: "Zustand와 Redux의 가장 큰 차이점은 무엇인가요?"
     a: "번들 크기(2.3KB vs 8KB)와 보일러플레이트입니다. Zustand는 액션, 리듀서, 디스패치 개념 없이 직관적인 함수로 상태를 업데이트하므로, 신규 프로젝트에서 생산성이 훨씬 높습니다. 다만 극도로 복잡한 상태 흐름 시각화는 Redux DevTools가 더 강합니다."
@@ -39,7 +39,7 @@ React 개발에서 상태 관리는 프로젝트의 유지보수성과 성능을
 3. **React 19 호환성** - 최신 리액트 기능과의 완벽한 통합
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -187,7 +187,7 @@ Redux에서 전환하고 싶은 팀을 위한 실용적 조언:
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%A0%90%ED%94%84+%ED%88%AC+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

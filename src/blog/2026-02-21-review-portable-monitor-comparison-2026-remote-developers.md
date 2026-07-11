@@ -10,11 +10,11 @@ image:
   alt: "A contemporary workspace featuring a Dell laptop, books, and stationery on a desk, reflecting modern office essentials."
 coupangLinks:
   - title: "맥북 에어 M3"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A7%A5%EB%B6%81+%EC%97%90%EC%96%B4+M3&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&src=1139000&spec=10799999&addtag=200&ctag=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3"
   - title: "LG 그램 17"
-    url: "https://www.coupang.com/np/search?component=&q=LG+%EA%B7%B8%EB%9E%A8+17&channel=user"
+    url: "https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017"
   - title: "삼성 갤럭시북4 프로"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814+%ED%94%84%EB%A1%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C"
 faq:
   - q: "포터블 모니터와 노트북만으로 개발이 가능한가요?"
     a: "가능하지만 추천하지 않습니다. 포터블 모니터는 보조 화면이며, 장시간 작업 시 색감 정확도나 응답속도가 데스크톱 모니터에 미치지 못합니다. 다만 원격근무나 출장 중 생산성 향상에는 매우 효과적입니다."
@@ -33,7 +33,7 @@ faq:
 더 자세한 모니터 선택 기준은 [개발자 모니터 구매 가이드 2026: 색감·응답속도·인체공학까지 완벽 정리](/blog/2026-02-14-review-developer-monitor-buying-guide-2026/)을 참고하세요.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A7%A5%EB%B6%81+%EC%97%90%EC%96%B4+M3&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&src=1139000&spec=10799999&addtag=200&ctag=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -237,7 +237,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=LG+%EA%B7%B8%EB%9E%A8+17&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

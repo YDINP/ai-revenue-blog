@@ -10,11 +10,11 @@ image:
   alt: "A Muslim woman in a hijab applies makeup for a tutorial indoors."
 coupangLinks:
   - title: "로지텍 G Pro X 게이밍 마우스"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+G+Pro+X+%EA%B2%8C%EC%9D%B4%EB%B0%8D+%EB%A7%88%EC%9A%B0%EC%8A%A4&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4"
   - title: "유니티 교과서"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C"
   - title: "게임 프로그래밍 패턴"
-    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4"
 faq:
   - q: "Phaser 3의 Arcade 물리 엔진은 모바일에서도 잘 작동하나요?"
     a: "네, Arcade는 모바일 최적화가 잘 되어 있습니다. Matter.js보다 계산 부하가 적어서 저사양 기기에서도 60fps를 유지할 가능성이 높습니다. 다만 충돌 객체 수가 100개를 초과하면 성능 테스트를 권장합니다."
@@ -31,7 +31,7 @@ Phaser 3는 웹 게임 개발을 위한 가장 인기 있는 자바스크립트 
 2D 게임에서 리얼한 움직임과 상호작용을 표현하려면 물리 엔진의 이해가 필수입니다. 캐릭터가 떨어지고, 벽에 부딪히고, 아이템을 집는 모든 동작이 물리 엔진을 통해 구현되기 때문입니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+G+Pro+X+%EA%B2%8C%EC%9D%B4%EB%B0%8D+%EB%A7%88%EC%9A%B0%EC%8A%A4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -246,7 +246,7 @@ Phaser 3는 **GitHub에서 약 37,000개의 스타**를 받았으며, 매월 활
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

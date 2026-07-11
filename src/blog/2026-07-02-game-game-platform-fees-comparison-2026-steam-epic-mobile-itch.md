@@ -10,9 +10,9 @@ image:
   alt: "달러 지폐 위에 놓인 계산기"
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4"
   - title: "돈의 심리학"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%8F%88%EC%9D%98+%EC%8B%AC%EB%A6%AC%ED%95%99&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&src=1139000&spec=10799999&addtag=200&ctag=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99"
 faq:
   - q: "인디 개발자에게 가장 수수료가 낮은 플랫폼은?"
     a: "명목 수수료만 보면 itch.io(기본 10%, 조정 가능)와 에픽(12%)이 가장 낮다. 다만 트래픽이 적어 실매출은 스팀이 더 큰 경우가 많다."
@@ -29,7 +29,7 @@ faq:
 이 글은 2026년 기준 주요 게임 플랫폼의 수수료 구조를 정확히 비교한다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -92,7 +92,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%8F%88%EC%9D%98+%EC%8B%AC%EB%A6%AC%ED%95%99&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&src=1139000&spec=10799999&addtag=200&ctag=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

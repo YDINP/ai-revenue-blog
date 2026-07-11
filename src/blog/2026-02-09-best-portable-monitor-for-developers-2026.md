@@ -10,17 +10,17 @@ image:
   alt: "깔끔한 데스크 셋업과 모니터가 있는 작업 공간"
 coupangLinks:
   - title: "ASUS ZenScreen MB16ACV"
-    url: "https://www.coupang.com/np/search?component=&q=ASUS+ZenScreen+MB16ACV&channel=user"
+    url: "https://www.coupang.com/np/search?q=ASUS%20ZenScreen%20MB16ACV&src=1139000&spec=10799999&addtag=200&ctag=ASUS%20ZenScreen%20MB16ACV&lptag=AF7838146&pageType=SEARCH&pageValue=ASUS%20ZenScreen%20MB16ACV"
   - title: "모니터 거치대"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8B%88%ED%84%B0+%EA%B1%B0%EC%B9%98%EB%8C%80&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8B%88%ED%84%B0%20%EA%B1%B0%EC%B9%98%EB%8C%80&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8B%88%ED%84%B0%20%EA%B1%B0%EC%B9%98%EB%8C%80&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8B%88%ED%84%B0%20%EA%B1%B0%EC%B9%98%EB%8C%80"
   - title: "USB-C 케이블"
-    url: "https://www.coupang.com/np/search?component=&q=USB-C+%EC%BC%80%EC%9D%B4%EB%B8%94&channel=user"
+    url: "https://www.coupang.com/np/search?q=USB-C%20%EC%BC%80%EC%9D%B4%EB%B8%94&src=1139000&spec=10799999&addtag=200&ctag=USB-C%20%EC%BC%80%EC%9D%B4%EB%B8%94&lptag=AF7838146&pageType=SEARCH&pageValue=USB-C%20%EC%BC%80%EC%9D%B4%EB%B8%94"
   - title: "HOHO 휴대용 노트북 거치대 (블랙)"
-    url: "https://www.coupang.com/np/search?component=&q=HOHO+%ED%9C%B4%EB%8C%80%EC%9A%A9+%EB%85%B8%ED%8A%B8%EB%B6%81+%EA%B1%B0%EC%B9%98%EB%8C%80&channel=user"
+    url: "https://www.coupang.com/np/search?q=HOHO%20%ED%9C%B4%EB%8C%80%EC%9A%A9%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EA%B1%B0%EC%B9%98%EB%8C%80&src=1139000&spec=10799999&addtag=200&ctag=HOHO%20%ED%9C%B4%EB%8C%80%EC%9A%A9%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EA%B1%B0%EC%B9%98%EB%8C%80&lptag=AF7838146&pageType=SEARCH&pageValue=HOHO%20%ED%9C%B4%EB%8C%80%EC%9A%A9%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EA%B1%B0%EC%B9%98%EB%8C%80"
   - title: "멜리언스 노트북 거치대 ML-MDD03"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A9%9C%EB%A6%AC%EC%96%B8%EC%8A%A4+%EB%85%B8%ED%8A%B8%EB%B6%81+%EA%B1%B0%EC%B9%98%EB%8C%80+ML-MDD03&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A9%9C%EB%A6%AC%EC%96%B8%EC%8A%A4%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EA%B1%B0%EC%B9%98%EB%8C%80%20ML-MDD03&src=1139000&spec=10799999&addtag=200&ctag=%EB%A9%9C%EB%A6%AC%EC%96%B8%EC%8A%A4%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EA%B1%B0%EC%B9%98%EB%8C%80%20ML-MDD03&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A9%9C%EB%A6%AC%EC%96%B8%EC%8A%A4%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EA%B1%B0%EC%B9%98%EB%8C%80%20ML-MDD03"
   - title: "규랩 쿨링 홀 노트북 스탠드 거치대"
-    url: "https://www.coupang.com/np/search?component=&q=%EA%B7%9C%EB%9E%A9+%EC%BF%A8%EB%A7%81+%ED%99%80+%EB%85%B8%ED%8A%B8%EB%B6%81+%EC%8A%A4%ED%83%A0%EB%93%9C+%EA%B1%B0%EC%B9%98%EB%8C%80&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B7%9C%EB%9E%A9%20%EC%BF%A8%EB%A7%81%20%ED%99%80%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%EA%B1%B0%EC%B9%98%EB%8C%80&src=1139000&spec=10799999&addtag=200&ctag=%EA%B7%9C%EB%9E%A9%20%EC%BF%A8%EB%A7%81%20%ED%99%80%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%EA%B1%B0%EC%B9%98%EB%8C%80&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B7%9C%EB%9E%A9%20%EC%BF%A8%EB%A7%81%20%ED%99%80%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%EA%B1%B0%EC%B9%98%EB%8C%80"
 ---
 ## 개발자에게 듀얼 모니터는 사치가 아닌 생존 도구
 
@@ -29,7 +29,7 @@ coupangLinks:
 코드 에디터 + 브라우저, 또는 코드 에디터 + 터미널을 동시에 보는 것만으로도 생산성이 **30~40% 향상**된다는 연구 결과가 있습니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=ASUS+ZenScreen+MB16ACV&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=ASUS%20ZenScreen%20MB16ACV&src=1139000&spec=10799999&addtag=200&ctag=ASUS%20ZenScreen%20MB16ACV&lptag=AF7838146&pageType=SEARCH&pageValue=ASUS%20ZenScreen%20MB16ACV" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -141,7 +141,7 @@ coupangLinks:
 듀얼 모니터 한 번 경험하면 절대 싱글로 돌아갈 수 없습니다. 투자 대비 생산성 향상이 가장 확실한 장비입니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8B%88%ED%84%B0+%EA%B1%B0%EC%B9%98%EB%8C%80&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8B%88%ED%84%B0%20%EA%B1%B0%EC%B9%98%EB%8C%80&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8B%88%ED%84%B0%20%EA%B1%B0%EC%B9%98%EB%8C%80&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8B%88%ED%84%B0%20%EA%B1%B0%EC%B9%98%EB%8C%80" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

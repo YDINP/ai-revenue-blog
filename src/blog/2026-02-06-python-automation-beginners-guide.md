@@ -10,9 +10,9 @@ image:
   alt: "노트북 키보드에서 타이핑하는 손의 클로즈업, Python 책이 보이며 코딩 진행 중"
 coupangLinks:
   - title: "혼자 공부하는 파이썬"
-    url: "https://www.coupang.com/np/search?component=&q=%ED%98%BC%EC%9E%90+%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
   - title: "점프 투 파이썬"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%A0%90%ED%94%84+%ED%88%AC+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
 ---
 ## 왜 Python 자동화인가?
 
@@ -21,7 +21,7 @@ coupangLinks:
 이번 가이드에서는 실무에서 바로 쓸 수 있는 **파이썬 업무자동화** 예제 5가지를 단계별로 소개합니다. 모든 코드는 Windows 환경에서 테스트되었으며, Python 3.10 이상에서 동작합니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%ED%98%BC%EC%9E%90+%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -235,7 +235,7 @@ Anaconda를 설치하면 Python + 주요 라이브러리가 한 번에 설치됩
 > 이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%A0%90%ED%94%84+%ED%88%AC+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

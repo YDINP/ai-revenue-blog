@@ -10,9 +10,9 @@ image:
   alt: "A man sitting on a sofa, reviewing documents in a modern home workspace with a laptop."
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive"
   - title: "러스트 프로그래밍"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%9F%AC%EC%8A%A4%ED%8A%B8+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D"
 faq:
   - q: "모니터 1개보다 2개 구입이 낫지 않을까요?"
     a: "34인치 울트라와이드 1개는 27인치 모니터 2개와 거의 동일한 작업 공간을 제공하면서 베젤이 없어 코딩 흐름을 끊지 않습니다. 가격도 2개 구입보다 20~30% 저렴하고 책상 공간도 절약됩니다. 다만 그래픽 디자인이 병행되면 2개 구입이 더 효율적입니다."
@@ -29,7 +29,7 @@ faq:
 모니터, 키보드, 마우스부터 보조 장치까지—예산을 효율적으로 분배해 최적의 워크스테이션을 구축하는 전략을 알려드리겠습니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -180,7 +180,7 @@ Samsung T7 Shield 특징:
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%9F%AC%EC%8A%A4%ED%8A%B8+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

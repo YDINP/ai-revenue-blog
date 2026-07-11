@@ -10,9 +10,9 @@ image:
   alt: "Flat lay of real estate brochures, checklists, and a calculator for home buying."
 coupangLinks:
   - title: "맥북 에어 M3"
-    url: "https://www.coupang.com/np/search?component=&q=%EB%A7%A5%EB%B6%81+%EC%97%90%EC%96%B4+M3&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&src=1139000&spec=10799999&addtag=200&ctag=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3"
   - title: "삼성 갤럭시북4 프로"
-    url: "https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814+%ED%94%84%EB%A1%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C"
 faq:
   - q: "개발자 모니터는 27인치와 32인치 중 어느 것이 나을까요?"
     a: "27인치 QHD는 선명도와 가격을 모두 만족시키는 표준 선택입니다. 32인치 4K는 더 큰 화면을 원할 때 좋지만, 텍스트가 작아져 스케일링이 필요하고 가격도 더 비쌉니다. 책상 크기와 시력을 고려하여 선택하세요."
@@ -35,7 +35,7 @@ faq:
 울트라와이드(34인치, 3440×1440)는 개인 선호도가 큰 부분입니다. 좌우 분할이 자유로워 멀티태스킹에 유리하지만, 가격이 높고 모니터 암에 무게 제약이 있습니다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A7%A5%EB%B6%81+%EC%97%90%EC%96%B4+M3&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&src=1139000&spec=10799999&addtag=200&ctag=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -129,7 +129,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814+%ED%94%84%EB%A1%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

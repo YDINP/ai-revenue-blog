@@ -10,9 +10,9 @@ image:
   alt: "그래픽 태블릿으로 디지털 작업을 하는 사람"
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4"
   - title: "AI 2041"
-    url: "https://www.coupang.com/np/search?component=&q=AI+2041&channel=user"
+    url: "https://www.coupang.com/np/search?q=AI%202041&src=1139000&spec=10799999&addtag=200&ctag=AI%202041&lptag=AF7838146&pageType=SEARCH&pageValue=AI%202041"
 faq:
   - q: "Scenario와 Midjourney의 차이는 무엇인가요?"
     a: 'Midjourney는 범용 고품질 이미지 생성에 강하고, Scenario는 게임 에셋 특화로 캐릭터·아이템의 스타일 일관성 유지에 최적화되어 있습니다.'
@@ -31,7 +31,7 @@ faq:
 단, 도구마다 게임 에셋에 대한 적합도 차이가 크다. 범용 이미지 생성기와 게임 특화 도구의 결과물 품질은 같은 프롬프트에서도 눈에 띄게 갈린다. [생성형 AI로 개발비 절감하기](/blog/2026-07-05-game-generative-ai-indie-game-development-2026-cost-cut-controversy/)에서 다룬 비용 구조 분석과 함께 읽으면 도구 선택 기준이 더 명확해진다.
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -93,7 +93,7 @@ AI 에셋 도구를 상업 프로젝트에 쓸 때 반드시 확인해야 할 �
 - [Game Developer — AI Art Tools 2026 Overview](https://www.gamedeveloper.com/) — 인디 개발자 대상 AI 에셋 도구 현황 분석
 
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=AI+2041&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=AI%202041&src=1139000&spec=10799999&addtag=200&ctag=AI%202041&lptag=AF7838146&pageType=SEARCH&pageValue=AI%202041" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
