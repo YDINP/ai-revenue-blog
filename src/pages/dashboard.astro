@@ -1704,6 +1704,10 @@ const ICONS: Record<string, string> = {
       }
       .seg-btn:hover { color: var(--text); }
       .seg-btn.active { background: var(--accent); color: #fff; }
+      /* 소형 세그먼트 토글 (Top Pages 기간 등) */
+      .seg-sm { padding: 1px; }
+      .seg-sm .seg-btn { padding: 0.2rem 0.45rem; font-size: 0.6875rem; }
+      .panel-head { flex-wrap: wrap; }
 
       /* ── 방문 추이: 차트 | 표 2단 ── */
       .traffic-split {
@@ -2142,7 +2146,15 @@ const ICONS: Record<string, string> = {
       <!-- ══ Row 4: Top Pages(4) + Live(4) + 추천 TOP(4) ══ -->
       <div class="dash-grid">
         <div class="panel col-4">
-          <div class="panel-head"><h4><svg class="ico sec-ico i-cyan" viewBox="0 0 24 24" set:html={ICONS['list']}></svg> Top Pages</h4></div>
+          <div class="panel-head">
+            <h4><svg class="ico sec-ico i-cyan" viewBox="0 0 24 24" set:html={ICONS['list']}></svg> Top Pages</h4>
+            <div class="seg-toggle seg-sm" id="top-pages-period">
+              <button class="seg-btn active" data-tp="all">전체</button>
+              <button class="seg-btn" data-tp="day">일</button>
+              <button class="seg-btn" data-tp="week">주</button>
+              <button class="seg-btn" data-tp="month">월</button>
+            </div>
+          </div>
           <div class="source-tabs" id="top-pages-tabs">
             <button class="source-tab active" data-filter="all">All</button>
             <button class="source-tab" data-filter="blog">TechFlow</button>
@@ -3344,21 +3356,44 @@ const ICONS: Record<string, string> = {
       // === Top Pages 전역 데이터 & 필터 ===
       let _topPagesData = [];
       let _topPagesFilter = 'all';
+      let _topPagesPeriod = 'all';   // 'all'|'day'|'week'|'month'
 
-      function renderTopPages(data, filter) {
+      // 기간별 인기 페이지: analytics 페이지뷰(_audienceRows)를 창(window)으로 집계
+      function computeTopPagesByPeriod(period) {
+        const nowMs = Date.now();
+        const todayKst = new Date(nowMs + 9 * 3600 * 1000).toISOString().split('T')[0];
+        const cutoff = period === 'week' ? nowMs - 7 * 86400000 : period === 'month' ? nowMs - 30 * 86400000 : null;
+        const by = {};
+        (_audienceRows || []).forEach(r => {
+          if (!r.path) return;
+          const t = new Date(r.created_at).getTime();
+          if (period === 'day') {
+            const day = new Date(t + 9 * 3600 * 1000).toISOString().split('T')[0];
+            if (day !== todayKst) return;
+          } else if (cutoff && t < cutoff) return;
+          const key = r.path;
+          if (!by[key]) by[key] = { path: r.path, source: r.source || 'blog', title: r.title || '', views: 0 };
+          by[key].views++;
+        });
+        return Object.values(by).sort((a, b) => b.views - a.views);
+      }
+
+      function renderTopPages(data, filter, period) {
         if (data !== undefined) _topPagesData = data || [];
         if (filter !== undefined) _topPagesFilter = filter;
+        if (period !== undefined) _topPagesPeriod = period;
 
         const container = document.getElementById('top-pages');
         if (!container) return;
 
-        let filtered = _topPagesData;
+        let base = _topPagesPeriod === 'all' ? _topPagesData : computeTopPagesByPeriod(_topPagesPeriod);
+        let filtered = base;
         if (_topPagesFilter !== 'all') {
           filtered = filtered.filter(p => p.source === _topPagesFilter);
         }
 
         if (filtered.length === 0) {
-          container.innerHTML = '<div class="no-data">No page data yet</div>';
+          container.innerHTML = `<div class="no-data">${_topPagesPeriod === 'all' ? 'No page data yet' : '해당 기간 데이터 없음'}</div>`;
           return;
         }
 
@@ -3383,7 +3418,7 @@ const ICONS: Record<string, string> = {
       async function fetchAudience() {
         try {
           const res = await fetch(
-            `${SUPABASE_URL}/rest/v1/analytics?event_type=eq.pageview&select=created_at,source,ref:metadata->>referrer,ua:metadata->>user_agent&order=created_at.desc&limit=5000`,
+            `${SUPABASE_URL}/rest/v1/analytics?event_type=eq.pageview&select=created_at,source,ref:metadata->>referrer,ua:metadata->>user_agent,path:metadata->>path,title:metadata->>title&order=created_at.desc&limit=5000`,
             { headers }
           );
           if (!res.ok) return [];
@@ -3908,6 +3943,14 @@ const ICONS: Record<string, string> = {
         renderTopPages(undefined, f);
       });
 
+      // Top Pages 기간 토글 (전체/일/주/월)
+      document.getElementById('top-pages-period')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('.seg-btn');
+        if (!btn) return;
+        document.querySelectorAll('#top-pages-period .seg-btn').forEach(b => b.classList.toggle('active', b === btn));
+        renderTopPages(undefined, undefined, btn.dataset.tp);
+      });
+
       document.getElementById('event-tabs')?.addEventListener('click', (e) => {
         const btn = e.target.closest('.source-tab');
         if (!btn) return;
@@ -4202,6 +4245,7 @@ const ICONS: Record<string, string> = {
             renderAudience(aud);
             _hourlyVisitors = computeHourlyVisitors(aud);   // 시간대 방문자(방문자 모드용)
             if (_trafficMetric === 'visitors') renderHourlyChart();
+            if (_topPagesPeriod !== 'all') renderTopPages();   // 기간별 Top Pages는 오디언스 로드 후 갱신
             renderCoupangProducts(coup);
             renderCoupangFeed(coup);
             _funnelCounts.coupang = Array.isArray(coup) ? coup.length : 0;
