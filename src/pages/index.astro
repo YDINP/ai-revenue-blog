@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NewsletterCTA from '../components/NewsletterCTA.astro';
 import PopularPosts from '../components/PopularPosts.astro';
-import PaperdocBanner from '../components/PaperdocBanner.astro';
+import PaperdocPopup from '../components/PaperdocPopup.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -66,7 +66,7 @@ const fmtDate = (d: Date) =>
     }))
   })} />
 
-  <PaperdocBanner />
+  <PaperdocPopup />
 
   <!-- ══ Deck: 컴팩트 검색 히어로 ══ -->
   <section class="deck deck-compact" aria-label="사이트 검색">
