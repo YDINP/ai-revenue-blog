@@ -1,0 +1,13 @@
+{
+  "task": "telegram-comment-bot",
+  "created": "2026-07-11",
+  "tasks": [
+    { "id": 1, "title": "PRD/TASKS 문서 작성", "status": "done" },
+    { "id": 2, "title": "api/_shared.js 공용 헬퍼", "status": "done" },
+    { "id": 3, "title": "api/comment-webhook.js — Supabase INSERT → 텔레그램 알림", "status": "done" },
+    { "id": 4, "title": "api/telegram-webhook.js — 답장/reply·delete 명령 → RPC", "status": "done" },
+    { "id": 5, "title": "supabase/telegram-comment-webhook.sql 트리거", "status": "done" },
+    { "id": 6, "title": "SETUP-telegram-comment-bot.md 설정 가이드", "status": "done" },
+    { "id": 7, "title": "사용자 설정 (BotFather/Vercel env/setWebhook/트리거 SQL 실행)", "status": "pending-user" }
+  ]
+}

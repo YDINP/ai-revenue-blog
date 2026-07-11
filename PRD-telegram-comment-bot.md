@@ -1,0 +1,65 @@
+# PRD: 텔레그램 댓글 알림 + 대댓글 봇
+
+> 작성: 2026-07-11
+
+## 배경
+
+- ai-revenue(TechFlow)·life-revenue(LifeFlow) 블로그 댓글은 공용 Supabase(`xyprbsmagtlzebxyxsvj`) `comments` 테이블에 저장됨
+- 대시보드(`/dashboard`)에서만 새 댓글 확인 가능 → 실시간 인지 불가
+- `admin_reply(p_parent_id, p_slug, p_source, p_content, p_admin_key)` RPC(SECURITY DEFINER)가 이미 존재 → 외부에서 대댓글 작성 가능
+
+## 목표
+
+1. 새 댓글 INSERT 시 텔레그램 봇으로 즉시 알림 (작성자/내용/글 링크 포함)
+2. 텔레그램에서 알림 메시지에 **답장(reply)** 하거나 `/reply` 명령으로 대댓글 작성
+3. `/delete` 명령으로 댓글 삭제 (모더레이션)
+
+## 아키텍처
+
+블로그는 Vercel **정적** 배포라 서버 코드가 없음 → Vercel 루트 `api/` 디렉터리 서버리스 함수 사용 (Astro 빌드와 무관하게 함께 배포됨).
+
+```
+[블로그 댓글 작성]
+  → Supabase comments INSERT
+  → DB Trigger (supabase_functions.http_request)
+  → POST https://ai-revenue-blog.vercel.app/api/comment-webhook  (x-webhook-secret 검증)
+  → Telegram sendMessage (관리자 채팅, #c_<uuid> 마커 포함)
+
+[관리자가 텔레그램에서 답장 / /reply <id> <내용>]
+  → Telegram Bot Webhook
+  → POST https://ai-revenue-blog.vercel.app/api/telegram-webhook  (secret_token 검증)
+  → 댓글 조회(REST, anon) → admin_reply RPC 호출
+  → 블로그 글 하단에 관리자 대댓글 노출
+```
+
+## 파일
+
+| 파일 | 역할 |
+|------|------|
+| `api/_shared.js` | 텔레그램/Supabase 공용 헬퍼 (`_` 프리픽스 → 엔드포인트 제외) |
+| `api/comment-webhook.js` | Supabase DB 웹훅 수신 → 텔레그램 알림 |
+| `api/telegram-webhook.js` | 텔레그램 업데이트 수신 → 대댓글/삭제 RPC |
+| `supabase/telegram-comment-webhook.sql` | comments INSERT 트리거 (SQL Editor 실행) |
+| `SETUP-telegram-comment-bot.md` | BotFather·Vercel env·setWebhook 설정 가이드 |
+
+## 환경변수 (Vercel)
+
+| 이름 | 설명 |
+|------|------|
+| `TELEGRAM_BOT_TOKEN` | BotFather 발급 토큰 |
+| `TELEGRAM_ADMIN_CHAT_ID` | 관리자 채팅 ID (봇에게 `/id` 로 확인) |
+| `WEBHOOK_SECRET` | Supabase 트리거 헤더 + 텔레그램 secret_token 공용 시크릿 |
+| `COMMENT_ADMIN_KEY` | `admin_reply`/`admin_delete_comment` RPC 관리자 키 (대시보드와 동일 값) |
+
+## 보안
+
+- comment-webhook: `x-webhook-secret` 헤더 불일치 시 401
+- telegram-webhook: `x-telegram-bot-api-secret-token` 검증 + `TELEGRAM_ADMIN_CHAT_ID` 외 채팅의 명령 거부
+- 관리자 키/토큰은 코드에 하드코딩하지 않고 전부 env
+- `is_admin=true` 댓글(관리자 답변)은 알림 제외 → 알림 루프 방지
+
+## 비고
+
+- source→URL 매핑: `blog`→ai-revenue-blog.vercel.app, `lifeflow`→life-revenue-blog.vercel.app (글 경로 `/blog/<slug>/`)
+- gameflow-blog은 현재 `source="blog"`로 잘못 지정돼 있음(별도 이슈) — 추후 `gameflow` source 추가 시 `_shared.js`의 SOURCE_META에 한 줄 추가하면 됨
+- 트리거는 공용 테이블에 걸리므로 두 블로그(+향후 gameflow) 댓글 모두 알림됨
