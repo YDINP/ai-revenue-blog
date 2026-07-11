@@ -10,9 +10,9 @@ image:
   alt: "책상 위의 오렌지색 게임 컨트롤러와 게이밍 셋업"
 coupangLinks:
   - title: "게임 기획자의 생각법"
-    url: "https://link.coupang.com/a/fiIcwVuAcm"
+    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98+%EC%83%9D%EA%B0%81%EB%B2%95&channel=user"
   - title: "로지텍 G Pro X 게이밍 마우스"
-    url: "https://link.coupang.com/a/fiIcrna9p6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+G+Pro+X+%EA%B2%8C%EC%9D%B4%EB%B0%8D+%EB%A7%88%EC%9A%B0%EC%8A%A4&channel=user"
 faq:
   - q: "스팀 위시리스트는 어떻게 추가하나요?"
     a: "스팀 게임 상세 페이지에서 '위시리스트에 추가' 버튼을 클릭하면 된다. PC 스팀 클라이언트와 모바일 앱 모두 지원하며, 출시 시 자동 알림을 받을 수 있다."
@@ -27,7 +27,7 @@ faq:
 [2026년 인디게임 수익화 현실](/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/)에서 다뤘듯, 스팀에는 매일 수십 편의 새 타이틀이 올라온다. 그 홍수 속에서도 하반기에는 대형 스튜디오의 기대작과 위시리스트 상위권을 달리는 인디 타이틀이 뚜렷하게 라인업을 채우고 있다. 7월부터 연말까지, 게이머라면 미리 챙겨둬야 할 작품들을 출시 일정·장르·기대 포인트 순으로 정리한다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwVuAcm" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98+%EC%83%9D%EA%B0%81%EB%B2%95&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -95,7 +95,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrna9p6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+G+Pro+X+%EA%B2%8C%EC%9D%B4%EB%B0%8D+%EB%A7%88%EC%9A%B0%EC%8A%A4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

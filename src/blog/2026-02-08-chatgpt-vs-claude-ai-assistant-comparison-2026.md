@@ -11,9 +11,9 @@ image:
   alt: "DeepSeek라는 AI 챗봇 인터페이스를 보여주는 나무 테이블 위의 스마트폰"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/fiIclVeeuO"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/fiIcbvsNz2"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user"
 ---
 
 > 2026년 7월 업데이트: 최신 모델(Opus 4.8·GPT-5.5·Gemini 3.1) 기준 갱신
@@ -29,7 +29,7 @@ coupangLinks:
 > AI 코딩 도구 심층 비교는 [2026 최고의 AI 코딩 도구 가이드](/blog/2026-02-07-best-ai-coding-tools-2026/)를 참고하세요.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -179,7 +179,7 @@ Google의 **Gemini 3.1 Pro**는 장문 처리와 멀티모달에서 주목할 �
 2026년 AI의 가장 현명한 전략은 **도구를 병행 사용**하는 것입니다. Claude Opus 4.8이 종합 1위이지만, "어떤 AI가 최고인가"보다 **"내 작업에 맞는 AI를 골라라"**가 훨씬 중요한 질문입니다. AI 경쟁이 치열해질수록 **개발자가 얻는 혜택**은 커집니다!
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

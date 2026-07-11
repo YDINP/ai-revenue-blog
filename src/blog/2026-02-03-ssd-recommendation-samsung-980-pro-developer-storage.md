@@ -10,9 +10,9 @@ image:
   alt: "회색 배경 위의 고성능 NVMe SSD 두 개"
 coupangLinks:
   - title: "삼성 SSD 980 PRO 1TB"
-    url: "https://link.coupang.com/a/fiIclSP6sK"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+SSD+980+PRO+1TB&channel=user"
   - title: "삼성 갤럭시북4 프로"
-    url: "https://link.coupang.com/a/fiIclYnkHc"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814+%ED%94%84%EB%A1%9C&channel=user"
 ---
 ## 개발자에게 SSD가 중요한 이유
 
@@ -21,7 +21,7 @@ coupangLinks:
 SSD를 HDD에서 NVMe SSD로 교체하면 빌드 시간이 **3~5배** 단축됩니다. 이미 NVMe SSD를 사용 중이더라도, 최신 세대로 업그레이드하면 체감 속도가 크게 개선됩니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIclSP6sK" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+SSD+980+PRO+1TB&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -134,7 +134,7 @@ SSD 업그레이드는 **가장 체감이 큰 하드웨어 투자**입니다. 10
 개발 환경의 병목이 스토리지에 있다면, 지금이 업그레이드할 때입니다!
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIclYnkHc" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814+%ED%94%84%EB%A1%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -10,16 +10,16 @@ image:
   alt: "현대적인 데이터 센터의 네트워크 서버 랙 상세 보기, 기술 인프라 강조"
 coupangLinks:
   - title: "삼성 SSD 980 PRO 1TB"
-    url: "https://link.coupang.com/a/fiIclSP6sK"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+SSD+980+PRO+1TB&channel=user"
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/fiIcofAIH6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user"
 ---
 ## Supabase란?
 
 Supabase는 Firebase의 오픈소스 대안으로, PostgreSQL 기반의 백엔드 서비스를 제공합니다. 인증, 데이터베이스, 스토리지, Edge Functions까지 올인원으로 제공하면서도 **무료 티어가 매우 넉넉**합니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIclSP6sK" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+SSD+980+PRO+1TB&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -96,7 +96,7 @@ Supabase 무료 티어는 **MVP부터 소규모 프로덕션까지** 충분히 �
 개발 공부를 시작한다면, 체계적인 학습 자료와 함께 실습하는 것을 추천합니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

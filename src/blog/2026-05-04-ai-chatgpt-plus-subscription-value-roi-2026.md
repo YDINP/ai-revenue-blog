@@ -10,9 +10,9 @@ image:
   alt: "Close-up of a monitor displaying ChatGPT Plus introduction on a green background."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/fiIcrdKjAG"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/fiIcbvsNz2"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user"
 faq:
   - q: "ChatGPT Plus가 정말 필요한가요?"
     a: "하루 30분 이상 AI를 업무에 사용하거나 시간당 5,000원 이상의 가치를 창출한다면 필수입니다. 월 26,000원 투자로 월 100만원 이상의 추가 수익을 창출할 수 있으므로 ROI 관점에서 매우 높은 가치가 있습니다."
@@ -44,7 +44,7 @@ faq:
 가장 중요한 점은 **응답 속도와 정확도**입니다. Plus 사용자는 무료 사용자보다 훨씬 빠른 응답 시간과 더 정교한 답변을 경험합니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrdKjAG" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -198,7 +198,7 @@ OpenAI는 공식적으로 연간 구독 할인을 제공하지 않지만:
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

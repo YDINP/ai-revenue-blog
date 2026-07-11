@@ -11,9 +11,9 @@ image:
   alt: "디버깅 및 문제 해결을 위한 메뉴 옵션이 있는 AI 보조 코딩 클로즈업"
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드 (개발자 추천)"
-    url: "https://link.coupang.com/a/fiIcrdKjAG"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/fiIcofAIH6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user"
 ---
 > **2026년 7월 업데이트**: 최신 도구 버전·벤치마크 반영
 
@@ -24,7 +24,7 @@ coupangLinks:
 2026년 중반을 기준으로 도구 생태계는 세 갈래로 분화했습니다: **인라인 제안형**(Copilot 계열), **자율 에이전트형**(Claude Code 등), **에이전트 통합 IDE형**(Cursor·Windsurf 계열). 현장에서는 'IDE 어시스턴트 + 터미널 에이전트' 페어링이 사실상 표준 워크플로우로 자리잡고 있습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrdKjAG" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -137,7 +137,7 @@ AWS 생태계에 최적화된 AI 코딩 도구입니다.
 개발 생산성을 높이는 것은 도구만이 아닙니다. 좋은 키보드와 넓은 모니터도 중요하죠!
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -10,9 +10,9 @@ image:
   alt: "Illuminated 'Game Over' sign in pixel art style with neon green and white colors on a dark background."
 coupangLinks:
   - title: "게임 프로그래밍 패턴 도서"
-    url: "https://link.coupang.com/a/fiIcrjUOCy"
+    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4+%EB%8F%84%EC%84%9C&channel=user"
   - title: "로지텍 MX Master 3S 마우스"
-    url: "https://link.coupang.com/a/fiIcrbxA5s"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S+%EB%A7%88%EC%9A%B0%EC%8A%A4&channel=user"
 ---
 ## Godot는 왜 인디 개발자의 선택인가?
 
@@ -43,7 +43,7 @@ Godot Engine은 100% 무료 오픈소스 게임 엔진으로, 최근 인디 게�
 - 한 번 작성으로 모든 플랫폼 지원
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrjUOCy" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -332,7 +332,7 @@ Unity나 Unreal의 강력한 생태계가 부러울 수 있지만, Godot의 자�
 오늘 Godot를 다운로드하고, 공식 튜토리얼 하나를 따라 해보세요. 놀라울 정도로 쉽고 빠르게 게임을 만들 수 있다는 것을 경험하게 될 것입니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrbxA5s" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S+%EB%A7%88%EC%9A%B0%EC%8A%A4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

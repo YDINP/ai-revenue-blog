@@ -10,11 +10,11 @@ image:
   alt: "A close-up of a colorful gaming mouse and illuminated RGB keyboard, perfect for tech setups."
 coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"
-    url: "https://link.coupang.com/a/fiIcohvP5g"
+    url: "https://www.coupang.com/np/search?component=&q=LG+%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C+34%EC%9D%B8%EC%B9%98+%EB%AA%A8%EB%8B%88%ED%84%B0&channel=user"
   - title: "로지텍 MX Keys S"
-    url: "https://link.coupang.com/a/fiIcwykOwC"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S&channel=user"
   - title: "LG 그램 17"
-    url: "https://link.coupang.com/a/fiIcl4LfVs"
+    url: "https://www.coupang.com/np/search?component=&q=LG+%EA%B7%B8%EB%9E%A8+17&channel=user"
 faq:
   - q: "키보드 마우스를 개별로 구매하는 것과 세트로 구매하는 것의 차이가 무엇인가요?"
     a: "세트 구매는 호환성이 이미 검증되어 있고, 디자인과 사용감이 통일되며, 가격도 개별 구매보다 10~20% 저렴합니다. 특히 무선 연결 동글이나 Bluetooth 페어링이 하나의 시스템으로 최적화되어 있어 초기 설정이 간단합니다."
@@ -31,7 +31,7 @@ faq:
 2026년 현재, 시중에 나와 있는 세트 제품들 중 **생산성 향상에 실질적으로 도움이 되는 조합 5가지**를 실제 사양과 사용자 피드백을 토대로 비교했습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcohvP5g" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=LG+%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C+34%EC%9D%B8%EC%B9%98+%EB%AA%A8%EB%8B%88%ED%84%B0&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -163,7 +163,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwykOwC" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

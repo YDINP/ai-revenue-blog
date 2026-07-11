@@ -10,9 +10,9 @@ image:
   alt: "Wooden Scrabble tiles spelling 'Deepmind' and 'Gemini' on a wooden surface, a concept of AI and games."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/fiIcrdKjAG"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/fiIcbvsNz2"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user"
 faq:
   - q: "프롬프트 엔지니어링은 ChatGPT, Claude 모두에 동일하게 적용되나요?"
     a: "기본 원칙은 같지만, 각 모델의 특성이 다릅니다. ChatGPT는 명확한 지시와 제약에 강하고, Claude는 복잡한 맥락 이해에 우수합니다. 따라서 같은 프롬프트라도 모델마다 결과가 다를 수 있으므로, 중요한 작업은 양쪽에서 테스트해보는 것을 추천합니다."
@@ -29,7 +29,7 @@ faq:
 이 글에서는 이미 발행된 기본기보다는 **즉시 적용할 수 있는 실전 팁 5가지**와 함께, 각 기법이 어떤 상황에서 가장 효과적인지 다룹니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrdKjAG" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -191,7 +191,7 @@ AI에게 **"어떤 형식으로", "어느 정도 길이로", "누구를 대상�
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -10,9 +10,9 @@ image:
   alt: "소파에서 함께 비디오 게임을 즐기는 두 아이"
 coupangLinks:
   - title: "로블록스 게임 제작 무작정 따라하기"
-    url: "https://link.coupang.com/a/fiIcyXDOWy"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4+%EA%B2%8C%EC%9E%84+%EC%A0%9C%EC%9E%91+%EB%AC%B4%EC%9E%91%EC%A0%95+%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0&channel=user"
   - title: "돈의 심리학"
-    url: "https://link.coupang.com/a/fiIcwI0etw"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%8F%88%EC%9D%98+%EC%8B%AC%EB%A6%AC%ED%95%99&channel=user"
 faq:
   - q: "로블록스에서 크리에이터는 실제로 얼마를 가져가나?"
     a: "판매액의 약 30% 수준으로 알려져 있으나, 로벅스 환전(DevEx)과 플랫폼 수수료를 거치면서 실수령액은 달라진다. 인기 경험은 게임패스·인게임 구매로 반복 수익을 낸다."
@@ -29,7 +29,7 @@ faq:
 규모를 보면 무시할 수 없다. **로블록스와 포트나이트가 크리에이터에게 지급한 금액은 2025년 기준 15억 달러를 넘어섰다.** 이 글은 UGC 이코노미의 실제 구조와, 인디 개발자가 진입할 때의 기회·함정을 정리한다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcyXDOWy" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4+%EA%B2%8C%EC%9E%84+%EC%A0%9C%EC%9E%91+%EB%AC%B4%EC%9E%91%EC%A0%95+%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -80,7 +80,7 @@ UGC 이코노미는 '스팀의 대체재'가 아니라 **'또 하나의 채널'*
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwI0etw" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%8F%88%EC%9D%98+%EC%8B%AC%EB%A6%AC%ED%95%99&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

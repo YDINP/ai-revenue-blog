@@ -10,9 +10,9 @@ image:
   alt: "Three diverse friends enjoy a lively game of Twister in a cozy living room. Perfect for lifestyle and leisure themes."
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/fiIcudQZjM"
+    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user"
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/fiIcubbf9E"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user"
 ---
 ## 2026년 Canvas WebGL 게임 개발 시장의 새로운 변화
 
@@ -115,7 +115,7 @@ WebAssembly와 Canvas의 결합으로 메모리 효율이 중요해졌습니다.
 WebGPU 지원 폴백을 항상 준비하되, 2026년 신규 게임은 WebGPU를 기본으로 개발하는 것을 권장합니다. 이는 향후 3년간의 주류 표준이 될 것이 확실하기 때문입니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

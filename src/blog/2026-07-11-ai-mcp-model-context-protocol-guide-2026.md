@@ -10,7 +10,7 @@ image:
   alt: "파란 빛의 네트워크 연결 그래프 — AI와 외부 도구를 잇는 MCP 개념 이미지"
 coupangLinks:
   - title: "랭체인·LLM 앱 개발 입문서"
-    url: "https://link.coupang.com/a/fiHEvJR6KO"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%9E%AD%EC%B2%B4%EC%9D%B8+LLM+%EC%95%B1+%EA%B0%9C%EB%B0%9C+%EC%9E%85%EB%AC%B8%EC%84%9C&channel=user"
 faq:
   - q: "MCP가 정확히 뭔가요?"
     a: "MCP(Model Context Protocol)는 AI 모델을 외부 도구·데이터와 연결하는 표준 규격입니다. 앤트로픽이 2024년 말 공개했고, 2026년 현재 사실상의 업계 표준으로 자리 잡았습니다. 흔히 'AI의 USB-C'에 비유되는데, 서로 다른 AI와 도구를 매번 개별 방식으로 잇는 대신 하나의 공통 규격으로 연결하기 때문입니다. 덕분에 한 번 만든 MCP 서버는 Claude, 여러 IDE, 다양한 에이전트에서 그대로 재사용됩니다."
@@ -77,7 +77,7 @@ AI(호스트)가 "GitHub 이슈 목록 줘"라고 하면, 클라이언트가 Git
 
 <div class="callout-warning">⚠️ 주의: MCP 서버는 파일·DB·외부 API에 접근할 수 있어 강력한 만큼 위험도 있습니다. 출처가 검증되지 않은 서버는 연결하지 말고, 권한은 꼭 필요한 범위로만 제한하세요. 아직 빠르게 진화하는 표준이라 버전 관리도 신경 써야 합니다.</div>
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiHEvJR6KO" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%9E%AD%EC%B2%B4%EC%9D%B8+LLM+%EC%95%B1+%EA%B0%9C%EB%B0%9C+%EC%9E%85%EB%AC%B8%EC%84%9C+%EB%B3%B4%EA%B8%B0&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">📘</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

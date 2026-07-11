@@ -10,9 +10,9 @@ image:
   alt: "Close-up of HTML and JavaScript code on a computer screen in Visual Studio Code."
 coupangLinks:
   - title: "러스트 프로그래밍"
-    url: "https://link.coupang.com/a/fiIcwrUd8m"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%9F%AC%EC%8A%A4%ED%8A%B8+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&channel=user"
   - title: "혼자 공부하는 파이썬"
-    url: "https://link.coupang.com/a/fiIcoAaGPY"
+    url: "https://www.coupang.com/np/search?component=&q=%ED%98%BC%EC%9E%90+%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user"
 faq:
   - q: "2026년에 Redux를 아직도 써야 할까요?"
     a: "Redux는 여전히 유효하지만, 대부분의 새로운 프로젝트에서는 Zustand나 TanStack Query 같은 가벼운 솔루션으로 충분합니다. Redux Toolkit은 엔터프라이즈 환경에서 검증된 안정성이 필요할 때 선택하세요."
@@ -29,7 +29,7 @@ faq:
 이 글에서는 2026년 기준 실제 프로덕션 프로젝트에서 검증된 5가지 상태 관리 라이브러리를 성능, 번들 크기, 학습곡선, 개발 생산성으로 비교합니다. 각 솔루션이 왜 필요한지, 어떤 상황에서 써야 하는지 구체적인 사례 코드와 함께 알아봅시다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwrUd8m" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%9F%AC%EC%8A%A4%ED%8A%B8+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -250,7 +250,7 @@ function Component() {
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcoAaGPY" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%ED%98%BC%EC%9E%90+%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

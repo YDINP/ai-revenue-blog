@@ -10,9 +10,9 @@ image:
   alt: "소파에서 집에서 헤드폰을 쓰고 화상 통화 중 하트 제스처를 하는 웃는 남자"
 coupangLinks:
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/fiIcbvsNz2"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user"
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/fiIclVeeuO"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user"
 ---
 안녕하세요. 작년부터 AI 자동화 도구들을 직접 활용해서 부업 수익을 만들고 있는 개발자입니다. 솔직히 처음에는 AI 자동화가 정말 돈이 될까 의심했어요. 하지만 지난 1년간 실험하면서 AI 자동화로 월 300만 원대의 패시브 인컴을 만드는 데 성공했습니다. 오늘은 제 경험을 바탕으로 AI 자동화를 통한 수익 창출 방법을 정리해서 공유하려고 합니다.
 
@@ -29,7 +29,7 @@ coupangLinks:
 **셋째**, 배우기 쉽습니다. 코딩 경험이 없어도 노코드 도구와 AI를 조합하면 충분합니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -95,7 +95,7 @@ AI 자동화로 패시브 인컴을 만드는 것은 이제 더 이상 먼 미�
 혹시 AI 자동화로 패시브 인컴을 만드는 데 관심이 있다면, 이 글에 제시된 방법 중 하나부터 시작해보세요. 처음 3개월이 가장 힘들겠지만, 그 이후로는 점점 더 자동화되고 수익이 늘어날 겁니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

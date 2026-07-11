@@ -10,9 +10,9 @@ image:
   alt: "A bustling urban street lined with neon signs and buildings under a moody dusky sky, creating a vibrant city atmosphere."
 coupangLinks:
   - title: "점프 투 파이썬"
-    url: "https://link.coupang.com/a/fiIcq7Gyf6"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%A0%90%ED%94%84+%ED%88%AC+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user"
   - title: "혼자 공부하는 파이썬"
-    url: "https://link.coupang.com/a/fiIcoAaGPY"
+    url: "https://www.coupang.com/np/search?component=&q=%ED%98%BC%EC%9E%90+%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user"
 faq:
   - q: "소규모 프로젝트도 TypeScript로 마이그레이션해야 할까요?"
     a: "파일 수가 50개 미만이고 팀이 2명 이하라면 JavaScript 유지도 고려할 만합니다. 하지만 유지보수 기간이 2년 이상 예상되면 TypeScript 도입이 장기적으로 효율적입니다. 특히 여러 개발자가 합류할 예정이면 타입 시스템의 이점이 큽니다."
@@ -36,7 +36,7 @@ faq:
 - **리팩토링 안전성**: 대규모 코드 변경 시 부작용 사전 감지
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcq7Gyf6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%A0%90%ED%94%84+%ED%88%AC+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -290,7 +290,7 @@ npx codemod --parser=babel
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcoAaGPY" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%ED%98%BC%EC%9E%90+%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

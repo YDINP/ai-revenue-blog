@@ -10,16 +10,16 @@ image:
   alt: "노트북 화면의 프로그래밍 코드와 개발 환경"
 coupangLinks:
   - title: "러스트 프로그래밍 도서"
-    url: "https://link.coupang.com/a/fiIct4NkVo"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%9F%AC%EC%8A%A4%ED%8A%B8+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%EB%8F%84%EC%84%9C&channel=user"
   - title: "개발자 노트북 맥북 프로"
-    url: "https://link.coupang.com/a/fiIct7HZ3A"
+    url: "https://www.coupang.com/np/search?component=&q=%EA%B0%9C%EB%B0%9C%EC%9E%90+%EB%85%B8%ED%8A%B8%EB%B6%81+%EB%A7%A5%EB%B6%81+%ED%94%84%EB%A1%9C&channel=user"
 ---
 ## 백엔드 언어, 2026년에는 무엇을 써야 할까?
 
 프로젝트를 시작할 때 가장 먼저 하는 고민: **"어떤 언어로 백엔드를 만들까?"** 2026년 현재 가장 뜨거운 세 언어 — TypeScript(Node.js/Bun), Rust, Go를 실전 관점에서 비교합니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIct4NkVo" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%9F%AC%EC%8A%A4%ED%8A%B8+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -114,7 +114,7 @@ Google이 만든 Go는 **심플함**이 최고의 무기입니다. 배우기 쉽
 2026년에는 하나만 고집할 필요 없습니다. TypeScript로 프로토타입을 만들고, 병목 구간만 Rust나 Go로 최적화하는 **폴리글랏 접근**이 현실적인 최선입니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIct7HZ3A" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B0%9C%EB%B0%9C%EC%9E%90+%EB%85%B8%ED%8A%B8%EB%B6%81+%EB%A7%A5%EB%B6%81+%ED%94%84%EB%A1%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

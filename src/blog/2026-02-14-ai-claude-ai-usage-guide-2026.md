@@ -10,9 +10,9 @@ image:
   alt: "A robotic arm carefully pouring ingredients into a mixing bowl in a modern kitchen setting."
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/fiIclVeeuO"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user"
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/fiIcrdKjAG"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
 ---
 ## Claude AI, 2026년 현황과 주목할 변화
 
@@ -21,7 +21,7 @@ coupangLinks:
 작년 대비 가장 주목할 변화는 **한국어 처리 성능 향상**과 **멀티모달 기능 강화**입니다. Claude는 이제 한국 기업들이 요구하는 수준의 한글 이해도와 이미지, 동영상 분석 능력을 갖추었으며, 이를 통해 국내 시장 진출을 가속화하고 있습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -152,7 +152,7 @@ Claude Opus 4.6도 최신 정보나 한국 지역 정보(예: 서울 강남역 �
 이 세 가지를 확인한다면, Claude AI는 당신의 생산성을 **30~50% 향상**시킬 수 있는 강력한 파트너가 될 것입니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrdKjAG" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

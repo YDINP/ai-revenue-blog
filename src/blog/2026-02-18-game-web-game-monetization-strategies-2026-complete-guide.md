@@ -10,9 +10,9 @@ image:
   alt: "Close-up of vintage playing cards featuring art design on a rustic paper backdrop."
 coupangLinks:
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/fiIcubbf9E"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user"
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/fiIcudQZjM"
+    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user"
 faq:
   - q: "웹 게임으로 월 100만원을 벌려면 DAU가 얼마나 필요한가요?"
     a: "일반적으로 DAU 5,000~10,000명이면 광고만으로 월 100~200만원을 벌 수 있습니다. IAP와 구독을 함께 운영하면 DAU 2,000명에서도 월 100만원 달성이 가능합니다. 핵심은 사용자 질(engagement)입니다."
@@ -31,7 +31,7 @@ faq:
 이번 글에서는 **실제 성공 사례를 바탕으로** 웹 게임 개발자들이 적용할 수 있는 5가지 수익화 모델과, 각 모델별 실행 전략, 그리고 피해야 할 함정들을 상세히 설명합니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcubbf9E" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -223,7 +223,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

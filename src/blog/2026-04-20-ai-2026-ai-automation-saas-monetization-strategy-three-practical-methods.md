@@ -10,11 +10,11 @@ image:
   alt: "Detailed view of a computer screen displaying code with a menu of AI actions, illustrating modern software development."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/fiIcrdKjAG"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/fiIcbvsNz2"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user"
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/fiIclVeeuO"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user"
 faq:
   - q: "API 래퍼 SaaS와 수직 자동화 플랫폼의 가장 큰 차이는 뭔가요?"
     a: "API 래퍼는 기존 AI 모델을 단순히 특정 용도로 포장만 하므로 개발이 빠르지만, 경쟁이 치열합니다. 수직 플랫폼은 개발에 시간이 걸리지만, 특정 산업에 깊이 있게 최적화되어 고객 만족도와 가격 책정 자유도가 높습니다."
@@ -31,7 +31,7 @@ faq:
 이 글에서는 실제 사업가들이 검증한 3가지 AI 자동화 수익화 모델을 소개하고, 각 모델별 시작 비용, 예상 수익, 구현 난이도를 정리했습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrdKjAG" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -219,7 +219,7 @@ API 래퍼 모델부터 시작합니다. 수직 플랫폼은 나중에.
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

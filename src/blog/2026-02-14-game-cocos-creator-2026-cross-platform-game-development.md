@@ -10,11 +10,11 @@ image:
   alt: "Detailed shot of a green coconut hanging from a palm tree against a black background."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/fiIcrgt7h6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
   - title: "로지텍 G Pro X 게이밍 마우스"
-    url: "https://link.coupang.com/a/fiIcrna9p6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+G+Pro+X+%EA%B2%8C%EC%9D%B4%EB%B0%8D+%EB%A7%88%EC%9A%B0%EC%8A%A4&channel=user"
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/fiIcubbf9E"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user"
 ---
 ## Cocos Creator란? 2026년 기준 현황
 
@@ -27,7 +27,7 @@ Cocos Creator는 Cocos 엔진의 공식 편집기로, 웹 기반의 2D/3D 게임
 - **가벼움**: 최종 빌드 용량이 Unity나 Unreal 대비 50~70% 수준으로 간소
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -199,7 +199,7 @@ Cocos Creator는 **웹 게임과 경량 모바일 게임** 개발 분야에서 �
 2026년 기준 하이퍼 캐주얼 게임 시장이 지속 성장 중이고, 웹 게임의 부활이 이어지는 만큼, Cocos Creator는 인디 개발자에게 가장 실용적인 도구로 평가됩니다. 특히 **빠른 프로토타입** 개발과 **멀티플랫폼 배포**가 필요한 팀이라면 강력히 추천합니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrna9p6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+G+Pro+X+%EA%B2%8C%EC%9D%B4%EB%B0%8D+%EB%A7%88%EC%9A%B0%EC%8A%A4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -10,9 +10,9 @@ image:
   alt: "분홍빛 조명 아래 놓인 무선 게임 컨트롤러"
 coupangLinks:
   - title: "게임, 이렇게 만들어야 팔린다"
-    url: "https://link.coupang.com/a/fiIcwK6Lnw"
+    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%EC%9D%B4%EB%A0%87%EA%B2%8C+%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC+%ED%8C%94%EB%A6%B0%EB%8B%A4&channel=user"
   - title: "돈의 심리학"
-    url: "https://link.coupang.com/a/fiIcwI0etw"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%8F%88%EC%9D%98+%EC%8B%AC%EB%A6%AC%ED%95%99&channel=user"
 faq:
   - q: "1인 개발자에게 가장 무난한 모델은?"
     a: "대체로 프리미엄(정가 판매)이 안전하다. 라이브 운영 부담이 적고, 게임을 완결된 작품으로 설계할 수 있어 리소스가 한정된 개인에게 적합하다."
@@ -29,7 +29,7 @@ faq:
 이 글은 네 가지 대표 수익 모델의 장단점과 장르별 적합도를 비교한다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwK6Lnw" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%EC%9D%B4%EB%A0%87%EA%B2%8C+%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC+%ED%8C%94%EB%A6%B0%EB%8B%A4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -84,7 +84,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwI0etw" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%8F%88%EC%9D%98+%EC%8B%AC%EB%A6%AC%ED%95%99&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

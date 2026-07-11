@@ -10,9 +10,9 @@ image:
   alt: "Close-up of AI-assisted coding with menu options for debugging and problem-solving."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/fiIcrdKjAG"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/fiIclVeeuO"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user"
 faq:
   - q: "GitHub Copilot과 Cursor, 어떤 걸 먼저 시작해야 하나요?"
     a: "개인 개발자라면 GitHub Copilot($10/월)부터 시작하세요. 기본 사용법을 익힌 후 TypeScript/React에 깊이 들어가면 Cursor Pro($20/월)로 업그레이드하는 것을 추천합니다. 두 도구 모두 유료이지만, Copilot이 더 저렴하고 widely 사용되므로 먼저 경험하기에 좋습니다."
@@ -31,7 +31,7 @@ AI 코딩 어시스턴트는 이제 선택지가 아닙니다. 2026년 개발 �
 이 글에서는 이론이 아닌 **실제 프로젝트에서 검증된 5가지 실무 활용법**을 소개합니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrdKjAG" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -214,7 +214,7 @@ frontend 팀은 백엔드 완성 대기 없이 개발 시작
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

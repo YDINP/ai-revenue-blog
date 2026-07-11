@@ -10,9 +10,9 @@ image:
   alt: "Curved monitor screen showing ChatGPT interface in low-light, focus on technology and AI."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/fiIcrdKjAG"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/fiIcbvsNz2"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user"
 faq:
   - q: "ChatGPT로 검색하면 최신 정보도 나오나요?"
     a: "ChatGPT는 학습 데이터가 2024년 4월까지 제한되므로 최신 뉴스나 통계는 부분적으로만 반영됩니다. 최신 정보가 필수라면 Google Gemini나 Perplexity AI를 병행하세요. 다만 정보 종합과 분석 관점에서는 ChatGPT가 우수합니다."
@@ -29,7 +29,7 @@ faq:
 이 가이드는 ChatGPT를 **실제 업무에 적용하는 구체적인 방법론**을 다룹니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrdKjAG" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -172,7 +172,7 @@ ChatGPT의 진정한 가치는 **대량의 비정형 데이터를 체계적으�
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

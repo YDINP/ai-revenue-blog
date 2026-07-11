@@ -10,11 +10,11 @@ image:
   alt: "Three diverse friends enjoy a lively game of Twister in a cozy living room. Perfect for lifestyle and leisure themes."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/fiIcrgt7h6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
   - title: "로지텍 G Pro X 게이밍 마우스"
-    url: "https://link.coupang.com/a/fiIcrna9p6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+G+Pro+X+%EA%B2%8C%EC%9D%B4%EB%B0%8D+%EB%A7%88%EC%9A%B0%EC%8A%A4&channel=user"
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/fiIcubbf9E"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user"
 faq:
   - q: "Canvas와 WebGL 중 어떤 것을 먼저 배워야 하나요?"
     a: "초보자는 Canvas부터 시작하는 것을 추천합니다. Canvas는 즉시 시각적 결과를 볼 수 있어 학습 동기가 높습니다. 게임이 복잡해지면서 성능 문제를 만날 때 WebGL로 전환하는 것이 자연스러운 진로입니다."
@@ -31,7 +31,7 @@ Phaser.js나 PixiJS 같은 프레임워크를 사용하지 않고 **Canvas와 We
 Canvas는 2D 그래픽 렌더링을 위한 즉시 모드(immediate mode) API로, 매 프레임마다 화면 전체를 다시 그려야 합니다. 반면 **WebGL은 GPU를 직접 활용하는 그래픽 API**로, 복잡한 3D 장면이나 수천 개의 스프라이트를 효율적으로 처리할 수 있습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -212,7 +212,7 @@ Canvas와 WebGL을 직접 다루는 능력은 **웹 게임 개발자의 핵심 �
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrna9p6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+G+Pro+X+%EA%B2%8C%EC%9D%B4%EB%B0%8D+%EB%A7%88%EC%9A%B0%EC%8A%A4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

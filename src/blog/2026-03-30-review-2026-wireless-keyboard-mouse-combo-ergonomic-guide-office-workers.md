@@ -10,9 +10,9 @@ image:
   alt: "Top view of a black Acer keyboard and mouse set on a white background."
 coupangLinks:
   - title: "맥북 에어 M3"
-    url: "https://link.coupang.com/a/fiIcl1zAXs"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A7%A5%EB%B6%81+%EC%97%90%EC%96%B4+M3&channel=user"
   - title: "로지텍 MX Keys S"
-    url: "https://link.coupang.com/a/fiIcwykOwC"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S&channel=user"
 faq:
   - q: "무선 세트와 유선 세트, 어떤 게 더 나을까요?"
     a: "무선은 **자유도와 편의성**이 우수하고, 유선은 **지연 없음과 영구적 연결**을 보장합니다. 사무 업무는 지연이 거의 발생하지 않으므로 무선을 추천하며, 온라인 게이밍이나 영상 편집이 필요하면 유선이 낫습니다."
@@ -29,7 +29,7 @@ faq:
 기존의 [2026년 개발자용 키보드 추천 TOP 5](/blog/2026-02-25-review-keyboard-mouse-combo-productivity-sets-2026-top-5/) 포스트와 달리, 이 글은 **게이밍이나 코딩보다는 일반 사무 업무에 최적화된** 무선 세트에 초점을 맞추겠습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcl1zAXs" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A7%A5%EB%B6%81+%EC%97%90%EC%96%B4+M3&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -189,7 +189,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwykOwC" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -10,9 +10,9 @@ image:
   alt: "밝은 분위기로 협업하는 다양한 크리에이티브 팀"
 coupangLinks:
   - title: "컨테이저스 전략적 입소문"
-    url: "https://link.coupang.com/a/fiIcy1IomG"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%BB%A8%ED%85%8C%EC%9D%B4%EC%A0%80%EC%8A%A4+%EC%A0%84%EB%9E%B5%EC%A0%81+%EC%9E%85%EC%86%8C%EB%AC%B8&channel=user"
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/fiIcrgt7h6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
 faq:
   - q: "디스코드 서버를 만들 때 채널이 너무 많으면 어떻게 되나?"
     a: "채널이 많을수록 서버가 복잡해 보여 신규 멤버가 이탈한다. 처음에는 5~7개 이하로 운영하고, 커뮤니티가 요청할 때 추가하는 방식이 낫다."
@@ -29,7 +29,7 @@ faq:
 이 글은 인디게임 디스코드 서버를 처음 만드는 단계부터 첫 100명을 모으고, 이들을 충성 팬으로 전환해 출시 화력으로 쓰는 운영 전략을 단계별로 정리한다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcy1IomG" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%BB%A8%ED%85%8C%EC%9D%B4%EC%A0%80%EC%8A%A4+%EC%A0%84%EB%9E%B5%EC%A0%81+%EC%9E%85%EC%86%8C%EB%AC%B8&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -121,7 +121,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

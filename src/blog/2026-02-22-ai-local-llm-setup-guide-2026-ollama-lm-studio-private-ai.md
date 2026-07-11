@@ -10,11 +10,11 @@ image:
   alt: "Close-up of an AI-driven chat interface on a computer screen, showcasing modern AI technology."
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/fiIclVeeuO"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/fiIcbvsNz2"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user"
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/fiIcrdKjAG"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
 faq:
   - q: "로컬 LLM과 API 기반 LLM, 어떤 것을 선택해야 할까요?"
     a: "API 호출 비용이 월 30만원 이상이면 로컬 LLM 투자를 고려하세요. 초기 GPU 비용(50~100만원)은 6~12개월 내 회수됩니다. 반면 최신 정보나 고급 기능(비전, 음성)이 필요하면 API 조합이 낫습니다."
@@ -38,7 +38,7 @@ faq:
 2026년 현재 Llama 3.3(8B, 70B), Mistral 7B, Phi 3.5 같은 오픈소스 모델들이 충분히 실용적 성능에 도달했습니다. **클라우드 모델과의 성능 격차는 이전보다 훨씬 좁혀졌습니다.**
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -252,7 +252,7 @@ for prompt in test_prompts:
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -10,11 +10,11 @@ image:
   alt: "A variety of game controllers and a keyboard arranged on a white textured surface, offering a minimalist gaming setup."
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/fiIcudQZjM"
+    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user"
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/fiIcubbf9E"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user"
   - title: "로지텍 G Pro X 게이밍 마우스"
-    url: "https://link.coupang.com/a/fiIcrna9p6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+G+Pro+X+%EA%B2%8C%EC%9D%B4%EB%B0%8D+%EB%A7%88%EC%9A%B0%EC%8A%A4&channel=user"
 faq:
   - q: "Unity Asset Store 에셋을 구매하면 게임을 상용화할 수 있나요?"
     a: "대부분의 에셋은 개인 게임과 상용 게임 모두에서 사용 가능합니다. 다만 일부 에셋은 라이선스에 제한이 있을 수 있으므로, 구매 전 라이선스 페이지를 반드시 확인하세요. Epic Marketplace도 마찬가지로 명확한 상용화 권한을 제공합니다."
@@ -33,7 +33,7 @@ faq:
 이 글에서는 각 에셋 스토어의 특징을 깊이 있게 분석하고, 개발자 유형별로 최적의 선택지를 제시하겠습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -165,7 +165,7 @@ Unity와 Unreal 양쪽 엔진 모두 지원하는 에셋(3D 모델, 사운드 �
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcubbf9E" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%9C%A0%EB%8B%88%ED%8B%B0+%EA%B5%90%EA%B3%BC%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

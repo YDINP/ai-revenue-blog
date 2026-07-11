@@ -10,9 +10,9 @@ image:
   alt: "어두운 환경에서 노트북으로 코드를 작성하는 사람"
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/fiIcudQZjM"
+    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user"
   - title: "AI 2041"
-    url: "https://link.coupang.com/a/fiIcwR1j6i"
+    url: "https://www.coupang.com/np/search?component=&q=AI+2041&channel=user"
 faq:
   - q: "Cursor와 Claude Code를 동시에 써야 하나요?"
     a: '반드시 그럴 필요는 없다. Cursor는 IDE 내에서 실시간으로 코드 작성을 돕고, Claude Code는 터미널에서 파일 생성·리팩터링·빌드 자동화에 특화돼 있다. 예산이 부담된다면 Cursor 단독으로 시작해도 충분하다.'
@@ -31,7 +31,7 @@ faq:
 이 변화의 핵심 패턴은 **IDE 어시스턴트 + 터미널 에이전트 페어링**이다. 역할을 분리해 두 도구를 함께 쓰는 방식이 2026년 개발자 사이에서 사실상 표준이 됐다. IDE에서 실시간으로 코드를 보조받고, 터미널 에이전트에 기능 단위 작업을 위임하는 흐름이다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -102,7 +102,7 @@ AI 코딩 도구는 강력하지만 두 가지 원칙을 반드시 지켜야 한
 - [GDC 2026 AI in Game Dev 세션 요약 - Game Developers Conference](https://gdconf.com)
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwR1j6i" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=AI+2041&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

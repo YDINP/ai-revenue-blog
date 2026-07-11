@@ -10,9 +10,9 @@ image:
   alt: "Blue Mazda Miata convertible on a scenic countryside road in Szczerbaków, Poland."
 coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"
-    url: "https://link.coupang.com/a/fiIcohvP5g"
+    url: "https://www.coupang.com/np/search?component=&q=LG+%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C+34%EC%9D%B8%EC%B9%98+%EB%AA%A8%EB%8B%88%ED%84%B0&channel=user"
   - title: "로지텍 MX Keys S"
-    url: "https://link.coupang.com/a/fiIcwykOwC"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S&channel=user"
 ---
 ## GPT-5.3 Codex Spark: AI 코딩 어시스턴트의 새로운 기준
 
@@ -125,7 +125,7 @@ GPT-5.3 Codex Spark는 생성된 코드의 출처를 추적할 수 있는 **코�
 $20/월의 투자는 개발 시간 단축으로 충분히 회수 가능하며, 장기적으로는 코드 품질 향상으로 유지보수 비용 절감까지 기대할 수 있습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcohvP5g" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=LG+%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C+34%EC%9D%B8%EC%B9%98+%EB%AA%A8%EB%8B%88%ED%84%B0&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

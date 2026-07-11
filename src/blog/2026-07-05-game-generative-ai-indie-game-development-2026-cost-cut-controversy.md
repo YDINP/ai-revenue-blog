@@ -10,9 +10,9 @@ image:
   alt: "푸른빛이 감도는 첨단 휴머노이드 로봇"
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/fiIcudQZjM"
+    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user"
   - title: "AI 2041"
-    url: "https://link.coupang.com/a/fiIcwR1j6i"
+    url: "https://www.coupang.com/np/search?component=&q=AI+2041&channel=user"
 faq:
   - q: "AI로 만든 에셋을 상업 게임에 써도 되나?"
     a: "도구의 라이선스와 학습 데이터 출처에 따라 다르다. 상업적 이용을 명시적으로 허용하고 저작권이 명확한 도구만 사용해야 하며, 스팀 등 플랫폼의 AI 콘텐츠 고지 정책도 확인해야 한다."
@@ -29,7 +29,7 @@ faq:
 하지만 같은 기술을 두고 **GDC 2026 개발자 설문에서는 52%가 생성형 AI를 부정적으로 본다**고 답했다. 1년 전(30%)보다 크게 늘어난 수치다. 이 글은 AI를 '무조건 도입'이 아니라, 인디 관점에서 **어디에 쓰면 이득이고 어디서 위험한지**를 균형 있게 정리한다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -89,7 +89,7 @@ AI의 절감 효과는 영역마다 다르다. 아래는 인디 개발에서 AI 
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwR1j6i" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=AI+2041&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -10,9 +10,9 @@ image:
   alt: "A woman records a tech tutorial using her smartphone on a desk filled with electronics."
 coupangLinks:
   - title: "자바스크립트 완벽 가이드"
-    url: "https://link.coupang.com/a/fiIcwvE5mu"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+%EC%99%84%EB%B2%BD+%EA%B0%80%EC%9D%B4%EB%93%9C&channel=user"
   - title: "점프 투 파이썬"
-    url: "https://link.coupang.com/a/fiIcq7Gyf6"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%A0%90%ED%94%84+%ED%88%AC+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user"
 faq:
   - q: "프로그래밍 초보자라면 Python과 JavaScript 중 뭘 먼저 배워야 하나요?"
     a: "목표에 따라 다릅니다. **웹 개발을 원한다면 JavaScript, 데이터 분석이나 AI를 배우고 싶다면 Python**을 선택하세요. 난이도만 고려하면 Python이 더 쉽지만, JavaScript는 브라우저에서 즉시 실행 결과를 볼 수 있어 초보자의 동기부여에 좋습니다."
@@ -33,7 +33,7 @@ faq:
 예를 들어, 데이터 분석가를 목표로 한다면 Python이 필수이지만, 시스템 소프트웨어를 만들고 싶다면 Rust나 C++을 배워야 합니다. 따라서 **"입문하기 가장 쉬운 언어"와 "목표에 맞는 언어"를 구분**하는 것이 핵심입니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwvE5mu" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+%EC%99%84%EB%B2%BD+%EA%B0%80%EC%9D%B4%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -169,7 +169,7 @@ JavaScript 진영에서 TypeScript 도입률이 80%를 넘었고, Python 커뮤�
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcq7Gyf6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%A0%90%ED%94%84+%ED%88%AC+%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

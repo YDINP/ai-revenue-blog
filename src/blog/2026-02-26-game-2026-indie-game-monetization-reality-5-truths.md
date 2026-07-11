@@ -11,9 +11,9 @@ image:
   alt: "Focused gamer with headset playing a video game on a desktop computer indoors."
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/fiIcudQZjM"
+    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user"
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/fiIcrgt7h6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
 faq:
   - q: "인디게임으로 생활비를 벌 수 있을까?"
     a: "가능하지만 어렵다. 2026년 기준 인디게임 개발자 중 월 300만원 이상 수익을 올리는 비율은 약 12%다. 성공하려면 마케팅비, 장기 로드맵, 명확한 타겟 오디언스 정의가 필수다."
@@ -98,7 +98,7 @@ faq:
 > 2026년의 인디게임 시장은 더 이상 '만들기만 해도 팔리는' 시대가 아니다. **마케팅, 데이터 분석, 커뮤니티 관리, 지속적인 콘텐츠 업데이트**가 필수다. 이를 받아들일 수 있는 팀만 생존할 수 있다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -121,7 +121,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

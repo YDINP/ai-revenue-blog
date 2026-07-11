@@ -10,9 +10,9 @@ image:
   alt: "Git 스티커를 들고 있는 사람의 클로즈업, 소프트웨어 개발 강조"
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/fiIcofAIH6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user"
   - title: "클린 코드"
-    url: "https://link.coupang.com/a/fiIclPV2CO"
+    url: "https://www.coupang.com/np/search?component=&q=%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C&channel=user"
 ---
 ## Git, 왜 배워야 할까?
 
@@ -21,7 +21,7 @@ coupangLinks:
 "혼자 개발하는데 Git이 필요해?" — 네, 절대적으로 필요합니다. 코드를 실수로 삭제해도 복구할 수 있고, 실험적인 기능을 안전하게 테스트할 수 있습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -220,7 +220,7 @@ Git을 모르고 개발하는 것은 안전벨트 없이 운전하는 것과 같
 오늘 배운 6단계를 순서대로 따라해보세요. **첫 커밋**을 하는 순간, Git의 매력에 빠지게 될 것입니다!
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIclPV2CO" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

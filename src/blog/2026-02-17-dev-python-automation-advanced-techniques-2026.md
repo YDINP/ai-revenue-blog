@@ -10,9 +10,9 @@ image:
   alt: "A person reads 'Python for Unix and Linux System Administration' indoors."
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/fiIcofAIH6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user"
   - title: "클린 코드"
-    url: "https://link.coupang.com/a/fiIclPV2CO"
+    url: "https://www.coupang.com/np/search?component=&q=%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C&channel=user"
 faq:
   - q: "비동기(asyncio)와 멀티프로세싱(multiprocessing)의 차이는 무엇인가요?"
     a: "asyncio는 단일 프로세스 내에서 여러 I/O 작업(네트워크, 파일)을 번갈아 처리하는 방식으로, CPU 바운드 작업에는 부적합합니다. 반면 multiprocessing은 여러 프로세스를 실제로 병렬 실행하므로 데이터 변환 같은 CPU 집약적 작업에 효과적입니다. 외부 API 호출은 asyncio, 대용량 데이터 처리는 multiprocessing을 선택하세요."
@@ -42,7 +42,7 @@ faq:
 <div class="chart-bar" data-title="2026년 기업 자동화 투자 영역별 비중" data-labels="API 통합,데이터 파이프라인,RPA,모니터링,기타" data-values="28,24,22,18,8" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="%"></div>
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -499,7 +499,7 @@ print(f"예상 순차 처리 시간: {parallel_time * 4:.2f}초 (4코어 기준)
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIclPV2CO" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

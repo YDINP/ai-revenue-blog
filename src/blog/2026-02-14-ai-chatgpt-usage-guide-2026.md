@@ -10,11 +10,11 @@ image:
   alt: "Curved monitor screen showing ChatGPT interface in low-light, focus on technology and AI."
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/fiIclVeeuO"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/fiIcbvsNz2"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user"
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/fiIcrdKjAG"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
 ---
 ## 2026년 ChatGPT, 어떻게 달라졌나?
 
@@ -27,7 +27,7 @@ coupangLinks:
 2026년 2월, OpenAI는 **GPT-5.3 Codex**(2월 5일)와 **GPT-5.3 Codex Spark**(2월 12일)를 연달아 출시했습니다. 풀 Codex는 400K 토큰 컨텍스트와 멀티모달을 지원하며, Spark는 Cerebras 칩 기반으로 초당 1,000+ 토큰의 초고속 생성이 특징입니다. 이제 전체 학위 논문이나 대규모 코드베이스를 한 번에 분석할 수 있습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -124,7 +124,7 @@ ChatGPT는 더 이상 선택이 아닌 **필수 도구**가 되었습니다. 특
 ChatGPT를 단순 채팅 도구가 아니라 **생산성 배수를 높이는 AI 동료**로 생각하고 활용한다면, 2026년의 경쟁력 있는 인재가 될 수 있습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

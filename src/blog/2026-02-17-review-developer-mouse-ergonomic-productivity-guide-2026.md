@@ -10,9 +10,9 @@ image:
   alt: "Stylish home office workspace featuring keyboard, mouse, and potted plant under purple illumination."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/fiIcrgt7h6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
   - title: "삼성 뷰피니티 S8 32인치 4K"
-    url: "https://link.coupang.com/a/fiIcokOP2O"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0+S8+32%EC%9D%B8%EC%B9%98+4K&channel=user"
 faq:
   - q: "개발자에게 트랙볼 마우스는 정말 도움이 될까요?"
     a: "손목 건강 측면에서는 최고의 선택입니다. 마우스를 고정하고 손가락만으로 조작하기 때문에 손목 회전 스트레스가 거의 없습니다. 다만 IDE에서 코드 선택이나 드래그 작업이 많다면 초기 적응 기간(2~4주)을 견디기 어려울 수 있으니, 웹 개발자보다는 모니터링 작업이 많은 DevOps 엔지니어에게 더 추천합니다."
@@ -39,7 +39,7 @@ faq:
 > 2025년 한 개발자 커뮤니티 설문에 따르면, 개발자 중 **72%가 손목 불편함을 경험**했으며, 그 원인의 58%가 부적절한 마우스 선택이었습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -243,7 +243,7 @@ IDE 단축키를 마우스 버튼에 할당할 수 있으면 작업 효율이 �
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcokOP2O" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%82%BC%EC%84%B1+%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0+S8+32%EC%9D%B8%EC%B9%98+4K&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

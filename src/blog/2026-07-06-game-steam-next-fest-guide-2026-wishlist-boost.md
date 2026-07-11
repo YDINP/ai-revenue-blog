@@ -10,9 +10,9 @@ image:
   alt: "헤드폰을 끼고 게임에 몰입한 어린 소녀"
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/fiIcudQZjM"
+    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user"
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/fiIcrgt7h6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
 faq:
   - q: "스팀 넥스트 페스트는 언제 열리나요?"
     a: "보통 연중 3~4회 개최된다. 스팀 공식 일정 페이지(store.steampowered.com/sale/nextfest)에서 다음 회차 날짜를 확인할 수 있으며, 신청은 페스트 시작 약 2~3개월 전에 Steamworks에서 열린다."
@@ -35,7 +35,7 @@ faq:
 위 수치는 개념적 예시다. 실제 결과는 게임 장르·데모 완성도·운영 방식에 따라 크게 달라진다. 다만 업계 통념상 페스트 참가 게임은 기간 내에 수천 개 단위의 위시리스트 상승을 경험하는 경우가 일반적이다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -107,7 +107,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

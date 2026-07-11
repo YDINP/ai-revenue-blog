@@ -10,9 +10,9 @@ image:
   alt: "대형 모니터를 사용하여 현대적인 컴퓨터로 백라이트 키보드에서 타이핑하는 익명의 남성"
 coupangLinks:
   - title: "로지텍 MX Keys S 무선 키보드"
-    url: "https://link.coupang.com/a/fiIconXWfc"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%EB%AC%B4%EC%84%A0+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
   - title: "키크론 K3 Pro 저소음 적축"
-    url: "https://link.coupang.com/a/fiIcoreg2K"
+    url: "https://www.coupang.com/np/search?component=&q=%ED%82%A4%ED%81%AC%EB%A1%A0+K3+Pro+%EC%A0%80%EC%86%8C%EC%9D%8C+%EC%A0%81%EC%B6%95&channel=user"
 ---
 ## 개발자에게 키보드가 중요한 이유
 
@@ -21,7 +21,7 @@ coupangLinks:
 이번 리뷰에서는 실제 개발자들이 선호하는 **코딩 키보드** 5종을 비교 분석했습니다. 타이핑감, 배터리, 연결성, 가격 대비 성능 등 실전에서 중요한 요소들을 중심으로 평가했습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIconXWfc" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%EB%AC%B4%EC%84%A0+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -89,7 +89,7 @@ coupangLinks:
 > 이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcoreg2K" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%ED%82%A4%ED%81%AC%EB%A1%A0+K3+Pro+%EC%A0%80%EC%86%8C%EC%9D%8C+%EC%A0%81%EC%B6%95&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

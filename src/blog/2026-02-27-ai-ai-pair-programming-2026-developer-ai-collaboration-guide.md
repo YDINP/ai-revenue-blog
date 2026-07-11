@@ -10,9 +10,9 @@ image:
   alt: "Old-fashioned typewriter with a paper labeled 'DEEPFAKE', symbolizing AI-generated content."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/fiIcrdKjAG"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/fiIclVeeuO"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user"
 faq:
   - q: "AI 페어 프로그래밍은 개발자의 일자리를 빼앗나요?"
     a: "아니요, 오히려 반대입니다. AI 페어 프로그래밍을 활용하는 개발자들이 더 복잡한 문제를 해결하고 경력을 발전시키고 있습니다. 일자리는 \"코드를 빠르게 쓰는 것\"에서 \"아키텍처를 설계하고 비즈니스 가치를 창출하는 것\"으로 변화하고 있습니다."
@@ -31,7 +31,7 @@ faq:
 2026년 현재, GitHub Copilot, Cursor, Windsurf, Claude API 등 주요 플랫폼들이 AI 페어 프로그래밍을 적극 지원하고 있으며, 개발팀의 생산성을 평균 35~50% 향상시키는 것으로 보고되고 있습니다. 이는 단순히 "코드를 더 빠르게 쓰는 것"을 넘어, **"더 나은 아키텍처를 설계하고, 버그를 조기에 발견하는 협력 관계"**를 의미합니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrdKjAG" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -174,7 +174,7 @@ Cloudflare, Stripe 등 민감한 정보를 다룬다면, **로컬 LLM(Ollama, LM
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

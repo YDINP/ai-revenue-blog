@@ -10,9 +10,9 @@ image:
   alt: "생동감 있는 노란색 배경 위의 측면 버튼이 있는 현대적인 무선 검은색 마우스"
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/fiIcrgt7h6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
   - title: "로지텍 MX Keys S 무선 키보드"
-    url: "https://link.coupang.com/a/fiIconXWfc"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%EB%AC%B4%EC%84%A0+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
 ---
 ## 개발자에게 마우스가 중요한 이유
 
@@ -23,7 +23,7 @@ coupangLinks:
 이 글에서는 실제 개발 환경에서 테스트한 **개발자용 마우스 TOP 5**를 소개합니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -136,7 +136,7 @@ coupangLinks:
 마우스는 매일 수천 번 클릭하는 도구입니다. 좋은 마우스에 투자하는 것은 건강과 생산성에 대한 투자입니다!
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIconXWfc" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Keys+S+%EB%AC%B4%EC%84%A0+%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -10,16 +10,16 @@ image:
   alt: "Scrabble tiles spelling 'AdWords' on a wooden surface, symbolizing digital marketing concepts."
 coupangLinks:
   - title: "게임 프로그래밍 패턴 도서"
-    url: "https://link.coupang.com/a/fiIcrjUOCy"
+    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4+%EB%8F%84%EC%84%9C&channel=user"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/fiIcbvsNz2"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user"
 ---
 ## 게임 개발은 도구의 조합이다
 
 성공적인 게임 개발은 올바른 도구 선택에서 시작됩니다. 2026년 현재, 게임 개발 도구는 그 어느 때보다 풍부하고 접근 가능합니다. 이 글에서는 게임 개발의 전 과정에 필요한 필수 도구들을 카테고리별로 소개하고, 무료와 유료 옵션을 비교 분석합니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrjUOCy" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -440,7 +440,7 @@ A. 아닙니다. GIMP, Krita, Affinity 등 훌륭한 대체재가 있습니다. 
 오늘부터 여러분의 게임 개발 도구 스택을 구축하고, 첫 게임 프로젝트를 시작해보세요!
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

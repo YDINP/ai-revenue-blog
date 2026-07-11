@@ -10,9 +10,9 @@ image:
   alt: "Close-up of mechanical keyboard switches and springs organized in containers on a desk setup."
 coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"
-    url: "https://link.coupang.com/a/fiIcohvP5g"
+    url: "https://www.coupang.com/np/search?component=&q=LG+%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C+34%EC%9D%B8%EC%B9%98+%EB%AA%A8%EB%8B%88%ED%84%B0&channel=user"
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/fiIcrgt7h6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
 ---
 ## 2026년 개발자 키보드 시장의 변화
 
@@ -21,7 +21,7 @@ coupangLinks:
 특히 원격 개발 환경이 일상화되면서 이동 가능한 소형 키보드와 고급 기계식 스위치의 조합을 찾는 개발자들이 급증했습니다. 2026년 2월 기준 개발자 커뮤니티 설문에서 응답자의 73%가 "키보드 투자 의사"를 밝혔으며, 평균 예산은 전년도 대비 15% 증가한 35만원대입니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcohvP5g" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=LG+%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C+34%EC%9D%B8%EC%B9%98+%EB%AA%A8%EB%8B%88%ED%84%B0&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -170,7 +170,7 @@ AI 기반 자동 최적화로 진입장벽을 낮췄으면서도 프리미엄 �
 2026년 2월 현재, 개발자 커뮤니티는 "올바른 키보드 선택이 코딩 생산성의 30%를 좌우한다"는 인식에 점차 동의하고 있습니다. 자신의 업무 환경, 건강 상태, 예산을 종합 고려하여 선택하기 바랍니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

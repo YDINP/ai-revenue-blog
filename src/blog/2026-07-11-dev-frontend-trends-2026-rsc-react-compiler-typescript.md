@@ -10,7 +10,7 @@ image:
   alt: "화면에 표시된 React JSX 코드 — 2026 프론트엔드 개발 트렌드"
 coupangLinks:
   - title: "모던 리액트 딥다이브"
-    url: "https://link.coupang.com/a/fiHEvPtpwy"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EB%A6%AC%EC%95%A1%ED%8A%B8+%EB%94%A5%EB%8B%A4%EC%9D%B4%EB%B8%8C&channel=user"
 faq:
   - q: "2026년 프론트엔드에서 가장 중요한 변화는 무엇인가요?"
     a: "'서버 우선(server-first) 아키텍처의 복귀'가 가장 큰 흐름입니다. React Server Components(RSC)가 안정화되면서, 예전처럼 모든 것을 브라우저에서 처리하던 방식에서 서버에서 렌더링하고 필요한 부분만 클라이언트로 보내는 방식으로 무게중심이 옮겨갔습니다. 여기에 AI 코드 생성, TypeScript 독점, React Compiler 자동 최적화가 더해지며 '무엇을 배우느냐'보다 '어떻게 개발하느냐'가 바뀌는 시기입니다."
@@ -63,7 +63,7 @@ TypeScript는 이제 '선택'이 아니라 '기본'입니다. 개발자의 약 4
 
 성능 최적화의 기본기는 [React 렌더링 성능 최적화 5가지](/blog/2026-02-23-dev-2026-react-performance-optimization-5-techniques/)에서, 상태 관리 선택은 [Zustand·Jotai 상태 관리 실전](/blog/2026-02-27-dev-react-state-management-2026-zustand-jotai-context-practical-guide/)에서 더 깊게 다룹니다. 아직 언어 선택 단계라면 [목표 기반 첫 프로그래밍 언어 로드맵](/blog/2026-04-13-dev-2026-programming-first-language-selection-goal-based-roadmap/)을 먼저 보세요.
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiHEvPtpwy" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EB%A6%AC%EC%95%A1%ED%8A%B8+%EB%94%A5%EB%8B%A4%EC%9D%B4%EB%B8%8C+%EB%B2%A0%EC%8A%A4%ED%8A%B8%EC%85%80%EB%9F%AC+%EB%B3%B4%EA%B8%B0&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">📗</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

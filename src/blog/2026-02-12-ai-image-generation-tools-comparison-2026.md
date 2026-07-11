@@ -10,9 +10,9 @@ image:
   alt: "A smartphone showing the Midjourney website on its screen against a gray textured surface."
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/fiIclVeeuO"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/fiIcbvsNz2"
+    url: "https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user"
 ---
 ## AI 이미지 생성 도구 시장의 현황
 
@@ -21,7 +21,7 @@ coupangLinks:
 AI 이미지 생성 도구 비교를 위해서는 단순 품질뿐만 아니라 가격, 속도, 커스터마이징 옵션, 상업적 사용 가능 여부 등 다양한 측면을 종합적으로 살펴봐야 합니다. 이 글에서는 가장 인기 있는 세 가지 AI 이미지 생성 도구를 심층 분석하겠습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%B1%97GPT+%ED%99%9C%EC%9A%A9%EB%B2%95+%EB%8F%84%EC%84%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -113,7 +113,7 @@ AI 이미지 생성 도구 비교에서 최적의 선택은 사용자의 목적�
 2026년의 AI 이미지 생성 시장은 여전히 빠르게 성장 중이며, 각 도구의 기능 격차도 점점 줄어들고 있습니다. 따라서 무료 체험판을 직접 사용해본 후 자신의 워크플로우에 가장 잘 맞는 도구를 선택하는 것이 가장 현명한 결정입니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C+%EC%97%90%EC%96%B4+M2&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

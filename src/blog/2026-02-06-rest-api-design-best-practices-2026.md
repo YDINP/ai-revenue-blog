@@ -10,9 +10,9 @@ image:
   alt: "어두운 테마의 컴퓨터 화면에 표시된 프로그래밍 코드의 상세 보기"
 coupangLinks:
   - title: "클린 코드"
-    url: "https://link.coupang.com/a/fiIclPV2CO"
+    url: "https://www.coupang.com/np/search?component=&q=%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C&channel=user"
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/fiIcofAIH6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user"
 ---
 ## 좋은 API vs 나쁜 API, 차이는 설계에 있다
 
@@ -21,7 +21,7 @@ API는 서비스의 **얼굴**입니다. 잘 설계된 API는 프론트엔드 �
 이 글에서는 수백 개의 API를 설계하며 쌓은 경험을 바탕으로, **실무에서 바로 적용 가능한 REST API 설계 원칙**을 정리합니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIclPV2CO" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -283,7 +283,7 @@ API 설계는 단순한 기술 결정이 아니라 **개발자 경험(DX) 설계
 핵심을 요약하면: **일관성**, **명확성**, **표준 준수**. 이 세 가지만 지켜도 상위 20%의 API가 됩니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%AA%A8%EB%8D%98+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8+Deep+Dive&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

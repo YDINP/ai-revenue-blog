@@ -10,11 +10,11 @@ image:
   alt: "Aerial shot of a modern workspace with a laptop, budget report, and eyeglasses on a desk."
 coupangLinks:
   - title: "ASUS ZenScreen MB16ACV"
-    url: "https://link.coupang.com/a/fiIcrrP4uH"
+    url: "https://www.coupang.com/np/search?component=&q=ASUS+ZenScreen+MB16ACV&channel=user"
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/fiIcrgt7h6"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user"
   - title: "LG 그램 17"
-    url: "https://link.coupang.com/a/fiIcl4LfVs"
+    url: "https://www.coupang.com/np/search?component=&q=LG+%EA%B7%B8%EB%9E%A8+17&channel=user"
 faq:
   - q: "2026년에 가성비 노트북을 고르는 가장 중요한 기준은 무엇입니까?"
     a: "단순히 저렴한 가격이 아니라 자신의 용도에 맞는 성능, 배터리 시간, 내구성을 종합적으로 평가해야 합니다. 휴대성이 중요하면 무게와 배터리, 콘텐츠 제작이면 디스플레이 색감과 RAM을 우선순위로 두세요. 같은 가격대에서 더 오래 사용할 수 있는 제품이 진정한 가성비입니다."
@@ -45,7 +45,7 @@ faq:
 2026년 출시 제품들의 배터리 기술이 크게 개선되어, **같은 가격대에서 10시간 이상의 배터리 시간**을 기대할 수 있습니다. 특히 AI 최적화 칩셋은 전력 효율성에서 두드러진 개선을 보이고 있습니다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrrP4uH" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=ASUS+ZenScreen+MB16ACV&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -206,7 +206,7 @@ LG 그램 1,390,000원이 ASUS Vivobook 999,000원보다 비싸지만, 매일 �
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%A1%9C%EC%A7%80%ED%85%8D+MX+Master+3S&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

@@ -10,9 +10,9 @@ image:
   alt: "노트북으로 작업에 집중하는 개발자"
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/fiIcudQZjM"
+    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user"
   - title: "딥 워크"
-    url: "https://link.coupang.com/a/fiIcwOO3P2"
+    url: "https://www.coupang.com/np/search?component=&q=%EB%94%A5+%EC%9B%8C%ED%81%AC&channel=user"
 faq:
   - q: "1인 개발로 첫 게임을 얼마나 크게 만들어야 하나?"
     a: "작을수록 좋다. 3~6개월 안에 완성 가능한 범위를 권장한다. 첫 게임의 목표는 큰 수익이 아니라 '출시까지 완주하는 경험'이다."
@@ -29,7 +29,7 @@ faq:
 이 글은 통계나 성공담이 아니라, **지속 가능하게 살아남기 위한 비용·시간·멘탈 관리**에 초점을 맞춘다.
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9E%84+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D+%ED%8C%A8%ED%84%B4&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
@@ -90,7 +90,7 @@ faq:
 ---
 
 
-<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwOO3P2" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EB%94%A5+%EC%9B%8C%ED%81%AC&channel=user" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">✅</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
