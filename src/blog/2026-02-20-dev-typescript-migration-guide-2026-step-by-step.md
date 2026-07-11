@@ -10,11 +10,11 @@ image:
   alt: "Bright vibrant colorful abstract background with white and yellow with blue soft lights"
 coupangLinks:
   - title: "러스트 프로그래밍"
-    url: "https://link.coupang.com/a/dJj7h9"
+    url: "https://link.coupang.com/a/fiIcwrUd8m"
   - title: "자바스크립트 완벽 가이드"
-    url: "https://link.coupang.com/a/dJjZe2"
+    url: "https://link.coupang.com/a/fiIcwvE5mu"
   - title: "점프 투 파이썬"
-    url: "https://link.coupang.com/a/dJjZ7z"
+    url: "https://link.coupang.com/a/fiIcq7Gyf6"
 faq:
   - q: "기존 JavaScript 프로젝트를 TypeScript로 마이그레이션하면 성능이 저하되나요?"
     a: "아니요. TypeScript는 컴파일 타임에만 타입 검사를 수행하고, 최종 산출물은 JavaScript입니다. 따라서 런타임 성능은 동일하며, 오히려 타입 검사로 인한 버그 감소로 안정성이 향상됩니다."
@@ -41,6 +41,16 @@ TypeScript는 정적 타입 검사를 통해 **런타임 에러를 개발 단계
 ### 팀 협업 효율성
 
 [2026년 React 상태 관리 전쟁: Zustand vs Jotai vs TanStack Query 실전 비교](/blog/2026-02-19-dev-react-state-management-comparison-2026-zustand-jotai-tanstack/)에서도 언급했듯이, 현대적 JavaScript 생태계의 대부분의 도구가 TypeScript를 기본으로 제공합니다. 이는 TypeScript 도입이 더 이상 선택이 아닌 필수임을 의미합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwrUd8m" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">러스트 프로그래밍</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 마이그레이션 단계별 전략
 
@@ -293,6 +303,16 @@ describe('formatCurrency', () => {
 - [DefinitelyTyped - Type Definitions Registry](https://www.typescriptlang.org/dt/search)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwvE5mu" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">자바스크립트 완벽 가이드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

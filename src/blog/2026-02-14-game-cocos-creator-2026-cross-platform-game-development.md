@@ -10,11 +10,11 @@ image:
   alt: "Detailed shot of a green coconut hanging from a palm tree against a black background."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
   - title: "로지텍 G Pro X 게이밍 마우스"
-    url: "https://link.coupang.com/a/dJj6m6"
+    url: "https://link.coupang.com/a/fiIcrna9p6"
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/dJj8Bn"
+    url: "https://link.coupang.com/a/fiIcubbf9E"
 ---
 ## Cocos Creator란? 2026년 기준 현황
 
@@ -25,6 +25,16 @@ Cocos Creator는 Cocos 엔진의 공식 편집기로, 웹 기반의 2D/3D 게임
 - **완전 무료**: 엔진, 편집기, 배포 모두 무료 (상용화도 로열티 없음)
 - **크로스플랫폼**: 단일 코드로 웹, iOS, Android, Windows, Mac 동시 배포
 - **가벼움**: 최종 빌드 용량이 Unity나 Unreal 대비 50~70% 수준으로 간소
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## Cocos Creator 3.8.x의 주요 기능
 
@@ -187,6 +197,16 @@ export class ObjectPool {
 Cocos Creator는 **웹 게임과 경량 모바일 게임** 개발 분야에서 최고의 선택지입니다. 완전 무료이면서도 프로페셔널한 수준의 기능을 제공하며, 특히 초보 개발자부터 중급 개발자까지 진입 장벽이 매우 낮습니다.
 
 2026년 기준 하이퍼 캐주얼 게임 시장이 지속 성장 중이고, 웹 게임의 부활이 이어지는 만큼, Cocos Creator는 인디 개발자에게 가장 실용적인 도구로 평가됩니다. 특히 **빠른 프로토타입** 개발과 **멀티플랫폼 배포**가 필요한 팀이라면 강력히 추천합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrna9p6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 G Pro X 게이밍 마우스</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

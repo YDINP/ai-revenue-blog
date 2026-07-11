@@ -10,11 +10,11 @@ image:
   alt: "Three diverse friends enjoy a lively game of Twister in a cozy living room. Perfect for lifestyle and leisure themes."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
   - title: "로지텍 G Pro X 게이밍 마우스"
-    url: "https://link.coupang.com/a/dJj6m6"
+    url: "https://link.coupang.com/a/fiIcrna9p6"
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/dJj8Bn"
+    url: "https://link.coupang.com/a/fiIcubbf9E"
 faq:
   - q: "Canvas와 WebGL 중 어떤 것을 먼저 배워야 하나요?"
     a: "초보자는 Canvas부터 시작하는 것을 추천합니다. Canvas는 즉시 시각적 결과를 볼 수 있어 학습 동기가 높습니다. 게임이 복잡해지면서 성능 문제를 만날 때 WebGL로 전환하는 것이 자연스러운 진로입니다."
@@ -29,6 +29,16 @@ faq:
 Phaser.js나 PixiJS 같은 프레임워크를 사용하지 않고 **Canvas와 WebGL을 직접 다루는 개발자들이 2026년 늘어나고 있습니다**. 프레임워크의 제약을 벗어나 완전한 통제력을 원하거나, 극도로 가벼운 게임을 만들어야 할 때 이 저수준 API들은 필수 도구가 됩니다.
 
 Canvas는 2D 그래픽 렌더링을 위한 즉시 모드(immediate mode) API로, 매 프레임마다 화면 전체를 다시 그려야 합니다. 반면 **WebGL은 GPU를 직접 활용하는 그래픽 API**로, 복잡한 3D 장면이나 수천 개의 스프라이트를 효율적으로 처리할 수 있습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## Canvas 기본: 2D 게임의 출발점
 
@@ -200,6 +210,16 @@ Canvas와 WebGL을 직접 다루는 능력은 **웹 게임 개발자의 핵심 �
 - [WebGL 2.0 Reference Card](https://www.khronos.org/files/webgl20-reference-guide.pdf)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrna9p6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 G Pro X 게이밍 마우스</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

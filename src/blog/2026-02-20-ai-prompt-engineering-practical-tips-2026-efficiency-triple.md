@@ -10,9 +10,9 @@ image:
   alt: "Wooden Scrabble tiles spelling 'Deepmind' and 'Gemini' on a wooden surface, a concept of AI and games."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIcrdKjAG"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dJjUUj"
+    url: "https://link.coupang.com/a/fiIcbvsNz2"
 faq:
   - q: "프롬프트 엔지니어링은 ChatGPT, Claude 모두에 동일하게 적용되나요?"
     a: "기본 원칙은 같지만, 각 모델의 특성이 다릅니다. ChatGPT는 명확한 지시와 제약에 강하고, Claude는 복잡한 맥락 이해에 우수합니다. 따라서 같은 프롬프트라도 모델마다 결과가 다를 수 있으므로, 중요한 작업은 양쪽에서 테스트해보는 것을 추천합니다."
@@ -27,6 +27,16 @@ faq:
 2026년 현재, AI 모델의 성능 차이보다 **프롬프트의 질이 결과물의 품질을 결정**합니다. 동일한 ChatGPT 4.5나 Claude 3.5 Opus를 사용해도 프롬프트에 따라 결과는 천차만별입니다. 개발 시간, 마케팅 콘텐츠 작성, 데이터 분석 등 모든 분야에서 프롬프트 엔지니어링은 생산성을 직결하는 핵심 기술입니다.
 
 이 글에서는 이미 발행된 기본기보다는 **즉시 적용할 수 있는 실전 팁 5가지**와 함께, 각 기법이 어떤 상황에서 가장 효과적인지 다룹니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrdKjAG" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Keys S 키보드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 1단계: 맥락(Context)을 명시적으로 제공하기
 
@@ -179,6 +189,16 @@ AI에게 **"어떤 형식으로", "어느 정도 길이로", "누구를 대상�
 - [Chain-of-Thought Prompting 분석 자료](https://arxiv.org/abs/2201.11903)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">아이패드 에어 M2</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

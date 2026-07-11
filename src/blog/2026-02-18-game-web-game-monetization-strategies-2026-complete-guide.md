@@ -10,9 +10,9 @@ image:
   alt: "Close-up of vintage playing cards featuring art design on a rustic paper backdrop."
 coupangLinks:
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/dJj8Bn"
+    url: "https://link.coupang.com/a/fiIcubbf9E"
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
 faq:
   - q: "웹 게임으로 월 100만원을 벌려면 DAU가 얼마나 필요한가요?"
     a: "일반적으로 DAU 5,000~10,000명이면 광고만으로 월 100~200만원을 벌 수 있습니다. IAP와 구독을 함께 운영하면 DAU 2,000명에서도 월 100만원 달성이 가능합니다. 핵심은 사용자 질(engagement)입니다."
@@ -29,6 +29,16 @@ faq:
 웹 게임의 장점은 플랫폼 의존성이 낮고, 배포가 간단하며, 업데이트가 신속하다는 점입니다. 더불어 HTML5와 WebGL 기술의 성숙으로 브라우저에서도 고품질의 게임을 제공할 수 있게 되었습니다. 다만 수익화 구조가 명확하지 않으면 높은 방문자도 수익으로 이어지지 않습니다.
 
 이번 글에서는 **실제 성공 사례를 바탕으로** 웹 게임 개발자들이 적용할 수 있는 5가지 수익화 모델과, 각 모델별 실행 전략, 그리고 피해야 할 함정들을 상세히 설명합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcubbf9E" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">유니티 교과서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 웹 게임 주요 수익화 모델 5가지
 
@@ -211,6 +221,16 @@ faq:
 - [HTML5 Game Development 커뮤니티](https://www.gamedev.net/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

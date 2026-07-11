@@ -10,15 +10,25 @@ image:
   alt: "A robotic arm carefully pouring ingredients into a mixing bowl in a modern kitchen setting."
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dJjUsG"
+    url: "https://link.coupang.com/a/fiIclVeeuO"
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIcrdKjAG"
 ---
 ## Claude AI, 2026년 현황과 주목할 변화
 
 2026년 2월 기준, Anthropic의 Claude AI는 단순한 챗봇을 넘어 엔터프라이즈급 AI 솔루션으로 자리잡았습니다. 특히 2월 5일 출시된 최신 모델 **Claude Opus 4.6**은 SWE-bench Verified 80.8%를 기록하며 GPT-5.3 Codex와의 경쟁에서 코드 생성, 데이터 분석, 창의 콘텐츠 작성에서 업계 최고 수준의 성능을 보여주고 있습니다.
 
 작년 대비 가장 주목할 변화는 **한국어 처리 성능 향상**과 **멀티모달 기능 강화**입니다. Claude는 이제 한국 기업들이 요구하는 수준의 한글 이해도와 이미지, 동영상 분석 능력을 갖추었으며, 이를 통해 국내 시장 진출을 가속화하고 있습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">챗GPT 활용법 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## Claude AI의 핵심 모델 비교
 
@@ -140,6 +150,16 @@ Claude Opus 4.6도 최신 정보나 한국 지역 정보(예: 서울 강남역 �
 3. 팀이 AI 도구 사용에 준비되어 있는가?
 
 이 세 가지를 확인한다면, Claude AI는 당신의 생산성을 **30~50% 향상**시킬 수 있는 강력한 파트너가 될 것입니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrdKjAG" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Keys S 키보드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

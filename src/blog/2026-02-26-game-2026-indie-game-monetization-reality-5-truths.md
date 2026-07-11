@@ -11,9 +11,9 @@ image:
   alt: "Focused gamer with headset playing a video game on a desktop computer indoors."
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
 faq:
   - q: "인디게임으로 생활비를 벌 수 있을까?"
     a: "가능하지만 어렵다. 2026년 기준 인디게임 개발자 중 월 300만원 이상 수익을 올리는 비율은 약 12%다. 성공하려면 마케팅비, 장기 로드맵, 명확한 타겟 오디언스 정의가 필수다."
@@ -97,6 +97,16 @@ faq:
 
 > 2026년의 인디게임 시장은 더 이상 '만들기만 해도 팔리는' 시대가 아니다. **마케팅, 데이터 분석, 커뮤니티 관리, 지속적인 콘텐츠 업데이트**가 필수다. 이를 받아들일 수 있는 팀만 생존할 수 있다.
 
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
+
 ## 결론: 현실을 직시하고 시작하라
 
 인디게임으로 수익을 올리는 것은 분명히 가능하다. 하지만 그것은 '게임을 잘 만드는 것'만으로는 부족하고, **비즈니스 감각, 마케팅 전략, 그리고 끈기 있는 실행**이 필요하다. 2026년의 인디게임 시장에서 살아남으려면 꿈을 꾸되, 현실을 직시해야 한다.
@@ -109,6 +119,16 @@ faq:
 - [Game Developer 매거진 - 인디게임 개발 트렌드 2026](https://www.gamedeveloper.com/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

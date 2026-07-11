@@ -10,15 +10,25 @@ image:
   alt: "Git 스티커를 들고 있는 사람의 클로즈업, 소프트웨어 개발 강조"
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dJjX0Z"
+    url: "https://link.coupang.com/a/fiIcofAIH6"
   - title: "클린 코드"
-    url: "https://link.coupang.com/a/dJjVjr"
+    url: "https://link.coupang.com/a/fiIclPV2CO"
 ---
 ## Git, 왜 배워야 할까?
 
 프로그래밍을 시작하면 반드시 만나게 되는 도구가 바로 **Git**입니다. Git은 코드의 변경 이력을 관리하는 **버전 관리 시스템**으로, 전 세계 개발자의 93% 이상이 사용하고 있습니다.
 
 "혼자 개발하는데 Git이 필요해?" — 네, 절대적으로 필요합니다. 코드를 실수로 삭제해도 복구할 수 있고, 실험적인 기능을 안전하게 테스트할 수 있습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">모던 자바스크립트 Deep Dive</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## Git vs GitHub: 차이점 이해하기
 
@@ -208,6 +218,16 @@ echo ".DS_Store" >> .gitignore
 Git을 모르고 개발하는 것은 안전벨트 없이 운전하는 것과 같습니다. 처음에는 명령어가 낯설지만, 일주일만 사용하면 습관이 됩니다.
 
 오늘 배운 6단계를 순서대로 따라해보세요. **첫 커밋**을 하는 순간, Git의 매력에 빠지게 될 것입니다!
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclPV2CO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">클린 코드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

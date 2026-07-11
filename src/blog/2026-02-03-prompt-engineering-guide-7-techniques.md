@@ -10,9 +10,9 @@ image:
   alt: "컴퓨터 화면에 표시된 AI 채팅 인터페이스"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dJjUsG"
+    url: "https://link.coupang.com/a/fiIclVeeuO"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dJjUUj"
+    url: "https://link.coupang.com/a/fiIcbvsNz2"
 ---
 ## 같은 AI, 다른 결과 — 프롬프트가 전부다
 
@@ -21,6 +21,16 @@ ChatGPT나 Claude를 사용할 때 "왜 내가 원하는 답이 안 나오지?"�
 **프롬프트 엔지니어링**이란 AI에게 최적의 결과를 이끌어내기 위한 질문 설계 기술입니다. 같은 AI라도 프롬프트에 따라 결과의 질이 10배 이상 달라질 수 있습니다.
 
 이 글에서는 실무에서 바로 활용할 수 있는 **7가지 핵심 프롬프트 기법**을 구체적인 예제와 함께 소개합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">챗GPT 활용법 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 기법 1: 역할 부여 (Role Prompting)
 
@@ -184,6 +194,16 @@ AI에게 **프롬프트 자체를 개선**하도록 요청하는 고급 기법�
 7. **메타 프롬프트** — AI에게 프롬프트 최적화 요청
 
 오늘부터 이 기법들을 하나씩 적용해보세요. AI가 당신의 가장 강력한 조수가 될 것입니다!
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">아이패드 에어 M2</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

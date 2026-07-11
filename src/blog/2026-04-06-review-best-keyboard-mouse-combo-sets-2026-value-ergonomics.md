@@ -10,11 +10,11 @@ image:
   alt: "Close-up view of black wired Acer keyboard and mouse with USB connection on a white surface."
 coupangLinks:
   - title: "삼성 뷰피니티 S8 32인치 4K"
-    url: "https://link.coupang.com/a/dJjYRb"
+    url: "https://link.coupang.com/a/fiIcokOP2O"
   - title: "키크론 K3 Pro"
-    url: "https://link.coupang.com/a/dJj42U"
+    url: "https://link.coupang.com/a/fiIcwB26Y8"
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
 faq:
   - q: "키보드 마우스 세트를 개별 구입하는 것보다 정말 저렴한가요?"
     a: "네, 일반적으로 10~20% 저렴합니다. 예를 들어 로지텍 MK470 세트는 약 32,000원이지만, 동급 제품을 개별로 사면 총 38,000원대가 됩니다. 다만 고급형 세트는 개별 선택이 더 유리할 수 있으니 비교가 필요합니다."
@@ -27,6 +27,16 @@ faq:
 ## 2026년 키보드 마우스 세트 선택의 중요성
 
 키보드와 마우스는 컴퓨터 사용의 약 70% 이상을 차지하는 입력 기기입니다. 별도로 구입하기보다는 **세트 제품을 선택하면 호환성 문제를 줄이고, 비용도 절약하며, 통일된 사용 경험**을 얻을 수 있습니다. 2026년 시장에는 무선 연결, 배터리 지속성, 인체공학적 설계 등이 대폭 개선된 제품들이 출시되었습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcokOP2O" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">삼성 뷰피니티 S8 32인치 4K</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 세트 제품의 장점 vs 단독 구입
 
@@ -183,6 +193,16 @@ Mac 생태계 사용자를 위한 **공식 순정 세트**입니다. 2024년 M4 
 - [애플 Magic Keyboard & Mouse 호환성 가이드](https://www.apple.com/kr)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwB26Y8" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">키크론 K3 Pro</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

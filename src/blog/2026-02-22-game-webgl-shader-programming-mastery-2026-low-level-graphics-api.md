@@ -10,9 +10,9 @@ image:
   alt: "Three diverse friends enjoy a lively game of Twister in a cozy living room. Perfect for lifestyle and leisure themes."
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
 faq:
   - q: "Canvas 2D와 WebGL 중 어떤 것을 선택해야 하나요?"
     a: "간단한 2D 게임은 Canvas 2D로 충분하지만, 1000개 이상의 객체를 렌더링하거나 복잡한 시각 효과가 필요하면 WebGL을 사용하세요. WebGL은 학습곡선이 가파르지만, 성능 차이는 압도적입니다."
@@ -41,6 +41,16 @@ Canvas 2D API와 WebGL은 완전히 다른 수준의 그래픽 렌더링을 제�
 **WebGL**은 GPU의 저수준 그래픽 API인 OpenGL ES를 브라우저에서 직접 사용합니다. 더 복잡하지만, **GPU 병렬 처리**를 최대한 활용할 수 있습니다. 특히 수천 개의 객체를 렌더링할 때 WebGL의 성능 우위는 압도적입니다.
 
 <div class="chart-versus" data-title="Canvas 2D vs WebGL 성능 비교" data-name-a="Canvas 2D" data-name-b="WebGL" data-color-a="#ef4444" data-color-b="#10b981" data-items='[{"label":"기본 도형 (100개)","a":92,"b":88},{"label":"스프라이트 (1000개)","a":45,"b":88},{"label":"파티클 (5000개)","a":12,"b":75},{"label":"학습곡선","a":90,"b":35}]'></div>
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## WebGL 셰이더란 무엇인가?
 
@@ -323,6 +333,16 @@ vec3 color = vec3(1.0, 0.0, 0.0);
 - [WebGL 2.0 명세서](https://www.khronos.org/registry/webgl/specs/latest/2.0/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

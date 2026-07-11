@@ -10,11 +10,11 @@ image:
   alt: "A dimly lit home study setup with laptop displaying coding notes on a hollow square pattern."
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dJjX0Z"
+    url: "https://link.coupang.com/a/fiIcofAIH6"
   - title: "클린 코드"
-    url: "https://link.coupang.com/a/dJjVjr"
+    url: "https://link.coupang.com/a/fiIclPV2CO"
   - title: "러스트 프로그래밍"
-    url: "https://link.coupang.com/a/dJj7h9"
+    url: "https://link.coupang.com/a/fiIcwrUd8m"
 faq:
   - q: "프로그래밍을 배운 적 없는데, 어떤 언어를 선택해야 할까요?"
     a: "비전공자나 프로그래밍 경험이 전혀 없다면 Python을 강력 추천합니다. 문법이 영어처럼 읽기 쉽고, 온라인 자료가 가장 많으며, 2~3주 안에 첫 프로젝트를 만들 수 있습니다. Python으로 기초를 다진 후 필요에 따라 다른 언어를 배우면 됩니다."
@@ -35,6 +35,16 @@ faq:
 <div class="chart-bar" data-title="2026년 개발자 선호 언어 TOP 5" data-labels="Python,JavaScript,TypeScript,Java,Go" data-values="88,82,76,68,62" data-colors="#3b82f6,#f59e0b,#10b981,#ef4444,#8b5cf6" data-unit="만 명"></div>
 
 Stack Overflow 2025 개발자 설문 결과, Python이 여전히 압도적인 1위를 차지하고 있습니다. 그러나 **언어의 인기도가 반드시 여러분에게 최적이라는 의미는 아닙니다.** 취업 목표, 희망 분야, 학습 속도에 따라 최적의 선택은 완전히 달라집니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">모던 자바스크립트 Deep Dive</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 목표별 첫 언어 선택 기준
 
@@ -189,6 +199,16 @@ LeetCode 200문제를 풀었는데 웹사이트를 못 만들면 취업 면접�
 
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclPV2CO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">클린 코드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

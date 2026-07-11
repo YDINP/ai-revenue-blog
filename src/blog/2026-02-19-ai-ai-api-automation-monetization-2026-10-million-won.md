@@ -10,11 +10,11 @@ image:
   alt: "A MacBook displaying the DeepSeek AI interface, showcasing digital innovation."
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dJjUsG"
+    url: "https://link.coupang.com/a/fiIclVeeuO"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dJjUUj"
+    url: "https://link.coupang.com/a/fiIcbvsNz2"
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIcrdKjAG"
 faq:
   - q: "정말 초보자도 월 100만원 이상 벌 수 있나요?"
     a: "네, 가능합니다. 가장 간단한 모델인 API 래퍼 서비스 (모델 2)는 기본 JavaScript 지식만으로 구현 가능합니다. 일 100건의 요청에 각 $0.10씩 판매하면 월 300만원이 됩니다. 핵심은 \"자동화율\"과 \"마진율\" 관리입니다."
@@ -31,6 +31,16 @@ faq:
 지난 3년간 ChatGPT, Claude, Gemini 같은 AI 서비스의 API 가격이 **50~70% 하락**했습니다. 이제 개인 개발자도 **저비용으로 자동화 파이프라인을 구축하고 본격적으로 수익화할 수 있는 시대**가 열렸습니다.
 
 기존의 "AI 에이전트로 자동화하기" 포스트들이 고수준의 기술을 다뤘다면, 이번 글은 **API 비용 구조를 정확히 이해하고, 실제 수익화까지 연결하는 구체적인 5가지 모델**을 제시합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">챗GPT 활용법 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 2026년 주요 AI API 가격 현황
 
@@ -231,6 +241,16 @@ def generate_product_description(product_info):
 - [2026년 AI 자동화 트렌드 리포트 - McKinsey](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/generative-ai-and-the-future-of-work)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">아이패드 에어 M2</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

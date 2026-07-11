@@ -10,9 +10,9 @@ image:
   alt: "A bustling urban street lined with neon signs and buildings under a moody dusky sky, creating a vibrant city atmosphere."
 coupangLinks:
   - title: "점프 투 파이썬"
-    url: "https://link.coupang.com/a/dJjZ7z"
+    url: "https://link.coupang.com/a/fiIcq7Gyf6"
   - title: "혼자 공부하는 파이썬"
-    url: "https://link.coupang.com/a/dJjZFZ"
+    url: "https://link.coupang.com/a/fiIcoAaGPY"
 faq:
   - q: "소규모 프로젝트도 TypeScript로 마이그레이션해야 할까요?"
     a: "파일 수가 50개 미만이고 팀이 2명 이하라면 JavaScript 유지도 고려할 만합니다. 하지만 유지보수 기간이 2년 이상 예상되면 TypeScript 도입이 장기적으로 효율적입니다. 특히 여러 개발자가 합류할 예정이면 타입 시스템의 이점이 큽니다."
@@ -34,6 +34,16 @@ faq:
 - **버그 감소**: 런타임 타입 에러 사전 방지로 프로덕션 버그 60% 감소
 - **코드 가독성**: 타입 정보가 명시되어 팀 협업 효율 증가
 - **리팩토링 안전성**: 대규모 코드 변경 시 부작용 사전 감지
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcq7Gyf6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">점프 투 파이썬</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## TypeScript 마이그레이션 전략 비교
 
@@ -278,6 +288,16 @@ npx codemod --parser=babel
 - [ts-migrate GitHub Repository](https://github.com/airbnb/ts-migrate)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcoAaGPY" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">혼자 공부하는 파이썬</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

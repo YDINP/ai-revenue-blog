@@ -10,15 +10,25 @@ image:
   alt: "함부르크 항구의 컨테이너와 크레인"
 coupangLinks:
   - title: "클린 코드"
-    url: "https://link.coupang.com/a/dJjVjr"
+    url: "https://link.coupang.com/a/fiIclPV2CO"
   - title: "삼성 SSD 980 PRO 1TB"
-    url: "https://link.coupang.com/a/dJjVJy"
+    url: "https://link.coupang.com/a/fiIclSP6sK"
 ---
 ## "내 컴퓨터에서는 되는데요?" 의 종말
 
 개발자라면 한 번쯤 들어봤을 이 문장. **Docker**는 이 문제를 근본적으로 해결합니다. 개발 환경을 **컨테이너**라는 독립된 상자에 담아서, 어떤 컴퓨터에서든 동일하게 실행되도록 보장합니다.
 
 2026년 현재, Docker는 개발자의 필수 도구입니다. 이 글에서는 Docker를 처음 접하는 분도 바로 실무에 적용할 수 있도록 단계별로 안내합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclPV2CO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">클린 코드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## Docker란? 쉽게 이해하기
 
@@ -228,6 +238,16 @@ A: WSL2 기반으로 잘 동작합니다. 다만 Mac/Linux 대비 약간의 성�
 Docker는 "있으면 좋은 도구"가 아니라 **"없으면 안 되는 도구"**입니다. 환경 설정에 시간을 낭비하지 않고, 코딩에만 집중할 수 있게 해줍니다.
 
 오늘 배운 5단계를 순서대로 따라해보세요. 한 번 익숙해지면 Docker 없이는 개발하기 싫어질 것입니다!
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclSP6sK" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">삼성 SSD 980 PRO 1TB</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

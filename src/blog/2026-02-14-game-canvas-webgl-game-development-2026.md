@@ -10,9 +10,9 @@ image:
   alt: "Three diverse friends enjoy a lively game of Twister in a cozy living room. Perfect for lifestyle and leisure themes."
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/dJj8Bn"
+    url: "https://link.coupang.com/a/fiIcubbf9E"
 ---
 ## 2026년 Canvas WebGL 게임 개발 시장의 새로운 변화
 
@@ -113,6 +113,16 @@ WebAssembly와 Canvas의 결합으로 메모리 효율이 중요해졌습니다.
 - **성능 최우선**: PixiJS + WebAssembly 조합
 
 WebGPU 지원 폴백을 항상 준비하되, 2026년 신규 게임은 WebGPU를 기본으로 개발하는 것을 권장합니다. 이는 향후 3년간의 주류 표준이 될 것이 확실하기 때문입니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

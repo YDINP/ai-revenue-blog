@@ -11,15 +11,25 @@ image:
   alt: "웹 개발 및 프로그래밍 개념을 보여주는 노트북에서 코딩하는 사람의 클로즈업"
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dJjX0Z"
+    url: "https://link.coupang.com/a/fiIcofAIH6"
   - title: "로지텍 MX Keys S 무선 키보드"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIconXWfc"
 ---
 > 2026년 7월 업데이트: 신흥 프레임워크·AI 통합 트렌드 반영
 
 ## 2026년 프론트엔드 생태계, 무엇이 변했나
 
 프론트엔드 개발은 매년 빠르게 변화합니다. 2026년에는 **AI 통합**, **서버 컴포넌트의 표준화**, **번들러 혁신**이 핵심 트렌드입니다. 이 글에서는 현업 개발자가 반드시 알아야 할 2026년 프론트엔드 트렌드를 정리합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">모던 자바스크립트 Deep Dive</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 트렌드 1: React 19 — 서버 컴포넌트의 완성
 
@@ -231,6 +241,16 @@ AI가 반복 코드를 처리하면서, 개발자의 경쟁력은 **"좋은 코�
 2026년 프론트엔드의 키워드는 **서버 컴포넌트**, **AI 통합**, **타입 안전성**입니다.
 
 모든 트렌드를 한꺼번에 따라갈 필요는 없습니다. 현재 프로젝트에 가장 임팩트가 큰 것부터 하나씩 도입해보세요. 가장 중요한 건 **계속 학습하는 습관**입니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIconXWfc" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Keys S 무선 키보드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

@@ -10,11 +10,11 @@ image:
   alt: "Overhead view of business tools including a phone calculator, pricing formula document, and eyeglasses on a desk."
 coupangLinks:
   - title: "클린 코드"
-    url: "https://link.coupang.com/a/dJjVjr"
+    url: "https://link.coupang.com/a/fiIclPV2CO"
   - title: "러스트 프로그래밍"
-    url: "https://link.coupang.com/a/dJj7h9"
+    url: "https://link.coupang.com/a/fiIcwrUd8m"
   - title: "혼자 공부하는 파이썬"
-    url: "https://link.coupang.com/a/dJjZFZ"
+    url: "https://link.coupang.com/a/fiIcoAaGPY"
 faq:
   - q: "개발을 시작하려면 최소 얼마를 투자해야 하나요?"
     a: "개발 시작에는 0원이 필요합니다. VS Code, Git, Python, Docker 모두 무료이며, 클라우드도 AWS/Google Cloud 무료 크레딧으로 시작할 수 있습니다. 프로덕션 배포 후 트래픽이 발생할 때 비용이 생깁니다."
@@ -29,6 +29,16 @@ faq:
 새로운 개발 프로젝트를 시작할 때 가장 먼저 마주치는 질문은 "개발 환경을 세팅하는데 얼마가 필요한가?"입니다. 2026년 현재, 개발 환경 구축의 비용은 **완전히 무료에서부터 월 수천 달러대까지** 다양합니다. 이 글에서는 실제 개발자들이 투자하는 비용과 현명한 선택 방법을 구체적으로 분석합니다.
 
 개발 환경 세팅 비용은 단순히 소프트웨어 구매가가 아닙니다. **하드웨어, 클라우드 서비스, 개발 도구, 학습 자료** 등 여러 항목이 복합적으로 작용합니다. 프로젝트 규모, 팀 구성, 배포 환경에 따라 비용이 극명하게 달라집니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclPV2CO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">클린 코드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 개발 환경 세팅 4가지 레벨별 비용 분석
 
@@ -229,6 +239,16 @@ A: 개발/테스트 환경은 온디맨드, 프로덕션은 예약 인스턴스�
 - [클라우드 비용 비교 분석 (DigitalOcean vs AWS)](https://www.digitalocean.com/pricing)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwrUd8m" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">러스트 프로그래밍</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

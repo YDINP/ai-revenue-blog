@@ -10,11 +10,11 @@ image:
   alt: "A variety of game controllers and a keyboard arranged on a white textured surface, offering a minimalist gaming setup."
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/dJj8Bn"
+    url: "https://link.coupang.com/a/fiIcubbf9E"
   - title: "로지텍 G Pro X 게이밍 마우스"
-    url: "https://link.coupang.com/a/dJj6m6"
+    url: "https://link.coupang.com/a/fiIcrna9p6"
 faq:
   - q: "Unity Asset Store 에셋을 구매하면 게임을 상용화할 수 있나요?"
     a: "대부분의 에셋은 개인 게임과 상용 게임 모두에서 사용 가능합니다. 다만 일부 에셋은 라이선스에 제한이 있을 수 있으므로, 구매 전 라이선스 페이지를 반드시 확인하세요. Epic Marketplace도 마찬가지로 명확한 상용화 권한을 제공합니다."
@@ -31,6 +31,16 @@ faq:
 2026년 현재, 게임 에셋 시장은 더욱 다양해졌습니다. 단순히 "어느 스토어가 더 저렴한가"를 비교하는 수준을 넘어, **실제 개발 프로젝트에서 얼마나 빠르게 통합할 수 있는가**, **사후 지원은 충분한가**, **라이선스 갱신 비용은 얼마나 드는가** 같은 실무 관점의 비교가 필요합니다.
 
 이 글에서는 각 에셋 스토어의 특징을 깊이 있게 분석하고, 개발자 유형별로 최적의 선택지를 제시하겠습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 주요 게임 에셋 스토어 3곳의 구조 비교
 
@@ -153,6 +163,16 @@ Unity와 Unreal 양쪽 엔진 모두 지원하는 에셋(3D 모델, 사운드 �
 - [Godot Engine 공식 문서](https://docs.godotengine.org/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcubbf9E" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">유니티 교과서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

@@ -10,9 +10,9 @@ image:
   alt: "Close-up of a red Nintendo Game Boy Color on a dark backdrop, showcasing retro gaming nostalgia."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/dJj8Bn"
+    url: "https://link.coupang.com/a/fiIcubbf9E"
 faq:
   - q: "PixiJS와 Phaser.js 중 뭘 선택해야 하나요?"
     a: "순수 렌더링 성능을 최우선으로 한다면 PixiJS, 완전한 게임 프레임워크(물리, 입력, 사운드 등)가 필요하면 Phaser.js를 추천합니다. PixiJS는 더 빠르지만 추가 라이브러리 연동이 필요합니다."
@@ -41,6 +41,16 @@ Texture Atlas, Spritesheets, 애니메이션 프레임워크를 내장하고 있
 
 **4. 풍부한 필터 및 효과**
 블러, 색상 변환, 왜곡 효과 등을 GPU에서 직접 처리하므로 성능 저하가 적습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## PixiJS vs 다른 2D 게임 엔진: 성능 비교
 
@@ -201,6 +211,16 @@ PixiJS의 강점을 최대한 활용하면 **개발 기간 30% 단축**과 **게
 - [Web Game Development with JavaScript - MDN Web Docs](https://developer.mozilla.org/en-US/docs/Games)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcubbf9E" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">유니티 교과서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

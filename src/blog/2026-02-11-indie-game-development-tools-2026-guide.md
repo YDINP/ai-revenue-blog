@@ -10,11 +10,11 @@ image:
   alt: "Focused gamer with headset playing a video game on a desktop computer indoors."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/dJj8Bn"
+    url: "https://link.coupang.com/a/fiIcubbf9E"
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
 ---
 ## 2026년 인디 게임 개발 도구의 변화
 
@@ -25,6 +25,16 @@ coupangLinks:
 ### 인디 게임 개발 도구 선택의 중요성
 
 올바른 인디 게임 개발 도구 선택은 프로젝트의 성패를 좌우합니다. 팀 규모, 게임 장르, 기술 수준, 예산 등 여러 요소를 고려해야 합니다. 2026년 인디 게임 개발 도구는 더욱 접근성 좋아지면서도 전문성은 깊어졌습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 주요 게임 엔진 비교
 
@@ -138,6 +148,16 @@ Unity 에셋 스토어, Itch.io, Godot Asset Library 등에서 기존 에셋과 
 2026년 현재, 인디 게임 개발 도구의 진입장벽은 역사상 가장 낮습니다. 무료 게임 엔진, AI 기반 자동화, 클라우드 협업 기능 등이 모두 가능해졌습니다. 당신의 아이디어와 열정만 있다면, 누구나 성공적인 인디 게임을 만들 수 있습니다.
 
 최적의 인디 게임 개발 도구 선택은 당신의 목표와 현재 수준을 정직하게 평가한 후 이루어져야 합니다. Godot의 무료성, Unity의 안정성, Unreal Engine의 성능 중 어떤 것을 우선시할지 결정하고, 꾸준히 학습하며 발전해나가길 바랍니다. 당신의 게임 개발 여정이 성공적이기를 응원합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcubbf9E" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">유니티 교과서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

@@ -10,11 +10,11 @@ image:
   alt: "Close-up of HTML and JavaScript code on a computer screen in Visual Studio Code."
 coupangLinks:
   - title: "점프 투 파이썬"
-    url: "https://link.coupang.com/a/dJjZ7z"
+    url: "https://link.coupang.com/a/fiIcq7Gyf6"
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dJjX0Z"
+    url: "https://link.coupang.com/a/fiIcofAIH6"
   - title: "러스트 프로그래밍"
-    url: "https://link.coupang.com/a/dJj7h9"
+    url: "https://link.coupang.com/a/fiIcwrUd8m"
 faq:
   - q: "useMemo를 모든 값에 적용해야 하나요?"
     a: "아닙니다. 복잡한 계산이나 자식 컴포넌트의 리렌더링을 방지할 때만 사용하세요. 간단한 원시값은 메모이제이션 오버헤드가 더 크므로 피하는 것이 좋습니다. React 19 Compiler는 이를 자동 최적화하려고 노력합니다."
@@ -31,6 +31,16 @@ faq:
 2026년 웹 개발 환경에서 React는 여전히 주요 프론트엔드 프레임워크로 자리잡고 있습니다. 다만 단순히 React를 사용하는 것만으로는 부족합니다. **사용자 경험을 결정하는 핵심은 성능**입니다. Google의 Web Vitals에 따르면, 페이지 로딩 속도가 1초 늘어날 때마다 전환율이 7% 하락합니다.
 
 React 애플리케이션에서 흔히 발생하는 불필요한 리렌더링, 번들 크기 증가, 메모리 누수는 사용자의 인식 성능을 크게 저하시킵니다. 이번 글에서는 실무에서 즉시 적용 가능한 **5가지 React 성능 최적화 기법**을 단계별로 소개하겠습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcq7Gyf6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">점프 투 파이썬</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 1. 메모이제이션으로 불필요한 리렌더링 차단
 
@@ -254,6 +264,16 @@ React 성능 최적화는 **일회성이 아닌 지속적 과정**입니다. 202
 - [React Window - Virtual Scrolling 라이브러리](https://github.com/bvaughn/react-window)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">모던 자바스크립트 Deep Dive</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

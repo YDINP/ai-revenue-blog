@@ -10,15 +10,25 @@ image:
   alt: "회색 배경 위의 고성능 NVMe SSD 두 개"
 coupangLinks:
   - title: "삼성 SSD 980 PRO 1TB"
-    url: "https://link.coupang.com/a/dJjVJy"
+    url: "https://link.coupang.com/a/fiIclSP6sK"
   - title: "삼성 갤럭시북4 프로"
-    url: "https://link.coupang.com/a/dJjWzN"
+    url: "https://link.coupang.com/a/fiIclYnkHc"
 ---
 ## 개발자에게 SSD가 중요한 이유
 
 개발 작업은 **디스크 I/O 집약적**입니다. npm install, Docker 이미지 빌드, Git 작업, IDE 인덱싱, 컴파일 — 이 모든 작업이 스토리지 속도에 직접적인 영향을 받습니다.
 
 SSD를 HDD에서 NVMe SSD로 교체하면 빌드 시간이 **3~5배** 단축됩니다. 이미 NVMe SSD를 사용 중이더라도, 최신 세대로 업그레이드하면 체감 속도가 크게 개선됩니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclSP6sK" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">삼성 SSD 980 PRO 1TB</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## SSD 종류 이해하기
 
@@ -122,6 +132,16 @@ SSD 업그레이드는 **가장 체감이 큰 하드웨어 투자**입니다. 10
 - **대용량 필요**: SK하이닉스 P41 2TB
 
 개발 환경의 병목이 스토리지에 있다면, 지금이 업그레이드할 때입니다!
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclYnkHc" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">삼성 갤럭시북4 프로</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

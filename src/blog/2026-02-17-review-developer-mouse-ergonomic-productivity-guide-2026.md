@@ -10,9 +10,9 @@ image:
   alt: "Stylish home office workspace featuring keyboard, mouse, and potted plant under purple illumination."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
   - title: "삼성 뷰피니티 S8 32인치 4K"
-    url: "https://link.coupang.com/a/dJjYRb"
+    url: "https://link.coupang.com/a/fiIcokOP2O"
 faq:
   - q: "개발자에게 트랙볼 마우스는 정말 도움이 될까요?"
     a: "손목 건강 측면에서는 최고의 선택입니다. 마우스를 고정하고 손가락만으로 조작하기 때문에 손목 회전 스트레스가 거의 없습니다. 다만 IDE에서 코드 선택이나 드래그 작업이 많다면 초기 적응 기간(2~4주)을 견디기 어려울 수 있으니, 웹 개발자보다는 모니터링 작업이 많은 DevOps 엔지니어에게 더 추천합니다."
@@ -37,6 +37,16 @@ faq:
 - **쉬지 않는 업무**: 티타임 제외 거의 7~8시간을 마우스로 작업하는 경우가 많아 CTS(손목굴증후군) 위험이 높습니다.
 
 > 2025년 한 개발자 커뮤니티 설문에 따르면, 개발자 중 **72%가 손목 불편함을 경험**했으며, 그 원인의 58%가 부적절한 마우스 선택이었습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 개발자용 마우스의 3가지 타입 비교
 
@@ -231,6 +241,16 @@ IDE 단축키를 마우스 버튼에 할당할 수 있으면 작업 효율이 �
 - [SteelSeries Prime Wireless 배터리 성능 벤치마크](https://steelseries.com/gaming-mice/prime-wireless)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcokOP2O" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">삼성 뷰피니티 S8 32인치 4K</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

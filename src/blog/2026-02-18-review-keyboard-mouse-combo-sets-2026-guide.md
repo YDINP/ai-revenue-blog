@@ -10,9 +10,9 @@ image:
   alt: "A close-up of a colorful gaming mouse and illuminated RGB keyboard, perfect for tech setups."
 coupangLinks:
   - title: "ASUS ZenScreen MB16ACV"
-    url: "https://link.coupang.com/a/dJj9S4"
+    url: "https://link.coupang.com/a/fiIcrrP4uH"
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
 faq:
   - q: "키보드 마우스 세트가 개별 제품보다 나은 이유는?"
     a: "세트는 높이, 그립감, 소프트웨어가 조화를 이루도록 설계되어 있습니다. 특히 손목 각도와 배터리 교체 주기가 일관되므로 장시간 사용 시 피로도가 낮습니다. 또한 RGB 동기화와 멀티디바이스 전환이 통합되어 생산성이 향상됩니다."
@@ -54,6 +54,16 @@ faq:
 **5. 멀티디바이스 전환**
 - 개발자는 노트북과 데스크톱을 오가며 사용합니다
 - 두 기기 간 쉬운 전환이 가능한 세트를 선택하세요
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrrP4uH" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">ASUS ZenScreen MB16ACV</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 2026년 인기 키보드 마우스 세트 4가지 비교
 
@@ -194,6 +204,16 @@ Logitech MX Master 3S는 70일 지속력으로 거의 배터리 교체가 필요
 - [ASUS ROG 공식 사양 비교](https://www.asus.com/us/keyboards/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

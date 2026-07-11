@@ -10,11 +10,11 @@ image:
   alt: "Aerial shot of a modern workspace with a laptop, budget report, and eyeglasses on a desk."
 coupangLinks:
   - title: "키크론 K3 Pro"
-    url: "https://link.coupang.com/a/dJj42U"
+    url: "https://link.coupang.com/a/fiIcwB26Y8"
   - title: "LG 울트라와이드 34인치 모니터"
-    url: "https://link.coupang.com/a/dJjYpL"
+    url: "https://link.coupang.com/a/fiIcohvP5g"
   - title: "LG 그램 17"
-    url: "https://link.coupang.com/a/dJjWZQ"
+    url: "https://link.coupang.com/a/fiIcl4LfVs"
 faq:
   - q: "2026년 가성비 노트북을 선택할 때 가장 중요한 기준은 무엇인가요?"
     a: "용도에 맞는 성능 선택이 핵심입니다. 웹 브라우징과 문서 작업이면 Core Ultra 5, 개발이나 멀티태스킹이면 Core Ultra 7 이상을 권장합니다. 가격과 성능 균형을 맞춘 후 화면 크기, 무게, 배터리 지속시간을 고려하세요. 직접 만져보고 키보드 감촉을 확인하는 것도 중요합니다."
@@ -33,6 +33,16 @@ faq:
 2026년 노트북 시장은 **AI 성능과 배터리 효율**을 중심으로 재편되었습니다. 과거 고성능 CPU만 강조되던 시대에서 벗어나 **일상 작업의 반응성**, **멀티태스킹 안정성**, **에너지 효율**이 동시에 중요해졌습니다.
 
 특히 가성비를 따질 때는 단순 스펙이 아닌 **실제 사용 환경에서의 만족도**를 기준으로 봐야 합니다. 같은 가격대에서도 화면 품질, 키보드 감촉, 냉각 효율 등이 일상 경험에 미치는 영향이 큽니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwB26Y8" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">키크론 K3 Pro</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 가성비 노트북 TOP 5 종합 비교
 
@@ -176,6 +186,16 @@ ThinkPad 시리즈는 **업무용 노트북의 표준**으로 평가받습니다
 - [LPDDR5X 메모리 기술 백서](https://www.jedec.org/standards-documents/results/jesd209-5)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcohvP5g" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">LG 울트라와이드 34인치 모니터</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

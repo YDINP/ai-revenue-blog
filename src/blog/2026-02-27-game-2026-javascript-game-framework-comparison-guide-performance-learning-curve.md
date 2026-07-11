@@ -10,9 +10,9 @@ image:
   alt: "A detailed view of programming code displayed on a laptop screen, depicting a tech workspace."
 coupangLinks:
   - title: "로지텍 G Pro X 게이밍 마우스"
-    url: "https://link.coupang.com/a/dJj6m6"
+    url: "https://link.coupang.com/a/fiIcrna9p6"
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/dJj8Bn"
+    url: "https://link.coupang.com/a/fiIcubbf9E"
 faq:
   - q: "초보자라면 어떤 프레임워크부터 배워야 할까요?"
     a: "**Phaser 3**을 추천합니다. 학습 난이도가 가장 낮으면서도 실제 게임 개발에 필요한 모든 기능이 포함되어 있기 때문입니다. 한국어 자료도 풍부하고 커뮤니티 지원이 가장 활발합니다."
@@ -29,6 +29,16 @@ faq:
 웹 기술의 발전으로 브라우저에서 고성능 게임을 개발할 수 있는 시대가 왔습니다. 하지만 **JavaScript 게임 프레임워크 시장은 선택지가 많아져서 초보자들이 혼란을 겪는 경우가 많습니다**. 이 글에서는 실제 게임 개발자들이 가장 많이 사용하는 5가지 프레임워크를 성능, 학습곡선, 커뮤니티 지원을 기준으로 비교하겠습니다.
 
 2026년 기준으로 각 프레임워크의 최신 버전과 실제 개발 사례를 바탕으로 분석했으므로, 당신의 프로젝트 규모와 목표에 맞는 최적의 도구를 선택할 수 있을 것입니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrna9p6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 G Pro X 게이밍 마우스</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 주요 JavaScript 게임 프레임워크 5가지 비교
 
@@ -163,6 +173,16 @@ WebGL 2.0이 표준화되고 있으며, 브라우저 성능이 지속적으로 �
 - [PlayCanvas 공식 플랫폼](https://playcanvas.com/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcubbf9E" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">유니티 교과서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

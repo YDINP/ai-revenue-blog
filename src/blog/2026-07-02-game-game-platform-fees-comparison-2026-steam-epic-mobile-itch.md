@@ -10,9 +10,9 @@ image:
   alt: "달러 지폐 위에 놓인 계산기"
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
   - title: "돈의 심리학"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcwI0etw"
 faq:
   - q: "인디 개발자에게 가장 수수료가 낮은 플랫폼은?"
     a: "명목 수수료만 보면 itch.io(기본 10%, 조정 가능)와 에픽(12%)이 가장 낮다. 다만 트래픽이 적어 실매출은 스팀이 더 큰 경우가 많다."
@@ -27,6 +27,16 @@ faq:
 인디 개발자가 흔히 놓치는 사실 하나. **게임의 매출과 실제로 통장에 들어오는 돈은 다르다.** 플랫폼은 결제 수수료 명목으로 매출의 상당 부분을 가져간다. [2026년 인디게임 수익화 현실](/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/)에서 다룬 대로 플랫폼 의존도는 생존의 위험요소이자, 동시에 **수익률을 좌우하는 결정 변수**다.
 
 이 글은 2026년 기준 주요 게임 플랫폼의 수수료 구조를 정확히 비교한다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 한눈에 보는 플랫폼별 수수료
 
@@ -80,6 +90,16 @@ faq:
 - [Epic Games Store 배포 정책](https://dev.epicgames.com/en-US/store)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwI0etw" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">돈의 심리학</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

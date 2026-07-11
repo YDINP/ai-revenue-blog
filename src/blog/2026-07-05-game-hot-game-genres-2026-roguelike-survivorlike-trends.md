@@ -10,9 +10,9 @@ image:
   alt: "화려한 네온 불빛의 빈티지 아케이드 게임기"
 coupangLinks:
   - title: "게임 기획자의 생각법"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcwVuAcm"
   - title: "게임, 이렇게 만들어야 팔린다"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcwK6Lnw"
 faq:
   - q: "1인 개발자에게 가장 효율적인 장르는?"
     a: "로그라이크(로그라이트)류가 대표적이다. 랜덤성과 빌드 조합으로 적은 콘텐츠로도 높은 리플레이성을 확보할 수 있어 리소스가 한정된 개인에게 유리하다."
@@ -27,6 +27,16 @@ faq:
 [인디게임 수익 모델 완벽 정리](/blog/2026-07-03-game-indie-game-revenue-models-2026-premium-f2p-subscription/)에서 '장르가 수익 모델을 결정한다'고 했다. 그렇다면 2026년 인디가 승부를 걸 만한 장르는 무엇일까? [수익화 현실](/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/)에서 강조한 '니치 공략'과 맞물려, **어떤 장르 문법 위에서 차별화하느냐**가 성패를 가른다.
 
 이 글은 2026년 스팀에서 실제로 통하고 있는 인디 장르 트렌드를 정리한다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwVuAcm" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 기획자의 생각법</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 로그라이크: 여전히 왕좌
 
@@ -71,6 +81,16 @@ faq:
 - [Best Indie Games 2026 - GAMES.GG](https://games.gg/genres/indie/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwK6Lnw" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임, 이렇게 만들어야 팔린다</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

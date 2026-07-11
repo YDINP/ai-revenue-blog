@@ -10,9 +10,9 @@ image:
   alt: "노트북으로 작업에 집중하는 개발자"
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
   - title: "딥 워크"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcwOO3P2"
 faq:
   - q: "1인 개발로 첫 게임을 얼마나 크게 만들어야 하나?"
     a: "작을수록 좋다. 3~6개월 안에 완성 가능한 범위를 권장한다. 첫 게임의 목표는 큰 수익이 아니라 '출시까지 완주하는 경험'이다."
@@ -27,6 +27,16 @@ faq:
 1인 게임 개발은 낭만적으로 그려지지만, 현실은 **프로그래머·아티스트·기획자·마케터·CS를 한 사람이 동시에 하는 일**이다. [2026년 인디게임 수익화 현실](/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/)에서 새 인디팀의 성공 확률이 2~5%라고 했는데, 1인 개발은 그 확률 싸움을 홀로 감당한다는 뜻이다.
 
 이 글은 통계나 성공담이 아니라, **지속 가능하게 살아남기 위한 비용·시간·멘탈 관리**에 초점을 맞춘다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 1인 개발자의 시간은 어디로 가는가
 
@@ -78,6 +88,16 @@ faq:
 - [GDC Vault - 솔로 개발 & 번아웃 세션](https://www.gdcvault.com/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwOO3P2" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">딥 워크</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

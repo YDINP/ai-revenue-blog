@@ -10,15 +10,25 @@ image:
   alt: "Scrabble tiles spelling CHATGPT on wooden surface emphasizing AI language models"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dJjUsG"
+    url: "https://link.coupang.com/a/fiIclVeeuO"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dJjUUj"
+    url: "https://link.coupang.com/a/fiIcbvsNz2"
 ---
 ## 2026년 2월, AI 코딩 어시스턴트 빅뱅
 
 2026년 2월은 AI 코딩 도구 역사에서 가장 격변의 시기입니다. **2월 5일 Anthropic의 Claude Opus 4.6**, **2월 12일 OpenAI의 GPT-5.3 Codex Spark**가 일주일 간격으로 출시되며 개발자들의 선택지가 근본적으로 바뀌었습니다.
 
 Codex Spark는 Cerebras 웨이퍼 스케일 엔진 위에서 초당 1,000+ 토큰을 생성하는 **속도의 혁명**을, Claude Opus 4.6은 SWE-bench Verified 80.8%를 기록하며 **정확도의 새 기준**을 제시합니다. 이 글에서는 실제 벤치마크 데이터를 기반으로 두 모델을 심층 비교합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">챗GPT 활용법 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 핵심 스펙 비교: 숫자로 보는 진실
 
@@ -183,6 +193,16 @@ AI 코딩 어시스턴트는 2026년 2월을 기점으로 **"자동완성 도구
 - 도구를 잘 활용하는 개발자가 **3~5배 생산적**인 시대
 
 어떤 도구를 선택하든, 중요한 것은 **"어떻게 활용하느냐"**입니다. 두 도구 모두 무료 체험이 가능하니 직접 비교해보시길 권장합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">아이패드 에어 M2</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

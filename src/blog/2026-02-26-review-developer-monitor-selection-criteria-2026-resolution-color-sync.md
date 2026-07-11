@@ -10,9 +10,9 @@ image:
   alt: "Flat lay of real estate brochures, checklists, and a calculator for home buying."
 coupangLinks:
   - title: "맥북 에어 M3"
-    url: "https://link.coupang.com/a/dJjWan"
+    url: "https://link.coupang.com/a/fiIcl1zAXs"
   - title: "삼성 갤럭시북4 프로"
-    url: "https://link.coupang.com/a/dJjWzN"
+    url: "https://link.coupang.com/a/fiIclYnkHc"
 faq:
   - q: "개발자 모니터는 27인치와 32인치 중 어느 것이 나을까요?"
     a: "27인치 QHD는 선명도와 가격을 모두 만족시키는 표준 선택입니다. 32인치 4K는 더 큰 화면을 원할 때 좋지만, 텍스트가 작아져 스케일링이 필요하고 가격도 더 비쌉니다. 책상 크기와 시력을 고려하여 선택하세요."
@@ -33,6 +33,16 @@ faq:
 **4K(3840×2160)** 모니터의 경우 텍스트가 작아져서 별도 스케일링 설정이 필요합니다. 일부 개발 도구(특히 구형 IDE)에서는 UI 렌더링이 부자연스러울 수 있습니다. 따라서 **27인치 QHD 또는 32인치 4K**가 현실적입니다.
 
 울트라와이드(34인치, 3440×1440)는 개인 선호도가 큰 부분입니다. 좌우 분할이 자유로워 멀티태스킹에 유리하지만, 가격이 높고 모니터 암에 무게 제약이 있습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcl1zAXs" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">맥북 에어 M3</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 색감 정확도: 웹 개발자에게 필수사항
 
@@ -117,6 +127,16 @@ faq:
 - [IPS vs VA vs TN 패널 기술 비교](https://www.techradar.com/monitors/ips-vs-va-vs-tn-which-panel-type-is-best-for-gaming)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclYnkHc" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">삼성 갤럭시북4 프로</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

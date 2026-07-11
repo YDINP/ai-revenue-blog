@@ -10,9 +10,9 @@ image:
   alt: "디지털 뉴럴 네트워크를 형상화한 3D 추상 이미지"
 coupangLinks:
   - title: "AI 2041"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcwR1j6i"
   - title: "슈퍼인텔리전스"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcy4CscC"
 faq:
   - q: "에이전틱 AI와 일반 AI 챗봇은 어떻게 다른가?"
     a: "챗봇은 질문에 답하는 '반응형'이지만, 에이전틱 AI는 목표를 부여받으면 계획 수립·도구 사용·결과 검증까지 스스로 진행하는 '행동형'이다. 사용자 개입 없이 여러 단계 작업을 완료할 수 있다는 점이 핵심 차이다."
@@ -29,6 +29,16 @@ faq:
 2026년 Gartner는 에이전틱 AI를 10대 전략 기술 트렌드 1위로 선정했다. Anthropic 연구에 따르면 2025년 말부터 기업 LLM 도입의 40% 이상이 에이전틱 워크플로우를 포함하는 형태로 전환됐다. 단순 챗봇 시대는 실질적으로 끝났다.
 
 핵심 구분점은 세 가지다. 첫째, **다단계 계획 수립** — 에이전트는 목표를 받으면 이를 순서 있는 하위 작업으로 분해한다. 둘째, **도구 사용** — 웹 검색, 코드 실행, 파일 읽기/쓰기, 외부 API 호출 등 실제 환경과 상호작용한다. 셋째, **자기 검증** — 결과가 목표에 맞는지 스스로 판단하고 루프를 반복한다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwR1j6i" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">AI 2041</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 에이전틱 AI는 어떻게 작동하는가: 계획→실행→검증 루프
 
@@ -93,6 +103,16 @@ faq:
 - Andreessen Horowitz, *2026 State of AI Report* — 엔터프라이즈 LLM 시장 점유율 분석
 - Anthropic, *Claude Agent Architecture Documentation* (2026) — 코딩·리서치 에이전트 구성 사례
 - Gartner, *Top 10 Strategic Technology Trends 2026* — 에이전틱 AI 1위 선정 보고서
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcy4CscC" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">슈퍼인텔리전스</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

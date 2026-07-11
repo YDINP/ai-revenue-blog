@@ -10,9 +10,9 @@ image:
   alt: "Top view of a black Acer keyboard and mouse set on a white background."
 coupangLinks:
   - title: "맥북 에어 M3"
-    url: "https://link.coupang.com/a/dJjWan"
+    url: "https://link.coupang.com/a/fiIcl1zAXs"
   - title: "로지텍 MX Keys S"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIcwykOwC"
 faq:
   - q: "무선 세트와 유선 세트, 어떤 게 더 나을까요?"
     a: "무선은 **자유도와 편의성**이 우수하고, 유선은 **지연 없음과 영구적 연결**을 보장합니다. 사무 업무는 지연이 거의 발생하지 않으므로 무선을 추천하며, 온라인 게이밍이나 영상 편집이 필요하면 유선이 낫습니다."
@@ -27,6 +27,16 @@ faq:
 사무실에서 하루 8시간 이상 업무를 처리하는 직장인이라면 **키보드와 마우스 선택**이 손목 건강과 생산성에 직결된다는 사실을 아실 겁니다. 2026년 현재, 개별 구매보다 **세트 상품**을 선택하는 추세가 강해지고 있는데, 이는 단순 가격 절감을 넘어 **인체공학적 조화**를 맞추기 위함입니다.
 
 기존의 [2026년 개발자용 키보드 추천 TOP 5](/blog/2026-02-25-review-keyboard-mouse-combo-productivity-sets-2026-top-5/) 포스트와 달리, 이 글은 **게이밍이나 코딩보다는 일반 사무 업무에 최적화된** 무선 세트에 초점을 맞추겠습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcl1zAXs" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">맥북 에어 M3</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 무선 키보드 마우스 세트가 필수인 이유
 
@@ -177,6 +187,16 @@ faq:
 - [OSHA - 컴퓨터 업무 손목 건강 기준](https://www.osha.gov/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwykOwC" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Keys S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

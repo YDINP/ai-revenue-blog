@@ -10,13 +10,23 @@ image:
   alt: "현대적인 데이터 센터의 네트워크 서버 랙 상세 보기, 기술 인프라 강조"
 coupangLinks:
   - title: "삼성 SSD 980 PRO 1TB"
-    url: "https://link.coupang.com/a/dJjVJy"
+    url: "https://link.coupang.com/a/fiIclSP6sK"
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dJjX0Z"
+    url: "https://link.coupang.com/a/fiIcofAIH6"
 ---
 ## Supabase란?
 
 Supabase는 Firebase의 오픈소스 대안으로, PostgreSQL 기반의 백엔드 서비스를 제공합니다. 인증, 데이터베이스, 스토리지, Edge Functions까지 올인원으로 제공하면서도 **무료 티어가 매우 넉넉**합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclSP6sK" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">삼성 SSD 980 PRO 1TB</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 무료 티어 한도 정리 (2026년 기준)
 
@@ -84,6 +94,16 @@ USING (auth.uid() = user_id);
 Supabase 무료 티어는 **MVP부터 소규모 프로덕션까지** 충분히 커버합니다. Firebase와 달리 벤더 락인 없이 PostgreSQL의 전체 기능을 사용할 수 있다는 것이 큰 장점입니다.
 
 개발 공부를 시작한다면, 체계적인 학습 자료와 함께 실습하는 것을 추천합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">모던 자바스크립트 Deep Dive</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

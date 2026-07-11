@@ -10,9 +10,9 @@ image:
   alt: "그래픽 태블릿으로 디지털 작업을 하는 사람"
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
   - title: "AI 2041"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcwR1j6i"
 faq:
   - q: "Scenario와 Midjourney의 차이는 무엇인가요?"
     a: 'Midjourney는 범용 고품질 이미지 생성에 강하고, Scenario는 게임 에셋 특화로 캐릭터·아이템의 스타일 일관성 유지에 최적화되어 있습니다.'
@@ -29,6 +29,16 @@ faq:
 2024년까지만 해도 게임 아트는 '외주 아니면 직접 그리기'의 이분법이었다. 지금은 AI 도구로 콘셉트 아트, UI 아이콘, 배경, 캐릭터 스프라이트 초안을 수 분 안에 생성한다. 비용 구조가 달라졌다. 월 정액 $20~30로 아티스트 외주비의 수십 분의 일에 해당하는 산출물을 낼 수 있다.
 
 단, 도구마다 게임 에셋에 대한 적합도 차이가 크다. 범용 이미지 생성기와 게임 특화 도구의 결과물 품질은 같은 프롬프트에서도 눈에 띄게 갈린다. [생성형 AI로 개발비 절감하기](/blog/2026-07-05-game-generative-ai-indie-game-development-2026-cost-cut-controversy/)에서 다룬 비용 구조 분석과 함께 읽으면 도구 선택 기준이 더 명확해진다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 주요 도구별 강점과 특성
 
@@ -81,6 +91,16 @@ AI 에셋 도구를 상업 프로젝트에 쓸 때 반드시 확인해야 할 �
 - [Scenario 공식 사이트](https://www.scenario.com/) — 게임 에셋 특화 AI 도구 공식 문서 및 플랜 정보
 - [Midjourney 공식 문서](https://docs.midjourney.com/) — 라이선스 정책 및 상업 이용 약관
 - [Game Developer — AI Art Tools 2026 Overview](https://www.gamedeveloper.com/) — 인디 개발자 대상 AI 에셋 도구 현황 분석
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwR1j6i" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">AI 2041</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

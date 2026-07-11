@@ -10,11 +10,11 @@ image:
   alt: "A close-up of a colorful gaming mouse and illuminated RGB keyboard, perfect for tech setups."
 coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"
-    url: "https://link.coupang.com/a/dJjYpL"
+    url: "https://link.coupang.com/a/fiIcohvP5g"
   - title: "로지텍 MX Keys S"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIcwykOwC"
   - title: "LG 그램 17"
-    url: "https://link.coupang.com/a/dJjWZQ"
+    url: "https://link.coupang.com/a/fiIcl4LfVs"
 faq:
   - q: "키보드 마우스를 개별로 구매하는 것과 세트로 구매하는 것의 차이가 무엇인가요?"
     a: "세트 구매는 호환성이 이미 검증되어 있고, 디자인과 사용감이 통일되며, 가격도 개별 구매보다 10~20% 저렴합니다. 특히 무선 연결 동글이나 Bluetooth 페어링이 하나의 시스템으로 최적화되어 있어 초기 설정이 간단합니다."
@@ -29,6 +29,16 @@ faq:
 사무실에서 개인 프로젝트를 진행하거나 재택근무로 장시간 업무하는 직장인과 프리랜서라면, **키보드와 마우스를 따로 고르는 것보다 세트 구매가 더 효율적**입니다. 호환성이 검증되었고, 디자인과 사용감이 통일되며, 가격도 개별 구매보다 저렴하기 때문입니다.
 
 2026년 현재, 시중에 나와 있는 세트 제품들 중 **생산성 향상에 실질적으로 도움이 되는 조합 5가지**를 실제 사양과 사용자 피드백을 토대로 비교했습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcohvP5g" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">LG 울트라와이드 34인치 모니터</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 키보드 마우스 세트 TOP 5
 
@@ -151,6 +161,16 @@ faq:
 - [안커 공식 제품 가이드](https://www.anker.com/products/keyboard-mouse-combo)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwykOwC" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Keys S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

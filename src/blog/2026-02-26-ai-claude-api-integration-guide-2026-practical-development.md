@@ -10,9 +10,9 @@ image:
   alt: "A robotic arm carefully pouring ingredients into a mixing bowl in a modern kitchen setting."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIcrdKjAG"
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dJjUsG"
+    url: "https://link.coupang.com/a/fiIclVeeuO"
 faq:
   - q: "Claude API 무료로 사용할 수 있나요?"
     a: "네, 처음 가입 시 $5 크레딧을 제공합니다. 이를 통해 충분한 테스트가 가능합니다. 이후에는 사용량에 따라 결제하며, 월 $1 이상 사용하면 혜택을 받을 수 있습니다."
@@ -66,6 +66,16 @@ message = client.messages.create(
 )
 print(message.content[0].text)
 ```
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrdKjAG" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Keys S 키보드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 실전 기법: 토큰 관리와 비용 최적화
 
@@ -299,6 +309,16 @@ Claude API는 **최고의 성능을 제공하되, 비용 최적화**를 함께 �
 - [Claude 벤치마크 결과](https://www.anthropic.com/research/claude-3-family)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">챗GPT 활용법 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

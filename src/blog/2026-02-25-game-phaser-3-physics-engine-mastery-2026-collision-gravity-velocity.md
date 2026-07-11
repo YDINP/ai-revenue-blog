@@ -10,11 +10,11 @@ image:
   alt: "A Muslim woman in a hijab applies makeup for a tutorial indoors."
 coupangLinks:
   - title: "로지텍 G Pro X 게이밍 마우스"
-    url: "https://link.coupang.com/a/dJj6m6"
+    url: "https://link.coupang.com/a/fiIcrna9p6"
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/dJj8Bn"
+    url: "https://link.coupang.com/a/fiIcubbf9E"
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
 faq:
   - q: "Phaser 3의 Arcade 물리 엔진은 모바일에서도 잘 작동하나요?"
     a: "네, Arcade는 모바일 최적화가 잘 되어 있습니다. Matter.js보다 계산 부하가 적어서 저사양 기기에서도 60fps를 유지할 가능성이 높습니다. 다만 충돌 객체 수가 100개를 초과하면 성능 테스트를 권장합니다."
@@ -29,6 +29,16 @@ faq:
 Phaser 3는 웹 게임 개발을 위한 가장 인기 있는 자바스크립트 프레임워크로, **두 가지 강력한 물리 엔진**을 기본으로 제공합니다. 바로 **Arcade Physics**와 **Matter.js**입니다. 이 중 Arcade는 간단하고 빠른 2D 게임에 최적화되어 있으며, 대부분의 인디 개발자들이 선택하는 엔진입니다.
 
 2D 게임에서 리얼한 움직임과 상호작용을 표현하려면 물리 엔진의 이해가 필수입니다. 캐릭터가 떨어지고, 벽에 부딪히고, 아이템을 집는 모든 동작이 물리 엔진을 통해 구현되기 때문입니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrna9p6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 G Pro X 게이밍 마우스</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## Phaser 3 Arcade 물리 엔진의 핵심 개념
 
@@ -234,6 +244,16 @@ Phaser 3는 **GitHub에서 약 37,000개의 스타**를 받았으며, 매월 활
 - [Matter.js 공식 사이트](https://brm.io/matter-js/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcubbf9E" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">유니티 교과서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

@@ -10,9 +10,9 @@ image:
   alt: "A person reads 'Python for Unix and Linux System Administration' indoors."
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dJjX0Z"
+    url: "https://link.coupang.com/a/fiIcofAIH6"
   - title: "클린 코드"
-    url: "https://link.coupang.com/a/dJjVjr"
+    url: "https://link.coupang.com/a/fiIclPV2CO"
 faq:
   - q: "비동기(asyncio)와 멀티프로세싱(multiprocessing)의 차이는 무엇인가요?"
     a: "asyncio는 단일 프로세스 내에서 여러 I/O 작업(네트워크, 파일)을 번갈아 처리하는 방식으로, CPU 바운드 작업에는 부적합합니다. 반면 multiprocessing은 여러 프로세스를 실제로 병렬 실행하므로 데이터 변환 같은 CPU 집약적 작업에 효과적입니다. 외부 API 호출은 asyncio, 대용량 데이터 처리는 multiprocessing을 선택하세요."
@@ -40,6 +40,16 @@ faq:
 더 자세한 자동화 기초는 [Python 자동화 입문: 반복 업무를 코드로 해결하는 5가지 실전 예제](/blog/2026-02-06-python-automation-beginners-guide/)를 참고하면, 이 글과의 연계학습이 가능합니다.
 
 <div class="chart-bar" data-title="2026년 기업 자동화 투자 영역별 비중" data-labels="API 통합,데이터 파이프라인,RPA,모니터링,기타" data-values="28,24,22,18,8" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="%"></div>
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">모던 자바스크립트 Deep Dive</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 1. 비동기 작업 처리와 asyncio 고도화
 
@@ -487,6 +497,16 @@ print(f"예상 순차 처리 시간: {parallel_time * 4:.2f}초 (4코어 기준)
 - [Python multiprocessing 공식 문서](https://docs.python.org/3/library/multiprocessing.html)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclPV2CO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">클린 코드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

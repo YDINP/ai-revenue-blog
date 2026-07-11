@@ -10,15 +10,25 @@ image:
   alt: "생동감 있는 AI 생성 디자인 요소를 보여주는 화려한 추상 예술 작품"
 coupangLinks:
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dJjUUj"
+    url: "https://link.coupang.com/a/fiIcbvsNz2"
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dJjUsG"
+    url: "https://link.coupang.com/a/fiIclVeeuO"
 ---
 ## AI가 그림을 그리는 시대
 
 2026년, AI 이미지 생성 기술은 상상 이상으로 발전했습니다. 텍스트 한 줄만 입력하면 전문 디자이너 수준의 이미지를 몇 초 만에 만들어냅니다. 블로그 썸네일, 소셜 미디어 콘텐츠, 제품 목업까지 — **AI 이미지 생성** 도구는 이제 크리에이터의 필수 도구가 되었습니다.
 
 하지만 도구마다 스타일, 가격, 사용성이 크게 다릅니다. 이 글에서는 2026년 가장 인기 있는 **AI 이미지 생성 도구** 5가지를 실제 사용 경험을 바탕으로 비교합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">아이패드 에어 M2</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## AI 이미지 생성 도구 한눈에 비교
 
@@ -152,6 +162,16 @@ Ideogram은 **이미지 안에 텍스트를 정확하게 넣는** 능력이 뛰�
 **개발자/DIY 성향**이라면 **Stable Diffusion**의 무한한 가능성을 탐험해보세요.
 
 AI 이미지 생성 기술은 계속 발전하고 있습니다. 지금 시작해서 자신만의 워크플로우를 만들어보는 것을 추천합니다!
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">챗GPT 활용법 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

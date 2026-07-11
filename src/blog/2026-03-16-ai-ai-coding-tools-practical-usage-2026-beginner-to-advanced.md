@@ -10,9 +10,9 @@ image:
   alt: "Close-up of AI-assisted coding with menu options for debugging and problem-solving."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIcrdKjAG"
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dJjUsG"
+    url: "https://link.coupang.com/a/fiIclVeeuO"
 faq:
   - q: "GitHub Copilot과 Cursor, 어떤 걸 먼저 시작해야 하나요?"
     a: "개인 개발자라면 GitHub Copilot($10/월)부터 시작하세요. 기본 사용법을 익힌 후 TypeScript/React에 깊이 들어가면 Cursor Pro($20/월)로 업그레이드하는 것을 추천합니다. 두 도구 모두 유료이지만, Copilot이 더 저렴하고 widely 사용되므로 먼저 경험하기에 좋습니다."
@@ -29,6 +29,16 @@ AI 코딩 어시스턴트는 이제 선택지가 아닙니다. 2026년 개발 �
 하지만 단순히 "AI가 코드를 자동 생성해주는 도구"라고 생각하면 제값을 못 받습니다. **각 도구의 강점을 파악하고, 프로젝트 특성에 맞게 조합해서 사용하는 능력**이 2026년 개발자의 핵심 경쟁력입니다.
 
 이 글에서는 이론이 아닌 **실제 프로젝트에서 검증된 5가지 실무 활용법**을 소개합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrdKjAG" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Keys S 키보드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 1. 언어별·프레임워크별 AI 도구 선택 기준
 
@@ -202,6 +212,16 @@ frontend 팀은 백엔드 완성 대기 없이 개발 시작
 - [Software Engineering Benchmark (SWE-bench)](https://www.swebench.com/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">챗GPT 활용법 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

@@ -10,13 +10,23 @@ image:
   alt: "Crop anonymous male using contemporary computer with big monitors and typing on backlit keyboard"
 coupangLinks:
   - title: "게임 프로그래밍 패턴 도서"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcrjUOCy"
   - title: "로지텍 G Pro X 게이밍 마우스"
-    url: "https://link.coupang.com/a/dJj6m6"
+    url: "https://link.coupang.com/a/fiIcrna9p6"
 ---
 ## 들어가며
 
 게임 개발을 시작하려는 분들이 가장 먼저 직면하는 질문은 "어떤 게임 엔진을 선택해야 할까?"입니다. 2026년 현재, 시장에는 다양한 특징을 가진 게임 엔진들이 경쟁하고 있습니다. 이 글에서는 가장 인기 있는 5가지 게임 엔진을 심층 비교하여 여러분의 프로젝트에 가장 적합한 선택을 도와드리겠습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrjUOCy" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## Unity: 가장 대중적인 선택
 
@@ -187,6 +197,16 @@ Cocos Creator는 중국에서 개발된 엔진으로, 특히 아시아 모바일
 **비용이 걱정된다면** Godot를 고려하세요. 로열티 걱정 없이 자유롭게 개발할 수 있습니다.
 
 어떤 엔진을 선택하든, 중요한 것은 꾸준히 프로젝트를 완성하는 것입니다. 완벽한 엔진을 찾는 것보다, 선택한 엔진을 깊이 있게 학습하는 것이 성공적인 게임 개발의 비결입니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrna9p6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 G Pro X 게이밍 마우스</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

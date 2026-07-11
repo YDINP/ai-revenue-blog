@@ -10,9 +10,9 @@ image:
   alt: "게임 스토어 화면이 표시된 휴대용 게임기"
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
 faq:
   - q: "스팀 출시 전 위시리스트는 몇 개가 적당한가?"
     a: "정답은 없지만, 업계에서는 출시 전 최소 7,000~1만 개 이상을 확보하면 '인기 예정작' 노출과 첫날 화력 면에서 유의미하다고 본다. 많을수록 좋고, 증가 속도(모멘텀)도 중요하다."
@@ -27,6 +27,16 @@ faq:
 많은 인디 개발자가 "게임만 완성하면 스팀에 올리기만 하면 된다"고 생각한다. 하지만 [2026년 인디게임 수익화 현실](/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/)에서 다뤘듯, 스팀에는 하루 70~80개의 신작이 쏟아지고 그중 대부분은 출시 첫 주에 발견조차 되지 못한다. **출시일은 마라톤의 결승선이 아니라, 최소 6개월 전부터 준비해야 하는 프로젝트의 정점**이다.
 
 이 글에서는 스팀 출시를 성공으로 이끄는 위시리스트 전략, 출시 타임라인, 그리고 첫날 매출을 좌우하는 핵심 지표를 실전 관점에서 정리한다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 위시리스트가 곧 화력이다
 
@@ -79,6 +89,16 @@ faq:
 - [Game Developer - 인디게임 출시 전략](https://www.gamedeveloper.com/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

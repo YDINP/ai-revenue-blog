@@ -10,15 +10,25 @@ image:
   alt: "모니터에 표시된 코드와 프로그래밍 화면"
 coupangLinks:
   - title: "AI 시대의 프로그래밍 도서"
-    url: "https://link.coupang.com/a/dJj823"
+    url: "https://link.coupang.com/a/fiIctVMQAS"
   - title: "개발자 모니터 LG 27인치"
-    url: "https://link.coupang.com/a/dJj9sM"
+    url: "https://link.coupang.com/a/fiIctYYvyS"
   - title: "로지텍 MX Keys 키보드"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIct042sS"
 ---
 ## AI가 코드를 쓰는 시대, 어떤 도구를 써야 할까?
 
 2026년, AI 코딩 어시스턴트는 선택이 아닌 **필수**가 되었습니다. 하지만 GitHub Copilot, Cursor, Windsurf 중 어떤 도구가 나에게 맞을까요? 각 도구를 실제로 사용하며 5가지 핵심 기준으로 비교해봤습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIctVMQAS" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">AI 시대의 프로그래밍 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 5가지 기준 종합 비교
 
@@ -90,6 +100,16 @@ Codeium 팀이 만든 Windsurf는 2025년 말 출시되어 빠르게 성장 중�
 3. **파워 유저라면** Cursor의 에이전트 기능이 생산성을 극대화합니다
 
 어떤 도구를 선택하든, AI 코딩 어시스턴트를 사용하지 않는 것은 2026년에 더 이상 옵션이 아닙니다. 지금 바로 무료 체험부터 시작해보세요.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIctYYvyS" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">개발자 모니터 LG 27인치</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

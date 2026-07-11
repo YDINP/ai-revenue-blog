@@ -10,9 +10,9 @@ image:
   alt: "분홍빛 조명 아래 놓인 무선 게임 컨트롤러"
 coupangLinks:
   - title: "게임, 이렇게 만들어야 팔린다"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcwK6Lnw"
   - title: "돈의 심리학"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcwI0etw"
 faq:
   - q: "1인 개발자에게 가장 무난한 모델은?"
     a: "대체로 프리미엄(정가 판매)이 안전하다. 라이브 운영 부담이 적고, 게임을 완결된 작품으로 설계할 수 있어 리소스가 한정된 개인에게 적합하다."
@@ -27,6 +27,16 @@ faq:
 수익 모델은 출시 직전에 붙이는 옵션이 아니다. **어떤 방식으로 돈을 벌지가 게임의 설계·콘텐츠·업데이트 주기 전체를 규정**한다. [2026년 인디게임 수익화 현실](/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/)에서 짚었듯, 성공한 인디는 단일 모델에 의존하지 않고 여러 수익 레이어를 조합한다.
 
 이 글은 네 가지 대표 수익 모델의 장단점과 장르별 적합도를 비교한다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwK6Lnw" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임, 이렇게 만들어야 팔린다</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 프리미엄 vs 부분유료: 정면 비교
 
@@ -72,6 +82,16 @@ faq:
 - [GDC Vault - 인디 비즈니스 모델 세션](https://www.gdcvault.com/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwI0etw" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">돈의 심리학</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

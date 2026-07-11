@@ -10,9 +10,9 @@ image:
   alt: "Illuminated 'Game Over' sign in pixel art style with neon green and white colors on a dark background."
 coupangLinks:
   - title: "게임 프로그래밍 패턴 도서"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcrjUOCy"
   - title: "로지텍 MX Master 3S 마우스"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrbxA5s"
 ---
 ## Godot는 왜 인디 개발자의 선택인가?
 
@@ -41,6 +41,16 @@ Godot Engine은 100% 무료 오픈소스 게임 엔진으로, 최근 인디 게�
 - Windows, Mac, Linux에서 개발 가능
 - PC, 모바일, 웹으로 배포
 - 한 번 작성으로 모든 플랫폼 지원
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrjUOCy" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## Godot 4.x의 새로운 기능
 
@@ -320,6 +330,16 @@ Godot는 자유를 원하는 인디 개발자에게 최고의 선택입니다. �
 Unity나 Unreal의 강력한 생태계가 부러울 수 있지만, Godot의 자유로움과 경량성은 그 이상의 가치를 제공합니다. 특히 2D 게임이나 중소 규모 3D 게임을 만든다면 Godot는 완벽한 도구입니다.
 
 오늘 Godot를 다운로드하고, 공식 튜토리얼 하나를 따라 해보세요. 놀라울 정도로 쉽고 빠르게 게임을 만들 수 있다는 것을 경험하게 될 것입니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrbxA5s" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S 마우스</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

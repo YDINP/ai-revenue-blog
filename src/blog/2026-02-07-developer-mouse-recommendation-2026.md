@@ -10,9 +10,9 @@ image:
   alt: "생동감 있는 노란색 배경 위의 측면 버튼이 있는 현대적인 무선 검은색 마우스"
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
   - title: "로지텍 MX Keys S 무선 키보드"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIconXWfc"
 ---
 ## 개발자에게 마우스가 중요한 이유
 
@@ -21,6 +21,16 @@ coupangLinks:
 잘못된 마우스 선택은 **손목 통증(손목터널증후군)**으로 이어질 수 있습니다. 반대로 좋은 마우스는 생산성을 눈에 띄게 향상시킵니다.
 
 이 글에서는 실제 개발 환경에서 테스트한 **개발자용 마우스 TOP 5**를 소개합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 개발자 마우스 선택 기준
 
@@ -124,6 +134,16 @@ coupangLinks:
 하나만 고르라면 **로지텍 MX Master 3S**입니다. 인체공학, 멀티디바이스, 스크롤 성능, 커스터마이징 모든 면에서 개발자의 니즈를 완벽히 충족합니다.
 
 마우스는 매일 수천 번 클릭하는 도구입니다. 좋은 마우스에 투자하는 것은 건강과 생산성에 대한 투자입니다!
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIconXWfc" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Keys S 무선 키보드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

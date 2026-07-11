@@ -10,9 +10,9 @@ image:
   alt: "마케팅이라는 단어를 나타내는 나무 글자 타일"
 coupangLinks:
   - title: "무기가 되는 스토리"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcwFwYns"
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
 faq:
   - q: "숏폼은 어떤 플랫폼부터 시작해야 하나?"
     a: "한 곳에 올린 영상을 틱톡·릴스·쇼츠에 동시 배포하는 것이 효율적이다. 초기에는 어디서 터질지 모르므로 3곳에 함께 올리고, 반응이 좋은 채널에 집중하는 방식이 좋다."
@@ -27,6 +27,16 @@ faq:
 인디 개발자에게 가장 큰 벽은 개발이 아니라 **'아무도 내 게임을 모른다'**는 현실이다. [2026년 인디게임 수익화 현실](/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/)에서 짚었듯 마케팅비가 개발비를 초과하는 시대지만, 자본이 없는 1인 개발자라면 **시간과 콘텐츠를 자본으로 환산**해야 한다. 다행히 인디게임 마케팅에는 돈 대신 손품으로 굴러가는 채널이 여럿 있다.
 
 이 글은 광고비 0원으로 스팀 위시리스트 1만 개를 목표로 하는 실전 채널 전략을 다룬다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwFwYns" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">무기가 되는 스토리</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 무료 채널별 유입 효과 한눈에 보기
 
@@ -83,6 +93,16 @@ faq:
 - [Game Developer - 인디 마케팅 전략](https://www.gamedeveloper.com/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

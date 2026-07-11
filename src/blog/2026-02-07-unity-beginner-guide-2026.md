@@ -10,9 +10,9 @@ image:
   alt: "A close-up view of modern GPU units, ideal for gaming and tech visuals."
 coupangLinks:
   - title: "유니티 교과서 도서"
-    url: "https://link.coupang.com/a/dJj8Bn"
+    url: "https://link.coupang.com/a/fiIcrpnRVk"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dJjUUj"
+    url: "https://link.coupang.com/a/fiIcbvsNz2"
 ---
 ## Unity가 인기 있는 이유
 
@@ -24,6 +24,16 @@ Unity를 선택해야 하는 이유는 명확합니다:
 - **에셋 스토어**: 수만 개의 유료/무료 에셋으로 개발 속도 가속화
 - **커뮤니티**: 방대한 튜토리얼, 포럼, Q&A 자료
 - **산업 표준**: 게임 회사 채용 시 Unity 경험 우대
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrpnRVk" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">유니티 교과서 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## Unity 설치하기
 
@@ -226,6 +236,16 @@ Unity는 게임 개발 입문자에게 최고의 선택입니다. 방대한 학�
 첫 게임을 완성하는 데 집중하세요. 완벽하지 않아도 괜찮습니다. 작은 프로젝트를 여러 개 완성하면서 실력을 쌓는 것이 가장 빠른 성장 방법입니다.
 
 오늘 Unity Hub를 설치하고, 공식 튜토리얼 하나를 따라 해보세요. 여러분의 게임 개발 여정이 시작됩니다!
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">아이패드 에어 M2</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

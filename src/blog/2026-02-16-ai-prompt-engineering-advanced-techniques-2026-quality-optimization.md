@@ -10,9 +10,9 @@ image:
   alt: "Wooden Scrabble tiles spelling 'Deepmind' and 'Gemini' on a wooden surface, a concept of AI and games."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIcrdKjAG"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dJjUUj"
+    url: "https://link.coupang.com/a/fiIcbvsNz2"
 faq:
   - q: "Chain-of-Thought 프롬프팅은 모든 작업에 적용되나요?"
     a: "아닙니다. 복잡한 추론(문제 해결, 분석, 코드 리뷰)에는 매우 효과적이지만, 간단한 분류나 나열 작업에는 오히려 토큰을 낭비합니다. 작업의 복잡도에 따라 선택하세요."
@@ -58,6 +58,16 @@ faq:
 4. 시간 복잡도가 O(n log n)인 이유 증명"
 
 CoT를 적용한 응답은 **평균 15~30% 정확도 향상**을 보여줍니다 (OpenAI 연구 기준).
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrdKjAG" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Keys S 키보드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 2. 역할 기반 프롬프팅(Role-Based Prompting): 컨텍스트 설정
 
@@ -192,6 +202,16 @@ GPT-4V, Claude 3.5 Vision 같은 멀티모달 AI는 텍스트 + 이미지를 동
 - [Prompt Engineering for Vision Models (OpenAI Blog)](https://openai.com/blog/gpt-4v-system-card/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">아이패드 에어 M2</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

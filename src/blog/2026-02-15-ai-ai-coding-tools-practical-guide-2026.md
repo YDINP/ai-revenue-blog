@@ -10,9 +10,9 @@ image:
   alt: "Close-up of AI-assisted coding with menu options for debugging and problem-solving."
 coupangLinks:
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dJjUUj"
+    url: "https://link.coupang.com/a/fiIcbvsNz2"
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dJjUsG"
+    url: "https://link.coupang.com/a/fiIclVeeuO"
 faq:
   - q: "AI 코딩 도구를 써도 버그가 많이 나오는 이유는?"
     a: "단순 자동완성 방식으로 사용하기 때문입니다. 기법 1의 '테스트 드리븐' 방식으로 변경하면 버그 발생률이 50% 감소합니다. 먼저 테스트 케이스를 작성하고, 그 테스트를 통과하는 코드를 AI에게 생성하도록 요청하세요."
@@ -29,6 +29,16 @@ faq:
 문제는 도구가 아닙니다. **사용 방식의 차이**입니다.
 
 이 글에서는 GitHub Copilot, Cursor, Claude Code 같은 주요 AI 코딩 도구를 **진짜 생산성을 높이는 방식**으로 활용하는 4가지 실전 기법을 공개합니다. 단순 자동완성 수준이 아닌, 실제 개발 속도를 2배 이상 높일 수 있는 방법들입니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">아이패드 에어 M2</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 실제 데이터로 본 AI 코딩 도구의 생산성 향상도
 
@@ -210,6 +220,16 @@ tree -I 'node_modules' > project_structure.txt
 - [2026 개발자 생산성 벤치마크 리포트 - Stack Overflow Developer Survey](https://survey.stackoverflow.co/2026)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">챗GPT 활용법 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

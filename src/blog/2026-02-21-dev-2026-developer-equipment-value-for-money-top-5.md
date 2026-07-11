@@ -10,9 +10,9 @@ image:
   alt: "A man sitting on a sofa, reviewing documents in a modern home workspace with a laptop."
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dJjX0Z"
+    url: "https://link.coupang.com/a/fiIcofAIH6"
   - title: "러스트 프로그래밍"
-    url: "https://link.coupang.com/a/dJj7h9"
+    url: "https://link.coupang.com/a/fiIcwrUd8m"
 faq:
   - q: "모니터 1개보다 2개 구입이 낫지 않을까요?"
     a: "34인치 울트라와이드 1개는 27인치 모니터 2개와 거의 동일한 작업 공간을 제공하면서 베젤이 없어 코딩 흐름을 끊지 않습니다. 가격도 2개 구입보다 20~30% 저렴하고 책상 공간도 절약됩니다. 다만 그래픽 디자인이 병행되면 2개 구입이 더 효율적입니다."
@@ -27,6 +27,16 @@ faq:
 개발자의 생산성은 코드 능력도 중요하지만, **올바른 개발 장비를 갖추는 것만으로도 효율성이 2배 이상 달라집니다**. 그러나 개발 장비 시장은 고가 제품이 대부분이라 진입장벽이 높다는 게 현실입니다. 이 글에서는 2026년 기준으로 **최고의 가성비를 자랑하는 개발자 필수 장비 5가지**를 엄선해 소개합니다.
 
 모니터, 키보드, 마우스부터 보조 장치까지—예산을 효율적으로 분배해 최적의 워크스테이션을 구축하는 전략을 알려드리겠습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">모던 자바스크립트 Deep Dive</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 1. 울트라와이드 모니터: ASUS ProArt PA348QV (가격: ₩580,000~650,000)
 
@@ -168,6 +178,16 @@ Samsung T7 Shield 특징:
 - [Amazon 개발자 장비 카테고리](https://www.amazon.com/s?k=developer+equipment)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwrUd8m" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">러스트 프로그래밍</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

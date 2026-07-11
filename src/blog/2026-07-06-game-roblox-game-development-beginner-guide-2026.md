@@ -10,9 +10,9 @@ image:
   alt: "형형색색 블록으로 노는 두 아이"
 coupangLinks:
   - title: "로블록스 게임 제작 무작정 따라하기"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcyXDOWy"
   - title: "돈의 심리학"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcwI0etw"
 faq:
   - q: "Roblox Studio는 무료인가?"
     a: "그렇다. Roblox Studio는 완전 무료로 제공된다. Roblox 계정만 만들면 Studio를 즉시 설치·사용할 수 있으며, 별도 구독료나 라이선스 비용이 없다."
@@ -27,6 +27,16 @@ faq:
 자신이 만든 게임으로 수익을 내고 싶지만 어디서부터 시작할지 막막하다면, 로블록스는 가장 현실적인 출발점 중 하나다. [2026년 인디게임 수익화 현실](/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/)에서 살펴봤듯, 1인 개발자가 처음부터 스팀으로 수익을 내기까지의 진입장벽은 매우 높다. 로블록스는 이 장벽을 상당 부분 낮춰준다.
 
 2026년 현재 로블록스의 월간 활성 이용자(MAU)는 3억 명을 넘어섰으며, 하루 평균 접속자도 수천만 명 수준이다(Roblox Corporation 공식 발표 기준). 10~20대 초반이 주 이용층이고, 유저가 직접 만든 '경험(Experience)'이 플랫폼의 핵심 콘텐츠다. 개발 도구인 **Roblox Studio**는 무료이고, 별도 서버 인프라 없이 로블록스 플랫폼 위에서 게임을 배포·운영할 수 있다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcyXDOWy" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로블록스 게임 제작 무작정 따라하기</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## Roblox Studio 시작하기
 
@@ -99,6 +109,16 @@ end)
 - [Roblox Creator Docs](https://create.roblox.com/docs) — Studio 공식 문서 및 Luau 레퍼런스
 - [Roblox Developer Forum](https://devforum.roblox.com) — 커뮤니티 Q&A 및 최신 업데이트 공지
 - [Roblox Developer Hub — DevEx 가이드](https://create.roblox.com/docs/production/earning-on-roblox) — DevEx 참여 조건·환전 절차 공식 안내
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwI0etw" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">돈의 심리학</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

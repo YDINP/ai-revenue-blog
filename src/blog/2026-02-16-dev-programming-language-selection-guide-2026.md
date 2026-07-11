@@ -10,9 +10,9 @@ image:
   alt: "A woman records a tech tutorial using her smartphone on a desk filled with electronics."
 coupangLinks:
   - title: "자바스크립트 완벽 가이드"
-    url: "https://link.coupang.com/a/dJjZe2"
+    url: "https://link.coupang.com/a/fiIcwvE5mu"
   - title: "점프 투 파이썬"
-    url: "https://link.coupang.com/a/dJjZ7z"
+    url: "https://link.coupang.com/a/fiIcq7Gyf6"
 faq:
   - q: "프로그래밍 초보자라면 Python과 JavaScript 중 뭘 먼저 배워야 하나요?"
     a: "목표에 따라 다릅니다. **웹 개발을 원한다면 JavaScript, 데이터 분석이나 AI를 배우고 싶다면 Python**을 선택하세요. 난이도만 고려하면 Python이 더 쉽지만, JavaScript는 브라우저에서 즉시 실행 결과를 볼 수 있어 초보자의 동기부여에 좋습니다."
@@ -31,6 +31,16 @@ faq:
 프로그래밍 언어는 단순한 도구가 아닙니다. 당신이 선택한 언어는 **배움의 난이도, 취업 시장에서의 경쟁력, 그리고 5년 후 커리어 방향**까지 결정하게 됩니다. 2026년의 개발 시장은 AI, 클라우드, 데이터 분석이 중심이 되면서 각 분야별로 요구되는 언어가 점점 특화되고 있습니다.
 
 예를 들어, 데이터 분석가를 목표로 한다면 Python이 필수이지만, 시스템 소프트웨어를 만들고 싶다면 Rust나 C++을 배워야 합니다. 따라서 **"입문하기 가장 쉬운 언어"와 "목표에 맞는 언어"를 구분**하는 것이 핵심입니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwvE5mu" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">자바스크립트 완벽 가이드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 초보자 입문 난이도별 비교
 
@@ -157,6 +167,16 @@ JavaScript 진영에서 TypeScript 도입률이 80%를 넘었고, Python 커뮤�
 
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcq7Gyf6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">점프 투 파이썬</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

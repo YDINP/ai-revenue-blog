@@ -10,15 +10,25 @@ image:
   alt: "노트북 키보드에서 타이핑하는 손의 클로즈업, Python 책이 보이며 코딩 진행 중"
 coupangLinks:
   - title: "혼자 공부하는 파이썬"
-    url: "https://link.coupang.com/a/dJjZFZ"
+    url: "https://link.coupang.com/a/fiIcoAaGPY"
   - title: "점프 투 파이썬"
-    url: "https://link.coupang.com/a/dJjZ7z"
+    url: "https://link.coupang.com/a/fiIcq7Gyf6"
 ---
 ## 왜 Python 자동화인가?
 
 매일 반복되는 파일 정리, 데이터 복사, 이메일 발송 같은 업무를 손으로 하고 계신가요? **Python 자동화**를 배우면 클릭 100번을 코드 10줄로 줄일 수 있습니다. Python은 배우기 쉬운 문법과 강력한 라이브러리 덕분에 비개발자도 **업무자동화**를 시작하기 좋은 언어입니다.
 
 이번 가이드에서는 실무에서 바로 쓸 수 있는 **파이썬 업무자동화** 예제 5가지를 단계별로 소개합니다. 모든 코드는 Windows 환경에서 테스트되었으며, Python 3.10 이상에서 동작합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcoAaGPY" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">혼자 공부하는 파이썬</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자동화 예제 비교표
 
@@ -223,6 +233,16 @@ Anaconda를 설치하면 Python + 주요 라이브러리가 한 번에 설치됩
 **Python 자동화**는 하루 30분을 절약해주는 작은 스크립트부터 시작됩니다. 처음엔 5줄짜리 파일명 변경 코드지만, 익숙해지면 복잡한 데이터 파이프라인도 구축할 수 있습니다. 이번 가이드의 5가지 예제를 직접 실행해보고, 여러분의 반복 업무에 맞게 수정해보세요. **파이썬 업무자동화**로 시간을 절약하고, 더 창의적인 일에 집중하시길 바랍니다.
 
 > 이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcq7Gyf6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">점프 투 파이썬</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

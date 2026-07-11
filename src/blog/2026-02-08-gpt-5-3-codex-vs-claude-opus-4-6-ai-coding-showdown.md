@@ -10,15 +10,25 @@ image:
   alt: "디버깅 및 문제 해결을 위한 메뉴 옵션이 있는 AI 보조 코딩 클로즈업"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dJjUsG"
+    url: "https://link.coupang.com/a/fiIclVeeuO"
   - title: "로지텍 MX Keys S 무선 키보드"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIconXWfc"
 ---
 ## 2월 5일, AI 역사상 가장 치열한 하루
 
 2026년 2월 5일, **OpenAI**와 **Anthropic**이 같은 날 차세대 AI 모델을 출시했습니다. OpenAI의 **GPT-5.3 Codex**와 Anthropic의 **Claude Opus 4.6** — 두 모델 모두 **에이전틱 코딩**에 초점을 맞추며, AI 개발 도구 시장의 패권을 놓고 치열한 경쟁을 벌이고 있습니다.
 
 이 글에서는 두 모델을 코딩 능력 중심으로 철저히 비교합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">챗GPT 활용법 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 스펙 비교: 한눈에 보기
 
@@ -158,6 +168,16 @@ Anthropic의 Constitutional AI 프레임워크를 기반으로, 보안 취약점
 | 멀티파일 동시 수정 | Claude Opus 4.6 |
 
 2026년 AI 코딩의 가장 현명한 전략은 **두 모델을 병행 사용**하는 것입니다. 작업의 성격에 따라 최적의 도구를 선택하세요. AI 경쟁이 치열해질수록 **개발자가 얻는 혜택**은 커집니다!
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIconXWfc" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Keys S 무선 키보드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

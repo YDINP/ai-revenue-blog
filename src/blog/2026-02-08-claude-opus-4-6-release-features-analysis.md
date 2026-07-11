@@ -10,15 +10,25 @@ image:
   alt: "눈으로 가득 찬 실루엣 머리와 함께 AI의 추상적인 일러스트, 관찰과 기술 상징"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dJjUsG"
+    url: "https://link.coupang.com/a/fiIclVeeuO"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dJjUUj"
+    url: "https://link.coupang.com/a/fiIcbvsNz2"
 ---
 ## Anthropic, Claude Opus 4.6 공식 출시
 
 2026년 2월 5일, Anthropic이 차세대 AI 모델 **Claude Opus 4.6**을 공식 출시했습니다. 이번 업데이트는 단순한 성능 향상을 넘어, AI가 **팀으로 일하는 시대**를 열었다는 평가를 받고 있습니다.
 
 가장 눈에 띄는 변화는 **100만 토큰 컨텍스트 윈도우**, **에이전트 팀(Agent Teams)** 기능, 그리고 **적응형 사고(Adaptive Thinking)**입니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">챗GPT 활용법 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 핵심 업데이트 요약
 
@@ -131,6 +141,16 @@ Claude Opus 4.6은 "AI 어시스턴트"에서 **"AI 동료"**로의 전환을 �
 2026년 AI 코딩의 핵심 키워드는 **"에이전틱(Agentic)"**입니다. AI가 단순히 코드를 제안하는 것이 아니라, 계획하고, 실행하고, 검증하는 전체 프로세스를 수행합니다.
 
 아직 Opus 4.6을 사용해보지 않았다면, 지금이 시작할 때입니다!
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">아이패드 에어 M2</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

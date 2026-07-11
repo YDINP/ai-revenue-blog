@@ -10,13 +10,23 @@ image:
   alt: "노트북 화면의 프로그래밍 코드와 개발 환경"
 coupangLinks:
   - title: "러스트 프로그래밍 도서"
-    url: "https://link.coupang.com/a/dJj7h9"
+    url: "https://link.coupang.com/a/fiIct4NkVo"
   - title: "개발자 노트북 맥북 프로"
-    url: "https://link.coupang.com/a/dJj7HT"
+    url: "https://link.coupang.com/a/fiIct7HZ3A"
 ---
 ## 백엔드 언어, 2026년에는 무엇을 써야 할까?
 
 프로젝트를 시작할 때 가장 먼저 하는 고민: **"어떤 언어로 백엔드를 만들까?"** 2026년 현재 가장 뜨거운 세 언어 — TypeScript(Node.js/Bun), Rust, Go를 실전 관점에서 비교합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIct4NkVo" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">러스트 프로그래밍 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 종합 점수 비교
 
@@ -102,6 +112,16 @@ Google이 만든 Go는 **심플함**이 최고의 무기입니다. 배우기 쉽
 - **빠르게 배우고 안정적이어야 한다면** → Go
 
 2026년에는 하나만 고집할 필요 없습니다. TypeScript로 프로토타입을 만들고, 병목 구간만 Rust나 Go로 최적화하는 **폴리글랏 접근**이 현실적인 최선입니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIct7HZ3A" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">개발자 노트북 맥북 프로</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

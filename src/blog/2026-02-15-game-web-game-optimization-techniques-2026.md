@@ -10,9 +10,9 @@ image:
   alt: "SEO spelled with Scrabble tiles on a black surface, representing search engine optimization concepts."
 coupangLinks:
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/dJj8Bn"
+    url: "https://link.coupang.com/a/fiIcubbf9E"
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
 faq:
   - q: "웹게임에서 프레임 드롭이 발생하는 주된 원인은?"
     a: "프레임 드롭은 주로 과도한 드로우콜, 메모리 누수로 인한 가비지 컬렉션 정지, 메인 스레드 블로킹 때문에 발생합니다. Chrome DevTools의 Performance 탭에서 병목 지점을 파악할 수 있습니다."
@@ -31,6 +31,16 @@ faq:
 웹게임은 브라우저 환경의 제약이 있기 때문에, 네이티브 게임보다 더 정교한 최적화 전략이 필요합니다. 프레임 드롭, 메모리 누수, 네트워크 지연 등의 문제를 사전에 해결해야 사용자 이탈을 줄이고 게임의 완성도를 높일 수 있습니다.
 
 > 구글의 웹 성능 가이드에 따르면, 로딩 시간이 1초 증가할 때마다 사용자 이탈률이 7% 증가합니다. 게임의 경우 이 수치가 더욱 심각합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcubbf9E" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">유니티 교과서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 1. 렌더링 최적화: GPU 가속과 배치 처리
 
@@ -270,6 +280,16 @@ class PerformanceMonitor {
 - [Canvas Optimization Guide](https://html5.rocks/en/tutorials/canvas/performance/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

@@ -10,9 +10,9 @@ image:
   alt: "소파에서 함께 비디오 게임을 즐기는 두 아이"
 coupangLinks:
   - title: "로블록스 게임 제작 무작정 따라하기"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcyXDOWy"
   - title: "돈의 심리학"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcwI0etw"
 faq:
   - q: "로블록스에서 크리에이터는 실제로 얼마를 가져가나?"
     a: "판매액의 약 30% 수준으로 알려져 있으나, 로벅스 환전(DevEx)과 플랫폼 수수료를 거치면서 실수령액은 달라진다. 인기 경험은 게임패스·인게임 구매로 반복 수익을 낸다."
@@ -27,6 +27,16 @@ faq:
 인디 개발자의 수익화라고 하면 대부분 [스팀 출시](/blog/2026-06-30-game-indie-game-steam-launch-guide-2026-wishlist-to-launch/)를 떠올린다. 하지만 2026년 가장 빠르게 성장하는 게임 수익 시장은 스팀 밖에 있다. 바로 **UGC(User-Generated Content) 크리에이터 이코노미**다. 이미 만들어진 거대한 플랫폼 위에서 콘텐츠를 만들어 수익을 나눠 갖는 모델이다.
 
 규모를 보면 무시할 수 없다. **로블록스와 포트나이트가 크리에이터에게 지급한 금액은 2025년 기준 15억 달러를 넘어섰다.** 이 글은 UGC 이코노미의 실제 구조와, 인디 개발자가 진입할 때의 기회·함정을 정리한다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcyXDOWy" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로블록스 게임 제작 무작정 따라하기</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 숫자로 보는 UGC 이코노미
 
@@ -68,6 +78,16 @@ UGC 이코노미는 '스팀의 대체재'가 아니라 **'또 하나의 채널'*
 - [The Roblox Creator Economy - Gaming Endsights](https://endsights.com/roblox-creator-economy)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwI0etw" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">돈의 심리학</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

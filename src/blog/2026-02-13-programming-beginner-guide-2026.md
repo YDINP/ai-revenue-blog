@@ -10,15 +10,25 @@ image:
   alt: "A woman records a tech tutorial using her smartphone on a desk filled with electronics."
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dJjX0Z"
+    url: "https://link.coupang.com/a/fiIcofAIH6"
   - title: "점프 투 파이썬"
-    url: "https://link.coupang.com/a/dJjZ7z"
+    url: "https://link.coupang.com/a/fiIcq7Gyf6"
   - title: "러스트 프로그래밍"
-    url: "https://link.coupang.com/a/dJj7h9"
+    url: "https://link.coupang.com/a/fiIcwrUd8m"
 ---
 ## 프로그래밍 입문, 어렵지 않습니다
 
 프로그래밍 입문은 많은 사람들이 두려워하는 도전이지만, 올바른 방향과 전략이 있다면 누구든 성공할 수 있습니다. 2026년은 AI와 자동화 도구의 발전으로 초보자들이 프로그래밍을 배우기 가장 좋은 시점입니다. 이 가이드는 프로그래밍 입문을 고민하는 분들을 위해 실제로 필요한 정보들을 정리했습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">모던 자바스크립트 Deep Dive</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 프로그래밍 입문 언어 선택하기
 
@@ -116,6 +126,16 @@ Stack Overflow, Reddit, 한국 개발자 커뮤니티 등에 참여하면서 질
 프로그래밍 입문은 생각보다 어렵지 않습니다. 2026년은 AI 도구의 도움과 풍부한 학습 자원이 있어 시작하기 가장 좋은 시점입니다. 중요한 것은 지금 시작하고, 꾸준히 학습하며, 작은 성과에 만족하지 않고 지속적으로 성장하는 것입니다.
 
 프로그래밍 입문을 위한 당신의 첫 번째 작은 프로그램은 무엇이 될까요? 오늘 바로 시작해보세요!
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcq7Gyf6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">점프 투 파이썬</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

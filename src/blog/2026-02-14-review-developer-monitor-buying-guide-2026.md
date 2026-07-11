@@ -10,11 +10,11 @@ image:
   alt: "Flat lay of real estate brochures, checklists, and a calculator for home buying."
 coupangLinks:
   - title: "ASUS ZenScreen MB16ACV"
-    url: "https://link.coupang.com/a/dJj9S4"
+    url: "https://link.coupang.com/a/fiIcrrP4uH"
   - title: "삼성 뷰피니티 S8 32인치 4K"
-    url: "https://link.coupang.com/a/dJjYRb"
+    url: "https://link.coupang.com/a/fiIcokOP2O"
   - title: "LG 그램 17"
-    url: "https://link.coupang.com/a/dJjWZQ"
+    url: "https://link.coupang.com/a/fiIcl4LfVs"
 faq:
   - q: "개발자는 정말 색정확도 좋은 모니터가 필요한가요?"
     a: "웹 개발만 한다면 일반 모니터도 괜찮지만, UI/UX 작업이나 영상·이미지 편집을 병행한다면 sRGB 95% 이상은 필수입니다. 특히 클라이언트에게 전달할 색감이 정확해야 할 때 차이가 명확합니다."
@@ -52,6 +52,16 @@ faq:
 목과 허리 건강을 위해서는 필수적입니다. 최소 높이 조정만 되어야 하고, 가능하면 회전(피벗) 기능이 있어서 세로 모드를 지원하는 모니터가 유용합니다.
 
 <div class="chart-progress" data-title="개발자 모니터 선택 기준 중요도" data-labels="색정확도,응답속도,밝기균일성,블루라이트,인체공학" data-values="95,78,82,75,88" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#8b5cf6" data-max="100" data-unit="점"></div>
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrrP4uH" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">ASUS ZenScreen MB16ACV</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 2단계: 패널 유형 선택 — IPS vs VA vs TN
 
@@ -196,6 +206,16 @@ Dell, LG, BenQ, ASUS 등 주요 제조사 모니터라면 기본 품질은 보�
 ### 울트라와이드 모니터는 개발자에게 좋은가요?
 
 3440x1440 울트라와이드는 IDE와 브라우저를 나란히 띄울 수 있어 매우 편합니다. 다만 가격이 높고, 일부 애플리케이션에서 호환성 이슈가 있을 수 있으니 구매 전 충분히 검토하세요.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcokOP2O" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">삼성 뷰피니티 S8 32인치 4K</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

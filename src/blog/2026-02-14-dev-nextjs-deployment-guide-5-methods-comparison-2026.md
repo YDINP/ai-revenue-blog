@@ -10,11 +10,11 @@ image:
   alt: "Orange to yellow gradient background ideal for creative projects."
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dJjX0Z"
+    url: "https://link.coupang.com/a/fiIcofAIH6"
   - title: "클린 코드"
-    url: "https://link.coupang.com/a/dJjVjr"
+    url: "https://link.coupang.com/a/fiIclPV2CO"
   - title: "자바스크립트 완벽 가이드"
-    url: "https://link.coupang.com/a/dJjZe2"
+    url: "https://link.coupang.com/a/fiIcwvE5mu"
 faq:
   - q: "Next.js를 배포할 때 반드시 Vercel을 사용해야 하나요?"
     a: "아닙니다. Vercel은 가장 편하지만, 다른 플랫폼도 완벽하게 지원합니다. 비용, 커스터마이징 필요성, 팀 규모에 따라 선택하면 됩니다. 개인 프로젝트라면 Vercel 무료 티어, 자유도가 필요하면 Docker를 추천합니다."
@@ -30,6 +30,16 @@ Next.js로 멋진 프로젝트를 완성하셨는데, 배포를 어떻게 할지
 ## Next.js 배포의 핵심 포인트
 
 Next.js를 배포할 때는 단순히 '어디에 올릴 것인가'만 고민해서는 안 됩니다. 여기서 주목할 점이 있습니다. **Edge Runtime, 이미지 최적화, 자동 스케일링** 같은 Next.js의 강력한 기능을 제대로 활용할 수 있는 환경을 선택해야 한다는 겁니다. 잘못된 배포 방식을 선택하면 성능 최적화 기능을 전혀 쓰지 못하거나, 수동으로 설정해야 하는 번거로움이 생깁니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">모던 자바스크립트 Deep Dive</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## Next.js 배포 5가지 방법 비교
 
@@ -212,6 +222,16 @@ Vercel 대시보드에서 이 지표들을 실시간으로 볼 수 있으며, �
 ### 배포 후 성능 저하가 생기면 어떻게 해야 하나요?
 
 먼저 배포 플랫폼의 모니터링 도구(Vercel의 Analytics, 또는 Google PageSpeed Insights)로 병목 지점을 파악하세요. 대부분 이미지 최적화 누락, API 응답 지연, 과도한 JavaScript 번들 크기가 원인입니다. Next.js Image 컴포넌트 사용, API 캐싱, 동적 임포트(Dynamic Import) 활용으로 개선할 수 있습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclPV2CO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">클린 코드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

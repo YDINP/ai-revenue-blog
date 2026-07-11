@@ -10,11 +10,11 @@ image:
   alt: "Close-up of HTML and JavaScript code on a computer screen in Visual Studio Code."
 coupangLinks:
   - title: "점프 투 파이썬"
-    url: "https://link.coupang.com/a/dJjZ7z"
+    url: "https://link.coupang.com/a/fiIcq7Gyf6"
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dJjX0Z"
+    url: "https://link.coupang.com/a/fiIcofAIH6"
   - title: "러스트 프로그래밍"
-    url: "https://link.coupang.com/a/dJj7h9"
+    url: "https://link.coupang.com/a/fiIcwrUd8m"
 faq:
   - q: "기존 Create React App(CRA) 프로젝트에서 Server Components를 사용할 수 있나요?"
     a: "아니요. Server Components는 Next.js, Remix, Waku 같은 풀스택 프레임워크가 필요합니다. CRA에서는 지원하지 않습니다. CRA 마이그레이션을 고려 중이라면 Next.js App Router로의 전환이 권장됩니다."
@@ -29,6 +29,16 @@ faq:
 React 19의 안정화와 함께 **Server Components(RSC)**는 더 이상 실험 기능이 아닙니다. 2026년 현재, Next.js 15, Remix, 그리고 Waku 같은 프레임워크들이 RSC를 기본 아키텍처로 채택하면서, React 개발의 중심축이 되어가고 있습니다.
 
 Traditional 클라이언트 사이드 렌더링의 한계를 넘어서, 서버에서 데이터를 가져오고 처리한 후 HTML을 직접 생성하는 방식이 성능 최적화의 핵심이 되고 있습니다. 이 글에서는 RSC의 작동 원리부터 실전 구현까지 다루겠습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcq7Gyf6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">점프 투 파이썬</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## Server Components vs Client Components: 무엇이 다른가?
 
@@ -234,6 +244,16 @@ Server Components는 **선택이 아닌 필수**로 가고 있습니다. Vercel,
 - [React 19 릴리스 노트](https://react.dev/blog/2024/12/19/react-19)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">모던 자바스크립트 Deep Dive</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

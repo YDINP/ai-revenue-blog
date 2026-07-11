@@ -10,9 +10,9 @@ image:
   alt: "Blue Mazda Miata convertible on a scenic countryside road in Szczerbaków, Poland."
 coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"
-    url: "https://link.coupang.com/a/dJjYpL"
+    url: "https://link.coupang.com/a/fiIcohvP5g"
   - title: "로지텍 MX Keys S"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIcwykOwC"
 ---
 ## GPT-5.3 Codex Spark: AI 코딩 어시스턴트의 새로운 기준
 
@@ -123,6 +123,16 @@ GPT-5.3 Codex Spark는 생성된 코드의 출처를 추적할 수 있는 **코�
 2026년 AI 코딩 도구 시장에서 GPT-5.3 Codex Spark는 **가성비와 성능 모두에서 최고 수준**입니다. 특히 다양한 프로젝트를 병행하는 개발자라면 생산성 향상 효과가 매우 클 것으로 예상됩니다.
 
 $20/월의 투자는 개발 시간 단축으로 충분히 회수 가능하며, 장기적으로는 코드 품질 향상으로 유지보수 비용 절감까지 기대할 수 있습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcohvP5g" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">LG 울트라와이드 34인치 모니터</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

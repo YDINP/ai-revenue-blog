@@ -10,11 +10,11 @@ image:
   alt: "A variety of game controllers and a keyboard arranged on a white textured surface, offering a minimalist gaming setup."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/dJj8Bn"
+    url: "https://link.coupang.com/a/fiIcubbf9E"
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
 faq:
   - q: "무료 에셋만으로도 상업용 게임을 만들 수 있나요?"
     a: "충분히 가능합니다. 특히 Godot Asset Library와 Itch.io에는 상업용 무료 에셋이 풍부합니다. 다만 게임의 규모와 그래픽 퀄리티에 따라 일부 프리미엄 에셋 투자가 도움이 될 수 있습니다. 처음에는 무료 에셋으로 프로토타입을 만들고, 수익화 이후 프리미엄 에셋으로 업그레이드하는 전략을 추천합니다."
@@ -29,6 +29,16 @@ faq:
 게임 개발에서 **에셋 스토어(Asset Store) 또는 마켓플레이스(Marketplace)**는 개발 시간을 단축하고 프로젝트 품질을 높이는 필수 자원입니다. 2026년 현재, 주요 게임 엔진별 에셋 스토어는 단순히 모델과 텍스처를 넘어 완성도 높은 완전한 게임 시스템, AI 도구, 그리고 커스터마이징된 플러그인까지 제공하고 있습니다.
 
 인디 게임 개발자들은 이제 **유료 에셋 투자**와 **무료 리소스 활용** 사이에서 전략적 선택이 필요한 시대입니다. 각 마켓플레이스마다 가격 정책, 에셋 품질, 개발사 지원, 라이선스 정책이 크게 다르기 때문입니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 주요 게임 에셋 스토어 4가지 비교
 
@@ -160,6 +170,16 @@ faq:
 - [Itch.io 게임 에셋 섹션](https://itch.io/game-assets)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcubbf9E" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">유니티 교과서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

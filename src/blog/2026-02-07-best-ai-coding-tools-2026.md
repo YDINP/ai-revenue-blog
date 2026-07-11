@@ -11,9 +11,9 @@ image:
   alt: "디버깅 및 문제 해결을 위한 메뉴 옵션이 있는 AI 보조 코딩 클로즈업"
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드 (개발자 추천)"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIcrdKjAG"
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dJjX0Z"
+    url: "https://link.coupang.com/a/fiIcofAIH6"
 ---
 > **2026년 7월 업데이트**: 최신 도구 버전·벤치마크 반영
 
@@ -22,6 +22,16 @@ coupangLinks:
 2026년 현재, AI 코딩 도구는 단순한 자동완성을 넘어 **자율적 에이전트 수준**으로 진화했습니다. 개발자의 생산성을 2~5배까지 높여주는 이 도구들을 실제로 사용해보고 비교해봤습니다.
 
 2026년 중반을 기준으로 도구 생태계는 세 갈래로 분화했습니다: **인라인 제안형**(Copilot 계열), **자율 에이전트형**(Claude Code 등), **에이전트 통합 IDE형**(Cursor·Windsurf 계열). 현장에서는 'IDE 어시스턴트 + 터미널 에이전트' 페어링이 사실상 표준 워크플로우로 자리잡고 있습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrdKjAG" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Keys S 키보드 (개발자 추천)</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 1. Claude Code (Anthropic)
 
@@ -125,6 +135,16 @@ AWS 생태계에 최적화된 AI 코딩 도구입니다.
 현장 표준 워크플로우는 **'IDE 어시스턴트 + 터미널 에이전트' 페어링**입니다. 예: Cursor 3(일상 편집) + Claude Code(대규모 리팩토링). AI 코딩을 처음 시작한다면 [AI 바이브코딩 입문 가이드](/blog/2026-07-07-ai-vibe-coding-beginner-guide-2026/)를, 도구 간 심층 비교는 [ChatGPT vs Claude 비교 분석](/blog/2026-02-08-chatgpt-vs-claude-ai-assistant-comparison-2026/)을 참고하세요.
 
 개발 생산성을 높이는 것은 도구만이 아닙니다. 좋은 키보드와 넓은 모니터도 중요하죠!
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">모던 자바스크립트 Deep Dive</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

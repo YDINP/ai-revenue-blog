@@ -10,9 +10,9 @@ image:
   alt: "Close-up of HTML and JavaScript code on a computer screen in Visual Studio Code."
 coupangLinks:
   - title: "러스트 프로그래밍"
-    url: "https://link.coupang.com/a/dJj7h9"
+    url: "https://link.coupang.com/a/fiIcwrUd8m"
   - title: "혼자 공부하는 파이썬"
-    url: "https://link.coupang.com/a/dJjZFZ"
+    url: "https://link.coupang.com/a/fiIcoAaGPY"
 faq:
   - q: "2026년에 Redux를 아직도 써야 할까요?"
     a: "Redux는 여전히 유효하지만, 대부분의 새로운 프로젝트에서는 Zustand나 TanStack Query 같은 가벼운 솔루션으로 충분합니다. Redux Toolkit은 엔터프라이즈 환경에서 검증된 안정성이 필요할 때 선택하세요."
@@ -27,6 +27,16 @@ faq:
 2026년 React 생태계에서 상태 관리는 더 이상 선택이 아닌 필수입니다. 그러나 **Redux, Context API, Zustand, Jotai, TanStack Query** 등 너무 많은 선택지가 있어서 프로젝트 규모와 팀 역량에 맞는 솔루션을 찾기 어렵습니다.
 
 이 글에서는 2026년 기준 실제 프로덕션 프로젝트에서 검증된 5가지 상태 관리 라이브러리를 성능, 번들 크기, 학습곡선, 개발 생산성으로 비교합니다. 각 솔루션이 왜 필요한지, 어떤 상황에서 써야 하는지 구체적인 사례 코드와 함께 알아봅시다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwrUd8m" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">러스트 프로그래밍</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 주요 상태 관리 솔루션 5가지 비교
 
@@ -238,6 +248,16 @@ function Component() {
 - [Redux Toolkit 공식 가이드](https://redux-toolkit.js.org/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcoAaGPY" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">혼자 공부하는 파이썬</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

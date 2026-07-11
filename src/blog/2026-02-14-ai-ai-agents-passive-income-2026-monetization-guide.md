@@ -10,9 +10,9 @@ image:
   alt: "A MacBook displaying the DeepSeek AI interface, showcasing digital innovation."
 coupangLinks:
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dJjUUj"
+    url: "https://link.coupang.com/a/fiIcbvsNz2"
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dJjUsG"
+    url: "https://link.coupang.com/a/fiIclVeeuO"
 faq:
   - q: "AI 에이전트와 일반 자동화 도구(Zapier)의 차이가 뭔가요?"
     a: "일반 자동화 도구는 '정해진 규칙대로만' 작동합니다(A하면 B). AI 에이전트는 '상황을 판단하고 최선의 선택'을 합니다. 예를 들어 고객 이메일이 왔을 때, 일반 도구는 무조건 답장 템플릿을 보내지만 에이전트는 \"이 고객의 역사를 분석해 맞춤 답장\"을 합니다. 이 차이가 수익성을 결정합니다."
@@ -32,6 +32,16 @@ faq:
 저도 처음엔 그랬습니다. "에이전트가 뭐 하는 건데?"라고 생각했는데, 직접 구축해보니 월 3백만원 규모의 자동화 수익 파이프라인을 만들 수 있었습니다. 지금부터 제가 경험한 **5가지 실전 전략**과 **3가지 선택해야 할 도구**를 공개하겠습니다.
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">아이패드 에어 M2</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## AI 에이전트로 수익을 만드는 3가지 기본 원리
 
@@ -279,6 +289,16 @@ Make 월 $99, OpenAI API 월 $200 정도면 총 45만원 수준입니다. 이것
 ### 한국어 지원이 안 된다고 했는데, 실제로 쓸 수 있나요?
 
 문제없습니다. 인터페이스가 영어지만, 한국 유튜브와 블로그에 충분한 튜토리얼이 있습니다. 또한 ChatGPT, Claude에게 "Make에서 이렇게 하려면?"이라고 물으면 한국어로 설명해줍니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">챗GPT 활용법 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

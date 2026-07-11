@@ -10,9 +10,9 @@ image:
   alt: "어두운 환경에서 노트북으로 코드를 작성하는 사람"
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
   - title: "AI 2041"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcwR1j6i"
 faq:
   - q: "Cursor와 Claude Code를 동시에 써야 하나요?"
     a: '반드시 그럴 필요는 없다. Cursor는 IDE 내에서 실시간으로 코드 작성을 돕고, Claude Code는 터미널에서 파일 생성·리팩터링·빌드 자동화에 특화돼 있다. 예산이 부담된다면 Cursor 단독으로 시작해도 충분하다.'
@@ -29,6 +29,16 @@ faq:
 2024년까지 AI 코딩 도구는 '빠른 자동완성' 정도의 역할이었다. 2026년은 다르다. 터미널 에이전트가 프로젝트 전체를 읽고 기능을 독립적으로 구현하는 단계까지 왔다. GDC 2026 보고에 따르면 AI 코딩 도구를 도입한 인디팀의 평균 개발 속도는 도입 전 대비 1.4~1.8배 향상된 것으로 집계됐다.
 
 이 변화의 핵심 패턴은 **IDE 어시스턴트 + 터미널 에이전트 페어링**이다. 역할을 분리해 두 도구를 함께 쓰는 방식이 2026년 개발자 사이에서 사실상 표준이 됐다. IDE에서 실시간으로 코드를 보조받고, 터미널 에이전트에 기능 단위 작업을 위임하는 흐름이다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## Cursor로 게임 코드 작성하기
 
@@ -90,6 +100,16 @@ AI 코딩 도구는 강력하지만 두 가지 원칙을 반드시 지켜야 한
 - [Cursor 공식 문서 - Composer 2.5](https://cursor.com/docs)
 - [Anthropic Claude Code 공식 페이지](https://claude.ai/claude-code)
 - [GDC 2026 AI in Game Dev 세션 요약 - Game Developers Conference](https://gdconf.com)
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwR1j6i" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">AI 2041</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

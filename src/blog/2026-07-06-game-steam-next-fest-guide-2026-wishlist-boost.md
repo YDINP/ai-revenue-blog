@@ -10,9 +10,9 @@ image:
   alt: "헤드폰을 끼고 게임에 몰입한 어린 소녀"
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
 faq:
   - q: "스팀 넥스트 페스트는 언제 열리나요?"
     a: "보통 연중 3~4회 개최된다. 스팀 공식 일정 페이지(store.steampowered.com/sale/nextfest)에서 다음 회차 날짜를 확인할 수 있으며, 신청은 페스트 시작 약 2~3개월 전에 Steamworks에서 열린다."
@@ -33,6 +33,16 @@ faq:
 <div class="chart-bar" data-title="넥스트 페스트 참가 전후 위시리스트 증가 (개념적 예시)" data-labels="참가 전,페스트 1일차,페스트 종료,종료 1주 후" data-values="2000,3500,7000,8000" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444" data-unit="개"></div>
 
 위 수치는 개념적 예시다. 실제 결과는 게임 장르·데모 완성도·운영 방식에 따라 크게 달라진다. 다만 업계 통념상 페스트 참가 게임은 기간 내에 수천 개 단위의 위시리스트 상승을 경험하는 경우가 일반적이다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참가 전 준비: 데모 완성도가 전부다
 
@@ -95,6 +105,16 @@ faq:
 - [Steamworks 개발자 뉴스레터 구독](https://partner.steamgames.com/doc/marketing/upcoming_events)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

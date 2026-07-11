@@ -10,9 +10,9 @@ image:
   alt: "카메라와 모니터를 갖춘 전문 영상 촬영 세팅"
 coupangLinks:
   - title: "무기가 되는 스토리"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcwFwYns"
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
 faq:
   - q: "트레일러는 몇 초가 적당한가?"
     a: "스팀 정식 트레일러는 60~90초가 표준이다. 숏폼 버전은 15~30초로 따로 편집해야 한다. 2분을 넘기면 이탈률이 급격히 올라간다."
@@ -27,6 +27,16 @@ faq:
 게임을 알리는 방법은 다양하다. 그러나 스팀 페이지에서 구매 결정을 실질적으로 좌우하는 것은 **트레일러** 하나다. [2026년 인디게임 수익화 현실](/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/)에서 짚었듯, 대부분의 인디게임은 마케팅 예산보다 게임 자체의 '노출물'로 승부를 본다. 스팀 상점 페이지를 방문한 유저가 가장 먼저 재생하는 것이 트레일러다. 업계 통념상 트레일러 완주율이 높은 게임은 위시리스트 전환율도 2~3배 높은 것으로 알려져 있다.
 
 트레일러가 실패하면 아무리 좋은 캡슐 이미지와 스크린샷을 준비해도 소용없다. 반대로 트레일러가 강렬하면, 다른 마케팅 요소가 부족해도 위시리스트가 쌓인다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwFwYns" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">무기가 되는 스토리</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 첫 3초의 법칙: 잡거나, 잃거나
 
@@ -79,6 +89,16 @@ faq:
 - [Steamworks 공식 문서 — 트레일러 업로드 가이드](https://partner.steamgames.com/doc/store/trailer)
 - [Game Developer — Indie Trailer Best Practices](https://www.gamedeveloper.com)
 - [Valve: Steam Discovery Update 공식 발표](https://store.steampowered.com/news/)
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

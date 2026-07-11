@@ -10,9 +10,9 @@ image:
   alt: "검은 화면에 표시된 컬러풀한 프로그래밍 코드"
 coupangLinks:
   - title: "함께 자라기"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcy6IY6C"
   - title: "클린 코드"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIclPV2CO"
 faq:
   - q: "바이브 코딩으로 실제 앱을 만들 수 있나요?"
     a: "예. 프로토타입과 MVP 수준의 앱은 충분히 만들 수 있습니다. 단, 수십만 줄 규모의 엔터프라이즈 시스템이나 고성능 요구 로직은 개발자 검수가 필수입니다. '아이디어 검증용 앱'으로 접근하면 생산성을 극대화할 수 있습니다."
@@ -31,6 +31,16 @@ faq:
 바이브 코딩의 핵심은 **AI에게 의도를 전달하고 생성된 코드를 검증·반복하는 루프**다. 개발자가 직접 구문을 외우거나 API 문서를 뒤지는 시간이 사라진다. 대신 "로그인 폼을 만들고, 이메일·비밀번호 유효성 검사를 추가해줘"처럼 결과를 서술하면 AI가 코드를 생성한다.
 
 2026년 Stack Overflow 개발자 설문에 따르면, 응답자의 76%가 AI 코딩 보조 도구를 매일 사용하며, 이 중 41%가 바이브 코딩 방식을 주요 워크플로우로 채택했다고 답했다. 개발자의 역할이 **'코드 작성자'에서 'AI 워크플로우 설계자'로** 이동하고 있다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcy6IY6C" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">함께 자라기</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 어떻게 시작하나: 3단계 접근법
 
@@ -88,6 +98,16 @@ faq:
 - [GitHub Octoverse 2025 - AI-assisted Development Trends](https://octoverse.github.com/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclPV2CO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">클린 코드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

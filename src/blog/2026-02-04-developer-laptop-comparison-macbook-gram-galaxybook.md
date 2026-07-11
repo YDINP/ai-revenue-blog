@@ -10,23 +10,33 @@ image:
   alt: "사무용품과 창의적인 장식으로 책상 위에 코드가 표시된 세련된 MacBook Pro"
 coupangLinks:
   - title: "맥북 에어 M3"
-    url: "https://link.coupang.com/a/dJjWan"
+    url: "https://link.coupang.com/a/fiIcl1zAXs"
   - title: "삼성 갤럭시북4 프로"
-    url: "https://link.coupang.com/a/dJjWzN"
+    url: "https://link.coupang.com/a/fiIclYnkHc"
   - title: "LG 그램 17"
-    url: "https://link.coupang.com/a/dJjWZQ"
+    url: "https://link.coupang.com/a/fiIcl4LfVs"
   - title: "HOHO 휴대용 노트북 거치대 (화이트)"
-    url: "https://link.coupang.com/a/dJjCfq"
+    url: "https://link.coupang.com/a/fiIcl7qY5A"
   - title: "규랩 쿨링 홀 노트북 스탠드 거치대"
-    url: "https://link.coupang.com/a/dJjEY6"
+    url: "https://link.coupang.com/a/fiIcn9htjo"
   - title: "토라픽 초경량 노트북 거치대"
-    url: "https://link.coupang.com/a/dJjIe9"
+    url: "https://link.coupang.com/a/fiIcob2MMu"
 ---
 ## 개발자의 영원한 고민: 어떤 노트북을 살까?
 
 개발용 노트북 선택은 앞으로 2~3년의 생산성을 결정합니다. 2026년 현재, 개발자들 사이에서 가장 인기 있는 노트북은 **맥북 에어 M3**, **LG 그램 17**, **삼성 갤럭시북4 프로** 세 가지입니다.
 
 이 글에서는 실제 개발 환경(IDE, Docker, 브라우저, 터미널)에서의 성능을 기준으로 세 노트북을 비교합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcl1zAXs" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">맥북 에어 M3</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 핵심 스펙 비교
 
@@ -155,6 +165,16 @@ SSD는 512GB면 시작은 가능하지만, 프로젝트가 늘어나면 1TB가 �
 세 제품 모두 개발용으로 충분한 성능을 제공합니다. 최종 선택은 **어떤 OS를 선호하는지**, **화면 크기가 얼마나 중요한지**, **어떤 생태계에 속해 있는지**에 따라 달라집니다.
 
 가장 확실한 조언: 매장에서 직접 타이핑해보세요. 키보드 타건감과 화면 느낌은 스펙으로 알 수 없습니다!
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclYnkHc" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">삼성 갤럭시북4 프로</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

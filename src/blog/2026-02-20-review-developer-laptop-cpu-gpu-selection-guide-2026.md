@@ -10,11 +10,11 @@ image:
   alt: "Close-up of a person coding on a laptop, showcasing web development and programming concepts."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
   - title: "삼성 갤럭시북4 프로"
-    url: "https://link.coupang.com/a/dJjWzN"
+    url: "https://link.coupang.com/a/fiIclYnkHc"
   - title: "맥북 에어 M3"
-    url: "https://link.coupang.com/a/dJjWan"
+    url: "https://link.coupang.com/a/fiIcl1zAXs"
 faq:
   - q: "개발자용 노트북에서 GPU는 정말 중요한가요?"
     a: "일반 웹/백엔드 개발자라면 내장 GPU만으로 충분합니다. GPU는 주로 화면 표시와 가벼운 3D 렌더링을 담당하며, CPU 성능이 훨씬 더 중요합니다. 게임 엔진 개발이나 CUDA 기반 AI 학습을 한다면 고급 GPU가 필요합니다."
@@ -67,6 +67,16 @@ Apple Silicon은 **에너지 효율**과 **발열 관리**에서 타의 추종�
 - 배터리 수명: 18시간 이상 (개발 작업 기준)
 
 Swift, Objective-C 개발자와 AI/ML 엔지니어에게 최적입니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 개발 작업별 최적 프로세서 선택표
 
@@ -181,6 +191,16 @@ GPT-5.3 Codex Spark, Claude 3 같은 AI 코딩 도구를 로컬에서 실행하�
 - [TechPowerUp CPU 벤치마크 데이터베이스](https://www.techpowerup.com/cpu-specs/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclYnkHc" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">삼성 갤럭시북4 프로</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

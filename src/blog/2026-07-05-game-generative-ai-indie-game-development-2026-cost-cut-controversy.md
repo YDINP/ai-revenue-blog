@@ -10,9 +10,9 @@ image:
   alt: "푸른빛이 감도는 첨단 휴머노이드 로봇"
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
   - title: "AI 2041"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcwR1j6i"
 faq:
   - q: "AI로 만든 에셋을 상업 게임에 써도 되나?"
     a: "도구의 라이선스와 학습 데이터 출처에 따라 다르다. 상업적 이용을 명시적으로 허용하고 저작권이 명확한 도구만 사용해야 하며, 스팀 등 플랫폼의 AI 콘텐츠 고지 정책도 확인해야 한다."
@@ -27,6 +27,16 @@ faq:
 [1인 게임 개발 생존 가이드](/blog/2026-07-04-game-solo-game-developer-survival-guide-2026-burnout-budget/)에서 다뤘듯, 혼자 개발할 때 가장 큰 병목은 '한 사람이 아트·코드·사운드를 전부 감당해야 한다'는 점이다. 2026년 생성형 AI는 바로 이 지점을 정면으로 흔들고 있다. 업계 보고에 따르면 AI 도구는 **에셋 제작 시간을 70~90% 단축**하고, 타이틀당 **10만~50만 달러의 제작비를 절감**하는 것으로 추정된다. 과거 6명짜리 아트팀이 필요했던 결과물을, 이제 1명 + AI 보드 + 마켓플레이스 정리로 만들어내는 시대다.
 
 하지만 같은 기술을 두고 **GDC 2026 개발자 설문에서는 52%가 생성형 AI를 부정적으로 본다**고 답했다. 1년 전(30%)보다 크게 늘어난 수치다. 이 글은 AI를 '무조건 도입'이 아니라, 인디 관점에서 **어디에 쓰면 이득이고 어디서 위험한지**를 균형 있게 정리한다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 어디서 비용이 줄어드는가
 
@@ -77,6 +87,16 @@ AI의 절감 효과는 영역마다 다르다. 아래는 인디 개발에서 AI 
 - [Generative AI in Game Development: NPCs, Assets, and IP Risk](https://beyondtmrw.org/article/generative-ai-in-game-development-npcs-assets-and-ip-risk)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcwR1j6i" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">AI 2041</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

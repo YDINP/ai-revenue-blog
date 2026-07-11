@@ -10,9 +10,9 @@ image:
   alt: "밝은 분위기로 협업하는 다양한 크리에이티브 팀"
 coupangLinks:
   - title: "컨테이저스 전략적 입소문"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcy1IomG"
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
 faq:
   - q: "디스코드 서버를 만들 때 채널이 너무 많으면 어떻게 되나?"
     a: "채널이 많을수록 서버가 복잡해 보여 신규 멤버가 이탈한다. 처음에는 5~7개 이하로 운영하고, 커뮤니티가 요청할 때 추가하는 방식이 낫다."
@@ -27,6 +27,16 @@ faq:
 [2026년 인디게임 수익화 현실](/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/)에서 짚었듯, 인디게임의 성패는 출시 당일이 아니라 그 전 6~12개월에 결정된다. 위시리스트를 쌓고 입소문을 만드는 핵심 인프라가 바로 **디스코드 커뮤니티**다. X(트위터)·Reddit·유튜브는 알고리즘에 의존하지만, 디스코드는 개발자가 직접 통제하는 **충성도 높은 직통 채널**이다. 팔로워가 사라지거나 알고리즘이 바뀌어도 서버 멤버는 그대로 남는다.
 
 이 글은 인디게임 디스코드 서버를 처음 만드는 단계부터 첫 100명을 모으고, 이들을 충성 팬으로 전환해 출시 화력으로 쓰는 운영 전략을 단계별로 정리한다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcy1IomG" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">컨테이저스 전략적 입소문</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 왜 디스코드인가 — 다른 채널과의 차이
 
@@ -109,6 +119,16 @@ faq:
 - [GDC Vault — 커뮤니티 마케팅 세션 아카이브](https://www.gdcvault.com/)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

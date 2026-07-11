@@ -10,9 +10,9 @@ image:
   alt: "Close-up of a monitor displaying ChatGPT Plus introduction on a green background."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIcrdKjAG"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dJjUUj"
+    url: "https://link.coupang.com/a/fiIcbvsNz2"
 faq:
   - q: "ChatGPT Plus가 정말 필요한가요?"
     a: "하루 30분 이상 AI를 업무에 사용하거나 시간당 5,000원 이상의 가치를 창출한다면 필수입니다. 월 26,000원 투자로 월 100만원 이상의 추가 수익을 창출할 수 있으므로 ROI 관점에서 매우 높은 가치가 있습니다."
@@ -42,6 +42,16 @@ faq:
 | 커스텀 GPT 생성 | ✗ | ✓ | 중간 |
 
 가장 중요한 점은 **응답 속도와 정확도**입니다. Plus 사용자는 무료 사용자보다 훨씬 빠른 응답 시간과 더 정교한 답변을 경험합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrdKjAG" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Keys S 키보드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## ChatGPT Plus의 숨은 가치: 시간 절약 관점의 ROI
 
@@ -186,6 +196,16 @@ OpenAI는 공식적으로 연간 구독 할인을 제공하지 않지만:
 - [2026년 AI 생산성 벤치마크 연구](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/generative-ai-and-the-future-of-work)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">아이패드 에어 M2</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

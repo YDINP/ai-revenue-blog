@@ -10,11 +10,11 @@ image:
   alt: "Close-up of HTML and JavaScript code on a computer screen in Visual Studio Code."
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dJjX0Z"
+    url: "https://link.coupang.com/a/fiIcofAIH6"
   - title: "점프 투 파이썬"
-    url: "https://link.coupang.com/a/dJjZ7z"
+    url: "https://link.coupang.com/a/fiIcq7Gyf6"
   - title: "러스트 프로그래밍"
-    url: "https://link.coupang.com/a/dJj7h9"
+    url: "https://link.coupang.com/a/fiIcwrUd8m"
 faq:
   - q: "Zustand와 Redux의 가장 큰 차이점은 무엇인가요?"
     a: "번들 크기(2.3KB vs 8KB)와 보일러플레이트입니다. Zustand는 액션, 리듀서, 디스패치 개념 없이 직관적인 함수로 상태를 업데이트하므로, 신규 프로젝트에서 생산성이 훨씬 높습니다. 다만 극도로 복잡한 상태 흐름 시각화는 Redux DevTools가 더 강합니다."
@@ -37,6 +37,16 @@ React 개발에서 상태 관리는 프로젝트의 유지보수성과 성능을
 1. **번들 크기 최소화** - 모바일 사용자 경험 개선의 필수 요소
 2. **개발 생산성** - 단순한 API로 빠른 프로토타이핑 가능
 3. **React 19 호환성** - 최신 리액트 기능과의 완벽한 통합
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcofAIH6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">모던 자바스크립트 Deep Dive</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 세 가지 솔루션의 핵심 스펙 비교
 
@@ -175,6 +185,16 @@ Redux에서 전환하고 싶은 팀을 위한 실용적 조언:
 - [React 19 릴리스 노트](https://react.dev/blog/2024/12/19/react-19)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcq7Gyf6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">점프 투 파이썬</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

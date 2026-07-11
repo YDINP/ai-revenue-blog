@@ -10,9 +10,9 @@ image:
   alt: "Close-up of HTML code lines highlighting web development concepts and techniques."
 coupangLinks:
   - title: "자바스크립트 완벽 가이드 도서"
-    url: "https://link.coupang.com/a/dJjZe2"
+    url: "https://link.coupang.com/a/fiIcos9opU"
   - title: "모니터 LG 울트라와이드"
-    url: "https://link.coupang.com/a/dJjYpL"
+    url: "https://link.coupang.com/a/fiIcowaNfo"
 ---
 ## Phaser.js가 웹 게임 개발의 정답인 이유
 
@@ -40,6 +40,16 @@ Phaser는 HTML5 게임 개발을 위한 가장 인기 있는 JavaScript 프레�
 - 물리 엔진 내장 (Arcade Physics, Matter.js)
 - 스프라이트 애니메이션, 타일맵, 파티클 시스템
 - 사운드 관리, 입력 처리 완벽 지원
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcos9opU" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">자바스크립트 완벽 가이드 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## Phaser로 만들 수 있는 게임
 
@@ -428,6 +438,16 @@ Phaser는 웹 게임 개발의 최고 선택입니다. 특히 다음 경우에 �
 - **소셜 플랫폼 게임**: Facebook, Discord 등에 통합
 
 설치 없이 링크 하나로 전 세계 누구나 플레이할 수 있다는 점은 Phaser만의 독보적인 강점입니다. 오늘 Vite + Phaser 프로젝트를 시작하고, 여러분의 첫 웹 게임을 세상에 공개해보세요!
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcowaNfo" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">모니터 LG 울트라와이드</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

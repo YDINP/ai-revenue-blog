@@ -10,11 +10,11 @@ image:
   alt: "Top view of Pantone color guides showcasing vibrant shades for creative design projects."
 coupangLinks:
   - title: "점프 투 파이썬"
-    url: "https://link.coupang.com/a/dJjZ7z"
+    url: "https://link.coupang.com/a/fiIcq7Gyf6"
   - title: "혼자 공부하는 파이썬"
-    url: "https://link.coupang.com/a/dJjZFZ"
+    url: "https://link.coupang.com/a/fiIcoAaGPY"
   - title: "클린 코드"
-    url: "https://link.coupang.com/a/dJjVjr"
+    url: "https://link.coupang.com/a/fiIclPV2CO"
 faq:
   - q: "Supabase 무료 티어로 충분한가요?"
     a: "프로토타입이나 소규모 개인 프로젝트(월 10만 행 이하)라면 충분합니다. 하지만 실시간 기능을 많이 사용하거나 1만 명 이상의 활성 사용자가 있다면 Pro 플랜 이상을 권장합니다."
@@ -33,6 +33,16 @@ Supabase는 Firebase의 오픈소스 대안으로, PostgreSQL 기반의 완전�
 기존의 무료 Supabase 무료 티어로 프로덕션 서비스를 운영하는 방법에 대해서는 별도로 다뤘으니, 이번 글에서는 실제 프로젝트에서 바로 쓸 수 있는 **4가지 핵심 활용 패턴**에 집중하겠습니다.
 
 더 자세한 내용은 [Supabase 무료 티어로 프로덕션 서비스 운영하기 완전 가이드](/blog/2026-02-06-supabase-free-tier-guide/)을 참고하세요.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcq7Gyf6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">점프 투 파이썬</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 핵심 1: 실시간 데이터베이스 동기화
 
@@ -302,6 +312,16 @@ Supabase는 2026년 기준으로 **가장 완성도 높은 오픈소스 백엔�
 - [Supabase 실시간 API 레퍼런스](https://supabase.com/docs/reference/javascript/subscribe)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcoAaGPY" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">혼자 공부하는 파이썬</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

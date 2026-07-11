@@ -10,11 +10,11 @@ image:
   alt: "Flat lay of real estate brochures, checklists, and a calculator for home buying."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
   - title: "LG 그램 17"
-    url: "https://link.coupang.com/a/dJjWZQ"
+    url: "https://link.coupang.com/a/fiIcl4LfVs"
   - title: "삼성 갤럭시북4 프로"
-    url: "https://link.coupang.com/a/dJjWzN"
+    url: "https://link.coupang.com/a/fiIclYnkHc"
 faq:
   - q: "개발자가 꼭 고가 모니터를 써야 할까요?"
     a: "순수 코딩만 한다면 50만원대 중급 모니터도 충분합니다. 하지만 UI 디자인, 색상 확인이 필요하면 sRGB 98% 이상의 중급~고급 모니터(60~100만원)가 필요합니다. 색감 정확도 부족은 생산성 손실로 이어지므로 용도에 맞게 투자하세요."
@@ -59,6 +59,16 @@ VESA 마운트를 지원하는지도 확인하세요. 모니터 암을 사용하
 ### 5. 밝기와 명암비
 
 개발 환경은 보통 어두운 편이므로, **350 nits 이상의 밝기**는 필요하지 않습니다. 하지만 일반 사무 환경에서 작업한다면 300 nits 이상을 추천합니다. 명암비는 1000:1 이상이면 충분합니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcrgt7h6" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">로지텍 MX Master 3S</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 예산별 추천 모니터 비교
 
@@ -131,6 +141,16 @@ UI 색상 확인이 중요하므로 **sRGB 98% 이상, 100Hz 이상의 중급 �
 
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcl4LfVs" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">LG 그램 17</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 

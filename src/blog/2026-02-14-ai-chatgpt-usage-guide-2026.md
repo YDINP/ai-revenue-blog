@@ -10,11 +10,11 @@ image:
   alt: "Curved monitor screen showing ChatGPT interface in low-light, focus on technology and AI."
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://link.coupang.com/a/dJjUsG"
+    url: "https://link.coupang.com/a/fiIclVeeuO"
   - title: "아이패드 에어 M2"
-    url: "https://link.coupang.com/a/dJjUUj"
+    url: "https://link.coupang.com/a/fiIcbvsNz2"
   - title: "로지텍 MX Keys S 키보드"
-    url: "https://link.coupang.com/a/dJj0zg"
+    url: "https://link.coupang.com/a/fiIcrdKjAG"
 ---
 ## 2026년 ChatGPT, 어떻게 달라졌나?
 
@@ -25,6 +25,16 @@ coupangLinks:
 <div class="chart-versus" data-title="GPT-5.3 Codex vs GPT-5.3 Codex Spark" data-name-a="GPT-5.3 Codex" data-name-b="Codex Spark" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"정확도","a":92,"b":78},{"label":"속도","a":65,"b":100},{"label":"멀티모달","a":90,"b":50},{"label":"컨텍스트","a":95,"b":65}]'></div>
 
 2026년 2월, OpenAI는 **GPT-5.3 Codex**(2월 5일)와 **GPT-5.3 Codex Spark**(2월 12일)를 연달아 출시했습니다. 풀 Codex는 400K 토큰 컨텍스트와 멀티모달을 지원하며, Spark는 Cerebras 칩 기반으로 초당 1,000+ 토큰의 초고속 생성이 특징입니다. 이제 전체 학위 논문이나 대규모 코드베이스를 한 번에 분석할 수 있습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIclVeeuO" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">챗GPT 활용법 도서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## ChatGPT의 실전 활용법
 
@@ -112,6 +122,16 @@ ChatGPT는 더 이상 선택이 아닌 **필수 도구**가 되었습니다. 특
 3. **다중 소스 데이터 분석** - 의사결정 고도화
 
 ChatGPT를 단순 채팅 도구가 아니라 **생산성 배수를 높이는 AI 동료**로 생각하고 활용한다면, 2026년의 경쟁력 있는 인재가 될 수 있습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcbvsNz2" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">아이패드 에어 M2</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 참고 자료
 

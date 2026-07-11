@@ -10,11 +10,11 @@ image:
   alt: "A Muslim woman in a hijab applies makeup for a tutorial indoors."
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://link.coupang.com/a/fiIcudQZjM"
   - title: "유니티 교과서"
-    url: "https://link.coupang.com/a/dJj8Bn"
+    url: "https://link.coupang.com/a/fiIcubbf9E"
   - title: "로지텍 MX Master 3S"
-    url: "https://link.coupang.com/a/dJj5uu"
+    url: "https://link.coupang.com/a/fiIcrgt7h6"
 faq:
   - q: "Phaser 3은 정말 완전 무료인가요?"
     a: "네, Phaser 3는 MIT 라이선스 오픈소스입니다. 상업적 게임 개발에도 제한이 없으며, 저작권 표시만 해주면 됩니다."
@@ -29,6 +29,16 @@ faq:
 Phaser 3는 2018년 출시 이후 웹게임 개발자들 사이에서 가장 인기 있는 HTML5 게임 엔진 중 하나입니다. **JavaScript 기반의 가볍고 빠른 게임 개발 환경**을 제공하면서도, 강력한 물리 엔진(Arcade Physics)과 애니메이션 시스템을 갖추고 있습니다. 2026년 현재 Phaser 3.80+ 버전에서는 WebGL 성능 최적화, 모바일 터치 입력 개선, 그리고 타입스크립트 지원이 더욱 강화되었습니다.
 
 이 가이드에서는 **Phaser 3로 처음부터 완성도 있는 웹게임을 만드는 실전 방법**을 다룹니다. 기존 완벽 가이드와 달리, 실제 프로젝트 구조 설계, 디버깅 팁, 그리고 배포 최적화에 중점을 두었습니다.
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcudQZjM" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🛒</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">게임 프로그래밍 패턴</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## Phaser 3 개발 환경 설정: 정확한 단계별 방법
 
@@ -365,6 +375,16 @@ Phaser 3는 **JavaScript 기반의 가장 성숙한 2D 게임 엔진**입니다.
 - [MDN Web Docs: Canvas API와 WebGL](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
 
 ---
+
+
+<a class="coupang-inline" href="https://link.coupang.com/a/fiIcubbf9E" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">✅</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">유니티 교과서</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 ## 자주 묻는 질문
 
