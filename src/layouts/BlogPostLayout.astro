@@ -295,6 +295,31 @@ const ogImageUrl = slug ? new URL(`/open-graph/${slug}.png`, Astro.site).href : 
       <slot />
     </div>
 
+    {seriesPosts.filter((p) => p.id !== slug).length >= 2 && (
+      <div id="mid-related-data" hidden>
+        <aside class="mid-related">
+          <span class="mid-related-label">📎 함께 읽으면 좋은 글</span>
+          <ul>
+            {seriesPosts.filter((p) => p.id !== slug).slice(0, 3).map((p) => (
+              <li><a href={`/blog/${p.id}/`}>{p.data.title}</a></li>
+            ))}
+          </ul>
+        </aside>
+      </div>
+    )}
+    <script is:inline>
+      (function () {
+        var src = document.getElementById('mid-related-data');
+        var content = document.getElementById('post-content');
+        if (!src || !content) return;
+        var hs = content.querySelectorAll('h2');
+        if (hs.length >= 3 && src.firstElementChild) {
+          hs[2].parentNode.insertBefore(src.firstElementChild, hs[2]);
+        }
+        src.remove();
+      })();
+    </script>
+
     <!-- 쿠팡 추천 상품 -->
     {coupangLinks && coupangLinks.length > 0 && (
       <CoupangBanner links={coupangLinks} />
