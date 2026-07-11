@@ -8,6 +8,10 @@
     { "id": 4, "title": "api/telegram-webhook.js — 답장/reply·delete 명령 → RPC", "status": "done" },
     { "id": 5, "title": "supabase/telegram-comment-webhook.sql 트리거", "status": "done" },
     { "id": 6, "title": "SETUP-telegram-comment-bot.md 설정 가이드", "status": "done" },
-    { "id": 7, "title": "사용자 설정 (BotFather/Vercel env/setWebhook/트리거 SQL 실행)", "status": "pending-user" }
+    { "id": 7, "title": "사용자 설정 (BotFather/Vercel env/setWebhook/트리거 SQL 실행)", "status": "pending-user" },
+    { "id": 8, "title": "api/_dashboard.js — 대시보드 항목별 실시간 조회 명령 9종", "status": "done" },
+    { "id": 9, "title": "쿠팡 클릭 트래커 통일(coupang_click)+상세화(title) — TF/LF BaseLayout·CoupangBanner", "status": "done" },
+    { "id": 10, "title": "대시보드 쿠팡 피드 상세표시(글→링크)+레거시 affiliate_click 포함", "status": "done" },
+    { "id": 11, "title": "System Status LifeFlow/쿠팡 오표시 수정", "status": "done" }
   ]
 }

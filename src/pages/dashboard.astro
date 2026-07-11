@@ -2325,7 +2325,7 @@ const ICONS: Record<string, string> = {
             </div>
             <div class="status-item">
               <span>LifeFlow (Vercel)</span>
-              <span class="status-badge pending">미배포</span>
+              <span class="status-badge online">Online</span>
             </div>
             <div class="status-item">
               <span>Supabase DB</span>
@@ -2341,7 +2341,7 @@ const ICONS: Record<string, string> = {
             </div>
             <div class="status-item">
               <span>Coupang Partners</span>
-              <span class="status-badge pending">연동 필요</span>
+              <span class="status-badge online">연동됨</span>
             </div>
           </div>
         </div>
@@ -3685,14 +3685,23 @@ const ICONS: Record<string, string> = {
       }
 
       // === 쿠팡 상품별 클릭 (analytics 테이블 직접 조회 → metadata.product 집계) ===
+      // 과거 인라인 링크는 affiliate_click 으로 기록됐어서(트래커 통일 전) 두 타입 모두 조회
       async function fetchCoupangProducts() {
         try {
           const res = await fetch(
-            `${SUPABASE_URL}/rest/v1/analytics?event_type=eq.coupang_click&select=metadata,source,created_at&order=created_at.desc&limit=2000`,
+            `${SUPABASE_URL}/rest/v1/analytics?or=(event_type.eq.coupang_click,event_type.eq.affiliate_click)&select=metadata,source,created_at&order=created_at.desc&limit=2000`,
             { headers }
           );
           if (!res.ok) return [];
-          return await res.json();
+          const rows = await res.json();
+          // affiliate_click 중 쿠팡 외 대상 제외 + 필드 정규화(label/href → product/url)
+          return (Array.isArray(rows) ? rows : []).filter(r => {
+            const m = r.metadata || {};
+            return m.target === undefined || m.target === 'coupang';
+          }).map(r => {
+            const m = r.metadata || {};
+            return { ...r, metadata: { ...m, product: m.product || m.label || '', url: m.url || m.href || '' } };
+          });
         } catch { return []; }
       }
 
@@ -3738,7 +3747,7 @@ const ICONS: Record<string, string> = {
         }).join('');
       }
 
-      // === 쿠팡 클릭 트래킹 피드 (analytics 전체 → 최근순 + 상품명) ===
+      // === 쿠팡 클릭 트래킹 피드 (어떤 포스팅에서 어떤 링크를 클릭했는지 상세) ===
       function renderCoupangFeed(rows) {
         const container = document.getElementById('coupang-events');
         if (!container) return;
@@ -3750,13 +3759,17 @@ const ICONS: Record<string, string> = {
         container.innerHTML = list.map(r => {
           const m = r.metadata || {};
           const prod = m.product || '(상품 미상)';
-          const path = m.path || m.slug || '';
+          const postTitle = getPageTitle({ title: m.title, slug: m.slug, path: m.path });
+          const path = m.path || (m.slug ? `/blog/${m.slug}/` : '');
           const src = r.source === 'lifeflow' ? 'lifeflow' : 'blog';
+          const prodEl = m.url
+            ? `<a href="${m.url}" target="_blank" rel="noopener" class="event-action" style="color:#facc15" title="${m.url}">🔗 ${prod.length > 44 ? prod.slice(0,44)+'…' : prod}</a>`
+            : `<div class="event-action" style="color:#facc15">${prod.length > 44 ? prod.slice(0,44)+'…' : prod}</div>`;
           return `<div class="event-item">
             <span class="event-icon coupang_click">🛒</span>
             <div class="event-content">
-              <div class="event-action" style="color:#facc15">${prod.length > 44 ? prod.slice(0,44)+'…' : prod}</div>
-              <div class="event-page-title" title="${path}">${sourceBadge(src)} ${path || '홈페이지'}</div>
+              ${prodEl}
+              <div class="event-page-title" title="${path}">${sourceBadge(src)} 📄 ${postTitle.length > 40 ? postTitle.slice(0,40)+'…' : postTitle}</div>
             </div>
             <span class="event-time">${timeAgo(r.created_at)}</span>
           </div>`;
@@ -4201,32 +4214,8 @@ const ICONS: Record<string, string> = {
           if (coupTfDetailEl) coupTfDetailEl.textContent = `${fmt(Number(summary?.tf_total_clicks) || 0)} / ${fmt(tfTotal)}`;
           if (coupLfDetailEl) coupLfDetailEl.textContent = `${fmt(Number(summary?.lf_total_clicks) || 0)} / ${fmt(lfTotal)}`;
 
-          // 쿠팡 클릭 이벤트 필터
-          const coupangEvents = events.filter(e => e.event_type === 'coupang_click');
-          const coupangEventsEl = document.getElementById('coupang-events');
-          if (coupangEventsEl) {
-            if (coupangEvents.length === 0) {
-              coupangEventsEl.innerHTML = '<div class="no-data">아직 쿠팡 클릭 데이터가 없습니다.</div>';
-            } else {
-              coupangEventsEl.innerHTML = coupangEvents.slice(0, 15).map(e => {
-                const icon = '🛒';
-                const title = getPageTitle(e);
-                const prod = e.product || (e.metadata && e.metadata.product) || '';
-                const srcBadge = sourceBadge(e.source);
-                const prodLine = prod
-                  ? `<div class="event-action" style="color:#facc15">${prod.length > 44 ? prod.slice(0,44)+'…' : prod}</div>`
-                  : `<div class="event-action">상품 미상</div>`;
-                return `<div class="event-item">
-                  <span class="event-icon coupang_click">${icon}</span>
-                  <div class="event-content">
-                    ${prodLine}
-                    <div class="event-page-title" title="${title}">${srcBadge} ${title}</div>
-                  </div>
-                  <span class="event-time">${timeAgo(e.created_at)}</span>
-                </div>`;
-              }).join('');
-            }
-          }
+          // 쿠팡 클릭 피드는 fetchCoupangProducts → renderCoupangFeed 가 전담
+          // (get_recent_events 20건 기반 구 렌더링은 상세 피드를 덮어써서 제거)
 
           // Charts & feeds
           _hourlyViews = Array.isArray(hourly) ? hourly : [];

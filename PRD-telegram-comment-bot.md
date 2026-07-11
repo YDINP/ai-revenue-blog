@@ -63,3 +63,30 @@
 - source→URL 매핑: `blog`→ai-revenue-blog.vercel.app, `lifeflow`→life-revenue-blog.vercel.app (글 경로 `/blog/<slug>/`)
 - gameflow-blog은 현재 `source="blog"`로 잘못 지정돼 있음(별도 이슈) — 추후 `gameflow` source 추가 시 `_shared.js`의 SOURCE_META에 한 줄 추가하면 됨
 - 트리거는 공용 테이블에 걸리므로 두 블로그(+향후 gameflow) 댓글 모두 알림됨
+
+---
+
+## 2차: 대시보드 실시간 조회 + 쿠팡 트래커 상세화 (2026-07-12)
+
+### 봇 대시보드 조회 명령 (`api/_dashboard.js`)
+
+대시보드(/dashboard)와 동일한 Supabase RPC를 조회해 항목별 실시간 확인:
+`/stats`(전체 요약+댓글 통계) · `/tf` `/lf`(소스별+Top5) · `/coupang`(상품별 Top+최근 클릭 상세) · `/top [n]` · `/trend`(스파크라인) · `/likes` · `/recent [n]` · `/cstats` · `/comments [n]`(댓글별 개별 메시지 → 각각 답장=대댓글)
+
+### 쿠팡 클릭 트래커 상세화 + 통일
+
+문제:
+1. 본문 인라인 링크는 `affiliate_click`, 배너는 `coupang_click`으로 **이벤트 타입이 갈라져** 대시보드 쿠팡 트래커(coupang_click만 조회)에 인라인 클릭이 안 보임
+2. 배너 클릭은 배너 자체 스크립트 + BaseLayout 전역 리스너 **양쪽에서 이중 기록**
+3. 메타데이터에 글 제목(title)이 없어 "어떤 포스팅에서" 클릭했는지 부실
+4. LF 배너 스크립트가 `source:'blog'`로 오기록 (LF 클릭이 TF로 집계)
+
+해결 (TF+LF 동일 적용):
+- BaseLayout 전역 핸들러 하나로 통일: `coupang_click` + `{product, url, slug, path, title}` — CoupangBanner 자체 스크립트 제거 (`data-product`는 전역 핸들러가 읽음)
+- 대시보드/봇 조회는 레거시 `affiliate_click`(target=coupang)도 포함 + `label/href → product/url` 정규화 → 과거 데이터 유지
+- 쿠팡 피드 렌더링: 상품명(링크) + 📄 글 제목 상세 표시. loadTraffic의 구식 중복 렌더링(#coupang-events 덮어쓰기) 제거
+
+### System Status 오표시 수정
+
+- LifeFlow (Vercel): "미배포" → "Online" (실제 배포됨)
+- Coupang Partners: "연동 필요" → "연동됨" (트래킹 가동 중)

@@ -60,13 +60,37 @@ curl "https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/setWebhook" \
 
 ## 봇 명령어
 
+**대시보드 실시간 조회**
+
+| 명령 | 동작 |
+|------|------|
+| `/stats` | 전체 요약 (오늘/누적 조회수·쿠팡클릭·좋아요·구독자·댓글, TF/LF 분리) |
+| `/tf` / `/lf` | TechFlow / LifeFlow 소스별 요약 + 인기 페이지 Top 5 |
+| `/coupang` | 쿠팡 클릭 상세 — 상품별 Top + 최근 클릭(어떤 글→어떤 링크) |
+| `/top [n]` | 인기 페이지 Top n (기본 10) |
+| `/trend` | 최근 7일 조회수 추이 (스파크라인) |
+| `/likes` | 추천(좋아요) Top |
+| `/recent [n]` | 최근 이벤트 피드 |
+| `/cstats` | 댓글 통계 + 7일 트렌드 |
+
+**댓글 관리**
+
 | 명령 | 동작 |
 |------|------|
 | 알림에 답장 | 해당 댓글에 관리자 대댓글 등록 |
+| `/comments [n]` | 최근 댓글 n개(기본 5) — **댓글마다 개별 메시지**라 각각에 답장하면 그 댓글에 대댓글 |
 | `/reply <댓글ID> <내용>` | ID 직접 지정 대댓글 (ID = 알림의 `#c_...` 값) |
 | `/delete <댓글ID>` | 댓글 삭제 (자식 대댓글 포함) |
 | `/id` | 현재 채팅 ID 확인 |
 | `/help` | 사용법 |
+
+**(선택) 명령어 자동완성 등록** — 텔레그램 입력창에서 `/` 입력 시 목록이 뜨게:
+
+```bash
+curl "https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/setMyCommands" \
+  -H "Content-Type: application/json" \
+  -d '{"commands":[{"command":"stats","description":"전체 요약"},{"command":"tf","description":"TechFlow 요약"},{"command":"lf","description":"LifeFlow 요약"},{"command":"coupang","description":"쿠팡 클릭 상세"},{"command":"comments","description":"최근 댓글 (답장=대댓글)"},{"command":"cstats","description":"댓글 통계"},{"command":"top","description":"인기 페이지"},{"command":"trend","description":"7일 조회수 추이"},{"command":"likes","description":"추천 Top"},{"command":"recent","description":"최근 이벤트"},{"command":"help","description":"사용법"}]}'
+```
 
 ## 트러블슈팅
 
