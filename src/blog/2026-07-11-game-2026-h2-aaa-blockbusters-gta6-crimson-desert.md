@@ -10,9 +10,9 @@ image:
   alt: "TV 앞에서 콘솔 컨트롤러로 게임하는 모습 — 2026 하반기 콘솔 대작"
 coupangLinks:
   - title: "PS5 듀얼센스 무선 컨트롤러"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://www.coupang.com/np/search?component=&q=PS5+%EB%93%80%EC%96%BC%EC%84%BC%EC%8A%A4+%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC&channel=user"
   - title: "게이밍 헤드셋"
-    url: "https://link.coupang.com/a/dJj5U5"
+    url: "https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9D%B4%EB%B0%8D+%ED%97%A4%EB%93%9C%EC%85%8B&channel=user"
 faq:
   - q: "GTA 6는 언제, 어떤 기기로 나오나요?"
     a: "GTA 6는 2026년 11월 19일 PS5와 Xbox 시리즈 X/S로 발매될 것으로 알려졌습니다. 한국어를 지원해 국내 이용자도 편하게 즐길 수 있습니다. PC판은 콘솔 출시 이후 별도 시점에 나오는 것이 락스타의 관례라, PC 유저는 다소 기다려야 할 가능성이 큽니다. 발매일은 개발사 사정에 따라 변동될 수 있으니 공식 발표를 확인하세요."
@@ -47,6 +47,15 @@ GTA 6 외에도 놓치기 아까운 대작이 가득합니다.
 | 팬텀 블레이드 제로 | 액션 | PC·콘솔 | 무협 액션 |
 | 신더시티 | 오픈월드 슈터 | 글로벌 | 엔씨 첫 오픈월드 슈터 |
 
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=PS5+%EB%93%80%EC%96%BC%EC%84%BC%EC%8A%A4+%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🎮</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">PS5 듀얼센스 무선 컨트롤러 최저가 보기</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
+
 ## K-게임의 글로벌 승부수
 
 올 하반기는 **국산 게임**에도 중요한 시기입니다. 펄어비스의 오픈월드 액션 '붉은사막'이 글로벌 기대주로 꼽히고, 엔씨소프트는 첫 오픈월드 슈터 '신더시티'로 새 도전에 나섭니다. MMORPG부터 액션 RPG, 루터 슈터까지 장르도 다양해, K-게임이 세계 시장에서 존재감을 키우는 해가 될 전망입니다.
@@ -62,6 +71,15 @@ GTA 6 외에도 놓치기 아까운 대작이 가득합니다.
 ## 놓치지 않으려면: 위시리스트
 
 이렇게 대작이 몰릴 땐 출시·할인 알림을 놓치기 쉽습니다. 스팀·콘솔 스토어의 **위시리스트**에 미리 담아두면 알림을 받을 수 있고, 예약 구매 시 얼리 액세스나 사전 특전을 주는 경우도 많아요. 인디·중소 신작까지 폭넓게 챙기고 싶다면 [2026 하반기 스팀 기대 신작 총정리](/blog/2026-07-07-game-steam-upcoming-games-2026-h2-wishlist/)도 함께 보면 좋습니다.
+
+<a class="coupang-inline" href="https://www.coupang.com/np/search?component=&q=%EA%B2%8C%EC%9D%B4%EB%B0%8D+%ED%97%A4%EB%93%9C%EC%85%8B&channel=user" target="_blank" rel="noopener noreferrer nofollow">
+  <span class="ci-icon" aria-hidden="true">🎧</span>
+  <span class="ci-body">
+    <span class="ci-label">쿠팡 추천</span>
+    <span class="ci-title">몰입감 게이밍 헤드셋 인기순 보기</span>
+  </span>
+  <span class="ci-cta">최저가 →</span>
+</a>
 
 <div class="callout-warning">⚠️ 주의: 출시일은 개발사 사정에 따라 연기될 수 있습니다. 특히 초대형 타이틀일수록 일정 변동 가능성이 있으니, 예약·구매 전 공식 발표를 확인하세요.</div>
 
