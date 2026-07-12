@@ -41,8 +41,14 @@ globalThis.fetch = async (url, opts = {}) => {
   // ── 리포트용 REST ──
   if (url.includes('/rest/v1/comments?created_at')) return { ok: true, json: async () => [{ source: 'blog', nickname: '독자', content: '좋은 글', post_slug: 'p1', is_admin: false }] };
   if (url.includes('/rest/v1/card_likes')) return { ok: true, json: async () => [{ slug: 'p1' }, { slug: 'p2' }] };
+  // ── 핫 키워드 소스 ──
+  if (url.includes('trends.google.com')) return { ok: true, text: async () => '<rss><channel><item><title>여름 폭염 대비</title></item><item><title>홍길동</title></item></channel></rss>' };
   // ── GitHub API ──
   if (url.includes('api.github.com')) {
+    if (url.includes('category-seeds.json')) {
+      const seeds = { categories: [{ name: 'AI', keywords: ['AI 코딩 도구 추천', 'ChatGPT 활용법'] }, { name: 'Game', keywords: ['인디게임 마케팅'] }] };
+      return { ok: true, status: 200, json: async () => ({ sha: 's', content: Buffer.from(JSON.stringify(seeds), 'utf8').toString('base64') }) };
+    }
     const m = url.match(/\/contents\/([^?]+)/);
     if (url.includes('/contents/src/blog?')) return { ok: true, status: 200, json: async () => [
       { type: 'file', name: '2026-07-12-new-post.md', path: 'src/blog/2026-07-12-new-post.md', sha: 'sha1' },
@@ -246,12 +252,71 @@ calls.length = 0; res = mockRes();
 await tgHook(tgMsg('확인'), res);
 assert(sentTexts()[0].includes('삭제 완료'), '확인 performs delete');
 
-// 22. /generate tf → GitHub Actions workflow_dispatch
+// 22. /generate tf <카테고리> <주제> → 즉시 workflow_dispatch (인자 직접 지정 경로)
 calls.length = 0; res = mockRes();
 await tgHook(tgMsg('/generate tf AI 인디게임 수익화'), res);
 const disp = calls.find(c => c.url.includes('/dispatches'));
-assert(disp, '/generate dispatches the workflow');
+assert(disp, '/generate with args dispatches the workflow');
 assert(disp.body.inputs.category === 'AI' && disp.body.inputs.topic === '인디게임 수익화', '/generate passes category and topic');
+
+// 22b. /generate (인자 없음) → 블로그 선택 버튼
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/generate'), res);
+const startMsg = calls.find(c => c.url.includes('sendMessage'));
+assert(startMsg?.body.reply_markup, '/generate shows inline keyboard');
+const blogBtns = startMsg.body.reply_markup.inline_keyboard[0];
+assert(blogBtns.some(b => b.callback_data === 'g:blog:tf') && blogBtns.some(b => b.callback_data === 'g:blog:lf'), 'blog buttons offered');
+assert(!JSON.stringify(startMsg.body.reply_markup).includes('g:blog:pc'), 'playcast excluded (no generator workflow)');
+
+// 22c. 블로그 선택 콜백 → 주제 결정 방식 버튼
+const cbUpdate = (data) => ({ method: 'POST', headers: { 'x-telegram-bot-api-secret-token': 'testsecret' }, body: { callback_query: { id: 'cb1', data, message: { message_id: 50, chat: { id: 11111 } } } } });
+calls.length = 0; res = mockRes();
+await tgHook(cbUpdate('g:blog:tf'), res);
+let edited = calls.find(c => c.url.includes('editMessageText'));
+assert(calls.some(c => c.url.includes('answerCallbackQuery')), 'callback spinner is cleared');
+assert(edited && JSON.stringify(edited.body.reply_markup).includes('g:hot'), 'blog pick offers hot/manual/auto');
+assert(botState?.flow === 'generate' && botState.blog === 'tf', 'blog stored in state');
+
+// 22d. 핫 키워드 → 시드/트렌드/인기글 후보 버튼
+calls.length = 0; res = mockRes();
+await tgHook(cbUpdate('g:hot'), res);
+edited = calls.find(c => c.url.includes('editMessageText'));
+assert(edited && edited.body.text.includes('핫 키워드'), 'hot keyword list shown');
+const kwBtns = JSON.stringify(edited.body.reply_markup);
+assert(kwBtns.includes('g:kw:0'), 'keyword buttons present');
+assert(botState?.cands?.length > 0, 'candidates saved in state (callback data stays under 64B)');
+assert(botState.cands.some(c => c.src === 'seed'), 'seeds included as candidates');
+
+// 22e. 키워드 선택 → 해당 주제로 dispatch
+calls.length = 0; res = mockRes();
+const picked = botState.cands[0];
+await tgHook(cbUpdate('g:kw:0'), res);
+const disp2 = calls.find(c => c.url.includes('/dispatches'));
+assert(disp2 && disp2.body.inputs.topic === picked.topic, 'picked keyword is dispatched as topic');
+assert(botState === null, 'state cleared after dispatch');
+
+// 22f. 직접 입력 → 다음 메시지가 주제로 사용됨
+await tgHook(cbUpdate('g:blog:lf'), mockRes());
+calls.length = 0; res = mockRes();
+await tgHook(cbUpdate('g:manual'), res);
+assert(botState?.step === 'await_topic', 'manual step waits for topic');
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('여름 휴가 가성비 여행지'), res);
+const disp3 = calls.find(c => c.url.includes('/dispatches'));
+assert(disp3 && disp3.body.inputs.topic === '여름 휴가 가성비 여행지', 'manual topic dispatched');
+assert(disp3.url.includes('life-revenue-blog'), 'dispatched to the selected blog repo');
+
+// 22g. 자동 선택 → 빈 주제로 dispatch
+await tgHook(cbUpdate('g:blog:tf'), mockRes());
+calls.length = 0; res = mockRes();
+await tgHook(cbUpdate('g:auto'), res);
+const disp4 = calls.find(c => c.url.includes('/dispatches'));
+assert(disp4 && disp4.body.inputs.topic === '' && disp4.body.inputs.category === 'auto', 'auto dispatch uses empty topic');
+
+// 22h. 비관리자 콜백 차단
+calls.length = 0; res = mockRes();
+await tgHook({ method: 'POST', headers: { 'x-telegram-bot-api-secret-token': 'testsecret' }, body: { callback_query: { id: 'cb2', data: 'g:blog:tf', message: { message_id: 1, chat: { id: 99999 } } } } }, res);
+assert(!calls.some(c => c.url.includes('editMessageText')), 'non-admin callback rejected');
 
 // 23. /deploy (VERCEL_TOKEN 없음) → 빈 커밋 폴백
 calls.length = 0; res = mockRes();

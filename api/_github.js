@@ -79,6 +79,13 @@ export async function getPost(blog, slug) {
   return { path, sha: f.sha, content: b64decode(f.content.replace(/\n/g, '')) };
 }
 
+// 레포의 임의 JSON 파일 읽기 (category-seeds.json 등)
+export async function getFileJson(blog, path) {
+  const f = await gh(`/repos/${blog.repo}/contents/${encodeURI(path)}?ref=${blog.branch}`);
+  if (!f?.content) throw new Error('파일 없음: ' + path);
+  return JSON.parse(b64decode(f.content.replace(/\n/g, '')));
+}
+
 export async function putPost(blog, path, content, sha, message) {
   return gh(`/repos/${blog.repo}/contents/${encodeURI(path)}`, {
     method: 'PUT',

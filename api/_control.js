@@ -17,6 +17,7 @@ import {
 } from './_github.js';
 import { escapeHtml } from './_shared.js';
 import { clearState, getState, setState } from './_state.js';
+import { hotKeywords } from './_trends.js';
 import { hasVercelToken, latestDeployment, redeploy } from './_vercel.js';
 
 const cut = (s, n) => (s = String(s || ''), s.length > n ? s.slice(0, n) + '…' : s);
@@ -208,22 +209,116 @@ export async function editApply(chatId, state, text) {
   return `✏️ 수정 완료 — <code>${escapeHtml(state.slug)}</code>\n재배포 후 반영됩니다.`;
 }
 
-// ── /generate <blog> [카테고리] [주제] — GitHub Actions 자동 포스팅 ──
-export async function generateMessage(blogArg, category, topic) {
-  const blog = needBlog(blogArg);
-  const inputs = {
-    category: category || 'auto',
-    topic: topic || '',
-    count: '1',
-  };
+// ── /generate — 대화형 자동 포스팅 (블로그 선택 → 핫 키워드/직접 입력 → 실행) ──
+// 인자를 직접 준 경우(/generate tf AI 주제)는 즉시 실행
+
+export async function generateDispatch(blog, category, topic) {
+  const inputs = { category: category || 'auto', topic: topic || '', count: '1' };
   await dispatchGenerator(blog, inputs);
   return (
     `🤖 <b>${escapeHtml(blog.label)}</b> 자동 포스팅 시작\n\n` +
-    `카테고리: ${escapeHtml(inputs.category)}\n` +
-    `주제: ${escapeHtml(inputs.topic || '(자동 선택)')}\n\n` +
+    `📌 주제: <b>${escapeHtml(inputs.topic || '(자동 선택)')}</b>\n` +
+    `🗂 카테고리: ${escapeHtml(inputs.category)}\n\n` +
     `Claude가 글을 생성하고 커밋 → 자동 배포합니다 (2~4분).\n` +
     `<code>/status ${blog.key}</code> 로 진행 확인.`
   );
+}
+
+export async function generateMessage(blogArg, category, topic) {
+  const blog = needBlog(blogArg);
+  return generateDispatch(blog, category, topic);
+}
+
+// 1단계: 블로그 선택 버튼
+export function generateStart() {
+  const blogs = blogList().filter((b) => b.generator);
+  return {
+    text:
+      '🤖 <b>AI 자동 포스팅</b>\n\n어느 블로그에 쓸까요?',
+    reply_markup: {
+      inline_keyboard: [
+        blogs.map((b) => ({ text: b.label.split(' (')[0], callback_data: `g:blog:${b.key}` })),
+        [{ text: '✖ 취소', callback_data: 'g:cancel' }],
+      ],
+    },
+  };
+}
+
+// 2단계: 주제 결정 방식
+export async function generateSourceStep(chatId, blogKey) {
+  const blog = needBlog(blogKey);
+  await setState(chatId, { flow: 'generate', blog: blog.key });
+  return {
+    text: `🤖 <b>${escapeHtml(blog.label)}</b>\n\n주제를 어떻게 정할까요?`,
+    reply_markup: {
+      inline_keyboard: [
+        [{ text: '🔥 현재 핫 키워드 보기', callback_data: 'g:hot' }],
+        [{ text: '✍️ 키워드 직접 입력', callback_data: 'g:manual' }],
+        [{ text: '🎲 알아서 (자동 선택)', callback_data: 'g:auto' }],
+        [{ text: '✖ 취소', callback_data: 'g:cancel' }],
+      ],
+    },
+  };
+}
+
+// 3단계-A: 핫 키워드 목록 (후보를 상태에 저장하고 인덱스로 콜백 — 콜백 데이터 64B 제한 회피)
+export async function generateHotStep(chatId, state) {
+  const blog = needBlog(state.blog);
+  const cands = await hotKeywords(blog);
+  if (!cands.length) {
+    return {
+      text: '키워드를 가져오지 못했습니다. 직접 입력하거나 자동 선택을 쓰세요.',
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: '✍️ 직접 입력', callback_data: 'g:manual' }],
+          [{ text: '🎲 자동 선택', callback_data: 'g:auto' }],
+        ],
+      },
+    };
+  }
+  await setState(chatId, { ...state, cands });
+  return {
+    text:
+      `🔥 <b>현재 핫 키워드</b> — ${escapeHtml(blog.label)}\n\n` +
+      `🌱 미사용 시드 · 🔥 구글 실시간 급상승 · 📈 내 블로그 인기글 후속편\n\n` +
+      `쓸 키워드를 고르세요.`,
+    reply_markup: {
+      inline_keyboard: [
+        ...cands.map((c, i) => [{ text: cut(c.label, 55), callback_data: `g:kw:${i}` }]),
+        [
+          { text: '🔄 새로고침', callback_data: 'g:hot' },
+          { text: '✍️ 직접 입력', callback_data: 'g:manual' },
+        ],
+        [{ text: '✖ 취소', callback_data: 'g:cancel' }],
+      ],
+    },
+  };
+}
+
+// 3단계-B: 직접 입력 대기
+export async function generateManualStep(chatId, state) {
+  const blog = needBlog(state.blog);
+  await setState(chatId, { ...state, step: 'await_topic' });
+  return {
+    text:
+      `✍️ <b>${escapeHtml(blog.label)}</b>\n\n쓸 <b>키워드/주제</b>를 보내주세요.\n` +
+      `예) <code>2026 인디게임 수익화 전략</code>\n\n취소: <code>/cancel</code>`,
+  };
+}
+
+// 4단계: 키워드 확정 → 워크플로 실행
+export async function generatePickKeyword(chatId, state, index) {
+  const blog = needBlog(state.blog);
+  const c = (state.cands || [])[index];
+  if (!c) throw new Error('키워드가 만료됐습니다. <code>/generate</code> 로 다시 시작하세요.');
+  await clearState(chatId);
+  return generateDispatch(blog, c.category, c.topic);
+}
+
+export async function generateManualTopic(chatId, state, topic) {
+  const blog = needBlog(state.blog);
+  await clearState(chatId);
+  return generateDispatch(blog, 'auto', topic);
 }
 
 // ── /deploy <blog> ──
@@ -296,6 +391,33 @@ export async function handleFlow(chatId, text) {
   }
   if (state.flow === 'newpost') return newPostStep(chatId, state, text);
   if (state.flow === 'edit') return editApply(chatId, state, text);
-  await clearState(chatId);
-  return null;
+  if (state.flow === 'generate' && state.step === 'await_topic') {
+    return generateManualTopic(chatId, state, text);
+  }
+  return null;   // generate 대기 중(버튼 단계) 등은 상태를 지우지 않고 통과
+}
+
+// 콜백 버튼(g:*) 처리 — { text, reply_markup? } 반환
+export async function handleGenerateCallback(chatId, data) {
+  if (data === 'g:cancel') {
+    await clearState(chatId);
+    return { text: '자동 포스팅을 취소했습니다.' };
+  }
+  const blogPick = data.match(/^g:blog:(\w+)$/);
+  if (blogPick) return generateSourceStep(chatId, blogPick[1]);
+
+  const state = await getState(chatId);
+  if (!state || state.flow !== 'generate') {
+    return { text: '세션이 만료됐습니다. <code>/generate</code> 로 다시 시작하세요.' };
+  }
+  if (data === 'g:hot') return generateHotStep(chatId, state);
+  if (data === 'g:manual') return generateManualStep(chatId, state);
+  if (data === 'g:auto') {
+    const blog = needBlog(state.blog);
+    await clearState(chatId);
+    return { text: await generateDispatch(blog, 'auto', '') };
+  }
+  const kw = data.match(/^g:kw:(\d+)$/);
+  if (kw) return { text: await generatePickKeyword(chatId, state, parseInt(kw[1], 10)) };
+  return { text: '알 수 없는 동작입니다.' };
 }

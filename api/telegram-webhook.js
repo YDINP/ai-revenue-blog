@@ -19,7 +19,9 @@ import {
   deployMessage,
   editStart,
   generateMessage,
+  generateStart,
   handleFlow,
+  handleGenerateCallback,
   newPostStart,
   postsMessage,
   statusMessage,
@@ -52,7 +54,8 @@ const HELP = [
   '• <code>/newpost &lt;블로그&gt;</code> — 새 글 작성 (제목→본문)',
   '• <code>/edit &lt;블로그&gt; &lt;slug&gt;</code> — 본문 교체',
   '• <code>/delpost &lt;블로그&gt; &lt;slug&gt;</code> — 글 삭제 (확인 필요)',
-  '• <code>/generate &lt;블로그&gt; [카테고리] [주제]</code> — AI 자동 포스팅',
+  '• /generate — AI 자동 포스팅 (블로그 선택 → 🔥핫 키워드 / ✍️직접 입력 / 🎲자동)',
+  '   <code>/generate tf AI 주제</code> 처럼 인자를 주면 바로 실행',
   '• <code>/deploy &lt;블로그&gt;</code> · <code>/status [블로그]</code>',
   '• /cancel — 진행 중인 작성/수정 취소',
 ].join('\n');
@@ -65,6 +68,38 @@ export default async function handler(req, res) {
   const secret = process.env.WEBHOOK_SECRET;
   if (!secret || req.headers['x-telegram-bot-api-secret-token'] !== secret) {
     return res.status(401).json({ error: 'unauthorized' });
+  }
+
+  // ── 인라인 버튼(callback_query) — /generate 대화형 플로우 ──
+  const cb = req.body?.callback_query;
+  if (cb) {
+    const cbChat = String(cb.message?.chat?.id || '');
+    const adminChatId = process.env.TELEGRAM_ADMIN_CHAT_ID;
+    if (!adminChatId || cbChat !== String(adminChatId)) {
+      await tg('answerCallbackQuery', { callback_query_id: cb.id, text: '관리자 전용' });
+      return res.status(200).json({ ok: true });
+    }
+    // 로딩 스피너 즉시 해제 (텔레그램은 응답 없으면 버튼이 계속 도는 것처럼 보임)
+    await tg('answerCallbackQuery', { callback_query_id: cb.id });
+    try {
+      const out = await handleGenerateCallback(cbChat, cb.data || '');
+      await tg('editMessageText', {
+        chat_id: cbChat,
+        message_id: cb.message.message_id,
+        text: out.text,
+        parse_mode: 'HTML',
+        disable_web_page_preview: true,
+        ...(out.reply_markup ? { reply_markup: out.reply_markup } : {}),
+      });
+    } catch (e) {
+      console.error('callback error:', e);
+      await tg('sendMessage', {
+        chat_id: cbChat,
+        text: `❌ ${escapeHtml(e.message)}`,
+        parse_mode: 'HTML',
+      });
+    }
+    return res.status(200).json({ ok: true });
   }
 
   const msg = req.body?.message;
@@ -116,13 +151,25 @@ export default async function handler(req, res) {
         newpost: () => newPostStart(chatId, a1),
         edit: () => editStart(chatId, a1, a2),
         delpost: () => deleteRequestMessage(chatId, a1, a2),
-        generate: () => generateMessage(a1, a2, a3),
+        // 인자 없이 /generate → 버튼 플로우, 인자 주면 즉시 실행
+        generate: () => (a1 ? generateMessage(a1, a2, a3) : null),
         deploy: () => deployMessage(a1),
         status: () => statusMessage(a1),
         report: () => reportMessage(/^\d{4}-\d{2}-\d{2}$/.test(a1 || '') ? a1 : undefined),
       };
       if (CONTROL[cmd]) {
-        await reply(await CONTROL[cmd]());
+        const out = await CONTROL[cmd]();
+        if (out === null && cmd === 'generate') {
+          const start = generateStart();
+          await tg('sendMessage', {
+            chat_id: chatId,
+            text: start.text,
+            parse_mode: 'HTML',
+            reply_markup: start.reply_markup,
+          });
+        } else {
+          await reply(out);
+        }
         return res.status(200).json({ ok: true });
       }
       if (cmd === 'cancel') {

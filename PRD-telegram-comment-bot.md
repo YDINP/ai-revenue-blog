@@ -99,3 +99,44 @@
 - 데이터: 신규 RPC `get_daily_device_trend(p_days)` — pageview `metadata->>'user_agent'` 를 `Mobi|Android|iPhone|iPad` 정규식으로 분류, **KST 일자 버킷** (기존 `get_daily_detail`이 KST 버킷임을 라이브 카운트 대조로 검증)
 - 적용 필요: `supabase/device-trend-rpc.sql` 을 SQL Editor에서 실행 (미설치 시 차트에 설치 안내 문구 표시, 다른 기능 영향 없음)
 - 일간/주간/월간/커스텀 기간 모두 지원, 우측 리스트에 웹·모바일·모바일% 표시, CSV에 웹/모바일 컬럼 추가
+
+---
+
+## 4차: 블로그 제어 + 일일 리포트 + 대화형 /generate (2026-07-12)
+
+### 블로그 제어 (`api/_blogs.js` 레지스트리 + `_github.js` + `_control.js`)
+
+대상 3종: `tf`(ai-revenue) · `lf`(life-revenue) · `pc`(playcast/virtual-in-playing).
+GitHub Contents API 커밋 → Vercel 자동배포가 기본 경로(별도 배포 호출 불필요).
+
+| 명령 | 동작 |
+|------|------|
+| `/blogs` `/posts <b> [n]` | 블로그 목록 / 최근 글(발행·숨김 표시) |
+| `/publish` `/draft` | frontmatter `draft` 토글 |
+| `/newpost` `/edit` `/delpost` | 작성(제목→본문) / 본문 교체 / 삭제(확인 필요) |
+| `/generate` | AI 자동 포스팅 (아래) |
+| `/deploy` `/status` | 재배포 / 배포·워크플로 상태 |
+
+- 서버리스는 요청 간 상태가 없어 다단계 흐름은 Supabase `bot_state`(SECURITY DEFINER RPC, 30분 만료)에 저장 → `supabase/bot-control.sql`
+- `VERCEL_TOKEN` 있으면 배포 상태 조회·재배포, 없으면 빈 커밋 폴백
+- ⚠️ LifeFlow는 `draft` 필터가 없어 숨김이 무효였음 → 목록·상세·카테고리·태그 페이지에 필터 추가(life-revenue 21dfbda)
+
+### 대화형 `/generate` (`api/_trends.js`)
+
+`/generate` → 인라인 버튼: 블로그 선택 → **🔥 핫 키워드 / ✍️ 직접 입력 / 🎲 자동**.
+핫 키워드 = 3개 소스 병합:
+1. 🌱 각 레포 `scripts/category-seeds.json` 중 **아직 안 쓴** 키워드 (기존 slug 대조)
+2. 🔥 Google 실시간 급상승(KR RSS, 인물명 필터링)
+3. 📈 내 블로그 최근 인기글 → "후속편" 후보 (get_top_pages, source별)
+
+선택 시 기존 GitHub Actions `daily-post.yml` 을 `workflow_dispatch`(category/topic/count)로 실행 → Claude 생성 → 커밋 → 자동배포.
+콜백 데이터 64B 제한 때문에 후보는 `bot_state`에 저장하고 인덱스(`g:kw:0`)로 참조.
+
+### 일일 리포트 (`api/daily-report.js` + `_report.js`, Vercel cron)
+
+매일 09:00 KST(`vercel.json` cron `0 0 * * *` UTC) → 전날 조회수(TF/LF)·방문자·신규 댓글·신규 좋아요·쿠팡 클릭 + 인기글 TOP·새 댓글·클릭 상품, 전일 대비 증감 포함. `/report [YYYY-MM-DD]` 로 수동 조회.
+좋아요는 `card_likes` 테이블, 쿠팡은 `coupang_click`+레거시 `affiliate_click` 병합.
+
+### 추가 환경변수
+
+`GITHUB_TOKEN`(repo+workflow) · `CRON_SECRET` · (선택) `VERCEL_TOKEN`
