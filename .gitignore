@@ -26,3 +26,7 @@ Thumbs.db
 # scratch
 .tmp-*.mjs
 .tmp/
+
+# vercel cli
+.env.local
+.vercel

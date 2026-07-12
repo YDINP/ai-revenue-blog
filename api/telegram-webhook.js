@@ -1,4 +1,4 @@
-// 텔레그램 봇 웹훅 — 알림 메시지에 답장하거나 /reply·/delete 명령으로 댓글 관리
+// 텔레그램 봇 웹훅 — 대시보드 조회 / 댓글 관리 / 블로그 제어(글·배포)
 // setWebhook 시 secret_token=WEBHOOK_SECRET 지정 필수 (SETUP-telegram-comment-bot.md)
 
 import { escapeHtml, getComment, postUrl, supabaseRpc, tg } from './_shared.js';
@@ -13,29 +13,48 @@ import {
   topPagesMessage,
   trendMessage,
 } from './_dashboard.js';
+import {
+  blogsMessage,
+  deleteRequestMessage,
+  deployMessage,
+  editStart,
+  generateMessage,
+  handleFlow,
+  newPostStart,
+  postsMessage,
+  statusMessage,
+  toggleDraftMessage,
+} from './_control.js';
+import { reportMessage } from './_report.js';
 
 const UUID_RE = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
 
 const HELP = [
-  '<b>블로그 댓글·대시보드 봇</b>',
+  '<b>블로그 운영 봇</b>',
   '',
   '<b>📊 대시보드 조회 (실시간)</b>',
   '• /stats — 전체 요약 (조회·클릭·좋아요·구독·댓글)',
+  '• /report [YYYY-MM-DD] — 일일 종합 리포트 (기본 어제, 매일 09시 자동 발송)',
   '• /tf · /lf — TechFlow / LifeFlow 소스별 요약',
   '• /coupang — 쿠팡 클릭 상세 (어떤 글→어떤 링크)',
-  '• /top [n] — 인기 페이지 (기본 10)',
-  '• /trend — 최근 7일 조회수 추이',
-  '• /likes — 추천(좋아요) Top',
-  '• /recent [n] — 최근 이벤트 피드',
+  '• /top [n] · /trend · /likes · /recent [n]',
   '',
   '<b>💬 댓글 관리</b>',
-  '• /comments [n] — 최근 댓글 (기본 5, 각 메시지에 답장=대댓글)',
+  '• /comments [n] — 최근 댓글 (각 메시지에 답장=대댓글)',
   '• /cstats — 댓글 통계 + 7일 트렌드',
   '• 새 댓글 알림에 <b>답장</b> → 관리자 대댓글 등록',
-  '• <code>/reply &lt;댓글ID&gt; &lt;내용&gt;</code> — ID 직접 지정 대댓글',
-  '• <code>/delete &lt;댓글ID&gt;</code> — 댓글 삭제 (대댓글 포함)',
+  '• <code>/reply &lt;댓글ID&gt; &lt;내용&gt;</code> · <code>/delete &lt;댓글ID&gt;</code>',
   '',
-  '댓글ID는 알림/목록 메시지 하단 <code>#c_...</code> 값입니다.',
+  '<b>📝 블로그 제어</b> (블로그: <code>tf</code>/<code>lf</code>/<code>pc</code>)',
+  '• /blogs — 제어 가능한 블로그 목록',
+  '• <code>/posts &lt;블로그&gt; [n]</code> — 최근 글 (발행✅/숨김🚫)',
+  '• <code>/publish &lt;블로그&gt; &lt;slug&gt;</code> · <code>/draft &lt;블로그&gt; &lt;slug&gt;</code> — 발행/숨김',
+  '• <code>/newpost &lt;블로그&gt;</code> — 새 글 작성 (제목→본문)',
+  '• <code>/edit &lt;블로그&gt; &lt;slug&gt;</code> — 본문 교체',
+  '• <code>/delpost &lt;블로그&gt; &lt;slug&gt;</code> — 글 삭제 (확인 필요)',
+  '• <code>/generate &lt;블로그&gt; [카테고리] [주제]</code> — AI 자동 포스팅',
+  '• <code>/deploy &lt;블로그&gt;</code> · <code>/status [블로그]</code>',
+  '• /cancel — 진행 중인 작성/수정 취소',
 ].join('\n');
 
 export default async function handler(req, res) {
@@ -81,6 +100,48 @@ export default async function handler(req, res) {
   }
 
   try {
+    // ── 블로그 제어 명령 (인자 있는 명령을 먼저 매칭) ──
+    const ctl = text.match(/^\/(\w+)(?:@\w+)?(?:\s+([\s\S]+))?$/);
+    if (ctl) {
+      const cmd = ctl[1].toLowerCase();
+      const rest = (ctl[2] || '').trim();
+      const [a1, a2, ...more] = rest.split(/\s+/).filter(Boolean);
+      const a3 = more.join(' ');
+
+      const CONTROL = {
+        blogs: () => blogsMessage(),
+        posts: () => postsMessage(a1, a2 ? parseInt(a2, 10) : 10),
+        publish: () => toggleDraftMessage(a1, a2, false),
+        draft: () => toggleDraftMessage(a1, a2, true),
+        newpost: () => newPostStart(chatId, a1),
+        edit: () => editStart(chatId, a1, a2),
+        delpost: () => deleteRequestMessage(chatId, a1, a2),
+        generate: () => generateMessage(a1, a2, a3),
+        deploy: () => deployMessage(a1),
+        status: () => statusMessage(a1),
+        report: () => reportMessage(/^\d{4}-\d{2}-\d{2}$/.test(a1 || '') ? a1 : undefined),
+      };
+      if (CONTROL[cmd]) {
+        await reply(await CONTROL[cmd]());
+        return res.status(200).json({ ok: true });
+      }
+      if (cmd === 'cancel') {
+        await reply((await handleFlow(chatId, '/cancel')) || '진행 중인 작업이 없습니다.');
+        return res.status(200).json({ ok: true });
+      }
+    }
+
+    // ── 진행 중인 다단계 흐름 (새 글 본문 입력, 본문 수정, 삭제 확인) ──
+    // 댓글 알림에 답장한 경우는 대댓글 경로가 우선하므로 제외
+    const isCommentReply = /#c_[0-9a-f-]{36}/i.test(msg.reply_to_message?.text || '');
+    if (!text.startsWith('/') && !isCommentReply) {
+      const flowed = await handleFlow(chatId, text);
+      if (flowed) {
+        await reply(flowed);
+        return res.status(200).json({ ok: true });
+      }
+    }
+
     // ── 대시보드 실시간 조회 명령 ──
     const cmdMatch = text.match(/^\/(\w+)(?:@\w+)?(?:\s+(\d{1,3}))?$/);
     if (cmdMatch) {

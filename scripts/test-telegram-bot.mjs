@@ -3,12 +3,17 @@ process.env.WEBHOOK_SECRET = 'testsecret';
 process.env.TELEGRAM_BOT_TOKEN = 'TESTTOKEN';
 process.env.TELEGRAM_ADMIN_CHAT_ID = '11111';
 process.env.COMMENT_ADMIN_KEY = 'testadminkey';
+process.env.GITHUB_TOKEN = 'ghtest';
+process.env.CRON_SECRET = 'croncron';
+
+// 봇 대화 상태(newpost/edit/delete 흐름)를 인메모리로 모킹
+let botState = null;
 
 const calls = [];
 globalThis.fetch = async (url, opts = {}) => {
   calls.push({ url, body: opts.body ? JSON.parse(opts.body) : null });
   if (url.includes('api.telegram.org')) return { json: async () => ({ ok: true }) };
-  if (url.includes('/rest/v1/comments?')) {
+  if (url.includes('/rest/v1/comments?id=eq.')) {
     return { json: async () => [{ id: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee', post_slug: 'my-post', source: 'blog', nickname: '홍길동', content: '질문요' }] };
   }
   if (url.includes('/rpc/admin_reply')) return { status: 200, json: async () => ({ success: true, id: 'new-id' }) };
@@ -26,9 +31,35 @@ globalThis.fetch = async (url, opts = {}) => {
   if (url.includes('/rpc/get_top_liked_posts')) return { status: 200, json: async () => [{ title: '좋아요글 | TechFlow', slug: 'liked', like_count: 7 }] };
   if (url.includes('/rpc/get_recent_events')) return { status: 200, json: async () => [{ event_type: 'pageview', source: 'blog', created_at: new Date().toISOString(), metadata: { title: '이벤트글 | TechFlow', slug: 'ev' } }] };
   if (url.includes('/rest/v1/analytics?')) return { ok: true, json: async () => [
-    { event_type: 'coupang_click', source: 'blog', created_at: new Date().toISOString(), metadata: { product: '노트북 거치대', url: 'https://link.coupang.com/a/x', slug: 'my-post', title: '내글 | TechFlow' } },
-    { event_type: 'affiliate_click', source: 'lifeflow', created_at: new Date().toISOString(), metadata: { target: 'coupang', label: '무선 청소기', href: 'https://link.coupang.com/a/y', slug: 'lf-post' } },
+    { event_type: 'coupang_click', source: 'blog', created_at: new Date().toISOString(), metadata: { product: '노트북 거치대', url: 'https://link.coupang.com/a/x', slug: 'my-post', title: '내글 | TechFlow', user_agent: 'UA1' } },
+    { event_type: 'affiliate_click', source: 'lifeflow', created_at: new Date().toISOString(), metadata: { target: 'coupang', label: '무선 청소기', href: 'https://link.coupang.com/a/y', slug: 'lf-post', user_agent: 'UA2' } },
   ] };
+  // ── 봇 대화 상태 RPC ──
+  if (url.includes('/rpc/bot_state_set')) { botState = JSON.parse(opts.body).p_value; return { status: 200, json: async () => ({ success: true }) }; }
+  if (url.includes('/rpc/bot_state_get')) return { status: 200, json: async () => (botState || {}) };
+  if (url.includes('/rpc/bot_state_clear')) { botState = null; return { status: 200, json: async () => ({ success: true }) }; }
+  // ── 리포트용 REST ──
+  if (url.includes('/rest/v1/comments?created_at')) return { ok: true, json: async () => [{ source: 'blog', nickname: '독자', content: '좋은 글', post_slug: 'p1', is_admin: false }] };
+  if (url.includes('/rest/v1/card_likes')) return { ok: true, json: async () => [{ slug: 'p1' }, { slug: 'p2' }] };
+  // ── GitHub API ──
+  if (url.includes('api.github.com')) {
+    const m = url.match(/\/contents\/([^?]+)/);
+    if (url.includes('/contents/src/blog?')) return { ok: true, status: 200, json: async () => [
+      { type: 'file', name: '2026-07-12-new-post.md', path: 'src/blog/2026-07-12-new-post.md', sha: 'sha1' },
+      { type: 'file', name: '2026-07-11-old-post.md', path: 'src/blog/2026-07-11-old-post.md', sha: 'sha2' },
+    ] };
+    if (m && opts.method === undefined) {
+      const md = '---\ntitle: "테스트 글"\npubDate: 2026-07-12\ndraft: false\n---\n\n본문입니다.\n';
+      return { ok: true, status: 200, json: async () => ({ sha: 'sha1', content: Buffer.from(md, 'utf8').toString('base64') }) };
+    }
+    if (m && (opts.method === 'PUT' || opts.method === 'DELETE')) return { ok: true, status: 200, json: async () => ({ commit: { sha: 'newsha' } }) };
+    if (url.includes('/dispatches')) return { ok: true, status: 204, json: async () => null };
+    if (url.includes('/runs?')) return { ok: true, status: 200, json: async () => ({ workflow_runs: [{ status: 'completed', conclusion: 'success', html_url: 'u', created_at: 'now' }] }) };
+    if (url.includes('/git/ref/')) return { ok: true, status: 200, json: async () => ({ object: { sha: 'headsha' } }) };
+    if (url.includes('/git/commits/')) return { ok: true, status: 200, json: async () => ({ tree: { sha: 'treesha' } }) };
+    if (url.includes('/git/commits')) return { ok: true, status: 200, json: async () => ({ sha: 'abcdef1234' }) };
+    if (url.includes('/git/refs/')) return { ok: true, status: 200, json: async () => ({}) };
+  }
   throw new Error('unexpected fetch ' + url);
 };
 
@@ -157,5 +188,106 @@ for (const c of ['/trend', '/cstats', '/likes', '/recent']) {
 calls.length = 0; res = mockRes();
 await tgHook({ method: 'POST', headers: { 'x-telegram-bot-api-secret-token': 'testsecret' }, body: { message: { message_id: 11, chat: { id: 99999 }, text: '/stats' } } }, res);
 assert(!calls.some(c => c.url.includes('/rpc/get_traffic_summary')), 'non-admin cannot query dashboard');
+
+// ── 블로그 제어 ──
+
+// 16. /blogs → 3개 블로그
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/blogs'), res);
+out = sentTexts().join('\n');
+assert(out.includes('TechFlow') && out.includes('LifeFlow') && out.includes('Playcast'), '/blogs lists all three blogs');
+
+// 17. /posts tf → 발행/숨김 표시 + slug
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/posts tf'), res);
+out = sentTexts().join('\n');
+assert(out.includes('테스트 글') && out.includes('2026-07-12-new-post'), '/posts lists posts with titles and slugs');
+assert(out.includes('✅'), '/posts marks published state');
+
+// 18. /draft tf <slug> → PUT 커밋 (draft: true)
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/draft tf 2026-07-12-new-post'), res);
+const put = calls.find(c => c.url.includes('/contents/') && c.body?.content);
+assert(put, '/draft commits via contents API');
+assert(Buffer.from(put.body.content, 'base64').toString('utf8').includes('draft: true'), '/draft sets draft: true in frontmatter');
+
+// 19. /publish 는 이미 발행 상태면 커밋하지 않음
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/publish tf 2026-07-12-new-post'), res);
+assert(!calls.some(c => c.body?.content), '/publish skips commit when already published');
+assert(sentTexts()[0].includes('이미'), '/publish reports already-published');
+
+// 20. /newpost 흐름: 제목 → 본문 → 커밋
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/newpost tf'), res);
+assert(botState?.flow === 'newpost' && botState.step === 'title', '/newpost starts title step');
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('봇으로 쓴 글'), res);
+assert(botState?.step === 'body', 'newpost advances to body step');
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('## 본문\n내용입니다.'), res);
+const newPut = calls.find(c => c.url.includes('/contents/') && c.body?.content);
+assert(newPut, 'newpost commits the file');
+const newMd = Buffer.from(newPut.body.content, 'base64').toString('utf8');
+assert(newMd.includes('title: "봇으로 쓴 글"') && newMd.includes('내용입니다.'), 'newpost writes frontmatter + body');
+assert(newMd.includes('draft: false'), 'newpost publishes by default');
+assert(botState === null, 'newpost clears state after commit');
+
+// 21. /delpost → 확인 전에는 삭제 안 함, '확인' 후 DELETE
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/delpost tf 2026-07-12-new-post'), res);
+assert(botState?.flow === 'delete', '/delpost sets confirm state');
+assert(!calls.some(c => c.opts?.method === 'DELETE'), '/delpost does not delete before confirm');
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('아니오'), res);
+assert(botState === null && sentTexts()[0].includes('취소'), 'non-확인 cancels delete');
+await tgHook(tgMsg('/delpost tf 2026-07-12-new-post'), mockRes());
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('확인'), res);
+assert(sentTexts()[0].includes('삭제 완료'), '확인 performs delete');
+
+// 22. /generate tf → GitHub Actions workflow_dispatch
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/generate tf AI 인디게임 수익화'), res);
+const disp = calls.find(c => c.url.includes('/dispatches'));
+assert(disp, '/generate dispatches the workflow');
+assert(disp.body.inputs.category === 'AI' && disp.body.inputs.topic === '인디게임 수익화', '/generate passes category and topic');
+
+// 23. /deploy (VERCEL_TOKEN 없음) → 빈 커밋 폴백
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/deploy lf'), res);
+assert(calls.some(c => c.url.includes('/git/refs/heads/main')), '/deploy falls back to empty commit when no VERCEL_TOKEN');
+
+// 24. /status → Vercel 토큰 없으면 안내 + Actions 상태
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/status tf'), res);
+out = sentTexts().join('\n');
+assert(out.includes('VERCEL_TOKEN') && out.includes('자동생성'), '/status reports missing token + actions run');
+
+// 25. 알 수 없는 블로그 → 안내
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/posts nosuch'), res);
+assert(sentTexts()[0].includes('❌'), 'unknown blog reports error');
+
+// ── 일일 리포트 ──
+const { default: reportHook } = await import('../api/daily-report.js');
+
+// 26. cron secret 불일치 → 401
+res = mockRes();
+await reportHook({ method: 'POST', headers: { authorization: 'Bearer wrong' } }, res);
+assert(res.code === 401, 'daily-report rejects bad cron secret');
+
+// 27. 정상 cron → 전날 종합 리포트 발송 (조회/방문자/댓글/좋아요/쿠팡)
+calls.length = 0; res = mockRes();
+await reportHook({ method: 'POST', headers: { authorization: 'Bearer croncron' } }, res);
+out = sentTexts().join('\n');
+assert(res.code === 200, 'daily-report returns 200');
+assert(out.includes('일일 리포트') && out.includes('조회수') && out.includes('방문자') && out.includes('신규 댓글') && out.includes('신규 좋아요') && out.includes('쿠팡 클릭'), 'report covers all requested metrics');
+assert(out.includes('독자') && out.includes('노트북 거치대'), 'report includes new comments and coupang products');
+
+// 28. /report 명령도 같은 리포트
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/report'), res);
+assert(sentTexts()[0].includes('일일 리포트'), '/report command works');
 
 console.log('\nDONE');
