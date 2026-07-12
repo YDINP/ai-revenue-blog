@@ -22,3 +22,7 @@ Thumbs.db
 
 .vercel
 .logs/
+
+# scratch
+.tmp-*.mjs
+.tmp/
