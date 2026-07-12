@@ -90,3 +90,12 @@
 
 - LifeFlow (Vercel): "미배포" → "Online" (실제 배포됨)
 - Coupang Partners: "연동 필요" → "연동됨" (트래킹 가동 중)
+
+---
+
+## 3차: 방문 추이 웹/모바일 분리 (2026-07-12)
+
+- 방문 추이 메트릭 토글에 **웹/모바일** 추가 (조회수/방문자/웹·모바일)
+- 데이터: 신규 RPC `get_daily_device_trend(p_days)` — pageview `metadata->>'user_agent'` 를 `Mobi|Android|iPhone|iPad` 정규식으로 분류, **KST 일자 버킷** (기존 `get_daily_detail`이 KST 버킷임을 라이브 카운트 대조로 검증)
+- 적용 필요: `supabase/device-trend-rpc.sql` 을 SQL Editor에서 실행 (미설치 시 차트에 설치 안내 문구 표시, 다른 기능 영향 없음)
+- 일간/주간/월간/커스텀 기간 모두 지원, 우측 리스트에 웹·모바일·모바일% 표시, CSV에 웹/모바일 컬럼 추가
