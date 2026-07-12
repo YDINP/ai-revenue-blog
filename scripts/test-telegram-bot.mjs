@@ -46,6 +46,13 @@ globalThis.fetch = async (url, opts = {}) => {
   if (url.includes('/rss.xml')) return { ok: true, text: async () => '<rss><channel><item><title>ChatGPT 활용법: 최신 기능과 실전 팁</title></item></channel></rss>' };
   // 구글 뉴스 = 블로그 주제 검색 (매체명이 두 번 붙는 실제 형식)
   if (url.includes('news.google.com')) return { ok: true, text: async () => '<rss><channel><item><title>AI 코딩 도구 신제품 출시 - AI타임스 - AI타임스</title></item></channel></rss>' };
+  // 빙 뉴스 = 다른 엔진 (구글과 같은 사건이면 중복 제거돼야 함)
+  if (url.includes('bing.com/news')) return { ok: true, text: async () => '<rss><channel><item><title>AI 코딩 도구 신제품 출시</title></item><item><title>국내 개발자 생산성 도구 도입 확산</title></item></channel></rss>' };
+  // Hacker News = 해외 개발자 커뮤니티 (블로그 키워드 필터링 대상)
+  if (url.includes('hn.algolia.com')) return { ok: true, json: async () => ({ hits: [
+    { title: 'Show HN: A new LLM inference engine', points: 300 },
+    { title: 'Sourdough starter tips from a baker', points: 120 },
+  ] }) };
   // ── GitHub API ──
   if (url.includes('api.github.com')) {
     if (url.includes('category-seeds.json')) {
@@ -307,6 +314,13 @@ assert(botState.cands.some(c => c.src === 'seed' && c.topic === '인디게임 �
 // 뉴스는 매체명 접미사(중복 포함)가 제거된 상태
 const newsCand = botState.cands.find(c => c.src === 'news');
 assert(newsCand && !newsCand.label.includes('AI타임스'), 'news headline strips repeated media suffix');
+// 여러 엔진(구글·빙) 사용 + 같은 사건은 한 번만
+assert(calls.some(c => c.url.includes('news.google.com')) && calls.some(c => c.url.includes('bing.com/news')), 'both news engines queried');
+assert(botState.cands.filter(c => c.src === 'news' && c.label.includes('AI 코딩 도구 신제품')).length === 1, 'same story from two engines is deduped');
+assert(botState.cands.some(c => c.src === 'news' && c.label.includes('생산성 도구')), 'bing-only story is kept');
+// Hacker News 는 블로그 키워드에 맞는 것만
+assert(botState.cands.some(c => c.src === 'hn' && c.label.includes('LLM')), 'relevant HN story included');
+assert(!botState.cands.some(c => c.label.includes('Sourdough')), 'irrelevant HN story filtered out');
 
 // 22e. 키워드 선택 → 해당 주제로 dispatch
 calls.length = 0; res = mockRes();
