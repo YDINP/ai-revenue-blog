@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "러스트 프로그래밍 도서"
     url: "https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/Bn0vPG6mHrulsCOeBipJRLwuhNeHJcFvsCIajCYOqqmyF2_-EUM9hh_5r502ODIlpl_yI8m7rxl3fwEJ6r9N7Xw_6kTQkHdZEKhie50za0yk73J2M11n4T41IFlk4lNOAvpap8BX7ZdoYiZI1R-KDfFCk5fkKUUr1NgDTmuHuR4HhKDK8cKW_nz01rx4DuQ2jnE_Xr6dcziXXiDxmH0uDdM6exdWF6serXRnKhngQZosIePu2eQvRDQFkQ5qoHhZsnXAWLgEU-hCeFAvFAw_DGt8O48yVSucJk9bmvQBNjYAXwMifbuptmkNAGtuTVVnGbq-80c="
   - title: "개발자 노트북 맥북 프로"
     url: "https://www.coupang.com/np/search?q=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EB%A7%A5%EB%B6%81%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EB%A7%A5%EB%B6%81%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EB%A7%A5%EB%B6%81%20%ED%94%84%EB%A1%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/GXTncZGOMmmHoyl4GTZg_mwZmJxyD8REuEbbIkdKKPL7isYEugv6nR4cVsmoW5S3PyV9FjQebkSVv869h1nOE39y8OpIwWdQ0eXcCxbHtGZ4SuAgScTRSFslj4LeHuxej-p5ZWvmKTvyVZYZav1FtGvNS5Wd_kwPkNO0DIYY5dGs90HIMUGJTGDiGIp0gPdGQsg7stimXtYUOVynO84qx6gXrB2SkE-MX8tKujcLmGmWru1YfHvfg6TRL2ddH9d8offasb2OLli5PNzRGswteeXKlKtZcHSfyMXgVR7IW0ylCc5tHMfLpag="
 ---
 ## 백엔드 언어, 2026년에는 무엇을 써야 할까?
 

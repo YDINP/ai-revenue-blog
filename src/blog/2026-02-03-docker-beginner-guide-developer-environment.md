@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "클린 코드"
     url: "https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/qne2hGD15JjE-w8hqo-MIq8aqUK_0f6v3E8XQlEFvv_LaEm4y69h-5ppYWEK0wpO7o5i3xkey6XCYHkvSQ-1Mtpx--gADkLLFuTOjvmEzTFoGsWXqOBAh8TGi_5iuograMtNjGVrOG5MWcCgUb_lLlCWN-4IoFOEVjz7WZ-5sBryOzYHn0IfFzzYJFq0YFiGCawa1UzMEl36TPgJMy2a6Yz4GMqp1TMPb5RK8xoANwm9RW7hjJ_kLIZVCPAYmBSmjvuJa8A3Lq3bAomXj95KraTyHhLJxpwtApSjczIEHTKbC7iQM1Ad3wM="
   - title: "삼성 SSD 980 PRO 1TB"
     url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB"
+    imageUrl: "https://ads-partners.coupang.com/image1/_qsUsLY6LSyOTqS__pJVdMCQ93UYVqLRIMnn8S8qlEPPWMsdbue688pJgyusND6JtIuxhzV82OKRbB7RGM7hHGBHDP0c-iIuAaLfdp5TnIF0Ibqxxhx0tQudKnCglLM7DyS-i3whwWpJe-4UsrabTbV_-Z43O8wOpWlgY--fUveo7ZSKL-K7wTXDY-8jngpdyBPSG4Su5BRr4XmrJGB7_uIAZfmMV96reUItTr1XdvrUb1ICeAjX5t9pY_KJk6DNA5w6Ol25RoM-NTbCXsIY5NUM3LMu9JwpMDU="
 ---
 ## "내 컴퓨터에서는 되는데요?" 의 종말
 

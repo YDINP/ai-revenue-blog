@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
+    imageUrl: "https://ads-partners.coupang.com/image1/N3MOn3F4M0r96tGWN8I7EHBxNmijCay63U9fXr_vTcbGzyXYNWufIm2ghSbCMxDr4gU5VtRvrqH7cz7ij5QeP4dilOAVm-woEJyJwBiohQq8i6nGtgBY0Y9VkOuXQ5s9Ud44lC30A__avNEiOq2OOYDBCDKxgAwqeVZjH8SduAFDkwv4384osbmboq4qoqUAl6RNLQqtYlUnsc98v20HPP5jmIYVHttkcEeRxKxsgsu5elI1o8qRCoBOyN_w_4gP_4oEZmhk_Zte2rO05Dpr0eQTONcs_QXxR5MS8NK3K4m_HU4xFnPZYehghd1RN0JsJAYrNQ=="
   - title: "유니티 교과서"
     url: "https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/jU4rMqEhhQQ2Wd8IjUpuHIKifVm5Xm_z8lEBuB7h5473DdC0rv0UxSWiDORvE1YMT3K2khY1on2Ww6xPRJ5SQm1MooU9TpEiB3lcpxaGeIv-VEpK8hUXcdRGQMBhu0kMP2qP_-uHY01BJYoO1NvVUPOa_FWtFuGDx0m-ITFfrPxGteYGOrvQWJdq81F1R1l_hcj8HkW8-hpZFoLxSgAGZCgsVDC-SwwLKzVS-4IXm7cnJCyG7I-dKlg4BijAJbRg0FuR7w3DIXEoYJs5-fycT7rp6-CQ1ZQDynUtzS2forabWOPdsZWkk3ArrKFIPHGS60kGSg=="
 faq:
   - q: "PixiJS와 Phaser.js 중 뭘 선택해야 하나요?"
     a: "순수 렌더링 성능을 최우선으로 한다면 PixiJS, 완전한 게임 프레임워크(물리, 입력, 사운드 등)가 필요하면 Phaser.js를 추천합니다. PixiJS는 더 빠르지만 추가 라이브러리 연동이 필요합니다."

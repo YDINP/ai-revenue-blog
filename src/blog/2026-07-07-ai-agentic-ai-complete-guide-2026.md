@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "AI 2041"
     url: "https://www.coupang.com/np/search?q=AI%202041&src=1139000&spec=10799999&addtag=200&ctag=AI%202041&lptag=AF7838146&pageType=SEARCH&pageValue=AI%202041"
+    imageUrl: "https://ads-partners.coupang.com/image1/za23GjufVytHpoQqzcLp0DIQXRYo3nDOV5QxIm55r-a9yvXVOYMJ6zXHSr9qPYU7ocKlOCfAzZeu2Swms2pIMy8RU4x_6Nls4isiU6qHXJdaFvPHVJQkeEwUu_g4flyaNt9FWg1E57CMLrG6frMHeplM0pwtQQshspSWoOUA28ftUUZ_2F1rUitGPNV2Mr1hVP6LOwdx_Ybh4pI9m0fb4_uahqmI0HmQCEhq2GOWw2TF0P1hZSWMY5d1mxFqehqTpoGvJbZlwR8EnJy852_JcsblWWaJ2GczBKpypTlt"
   - title: "슈퍼인텔리전스"
     url: "https://www.coupang.com/np/search?q=%EC%8A%88%ED%8D%BC%EC%9D%B8%ED%85%94%EB%A6%AC%EC%A0%84%EC%8A%A4&src=1139000&spec=10799999&addtag=200&ctag=%EC%8A%88%ED%8D%BC%EC%9D%B8%ED%85%94%EB%A6%AC%EC%A0%84%EC%8A%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%8A%88%ED%8D%BC%EC%9D%B8%ED%85%94%EB%A6%AC%EC%A0%84%EC%8A%A4"
+    imageUrl: "https://ads-partners.coupang.com/image1/hQ4DWAR_7UWtqQwhhQZyVrdpZiLOxxlDcq-kM5Pq6azdwDtlTZTliSnTCPKA5LysPhRx8hXnZFyxBd8qGlUyEFYVLAz0KlAvfPcD9Z1CNrUtD5k2JVCMh819uuo4Brmycpp-Kd6w2XkP3FiDbu3faDbi20YRIO66vHtXkFaFQfHTmj_Q1ShLglFzoIKv0RwE4KRTrZo-Qb8CvdEwTPvSioq0sqBthVTFAIbVZqIpTxs5WDcP9XnzD7hFmRWvpIs_gDMpmI_QjK7jMbt1uT5Uqz81R0TuBZAy6v9KoqYJ6Pbzm803xwcdX0Zo3A2Hs7E03FvQoNGvVCW3kHc2cBCIAmSi2hu_mEp3U24BZBiJj_YH"
 faq:
   - q: "에이전틱 AI와 일반 AI 챗봇은 어떻게 다른가?"
     a: "챗봇은 질문에 답하는 '반응형'이지만, 에이전틱 AI는 목표를 부여받으면 계획 수립·도구 사용·결과 검증까지 스스로 진행하는 '행동형'이다. 사용자 개입 없이 여러 단계 작업을 완료할 수 있다는 점이 핵심 차이다."

@@ -30,7 +30,8 @@ if (!ACCESS || !SECRET) {
 
 // CEA HMAC 서명: datetime(YYMMDDTHHmmssZ) + METHOD + path + query
 function authHeader(query) {
-  const datetime = new Date().toISOString().replace(/[:-]|\.\d{3}/g, '').slice(2, 16) + 'Z';
+  // 2026-07-12T14:30:00.000Z → 260712T143000Z
+  const datetime = new Date().toISOString().replace(/[:-]|\.\d{3}/g, '').slice(2);
   const message = datetime + 'GET' + API_PATH + query;
   const signature = crypto.createHmac('sha256', SECRET).update(message).digest('hex');
   return `CEA algorithm=HmacSHA256, access-key=${ACCESS}, signed-date=${datetime}, signature=${signature}`;
@@ -74,7 +75,8 @@ for (const file of fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith('.md'))) {
   if (fmEnd === -1) continue;
 
   let changed = false;
-  for (let i = 1; i < fmEnd; i++) {
+  let fmLast = fmEnd; // imageUrl 삽입으로 frontmatter가 길어지므로 끝 인덱스를 함께 민다
+  for (let i = 1; i < fmLast; i++) {
     const m = lines[i].match(/^ {2}- title: "?(.+?)"?$/);
     if (!m) continue;
     // coupangLinks 블록 소속인지 확인 (직전의 최상위 키가 coupangLinks 여야 한다)
@@ -97,7 +99,7 @@ for (const file of fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith('.md'))) {
     }
     const img = cache.get(keyword);
     if (!img) continue;
-    if (injectImage(lines, i, img)) filled++;
+    if (injectImage(lines, i, img)) { filled++; fmLast++; }
     changed = true;
     console.log(`  ${file} :: ${keyword} → ${img}`);
   }

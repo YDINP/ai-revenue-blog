@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "로블록스 게임 제작 무작정 따라하기"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4%20%EA%B2%8C%EC%9E%84%20%EC%A0%9C%EC%9E%91%20%EB%AC%B4%EC%9E%91%EC%A0%95%20%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4%20%EA%B2%8C%EC%9E%84%20%EC%A0%9C%EC%9E%91%20%EB%AC%B4%EC%9E%91%EC%A0%95%20%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4%20%EA%B2%8C%EC%9E%84%20%EC%A0%9C%EC%9E%91%20%EB%AC%B4%EC%9E%91%EC%A0%95%20%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0"
+    imageUrl: "https://ads-partners.coupang.com/image1/N9NOt1lGIgR5t2XPN4S1JaGOURbNb-s008x6z9MOvtiY2UNIQhi7s6NKPQjQfo9tiW2tMLkdFXDgqtNPbMjvT2b83e8Mi30qFCuq1qkaGfPIVDjP-HTFdIuing7bixWB0S00bL5mUDkaLu717C6veah2nst7QUWl4CWbg0B0I1QyKSLxnhjcFqOrmQlGNAdtjBpCFxMuZErSzN4KOQ5Zbjlev-rq162Hfe4qcaohKBtZXFvR6IlPhTw15lMgezL_JqEYa9n5XWKHmqJTm-BPzwb7wm24VOAFwLN9R3Tr3j0ph0imAvR9wpxxHXSQjJ-yayAipynp"
   - title: "돈의 심리학"
     url: "https://www.coupang.com/np/search?q=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&src=1139000&spec=10799999&addtag=200&ctag=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99"
+    imageUrl: "https://ads-partners.coupang.com/image1/HWtq-eHaQ6lIuVBcHePYoWVXhJls0mroAWDOHh8SFb_sM4_rJF61EaFyORJ4_uTAV35LChup8dgaHBWYF0EkA6YIGbUspznUKBy6JXpuoXQ3ieBVDfPn6xRO0AAkZpsHUz9TM3ZCtPiZxoncrC-p_JJ8Td9TyQI6jq-dVmTZZaxi3mp0BoZtUZzGbGiliHyzPURHIfXtha2W9ovRyZs6obWZ3I_-vNS_x1aDrlV6T5hT3YouTI_rPfFwsCvgrOrVFixk-naOrIARw8slgBDWahIK96uXDaeK_4L3ijRa_Hq2zj-M3A=="
 faq:
   - q: "Roblox Studio는 무료인가?"
     a: "그렇다. Roblox Studio는 완전 무료로 제공된다. Roblox 계정만 만들면 Studio를 즉시 설치·사용할 수 있으며, 별도 구독료나 라이선스 비용이 없다."

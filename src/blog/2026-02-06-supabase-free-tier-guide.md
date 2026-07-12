@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "삼성 SSD 980 PRO 1TB"
     url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB"
+    imageUrl: "https://ads-partners.coupang.com/image1/_qsUsLY6LSyOTqS__pJVdMCQ93UYVqLRIMnn8S8qlEPPWMsdbue688pJgyusND6JtIuxhzV82OKRbB7RGM7hHGBHDP0c-iIuAaLfdp5TnIF0Ibqxxhx0tQudKnCglLM7DyS-i3whwWpJe-4UsrabTbV_-Z43O8wOpWlgY--fUveo7ZSKL-K7wTXDY-8jngpdyBPSG4Su5BRr4XmrJGB7_uIAZfmMV96reUItTr1XdvrUb1ICeAjX5t9pY_KJk6DNA5w6Ol25RoM-NTbCXsIY5NUM3LMu9JwpMDU="
   - title: "모던 자바스크립트 Deep Dive"
     url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive"
+    imageUrl: "https://ads-partners.coupang.com/image1/bQe2gwYArBVjsWMfbalAc5XbsxyokcVZk_0AddBydK0KVBL13bW9O7XHB4rsfzvaIBSiqALk1aSoNcJqdnENbMwJMUiFtKRjPTIZrF6eS5VbJuIZIEGVGyzOhkY0u4UeEtpDEfc9mrbsZ9N0uE-KZt8sanyYii2Y7qwZLvAqC5paq8w5QwNGq6-8K6Wk4zl_moiQc_uIMgIe5BgpMLGwnTfa3OqwTPiXDMZki5JAAFVuzdl9uc9aEDmXzZb6iHuc7zcKr5xwrP1REXsNdGthnr1R45D7ktEdrIildSyPF-V11W_fig=="
 ---
 ## Supabase란?
 

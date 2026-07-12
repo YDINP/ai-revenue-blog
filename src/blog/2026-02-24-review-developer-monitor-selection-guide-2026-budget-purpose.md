@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
+    imageUrl: "https://ads-partners.coupang.com/image1/N3MOn3F4M0r96tGWN8I7EHBxNmijCay63U9fXr_vTcbGzyXYNWufIm2ghSbCMxDr4gU5VtRvrqH7cz7ij5QeP4dilOAVm-woEJyJwBiohQq8i6nGtgBY0Y9VkOuXQ5s9Ud44lC30A__avNEiOq2OOYDBCDKxgAwqeVZjH8SduAFDkwv4384osbmboq4qoqUAl6RNLQqtYlUnsc98v20HPP5jmIYVHttkcEeRxKxsgsu5elI1o8qRCoBOyN_w_4gP_4oEZmhk_Zte2rO05Dpr0eQTONcs_QXxR5MS8NK3K4m_HU4xFnPZYehghd1RN0JsJAYrNQ=="
   - title: "LG 그램 17"
     url: "https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017"
+    imageUrl: "https://ads-partners.coupang.com/image1/VgWdF7N09CLM-FATVgi2YrtQRKpBrt4FxNXOAA3IO7IcSMRACuwsSW2thSF6TRqp8XLZ7DrXu0X6_dMFJRiAHLPk91gQ3xfVt35LpnQM9XZD9PwoDNU8zTtWAZh6n5k88414aPWmlZvAlipI_kM26Hgwu8TnGGhJCMBJr6LQYLhH99OSgix7nmJrz-FqvJm0fvBN8A6S_N_6t6TvbYQ6_IyQlAP126u6i_EXOidyY1L_mdDYWm_UmrRivB1Vtm8XjGw70ui6H1pqLpC5oMM2jK__BchKHMS5GMyYlhDNO6PvYrtsQRFKU5vE"
   - title: "삼성 갤럭시북4 프로"
     url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/TUN_I2oeJcUmXl2jTX5TGr8AhWUSeEAwJ2DS-Ine5n8x9UOXFaq3njYlwuTnU0Ch54tUDopafjZyZtMLWVqtnEIiduEOsbjg7MQm6J3vut-xv5qmqZq0KtGiMoEYidfQpb2YMKTGqd7RrCdsgl-yGDJKb91uC_X0NJX5JG_a3v6jFJqq1akEtp_ZvdYrNF-4x-aUHqo2Qs1R7gJr8mRApOomMzpzZEB80_U2EOmjsaRXO5Uq3I4osObzNMql6WG2TaKL5R4sbWBT8a8qrs7AVFYGbh1CxucCKGlDKsB7ZKUjs4xWRSYy4LRvJA=="
 faq:
   - q: "개발자가 꼭 고가 모니터를 써야 할까요?"
     a: "순수 코딩만 한다면 50만원대 중급 모니터도 충분합니다. 하지만 UI 디자인, 색상 확인이 필요하면 sRGB 98% 이상의 중급~고급 모니터(60~100만원)가 필요합니다. 색감 정확도 부족은 생산성 손실로 이어지므로 용도에 맞게 투자하세요."

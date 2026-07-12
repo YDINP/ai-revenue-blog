@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "게임 프로그래밍 패턴 도서"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4%20%EB%8F%84%EC%84%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/ypirGiO-oAZxmEyZyh8QMeVTyiv1FUdueRr_oBHlI8oWIf7Db9jJenJ26jO3D6XgmH7J3XZg4hJrRy9xzl6Z6UFzrae8E97gV93zZs5qDWrzmhSHV_G89h0aMzQz59vZzSb5RG_ochkC5690vv0nVDyzDSEgEsIsVTMeGE_9-12Euwp49PqhokDtv_IA_w1p7hLi4qYs1Td-bM-5R5Lp9Jebu-BlwZqNpcV9Sk0vUw5q9ng4tXCRz9t5T8b4waMQKbmEbebsru-YZ0jpdioXX6vGqgXQkwOAqtZqTQoa2_cQDfBkYIA6cctP0qRU9W_uRr7WEyM="
   - title: "로지텍 MX Master 3S 마우스"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S%20%EB%A7%88%EC%9A%B0%EC%8A%A4&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S%20%EB%A7%88%EC%9A%B0%EC%8A%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S%20%EB%A7%88%EC%9A%B0%EC%8A%A4"
+    imageUrl: "https://ads-partners.coupang.com/image1/Wc18ZH2v3NQ9aSjWWenEv3uWy0TB7qqHTVVbbHPg4Q2KebV8MagxSIW49wq8MgA2pJJA_8SPOdNX3qpWz-aQbQHpMMeRSPhwi0u9BTT-bkd4kDbEyULx_zZl8VjGQY40RC73-ZBozK9InLA0yMCxufks5dB55NYTreENBVoG9uU2s5Kl8FtMZuZlYRBja00OHNXl9XrGENlFdQrI8x9az307nRBYhKQCebWTvf_NDIPI2Mjj5-4WvFLyD2A061rwOkRL7u8_IQlZTx4cC3oJ_OJjGPe5LdMmV2o="
 ---
 ## Godot는 왜 인디 개발자의 선택인가?
 

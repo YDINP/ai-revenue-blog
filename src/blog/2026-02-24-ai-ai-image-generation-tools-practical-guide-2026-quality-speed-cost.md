@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "아이패드 에어 M2"
     url: "https://www.coupang.com/np/search?q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&src=1139000&spec=10799999&addtag=200&ctag=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2"
+    imageUrl: "https://ads-partners.coupang.com/image1/nehfMYREFYi1qI4OnRcdi03VtNxU8KMW8_x-3A4HMpSo6mXYNo7sSb5b2JHq6oIi76d4X72ho7NRy7yiU2pRfHouqEXs84cMkf78joRY0g7keyTZXnoUx5JdqLBF6EtNyKoc_6Sk-UU9vsXPzYquqyWP7D9b0panHCo88I6nxoMpCFB_Q7w6StC-3fi5q1tUZHGCWeOB-ZGnTPXGPY2C0Z1wUecy7-vm-gvIHbAXeuifZ9Hy5UKCSaNp4m6pKKrcVG6Ue7WMs1Su8Ct-OSHyg9XR9QHUVXh4ldfmE7SuswMkjxTCL6XBKL6C_KazM9uMFZWHjycmwc1uxbi9ZMrniJXsJUfJfaj9ytdqYPc="
   - title: "로지텍 MX Keys S 키보드"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/kRP2tNtRYuy67cg-kT0hp84di-RGopkc313iCV1Lh5i5GeM4DhkTeP9ivodQ9DLjolpAA4Rc0zhZQkGD9cldunGR06JVyC5_jk9J2O-M27lvERPIgXHWxi0FXp6wDo0KpYOINUEHILwDPngc8kECd4WtMOWYar5-usBIXTGESmkU04o1ptIrIfLeolko_FU9mqqSVIW_IuBWCD_5frY760QrK7VTk6NUtnUmpG6egd_nUhde8eEDc0pE5hcjZ1lY9egeYK_HgzndsftYgUDMK6ZxYzSAI7KcWkw="
 faq:
   - q: "Midjourney와 DALL-E 중 어느 것이 더 저렴한가?"
     a: "DALL-E 4가 월 $15로 더 저렴하지만, 무제한 생성이 필요하면 Midjourney Pro($30)가 효율적입니다. 월 50개 이상 생성하면 Midjourney가 이미지당 비용이 더 낮습니다. 프로젝트 규모에 따라 선택하세요."

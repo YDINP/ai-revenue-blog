@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
     url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive"
+    imageUrl: "https://ads-partners.coupang.com/image1/bQe2gwYArBVjsWMfbalAc5XbsxyokcVZk_0AddBydK0KVBL13bW9O7XHB4rsfzvaIBSiqALk1aSoNcJqdnENbMwJMUiFtKRjPTIZrF6eS5VbJuIZIEGVGyzOhkY0u4UeEtpDEfc9mrbsZ9N0uE-KZt8sanyYii2Y7qwZLvAqC5paq8w5QwNGq6-8K6Wk4zl_moiQc_uIMgIe5BgpMLGwnTfa3OqwTPiXDMZki5JAAFVuzdl9uc9aEDmXzZb6iHuc7zcKr5xwrP1REXsNdGthnr1R45D7ktEdrIildSyPF-V11W_fig=="
   - title: "점프 투 파이썬"
     url: "https://www.coupang.com/np/search?q=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
+    imageUrl: "https://ads-partners.coupang.com/image1/0On6H424FU-r321w0IKYNHFbCTvQZcxWO7MrWHJh0lPiI-TqHGfr2BoQ7aScV3gjq0pXEEid9GaTek5MdF_fSes76-X8XYB9I0QbG5lt569cmgVQR4GurvRPIpOu05CKpjvebmiMEbhHgxEjibMLq1LLbW4hscQAbdUGF8dR0A2A0rXUjC3edghaw9g4p0ERz_DO1mivI3eDzNubOUTF0y8QI2LoWp9uCfbvBsfnw1cdkGRUg0FhhCVmdD-XvzvfkVADF727qIGm-blvZtHpPLaNfd9rgx_A40SSwQ-y2-gL4LRrQj6LesfP5o3ZNBn41ntzpw=="
   - title: "러스트 프로그래밍"
     url: "https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D"
+    imageUrl: "https://ads-partners.coupang.com/image1/dbsBLgKa1TUQAMe9deQm4iK3Siu2ZdQSgl7y37pcEIbufmGAxqZX9Uxc4eOyhLrVAhTN4IQxK58yJsqt9PjIAFExXC6RgHMpgqGZU7wkaimqQjxRJfCdf9mpjvbtiyjpODOoPppg7WLmPgcYr303raPgiFgQGEfnFRCMM1tUaI7n3Q4kVuKJ0-ZZUMKQs0zgWO20SX9X27GQbrH7kqLFfzHnQSFukc3w7JnVVwyAttI0pocn2mUudP-7Gk4aW_eEY4BdXebYxM5ZCd3lYmXbSqbbZ9o4TIixoBIwavfL18sKl9njvWeGDF-RwgQfylmi2xscgA=="
 ---
 ## 프로그래밍 입문, 어렵지 않습니다
 

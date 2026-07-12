@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "게임 프로그래밍 패턴 도서"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4%20%EB%8F%84%EC%84%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/ypirGiO-oAZxmEyZyh8QMeVTyiv1FUdueRr_oBHlI8oWIf7Db9jJenJ26jO3D6XgmH7J3XZg4hJrRy9xzl6Z6UFzrae8E97gV93zZs5qDWrzmhSHV_G89h0aMzQz59vZzSb5RG_ochkC5690vv0nVDyzDSEgEsIsVTMeGE_9-12Euwp49PqhokDtv_IA_w1p7hLi4qYs1Td-bM-5R5Lp9Jebu-BlwZqNpcV9Sk0vUw5q9ng4tXCRz9t5T8b4waMQKbmEbebsru-YZ0jpdioXX6vGqgXQkwOAqtZqTQoa2_cQDfBkYIA6cctP0qRU9W_uRr7WEyM="
   - title: "아이패드 에어 M2"
     url: "https://www.coupang.com/np/search?q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&src=1139000&spec=10799999&addtag=200&ctag=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2"
+    imageUrl: "https://ads-partners.coupang.com/image1/nehfMYREFYi1qI4OnRcdi03VtNxU8KMW8_x-3A4HMpSo6mXYNo7sSb5b2JHq6oIi76d4X72ho7NRy7yiU2pRfHouqEXs84cMkf78joRY0g7keyTZXnoUx5JdqLBF6EtNyKoc_6Sk-UU9vsXPzYquqyWP7D9b0panHCo88I6nxoMpCFB_Q7w6StC-3fi5q1tUZHGCWeOB-ZGnTPXGPY2C0Z1wUecy7-vm-gvIHbAXeuifZ9Hy5UKCSaNp4m6pKKrcVG6Ue7WMs1Su8Ct-OSHyg9XR9QHUVXh4ldfmE7SuswMkjxTCL6XBKL6C_KazM9uMFZWHjycmwc1uxbi9ZMrniJXsJUfJfaj9ytdqYPc="
 ---
 ## 게임 개발은 도구의 조합이다
 

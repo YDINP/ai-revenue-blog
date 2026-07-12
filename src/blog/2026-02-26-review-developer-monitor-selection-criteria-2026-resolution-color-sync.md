@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "맥북 에어 M3"
     url: "https://www.coupang.com/np/search?q=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&src=1139000&spec=10799999&addtag=200&ctag=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3"
+    imageUrl: "https://ads-partners.coupang.com/image1/Em7Keuf-RPNQ5Z9fElHPi3zyJ7F1VjP7B8HCu1PdH8kFZdad2K-OSpg4nqikxmmKciw21oMsi5926rHCwZ94N0t3weWq-34Vtt0nMZS6mnXS898V9Avl8NphQX3q7FR7_qZAsDerbmtYdKFUFr_SZ4dh10yyB6lzjJ8QMr18P9ow3SssZc-_tDPDKyV_QIfCUBBJuNy7-MeJAp8XAAAVkXDokwX1kWlu6ppP73W3ZOdZzt9fF5ECtoV8MpFZ7I_Dfq2Rauu3XyFc6dUlawHSeJKe2gusJUGoFw=="
   - title: "삼성 갤럭시북4 프로"
     url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/TUN_I2oeJcUmXl2jTX5TGr8AhWUSeEAwJ2DS-Ine5n8x9UOXFaq3njYlwuTnU0Ch54tUDopafjZyZtMLWVqtnEIiduEOsbjg7MQm6J3vut-xv5qmqZq0KtGiMoEYidfQpb2YMKTGqd7RrCdsgl-yGDJKb91uC_X0NJX5JG_a3v6jFJqq1akEtp_ZvdYrNF-4x-aUHqo2Qs1R7gJr8mRApOomMzpzZEB80_U2EOmjsaRXO5Uq3I4osObzNMql6WG2TaKL5R4sbWBT8a8qrs7AVFYGbh1CxucCKGlDKsB7ZKUjs4xWRSYy4LRvJA=="
 faq:
   - q: "개발자 모니터는 27인치와 32인치 중 어느 것이 나을까요?"
     a: "27인치 QHD는 선명도와 가격을 모두 만족시키는 표준 선택입니다. 32인치 4K는 더 큰 화면을 원할 때 좋지만, 텍스트가 작아져 스케일링이 필요하고 가격도 더 비쌉니다. 책상 크기와 시력을 고려하여 선택하세요."

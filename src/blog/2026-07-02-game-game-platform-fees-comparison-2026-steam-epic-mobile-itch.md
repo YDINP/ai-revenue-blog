@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4"
+    imageUrl: "https://ads-partners.coupang.com/image1/06QeSNhbWeAAJxM10wE0QTmgQN3qv54-GBzRSocemWeFVFwDQs37_KIclAxaLq9gHZ7534QPqrndFd8UDe8FSyDw0NteoFE_vYqK6PJFXMyaTTfVSQLXIn6rZnfTL7f49s-Id_-3TMdECKyFxaWGISI46tcoFbU4YdSvK83ejlq9ca-uWPo4ms_Ya1uNA0bobw3XmVhp-5yZt2FTPEmobuttPTCcKpO1WcnV28zFPKtY04R3s51ZCglLIt-OQm9F6J0KHEsInlulDuKWtkJ2H8UngCj_OFOR8l5U3Ie9DU0CwXPi4FogQoAQPCffs5RXlAFUo2wEQRS7prjQYkE1XN4NU2JJQBNzio69Vs4y3d56dA=="
   - title: "돈의 심리학"
     url: "https://www.coupang.com/np/search?q=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&src=1139000&spec=10799999&addtag=200&ctag=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99"
+    imageUrl: "https://ads-partners.coupang.com/image1/HWtq-eHaQ6lIuVBcHePYoWVXhJls0mroAWDOHh8SFb_sM4_rJF61EaFyORJ4_uTAV35LChup8dgaHBWYF0EkA6YIGbUspznUKBy6JXpuoXQ3ieBVDfPn6xRO0AAkZpsHUz9TM3ZCtPiZxoncrC-p_JJ8Td9TyQI6jq-dVmTZZaxi3mp0BoZtUZzGbGiliHyzPURHIfXtha2W9ovRyZs6obWZ3I_-vNS_x1aDrlV6T5hT3YouTI_rPfFwsCvgrOrVFixk-naOrIARw8slgBDWahIK96uXDaeK_4L3ijRa_Hq2zj-M3A=="
 faq:
   - q: "인디 개발자에게 가장 수수료가 낮은 플랫폼은?"
     a: "명목 수수료만 보면 itch.io(기본 10%, 조정 가능)와 에픽(12%)이 가장 낮다. 다만 트래픽이 적어 실매출은 스팀이 더 큰 경우가 많다."

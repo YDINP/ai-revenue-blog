@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
     url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive"
+    imageUrl: "https://ads-partners.coupang.com/image1/bQe2gwYArBVjsWMfbalAc5XbsxyokcVZk_0AddBydK0KVBL13bW9O7XHB4rsfzvaIBSiqALk1aSoNcJqdnENbMwJMUiFtKRjPTIZrF6eS5VbJuIZIEGVGyzOhkY0u4UeEtpDEfc9mrbsZ9N0uE-KZt8sanyYii2Y7qwZLvAqC5paq8w5QwNGq6-8K6Wk4zl_moiQc_uIMgIe5BgpMLGwnTfa3OqwTPiXDMZki5JAAFVuzdl9uc9aEDmXzZb6iHuc7zcKr5xwrP1REXsNdGthnr1R45D7ktEdrIildSyPF-V11W_fig=="
   - title: "클린 코드"
     url: "https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/qne2hGD15JjE-w8hqo-MIq8aqUK_0f6v3E8XQlEFvv_LaEm4y69h-5ppYWEK0wpO7o5i3xkey6XCYHkvSQ-1Mtpx--gADkLLFuTOjvmEzTFoGsWXqOBAh8TGi_5iuograMtNjGVrOG5MWcCgUb_lLlCWN-4IoFOEVjz7WZ-5sBryOzYHn0IfFzzYJFq0YFiGCawa1UzMEl36TPgJMy2a6Yz4GMqp1TMPb5RK8xoANwm9RW7hjJ_kLIZVCPAYmBSmjvuJa8A3Lq3bAomXj95KraTyHhLJxpwtApSjczIEHTKbC7iQM1Ad3wM="
   - title: "자바스크립트 완벽 가이드"
     url: "https://www.coupang.com/np/search?q=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/YF0t-yxOqSRd-xBqYJT1bEkDPNVag9oZaBVvVkJErmdEv59xESSfvkRYAJfNL5y4qmkvfSr31JnD4x1phltXMvdRaE1_JXxjyVOMHpow_k_PplKuv0CwDu_guNsPWUSZswPuHa0QwCvRmCMIKenV8lyZSLa9C5PT5H3p0MgJ-aS8bycBGXMQbF8j_OMG0UL2m71sPfjGc_8OFyx6CAcXSlPcQpmbwK_W67l--SFoPS_AGIptEtZ0rETG3TuZKa7VZu6EVIDxqesBmajYKNBZXf3FLUmNQPKa1WRuJw=="
 faq:
   - q: "Next.js를 배포할 때 반드시 Vercel을 사용해야 하나요?"
     a: "아닙니다. Vercel은 가장 편하지만, 다른 플랫폼도 완벽하게 지원합니다. 비용, 커스터마이징 필요성, 팀 규모에 따라 선택하면 됩니다. 개인 프로젝트라면 Vercel 무료 티어, 자유도가 필요하면 Docker를 추천합니다."

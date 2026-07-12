@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
+    imageUrl: "https://ads-partners.coupang.com/image1/N3MOn3F4M0r96tGWN8I7EHBxNmijCay63U9fXr_vTcbGzyXYNWufIm2ghSbCMxDr4gU5VtRvrqH7cz7ij5QeP4dilOAVm-woEJyJwBiohQq8i6nGtgBY0Y9VkOuXQ5s9Ud44lC30A__avNEiOq2OOYDBCDKxgAwqeVZjH8SduAFDkwv4384osbmboq4qoqUAl6RNLQqtYlUnsc98v20HPP5jmIYVHttkcEeRxKxsgsu5elI1o8qRCoBOyN_w_4gP_4oEZmhk_Zte2rO05Dpr0eQTONcs_QXxR5MS8NK3K4m_HU4xFnPZYehghd1RN0JsJAYrNQ=="
   - title: "삼성 뷰피니티 S8 32인치 4K"
     url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K"
+    imageUrl: "https://ads-partners.coupang.com/image1/qaN-X4jYUqYDW6wUqcfFe7KznDtleD1zE1kICLiYb9H623hC8BX5XqKRd98yyUy01o2Kel6AfC1P6eV3S3BxvTm2MsnGxczZkEzNwflO3ABOJybGOzcRvDBudePQdAE2mkdY9BuXylALyVZr_BnZv_EqxeeqssD1XAhwp6vbS-qos3RIdCZA2naDiUNDfMskOzfm-uibROWQM10w7NoEt0z7iFr2eLXR_W2bGJd-fEnaytdjueyE3roHZ9LD5ZEU41ZkBtfIgUAKhArGnOTDtw3YT_nQGMl_AG3_Zz4Ah2kV2rDODeyhvyrN7ui8pJBKGBZtXA=="
 faq:
   - q: "개발자에게 트랙볼 마우스는 정말 도움이 될까요?"
     a: "손목 건강 측면에서는 최고의 선택입니다. 마우스를 고정하고 손가락만으로 조작하기 때문에 손목 회전 스트레스가 거의 없습니다. 다만 IDE에서 코드 선택이나 드래그 작업이 많다면 초기 적응 기간(2~4주)을 견디기 어려울 수 있으니, 웹 개발자보다는 모니터링 작업이 많은 DevOps 엔지니어에게 더 추천합니다."

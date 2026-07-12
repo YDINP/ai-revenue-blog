@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "게임 기획자의 생각법"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98%20%EC%83%9D%EA%B0%81%EB%B2%95&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98%20%EC%83%9D%EA%B0%81%EB%B2%95&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98%20%EC%83%9D%EA%B0%81%EB%B2%95"
+    imageUrl: "https://ads-partners.coupang.com/image1/OYebuUkTvKf2nenfOS9SvImEp-LKyPDS5ixUM0KGO0d8q1aff94RyIE59T8ugUXddlg59B301itmMnQqHH1nWeNPBKkyBXkoH2AkMGpP11UMsi5n3_QwOAuL-5LwQMBu-zJOTZWBIQEtR3UMEFhY7TRrbHUjRqxXMDqtubopFu_torCAT9y9_3iCMKEOsvWr05VQ9LzAN4YGUBT6kkvgxnDa76tABlr6_6wGIu9I2Edo1QcvBmC080OjDjdxQPxKbaHArRA2p6YXq4FNZ6qvSRffqt_ZWk-yp3KjcL6jIohMMxSnOGcgPCIsS2FYShBdN8XgU5k="
   - title: "로지텍 G Pro X 게이밍 마우스"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4"
+    imageUrl: "https://ads-partners.coupang.com/image1/xzIKXSQbvbVi7Qumx6FIGUVhHlzvz6GImmaSUz9I_tS1ylfJcHKc1dxeIWOpQgJljpdYvPdFquESelVPZw6SNif-NzPamjZsk-RKhv7adwxEehFcGm77iLFlMafBIwqdKn6Af8SzL-wwBZAzgUcD0KH2HfkYv26XSummRtEG1h6IIkpRFnuuXfDWglwfflqM5Rc7tLSsABLxSfqbuvDEIdsUiASR5ptHIq_YU0RB87hHoDX7ibEtiIO4y17U_2yIi7XET2oG2SM197u9K4Rbfo5qhbd2knggKLwKYMitZ7DmpbWkhvjXgVA="
 faq:
   - q: "스팀 위시리스트는 어떻게 추가하나요?"
     a: "스팀 게임 상세 페이지에서 '위시리스트에 추가' 버튼을 클릭하면 된다. PC 스팀 클라이언트와 모바일 앱 모두 지원하며, 출시 시 자동 알림을 받을 수 있다."

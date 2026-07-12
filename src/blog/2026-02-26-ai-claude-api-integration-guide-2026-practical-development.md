@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/kRP2tNtRYuy67cg-kT0hp84di-RGopkc313iCV1Lh5i5GeM4DhkTeP9ivodQ9DLjolpAA4Rc0zhZQkGD9cldunGR06JVyC5_jk9J2O-M27lvERPIgXHWxi0FXp6wDo0KpYOINUEHILwDPngc8kECd4WtMOWYar5-usBIXTGESmkU04o1ptIrIfLeolko_FU9mqqSVIW_IuBWCD_5frY760QrK7VTk6NUtnUmpG6egd_nUhde8eEDc0pE5hcjZ1lY9egeYK_HgzndsftYgUDMK6ZxYzSAI7KcWkw="
   - title: "챗GPT 활용법 도서"
     url: "https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/Utu9yX7FHBeQATeHUvq_zJG1NymYApyI7m_BOmY4SCdd-miiJsL_gM0ZLNcLJQz3EpAC9ffXJRA1kImbcqfvSZ1kryoRWdhyoVj7WkVp_wiyAcX_7h3tDK0s0-6wFy2cavE7TiCG92TjkvPv1QPHVsJuc0JaGWah7V-Hx2C-23u2D3M8D-HY2Pony2AeUt60XkJAt4p27cFtmK98axFxVm0z6sIlLrOWoO_9kMklJTwM7u3IsFAHf4iE_OVXgZ18UQpoBS_IRGno9jnDa0XyZZPnEk4HQBYy8g=="
 faq:
   - q: "Claude API 무료로 사용할 수 있나요?"
     a: "네, 처음 가입 시 $5 크레딧을 제공합니다. 이를 통해 충분한 테스트가 가능합니다. 이후에는 사용량에 따라 결제하며, 월 $1 이상 사용하면 혜택을 받을 수 있습니다."

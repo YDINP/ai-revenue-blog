@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "삼성 SSD 980 PRO 1TB"
     url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB"
+    imageUrl: "https://ads-partners.coupang.com/image1/_qsUsLY6LSyOTqS__pJVdMCQ93UYVqLRIMnn8S8qlEPPWMsdbue688pJgyusND6JtIuxhzV82OKRbB7RGM7hHGBHDP0c-iIuAaLfdp5TnIF0Ibqxxhx0tQudKnCglLM7DyS-i3whwWpJe-4UsrabTbV_-Z43O8wOpWlgY--fUveo7ZSKL-K7wTXDY-8jngpdyBPSG4Su5BRr4XmrJGB7_uIAZfmMV96reUItTr1XdvrUb1ICeAjX5t9pY_KJk6DNA5w6Ol25RoM-NTbCXsIY5NUM3LMu9JwpMDU="
   - title: "삼성 갤럭시북4 프로"
     url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/TUN_I2oeJcUmXl2jTX5TGr8AhWUSeEAwJ2DS-Ine5n8x9UOXFaq3njYlwuTnU0Ch54tUDopafjZyZtMLWVqtnEIiduEOsbjg7MQm6J3vut-xv5qmqZq0KtGiMoEYidfQpb2YMKTGqd7RrCdsgl-yGDJKb91uC_X0NJX5JG_a3v6jFJqq1akEtp_ZvdYrNF-4x-aUHqo2Qs1R7gJr8mRApOomMzpzZEB80_U2EOmjsaRXO5Uq3I4osObzNMql6WG2TaKL5R4sbWBT8a8qrs7AVFYGbh1CxucCKGlDKsB7ZKUjs4xWRSYy4LRvJA=="
 ---
 ## 개발자에게 SSD가 중요한 이유
 

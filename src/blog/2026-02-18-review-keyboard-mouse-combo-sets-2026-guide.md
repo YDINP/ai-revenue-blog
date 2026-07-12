@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "ASUS ZenScreen MB16ACV"
     url: "https://www.coupang.com/np/search?q=ASUS%20ZenScreen%20MB16ACV&src=1139000&spec=10799999&addtag=200&ctag=ASUS%20ZenScreen%20MB16ACV&lptag=AF7838146&pageType=SEARCH&pageValue=ASUS%20ZenScreen%20MB16ACV"
+    imageUrl: "https://ads-partners.coupang.com/image1/-m8A9e1f_U5IxX8_-vWMHBJvjBpMNDsMvpN85G7rk_yzyWaXJEbh6hoXIPlOtPrz9fINx1CSru-BKCoJesRoBOo7l9WW36j2jzDaZUbhmlXwvIDjmJEMU5Um-Kd6INLphs_Lzin2H2ekTZ3bwUGguyZdkdKsVzK333Hi99zRCLRRZOBDmHKg2UIQVkHHYjci0YntCCapwxvOJGTTCz5NgR2aRyxajalsVwP_7j0HgcLBUI9aEy3csziEdc5XWOoPsuJspmry-D0lQg3xSbOf_5OGqAxDMaslaiFD6IK0MD9NocTP3PCgJMk="
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
+    imageUrl: "https://ads-partners.coupang.com/image1/N3MOn3F4M0r96tGWN8I7EHBxNmijCay63U9fXr_vTcbGzyXYNWufIm2ghSbCMxDr4gU5VtRvrqH7cz7ij5QeP4dilOAVm-woEJyJwBiohQq8i6nGtgBY0Y9VkOuXQ5s9Ud44lC30A__avNEiOq2OOYDBCDKxgAwqeVZjH8SduAFDkwv4384osbmboq4qoqUAl6RNLQqtYlUnsc98v20HPP5jmIYVHttkcEeRxKxsgsu5elI1o8qRCoBOyN_w_4gP_4oEZmhk_Zte2rO05Dpr0eQTONcs_QXxR5MS8NK3K4m_HU4xFnPZYehghd1RN0JsJAYrNQ=="
 faq:
   - q: "키보드 마우스 세트가 개별 제품보다 나은 이유는?"
     a: "세트는 높이, 그립감, 소프트웨어가 조화를 이루도록 설계되어 있습니다. 특히 손목 각도와 배터리 교체 주기가 일관되므로 장시간 사용 시 피로도가 낮습니다. 또한 RGB 동기화와 멀티디바이스 전환이 통합되어 생산성이 향상됩니다."

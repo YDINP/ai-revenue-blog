@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "점프 투 파이썬"
     url: "https://www.coupang.com/np/search?q=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
+    imageUrl: "https://ads-partners.coupang.com/image1/0On6H424FU-r321w0IKYNHFbCTvQZcxWO7MrWHJh0lPiI-TqHGfr2BoQ7aScV3gjq0pXEEid9GaTek5MdF_fSes76-X8XYB9I0QbG5lt569cmgVQR4GurvRPIpOu05CKpjvebmiMEbhHgxEjibMLq1LLbW4hscQAbdUGF8dR0A2A0rXUjC3edghaw9g4p0ERz_DO1mivI3eDzNubOUTF0y8QI2LoWp9uCfbvBsfnw1cdkGRUg0FhhCVmdD-XvzvfkVADF727qIGm-blvZtHpPLaNfd9rgx_A40SSwQ-y2-gL4LRrQj6LesfP5o3ZNBn41ntzpw=="
   - title: "혼자 공부하는 파이썬"
     url: "https://www.coupang.com/np/search?q=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
+    imageUrl: "https://ads-partners.coupang.com/image1/luce-PHUYeRYhl5Xllwpd1xxfNplAaJ6KhrRQDrJkko3lopXlBiAOUf9VdzrHoaqMztpBB-EhNsjU-5cAA3SXGsgpaM03-M1vlndMangQ3vm1J68WhIz2nVQWGX7zUNj0DV9VwFW2UnifdyisTClXQnAINW-EgnvuLJx6B3hxGVnzZWucXoUjqUMg7JdrFKGO7ubt1zkOBhyJ7Es3_-bwOrTEQWWX9DTc1_EjzlUZgFnVKo6VtxCNjILe4GF1WFWAOMc3O5oVlQ_-PpucZJ7ghsdr9HFQDvVJB9zAoboc62BNd80VtQM2VmwXutV8UMvkQjINfE="
 faq:
   - q: "소규모 프로젝트도 TypeScript로 마이그레이션해야 할까요?"
     a: "파일 수가 50개 미만이고 팀이 2명 이하라면 JavaScript 유지도 고려할 만합니다. 하지만 유지보수 기간이 2년 이상 예상되면 TypeScript 도입이 장기적으로 효율적입니다. 특히 여러 개발자가 합류할 예정이면 타입 시스템의 이점이 큽니다."

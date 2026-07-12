@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "클린 코드"
     url: "https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/qne2hGD15JjE-w8hqo-MIq8aqUK_0f6v3E8XQlEFvv_LaEm4y69h-5ppYWEK0wpO7o5i3xkey6XCYHkvSQ-1Mtpx--gADkLLFuTOjvmEzTFoGsWXqOBAh8TGi_5iuograMtNjGVrOG5MWcCgUb_lLlCWN-4IoFOEVjz7WZ-5sBryOzYHn0IfFzzYJFq0YFiGCawa1UzMEl36TPgJMy2a6Yz4GMqp1TMPb5RK8xoANwm9RW7hjJ_kLIZVCPAYmBSmjvuJa8A3Lq3bAomXj95KraTyHhLJxpwtApSjczIEHTKbC7iQM1Ad3wM="
   - title: "러스트 프로그래밍"
     url: "https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D"
+    imageUrl: "https://ads-partners.coupang.com/image1/xh0ygIMl0kZmqZItxhwe3pWc3N0XCDHEbC-Pmee--QSWd5-AcWZCIw8KPmDYR8qTEJofmUDPIl-6TF15-zVQ6NW3wsKQoSBTqgOjL1ZxPuA-G6TuS0G_v_HTbHXpt4vHJXuaqa0bFR22VKETg9uVvxuW16paCEmZ45bWtvj45Ud4R8-h39B7aeNMTV89f0M88zcEL6-A0uq2bWHZuS3e1qGgyyrRT9NFsVGBd7jeFrjnUDt6WrwiYgK1_uOI-yRexInSePjGYHH35sR4wYECGU4tCwclWzbBpp7UUjXqdKKvEZV0AsjoZ7N89PUElP1vEbZtqw=="
   - title: "혼자 공부하는 파이썬"
     url: "https://www.coupang.com/np/search?q=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
+    imageUrl: "https://ads-partners.coupang.com/image1/luce-PHUYeRYhl5Xllwpd1xxfNplAaJ6KhrRQDrJkko3lopXlBiAOUf9VdzrHoaqMztpBB-EhNsjU-5cAA3SXGsgpaM03-M1vlndMangQ3vm1J68WhIz2nVQWGX7zUNj0DV9VwFW2UnifdyisTClXQnAINW-EgnvuLJx6B3hxGVnzZWucXoUjqUMg7JdrFKGO7ubt1zkOBhyJ7Es3_-bwOrTEQWWX9DTc1_EjzlUZgFnVKo6VtxCNjILe4GF1WFWAOMc3O5oVlQ_-PpucZJ7ghsdr9HFQDvVJB9zAoboc62BNd80VtQM2VmwXutV8UMvkQjINfE="
 faq:
   - q: "개발을 시작하려면 최소 얼마를 투자해야 하나요?"
     a: "개발 시작에는 0원이 필요합니다. VS Code, Git, Python, Docker 모두 무료이며, 클라우드도 AWS/Google Cloud 무료 크레딧으로 시작할 수 있습니다. 프로덕션 배포 후 트래픽이 발생할 때 비용이 생깁니다."

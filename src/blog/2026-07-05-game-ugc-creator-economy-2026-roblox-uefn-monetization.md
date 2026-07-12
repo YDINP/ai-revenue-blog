@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "로블록스 게임 제작 무작정 따라하기"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4%20%EA%B2%8C%EC%9E%84%20%EC%A0%9C%EC%9E%91%20%EB%AC%B4%EC%9E%91%EC%A0%95%20%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4%20%EA%B2%8C%EC%9E%84%20%EC%A0%9C%EC%9E%91%20%EB%AC%B4%EC%9E%91%EC%A0%95%20%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EB%B8%94%EB%A1%9D%EC%8A%A4%20%EA%B2%8C%EC%9E%84%20%EC%A0%9C%EC%9E%91%20%EB%AC%B4%EC%9E%91%EC%A0%95%20%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0"
+    imageUrl: "https://ads-partners.coupang.com/image1/N9NOt1lGIgR5t2XPN4S1JaGOURbNb-s008x6z9MOvtiY2UNIQhi7s6NKPQjQfo9tiW2tMLkdFXDgqtNPbMjvT2b83e8Mi30qFCuq1qkaGfPIVDjP-HTFdIuing7bixWB0S00bL5mUDkaLu717C6veah2nst7QUWl4CWbg0B0I1QyKSLxnhjcFqOrmQlGNAdtjBpCFxMuZErSzN4KOQ5Zbjlev-rq162Hfe4qcaohKBtZXFvR6IlPhTw15lMgezL_JqEYa9n5XWKHmqJTm-BPzwb7wm24VOAFwLN9R3Tr3j0ph0imAvR9wpxxHXSQjJ-yayAipynp"
   - title: "돈의 심리학"
     url: "https://www.coupang.com/np/search?q=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&src=1139000&spec=10799999&addtag=200&ctag=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99"
+    imageUrl: "https://ads-partners.coupang.com/image1/HWtq-eHaQ6lIuVBcHePYoWVXhJls0mroAWDOHh8SFb_sM4_rJF61EaFyORJ4_uTAV35LChup8dgaHBWYF0EkA6YIGbUspznUKBy6JXpuoXQ3ieBVDfPn6xRO0AAkZpsHUz9TM3ZCtPiZxoncrC-p_JJ8Td9TyQI6jq-dVmTZZaxi3mp0BoZtUZzGbGiliHyzPURHIfXtha2W9ovRyZs6obWZ3I_-vNS_x1aDrlV6T5hT3YouTI_rPfFwsCvgrOrVFixk-naOrIARw8slgBDWahIK96uXDaeK_4L3ijRa_Hq2zj-M3A=="
 faq:
   - q: "로블록스에서 크리에이터는 실제로 얼마를 가져가나?"
     a: "판매액의 약 30% 수준으로 알려져 있으나, 로벅스 환전(DevEx)과 플랫폼 수수료를 거치면서 실수령액은 달라진다. 인기 경험은 게임패스·인게임 구매로 반복 수익을 낸다."

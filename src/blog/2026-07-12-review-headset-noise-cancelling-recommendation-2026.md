@@ -11,10 +11,12 @@ image:
 coupangLinks:
   - title: "노이즈캔슬링 오버이어 헤드폰"
     url: "https://www.coupang.com/np/search?q=%EB%85%B8%EC%9D%B4%EC%A6%88%EC%BA%94%EC%8A%AC%EB%A7%81%20%ED%97%A4%EB%93%9C%ED%8F%B0&channel=user"
+    imageUrl: "https://ads-partners.coupang.com/image1/27JYO27XEoPvyamg2_QKXHUr7KlYL2u-jHurbSp_YrAcrzz8GDJXFXcDtAWrufPYN5NEBaz-gvVwk6jjO6klLWhqgHTMQ9hXOK_4ivbmgWb9prYbNEM8H1SFC8iHGF4G6h5tF4YnGRlPmjnncY-62RmlHUJuGoJXccC69dtlw8NvUpJ3D0HH9vOIkhEnOYwK3Oqssht2VvmEzNVO1G4srG1x-by6BkrVF8MiqmE7rrZoto9THfsMEaB5x6OsbeQUkVj89YbxZEA9TSP0cTqIpXILHqqbK-F-kk881_IqbTSNyQci2_M1vFE="
   - title: "노이즈캔슬링 무선 이어폰"
     url: "https://www.coupang.com/np/search?q=%EB%85%B8%EC%9D%B4%EC%A6%88%EC%BA%94%EC%8A%AC%EB%A7%81%20%EB%AC%B4%EC%84%A0%20%EC%9D%B4%EC%96%B4%ED%8F%B0&channel=user"
   - title: "화상회의용 USB 헤드셋"
     url: "https://www.coupang.com/np/search?q=%ED%99%94%EC%83%81%ED%9A%8C%EC%9D%98%20%ED%97%A4%EB%93%9C%EC%85%8B&channel=user"
+    imageUrl: "https://ads-partners.coupang.com/image1/RQ5P2PoTx4L1dO43Rc9I7bMP34ksKp57DkKpDpFxpXjEHIcmDqOPF1Ju7AcuUC0H2TNcQ2OV6JphTxXzLq5w5m2NODR9ys-VCS9Vk9QJge8B3Es8_EHUD6qdEnXPaX1zYdnzp6r1rUc9rP2N_6hdtzNHiHkuUlwT1ZL-1qeiMtQP058bTJMluPn0iDnaxXthdzzpzEqoJBox25uKxpThQ9pcmFzU-HnBnX3qgFUQCpyfhwTykIstkPyWOosJQIzWhobTNRnAPCl_qYHPj7_Z_MCaDwZcNyEQ9cArzrFL50eAwuF4y5YWTOE="
 faq:
   - q: "노이즈캔슬링(ANC)이 정말 집중에 도움이 되나요?"
     a: "네, 특히 '일정한 소음' 차단에 효과적입니다. 에어컨·팬·카페 웅성거림·교통 소음처럼 규칙적인 저역 소음을 크게 줄여 줘, 집중이 쉬워지고 소리를 크게 안 틀어도 돼 귀 피로가 줍니다. 다만 갑작스러운 말소리·타격음 같은 불규칙 소음은 완벽히 못 막습니다. '조용한 환경을 만드는 도구'로 이해하면 좋습니다."

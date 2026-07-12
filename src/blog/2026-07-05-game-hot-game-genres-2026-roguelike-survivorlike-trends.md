@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "게임 기획자의 생각법"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98%20%EC%83%9D%EA%B0%81%EB%B2%95&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98%20%EC%83%9D%EA%B0%81%EB%B2%95&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%EC%9E%90%EC%9D%98%20%EC%83%9D%EA%B0%81%EB%B2%95"
+    imageUrl: "https://ads-partners.coupang.com/image1/OYebuUkTvKf2nenfOS9SvImEp-LKyPDS5ixUM0KGO0d8q1aff94RyIE59T8ugUXddlg59B301itmMnQqHH1nWeNPBKkyBXkoH2AkMGpP11UMsi5n3_QwOAuL-5LwQMBu-zJOTZWBIQEtR3UMEFhY7TRrbHUjRqxXMDqtubopFu_torCAT9y9_3iCMKEOsvWr05VQ9LzAN4YGUBT6kkvgxnDa76tABlr6_6wGIu9I2Edo1QcvBmC080OjDjdxQPxKbaHArRA2p6YXq4FNZ6qvSRffqt_ZWk-yp3KjcL6jIohMMxSnOGcgPCIsS2FYShBdN8XgU5k="
   - title: "게임, 이렇게 만들어야 팔린다"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4"
+    imageUrl: "https://ads-partners.coupang.com/image1/t8hkFW23MsdcVlxmt0UNwP3YxB5t6pFa0gVYKlFVkmzAmcp1X8M9IxDXbRod8cjyJtCFKhazmZaUVUm6sLy_rTgdqjtLsIpG2GkBwsS_WhJ18gvT3Fv6N8W-xqc4yLyBUv64MKPvkLGtAyqHjbtWdvzmZU22k_hhM0u7YtK-qAzpKEfM5ALIu0ekYLDHW10mJ44FTvQMIqcuVpYaJmone2BPxVHasDuNIQzUL6Q_PnPo6iiL8ihCauRAYoDmr0gTEXI1SiW4OrMabQOrITfiQsTJa3_3leRqCj4exRVDw0D8ddxS"
 faq:
   - q: "1인 개발자에게 가장 효율적인 장르는?"
     a: "로그라이크(로그라이트)류가 대표적이다. 랜덤성과 빌드 조합으로 적은 콘텐츠로도 높은 리플레이성을 확보할 수 있어 리소스가 한정된 개인에게 유리하다."

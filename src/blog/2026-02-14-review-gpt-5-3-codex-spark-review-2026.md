@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"
     url: "https://www.coupang.com/np/search?q=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0"
+    imageUrl: "https://ads-partners.coupang.com/image1/dwcczT_OB-uthXP_d7nVeKPPLkuDnKxc-uq5OR2P3iBweGLdoYnENA5Duq2Sndk390hTPLs_ogZAqPmuEuwGY-I0RlfH_Z5S4pf-pgNCx2iBabTnuo13vWtSuNp7AVlG6xlHAod8_MpkqGqEi8cSNRxnb_7s6kP7hqeojIEdUHiZhKvLKBSwtg7M9BEMHdmaEfM78ZBuHwW2PWazwoq3H5d054OKdxmmQTKlTIu9DKYtZVpil9rs7i24frsQNk6IJJq7MLn1Rvkp3OFU3DAq7q0yEJKN55vCjQUBAfDy_rnT2odIkUKpGYbRadR3_zorU0R9jRA="
   - title: "로지텍 MX Keys S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S"
+    imageUrl: "https://ads-partners.coupang.com/image1/ezpf0GR4BzffiPvWe2k74jT3RBLuAjPe0v_bX6hU0wle_X168JmYu7hAG4hxD2iBdIbJpjeAta6nc2Fe5aaqdWaUOLUddaimIqk8TRHenLgIa9Xy_RI4bHy0p66ymMwN1PMEwAFyPnovJpVnnRRODSZQ11OKq9QVvHazuhdBSv66R2WeABiHYnolhGWEjmkd4jdvZ2d-aeTSy2BMTbQgOZkm10o59K6iGTWxuYBauaszozfNmGdHZ7W97v6G4jqBRVkJBoY6pnVXyfRiJcCpH0rxgKb32EtxQg=="
 ---
 ## GPT-5.3 Codex Spark: AI 코딩 어시스턴트의 새로운 기준
 

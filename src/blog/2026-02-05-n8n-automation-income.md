@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "LG 그램 17 (개발용 노트북)"
     url: "https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017"
+    imageUrl: "https://ads-partners.coupang.com/image1/JewdcGkEq26nsizQJUUu2Ol-VC5oSu_CEDzzqp9rTR4fszDCivoBXZ22w6w6KJLYJlXg2PbhO2D4FCsFwspWvOLltB4z2gHV3I0f5tlOHTf3xHt78PsjtLyYhBgRl-NpixT2g0x68r7Gbqr_046kcGnibc1X_s1RAl5UXqDzzhUlpTR953R9PRT1RJXNeWr3nsPJG3oIPzFaOFZcJZmhoMWHORrrSfIYaWjdC8q8DtKjlvAbp7VScH_9pBqkKq2ZjwQJO1VEYaqM4i_jK2JFftdCiYjvMEBCChgyNwDeWYskc0yXR-SxLhrK"
   - title: "챗GPT 활용법 도서"
     url: "https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/Utu9yX7FHBeQATeHUvq_zJG1NymYApyI7m_BOmY4SCdd-miiJsL_gM0ZLNcLJQz3EpAC9ffXJRA1kImbcqfvSZ1kryoRWdhyoVj7WkVp_wiyAcX_7h3tDK0s0-6wFy2cavE7TiCG92TjkvPv1QPHVsJuc0JaGWah7V-Hx2C-23u2D3M8D-HY2Pony2AeUt60XkJAt4p27cFtmK98axFxVm0z6sIlLrOWoO_9kMklJTwM7u3IsFAHf4iE_OVXgZ18UQpoBS_IRGno9jnDa0XyZZPnEk4HQBYy8g=="
 ---
 ## n8n이란?
 

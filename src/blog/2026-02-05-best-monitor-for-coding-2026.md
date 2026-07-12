@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"
     url: "https://www.coupang.com/np/search?q=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0"
+    imageUrl: "https://ads-partners.coupang.com/image1/dwcczT_OB-uthXP_d7nVeKPPLkuDnKxc-uq5OR2P3iBweGLdoYnENA5Duq2Sndk390hTPLs_ogZAqPmuEuwGY-I0RlfH_Z5S4pf-pgNCx2iBabTnuo13vWtSuNp7AVlG6xlHAod8_MpkqGqEi8cSNRxnb_7s6kP7hqeojIEdUHiZhKvLKBSwtg7M9BEMHdmaEfM78ZBuHwW2PWazwoq3H5d054OKdxmmQTKlTIu9DKYtZVpil9rs7i24frsQNk6IJJq7MLn1Rvkp3OFU3DAq7q0yEJKN55vCjQUBAfDy_rnT2odIkUKpGYbRadR3_zorU0R9jRA="
   - title: "삼성 뷰피니티 S8 32인치 4K"
     url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K"
+    imageUrl: "https://ads-partners.coupang.com/image1/qaN-X4jYUqYDW6wUqcfFe7KznDtleD1zE1kICLiYb9H623hC8BX5XqKRd98yyUy01o2Kel6AfC1P6eV3S3BxvTm2MsnGxczZkEzNwflO3ABOJybGOzcRvDBudePQdAE2mkdY9BuXylALyVZr_BnZv_EqxeeqssD1XAhwp6vbS-qos3RIdCZA2naDiUNDfMskOzfm-uibROWQM10w7NoEt0z7iFr2eLXR_W2bGJd-fEnaytdjueyE3roHZ9LD5ZEU41ZkBtfIgUAKhArGnOTDtw3YT_nQGMl_AG3_Zz4Ah2kV2rDODeyhvyrN7ui8pJBKGBZtXA=="
 ---
 ## 개발자에게 모니터 크기가 중요한 이유
 

@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "챗GPT 활용법 도서"
     url: "https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/Utu9yX7FHBeQATeHUvq_zJG1NymYApyI7m_BOmY4SCdd-miiJsL_gM0ZLNcLJQz3EpAC9ffXJRA1kImbcqfvSZ1kryoRWdhyoVj7WkVp_wiyAcX_7h3tDK0s0-6wFy2cavE7TiCG92TjkvPv1QPHVsJuc0JaGWah7V-Hx2C-23u2D3M8D-HY2Pony2AeUt60XkJAt4p27cFtmK98axFxVm0z6sIlLrOWoO_9kMklJTwM7u3IsFAHf4iE_OVXgZ18UQpoBS_IRGno9jnDa0XyZZPnEk4HQBYy8g=="
   - title: "아이패드 에어 M2"
     url: "https://www.coupang.com/np/search?q=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&src=1139000&spec=10799999&addtag=200&ctag=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%20%EC%97%90%EC%96%B4%20M2"
+    imageUrl: "https://ads-partners.coupang.com/image1/nehfMYREFYi1qI4OnRcdi03VtNxU8KMW8_x-3A4HMpSo6mXYNo7sSb5b2JHq6oIi76d4X72ho7NRy7yiU2pRfHouqEXs84cMkf78joRY0g7keyTZXnoUx5JdqLBF6EtNyKoc_6Sk-UU9vsXPzYquqyWP7D9b0panHCo88I6nxoMpCFB_Q7w6StC-3fi5q1tUZHGCWeOB-ZGnTPXGPY2C0Z1wUecy7-vm-gvIHbAXeuifZ9Hy5UKCSaNp4m6pKKrcVG6Ue7WMs1Su8Ct-OSHyg9XR9QHUVXh4ldfmE7SuswMkjxTCL6XBKL6C_KazM9uMFZWHjycmwc1uxbi9ZMrniJXsJUfJfaj9ytdqYPc="
 ---
 ## 2026년 2월, AI 코딩 어시스턴트 빅뱅
 

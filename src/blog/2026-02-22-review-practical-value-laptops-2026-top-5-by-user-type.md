@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "ASUS ZenScreen MB16ACV"
     url: "https://www.coupang.com/np/search?q=ASUS%20ZenScreen%20MB16ACV&src=1139000&spec=10799999&addtag=200&ctag=ASUS%20ZenScreen%20MB16ACV&lptag=AF7838146&pageType=SEARCH&pageValue=ASUS%20ZenScreen%20MB16ACV"
+    imageUrl: "https://ads-partners.coupang.com/image1/-m8A9e1f_U5IxX8_-vWMHBJvjBpMNDsMvpN85G7rk_yzyWaXJEbh6hoXIPlOtPrz9fINx1CSru-BKCoJesRoBOo7l9WW36j2jzDaZUbhmlXwvIDjmJEMU5Um-Kd6INLphs_Lzin2H2ekTZ3bwUGguyZdkdKsVzK333Hi99zRCLRRZOBDmHKg2UIQVkHHYjci0YntCCapwxvOJGTTCz5NgR2aRyxajalsVwP_7j0HgcLBUI9aEy3csziEdc5XWOoPsuJspmry-D0lQg3xSbOf_5OGqAxDMaslaiFD6IK0MD9NocTP3PCgJMk="
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
+    imageUrl: "https://ads-partners.coupang.com/image1/N3MOn3F4M0r96tGWN8I7EHBxNmijCay63U9fXr_vTcbGzyXYNWufIm2ghSbCMxDr4gU5VtRvrqH7cz7ij5QeP4dilOAVm-woEJyJwBiohQq8i6nGtgBY0Y9VkOuXQ5s9Ud44lC30A__avNEiOq2OOYDBCDKxgAwqeVZjH8SduAFDkwv4384osbmboq4qoqUAl6RNLQqtYlUnsc98v20HPP5jmIYVHttkcEeRxKxsgsu5elI1o8qRCoBOyN_w_4gP_4oEZmhk_Zte2rO05Dpr0eQTONcs_QXxR5MS8NK3K4m_HU4xFnPZYehghd1RN0JsJAYrNQ=="
   - title: "LG 그램 17"
     url: "https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017"
+    imageUrl: "https://ads-partners.coupang.com/image1/VgWdF7N09CLM-FATVgi2YrtQRKpBrt4FxNXOAA3IO7IcSMRACuwsSW2thSF6TRqp8XLZ7DrXu0X6_dMFJRiAHLPk91gQ3xfVt35LpnQM9XZD9PwoDNU8zTtWAZh6n5k88414aPWmlZvAlipI_kM26Hgwu8TnGGhJCMBJr6LQYLhH99OSgix7nmJrz-FqvJm0fvBN8A6S_N_6t6TvbYQ6_IyQlAP126u6i_EXOidyY1L_mdDYWm_UmrRivB1Vtm8XjGw70ui6H1pqLpC5oMM2jK__BchKHMS5GMyYlhDNO6PvYrtsQRFKU5vE"
 faq:
   - q: "2026년에 가성비 노트북을 고르는 가장 중요한 기준은 무엇입니까?"
     a: "단순히 저렴한 가격이 아니라 자신의 용도에 맞는 성능, 배터리 시간, 내구성을 종합적으로 평가해야 합니다. 휴대성이 중요하면 무게와 배터리, 콘텐츠 제작이면 디스플레이 색감과 RAM을 우선순위로 두세요. 같은 가격대에서 더 오래 사용할 수 있는 제품이 진정한 가성비입니다."

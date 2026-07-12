@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "함께 자라기"
     url: "https://www.coupang.com/np/search?q=%ED%95%A8%EA%BB%98%20%EC%9E%90%EB%9D%BC%EA%B8%B0&src=1139000&spec=10799999&addtag=200&ctag=%ED%95%A8%EA%BB%98%20%EC%9E%90%EB%9D%BC%EA%B8%B0&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%95%A8%EA%BB%98%20%EC%9E%90%EB%9D%BC%EA%B8%B0"
+    imageUrl: "https://ads-partners.coupang.com/image1/LS4pQC9FSNgYszfgLdVp81puL_XjYG6BuVZUfsdx9IGBa-d0vqlVeKbs5ynyyuYqORFPbmfzzj1_kL_kdxS1zRqBpaQZiya7bz2sd0762hb4nt8MdSCDMwrT1h2WGWTK4yLooE5BMcTCVNvotAANgSW5NaLVz6fDagAML4qEJBrAVuYBzNgKbrP5GBHC8mkH34kPxMSuXrqVxvyuiE3eHkVbct5rl37hG8VqBgpLN2MOWG-4x3mQlOPaC1lQZS-KvnvbBDWINPdFLT40eTGUxN53O-_iCIEN-EBMB5pNKA9FQoU8wSTsqRP0YIMCnQTCQcf3bA=="
   - title: "클린 코드"
     url: "https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/qne2hGD15JjE-w8hqo-MIq8aqUK_0f6v3E8XQlEFvv_LaEm4y69h-5ppYWEK0wpO7o5i3xkey6XCYHkvSQ-1Mtpx--gADkLLFuTOjvmEzTFoGsWXqOBAh8TGi_5iuograMtNjGVrOG5MWcCgUb_lLlCWN-4IoFOEVjz7WZ-5sBryOzYHn0IfFzzYJFq0YFiGCawa1UzMEl36TPgJMy2a6Yz4GMqp1TMPb5RK8xoANwm9RW7hjJ_kLIZVCPAYmBSmjvuJa8A3Lq3bAomXj95KraTyHhLJxpwtApSjczIEHTKbC7iQM1Ad3wM="
 faq:
   - q: "바이브 코딩으로 실제 앱을 만들 수 있나요?"
     a: "예. 프로토타입과 MVP 수준의 앱은 충분히 만들 수 있습니다. 단, 수십만 줄 규모의 엔터프라이즈 시스템이나 고성능 요구 로직은 개발자 검수가 필수입니다. '아이디어 검증용 앱'으로 접근하면 생산성을 극대화할 수 있습니다."

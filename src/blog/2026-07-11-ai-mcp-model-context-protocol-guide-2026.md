@@ -11,6 +11,7 @@ image:
 coupangLinks:
   - title: "랭체인·LLM 앱 개발 입문서"
     url: "https://www.coupang.com/np/search?q=%EB%9E%AD%EC%B2%B4%EC%9D%B8%20LLM%20%EC%95%B1%20%EA%B0%9C%EB%B0%9C%20%EC%9E%85%EB%AC%B8%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%9E%AD%EC%B2%B4%EC%9D%B8%20LLM%20%EC%95%B1%20%EA%B0%9C%EB%B0%9C%20%EC%9E%85%EB%AC%B8%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9E%AD%EC%B2%B4%EC%9D%B8%20LLM%20%EC%95%B1%20%EA%B0%9C%EB%B0%9C%20%EC%9E%85%EB%AC%B8%EC%84%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/JhGwqhlCtdyhBjDNJgMkb1mAkRD5TYE6JQfihBhAJccjk1BDTAG-LlQYjILb2a6KVtts7r_Ys7ES7nRunqYjC4L5yoGP9StQFW_6djqLkg2egyEFCneqlV8znumNtTwy0oMxraTPjF-dZtoIp8-9AwlY7PV_h5al0gBR_3f64hiWQRZc5TJHsDo11X7SMl-1l-qnAkNV0ZYPvRNF1_21ZwpUi00iGrwLkd6mM9ImWUy6dYcolYPSe9-CLB9pQ9qS5NtNsV8jx-jRb2UIUfaGpTfmftFSUqbndvJNTJHszM4PquHo"
 faq:
   - q: "MCP가 정확히 뭔가요?"
     a: "MCP(Model Context Protocol)는 AI 모델을 외부 도구·데이터와 연결하는 표준 규격입니다. 앤트로픽이 2024년 말 공개했고, 2026년 현재 사실상의 업계 표준으로 자리 잡았습니다. 흔히 'AI의 USB-C'에 비유되는데, 서로 다른 AI와 도구를 매번 개별 방식으로 잇는 대신 하나의 공통 규격으로 연결하기 때문입니다. 덕분에 한 번 만든 MCP 서버는 Claude, 여러 IDE, 다양한 에이전트에서 그대로 재사용됩니다."

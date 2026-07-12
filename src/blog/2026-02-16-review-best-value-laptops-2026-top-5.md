@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "키크론 K3 Pro"
     url: "https://www.coupang.com/np/search?q=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro&src=1139000&spec=10799999&addtag=200&ctag=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro"
+    imageUrl: "https://ads-partners.coupang.com/image1/-BjrcohaVJh7n88o-K9OXVKnZYtyT78oXKeYk_DTvZzwrGBqjAJ7sSb78yvxtP-og6YxISXF8MjNYtnwnBywGkmwqR6WNXkpczzwQybjAld8QYuH43YhKNwtXbep72Lrmqlf2bdlZhBBQSrlCWX-05FW3UY9UiaZI_rgTZoeqJzDXJrLlHt93gErNCPCLCk42AEVhOy2cV2v1XwDdC7Nl9P8MN3MyvdG6DvSe44cQqTFeXJsaPn_loY--3BBdJQYXPI4vfSZZ6YXGWtY6ylz6tUeOaE7MPsyc20="
   - title: "LG 울트라와이드 34인치 모니터"
     url: "https://www.coupang.com/np/search?q=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0"
+    imageUrl: "https://ads-partners.coupang.com/image1/dwcczT_OB-uthXP_d7nVeKPPLkuDnKxc-uq5OR2P3iBweGLdoYnENA5Duq2Sndk390hTPLs_ogZAqPmuEuwGY-I0RlfH_Z5S4pf-pgNCx2iBabTnuo13vWtSuNp7AVlG6xlHAod8_MpkqGqEi8cSNRxnb_7s6kP7hqeojIEdUHiZhKvLKBSwtg7M9BEMHdmaEfM78ZBuHwW2PWazwoq3H5d054OKdxmmQTKlTIu9DKYtZVpil9rs7i24frsQNk6IJJq7MLn1Rvkp3OFU3DAq7q0yEJKN55vCjQUBAfDy_rnT2odIkUKpGYbRadR3_zorU0R9jRA="
   - title: "LG 그램 17"
     url: "https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017"
+    imageUrl: "https://ads-partners.coupang.com/image1/VgWdF7N09CLM-FATVgi2YrtQRKpBrt4FxNXOAA3IO7IcSMRACuwsSW2thSF6TRqp8XLZ7DrXu0X6_dMFJRiAHLPk91gQ3xfVt35LpnQM9XZD9PwoDNU8zTtWAZh6n5k88414aPWmlZvAlipI_kM26Hgwu8TnGGhJCMBJr6LQYLhH99OSgix7nmJrz-FqvJm0fvBN8A6S_N_6t6TvbYQ6_IyQlAP126u6i_EXOidyY1L_mdDYWm_UmrRivB1Vtm8XjGw70ui6H1pqLpC5oMM2jK__BchKHMS5GMyYlhDNO6PvYrtsQRFKU5vE"
 faq:
   - q: "2026년 가성비 노트북을 선택할 때 가장 중요한 기준은 무엇인가요?"
     a: "용도에 맞는 성능 선택이 핵심입니다. 웹 브라우징과 문서 작업이면 Core Ultra 5, 개발이나 멀티태스킹이면 Core Ultra 7 이상을 권장합니다. 가격과 성능 균형을 맞춘 후 화면 크기, 무게, 배터리 지속시간을 고려하세요. 직접 만져보고 키보드 감촉을 확인하는 것도 중요합니다."

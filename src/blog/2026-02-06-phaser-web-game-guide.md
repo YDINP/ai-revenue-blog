@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "자바스크립트 완벽 가이드 도서"
     url: "https://www.coupang.com/np/search?q=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C%20%EB%8F%84%EC%84%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/WvuE9hkRYvJXeVkPWk1sGYq83rCB-VQnqqabi8ZzC2vaaRoBF1mgaOhOs4ZJFw1QbReTnv4vwiDuVIj__g-T-Pn7xmPtAQ_WH98uWhBw0CdDVcwnAPqMy-mTsm0nJiNwDo2s9YnyQpTNhddpNEQx08EAshnD_F0zjk14KIa0tJfsSlJXQfDYdqSjGu40ZtkJpA3pi5jPK0RzP97dDv4L39ROpxsfx7NJEys_JzxU8yMOixSabF_0_or3i4fZRswyp3okgFYJY6XJeSnapJmDt0X-kZwE8dzlxYR88Q64Y3jRl0qXFI3ocLw6PgoRQwaJ4DjeyOed"
   - title: "모니터 LG 울트라와이드"
     url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/6SIZe3B9x0OXeXJA6aMiwQYPMZDqJrWWa44fOeUcCQFpXzDnfiM9pRlF6SqIlcPTKp0k2J4xRXCU5TFWCjvp4ofH6KoaH58zAJo57fIojvRabUkJQ9PKGCaqo2FcyEEZ51abgeOpLJi-zcbWjgi9_RtQRl_hYhdZYsLksQ1qq6jb-mxLu2nZFsDP75mqnB2U4VMb58soJmYX0CwXhkqRSpbEGMpPGwQTRwU9RBxN6t4DDrpywwi3JQcY6p1uZfUJ6IKsYpDXbglqGnyqRPM_jzizBqWeC-TjCOg="
 ---
 ## Phaser.js가 웹 게임 개발의 정답인 이유
 

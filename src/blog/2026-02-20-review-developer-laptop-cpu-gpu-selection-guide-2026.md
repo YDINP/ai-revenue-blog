@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
+    imageUrl: "https://ads-partners.coupang.com/image1/N3MOn3F4M0r96tGWN8I7EHBxNmijCay63U9fXr_vTcbGzyXYNWufIm2ghSbCMxDr4gU5VtRvrqH7cz7ij5QeP4dilOAVm-woEJyJwBiohQq8i6nGtgBY0Y9VkOuXQ5s9Ud44lC30A__avNEiOq2OOYDBCDKxgAwqeVZjH8SduAFDkwv4384osbmboq4qoqUAl6RNLQqtYlUnsc98v20HPP5jmIYVHttkcEeRxKxsgsu5elI1o8qRCoBOyN_w_4gP_4oEZmhk_Zte2rO05Dpr0eQTONcs_QXxR5MS8NK3K4m_HU4xFnPZYehghd1RN0JsJAYrNQ=="
   - title: "삼성 갤럭시북4 프로"
     url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/TUN_I2oeJcUmXl2jTX5TGr8AhWUSeEAwJ2DS-Ine5n8x9UOXFaq3njYlwuTnU0Ch54tUDopafjZyZtMLWVqtnEIiduEOsbjg7MQm6J3vut-xv5qmqZq0KtGiMoEYidfQpb2YMKTGqd7RrCdsgl-yGDJKb91uC_X0NJX5JG_a3v6jFJqq1akEtp_ZvdYrNF-4x-aUHqo2Qs1R7gJr8mRApOomMzpzZEB80_U2EOmjsaRXO5Uq3I4osObzNMql6WG2TaKL5R4sbWBT8a8qrs7AVFYGbh1CxucCKGlDKsB7ZKUjs4xWRSYy4LRvJA=="
   - title: "맥북 에어 M3"
     url: "https://www.coupang.com/np/search?q=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&src=1139000&spec=10799999&addtag=200&ctag=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3"
+    imageUrl: "https://ads-partners.coupang.com/image1/Em7Keuf-RPNQ5Z9fElHPi3zyJ7F1VjP7B8HCu1PdH8kFZdad2K-OSpg4nqikxmmKciw21oMsi5926rHCwZ94N0t3weWq-34Vtt0nMZS6mnXS898V9Avl8NphQX3q7FR7_qZAsDerbmtYdKFUFr_SZ4dh10yyB6lzjJ8QMr18P9ow3SssZc-_tDPDKyV_QIfCUBBJuNy7-MeJAp8XAAAVkXDokwX1kWlu6ppP73W3ZOdZzt9fF5ECtoV8MpFZ7I_Dfq2Rauu3XyFc6dUlawHSeJKe2gusJUGoFw=="
 faq:
   - q: "개발자용 노트북에서 GPU는 정말 중요한가요?"
     a: "일반 웹/백엔드 개발자라면 내장 GPU만으로 충분합니다. GPU는 주로 화면 표시와 가벼운 3D 렌더링을 담당하며, CPU 성능이 훨씬 더 중요합니다. 게임 엔진 개발이나 CUDA 기반 AI 학습을 한다면 고급 GPU가 필요합니다."

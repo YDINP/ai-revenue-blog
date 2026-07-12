@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4"
+    imageUrl: "https://ads-partners.coupang.com/image1/06QeSNhbWeAAJxM10wE0QTmgQN3qv54-GBzRSocemWeFVFwDQs37_KIclAxaLq9gHZ7534QPqrndFd8UDe8FSyDw0NteoFE_vYqK6PJFXMyaTTfVSQLXIn6rZnfTL7f49s-Id_-3TMdECKyFxaWGISI46tcoFbU4YdSvK83ejlq9ca-uWPo4ms_Ya1uNA0bobw3XmVhp-5yZt2FTPEmobuttPTCcKpO1WcnV28zFPKtY04R3s51ZCglLIt-OQm9F6J0KHEsInlulDuKWtkJ2H8UngCj_OFOR8l5U3Ie9DU0CwXPi4FogQoAQPCffs5RXlAFUo2wEQRS7prjQYkE1XN4NU2JJQBNzio69Vs4y3d56dA=="
   - title: "AI 2041"
     url: "https://www.coupang.com/np/search?q=AI%202041&src=1139000&spec=10799999&addtag=200&ctag=AI%202041&lptag=AF7838146&pageType=SEARCH&pageValue=AI%202041"
+    imageUrl: "https://ads-partners.coupang.com/image1/za23GjufVytHpoQqzcLp0DIQXRYo3nDOV5QxIm55r-a9yvXVOYMJ6zXHSr9qPYU7ocKlOCfAzZeu2Swms2pIMy8RU4x_6Nls4isiU6qHXJdaFvPHVJQkeEwUu_g4flyaNt9FWg1E57CMLrG6frMHeplM0pwtQQshspSWoOUA28ftUUZ_2F1rUitGPNV2Mr1hVP6LOwdx_Ybh4pI9m0fb4_uahqmI0HmQCEhq2GOWw2TF0P1hZSWMY5d1mxFqehqTpoGvJbZlwR8EnJy852_JcsblWWaJ2GczBKpypTlt"
 faq:
   - q: "AI로 만든 에셋을 상업 게임에 써도 되나?"
     a: "도구의 라이선스와 학습 데이터 출처에 따라 다르다. 상업적 이용을 명시적으로 허용하고 저작권이 명확한 도구만 사용해야 하며, 스팀 등 플랫폼의 AI 콘텐츠 고지 정책도 확인해야 한다."

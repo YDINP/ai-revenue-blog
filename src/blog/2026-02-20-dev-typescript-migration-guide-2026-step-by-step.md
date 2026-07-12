@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "러스트 프로그래밍"
     url: "https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D"
+    imageUrl: "https://ads-partners.coupang.com/image1/xh0ygIMl0kZmqZItxhwe3pWc3N0XCDHEbC-Pmee--QSWd5-AcWZCIw8KPmDYR8qTEJofmUDPIl-6TF15-zVQ6NW3wsKQoSBTqgOjL1ZxPuA-G6TuS0G_v_HTbHXpt4vHJXuaqa0bFR22VKETg9uVvxuW16paCEmZ45bWtvj45Ud4R8-h39B7aeNMTV89f0M88zcEL6-A0uq2bWHZuS3e1qGgyyrRT9NFsVGBd7jeFrjnUDt6WrwiYgK1_uOI-yRexInSePjGYHH35sR4wYECGU4tCwclWzbBpp7UUjXqdKKvEZV0AsjoZ7N89PUElP1vEbZtqw=="
   - title: "자바스크립트 완벽 가이드"
     url: "https://www.coupang.com/np/search?q=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/YF0t-yxOqSRd-xBqYJT1bEkDPNVag9oZaBVvVkJErmdEv59xESSfvkRYAJfNL5y4qmkvfSr31JnD4x1phltXMvdRaE1_JXxjyVOMHpow_k_PplKuv0CwDu_guNsPWUSZswPuHa0QwCvRmCMIKenV8lyZSLa9C5PT5H3p0MgJ-aS8bycBGXMQbF8j_OMG0UL2m71sPfjGc_8OFyx6CAcXSlPcQpmbwK_W67l--SFoPS_AGIptEtZ0rETG3TuZKa7VZu6EVIDxqesBmajYKNBZXf3FLUmNQPKa1WRuJw=="
   - title: "점프 투 파이썬"
     url: "https://www.coupang.com/np/search?q=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
+    imageUrl: "https://ads-partners.coupang.com/image1/0On6H424FU-r321w0IKYNHFbCTvQZcxWO7MrWHJh0lPiI-TqHGfr2BoQ7aScV3gjq0pXEEid9GaTek5MdF_fSes76-X8XYB9I0QbG5lt569cmgVQR4GurvRPIpOu05CKpjvebmiMEbhHgxEjibMLq1LLbW4hscQAbdUGF8dR0A2A0rXUjC3edghaw9g4p0ERz_DO1mivI3eDzNubOUTF0y8QI2LoWp9uCfbvBsfnw1cdkGRUg0FhhCVmdD-XvzvfkVADF727qIGm-blvZtHpPLaNfd9rgx_A40SSwQ-y2-gL4LRrQj6LesfP5o3ZNBn41ntzpw=="
 faq:
   - q: "기존 JavaScript 프로젝트를 TypeScript로 마이그레이션하면 성능이 저하되나요?"
     a: "아니요. TypeScript는 컴파일 타임에만 타입 검사를 수행하고, 최종 산출물은 JavaScript입니다. 따라서 런타임 성능은 동일하며, 오히려 타입 검사로 인한 버그 감소로 안정성이 향상됩니다."

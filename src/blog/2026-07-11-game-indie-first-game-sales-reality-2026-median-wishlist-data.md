@@ -11,6 +11,7 @@ image:
 coupangLinks:
   - title: "게임, 이렇게 만들어야 팔린다"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4"
+    imageUrl: "https://ads-partners.coupang.com/image1/t8hkFW23MsdcVlxmt0UNwP3YxB5t6pFa0gVYKlFVkmzAmcp1X8M9IxDXbRod8cjyJtCFKhazmZaUVUm6sLy_rTgdqjtLsIpG2GkBwsS_WhJ18gvT3Fv6N8W-xqc4yLyBUv64MKPvkLGtAyqHjbtWdvzmZU22k_hhM0u7YtK-qAzpKEfM5ALIu0ekYLDHW10mJ44FTvQMIqcuVpYaJmone2BPxVHasDuNIQzUL6Q_PnPo6iiL8ihCauRAYoDmr0gTEXI1SiW4OrMabQOrITfiQsTJa3_3leRqCj4exRVDw0D8ddxS"
 faq:
   - q: "첫 인디게임은 보통 얼마나 버나요?"
     a: "편차가 극단적이다. 스팀 인디게임의 생애 총매출 중앙값은 약 5,000~15,000달러 수준이고, 전체 중앙값으로 내려가면 수백 달러에 그치는 게임도 많다. 반면 데뷔작 '평균'은 약 12만 달러로 잡히는데, 이는 소수 히트작이 평균을 끌어올린 착시다. 중앙값과 평균의 간극이 곧 인디 시장의 현실이다."

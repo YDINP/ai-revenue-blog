@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
+    imageUrl: "https://ads-partners.coupang.com/image1/N3MOn3F4M0r96tGWN8I7EHBxNmijCay63U9fXr_vTcbGzyXYNWufIm2ghSbCMxDr4gU5VtRvrqH7cz7ij5QeP4dilOAVm-woEJyJwBiohQq8i6nGtgBY0Y9VkOuXQ5s9Ud44lC30A__avNEiOq2OOYDBCDKxgAwqeVZjH8SduAFDkwv4384osbmboq4qoqUAl6RNLQqtYlUnsc98v20HPP5jmIYVHttkcEeRxKxsgsu5elI1o8qRCoBOyN_w_4gP_4oEZmhk_Zte2rO05Dpr0eQTONcs_QXxR5MS8NK3K4m_HU4xFnPZYehghd1RN0JsJAYrNQ=="
   - title: "로지텍 MX Keys S 무선 키보드"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%EB%AC%B4%EC%84%A0%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%EB%AC%B4%EC%84%A0%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%EB%AC%B4%EC%84%A0%20%ED%82%A4%EB%B3%B4%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/qJs2DVNc7_u9EFHOqGJYptFuU4gxm0kFf_4rNKvhY7wErTvt7EJI9fNQ5rFq_xkyNYO2MIs4BlHJKEQnZdHvS4KnoEUgOcf3AZPnaFw0Vz8QGpE4aOQ-xlLElXaC2PtAUeVdHcOIzZqe8HIPfE75I57DnBNuyxfQJzoyy_oYjp9uYC8Zt1d34K5aqETGewWDCi-p2zQy_rU14mFODeTHYaPTxLbRQhNKSwZutzyTwDLZb6KagiWidzc3OYdqCmFH2AaekZ45EwCIELPb1yVrryjyV5Iie3qIF2o="
 ---
 ## 개발자에게 마우스가 중요한 이유
 

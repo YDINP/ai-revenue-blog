@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "NVIDIA RTX 5090 그래픽카드"
     url: "https://www.coupang.com/np/search?q=RTX%205090&channel=user"
+    imageUrl: "https://ads-partners.coupang.com/image1/8YAKA3pFSR_sb7RR8V3b-NUO-YAqvcQfbvczjb9snSG1jC_qyFUzPgjcrfJPcIynuMgJFFvzTPJo_hK9z2jg_rjukvY0V85LcB5rH9YJhG7UjHwSjKGvsXMuXa_OUOXFiRg_QeGeV6iPeexTa-fRyF-xhc0F370RIcB8VlW2bucRB37TxAK7uGmYPDAgpL4cgZGw9uFyli6QPfVecqEr2Ui3YNWUnGGSC7Pt4fmlO6sCd5vd7qkC4Bvsrqnm2UAeSpcLl6TEV73wcCWerRsMZy8tPJfuU5wDAsYN2zZMGwzbtwtE"
   - title: "RTX 5070 Ti 그래픽카드"
     url: "https://www.coupang.com/np/search?q=RTX%205070%20Ti&channel=user"
+    imageUrl: "https://ads-partners.coupang.com/image1/1bvSsvq2_HO0qM-f1bFPjqvWncFqyJAsSYaEXgNYQxk2ua9ZrscehkfPXtyvjOxXrYwMr64m5c1JH9co0FBA5J2xghuQXq6T7LhGHeI-ZefuJ1z1DpN92Bh_163ptDzCl8rkgM8yiMmWWw7YMgc7emEuZ0e7HOHEFK8XytV3zAjlsP4X_oo36OeIaNcQ2BZ9WxR-a0EeqXAwHvH5TA2rvxSiv_rl34OSMBuGAjS-GYhSWtqFTrcbjJHYOY6Swr1aYuOPsl5X9Ep_xmtMo9dCsiqXy8fta53EoZvafSyEMFwWouzgpHrAXkkApOGacrC7p2l7uiw="
   - title: "AI 미니PC (대용량 RAM)"
     url: "https://www.coupang.com/np/search?q=%EB%AF%B8%EB%8B%88PC%2064GB&channel=user"
+    imageUrl: "https://ads-partners.coupang.com/image1/XmU3VoXkSa5aEAWvXqURDJrdoT6og4xPFeshbZNDdjuaS8_XGr8S459B1q0TZu02w09HEYOB1iwsZOk6Q6KndC5pn1jCUIyOnq-PBDLdYPSfF26yoKxcx_gOCOIPpwYcZOB9BkhYKo-IkrXaHPTAxMh_xZqOdNuFRMciWtjZUotV28rvjPRjQNXl7ouz2k_gNXf7Zk3nOBH5hz0GFtRcuBqsOao24iCAfxMT6hi8aGudBOlMfTHlb-Fm3fH57WHW3SV8WRJHCwM4AoW3lhQDex_4jRibuLPXjftxkWas4rJd3oPbjxWrWSoywxOqHn3CSg0uaQ=="
 faq:
   - q: "로컬 LLM에서 가장 중요한 스펙은 뭔가요?"
     a: "VRAM(그래픽카드 메모리)입니다. LLM은 모델 크기(파라미터 수)에 비례해 메모리를 많이 먹는데, 모델이 VRAM에 다 올라가야 빠르게 돌아갑니다. 넘치면 시스템 메모리로 밀려나 속도가 급락합니다. 그래서 '연산 성능'보다 'VRAM 용량'이 어떤 크기의 모델을 돌릴 수 있느냐를 결정합니다. 로컬 LLM에서는 VRAM이 사실상 전부입니다."

@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "게임, 이렇게 만들어야 팔린다"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4"
+    imageUrl: "https://ads-partners.coupang.com/image1/t8hkFW23MsdcVlxmt0UNwP3YxB5t6pFa0gVYKlFVkmzAmcp1X8M9IxDXbRod8cjyJtCFKhazmZaUVUm6sLy_rTgdqjtLsIpG2GkBwsS_WhJ18gvT3Fv6N8W-xqc4yLyBUv64MKPvkLGtAyqHjbtWdvzmZU22k_hhM0u7YtK-qAzpKEfM5ALIu0ekYLDHW10mJ44FTvQMIqcuVpYaJmone2BPxVHasDuNIQzUL6Q_PnPo6iiL8ihCauRAYoDmr0gTEXI1SiW4OrMabQOrITfiQsTJa3_3leRqCj4exRVDw0D8ddxS"
   - title: "돈의 심리학"
     url: "https://www.coupang.com/np/search?q=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&src=1139000&spec=10799999&addtag=200&ctag=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%8F%88%EC%9D%98%20%EC%8B%AC%EB%A6%AC%ED%95%99"
+    imageUrl: "https://ads-partners.coupang.com/image1/HWtq-eHaQ6lIuVBcHePYoWVXhJls0mroAWDOHh8SFb_sM4_rJF61EaFyORJ4_uTAV35LChup8dgaHBWYF0EkA6YIGbUspznUKBy6JXpuoXQ3ieBVDfPn6xRO0AAkZpsHUz9TM3ZCtPiZxoncrC-p_JJ8Td9TyQI6jq-dVmTZZaxi3mp0BoZtUZzGbGiliHyzPURHIfXtha2W9ovRyZs6obWZ3I_-vNS_x1aDrlV6T5hT3YouTI_rPfFwsCvgrOrVFixk-naOrIARw8slgBDWahIK96uXDaeK_4L3ijRa_Hq2zj-M3A=="
 faq:
   - q: "1인 개발자에게 가장 무난한 모델은?"
     a: "대체로 프리미엄(정가 판매)이 안전하다. 라이브 운영 부담이 적고, 게임을 완결된 작품으로 설계할 수 있어 리소스가 한정된 개인에게 적합하다."

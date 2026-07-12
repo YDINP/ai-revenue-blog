@@ -12,8 +12,10 @@ image:
 coupangLinks:
   - title: "게임 프로그래밍 패턴 도서"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4%20%EB%8F%84%EC%84%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/ypirGiO-oAZxmEyZyh8QMeVTyiv1FUdueRr_oBHlI8oWIf7Db9jJenJ26jO3D6XgmH7J3XZg4hJrRy9xzl6Z6UFzrae8E97gV93zZs5qDWrzmhSHV_G89h0aMzQz59vZzSb5RG_ochkC5690vv0nVDyzDSEgEsIsVTMeGE_9-12Euwp49PqhokDtv_IA_w1p7hLi4qYs1Td-bM-5R5Lp9Jebu-BlwZqNpcV9Sk0vUw5q9ng4tXCRz9t5T8b4waMQKbmEbebsru-YZ0jpdioXX6vGqgXQkwOAqtZqTQoa2_cQDfBkYIA6cctP0qRU9W_uRr7WEyM="
   - title: "로지텍 G Pro X 게이밍 마우스"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4"
+    imageUrl: "https://ads-partners.coupang.com/image1/xzIKXSQbvbVi7Qumx6FIGUVhHlzvz6GImmaSUz9I_tS1ylfJcHKc1dxeIWOpQgJljpdYvPdFquESelVPZw6SNif-NzPamjZsk-RKhv7adwxEehFcGm77iLFlMafBIwqdKn6Af8SzL-wwBZAzgUcD0KH2HfkYv26XSummRtEG1h6IIkpRFnuuXfDWglwfflqM5Rc7tLSsABLxSfqbuvDEIdsUiASR5ptHIq_YU0RB87hHoDX7ibEtiIO4y17U_2yIi7XET2oG2SM197u9K4Rbfo5qhbd2knggKLwKYMitZ7DmpbWkhvjXgVA="
 faq:
   - q: "2026년 Unity 런타임 요금(Runtime Fee)은 아직 있나요?"
     a: "없다. Unity는 2024년 9월 런타임 요금제를 공식 철회하고 기존의 좌석(시트) 기반 구독제로 되돌아갔다. 2026년 7월 기준 Unity Personal은 연 매출·펀딩 20만 달러 미만이면 무료이며, Unity Pro는 2026년 1월 12일부터 5% 인상되어 좌석당 연 2,310달러다. Enterprise는 별도 문의 가격이다."

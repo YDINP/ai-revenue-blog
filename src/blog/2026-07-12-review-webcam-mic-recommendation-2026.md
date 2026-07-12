@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "로지텍 웹캠 (Full HD)"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20%EC%9B%B9%EC%BA%A0&channel=user"
+    imageUrl: "https://ads-partners.coupang.com/image1/-hiuU5P5lq6ooBV8-qtBhMgvmbBoAj-b3aDcxG9qqBZpv4XReoIsr4XF0nG4hNoqVITLSEd24x2m7i6PQAsOI7ZafSydxKxAjvB15ypMNIfX0KUhVoAuKHr5JIGFTqTXVDDmcXub8yqyU9SfpzrtZrFtZiuJfIrlFoJykfDnPSDLXssrt0DZj6pVfg8i9sx6_wzFFxW2y-sI94r3wtK8miFUbwVQXN0Z7LtCPqCQrhfg3Urpit9_XMvED-ThVkW8rwtZI8B5Z7d4q4mIo4PPsQHxIwE6--b0iUer0tDAqnppKBIsU0lxpN1a"
   - title: "USB 콘덴서 마이크"
     url: "https://www.coupang.com/np/search?q=USB%20%EC%BD%98%EB%8D%B4%EC%84%9C%20%EB%A7%88%EC%9D%B4%ED%81%AC&channel=user"
+    imageUrl: "https://ads-partners.coupang.com/image1/unPezx6Ov__pFGXIuiJCwE5xdVr0PEoVgOwce1Aryye8EKj8OmjFCbDGQfjksjVwQnoLUG07FadcgKwaidB9aDJs-j4Yp22WPw9jdh-h3AMjq_Psfblsf5yuGp0065jq0p8ROLKFv7_J8etABRyBo9pc94bww2Ay8_NbehKCB0wWth5JyNz-KhfOKgo0qOdHyIFXcdJn1-YmX-iJQKZ_KYZsmn6SqBG42aEImdBi5mFKAvWUJTGMI6KpT1lOwGk_rjuLnOhMcw-_L5lUtjw40aYQ9LSPsYNOW65ebQ3UiVC22krnD8Q-F-kx4JQbVzbwcpX0vIC941er2X4XGYllybF-StLwaQ3utSe_Mvc="
   - title: "다이나믹 방송용 마이크"
     url: "https://www.coupang.com/np/search?q=%EB%B0%A9%EC%86%A1%EC%9A%A9%20%EB%8B%A4%EC%9D%B4%EB%82%98%EB%AF%B9%20%EB%A7%88%EC%9D%B4%ED%81%AC&channel=user"
 faq:

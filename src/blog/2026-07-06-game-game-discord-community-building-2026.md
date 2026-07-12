@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "컨테이저스 전략적 입소문"
     url: "https://www.coupang.com/np/search?q=%EC%BB%A8%ED%85%8C%EC%9D%B4%EC%A0%80%EC%8A%A4%20%EC%A0%84%EB%9E%B5%EC%A0%81%20%EC%9E%85%EC%86%8C%EB%AC%B8&src=1139000&spec=10799999&addtag=200&ctag=%EC%BB%A8%ED%85%8C%EC%9D%B4%EC%A0%80%EC%8A%A4%20%EC%A0%84%EB%9E%B5%EC%A0%81%20%EC%9E%85%EC%86%8C%EB%AC%B8&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%BB%A8%ED%85%8C%EC%9D%B4%EC%A0%80%EC%8A%A4%20%EC%A0%84%EB%9E%B5%EC%A0%81%20%EC%9E%85%EC%86%8C%EB%AC%B8"
+    imageUrl: "https://ads-partners.coupang.com/image1/aj5d_zonESqkKpcXanV73l0r5tvL1quOhotgRWxfp-J0qWPmTgAwwZCsSsf8q9ELpUMVPMvF8RiegAkSRshf1f0Jy2TdPY0Cf8qYg1d22aBtjb4UGpM8Gid4svCgYt_vcKzbwMwhMtsvr8IFsduv8soPgeOGGgV4zkFTPJ8DBus8r2iq9g5vBDz7Fi25KU1BRcAK1MrKbAcVIQpPO75ZE62Ko91S8h3r-zI5u7Gw9louZnhSoBfjNa1yV62dU8Skz8yIuYK598WllhYbR3C5FgUDaQCKTuF4e-IM6UaaWgua7brgAF6gxyjwd-drOU2iJ_iG"
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
+    imageUrl: "https://ads-partners.coupang.com/image1/N3MOn3F4M0r96tGWN8I7EHBxNmijCay63U9fXr_vTcbGzyXYNWufIm2ghSbCMxDr4gU5VtRvrqH7cz7ij5QeP4dilOAVm-woEJyJwBiohQq8i6nGtgBY0Y9VkOuXQ5s9Ud44lC30A__avNEiOq2OOYDBCDKxgAwqeVZjH8SduAFDkwv4384osbmboq4qoqUAl6RNLQqtYlUnsc98v20HPP5jmIYVHttkcEeRxKxsgsu5elI1o8qRCoBOyN_w_4gP_4oEZmhk_Zte2rO05Dpr0eQTONcs_QXxR5MS8NK3K4m_HU4xFnPZYehghd1RN0JsJAYrNQ=="
 faq:
   - q: "디스코드 서버를 만들 때 채널이 너무 많으면 어떻게 되나?"
     a: "채널이 많을수록 서버가 복잡해 보여 신규 멤버가 이탈한다. 처음에는 5~7개 이하로 운영하고, 커뮤니티가 요청할 때 추가하는 방식이 낫다."

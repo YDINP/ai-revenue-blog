@@ -11,6 +11,7 @@ image:
 coupangLinks:
   - title: "게임 기획·개발 실전서"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D"
+    imageUrl: "https://ads-partners.coupang.com/image1/0Yb550qqqi2aFrHs0fZTykRn8Th8DAWE49GkpAxqL6vouVoU_zWbrCDMUnmPOdJMMEIN6dT2tHt0zW1ZBOt2eHp-tDPcjtKSfeWigCqqwruPCy_ZJ4T7OKURuq8hmsRYtfG6JR5RcPHR5XIHsqXiUsDE5aK85SJmv-zdjHUIAu-YJ7nkv165LDDwk5dbyFnUDnznjoKoVQGz-aNOHusW8f6PBJ_eD_nQwRkfx6uak7kKu_hyCa8cNvpfj_UHy__XDFkoUlFpyNUwvs6E9wx_QPwDhBQPik8jWcLcrAJnE4e9d5-w1QKpi8oBORvAAvLMclz3SA=="
 faq:
   - q: "인디게임이 실패하는 가장 큰 원인은 무엇인가요?"
     a: "2025~2026년 데이터에서 가장 지배적인 원인은 '가시성 실패'다. 게임 자체의 완성도보다, 아무도 게임의 존재를 모르는 상태로 출시되는 것이 문제다. 2025년 스팀 출시작 약 17,889개 중 절반이 유저 리뷰 10개 미만이었다. 그다음 원인이 스코프 크립(과도한 개발 범위)으로, 설문 개발자의 70% 이상이 지목했다."

@@ -12,8 +12,10 @@ image:
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드 (개발자 추천)"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/JAm5lI_SvV62VI0_JHIGClPe3a_YfHte719-JASVVJLtdRngIXuBG87lSNWZuqDbrR-2WY92Ba48bR18zSjslYL1XdoolAA_I8BtYlgd2n1H7Yro6MXEgsSftOXtRx5XxpQXP5o213NfJ3759TuIuvtwGQ9GnoFzIRb2X7dHNkcaznVYFX_IdF8wfS_lVXFK2GFS24hZEKt7jAwT5NWWJpb5rMbLQA2DLKtvtrJMs3uI7Mwp1ZvRHpyBiwsFCbCv5bqWtSKVI-IaUvigIAPjsPh6l6mb0p73SXU4TkV_H4g724KCPA=="
   - title: "모던 자바스크립트 Deep Dive"
     url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive"
+    imageUrl: "https://ads-partners.coupang.com/image1/bQe2gwYArBVjsWMfbalAc5XbsxyokcVZk_0AddBydK0KVBL13bW9O7XHB4rsfzvaIBSiqALk1aSoNcJqdnENbMwJMUiFtKRjPTIZrF6eS5VbJuIZIEGVGyzOhkY0u4UeEtpDEfc9mrbsZ9N0uE-KZt8sanyYii2Y7qwZLvAqC5paq8w5QwNGq6-8K6Wk4zl_moiQc_uIMgIe5BgpMLGwnTfa3OqwTPiXDMZki5JAAFVuzdl9uc9aEDmXzZb6iHuc7zcKr5xwrP1REXsNdGthnr1R45D7ktEdrIildSyPF-V11W_fig=="
 ---
 > **2026년 7월 업데이트**: 최신 도구 버전·벤치마크 반영
 

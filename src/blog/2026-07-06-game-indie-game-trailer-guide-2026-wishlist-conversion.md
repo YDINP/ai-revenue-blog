@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "무기가 되는 스토리"
     url: "https://www.coupang.com/np/search?q=%EB%AC%B4%EA%B8%B0%EA%B0%80%20%EB%90%98%EB%8A%94%20%EC%8A%A4%ED%86%A0%EB%A6%AC&src=1139000&spec=10799999&addtag=200&ctag=%EB%AC%B4%EA%B8%B0%EA%B0%80%20%EB%90%98%EB%8A%94%20%EC%8A%A4%ED%86%A0%EB%A6%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AC%B4%EA%B8%B0%EA%B0%80%20%EB%90%98%EB%8A%94%20%EC%8A%A4%ED%86%A0%EB%A6%AC"
+    imageUrl: "https://ads-partners.coupang.com/image1/f3HwbLkevbNCZxy_f10u8nGKs82qOJT8yqpUVuvlraEeFz0sdX5xdC8KnfUveZ_ovUf4rCaGz_1KAlkn7IKTUQVaMd4gNyRZMleLpkVmnENfaXbxpkoaE5xAje5OEfwZ3KQ8a4n8dB5DXSR6iJmvSvOB3g9iD_nshj5t3bcxBBDFZNsIqjAvssraljQXvE5TsSLtARHdGYEpt3cTVwAO7Fuj1_pb6ZGtbY6gWmKQLEGL1kytUhdX78_BIN44SYRqO3_Vgz2V5bw49U1DeT6SWS7lkYaGa0DgTs1cTedhNHuHEM7Jaaas2Cdnv1E9hEkP-XQ1Elue"
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
+    imageUrl: "https://ads-partners.coupang.com/image1/N3MOn3F4M0r96tGWN8I7EHBxNmijCay63U9fXr_vTcbGzyXYNWufIm2ghSbCMxDr4gU5VtRvrqH7cz7ij5QeP4dilOAVm-woEJyJwBiohQq8i6nGtgBY0Y9VkOuXQ5s9Ud44lC30A__avNEiOq2OOYDBCDKxgAwqeVZjH8SduAFDkwv4384osbmboq4qoqUAl6RNLQqtYlUnsc98v20HPP5jmIYVHttkcEeRxKxsgsu5elI1o8qRCoBOyN_w_4gP_4oEZmhk_Zte2rO05Dpr0eQTONcs_QXxR5MS8NK3K4m_HU4xFnPZYehghd1RN0JsJAYrNQ=="
 faq:
   - q: "트레일러는 몇 초가 적당한가?"
     a: "스팀 정식 트레일러는 60~90초가 표준이다. 숏폼 버전은 15~30초로 따로 편집해야 한다. 2분을 넘기면 이탈률이 급격히 올라간다."

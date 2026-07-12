@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "PS5 듀얼센스 무선 컨트롤러"
     url: "https://www.coupang.com/np/search?q=PS5%20%EB%93%80%EC%96%BC%EC%84%BC%EC%8A%A4%20%EB%AC%B4%EC%84%A0%20%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC&src=1139000&spec=10799999&addtag=200&ctag=PS5%20%EB%93%80%EC%96%BC%EC%84%BC%EC%8A%A4%20%EB%AC%B4%EC%84%A0%20%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC&lptag=AF7838146&pageType=SEARCH&pageValue=PS5%20%EB%93%80%EC%96%BC%EC%84%BC%EC%8A%A4%20%EB%AC%B4%EC%84%A0%20%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC"
+    imageUrl: "https://ads-partners.coupang.com/image1/-1DP2vgffyrXxDTH-4bNtGpr4VV50qF148OcJ8cK-uEMWlvZd5UpggGF_eiixLFQfoVwm2HsXWDtHEoWFaBs5z_0NC8mR-Ci99JNgJhh_tWyM9Tb6qCwCuGgGlm6UTWSDmnOkMGNMbiYAtD7eCQK4FW-zbj9VXRkF9mQDL9r7p32_YRyA7wMyZCoCemXeOn6BMNMnHUX13svFzr5b6vE9qPs9H_zrrsxBsfA31uik7snuOghd1NGimiZ_TefBzWCKl8kStzP-djbs7OjiF01HAYZo9EmeQyOnffzWxfgo9Tq3-P2Y9OXLtBe"
   - title: "게이밍 헤드셋"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%ED%97%A4%EB%93%9C%EC%85%8B&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%ED%97%A4%EB%93%9C%EC%85%8B&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%ED%97%A4%EB%93%9C%EC%85%8B"
+    imageUrl: "https://ads-partners.coupang.com/image1/l95Lz8kaNmU1xdTnl9gCsxbkWXDIrYdEs9KI_A8TktVIlebpGugyYppCy1kWktVf058sbNc3Sn-bv3AlOTWGBLAJGaOR2ml9MI-L8Mkz5q2wtzM6wn7Y5kWvDm-xp5wH6vnl0Qn0V7sIlstDD2coS_q8iWO-TZ2NYCJxv-1Bzu7_3rwjVNjOjdQA9usN8SfPu54owSDsO_TKOf1Y3T9wtymJScqI-EDjCkZVewVjRbkpqQE7cFMUcoG7M94xEl7ZP9QVhYT7TUikbGpehnVG6aDrZYxR-Qu0NOao1z4V_QnIjQAupDmUOhIDOOWSLZCHza-6sA=="
 faq:
   - q: "GTA 6는 언제, 어떤 기기로 나오나요?"
     a: "GTA 6는 2026년 11월 19일 PS5와 Xbox 시리즈 X/S로 발매될 것으로 알려졌습니다. 한국어를 지원해 국내 이용자도 편하게 즐길 수 있습니다. PC판은 콘솔 출시 이후 별도 시점에 나오는 것이 락스타의 관례라, PC 유저는 다소 기다려야 할 가능성이 큽니다. 발매일은 개발사 사정에 따라 변동될 수 있으니 공식 발표를 확인하세요."

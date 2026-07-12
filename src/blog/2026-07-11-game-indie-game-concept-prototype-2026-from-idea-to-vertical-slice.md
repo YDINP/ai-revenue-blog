@@ -12,6 +12,7 @@ image:
 coupangLinks:
   - title: "게임 기획·설계 실전서"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D"
+    imageUrl: "https://ads-partners.coupang.com/image1/-enm6eUgClYde5Dn-Z-zJu8LYIzihbDxvQ7Qq6Mt2bemLJbg2oegMiRDlm6Byyd8BXEoC3WsN6pJ7k11wDIAhPjcLYvSqlX8WFFlVCQiHvH0MWOwAMn_bveZJDOuVsjGOKlogx_n4-LxrmplF1mtoSr8cWohrlhNLvTcWu7-r0VyDad77JwO1R6pTGK9bs2aM1iqhigKw_5K0Sv9KF5vDeFLwdy5ssQ9o9uOOyuqV_w4R50ywP9Ea-fSckBVrBvyX7PhGqmopUbAYl-6Cy-S5-qP8VnXrc83E0wc23L7jOTY0PdmSrXrQrKH-g=="
 faq:
   - q: "게임 아이디어는 어떻게 검증하나요?"
     a: "코어 루프(핵심 반복 행동)를 한 문장으로 설명할 수 있어야 한다. '무엇을 하고, 왜 재밌고, 무엇으로 보상받는가'가 한 줄로 안 나오면 아직 기획이 덜 된 것이다. 그다음 종이·간단한 플레이어블로 이 루프만 먼저 테스트한다. 그래픽·스토리는 나중이다."

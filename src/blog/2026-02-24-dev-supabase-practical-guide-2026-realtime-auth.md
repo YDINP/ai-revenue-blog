@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "점프 투 파이썬"
     url: "https://www.coupang.com/np/search?q=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
+    imageUrl: "https://ads-partners.coupang.com/image1/0On6H424FU-r321w0IKYNHFbCTvQZcxWO7MrWHJh0lPiI-TqHGfr2BoQ7aScV3gjq0pXEEid9GaTek5MdF_fSes76-X8XYB9I0QbG5lt569cmgVQR4GurvRPIpOu05CKpjvebmiMEbhHgxEjibMLq1LLbW4hscQAbdUGF8dR0A2A0rXUjC3edghaw9g4p0ERz_DO1mivI3eDzNubOUTF0y8QI2LoWp9uCfbvBsfnw1cdkGRUg0FhhCVmdD-XvzvfkVADF727qIGm-blvZtHpPLaNfd9rgx_A40SSwQ-y2-gL4LRrQj6LesfP5o3ZNBn41ntzpw=="
   - title: "혼자 공부하는 파이썬"
     url: "https://www.coupang.com/np/search?q=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
+    imageUrl: "https://ads-partners.coupang.com/image1/luce-PHUYeRYhl5Xllwpd1xxfNplAaJ6KhrRQDrJkko3lopXlBiAOUf9VdzrHoaqMztpBB-EhNsjU-5cAA3SXGsgpaM03-M1vlndMangQ3vm1J68WhIz2nVQWGX7zUNj0DV9VwFW2UnifdyisTClXQnAINW-EgnvuLJx6B3hxGVnzZWucXoUjqUMg7JdrFKGO7ubt1zkOBhyJ7Es3_-bwOrTEQWWX9DTc1_EjzlUZgFnVKo6VtxCNjILe4GF1WFWAOMc3O5oVlQ_-PpucZJ7ghsdr9HFQDvVJB9zAoboc62BNd80VtQM2VmwXutV8UMvkQjINfE="
   - title: "클린 코드"
     url: "https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/qne2hGD15JjE-w8hqo-MIq8aqUK_0f6v3E8XQlEFvv_LaEm4y69h-5ppYWEK0wpO7o5i3xkey6XCYHkvSQ-1Mtpx--gADkLLFuTOjvmEzTFoGsWXqOBAh8TGi_5iuograMtNjGVrOG5MWcCgUb_lLlCWN-4IoFOEVjz7WZ-5sBryOzYHn0IfFzzYJFq0YFiGCawa1UzMEl36TPgJMy2a6Yz4GMqp1TMPb5RK8xoANwm9RW7hjJ_kLIZVCPAYmBSmjvuJa8A3Lq3bAomXj95KraTyHhLJxpwtApSjczIEHTKbC7iQM1Ad3wM="
 faq:
   - q: "Supabase 무료 티어로 충분한가요?"
     a: "프로토타입이나 소규모 개인 프로젝트(월 10만 행 이하)라면 충분합니다. 하지만 실시간 기능을 많이 사용하거나 1만 명 이상의 활성 사용자가 있다면 Pro 플랜 이상을 권장합니다."

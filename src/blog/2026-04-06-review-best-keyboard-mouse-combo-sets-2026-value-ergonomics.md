@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "삼성 뷰피니티 S8 32인치 4K"
     url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K"
+    imageUrl: "https://ads-partners.coupang.com/image1/qaN-X4jYUqYDW6wUqcfFe7KznDtleD1zE1kICLiYb9H623hC8BX5XqKRd98yyUy01o2Kel6AfC1P6eV3S3BxvTm2MsnGxczZkEzNwflO3ABOJybGOzcRvDBudePQdAE2mkdY9BuXylALyVZr_BnZv_EqxeeqssD1XAhwp6vbS-qos3RIdCZA2naDiUNDfMskOzfm-uibROWQM10w7NoEt0z7iFr2eLXR_W2bGJd-fEnaytdjueyE3roHZ9LD5ZEU41ZkBtfIgUAKhArGnOTDtw3YT_nQGMl_AG3_Zz4Ah2kV2rDODeyhvyrN7ui8pJBKGBZtXA=="
   - title: "키크론 K3 Pro"
     url: "https://www.coupang.com/np/search?q=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro&src=1139000&spec=10799999&addtag=200&ctag=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro"
+    imageUrl: "https://ads-partners.coupang.com/image1/-BjrcohaVJh7n88o-K9OXVKnZYtyT78oXKeYk_DTvZzwrGBqjAJ7sSb78yvxtP-og6YxISXF8MjNYtnwnBywGkmwqR6WNXkpczzwQybjAld8QYuH43YhKNwtXbep72Lrmqlf2bdlZhBBQSrlCWX-05FW3UY9UiaZI_rgTZoeqJzDXJrLlHt93gErNCPCLCk42AEVhOy2cV2v1XwDdC7Nl9P8MN3MyvdG6DvSe44cQqTFeXJsaPn_loY--3BBdJQYXPI4vfSZZ6YXGWtY6ylz6tUeOaE7MPsyc20="
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
+    imageUrl: "https://ads-partners.coupang.com/image1/N3MOn3F4M0r96tGWN8I7EHBxNmijCay63U9fXr_vTcbGzyXYNWufIm2ghSbCMxDr4gU5VtRvrqH7cz7ij5QeP4dilOAVm-woEJyJwBiohQq8i6nGtgBY0Y9VkOuXQ5s9Ud44lC30A__avNEiOq2OOYDBCDKxgAwqeVZjH8SduAFDkwv4384osbmboq4qoqUAl6RNLQqtYlUnsc98v20HPP5jmIYVHttkcEeRxKxsgsu5elI1o8qRCoBOyN_w_4gP_4oEZmhk_Zte2rO05Dpr0eQTONcs_QXxR5MS8NK3K4m_HU4xFnPZYehghd1RN0JsJAYrNQ=="
 faq:
   - q: "키보드 마우스 세트를 개별 구입하는 것보다 정말 저렴한가요?"
     a: "네, 일반적으로 10~20% 저렴합니다. 예를 들어 로지텍 MK470 세트는 약 32,000원이지만, 동급 제품을 개별로 사면 총 38,000원대가 됩니다. 다만 고급형 세트는 개별 선택이 더 유리할 수 있으니 비교가 필요합니다."

@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4"
+    imageUrl: "https://ads-partners.coupang.com/image1/06QeSNhbWeAAJxM10wE0QTmgQN3qv54-GBzRSocemWeFVFwDQs37_KIclAxaLq9gHZ7534QPqrndFd8UDe8FSyDw0NteoFE_vYqK6PJFXMyaTTfVSQLXIn6rZnfTL7f49s-Id_-3TMdECKyFxaWGISI46tcoFbU4YdSvK83ejlq9ca-uWPo4ms_Ya1uNA0bobw3XmVhp-5yZt2FTPEmobuttPTCcKpO1WcnV28zFPKtY04R3s51ZCglLIt-OQm9F6J0KHEsInlulDuKWtkJ2H8UngCj_OFOR8l5U3Ie9DU0CwXPi4FogQoAQPCffs5RXlAFUo2wEQRS7prjQYkE1XN4NU2JJQBNzio69Vs4y3d56dA=="
   - title: "딥 워크"
     url: "https://www.coupang.com/np/search?q=%EB%94%A5%20%EC%9B%8C%ED%81%AC&src=1139000&spec=10799999&addtag=200&ctag=%EB%94%A5%20%EC%9B%8C%ED%81%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%94%A5%20%EC%9B%8C%ED%81%AC"
+    imageUrl: "https://ads-partners.coupang.com/image1/FBndgZ16DZo0PXckFDutM4loM8N9YsOpvfs0OkMOVWa0G2PrrMbHyyzTGMzQT-9NrKHq60J2XXX7yF1xpaKfUWF_lvNzTYTCtQd7M3vRoRMXxz8khM49YdfLdmVQoYQi92sdX8WTezGcBYmVXmTu4P8Hs6q69wFgFXTa35E-pYJ8oU7h_mqnfIhl1C93ZHa8cCR17NVR8EpqIfmMpDx7ICaOCOLj5zqv_nmyAlkJS4Me9dx4sIazt58_6l9pVqLWWyxT_VMWIQkUpqJxNOn8yEvRY_4C7OjbI2CePFVMC5W_8HAYyQ=="
 faq:
   - q: "1인 개발로 첫 게임을 얼마나 크게 만들어야 하나?"
     a: "작을수록 좋다. 3~6개월 안에 완성 가능한 범위를 권장한다. 첫 게임의 목표는 큰 수익이 아니라 '출시까지 완주하는 경험'이다."

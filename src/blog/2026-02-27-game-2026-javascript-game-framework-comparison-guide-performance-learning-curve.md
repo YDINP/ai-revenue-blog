@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "로지텍 G Pro X 게이밍 마우스"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4"
+    imageUrl: "https://ads-partners.coupang.com/image1/xzIKXSQbvbVi7Qumx6FIGUVhHlzvz6GImmaSUz9I_tS1ylfJcHKc1dxeIWOpQgJljpdYvPdFquESelVPZw6SNif-NzPamjZsk-RKhv7adwxEehFcGm77iLFlMafBIwqdKn6Af8SzL-wwBZAzgUcD0KH2HfkYv26XSummRtEG1h6IIkpRFnuuXfDWglwfflqM5Rc7tLSsABLxSfqbuvDEIdsUiASR5ptHIq_YU0RB87hHoDX7ibEtiIO4y17U_2yIi7XET2oG2SM197u9K4Rbfo5qhbd2knggKLwKYMitZ7DmpbWkhvjXgVA="
   - title: "유니티 교과서"
     url: "https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/jU4rMqEhhQQ2Wd8IjUpuHIKifVm5Xm_z8lEBuB7h5473DdC0rv0UxSWiDORvE1YMT3K2khY1on2Ww6xPRJ5SQm1MooU9TpEiB3lcpxaGeIv-VEpK8hUXcdRGQMBhu0kMP2qP_-uHY01BJYoO1NvVUPOa_FWtFuGDx0m-ITFfrPxGteYGOrvQWJdq81F1R1l_hcj8HkW8-hpZFoLxSgAGZCgsVDC-SwwLKzVS-4IXm7cnJCyG7I-dKlg4BijAJbRg0FuR7w3DIXEoYJs5-fycT7rp6-CQ1ZQDynUtzS2forabWOPdsZWkk3ArrKFIPHGS60kGSg=="
 faq:
   - q: "초보자라면 어떤 프레임워크부터 배워야 할까요?"
     a: "**Phaser 3**을 추천합니다. 학습 난이도가 가장 낮으면서도 실제 게임 개발에 필요한 모든 기능이 포함되어 있기 때문입니다. 한국어 자료도 풍부하고 커뮤니티 지원이 가장 활발합니다."

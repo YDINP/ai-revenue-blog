@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"
     url: "https://www.coupang.com/np/search?q=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0"
+    imageUrl: "https://ads-partners.coupang.com/image1/dwcczT_OB-uthXP_d7nVeKPPLkuDnKxc-uq5OR2P3iBweGLdoYnENA5Duq2Sndk390hTPLs_ogZAqPmuEuwGY-I0RlfH_Z5S4pf-pgNCx2iBabTnuo13vWtSuNp7AVlG6xlHAod8_MpkqGqEi8cSNRxnb_7s6kP7hqeojIEdUHiZhKvLKBSwtg7M9BEMHdmaEfM78ZBuHwW2PWazwoq3H5d054OKdxmmQTKlTIu9DKYtZVpil9rs7i24frsQNk6IJJq7MLn1Rvkp3OFU3DAq7q0yEJKN55vCjQUBAfDy_rnT2odIkUKpGYbRadR3_zorU0R9jRA="
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
+    imageUrl: "https://ads-partners.coupang.com/image1/N3MOn3F4M0r96tGWN8I7EHBxNmijCay63U9fXr_vTcbGzyXYNWufIm2ghSbCMxDr4gU5VtRvrqH7cz7ij5QeP4dilOAVm-woEJyJwBiohQq8i6nGtgBY0Y9VkOuXQ5s9Ud44lC30A__avNEiOq2OOYDBCDKxgAwqeVZjH8SduAFDkwv4384osbmboq4qoqUAl6RNLQqtYlUnsc98v20HPP5jmIYVHttkcEeRxKxsgsu5elI1o8qRCoBOyN_w_4gP_4oEZmhk_Zte2rO05Dpr0eQTONcs_QXxR5MS8NK3K4m_HU4xFnPZYehghd1RN0JsJAYrNQ=="
 ---
 ## 2026년 개발자 키보드 시장의 변화
 

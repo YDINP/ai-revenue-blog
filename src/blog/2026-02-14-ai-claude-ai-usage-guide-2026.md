@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "챗GPT 활용법 도서"
     url: "https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/Utu9yX7FHBeQATeHUvq_zJG1NymYApyI7m_BOmY4SCdd-miiJsL_gM0ZLNcLJQz3EpAC9ffXJRA1kImbcqfvSZ1kryoRWdhyoVj7WkVp_wiyAcX_7h3tDK0s0-6wFy2cavE7TiCG92TjkvPv1QPHVsJuc0JaGWah7V-Hx2C-23u2D3M8D-HY2Pony2AeUt60XkJAt4p27cFtmK98axFxVm0z6sIlLrOWoO_9kMklJTwM7u3IsFAHf4iE_OVXgZ18UQpoBS_IRGno9jnDa0XyZZPnEk4HQBYy8g=="
   - title: "로지텍 MX Keys S 키보드"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/kRP2tNtRYuy67cg-kT0hp84di-RGopkc313iCV1Lh5i5GeM4DhkTeP9ivodQ9DLjolpAA4Rc0zhZQkGD9cldunGR06JVyC5_jk9J2O-M27lvERPIgXHWxi0FXp6wDo0KpYOINUEHILwDPngc8kECd4WtMOWYar5-usBIXTGESmkU04o1ptIrIfLeolko_FU9mqqSVIW_IuBWCD_5frY760QrK7VTk6NUtnUmpG6egd_nUhde8eEDc0pE5hcjZ1lY9egeYK_HgzndsftYgUDMK6ZxYzSAI7KcWkw="
 ---
 ## Claude AI, 2026년 현황과 주목할 변화
 

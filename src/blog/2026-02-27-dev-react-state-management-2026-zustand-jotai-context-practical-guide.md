@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "러스트 프로그래밍"
     url: "https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D"
+    imageUrl: "https://ads-partners.coupang.com/image1/xh0ygIMl0kZmqZItxhwe3pWc3N0XCDHEbC-Pmee--QSWd5-AcWZCIw8KPmDYR8qTEJofmUDPIl-6TF15-zVQ6NW3wsKQoSBTqgOjL1ZxPuA-G6TuS0G_v_HTbHXpt4vHJXuaqa0bFR22VKETg9uVvxuW16paCEmZ45bWtvj45Ud4R8-h39B7aeNMTV89f0M88zcEL6-A0uq2bWHZuS3e1qGgyyrRT9NFsVGBd7jeFrjnUDt6WrwiYgK1_uOI-yRexInSePjGYHH35sR4wYECGU4tCwclWzbBpp7UUjXqdKKvEZV0AsjoZ7N89PUElP1vEbZtqw=="
   - title: "혼자 공부하는 파이썬"
     url: "https://www.coupang.com/np/search?q=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
+    imageUrl: "https://ads-partners.coupang.com/image1/luce-PHUYeRYhl5Xllwpd1xxfNplAaJ6KhrRQDrJkko3lopXlBiAOUf9VdzrHoaqMztpBB-EhNsjU-5cAA3SXGsgpaM03-M1vlndMangQ3vm1J68WhIz2nVQWGX7zUNj0DV9VwFW2UnifdyisTClXQnAINW-EgnvuLJx6B3hxGVnzZWucXoUjqUMg7JdrFKGO7ubt1zkOBhyJ7Es3_-bwOrTEQWWX9DTc1_EjzlUZgFnVKo6VtxCNjILe4GF1WFWAOMc3O5oVlQ_-PpucZJ7ghsdr9HFQDvVJB9zAoboc62BNd80VtQM2VmwXutV8UMvkQjINfE="
 faq:
   - q: "2026년에 Redux를 아직도 써야 할까요?"
     a: "Redux는 여전히 유효하지만, 대부분의 새로운 프로젝트에서는 Zustand나 TanStack Query 같은 가벼운 솔루션으로 충분합니다. Redux Toolkit은 엔터프라이즈 환경에서 검증된 안정성이 필요할 때 선택하세요."

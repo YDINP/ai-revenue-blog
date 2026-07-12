@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
     url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive"
+    imageUrl: "https://ads-partners.coupang.com/image1/bQe2gwYArBVjsWMfbalAc5XbsxyokcVZk_0AddBydK0KVBL13bW9O7XHB4rsfzvaIBSiqALk1aSoNcJqdnENbMwJMUiFtKRjPTIZrF6eS5VbJuIZIEGVGyzOhkY0u4UeEtpDEfc9mrbsZ9N0uE-KZt8sanyYii2Y7qwZLvAqC5paq8w5QwNGq6-8K6Wk4zl_moiQc_uIMgIe5BgpMLGwnTfa3OqwTPiXDMZki5JAAFVuzdl9uc9aEDmXzZb6iHuc7zcKr5xwrP1REXsNdGthnr1R45D7ktEdrIildSyPF-V11W_fig=="
   - title: "클린 코드"
     url: "https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/qne2hGD15JjE-w8hqo-MIq8aqUK_0f6v3E8XQlEFvv_LaEm4y69h-5ppYWEK0wpO7o5i3xkey6XCYHkvSQ-1Mtpx--gADkLLFuTOjvmEzTFoGsWXqOBAh8TGi_5iuograMtNjGVrOG5MWcCgUb_lLlCWN-4IoFOEVjz7WZ-5sBryOzYHn0IfFzzYJFq0YFiGCawa1UzMEl36TPgJMy2a6Yz4GMqp1TMPb5RK8xoANwm9RW7hjJ_kLIZVCPAYmBSmjvuJa8A3Lq3bAomXj95KraTyHhLJxpwtApSjczIEHTKbC7iQM1Ad3wM="
 ---
 ## Git, 왜 배워야 할까?
 

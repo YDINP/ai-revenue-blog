@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "맥북 에어 M3"
     url: "https://www.coupang.com/np/search?q=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&src=1139000&spec=10799999&addtag=200&ctag=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3"
+    imageUrl: "https://ads-partners.coupang.com/image1/Em7Keuf-RPNQ5Z9fElHPi3zyJ7F1VjP7B8HCu1PdH8kFZdad2K-OSpg4nqikxmmKciw21oMsi5926rHCwZ94N0t3weWq-34Vtt0nMZS6mnXS898V9Avl8NphQX3q7FR7_qZAsDerbmtYdKFUFr_SZ4dh10yyB6lzjJ8QMr18P9ow3SssZc-_tDPDKyV_QIfCUBBJuNy7-MeJAp8XAAAVkXDokwX1kWlu6ppP73W3ZOdZzt9fF5ECtoV8MpFZ7I_Dfq2Rauu3XyFc6dUlawHSeJKe2gusJUGoFw=="
   - title: "LG 그램 17"
     url: "https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017"
+    imageUrl: "https://ads-partners.coupang.com/image1/VgWdF7N09CLM-FATVgi2YrtQRKpBrt4FxNXOAA3IO7IcSMRACuwsSW2thSF6TRqp8XLZ7DrXu0X6_dMFJRiAHLPk91gQ3xfVt35LpnQM9XZD9PwoDNU8zTtWAZh6n5k88414aPWmlZvAlipI_kM26Hgwu8TnGGhJCMBJr6LQYLhH99OSgix7nmJrz-FqvJm0fvBN8A6S_N_6t6TvbYQ6_IyQlAP126u6i_EXOidyY1L_mdDYWm_UmrRivB1Vtm8XjGw70ui6H1pqLpC5oMM2jK__BchKHMS5GMyYlhDNO6PvYrtsQRFKU5vE"
   - title: "삼성 갤럭시북4 프로"
     url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%EB%B6%814%20%ED%94%84%EB%A1%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/TUN_I2oeJcUmXl2jTX5TGr8AhWUSeEAwJ2DS-Ine5n8x9UOXFaq3njYlwuTnU0Ch54tUDopafjZyZtMLWVqtnEIiduEOsbjg7MQm6J3vut-xv5qmqZq0KtGiMoEYidfQpb2YMKTGqd7RrCdsgl-yGDJKb91uC_X0NJX5JG_a3v6jFJqq1akEtp_ZvdYrNF-4x-aUHqo2Qs1R7gJr8mRApOomMzpzZEB80_U2EOmjsaRXO5Uq3I4osObzNMql6WG2TaKL5R4sbWBT8a8qrs7AVFYGbh1CxucCKGlDKsB7ZKUjs4xWRSYy4LRvJA=="
 faq:
   - q: "포터블 모니터와 노트북만으로 개발이 가능한가요?"
     a: "가능하지만 추천하지 않습니다. 포터블 모니터는 보조 화면이며, 장시간 작업 시 색감 정확도나 응답속도가 데스크톱 모니터에 미치지 못합니다. 다만 원격근무나 출장 중 생산성 향상에는 매우 효과적입니다."

@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"
     url: "https://www.coupang.com/np/search?q=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C%2034%EC%9D%B8%EC%B9%98%20%EB%AA%A8%EB%8B%88%ED%84%B0"
+    imageUrl: "https://ads-partners.coupang.com/image1/dwcczT_OB-uthXP_d7nVeKPPLkuDnKxc-uq5OR2P3iBweGLdoYnENA5Duq2Sndk390hTPLs_ogZAqPmuEuwGY-I0RlfH_Z5S4pf-pgNCx2iBabTnuo13vWtSuNp7AVlG6xlHAod8_MpkqGqEi8cSNRxnb_7s6kP7hqeojIEdUHiZhKvLKBSwtg7M9BEMHdmaEfM78ZBuHwW2PWazwoq3H5d054OKdxmmQTKlTIu9DKYtZVpil9rs7i24frsQNk6IJJq7MLn1Rvkp3OFU3DAq7q0yEJKN55vCjQUBAfDy_rnT2odIkUKpGYbRadR3_zorU0R9jRA="
   - title: "로지텍 MX Keys S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S"
+    imageUrl: "https://ads-partners.coupang.com/image1/ezpf0GR4BzffiPvWe2k74jT3RBLuAjPe0v_bX6hU0wle_X168JmYu7hAG4hxD2iBdIbJpjeAta6nc2Fe5aaqdWaUOLUddaimIqk8TRHenLgIa9Xy_RI4bHy0p66ymMwN1PMEwAFyPnovJpVnnRRODSZQ11OKq9QVvHazuhdBSv66R2WeABiHYnolhGWEjmkd4jdvZ2d-aeTSy2BMTbQgOZkm10o59K6iGTWxuYBauaszozfNmGdHZ7W97v6G4jqBRVkJBoY6pnVXyfRiJcCpH0rxgKb32EtxQg=="
   - title: "LG 그램 17"
     url: "https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017"
+    imageUrl: "https://ads-partners.coupang.com/image1/VgWdF7N09CLM-FATVgi2YrtQRKpBrt4FxNXOAA3IO7IcSMRACuwsSW2thSF6TRqp8XLZ7DrXu0X6_dMFJRiAHLPk91gQ3xfVt35LpnQM9XZD9PwoDNU8zTtWAZh6n5k88414aPWmlZvAlipI_kM26Hgwu8TnGGhJCMBJr6LQYLhH99OSgix7nmJrz-FqvJm0fvBN8A6S_N_6t6TvbYQ6_IyQlAP126u6i_EXOidyY1L_mdDYWm_UmrRivB1Vtm8XjGw70ui6H1pqLpC5oMM2jK__BchKHMS5GMyYlhDNO6PvYrtsQRFKU5vE"
 faq:
   - q: "키보드 마우스를 개별로 구매하는 것과 세트로 구매하는 것의 차이가 무엇인가요?"
     a: "세트 구매는 호환성이 이미 검증되어 있고, 디자인과 사용감이 통일되며, 가격도 개별 구매보다 10~20% 저렴합니다. 특히 무선 연결 동글이나 Bluetooth 페어링이 하나의 시스템으로 최적화되어 있어 초기 설정이 간단합니다."

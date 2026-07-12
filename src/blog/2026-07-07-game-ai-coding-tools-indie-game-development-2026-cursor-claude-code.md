@@ -12,8 +12,10 @@ image:
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4"
+    imageUrl: "https://ads-partners.coupang.com/image1/06QeSNhbWeAAJxM10wE0QTmgQN3qv54-GBzRSocemWeFVFwDQs37_KIclAxaLq9gHZ7534QPqrndFd8UDe8FSyDw0NteoFE_vYqK6PJFXMyaTTfVSQLXIn6rZnfTL7f49s-Id_-3TMdECKyFxaWGISI46tcoFbU4YdSvK83ejlq9ca-uWPo4ms_Ya1uNA0bobw3XmVhp-5yZt2FTPEmobuttPTCcKpO1WcnV28zFPKtY04R3s51ZCglLIt-OQm9F6J0KHEsInlulDuKWtkJ2H8UngCj_OFOR8l5U3Ie9DU0CwXPi4FogQoAQPCffs5RXlAFUo2wEQRS7prjQYkE1XN4NU2JJQBNzio69Vs4y3d56dA=="
   - title: "AI 2041"
     url: "https://www.coupang.com/np/search?q=AI%202041&src=1139000&spec=10799999&addtag=200&ctag=AI%202041&lptag=AF7838146&pageType=SEARCH&pageValue=AI%202041"
+    imageUrl: "https://ads-partners.coupang.com/image1/za23GjufVytHpoQqzcLp0DIQXRYo3nDOV5QxIm55r-a9yvXVOYMJ6zXHSr9qPYU7ocKlOCfAzZeu2Swms2pIMy8RU4x_6Nls4isiU6qHXJdaFvPHVJQkeEwUu_g4flyaNt9FWg1E57CMLrG6frMHeplM0pwtQQshspSWoOUA28ftUUZ_2F1rUitGPNV2Mr1hVP6LOwdx_Ybh4pI9m0fb4_uahqmI0HmQCEhq2GOWw2TF0P1hZSWMY5d1mxFqehqTpoGvJbZlwR8EnJy852_JcsblWWaJ2GczBKpypTlt"
 faq:
   - q: "Cursor와 Claude Code를 동시에 써야 하나요?"
     a: '반드시 그럴 필요는 없다. Cursor는 IDE 안에서 실시간 코드 작성을 돕고, Claude Code는 터미널에서 파일 생성·리팩터링·빌드 자동화에 특화돼 있다. 둘 다 구독하면 2026년 7월 기준 월 $40(Cursor Pro $20 + Claude Pro $20) 선이다. 예산이 빠듯하면 한쪽만으로 시작해도 충분하다.'

@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "AI 시대의 프로그래밍 도서"
     url: "https://www.coupang.com/np/search?q=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/Zg-Jact3PJqmgWcIZt2AwCIJzT6jGDUXcW_axr-yBDcloD4azZjf9NICnjac4LrUZo-sTGvWz2Np6sYKuooeruYR0dwlmAUtaGf6VrJGqghIB-nUR5hFcGWGJ5BJObc_U3hssLjm14f6123l-29n_PG26JlsOM-IJwfeleeAbUYFhy-hXG66CljmsJ_vdTh0rzi8u_Y28eJT8N_RUddnPcwm_lUVsYKu-m-Q9NWkgrldJ5hNa5ByA-jnyyqXikOyIGeLCxuTeSy0fG2TudiG7FPZ2M1uakyk2ucBA5rPEBJP9U8_ewX2GGH5C66oI6fl5T_-sw=="
   - title: "개발자 모니터 LG 27인치"
     url: "https://www.coupang.com/np/search?q=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%2027%EC%9D%B8%EC%B9%98&src=1139000&spec=10799999&addtag=200&ctag=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%2027%EC%9D%B8%EC%B9%98&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%2027%EC%9D%B8%EC%B9%98"
+    imageUrl: "https://ads-partners.coupang.com/image1/bY-rIsYzGDjviwzRbVFRxMFi5lRuhu-XissdOBmiDhUpkaO0yCaiU3IHx5ni1Jq19A0IE_P3wWf1cJwEOT_gp_ph5E_hZqeZfjMQ-FsFG-PgimlwJgMxqQGFtFjEofAHe3SDrAB05DlhcMwACHArFnEmzl5UUJ-pRBOJIlSuFFY48492a4oBf-utxmwLSnos5KeFU_Qg8GMl11QLT4X1TuIz3DsLGms0obCrnkvaT0Y2X6q_M9yKEbzFvSZPda5jNf-S5rkyS9pM5bhuazGHW5JGNv6uuZvyIdIBxiW5B2x9Izzu"
   - title: "로지텍 MX Keys 키보드"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20%ED%82%A4%EB%B3%B4%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/p39mrB4dm2o9iFtFp_2vxPgwtML0tq3czOZ74C908rwl1YKjoe2BHLyA9tYQ9rCfOuzM_9QFWOe9Nh9oMB7vPnvEiVa3TmApBs_BFU_9FSYOdoQuDs2H2adxde8u3oeFu0Kded3UTF4q-ihLD42-OcSfIu3ApSQ2CoCuNO6XTTSt7zjjuf4dIouGZJMjOHBDwUwBCVFZB-d5Xsw61OaAVUdRfdEZmXP4Jy-nd0RVGhjjc6vPBryPGUb51dJOGfSBRK_3T2LZX_lPFS2R3-gk5mISEgCsJH5BBg=="
 ---
 ## AI가 코드를 쓰는 시대, 어떤 도구를 써야 할까?
 

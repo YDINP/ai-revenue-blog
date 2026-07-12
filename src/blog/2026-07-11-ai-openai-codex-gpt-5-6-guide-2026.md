@@ -11,6 +11,7 @@ image:
 coupangLinks:
   - title: "혼자 공부하는 파이썬 (개정판)"
     url: "https://www.coupang.com/np/search?q=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user"
+    imageUrl: "https://ads-partners.coupang.com/image1/1SytjviI3qxQS-nn1W7V8Bvn_Kl17UUV7ZXuC4XsXLH4KE0qWXz1hrihYmkB4df9yB89YSwj3wQSrtSik5ew_j2AzZ8-MysZaJOYJRAV9Yy18PgvXQ0mft-i7lK9-W0qqH_VGOnkhsO1bUrG4J08nn88woUN57KCMH2LZF33fDCEjEkkEx8ogGuEmPoYGqNFxF6yLms8C1b7Lm2tybt_g3ZzDcCMlFgxCAIFn6vhD-BIPB7FZDW5N32Jam4DJmBVY80rK8st0Ch22CBVs8G5Z7jSwKSbeOI0jXSRSQFXbpG-qj8HNVBQM_q735uNbL8LRUav-2U="
 faq:
   - q: "GPT-5.6 Sol·Terra·Luna는 어떻게 다른가요?"
     a: "세 가지는 같은 GPT-5.6 세대의 등급 구분입니다. Sol은 최고 성능(프런티어)을 노리는 최상위 모델, Terra는 지능과 비용의 균형을 맞춘 중간 등급, Luna는 대량·고빈도 작업을 저렴하게 처리하는 효율형입니다. 100만 토큰당 입력/출력 가격은 Sol 5/30달러, Terra 2.5/15달러, Luna 1/6달러로 등급이 내려갈수록 저렴합니다. 대부분의 일상 코딩은 Terra로 충분하고, 어려운 문제나 장시간 에이전트 작업엔 Sol을 씁니다."

@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
+    imageUrl: "https://ads-partners.coupang.com/image1/N3MOn3F4M0r96tGWN8I7EHBxNmijCay63U9fXr_vTcbGzyXYNWufIm2ghSbCMxDr4gU5VtRvrqH7cz7ij5QeP4dilOAVm-woEJyJwBiohQq8i6nGtgBY0Y9VkOuXQ5s9Ud44lC30A__avNEiOq2OOYDBCDKxgAwqeVZjH8SduAFDkwv4384osbmboq4qoqUAl6RNLQqtYlUnsc98v20HPP5jmIYVHttkcEeRxKxsgsu5elI1o8qRCoBOyN_w_4gP_4oEZmhk_Zte2rO05Dpr0eQTONcs_QXxR5MS8NK3K4m_HU4xFnPZYehghd1RN0JsJAYrNQ=="
   - title: "로지텍 G Pro X 게이밍 마우스"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4"
+    imageUrl: "https://ads-partners.coupang.com/image1/xzIKXSQbvbVi7Qumx6FIGUVhHlzvz6GImmaSUz9I_tS1ylfJcHKc1dxeIWOpQgJljpdYvPdFquESelVPZw6SNif-NzPamjZsk-RKhv7adwxEehFcGm77iLFlMafBIwqdKn6Af8SzL-wwBZAzgUcD0KH2HfkYv26XSummRtEG1h6IIkpRFnuuXfDWglwfflqM5Rc7tLSsABLxSfqbuvDEIdsUiASR5ptHIq_YU0RB87hHoDX7ibEtiIO4y17U_2yIi7XET2oG2SM197u9K4Rbfo5qhbd2knggKLwKYMitZ7DmpbWkhvjXgVA="
   - title: "유니티 교과서"
     url: "https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/jU4rMqEhhQQ2Wd8IjUpuHIKifVm5Xm_z8lEBuB7h5473DdC0rv0UxSWiDORvE1YMT3K2khY1on2Ww6xPRJ5SQm1MooU9TpEiB3lcpxaGeIv-VEpK8hUXcdRGQMBhu0kMP2qP_-uHY01BJYoO1NvVUPOa_FWtFuGDx0m-ITFfrPxGteYGOrvQWJdq81F1R1l_hcj8HkW8-hpZFoLxSgAGZCgsVDC-SwwLKzVS-4IXm7cnJCyG7I-dKlg4BijAJbRg0FuR7w3DIXEoYJs5-fycT7rp6-CQ1ZQDynUtzS2forabWOPdsZWkk3ArrKFIPHGS60kGSg=="
 faq:
   - q: "Canvas와 WebGL 중 어떤 것을 먼저 배워야 하나요?"
     a: "초보자는 Canvas부터 시작하는 것을 추천합니다. Canvas는 즉시 시각적 결과를 볼 수 있어 학습 동기가 높습니다. 게임이 복잡해지면서 성능 문제를 만날 때 WebGL로 전환하는 것이 자연스러운 진로입니다."

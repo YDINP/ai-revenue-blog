@@ -11,10 +11,13 @@ image:
 coupangLinks:
   - title: "ASUS ZenScreen MB16ACV"
     url: "https://www.coupang.com/np/search?q=ASUS%20ZenScreen%20MB16ACV&src=1139000&spec=10799999&addtag=200&ctag=ASUS%20ZenScreen%20MB16ACV&lptag=AF7838146&pageType=SEARCH&pageValue=ASUS%20ZenScreen%20MB16ACV"
+    imageUrl: "https://ads-partners.coupang.com/image1/-m8A9e1f_U5IxX8_-vWMHBJvjBpMNDsMvpN85G7rk_yzyWaXJEbh6hoXIPlOtPrz9fINx1CSru-BKCoJesRoBOo7l9WW36j2jzDaZUbhmlXwvIDjmJEMU5Um-Kd6INLphs_Lzin2H2ekTZ3bwUGguyZdkdKsVzK333Hi99zRCLRRZOBDmHKg2UIQVkHHYjci0YntCCapwxvOJGTTCz5NgR2aRyxajalsVwP_7j0HgcLBUI9aEy3csziEdc5XWOoPsuJspmry-D0lQg3xSbOf_5OGqAxDMaslaiFD6IK0MD9NocTP3PCgJMk="
   - title: "삼성 뷰피니티 S8 32인치 4K"
     url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K"
+    imageUrl: "https://ads-partners.coupang.com/image1/qaN-X4jYUqYDW6wUqcfFe7KznDtleD1zE1kICLiYb9H623hC8BX5XqKRd98yyUy01o2Kel6AfC1P6eV3S3BxvTm2MsnGxczZkEzNwflO3ABOJybGOzcRvDBudePQdAE2mkdY9BuXylALyVZr_BnZv_EqxeeqssD1XAhwp6vbS-qos3RIdCZA2naDiUNDfMskOzfm-uibROWQM10w7NoEt0z7iFr2eLXR_W2bGJd-fEnaytdjueyE3roHZ9LD5ZEU41ZkBtfIgUAKhArGnOTDtw3YT_nQGMl_AG3_Zz4Ah2kV2rDODeyhvyrN7ui8pJBKGBZtXA=="
   - title: "LG 그램 17"
     url: "https://www.coupang.com/np/search?q=LG%20%EA%B7%B8%EB%9E%A8%2017&src=1139000&spec=10799999&addtag=200&ctag=LG%20%EA%B7%B8%EB%9E%A8%2017&lptag=AF7838146&pageType=SEARCH&pageValue=LG%20%EA%B7%B8%EB%9E%A8%2017"
+    imageUrl: "https://ads-partners.coupang.com/image1/VgWdF7N09CLM-FATVgi2YrtQRKpBrt4FxNXOAA3IO7IcSMRACuwsSW2thSF6TRqp8XLZ7DrXu0X6_dMFJRiAHLPk91gQ3xfVt35LpnQM9XZD9PwoDNU8zTtWAZh6n5k88414aPWmlZvAlipI_kM26Hgwu8TnGGhJCMBJr6LQYLhH99OSgix7nmJrz-FqvJm0fvBN8A6S_N_6t6TvbYQ6_IyQlAP126u6i_EXOidyY1L_mdDYWm_UmrRivB1Vtm8XjGw70ui6H1pqLpC5oMM2jK__BchKHMS5GMyYlhDNO6PvYrtsQRFKU5vE"
 faq:
   - q: "개발자는 정말 색정확도 좋은 모니터가 필요한가요?"
     a: "웹 개발만 한다면 일반 모니터도 괜찮지만, UI/UX 작업이나 영상·이미지 편집을 병행한다면 sRGB 95% 이상은 필수입니다. 특히 클라이언트에게 전달할 색감이 정확해야 할 때 차이가 명확합니다."

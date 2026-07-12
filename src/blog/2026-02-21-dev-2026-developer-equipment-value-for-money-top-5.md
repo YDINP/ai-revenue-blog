@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"
     url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive"
+    imageUrl: "https://ads-partners.coupang.com/image1/bQe2gwYArBVjsWMfbalAc5XbsxyokcVZk_0AddBydK0KVBL13bW9O7XHB4rsfzvaIBSiqALk1aSoNcJqdnENbMwJMUiFtKRjPTIZrF6eS5VbJuIZIEGVGyzOhkY0u4UeEtpDEfc9mrbsZ9N0uE-KZt8sanyYii2Y7qwZLvAqC5paq8w5QwNGq6-8K6Wk4zl_moiQc_uIMgIe5BgpMLGwnTfa3OqwTPiXDMZki5JAAFVuzdl9uc9aEDmXzZb6iHuc7zcKr5xwrP1REXsNdGthnr1R45D7ktEdrIildSyPF-V11W_fig=="
   - title: "러스트 프로그래밍"
     url: "https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D"
+    imageUrl: "https://ads-partners.coupang.com/image1/xh0ygIMl0kZmqZItxhwe3pWc3N0XCDHEbC-Pmee--QSWd5-AcWZCIw8KPmDYR8qTEJofmUDPIl-6TF15-zVQ6NW3wsKQoSBTqgOjL1ZxPuA-G6TuS0G_v_HTbHXpt4vHJXuaqa0bFR22VKETg9uVvxuW16paCEmZ45bWtvj45Ud4R8-h39B7aeNMTV89f0M88zcEL6-A0uq2bWHZuS3e1qGgyyrRT9NFsVGBd7jeFrjnUDt6WrwiYgK1_uOI-yRexInSePjGYHH35sR4wYECGU4tCwclWzbBpp7UUjXqdKKvEZV0AsjoZ7N89PUElP1vEbZtqw=="
 faq:
   - q: "모니터 1개보다 2개 구입이 낫지 않을까요?"
     a: "34인치 울트라와이드 1개는 27인치 모니터 2개와 거의 동일한 작업 공간을 제공하면서 베젤이 없어 코딩 흐름을 끊지 않습니다. 가격도 2개 구입보다 20~30% 저렴하고 책상 공간도 절약됩니다. 다만 그래픽 디자인이 병행되면 2개 구입이 더 효율적입니다."

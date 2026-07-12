@@ -11,6 +11,7 @@ image:
 coupangLinks:
   - title: "모던 리액트 딥다이브"
     url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EB%A6%AC%EC%95%A1%ED%8A%B8%20%EB%94%A5%EB%8B%A4%EC%9D%B4%EB%B8%8C&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EB%A6%AC%EC%95%A1%ED%8A%B8%20%EB%94%A5%EB%8B%A4%EC%9D%B4%EB%B8%8C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EB%A6%AC%EC%95%A1%ED%8A%B8%20%EB%94%A5%EB%8B%A4%EC%9D%B4%EB%B8%8C"
+    imageUrl: "https://ads-partners.coupang.com/image1/EmRZRhSB4KbNrY1KEvwi-INYyTyFKA1mYGodgONEzTC_jPtk_qp0aMuuWiS-hjkZf-CkcvvZmHaSGS6BYTf1mIJyvSaAGH7mHK6-VqOnJR3ls8voPYRdVjjYnCsnLiHIyIRMwhi-OdH3OMaD0C8UDpxJx6ybEdwW9_iB6I0M0o9bQBmVq2MJjy-AD60P8qULYdA1Cfs0OHy3Cxi7wy9Ww1clWCQMC6NqrLVvqD6y7nsGHNATF1mLPwUWQlWHYB-X9SkaKvdkttZk5G_qiiiWaNxf2e4nRsFZTL3tUqSQvYUcCfM_BhheC9WI6rhyOcsePglaSg=="
 faq:
   - q: "2026년 프론트엔드에서 가장 중요한 변화는 무엇인가요?"
     a: "'서버 우선(server-first) 아키텍처의 복귀'가 가장 큰 흐름입니다. React Server Components(RSC)가 안정화되면서, 예전처럼 모든 것을 브라우저에서 처리하던 방식에서 서버에서 렌더링하고 필요한 부분만 클라이언트로 보내는 방식으로 무게중심이 옮겨갔습니다. 여기에 AI 코드 생성, TypeScript 독점, React Compiler 자동 최적화가 더해지며 '무엇을 배우느냐'보다 '어떻게 개발하느냐'가 바뀌는 시기입니다."

@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "갤럭시 Z 플립 케이스·강화 보호필름"
     url: "https://www.coupang.com/np/search?q=%EA%B0%A4%EB%9F%AD%EC%8B%9C%20Z%20%ED%94%8C%EB%A6%BD%20%EC%BC%80%EC%9D%B4%EC%8A%A4%20%EA%B0%95%ED%99%94%20%EB%B3%B4%ED%98%B8%ED%95%84%EB%A6%84&src=1139000&spec=10799999&addtag=200&ctag=%EA%B0%A4%EB%9F%AD%EC%8B%9C%20Z%20%ED%94%8C%EB%A6%BD%20%EC%BC%80%EC%9D%B4%EC%8A%A4%20%EA%B0%95%ED%99%94%20%EB%B3%B4%ED%98%B8%ED%95%84%EB%A6%84&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B0%A4%EB%9F%AD%EC%8B%9C%20Z%20%ED%94%8C%EB%A6%BD%20%EC%BC%80%EC%9D%B4%EC%8A%A4%20%EA%B0%95%ED%99%94%20%EB%B3%B4%ED%98%B8%ED%95%84%EB%A6%84"
+    imageUrl: "https://ads-partners.coupang.com/image1/mqJborGIiji3WJ8imqgHvQDzvculvZwDK-72woPG9JOkGMUbXtlVW4ZRHoONWIG_8c_PG4sjlZdRaa19QBPvl_s0bAr_YtlKsIdNU4q4r4AXsDako_3DTwFRrqaHUaNi5pbBuOWa6bIoSndBWBGBY6MURB_X8F0OCdavcla0-Yg6TVVrmpdC0UkeJJyVVClePj0zuxWU0pFwRK0GSNorskUv7SMT_o5ODjjgm4MPog_sAa-wsdSTRDg4NHfzPfR5tSx8kxcOT2m3Ex28xGD3cZ3z_VQejNRLyNhlX_JmwWRNuc3vEWywBdLA"
   - title: "삼성 정품 25W 고속 충전기"
     url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EC%A0%95%ED%92%88%2025W%20%EA%B3%A0%EC%86%8D%20%EC%B6%A9%EC%A0%84%EA%B8%B0&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EC%A0%95%ED%92%88%2025W%20%EA%B3%A0%EC%86%8D%20%EC%B6%A9%EC%A0%84%EA%B8%B0&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EC%A0%95%ED%92%88%2025W%20%EA%B3%A0%EC%86%8D%20%EC%B6%A9%EC%A0%84%EA%B8%B0"
+    imageUrl: "https://ads-partners.coupang.com/image1/O3Yggb8xx6IOqia-O0609Fw6LO3ebyby5NgcMvQB3JixglstqDFX2l5xHOHPsqnVRvjLEQkuxO1gL1kb9-2i_38l7xBSOcv-jZLNpT3vlNYb-hDnQi-w6TYc44Q5i5HXu7r9RvFSmv8pcV_AcHmjeSGDnau83MF-yiF1bhK6PknJXSBsy_kdhUquueZiXNraOBmU6KD3M8X-R6K_9ztutMM2Hn4RcIRHBZGseTWGYiqGAE9eDuj0CG0bs3rG-w4B7u6nb0kpt6iZrLNjOTlEEKvaUdU-Q7_zlw=="
 faq:
   - q: "갤럭시 Z 플립8은 언제 공개되나요?"
     a: "2026년 7월 22일 삼성 갤럭시 언팩에서 공개될 것이란 관측이 유력합니다. 삼성은 매년 여름과 겨울 두 차례 언팩을 여는데, 폴더블 라인업(Z 플립·Z 폴드)은 통상 여름 언팩에서 발표됩니다. 정식 출시(판매 개시)는 공개 후 1~2주 뒤가 일반적입니다. 다만 아직 공식 발표 전이므로 날짜는 바뀔 수 있습니다."

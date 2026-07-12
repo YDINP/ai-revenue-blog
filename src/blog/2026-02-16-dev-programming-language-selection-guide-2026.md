@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "자바스크립트 완벽 가이드"
     url: "https://www.coupang.com/np/search?q=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%99%84%EB%B2%BD%20%EA%B0%80%EC%9D%B4%EB%93%9C"
+    imageUrl: "https://ads-partners.coupang.com/image1/YF0t-yxOqSRd-xBqYJT1bEkDPNVag9oZaBVvVkJErmdEv59xESSfvkRYAJfNL5y4qmkvfSr31JnD4x1phltXMvdRaE1_JXxjyVOMHpow_k_PplKuv0CwDu_guNsPWUSZswPuHa0QwCvRmCMIKenV8lyZSLa9C5PT5H3p0MgJ-aS8bycBGXMQbF8j_OMG0UL2m71sPfjGc_8OFyx6CAcXSlPcQpmbwK_W67l--SFoPS_AGIptEtZ0rETG3TuZKa7VZu6EVIDxqesBmajYKNBZXf3FLUmNQPKa1WRuJw=="
   - title: "점프 투 파이썬"
     url: "https://www.coupang.com/np/search?q=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
+    imageUrl: "https://ads-partners.coupang.com/image1/0On6H424FU-r321w0IKYNHFbCTvQZcxWO7MrWHJh0lPiI-TqHGfr2BoQ7aScV3gjq0pXEEid9GaTek5MdF_fSes76-X8XYB9I0QbG5lt569cmgVQR4GurvRPIpOu05CKpjvebmiMEbhHgxEjibMLq1LLbW4hscQAbdUGF8dR0A2A0rXUjC3edghaw9g4p0ERz_DO1mivI3eDzNubOUTF0y8QI2LoWp9uCfbvBsfnw1cdkGRUg0FhhCVmdD-XvzvfkVADF727qIGm-blvZtHpPLaNfd9rgx_A40SSwQ-y2-gL4LRrQj6LesfP5o3ZNBn41ntzpw=="
 faq:
   - q: "프로그래밍 초보자라면 Python과 JavaScript 중 뭘 먼저 배워야 하나요?"
     a: "목표에 따라 다릅니다. **웹 개발을 원한다면 JavaScript, 데이터 분석이나 AI를 배우고 싶다면 Python**을 선택하세요. 난이도만 고려하면 Python이 더 쉽지만, JavaScript는 브라우저에서 즉시 실행 결과를 볼 수 있어 초보자의 동기부여에 좋습니다."

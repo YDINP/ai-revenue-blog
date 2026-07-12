@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "키크론 K3 Pro"
     url: "https://www.coupang.com/np/search?q=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro&src=1139000&spec=10799999&addtag=200&ctag=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%82%A4%ED%81%AC%EB%A1%A0%20K3%20Pro"
+    imageUrl: "https://ads-partners.coupang.com/image1/-BjrcohaVJh7n88o-K9OXVKnZYtyT78oXKeYk_DTvZzwrGBqjAJ7sSb78yvxtP-og6YxISXF8MjNYtnwnBywGkmwqR6WNXkpczzwQybjAld8QYuH43YhKNwtXbep72Lrmqlf2bdlZhBBQSrlCWX-05FW3UY9UiaZI_rgTZoeqJzDXJrLlHt93gErNCPCLCk42AEVhOy2cV2v1XwDdC7Nl9P8MN3MyvdG6DvSe44cQqTFeXJsaPn_loY--3BBdJQYXPI4vfSZZ6YXGWtY6ylz6tUeOaE7MPsyc20="
   - title: "맥북 에어 M3"
     url: "https://www.coupang.com/np/search?q=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&src=1139000&spec=10799999&addtag=200&ctag=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3"
+    imageUrl: "https://ads-partners.coupang.com/image1/Em7Keuf-RPNQ5Z9fElHPi3zyJ7F1VjP7B8HCu1PdH8kFZdad2K-OSpg4nqikxmmKciw21oMsi5926rHCwZ94N0t3weWq-34Vtt0nMZS6mnXS898V9Avl8NphQX3q7FR7_qZAsDerbmtYdKFUFr_SZ4dh10yyB6lzjJ8QMr18P9ow3SssZc-_tDPDKyV_QIfCUBBJuNy7-MeJAp8XAAAVkXDokwX1kWlu6ppP73W3ZOdZzt9fF5ECtoV8MpFZ7I_Dfq2Rauu3XyFc6dUlawHSeJKe2gusJUGoFw=="
 faq:
   - q: "멤브레인 키보드의 러버돔은 얼마나 오래 사용할 수 있나요?"
     a: "현대 고급 멤브레인 키보드는 평균 800만~1000만 회의 입력을 견딘다. 하루 평균 5시간 타이핑 기준으로 약 4~5년 사용이 가능하다. 러버돔의 경화로 입력감이 변할 수 있지만, 교체 부품이 저렴하면 인생 기한까지 쓸 수 있다."

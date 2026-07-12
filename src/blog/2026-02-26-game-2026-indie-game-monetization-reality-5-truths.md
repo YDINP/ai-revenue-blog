@@ -12,8 +12,10 @@ image:
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4"
+    imageUrl: "https://ads-partners.coupang.com/image1/06QeSNhbWeAAJxM10wE0QTmgQN3qv54-GBzRSocemWeFVFwDQs37_KIclAxaLq9gHZ7534QPqrndFd8UDe8FSyDw0NteoFE_vYqK6PJFXMyaTTfVSQLXIn6rZnfTL7f49s-Id_-3TMdECKyFxaWGISI46tcoFbU4YdSvK83ejlq9ca-uWPo4ms_Ya1uNA0bobw3XmVhp-5yZt2FTPEmobuttPTCcKpO1WcnV28zFPKtY04R3s51ZCglLIt-OQm9F6J0KHEsInlulDuKWtkJ2H8UngCj_OFOR8l5U3Ie9DU0CwXPi4FogQoAQPCffs5RXlAFUo2wEQRS7prjQYkE1XN4NU2JJQBNzio69Vs4y3d56dA=="
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
+    imageUrl: "https://ads-partners.coupang.com/image1/N3MOn3F4M0r96tGWN8I7EHBxNmijCay63U9fXr_vTcbGzyXYNWufIm2ghSbCMxDr4gU5VtRvrqH7cz7ij5QeP4dilOAVm-woEJyJwBiohQq8i6nGtgBY0Y9VkOuXQ5s9Ud44lC30A__avNEiOq2OOYDBCDKxgAwqeVZjH8SduAFDkwv4384osbmboq4qoqUAl6RNLQqtYlUnsc98v20HPP5jmIYVHttkcEeRxKxsgsu5elI1o8qRCoBOyN_w_4gP_4oEZmhk_Zte2rO05Dpr0eQTONcs_QXxR5MS8NK3K4m_HU4xFnPZYehghd1RN0JsJAYrNQ=="
 faq:
   - q: "인디게임으로 생활비를 벌 수 있을까?"
     a: "가능하지만 확률은 낮다. VG Insights 집계 기준 2025년 스팀 신작 약 2만 개 중 매출 10만 달러(약 1.4억원)를 넘긴 것은 1,700여 개, 약 8.5%다. 생활이 가능한 지속 수익 구간은 그보다도 좁다. 첫 게임 한 편으로 전업을 계획하기보다 두세 편을 낼 수 있는 생활비 활주로를 먼저 확보하는 편이 현실적이다."

@@ -11,6 +11,7 @@ image:
 coupangLinks:
   - title: "게임, 이렇게 만들어야 팔린다"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EC%9D%B4%EB%A0%87%EA%B2%8C%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%8C%94%EB%A6%B0%EB%8B%A4"
+    imageUrl: "https://ads-partners.coupang.com/image1/t8hkFW23MsdcVlxmt0UNwP3YxB5t6pFa0gVYKlFVkmzAmcp1X8M9IxDXbRod8cjyJtCFKhazmZaUVUm6sLy_rTgdqjtLsIpG2GkBwsS_WhJ18gvT3Fv6N8W-xqc4yLyBUv64MKPvkLGtAyqHjbtWdvzmZU22k_hhM0u7YtK-qAzpKEfM5ALIu0ekYLDHW10mJ44FTvQMIqcuVpYaJmone2BPxVHasDuNIQzUL6Q_PnPo6iiL8ihCauRAYoDmr0gTEXI1SiW4OrMabQOrITfiQsTJa3_3leRqCj4exRVDw0D8ddxS"
 faq:
   - q: "인디에게 가장 수익성 높은 장르는 무엇인가요?"
     a: "노력 대비 수익(ROI) 관점에서는 팩토리/자동화·경영 시뮬레이션이 강하다. 리뷰 100개 이상을 받은 이 계열 게임의 매출 중앙값은 약 20만~50만 달러 이상으로, 열성적이고 지출이 큰 팬층을 갖는다. 로그라이크 덱빌더도 장르 사상 최고의 해를 보내고 있다. 다만 절대 규모는 액션·RPG가 크지만 그만큼 경쟁이 포화 상태다."

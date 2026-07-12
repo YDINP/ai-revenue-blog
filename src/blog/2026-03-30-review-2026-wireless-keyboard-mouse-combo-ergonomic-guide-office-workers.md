@@ -11,8 +11,10 @@ image:
 coupangLinks:
   - title: "맥북 에어 M3"
     url: "https://www.coupang.com/np/search?q=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&src=1139000&spec=10799999&addtag=200&ctag=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A7%A5%EB%B6%81%20%EC%97%90%EC%96%B4%20M3"
+    imageUrl: "https://ads-partners.coupang.com/image1/Em7Keuf-RPNQ5Z9fElHPi3zyJ7F1VjP7B8HCu1PdH8kFZdad2K-OSpg4nqikxmmKciw21oMsi5926rHCwZ94N0t3weWq-34Vtt0nMZS6mnXS898V9Avl8NphQX3q7FR7_qZAsDerbmtYdKFUFr_SZ4dh10yyB6lzjJ8QMr18P9ow3SssZc-_tDPDKyV_QIfCUBBJuNy7-MeJAp8XAAAVkXDokwX1kWlu6ppP73W3ZOdZzt9fF5ECtoV8MpFZ7I_Dfq2Rauu3XyFc6dUlawHSeJKe2gusJUGoFw=="
   - title: "로지텍 MX Keys S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S"
+    imageUrl: "https://ads-partners.coupang.com/image1/ezpf0GR4BzffiPvWe2k74jT3RBLuAjPe0v_bX6hU0wle_X168JmYu7hAG4hxD2iBdIbJpjeAta6nc2Fe5aaqdWaUOLUddaimIqk8TRHenLgIa9Xy_RI4bHy0p66ymMwN1PMEwAFyPnovJpVnnRRODSZQ11OKq9QVvHazuhdBSv66R2WeABiHYnolhGWEjmkd4jdvZ2d-aeTSy2BMTbQgOZkm10o59K6iGTWxuYBauaszozfNmGdHZ7W97v6G4jqBRVkJBoY6pnVXyfRiJcCpH0rxgKb32EtxQg=="
 faq:
   - q: "무선 세트와 유선 세트, 어떤 게 더 나을까요?"
     a: "무선은 **자유도와 편의성**이 우수하고, 유선은 **지연 없음과 영구적 연결**을 보장합니다. 사무 업무는 지연이 거의 발생하지 않으므로 무선을 추천하며, 온라인 게이밍이나 영상 편집이 필요하면 유선이 낫습니다."
