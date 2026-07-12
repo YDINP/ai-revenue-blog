@@ -362,7 +362,12 @@ const seriesItemListLd = roadmap
         if (!content) return;
         var hs = content.querySelectorAll('h2');
         // 1) 쿠팡 인라인 CTA를 본문 h2 사이에 분산 삽입
+        //    단, 본문(마크다운)에 수동 CTA가 이미 있으면 같은 상품이 두 벌 노출되므로 주입하지 않는다.
         var cta = document.getElementById('mid-coupang-data');
+        if (cta && content.querySelector('.coupang-inline')) {
+          cta.remove();
+          cta = null;
+        }
         if (cta) {
           var positions = [];
           if (hs.length >= 2) positions.push(1);            // 두 번째 섹션 앞
