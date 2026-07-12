@@ -295,6 +295,30 @@ const ogImageUrl = slug ? new URL(`/open-graph/${slug}.png`, Astro.site).href : 
       <slot />
     </div>
 
+    <!-- 본문 중간 삽입용: 쿠팡 인라인 CTA (JS로 h2 사이에 배치) -->
+    {coupangLinks && coupangLinks.length > 0 && (
+      <div id="mid-coupang-data" hidden>
+        {coupangLinks.slice(0, 2).map((link) => (
+          <div class="mid-coupang-wrap">
+            <a
+              class="coupang-cta-inline"
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              data-product={link.title}
+            >
+              <span class="cci-left">
+                <span class="cci-badge">쿠팡</span>
+                <span class="cci-text"><b>{link.title}</b> 최저가·가격 확인</span>
+              </span>
+              <span class="cci-btn">보러가기 ›</span>
+            </a>
+            <p class="cci-disc">쿠팡 파트너스 활동의 일환으로 일정액의 수수료를 제공받습니다.</p>
+          </div>
+        ))}
+      </div>
+    )}
+
     {seriesPosts.filter((p) => p.id !== slug).length >= 2 && (
       <div id="mid-related-data" hidden>
         <aside class="mid-related">
@@ -309,14 +333,29 @@ const ogImageUrl = slug ? new URL(`/open-graph/${slug}.png`, Astro.site).href : 
     )}
     <script is:inline>
       (function () {
-        var src = document.getElementById('mid-related-data');
         var content = document.getElementById('post-content');
-        if (!src || !content) return;
+        if (!content) return;
         var hs = content.querySelectorAll('h2');
-        if (hs.length >= 3 && src.firstElementChild) {
-          hs[2].parentNode.insertBefore(src.firstElementChild, hs[2]);
+        // 1) 쿠팡 인라인 CTA를 본문 h2 사이에 분산 삽입
+        var cta = document.getElementById('mid-coupang-data');
+        if (cta) {
+          var positions = [];
+          if (hs.length >= 2) positions.push(1);            // 두 번째 섹션 앞
+          if (hs.length >= 6) positions.push(Math.min(hs.length - 2, 5)); // 후반부
+          else if (hs.length >= 4) positions.push(hs.length - 1);
+          for (var i = 0; i < positions.length && cta.firstElementChild; i++) {
+            hs[positions[i]].parentNode.insertBefore(cta.firstElementChild, hs[positions[i]]);
+          }
+          cta.remove();
         }
-        src.remove();
+        // 2) 관련 글 중간 삽입 (기존)
+        var src = document.getElementById('mid-related-data');
+        if (src) {
+          if (hs.length >= 3 && src.firstElementChild) {
+            hs[2].parentNode.insertBefore(src.firstElementChild, hs[2]);
+          }
+          src.remove();
+        }
       })();
     </script>
 

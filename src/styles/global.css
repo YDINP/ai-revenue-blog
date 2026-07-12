@@ -1034,6 +1034,56 @@ section > h2::after {
 .post-content .mid-related a { font-weight: 600; text-decoration: none; }
 .post-content .mid-related a:hover { text-decoration: underline; }
 
+/* 본문 중간 쿠팡 인라인 CTA (자동 삽입) */
+.post-content .mid-coupang-wrap { margin: 2rem 0; }
+.post-content .coupang-cta-inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(135deg, #e44d26 0%, #ff6b35 100%);
+  box-shadow: 0 6px 18px rgba(228, 77, 38, 0.22);
+  transition: transform 0.2s, box-shadow 0.2s;
+  flex-wrap: wrap;
+}
+.post-content .coupang-cta-inline:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(228, 77, 38, 0.32);
+}
+.post-content .coupang-cta-inline .cci-left {
+  display: flex; align-items: center; gap: 0.6rem; min-width: 0;
+}
+.post-content .coupang-cta-inline .cci-badge {
+  flex-shrink: 0;
+  font-size: 0.72rem; font-weight: 800; letter-spacing: 0.02em;
+  background: rgba(255,255,255,0.22);
+  padding: 3px 9px; border-radius: 6px;
+}
+.post-content .coupang-cta-inline .cci-text {
+  font-size: 0.95rem; font-weight: 600; line-height: 1.4; word-break: keep-all;
+}
+.post-content .coupang-cta-inline .cci-text b { font-weight: 800; }
+.post-content .coupang-cta-inline .cci-btn {
+  flex-shrink: 0;
+  font-weight: 800; font-size: 0.9rem;
+  background: rgba(255,255,255,0.18);
+  padding: 0.45rem 0.9rem; border-radius: 8px;
+  white-space: nowrap;
+}
+.post-content .cci-disc {
+  margin: 0.4rem 0 0;
+  font-size: 0.7rem;
+  color: var(--color-text-muted, #999);
+  line-height: 1.5;
+}
+@media (max-width: 480px) {
+  .post-content .coupang-cta-inline { justify-content: center; text-align: center; }
+}
+
 .post-content .callout-tip strong,
 .post-content .callout-warning strong,
 .post-content .callout-info strong {

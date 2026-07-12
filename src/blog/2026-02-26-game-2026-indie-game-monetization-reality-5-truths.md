@@ -111,6 +111,12 @@ faq:
 
 인디게임으로 수익을 올리는 것은 분명히 가능하다. 하지만 그것은 '게임을 잘 만드는 것'만으로는 부족하고, **비즈니스 감각, 마케팅 전략, 그리고 끈기 있는 실행**이 필요하다. 2026년의 인디게임 시장에서 살아남으려면 꿈을 꾸되, 현실을 직시해야 한다.
 
+## 함께 읽으면 좋은 글
+
+- [인디게임 첫 출시 매출의 현실 2026: 중앙값·위시리스트 전환율 실데이터](/blog/2026-07-11-game-indie-first-game-sales-reality-2026-median-wishlist-data/) — "얼마 버나"를 숫자로
+- [인디게임은 왜 실패하는가 2026: 3가지 침몰 원인과 회피법](/blog/2026-07-11-game-indie-game-failure-reasons-2026-postmortem-lessons/) — 남의 실패에서 싸게 배우기
+- [인디게임 수익 모델 완벽 정리](/blog/2026-07-03-game-indie-game-revenue-models-2026-premium-f2p-subscription/) · [플랫폼 수수료 비교](/blog/2026-07-02-game-game-platform-fees-comparison-2026-steam-epic-mobile-itch/)
+
 ## 참고 자료
 
 - [Steam 게임 출시 현황 및 통계](https://www.pcgameshardware.de/)
