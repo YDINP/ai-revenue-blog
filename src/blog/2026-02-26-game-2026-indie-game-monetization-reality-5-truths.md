@@ -115,6 +115,7 @@ faq:
 
 - [인디게임 첫 출시 매출의 현실 2026: 중앙값·위시리스트 전환율 실데이터](/blog/2026-07-11-game-indie-first-game-sales-reality-2026-median-wishlist-data/) — "얼마 버나"를 숫자로
 - [인디게임은 왜 실패하는가 2026: 3가지 침몰 원인과 회피법](/blog/2026-07-11-game-indie-game-failure-reasons-2026-postmortem-lessons/) — 남의 실패에서 싸게 배우기
+- [인디게임 장르별 수익성 2026: 데이터로 고르는 '팔리는 장르'](/blog/2026-07-11-game-indie-genre-profitability-2026-steam-revenue-by-genre/) — 어떤 장르가 돈이 되나
 - [인디게임 수익 모델 완벽 정리](/blog/2026-07-03-game-indie-game-revenue-models-2026-premium-f2p-subscription/) · [플랫폼 수수료 비교](/blog/2026-07-02-game-game-platform-fees-comparison-2026-steam-epic-mobile-itch/)
 
 ## 참고 자료
