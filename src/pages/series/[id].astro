@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { seriesList, getSeries } from '../../data/series';
+
+export function getStaticPaths() {
+  return seriesList.map((s) => ({ params: { id: s.id } }));
+}
+
+const { id } = Astro.params;
+const series = getSeries(id!)!;
+
+// 각 단계 글이 실제 존재하는지 확인(있으면 링크, 없으면 준비중)
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+const slugSet = new Set(posts.map((p) => p.id));
+
+const title = series.title;
+const description = series.description;
+
+const itemListLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: series.title,
+  description: series.description,
+  itemListOrder: 'https://schema.org/ItemListOrderAscending',
+  numberOfItems: series.steps.length,
+  itemListElement: series.steps.map((s) => ({
+    '@type': 'ListItem',
+    position: s.order,
+    name: s.label,
+    url: new URL(`/blog/${s.slug}/`, Astro.site).href,
+  })),
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="series-hub">
+    <div class="series-hub-head">
+      <div class="eyebrow">📚 연재 시리즈</div>
+      <h1>{series.title}</h1>
+      <p>{series.description}</p>
+    </div>
+
+    <div class="series-steps">
+      {
+        series.steps.map((s) => {
+          const exists = slugSet.has(s.slug);
+          return exists ? (
+            <a href={`/blog/${s.slug}/`} class="series-step-card">
+              <span class="num">{s.order}</span>
+              <span class="info">
+                <span class="label">{s.label}</span>
+                <span class="blurb">{s.blurb}</span>
+              </span>
+              <span class="go">→</span>
+            </a>
+          ) : (
+            <div class="series-step-card pending">
+              <span class="num">{s.order}</span>
+              <span class="info">
+                <span class="label">{s.label}</span>
+                <span class="blurb">{s.blurb} · 준비 중</span>
+              </span>
+              <span class="go">⋯</span>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(itemListLd)} />
+</BaseLayout>

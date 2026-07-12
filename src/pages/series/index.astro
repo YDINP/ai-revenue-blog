@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { seriesList } from '../../data/series';
+
+const title = '연재 시리즈';
+const description = '주제별로 순서대로 읽는 TechFlow 연재 시리즈 모음. 인디게임 개발 로드맵 등 단계별 가이드를 한곳에서.';
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="series-hub">
+    <div class="series-hub-head">
+      <div class="eyebrow">📚 연재 시리즈</div>
+      <h1>연재 시리즈</h1>
+      <p>흩어진 글을 여정 순서로 묶어, 처음부터 끝까지 따라올 수 있게 구성한 단계별 가이드입니다.</p>
+    </div>
+
+    <div class="series-hub-list">
+      {
+        seriesList.map((s) => (
+          <a href={`/series/${s.id}/`} class="series-hub-list-card">
+            <h2>{s.title}</h2>
+            <p>{s.description}</p>
+            <p style="margin-top:0.6rem;color:var(--color-primary);font-weight:700;font-size:0.85rem">
+              {s.steps.length}단계 · 로드맵 보기 →
+            </p>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

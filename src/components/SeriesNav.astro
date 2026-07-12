@@ -1,0 +1,72 @@
+---
+// 연재 시리즈 네비게이션. 글이 시리즈에 속할 때만 렌더(미소속이면 null → 기존 글 영향 0).
+import { seriesForSlug } from '../data/series';
+
+interface Props {
+  slug: string;
+  position?: 'top' | 'bottom';
+}
+const { slug, position = 'top' } = Astro.props;
+const info = seriesForSlug(slug);
+---
+
+{
+  info && position === 'top' && (
+    <nav class="series-nav" aria-label="연재 시리즈">
+      <a href={`/series/${info.series.id}/`} class="series-badge">
+        <span class="series-ico">📚</span>
+        <span class="series-name">{info.series.title}</span>
+        <span class="series-count">
+          {info.step.order} / {info.series.steps.length}단계
+        </span>
+      </a>
+      <details class="series-toc">
+        <summary>시리즈 전체 목차 보기</summary>
+        <ol>
+          {info.series.steps.map((s) => (
+            <li class={s.slug === slug ? 'is-current' : ''}>
+              {s.slug === slug ? (
+                <span>
+                  <b>{s.order}. {s.label}</b> — 지금 이 글
+                </span>
+              ) : (
+                <a href={`/blog/${s.slug}/`}>
+                  {s.order}. {s.label}
+                </a>
+              )}
+            </li>
+          ))}
+        </ol>
+      </details>
+    </nav>
+  )
+}
+
+{
+  info && position === 'bottom' && (info.prev || info.next) && (
+    <nav class="series-pager" aria-label="시리즈 이동">
+      {info.prev ? (
+        <a href={`/blog/${info.prev.slug}/`} class="series-pager-item prev">
+          <span class="dir">← 이전 단계</span>
+          <span class="t">{info.prev.order}. {info.prev.label}</span>
+          <span class="b">{info.prev.blurb}</span>
+        </a>
+      ) : (
+        <span class="series-pager-item empty" />
+      )}
+      {info.next ? (
+        <a href={`/blog/${info.next.slug}/`} class="series-pager-item next">
+          <span class="dir">다음 단계 →</span>
+          <span class="t">{info.next.order}. {info.next.label}</span>
+          <span class="b">{info.next.blurb}</span>
+        </a>
+      ) : (
+        <a href={`/series/${info.series.id}/`} class="series-pager-item next">
+          <span class="dir">시리즈 완료 🎉</span>
+          <span class="t">로드맵 전체 보기</span>
+          <span class="b">모든 단계를 한눈에</span>
+        </a>
+      )}
+    </nav>
+  )
+}
