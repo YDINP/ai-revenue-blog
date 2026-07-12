@@ -14,6 +14,8 @@ coupangLinks:
   - title: "로지텍 G Pro X 게이밍 마우스"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4"
 ---
+> 📚 이 글은 **[인디게임 개발 로드맵](/series/indie-roadmap/)** 시리즈의 **2단계 · 엔진·도구 선택**입니다. 기획→개발→마케팅→출시→수익화 전체 여정을 순서대로 다룹니다. 앞 단계는 [기획·프로토타입](/blog/2026-07-11-game-indie-game-concept-prototype-2026-from-idea-to-vertical-slice/)입니다.
+
 ## 들어가며
 
 게임 개발을 시작하려는 분들이 가장 먼저 직면하는 질문은 "어떤 게임 엔진을 선택해야 할까?"입니다. 2026년 현재, 시장에는 다양한 특징을 가진 게임 엔진들이 경쟁하고 있습니다. 이 글에서는 가장 인기 있는 5가지 게임 엔진을 심층 비교하여 여러분의 프로젝트에 가장 적합한 선택을 도와드리겠습니다.

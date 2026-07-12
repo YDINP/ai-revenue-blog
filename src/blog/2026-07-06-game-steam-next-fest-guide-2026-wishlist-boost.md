@@ -22,6 +22,8 @@ faq:
     a: "페스트 시작 2~3개월 전 Steamworks 이벤트 신청 페이지가 열린다. 마감 후에는 참가가 불가하므로 스팀 개발자 뉴스레터를 구독해 공고를 놓치지 않는 것이 중요하다."
 ---
 
+> 📚 이 글은 **[인디게임 개발 로드맵](/series/indie-roadmap/)** 시리즈의 **5단계 · 넥스트페스트·데모**입니다. 앞 단계는 [마케팅·위시리스트](/blog/2026-07-01-game-indie-game-marketing-zero-budget-2026-wishlist-growth/), 다음 단계는 [스팀 출시](/blog/2026-06-30-game-indie-game-steam-launch-guide-2026-wishlist-to-launch/)입니다.
+
 ## 스팀 넥스트 페스트란, 왜 인디 개발자에게 중요한가
 
 [2026년 인디게임 수익화 현실](/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/)에서 확인했듯, 스팀에 게임을 올리는 것만으로는 더 이상 눈에 띄기 어렵다. 매일 수십 개의 신작이 쏟아지는 지금, **스팀 넥스트 페스트(Steam Next Fest)**는 인디 개발자가 마케팅 예산 없이도 대규모 노출을 얻을 수 있는 몇 안 되는 공식 창구다.

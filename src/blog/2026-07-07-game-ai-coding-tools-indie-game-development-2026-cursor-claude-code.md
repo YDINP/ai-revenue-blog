@@ -22,6 +22,8 @@ faq:
     a: 'Copilot은 자동완성·인라인 제안에 강하고 월 $10로 접근성이 높다. Cursor는 GPT-4o·Claude Sonnet 등 여러 모델을 선택할 수 있고, Composer 2.5의 코드베이스 전체 컨텍스트 활용이 강점이다. 프로젝트가 커질수록 Cursor의 차이가 두드러진다.'
 ---
 
+> 📚 이 글은 **[인디게임 개발 로드맵](/series/indie-roadmap/)** 시리즈의 **3단계 · 개발·에셋**입니다. 앞 단계는 [엔진·도구 선택](/blog/2026-02-07-game-engine-comparison-2026/), 다음 단계는 [마케팅·위시리스트](/blog/2026-07-01-game-indie-game-marketing-zero-budget-2026-wishlist-growth/)입니다.
+
 [2026년 인디게임 수익화 현실](/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/)에서 정리했듯, 1인 개발자의 최대 자산은 '속도'다. 아이디어를 빠르게 구현하고, 시장 반응을 일찍 확인하는 것이 생존의 핵심이다. 2026년, AI 코딩 도구가 이 방정식을 다시 쓰고 있다. Cursor, Claude Code, GitHub Copilot은 이제 단순 자동완성 수준을 넘어 기능 단위 자동 구현, 멀티파일 리팩터링, 빌드 오류 수정까지 처리한다. 1인 인디 개발자가 이 도구들을 어떻게 조합해야 하는지 실전 관점에서 정리한다.
 
 ## AI 코딩 도구가 1인 게임 개발을 바꿨다
