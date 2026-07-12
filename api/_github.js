@@ -106,12 +106,23 @@ export async function deletePost(blog, path, sha, message) {
 }
 
 // ── Actions: 자동 포스팅 워크플로 트리거 ──
+// GitHub 은 60일간 레포 활동이 없으면 스케줄 워크플로를 자동 비활성(disabled_inactivity)
+// 시킨다 → dispatch 가 422 로 실패. 이때는 자동으로 다시 켜고 한 번 재시도한다.
 export async function dispatchGenerator(blog, inputs = {}) {
   if (!blog.generator) throw new Error(`${blog.label} 은 자동 포스팅 워크플로가 없습니다`);
-  await gh(`/repos/${blog.repo}/actions/workflows/${blog.generator}/dispatches`, {
-    method: 'POST',
-    body: JSON.stringify({ ref: blog.branch, inputs }),
-  });
+  const path = `/repos/${blog.repo}/actions/workflows/${blog.generator}`;
+  const send = () =>
+    gh(`${path}/dispatches`, {
+      method: 'POST',
+      body: JSON.stringify({ ref: blog.branch, inputs }),
+    });
+  try {
+    await send();
+  } catch (e) {
+    if (!/disabled workflow/i.test(e.message)) throw e;
+    await gh(`${path}/enable`, { method: 'PUT' });
+    await send();
+  }
   return true;
 }
 

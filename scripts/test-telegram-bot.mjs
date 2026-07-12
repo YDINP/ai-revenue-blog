@@ -42,12 +42,24 @@ globalThis.fetch = async (url, opts = {}) => {
   if (url.includes('/rest/v1/comments?created_at')) return { ok: true, json: async () => [{ source: 'blog', nickname: '독자', content: '좋은 글', post_slug: 'p1', is_admin: false }] };
   if (url.includes('/rest/v1/card_likes')) return { ok: true, json: async () => [{ slug: 'p1' }, { slug: 'p2' }] };
   // ── 핫 키워드 소스 ──
-  if (url.includes('trends.google.com')) return { ok: true, text: async () => '<rss><channel><item><title>여름 폭염 대비</title></item><item><title>홍길동</title></item></channel></rss>' };
+  // 블로그 RSS = 이미 쓴 글 제목 (시드 미사용 판정 기준)
+  if (url.includes('/rss.xml')) return { ok: true, text: async () => '<rss><channel><item><title>ChatGPT 활용법: 최신 기능과 실전 팁</title></item></channel></rss>' };
+  // 구글 뉴스 = 블로그 주제 검색 (매체명이 두 번 붙는 실제 형식)
+  if (url.includes('news.google.com')) return { ok: true, text: async () => '<rss><channel><item><title>AI 코딩 도구 신제품 출시 - AI타임스 - AI타임스</title></item></channel></rss>' };
   // ── GitHub API ──
   if (url.includes('api.github.com')) {
     if (url.includes('category-seeds.json')) {
       const seeds = { categories: [{ name: 'AI', keywords: ['AI 코딩 도구 추천', 'ChatGPT 활용법'] }, { name: 'Game', keywords: ['인디게임 마케팅'] }] };
       return { ok: true, status: 200, json: async () => ({ sha: 's', content: Buffer.from(JSON.stringify(seeds), 'utf8').toString('base64') }) };
+    }
+    if (url.includes('/enable')) return { ok: true, status: 204, json: async () => null };
+    if (url.includes('/dispatches')) {
+      // 첫 호출은 비활성 워크플로 422 → enable 후 재시도 성공을 재현
+      if (!globalThis.__dispatchEnabled) {
+        globalThis.__dispatchEnabled = true;
+        return { ok: false, status: 422, json: async () => ({ message: "Cannot trigger a 'workflow_dispatch' on a disabled workflow" }) };
+      }
+      return { ok: true, status: 204, json: async () => null };
     }
     const m = url.match(/\/contents\/([^?]+)/);
     if (url.includes('/contents/src/blog?')) return { ok: true, status: 200, json: async () => [
@@ -253,11 +265,14 @@ await tgHook(tgMsg('확인'), res);
 assert(sentTexts()[0].includes('삭제 완료'), '확인 performs delete');
 
 // 22. /generate tf <카테고리> <주제> → 즉시 workflow_dispatch (인자 직접 지정 경로)
+//     첫 dispatch 는 목에서 "disabled workflow" 422 → 자동 enable 후 재시도해야 성공
 calls.length = 0; res = mockRes();
 await tgHook(tgMsg('/generate tf AI 인디게임 수익화'), res);
-const disp = calls.find(c => c.url.includes('/dispatches'));
+assert(calls.some(c => c.url.includes('/enable')), 'disabled workflow is auto-enabled on 422');
+const disp = calls.filter(c => c.url.includes('/dispatches')).pop();
 assert(disp, '/generate with args dispatches the workflow');
 assert(disp.body.inputs.category === 'AI' && disp.body.inputs.topic === '인디게임 수익화', '/generate passes category and topic');
+assert(!sentTexts().join('').includes('❌'), 'no error surfaced after auto-enable retry');
 
 // 22b. /generate (인자 없음) → 블로그 선택 버튼
 calls.length = 0; res = mockRes();
@@ -286,6 +301,12 @@ const kwBtns = JSON.stringify(edited.body.reply_markup);
 assert(kwBtns.includes('g:kw:0'), 'keyword buttons present');
 assert(botState?.cands?.length > 0, 'candidates saved in state (callback data stays under 64B)');
 assert(botState.cands.some(c => c.src === 'seed'), 'seeds included as candidates');
+// 이미 쓴 글(RSS 제목 "ChatGPT 활용법…")과 겹치는 시드는 후보에서 제외돼야 함
+assert(!botState.cands.some(c => c.src === 'seed' && c.topic === 'ChatGPT 활용법'), 'already-covered seed is filtered out');
+assert(botState.cands.some(c => c.src === 'seed' && c.topic === '인디게임 마케팅'), 'unused seed is kept');
+// 뉴스는 매체명 접미사(중복 포함)가 제거된 상태
+const newsCand = botState.cands.find(c => c.src === 'news');
+assert(newsCand && !newsCand.label.includes('AI타임스'), 'news headline strips repeated media suffix');
 
 // 22e. 키워드 선택 → 해당 주제로 dispatch
 calls.length = 0; res = mockRes();

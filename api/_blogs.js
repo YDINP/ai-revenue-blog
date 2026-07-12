@@ -8,6 +8,7 @@
 // vercel     : Vercel 프로젝트명 (배포/상태 조회)
 // source     : analytics·comments 의 source 값 (없으면 통계 미연동)
 // generator  : GitHub Actions 자동 포스팅 워크플로 파일 (없으면 /generate 불가)
+// newsQueries: /generate 핫 키워드의 뉴스 소스 검색어 (블로그 주제 범위)
 
 export const BLOGS = {
   tf: {
@@ -20,6 +21,7 @@ export const BLOGS = {
     vercel: 'ai-revenue-blog',
     source: 'blog',
     generator: 'daily-post.yml',
+    newsQueries: ['AI 도구', '개발자 생산성', '인디게임'],
   },
   lf: {
     key: 'lf',
@@ -31,6 +33,7 @@ export const BLOGS = {
     vercel: 'life-revenue-blog',
     source: 'lifeflow',
     generator: 'daily-post.yml',
+    newsQueries: ['재테크 절세', '건강관리', '국내여행'],
   },
   pc: {
     key: 'pc',
