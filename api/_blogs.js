@@ -8,8 +8,8 @@
 // vercel     : Vercel 프로젝트명 (배포/상태 조회)
 // source     : analytics·comments 의 source 값 (없으면 통계 미연동)
 // generator  : GitHub Actions 자동 포스팅 워크플로 파일 (없으면 /generate 불가)
-// newsQueries: /generate 핫 키워드의 뉴스 검색어 (Google·Bing 두 엔진 공통)
-// hnKeywords : Hacker News 상위글 중 이 블로그와 관련된 것만 남기는 필터 (없으면 HN 미사용)
+// newsQueries: 뉴스 검색어 폴백. 평소엔 레포의 category-seeds.json 에서 매번 새로 뽑으므로
+//              이 값은 시드 파일을 못 읽을 때만 쓰인다 (_trends.js buildQueries)
 
 export const BLOGS = {
   tf: {
@@ -23,7 +23,7 @@ export const BLOGS = {
     source: 'blog',
     generator: 'daily-post.yml',
     newsQueries: ['AI 도구', '개발자 생산성', '인디게임'],
-    hnKeywords: ['\\bAI\\b', 'LLM', 'GPT', 'Claude', 'developer', 'programming', 'coding', 'game', 'startup', 'open.?source'],
+    useHackerNews: true,   // 기술 블로그만 (라이프스타일엔 코딩 글이 무의미)
   },
   lf: {
     key: 'lf',

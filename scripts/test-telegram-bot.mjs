@@ -44,10 +44,21 @@ globalThis.fetch = async (url, opts = {}) => {
   // ── 핫 키워드 소스 ──
   // 블로그 RSS = 이미 쓴 글 제목 (시드 미사용 판정 기준)
   if (url.includes('/rss.xml')) return { ok: true, text: async () => '<rss><channel><item><title>ChatGPT 활용법: 최신 기능과 실전 팁</title></item></channel></rss>' };
-  // 구글 뉴스 = 블로그 주제 검색 (매체명이 두 번 붙는 실제 형식)
-  if (url.includes('news.google.com')) return { ok: true, text: async () => '<rss><channel><item><title>AI 코딩 도구 신제품 출시 - AI타임스 - AI타임스</title></item></channel></rss>' };
-  // 빙 뉴스 = 다른 엔진 (구글과 같은 사건이면 중복 제거돼야 함)
-  if (url.includes('bing.com/news')) return { ok: true, text: async () => '<rss><channel><item><title>AI 코딩 도구 신제품 출시</title></item><item><title>국내 개발자 생산성 도구 도입 확산</title></item></channel></rss>' };
+  // 뉴스 목: 검색어(q)를 그대로 되돌려 관련성 게이트를 통과시키고, 잡음/옛기사 케이스를 섞음
+  const q = decodeURIComponent((url.match(/[?&]q=([^&]+)/) || [])[1] || '').replace(' when:7d', '');
+  const head = q.split(' ')[0];
+  const fresh = new Date().toUTCString();
+  const old = new Date(Date.now() - 400 * 86400000).toUTCString();
+  if (url.includes('news.google.com')) return { ok: true, text: async () => `<rss><channel>
+    <item><title>${head} 신제품 출시 - AI타임스 - AI타임스</title><pubDate>${fresh}</pubDate></item>
+    <item><title>refactor: SomeComponent 마이그레이션 #973</title><pubDate>${fresh}</pubDate></item>
+  </channel></rss>` };
+  if (url.includes('bing.com/news')) return { ok: true, text: async () => `<rss><channel>
+    <item><title>${head} 신제품 출시</title><pubDate>${fresh}</pubDate></item>
+    <item><title>${head} 도입 확산으로 업계 변화</title><pubDate>${fresh}</pubDate></item>
+    <item><title>${head} 5년 전 회고 기사</title><pubDate>${old}</pubDate></item>
+    <item><title>무관한 지역 행사 소식</title><pubDate>${fresh}</pubDate></item>
+  </channel></rss>` };
   // Hacker News = 해외 개발자 커뮤니티 (블로그 키워드 필터링 대상)
   if (url.includes('hn.algolia.com')) return { ok: true, json: async () => ({ hits: [
     { title: 'Show HN: A new LLM inference engine', points: 300 },
@@ -56,7 +67,10 @@ globalThis.fetch = async (url, opts = {}) => {
   // ── GitHub API ──
   if (url.includes('api.github.com')) {
     if (url.includes('category-seeds.json')) {
-      const seeds = { categories: [{ name: 'AI', keywords: ['AI 코딩 도구 추천', 'ChatGPT 활용법'] }, { name: 'Game', keywords: ['인디게임 마케팅'] }] };
+      const seeds = { categories: [
+        { name: 'AI', keywords: ['AI 코딩 도구 추천', 'ChatGPT 활용법'], searchTerms: ['AI coding tools', 'LLM inference'] },
+        { name: 'Game', keywords: ['인디게임 마케팅'], searchTerms: ['indie game marketing'] },
+      ] };
       return { ok: true, status: 200, json: async () => ({ sha: 's', content: Buffer.from(JSON.stringify(seeds), 'utf8').toString('base64') }) };
     }
     if (url.includes('/enable')) return { ok: true, status: 204, json: async () => null };
@@ -314,12 +328,20 @@ assert(botState.cands.some(c => c.src === 'seed' && c.topic === '인디게임 �
 // 뉴스는 매체명 접미사(중복 포함)가 제거된 상태
 const newsCand = botState.cands.find(c => c.src === 'news');
 assert(newsCand && !newsCand.label.includes('AI타임스'), 'news headline strips repeated media suffix');
-// 여러 엔진(구글·빙) 사용 + 같은 사건은 한 번만
+// 여러 엔진(구글·빙) 사용
 assert(calls.some(c => c.url.includes('news.google.com')) && calls.some(c => c.url.includes('bing.com/news')), 'both news engines queried');
-assert(botState.cands.filter(c => c.src === 'news' && c.label.includes('AI 코딩 도구 신제품')).length === 1, 'same story from two engines is deduped');
-assert(botState.cands.some(c => c.src === 'news' && c.label.includes('생산성 도구')), 'bing-only story is kept');
-// Hacker News 는 블로그 키워드에 맞는 것만
-assert(botState.cands.some(c => c.src === 'hn' && c.label.includes('LLM')), 'relevant HN story included');
+// 검색어는 고정값이 아니라 시드 키워드에서 생성 (목 시드의 키워드가 쿼리로 쓰였는지)
+const newsUrls = calls.filter(c => c.url.includes('news.google.com')).map(c => decodeURIComponent(c.url));
+assert(newsUrls.some(u => /AI 코딩 도구|인디게임 마케팅|ChatGPT/.test(u)), 'news queries are derived from seed keywords, not hardcoded');
+// 같은 사건이 두 엔진에서 오면 한 번만 (동일 제목이 중복 등장하지 않아야 함)
+const newsLabels = botState.cands.filter(c => c.src === 'news').map(c => c.label);
+assert(new Set(newsLabels).size === newsLabels.length, 'same story from two engines is deduped');
+// 잡음/옛기사/무관 기사 제외
+assert(!botState.cands.some(c => c.label.includes('refactor')), 'commit-style title filtered out');
+assert(!botState.cands.some(c => c.label.includes('5년 전 회고')), 'stale article (pubDate) filtered out');
+assert(!botState.cands.some(c => c.label.includes('무관한 지역 행사')), 'headline unrelated to the query filtered out');
+// Hacker News 는 기술 블로그(tf)만, 그중 관련 글만
+assert(botState.cands.some(c => c.src === 'hn' && c.label.includes('LLM')), 'relevant HN story included for tech blog');
 assert(!botState.cands.some(c => c.label.includes('Sourdough')), 'irrelevant HN story filtered out');
 
 // 22e. 키워드 선택 → 해당 주제로 dispatch
