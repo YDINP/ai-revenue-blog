@@ -11,7 +11,7 @@ image:
   alt: "Developer sketching game design ideas on paper next to a laptop."
 coupangLinks:
   - title: "게임 기획·설계 실전서"
-    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D"
+    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%C2%B7%EC%84%A4%EA%B3%84%20%EC%8B%A4%EC%A0%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%C2%B7%EC%84%A4%EA%B3%84%20%EC%8B%A4%EC%A0%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%C2%B7%EC%84%A4%EA%B3%84%20%EC%8B%A4%EC%A0%84%EC%84%9C"
     imageUrl: "https://ads-partners.coupang.com/image1/-enm6eUgClYde5Dn-Z-zJu8LYIzihbDxvQ7Qq6Mt2bemLJbg2oegMiRDlm6Byyd8BXEoC3WsN6pJ7k11wDIAhPjcLYvSqlX8WFFlVCQiHvH0MWOwAMn_bveZJDOuVsjGOKlogx_n4-LxrmplF1mtoSr8cWohrlhNLvTcWu7-r0VyDad77JwO1R6pTGK9bs2aM1iqhigKw_5K0Sv9KF5vDeFLwdy5ssQ9o9uOOyuqV_w4R50ywP9Ea-fSckBVrBvyX7PhGqmopUbAYl-6Cy-S5-qP8VnXrc83E0wc23L7jOTY0PdmSrXrQrKH-g=="
 faq:
   - q: "게임 아이디어는 어떻게 검증하나요?"
@@ -39,7 +39,7 @@ faq:
 
 한 줄 훅이 나오면, 그 문장이 개발 내내 **나침반**이 된다. 새 기능을 넣을지 말지 고민될 때마다 "이게 코어 루프를 강화하나?"로 판단하면 된다.
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%C2%B7%EC%84%A4%EA%B3%84%20%EC%8B%A4%EC%A0%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%C2%B7%EC%84%A4%EA%B3%84%20%EC%8B%A4%EC%A0%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%C2%B7%EC%84%A4%EA%B3%84%20%EC%8B%A4%EC%A0%84%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>

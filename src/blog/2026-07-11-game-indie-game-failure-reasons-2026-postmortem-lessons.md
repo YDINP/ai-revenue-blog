@@ -10,7 +10,7 @@ image:
   alt: "Frustrated developer with head in hands in front of a computer."
 coupangLinks:
   - title: "게임 기획·개발 실전서"
-    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D"
+    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%C2%B7%EA%B0%9C%EB%B0%9C%20%EC%8B%A4%EC%A0%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%C2%B7%EA%B0%9C%EB%B0%9C%20%EC%8B%A4%EC%A0%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%C2%B7%EA%B0%9C%EB%B0%9C%20%EC%8B%A4%EC%A0%84%EC%84%9C"
     imageUrl: "https://ads-partners.coupang.com/image1/0Yb550qqqi2aFrHs0fZTykRn8Th8DAWE49GkpAxqL6vouVoU_zWbrCDMUnmPOdJMMEIN6dT2tHt0zW1ZBOt2eHp-tDPcjtKSfeWigCqqwruPCy_ZJ4T7OKURuq8hmsRYtfG6JR5RcPHR5XIHsqXiUsDE5aK85SJmv-zdjHUIAu-YJ7nkv165LDDwk5dbyFnUDnznjoKoVQGz-aNOHusW8f6PBJ_eD_nQwRkfx6uak7kKu_hyCa8cNvpfj_UHy__XDFkoUlFpyNUwvs6E9wx_QPwDhBQPik8jWcLcrAJnE4e9d5-w1QKpi8oBORvAAvLMclz3SA=="
 faq:
   - q: "인디게임이 실패하는 가장 큰 원인은 무엇인가요?"
@@ -37,7 +37,7 @@ faq:
 
 원인은 게임의 질이 아니라 **노출**이다. 스팀 알고리즘 불가시성, 위시리스트 전환 붕괴, 틱톡 오가닉 도달 급감, 넥스트페스트 포화가 downstream에서 복합적으로 작용한다. 시장은 너무 시끄럽고, 유저의 주의력은 너무 짧다.
 
-<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D" target="_blank" rel="noopener noreferrer nofollow">
+<a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%C2%B7%EA%B0%9C%EB%B0%9C%20%EC%8B%A4%EC%A0%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%C2%B7%EA%B0%9C%EB%B0%9C%20%EC%8B%A4%EC%A0%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%EA%B8%B0%ED%9A%8D%C2%B7%EA%B0%9C%EB%B0%9C%20%EC%8B%A4%EC%A0%84%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
     <span class="ci-label">쿠팡 추천</span>
