@@ -8,8 +8,9 @@
 // vercel     : Vercel 프로젝트명 (배포/상태 조회)
 // source     : analytics·comments 의 source 값 (없으면 통계 미연동)
 // generator  : GitHub Actions 자동 포스팅 워크플로 파일 (없으면 /generate 불가)
-// newsQueries: 뉴스 검색어 폴백. 평소엔 레포의 category-seeds.json 에서 매번 새로 뽑으므로
-//              이 값은 시드 파일을 못 읽을 때만 쓰인다 (_trends.js buildQueries)
+// communities: /generate 핫키워드의 1차 소스 — 커뮤니티 실시간 인기글에서 키워드 추출
+//              ('geeknews' | 'hn' | 'ppomppu:<board>')
+// newsQueries: 뉴스 검색어 폴백. 평소엔 커뮤니티 핫키워드(없으면 시드)에서 뽑는다
 
 export const BLOGS = {
   tf: {
@@ -22,6 +23,7 @@ export const BLOGS = {
     vercel: 'ai-revenue-blog',
     source: 'blog',
     generator: 'daily-post.yml',
+    communities: ['geeknews', 'hn'],   // 개발/기술 커뮤니티
     newsQueries: ['AI 도구', '개발자 생산성', '인디게임'],
     useHackerNews: true,   // 기술 블로그만 (라이프스타일엔 코딩 글이 무의미)
   },
@@ -35,6 +37,8 @@ export const BLOGS = {
     vercel: 'life-revenue-blog',
     source: 'lifeflow',
     generator: 'daily-post.yml',
+    // 재테크·건강·핫딜(소비) 게시판. 자유게시판은 정치·잡담이라 제외
+    communities: ['ppomppu:money', 'ppomppu:health', 'ppomppu:ppomppu'],
     newsQueries: ['재테크 절세', '건강관리', '국내여행'],
   },
   pc: {

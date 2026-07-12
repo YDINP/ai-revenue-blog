@@ -10,6 +10,7 @@
 //
 // 실데이터 확인: GITHUB_TOKEN=$(gh auth token) node scripts/check-hot-keywords.mjs [tf|lf]
 
+import { communityHot } from './_community.js';
 import { getFileJson, listPosts } from './_github.js';
 import { SUPABASE_ANON_KEY, SUPABASE_URL } from './_shared.js';
 
@@ -62,6 +63,8 @@ const JUNK_RE = new RegExp(
     '이벤트|증정|할인쿠폰|당첨|사은품|프로모션|출시 기념',
     '추천 순위|최저가|구매 가이드|디시|쿠팡|파트너스',
     '순간포착|헬스톡|연예|배우|가수|아이돌|예능|열애|결혼설|이혼|출연',
+    // 사건사고·정치 — 검색어와 무관하게 뉴스 상단에 자주 올라온다
+    '살해|성폭행|음주운전|사망|숨진|체포|구속|피의자|유기한|친모|계부|징역|검찰|의원|대통령',
   ].join('|'),
   'i'
 );
@@ -150,20 +153,25 @@ function unusedSeeds(seeds, titles, limit = 4) {
   return out;
 }
 
-// ── 뉴스 검색어 생성 (고정값 아님) ──
-// 시드 키워드 풀에서 카테고리를 분산해 매번 새로 뽑고, 내 인기글에서 파생한 쿼리를 얹는다.
-function buildQueries(seeds, myTitles, count = 4) {
-  const cats = shuffle((seeds?.categories || []).filter((c) => (c.keywords || []).length));
+// ── 뉴스 검색어 생성 ──
+// 1순위: 커뮤니티에서 "지금" 화제인 키워드 (긱뉴스·HN·뽐뿌)
+// 2순위: 시드 키워드 풀 (커뮤니티가 조용하거나 실패했을 때)
+// + 실제 유입되는 인기글에서 파생한 쿼리 1개
+function buildQueries(community, seeds, myTitles, count = 4) {
   const queries = [];
-  // 카테고리당 1개씩 → 서로 다른 주제가 섞이도록
-  for (const c of cats) {
-    if (queries.length >= count - 1) break;
-    const kw = shuffle(c.keywords)[0];
-    // "AI 코딩 도구 추천" → "AI 코딩 도구" (검색어로는 추천/팁/가이드 같은 꼬리말이 방해)
-    const q = kw.replace(/\s*(추천|팁|가이드|방법|비교|후기|정리|입문)$/, '').trim();
-    if (q.length >= 2) queries.push(q);
+
+  community.keywords.slice(0, count - 1).forEach((k) => queries.push(k.keyword));
+
+  if (queries.length < count - 1) {
+    const cats = shuffle((seeds?.categories || []).filter((c) => (c.keywords || []).length));
+    for (const c of cats) {
+      if (queries.length >= count - 1) break;
+      // "AI 코딩 도구 추천" → "AI 코딩 도구" (검색어로는 추천/팁 같은 꼬리말이 방해)
+      const q = shuffle(c.keywords)[0].replace(/\s*(추천|팁|가이드|방법|비교|후기|정리|입문)$/, '').trim();
+      if (q.length >= 2) queries.push(q);
+    }
   }
-  // 실제 유입되는 글에서 뽑은 쿼리 1개 (트래픽 있는 주제의 최신 뉴스)
+
   const mine = myTitles[0];
   if (mine) {
     const q = mine
@@ -207,10 +215,13 @@ async function googleNews(q) {
   const xml = await fetchText(
     `https://news.google.com/rss/search?q=${encodeURIComponent(q + ' when:7d')}&hl=ko&gl=KR&ceid=KR:ko`
   );
+  // 매체명을 먼저 떼고 검사한다. 원본 제목은 "<영문 기사> - 아주경제" 처럼 매체명만 한글이라
+  // 한글 검사를 통과해버린다 (그 뒤 매체명을 떼면 영문 기사만 남음)
   return rssItems(xml)
+    .map((i) => ({ ...i, title: cleanHeadline(i.title) }))
     .filter((i) => usableNews(i, q))
     .slice(0, 2)
-    .map((i) => ({ headline: cleanHeadline(i.title), query: q, engine: 'google' }));
+    .map((i) => ({ headline: i.title, query: q, engine: 'google' }));
 }
 
 async function bingNews(q) {
@@ -218,10 +229,13 @@ async function bingNews(q) {
   const xml = await fetchText(
     `https://www.bing.com/news/search?q=${encodeURIComponent(q)}&format=RSS&setmkt=ko-KR&qft=interval%3d%228%22`
   );
+  // 매체명을 먼저 떼고 검사한다. 원본 제목은 "<영문 기사> - 아주경제" 처럼 매체명만 한글이라
+  // 한글 검사를 통과해버린다 (그 뒤 매체명을 떼면 영문 기사만 남음)
   return rssItems(xml)
+    .map((i) => ({ ...i, title: cleanHeadline(i.title) }))
     .filter((i) => usableNews(i, q))
     .slice(0, 2)
-    .map((i) => ({ headline: cleanHeadline(i.title), query: q, engine: 'bing' }));
+    .map((i) => ({ headline: i.title, query: q, engine: 'bing' }));
 }
 
 async function topicNews(queries, limit = 4) {
@@ -313,24 +327,33 @@ async function myTopPosts(blog) {
 
 // 후보 목록 (최대 12) — { label, topic, category, src }
 export async function hotKeywords(blog) {
+  // 시드를 먼저 읽어 도메인 어휘를 만들고, 그것으로 커뮤니티 잡담을 걸러낸다
   const [seeds, titles, mine] = await Promise.all([
     getFileJson(blog, 'scripts/category-seeds.json').catch(() => null),
     publishedTitles(blog),
     myTopPosts(blog),
   ]);
+  const community = await communityHot(blog, seeds).catch(() => ({ keywords: [], posts: [] }));
 
-  const queries = seeds ? buildQueries(seeds, mine) : blog.newsQueries || [];
+  const queries = buildQueries(community, seeds, mine);
   const hnTerms = seeds ? hnFilterFromSeeds(seeds) : null;
 
   // Hacker News 는 기술 블로그에만 (라이프스타일 블로그엔 코딩 글이 섞여 무의미)
   const [news, hn] = await Promise.all([
-    topicNews(queries),
+    topicNews(queries.length ? queries : blog.newsQueries || []),
     blog.useHackerNews ? hackerNews(hnTerms) : [],
   ]);
 
   const out = [];
-  unusedSeeds(seeds, titles).forEach((s) =>
-    out.push({ label: `🌱 ${s.kw}`, topic: s.kw, category: s.category, src: 'seed' })
+
+  // 🔥 커뮤니티에서 지금 화제인 글 (검색어의 출처이기도 함)
+  community.posts.forEach((p) =>
+    out.push({
+      label: `🔥 ${p}`,
+      topic: `${p} — 커뮤니티에서 화제인 이슈, 배경과 실무 관점 정리`,
+      category: 'auto',
+      src: 'community',
+    })
   );
   news.forEach((n) =>
     out.push({
@@ -347,6 +370,9 @@ export async function hotKeywords(blog) {
       category: 'auto',
       src: 'hn',
     })
+  );
+  unusedSeeds(seeds, titles, 3).forEach((s) =>
+    out.push({ label: `🌱 ${s.kw}`, topic: s.kw, category: s.category, src: 'seed' })
   );
   mine.slice(0, 2).forEach((t) =>
     out.push({

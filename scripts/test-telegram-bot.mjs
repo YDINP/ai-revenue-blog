@@ -44,6 +44,17 @@ globalThis.fetch = async (url, opts = {}) => {
   // ── 핫 키워드 소스 ──
   // 블로그 RSS = 이미 쓴 글 제목 (시드 미사용 판정 기준)
   if (url.includes('/rss.xml')) return { ok: true, text: async () => '<rss><channel><item><title>ChatGPT 활용법: 최신 기능과 실전 팁</title></item></channel></rss>' };
+  // 커뮤니티 목: 긱뉴스(Atom) — 'llm 추론'이 두 글에 반복 = 실시간 화제
+  if (url.includes('news.hada.io')) return { ok: true, text: async () => `<feed>
+    <entry><title><![CDATA[LLM 추론 비용을 90% 줄인 방법]]></title></entry>
+    <entry><title><![CDATA[LLM 추론 서버를 직접 만들어봤습니다]]></title></entry>
+    <entry><title><![CDATA[정청래 의원 관련 정치 이슈]]></title></entry>
+  </feed>` };
+  // 커뮤니티 목: 뽐뿌 — 핫딜 제목의 단위(3kg/355ml)가 키워드로 새면 안 됨
+  if (url.includes('ppomppu.co.kr')) return { ok: true, text: async () => `<rss><channel>
+    <item><title>[G마켓] 열무김치 3kg (9,900원/무배)</item></title></item>
+    <item><title>[톡딜] 몬스터 에너지 355ml 24캔 (23,940원)</title></item>
+  </channel></rss>` };
   // 뉴스 목: 검색어(q)를 그대로 되돌려 관련성 게이트를 통과시키고, 잡음/옛기사 케이스를 섞음
   const q = decodeURIComponent((url.match(/[?&]q=([^&]+)/) || [])[1] || '').replace(' when:7d', '');
   const head = q.split(' ')[0];
@@ -330,9 +341,14 @@ const newsCand = botState.cands.find(c => c.src === 'news');
 assert(newsCand && !newsCand.label.includes('AI타임스'), 'news headline strips repeated media suffix');
 // 여러 엔진(구글·빙) 사용
 assert(calls.some(c => c.url.includes('news.google.com')) && calls.some(c => c.url.includes('bing.com/news')), 'both news engines queried');
-// 검색어는 고정값이 아니라 시드 키워드에서 생성 (목 시드의 키워드가 쿼리로 쓰였는지)
+// 검색어는 고정값이 아니라 커뮤니티 실시간 화제에서 생성
 const newsUrls = calls.filter(c => c.url.includes('news.google.com')).map(c => decodeURIComponent(c.url));
-assert(newsUrls.some(u => /AI 코딩 도구|인디게임 마케팅|ChatGPT/.test(u)), 'news queries are derived from seed keywords, not hardcoded');
+assert(calls.some(c => c.url.includes('news.hada.io')), 'community source is queried');
+assert(newsUrls.some(u => /llm 추론/i.test(u)), 'news query comes from community hot keyword (not hardcoded)');
+assert(!newsUrls.some(u => /q=(kg|ml|of|an)\b/i.test(u)), 'units and stopwords never become search queries');
+// 커뮤니티 화제글이 후보로 제시됨 (정치 글은 제외)
+assert(botState.cands.some(c => c.src === 'community' && c.label.includes('LLM 추론')), 'community hot post offered as candidate');
+assert(!botState.cands.some(c => c.label.includes('정청래')), 'political community post filtered out');
 // 같은 사건이 두 엔진에서 오면 한 번만 (동일 제목이 중복 등장하지 않아야 함)
 const newsLabels = botState.cands.filter(c => c.src === 'news').map(c => c.label);
 assert(new Set(newsLabels).size === newsLabels.length, 'same story from two engines is deduped');
