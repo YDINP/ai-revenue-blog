@@ -128,7 +128,7 @@
   const chartObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.chart-fill, .radar-score-fill, .versus-fill').forEach(fill => {
+        entry.target.querySelectorAll('.chart-fill, .chart-col-fill, .radar-score-fill, .versus-fill').forEach(fill => {
           fill.classList.add('animated');
         });
         entry.target.querySelectorAll('.progress-ring').forEach(ring => {
@@ -152,12 +152,24 @@
     const title = el.dataset.title || '';
     const unit = el.dataset.unit || '';
     const max = Math.max(...values) * 1.15;
+    const vertical = el.dataset.orient === 'vertical';
     let html = '';
     if (title) html += `<div class="chart-title">${title}</div>`;
-    html += '<div class="chart-bars">';
+    html += vertical ? '<div class="chart-columns">' : '<div class="chart-bars">';
     labels.forEach((label, i) => {
       const pct = max > 0 ? (values[i] / max) * 100 : 0;
       const color = colors[i % colors.length].trim();
+      if (vertical) {
+        const gradV = `linear-gradient(0deg, ${color}, ${hexToRgba(color, 0.7)})`;
+        html += `<div class="chart-col">
+          <span class="chart-value">${values[i]}${unit}</span>
+          <div class="chart-col-track">
+            <div class="chart-col-fill" style="height:${pct}%;background:${gradV}"></div>
+          </div>
+          <span class="chart-col-label">${label.trim()}</span>
+        </div>`;
+        return;
+      }
       const grad = `linear-gradient(90deg, ${color}, ${hexToRgba(color, 0.7)})`;
       html += `<div class="chart-row">
         <span class="chart-label">${label.trim()}</span>
@@ -231,19 +243,27 @@
       cumPct += pct;
       if (i < values.length - 1) gradient += ', ';
     });
+    // 상대 점수 비교용 도넛은 원본 수치(합계)가 의미 없으므로 비중(%)만 노출한다.
+    const percentOnly = el.dataset.valueMode === 'percent';
+    let topIdx = 0;
+    values.forEach((v, i) => { if (v > values[topIdx]) topIdx = i; });
+    const topPct = total > 0 ? ((values[topIdx] / total) * 100).toFixed(1) : '0';
     let html = '';
     if (title) html += `<div class="chart-title">${title}</div>`;
     html += '<div class="chart-donut-container">';
     html += `<div class="donut-ring" style="background:conic-gradient(${gradient})">`;
-    html += `<div class="donut-hole"><span class="donut-total">${total}${unit}</span><span class="donut-total-label">합계</span></div>`;
+    html += percentOnly
+      ? `<div class="donut-hole"><span class="donut-total">${topPct}%</span><span class="donut-total-label">${labels[topIdx].trim()}</span></div>`
+      : `<div class="donut-hole"><span class="donut-total">${total}${unit}</span><span class="donut-total-label">합계</span></div>`;
     html += '</div>';
     html += '<div class="donut-legend">';
     labels.forEach((label, i) => {
       const pct = total > 0 ? ((values[i] / total) * 100).toFixed(1) : '0';
+      const valText = percentOnly ? `${pct}%` : `${values[i]}${unit} (${pct}%)`;
       html += `<div class="donut-legend-item">
         <span class="donut-legend-dot" style="background:${colors[i % colors.length].trim()}"></span>
         <span class="donut-legend-label">${label.trim()}</span>
-        <span class="donut-legend-value">${values[i]}${unit} (${pct}%)</span>
+        <span class="donut-legend-value">${valText}</span>
       </div>`;
     });
     html += '</div></div>';
