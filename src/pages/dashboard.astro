@@ -2021,7 +2021,6 @@ const ICONS: Record<string, string> = {
             <div class="seg-toggle" id="traffic-metric">
               <button class="seg-btn active" data-metric="views">조회수</button>
               <button class="seg-btn" data-metric="visitors">방문자</button>
-              <button class="seg-btn" data-metric="device">웹/모바일</button>
             </div>
             <div class="seg-toggle" id="traffic-period">
               <button class="seg-btn active" data-period="daily">일간</button>
@@ -3065,7 +3064,7 @@ const ICONS: Record<string, string> = {
       // ── 방문 추이 (일간/주간/월간 통합) ──
       let _trafficDetail = [];
       let _trafficPeriod = 'daily';
-      let _trafficMetric = 'views';   // 'views' | 'visitors' | 'device'
+      let _trafficMetric = 'views';   // 'views' | 'visitors' — 웹/모바일은 두 메트릭 안에 병기
       let _deviceDataReady = false;   // get_daily_device_trend RPC 설치 여부
 
       function bucketDetail(rows, period) {
@@ -3089,7 +3088,7 @@ const ICONS: Record<string, string> = {
             label = `${date.getMonth()+1}/${date.getDate()}`;
             sortKey = key;
           }
-          if (!buckets[key]) buckets[key] = { key, label, views:0, visitors:0, tf:0, lf:0, web:0, mobile:0, sortKey };
+          if (!buckets[key]) buckets[key] = { key, label, views:0, visitors:0, tf:0, lf:0, web:0, mobile:0, webV:0, mobileV:0, sortKey };
           const b = buckets[key];
           b.views += Number(d.views)||0;
           b.visitors += Number(d.visitors)||0;
@@ -3097,6 +3096,8 @@ const ICONS: Record<string, string> = {
           b.lf += Number(d.lf_views)||0;
           b.web += Number(d.web_views)||0;
           b.mobile += Number(d.mobile_views)||0;
+          b.webV += Number(d.web_visitors)||0;
+          b.mobileV += Number(d.mobile_visitors)||0;
         });
         return Object.values(buckets).sort((a,b) => a.sortKey < b.sortKey ? -1 : 1);
       }
@@ -3118,16 +3119,7 @@ const ICONS: Record<string, string> = {
         if (!buckets.length) { container.innerHTML = '<div class="no-data">데이터 없음</div>'; _chartHover = null; return; }
 
         const metric = _trafficMetric || 'views';
-        if (metric === 'device' && !_deviceDataReady) {
-          container.innerHTML = '<div class="no-data">웹/모바일 데이터 없음 — <code>supabase/device-trend-rpc.sql</code> 을 Supabase SQL Editor에서 실행하세요</div>';
-          if (legend) legend.innerHTML = '';
-          _chartHover = null;
-          return;
-        }
-        const series = metric === 'device'
-          ? [{ name: '웹(PC)', color: '#f59e0b', vals: buckets.map(b => b.web) },
-             { name: '모바일', color: '#ec4899', vals: buckets.map(b => b.mobile) }]
-          : metric === 'visitors'
+        const series = metric === 'visitors'
           ? [{ name: 'TechFlow', color: '#3b82f6', vals: buckets.map(b => splitVisitors(b).tf) },
              { name: 'LifeFlow', color: '#22c55e', vals: buckets.map(b => splitVisitors(b).lf) }]
           : [{ name: 'TechFlow', color: '#3b82f6', vals: buckets.map(b => b.tf) },
@@ -3171,7 +3163,7 @@ const ICONS: Record<string, string> = {
           }
         });
 
-        container.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${metric === 'device' ? '웹/모바일' : metric === 'visitors' ? '방문자' : '조회수'} 추이 선그래프">${grid}${lines}${xl}</svg>`;
+        container.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${metric === 'visitors' ? '방문자' : '조회수'} 추이 선그래프">${grid}${lines}${xl}</svg>`;
         _chartHover = { buckets, series, n, W, padL, padR, metric };
       }
 
@@ -3182,25 +3174,27 @@ const ICONS: Record<string, string> = {
         const mLabel = document.getElementById('tl-metric-label');
         const metric = _trafficMetric || 'views';
         if (col0) col0.textContent = _trafficPeriod === 'weekly' && !_trafficCustom ? '주' : _trafficPeriod === 'monthly' && !_trafficCustom ? '월' : '날짜';
-        if (mLabel) mLabel.textContent = metric === 'device' ? '웹/모바일' : metric === 'visitors' ? '방문자' : '조회수';
+        if (mLabel) mLabel.textContent = metric === 'visitors' ? '방문자' : '조회수';
         if (!el) return;
         if (!buckets.length) { el.innerHTML = '<div class="no-data">데이터 없음</div>'; return; }
-        if (metric === 'device' && !_deviceDataReady) { el.innerHTML = '<div class="no-data">RPC 미설치</div>'; return; }
-        const primary = b => metric === 'device' ? b.web + b.mobile : metric === 'visitors' ? b.visitors : b.views;
+        const primary = b => metric === 'visitors' ? b.visitors : b.views;
         const maxV = Math.max(1, ...buckets.map(primary));
         const lastKey = buckets[buckets.length - 1].key;
-        const valColor = metric === 'device' ? '#f59e0b' : metric === 'visitors' ? '#c084fc' : '#7cb0fb';
+        const valColor = metric === 'visitors' ? '#c084fc' : '#7cb0fb';
         el.innerHTML = buckets.slice().reverse().map(b => {           // 최신 위로
           const val = primary(b);
           const barW = Math.max(Math.round(val / maxV * 100), 2);
           const cur = b.key === lastKey;
           const vis = splitVisitors(b);
-          const mobilePct = (b.web + b.mobile) > 0 ? Math.round(b.mobile / (b.web + b.mobile) * 100) : 0;
-          const sub = metric === 'device'
-            ? `<span style="color:#f59e0b">웹 ${fmt(b.web)}</span> · <span style="color:#ec4899">모바일 ${fmt(b.mobile)}</span> <span style="color:var(--text-3)">· 모바일 ${mobilePct}%</span>`
-            : metric === 'visitors'
+          // 웹/모바일 병기 (RPC 설치 시) — 조회수엔 조회 기준, 방문자엔 방문자 기준
+          const dw = metric === 'visitors' ? b.webV : b.web;
+          const dm = metric === 'visitors' ? b.mobileV : b.mobile;
+          const devSub = _deviceDataReady && (dw + dm) > 0
+            ? ` <span style="color:var(--text-3)">·</span> <span style="color:#f59e0b">🖥 ${fmt(dw)}</span> <span style="color:#ec4899">📱 ${fmt(dm)}</span>`
+            : '';
+          const sub = (metric === 'visitors'
             ? `<span style="color:#60a5fa">TF ${fmt(vis.tf)}</span> · <span style="color:#4ade80">LF ${fmt(vis.lf)}</span> <span style="color:var(--text-3)">· 조회 ${fmt(b.views)}</span>`
-            : `<span style="color:#60a5fa">TF ${fmt(b.tf)}</span> · <span style="color:#4ade80">LF ${fmt(b.lf)}</span>`;
+            : `<span style="color:#60a5fa">TF ${fmt(b.tf)}</span> · <span style="color:#4ade80">LF ${fmt(b.lf)}</span>`) + devSub;
           return `<div class="tl-row ${cur ? 'tl-cur' : ''}">
             <div class="tl-top">
               <span class="tl-date">${b.label}${cur ? ' ·현재' : ''}</span>
@@ -3233,9 +3227,17 @@ const ICONS: Record<string, string> = {
           const cross = document.getElementById('chart-cross');
           if (cross) { cross.setAttribute('x1', xv); cross.setAttribute('x2', xv); cross.style.display = ''; }
           const total = series.reduce((s, se) => s + (se.vals[idx] || 0), 0);
+          // 웹/모바일 병기 (RPC 설치 + 데이터 있을 때)
+          const metric = _chartHover.metric || 'views';
+          const dw = metric === 'visitors' ? (b.webV || 0) : (b.web || 0);
+          const dm = metric === 'visitors' ? (b.mobileV || 0) : (b.mobile || 0);
+          const devRow = _deviceDataReady && (dw + dm) > 0
+            ? `<div class="ct-row"><i style="background:#f59e0b"></i>🖥/📱<b>${fmt(dw)} / ${fmt(dm)}</b></div>`
+            : '';
           tip.innerHTML = `<div class="ct-date">${b.label}</div>` +
             series.map(se => `<div class="ct-row"><i style="background:${se.color}"></i>${se.name}<b>${fmt(se.vals[idx])}</b></div>`).join('') +
-            (series.length > 1 ? `<div class="ct-row ct-total">합계<b>${fmt(total)}</b></div>` : '');
+            (series.length > 1 ? `<div class="ct-row ct-total">합계<b>${fmt(total)}</b></div>` : '') +
+            devRow;
           tip.style.display = 'block';
           const wr = wrap.getBoundingClientRect();
           let left = e.clientX - wr.left + 14;
@@ -3309,7 +3311,7 @@ const ICONS: Record<string, string> = {
           for (let i = 13; i >= 0; i--) {
             const dt = new Date(); dt.setDate(dt.getDate() - i);
             const k = dt.toISOString().split('T')[0];
-            padded.push(map[k] || { key:k, label:`${dt.getMonth()+1}/${dt.getDate()}`, views:0, visitors:0, tf:0, lf:0, web:0, mobile:0, sortKey:k });
+            padded.push(map[k] || { key:k, label:`${dt.getMonth()+1}/${dt.getDate()}`, views:0, visitors:0, tf:0, lf:0, web:0, mobile:0, webV:0, mobileV:0, sortKey:k });
           }
           buckets = padded;
           for (let i = 27; i >= 14; i--) { const dt = new Date(); dt.setDate(dt.getDate() - i); prevSum += (map[dt.toISOString().split('T')[0]] || {}).views || 0; }
@@ -4251,6 +4253,8 @@ const ICONS: Record<string, string> = {
               const m = dm[d.day] || {};
               d.web_views = Number(m.web_views) || 0;
               d.mobile_views = Number(m.mobile_views) || 0;
+              d.web_visitors = Number(m.web_visitors) || 0;
+              d.mobile_visitors = Number(m.mobile_visitors) || 0;
             });
           }
           renderTrafficPanel();
