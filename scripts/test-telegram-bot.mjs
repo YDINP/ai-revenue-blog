@@ -85,6 +85,13 @@ globalThis.fetch = async (url, opts = {}) => {
       return { ok: true, status: 200, json: async () => ({ sha: 's', content: Buffer.from(JSON.stringify(seeds), 'utf8').toString('base64') }) };
     }
     if (url.includes('/enable')) return { ok: true, status: 204, json: async () => null };
+    // Vercel 이 GitHub 에 남기는 배포 기록 (Vercel 토큰 없이 /status 조회)
+    if (/\/deployments\/\d+\/statuses/.test(url)) return { ok: true, status: 200, json: async () => [
+      { state: 'success', target_url: 'https://ai-revenue-blog.vercel.app', created_at: new Date().toISOString() },
+    ] };
+    if (url.includes('/deployments?')) return { ok: true, status: 200, json: async () => [
+      { id: 123, sha: 'abc1234def', created_at: new Date().toISOString(), payload: { githubCommitMessage: 'feat: 새 글' } },
+    ] };
     if (url.includes('/dispatches')) {
       // 첫 호출은 비활성 워크플로 422 → enable 후 재시도 성공을 재현
       if (!globalThis.__dispatchEnabled) {
@@ -396,11 +403,13 @@ calls.length = 0; res = mockRes();
 await tgHook(tgMsg('/deploy lf'), res);
 assert(calls.some(c => c.url.includes('/git/refs/heads/main')), '/deploy falls back to empty commit when no VERCEL_TOKEN');
 
-// 24. /status → Vercel 토큰 없으면 안내 + Actions 상태
+// 24. /status → Vercel 토큰 없이도 GitHub 배포 기록으로 상태 표시 + Actions 상태
 calls.length = 0; res = mockRes();
 await tgHook(tgMsg('/status tf'), res);
 out = sentTexts().join('\n');
-assert(out.includes('VERCEL_TOKEN') && out.includes('자동생성'), '/status reports missing token + actions run');
+assert(calls.some(c => /\/deployments/.test(c.url)), '/status reads deployment state from GitHub (no Vercel token needed)');
+assert(out.includes('success') && out.includes('abc1234'), '/status shows deploy state and commit');
+assert(out.includes('자동생성'), '/status shows generator workflow run');
 
 // 25. 알 수 없는 블로그 → 안내
 calls.length = 0; res = mockRes();

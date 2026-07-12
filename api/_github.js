@@ -137,6 +137,24 @@ export async function latestRun(blog) {
     : null;
 }
 
+// ── 배포 상태 (Vercel 이 GitHub Deployments 에 기록한다 → Vercel 토큰 없이 조회 가능) ──
+export async function latestGithubDeployment(blog) {
+  const deps = await gh(
+    `/repos/${blog.repo}/deployments?environment=Production&per_page=1`
+  );
+  const dep = deps?.[0];
+  if (!dep) return null;
+  const statuses = await gh(`/repos/${blog.repo}/deployments/${dep.id}/statuses?per_page=1`);
+  const st = statuses?.[0];
+  return {
+    state: st?.state || 'pending',        // success | failure | in_progress | queued | error
+    url: st?.target_url || null,
+    at: st?.created_at || dep.created_at,
+    sha: (dep.sha || '').slice(0, 7),
+    message: dep.payload?.githubCommitMessage || dep.description || '',
+  };
+}
+
 // ── 빈 커밋으로 재배포 (VERCEL_TOKEN 없을 때의 폴백) ──
 export async function emptyCommitDeploy(blog, message) {
   const ref = await gh(`/repos/${blog.repo}/git/ref/heads/${blog.branch}`);

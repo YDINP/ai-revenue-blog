@@ -23,7 +23,9 @@ export const BLOGS = {
     vercel: 'ai-revenue-blog',
     source: 'blog',
     generator: 'daily-post.yml',
-    communities: ['geeknews', 'hn'],   // 개발/기술 커뮤니티
+    // 개발자 커뮤니티(긱뉴스·HN)만 쓰면 화제가 개발 쪽으로 치우친다.
+    // TechFlow 는 AI 활용·기기 리뷰·게임도 다루므로 소비자/게이머 커뮤니티를 함께 본다.
+    communities: ['geeknews', 'hn', 'ppomppu:computer', 'ppomppu:phone', 'ruliweb:news'],
     newsQueries: ['AI 도구', '개발자 생산성', '인디게임'],
     useHackerNews: true,   // 기술 블로그만 (라이프스타일엔 코딩 글이 무의미)
   },

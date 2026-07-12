@@ -9,6 +9,7 @@ import {
   fmValue,
   getPost,
   isDraft,
+  latestGithubDeployment,
   latestRun,
   listPosts,
   putPost,
@@ -337,13 +338,18 @@ export async function deployMessage(blogArg) {
 }
 
 // ── /status [blog] ──
+// Vercel 토큰이 있으면 Vercel API, 없으면 GitHub Deployments(=Vercel 이 기록) 로 조회
+const GH_STATE_ICON = {
+  success: '✅', failure: '❌', error: '❌', in_progress: '🔨', queued: '⏳', pending: '⏳', inactive: '💤',
+};
+
 export async function statusMessage(blogArg) {
   const targets = blogArg ? [needBlog(blogArg)] : blogList();
   const lines = ['🩺 <b>배포 상태</b>', ''];
   for (const blog of targets) {
     lines.push(`<b>${escapeHtml(blog.label)}</b>`);
-    if (hasVercelToken()) {
-      try {
+    try {
+      if (hasVercelToken()) {
         const d = await latestDeployment(blog);
         if (d) {
           const icon =
@@ -351,11 +357,17 @@ export async function statusMessage(blogArg) {
           lines.push(`  ${icon} ${d.state}${d.sha ? ` · <code>${d.sha}</code>` : ''}`);
           if (d.commit) lines.push(`  💬 ${escapeHtml(cut(d.commit, 40))}`);
         } else lines.push('  배포 이력 없음');
-      } catch (e) {
-        lines.push(`  ⚠️ ${escapeHtml(e.message)}`);
+      } else {
+        const d = await latestGithubDeployment(blog);
+        if (d) {
+          lines.push(
+            `  ${GH_STATE_ICON[d.state] || '⏳'} ${d.state}${d.sha ? ` · <code>${d.sha}</code>` : ''}`
+          );
+          if (d.message) lines.push(`  💬 ${escapeHtml(cut(d.message, 40))}`);
+        } else lines.push('  배포 이력 없음');
       }
-    } else {
-      lines.push('  <i>VERCEL_TOKEN 미설정 — 배포 상태 조회 불가</i>');
+    } catch (e) {
+      lines.push(`  ⚠️ ${escapeHtml(e.message)}`);
     }
     if (blog.generator) {
       try {

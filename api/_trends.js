@@ -10,7 +10,7 @@
 //
 // 실데이터 확인: GITHUB_TOKEN=$(gh auth token) node scripts/check-hot-keywords.mjs [tf|lf]
 
-import { communityHot } from './_community.js';
+import { communityHot, toQuery } from './_community.js';
 import { getFileJson, listPosts } from './_github.js';
 import { SUPABASE_ANON_KEY, SUPABASE_URL } from './_shared.js';
 
@@ -63,6 +63,8 @@ const JUNK_RE = new RegExp(
     '이벤트|증정|할인쿠폰|당첨|사은품|프로모션|출시 기념',
     '추천 순위|최저가|구매 가이드|디시|쿠팡|파트너스',
     '순간포착|헬스톡|연예|배우|가수|아이돌|예능|열애|결혼설|이혼|출연',
+    // 연예인 근황·인증샷류 (검색어가 '오운완' 같은 커뮤니티 밈일 때 상위에 올라옴)
+    '셀카|인증샷|복근|몸매|화보|근황|♥|일상 공개',
     // 사건사고·정치 — 검색어와 무관하게 뉴스 상단에 자주 올라온다
     '살해|성폭행|음주운전|사망|숨진|체포|구속|피의자|유기한|친모|계부|징역|검찰|의원|대통령',
   ].join('|'),
@@ -160,7 +162,8 @@ function unusedSeeds(seeds, titles, limit = 4) {
 function buildQueries(community, seeds, myTitles, count = 4) {
   const queries = [];
 
-  community.keywords.slice(0, count - 1).forEach((k) => queries.push(k.keyword));
+  // 키워드에 게시판 문맥어를 얹어 검색 (예: "울트라" → "울트라 스마트폰")
+  community.keywords.slice(0, count - 1).forEach((k) => queries.push(toQuery(k)));
 
   if (queries.length < count - 1) {
     const cats = shuffle((seeds?.categories || []).filter((c) => (c.keywords || []).length));
