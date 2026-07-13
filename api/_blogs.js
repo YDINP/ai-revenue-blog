@@ -21,6 +21,7 @@ export const BLOGS = {
     contentDir: 'src/blog',
     site: 'https://ai-revenue-blog.vercel.app',
     gscSite: 'https://ai-revenue-blog.vercel.app/',   // Search Console URL 프리픽스 속성
+    indexNowKey: 'f4a8e2c1b7d9306584ef1a2b3c4d5e6f',  // public/<key>.txt 로 호스팅됨
     vercel: 'ai-revenue-blog',
     source: 'blog',
     generator: 'daily-post.yml',
@@ -38,6 +39,7 @@ export const BLOGS = {
     contentDir: 'src/blog',
     site: 'https://life-revenue-blog.vercel.app',
     gscSite: 'https://life-revenue-blog.vercel.app/',
+    indexNowKey: 'c9d3f7a2e8b104569abc7d8e9f0a1b2c',
     vercel: 'life-revenue-blog',
     source: 'lifeflow',
     generator: 'daily-post.yml',

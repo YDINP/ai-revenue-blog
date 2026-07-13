@@ -21,7 +21,7 @@ globalThis.fetch = async (url, opts = {}) => {
   // ── 대시보드 조회 RPC 모킹 ──
   if (url.includes('/rpc/get_traffic_summary')) return { status: 200, json: async () => ({ today_views: 123, yesterday_views: 98, today_clicks: 5, total_clicks: 321, today_likes: 2, total_likes: 45, total_subscribers: 12, today_subscribers: 1, total_views: 12345, tf_today_views: 80, lf_today_views: 43, tf_today_clicks: 3, lf_today_clicks: 2, tf_total_views: 8000, lf_total_views: 4345, tf_total_clicks: 200, lf_total_clicks: 121 }) };
   if (url.includes('/rpc/get_comment_stats')) return { status: 200, json: async () => ({ total: 57, today: 3, reports: 1, blog_count: 40, lifeflow_count: 17 }) };
-  if (url.includes('/rpc/get_top_pages')) return { status: 200, json: async () => [{ path: '/blog/hot-post/', slug: 'hot-post', title: '인기글 | TechFlow - AI', source: 'blog', views: 99 }, { path: '/blog/lf-post/', slug: 'lf-post', title: 'LF글 | LifeFlow', source: 'lifeflow', views: 55 }] };
+  if (url.includes('/rpc/get_top_pages')) return { ok: true, status: 200, json: async () => [{ path: '/blog/hot-post/', slug: 'hot-post', title: '인기글 | TechFlow - AI', source: 'blog', views: 99 }, { path: '/blog/lf-post/', slug: 'lf-post', title: 'LF글 | LifeFlow', source: 'lifeflow', views: 55 }] };
   if (url.includes('/rpc/get_all_comments')) return { status: 200, json: async () => [
     { id: '11111111-2222-3333-4444-555555555555', post_slug: 'p1', source: 'blog', nickname: 'A', content: 'c1', parent_id: null, is_admin: false, created_at: new Date().toISOString(), report_count: 0 },
     { id: '66666666-7777-8888-9999-000000000000', post_slug: 'p2', source: 'lifeflow', nickname: 'B', content: 'c2', parent_id: null, is_admin: false, created_at: new Date().toISOString(), report_count: 1 },
@@ -47,6 +47,8 @@ globalThis.fetch = async (url, opts = {}) => {
   // 블로그 RSS = 이미 쓴 글 제목 (시드 미사용 판정 기준)
   if (url.includes('/rss.xml')) return { ok: true, text: async () => '<rss><channel><item><title>ChatGPT 활용법: 최신 기능과 실전 팁</title></item></channel></rss>' };
   // 커뮤니티 목: 긱뉴스(Atom) — 'llm 추론'이 두 글에 반복 = 실시간 화제
+  // IndexNow 제출 엔드포인트
+  if (url.includes('api.indexnow.org')) return { ok: true, status: 200, json: async () => ({}) };
   if (url.includes('news.hada.io')) return { ok: true, text: async () => `<feed>
     <entry><title><![CDATA[LLM 추론 비용을 90% 줄인 방법]]></title></entry>
     <entry><title><![CDATA[LLM 추론 서버를 직접 만들어봤습니다]]></title></entry>
@@ -417,6 +419,28 @@ assert(out.includes('자동생성'), '/status shows generator workflow run');
 calls.length = 0; res = mockRes();
 await tgHook(tgMsg('/posts nosuch'), res);
 assert(sentTexts()[0].includes('❌'), 'unknown blog reports error');
+
+// 26. /index tf → IndexNow 제출 (키·keyLocation·URL 목록)
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/index tf'), res);
+const idx = calls.find(c => c.url.includes('api.indexnow.org'));
+assert(idx, '/index submits to IndexNow');
+assert(idx.body.host === 'ai-revenue-blog.vercel.app' && idx.body.key && idx.body.keyLocation.endsWith('.txt'), 'IndexNow payload has host/key/keyLocation');
+assert(idx.body.urlList.some(u => u.includes('/blog/2026-07-12-new-post/')), 'recent posts included in submission');
+assert(sentTexts()[0].includes('색인 요청 완료'), '/index reports success');
+
+// 26b. /index tf <slug> → 해당 글만
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/index tf 2026-07-12-new-post'), res);
+const idx2 = calls.find(c => c.url.includes('api.indexnow.org'));
+assert(idx2.body.urlList.length === 1 && idx2.body.urlList[0].includes('2026-07-12-new-post'), '/index with slug submits only that URL');
+
+// 27. /money → 링크 없는 인기글 탐지 (목: 본문에 쿠팡 링크 없음)
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/money'), res);
+out = sentTexts().join('\n');
+assert(out.includes('수익화 커버리지'), '/money reports coverage');
+assert(out.includes('2026-07-12-new-post') || out.includes('링크 있음'), '/money lists posts or confirms coverage');
 
 // ── 일일 리포트 ──
 const { default: reportHook } = await import('../api/daily-report.js');

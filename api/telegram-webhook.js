@@ -28,7 +28,9 @@ import {
   toggleDraftMessage,
 } from './_control.js';
 import { gscMessage } from './_gsc-view.js';
+import { moneyMessage } from './_money.js';
 import { reportMessage } from './_report.js';
+import { indexMessage } from './_seo.js';
 
 const UUID_RE = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
 
@@ -48,6 +50,10 @@ const HELP = [
   '• /cstats — 댓글 통계 + 7일 트렌드',
   '• 새 댓글 알림에 <b>답장</b> → 관리자 대댓글 등록',
   '• <code>/reply &lt;댓글ID&gt; &lt;내용&gt;</code> · <code>/delete &lt;댓글ID&gt;</code>',
+  '',
+  '<b>💰 수익화·SEO</b>',
+  '• /money [블로그] [n] — 트래픽 있는데 쿠팡 링크 없는 글',
+  '• <code>/index &lt;블로그&gt; [slug]</code> — IndexNow 색인 요청 (빙·네이버)',
   '',
   '<b>📝 블로그 제어</b> (블로그: <code>tf</code>/<code>lf</code>/<code>pc</code>)',
   '• /blogs — 제어 가능한 블로그 목록',
@@ -159,6 +165,8 @@ export default async function handler(req, res) {
         status: () => statusMessage(a1),
         report: () => reportMessage(/^\d{4}-\d{2}-\d{2}$/.test(a1 || '') ? a1 : undefined),
         gsc: () => gscMessage(a1 ? parseInt(a1, 10) : 7),
+        money: () => moneyMessage(/^\d+$/.test(a1 || '') ? null : a1, /^\d+$/.test(a1 || '') ? parseInt(a1, 10) : 8),
+        index: () => indexMessage(a1, a2),
       };
       if (CONTROL[cmd]) {
         const out = await CONTROL[cmd]();
