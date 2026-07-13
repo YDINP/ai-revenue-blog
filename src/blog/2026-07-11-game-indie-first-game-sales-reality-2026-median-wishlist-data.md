@@ -68,6 +68,7 @@ faq:
 - **중앙값으로 계획**하되, 첫 게임은 '경험 자산'으로 본다. 3번째 작품 평균이 약 20.9만 달러로 뛰는 이유는 경험 누적이다.
 - **출시 전 위시리스트 1만~2만**을 최소 목표로. 이를 쌓는 최고의 무기가 [스팀 넥스트페스트](/blog/2026-07-06-game-steam-next-fest-guide-2026-wishlist-boost/)와 [0원 마케팅](/blog/2026-07-01-game-indie-game-marketing-zero-budget-2026-wishlist-growth/)이다.
 - 수수료까지 계산에 넣는다 — [플랫폼 수수료 비교](/blog/2026-07-02-game-game-platform-fees-comparison-2026-steam-epic-mobile-itch/)에서 다룬 30% 컷은 중앙값 개발자에게 특히 뼈아프다.
+- 스팀 말고 다른 판이 궁금하다면 — [게임 수익 2026: 스팀·모바일·웹 비교](/blog/2026-07-13-game-revenue-comparison-2026-steam-mobile-web/)에서 세 플랫폼의 병목을 나란히 비교했다.
 - 어떤 [수익 모델](/blog/2026-07-03-game-indie-game-revenue-models-2026-premium-f2p-subscription/)을 택하든, 숫자는 출시 전에 검증해야 한다.
 
 숫자는 차갑지만 거짓말은 안 한다. 환상을 걷어낸 자리에서 현실적인 계획이 시작된다.

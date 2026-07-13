@@ -17,7 +17,7 @@ coupangLinks:
     imageUrl: "https://ads-partners.coupang.com/image1/06QeSNhbWeAAJxM10wE0QTmgQN3qv54-GBzRSocemWeFVFwDQs37_KIclAxaLq9gHZ7534QPqrndFd8UDe8FSyDw0NteoFE_vYqK6PJFXMyaTTfVSQLXIn6rZnfTL7f49s-Id_-3TMdECKyFxaWGISI46tcoFbU4YdSvK83ejlq9ca-uWPo4ms_Ya1uNA0bobw3XmVhp-5yZt2FTPEmobuttPTCcKpO1WcnV28zFPKtY04R3s51ZCglLIt-OQm9F6J0KHEsInlulDuKWtkJ2H8UngCj_OFOR8l5U3Ie9DU0CwXPi4FogQoAQPCffs5RXlAFUo2wEQRS7prjQYkE1XN4NU2JJQBNzio69Vs4y3d56dA=="
 faq:
   - q: "웹 게임으로 월 100만원을 벌려면 DAU가 얼마나 필요한가요?"
-    a: "일반적으로 DAU 5,000~10,000명이면 광고만으로 월 100~200만원을 벌 수 있습니다. IAP와 구독을 함께 운영하면 DAU 2,000명에서도 월 100만원 달성이 가능합니다. 핵심은 사용자 질(engagement)입니다."
+    a: "공식으로 계산하세요. 광고 ARPDAU를 보수적으로 $0.013(웹게임 보상형 eCPM $5 기준)로 잡으면 DAU 1,000명이 광고만으로 월 약 60만원입니다(DAU × 노출 × eCPM ÷ 1,000). 따라서 월 100만원을 넘기려면 DAU 약 1,700명, 월 200만원이면 약 3,400명이 기준선입니다. IAP·구독을 얹으면 더 적은 DAU로도 가능합니다. eCPM과 트래픽 국가에 따라 편차가 큽니다."
   - q: "광고와 IAP 중 어느 것을 먼저 도입해야 하나요?"
     a: "게임 초기에는 광고만 적용하세요. DAU 1,000명 이상으로 안정화되면 IAP를 추가합니다. 순서를 바꾸면 초기 이탈률이 급증할 수 있습니다."
   - q: "구독 가격은 어떻게 정해야 하나요?"
@@ -42,6 +42,8 @@ faq:
   <span class="ci-cta">최저가 →</span>
 </a>
 
+웹만이 아니라 스팀·모바일까지 놓고 '어디에 낼지'부터 정하려면 [게임 수익 2026: 스팀·모바일·웹 비교](/blog/2026-07-13-game-revenue-comparison-2026-steam-mobile-web/)를 먼저 보자. 아래는 그중 웹 플랫폼을 택했을 때의 수익화 실행 전략이다.
+
 ## 웹 게임 주요 수익화 모델 5가지
 
 ### 1. 광고 기반 수익화 (Ad-Supported Model)
@@ -54,7 +56,7 @@ faq:
 
 **실전 팁**: 리워드 광고가 가장 높은 사용자 만족도를 기록합니다. "5초 광고 시청 후 체력 회복" 같은 방식으로 사용자 경험을 해치지 않으면서도 광고 노출을 늘릴 수 있습니다.
 
-주요 광고 네트워크는 Google AdMob, AppLovin, Unity Ads 등이 있으며, 월 방문자 10만 명 기준 월 50~300만원대의 수익을 기대할 수 있습니다.
+주요 광고 네트워크는 Google AdMob, AppLovin, Unity Ads 등이 있습니다. 여기서 감이 아니라 공식으로 계산해야 합니다. **월 광고 매출 = DAU × 유저당 일 광고 노출 수 × eCPM ÷ 1,000 × 30일**입니다. 웹게임 보상형 eCPM을 보수적으로 $5, 전면 $3.75로 잡고 유저당 하루 보상형 2회 + 전면 1회를 가정하면 **ARPDAU는 약 $0.013**입니다. 즉 **DAU 1,000명이면 하루 약 $13.75, 월 약 $410(약 60만원, 1달러=약 1,500원)**이 광고 매출의 현실적 기대치입니다. Poki·CrazyGames 같은 포털 유입이면 레브셰어로 절반이 깎여 월 30만원 안팎이 됩니다. eCPM과 트래픽 국가에 따라 편차가 크므로 이 값은 상한이 아니라 기준선으로 봐야 합니다.
 
 ### 2. 인앱 구매 (In-App Purchases)
 
@@ -104,7 +106,9 @@ faq:
 
 2026년 기준, 월 500만원 이상 벌이를 하는 인디 개발자 80%는 **3가지 이상의 수익화 채널을 병행**하고 있습니다.
 
-<div class="chart-bar" data-title="웹 게임 수익화 모델별 평균 월 수익 (DAU 10만 기준)" data-labels="광고 단독,IAP 단독,구독 단독,광고+IAP,하이브리드(3개 이상)" data-values="150,280,120,450,720" data-colors="#3b82f6,#10b981,#f59e0b,#8b5cf6,#ec4899" data-unit="만원"></div>
+<div class="chart-bar" data-title="웹 게임 수익화 모델별 월 수익 추정 (DAU 1,000 기준 · 광고 ARPDAU $0.013 앵커)" data-labels="광고 단독,IAP 단독,구독 단독,광고+IAP,하이브리드(3개 이상)" data-values="60,112,48,180,288" data-colors="#3b82f6,#10b981,#f59e0b,#8b5cf6,#ec4899" data-unit="만원"></div>
+
+> 위 막대에서 **광고 단독 60만원**은 바로 앞에서 계산한 `DAU × 노출 × eCPM ÷ 1,000` 공식(DAU 1,000, ARPDAU $0.013)에 앵커링한 값이고, 나머지는 광고 대비 상대 배수로 잡은 개념적 추정입니다. DAU가 늘면 이 값들도 비례해 커집니다(예: DAU 1만이면 광고 단독 약 600만원). 이는 [스팀·모바일·웹 수익 비교](/blog/2026-07-13-game-revenue-comparison-2026-steam-mobile-web/)의 웹게임 계산(DAU 1,000 → 월 약 62만원)과 같은 기준입니다.
 
 ## 각 모델별 실행 전략
 
@@ -238,7 +242,7 @@ faq:
 
 ### 웹 게임으로 월 100만원을 벌려면 DAU가 얼마나 필요한가요?
 
-일반적으로 DAU 5,000~10,000명이면 광고만으로 월 100~200만원을 벌 수 있습니다. IAP와 구독을 함께 운영하면 DAU 2,000명에서도 월 100만원 달성이 가능합니다. 핵심은 사용자 질(engagement)입니다.
+공식으로 계산하세요. 광고 ARPDAU를 보수적으로 $0.013(웹게임 보상형 eCPM $5 기준)로 잡으면 DAU 1,000명이 광고만으로 월 약 60만원입니다(DAU × 노출 × eCPM ÷ 1,000). 따라서 월 100만원을 넘기려면 DAU 약 1,700명, 월 200만원이면 약 3,400명이 기준선입니다. IAP·구독을 얹으면 더 적은 DAU로도 가능합니다. eCPM과 트래픽 국가에 따라 편차가 큽니다.
 
 ### 광고와 IAP 중 어느 것을 먼저 도입해야 하나요?
 

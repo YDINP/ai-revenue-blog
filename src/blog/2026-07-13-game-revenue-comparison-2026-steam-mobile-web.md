@@ -3,7 +3,7 @@ title: "게임 수익 2026: 스팀·모바일·웹 어디가 돈이 되나"
 description: "게임 수익은 플랫폼마다 병목이 다르다. 스팀·모바일·웹의 수수료·eCPM·현실 매출을 비교하고 자기 숫자로 계산하는 공식을 정리했다."
 pubDate: 2026-07-13T09:00:00+09:00
 updatedDate: 2026-07-13
-draft: true
+draft: false
 author: "TechFlow"
 category: "Game"
 tags: ["게임 수익", "게임 수익화", "게임 비즈니스", "웹게임", "게임 개발"]
