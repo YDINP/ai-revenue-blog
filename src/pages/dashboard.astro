@@ -1166,6 +1166,30 @@ const ICONS: Record<string, string> = {
       .coupang-card .sub { font-size: 0.75rem; color: var(--text-2); }
 
       /* ── 댓글 탭 ──────────────────────────────────────── */
+      /* 페이지 진입 인증 오버레이 — 인증 전 대시보드 내용 노출 차단 */
+      .page-auth {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg, #0b1020);
+      }
+      body.locked { overflow: hidden; }
+      body.locked .dash-header,
+      body.locked .dash-container { filter: blur(6px); pointer-events: none; user-select: none; }
+      #logout-btn {
+        background: none;
+        border: 1px solid var(--border);
+        color: var(--text-3);
+        border-radius: 6px;
+        padding: 0.2rem 0.5rem;
+        font-size: 0.75rem;
+        cursor: pointer;
+      }
+      #logout-btn:hover { color: var(--text); border-color: var(--text-3); }
+
       .comment-auth-gate {
         display: flex;
         justify-content: center;
@@ -1917,7 +1941,20 @@ const ICONS: Record<string, string> = {
       .skel-row:nth-child(3) { width: 66%; }
     </style>
   </head>
-  <body>
+  <body class="locked">
+    <!-- 페이지 진입 인증: 인증 전에는 대시보드 전체를 가린다 -->
+    <div id="page-auth" class="page-auth">
+      <div class="auth-box">
+        <h3>관리자 인증</h3>
+        <p>대시보드를 보려면 비밀번호를 입력하세요.</p>
+        <div class="auth-input-row">
+          <input type="password" id="page-auth-input" placeholder="비밀번호" autocomplete="current-password" />
+          <button id="page-auth-submit">입장</button>
+        </div>
+        <div id="page-auth-error" class="auth-error" style="display:none;"></div>
+      </div>
+    </div>
+
     <header class="dash-header">
       <h1>
         <span class="logo-tf">TechFlow</span>
@@ -1929,6 +1966,7 @@ const ICONS: Record<string, string> = {
         <span class="live-dot"></span>
         <span id="last-updated">Loading...</span>
         <a href="/" style="color: var(--dash-accent); text-decoration: none; font-size: 0.8125rem;">Blog &rarr;</a>
+        <button id="logout-btn" title="인증 해제">로그아웃</button>
       </div>
     </header>
 
@@ -4399,14 +4437,9 @@ const ICONS: Record<string, string> = {
         loadCommentData();
       }
 
-      // 저장된 키가 있으면 서버 재검증 후 자동 인증(예전 잘못된 키 자동 정리)
+      // 페이지 진입 시 이미 인증했으므로 댓글 탭은 별도 인증 없이 바로 연다
       async function loadCommentDashboard() {
-        if (adminKey && await checkAdminKey(adminKey)) {
-          showCommentDashboard();
-        } else {
-          adminKey = '';
-          localStorage.removeItem('dash-admin-key');
-        }
+        showCommentDashboard();
       }
 
       async function loadCommentData() {
@@ -4637,15 +4670,70 @@ const ICONS: Record<string, string> = {
         loadCommentData();
       });
 
-      // Init
-      fetchLifeFlowRSS();
-      loadTraffic();
-      checkSupabase();
-      initChartHover();
-      initHeatmapHover();
-      enableDragScroll(document.getElementById('traffic-list'));
-      enableDragScroll(document.getElementById('hourly-hot'));
-      setInterval(loadTraffic, 30000);
+      // === 페이지 진입 인증 ===
+      // 대시보드 전체를 관리자 비밀번호로 잠근다. 인증값(=DB 관리자 키)은 localStorage 에
+      // 저장돼 다음 접속엔 바로 열리고, 댓글 탭도 이 값을 그대로 써서 따로 인증하지 않는다.
+      let _inited = false;
+
+      function initDashboard() {
+        if (_inited) return;
+        _inited = true;
+        fetchLifeFlowRSS();
+        loadTraffic();
+        checkSupabase();
+        initChartHover();
+        initHeatmapHover();
+        enableDragScroll(document.getElementById('traffic-list'));
+        enableDragScroll(document.getElementById('hourly-hot'));
+        setInterval(loadTraffic, 30000);
+      }
+
+      function unlockDashboard() {
+        const gate = document.getElementById('page-auth');
+        if (gate) gate.style.display = 'none';
+        document.body.classList.remove('locked');
+        initDashboard();
+      }
+
+      async function submitPageAuth() {
+        const input = document.getElementById('page-auth-input');
+        const errEl = document.getElementById('page-auth-error');
+        const btn = document.getElementById('page-auth-submit');
+        const key = input?.value?.trim();
+        if (!key) return;
+        if (btn) { btn.disabled = true; btn.textContent = '확인 중…'; }
+        const ok = await checkAdminKey(key);
+        if (btn) { btn.disabled = false; btn.textContent = '입장'; }
+        if (ok) {
+          adminKey = key;
+          localStorage.setItem('dash-admin-key', key);
+          if (errEl) errEl.style.display = 'none';
+          unlockDashboard();
+        } else {
+          if (errEl) { errEl.textContent = '비밀번호가 올바르지 않습니다.'; errEl.style.display = 'block'; }
+          if (input) { input.value = ''; input.focus(); }
+        }
+      }
+
+      document.getElementById('page-auth-submit')?.addEventListener('click', submitPageAuth);
+      document.getElementById('page-auth-input')?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') submitPageAuth();
+      });
+      document.getElementById('logout-btn')?.addEventListener('click', () => {
+        localStorage.removeItem('dash-admin-key');
+        location.reload();
+      });
+
+      // 저장된 값이 있으면 서버 재검증 후 자동 입장
+      (async () => {
+        if (adminKey && await checkAdminKey(adminKey)) {
+          unlockDashboard();
+        } else {
+          adminKey = '';
+          localStorage.removeItem('dash-admin-key');
+          document.getElementById('page-auth-input')?.focus();
+        }
+      })();
     </script>
   </body>
 </html>

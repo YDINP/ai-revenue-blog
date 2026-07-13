@@ -13,7 +13,7 @@ CREATE OR REPLACE FUNCTION admin_delete_comment(p_id uuid, p_admin_key text)
 RETURNS json AS $$
 DECLARE n int;
 BEGIN
-  IF p_admin_key != 'blog-admin-2026!' THEN
+  IF p_admin_key != '123123' THEN
     RETURN json_build_object('success', false, 'error', 'unauthorized');
   END IF;
   DELETE FROM comments WHERE id = p_id OR parent_id = p_id;  -- 대상 + 자식 답글
@@ -28,7 +28,7 @@ CREATE OR REPLACE FUNCTION admin_reply(
 RETURNS json AS $$
 DECLARE new_id uuid;
 BEGIN
-  IF p_admin_key != 'blog-admin-2026!' THEN
+  IF p_admin_key != '123123' THEN
     RETURN json_build_object('success', false, 'error', 'unauthorized');
   END IF;
   INSERT INTO comments (post_slug, source, nickname, password_hash, content, parent_id, is_admin)

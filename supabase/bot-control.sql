@@ -20,7 +20,7 @@ CREATE POLICY bot_state_no_direct ON bot_state FOR ALL USING (false) WITH CHECK 
 CREATE OR REPLACE FUNCTION bot_state_set(p_chat text, p_value jsonb, p_admin_key text)
 RETURNS json AS $$
 BEGIN
-  IF p_admin_key != 'blog-admin-2026!' THEN
+  IF p_admin_key != '123123' THEN
     RETURN json_build_object('success', false, 'error', 'unauthorized');
   END IF;
   INSERT INTO bot_state (chat_id, value, updated_at)
@@ -34,7 +34,7 @@ CREATE OR REPLACE FUNCTION bot_state_get(p_chat text, p_admin_key text)
 RETURNS json AS $$
 DECLARE v jsonb;
 BEGIN
-  IF p_admin_key != 'blog-admin-2026!' THEN
+  IF p_admin_key != '123123' THEN
     RETURN '{}'::json;
   END IF;
   -- 30분 지난 상태는 만료 처리 (작성하다 만 흐름이 영원히 남지 않도록)
@@ -47,7 +47,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 CREATE OR REPLACE FUNCTION bot_state_clear(p_chat text, p_admin_key text)
 RETURNS json AS $$
 BEGIN
-  IF p_admin_key != 'blog-admin-2026!' THEN
+  IF p_admin_key != '123123' THEN
     RETURN json_build_object('success', false, 'error', 'unauthorized');
   END IF;
   DELETE FROM bot_state WHERE chat_id = p_chat;
