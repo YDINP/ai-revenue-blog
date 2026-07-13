@@ -50,21 +50,55 @@ const tfRecentPosts = allPosts
     slug: p.id,
   }));
 
-// LifeFlow 데이터: RSS 피드에서 가져오기 (클라이언트 사이드)
-// 빌드 타임에는 기본값 사용, 브라우저에서 실시간 로드
-const lfCategories = [
-  { name: 'Lifestyle', count: 4, icon: 'sparkles', color: '#ec4899' },
-  { name: 'Finance', count: 4, icon: 'banknotes', color: '#3b82f6' },
-  { name: 'Health', count: 3, icon: 'heart', color: '#16a34a' },
-  { name: 'Education', count: 3, icon: 'book', color: '#a855f7' },
-  { name: 'Travel', count: 3, icon: 'plane', color: '#ea580c' },
-];
-const lfPostCount = 17; // RSS에서 동적 로드
+// LifeFlow 데이터: 별도 레포/사이트라 파일을 직접 읽을 수 없어 RSS 로 집계한다.
+// 빌드 타임에 한 번 파싱 → 모든 섹션(KPI·도넛·범례)이 실제 편수를 렌더.
+// 빌드 중 RSS 를 못 받으면 0 으로 두고, 브라우저의 fetchLifeFlowRSS() 가 채운다.
+const LF_CAT_COLORS: Record<string, string> = {
+  Lifestyle: '#ec4899',
+  Finance: '#3b82f6',
+  Health: '#16a34a',
+  Education: '#a855f7',
+  Travel: '#ea580c',
+};
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+type LfPost = { title: string; slug: string; category: string; date: string };
+let lfPosts: LfPost[] = [];
+try {
+  const res = await fetch('https://life-revenue-blog.vercel.app/rss.xml');
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const xml = await res.text();
+  lfPosts = xml.split('<item>').slice(1).map((item) => {
+    const pick = (tag: string) =>
+      item.match(new RegExp(`<${tag}>(?:<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>)?</${tag}>`))?.[1]?.trim() || '';
+    const link = pick('link');
+    return {
+      title: pick('title'),
+      slug: link.split('/').filter(Boolean).pop() || '',
+      // 첫 <category> 만 frontmatter.category, 뒤따르는 것들은 태그다
+      category: cap(pick('category')),
+      date: pick('pubDate'),
+    };
+  });
+} catch (e) {
+  console.warn('[dashboard] LifeFlow RSS 빌드타임 로드 실패 — 클라이언트 로드에 위임:', e);
+}
+
+const lfCategoryMap: Record<string, number> = {};
+for (const p of lfPosts) {
+  if (p.category) lfCategoryMap[p.category] = (lfCategoryMap[p.category] || 0) + 1;
+}
+const lfCategories = Object.entries(lfCategoryMap)
+  .sort((a, b) => b[1] - a[1])
+  .map(([name, count]) => ({ name, count, color: LF_CAT_COLORS[name] || '#94a3b8' }));
+const lfPostCount = lfPosts.length;
 const lfCategoryCount = lfCategories.length;
 
-// 통합 통계
+// 통합 통계 (분모 0 방지 — RSS 실패 시에도 레이아웃이 깨지지 않게)
 const totalPosts = tfPostCount + lfPostCount;
 const totalCategories = tfCategoryStats.length + lfCategoryCount;
+const pctBase = totalPosts || 1;
+const lfBase = lfPostCount || 1;
 
 // 라인 아이콘 (Lucide 계열, 24x24 stroke) — set:html로 <svg>에 주입
 const ICONS: Record<string, string> = {
@@ -1998,16 +2032,16 @@ const ICONS: Record<string, string> = {
             <div class="label">Total Posts</div>
           </div>
           <div class="kpi-value-row">
-            <div class="value">{totalPosts}</div>
+            <div class="value" id="total-post-count">{totalPosts}</div>
           </div>
-          <div class="sub">TechFlow {tfPostCount} + LifeFlow {lfPostCount}</div>
+          <div class="sub" id="total-post-sub">TechFlow {tfPostCount} + LifeFlow {lfPostCount}</div>
           <div class="source-split-bar" style="margin-top:0.5rem;">
-            <div class="split-tf" style={`width:${Math.round(tfPostCount / totalPosts * 100)}%`}></div>
-            <div class="split-lf" style={`width:${Math.round(lfPostCount / totalPosts * 100)}%`}></div>
+            <div class="split-tf" id="total-split-tf" style={`width:${Math.round(tfPostCount / pctBase * 100)}%`}></div>
+            <div class="split-lf" id="total-split-lf" style={`width:${Math.round(lfPostCount / pctBase * 100)}%`}></div>
           </div>
           <div class="split-legend">
-            <span>TF {Math.round(tfPostCount / totalPosts * 100)}%</span>
-            <span>LF {Math.round(lfPostCount / totalPosts * 100)}%</span>
+            <span id="total-split-tf-pct">TF {Math.round(tfPostCount / pctBase * 100)}%</span>
+            <span id="total-split-lf-pct">LF {Math.round(lfPostCount / pctBase * 100)}%</span>
           </div>
         </div>
         <div class="summary-card accent-green color-green">
@@ -2322,13 +2356,13 @@ const ICONS: Record<string, string> = {
               <svg class="ico sec-ico i-green" viewBox="0 0 24 24" set:html={ICONS['pie']}></svg>
               LifeFlow
             </div>
-            <span class="section-badge badge-lf">{lfPostCount}편</span>
+            <span class="section-badge badge-lf" id="lf-overview-badge">{lfPostCount}편</span>
           </div>
           <div class="section-body">
-            <div class="cat-donut-wrap">
+            <div class="cat-donut-wrap" id="lf-overview-donut-wrap">
               <div class="cat-donut" style={`background: conic-gradient(${lfCategories.map((c, i) => {
-                const pctBefore = lfCategories.slice(0, i).reduce((s, x) => s + x.count, 0) / lfPostCount * 100;
-                const pct = c.count / lfPostCount * 100;
+                const pctBefore = lfCategories.slice(0, i).reduce((s, x) => s + x.count, 0) / lfBase * 100;
+                const pct = c.count / lfBase * 100;
                 const g = lfCategories.length > 1 ? Math.min(1, pct / 4) : 0;
                 return `#1e293b ${pctBefore}% ${pctBefore + g}%, ${c.color} ${pctBefore + g}% ${pctBefore + pct}%`;
               }).join(', ')})`}>
@@ -2337,13 +2371,13 @@ const ICONS: Record<string, string> = {
                   <span class="donut-label">포스트</span>
                 </div>
               </div>
-              <div class="cat-legend">
+              <div class="cat-legend" id="lf-overview-cat-legend">
                 {lfCategories.map(c => (
                   <div class="cat-legend-item">
                     <span class="cat-legend-dot" style={`background:${c.color}`}></span>
                     <span class="cat-legend-name">{c.name}</span>
                     <span class="cat-legend-count">{c.count}</span>
-                    <span class="cat-legend-pct">{Math.round(c.count / lfPostCount * 100)}%</span>
+                    <span class="cat-legend-pct">{Math.round(c.count / lfBase * 100)}%</span>
                   </div>
                 ))}
               </div>
@@ -2527,8 +2561,8 @@ const ICONS: Record<string, string> = {
           <div class="section-body">
             <div class="cat-donut-wrap" id="lf-donut-wrap">
               <div class="cat-donut" style={`background: conic-gradient(${lfCategories.map((c, i) => {
-                const pctBefore = lfCategories.slice(0, i).reduce((s, x) => s + x.count, 0) / lfPostCount * 100;
-                const pct = c.count / lfPostCount * 100;
+                const pctBefore = lfCategories.slice(0, i).reduce((s, x) => s + x.count, 0) / lfBase * 100;
+                const pct = c.count / lfBase * 100;
                 const g = lfCategories.length > 1 ? Math.min(1, pct / 4) : 0;
                 return `#1e293b ${pctBefore}% ${pctBefore + g}%, ${c.color} ${pctBefore + g}% ${pctBefore + pct}%`;
               }).join(', ')})`}>
@@ -2543,7 +2577,7 @@ const ICONS: Record<string, string> = {
                     <span class="cat-legend-dot" style={`background:${c.color}`}></span>
                     <span class="cat-legend-name">{c.name}</span>
                     <span class="cat-legend-count">{c.count}</span>
-                    <span class="cat-legend-pct">{Math.round(c.count / lfPostCount * 100)}%</span>
+                    <span class="cat-legend-pct">{Math.round(c.count / lfBase * 100)}%</span>
                   </div>
                 ))}
               </div>
@@ -2688,13 +2722,10 @@ const ICONS: Record<string, string> = {
       SUPABASE_URL: 'https://xyprbsmagtlzebxyxsvj.supabase.co',
       SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5cHJic21hZ3RsemVieHl4c3ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjY4NTQsImV4cCI6MjA4NjA0Mjg1NH0.dajN0n0IWzOgYOSCglxVLzddg7jJFRHNCHwTWMG62uU',
       TF_SLUG_CAT: Object.fromEntries(allPosts.map(p => [p.id, p.data.category])),
-      LF_POSTS: [
-        { slug: 'effective-foreign-language-learning-strategies-2025', title: '효과적인 외국어 학습 전략 가이드', category: 'Education', date: '2026-02-13' },
-        { slug: 'healthy-diet-guide-2024-nutrition', title: '건강한 식단 관리 완벽 가이드', category: 'Health', date: '2026-02-12' },
-        { slug: 'saving-habits-guide-2026', title: '2026 저축 습관 만들기 가이드', category: 'Finance', date: '2026-02-11' },
-        { slug: '시간-관리-전략-7가지', title: '시간 관리 전략 7가지: 하루 2시간 절약법', category: 'Lifestyle', date: '2026-02-10' },
-        { slug: 'jeju-island-one-month-living-guide', title: '제주도 한 달 살기 완벽 가이드', category: 'Travel', date: '2026-02-09' },
-      ]
+      TF_POST_COUNT: tfPostCount,
+      // LifeFlow 는 빌드타임 RSS 산출물 — 카테고리 트래픽 매칭은 전체 글의 slug→category 로
+      LF_SLUG_CAT: Object.fromEntries(lfPosts.map(p => [p.slug, p.category])),
+      LF_POSTS: lfPosts.slice(0, 10),
     }}>
       const API = `${SUPABASE_URL}/rest/v1/rpc`;
       const headers = {
@@ -2762,41 +2793,57 @@ const ICONS: Record<string, string> = {
           const cats = Object.entries(catCounts).map(([name, count]) => ({ name: capitalize(name), count, color: colors[name] || '#94a3b8' }));
           const totalLf = posts.length;
 
-          // 포스트 수 업데이트
-          document.getElementById('lf-post-count').textContent = totalLf;
-          document.getElementById('lf-badge-count').textContent = totalLf;
+          // 포스트 수 업데이트 (LifeFlow 탭 + 전체 요약 탭 + Total Posts KPI)
+          const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+          setText('lf-post-count', totalLf);
+          setText('lf-badge-count', totalLf);
+          setText('lf-overview-badge', `${totalLf}편`);
+
+          const totalAll = TF_POST_COUNT + totalLf;
+          const tfPct = Math.round((TF_POST_COUNT / (totalAll || 1)) * 100);
+          setText('total-post-count', totalAll);
+          setText('total-post-sub', `TechFlow ${TF_POST_COUNT} + LifeFlow ${totalLf}`);
+          setText('total-split-tf-pct', `TF ${tfPct}%`);
+          setText('total-split-lf-pct', `LF ${100 - tfPct}%`);
+          const splitTf = document.getElementById('total-split-tf');
+          const splitLf = document.getElementById('total-split-lf');
+          if (splitTf) splitTf.style.width = `${tfPct}%`;
+          if (splitLf) splitLf.style.width = `${100 - tfPct}%`;
 
           // 도넛 차트 배경 재생성 (세그먼트 사이 서피스 갭 포함)
-          const donutWrap = document.getElementById('lf-donut-wrap');
-          if (donutWrap) {
-            let gradient = 'conic-gradient(';
-            let pctBefore = 0;
-            cats.forEach((c, i) => {
-              const pct = (c.count / totalLf) * 100;
-              const g = cats.length > 1 ? Math.min(1, pct / 4) : 0;
-              gradient += `#1e293b ${pctBefore}% ${pctBefore + g}%, ${c.color} ${pctBefore + g}% ${pctBefore + pct}%`;
-              if (i < cats.length - 1) gradient += ', ';
-              pctBefore += pct;
-            });
-            gradient += ')';
-            const donutEl = donutWrap.querySelector('.cat-donut');
-            if (donutEl) donutEl.style.background = gradient;
-            const donutNum = donutWrap.querySelector('.donut-num');
-            if (donutNum) donutNum.textContent = totalLf;
-          }
+          let gradient = 'conic-gradient(';
+          let pctBefore = 0;
+          cats.forEach((c, i) => {
+            const pct = (c.count / totalLf) * 100;
+            const g = cats.length > 1 ? Math.min(1, pct / 4) : 0;
+            gradient += `#1e293b ${pctBefore}% ${pctBefore + g}%, ${c.color} ${pctBefore + g}% ${pctBefore + pct}%`;
+            if (i < cats.length - 1) gradient += ', ';
+            pctBefore += pct;
+          });
+          gradient += ')';
 
-          // 범례 업데이트
-          const legendEl = document.getElementById('lf-cat-legend');
-          if (legendEl) {
-            legendEl.innerHTML = cats.map(c =>
-              `<div class="cat-legend-item">
-                <span class="cat-legend-dot" style="background:${c.color}"></span>
-                <span class="cat-legend-name">${c.name}</span>
-                <span class="cat-legend-count">${c.count}</span>
-                <span class="cat-legend-pct">${Math.round((c.count / totalLf) * 100)}%</span>
-              </div>`
-            ).join('');
-          }
+          // LifeFlow 탭 · 전체 요약 탭 두 곳의 도넛/범례를 같은 값으로 갱신
+          ['lf-donut-wrap', 'lf-overview-donut-wrap'].forEach(id => {
+            const wrap = document.getElementById(id);
+            if (!wrap) return;
+            const donutEl = wrap.querySelector('.cat-donut');
+            if (donutEl) donutEl.style.background = gradient;
+            const donutNum = wrap.querySelector('.donut-num');
+            if (donutNum) donutNum.textContent = totalLf;
+          });
+
+          const legendHtml = cats.map(c =>
+            `<div class="cat-legend-item">
+              <span class="cat-legend-dot" style="background:${c.color}"></span>
+              <span class="cat-legend-name">${c.name}</span>
+              <span class="cat-legend-count">${c.count}</span>
+              <span class="cat-legend-pct">${Math.round((c.count / totalLf) * 100)}%</span>
+            </div>`
+          ).join('');
+          ['lf-cat-legend', 'lf-overview-cat-legend'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = legendHtml;
+          });
 
           // 최근 포스트 렌더링 (전체 요약 탭)
           renderLfRecentPosts(posts.slice(0, 5), 'lf-recent-list');
@@ -3896,13 +3943,12 @@ const ICONS: Record<string, string> = {
             return;
           }
 
-          // LifeFlow 매칭: LF_POSTS 또는 RSS 데이터에서 카테고리 매핑
-          const lfPost = LF_POSTS.find(lp => slug.includes(lp.slug) || rawSlug.includes(lp.slug));
+          // LifeFlow 매칭: 빌드타임 slug→category 맵 우선, 그 뒤 최신 RSS 데이터
           const rssPost = lfRssData.find(rp => {
             const rssSlug = (rp.link || '').split('/').filter(Boolean).pop() || '';
             return slug.includes(rssSlug) || rssSlug.includes(slug);
           });
-          const lfCat = lfPost?.category || rssPost?.category || '';
+          const lfCat = LF_SLUG_CAT[slug] || LF_SLUG_CAT[rawSlug] || rssPost?.category || '';
           if (lfCat) {
             const capCat = lfCat.charAt(0).toUpperCase() + lfCat.slice(1);
             lfCatViews[capCat] = (lfCatViews[capCat] || 0) + (p.views || 0);
