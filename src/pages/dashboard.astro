@@ -747,6 +747,9 @@ const ICONS: Record<string, string> = {
 
       .top-page-item:last-child, .like-top-item:last-child,
       .event-item:last-child, .recent-item:last-child { border-bottom: none; }
+      /* 피드 항목을 링크로 (레이아웃은 기존 flex 행 그대로) */
+      a.event-link { text-decoration: none; color: inherit; cursor: pointer; }
+      a.event-link:hover .event-page-title { text-decoration: underline; }
 
       .top-page-item:hover, .like-top-item:hover,
       .event-item:hover, .recent-item:hover { background: var(--surface-2); }
@@ -3925,6 +3928,25 @@ const ICONS: Record<string, string> = {
       let _eventsData = [];
       let _eventsFilter = 'all';
 
+      // 이벤트 → 해당 글 URL. ?admin=1 을 붙여 내 확인 방문이 집계에 잡히지 않게 한다
+      // (BaseLayout 트래커가 admin=1 을 보면 localStorage 에 notrack 플래그를 저장)
+      const SITE_BY_SOURCE = {
+        blog: 'https://ai-revenue-blog.vercel.app',
+        lifeflow: 'https://life-revenue-blog.vercel.app',
+      };
+
+      function eventLink(e) {
+        const base = SITE_BY_SOURCE[e.source] || SITE_BY_SOURCE.blog;
+        const m = e.metadata || {};
+        let path = e.path || m.path || '';
+        if (!path) {
+          const slug = e.slug || m.slug || '';
+          path = slug ? `/blog/${slug}/` : '/';
+        }
+        if (!path.startsWith('/')) path = '/' + path;
+        return `${base}${path}${path.includes('?') ? '&' : '?'}admin=1`;
+      }
+
       function renderEventFeed(data, filter) {
         if (data !== undefined) _eventsData = data || [];
         if (filter !== undefined) _eventsFilter = filter;
@@ -3954,14 +3976,14 @@ const ICONS: Record<string, string> = {
             ? `<div class="event-page-title" title="${prod}" style="color:#facc15">🛒 ${prod.length > 30 ? prod.slice(0,30)+'…' : prod}</div>`
             : `<div class="event-page-title" title="${title}">${shortTitle || '홈페이지'}</div>`;
 
-          return `<div class="event-item">
+          return `<a class="event-item event-link" href="${eventLink(e)}" target="_blank" rel="noopener" title="글 열기 (집계 제외)">
             <span class="event-icon ${e.event_type}">${icon}</span>
             <div class="event-content">
               <div class="event-action">${srcBadge} ${label}</div>
               ${detail}
             </div>
             <span class="event-time">${timeAgo(e.created_at)}</span>
-          </div>`;
+          </a>`;
         }).join('');
       }
 
