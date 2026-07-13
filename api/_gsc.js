@@ -93,12 +93,20 @@ export async function gscSummary(site, startDate, endDate, limit = 5) {
       ctr: r.ctr,
       position: r.position,
     })),
-    pages: pages.map((r) => ({
-      key: r.keys[0],
-      clicks: r.clicks,
-      impressions: r.impressions,
-      position: r.position,
-    })),
+    // GSC 는 같은 글의 앵커 URL(#heading-1)을 별도 페이지로 집계한다. 이걸 그대로 두면
+    // "노출은 있는데 클릭 0" 으로 잡혀 멀쩡한 글이 CTR 개선 대상으로 오진된다 → 본문 URL로 합산
+    pages: Object.values(
+      pages.reduce((acc, r) => {
+        const url = r.keys[0].split('#')[0];
+        const a = (acc[url] ||= { key: url, clicks: 0, impressions: 0, _pos: 0 });
+        a.clicks += r.clicks;
+        a.impressions += r.impressions;
+        a._pos += (r.position || 0) * (r.impressions || 0);
+        return acc;
+      }, {})
+    )
+      .map((p) => ({ ...p, position: p.impressions ? p._pos / p.impressions : 0 }))
+      .sort((a, b) => b.impressions - a.impressions),
   };
 }
 

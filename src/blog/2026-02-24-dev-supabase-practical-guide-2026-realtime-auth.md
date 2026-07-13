@@ -1,6 +1,6 @@
 ---
-title: "2026년 Supabase 실전 활용법: 실시간 앱 개발부터 인증까지"
-description: "Supabase로 실시간 웹앱을 만드는 4가지 핵심 기법을 배워보세요. 데이터베이스·인증·실시간 동기화·스토리지를 한번에 처리하는 완벽 가이드입니다."
+title: "Supabase 사용법 2026: 인증·실시간 DB 실전 가이드 (Firebase 대안)"
+description: "Supabase 시작부터 실전까지. 인증(Auth), 실시간 구독, RLS 보안, 스토리지를 예제 코드로 정리했습니다. Firebase와 뭐가 다른지, 무료 플랜으로 어디까지 되는지도 함께 다룹니다."
 pubDate: 2026-02-24
 author: "TechFlow"
 category: "Dev"
