@@ -1,10 +1,25 @@
 // 전날(또는 지정일) 종합 리포트 — 조회수/방문자/신규 댓글/좋아요/쿠팡클릭
 // cron(daily-report.js) 과 봇 /report 명령이 공유
 
+import { blogList } from './_blogs.js';
+import { communityHot } from './_community.js';
+import { getFileJson } from './_github.js';
 import { SUPABASE_ANON_KEY, SUPABASE_URL, escapeHtml, postUrl } from './_shared.js';
 
 const fmt = (n) => Number(n || 0).toLocaleString('en-US');
 const cut = (s, n) => (s = String(s || ''), s.length > n ? s.slice(0, n) + '…' : s);
+
+// RSS 제목의 엔티티를 먼저 풀어야 한다 (안 풀면 escapeHtml 을 거쳐 &amp;amp; 로 이중 인코딩)
+const decodeEntities = (s) =>
+  String(s)
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;|&#39;/g, "'")
+    .replace(/&amp;/g, '&');
+
+// 홈페이지 조회는 사이트 제목으로 기록된다 → '홈' 으로 표시
+const postTitle = (t) => (/^(TechFlow|LifeFlow)/.test(t) ? '홈' : t);
 
 // KST 기준 날짜 문자열 (offset일 전)
 function kstDay(offsetDays = 0) {
@@ -26,6 +41,31 @@ async function rest(query) {
   if (!r.ok) throw new Error(`Supabase ${r.status}`);
   return r.json();
 }
+
+// 유입 경로 분류 — 수익형 블로그에선 검색 유입이 핵심 지표
+const REF_RULES = [
+  [/google\./i, '구글 검색'],
+  [/naver\./i, '네이버 검색'],
+  [/daum\.|search\.daum/i, '다음 검색'],
+  [/bing\.|duckduckgo|yahoo/i, '기타 검색'],
+  [/facebook|instagram|threads|twitter|x\.com|t\.co|linkedin|reddit/i, 'SNS'],
+  [/kakao|band\.us/i, '카카오/밴드'],
+];
+
+function classifyRef(referrer) {
+  const r = String(referrer || '').trim();
+  if (!r || r === 'direct') return '직접/북마크';
+  for (const [re, label] of REF_RULES) if (re.test(r)) return label;
+  try {
+    const host = new URL(r).hostname.replace(/^www\./, '');
+    if (/(ai-revenue-blog|life-revenue-blog)\.vercel\.app/.test(host)) return '내부 이동';
+    return `기타(${host})`;
+  } catch {
+    return '기타';
+  }
+}
+
+const isSearch = (label) => /검색$/.test(label);
 
 function delta(cur, prev) {
   const c = Number(cur || 0), p = Number(prev || 0);
@@ -51,6 +91,7 @@ async function collect(day) {
 
   const uas = new Set();
   const byPost = {};
+  const refs = {};        // 유입 경로별 조회수
   let tf = 0, lf = 0;
   (pv || []).forEach((r) => {
     const m = r.metadata || {};
@@ -61,6 +102,8 @@ async function collect(day) {
       : decodeURIComponent(m.slug || m.path || '홈');
     const key = `${r.source === 'lifeflow' ? 'LF' : 'TF'}|${title}`;
     byPost[key] = (byPost[key] || 0) + 1;
+    const c = classifyRef(m.referrer);
+    refs[c] = (refs[c] || 0) + 1;
   });
 
   return {
@@ -69,6 +112,8 @@ async function collect(day) {
     tfViews: tf,
     lfViews: lf,
     visitors: uas.size,
+    refs,
+    byPostMap: byPost,
     comments: (comments || []).filter((c) => !c.is_admin),
     likes: (likes || []).length,
     clicks: (clicks || []).filter((c) => {
@@ -79,13 +124,79 @@ async function collect(day) {
   };
 }
 
+// ── 어제 발행된 글 (블로그 RSS 의 pubDate 기준) ──
+async function newPosts(day) {
+  const jobs = blogList()
+    .filter((b) => b.source)
+    .map(async (b) => {
+      try {
+        const r = await fetch(`${b.site}/rss.xml`, { signal: AbortSignal.timeout(6000) });
+        if (!r.ok) return [];
+        const xml = await r.text();
+        return [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)]
+          .map((m) => {
+            const t = m[1].match(/<title>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/title>/);
+            const d = m[1].match(/<pubDate>([^<]+)<\/pubDate>/);
+            if (!t || !d) return null;
+            const at = new Date(d[1]);
+            if (isNaN(at)) return null;
+            // KST 날짜로 환산해 비교
+            const kst = new Date(at.getTime() + 9 * 3600 * 1000).toISOString().split('T')[0];
+            return kst === day
+              ? { src: b.source === 'lifeflow' ? 'LF' : 'TF', title: decodeEntities(t[1].trim()) }
+              : null;
+          })
+          .filter(Boolean);
+      } catch {
+        return [];
+      }
+    });
+  return (await Promise.all(jobs)).flat();
+}
+
+// ── 전일 대비 급상승/급락 글 ──
+function movers(cur, prev, minViews = 3) {
+  const keys = new Set([...Object.keys(cur.byPostMap), ...Object.keys(prev.byPostMap)]);
+  const rows = [];
+  for (const k of keys) {
+    const c = cur.byPostMap[k] || 0;
+    const p = prev.byPostMap[k] || 0;
+    if (Math.max(c, p) < minViews) continue;      // 표본이 너무 작으면 노이즈
+    rows.push({ key: k, cur: c, prev: p, diff: c - p });
+  }
+  const up = rows.filter((r) => r.diff > 0).sort((a, b) => b.diff - a.diff).slice(0, 2);
+  const down = rows.filter((r) => r.diff < 0).sort((a, b) => a.diff - b.diff).slice(0, 2);
+  return { up, down };
+}
+
+// ── 오늘 쓸 만한 소재 (커뮤니티 실시간 화제) ──
+async function todaysTopics() {
+  const jobs = blogList()
+    .filter((b) => b.generator && b.communities?.length)
+    .map(async (b) => {
+      try {
+        const seeds = await getFileJson(b, 'scripts/category-seeds.json').catch(() => null);
+        const { posts } = await communityHot(b, seeds, 3);
+        return posts.slice(0, 2).map((p) => ({ key: b.key, label: b.label.split(' (')[0], post: p }));
+      } catch {
+        return [];
+      }
+    });
+  return (await Promise.all(jobs)).flat().slice(0, 4);
+}
+
 export async function reportMessage(dayArg) {
   const day = dayArg || kstDay(1);                      // 기본 = 어제(KST)
   const prevDay = new Date(new Date(`${day}T00:00:00+09:00`).getTime() - 86400000)
     .toISOString()
     .split('T')[0];
 
-  const [cur, prev] = await Promise.all([collect(day), collect(prevDay)]);
+  const [cur, prev, fresh, topics] = await Promise.all([
+    collect(day),
+    collect(prevDay),
+    newPosts(day),
+    todaysTopics().catch(() => []),
+  ]);
 
   const wd = ['일', '월', '화', '수', '목', '금', '토'][new Date(`${day}T00:00:00+09:00`).getDay()];
   const lines = [
@@ -99,11 +210,57 @@ export async function reportMessage(dayArg) {
     `🛒 쿠팡 클릭 <b>${fmt(cur.clicks.length)}</b>${delta(cur.clicks.length, prev.clicks.length)}`,
   ];
 
+  // ── 유입 경로 (검색 유입이 핵심) ──
+  const refEntries = Object.entries(cur.refs || {}).sort((a, b) => b[1] - a[1]);
+  if (refEntries.length) {
+    const searchCur = refEntries.filter(([l]) => isSearch(l)).reduce((s, [, n]) => s + n, 0);
+    const searchPrev = Object.entries(prev.refs || {})
+      .filter(([l]) => isSearch(l))
+      .reduce((s, [, n]) => s + n, 0);
+    const pct = (n) => (cur.views ? Math.round((n / cur.views) * 100) : 0);
+    lines.push(
+      '',
+      `<b>유입 경로</b> — 검색 <b>${fmt(searchCur)}</b> (${pct(searchCur)}%)${delta(searchCur, searchPrev)}`
+    );
+    refEntries.slice(0, 5).forEach(([label, n]) =>
+      lines.push(`· ${escapeHtml(label)} ${fmt(n)} (${pct(n)}%)`)
+    );
+  }
+
   if (cur.topPosts.length) {
     lines.push('', '<b>인기 글 TOP</b>');
     cur.topPosts.forEach(([key, n], i) => {
       const [src, title] = key.split('|');
-      lines.push(`${i + 1}. [${src}] ${escapeHtml(cut(title, 32))} — ${fmt(n)}`);
+      lines.push(`${i + 1}. [${src}] ${escapeHtml(cut(postTitle(title), 32))} — ${fmt(n)}`);
+    });
+  }
+
+  // ── 어제 발행한 글 + 초기 성과 (조회 많은 순, 많으면 접어서) ──
+  if (fresh.length) {
+    const withViews = fresh
+      .map((p) => ({
+        ...p,
+        views: cur.byPostMap[`${p.src}|${p.title.split(' | ')[0].split(' - ')[0]}`] || 0,
+      }))
+      .sort((a, b) => b.views - a.views);
+    lines.push('', `<b>새로 발행한 글</b> ${withViews.length}개`);
+    withViews.slice(0, 5).forEach((p) =>
+      lines.push(`· [${p.src}] ${escapeHtml(cut(p.title, 34))} — 조회 ${fmt(p.views)}`)
+    );
+    if (withViews.length > 5) lines.push(`  …외 ${withViews.length - 5}개`);
+  }
+
+  // ── 급상승 / 급락 ──
+  const mv = movers(cur, prev);
+  if (mv.up.length || mv.down.length) {
+    lines.push('', '<b>전일 대비 변화</b>');
+    mv.up.forEach((r) => {
+      const [src, title] = r.key.split('|');
+      lines.push(`▲ [${src}] ${escapeHtml(cut(postTitle(title), 28))} ${fmt(r.prev)}→<b>${fmt(r.cur)}</b>`);
+    });
+    mv.down.forEach((r) => {
+      const [src, title] = r.key.split('|');
+      lines.push(`▼ [${src}] ${escapeHtml(cut(postTitle(title), 28))} ${fmt(r.prev)}→<b>${fmt(r.cur)}</b>`);
     });
   }
 
@@ -132,6 +289,13 @@ export async function reportMessage(dayArg) {
 
   if (!cur.views && !cur.comments.length && !cur.clicks.length) {
     lines.push('', '<i>해당 날짜의 활동 데이터가 없습니다.</i>');
+  }
+
+  // ── 오늘 쓸 만한 소재 (커뮤니티 실시간 화제) ──
+  if (topics.length) {
+    lines.push('', '<b>오늘의 추천 주제</b> — 커뮤니티 화제');
+    topics.forEach((t) => lines.push(`· [${t.key.toUpperCase()}] ${escapeHtml(cut(t.post, 40))}`));
+    lines.push('<code>/generate</code> 로 바로 쓸 수 있습니다.');
   }
 
   return lines.join('\n');

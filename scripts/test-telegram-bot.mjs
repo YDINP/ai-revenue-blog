@@ -31,6 +31,8 @@ globalThis.fetch = async (url, opts = {}) => {
   if (url.includes('/rpc/get_top_liked_posts')) return { status: 200, json: async () => [{ title: '좋아요글 | TechFlow', slug: 'liked', like_count: 7 }] };
   if (url.includes('/rpc/get_recent_events')) return { status: 200, json: async () => [{ event_type: 'pageview', source: 'blog', created_at: new Date().toISOString(), metadata: { title: '이벤트글 | TechFlow', slug: 'ev' } }] };
   if (url.includes('/rest/v1/analytics?')) return { ok: true, json: async () => [
+    { event_type: 'pageview', source: 'blog', created_at: new Date().toISOString(), metadata: { title: '내글 | TechFlow', slug: 'my-post', user_agent: 'UA1', referrer: 'https://www.google.com/search?q=x' } },
+    { event_type: 'pageview', source: 'blog', created_at: new Date().toISOString(), metadata: { title: '내글 | TechFlow', slug: 'my-post', user_agent: 'UA1', referrer: 'direct' } },
     { event_type: 'coupang_click', source: 'blog', created_at: new Date().toISOString(), metadata: { product: '노트북 거치대', url: 'https://link.coupang.com/a/x', slug: 'my-post', title: '내글 | TechFlow', user_agent: 'UA1' } },
     { event_type: 'affiliate_click', source: 'lifeflow', created_at: new Date().toISOString(), metadata: { target: 'coupang', label: '무선 청소기', href: 'https://link.coupang.com/a/y', slug: 'lf-post', user_agent: 'UA2' } },
   ] };
@@ -431,6 +433,10 @@ out = sentTexts().join('\n');
 assert(res.code === 200, 'daily-report returns 200');
 assert(out.includes('일일 리포트') && out.includes('조회수') && out.includes('방문자') && out.includes('신규 댓글') && out.includes('신규 좋아요') && out.includes('쿠팡 클릭'), 'report covers all requested metrics');
 assert(out.includes('독자') && out.includes('노트북 거치대'), 'report includes new comments and coupang products');
+// 유입 경로 (검색 유입 강조)
+assert(out.includes('유입 경로') && out.includes('구글 검색') && out.includes('직접/북마크'), 'report breaks down referrers');
+// 오늘의 추천 주제 (커뮤니티 화제 → /generate 연결)
+assert(out.includes('오늘의 추천 주제') && out.includes('/generate'), 'report suggests topics from community');
 
 // 28. /report 명령도 같은 리포트
 calls.length = 0; res = mockRes();
