@@ -55,6 +55,77 @@ export async function gscMessage(days = 7) {
   return lines.join('\n');
 }
 
+// /seo [days] — 검색 데이터에서 "손보면 바로 오를 것" 찾기
+//
+//  1) CTR 개선 대상 — 노출은 나오는데 클릭이 거의 없는 글 (제목·설명 문제)
+//  2) 문턱 앞 검색어 — 8~20위. 조금만 보강하면 1페이지 진입
+//  3) 미공략 검색어 — 노출은 있는데 클릭 0. 그 주제 전용 글이 없다는 신호
+export async function seoMessage(days = 28) {
+  if (!hasGsc()) return '⚠️ Search Console 미연동입니다.';
+  days = Math.min(Math.max(days, 7), 90);
+  const end = gscDay(3);
+  const start = gscDay(3 + days - 1);
+
+  const lines = [`🩺 <b>SEO 기회 진단</b> — 최근 ${days}일 (${start} ~ ${end})`];
+
+  for (const b of gscBlogs()) {
+    try {
+      const s = await gscSummary(b.gscSite, start, end, 50);
+      lines.push('', `<b>${escapeHtml(b.label.split(' (')[0])}</b>`);
+      if (!s.impressions) {
+        lines.push('  노출 데이터 없음');
+        continue;
+      }
+
+      // 1) 노출 대비 클릭이 바닥인 글
+      const lowCtr = s.pages
+        .filter((p) => p.impressions >= 20 && p.clicks / p.impressions < 0.02)
+        .slice(0, 3);
+      if (lowCtr.length) {
+        lines.push('📉 <b>CTR 개선 대상</b> (노출은 있는데 클릭이 안 됨 → 제목·설명 손보기)');
+        lowCtr.forEach((p) =>
+          lines.push(
+            `· ${escapeHtml(cut(p.key.replace(/^https?:\/\/[^/]+\/blog\//, ''), 32))}`,
+            `    노출 ${fmt(p.impressions)} · 클릭 ${fmt(p.clicks)} · ${pos(p.position)}위`
+          )
+        );
+      }
+
+      // 2) 8~20위 = 조금만 보강하면 1페이지
+      const striking = s.queries
+        .filter((q) => q.position >= 8 && q.position <= 20 && q.impressions >= 5)
+        .sort((a, b2) => b2.impressions - a.impressions)
+        .slice(0, 4);
+      if (striking.length) {
+        lines.push('🎯 <b>문턱 앞 검색어</b> (8~20위 → 보강하면 1페이지)');
+        striking.forEach((q) =>
+          lines.push(`· ${escapeHtml(cut(q.key, 26))} — ${pos(q.position)}위 · 노출 ${fmt(q.impressions)}`)
+        );
+      }
+
+      // 3) 노출은 있는데 클릭 0 = 그 주제 전용 글이 없다는 신호
+      const gaps = s.queries
+        .filter((q) => q.clicks === 0 && q.impressions >= 8)
+        .sort((a, b2) => b2.impressions - a.impressions)
+        .slice(0, 4);
+      if (gaps.length) {
+        lines.push('🆕 <b>미공략 검색어</b> (노출만 있고 클릭 0 → 전용 글 없음)');
+        gaps.forEach((q) =>
+          lines.push(`· ${escapeHtml(cut(q.key, 26))} — 노출 ${fmt(q.impressions)} · ${pos(q.position)}위`)
+        );
+      }
+
+      if (!lowCtr.length && !striking.length && !gaps.length) {
+        lines.push('  <i>표본이 부족합니다 (노출이 더 쌓여야 진단 가능)</i>');
+      }
+    } catch (e) {
+      lines.push('', `<b>${escapeHtml(b.label.split(' (')[0])}</b>`, `⚠️ ${escapeHtml(e.message)}`);
+    }
+  }
+  lines.push('', '<i>미공략 검색어는</i> <code>/generate</code> <i>로 바로 글을 쓸 수 있습니다.</i>');
+  return lines.join('\n');
+}
+
 // 일일 리포트용 요약 (최근 7일 vs 그 이전 7일 비교 + 상위 검색어 3개)
 export async function gscReportLines() {
   if (!hasGsc()) return [];

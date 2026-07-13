@@ -27,7 +27,7 @@ import {
   statusMessage,
   toggleDraftMessage,
 } from './_control.js';
-import { gscMessage } from './_gsc-view.js';
+import { gscMessage, seoMessage } from './_gsc-view.js';
 import { moneyMessage } from './_money.js';
 import { reportMessage } from './_report.js';
 import { indexMessage } from './_seo.js';
@@ -52,6 +52,7 @@ const HELP = [
   '• <code>/reply &lt;댓글ID&gt; &lt;내용&gt;</code> · <code>/delete &lt;댓글ID&gt;</code>',
   '',
   '<b>💰 수익화·SEO</b>',
+  '• /seo [일수] — SEO 기회 진단 (CTR 개선 대상·문턱 앞 검색어·미공략 검색어)',
   '• /money [블로그] [n] — 트래픽 있는데 쿠팡 링크 없는 글',
   '• <code>/index &lt;블로그&gt; [slug]</code> — IndexNow 색인 요청 (빙·네이버)',
   '',
@@ -165,6 +166,7 @@ export default async function handler(req, res) {
         status: () => statusMessage(a1),
         report: () => reportMessage(/^\d{4}-\d{2}-\d{2}$/.test(a1 || '') ? a1 : undefined),
         gsc: () => gscMessage(a1 ? parseInt(a1, 10) : 7),
+        seo: () => seoMessage(a1 ? parseInt(a1, 10) : 28),
         money: () => moneyMessage(/^\d+$/.test(a1 || '') ? null : a1, /^\d+$/.test(a1 || '') ? parseInt(a1, 10) : 8),
         index: () => indexMessage(a1, a2),
       };

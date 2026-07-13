@@ -34,10 +34,11 @@ export async function indexMessage(blogArg, slug) {
   if (!blog.indexNowKey) throw new Error(`${escapeHtml(blog.label)} 은 IndexNow 미설정`);
 
   let urls;
-  if (slug) {
+  if (slug && slug !== 'all') {
     urls = [`${blog.site}/blog/${slug}/`];
   } else {
-    const posts = await listPosts(blog, 10);
+    // all = 전 글 (색인이 거의 안 된 상태에서 한 번에 밀어넣을 때)
+    const posts = await listPosts(blog, slug === 'all' ? 500 : 10);
     urls = [blog.site + '/', `${blog.site}/blog/`, ...posts.map((p) => `${blog.site}/blog/${p.slug}/`)];
   }
 
