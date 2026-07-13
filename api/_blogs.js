@@ -20,6 +20,7 @@ export const BLOGS = {
     branch: 'master',
     contentDir: 'src/blog',
     site: 'https://ai-revenue-blog.vercel.app',
+    gscSite: 'https://ai-revenue-blog.vercel.app/',   // Search Console URL 프리픽스 속성
     vercel: 'ai-revenue-blog',
     source: 'blog',
     generator: 'daily-post.yml',
@@ -36,6 +37,7 @@ export const BLOGS = {
     branch: 'main',
     contentDir: 'src/blog',
     site: 'https://life-revenue-blog.vercel.app',
+    gscSite: 'https://life-revenue-blog.vercel.app/',
     vercel: 'life-revenue-blog',
     source: 'lifeflow',
     generator: 'daily-post.yml',

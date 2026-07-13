@@ -4,6 +4,7 @@
 import { blogList } from './_blogs.js';
 import { communityHot } from './_community.js';
 import { getFileJson } from './_github.js';
+import { gscReportLines } from './_gsc-view.js';
 import { SUPABASE_ANON_KEY, SUPABASE_URL, escapeHtml, postUrl } from './_shared.js';
 
 const fmt = (n) => Number(n || 0).toLocaleString('en-US');
@@ -191,11 +192,12 @@ export async function reportMessage(dayArg) {
     .toISOString()
     .split('T')[0];
 
-  const [cur, prev, fresh, topics] = await Promise.all([
+  const [cur, prev, fresh, topics, gscLines] = await Promise.all([
     collect(day),
     collect(prevDay),
     newPosts(day),
     todaysTopics().catch(() => []),
+    gscReportLines().catch(() => []),   // Search Console 미연동이면 빈 배열
   ]);
 
   const wd = ['일', '월', '화', '수', '목', '금', '토'][new Date(`${day}T00:00:00+09:00`).getDay()];
@@ -226,6 +228,9 @@ export async function reportMessage(dayArg) {
       lines.push(`· ${escapeHtml(label)} ${fmt(n)} (${pct(n)}%)`)
     );
   }
+
+  // ── 검색 유입 (Search Console) ──
+  lines.push(...gscLines);
 
   if (cur.topPosts.length) {
     lines.push('', '<b>인기 글 TOP</b>');

@@ -27,6 +27,7 @@ import {
   statusMessage,
   toggleDraftMessage,
 } from './_control.js';
+import { gscMessage } from './_gsc-view.js';
 import { reportMessage } from './_report.js';
 
 const UUID_RE = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
@@ -37,6 +38,7 @@ const HELP = [
   '<b>📊 대시보드 조회 (실시간)</b>',
   '• /stats — 전체 요약 (조회·클릭·좋아요·구독·댓글)',
   '• /report [YYYY-MM-DD] — 일일 종합 리포트 (기본 어제, 매일 09시 자동 발송)',
+  '• /gsc [일수] — 구글 검색 유입 (검색어·노출·CTR·평균순위, 기본 7일)',
   '• /tf · /lf — TechFlow / LifeFlow 소스별 요약',
   '• /coupang — 쿠팡 클릭 상세 (어떤 글→어떤 링크)',
   '• /top [n] · /trend · /likes · /recent [n]',
@@ -156,6 +158,7 @@ export default async function handler(req, res) {
         deploy: () => deployMessage(a1),
         status: () => statusMessage(a1),
         report: () => reportMessage(/^\d{4}-\d{2}-\d{2}$/.test(a1 || '') ? a1 : undefined),
+        gsc: () => gscMessage(a1 ? parseInt(a1, 10) : 7),
       };
       if (CONTROL[cmd]) {
         const out = await CONTROL[cmd]();
