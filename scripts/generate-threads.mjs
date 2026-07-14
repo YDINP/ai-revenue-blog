@@ -8,7 +8,10 @@
 
 const CLAUDE_MODEL = 'claude-haiku-4-5-20251001';
 const SITE = 'https://ai-revenue-blog.vercel.app';
-const SB = process.env.SUPABASE_URL || 'https://xyprbsmagtlzebxyxsvj.supabase.co';
+// 프로젝트 공개 URL 고정 (SUPABASE_URL secret이 비었거나 잘못돼도 안전). service_role 키만 secret.
+const SB = (/^https?:\/\/[^ ]+\.supabase\.co\/?$/.test(process.env.SUPABASE_URL || '')
+  ? process.env.SUPABASE_URL
+  : 'https://xyprbsmagtlzebxyxsvj.supabase.co').replace(/\/+$/, '');
 const SRK = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 const TOPIC = {
