@@ -1652,7 +1652,7 @@ const ICONS: Record<string, string> = {
       }
       .kpi-top .label { margin-bottom: 0; }
       .summary-card .value, .summary-card .sub, .summary-card .source-split-bar,
-      .summary-card .split-legend, .kpi-spark { position: relative; z-index: 1; }
+      .summary-card .split-legend { position: relative; z-index: 1; }
 
       /* KPI 값 + 델타 인라인 행 */
       .kpi-value-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.375rem; }
@@ -1696,25 +1696,6 @@ const ICONS: Record<string, string> = {
       .color-red    .value    { color: #fb8b98; }
       .color-red::after        { color: #ef4444; }
 
-      /* 미니 스파크라인 (CSS 바) */
-      .kpi-spark {
-        display: flex;
-        align-items: flex-end;
-        gap: 2px;
-        height: 30px;
-        margin-top: 0.75rem;
-      }
-      .kpi-spark .sbar {
-        flex: 1;
-        min-height: 2px;
-        border-radius: 2px 2px 0 0;
-        background: currentColor;
-        opacity: 0.45;
-      }
-      .kpi-spark .sbar.on { opacity: 1; }
-      .color-blue  .kpi-spark { color: #60a5fa; }
-      .color-amber .kpi-spark { color: #facc15; }
-      .color-purple .kpi-spark { color: #c084fc; }
 
       /* 섹션/패널 헤더 라인 아이콘 */
       .sec-ico {
@@ -2072,7 +2053,6 @@ const ICONS: Record<string, string> = {
             <span>TF: <b id="tf-total-views">--</b></span>
             <span>LF: <b id="lf-total-views">--</b></span>
           </div>
-          <div class="kpi-spark" id="kpi-spark-views" aria-hidden="true"></div>
         </div>
         <div class="summary-card accent-yellow color-amber">
           <div class="kpi-top">
@@ -2436,6 +2416,10 @@ const ICONS: Record<string, string> = {
               <span class="link-icon">&#9650;</span>
               Vercel TechFlow
             </a>
+            <a href="https://life-revenue-blog.vercel.app" target="_blank" rel="noopener" class="link-btn">
+              <span class="link-icon">&#9650;</span>
+              Vercel LifeFlow
+            </a>
             <a href="https://supabase.com/dashboard" target="_blank" rel="noopener" class="link-btn">
               <span class="link-icon">&#9889;</span>
               Supabase
@@ -2444,9 +2428,9 @@ const ICONS: Record<string, string> = {
               <span class="link-icon">&#128270;</span>
               Search Console
             </a>
-            <a href="https://analytics.google.com" target="_blank" rel="noopener" class="link-btn">
-              <span class="link-icon">&#128200;</span>
-              Google Analytics
+            <a href="https://adsense.google.com" target="_blank" rel="noopener" class="link-btn">
+              <span class="link-icon">&#128176;</span>
+              AdSense
             </a>
           </div>
         </div>
@@ -3130,23 +3114,6 @@ const ICONS: Record<string, string> = {
         if (pct > 0) { el.className = 'delta-chip up'; el.innerHTML = up + `${pct}%`; }
         else if (pct < 0) { el.className = 'delta-chip down'; el.innerHTML = down + `${Math.abs(pct)}%`; }
         else { el.className = 'delta-chip flat'; el.innerHTML = '0%'; }
-      }
-
-      // KPI 미니 스파크라인 (실제 7일 조회수 → CSS 바). 마지막(오늘) 강조
-      function renderKpiSpark(rawData) {
-        const el = document.getElementById('kpi-spark-views');
-        if (!el) return;
-        const map = {};
-        (rawData || []).forEach(d => { if (d.day) map[d.day] = Number(d.views) || 0; });
-        const days = [];
-        for (let i = 6; i >= 0; i--) {
-          const dt = new Date(); dt.setDate(dt.getDate() - i);
-          days.push(map[dt.toISOString().split('T')[0]] || 0);
-        }
-        const max = Math.max(...days, 1);
-        el.innerHTML = days.map((v, i) =>
-          `<span class="sbar ${i === days.length - 1 ? 'on' : ''}" style="height:${Math.max((v / max) * 100, 6)}%" title="${v}회"></span>`
-        ).join('');
       }
 
       // ── 방문 추이 (일간/주간/월간 통합) ──
@@ -4348,7 +4315,6 @@ const ICONS: Record<string, string> = {
           renderHourlyChart();
           renderTopPages(topPages);
           renderEventFeed(events);
-          renderKpiSpark(trend);
           _trafficDetail = Array.isArray(dailyDetail) ? dailyDetail : [];
           // 웹/모바일 일별 집계 병합 (get_daily_device_trend — KST 일자 기준으로 daily_detail 과 동일)
           _deviceDataReady = Array.isArray(deviceTrend) && deviceTrend.length > 0;
