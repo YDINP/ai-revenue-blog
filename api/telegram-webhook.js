@@ -37,6 +37,7 @@ import {
   threadsGenMessage,
   threadsQueueCards,
   threadsQueueList,
+  threadsPostNow,
   threadsInsightsMessage,
   handleThreadsCallback,
   handleReplyCallback,
@@ -201,6 +202,13 @@ export default async function handler(req, res) {
 
   if (text === '/help') {
     await reply(HELP);
+    return res.status(200).json({ ok: true });
+  }
+
+  // ── /post <내용> — 큐 안 거치고 즉석 발행 (life 계정) ──
+  const postCmd = text.match(/^\/post(?:@\w+)?(?:\s+([\s\S]+))?$/i);
+  if (postCmd) {
+    await reply(await threadsPostNow(postCmd[1] || ''));
     return res.status(200).json({ ok: true });
   }
 

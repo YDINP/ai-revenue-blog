@@ -4,7 +4,7 @@ import { dispatchWorkflow } from './_github.js';
 import { setState, getState, clearState } from './_state.js';
 import {
   getAccounts, sb, getQueue, updateQueue, publishDraft,
-  getReply, updateReply, publishReply,
+  getReply, updateReply, publishReply, publish, insertPost,
 } from './_threads.js';
 
 const REPO = 'YDINP/ai-revenue-blog';
@@ -93,8 +93,27 @@ export async function threadsQueueList(topic = 'life') {
   }
   const kb = [];
   for (let i = 0; i < btns.length; i += 3) kb.push(btns.slice(i, i + 3));
-  kb.push([{ text: '🔀 랜덤 발행', callback_data: `thr:rand:${topic}` }]);
+  kb.push([
+    { text: '🔀 랜덤 발행', callback_data: `thr:rand:${topic}` },
+    { text: '✖ 닫기', callback_data: 'thr:close' },
+  ]);
   return { text: lines.join('\n'), reply_markup: { inline_keyboard: kb } };
+}
+
+// ── 즉석 발행 (/post) — 큐 안 거치고 바로 Threads 발행 ──
+export async function threadsPostNow(rawText, topic = 'life') {
+  const body = String(rawText || '').trim();
+  if (!body) return '사용법: <code>/post 올릴 내용</code> (여러 줄 OK). 링크 없이 본문만 바로 발행돼요.';
+  const acct = (await sb(`threads_accounts?topic=eq.${encodeURIComponent(topic)}&active=eq.true&limit=1`))[0];
+  if (!acct?.access_token) return `❌ '${escapeHtml(topic)}' 계정 토큰 없음`;
+  try {
+    const mediaId = await publish(acct, { text: body });
+    await insertPost({ account_id: acct.id, threads_media_id: mediaId }).catch(() => {});
+    await sb(`threads_accounts?id=eq.${acct.id}`, { method: 'PATCH', body: { hottime_started_at: null } }).catch(() => {}); // 상호작용 처리
+    return `✅ 바로 발행 완료! (media ${mediaId})`;
+  } catch (e) {
+    return `❌ 발행 실패: ${escapeHtml(e.message)}`;
+  }
 }
 
 // ── 다음 골든타임(KST 08:00 / 23:00) UTC ISO ──
@@ -130,6 +149,10 @@ export async function threadsInsightsMessage(days = 7) {
 // ── 콜백 처리 (thr:list|show|rand|pub|edit|sched|rej) → {text, reply_markup?} ──
 export async function handleThreadsCallback(chatId, data) {
   let mm;
+  // 목록 닫기
+  if (data === 'thr:close') {
+    return { text: '🧵 큐 목록 닫음. 다시 보려면 <code>/threads queue life</code>', reply_markup: { inline_keyboard: [] } };
+  }
   // 목록으로 돌아가기
   if ((mm = /^thr:list:(.+)$/.exec(data || ''))) {
     return await threadsQueueList(mm[1]);
