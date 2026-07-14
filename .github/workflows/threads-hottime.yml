@@ -1,0 +1,25 @@
+name: Threads Hot-time (nudge + auto-post)
+
+# 골든타임 08:00 / 23:00 KST 에 핫타임 알림 → 10분 sleep → 미상호작용 시 랜덤 자동발행.
+# GH Actions cron은 정시보다 지연될 수 있음(10분 창 자체는 sleep으로 정확히 보장).
+on:
+  schedule:
+    - cron: '0 23 * * *'   # 23:00 UTC = 08:00 KST
+    - cron: '0 14 * * *'   # 14:00 UTC = 23:00 KST
+  workflow_dispatch:
+
+jobs:
+  hottime:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Nudge → wait 10min → resolve
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          BASE: https://ai-revenue-blog.vercel.app
+        run: |
+          echo "== nudge =="
+          curl -sS -X POST "$BASE/api/threads-hottime?topic=life" -H "Authorization: Bearer $CRON_SECRET"; echo
+          echo "== sleeping 600s (10min interaction window) =="
+          sleep 600
+          echo "== resolve =="
+          curl -sS -X POST "$BASE/api/threads-hottime-resolve?topic=life" -H "Authorization: Bearer $CRON_SECRET"; echo

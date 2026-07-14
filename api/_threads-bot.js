@@ -125,6 +125,7 @@ export async function handleThreadsCallback(chatId, data) {
   if (action === 'sched') {
     const at = nextGoldenSlotUtc();
     await updateQueue(id, { status: 'scheduled', scheduled_at: at });
+    await sb(`threads_accounts?id=eq.${row.account_id}`, { method: 'PATCH', body: { hottime_started_at: null } }).catch(() => {}); // 상호작용함 → 핫타임 자동발행 skip
     const kst = new Date(new Date(at).getTime() + 9 * 3600 * 1000).toISOString().slice(5, 16).replace('T', ' ');
     return { text: `⏰ 초안 #${id} 예약됨 → ${kst} (KST). Cron이 발행합니다.` };
   }
@@ -133,6 +134,7 @@ export async function handleThreadsCallback(chatId, data) {
   if (!account?.access_token) return { text: `❌ 계정 토큰 없음 (account_id=${row.account_id})` };
   try {
     const mediaId = await publishDraft(account, row);
+    await sb(`threads_accounts?id=eq.${row.account_id}`, { method: 'PATCH', body: { hottime_started_at: null } }).catch(() => {}); // 상호작용함 → 핫타임 자동발행 skip
     return { text: `✅ 초안 #${id} 발행 완료! (media ${mediaId})${row.link_url ? '\n🔗 링크는 첫 댓글에 게시됨' : ''}` };
   } catch (e) {
     await updateQueue(id, { status: 'failed', error: e.message });
