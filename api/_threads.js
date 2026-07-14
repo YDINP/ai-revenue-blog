@@ -109,7 +109,7 @@ export async function codeToShortToken(code) {
 
 // ── 발행 (2단계: 컨테이너 생성 → 게시) ──
 export async function publish(account, { text, imageUrl }) {
-  const uid = account.threads_user_id;
+  const uid = 'me'; // 숫자 threads_user_id는 노드로 안 먹는 경우 있음 → 'me'가 안정
   const token = account.access_token;
 
   // 1) 컨테이너 생성
@@ -134,7 +134,7 @@ export async function publish(account, { text, imageUrl }) {
 
 // 자답(첫 댓글) — hook-writer 규칙: 외부링크는 본문 아닌 첫 댓글에 (도달 보호)
 export async function publishReply(account, { text, replyToId }) {
-  const uid = account.threads_user_id;
+  const uid = 'me'; // 숫자 threads_user_id는 노드로 안 먹는 경우 있음 → 'me'가 안정
   const token = account.access_token;
   const create = new URL(`${GRAPH_V}/${uid}/threads`);
   create.searchParams.set('media_type', 'TEXT');
