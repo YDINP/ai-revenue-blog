@@ -220,6 +220,16 @@ export async function getReplies(account, mediaId) {
   return Array.isArray(j.data) ? j.data : [];
 }
 
+// 내 글/대댓글 삭제 — DELETE /{media-id}. threads_delete 스코프 필요(100/day 한도).
+export async function deleteMedia(account, mediaId) {
+  const url = new URL(`${GRAPH_V}/${mediaId}`);
+  url.searchParams.set('access_token', account.access_token);
+  const r = await fetch(url, { method: 'DELETE' });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(`delete failed: ${JSON.stringify(j)}`);
+  return j;
+}
+
 export const insertReply = (row) =>
   sb('threads_replies', { method: 'POST', body: row, prefer: 'return=representation' }).then((r) => r[0]);
 export const updateReply = (id, patch) =>
