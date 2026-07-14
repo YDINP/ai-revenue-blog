@@ -38,6 +38,7 @@ import {
   threadsQueueCards,
   threadsInsightsMessage,
   handleThreadsCallback,
+  handleReplyCallback,
   maybeHandleThreadsFlow,
 } from './_threads-bot.js';
 
@@ -114,6 +115,24 @@ export default async function handler(req, res) {
         });
       } catch (e) {
         console.error('threads callback error:', e);
+        await tg('sendMessage', { chat_id: cbChat, text: `❌ ${escapeHtml(e.message)}`, parse_mode: 'HTML' });
+      }
+      return res.status(200).json({ ok: true });
+    }
+
+    // ── 댓글 대댓글 콜백 (rpl:send|reply|ign:ID) ──
+    if ((cb.data || '').startsWith('rpl:')) {
+      try {
+        const out = await handleReplyCallback(cbChat, cb.data || '');
+        await tg('editMessageText', {
+          chat_id: cbChat,
+          message_id: cb.message.message_id,
+          text: out.text,
+          parse_mode: 'HTML',
+          disable_web_page_preview: true,
+        });
+      } catch (e) {
+        console.error('reply callback error:', e);
         await tg('sendMessage', { chat_id: cbChat, text: `❌ ${escapeHtml(e.message)}`, parse_mode: 'HTML' });
       }
       return res.status(200).json({ ok: true });
@@ -256,10 +275,12 @@ export default async function handler(req, res) {
       const tflow = await maybeHandleThreadsFlow(chatId, text);
       if (tflow) {
         await reply(tflow.note);
-        await tg('sendMessage', {
-          chat_id: chatId, text: tflow.card.text, parse_mode: 'HTML',
-          disable_web_page_preview: true, reply_markup: tflow.card.reply_markup,
-        });
+        if (tflow.card) {
+          await tg('sendMessage', {
+            chat_id: chatId, text: tflow.card.text, parse_mode: 'HTML',
+            disable_web_page_preview: true, reply_markup: tflow.card.reply_markup,
+          });
+        }
         return res.status(200).json({ ok: true });
       }
       const flowed = await handleFlow(chatId, text);

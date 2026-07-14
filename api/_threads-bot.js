@@ -4,6 +4,7 @@ import { dispatchWorkflow } from './_github.js';
 import { setState, getState, clearState } from './_state.js';
 import {
   getAccounts, sb, getQueue, updateQueue, publishDraft,
+  getReply, updateReply, publishReply,
 } from './_threads.js';
 
 const REPO = 'YDINP/ai-revenue-blog';
@@ -139,12 +140,72 @@ export async function handleThreadsCallback(chatId, data) {
   }
 }
 
-// ── 수정 플로우 텍스트 처리 (webhook에서 호출) ──
+// ── 댓글 반자동: 승인카드 ──
+export function threadsReplyCard(row) {
+  const d = row.draft
+    ? `\n\n<b>추천 답변</b>\n${escapeHtml(row.draft)}`
+    : '\n\n<i>추천 답변 없음 — ✍️로 직접 작성</i>';
+  const text = `💬 <b>새 댓글</b> @${escapeHtml(row.comment_user || '?')}\n${escapeHtml(row.comment_text || '')}${d}`;
+  const buttons = [];
+  if (row.draft) buttons.push({ text: '✅ 이대로', callback_data: `rpl:send:${row.id}` });
+  buttons.push({ text: '✍️ 답장', callback_data: `rpl:reply:${row.id}` });
+  buttons.push({ text: '🗑 무시', callback_data: `rpl:ign:${row.id}` });
+  return { text, reply_markup: { inline_keyboard: [buttons] } };
+}
+
+// 대댓글 실제 발행 (콜백/플로우 공용)
+async function sendReply(id, text) {
+  const row = await getReply(id);
+  if (!row) return { text: `댓글 #${id} 없음(이미 처리됨?)` };
+  if (!text || !text.trim()) return { text: `❌ 빈 답변이라 취소.` };
+  const account = (await sb(`threads_accounts?id=eq.${row.account_id}&limit=1`))[0];
+  if (!account?.access_token) return { text: `❌ 계정 토큰 없음 (account_id=${row.account_id})` };
+  try {
+    const mediaId = await publishReply(account, { text, replyToId: row.comment_id });
+    await updateReply(id, { status: 'sent', reply_media_id: mediaId });
+    return { text: `✅ 대댓글 발행 완료 (#${id})` };
+  } catch (e) {
+    await updateReply(id, { status: 'failed', error: e.message });
+    return { text: `❌ 발행 실패 #${id}: ${escapeHtml(e.message)}` };
+  }
+}
+
+// ── 콜백 처리 (rpl:send|reply|ign:ID) ──
+export async function handleReplyCallback(chatId, data) {
+  const m = /^rpl:(send|reply|ign):(\d+)$/.exec(data || '');
+  if (!m) return { text: '알 수 없는 동작' };
+  const [, action, idStr] = m;
+  const id = parseInt(idStr, 10);
+  const row = await getReply(id);
+  if (!row) return { text: `댓글 #${id} 없음(이미 처리됨?)` };
+  if (row.status !== 'pending') return { text: `댓글 #${id} 이미 처리됨(${row.status}).` };
+
+  if (action === 'ign') {
+    await updateReply(id, { status: 'ignored' });
+    return { text: `🗑 댓글 #${id} 무시.` };
+  }
+  if (action === 'reply') {
+    await setState(chatId, { flow: 'threads_reply', replyId: id });
+    return { text: `✍️ 댓글 #${id}에 답장: 내용을 답장으로 보내줘. (취소 /cancel)\n\n원댓글:\n${escapeHtml(row.comment_text || '')}` };
+  }
+  // send — AI 초안 그대로 발행
+  return await sendReply(id, row.draft);
+}
+
+// ── 텍스트 플로우 처리 (webhook에서 호출) — 초안 수정 / 대댓글 직접 작성 ──
 export async function maybeHandleThreadsFlow(chatId, text) {
   const st = await getState(chatId);
-  if (st?.flow !== 'threads_edit') return null;
-  await updateQueue(st.queueId, { text });
-  await clearState(chatId);
-  const row = await getQueue(st.queueId);
-  return { card: threadsCard(row), note: `✍️ 초안 #${st.queueId} 수정됨.` };
+  if (!st) return null;
+  if (st.flow === 'threads_edit') {
+    await updateQueue(st.queueId, { text });
+    await clearState(chatId);
+    const row = await getQueue(st.queueId);
+    return { card: threadsCard(row), note: `✍️ 초안 #${st.queueId} 수정됨.` };
+  }
+  if (st.flow === 'threads_reply') {
+    await clearState(chatId);
+    const out = await sendReply(st.replyId, text);
+    return { note: out.text }; // card 없음
+  }
+  return null;
 }

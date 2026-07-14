@@ -186,3 +186,56 @@ export async function getInsights(mediaId, token) {
   for (const m of j.data || []) out[m.name] = m.values?.[0]?.value ?? 0;
   return out; // { views, likes, replies, reposts, quotes, shares }
 }
+
+// ── 댓글(대댓글) 반자동 ──
+// 내 원글에 달린 직접 답글 목록. threads_manage_replies 스코프 필요.
+export async function getReplies(account, mediaId) {
+  const url = new URL(`${GRAPH_V}/${mediaId}/replies`);
+  url.searchParams.set('fields', 'id,text,username,timestamp,hide_status');
+  url.searchParams.set('reverse', 'false');
+  url.searchParams.set('access_token', account.access_token);
+  const r = await fetch(url);
+  const j = await r.json();
+  if (!r.ok) throw new Error(`replies fetch failed: ${JSON.stringify(j)}`);
+  return Array.isArray(j.data) ? j.data : [];
+}
+
+export const insertReply = (row) =>
+  sb('threads_replies', { method: 'POST', body: row, prefer: 'return=representation' }).then((r) => r[0]);
+export const updateReply = (id, patch) =>
+  sb(`threads_replies?id=eq.${id}`, { method: 'PATCH', body: patch, prefer: 'return=representation' }).then((r) => r[0]);
+export const getReply = (id) =>
+  sb(`threads_replies?id=eq.${id}&select=*`).then((r) => r[0] || null);
+// 이미 수집한 댓글이거나(comment_id), 내가 보낸 대댓글(reply_media_id)이면 true → 재수집·자기답글 루프 방지
+export const replyExists = (mediaId) => {
+  const v = encodeURIComponent(mediaId);
+  return sb(`threads_replies?or=(comment_id.eq.${v},reply_media_id.eq.${v})&select=id&limit=1`).then((r) => r.length > 0);
+};
+
+// AI 추천 대댓글 초안 — ANTHROPIC_API_KEY 있으면 생성, 없으면 '' (사람이 직접 작성).
+// 반말+스친체, 진심 1~2줄, 링크·영업 금지 (threads-hook-writer 규칙).
+export async function draftReply(commentText, { postText } = {}) {
+  const key = process.env.ANTHROPIC_API_KEY;
+  if (!key || !commentText) return '';
+  const sys =
+    '너는 생활정보 스레드 계정 "미나"야. 댓글에 다는 대댓글을 쓴다. ' +
+    '규칙: 반말+친근한 스친체(존댓말/격식체/~있음체 금지), 1~2줄, 진심으로 반응, ' +
+    '외부 링크·영업·홍보 금지, 이모지 0~1개. 댓글 내용에 실제로 반응하는 답만.';
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 150,
+        system: sys,
+        messages: [{ role: 'user', content: `${postText ? `[내 글]\n${postText}\n\n` : ''}[달린 댓글]\n${commentText}\n\n이 댓글에 달 대댓글만 써줘.` }],
+      }),
+    });
+    const j = await r.json();
+    if (!r.ok) return '';
+    return (j.content?.[0]?.text || '').trim();
+  } catch {
+    return '';
+  }
+}

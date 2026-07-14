@@ -1,0 +1,17 @@
+{
+  "feature": "threads-reply-assist",
+  "created": "2026-07-14",
+  "tasks": [
+    { "id": 1, "title": "threads_replies 테이블 SQL", "file": "supabase/threads-replies-schema.sql", "status": "done" },
+    { "id": 2, "title": "_threads.js: getReplies/insertReply/updateReply/getReply/draftReply", "file": "api/_threads.js", "status": "done" },
+    { "id": 3, "title": "threads-cron.js: 섹션5 댓글 수집→초안→카드 발송", "file": "api/threads-cron.js", "status": "done" },
+    { "id": 4, "title": "_threads-bot.js: threadsReplyCard/handleReplyCallback/sendReply/flow", "file": "api/_threads-bot.js", "status": "done" },
+    { "id": 5, "title": "telegram-webhook.js: rpl: 콜백 라우팅 + 카드 옵셔널 가드", "file": "api/telegram-webhook.js", "status": "done" },
+    { "id": 6, "title": "node --check 문법 검증 + 커밋/푸시", "status": "done" }
+  ],
+  "user_setup_required": [
+    "Threads 토큰에 threads_manage_replies 스코프 재동의",
+    "(선택) Vercel env ANTHROPIC_API_KEY 설정 시 AI 초안 활성화",
+    "Supabase에서 threads-replies-schema.sql 실행"
+  ]
+}

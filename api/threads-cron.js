@@ -1,10 +1,12 @@
 // Threads Cron — 예약/자동 발행 + 토큰 갱신 + 인사이트 동기화
 // Vercel Cron이 Authorization: Bearer CRON_SECRET 로 호출. (GH Actions cron으로 더 자주 핑도 가능)
-import { sendToAdmin } from './_shared.js';
+import { sendToAdmin, tg } from './_shared.js';
 import {
   sb, getAccounts, publishDraft, refreshLongLived, updateAccount,
   getInsights, publishedCount24h,
+  getReplies, insertReply, replyExists, draftReply,
 } from './_threads.js';
+import { threadsReplyCard } from './_threads-bot.js';
 
 const AUTO_DAILY_CAP = 3; // 자동모드 계정당 24h 최대 발행(스팸 방지)
 
@@ -79,9 +81,49 @@ export default async function handler(req, res) {
     }
   } catch (e) { log.errors.push(`insights:${e.message}`); }
 
-  if (log.scheduled || log.auto || log.errors.length) {
+  // ── 5) 댓글 반자동: 최근 48h 내 글의 새 댓글 → AI 초안 → 텔레그램 승인카드 ──
+  log.replies = 0;
+  try {
+    const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID;
+    const rSince = new Date(Date.now() - 48 * 3600 * 1000).toISOString();
+    const myPosts = await sb(`threads_posts?published_at=gte.${rSince}&threads_media_id=not.is.null&select=account_id,threads_media_id&limit=30`);
+    const acctById = {};
+    for (const a of await getAccounts(false)) acctById[a.id] = a;
+    const CAP = 10; // 런당 새 댓글 처리 상한(폭주 방지)
+    outer: for (const p of myPosts) {
+      const acct = acctById[p.account_id];
+      if (!acct?.access_token) continue;
+      let replies = [];
+      try { replies = await getReplies(acct, p.threads_media_id); }
+      catch (e) { log.errors.push(`replies#${p.threads_media_id}:${e.message}`); continue; }
+      for (const c of replies) {
+        if (!c.id) continue;
+        if (acct.username && c.username === acct.username) continue; // 내 답글 제외
+        if (await replyExists(c.id)) continue;                       // 이미 수집됨
+        const draft = await draftReply(c.text, { postText: p.text }).catch(() => '');
+        let row;
+        try {
+          row = await insertReply({
+            account_id: acct.id, root_media_id: p.threads_media_id, comment_id: c.id,
+            comment_text: c.text || '', comment_user: c.username || '', draft: draft || null,
+          });
+        } catch { continue; } // comment_id unique 충돌 = 동시성으로 이미 삽입됨
+        if (chatId && row) {
+          const card = threadsReplyCard(row);
+          await tg('sendMessage', {
+            chat_id: chatId, text: card.text, parse_mode: 'HTML',
+            disable_web_page_preview: true, reply_markup: card.reply_markup,
+          }).catch(() => {});
+        }
+        log.replies++;
+        if (log.replies >= CAP) break outer;
+      }
+    }
+  } catch (e) { log.errors.push(`replies:${e.message}`); }
+
+  if (log.scheduled || log.auto || log.replies || log.errors.length) {
     await sendToAdmin(
-      `🧵 Threads Cron\n예약발행 ${log.scheduled} · 자동발행 ${log.auto} · 토큰갱신 ${log.refreshed} · 인사이트 ${log.insights}` +
+      `🧵 Threads Cron\n예약발행 ${log.scheduled} · 자동발행 ${log.auto} · 토큰갱신 ${log.refreshed} · 인사이트 ${log.insights} · 새댓글 ${log.replies}` +
         (log.errors.length ? `\n⚠️ ${log.errors.slice(0, 5).join(' / ')}` : '')
     ).catch(() => {});
   }
