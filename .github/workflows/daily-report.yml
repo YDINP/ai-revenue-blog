@@ -1,11 +1,11 @@
 name: Daily Report (Telegram)
 
-# 매일 09:00 KST 전날 종합 리포트를 텔레그램 봇으로 발송.
-# Vercel Hobby 플랜의 cron 은 지정 시각에서 최대 1시간까지 지연돼 09시 발송이 보장되지
-# 않아 GitHub Actions 스케줄로 옮겼다 (vercel.json 의 crons 는 중복 발송 방지를 위해 제거).
+# 전날 종합 리포트를 텔레그램 봇으로 발송하는 수동 트리거.
+# 정기 발송은 vercel.json 의 cron('0 23 * * *' = 08:00 KST)이 담당한다.
+# GitHub Actions 의 schedule('0 0 * * *')은 UTC 00:00(전 세계 크론 최혼잡 시각)이라
+# 관측상 2.5~4h 지연돼 09시 발송이 불가능했다. 중복 발송 방지를 위해 schedule 제거,
+# 특정 날짜 재발송/수동 확인용으로 workflow_dispatch 만 남긴다.
 on:
-  schedule:
-    - cron: '0 0 * * *'      # UTC 00:00 = KST 09:00
   workflow_dispatch:
     inputs:
       day:
