@@ -6,7 +6,7 @@
 import { codeToShortToken, exchangeLongLived, insertAccount, updateAccount, getAccountByTopic } from './_threads.js';
 import { sendToAdmin } from './_shared.js';
 
-const SCOPES = 'threads_basic,threads_content_publish,threads_manage_insights,threads_manage_replies';
+const SCOPES = 'threads_basic,threads_content_publish,threads_manage_insights,threads_read_replies,threads_manage_replies';
 
 export default async function handler(req, res) {
   const { connect, topic, persona, code, state, error, error_description } = req.query;
