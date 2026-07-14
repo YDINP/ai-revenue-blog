@@ -30,3 +30,5 @@ Thumbs.db
 # vercel cli
 .env.local
 .vercel
+
+.env*

@@ -242,6 +242,52 @@ export const replyExists = (mediaId) => {
   return sb(`threads_replies?or=(comment_id.eq.${v},reply_media_id.eq.${v})&select=id&limit=1`).then((r) => r.length > 0);
 };
 
+// ── 아웃바운드 인게이지먼트 (키워드 검색 → 남 글에 답글) ──
+export async function keywordSearch(account, q, { searchType = 'TOP', limit = 15 } = {}) {
+  const url = new URL(`${GRAPH}/v1.0/keyword_search`);
+  url.searchParams.set('q', q);
+  url.searchParams.set('search_type', searchType); // TOP | RECENT
+  url.searchParams.set('limit', String(limit));
+  url.searchParams.set('fields', 'id,text,username,permalink,timestamp');
+  url.searchParams.set('access_token', account.access_token);
+  const r = await fetch(url);
+  const j = await r.json();
+  if (!r.ok) throw new Error(`keyword_search failed: ${JSON.stringify(j)}`);
+  return Array.isArray(j.data) ? j.data : [];
+}
+
+export const insertEngage = (row) =>
+  sb('threads_engage', { method: 'POST', body: row, prefer: 'return=representation' }).then((r) => r[0]);
+export const updateEngage = (id, patch) =>
+  sb(`threads_engage?id=eq.${id}`, { method: 'PATCH', body: patch, prefer: 'return=representation' }).then((r) => r[0]);
+export const getEngage = (id) =>
+  sb(`threads_engage?id=eq.${id}&select=*`).then((r) => r[0] || null);
+export const engageExists = (postId) =>
+  sb(`threads_engage?post_id=eq.${encodeURIComponent(postId)}&select=id&limit=1`).then((r) => r.length > 0);
+
+// 남 글에 다는 답글 초안 — 공감/도움 위주, 홍보·링크 금지 (스팸 방지).
+export async function draftEngageReply(postText) {
+  const key = process.env.ANTHROPIC_API_KEY;
+  if (!key || !postText) return '';
+  const sys =
+    '너는 생활정보 스레드 계정 "미나"야. 다른 사람의 글에 다는 답글을 쓴다. ' +
+    '규칙: 반말+친근한 스친체(존댓말/격식체/~있음체 금지), 1~2줄, 글 내용에 진심으로 공감/반응. ' +
+    '절대 홍보·링크·내 계정 언급 금지. 자연스러운 대화만. 뻔한 "좋은 글이네요" 금지.';
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001', max_tokens: 150, system: sys,
+        messages: [{ role: 'user', content: `[상대 글]\n${postText}\n\n이 글에 달 답글만 써줘.` }],
+      }),
+    });
+    const j = await r.json();
+    if (!r.ok) return '';
+    return (j.content?.[0]?.text || '').trim();
+  } catch { return ''; }
+}
+
 // AI 추천 대댓글 초안 — ANTHROPIC_API_KEY 있으면 생성, 없으면 '' (사람이 직접 작성).
 // 반말+스친체, 진심 1~2줄, 링크·영업 금지 (threads-hook-writer 규칙).
 export async function draftReply(commentText, { postText } = {}) {

@@ -41,6 +41,9 @@ import {
   threadsInsightsMessage,
   handleThreadsCallback,
   handleReplyCallback,
+  handleHottimeCallback,
+  handleEngageCallback,
+  findAndQueue,
   maybeHandleThreadsFlow,
 } from './_threads-bot.js';
 
@@ -152,6 +155,36 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true });
     }
 
+    // ── 핫타임 버튼 (ht:queue|pass) ──
+    if ((cb.data || '').startsWith('ht:')) {
+      try {
+        const out = await handleHottimeCallback(cbChat, cb.data || '');
+        if (cb.data === 'ht:queue') {
+          await tg('sendMessage', { chat_id: cbChat, text: out.text, parse_mode: 'HTML', disable_web_page_preview: true, ...(out.reply_markup ? { reply_markup: out.reply_markup } : {}) });
+        } else {
+          await tg('editMessageText', { chat_id: cbChat, message_id: cb.message.message_id, text: out.text, parse_mode: 'HTML', ...(out.reply_markup ? { reply_markup: out.reply_markup } : {}) });
+        }
+      } catch (e) {
+        await tg('sendMessage', { chat_id: cbChat, text: `❌ ${escapeHtml(e.message)}`, parse_mode: 'HTML' });
+      }
+      return res.status(200).json({ ok: true });
+    }
+
+    // ── 인게이지 답글 버튼 (eng:send|reply|pass) ──
+    if ((cb.data || '').startsWith('eng:')) {
+      try {
+        const out = await handleEngageCallback(cbChat, cb.data || '');
+        if (out.force_reply) {
+          await tg('sendMessage', { chat_id: cbChat, text: out.text, parse_mode: 'HTML', disable_web_page_preview: true, reply_markup: { force_reply: true, input_field_placeholder: '답글 입력…' } });
+        } else {
+          await tg('editMessageText', { chat_id: cbChat, message_id: cb.message.message_id, text: out.text, parse_mode: 'HTML', disable_web_page_preview: true });
+        }
+      } catch (e) {
+        await tg('sendMessage', { chat_id: cbChat, text: `❌ ${escapeHtml(e.message)}`, parse_mode: 'HTML' });
+      }
+      return res.status(200).json({ ok: true });
+    }
+
     try {
       const out = await handleGenerateCallback(cbChat, cb.data || '');
       await tg('editMessageText', {
@@ -209,6 +242,14 @@ export default async function handler(req, res) {
   const postCmd = text.match(/^\/post(?:@\w+)?(?:\s+([\s\S]+))?$/i);
   if (postCmd) {
     await reply(await threadsPostNow(postCmd[1] || ''));
+    return res.status(200).json({ ok: true });
+  }
+
+  // ── /find <키워드> — 공개글 검색 → 답글 후보 카드 (수동 답글) ──
+  const findCmd = text.match(/^\/find(?:@\w+)?(?:\s+([\s\S]+))?$/i);
+  if (findCmd) {
+    await reply('🔎 검색 중…');
+    await reply(await findAndQueue(findCmd[1] || '', chatId));
     return res.status(200).json({ ok: true });
   }
 

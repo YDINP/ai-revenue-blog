@@ -1,10 +1,11 @@
 // Threads 텔레그램 봇 명령/콜백 핸들러
-import { escapeHtml } from './_shared.js';
+import { escapeHtml, tg } from './_shared.js';
 import { dispatchWorkflow } from './_github.js';
 import { setState, getState, clearState } from './_state.js';
 import {
   getAccounts, sb, getQueue, updateQueue, publishDraft,
   getReply, updateReply, publishReply, publish, insertPost,
+  keywordSearch, insertEngage, getEngage, updateEngage, engageExists, draftEngageReply,
 } from './_threads.js';
 
 const REPO = 'YDINP/ai-revenue-blog';
@@ -98,6 +99,88 @@ export async function threadsQueueList(topic = 'life') {
     { text: '✖ 닫기', callback_data: 'thr:close' },
   ]);
   return { text: lines.join('\n'), reply_markup: { inline_keyboard: kb } };
+}
+
+// ── 핫타임 알림 버튼 (ht:queue | ht:pass) ──
+export async function handleHottimeCallback(chatId, data) {
+  if (data === 'ht:queue') return await threadsQueueList('life');
+  if (data === 'ht:pass') {
+    await sb('threads_accounts?topic=eq.life&active=eq.true', { method: 'PATCH', body: { hottime_started_at: null } }).catch(() => {});
+    return { text: '⏭ 이번 핫타임 패스 — 자동발행 안 함.', reply_markup: { inline_keyboard: [] } };
+  }
+  return { text: '알 수 없는 동작' };
+}
+
+// ── 아웃바운드 인게이지먼트 (키워드 검색 → 남 글에 답글, 수동 승인) ──
+export function engageCard(row) {
+  const d = row.draft ? `\n\n<b>추천 답글</b>\n${escapeHtml(row.draft)}` : '\n\n<i>추천 답글 없음 — ✍️로 직접 작성</i>';
+  const link = row.permalink ? `\n🔗 ${escapeHtml(row.permalink)}` : '';
+  const text = `🔎 <b>@${escapeHtml(row.post_user || '?')}</b>\n${escapeHtml((row.post_text || '').slice(0, 240))}${link}${d}`;
+  const b = [];
+  if (row.draft) b.push({ text: '✅ 이대로', callback_data: `eng:send:${row.id}` });
+  b.push({ text: '✍️ 답글', callback_data: `eng:reply:${row.id}` });
+  b.push({ text: '🗑 패스', callback_data: `eng:pass:${row.id}` });
+  return { text, reply_markup: { inline_keyboard: [b] } };
+}
+
+async function sendEngageReply(id, text) {
+  const row = await getEngage(id);
+  if (!row) return { text: `#${id} 없음(이미 처리됨?)` };
+  if (!text || !text.trim()) return { text: '❌ 빈 답글이라 취소.' };
+  const acct = (await sb(`threads_accounts?id=eq.${row.account_id}&limit=1`))[0];
+  if (!acct?.access_token) return { text: '❌ 계정 토큰 없음' };
+  try {
+    const mid = await publishReply(acct, { text, replyToId: row.post_id });
+    await updateEngage(id, { status: 'replied', reply_media_id: mid });
+    return { text: `✅ @${escapeHtml(row.post_user || '')} 글에 답글 완료 (#${id})` };
+  } catch (e) {
+    await updateEngage(id, { status: 'failed', error: e.message });
+    return { text: `❌ 답글 실패 #${id}: ${escapeHtml(e.message)}` };
+  }
+}
+
+export async function handleEngageCallback(chatId, data) {
+  const m = /^eng:(send|reply|pass):(\d+)$/.exec(data || '');
+  if (!m) return { text: '알 수 없는 동작' };
+  const [, action, idStr] = m;
+  const id = parseInt(idStr, 10);
+  const row = await getEngage(id);
+  if (!row) return { text: `#${id} 없음(이미 처리됨?)` };
+  if (row.status !== 'pending') return { text: `#${id} 이미 처리됨(${row.status}).` };
+  if (action === 'pass') { await updateEngage(id, { status: 'passed' }); return { text: `🗑 #${id} 패스.` }; }
+  if (action === 'reply') {
+    await setState(chatId, { flow: 'engage_reply', engageId: id });
+    return { text: `✍️ @${escapeHtml(row.post_user || '')} 글에 답글 — 아래 입력창에 써서 보내줘.\n\n상대 글:\n${escapeHtml((row.post_text || '').slice(0, 200))}`, force_reply: true };
+  }
+  return await sendEngageReply(id, row.draft); // send
+}
+
+// /find <키워드> — 키워드로 공개글 검색 → 후보 카드 발송(사람이 골라 답글)
+export async function findAndQueue(keyword, chatId, topic = 'life') {
+  const kw = String(keyword || '').trim();
+  if (!kw) return '사용법: <code>/find 키워드</code> (예: <code>/find 재테크</code>)';
+  const acct = (await sb(`threads_accounts?topic=eq.${encodeURIComponent(topic)}&active=eq.true&limit=1`))[0];
+  if (!acct?.access_token) return `❌ '${escapeHtml(topic)}' 계정 토큰 없음`;
+  let results = [];
+  try { results = await keywordSearch(acct, kw, { limit: 15 }); }
+  catch (e) { return `❌ 검색 실패: ${escapeHtml(e.message)}`; }
+  if (!results.length) return `'${escapeHtml(kw)}' 검색 결과 없음.`;
+  let sent = 0;
+  for (const p of results) {
+    if (!p.id || !p.text) continue;
+    if (await engageExists(p.id)) continue;
+    const draft = await draftEngageReply(p.text).catch(() => '');
+    let row;
+    try { row = await insertEngage({ account_id: acct.id, post_id: p.id, post_text: p.text || '', post_user: p.username || '', permalink: p.permalink || '', draft: draft || null }); }
+    catch { continue; }
+    const card = engageCard(row);
+    await tg('sendMessage', { chat_id: chatId, text: card.text, parse_mode: 'HTML', disable_web_page_preview: true, reply_markup: card.reply_markup }).catch(() => {});
+    sent++;
+    if (sent >= 8) break; // 한 번에 8개까지(도배 방지)
+  }
+  return sent
+    ? `🔎 '${escapeHtml(kw)}' — 후보 ${sent}개 보냈어. 골라서 ✍️ 답글 달아줘 (스팸 X, 진심 답글만 🐶)`
+    : `'${escapeHtml(kw)}' 새 후보 없음(이미 봤거나 텍스트 글 없음).`;
 }
 
 // ── 즉석 발행 (/post) — 큐 안 거치고 바로 Threads 발행 ──
@@ -287,6 +370,11 @@ export async function maybeHandleThreadsFlow(chatId, text) {
     await clearState(chatId);
     const out = await sendReply(st.replyId, text);
     return { note: out.text }; // card 없음
+  }
+  if (st.flow === 'engage_reply') {
+    await clearState(chatId);
+    const out = await sendEngageReply(st.engageId, text);
+    return { note: out.text };
   }
   return null;
 }

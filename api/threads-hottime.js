@@ -23,8 +23,14 @@ export default async function handler(req, res) {
   if (chatId) {
     await tg('sendMessage', {
       chat_id: chatId,
-      text: `🔥 <b>지금 핫타임이야!</b> (초안 ${drafts.length}개 대기)\n\n지금 올리고 싶으면 <code>/threads queue life</code> 로 골라서 ✅ 발행/⏰ 예약 해줘.\n<b>10분 안에 아무것도 안 하면</b> 큐에서 랜덤으로 하나 자동 발행할게 🐶`,
+      text: `🔥 <b>지금 핫타임이야!</b> (초안 ${drafts.length}개 대기)\n\n<b>10분 안에 아무것도 안 하면</b> 큐에서 랜덤으로 하나 자동 발행할게 🐶`,
       parse_mode: 'HTML',
+      reply_markup: {
+        inline_keyboard: [[
+          { text: '📋 큐 보기', callback_data: 'ht:queue' },
+          { text: '⏭ 패스', callback_data: 'ht:pass' },
+        ]],
+      },
     }).catch(() => {});
   }
   return res.status(200).json({ ok: true, drafts: drafts.length });
