@@ -177,7 +177,7 @@ export async function coupangMessage() {
   const [s, rowsRaw] = await Promise.all([
     rpc('get_traffic_summary'),
     // 트래커 통일 전 인라인 링크는 affiliate_click 으로 기록 → 두 타입 모두 조회
-    restGet('analytics?or=(event_type.eq.coupang_click,event_type.eq.affiliate_click)&select=metadata,source,created_at&order=created_at.desc&limit=200'),
+    restGet('analytics?or=(event_type.eq.coupang_click,event_type.eq.affiliate_click)&metadata->>__probe=is.null&select=metadata,source,created_at&order=created_at.desc&limit=200'),
   ]);
   const rows = (Array.isArray(rowsRaw) ? rowsRaw : [])
     .filter((r) => { const m = r.metadata || {}; return m.target === undefined || m.target === 'coupang'; })
@@ -224,7 +224,7 @@ const PD_PLACE_LABEL = { popup: '홈 팝업', banner: '가로 배너', side: '�
 
 export async function paperdocMessage() {
   const rowsRaw = await restGet(
-    'analytics?event_type=eq.paperdoc_click&select=metadata,source,created_at&order=created_at.desc&limit=500'
+    'analytics?event_type=eq.paperdoc_click&metadata->>__probe=is.null&select=metadata,source,created_at&order=created_at.desc&limit=500'
   );
   const rows = Array.isArray(rowsRaw) ? rowsRaw : [];
   const todayKst = new Date(Date.now() + 9 * 3600 * 1000).toISOString().split('T')[0];
