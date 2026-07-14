@@ -188,6 +188,18 @@ export async function getInsights(mediaId, token) {
 }
 
 // ── 댓글(대댓글) 반자동 ──
+// 내 계정의 최근 글(수동 발행 포함) — DB(threads_posts)에 없는 앱 직접 발행글도 커버.
+export async function getMyRecentMedia(account, limit = 25) {
+  const url = new URL(`${GRAPH_V}/${account.threads_user_id}/threads`);
+  url.searchParams.set('fields', 'id,timestamp,media_type');
+  url.searchParams.set('limit', String(limit));
+  url.searchParams.set('access_token', account.access_token);
+  const r = await fetch(url);
+  const j = await r.json();
+  if (!r.ok) throw new Error(`my media fetch failed: ${JSON.stringify(j)}`);
+  return Array.isArray(j.data) ? j.data : [];
+}
+
 // 내 원글에 달린 직접 답글 목록. threads_manage_replies 스코프 필요.
 export async function getReplies(account, mediaId) {
   const url = new URL(`${GRAPH_V}/${mediaId}/replies`);

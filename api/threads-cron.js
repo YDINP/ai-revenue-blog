@@ -4,7 +4,7 @@ import { sendToAdmin, tg } from './_shared.js';
 import {
   sb, getAccounts, publishDraft, refreshLongLived, updateAccount,
   getInsights, publishedCount24h,
-  getReplies, insertReply, replyExists, draftReply,
+  getReplies, insertReply, replyExists, draftReply, getMyRecentMedia,
 } from './_threads.js';
 import { threadsReplyCard } from './_threads-bot.js';
 
@@ -81,42 +81,43 @@ export default async function handler(req, res) {
     }
   } catch (e) { log.errors.push(`insights:${e.message}`); }
 
-  // ── 5) 댓글 반자동: 최근 48h 내 글의 새 댓글 → AI 초안 → 텔레그램 승인카드 ──
+  // ── 5) 댓글 반자동: 내 계정 최근 글(48h, 수동 발행 포함) 새 댓글 → AI 초안 → 텔레그램 카드 ──
   log.replies = 0;
   try {
     const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID;
-    const rSince = new Date(Date.now() - 48 * 3600 * 1000).toISOString();
-    const myPosts = await sb(`threads_posts?published_at=gte.${rSince}&threads_media_id=not.is.null&select=account_id,threads_media_id&limit=30`);
-    const acctById = {};
-    for (const a of await getAccounts(false)) acctById[a.id] = a;
+    const cutoff = Date.now() - 48 * 3600 * 1000;
     const CAP = 10; // 런당 새 댓글 처리 상한(폭주 방지)
-    outer: for (const p of myPosts) {
-      const acct = acctById[p.account_id];
-      if (!acct?.access_token) continue;
-      let replies = [];
-      try { replies = await getReplies(acct, p.threads_media_id); }
-      catch (e) { log.errors.push(`replies#${p.threads_media_id}:${e.message}`); continue; }
-      for (const c of replies) {
-        if (!c.id) continue;
-        if (acct.username && c.username === acct.username) continue; // 내 답글 제외
-        if (await replyExists(c.id)) continue;                       // 이미 수집됨
-        const draft = await draftReply(c.text, { postText: p.text }).catch(() => '');
-        let row;
-        try {
-          row = await insertReply({
-            account_id: acct.id, root_media_id: p.threads_media_id, comment_id: c.id,
-            comment_text: c.text || '', comment_user: c.username || '', draft: draft || null,
-          });
-        } catch { continue; } // comment_id unique 충돌 = 동시성으로 이미 삽입됨
-        if (chatId && row) {
-          const card = threadsReplyCard(row);
-          await tg('sendMessage', {
-            chat_id: chatId, text: card.text, parse_mode: 'HTML',
-            disable_web_page_preview: true, reply_markup: card.reply_markup,
-          }).catch(() => {});
+    outer: for (const acct of await getAccounts(true)) {
+      if (!acct.access_token || !acct.threads_user_id) continue;
+      let media = [];
+      try { media = await getMyRecentMedia(acct, 25); }
+      catch (e) { log.errors.push(`media#${acct.id}:${e.message}`); continue; }
+      for (const p of media) {
+        if (p.timestamp && new Date(p.timestamp).getTime() < cutoff) continue; // 48h 지난 글 skip
+        let replies = [];
+        try { replies = await getReplies(acct, p.id); }
+        catch (e) { log.errors.push(`replies#${p.id}:${e.message}`); continue; }
+        for (const c of replies) {
+          if (!c.id) continue;
+          if (await replyExists(c.id)) continue; // 이미 수집됐거나 내가 보낸 대댓글
+          const draft = await draftReply(c.text, {}).catch(() => '');
+          let row;
+          try {
+            row = await insertReply({
+              account_id: acct.id, root_media_id: p.id, comment_id: c.id,
+              comment_text: c.text || '', comment_user: c.username || '', draft: draft || null,
+            });
+          } catch { continue; } // comment_id unique 충돌 = 동시성으로 이미 삽입됨
+          if (chatId && row) {
+            const card = threadsReplyCard(row);
+            await tg('sendMessage', {
+              chat_id: chatId, text: card.text, parse_mode: 'HTML',
+              disable_web_page_preview: true, reply_markup: card.reply_markup,
+            }).catch(() => {});
+          }
+          log.replies++;
+          if (log.replies >= CAP) break outer;
         }
-        log.replies++;
-        if (log.replies >= CAP) break outer;
       }
     }
   } catch (e) { log.errors.push(`replies:${e.message}`); }
