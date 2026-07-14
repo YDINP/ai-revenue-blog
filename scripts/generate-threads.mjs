@@ -8,10 +8,9 @@
 
 const CLAUDE_MODEL = 'claude-haiku-4-5-20251001';
 const SITE = 'https://ai-revenue-blog.vercel.app';
-// 프로젝트 공개 URL 고정 (SUPABASE_URL secret이 비었거나 잘못돼도 안전). service_role 키만 secret.
-const SB = (/^https?:\/\/[^ ]+\.supabase\.co\/?$/.test(process.env.SUPABASE_URL || '')
-  ? process.env.SUPABASE_URL
-  : 'https://xyprbsmagtlzebxyxsvj.supabase.co').replace(/\/+$/, '');
+// 프로젝트 공개 URL 고정. ⚠️ GH secret SUPABASE_URL은 죽은 옛 프로젝트(mkatz…)를
+// 가리켜 신뢰 불가 → 라이브 프로젝트 URL 하드코딩(service_role 키가 이 프로젝트 소속).
+const SB = 'https://xyprbsmagtlzebxyxsvj.supabase.co';
 const SRK = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 const TOPIC = {
