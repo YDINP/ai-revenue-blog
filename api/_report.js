@@ -200,7 +200,9 @@ export async function reportMessage(dayArg) {
     gscReportLines().catch(() => []),   // Search Console 미연동이면 빈 배열
   ]);
 
-  const wd = ['일', '월', '화', '수', '목', '금', '토'][new Date(`${day}T00:00:00+09:00`).getDay()];
+  // day 는 이미 KST 달력 날짜(YYYY-MM-DD)이므로 UTC 자정으로 파싱해 getUTCDay 로 요일을 뽑는다.
+  // getDay()/+09:00 조합은 서버 로컬 TZ(UTC 러너)에서 하루 밀림 → 07-13(월)이 일요일로 표기됐음.
+  const wd = ['일', '월', '화', '수', '목', '금', '토'][new Date(`${day}T00:00:00Z`).getUTCDay()];
   const lines = [
     `📊 <b>일일 리포트</b> — ${day} (${wd})`,
     '',
