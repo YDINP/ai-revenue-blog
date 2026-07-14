@@ -163,8 +163,10 @@ export async function findAndQueue(keyword, chatId, topic = 'life') {
   if (!acct?.access_token) return `❌ '${escapeHtml(topic)}' 계정 토큰 없음`;
   let results = [];
   try {
-    results = await keywordSearch(acct, kw, { searchType: 'RECENT', limit: 20 });
-    if (!results.length) results = await keywordSearch(acct, kw, { searchType: 'TOP', limit: 20 }); // 폴백
+    // TAG(토픽) 우선 → 없으면 KEYWORD RECENT → TOP 순 폴백 (recall 최대화)
+    results = await keywordSearch(acct, kw, { searchMode: 'TAG', searchType: 'RECENT', limit: 20 });
+    if (!results.length) results = await keywordSearch(acct, kw, { searchMode: 'KEYWORD', searchType: 'RECENT', limit: 20 });
+    if (!results.length) results = await keywordSearch(acct, kw, { searchMode: 'KEYWORD', searchType: 'TOP', limit: 20 });
   } catch (e) { return `❌ 검색 실패: ${escapeHtml(e.message)}`; }
   if (!results.length) return `'${escapeHtml(kw)}' 검색 결과 없음.`;
   let sent = 0;

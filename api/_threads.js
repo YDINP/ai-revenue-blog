@@ -243,10 +243,11 @@ export const replyExists = (mediaId) => {
 };
 
 // ── 아웃바운드 인게이지먼트 (키워드 검색 → 남 글에 답글) ──
-export async function keywordSearch(account, q, { searchType = 'TOP', limit = 15 } = {}) {
+export async function keywordSearch(account, q, { searchType = 'TOP', searchMode = 'KEYWORD', limit = 15 } = {}) {
   const url = new URL(`${GRAPH}/v1.0/keyword_search`);
   url.searchParams.set('q', q);
   url.searchParams.set('search_type', searchType); // TOP | RECENT
+  url.searchParams.set('search_mode', searchMode); // KEYWORD | TAG
   url.searchParams.set('limit', String(limit));
   url.searchParams.set('fields', 'id,text,username,permalink,timestamp');
   url.searchParams.set('access_token', account.access_token);
