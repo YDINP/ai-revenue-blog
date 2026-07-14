@@ -6,6 +6,7 @@ import RelatedPosts from '../components/RelatedPosts.astro';
 import NewsletterCTA from '../components/NewsletterCTA.astro';
 import CommentSection from '../components/CommentSection.astro';
 import SeriesNav from '../components/SeriesNav.astro';
+import PaperdocBanner from '../components/PaperdocBanner.astro';
 import { seriesForSlug } from '../data/series';
 
 interface ChartBarData {
@@ -401,6 +402,9 @@ const seriesItemListLd = roadmap
     {slug && (
       <RelatedPosts currentSlug={slug} category={category} tags={tags} />
     )}
+
+    <!-- 페이퍼닥 프로모 (관련글 추천 하단) -->
+    <PaperdocBanner />
 
     <!-- Newsletter CTA -->
     <NewsletterCTA />
