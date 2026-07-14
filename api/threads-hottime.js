@@ -19,9 +19,9 @@ export default async function handler(req, res) {
     return res.status(200).json({ ok: true, drafts: 0 });
   }
 
-  await sb(`threads_accounts?id=eq.${acct.id}`, { method: 'PATCH', body: { hottime_started_at: new Date().toISOString() } });
+  let msgId = null;
   if (chatId) {
-    await tg('sendMessage', {
+    const r = await tg('sendMessage', {
       chat_id: chatId,
       text: `🔥 <b>지금 핫타임이야!</b> (초안 ${drafts.length}개 대기)\n\n<b>10분 안에 아무것도 안 하면</b> 큐에서 랜덤으로 하나 자동 발행할게 🐶`,
       parse_mode: 'HTML',
@@ -31,7 +31,9 @@ export default async function handler(req, res) {
           { text: '⏭ 패스', callback_data: 'ht:pass' },
         ]],
       },
-    }).catch(() => {});
+    }).catch(() => null);
+    msgId = r?.result?.message_id ? String(r.result.message_id) : null;
   }
+  await sb(`threads_accounts?id=eq.${acct.id}`, { method: 'PATCH', body: { hottime_started_at: new Date().toISOString(), hottime_msg_id: msgId } });
   return res.status(200).json({ ok: true, drafts: drafts.length });
 }
