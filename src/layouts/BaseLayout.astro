@@ -240,13 +240,18 @@ const websiteSchema = {
         // 3) 관리자 플래그가 있으면 집계하지 않음
         try { if (localStorage.getItem(NOTRACK_KEY) === '1') return; } catch (e) {}
         const slug = window.location.pathname.replace(/^\/blog\//, '').replace(/\/$/, '');
+        // UTM 캡처 — 공유 링크(카톡/뉴스레터 등)에 utm_source 를 붙이면 유입경로를 정확히 분리
+        const qs = new URLSearchParams(window.location.search);
+        const utm_source = qs.get('utm_source') || undefined;
+        const utm_medium = qs.get('utm_medium') || undefined;
+        const utm_campaign = qs.get('utm_campaign') || undefined;
         fetch(ANALYTICS_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             event_type: 'pageview',
             source: 'blog',
-            metadata: { slug, title: document.title, path: window.location.pathname, referrer: document.referrer || 'direct', user_agent: navigator.userAgent }
+            metadata: { slug, title: document.title, path: window.location.pathname, referrer: document.referrer || 'direct', user_agent: navigator.userAgent, utm_source, utm_medium, utm_campaign }
           })
         }).catch(() => {});
 

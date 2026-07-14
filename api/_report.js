@@ -53,13 +53,41 @@ const REF_RULES = [
   [/kakao|band\.us/i, '카카오/밴드'],
 ];
 
-function classifyRef(referrer) {
+// 빈 referrer 를 user_agent 로 재분류 — 메신저/SNS 인앱브라우저는 referrer 를 안 넘겨
+// 전부 '직접'으로 뭉치므로 UA 시그니처로 인앱 채널을 분리한다.
+function classifyInAppRef(ua) {
+  const u = String(ua || '');
+  if (/KAKAOTALK/i.test(u)) return '카카오톡 인앱';
+  if (/Instagram/i.test(u)) return 'Instagram 인앱';
+  if (/FBAN|FBAV|FB_IAB/i.test(u)) return 'Facebook 인앱';
+  if (/Line\//i.test(u)) return 'LINE 인앱';
+  if (/NAVER\(inapp/i.test(u)) return 'Naver 앱';
+  if (/DaumApps|DaumDevice/i.test(u)) return 'Daum 앱';
+  if (/BAND\//i.test(u)) return 'Band 인앱';
+  if (/Threads/i.test(u)) return 'Threads 인앱';
+  // 참조 없음 + 알려진 인앱 아님 → WebView 시그니처면 '앱 내(무참조)', 아니면 '직접/북마크'
+  if (/;\s?wv\)/.test(u) || (/(iPhone|iPad)/.test(u) && /Mobile\//.test(u) && !/Safari/.test(u))) return '앱 내(무참조)';
+  return '직접/북마크';
+}
+
+// 분류 우선순위: UTM > referrer 호스트 > (빈 referrer)UA 인앱감지 > 직접
+function classifyRef(referrer, ua, utm) {
+  if (utm) {
+    const s = String(utm).toLowerCase();
+    if (/google/.test(s)) return '구글 검색';
+    if (/naver/.test(s)) return '네이버 검색';
+    if (/daum/.test(s)) return '다음 검색';
+    if (/bing|yahoo|duckduckgo/.test(s)) return '기타 검색';
+    if (/kakao|band/.test(s)) return '카카오/밴드';
+    if (/facebook|instagram|threads|twitter|line|linkedin|reddit/.test(s)) return 'SNS';
+    return `기타(${utm})`;
+  }
   const r = String(referrer || '').trim();
-  if (!r || r === 'direct') return '직접/북마크';
+  if (!r || r === 'direct') return classifyInAppRef(ua);
   for (const [re, label] of REF_RULES) if (re.test(r)) return label;
   try {
     const host = new URL(r).hostname.replace(/^www\./, '');
-    if (/(ai-revenue-blog|life-revenue-blog)\.vercel\.app/.test(host)) return '내부 이동';
+    if (/(ai-revenue-blog|life-revenue-blog)\.vercel\.app/.test(host)) return '사이트 내 이동';
     return `기타(${host})`;
   } catch {
     return '기타';
@@ -103,7 +131,7 @@ async function collect(day) {
       : decodeURIComponent(m.slug || m.path || '홈');
     const key = `${r.source === 'lifeflow' ? 'LF' : 'TF'}|${title}`;
     byPost[key] = (byPost[key] || 0) + 1;
-    const c = classifyRef(m.referrer);
+    const c = classifyRef(m.referrer, m.user_agent, m.utm_source);
     refs[c] = (refs[c] || 0) + 1;
   });
 

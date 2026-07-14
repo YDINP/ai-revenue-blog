@@ -3594,7 +3594,10 @@ const ICONS: Record<string, string> = {
         if (/DaumApps|DaumDevice/i.test(u)) return { key: 'Daum 앱', kind: 'inapp' };
         if (/BAND\//i.test(u)) return { key: 'Band 인앱', kind: 'inapp' };
         if (/Threads/i.test(u)) return { key: 'Threads 인앱', kind: 'inapp' };
-        return { key: '직접 유입', kind: 'direct' };
+        // 참조 없음 + 알려진 인앱 아님 → WebView 시그니처면 '앱 내(무참조)', 아니면 '직접/북마크'
+        //  · Android WebView: UA 에 "; wv)" 토큰  · iOS 앱 WKWebView: iPhone/iPad + Mobile/ 인데 Safari 토큰 없음(브라우저는 항상 Safari 포함)
+        if (/;\s?wv\)/.test(u) || (/(iPhone|iPad)/.test(u) && /Mobile\//.test(u) && !/Safari/.test(u))) return { key: '앱 내(무참조)', kind: 'appref' };
+        return { key: '직접/북마크', kind: 'direct' };
       }
 
       // utm_source 문자열 → 채널 (수집단이 UTM 을 넘긴 신규 트래픽용, 최고 신뢰도)
@@ -3620,7 +3623,7 @@ const ICONS: Record<string, string> = {
         // 로컬/개발 트래픽
         if (h === 'localhost' || h === '127.0.0.1' || /^192\.168\.|^10\.|^172\.(1[6-9]|2\d|3[01])\./.test(h) || h.endsWith('.local')) return { key: '로컬/개발', kind: 'internal' };
         // 자기 도메인(내부 이동) → 직접 유입으로 합산(GA self-referral 처리)
-        if (h.includes('ai-revenue-blog') || h.includes('life-revenue-blog')) return { key: '직접 유입', kind: 'direct' };
+        if (h.includes('ai-revenue-blog') || h.includes('life-revenue-blog')) return { key: '사이트 내 이동', kind: 'selfref' };
         if (h.includes('google')) return { key: 'Google', kind: 'search' };
         if (h.includes('naver')) return { key: 'Naver', kind: 'search' };
         if (h.includes('daum') || h.includes('kakao')) return { key: 'Daum/Kakao', kind: 'search' };
@@ -3742,7 +3745,7 @@ const ICONS: Record<string, string> = {
         return tip;
       }
 
-      const REF_COLORS = { direct: '#94a3b8', search: '#60a5fa', social: '#f472b6', referral: '#4ade80', internal: '#64748b', inapp: '#fbbf24' };
+      const REF_COLORS = { direct: '#94a3b8', search: '#60a5fa', social: '#f472b6', referral: '#4ade80', internal: '#64748b', inapp: '#fbbf24', selfref: '#a78bfa', appref: '#fb923c' };
       const DEV_COLORS = { Mobile: '#60a5fa', Desktop: '#c084fc', Tablet: '#facc15' };
       const OS_COLORS = { Windows: '#60a5fa', macOS: '#c084fc', Android: '#4ade80', iOS: '#f472b6', Linux: '#facc15', 기타: '#94a3b8' };
       const BR_COLORS = { Chrome: '#60a5fa', Safari: '#4ade80', Edge: '#22d3ee', Firefox: '#fb923c', Samsung: '#c084fc', KakaoTalk: '#facc15', 'In-App': '#f472b6', 기타: '#94a3b8' };
