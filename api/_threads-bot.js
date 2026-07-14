@@ -75,6 +75,28 @@ export async function threadsQueueCards(topic) {
   return rows.map(threadsCard);
 }
 
+// ── 대기 초안 목록 (한 메시지 + 선택 버튼) ──
+export async function threadsQueueList(topic = 'life') {
+  let ids = null;
+  const accts = await sb(`threads_accounts?topic=eq.${encodeURIComponent(topic)}&select=id`);
+  ids = accts.map((a) => a.id);
+  if (!ids.length) return { text: `'${escapeHtml(topic)}' 계정이 없습니다.` };
+  const rows = await sb(`threads_queue?status=eq.draft&account_id=in.(${ids.join(',')})&select=id,text,link_kind&order=id.desc&limit=20`);
+  if (!rows.length) return { text: '큐에 초안이 없어. <code>/threads gen life 2</code> 로 채워줘.' };
+
+  const lines = [`🧵 <b>큐 초안 ${rows.length}개</b> — 눌러서 발행/예약`, ''];
+  const btns = [];
+  for (const r of rows) {
+    const tag = r.link_kind === 'none' ? '💬' : '📄';
+    lines.push(`${tag} <b>#${r.id}</b> ${preview(r.text, 40)}`);
+    btns.push({ text: `${tag}#${r.id}`, callback_data: `thr:show:${r.id}` });
+  }
+  const kb = [];
+  for (let i = 0; i < btns.length; i += 3) kb.push(btns.slice(i, i + 3));
+  kb.push([{ text: '🔀 랜덤 발행', callback_data: `thr:rand:${topic}` }]);
+  return { text: lines.join('\n'), reply_markup: { inline_keyboard: kb } };
+}
+
 // ── 다음 골든타임(KST 08:00 / 23:00) UTC ISO ──
 function nextGoldenSlotUtc() {
   const now = Date.now();
@@ -105,8 +127,39 @@ export async function threadsInsightsMessage(days = 7) {
   return lines.join('\n');
 }
 
-// ── 콜백 처리 (thr:pub|edit|sched|rej:ID) → {text, reply_markup?} ──
+// ── 콜백 처리 (thr:list|show|rand|pub|edit|sched|rej) → {text, reply_markup?} ──
 export async function handleThreadsCallback(chatId, data) {
+  let mm;
+  // 목록으로 돌아가기
+  if ((mm = /^thr:list:(.+)$/.exec(data || ''))) {
+    return await threadsQueueList(mm[1]);
+  }
+  // 초안 하나 펼쳐 카드 보기(+목록 back)
+  if ((mm = /^thr:show:(\d+)$/.exec(data || ''))) {
+    const row = await getQueue(parseInt(mm[1], 10));
+    if (!row) return { text: `초안 #${mm[1]} 없음(이미 처리됨?)` };
+    const card = threadsCard(row);
+    card.reply_markup.inline_keyboard.push([{ text: '◀ 목록', callback_data: 'thr:list:life' }]);
+    return { text: card.text, reply_markup: card.reply_markup };
+  }
+  // 랜덤 즉시 발행
+  if ((mm = /^thr:rand:(.+)$/.exec(data || ''))) {
+    const topic = mm[1];
+    const acct = (await sb(`threads_accounts?topic=eq.${encodeURIComponent(topic)}&active=eq.true&limit=1`))[0];
+    if (!acct?.access_token) return { text: '❌ 계정 토큰 없음' };
+    const drafts = await sb(`threads_queue?status=eq.draft&account_id=eq.${acct.id}&select=*`);
+    if (!drafts.length) return { text: '큐에 초안이 없어.' };
+    const pick = drafts[Math.floor(Math.random() * drafts.length)];
+    try {
+      const mid = await publishDraft(acct, pick);
+      await sb(`threads_accounts?id=eq.${acct.id}`, { method: 'PATCH', body: { hottime_started_at: null } }).catch(() => {});
+      return { text: `🔀 랜덤 발행 완료: #${pick.id} (media ${mid})${pick.link_url ? '\n🔗 링크는 첫 댓글에' : ''}` };
+    } catch (e) {
+      await updateQueue(pick.id, { status: 'failed', error: e.message });
+      return { text: `❌ 발행 실패 #${pick.id}: ${escapeHtml(e.message)}` };
+    }
+  }
+
   const m = /^thr:(pub|edit|sched|rej):(\d+)$/.exec(data || '');
   if (!m) return { text: '알 수 없는 동작' };
   const [, action, idStr] = m;

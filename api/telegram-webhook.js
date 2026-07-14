@@ -36,6 +36,7 @@ import {
   threadsStatusMessage,
   threadsGenMessage,
   threadsQueueCards,
+  threadsQueueList,
   threadsInsightsMessage,
   handleThreadsCallback,
   handleReplyCallback,
@@ -112,6 +113,7 @@ export default async function handler(req, res) {
           text: out.text,
           parse_mode: 'HTML',
           disable_web_page_preview: true,
+          ...(out.reply_markup ? { reply_markup: out.reply_markup } : {}),
         });
       } catch (e) {
         console.error('threads callback error:', e);
@@ -211,13 +213,11 @@ export default async function handler(req, res) {
       if (sub === 'gen') {
         await reply(await threadsGenMessage(parts[1], parts[2], parts[3]));
       } else if (sub === 'queue') {
-        const cards = await threadsQueueCards(parts[1]);
-        for (const c of cards) {
-          await tg('sendMessage', {
-            chat_id: chatId, text: c.text, parse_mode: 'HTML',
-            disable_web_page_preview: true, ...(c.reply_markup ? { reply_markup: c.reply_markup } : {}),
-          });
-        }
+        const list = await threadsQueueList(parts[1] || 'life');
+        await tg('sendMessage', {
+          chat_id: chatId, text: list.text, parse_mode: 'HTML',
+          disable_web_page_preview: true, ...(list.reply_markup ? { reply_markup: list.reply_markup } : {}),
+        });
       } else if (sub === 'insights') {
         await reply(await threadsInsightsMessage(parts[1] ? parseInt(parts[1], 10) : 7));
       } else {
