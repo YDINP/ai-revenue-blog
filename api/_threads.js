@@ -190,7 +190,8 @@ export async function getInsights(mediaId, token) {
 // ── 댓글(대댓글) 반자동 ──
 // 내 계정의 최근 글(수동 발행 포함) — DB(threads_posts)에 없는 앱 직접 발행글도 커버.
 export async function getMyRecentMedia(account, limit = 25) {
-  const url = new URL(`${GRAPH_V}/${account.threads_user_id}/threads`);
+  // 본인 글 조회는 'me' 별칭이 안정적(토큰 주인으로 해석). 숫자 user_id는 노드 조회 불가한 경우 있음.
+  const url = new URL(`${GRAPH_V}/me/threads`);
   url.searchParams.set('fields', 'id,timestamp,media_type');
   url.searchParams.set('limit', String(limit));
   url.searchParams.set('access_token', account.access_token);
