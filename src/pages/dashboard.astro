@@ -304,6 +304,7 @@ const ICONS: Record<string, string> = {
       .main-tab.active-tf,
       .main-tab.active-lf,
       .main-tab.active-coupang,
+      .main-tab.active-paperdoc,
       .main-tab.active-comments {
         color: var(--text);
         border-bottom-color: var(--accent);
@@ -836,6 +837,7 @@ const ICONS: Record<string, string> = {
 
       .src-badge.tf { background: rgba(59, 130, 246, 0.15); color: #93bbfd; }
       .src-badge.lf { background: rgba(22, 163, 74, 0.15); color: #6ee7a5; }
+      .src-badge.gf { background: rgba(168, 85, 247, 0.15); color: #d8b4fe; }
 
       /* ── 추천 TOP ─────────────────────────────────────── */
       .like-top-panel { margin-top: 1.25rem; }
@@ -1995,6 +1997,7 @@ const ICONS: Record<string, string> = {
         <button class="main-tab" data-tab="techflow">TechFlow</button>
         <button class="main-tab" data-tab="lifeflow">LifeFlow</button>
         <button class="main-tab" data-tab="coupang">쿠팡</button>
+        <button class="main-tab" data-tab="paperdoc">페이퍼닥</button>
         <button class="main-tab" data-tab="comments">댓글</button>
       </div>
 
@@ -2632,6 +2635,59 @@ const ICONS: Record<string, string> = {
         </div>
       </div>
 
+      <!-- Tab: 페이퍼닥 프로모 클릭 -->
+      <div class="tab-content" id="tab-paperdoc">
+        <div class="coupang-stats">
+          <div class="coupang-card">
+            <h4>총 클릭 수</h4>
+            <div class="conversion-rate" id="pd-total-clicks">--</div>
+            <div class="sub">누적 페이퍼닥 클릭</div>
+          </div>
+          <div class="coupang-card">
+            <h4>오늘 클릭</h4>
+            <div class="conversion-rate" id="pd-today-clicks">--</div>
+            <div class="sub">금일 클릭 수</div>
+          </div>
+          <div class="coupang-card">
+            <h4>TechFlow</h4>
+            <div class="conversion-rate" id="pd-tf-clicks">--</div>
+            <div class="sub" id="pd-tf-detail">TF 클릭 (오늘 --)</div>
+          </div>
+          <div class="coupang-card">
+            <h4>LifeFlow</h4>
+            <div class="conversion-rate" id="pd-lf-clicks">--</div>
+            <div class="sub" id="pd-lf-detail">LF 클릭 (오늘 --)</div>
+          </div>
+          <div class="coupang-card">
+            <h4>GameFlow</h4>
+            <div class="conversion-rate" id="pd-gf-clicks">--</div>
+            <div class="sub" id="pd-gf-detail">GF 클릭 (오늘 --)</div>
+          </div>
+        </div>
+
+        <div class="traffic-section">
+          <div class="traffic-header">
+            <h3><svg class="ico sec-ico i-amber" viewBox="0 0 24 24" set:html={ICONS['cart']}></svg> 노출 위치별 클릭 <span class="like-top-total" id="pd-place-total"></span></h3>
+          </div>
+          <div class="traffic-body">
+            <div class="top-page-list" id="paperdoc-placements">
+              <div class="no-data">위치별 클릭 데이터 로딩 중...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="traffic-section">
+          <div class="traffic-header">
+            <h3><svg class="ico sec-ico i-amber" viewBox="0 0 24 24" set:html={ICONS['cart']}></svg> 페이퍼닥 클릭 트래킹</h3>
+          </div>
+          <div class="traffic-body">
+            <div class="event-feed" id="paperdoc-events">
+              <div class="no-data">페이퍼닥 클릭 데이터 로딩 중...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Tab: 댓글 관리 -->
       <div class="tab-content" id="tab-comments">
         <!-- 관리자 인증 -->
@@ -2893,6 +2949,7 @@ const ICONS: Record<string, string> = {
         pageview: '\uD83D\uDC41',
         like: '\u2764\uFE0F',
         coupang_click: '\uD83D\uDED2',
+        paperdoc_click: '\uD83D\uDCC4',
         newsletter_subscribe: '\uD83D\uDCE7'
       };
 
@@ -2900,6 +2957,7 @@ const ICONS: Record<string, string> = {
         pageview: 'Viewed',
         like: 'Liked',
         coupang_click: 'Coupang Click',
+        paperdoc_click: 'Paperdoc Click',
         newsletter_subscribe: 'Subscribed'
       };
 
@@ -3424,6 +3482,7 @@ const ICONS: Record<string, string> = {
       function sourceBadge(source) {
         if (source === 'blog') return '<span class="src-badge tf">TF</span>';
         if (source === 'lifeflow') return '<span class="src-badge lf">LF</span>';
+        if (source === 'gameflow') return '<span class="src-badge gf">GF</span>';
         return '';
       }
 
@@ -3844,6 +3903,101 @@ const ICONS: Record<string, string> = {
             <div class="event-content">
               ${prodEl}
               <div class="event-page-title" title="${path}">${sourceBadge(src)} 📄 ${postTitle.length > 40 ? postTitle.slice(0,40)+'…' : postTitle}</div>
+            </div>
+            <span class="event-time">${timeAgo(r.created_at)}</span>
+          </div>`;
+        }).join('');
+      }
+
+      // === 페이퍼닥 프로모 클릭 (analytics 직접 조회 → source·placement 집계) ===
+      async function fetchPaperdocClicks() {
+        try {
+          const res = await fetch(
+            `${SUPABASE_URL}/rest/v1/analytics?event_type=eq.paperdoc_click&select=metadata,source,created_at&order=created_at.desc&limit=2000`,
+            { headers }
+          );
+          if (!res.ok) return [];
+          const rows = await res.json();
+          return Array.isArray(rows) ? rows : [];
+        } catch { return []; }
+      }
+
+      const PD_PLACE_LABEL = { popup: '홈 팝업', banner: '가로 배너', side: '사이드 배너', other: '기타' };
+
+      function renderPaperdocStats(rows) {
+        const list = Array.isArray(rows) ? rows : [];
+        const todayKst = new Date(Date.now() + 9 * 3600 * 1000).toISOString().split('T')[0];
+        const dayOf = (ts) => new Date(new Date(ts).getTime() + 9 * 3600 * 1000).toISOString().split('T')[0];
+        const bySrc = { blog: { total: 0, today: 0 }, lifeflow: { total: 0, today: 0 }, gameflow: { total: 0, today: 0 } };
+        let total = 0, today = 0;
+        list.forEach(r => {
+          total++;
+          const isToday = dayOf(r.created_at) === todayKst;
+          if (isToday) today++;
+          const b = bySrc[r.source];
+          if (b) { b.total++; if (isToday) b.today++; }
+        });
+        const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+        set('pd-total-clicks', fmt(total));
+        set('pd-today-clicks', fmt(today));
+        set('pd-tf-clicks', fmt(bySrc.blog.total));
+        set('pd-lf-clicks', fmt(bySrc.lifeflow.total));
+        set('pd-gf-clicks', fmt(bySrc.gameflow.total));
+        set('pd-tf-detail', `TF 클릭 (오늘 ${fmt(bySrc.blog.today)})`);
+        set('pd-lf-detail', `LF 클릭 (오늘 ${fmt(bySrc.lifeflow.today)})`);
+        set('pd-gf-detail', `GF 클릭 (오늘 ${fmt(bySrc.gameflow.today)})`);
+      }
+
+      function renderPaperdocPlacements(rows) {
+        const container = document.getElementById('paperdoc-placements');
+        const totalEl = document.getElementById('pd-place-total');
+        if (!container) return;
+        const list = Array.isArray(rows) ? rows : [];
+        if (!list.length) {
+          container.innerHTML = '<div class="no-data">아직 페이퍼닥 클릭 데이터가 없습니다. 📄</div>';
+          if (totalEl) totalEl.textContent = '';
+          return;
+        }
+        const by = {};
+        list.forEach(r => {
+          const p = (r.metadata && r.metadata.placement) || 'other';
+          by[p] = (by[p] || 0) + 1;
+        });
+        const arr = Object.entries(by).map(([k, v]) => ({ key: k, count: v })).sort((a, b) => b.count - a.count);
+        const total = arr.reduce((s, x) => s + x.count, 0);
+        if (totalEl) totalEl.textContent = `(총 ${fmt(total)}클릭 · ${arr.length}종)`;
+        const max = arr[0].count || 1;
+        container.innerHTML = arr.map((p, i) => {
+          const barPct = Math.max(Math.round((p.count / max) * 100), 4);
+          const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}`;
+          const name = PD_PLACE_LABEL[p.key] || p.key;
+          return `<div class="like-top-item">
+            <span class="top-page-rank">${medal}</span>
+            <span class="top-page-title" title="${name}">${name}</span>
+            <div class="like-bar-wrap"><div class="like-bar-fill" style="width:${barPct}%;background:linear-gradient(90deg,#a855f7,#facc15)"></div></div>
+            <span class="like-top-count" style="color:#d8b4fe">${fmt(p.count)}</span>
+          </div>`;
+        }).join('');
+      }
+
+      function renderPaperdocFeed(rows) {
+        const container = document.getElementById('paperdoc-events');
+        if (!container) return;
+        const list = (Array.isArray(rows) ? rows : []).slice(0, 20);
+        if (!list.length) {
+          container.innerHTML = '<div class="no-data">아직 페이퍼닥 클릭 데이터가 없습니다.</div>';
+          return;
+        }
+        container.innerHTML = list.map(r => {
+          const m = r.metadata || {};
+          const place = PD_PLACE_LABEL[m.placement] || m.placement || '기타';
+          const postTitle = getPageTitle({ title: m.title, slug: m.slug, path: m.path });
+          const path = m.path || (m.slug ? `/blog/${m.slug}/` : '');
+          return `<div class="event-item">
+            <span class="event-icon paperdoc_click">📄</span>
+            <div class="event-content">
+              <div class="event-action" style="color:#d8b4fe">${place}</div>
+              <div class="event-page-title" title="${path}">${sourceBadge(r.source)} 📄 ${postTitle.length > 40 ? postTitle.slice(0,40)+'…' : postTitle}</div>
             </div>
             <span class="event-time">${timeAgo(r.created_at)}</span>
           </div>`;
@@ -4335,13 +4489,16 @@ const ICONS: Record<string, string> = {
           renderTopLikedPosts(topLiked);
           // 오디언스(유입경로·기기) + 쿠팡 + 뉴스레터 → 퍼널·인사이트 일괄 렌더
           _funnelCounts.pageviews = Number(summary?.total_views) || 0;   // 퍼널 분모=실제 총 페이지뷰
-          Promise.all([fetchAudience(), fetchCoupangProducts(), fetchNewsletterCount()]).then(([aud, coup, nl]) => {
+          Promise.all([fetchAudience(), fetchCoupangProducts(), fetchNewsletterCount(), fetchPaperdocClicks()]).then(([aud, coup, nl, pd]) => {
             renderAudience(aud);
             _hourlyVisitors = computeHourlyVisitors(aud);   // 시간대 방문자(방문자 모드용)
             if (_trafficMetric === 'visitors') renderHourlyChart();
             if (_topPagesPeriod !== 'all') renderTopPages();   // 기간별 Top Pages는 오디언스 로드 후 갱신
             renderCoupangProducts(coup);
             renderCoupangFeed(coup);
+            renderPaperdocStats(pd);
+            renderPaperdocPlacements(pd);
+            renderPaperdocFeed(pd);
             _funnelCounts.coupang = Array.isArray(coup) ? coup.length : 0;
             _funnelCounts.newsletter = nl;
             renderFunnelGoals();
@@ -4369,7 +4526,7 @@ const ICONS: Record<string, string> = {
 
           // 모든 탭 비활성화
           mainTabs.forEach(t => {
-            t.classList.remove('active', 'active-tf', 'active-lf', 'active-coupang');
+            t.classList.remove('active', 'active-tf', 'active-lf', 'active-coupang', 'active-paperdoc');
           });
 
           // 클릭한 탭 활성화
@@ -4379,6 +4536,8 @@ const ICONS: Record<string, string> = {
             tab.classList.add('active-lf');
           } else if (targetTab === 'coupang') {
             tab.classList.add('active-coupang');
+          } else if (targetTab === 'paperdoc') {
+            tab.classList.add('active-paperdoc');
           } else if (targetTab === 'comments') {
             tab.classList.add('active-comments');
             loadCommentDashboard();

@@ -6,6 +6,7 @@ import {
   commentStatsMessage,
   commentsMessages,
   coupangMessage,
+  paperdocMessage,
   likesMessage,
   recentMessage,
   sourceMessage,
@@ -43,6 +44,7 @@ const HELP = [
   '• /gsc [일수] — 구글 검색 유입 (검색어·노출·CTR·평균순위, 기본 7일)',
   '• /tf · /lf — TechFlow / LifeFlow 소스별 요약',
   '• /coupang — 쿠팡 클릭 상세 (어떤 글→어떤 링크)',
+  '• /paperdoc — 페이퍼닥 클릭 (블로그별 TF·LF·GF, 위치별)',
   '• /top [n] · /trend · /likes · /recent [n]',
   '',
   '<b>💬 댓글 관리</b>',
@@ -215,6 +217,7 @@ export default async function handler(req, res) {
         trend: () => trendMessage(),
         cstats: () => commentStatsMessage(),
         coupang: () => coupangMessage(),
+        paperdoc: () => paperdocMessage(),
         likes: () => likesMessage(num ?? 10),
         recent: () => recentMessage(num ?? 10),
       };

@@ -218,6 +218,59 @@ export async function coupangMessage() {
   return lines.join('\n');
 }
 
+// ── /paperdoc — 페이퍼닥 프로모 클릭 (블로그별·위치별) ──────
+const PD_SRC_LABEL = { blog: 'TF', lifeflow: 'LF', gameflow: 'GF' };
+const PD_PLACE_LABEL = { popup: '홈 팝업', banner: '가로 배너', side: '사이드 배너', other: '기타' };
+
+export async function paperdocMessage() {
+  const rowsRaw = await restGet(
+    'analytics?event_type=eq.paperdoc_click&select=metadata,source,created_at&order=created_at.desc&limit=500'
+  );
+  const rows = Array.isArray(rowsRaw) ? rowsRaw : [];
+  const todayKst = new Date(Date.now() + 9 * 3600 * 1000).toISOString().split('T')[0];
+  const dayOf = (ts) => new Date(new Date(ts).getTime() + 9 * 3600 * 1000).toISOString().split('T')[0];
+
+  const bySrc = { blog: { total: 0, today: 0 }, lifeflow: { total: 0, today: 0 }, gameflow: { total: 0, today: 0 } };
+  const byPlace = {};
+  let total = 0, today = 0;
+  rows.forEach((r) => {
+    total++;
+    const isToday = dayOf(r.created_at) === todayKst;
+    if (isToday) today++;
+    const b = bySrc[r.source];
+    if (b) { b.total++; if (isToday) b.today++; }
+    const p = (r.metadata && r.metadata.placement) || 'other';
+    byPlace[p] = (byPlace[p] || 0) + 1;
+  });
+
+  const lines = [
+    `📄 <b>페이퍼닥 클릭</b>  <i>${nowKst()}</i>`,
+    '',
+    `오늘 <b>${fmt(today)}</b> · 누적 <b>${fmt(total)}</b>`,
+    `    TF ${fmt(bySrc.blog.total)} · LF ${fmt(bySrc.lifeflow.total)} · GF ${fmt(bySrc.gameflow.total)}`,
+  ];
+
+  const places = Object.entries(byPlace).sort((a, b) => b[1] - a[1]);
+  if (places.length) {
+    lines.push('', '<b>노출 위치별</b>');
+    places.forEach(([k, c]) => lines.push(`· ${PD_PLACE_LABEL[k] || k} — <b>${fmt(c)}</b>`));
+  }
+
+  const recent = rows.slice(0, 8);
+  if (recent.length) {
+    lines.push('', '<b>최근 클릭</b>');
+    recent.forEach((r) => {
+      const m = r.metadata || {};
+      const src = PD_SRC_LABEL[r.source] || r.source || '?';
+      const place = PD_PLACE_LABEL[m.placement] || m.placement || '기타';
+      lines.push(`· [${src}] ${place} ← ${escapeHtml(cut(pageTitle(m), 24))} (${timeAgo(r.created_at)})`);
+    });
+  } else {
+    lines.push('', '아직 클릭 데이터가 없습니다.');
+  }
+  return lines.join('\n');
+}
+
 // ── /likes — 추천(좋아요) Top ───────────────────────────────
 export async function likesMessage(n = 10) {
   n = Math.min(Math.max(n, 1), 15);
