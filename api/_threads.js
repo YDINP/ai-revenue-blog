@@ -107,13 +107,35 @@ export async function codeToShortToken(code) {
   return j; // { access_token, user_id }
 }
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// 컨테이너 게시 (2단계). 컨테이너가 처리되기 전 게시하면 "Media Not Found"(subcode 4279009)가
+// 나므로, 잠깐 기다렸다가 재시도한다. 텍스트는 대개 1~2초면 준비됨.
+const UID = 'me'; // 숫자 threads_user_id는 노드로 안 먹는 경우 있음 → 'me'가 안정
+
+async function finalizePublish(token, creationId) {
+  const pub = new URL(`${GRAPH_V}/${UID}/threads_publish`);
+  pub.searchParams.set('creation_id', creationId);
+  pub.searchParams.set('access_token', token);
+  const delays = [1000, 2000, 3000]; // 최대 ~6초(Vercel 10s 제한 여유), 텍스트는 대개 1~2초면 준비
+  let last;
+  for (let i = 0; i < delays.length; i++) {
+    await sleep(delays[i]);
+    const pRes = await fetch(pub, { method: 'POST' });
+    const pJson = await pRes.json();
+    if (pRes.ok && pJson.id) return pJson.id;
+    last = pJson;
+    const sub = pJson?.error?.error_subcode;
+    const transient = pJson?.error?.is_transient === true;
+    if (sub !== 4279009 && !transient) throw new Error(`publish failed: ${JSON.stringify(pJson)}`); // 준비지연 아니면 즉시 중단
+  }
+  throw new Error(`publish failed(after retries): ${JSON.stringify(last)}`);
+}
+
 // ── 발행 (2단계: 컨테이너 생성 → 게시) ──
 export async function publish(account, { text, imageUrl }) {
-  const uid = 'me'; // 숫자 threads_user_id는 노드로 안 먹는 경우 있음 → 'me'가 안정
   const token = account.access_token;
-
-  // 1) 컨테이너 생성
-  const create = new URL(`${GRAPH_V}/${uid}/threads`);
+  const create = new URL(`${GRAPH_V}/${UID}/threads`);
   create.searchParams.set('media_type', imageUrl ? 'IMAGE' : 'TEXT');
   if (text) create.searchParams.set('text', text);
   if (imageUrl) create.searchParams.set('image_url', imageUrl);
@@ -121,22 +143,13 @@ export async function publish(account, { text, imageUrl }) {
   const cRes = await fetch(create, { method: 'POST' });
   const cJson = await cRes.json();
   if (!cRes.ok || !cJson.id) throw new Error(`container failed: ${JSON.stringify(cJson)}`);
-
-  // 2) 게시 (미디어 처리 지연 대비 — 이미지면 잠깐 여유가 필요할 수 있음. 텍스트는 즉시)
-  const pub = new URL(`${GRAPH_V}/${uid}/threads_publish`);
-  pub.searchParams.set('creation_id', cJson.id);
-  pub.searchParams.set('access_token', token);
-  const pRes = await fetch(pub, { method: 'POST' });
-  const pJson = await pRes.json();
-  if (!pRes.ok || !pJson.id) throw new Error(`publish failed: ${JSON.stringify(pJson)}`);
-  return pJson.id; // media id
+  return await finalizePublish(token, cJson.id);
 }
 
-// 자답(첫 댓글) — hook-writer 규칙: 외부링크는 본문 아닌 첫 댓글에 (도달 보호)
+// 대댓글/자답 발행 — hook-writer 규칙: 외부링크는 본문 아닌 첫 댓글에 (도달 보호)
 export async function publishReply(account, { text, replyToId }) {
-  const uid = 'me'; // 숫자 threads_user_id는 노드로 안 먹는 경우 있음 → 'me'가 안정
   const token = account.access_token;
-  const create = new URL(`${GRAPH_V}/${uid}/threads`);
+  const create = new URL(`${GRAPH_V}/${UID}/threads`);
   create.searchParams.set('media_type', 'TEXT');
   create.searchParams.set('text', text);
   create.searchParams.set('reply_to_id', replyToId);
@@ -144,13 +157,7 @@ export async function publishReply(account, { text, replyToId }) {
   const cRes = await fetch(create, { method: 'POST' });
   const cJson = await cRes.json();
   if (!cRes.ok || !cJson.id) throw new Error(`reply container failed: ${JSON.stringify(cJson)}`);
-  const pub = new URL(`${GRAPH_V}/${uid}/threads_publish`);
-  pub.searchParams.set('creation_id', cJson.id);
-  pub.searchParams.set('access_token', token);
-  const pRes = await fetch(pub, { method: 'POST' });
-  const pJson = await pRes.json();
-  if (!pRes.ok || !pJson.id) throw new Error(`reply publish failed: ${JSON.stringify(pJson)}`);
-  return pJson.id;
+  return await finalizePublish(token, cJson.id);
 }
 
 // 쿠팡 파트너스 정적 검색 URL (딥링크/Open API 아님 — lptag 검색 URL만, 호출 금지 제약 준수)
