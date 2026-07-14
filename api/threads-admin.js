@@ -1,0 +1,69 @@
+// 관리자/자동화 통합 트리거 (CRON_SECRET). Hobby 함수 12개 한도 절약용 통합.
+//  ?action=post          body{text,topic?,linkUrl?}  → 즉석 발행
+//  ?action=find&q=&topic= → keyword_search 후보 카드 발송
+//  ?action=reply-delete[&rid=N|&media=id]  → 대댓글 삭제(목록/삭제)
+import { sb, publish, publishReply, insertPost, getAccounts, deleteMedia } from './_threads.js';
+import { findAndQueue } from './_threads-bot.js';
+
+export default async function handler(req, res) {
+  const secret = process.env.CRON_SECRET;
+  if (!secret || req.headers.authorization !== `Bearer ${secret}`) {
+    return res.status(401).json({ error: 'unauthorized' });
+  }
+  const b = req.body || {};
+  const action = req.query?.action || b.action;
+  const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID;
+
+  try {
+    if (action === 'post') {
+      const topic = b.topic || req.query?.topic || 'life';
+      const text = (b.text || req.query?.text || '').trim();
+      const linkUrl = b.linkUrl || req.query?.linkUrl || '';
+      if (!text) return res.status(400).json({ error: 'no text' });
+      const acct = (await sb(`threads_accounts?topic=eq.${encodeURIComponent(topic)}&active=eq.true&limit=1`))[0];
+      if (!acct?.access_token) return res.status(400).json({ error: `no token for ${topic}` });
+      const mediaId = await publish(acct, { text });
+      if (linkUrl) await publishReply(acct, { text: `전문 👇\n${linkUrl}`, replyToId: mediaId }).catch(() => {});
+      await insertPost({ account_id: acct.id, threads_media_id: mediaId }).catch(() => {});
+      await sb(`threads_accounts?id=eq.${acct.id}`, { method: 'PATCH', body: { hottime_started_at: null } }).catch(() => {});
+      return res.status(200).json({ ok: true, mediaId });
+    }
+
+    if (action === 'find') {
+      const q = req.query?.q || b.q || '';
+      const topic = req.query?.topic || b.topic || 'life';
+      const summary = await findAndQueue(q, chatId, topic);
+      return res.status(200).json({ ok: true, summary });
+    }
+
+    if (action === 'reply-delete') {
+      const rid = req.query?.rid;
+      const media = req.query?.media;
+      const topic = req.query?.topic || 'life';
+      if (!rid && !media) {
+        const rows = await sb('threads_replies?status=eq.sent&select=id,reply_media_id,comment_user,comment_text,created_at&order=id.desc&limit=20');
+        return res.status(200).json({ sent: rows });
+      }
+      const accounts = await getAccounts(false);
+      let account, mediaId, row;
+      if (rid) {
+        row = (await sb(`threads_replies?id=eq.${Number(rid)}&select=*`))[0];
+        if (!row) return res.status(404).json({ error: 'reply row not found' });
+        mediaId = row.reply_media_id;
+        account = accounts.find((a) => a.id === row.account_id);
+      } else {
+        mediaId = media;
+        account = accounts.find((a) => a.topic === topic) || accounts[0];
+      }
+      if (!mediaId) return res.status(400).json({ error: 'no reply_media_id' });
+      if (!account?.access_token) return res.status(400).json({ error: 'no token' });
+      const out = await deleteMedia(account, mediaId);
+      if (row) await sb(`threads_replies?id=eq.${row.id}`, { method: 'PATCH', body: { status: 'deleted' } });
+      return res.status(200).json({ ok: true, deleted: mediaId, result: out });
+    }
+
+    return res.status(400).json({ error: 'unknown action — post | find | reply-delete' });
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
+}
