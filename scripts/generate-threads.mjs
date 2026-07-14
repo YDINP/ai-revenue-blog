@@ -188,7 +188,10 @@ JSON 배열로만 출력. 각 원소: {"text":"<훅+전개+댓글CTA, 줄바꿈 
   }
 }
 
+console.log(`[threads-gen] start | SB=${SB} | SRK=${SRK ? 'set(' + SRK.length + ')' : 'MISSING'}`);
 main().catch((e) => {
   console.error('[threads-gen] 실패:', e.message);
+  if (e.cause) console.error('[threads-gen] cause:', JSON.stringify(e.cause, Object.getOwnPropertyNames(e.cause)));
+  console.error(e.stack);
   process.exit(1);
 });
