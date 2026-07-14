@@ -32,6 +32,14 @@ import { gscMessage, seoMessage } from './_gsc-view.js';
 import { moneyMessage } from './_money.js';
 import { reportMessage } from './_report.js';
 import { indexMessage } from './_seo.js';
+import {
+  threadsStatusMessage,
+  threadsGenMessage,
+  threadsQueueCards,
+  threadsInsightsMessage,
+  handleThreadsCallback,
+  maybeHandleThreadsFlow,
+} from './_threads-bot.js';
 
 const UUID_RE = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
 
@@ -92,6 +100,25 @@ export default async function handler(req, res) {
     }
     // 로딩 스피너 즉시 해제 (텔레그램은 응답 없으면 버튼이 계속 도는 것처럼 보임)
     await tg('answerCallbackQuery', { callback_query_id: cb.id });
+
+    // ── Threads 초안 콜백 (thr:pub|edit|sched|rej:ID) ──
+    if ((cb.data || '').startsWith('thr:')) {
+      try {
+        const out = await handleThreadsCallback(cbChat, cb.data || '');
+        await tg('editMessageText', {
+          chat_id: cbChat,
+          message_id: cb.message.message_id,
+          text: out.text,
+          parse_mode: 'HTML',
+          disable_web_page_preview: true,
+        });
+      } catch (e) {
+        console.error('threads callback error:', e);
+        await tg('sendMessage', { chat_id: cbChat, text: `❌ ${escapeHtml(e.message)}`, parse_mode: 'HTML' });
+      }
+      return res.status(200).json({ ok: true });
+    }
+
     try {
       const out = await handleGenerateCallback(cbChat, cb.data || '');
       await tg('editMessageText', {
@@ -142,6 +169,34 @@ export default async function handler(req, res) {
 
   if (text === '/help') {
     await reply(HELP);
+    return res.status(200).json({ ok: true });
+  }
+
+  // ── /threads 명령군 ──
+  const thr = text.match(/^\/threads(?:@\w+)?(?:\s+([\s\S]+))?$/i);
+  if (thr) {
+    try {
+      const parts = (thr[1] || '').trim().split(/\s+/).filter(Boolean);
+      const sub = (parts[0] || '').toLowerCase();
+      if (sub === 'gen') {
+        await reply(await threadsGenMessage(parts[1], parts[2], parts[3]));
+      } else if (sub === 'queue') {
+        const cards = await threadsQueueCards(parts[1]);
+        for (const c of cards) {
+          await tg('sendMessage', {
+            chat_id: chatId, text: c.text, parse_mode: 'HTML',
+            disable_web_page_preview: true, ...(c.reply_markup ? { reply_markup: c.reply_markup } : {}),
+          });
+        }
+      } else if (sub === 'insights') {
+        await reply(await threadsInsightsMessage(parts[1] ? parseInt(parts[1], 10) : 7));
+      } else {
+        await reply(await threadsStatusMessage());
+      }
+    } catch (e) {
+      console.error('threads command error:', e);
+      await reply(`❌ ${escapeHtml(e.message)}`);
+    }
     return res.status(200).json({ ok: true });
   }
 
@@ -197,6 +252,16 @@ export default async function handler(req, res) {
     // 댓글 알림에 답장한 경우는 대댓글 경로가 우선하므로 제외
     const isCommentReply = /#c_[0-9a-f-]{36}/i.test(msg.reply_to_message?.text || '');
     if (!text.startsWith('/') && !isCommentReply) {
+      // Threads 초안 수정 플로우 우선
+      const tflow = await maybeHandleThreadsFlow(chatId, text);
+      if (tflow) {
+        await reply(tflow.note);
+        await tg('sendMessage', {
+          chat_id: chatId, text: tflow.card.text, parse_mode: 'HTML',
+          disable_web_page_preview: true, reply_markup: tflow.card.reply_markup,
+        });
+        return res.status(200).json({ ok: true });
+      }
       const flowed = await handleFlow(chatId, text);
       if (flowed) {
         await reply(flowed);

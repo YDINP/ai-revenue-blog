@@ -1,0 +1,150 @@
+// Threads 텔레그램 봇 명령/콜백 핸들러
+import { escapeHtml } from './_shared.js';
+import { dispatchWorkflow } from './_github.js';
+import { setState, getState, clearState } from './_state.js';
+import {
+  getAccounts, sb, getQueue, updateQueue, publishDraft,
+} from './_threads.js';
+
+const REPO = 'YDINP/ai-revenue-blog';
+const WORKFLOW = 'generate-threads.yml';
+const BRANCH = 'master';
+
+const preview = (s, n = 120) => {
+  const t = String(s || '').replace(/\n/g, ' ⏎ ');
+  return escapeHtml(t.length > n ? t.slice(0, n) + '…' : t);
+};
+
+// ── 상태 요약 ──
+export async function threadsStatusMessage() {
+  const accounts = await getAccounts(false);
+  if (!accounts.length) return '연결된 Threads 계정이 없습니다. OAuth 연결 링크로 계정을 추가하세요.';
+  const drafts = await sb('threads_queue?status=eq.draft&select=account_id');
+  const since = new Date(Date.now() - 24 * 3600 * 1000).toISOString();
+  const pub = await sb(`threads_posts?published_at=gte.${since}&select=account_id`);
+  const cnt = (arr, id) => arr.filter((r) => r.account_id === id).length;
+  const lines = ['<b>🧵 Threads 계정</b>', ''];
+  for (const a of accounts) {
+    const exp = a.token_expires_at ? a.token_expires_at.slice(0, 10) : '?';
+    lines.push(
+      `• <b>${escapeHtml(a.topic)}</b> ${a.active ? '' : '(비활성) '}— 모드 <code>${a.publish_mode}</code>\n` +
+        `  초안 ${cnt(drafts, a.id)} · 24h발행 ${cnt(pub, a.id)} · 토큰~${exp}`
+    );
+  }
+  lines.push('', '명령: <code>/threads gen &lt;topic&gt; [n] [blog|coupang]</code> · <code>/threads queue &lt;topic&gt;</code> · <code>/threads insights</code>');
+  return lines.join('\n');
+}
+
+// ── 초안 생성 dispatch ──
+export async function threadsGenMessage(topic = 'life', count = '2', linkmode = 'blog') {
+  const t = (topic || 'life').toLowerCase();
+  const lm = ['blog', 'coupang'].includes((linkmode || '').toLowerCase()) ? linkmode.toLowerCase() : 'blog';
+  const n = ['1', '2', '3', '5'].includes(String(count)) ? String(count) : '2';
+  await dispatchWorkflow(REPO, WORKFLOW, BRANCH, { topic: t, count: n, linkmode: lm });
+  return `🧵 <b>${escapeHtml(t)}</b> 초안 ${n}개 생성 요청됨 (링크:${lm}).\n30~60초 뒤 승인 카드가 도착합니다.`;
+}
+
+// ── 초안 카드 (승인 버튼) ──
+export function threadsCard(row) {
+  const link = row.link_url ? `\n🔗 <code>${row.link_kind}</code>: ${escapeHtml(row.link_url.slice(0, 60))}…` : '';
+  return {
+    text: `🧵 <b>초안 #${row.id}</b> (${escapeHtml(row.link_kind || 'none')})\n\n${escapeHtml(row.text)}${link}`,
+    reply_markup: {
+      inline_keyboard: [[
+        { text: '✅ 발행', callback_data: `thr:pub:${row.id}` },
+        { text: '✍️ 수정', callback_data: `thr:edit:${row.id}` },
+        { text: '⏰ 예약', callback_data: `thr:sched:${row.id}` },
+        { text: '🗑 버림', callback_data: `thr:rej:${row.id}` },
+      ]],
+    },
+  };
+}
+
+// ── 대기 초안 카드 목록 ──
+export async function threadsQueueCards(topic) {
+  let q = 'threads_queue?status=eq.draft&select=*&order=id.desc&limit=10';
+  if (topic) {
+    const accts = await sb(`threads_accounts?topic=eq.${encodeURIComponent(topic)}&select=id`);
+    const ids = accts.map((a) => a.id);
+    if (!ids.length) return [{ text: `'${escapeHtml(topic)}' 계정이 없습니다.` }];
+    q = `threads_queue?status=eq.draft&account_id=in.(${ids.join(',')})&select=*&order=id.desc&limit=10`;
+  }
+  const rows = await sb(q);
+  if (!rows.length) return [{ text: '대기 중인 초안이 없습니다. <code>/threads gen</code> 로 생성하세요.' }];
+  return rows.map(threadsCard);
+}
+
+// ── 다음 골든타임(KST 08:00 / 23:00) UTC ISO ──
+function nextGoldenSlotUtc() {
+  const now = Date.now();
+  const KST = 9 * 3600 * 1000;
+  const kstNow = new Date(now + KST);
+  const y = kstNow.getUTCFullYear(), mo = kstNow.getUTCMonth(), d = kstNow.getUTCDate();
+  const slots = [8, 23];
+  for (let addDay = 0; addDay < 2; addDay++) {
+    for (const h of slots) {
+      const kstMs = Date.UTC(y, mo, d + addDay, h, 0, 0);
+      const utcMs = kstMs - KST;
+      if (utcMs > now + 60 * 1000) return new Date(utcMs).toISOString();
+    }
+  }
+  return new Date(now + 3600 * 1000).toISOString();
+}
+
+// ── 인사이트 요약 ──
+export async function threadsInsightsMessage(days = 7) {
+  const since = new Date(Date.now() - days * 24 * 3600 * 1000).toISOString();
+  const rows = await sb(`threads_posts?published_at=gte.${since}&select=*&order=published_at.desc&limit=20`);
+  if (!rows.length) return `최근 ${days}일 발행 없음.`;
+  const sum = rows.reduce((a, r) => ({ v: a.v + (r.views || 0), l: a.l + (r.likes || 0), c: a.c + (r.replies || 0) }), { v: 0, l: 0, c: 0 });
+  const lines = [`<b>🧵 Threads 성과 (최근 ${days}일, ${rows.length}건)</b>`, `합계 — 노출 ${sum.v} · 좋아요 ${sum.l} · 댓글 ${sum.c}`, ''];
+  for (const r of rows.slice(0, 8)) {
+    lines.push(`• #${r.id} ${r.published_at.slice(5, 16).replace('T', ' ')} — 👁${r.views || 0} ♥${r.likes || 0} 💬${r.replies || 0}`);
+  }
+  return lines.join('\n');
+}
+
+// ── 콜백 처리 (thr:pub|edit|sched|rej:ID) → {text, reply_markup?} ──
+export async function handleThreadsCallback(chatId, data) {
+  const m = /^thr:(pub|edit|sched|rej):(\d+)$/.exec(data || '');
+  if (!m) return { text: '알 수 없는 동작' };
+  const [, action, idStr] = m;
+  const id = parseInt(idStr, 10);
+  const row = await getQueue(id);
+  if (!row) return { text: `초안 #${id} 없음(이미 처리됨?)` };
+
+  if (action === 'rej') {
+    await updateQueue(id, { status: 'rejected' });
+    return { text: `🗑 초안 #${id} 버림.` };
+  }
+  if (action === 'edit') {
+    await setState(chatId, { flow: 'threads_edit', queueId: id });
+    return { text: `✍️ 초안 #${id} 수정: 새 본문을 답장으로 보내주세요. (취소: /cancel)\n\n현재:\n${escapeHtml(row.text)}` };
+  }
+  if (action === 'sched') {
+    const at = nextGoldenSlotUtc();
+    await updateQueue(id, { status: 'scheduled', scheduled_at: at });
+    const kst = new Date(new Date(at).getTime() + 9 * 3600 * 1000).toISOString().slice(5, 16).replace('T', ' ');
+    return { text: `⏰ 초안 #${id} 예약됨 → ${kst} (KST). Cron이 발행합니다.` };
+  }
+  // pub — 즉시 발행
+  const account = (await sb(`threads_accounts?id=eq.${row.account_id}&limit=1`))[0];
+  if (!account?.access_token) return { text: `❌ 계정 토큰 없음 (account_id=${row.account_id})` };
+  try {
+    const mediaId = await publishDraft(account, row);
+    return { text: `✅ 초안 #${id} 발행 완료! (media ${mediaId})${row.link_url ? '\n🔗 링크는 첫 댓글에 게시됨' : ''}` };
+  } catch (e) {
+    await updateQueue(id, { status: 'failed', error: e.message });
+    return { text: `❌ 발행 실패 #${id}: ${escapeHtml(e.message)}` };
+  }
+}
+
+// ── 수정 플로우 텍스트 처리 (webhook에서 호출) ──
+export async function maybeHandleThreadsFlow(chatId, text) {
+  const st = await getState(chatId);
+  if (st?.flow !== 'threads_edit') return null;
+  await updateQueue(st.queueId, { text });
+  await clearState(chatId);
+  const row = await getQueue(st.queueId);
+  return { card: threadsCard(row), note: `✍️ 초안 #${st.queueId} 수정됨.` };
+}

@@ -126,6 +126,20 @@ export async function dispatchGenerator(blog, inputs = {}) {
   return true;
 }
 
+// 임의 워크플로 dispatch (Threads 초안 생성기 등) — 비활성 시 자동 재활성 후 재시도
+export async function dispatchWorkflow(repo, workflow, ref, inputs = {}) {
+  const path = `/repos/${repo}/actions/workflows/${workflow}`;
+  const send = () => gh(`${path}/dispatches`, { method: 'POST', body: JSON.stringify({ ref, inputs }) });
+  try {
+    await send();
+  } catch (e) {
+    if (!/disabled workflow/i.test(e.message)) throw e;
+    await gh(`${path}/enable`, { method: 'PUT' });
+    await send();
+  }
+  return true;
+}
+
 export async function latestRun(blog) {
   if (!blog.generator) return null;
   const d = await gh(

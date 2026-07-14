@@ -132,6 +132,49 @@ export async function publish(account, { text, imageUrl }) {
   return pJson.id; // media id
 }
 
+// 자답(첫 댓글) — hook-writer 규칙: 외부링크는 본문 아닌 첫 댓글에 (도달 보호)
+export async function publishReply(account, { text, replyToId }) {
+  const uid = account.threads_user_id;
+  const token = account.access_token;
+  const create = new URL(`${GRAPH_V}/${uid}/threads`);
+  create.searchParams.set('media_type', 'TEXT');
+  create.searchParams.set('text', text);
+  create.searchParams.set('reply_to_id', replyToId);
+  create.searchParams.set('access_token', token);
+  const cRes = await fetch(create, { method: 'POST' });
+  const cJson = await cRes.json();
+  if (!cRes.ok || !cJson.id) throw new Error(`reply container failed: ${JSON.stringify(cJson)}`);
+  const pub = new URL(`${GRAPH_V}/${uid}/threads_publish`);
+  pub.searchParams.set('creation_id', cJson.id);
+  pub.searchParams.set('access_token', token);
+  const pRes = await fetch(pub, { method: 'POST' });
+  const pJson = await pRes.json();
+  if (!pRes.ok || !pJson.id) throw new Error(`reply publish failed: ${JSON.stringify(pJson)}`);
+  return pJson.id;
+}
+
+// 쿠팡 파트너스 정적 검색 URL (딥링크/Open API 아님 — lptag 검색 URL만, 호출 금지 제약 준수)
+const COUPANG_LPTAG = 'AF7838146';
+export function coupangSearchUrl(keyword) {
+  const q = encodeURIComponent(keyword);
+  return `https://www.coupang.com/np/search?q=${q}&src=1139000&spec=10799999&addtag=200&ctag=${q}&lptag=${COUPANG_LPTAG}&pageType=SEARCH&pageValue=${q}`;
+}
+
+// 큐 항목 발행 오케스트레이션 (본문 → 링크는 첫 댓글 자답 → 기록)
+export async function publishDraft(account, item) {
+  const mediaId = await publish(account, { text: item.text, imageUrl: item.image_url });
+  if (item.link_url) {
+    try {
+      await publishReply(account, { text: `전문 👇\n${item.link_url}`, replyToId: mediaId });
+    } catch (e) {
+      console.error('link reply failed (본문은 정상 발행됨):', e.message);
+    }
+  }
+  await updateQueue(item.id, { status: 'published', error: null });
+  await insertPost({ queue_id: item.id, account_id: account.id, threads_media_id: mediaId });
+  return mediaId;
+}
+
 export async function getInsights(mediaId, token) {
   const url = new URL(`${GRAPH_V}/${mediaId}/insights`);
   url.searchParams.set('metric', 'views,likes,replies,reposts,quotes,shares');

@@ -1,0 +1,48 @@
+name: Threads Draft Generator
+
+on:
+  workflow_dispatch:
+    inputs:
+      account_id:
+        description: '계정 ID (비우면 topic 매칭)'
+        required: false
+        default: ''
+        type: string
+      topic:
+        description: '주제'
+        required: false
+        default: 'life'
+        type: choice
+        options: [life, ai, game, coupang]
+      count:
+        description: '생성 개수'
+        required: false
+        default: '2'
+        type: choice
+        options: ['1', '2', '3', '5']
+      linkmode:
+        description: '유도 링크'
+        required: false
+        default: 'blog'
+        type: choice
+        options: [blog, coupang]
+
+jobs:
+  generate-threads:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Generate Threads drafts
+        run: node scripts/generate-threads.mjs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          INPUT_ACCOUNT_ID: ${{ github.event.inputs.account_id || '' }}
+          INPUT_TOPIC: ${{ github.event.inputs.topic || 'life' }}
+          INPUT_COUNT: ${{ github.event.inputs.count || '2' }}
+          INPUT_LINKMODE: ${{ github.event.inputs.linkmode || 'blog' }}
