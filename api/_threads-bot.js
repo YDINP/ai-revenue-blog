@@ -186,7 +186,10 @@ export async function handleReplyCallback(chatId, data) {
   }
   if (action === 'reply') {
     await setState(chatId, { flow: 'threads_reply', replyId: id });
-    return { text: `✍️ 댓글 #${id}에 답장: 내용을 답장으로 보내줘. (취소 /cancel)\n\n원댓글:\n${escapeHtml(row.comment_text || '')}` };
+    return {
+      text: `✍️ 댓글 #${id}에 답장 — 아래 입력창에 대댓글을 써서 보내줘. (취소 /cancel)\n\n원댓글:\n${escapeHtml(row.comment_text || '')}`,
+      force_reply: true, // 입력창 자동 오픈+포커스
+    };
   }
   // send — AI 초안 그대로 발행
   return await sendReply(id, row.draft);

@@ -124,13 +124,24 @@ export default async function handler(req, res) {
     if ((cb.data || '').startsWith('rpl:')) {
       try {
         const out = await handleReplyCallback(cbChat, cb.data || '');
-        await tg('editMessageText', {
-          chat_id: cbChat,
-          message_id: cb.message.message_id,
-          text: out.text,
-          parse_mode: 'HTML',
-          disable_web_page_preview: true,
-        });
+        if (out.force_reply) {
+          // ✍️ 답장 — 입력창 자동 오픈(포커스). 사용자가 여기 답하면 threads_reply 플로우가 처리.
+          await tg('sendMessage', {
+            chat_id: cbChat,
+            text: out.text,
+            parse_mode: 'HTML',
+            disable_web_page_preview: true,
+            reply_markup: { force_reply: true, input_field_placeholder: '대댓글 입력…' },
+          });
+        } else {
+          await tg('editMessageText', {
+            chat_id: cbChat,
+            message_id: cb.message.message_id,
+            text: out.text,
+            parse_mode: 'HTML',
+            disable_web_page_preview: true,
+          });
+        }
       } catch (e) {
         console.error('reply callback error:', e);
         await tg('sendMessage', { chat_id: cbChat, text: `❌ ${escapeHtml(e.message)}`, parse_mode: 'HTML' });
