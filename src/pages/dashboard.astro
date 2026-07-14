@@ -2637,31 +2637,35 @@ const ICONS: Record<string, string> = {
 
       <!-- Tab: 페이퍼닥 프로모 클릭 -->
       <div class="tab-content" id="tab-paperdoc">
+        <div class="traffic-header" style="margin-bottom:0.75rem;">
+          <h3 style="margin:0;">기간별 클릭</h3>
+          <div class="seg-toggle seg-sm" id="pd-period">
+            <button class="seg-btn" data-pd="day">일간</button>
+            <button class="seg-btn" data-pd="week">주간</button>
+            <button class="seg-btn" data-pd="month">월간</button>
+            <button class="seg-btn active" data-pd="all">전체</button>
+          </div>
+        </div>
         <div class="coupang-stats">
           <div class="coupang-card">
-            <h4>총 클릭 수</h4>
+            <h4 id="pd-total-label">총 클릭 수</h4>
             <div class="conversion-rate" id="pd-total-clicks">--</div>
-            <div class="sub">누적 페이퍼닥 클릭</div>
-          </div>
-          <div class="coupang-card">
-            <h4>오늘 클릭</h4>
-            <div class="conversion-rate" id="pd-today-clicks">--</div>
-            <div class="sub">금일 클릭 수</div>
+            <div class="sub" id="pd-total-detail">누적 페이퍼닥 클릭</div>
           </div>
           <div class="coupang-card">
             <h4>TechFlow</h4>
             <div class="conversion-rate" id="pd-tf-clicks">--</div>
-            <div class="sub" id="pd-tf-detail">TF 클릭 (오늘 --)</div>
+            <div class="sub" id="pd-tf-detail">TF 클릭</div>
           </div>
           <div class="coupang-card">
             <h4>LifeFlow</h4>
             <div class="conversion-rate" id="pd-lf-clicks">--</div>
-            <div class="sub" id="pd-lf-detail">LF 클릭 (오늘 --)</div>
+            <div class="sub" id="pd-lf-detail">LF 클릭</div>
           </div>
           <div class="coupang-card">
             <h4>GameFlow</h4>
             <div class="conversion-rate" id="pd-gf-clicks">--</div>
-            <div class="sub" id="pd-gf-detail">GF 클릭 (오늘 --)</div>
+            <div class="sub" id="pd-gf-detail">GF 클릭</div>
           </div>
         </div>
 
@@ -3923,29 +3927,49 @@ const ICONS: Record<string, string> = {
       }
 
       const PD_PLACE_LABEL = { popup: '홈 팝업', banner: '가로 배너', side: '사이드 배너', other: '기타' };
+      const PD_PERIOD_LABEL = { day: '일간', week: '주간', month: '월간', all: '전체' };
+      const PD_PERIOD_DETAIL = { day: '오늘', week: '최근 7일', month: '최근 30일', all: '누적' };
 
-      function renderPaperdocStats(rows) {
-        const list = Array.isArray(rows) ? rows : [];
-        const todayKst = new Date(Date.now() + 9 * 3600 * 1000).toISOString().split('T')[0];
-        const dayOf = (ts) => new Date(new Date(ts).getTime() + 9 * 3600 * 1000).toISOString().split('T')[0];
-        const bySrc = { blog: { total: 0, today: 0 }, lifeflow: { total: 0, today: 0 }, gameflow: { total: 0, today: 0 } };
-        let total = 0, today = 0;
-        list.forEach(r => {
-          total++;
-          const isToday = dayOf(r.created_at) === todayKst;
-          if (isToday) today++;
-          const b = bySrc[r.source];
-          if (b) { b.total++; if (isToday) b.today++; }
-        });
+      // 기간 필터: KST 자정 기준 오늘 / 최근 7일 / 최근 30일 / 전체
+      let _paperdocRows = [];
+      let _paperdocPeriod = 'all';
+
+      function paperdocInWindow(ts, period) {
+        if (period === 'all') return true;
+        const nowMs = Date.now();
+        if (period === 'week') return new Date(ts).getTime() >= nowMs - 7 * 86400000;
+        if (period === 'month') return new Date(ts).getTime() >= nowMs - 30 * 86400000;
+        // day = KST 오늘
+        const todayKst = new Date(nowMs + 9 * 3600 * 1000).toISOString().split('T')[0];
+        const dayOf = new Date(new Date(ts).getTime() + 9 * 3600 * 1000).toISOString().split('T')[0];
+        return dayOf === todayKst;
+      }
+
+      // 기간 토글 진입점: rows/period 갱신 후 카드·위치·피드 일괄 재렌더
+      function renderPaperdoc(rows, period) {
+        if (rows !== undefined) _paperdocRows = Array.isArray(rows) ? rows : [];
+        if (period !== undefined) _paperdocPeriod = period;
+        const filtered = _paperdocRows.filter(r => paperdocInWindow(r.created_at, _paperdocPeriod));
+        renderPaperdocStats(filtered);
+        renderPaperdocPlacements(filtered);
+        renderPaperdocFeed(filtered);
+      }
+
+      function renderPaperdocStats(list) {
+        const bySrc = { blog: 0, lifeflow: 0, gameflow: 0 };
+        let total = 0;
+        (list || []).forEach(r => { total++; if (bySrc[r.source] !== undefined) bySrc[r.source]++; });
         const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+        const share = (n) => total > 0 ? `${Math.round(n / total * 100)}%` : '0%';
+        set('pd-total-label', `${PD_PERIOD_LABEL[_paperdocPeriod]} 클릭 수`);
+        set('pd-total-detail', `${PD_PERIOD_DETAIL[_paperdocPeriod]} 페이퍼닥 클릭`);
         set('pd-total-clicks', fmt(total));
-        set('pd-today-clicks', fmt(today));
-        set('pd-tf-clicks', fmt(bySrc.blog.total));
-        set('pd-lf-clicks', fmt(bySrc.lifeflow.total));
-        set('pd-gf-clicks', fmt(bySrc.gameflow.total));
-        set('pd-tf-detail', `TF 클릭 (오늘 ${fmt(bySrc.blog.today)})`);
-        set('pd-lf-detail', `LF 클릭 (오늘 ${fmt(bySrc.lifeflow.today)})`);
-        set('pd-gf-detail', `GF 클릭 (오늘 ${fmt(bySrc.gameflow.today)})`);
+        set('pd-tf-clicks', fmt(bySrc.blog));
+        set('pd-lf-clicks', fmt(bySrc.lifeflow));
+        set('pd-gf-clicks', fmt(bySrc.gameflow));
+        set('pd-tf-detail', `비중 ${share(bySrc.blog)}`);
+        set('pd-lf-detail', `비중 ${share(bySrc.lifeflow)}`);
+        set('pd-gf-detail', `비중 ${share(bySrc.gameflow)}`);
       }
 
       function renderPaperdocPlacements(rows) {
@@ -4208,6 +4232,13 @@ const ICONS: Record<string, string> = {
         if (!btn) return;
         document.querySelectorAll('#top-pages-period .seg-btn').forEach(b => b.classList.toggle('active', b === btn));
         renderTopPages(undefined, undefined, btn.dataset.tp);
+      });
+
+      document.getElementById('pd-period')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('.seg-btn');
+        if (!btn) return;
+        document.querySelectorAll('#pd-period .seg-btn').forEach(b => b.classList.toggle('active', b === btn));
+        renderPaperdoc(undefined, btn.dataset.pd);
       });
 
       document.getElementById('event-tabs')?.addEventListener('click', (e) => {
@@ -4496,9 +4527,7 @@ const ICONS: Record<string, string> = {
             if (_topPagesPeriod !== 'all') renderTopPages();   // 기간별 Top Pages는 오디언스 로드 후 갱신
             renderCoupangProducts(coup);
             renderCoupangFeed(coup);
-            renderPaperdocStats(pd);
-            renderPaperdocPlacements(pd);
-            renderPaperdocFeed(pd);
+            renderPaperdoc(pd, _paperdocPeriod);
             _funnelCounts.coupang = Array.isArray(coup) ? coup.length : 0;
             _funnelCounts.newsletter = nl;
             renderFunnelGoals();

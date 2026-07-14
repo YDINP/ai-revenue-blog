@@ -230,13 +230,17 @@ export async function paperdocMessage() {
   const todayKst = new Date(Date.now() + 9 * 3600 * 1000).toISOString().split('T')[0];
   const dayOf = (ts) => new Date(new Date(ts).getTime() + 9 * 3600 * 1000).toISOString().split('T')[0];
 
+  const nowMs = Date.now();
   const bySrc = { blog: { total: 0, today: 0 }, lifeflow: { total: 0, today: 0 }, gameflow: { total: 0, today: 0 } };
   const byPlace = {};
-  let total = 0, today = 0;
+  let total = 0, day = 0, week = 0, month = 0;
   rows.forEach((r) => {
     total++;
+    const tMs = new Date(r.created_at).getTime();
     const isToday = dayOf(r.created_at) === todayKst;
-    if (isToday) today++;
+    if (isToday) day++;
+    if (tMs >= nowMs - 7 * 86400000) week++;
+    if (tMs >= nowMs - 30 * 86400000) month++;
     const b = bySrc[r.source];
     if (b) { b.total++; if (isToday) b.today++; }
     const p = (r.metadata && r.metadata.placement) || 'other';
@@ -246,8 +250,8 @@ export async function paperdocMessage() {
   const lines = [
     `📄 <b>페이퍼닥 클릭</b>  <i>${nowKst()}</i>`,
     '',
-    `오늘 <b>${fmt(today)}</b> · 누적 <b>${fmt(total)}</b>`,
-    `    TF ${fmt(bySrc.blog.total)} · LF ${fmt(bySrc.lifeflow.total)} · GF ${fmt(bySrc.gameflow.total)}`,
+    `<b>기간별</b>  일간 <b>${fmt(day)}</b> · 주간 <b>${fmt(week)}</b> · 월간 <b>${fmt(month)}</b> · 전체 <b>${fmt(total)}</b>`,
+    `<b>블로그별</b>  TF ${fmt(bySrc.blog.total)} · LF ${fmt(bySrc.lifeflow.total)} · GF ${fmt(bySrc.gameflow.total)} <i>(누적)</i>`,
   ];
 
   const places = Object.entries(byPlace).sort((a, b) => b[1] - a[1]);
