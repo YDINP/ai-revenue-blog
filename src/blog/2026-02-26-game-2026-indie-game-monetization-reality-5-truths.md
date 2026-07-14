@@ -148,6 +148,7 @@ GameDiscoverCo 분석에 따르면 2025년 스팀의 **플랫폼 전체 실효 �
 
 ## 함께 읽으면 좋은 글
 
+- [1인 게임 개발 수익·현실 생존 가이드](/blog/2026-07-04-game-solo-game-developer-survival-guide-2026-burnout-budget/) — 혼자 만들 때 비용·번아웃·수익을 어떻게 버티나
 - [게임 수익 2026: 스팀·모바일·웹 어디가 돈이 되나](/blog/2026-07-13-game-revenue-comparison-2026-steam-mobile-web/) — 플랫폼부터 고르는 상위 좌표
 - [인디게임 첫 출시 매출의 현실 2026: 중앙값·위시리스트 전환율 실데이터](/blog/2026-07-11-game-indie-first-game-sales-reality-2026-median-wishlist-data/) — "얼마 버나"를 숫자로
 - [인디게임은 왜 실패하는가 2026: 3가지 침몰 원인과 회피법](/blog/2026-07-11-game-indie-game-failure-reasons-2026-postmortem-lessons/) — 남의 실패에서 싸게 배우기
