@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Review"
 tags: ["개발자 모니터", "모니터 구매 가이드", "색감 정확도", "응답속도", "개발 장비"]
 image:
-  url: "https://images.pexels.com/photos/8292889/pexels-photo-8292889.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/340152/pexels-photo-340152.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Flat lay of real estate brochures, checklists, and a calculator for home buying."
 coupangLinks:
   - title: "ASUS ZenScreen MB16ACV"

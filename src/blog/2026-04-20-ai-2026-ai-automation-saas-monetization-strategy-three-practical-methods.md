@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["AI 자동화", "SaaS 수익화", "AI 수익 모델", "자동화 비즈니스"]
 image:
-  url: "https://images.pexels.com/photos/34804017/pexels-photo-34804017.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/8386357/pexels-photo-8386357.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Detailed view of a computer screen displaying code with a menu of AI actions, illustrating modern software development."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"

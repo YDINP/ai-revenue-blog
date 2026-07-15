@@ -6,7 +6,7 @@ category: "Dev"
 tags: ["Docker", "컨테이너", "개발 환경", "DevOps 입문"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/30517083/pexels-photo-30517083.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/30517083/pexels-photo-30517083.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "함부르크 항구의 컨테이너와 크레인"
 coupangLinks:
   - title: "클린 코드"

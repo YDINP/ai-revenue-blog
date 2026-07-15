@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["Claude API", "AI 개발", "통합 가이드", "실전 예제"]
 image:
-  url: "https://images.pexels.com/photos/9028873/pexels-photo-9028873.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/10816120/pexels-photo-10816120.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "A robotic arm carefully pouring ingredients into a mixing bowl in a modern kitchen setting."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"

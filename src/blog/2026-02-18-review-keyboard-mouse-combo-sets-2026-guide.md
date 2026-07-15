@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Review"
 tags: ["키보드마우스세트", "개발자장비", "인체공학마우스", "무선키보드", "게이밍세트"]
 image:
-  url: "https://images.pexels.com/photos/2115256/pexels-photo-2115256.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/4990471/pexels-photo-4990471.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "A close-up of a colorful gaming mouse and illuminated RGB keyboard, perfect for tech setups."
 coupangLinks:
   - title: "ASUS ZenScreen MB16ACV"

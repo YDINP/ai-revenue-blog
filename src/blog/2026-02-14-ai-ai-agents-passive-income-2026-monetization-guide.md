@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["AI 자동화", "AI 에이전트", "수익화", "자동 수입", "AI 비즈니스"]
 image:
-  url: "https://images.pexels.com/photos/30530416/pexels-photo-30530416.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/30530420/pexels-photo-30530420.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "A MacBook displaying the DeepSeek AI interface, showcasing digital innovation."
 coupangLinks:
   - title: "아이패드 에어 M2"

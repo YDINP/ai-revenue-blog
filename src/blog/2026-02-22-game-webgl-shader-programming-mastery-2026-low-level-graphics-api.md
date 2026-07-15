@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Game"
 tags: ["WebGL", "셰이더 프로그래밍", "게임 개발", "그래픽 API", "GLSL", "성능 최적화"]
 image:
-  url: "https://images.pexels.com/photos/7489031/pexels-photo-7489031.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/247791/pexels-photo-247791.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Three diverse friends enjoy a lively game of Twister in a cozy living room. Perfect for lifestyle and leisure themes."
 coupangLinks:
   - title: "게임 프로그래밍 패턴"

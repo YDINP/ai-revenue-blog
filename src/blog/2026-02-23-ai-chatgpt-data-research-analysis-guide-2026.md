@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["ChatGPT", "AI 활용법", "데이터 분석", "정보 검색", "업무 자동화"]
 image:
-  url: "https://images.pexels.com/photos/16027815/pexels-photo-16027815.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/18512878/pexels-photo-18512878.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Curved monitor screen showing ChatGPT interface in low-light, focus on technology and AI."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"

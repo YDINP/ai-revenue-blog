@@ -7,7 +7,7 @@ category: "AI"
 tags: ["AI코딩", "개발도구", "Claude", "Copilot", "생산성"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/34804018/pexels-photo-34804018.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/34804018/pexels-photo-34804018.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "디버깅 및 문제 해결을 위한 메뉴 옵션이 있는 AI 보조 코딩 클로즈업"
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드 (개발자 추천)"

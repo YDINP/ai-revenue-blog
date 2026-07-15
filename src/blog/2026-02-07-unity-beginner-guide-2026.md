@@ -6,7 +6,7 @@ category: "Game"
 tags: ["Unity", "게임개발", "C#", "입문가이드"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/4581902/pexels-photo-4581902.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/7447155/pexels-photo-7447155.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "A close-up view of modern GPU units, ideal for gaming and tech visuals."
 coupangLinks:
   - title: "유니티 교과서 도서"

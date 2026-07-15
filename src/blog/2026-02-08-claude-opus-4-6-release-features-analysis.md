@@ -6,7 +6,7 @@ category: "AI"
 tags: ["Claude Opus 4.6", "Anthropic", "AI 모델", "에이전틱 코딩"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/8849295/pexels-photo-8849295.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/18452255/pexels-photo-18452255.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "눈으로 가득 찬 실루엣 머리와 함께 AI의 추상적인 일러스트, 관찰과 기술 상징"
 coupangLinks:
   - title: "챗GPT 활용법 도서"

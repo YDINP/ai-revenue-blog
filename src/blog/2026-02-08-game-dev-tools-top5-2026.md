@@ -6,7 +6,7 @@ category: "Game"
 tags: ["게임개발도구", "에셋스토어", "게임개발", "프로토타이핑"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/267401/pexels-photo-267401.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/4312861/pexels-photo-4312861.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Scrabble tiles spelling 'AdWords' on a wooden surface, symbolizing digital marketing concepts."
 coupangLinks:
   - title: "게임 프로그래밍 패턴 도서"

@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["GPT-5.3-Codex-Spark", "Claude-Opus-4.6", "AI코딩어시스턴트", "SWE-bench", "2026개발자도구"]
 image:
-  url: "https://images.pexels.com/photos/30869075/pexels-photo-30869075.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/30869075/pexels-photo-30869075.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Scrabble tiles spelling CHATGPT on wooden surface emphasizing AI language models"
 coupangLinks:
   - title: "챗GPT 활용법 도서"

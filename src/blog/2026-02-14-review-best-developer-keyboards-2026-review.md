@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Review"
 tags: ["개발자키보드리뷰", "기계식키보드", "2026신제품", "개발자도구"]
 image:
-  url: "https://images.pexels.com/photos/6460801/pexels-photo-6460801.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/6803524/pexels-photo-6803524.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Close-up of mechanical keyboard switches and springs organized in containers on a desk setup."
 coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"

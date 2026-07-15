@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Dev"
 tags: ["프로그래밍 입문", "코딩", "개발자", "학습 가이드"]
 image:
-  url: "https://images.pexels.com/photos/19895712/pexels-photo-19895712.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/574073/pexels-photo-574073.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "A woman records a tech tutorial using her smartphone on a desk filled with electronics."
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"

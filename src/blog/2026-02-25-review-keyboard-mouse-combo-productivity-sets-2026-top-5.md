@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Review"
 tags: ["키보드마우스세트", "생산성향상", "사무용품", "2026년추천", "가성비"]
 image:
-  url: "https://images.pexels.com/photos/2115256/pexels-photo-2115256.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/7047612/pexels-photo-7047612.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "A close-up of a colorful gaming mouse and illuminated RGB keyboard, perfect for tech setups."
 coupangLinks:
   - title: "LG 울트라와이드 34인치 모니터"

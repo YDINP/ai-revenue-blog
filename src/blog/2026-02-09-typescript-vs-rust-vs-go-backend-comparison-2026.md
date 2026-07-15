@@ -6,7 +6,7 @@ category: "Dev"
 tags: ["TypeScript", "Rust", "Go", "백엔드", "프로그래밍 언어"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/33607832/pexels-photo-33607832.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "노트북 화면의 프로그래밍 코드와 개발 환경"
 coupangLinks:
   - title: "러스트 프로그래밍 도서"

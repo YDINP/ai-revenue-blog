@@ -7,7 +7,7 @@ category: "AI"
 tags: ["ChatGPT", "Claude", "GPT-5.5", "Claude Opus 4.8", "Gemini 3.1 Pro", "AI 비교"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/30479283/pexels-photo-30479283.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/15940005/pexels-photo-15940005.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "DeepSeek라는 AI 챗봇 인터페이스를 보여주는 나무 테이블 위의 스마트폰"
 coupangLinks:
   - title: "챗GPT 활용법 도서"

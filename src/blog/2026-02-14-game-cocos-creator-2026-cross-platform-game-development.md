@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Game"
 tags: ["Cocos Creator", "게임 개발", "크로스플랫폼", "HTML5", "2D 게임"]
 image:
-  url: "https://images.pexels.com/photos/60713/coconut-coconut-tree-plant-60713.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/9488424/pexels-photo-9488424.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Detailed shot of a green coconut hanging from a palm tree against a black background."
 coupangLinks:
   - title: "로지텍 MX Master 3S"

@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["AI 페어 프로그래밍", "AI 개발", "코딩 생산성", "AI 어시스턴트"]
 image:
-  url: "https://images.pexels.com/photos/18465017/pexels-photo-18465017.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/1921326/pexels-photo-1921326.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Old-fashioned typewriter with a paper labeled 'DEEPFAKE', symbolizing AI-generated content."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"

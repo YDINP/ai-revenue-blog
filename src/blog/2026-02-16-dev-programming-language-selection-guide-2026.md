@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Dev"
 tags: ["프로그래밍 입문", "프로그래밍 언어", "2026년 트렌드", "개발자 가이드"]
 image:
-  url: "https://images.pexels.com/photos/19895712/pexels-photo-19895712.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/4976712/pexels-photo-4976712.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "A woman records a tech tutorial using her smartphone on a desk filled with electronics."
 coupangLinks:
   - title: "자바스크립트 완벽 가이드"

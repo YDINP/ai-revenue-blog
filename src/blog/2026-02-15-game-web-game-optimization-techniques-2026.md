@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Game"
 tags: ["웹게임", "게임최적화", "성능튜닝", "웹개발"]
 image:
-  url: "https://images.pexels.com/photos/7119258/pexels-photo-7119258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/267415/pexels-photo-267415.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "SEO spelled with Scrabble tiles on a black surface, representing search engine optimization concepts."
 coupangLinks:
   - title: "유니티 교과서"

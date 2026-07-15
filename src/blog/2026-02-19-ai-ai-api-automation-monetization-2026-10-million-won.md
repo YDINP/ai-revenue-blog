@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["AI 자동화", "AI API", "수익화", "부수입", "2026"]
 image:
-  url: "https://images.pexels.com/photos/30530416/pexels-photo-30530416.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/35280311/pexels-photo-35280311.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "A MacBook displaying the DeepSeek AI interface, showcasing digital innovation."
 coupangLinks:
   - title: "챗GPT 활용법 도서"

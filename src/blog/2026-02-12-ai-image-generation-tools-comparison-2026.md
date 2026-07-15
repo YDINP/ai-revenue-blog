@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["AI", "이미지생성", "AI도구", "2026트렌드"]
 image:
-  url: "https://images.pexels.com/photos/17153194/pexels-photo-17153194.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/12411911/pexels-photo-12411911.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "A smartphone showing the Midjourney website on its screen against a gray textured surface."
 coupangLinks:
   - title: "챗GPT 활용법 도서"

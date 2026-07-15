@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["AI 코딩", "개발 도구", "생산성", "2026년 트렌드"]
 image:
-  url: "https://images.pexels.com/photos/34804018/pexels-photo-34804018.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/34804017/pexels-photo-34804017.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Close-up of AI-assisted coding with menu options for debugging and problem-solving."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"

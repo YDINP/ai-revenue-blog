@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Dev"
 tags: ["React", "Server Components", "성능최적화", "프론트엔드"]
 image:
-  url: "https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/17489157/pexels-photo-17489157.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Close-up of HTML and JavaScript code on a computer screen in Visual Studio Code."
 coupangLinks:
   - title: "점프 투 파이썬"

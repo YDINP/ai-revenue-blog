@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["로컬 LLM", "오픈소스 AI", "프라이빗 AI", "LLaMA", "Ollama"]
 image:
-  url: "https://images.pexels.com/photos/30530407/pexels-photo-30530407.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/10932215/pexels-photo-10932215.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Close-up of an AI-driven chat interface on a computer screen, showcasing modern AI technology."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"

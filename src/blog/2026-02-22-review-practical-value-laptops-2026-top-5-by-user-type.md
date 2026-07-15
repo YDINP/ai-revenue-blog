@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Review"
 tags: ["노트북추천", "가성비", "2026년", "노트북비교", "구매가이드"]
 image:
-  url: "https://images.pexels.com/photos/7054403/pexels-photo-7054403.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/19970375/pexels-photo-19970375.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Aerial shot of a modern workspace with a laptop, budget report, and eyeglasses on a desk."
 coupangLinks:
   - title: "ASUS ZenScreen MB16ACV"

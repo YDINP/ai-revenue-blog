@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Dev"
 tags: ["React", "상태 관리", "Zustand", "Jotai", "TanStack Query", "2026"]
 image:
-  url: "https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/37085302/pexels-photo-37085302.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Close-up of HTML and JavaScript code on a computer screen in Visual Studio Code."
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"

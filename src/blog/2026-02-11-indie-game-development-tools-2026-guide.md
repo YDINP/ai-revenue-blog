@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Game"
 tags: ["인디 게임", "게임 개발 도구", "게임 엔진", "Unity", "Godot"]
 image:
-  url: "https://images.pexels.com/photos/12832570/pexels-photo-12832570.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/12832570/pexels-photo-12832570.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Focused gamer with headset playing a video game on a desktop computer indoors."
 coupangLinks:
   - title: "로지텍 MX Master 3S"

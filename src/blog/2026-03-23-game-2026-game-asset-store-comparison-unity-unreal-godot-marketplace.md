@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Game"
 tags: ["게임 개발", "에셋 스토어", "마켓플레이스", "게임 엔진", "인디 게임"]
 image:
-  url: "https://images.pexels.com/photos/4523021/pexels-photo-4523021.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/28582719/pexels-photo-28582719.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "A variety of game controllers and a keyboard arranged on a white textured surface, offering a minimalist gaming setup."
 coupangLinks:
   - title: "로지텍 MX Master 3S"

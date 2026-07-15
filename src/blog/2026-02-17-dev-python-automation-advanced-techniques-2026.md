@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Dev"
 tags: ["Python", "자동화", "RPA", "업무 효율화", "실무"]
 image:
-  url: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/20552667/pexels-photo-20552667.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "A person reads 'Python for Unix and Linux System Administration' indoors."
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"

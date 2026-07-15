@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Review"
 tags: ["개발용노트북", "CPU선택", "GPU성능", "2026년", "개발자장비"]
 image:
-  url: "https://images.pexels.com/photos/574069/pexels-photo-574069.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/6677499/pexels-photo-6677499.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Close-up of a person coding on a laptop, showcasing web development and programming concepts."
 coupangLinks:
   - title: "로지텍 MX Master 3S"

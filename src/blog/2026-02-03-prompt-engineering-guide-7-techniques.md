@@ -6,7 +6,7 @@ category: "AI"
 tags: ["프롬프트 엔지니어링", "ChatGPT 활용법", "AI 프롬프트", "AI 팁"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/30530407/pexels-photo-30530407.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/31742337/pexels-photo-31742337.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "컴퓨터 화면에 표시된 AI 채팅 인터페이스"
 coupangLinks:
   - title: "챗GPT 활용법 도서"

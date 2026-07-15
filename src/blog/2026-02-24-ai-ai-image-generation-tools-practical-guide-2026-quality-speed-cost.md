@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["AI 이미지 생성", "DALL-E", "Midjourney", "Stable Diffusion", "AI 도구 활용"]
 image:
-  url: "https://images.pexels.com/photos/17153194/pexels-photo-17153194.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/25626448/pexels-photo-25626448.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "A smartphone showing the Midjourney website on its screen against a gray textured surface."
 coupangLinks:
   - title: "아이패드 에어 M2"

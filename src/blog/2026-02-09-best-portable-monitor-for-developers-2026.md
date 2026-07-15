@@ -6,7 +6,7 @@ category: "Review"
 tags: ["포터블 모니터", "재택근무", "개발 장비", "모니터 추천", "리뷰"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/20762607/pexels-photo-20762607.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "깔끔한 데스크 셋업과 모니터가 있는 작업 공간"
 coupangLinks:
   - title: "ASUS ZenScreen MB16ACV"

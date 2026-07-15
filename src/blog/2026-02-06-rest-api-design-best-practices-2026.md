@@ -6,7 +6,7 @@ category: "Dev"
 tags: ["REST API", "API 설계", "백엔드 개발", "웹 개발"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/10816120/pexels-photo-10816120.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/16592498/pexels-photo-16592498.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "어두운 테마의 컴퓨터 화면에 표시된 프로그래밍 코드의 상세 보기"
 coupangLinks:
   - title: "클린 코드"

@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["프롬프트 엔지니어링", "AI 활용법", "ChatGPT", "Claude", "생산성"]
 image:
-  url: "https://images.pexels.com/photos/30839680/pexels-photo-30839680.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/19101570/pexels-photo-19101570.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Wooden Scrabble tiles spelling 'Deepmind' and 'Gemini' on a wooden surface, a concept of AI and games."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"

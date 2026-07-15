@@ -6,7 +6,7 @@ category: "Game"
 tags: ["Godot", "인디게임", "오픈소스", "GDScript", "게임개발"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/29096088/pexels-photo-29096088.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/30512715/pexels-photo-30512715.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Illuminated 'Game Over' sign in pixel art style with neon green and white colors on a dark background."
 coupangLinks:
   - title: "게임 프로그래밍 패턴 도서"

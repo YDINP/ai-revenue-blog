@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["AI 코딩", "개발자 생산성", "2026 트렌드", "프로그래밍 효율화"]
 image:
-  url: "https://images.pexels.com/photos/34804018/pexels-photo-34804018.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/34804015/pexels-photo-34804015.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Close-up of AI-assisted coding with menu options for debugging and problem-solving."
 coupangLinks:
   - title: "아이패드 에어 M2"

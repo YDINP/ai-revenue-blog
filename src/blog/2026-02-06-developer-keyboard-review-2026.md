@@ -6,7 +6,7 @@ category: "Review"
 tags: ["키보드추천", "개발자키보드", "기계식키보드", "코딩장비", "리뷰"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/4792726/pexels-photo-4792726.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/36496927/pexels-photo-36496927.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "대형 모니터를 사용하여 현대적인 컴퓨터로 백라이트 키보드에서 타이핑하는 익명의 남성"
 coupangLinks:
   - title: "로지텍 MX Keys S 무선 키보드"

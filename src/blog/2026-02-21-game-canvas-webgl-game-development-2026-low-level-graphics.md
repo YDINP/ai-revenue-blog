@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Game"
 tags: ["Canvas", "WebGL", "웹게임 개발", "그래픽 프로그래밍", "성능 최적화"]
 image:
-  url: "https://images.pexels.com/photos/7489031/pexels-photo-7489031.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/6005476/pexels-photo-6005476.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Three diverse friends enjoy a lively game of Twister in a cozy living room. Perfect for lifestyle and leisure themes."
 coupangLinks:
   - title: "로지텍 MX Master 3S"

@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["로컬LLM", "오픈소스AI", "Ollama", "LMStudio", "프라이빗AI", "2026"]
 image:
-  url: "https://images.pexels.com/photos/30530407/pexels-photo-30530407.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/37717004/pexels-photo-37717004.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Close-up of an AI-driven chat interface on a computer screen, showcasing modern AI technology."
 coupangLinks:
   - title: "챗GPT 활용법 도서"

@@ -6,7 +6,7 @@ category: "AI"
 tags: ["AI 코딩", "GitHub Copilot", "Cursor", "Windsurf", "개발 도구"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/11035544/pexels-photo-11035544.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "모니터에 표시된 코드와 프로그래밍 화면"
 coupangLinks:
   - title: "AI 시대의 프로그래밍 도서"

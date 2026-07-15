@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Game"
 tags: ["Phaser 3", "웹게임 개발", "JavaScript 게임", "게임 엔진", "웹 개발"]
 image:
-  url: "https://images.pexels.com/photos/4620834/pexels-photo-4620834.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/262508/pexels-photo-262508.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "A Muslim woman in a hijab applies makeup for a tutorial indoors."
 coupangLinks:
   - title: "게임 프로그래밍 패턴"

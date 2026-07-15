@@ -6,7 +6,7 @@ category: "AI"
 tags: ["n8n", "자동화", "수익화", "워크플로우", "패시브인컴"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/11035393/pexels-photo-11035393.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/5849573/pexels-photo-5849573.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "야외에서 DevOps 스티커를 들고 있는 사람을 특징으로 하는 클로즈업 이미지"
 coupangLinks:
   - title: "LG 그램 17 (개발용 노트북)"

@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Game"
 tags: ["PixiJS", "2D게임개발", "웹게임", "WebGL", "게임엔진"]
 image:
-  url: "https://images.pexels.com/photos/2263816/pexels-photo-2263816.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/12891180/pexels-photo-12891180.jpeg?auto=compress&cs=tinysrgb&w=1200"
   alt: "Close-up of a red Nintendo Game Boy Color on a dark backdrop, showcasing retro gaming nostalgia."
 coupangLinks:
   - title: "로지텍 MX Master 3S"
