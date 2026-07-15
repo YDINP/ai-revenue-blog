@@ -14,13 +14,16 @@
 -- ⚠️ 'naver'/'yandex'/'baidu' 같은 넓은 토큰은 인앱브라우저 실사용자 UA(네이버앱=NAVER(inapp))
 --    까지 매칭하므로 사용 금지. YandexBot·Baiduspider 는 bot|spider 로 이미 커버됨.
 
+-- 2026-07-15 추가: Google 범용 크롤러 GoogleOther·Google-InspectionTool 은 UA 에 'bot' 토큰이
+-- 없어 기존 정규식에 안 걸림(7/12 47건 조회수 오염 확인) → googleother|google-inspection 추가.
+
 -- 삭제 전 확인 (건수 미리보기)
 SELECT count(*) AS bot_pageviews
 FROM analytics
 WHERE event_type = 'pageview'
-  AND metadata->>'user_agent' ~* 'bot|crawl|spider|headless|lighthouse|playwright|puppeteer|slurp|petalbot|bytespider|yeti|daumoa';
+  AND metadata->>'user_agent' ~* 'bot|crawl|spider|headless|lighthouse|playwright|puppeteer|slurp|petalbot|bytespider|yeti|daumoa|googleother|google-inspection';
 
 -- 삭제 실행
 DELETE FROM analytics
 WHERE event_type = 'pageview'
-  AND metadata->>'user_agent' ~* 'bot|crawl|spider|headless|lighthouse|playwright|puppeteer|slurp|petalbot|bytespider|yeti|daumoa';
+  AND metadata->>'user_agent' ~* 'bot|crawl|spider|headless|lighthouse|playwright|puppeteer|slurp|petalbot|bytespider|yeti|daumoa|googleother|google-inspection';

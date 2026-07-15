@@ -3796,13 +3796,24 @@ const ICONS: Record<string, string> = {
             { label: '쿠팡 클릭', count: cc, color: 'linear-gradient(90deg,#ea580c,#facc15)', rate: cvr },
           ];
           el.innerHTML = steps.map((s, i) => {
-            const w = Math.max(s.count / max * 100, 2.5);
-            const rate = s.rate !== null ? `<span class="funnel-rate">전환 ${s.rate.toFixed(2)}%</span>` : '';
+            // 첫 스텝(페이지뷰)은 퍼널의 분모=기준선이라 막대가 항상 100%로 정보량이 없음.
+            // → 색막대 없이 '기준' 표기만, 하단 전환 스텝만 전환율 막대(width=전환율)로 렌더.
+            if (s.rate === null) {
+              return `<div class="funnel-step">
+                <div class="funnel-step-head">
+                  <span class="funnel-step-label">${s.label}</span>
+                  <span class="funnel-step-count">${fmt(s.count)}</span>
+                  <span class="funnel-rate" style="color:var(--text-3)">기준 100%</span>
+                </div>
+                <div class="funnel-bar-wrap funnel-baseline"></div>
+              </div>`;
+            }
+            const w = Math.max(s.rate, 2.5);
             return `<div class="funnel-step">
               <div class="funnel-step-head">
                 <span class="funnel-step-label">${s.label}</span>
                 <span class="funnel-step-count">${fmt(s.count)}</span>
-                ${rate}
+                <span class="funnel-rate">전환 ${s.rate.toFixed(2)}%</span>
               </div>
               <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:${w}%;background:${s.color}"></div></div>
             </div>`;

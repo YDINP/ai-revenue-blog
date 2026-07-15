@@ -240,7 +240,8 @@ const websiteSchema = {
         //   — 네이버 서치어드바이저 '웹페이지 수집' 후 Yeti 크롤링이 조회수로 잡히던 문제
         //   ⚠️ 'naver'/'yandex'/'baidu' 처럼 넓게 잡으면 인앱브라우저 실사용자(예: 네이버앱 UA=NAVER(inapp))
         //      까지 제외되므로, 크롤러 전용 문자열(yeti·daumoa)만 사용. YandexBot·Baiduspider 는 bot|spider 로 이미 걸림.
-        if (navigator.webdriver || /bot|crawl|spider|headless|lighthouse|playwright|puppeteer|slurp|petalbot|bytespider|yeti|daumoa/i.test(ua)) return;
+        //   — GoogleOther/Google-InspectionTool 등 Google 크롤러는 UA에 'bot' 이 없어 별도 명시
+        if (navigator.webdriver || /bot|crawl|spider|headless|lighthouse|playwright|puppeteer|slurp|petalbot|bytespider|yeti|daumoa|googleother|google-inspection/i.test(ua)) return;
         // 3) 관리자 플래그가 있으면 집계하지 않음
         try { if (localStorage.getItem(NOTRACK_KEY) === '1') return; } catch (e) {}
         const slug = window.location.pathname.replace(/^\/blog\//, '').replace(/\/$/, '');
