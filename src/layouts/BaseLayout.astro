@@ -9,9 +9,10 @@ interface Props {
   description: string;
   image?: string;
   canonicalUrl?: string;
+  noindex?: boolean;
 }
 
-const { title, description, image, canonicalUrl } = Astro.props;
+const { title, description, image, canonicalUrl, noindex = false } = Astro.props;
 const siteTitle = 'TechFlow - AI & 테크 인사이트';
 const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 const defaultOgImage = 'https://images.pexels.com/photos/18068768/pexels-photo-18068768.png?auto=compress&cs=tinysrgb&w=1200&h=630&dpr=1';
@@ -65,7 +66,7 @@ const websiteSchema = {
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="author" content="TechFlow" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? "noindex, follow" : "index, follow"} />
     <meta name="google-site-verification" content="uShjQZTfZFAauTdbCg7ZN0cvDV_ErVoVmdCScJ75TIQ" />
     <meta name="naver-site-verification" content="8690f68a97ed2c84b4644bbe00fa2ec9ccdbe55e" />
     <meta name="theme-color" content="#2563eb" />

@@ -42,6 +42,7 @@ interface Props {
   chartData?: (ChartBarData | ChartRadarData)[];
   slug?: string;
   faq?: FaqItem[];
+  noindex?: boolean;
 }
 
 const {
@@ -57,6 +58,7 @@ const {
   chartData,
   slug,
   faq,
+  noindex,
 } = Astro.props;
 
 const formattedDate = new Date(pubDate).toLocaleDateString('ko-KR', {
@@ -194,7 +196,7 @@ const seriesItemListLd = roadmap
   : null;
 ---
 
-<BaseLayout title={title} description={description} image={ogImageUrl}>
+<BaseLayout title={title} description={description} image={ogImageUrl} noindex={noindex}>
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />

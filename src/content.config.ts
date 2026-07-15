@@ -36,6 +36,7 @@ const blog = defineCollection({
       )
       .optional(),
     draft: z.boolean().default(false),
+    noindex: z.boolean().default(false),
   }),
 });
 
