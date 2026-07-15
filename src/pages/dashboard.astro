@@ -1942,14 +1942,16 @@ const ICONS: Record<string, string> = {
       .funnel-rate { font-size: 0.6875rem; font-weight: 700; color: #facc15; margin-left: auto; }
       .funnel-bar-wrap { height: 14px; background: var(--surface-2); border-radius: 7px; overflow: hidden; }
       .funnel-bar { height: 100%; border-radius: 7px; min-width: 4px; }
-      /* 숫자 중심 퍼널 플로우 (전환율 <1% 라 비례막대 대신) */
-      .funnel-flow { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; padding: 0.75rem 0; }
+      /* 숫자 중심 퍼널 플로우 (전환율 <1% 라 비례막대 대신) — 단계는 좌측, 전환율은 우측 단독 */
+      .funnel-flow2 { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem 0; flex-wrap: wrap; }
+      .funnel-steps-left { display: flex; align-items: center; gap: 1.1rem; flex: 1; min-width: 0; }
       .funnel-node { text-align: center; }
-      .funnel-node-count { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+      .funnel-node-count { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
       .funnel-node-label { font-size: 0.8125rem; color: var(--text-2); margin-top: 0.3rem; }
-      .funnel-conn { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; color: var(--text-3); }
-      .funnel-conn-arrow { font-size: 0.85rem; line-height: 1; }
-      .funnel-conn-rate { font-size: 0.8125rem; font-weight: 700; color: #facc15; }
+      .funnel-arrow2 { color: var(--text-3); font-size: 1.1rem; }
+      .funnel-rate-box { text-align: center; padding-left: 1.1rem; border-left: 1px solid var(--surface-2); flex-shrink: 0; }
+      .funnel-rate-val { font-size: 1.9rem; font-weight: 800; color: #facc15; letter-spacing: -0.02em; line-height: 1; }
+      .funnel-rate-cap { font-size: 0.75rem; color: var(--text-2); margin-top: 0.3rem; }
 
       /* 목표 카드 */
       .goal-cards { display: flex; flex-direction: column; gap: 0.75rem; }
@@ -3569,7 +3571,7 @@ const ICONS: Record<string, string> = {
 
       // === 오디언스: 유입경로 / 기기·브라우저·OS (analytics pageview 조회) ===
       let _audienceRows = [];
-      let _funnelCounts = { pageviews: 0, coupang: 0, newsletter: 0 };
+      let _funnelCounts = { pageviews: 0, coupang: 0, newsletter: 0, paperdoc: 0 };
 
       async function fetchAudience() {
         try {
@@ -3795,24 +3797,28 @@ const ICONS: Record<string, string> = {
         const pv = _funnelCounts.pageviews || 0;
         const cc = _funnelCounts.coupang || 0;
         const nl = _funnelCounts.newsletter || 0;
+        const pdc = _funnelCounts.paperdoc || 0;
         const el = document.getElementById('funnel-steps');
         if (el) {
           // 전환율이 1% 미만이라 비례 막대는 사실상 안 보임 → 숫자 중심 세로 플로우로 표시
           // (페이지뷰 → 전환율 → 쿠팡 클릭). 각 수치를 크게, 단계 사이에 전환율을 배지로.
           const cvr = pv > 0 ? (cc / pv * 100) : 0;
           el.innerHTML = `
-            <div class="funnel-flow">
-              <div class="funnel-node">
-                <div class="funnel-node-count">${fmt(pv)}</div>
-                <div class="funnel-node-label">페이지뷰</div>
+            <div class="funnel-flow2">
+              <div class="funnel-steps-left">
+                <div class="funnel-node">
+                  <div class="funnel-node-count">${fmt(pv)}</div>
+                  <div class="funnel-node-label">페이지뷰</div>
+                </div>
+                <span class="funnel-arrow2">→</span>
+                <div class="funnel-node">
+                  <div class="funnel-node-count" style="color:#f59e0b">${fmt(cc)}</div>
+                  <div class="funnel-node-label">쿠팡 클릭</div>
+                </div>
               </div>
-              <div class="funnel-conn">
-                <span class="funnel-conn-arrow">▼</span>
-                <span class="funnel-conn-rate">전환 ${cvr.toFixed(2)}%</span>
-              </div>
-              <div class="funnel-node">
-                <div class="funnel-node-count" style="color:#f59e0b">${fmt(cc)}</div>
-                <div class="funnel-node-label">쿠팡 클릭</div>
+              <div class="funnel-rate-box">
+                <div class="funnel-rate-val">${cvr.toFixed(2)}%</div>
+                <div class="funnel-rate-cap">전환율</div>
               </div>
             </div>`;
         }
@@ -3820,6 +3826,7 @@ const ICONS: Record<string, string> = {
         if (gc) {
           const goals = [
             { name: '쿠팡 클릭', count: cc, color: '#facc15' },
+            { name: '페이퍼닥 클릭', count: pdc, color: '#60a5fa' },
             { name: '뉴스레터 구독', count: nl, color: '#4ade80' },
           ];
           gc.innerHTML = goals.map(g => {
@@ -4595,6 +4602,7 @@ const ICONS: Record<string, string> = {
             renderPaperdoc(pd, _paperdocPeriod);
             _funnelCounts.coupang = Array.isArray(coup) ? coup.length : 0;
             _funnelCounts.newsletter = nl;
+            _funnelCounts.paperdoc = Array.isArray(pd) ? pd.length : 0;
             renderFunnelGoals();
             computeInsight();
           });

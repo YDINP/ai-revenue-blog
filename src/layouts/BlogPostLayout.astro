@@ -436,6 +436,14 @@ const seriesItemListLd = roadmap
       </nav>
     )}
 
+    <!-- 인기글 위젯 (카테고리 시리즈보다 위에 노출) -->
+    <div class="popular-posts-widget" id="popular-posts-widget">
+      <h4 class="popular-posts-title">&#128293; 인기 글 TOP 5</h4>
+      <div class="popular-posts-list" id="popular-posts-list">
+        <div class="popular-posts-loading">로딩 중...</div>
+      </div>
+    </div>
+
     <!-- 시리즈 네비게이션 -->
     {seriesTotal > 1 && (
       <div class="series-box">
@@ -463,14 +471,6 @@ const seriesItemListLd = roadmap
         </ul>
       </div>
     )}
-
-    <!-- 인기글 위젯 -->
-    <div class="popular-posts-widget" id="popular-posts-widget">
-      <h4 class="popular-posts-title">&#128293; 인기 글 TOP 5</h4>
-      <div class="popular-posts-list" id="popular-posts-list">
-        <div class="popular-posts-loading">로딩 중...</div>
-      </div>
-    </div>
 
     <!-- 추천 버튼 -->
     <div class="like-section">
