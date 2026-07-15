@@ -134,19 +134,7 @@ GameDiscoverCo 분석에 따르면 2025년 스팀의 플랫폼 전체 실효 수
 
 좌표를 알면 전략이 바뀐다. 규모를 줄이고, 훅을 날카롭게 하고, 출시 전에 관객을 모으고, 실패해도 다시 던질 수 있는 구조를 만든다. 그게 이 시리즈 일곱 편이 하려던 이야기의 전부다.
 
-## 함께 읽으면 좋은 글
-
-인디게임 개발 로드맵 시리즈 (총 7편, 순서대로 읽으면 좋다):
-
-1. [1탄 · 기획·프로토타입](/blog/2026-07-11-game-indie-game-concept-prototype-2026-from-idea-to-vertical-slice/) — 아이디어에서 버티컬 슬라이스까지
-2. [2탄 · 게임 엔진 선택](/blog/2026-02-07-game-engine-comparison-2026/) — Unity·Unreal·Godot 비교
-3. [3탄 · AI 코딩 도구](/blog/2026-07-07-game-ai-coding-tools-indie-game-development-2026-cursor-claude-code/) — Cursor·Claude Code로 개발 속도 올리기
-4. [4탄 · 0원 마케팅](/blog/2026-07-01-game-indie-game-marketing-zero-budget-2026-wishlist-growth/) — 예산 없이 위시리스트 쌓기
-5. [5탄 · 스팀 넥스트 페스트](/blog/2026-07-06-game-steam-next-fest-guide-2026-wishlist-boost/) — 데모로 노출 폭발시키기
-6. [6탄 · 스팀 출시](/blog/2026-06-30-game-indie-game-steam-launch-guide-2026-wishlist-to-launch/) — 위시리스트에서 출시일까지
-7. 7탄 · 수익화·사후 운영 (현재 글) — 돈이 되는 구조 만들기
-
-주제가 이어지는 다른 글:
+## 이어서 읽을 만한 글
 
 - [1인 게임 개발 수익·현실 생존 가이드](/blog/2026-07-04-game-solo-game-developer-survival-guide-2026-burnout-budget/) — 혼자 만들 때 비용·번아웃·수익을 어떻게 버티나
 - [게임 수익 2026: 스팀·모바일·웹 어디가 돈이 되나](/blog/2026-07-13-game-revenue-comparison-2026-steam-mobile-web/) — 플랫폼부터 고르는 상위 좌표
