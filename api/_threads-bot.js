@@ -108,8 +108,7 @@ export function threadsMenu() {
     reply_markup: {
       inline_keyboard: [
         [{ text: '📋 큐 보기', callback_data: 'thr:list:life' }, { text: '🔀 랜덤 발행', callback_data: 'thr:rand:life' }],
-        [{ text: '📊 성과', callback_data: 'thr:insights' }, { text: '🔎 글 찾기', callback_data: 'thr:find' }],
-        [{ text: 'ℹ️ 명령어', callback_data: 'thr:cmds' }],
+        [{ text: '📊 성과', callback_data: 'thr:insights' }, { text: 'ℹ️ 명령어', callback_data: 'thr:cmds' }],
       ],
     },
   };
