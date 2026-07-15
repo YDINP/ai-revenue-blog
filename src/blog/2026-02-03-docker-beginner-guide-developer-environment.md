@@ -15,6 +15,7 @@ coupangLinks:
   - title: "삼성 SSD 980 PRO 1TB"
     url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB"
     imageUrl: "https://ads-partners.coupang.com/image1/_qsUsLY6LSyOTqS__pJVdMCQ93UYVqLRIMnn8S8qlEPPWMsdbue688pJgyusND6JtIuxhzV82OKRbB7RGM7hHGBHDP0c-iIuAaLfdp5TnIF0Ibqxxhx0tQudKnCglLM7DyS-i3whwWpJe-4UsrabTbV_-Z43O8wOpWlgY--fUveo7ZSKL-K7wTXDY-8jngpdyBPSG4Su5BRr4XmrJGB7_uIAZfmMV96reUItTr1XdvrUb1ICeAjX5t9pY_KJk6DNA5w6Ol25RoM-NTbCXsIY5NUM3LMu9JwpMDU="
+noindex: true
 ---
 ## "내 컴퓨터에서는 되는데요?" 의 종말
 

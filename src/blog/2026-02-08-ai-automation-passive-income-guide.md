@@ -15,6 +15,7 @@ coupangLinks:
   - title: "챗GPT 활용법 도서"
     url: "https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C"
     imageUrl: "https://ads-partners.coupang.com/image1/Utu9yX7FHBeQATeHUvq_zJG1NymYApyI7m_BOmY4SCdd-miiJsL_gM0ZLNcLJQz3EpAC9ffXJRA1kImbcqfvSZ1kryoRWdhyoVj7WkVp_wiyAcX_7h3tDK0s0-6wFy2cavE7TiCG92TjkvPv1QPHVsJuc0JaGWah7V-Hx2C-23u2D3M8D-HY2Pony2AeUt60XkJAt4p27cFtmK98axFxVm0z6sIlLrOWoO_9kMklJTwM7u3IsFAHf4iE_OVXgZ18UQpoBS_IRGno9jnDa0XyZZPnEk4HQBYy8g=="
+noindex: true
 ---
 안녕하세요. 작년부터 AI 자동화 도구들을 직접 활용해서 부업 수익을 만들고 있는 개발자입니다. 솔직히 처음에는 AI 자동화가 정말 돈이 될까 의심했어요. 하지만 지난 1년간 실험하면서 AI 자동화로 월 300만 원대의 패시브 인컴을 만드는 데 성공했습니다. 오늘은 제 경험을 바탕으로 AI 자동화를 통한 수익 창출 방법을 정리해서 공유하려고 합니다.
 

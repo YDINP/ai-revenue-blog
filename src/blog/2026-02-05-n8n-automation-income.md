@@ -15,6 +15,7 @@ coupangLinks:
   - title: "챗GPT 활용법 도서"
     url: "https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C"
     imageUrl: "https://ads-partners.coupang.com/image1/Utu9yX7FHBeQATeHUvq_zJG1NymYApyI7m_BOmY4SCdd-miiJsL_gM0ZLNcLJQz3EpAC9ffXJRA1kImbcqfvSZ1kryoRWdhyoVj7WkVp_wiyAcX_7h3tDK0s0-6wFy2cavE7TiCG92TjkvPv1QPHVsJuc0JaGWah7V-Hx2C-23u2D3M8D-HY2Pony2AeUt60XkJAt4p27cFtmK98axFxVm0z6sIlLrOWoO_9kMklJTwM7u3IsFAHf4iE_OVXgZ18UQpoBS_IRGno9jnDa0XyZZPnEk4HQBYy8g=="
+noindex: true
 ---
 ## n8n이란?
 

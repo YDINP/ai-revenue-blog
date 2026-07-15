@@ -18,6 +18,7 @@ coupangLinks:
   - title: "러스트 프로그래밍"
     url: "https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D"
     imageUrl: "https://ads-partners.coupang.com/image1/dbsBLgKa1TUQAMe9deQm4iK3Siu2ZdQSgl7y37pcEIbufmGAxqZX9Uxc4eOyhLrVAhTN4IQxK58yJsqt9PjIAFExXC6RgHMpgqGZU7wkaimqQjxRJfCdf9mpjvbtiyjpODOoPppg7WLmPgcYr303raPgiFgQGEfnFRCMM1tUaI7n3Q4kVuKJ0-ZZUMKQs0zgWO20SX9X27GQbrH7kqLFfzHnQSFukc3w7JnVVwyAttI0pocn2mUudP-7Gk4aW_eEY4BdXebYxM5ZCd3lYmXbSqbbZ9o4TIixoBIwavfL18sKl9njvWeGDF-RwgQfylmi2xscgA=="
+noindex: true
 ---
 ## 프로그래밍 입문, 어렵지 않습니다
 

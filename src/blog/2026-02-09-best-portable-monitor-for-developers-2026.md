@@ -26,6 +26,7 @@ coupangLinks:
     imageUrl: "https://ads-partners.coupang.com/image1/4GcDsjx61QbR12T14EhO64g8emGjsGGKRLxF5hbXlEXkIE2c4rWpl2d-cR6umUGHYTEGUQXEg8qelS9CLPW6PWvWQCOdptcRoqdcFaw0bOe6LARBMyU8di0A9wGXHTY7aX3BBgxWRfHpxhTMDzSzDZ4wrNAyI98bNxcJprKHm1PYffNdktAgsfRB4dlGQmX5XSFi317LpU7hA61Y8VNKQbuek0lJJDJqr7a3k6sfoGjEEwEavN-VxqVs50PLchhXFOZnJe5FEjlX_kRT_JUprhceJbsgiSBNNA=="
   - title: "규랩 쿨링 홀 노트북 스탠드 거치대"
     url: "https://www.coupang.com/np/search?q=%EA%B7%9C%EB%9E%A9%20%EC%BF%A8%EB%A7%81%20%ED%99%80%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%EA%B1%B0%EC%B9%98%EB%8C%80&src=1139000&spec=10799999&addtag=200&ctag=%EA%B7%9C%EB%9E%A9%20%EC%BF%A8%EB%A7%81%20%ED%99%80%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%EA%B1%B0%EC%B9%98%EB%8C%80&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B7%9C%EB%9E%A9%20%EC%BF%A8%EB%A7%81%20%ED%99%80%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%EA%B1%B0%EC%B9%98%EB%8C%80"
+noindex: true
 ---
 ## 개발자에게 듀얼 모니터는 사치가 아닌 생존 도구
 

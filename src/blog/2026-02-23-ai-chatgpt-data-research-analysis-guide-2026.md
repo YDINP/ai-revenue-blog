@@ -22,6 +22,7 @@ faq:
     a: "기밀 정보나 개인정보는 절대 업로드하면 안 됩니다. OpenAI 정책상 입력 데이터가 모델 개선에 활용될 수 있습니다. 필요시 기업용 ChatGPT Enterprise를 사용하거나 로컬 LLM([2026년 로컬 LLM 구축 실전 가이드: Ollama, LM Studio로 프라이빗 AI 만들기](/blog/2026-02-22-ai-local-llm-setup-guide-2026-ollama-lm-studio-private-ai/))을 고려하세요."
   - q: "ChatGPT Plus ($20/월)와 무료 버전의 성능 차이는?"
     a: "Plus는 GPT-4.5 모델, 이미지/파일 분석, 더 높은 응답 속도를 제공합니다. 무료 버전은 GPT-3.5 기반이므로 복잡한 분석은 정확도가 떨어집니다. 정보검색 수준이라면 무료로 충분하지만, 데이터 분석·보고서 작성은 Plus 가입을 권장합니다."
+noindex: true
 ---
 
 ## ChatGPT를 검색과 분석 도구로 활용하기

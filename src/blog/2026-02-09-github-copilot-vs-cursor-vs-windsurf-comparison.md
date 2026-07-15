@@ -18,6 +18,7 @@ coupangLinks:
   - title: "로지텍 MX Keys 키보드"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20%ED%82%A4%EB%B3%B4%EB%93%9C"
     imageUrl: "https://ads-partners.coupang.com/image1/p39mrB4dm2o9iFtFp_2vxPgwtML0tq3czOZ74C908rwl1YKjoe2BHLyA9tYQ9rCfOuzM_9QFWOe9Nh9oMB7vPnvEiVa3TmApBs_BFU_9FSYOdoQuDs2H2adxde8u3oeFu0Kded3UTF4q-ihLD42-OcSfIu3ApSQ2CoCuNO6XTTSt7zjjuf4dIouGZJMjOHBDwUwBCVFZB-d5Xsw61OaAVUdRfdEZmXP4Jy-nd0RVGhjjc6vPBryPGUb51dJOGfSBRK_3T2LZX_lPFS2R3-gk5mISEgCsJH5BBg=="
+noindex: true
 ---
 ## AI가 코드를 쓰는 시대, 어떤 도구를 써야 할까?
 

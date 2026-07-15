@@ -18,6 +18,7 @@ coupangLinks:
   - title: "게임 프로그래밍 패턴"
     url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4"
     imageUrl: "https://ads-partners.coupang.com/image1/cjw8eU-RuCxeQ_R2clv0m05lX0rjCe98FvyNC-KpOCoDIQwgfQZ5dOKX8dcLMIhNsGmGDEm3a97EJigUmZTzQNunevTEF60gjmylXfLTk-_Q3yWHuVBJGpmvR-mUeBNY7zOvtIw0GtX8FobNoWFtB1otPIYpaf3ROEhyZ48hW9TrB7T94aHFud-nyhWdtUuVC-m1WVW6niXkADP5D3S70S87u297SAcHld-8JySdDFhX8Mds6DU1QJk4KN1L957pFHSDtEfA7y5WF_reZbdfPfU0yQoRFhdz67Rlv8OMvLVfXOFJGe5IiAeRUcCaJ7b8f_8v-vJtkmp3Nme6QM8J8576Ak4Kg3-SgdqPHAk99Ps7"
+noindex: true
 ---
 ## 2026년 인디 게임 개발 도구의 변화
 

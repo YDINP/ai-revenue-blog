@@ -15,6 +15,7 @@ coupangLinks:
   - title: "로지텍 MX Keys S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S"
     imageUrl: "https://ads-partners.coupang.com/image1/ezpf0GR4BzffiPvWe2k74jT3RBLuAjPe0v_bX6hU0wle_X168JmYu7hAG4hxD2iBdIbJpjeAta6nc2Fe5aaqdWaUOLUddaimIqk8TRHenLgIa9Xy_RI4bHy0p66ymMwN1PMEwAFyPnovJpVnnRRODSZQ11OKq9QVvHazuhdBSv66R2WeABiHYnolhGWEjmkd4jdvZ2d-aeTSy2BMTbQgOZkm10o59K6iGTWxuYBauaszozfNmGdHZ7W97v6G4jqBRVkJBoY6pnVXyfRiJcCpH0rxgKb32EtxQg=="
+noindex: true
 ---
 ## GPT-5.3 Codex Spark: AI 코딩 어시스턴트의 새로운 기준
 

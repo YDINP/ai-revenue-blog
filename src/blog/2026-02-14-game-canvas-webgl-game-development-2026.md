@@ -15,6 +15,7 @@ coupangLinks:
   - title: "유니티 교과서"
     url: "https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C"
     imageUrl: "https://ads-partners.coupang.com/image1/jU4rMqEhhQQ2Wd8IjUpuHIKifVm5Xm_z8lEBuB7h5473DdC0rv0UxSWiDORvE1YMT3K2khY1on2Ww6xPRJ5SQm1MooU9TpEiB3lcpxaGeIv-VEpK8hUXcdRGQMBhu0kMP2qP_-uHY01BJYoO1NvVUPOa_FWtFuGDx0m-ITFfrPxGteYGOrvQWJdq81F1R1l_hcj8HkW8-hpZFoLxSgAGZCgsVDC-SwwLKzVS-4IXm7cnJCyG7I-dKlg4BijAJbRg0FuR7w3DIXEoYJs5-fycT7rp6-CQ1ZQDynUtzS2forabWOPdsZWkk3ArrKFIPHGS60kGSg=="
+noindex: true
 ---
 ## 2026년 Canvas WebGL 게임 개발 시장의 새로운 변화
 

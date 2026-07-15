@@ -15,6 +15,7 @@ coupangLinks:
   - title: "로지텍 MX Keys S 무선 키보드"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%EB%AC%B4%EC%84%A0%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%EB%AC%B4%EC%84%A0%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%EB%AC%B4%EC%84%A0%20%ED%82%A4%EB%B3%B4%EB%93%9C"
     imageUrl: "https://ads-partners.coupang.com/image1/qJs2DVNc7_u9EFHOqGJYptFuU4gxm0kFf_4rNKvhY7wErTvt7EJI9fNQ5rFq_xkyNYO2MIs4BlHJKEQnZdHvS4KnoEUgOcf3AZPnaFw0Vz8QGpE4aOQ-xlLElXaC2PtAUeVdHcOIzZqe8HIPfE75I57DnBNuyxfQJzoyy_oYjp9uYC8Zt1d34K5aqETGewWDCi-p2zQy_rU14mFODeTHYaPTxLbRQhNKSwZutzyTwDLZb6KagiWidzc3OYdqCmFH2AaekZ45EwCIELPb1yVrryjyV5Iie3qIF2o="
+noindex: true
 ---
 ## 2월 5일, AI 역사상 가장 치열한 하루
 

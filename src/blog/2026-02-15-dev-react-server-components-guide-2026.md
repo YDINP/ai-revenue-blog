@@ -25,6 +25,7 @@ faq:
     a: "App Router가 Server Components를 기본으로 채택한 구현 방식입니다. Next.js 13+에서는 기본적으로 모든 컴포넌트가 Server Component이며, 'use client' 지시문으로만 Client Component로 변환합니다."
   - q: "Server Components를 사용하면 SEO가 정말 개선되나요?"
     a: "네. 서버에서 동적으로 메타 데이터와 콘텐츠를 생성하고 초기 HTML에 포함시켜 검색 엔진 크롤링이 더 효율적입니다. 평균적으로 Core Web Vitals 점수가 20~30점 상승합니다."
+noindex: true
 ---
 
 ## React Server Components: 2026년 프론트엔드 패러다임 전환

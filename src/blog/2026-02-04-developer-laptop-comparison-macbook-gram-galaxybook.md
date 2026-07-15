@@ -26,6 +26,7 @@ coupangLinks:
     imageUrl: "https://ads-partners.coupang.com/image1/ENbp7PChEmTv5eskEMtivUmo4ONEC0cNdl0OMakwEvm3bfdSU7rrYcp6Ie9v-wQA2FSE6nNQzTpLUY3KBWxQHXwMV36eN9q0PqPj1owT3jzlrKxJjdjbscmgvk-OHxIF7gdLkh42jX_9E_W3GZo2nRt_h6QNs4AOiEFOG2XG6IM2eV9Bad10VqTQ8Dl19xfgaGXjOos-B02r-Jz9TON6O3ihHyhRWja3MZjJksEzbQ6nZ03P7JO_6W0o-2lKxW8PG-A7GP6vBA1eOtheHqAyQ_5hWiOfKgIEQWHs5pSoFWO1evKlBlfJRI0="
   - title: "토라픽 초경량 노트북 거치대"
     url: "https://www.coupang.com/np/search?q=%ED%86%A0%EB%9D%BC%ED%94%BD%20%EC%B4%88%EA%B2%BD%EB%9F%89%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EA%B1%B0%EC%B9%98%EB%8C%80&src=1139000&spec=10799999&addtag=200&ctag=%ED%86%A0%EB%9D%BC%ED%94%BD%20%EC%B4%88%EA%B2%BD%EB%9F%89%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EA%B1%B0%EC%B9%98%EB%8C%80&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%86%A0%EB%9D%BC%ED%94%BD%20%EC%B4%88%EA%B2%BD%EB%9F%89%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EA%B1%B0%EC%B9%98%EB%8C%80"
+noindex: true
 ---
 ## 개발자의 영원한 고민: 어떤 노트북을 살까?
 

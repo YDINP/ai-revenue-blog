@@ -18,6 +18,7 @@ coupangLinks:
   - title: "유니티 교과서"
     url: "https://www.coupang.com/np/search?q=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9C%A0%EB%8B%88%ED%8B%B0%20%EA%B5%90%EA%B3%BC%EC%84%9C"
     imageUrl: "https://ads-partners.coupang.com/image1/nsBrUbqVpE2dSBiInsmUQpL5-SzfmSJt9s4tftA0O2D4NYRYJzx7OooNrTlcKdqsktlVYXmw0dTBrvC3BROQhypVLcblwOxZkVQ5r9sfn-XjneX0iR3zNV7Q2m3CVHfJgeTYnnJf6QH8YBFV1TrMPfTgb8sEh20QKQ0p1xzu5wqaSiQNLs6T4G2wqh7iKyRpyE3ZGjB8d-rvxJ91jYTx4SLomkFnKxNlOwGtsHnKriKVv_TxwoV-HLCJNnxB4nT1d8G_ZzqaOBuoYlYzsKSouWJUme_hnVDNUhXiBCir6NxW2kT2-O50-8pGBPpj3lkaRd9bV7g="
+noindex: true
 ---
 ## Cocos Creator란? 2026년 기준 현황
 

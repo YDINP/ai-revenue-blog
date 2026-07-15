@@ -15,6 +15,7 @@ coupangLinks:
   - title: "모니터 LG 울트라와이드"
     url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8B%88%ED%84%B0%20LG%20%EC%9A%B8%ED%8A%B8%EB%9D%BC%EC%99%80%EC%9D%B4%EB%93%9C"
     imageUrl: "https://ads-partners.coupang.com/image1/6SIZe3B9x0OXeXJA6aMiwQYPMZDqJrWWa44fOeUcCQFpXzDnfiM9pRlF6SqIlcPTKp0k2J4xRXCU5TFWCjvp4ofH6KoaH58zAJo57fIojvRabUkJQ9PKGCaqo2FcyEEZ51abgeOpLJi-zcbWjgi9_RtQRl_hYhdZYsLksQ1qq6jb-mxLu2nZFsDP75mqnB2U4VMb58soJmYX0CwXhkqRSpbEGMpPGwQTRwU9RBxN6t4DDrpywwi3JQcY6p1uZfUJ6IKsYpDXbglqGnyqRPM_jzizBqWeC-TjCOg="
+noindex: true
 ---
 ## Phaser.js가 웹 게임 개발의 정답인 이유
 

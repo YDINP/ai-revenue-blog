@@ -15,6 +15,7 @@ coupangLinks:
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
     imageUrl: "https://ads-partners.coupang.com/image1/N3MOn3F4M0r96tGWN8I7EHBxNmijCay63U9fXr_vTcbGzyXYNWufIm2ghSbCMxDr4gU5VtRvrqH7cz7ij5QeP4dilOAVm-woEJyJwBiohQq8i6nGtgBY0Y9VkOuXQ5s9Ud44lC30A__avNEiOq2OOYDBCDKxgAwqeVZjH8SduAFDkwv4384osbmboq4qoqUAl6RNLQqtYlUnsc98v20HPP5jmIYVHttkcEeRxKxsgsu5elI1o8qRCoBOyN_w_4gP_4oEZmhk_Zte2rO05Dpr0eQTONcs_QXxR5MS8NK3K4m_HU4xFnPZYehghd1RN0JsJAYrNQ=="
+noindex: true
 ---
 ## 2026년 개발자 키보드 시장의 변화
 

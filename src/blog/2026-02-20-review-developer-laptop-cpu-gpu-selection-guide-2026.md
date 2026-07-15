@@ -25,6 +25,7 @@ faq:
     a: "Python/JavaScript 개발자는 AMD Ryzen이 가성비 최고이고, C++/Rust 개발자는 Intel Core Ultra의 멀티코어가 유리하며, iOS 앱 개발자는 Apple Silicon이 필수입니다. 예산이 가장 중요하다면 AMD를 추천합니다."
   - q: "32GB RAM이 정말 필요한가요?"
     a: "일반 개발이라면 16GB로 충분하지만, Docker/Kubernetes를 많이 사용하거나 여러 IDE와 데이터베이스를 동시 실행한다면 32GB가 체감상 큰 차이를 만듭니다. 장기 투자를 고려하면 32GB를 권장합니다."
+noindex: true
 ---
 
 # 2026년 개발자용 노트북 CPU/GPU 선택 완벽 가이드

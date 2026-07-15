@@ -15,6 +15,7 @@ coupangLinks:
   - title: "삼성 뷰피니티 S8 32인치 4K"
     url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EB%B7%B0%ED%94%BC%EB%8B%88%ED%8B%B0%20S8%2032%EC%9D%B8%EC%B9%98%204K"
     imageUrl: "https://ads-partners.coupang.com/image1/qaN-X4jYUqYDW6wUqcfFe7KznDtleD1zE1kICLiYb9H623hC8BX5XqKRd98yyUy01o2Kel6AfC1P6eV3S3BxvTm2MsnGxczZkEzNwflO3ABOJybGOzcRvDBudePQdAE2mkdY9BuXylALyVZr_BnZv_EqxeeqssD1XAhwp6vbS-qos3RIdCZA2naDiUNDfMskOzfm-uibROWQM10w7NoEt0z7iFr2eLXR_W2bGJd-fEnaytdjueyE3roHZ9LD5ZEU41ZkBtfIgUAKhArGnOTDtw3YT_nQGMl_AG3_Zz4Ah2kV2rDODeyhvyrN7ui8pJBKGBZtXA=="
+noindex: true
 ---
 ## 개발자에게 모니터 크기가 중요한 이유
 

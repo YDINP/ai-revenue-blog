@@ -15,6 +15,7 @@ coupangLinks:
   - title: "개발자 노트북 맥북 프로"
     url: "https://www.coupang.com/np/search?q=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EB%A7%A5%EB%B6%81%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EB%A7%A5%EB%B6%81%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EB%A7%A5%EB%B6%81%20%ED%94%84%EB%A1%9C"
     imageUrl: "https://ads-partners.coupang.com/image1/GXTncZGOMmmHoyl4GTZg_mwZmJxyD8REuEbbIkdKKPL7isYEugv6nR4cVsmoW5S3PyV9FjQebkSVv869h1nOE39y8OpIwWdQ0eXcCxbHtGZ4SuAgScTRSFslj4LeHuxej-p5ZWvmKTvyVZYZav1FtGvNS5Wd_kwPkNO0DIYY5dGs90HIMUGJTGDiGIp0gPdGQsg7stimXtYUOVynO84qx6gXrB2SkE-MX8tKujcLmGmWru1YfHvfg6TRL2ddH9d8offasb2OLli5PNzRGswteeXKlKtZcHSfyMXgVR7IW0ylCc5tHMfLpag="
+noindex: true
 ---
 ## 백엔드 언어, 2026년에는 무엇을 써야 할까?
 

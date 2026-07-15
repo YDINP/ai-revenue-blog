@@ -25,6 +25,7 @@ faq:
     a: "필수는 아닙니다. Server Components와 클라이언트 컴포넌트의 경계가 명확하면 Zustand도 잘 작동합니다. 다만 Jotai는 이 패러다임을 처음부터 염두에 두고 설계되어, 원자 단위로 서버/클라이언트 상태를 분리하기 더 편합니다."
   - q: "TanStack Query만으로 모든 상태 관리가 가능한가요?"
     a: "아닙니다. TanStack Query는 서버 상태(API 데이터)에 특화되어 있고, UI 상태(다크 모드, 모달 열림 상태 등)는 여전히 별도 라이브러리가 필요합니다. 따라서 프로젝트에 따라 Zustand나 Jotai와 조합하는 것이 일반적입니다."
+noindex: true
 ---
 
 # 2026년 React 상태 관리 전쟁: Zustand vs Jotai vs TanStack Query 실전 비교
