@@ -30,6 +30,15 @@ export default async function handler(req, res) {
     return res.status(200).json({ ok: true, skipped: 'interacted_or_no_window' });
   }
 
+  // 이 시간대(최근 20분)에 이미 글이 나갔으면(예약 타래·수동 발행 등) 중복 자동발행 skip
+  const recentSince = new Date(Date.now() - 20 * 60 * 1000).toISOString();
+  const already = await sb(`threads_posts?account_id=eq.${acct.id}&published_at=gte.${recentSince}&select=id&limit=1`);
+  if (already.length) {
+    await sb(`threads_accounts?id=eq.${acct.id}`, { method: 'PATCH', body: { hottime_started_at: null, hottime_msg_id: null } });
+    await notifyDone('✅ 핫타임 종료 — 이 시간대에 이미 글(예약 등)이 나가서 자동발행은 건너뜀.');
+    return res.status(200).json({ ok: true, skipped: 'already_posted' });
+  }
+
   const drafts = await sb(`threads_queue?status=eq.draft&account_id=eq.${acct.id}&select=*`);
   // 마커·메시지id 클리어(다음 창을 위해)
   await sb(`threads_accounts?id=eq.${acct.id}`, { method: 'PATCH', body: { hottime_started_at: null, hottime_msg_id: null } });
