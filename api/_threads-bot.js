@@ -8,6 +8,7 @@ import {
   keywordSearch, insertEngage, getEngage, updateEngage, engageExists, draftEngageReply,
   splitThread, isThreadItem,
 } from './_threads.js';
+import { THREAD_PRESETS, getPreset } from './_threads-presets.js';
 
 const REPO = 'YDINP/ai-revenue-blog';
 const WORKFLOW = 'generate-threads.yml';
@@ -123,7 +124,7 @@ export function threadsMenu() {
     text: '🧵 <b>Threads 메뉴</b> — 뭐 할래?',
     reply_markup: {
       inline_keyboard: [
-        [{ text: '🧵 타래 올리기', callback_data: 'thr:newthread' }],
+        [{ text: '📥 만든 타래', callback_data: 'thr:presets' }, { text: '🧵 타래 올리기', callback_data: 'thr:newthread' }],
         [{ text: '📋 큐 보기', callback_data: 'thr:list:life' }, { text: '🔀 랜덤 발행', callback_data: 'thr:rand:life' }],
         [{ text: '📊 성과', callback_data: 'thr:insights' }, { text: 'ℹ️ 명령어', callback_data: 'thr:cmds' }],
       ],
@@ -264,6 +265,31 @@ export async function createThreadDraft(topic, rawText) {
   return { card, note: `🧵 타래 초안 #${row.id} 저장됨 (${segs.length}편${linkUrl ? ' + 링크' : ''}).${warn}` };
 }
 
+// ── 프리셋 타래 → 큐 삽입(초안) ──
+export async function seedPreset(id) {
+  const p = getPreset(id);
+  if (!p) return { note: `❌ 프리셋 '${escapeHtml(id)}' 없음.` };
+  // preset.topic 활성계정 우선, 없으면 첫 활성계정 폴백
+  let acct = (await sb(`threads_accounts?topic=eq.${encodeURIComponent(p.topic || '')}&active=eq.true&limit=1`))[0];
+  let note = '';
+  if (!acct) {
+    acct = (await getAccounts(true))[0];
+    if (!acct) return { note: '❌ 활성 Threads 계정이 없어. OAuth로 먼저 연결해줘.' };
+    note = `⚠️ '${escapeHtml(p.topic || '?')}' 계정이 없어 <b>${escapeHtml(acct.topic)}</b> 계정으로 담았어(니치 확인!).\n`;
+  }
+  const segs = (p.segments || []).map((s) => s.trim()).filter(Boolean);
+  if (!segs.length) return { note: `❌ 프리셋 '${escapeHtml(id)}'에 편이 없음.` };
+  const row = await insertQueue({
+    account_id: acct.id,
+    text: segs.join('\n---\n'),
+    link_kind: 'thread',
+    link_url: p.link || null,
+    status: 'draft',
+  });
+  const card = threadsCard(row);
+  return { card, note: `${note}📥 <b>${escapeHtml(p.label)}</b> → 큐 초안 #${row.id} (${segs.length}편${p.link ? ' + 링크' : ''}). 4편↑은 ⏰예약 추천.` };
+}
+
 // ── 즉석 발행 (/post) — 큐 안 거치고 바로 Threads 발행 ──
 export async function threadsPostNow(rawText, topic = 'life') {
   const body = String(rawText || '').trim();
@@ -350,6 +376,18 @@ export async function handleThreadsCallback(chatId, data) {
   if ((mm = /^thr:nt:(.+)$/.exec(data || ''))) {
     await setState(chatId, { flow: 'threads_newthread', topic: mm[1] });
     return { text: newThreadPrompt(mm[1]), force_reply: true };
+  }
+  // 미리 만든 타래 프리셋 목록
+  if (data === 'thr:presets') {
+    if (!THREAD_PRESETS.length) return { text: '등록된 프리셋 타래가 없어. 코드 _threads-presets.js에 추가해줘.' };
+    const kb = THREAD_PRESETS.map((p) => [{ text: `📥 ${p.label}`, callback_data: `thr:seed:${p.id}` }]);
+    kb.push([{ text: '◀ 메뉴', callback_data: 'thr:menu' }]);
+    return { text: '📥 <b>만든 타래</b> — 누르면 큐에 초안으로 담아줄게.', reply_markup: { inline_keyboard: kb } };
+  }
+  // 프리셋 → 큐 삽입(초안) → 미리보기 카드
+  if ((mm = /^thr:seed:(.+)$/.exec(data || ''))) {
+    const out = await seedPreset(mm[1]);
+    return out.card ? { text: `${out.note}\n\n${out.card.text}`, reply_markup: out.card.reply_markup } : { text: out.note };
   }
   // 목록 닫기
   if (data === 'thr:close') {
