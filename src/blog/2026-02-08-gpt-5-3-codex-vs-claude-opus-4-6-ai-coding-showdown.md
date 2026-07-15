@@ -18,7 +18,7 @@ coupangLinks:
 ---
 ## 2월 5일, AI 역사상 가장 치열한 하루
 
-2026년 2월 5일, **OpenAI**와 **Anthropic**이 같은 날 차세대 AI 모델을 출시했습니다. OpenAI의 **GPT-5.3 Codex**와 Anthropic의 **Claude Opus 4.6** — 두 모델 모두 **에이전틱 코딩**에 초점을 맞추며, AI 개발 도구 시장의 패권을 놓고 치열한 경쟁을 벌이고 있습니다.
+2026년 2월 5일, OpenAI와 Anthropic이 같은 날 차세대 AI 모델을 출시했습니다. OpenAI의 GPT-5.3 Codex와 Anthropic의 Claude Opus 4.6 — 두 모델 모두 에이전틱 코딩에 초점을 맞추며, AI 개발 도구 시장의 패권을 놓고 치열한 경쟁을 벌이고 있습니다.
 
 이 글에서는 두 모델을 코딩 능력 중심으로 철저히 비교합니다.
 
@@ -59,7 +59,7 @@ coupangLinks:
 | GPT-5.2 Codex | 3위 |
 | Claude Opus 4.5 | 4위 |
 
-GPT-5.3 Codex가 SWE-Bench Pro에서 새로운 업계 최고 기록을 세웠습니다. 하지만 Opus 4.6과의 차이는 **근소한 수준**입니다.
+GPT-5.3 Codex가 SWE-Bench Pro에서 새로운 업계 최고 기록을 세웠습니다. 하지만 Opus 4.6과의 차이는 근소한 수준입니다.
 
 ### Terminal-Bench (터미널 기반 작업)
 
@@ -67,7 +67,7 @@ GPT-5.3 Codex가 Terminal-Bench에서도 1위를 차지했습니다. CLI 기반 
 
 ### 긴 컨텍스트 활용
 
-여기서는 **Opus 4.6이 압도적**입니다. 100만 토큰 컨텍스트와 76%의 검색 정확도는 대규모 코드베이스 분석에서 결정적 차이를 만듭니다.
+여기서는 Opus 4.6이 압도적입니다. 100만 토큰 컨텍스트와 <span style="font-size:1.3em;font-weight:800">76%의 검색 정확도</span>는 대규모 코드베이스 분석에서 결정적 차이를 만듭니다.
 
 ## 실사용 비교: 어떤 작업에 어떤 모델?
 
@@ -75,7 +75,7 @@ GPT-5.3 Codex가 Terminal-Bench에서도 1위를 차지했습니다. CLI 기반 
 
 **GPT-5.3 Codex 우세**
 
-GPT-5.3 Codex의 에이전트는 작업 중에도 사용자가 **실시간으로 방향을 조정**할 수 있습니다. "동료에게 지시하듯" 대화하면서 코드를 수정할 수 있어, 반복적인 수정 작업이 빠릅니다.
+GPT-5.3 Codex의 에이전트는 작업 중에도 사용자가 실시간으로 방향을 조정할 수 있습니다. "동료에게 지시하듯" 대화하면서 코드를 수정할 수 있어, 반복적인 수정 작업이 빠릅니다.
 
 ```
 사용자: "로그인 API를 만들어줘"
@@ -114,11 +114,11 @@ GPT-5.3: [컨텍스트 유지하며 확장...]
 
 ### OpenAI: 대화형 에이전트
 
-GPT-5.3 Codex는 **"동료 개발자"** 컨셉입니다. 작업 중에도 대화하고, 방향을 바꾸고, 피드백을 주고받을 수 있습니다.
+GPT-5.3 Codex는 "동료 개발자" 컨셉입니다. 작업 중에도 대화하고, 방향을 바꾸고, 피드백을 주고받을 수 있습니다.
 
 ### Anthropic: 팀 기반 에이전트
 
-Claude Opus 4.6은 **"개발 팀"** 컨셉입니다. 복잡한 작업을 여러 전문 에이전트가 분업 처리합니다. 더 큰 규모의 작업에 적합하지만, 개별 에이전트와의 실시간 상호작용은 제한적입니다.
+Claude Opus 4.6은 "개발 팀" 컨셉입니다. 복잡한 작업을 여러 전문 에이전트가 분업 처리합니다. 더 큰 규모의 작업에 적합하지만, 개별 에이전트와의 실시간 상호작용은 제한적입니다.
 
 ## 가격 비교
 
@@ -133,12 +133,12 @@ Claude Opus 4.6은 **"개발 팀"** 컨셉입니다. 복잡한 작업을 여러 
 
 <div class="chart-bar" data-title="컨텍스트 윈도우 (K 토큰)" data-labels="Claude Opus 4.6,GPT-5.3 Codex" data-values="1000,256" data-colors="#3b82f6,#10b981" data-unit="K"></div>
 
-GPT-5.3 Codex가 API 가격 면에서 약 20% 저렴하며, 동일 작업에 더 적은 토큰을 사용합니다.
+GPT-5.3 Codex가 API 가격 면에서 <span style="font-size:1.15em;font-weight:700">약 20% 저렴</span>하며, 동일 작업에 더 적은 토큰을 사용합니다.
 
 ## 보안 고려사항
 
 ### GPT-5.3 Codex
-OpenAI 자체 평가에서 사이버보안 관련 **"High capability"** 등급을 받았습니다. 코딩 능력이 향상되면서 악용 가능성도 높아졌다는 의미로, 추가 보안 통제가 적용되었습니다.
+OpenAI 자체 평가에서 사이버보안 관련 "High capability" 등급을 받았습니다. 코딩 능력이 향상되면서 악용 가능성도 높아졌다는 의미로, 추가 보안 통제가 적용되었습니다.
 
 ### Claude Opus 4.6
 Anthropic의 Constitutional AI 프레임워크를 기반으로, 보안 취약점 악용 코드 생성을 적극적으로 거부합니다. "안전한 AI" 철학이 코딩에도 적용됩니다.
@@ -156,7 +156,7 @@ Anthropic의 Constitutional AI 프레임워크를 기반으로, 보안 취약점
 
 ## 최종 결론: 누가 이겼나?
 
-**정답은 "둘 다"입니다.**
+정답은 "둘 다"입니다.
 
 | 이런 상황이라면 | 추천 |
 |---------------|------|
@@ -169,7 +169,7 @@ Anthropic의 Constitutional AI 프레임워크를 기반으로, 보안 취약점
 | 단일 파일 코딩 | GPT-5.3 Codex |
 | 멀티파일 동시 수정 | Claude Opus 4.6 |
 
-2026년 AI 코딩의 가장 현명한 전략은 **두 모델을 병행 사용**하는 것입니다. 작업의 성격에 따라 최적의 도구를 선택하세요. AI 경쟁이 치열해질수록 **개발자가 얻는 혜택**은 커집니다!
+2026년 AI 코딩의 가장 현명한 전략은 두 모델을 병행 사용하는 것입니다. 작업의 성격에 따라 최적의 도구를 선택하세요. AI 경쟁이 치열해질수록 개발자가 얻는 혜택은 커집니다!
 
 
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%EB%AC%B4%EC%84%A0%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%EB%AC%B4%EC%84%A0%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%EB%AC%B4%EC%84%A0%20%ED%82%A4%EB%B3%B4%EB%93%9C" target="_blank" rel="noopener noreferrer nofollow">

@@ -21,7 +21,7 @@ faq:
     a: "매번 수동으로 아카이브하고 TestFlight에 올리고 테스터에게 알리는 반복을 없앨 수 있습니다. 커밋이 올라오면 CI가 빌드·서명·업로드까지 처리해, 시간을 아끼는 동시에 사람 실수를 줄이고 릴리스 과정을 일관되게 만듭니다. 팀이 커질수록, 릴리스가 잦을수록 효과가 큽니다."
 ---
 
-iOS 개발이라고 하면 Xcode GUI에서 버튼 눌러 아카이브하는 그림이 떠오르죠. 하지만 2026년 실무의 상당수는 **Xcode를 열지 않고** 터미널과 CI로 빌드·서명·배포합니다. 반복을 없애고, 사람 실수를 줄이고, 릴리스를 일관되게 만들기 위해서입니다.
+iOS 개발이라고 하면 Xcode GUI에서 버튼 눌러 아카이브하는 그림이 떠오르죠. 하지만 2026년 실무의 상당수는 <span style="font-size:1.3em;font-weight:800">Xcode를 열지 않고</span> 터미널과 CI로 빌드·서명·배포합니다. 반복을 없애고, 사람 실수를 줄이고, 릴리스를 일관되게 만들기 위해서입니다.
 
 ![CI/CD 자동화를 상징하는 이미지](https://images.pexels.com/photos/11035393/pexels-photo-11035393.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=430&w=940)
 
@@ -72,14 +72,14 @@ xcodebuild -scheme MyApp -archivePath build/MyApp.xcarchive archive
 
 ## 자동화의 보상
 
-커밋이 올라오면 CI가 **빌드→서명→업로드→테스터 배포**까지 처리합니다. 수동 아카이브·업로드·알림의 반복이 사라지고, 사람 실수가 줄고, 릴리스가 일관돼집니다. 파이프라인 사고방식은 [Git 히스토리 활용](/blog/2026-07-14-dev-git-history-log-tips-developers-2026/)과 [Next.js 배포 5가지 비교](/blog/2026-02-14-dev-nextjs-deployment-guide-5-methods-comparison-2026/)도 함께 보면 좋습니다.
+커밋이 올라오면 CI가 빌드→서명→업로드→테스터 배포까지 처리합니다. 수동 아카이브·업로드·알림의 반복이 사라지고, 사람 실수가 줄고, 릴리스가 일관돼집니다. 파이프라인 사고방식은 [Git 히스토리 활용](/blog/2026-07-14-dev-git-history-log-tips-developers-2026/)과 [Next.js 배포 5가지 비교](/blog/2026-02-14-dev-nextjs-deployment-guide-5-methods-comparison-2026/)도 함께 보면 좋습니다.
 
 ## 정리
 
 - **GUI 없이 O, 맥 없이 X** — 애플 도구 체인은 필수
-- 간단 빌드는 **xcodebuild**, 서명·업로드는 **fastlane(gym)**
-- 로컬 맥이 없으면 **클라우드 맥 CI**(GitHub Actions·Codemagic 등)
-- 최대 난관은 **코드 서명** → fastlane match로 관리
+- 간단 빌드는 xcodebuild, 서명·업로드는 fastlane(gym)
+- 로컬 맥이 없으면 클라우드 맥 CI(GitHub Actions·Codemagic 등)
+- 최대 난관은 <span style="font-size:1.15em;font-weight:700">코드 서명</span> → fastlane match로 관리
 - 자동화 = 시간 절약 + 실수 감소 + 일관성
 
 Xcode를 열지 않는 릴리스는 '고수의 사치'가 아니라, 릴리스가 잦아질수록 **반드시 필요한 위생**입니다. xcodebuild로 시작해 fastlane으로 묶고, CI에 얹으세요.
