@@ -5,6 +5,9 @@ import { getCollection } from 'astro:content';
 // TechFlow 실제 블로그 포스트 파일 기반 통계 (빌드 타임)
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const tfPostCount = allPosts.length;
+// 슬러그→현재 제목 맵 — topPages가 analytics에 저장된(옛) 제목 대신 현재 제목을 쓰게(제목 변경 즉시 반영)
+const slugTitles: Record<string, string> = {};
+for (const p of allPosts) slugTitles[String(p.id).replace(/\.mdx?$/, '')] = p.data.title;
 
 // TechFlow 카테고리별 포스트 수
 const tfCategoryMap: Record<string, number> = {};
@@ -2788,6 +2791,8 @@ const ICONS: Record<string, string> = {
       SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5cHJic21hZ3RsemVieHl4c3ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjY4NTQsImV4cCI6MjA4NjA0Mjg1NH0.dajN0n0IWzOgYOSCglxVLzddg7jJFRHNCHwTWMG62uU',
       TF_SLUG_CAT: Object.fromEntries(allPosts.map(p => [p.id, p.data.category])),
       TF_POST_COUNT: tfPostCount,
+      // 슬러그→현재 제목(TF+LF) — topPages가 옛 제목 대신 현재 제목 표시
+      SLUG_TITLES: { ...slugTitles, ...Object.fromEntries(lfPosts.map(p => [p.slug, p.title])) },
       // LifeFlow 는 빌드타임 RSS 산출물 — 카테고리 트래픽 매칭은 전체 글의 slug→category 로
       LF_SLUG_CAT: Object.fromEntries(lfPosts.map(p => [p.slug, p.category])),
       LF_POSTS: lfPosts.slice(0, 10),
@@ -3494,6 +3499,9 @@ const ICONS: Record<string, string> = {
 
       // 페이지 제목 가져오기: title 필드 우선, 없으면 slug 디코딩
       function getPageTitle(item) {
+        // 현재 글 제목(빌드 시점 맵) 우선 — analytics에 저장된 옛 제목보다 정확
+        const bare = String(item.slug || item.path || '').replace(/^\/blog\//, '').replace(/^\//, '').replace(/\/$/, '');
+        if (bare && typeof SLUG_TITLES !== 'undefined' && SLUG_TITLES[bare]) return SLUG_TITLES[bare];
         if (item.title && item.title !== 'null' && !item.title.startsWith('TechFlow') && !item.title.startsWith('LifeFlow')) {
           // "포스트 제목 | TechFlow - AI & 테크 인사이트" 형태에서 제목만 추출
           return item.title.split(' | ')[0].split(' - ')[0];
