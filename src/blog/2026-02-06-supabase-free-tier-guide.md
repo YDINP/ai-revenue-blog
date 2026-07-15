@@ -41,7 +41,13 @@ Supabase는 Firebase의 오픈소스 대안으로, PostgreSQL 기반의 백엔�
 | **Bandwidth** | 5GB/월 | 일반 API 서비스에 충분 |
 | **Realtime** | 200 동시 접속 | 소규모 앱에 적합 |
 
-<div class="chart-bar" data-title="Supabase 무료 티어 한도" data-labels="Database (MB),Auth (만 MAU),Storage (GB),Edge Functions (만회/월),Bandwidth (GB)" data-values="500,5,1,50,5" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6,#ef4444" data-unit=""></div>
+| 항목 | 무료 티어 한도 |
+|------|--------------|
+| Database | 500 MB |
+| Auth | 5만 MAU |
+| Storage | 1 GB |
+| Edge Functions | 50만 회/월 |
+| Bandwidth | 5 GB |
 
 <div class="chart-radar" data-title="Supabase vs Firebase vs 직접 구축" data-items='[{"name":"Supabase","scores":[{"label":"무료 한도","value":9,"color":"#10b981"},{"label":"학습곡선","value":7,"color":"#10b981"},{"label":"확장성","value":9,"color":"#10b981"},{"label":"벤더 독립성","value":10,"color":"#10b981"},{"label":"기능 범위","value":8,"color":"#10b981"}]},{"name":"Firebase","scores":[{"label":"무료 한도","value":7,"color":"#f59e0b"},{"label":"학습곡선","value":9,"color":"#f59e0b"},{"label":"확장성","value":7,"color":"#f59e0b"},{"label":"벤더 독립성","value":3,"color":"#f59e0b"},{"label":"기능 범위","value":9,"color":"#f59e0b"}]},{"name":"직접 구축 (VPS)","scores":[{"label":"무료 한도","value":2,"color":"#ef4444"},{"label":"학습곡선","value":3,"color":"#ef4444"},{"label":"확장성","value":10,"color":"#ef4444"},{"label":"벤더 독립성","value":10,"color":"#ef4444"},{"label":"기능 범위","value":10,"color":"#ef4444"}]}]'></div>
 
