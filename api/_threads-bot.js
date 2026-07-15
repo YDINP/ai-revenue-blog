@@ -101,6 +101,20 @@ export async function threadsQueueList(topic = 'life') {
   return { text: lines.join('\n'), reply_markup: { inline_keyboard: kb } };
 }
 
+// ── Threads 메뉴 (버튼) ──
+export function threadsMenu() {
+  return {
+    text: '🧵 <b>Threads 메뉴</b> — 뭐 할래?',
+    reply_markup: {
+      inline_keyboard: [
+        [{ text: '📋 큐 보기', callback_data: 'thr:list:life' }, { text: '🔀 랜덤 발행', callback_data: 'thr:rand:life' }],
+        [{ text: '📊 성과', callback_data: 'thr:insights' }, { text: '🔎 글 찾기', callback_data: 'thr:find' }],
+        [{ text: 'ℹ️ 명령어', callback_data: 'thr:cmds' }],
+      ],
+    },
+  };
+}
+
 // ── 핫타임 알림 버튼 (ht:queue | ht:pass) ──
 export async function handleHottimeCallback(chatId, data) {
   if (data === 'ht:queue') return await threadsQueueList('life');
@@ -236,6 +250,27 @@ export async function threadsInsightsMessage(days = 7) {
 // ── 콜백 처리 (thr:list|show|rand|pub|edit|sched|rej) → {text, reply_markup?} ──
 export async function handleThreadsCallback(chatId, data) {
   let mm;
+  // 메뉴
+  if (data === 'thr:menu') return threadsMenu();
+  if (data === 'thr:insights') return { text: await threadsInsightsMessage(7) };
+  if (data === 'thr:cmds') {
+    return {
+      text: [
+        '🧵 <b>Threads 명령어</b>',
+        '• <code>/threads</code> — 이 메뉴',
+        '• <code>/threads queue life</code> — 큐 목록',
+        '• <code>/post &lt;내용&gt;</code> — 즉석 발행',
+        '• <code>/find &lt;키워드&gt;</code> — 답글 후보 찾기',
+        '• <code>/threads insights [일수]</code> — 성과',
+        '• <code>/threads gen life 2</code> — AI 초안 생성',
+      ].join('\n'),
+      reply_markup: { inline_keyboard: [[{ text: '◀ 메뉴', callback_data: 'thr:menu' }]] },
+    };
+  }
+  if (data === 'thr:find') {
+    await setState(chatId, { flow: 'engage_find' });
+    return { text: '🔎 검색할 키워드를 보내줘 (예: 재테크 · 전세 · 여행). 관련 공개글 후보를 찾아줄게.', force_reply: true };
+  }
   // 목록 닫기
   if (data === 'thr:close') {
     return { text: '🧵 큐 목록 닫음. 다시 보려면 <code>/threads queue life</code>', reply_markup: { inline_keyboard: [] } };
@@ -379,6 +414,11 @@ export async function maybeHandleThreadsFlow(chatId, text) {
     await clearState(chatId);
     const out = await sendEngageReply(st.engageId, text);
     return { note: out.text };
+  }
+  if (st.flow === 'engage_find') {
+    await clearState(chatId);
+    const summary = await findAndQueue(text, chatId);
+    return { note: summary };
   }
   return null;
 }

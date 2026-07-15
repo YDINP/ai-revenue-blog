@@ -34,6 +34,7 @@ import { reportMessage } from './_report.js';
 import { indexMessage } from './_seo.js';
 import {
   threadsStatusMessage,
+  threadsMenu,
   threadsGenMessage,
   threadsQueueCards,
   threadsQueueList,
@@ -111,14 +112,18 @@ export default async function handler(req, res) {
     if ((cb.data || '').startsWith('thr:')) {
       try {
         const out = await handleThreadsCallback(cbChat, cb.data || '');
-        await tg('editMessageText', {
-          chat_id: cbChat,
-          message_id: cb.message.message_id,
-          text: out.text,
-          parse_mode: 'HTML',
-          disable_web_page_preview: true,
-          ...(out.reply_markup ? { reply_markup: out.reply_markup } : {}),
-        });
+        if (out.force_reply) {
+          await tg('sendMessage', { chat_id: cbChat, text: out.text, parse_mode: 'HTML', disable_web_page_preview: true, reply_markup: { force_reply: true, input_field_placeholder: '키워드 입력…' } });
+        } else {
+          await tg('editMessageText', {
+            chat_id: cbChat,
+            message_id: cb.message.message_id,
+            text: out.text,
+            parse_mode: 'HTML',
+            disable_web_page_preview: true,
+            ...(out.reply_markup ? { reply_markup: out.reply_markup } : {}),
+          });
+        }
       } catch (e) {
         console.error('threads callback error:', e);
         await tg('sendMessage', { chat_id: cbChat, text: `❌ ${escapeHtml(e.message)}`, parse_mode: 'HTML' });
@@ -269,8 +274,11 @@ export default async function handler(req, res) {
         });
       } else if (sub === 'insights') {
         await reply(await threadsInsightsMessage(parts[1] ? parseInt(parts[1], 10) : 7));
-      } else {
+      } else if (sub === 'status') {
         await reply(await threadsStatusMessage());
+      } else {
+        const menu = threadsMenu();
+        await tg('sendMessage', { chat_id: chatId, text: menu.text, parse_mode: 'HTML', reply_markup: menu.reply_markup });
       }
     } catch (e) {
       console.error('threads command error:', e);
