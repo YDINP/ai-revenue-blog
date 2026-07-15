@@ -4484,7 +4484,7 @@ const ICONS: Record<string, string> = {
 
           // Also update summary cards
           document.getElementById('total-views').textContent = fmt(Number(summary?.total_views) || 0);
-          document.getElementById('views-sub').textContent = tv > 0 ? `today +${tv}` : 'Collecting...';
+          document.getElementById('views-sub').textContent = tv > 0 ? `today +${tv} (TF +${tfTv} / LF +${lfTv})` : 'Collecting...';
           document.getElementById('total-clicks').textContent = fmt(Number(summary?.total_clicks) || 0);
           document.getElementById('clicks-sub').textContent = tc > 0 ? `today +${tc}` : 'Waiting...';
 
