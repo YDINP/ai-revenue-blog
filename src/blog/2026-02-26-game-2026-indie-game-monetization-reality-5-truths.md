@@ -116,9 +116,6 @@ GameDiscoverCo 분석에 따르면 2025년 스팀의 플랫폼 전체 실효 수
 - **다섯째, 플랫폼 밖의 채널을 소유하라.** 디스코드·뉴스레터·자체 사이트는 알고리즘이 빼앗지 못한다.
 - **여섯째, 데이터로 결정하라.** 위시리스트 전환율, 데모 이탈 지점, 환불 사유를 지표로 본다.
 
-<blockquote style="text-align:center">2026년의 인디 시장은 '만들면 팔리는' 시장이 아니다. 발견 가능성, 전파력, 순수익 감각, 그리고 다음 게임을 만들 수 있는 체력이 생존을 결정한다.</blockquote>
-
-
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4" target="_blank" rel="noopener noreferrer nofollow">
   <span class="ci-icon" aria-hidden="true">🛒</span>
   <span class="ci-body">
@@ -133,6 +130,8 @@ GameDiscoverCo 분석에 따르면 2025년 스팀의 플랫폼 전체 실효 수
 인디게임으로 수익을 올리는 것은 가능하다. 다만 그것은 '게임을 잘 만드는 것'만으로는 부족하고, 비즈니스 감각·발견 가능성 설계·끈질긴 반복이 함께 필요하다. 중앙값 249달러라는 숫자는 겁을 주려는 게 아니라, <span style="font-size:1.15em;font-weight:800">당신이 어떤 분포 위에서 도박하고 있는지를 정확히 알려주는 좌표</span>다.
 
 좌표를 알면 전략이 바뀐다. 규모를 줄이고, 훅을 날카롭게 하고, 출시 전에 관객을 모으고, 실패해도 다시 던질 수 있는 구조를 만든다. 그게 이 시리즈 일곱 편이 하려던 이야기의 전부다.
+
+<blockquote style="text-align:center">2026년의 인디 시장은 '만들면 팔리는' 시장이 아니다. 발견 가능성, 전파력, 순수익 감각, 그리고 다음 게임을 만들 수 있는 체력이 생존을 결정한다.</blockquote>
 
 ## 이어서 읽을 만한 글
 
