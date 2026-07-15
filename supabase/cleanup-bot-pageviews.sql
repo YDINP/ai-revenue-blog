@@ -8,17 +8,19 @@
 -- navigator.webdriver + UA 정규식), 이 SQL은 과거 데이터 정리용.
 -- ============================================================
 
--- 2026-07-15 추가: 검색엔진 크롤러(네이버 Yeti·다음 Daumoa 등)는 UA에 bot/spider 토큰이
--- 없어 기존 정규식에 안 걸림 → yeti|naver|daumoa|yandex|baidu 추가. 네이버 서치어드바이저
+-- 2026-07-15 추가: 검색엔진 크롤러(네이버 Yeti·다음 Daumoa)는 UA에 bot/spider 토큰이
+-- 없어 기존 정규식에 안 걸림 → yeti|daumoa 만 추가(크롤러 전용). 네이버 서치어드바이저
 -- '웹페이지 수집' 후 Yeti 크롤링이 조회수로 집계되던 문제를 소급 정리.
+-- ⚠️ 'naver'/'yandex'/'baidu' 같은 넓은 토큰은 인앱브라우저 실사용자 UA(네이버앱=NAVER(inapp))
+--    까지 매칭하므로 사용 금지. YandexBot·Baiduspider 는 bot|spider 로 이미 커버됨.
 
 -- 삭제 전 확인 (건수 미리보기)
 SELECT count(*) AS bot_pageviews
 FROM analytics
 WHERE event_type = 'pageview'
-  AND metadata->>'user_agent' ~* 'bot|crawl|spider|headless|lighthouse|playwright|puppeteer|slurp|petalbot|bytespider|yeti|naver|daumoa|yandex|baidu';
+  AND metadata->>'user_agent' ~* 'bot|crawl|spider|headless|lighthouse|playwright|puppeteer|slurp|petalbot|bytespider|yeti|daumoa';
 
 -- 삭제 실행
 DELETE FROM analytics
 WHERE event_type = 'pageview'
-  AND metadata->>'user_agent' ~* 'bot|crawl|spider|headless|lighthouse|playwright|puppeteer|slurp|petalbot|bytespider|yeti|naver|daumoa|yandex|baidu';
+  AND metadata->>'user_agent' ~* 'bot|crawl|spider|headless|lighthouse|playwright|puppeteer|slurp|petalbot|bytespider|yeti|daumoa';
