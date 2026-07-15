@@ -29,7 +29,7 @@ faq:
 
 ## 로컬 LLM이 필수인 이유: 2026년 기업 AI의 현실
 
-**기업 데이터 보안 문제**가 클라우드 기반 LLM 서비스(ChatGPT, Claude)의 가장 큰 약점으로 지적되고 있습니다. 2026년 현재 금융, 의료, 제조 분야의 약 73%는 민감한 데이터 처리 시 로컬 LLM 도입을 검토 중입니다. 로컬 LLM은 데이터가 회사 내부에만 머물고, API 비용을 절감하며, 완전한 커스터마이제이션이 가능한 솔루션입니다.
+기업 데이터 보안 문제가 클라우드 기반 LLM 서비스(ChatGPT, Claude)의 가장 큰 약점으로 지적되고 있습니다. 2026년 현재 금융, 의료, 제조 분야의 약 73%는 민감한 데이터 처리 시 로컬 LLM 도입을 검토 중입니다. 로컬 LLM은 데이터가 회사 내부에만 머물고, API 비용을 절감하며, 완전한 커스터마이제이션이 가능한 솔루션입니다.
 
 더 자세한 내용은 [프롬프트 엔지니어링 심화 기법: 2026년 AI 출력 품질 10배 향상법](/blog/2026-02-16-ai-prompt-engineering-advanced-techniques-2026-quality-optimization/)을 참고하면, 로컬 환경에서도 프롬프트 최적화로 모델 성능을 극대화할 수 있습니다.
 
@@ -53,7 +53,7 @@ faq:
 - **중형 모델 (13B 파라미터)**: GPU 12GB 이상, VRAM 16GB
 - **대형 모델 (70B 파라미터)**: 멀티 GPU (24GB × 2) 또는 양자화 필수
 
-NVIDIA RTX 4070 Super(12GB)는 13B 모델 구동에 최적화되었으며, AMD Radeon RX 7900 GRE도 유사 성능을 제공합니다. **CPU 전용 구축은 가능하지만 추론 속도가 10배 이상 느려지므로 실무용으로는 부적합**합니다.
+NVIDIA RTX 4070 Super(12GB)는 13B 모델 구동에 최적화되었으며, AMD Radeon RX 7900 GRE도 유사 성능을 제공합니다. <span style="font-size:1.3em;font-weight:800">CPU 전용 구축은 가능하지만 추론 속도가 10배 이상 느려지므로 실무용으로는 부적합</span>합니다.
 
 <div class="chart-bar" data-title="모델 크기별 최소 하드웨어 요구사항" data-labels="7B 모델,13B 모델,70B 모델" data-values="6,12,24" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="GB VRAM"></div>
 
@@ -69,7 +69,7 @@ NVIDIA RTX 4070 Super(12GB)는 13B 모델 구동에 최적화되었으며, AMD R
 | **KoAlpaca** | 13B | 상 | 우수 | GPL-3.0 | 한국어 전문 작업 |
 | **DPO-Mistral** | 7B | 상 | 기본 | MIT | 정렬 성능 우수 |
 
-**한국어 정확도가 중요하면 KoAlpaca를, 빠른 속도가 우선이면 Mistral 7B를 선택**하는 것이 현명합니다. KoAlpaca는 한국어 SQuAD 벤치마크에서 F1 스코어 78.5%를 기록해 한국어 질문-답변 작업에 최적화되어 있습니다.
+<span style="font-size:1.15em;font-weight:700">한국어 정확도가 중요하면 KoAlpaca를, 빠른 속도가 우선이면 Mistral 7B를 선택</span>하는 것이 현명합니다. KoAlpaca는 한국어 SQuAD 벤치마크에서 F1 스코어 78.5%를 기록해 한국어 질문-답변 작업에 최적화되어 있습니다.
 
 ## 단계별 로컬 LLM 구축 실행 가이드
 
@@ -105,7 +105,7 @@ Ollama CLI에 불편함을 느낀다면 LM Studio의 시각적 인터페이스�
 
 ### 단계 3: 고급 구축 - Llama.cpp를 활용한 최적화
 
-더 정밀한 제어와 극대화된 성능을 원한다면 Llama.cpp를 사용합니다. **양자화 레벨(Q4, Q5, Q8)을 직접 선택하여 메모리와 품질의 트레이드오프를 조절**할 수 있습니다.
+더 정밀한 제어와 극대화된 성능을 원한다면 Llama.cpp를 사용합니다. 양자화 레벨(Q4, Q5, Q8)을 직접 선택하여 메모리와 품질의 트레이드오프를 조절할 수 있습니다.
 
 ```bash
 # 모델 변환 (GGML 형식으로)
@@ -124,7 +124,7 @@ python convert.py ./models/mistral-7b-model --outtype q4_0
 
 ### 단계 4: API 래퍼로 기존 애플리케이션 연결
 
-로컬 LLM을 프로덕션 환경에 통합하려면 API 래퍼가 필수입니다. 가장 널리 사용되는 솔루션은 **Text Generation WebUI** 또는 **Hugging Face의 TGI(Text Generation Inference)**입니다.
+로컬 LLM을 프로덕션 환경에 통합하려면 API 래퍼가 필수입니다. 가장 널리 사용되는 솔루션은 Text Generation WebUI 또는 Hugging Face의 TGI(Text Generation Inference)입니다.
 
 ```bash
 # TGI 도커 실행 (GPU 자동 할당)
@@ -147,7 +147,7 @@ print(response.json())
 
 ### 단계 5: 파인튜닝으로 도메인 특화 모델 구축
 
-로컬 LLM의 진정한 가치는 **도메인 특화 데이터로 파인튜닝할 때** 나타납니다. LoRA(Low-Rank Adaptation) 기법을 사용하면 A100 GPU 없이도 가능합니다.
+로컬 LLM의 진정한 가치는 도메인 특화 데이터로 파인튜닝할 때 나타납니다. LoRA(Low-Rank Adaptation) 기법을 사용하면 A100 GPU 없이도 가능합니다.
 
 ```bash
 # LoRA 파인튜닝 (메모리 90% 절감)
@@ -173,7 +173,7 @@ ollama run mistral:with-lora ./lora_adapter
 
 ### 메모리 누수 방지
 
-장시간 운영 시 메모리 누수는 치명적입니다. **vLLM(Versatile LLM)**을 사용하면 배치 처리와 메모리 재활용이 자동화됩니다.
+장시간 운영 시 메모리 누수는 치명적입니다. vLLM(Versatile LLM)을 사용하면 배치 처리와 메모리 재활용이 자동화됩니다.
 
 ```bash
 # vLLM 서버 실행

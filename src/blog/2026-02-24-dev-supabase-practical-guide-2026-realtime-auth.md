@@ -31,9 +31,9 @@ faq:
 
 ## Supabase란? 현대 개발자를 위한 백엔드
 
-Supabase는 Firebase의 오픈소스 대안으로, PostgreSQL 기반의 완전한 백엔드 솔루션입니다. 2026년 현재 월 활성 사용자 150만 명을 돌파했으며, 특히 **실시간 데이터 동기화**가 필요한 협업 도구, 채팅 앱, 대시보드 개발에서 개발자들의 신뢰를 받고 있습니다.
+Supabase는 Firebase의 오픈소스 대안으로, PostgreSQL 기반의 완전한 백엔드 솔루션입니다. 2026년 현재 월 활성 사용자 150만 명을 돌파했으며, 특히 실시간 데이터 동기화가 필요한 협업 도구, 채팅 앱, 대시보드 개발에서 개발자들의 신뢰를 받고 있습니다.
 
-기존의 무료 Supabase 무료 티어로 프로덕션 서비스를 운영하는 방법에 대해서는 별도로 다뤘으니, 이번 글에서는 실제 프로젝트에서 바로 쓸 수 있는 **4가지 핵심 활용 패턴**에 집중하겠습니다.
+기존의 무료 Supabase 무료 티어로 프로덕션 서비스를 운영하는 방법에 대해서는 별도로 다뤘으니, 이번 글에서는 실제 프로젝트에서 바로 쓸 수 있는 4가지 핵심 활용 패턴에 집중하겠습니다.
 
 더 자세한 내용은 [Supabase 무료 티어로 프로덕션 서비스 운영하기 완전 가이드](/blog/2026-02-06-supabase-free-tier-guide/)을 참고하세요.
 
@@ -51,7 +51,7 @@ Supabase는 Firebase의 오픈소스 대안으로, PostgreSQL 기반의 완전�
 
 ### 구독 기반 변경 감지
 
-Supabase의 가장 강력한 기능은 **Realtime Subscriptions**입니다. WebSocket을 통해 데이터베이스 변경사항을 즉시 클라이언트에 전송합니다.
+Supabase의 가장 강력한 기능은 Realtime Subscriptions입니다. WebSocket을 통해 데이터베이스 변경사항을 즉시 클라이언트에 전송합니다.
 
 ```javascript
 const { data, error } = await supabase
@@ -76,13 +76,13 @@ supabase
   .subscribe();
 ```
 
-이 방식은 **협업 도구나 멀티유저 게임**에서 데이터 동기화 비용을 대폭 줄입니다. 기존 REST API 폴링과 달리 서버 부하가 적고, 지연시간도 평균 100ms 이내입니다.
+이 방식은 협업 도구나 멀티유저 게임에서 데이터 동기화 비용을 대폭 줄입니다. 기존 REST API 폴링과 달리 서버 부하가 적고, 지연시간도 평균 100ms 이내입니다.
 
 ## 핵심 2: 선언적 Row-Level Security (RLS)
 
 ### 데이터베이스 수준의 인증 제어
 
-Supabase RLS는 PostgreSQL의 기본 기능을 활용하여 **데이터베이스 쿼리 단계에서 접근 제어**를 수행합니다. 클라이언트나 서버에서 검증하지 않아도 됩니다.
+Supabase RLS는 PostgreSQL의 기본 기능을 활용하여 데이터베이스 쿼리 단계에서 접근 제어를 수행합니다. 클라이언트나 서버에서 검증하지 않아도 됩니다.
 
 ```sql
 CREATE POLICY "사용자는 자신의 게시물만 조회"
@@ -96,7 +96,7 @@ CREATE POLICY "사용자는 자신의 게시물만 수정"
   USING (auth.uid() = user_id);
 ```
 
-이렇게 정의하면, 클라이언트에서 아무리 다른 사용자의 ID를 입력해도 자신의 게시물만 조회·수정됩니다. **보안 구멍이 생길 여지가 없습니다.**
+이렇게 정의하면, 클라이언트에서 아무리 다른 사용자의 ID를 입력해도 자신의 게시물만 조회·수정됩니다. 보안 구멍이 생길 여지가 없습니다.
 
 실무에서 자주 쓰이는 패턴:
 
@@ -107,13 +107,13 @@ CREATE POLICY "사용자는 자신의 게시물만 수정"
 | 공개 게시물 | `is_public = true OR user_id = auth.uid()` | 중간 |
 | 관리자만 접근 | `user_id IN (SELECT user_id FROM admins)` | 매우 높음 |
 
-RLS를 제대로 설정하면 **백엔드 인증 로직을 거의 작성하지 않아도** 됩니다.
+RLS를 제대로 설정하면 백엔드 인증 로직을 거의 작성하지 않아도 됩니다.
 
 ## 핵심 3: 함수 기반 비즈니스 로직
 
 ### PostgreSQL 함수로 복잡한 로직 처리
 
-클라이언트에서 직접 데이터를 수정하는 것 외에, **PostgreSQL 함수를 호출**하여 서버 측 로직을 처리할 수 있습니다.
+클라이언트에서 직접 데이터를 수정하는 것 외에, PostgreSQL 함수를 호출하여 서버 측 로직을 처리할 수 있습니다.
 
 ```sql
 CREATE OR REPLACE FUNCTION transfer_points(
@@ -159,7 +159,7 @@ const { data, error } = await supabase.rpc('transfer_points', {
 
 ### pgvector로 의미 기반 검색 구현
 
-2026년 현재 Supabase는 **pgvector 확장**을 기본으로 지원하므로, 임베딩 벡터를 저장하고 유사도 검색을 할 수 있습니다.
+2026년 현재 Supabase는 pgvector 확장을 기본으로 지원하므로, 임베딩 벡터를 저장하고 유사도 검색을 할 수 있습니다.
 
 ```sql
 CREATE TABLE documents (
@@ -199,7 +199,7 @@ const { data } = await supabase.rpc('search_documents', {
 });
 ```
 
-이것은 **AI 검색 엔진, 추천 시스템, 챗봇**을 만드는 데 핵심입니다.
+이것은 AI 검색 엔진, 추천 시스템, 챗봇을 만드는 데 핵심입니다.
 
 <div class="chart-progress" data-title="2026년 Supabase 개발자 만족도" data-labels="실시간 성능,보안,개발자경험,가격" data-values="94,92,88,85" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-max="100" data-unit="점"></div>
 
@@ -277,13 +277,13 @@ function TodoApp() {
 }
 ```
 
-**이 간단한 코드로** 실시간 동기화, 인증, 권한 관리가 모두 구현됩니다.
+이 간단한 코드로 실시간 동기화, 인증, 권한 관리가 모두 구현됩니다.
 
 ## 2026년 Supabase 성능 지표
 
 <div class="chart-bar" data-title="Supabase vs Firebase 성능 비교" data-labels="RLS오버헤드,데이터베이스 응답시간,실시간동기화지연" data-values="12,28,87" data-colors="#f59e0b,#10b981,#3b82f6" data-unit="ms"></div>
 
-위 벤치마크는 **평균 1000개 행 데이터셋 기준**입니다. Supabase의 PostgreSQL 백엔드는 Firebase의 NoSQL과 달리 복잡한 쿼리에서 더 유리합니다.
+위 벤치마크는 <span style="font-size:1.15em;font-weight:700">평균 1000개 행 데이터셋 기준</span>입니다. Supabase의 PostgreSQL 백엔드는 Firebase의 NoSQL과 달리 복잡한 쿼리에서 더 유리합니다.
 
 ## 주의할 점: 비용과 한계
 
@@ -293,7 +293,7 @@ function TodoApp() {
 - **Pro**: $25/월 (무제한 API 호출, 100GB 저장소)
 - **실시간 데이터**: 추가 비용 발생 가능
 
-대규모 실시간 앱(초당 1000+ 이벤트)은 **관리형 서버 또는 자체 호스팅 PostgreSQL**을 검토해야 합니다.
+대규모 실시간 앱(초당 1000+ 이벤트)은 관리형 서버 또는 자체 호스팅 PostgreSQL을 검토해야 합니다.
 
 ### 피해야 할 패턴
 
@@ -303,7 +303,7 @@ function TodoApp() {
 
 ## 마치며
 
-Supabase는 2026년 기준으로 **가장 완성도 높은 오픈소스 백엔드 플랫폼**입니다. 특히 실시간 협업 앱, AI 통합 서비스, 중소 규모 스타트업에 최적화되어 있습니다.
+Supabase는 2026년 기준으로 <span style="font-size:1.3em;font-weight:800">가장 완성도 높은 오픈소스 백엔드 플랫폼</span>입니다. 특히 실시간 협업 앱, AI 통합 서비스, 중소 규모 스타트업에 최적화되어 있습니다.
 
 더 자세한 내용은 [REST API 설계 베스트 프랙티스: 2026년 실무 가이드](/blog/2026-02-06-rest-api-design-best-practices-2026/)도 함께 참고하면, 전체적인 백엔드 아키텍처 설계에 도움이 될 것입니다.
 

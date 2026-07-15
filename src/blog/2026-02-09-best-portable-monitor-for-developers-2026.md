@@ -29,9 +29,9 @@ coupangLinks:
 ---
 ## 개발자에게 듀얼 모니터는 사치가 아닌 생존 도구
 
-카페에서, 공유 오피스에서, 출장 중에도 코딩을 해야 하는 2026년. **포터블 모니터** 하나만 있으면 어디서든 듀얼 모니터 환경을 만들 수 있습니다.
+카페에서, 공유 오피스에서, 출장 중에도 코딩을 해야 하는 2026년. 포터블 모니터 하나만 있으면 어디서든 듀얼 모니터 환경을 만들 수 있습니다.
 
-코드 에디터 + 브라우저, 또는 코드 에디터 + 터미널을 동시에 보는 것만으로도 생산성이 **30~40% 향상**된다는 연구 결과가 있습니다.
+코드 에디터 + 브라우저, 또는 코드 에디터 + 터미널을 동시에 보는 것만으로도 생산성이 <span style="font-size:1.3em;font-weight:800">30~40% 향상</span>된다는 연구 결과가 있습니다.
 
 
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=ASUS%20ZenScreen%20MB16ACV&src=1139000&spec=10799999&addtag=200&ctag=ASUS%20ZenScreen%20MB16ACV&lptag=AF7838146&pageType=SEARCH&pageValue=ASUS%20ZenScreen%20MB16ACV" target="_blank" rel="noopener noreferrer nofollow">
@@ -60,7 +60,7 @@ coupangLinks:
 
 - 자동 회전 기능으로 세로 모드 즉시 전환
 - 접이식 스탠드 내장, 별도 케이스 불필요
-- 개발자 추천: **코드 리뷰 시 세로 모드가 압도적**
+- 개발자 추천: <span style="font-size:1.15em;font-weight:700">코드 리뷰 시 세로 모드가 압도적</span>
 
 ## 2. Lenovo ThinkVision M14d (14인치)
 
@@ -118,7 +118,7 @@ coupangLinks:
 | 연결 | USB-C + mini HDMI |
 | 가격대 | 25~30만원 |
 
-- **4K OLED**를 30만원 이하에 제공
+- 4K OLED를 30만원 이하에 제공
 - 내장 배터리 없지만 보조배터리로 구동 가능
 - 가격 대비 최고의 화질
 

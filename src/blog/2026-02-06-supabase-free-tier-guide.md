@@ -18,7 +18,7 @@ coupangLinks:
 ---
 ## Supabase란?
 
-Supabase는 Firebase의 오픈소스 대안으로, PostgreSQL 기반의 백엔드 서비스를 제공합니다. 인증, 데이터베이스, 스토리지, Edge Functions까지 올인원으로 제공하면서도 **무료 티어가 매우 넉넉**합니다.
+Supabase는 Firebase의 오픈소스 대안으로, PostgreSQL 기반의 백엔드 서비스를 제공합니다. 인증, 데이터베이스, 스토리지, Edge Functions까지 올인원으로 제공하면서도 무료 티어가 매우 넉넉합니다.
 
 
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20SSD%20980%20PRO%201TB" target="_blank" rel="noopener noreferrer nofollow">
@@ -40,14 +40,6 @@ Supabase는 Firebase의 오픈소스 대안으로, PostgreSQL 기반의 백엔�
 | **Edge Functions** | 500,000 호출/월 | 하루 ~16,000건 |
 | **Bandwidth** | 5GB/월 | 일반 API 서비스에 충분 |
 | **Realtime** | 200 동시 접속 | 소규모 앱에 적합 |
-
-| 항목 | 무료 티어 한도 |
-|------|--------------|
-| Database | 500 MB |
-| Auth | 5만 MAU |
-| Storage | 1 GB |
-| Edge Functions | 50만 회/월 |
-| Bandwidth | 5 GB |
 
 <div class="chart-radar" data-title="Supabase vs Firebase vs 직접 구축" data-items='[{"name":"Supabase","scores":[{"label":"무료 한도","value":9,"color":"#10b981"},{"label":"학습곡선","value":7,"color":"#10b981"},{"label":"확장성","value":9,"color":"#10b981"},{"label":"벤더 독립성","value":10,"color":"#10b981"},{"label":"기능 범위","value":8,"color":"#10b981"}]},{"name":"Firebase","scores":[{"label":"무료 한도","value":7,"color":"#f59e0b"},{"label":"학습곡선","value":9,"color":"#f59e0b"},{"label":"확장성","value":7,"color":"#f59e0b"},{"label":"벤더 독립성","value":3,"color":"#f59e0b"},{"label":"기능 범위","value":9,"color":"#f59e0b"}]},{"name":"직접 구축 (VPS)","scores":[{"label":"무료 한도","value":2,"color":"#ef4444"},{"label":"학습곡선","value":3,"color":"#ef4444"},{"label":"확장성","value":10,"color":"#ef4444"},{"label":"벤더 독립성","value":10,"color":"#ef4444"},{"label":"기능 범위","value":10,"color":"#ef4444"}]}]'></div>
 
@@ -85,7 +77,7 @@ USING (auth.uid() = user_id);
 - 배치 처리로 여러 작업을 하나의 함수 호출로 묶으세요
 
 ### 스토리지 최적화
-- 이미지는 WebP 포맷으로 변환 (용량 50% 절감)
+- 이미지는 WebP 포맷으로 변환 (용량 <span style="font-size:1.15em;font-weight:700">50%</span> 절감)
 - CDN 캐싱 활용으로 대역폭 절약
 
 ## 유료 전환 시점
@@ -99,7 +91,7 @@ USING (auth.uid() = user_id);
 
 ## 결론
 
-Supabase 무료 티어는 **MVP부터 소규모 프로덕션까지** 충분히 커버합니다. Firebase와 달리 벤더 락인 없이 PostgreSQL의 전체 기능을 사용할 수 있다는 것이 큰 장점입니다.
+Supabase 무료 티어는 MVP부터 소규모 프로덕션까지 충분히 커버합니다. Firebase와 달리 벤더 락인 없이 PostgreSQL의 전체 기능을 사용할 수 있다는 것이 큰 장점입니다.
 
 개발 공부를 시작한다면, 체계적인 학습 자료와 함께 실습하는 것을 추천합니다.
 

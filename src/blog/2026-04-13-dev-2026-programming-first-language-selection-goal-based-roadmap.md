@@ -31,13 +31,13 @@ faq:
 
 프로그래밍을 배우기로 결심했는데 "어떤 언어부터 시작할까?"라는 고민이 가장 크다면, 이 글이 당신의 선택을 명확하게 해줄 것입니다. 2026년 현재 개발 시장은 급변하고 있으며, 잘못된 첫 선택은 6개월 이상의 시간 낭비로 이어질 수 있습니다.
 
-이 글에서는 **데이터 기반의 객관적인 기준**으로 Python, JavaScript, Go, Rust 중에서 여러분의 목표에 맞는 최적의 첫 언어를 찾는 방법을 제시합니다. 단순한 이론이 아닌, 실제 2026년 채용공고 분석과 커뮤니티 통계를 바탕으로 작성했습니다.
+이 글에서는 데이터 기반의 객관적인 기준으로 Python, JavaScript, Go, Rust 중에서 여러분의 목표에 맞는 최적의 첫 언어를 찾는 방법을 제시합니다. 단순한 이론이 아닌, 실제 2026년 채용공고 분석과 커뮤니티 통계를 바탕으로 작성했습니다.
 
 ## 2026년 프로그래밍 언어 채택 현황
 
 <div class="chart-bar" data-title="2026년 개발자 선호 언어 TOP 5" data-labels="Python,JavaScript,TypeScript,Java,Go" data-values="88,82,76,68,62" data-colors="#3b82f6,#f59e0b,#10b981,#ef4444,#8b5cf6" data-unit="만 명"></div>
 
-Stack Overflow 2025 개발자 설문 결과, Python이 여전히 압도적인 1위를 차지하고 있습니다. 그러나 **언어의 인기도가 반드시 여러분에게 최적이라는 의미는 아닙니다.** 취업 목표, 희망 분야, 학습 속도에 따라 최적의 선택은 완전히 달라집니다.
+Stack Overflow 2025 개발자 설문 결과, Python이 여전히 압도적인 1위를 차지하고 있습니다. 그러나 언어의 인기도가 반드시 여러분에게 최적이라는 의미는 아닙니다. 취업 목표, 희망 분야, 학습 속도에 따라 최적의 선택은 완전히 달라집니다.
 
 
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive" target="_blank" rel="noopener noreferrer nofollow">
@@ -152,7 +152,7 @@ WebAssembly와 Node.js의 성숙으로, JavaScript는 더 이상 "브라우저 �
 
 **❌ 실수 1: 여러 언어를 동시에 배우기**
 
-"Python도 배우고 JavaScript도 배우고 Java도 배워야 취업이 될 것 같아"라는 생각은 금물입니다. 첫 3개월은 **한 언어에만 집중**해야 합니다. 한 언어를 깊이 있게 배운 후 다른 언어는 자동으로 쉬워집니다.
+"Python도 배우고 JavaScript도 배우고 Java도 배워야 취업이 될 것 같아"라는 생각은 금물입니다. 첫 3개월은 한 언어에만 집중해야 합니다. 한 언어를 깊이 있게 배운 후 다른 언어는 자동으로 쉬워집니다.
 
 **❌ 실수 2: 온라인 강의만 듣기**
 
@@ -160,7 +160,7 @@ WebAssembly와 Node.js의 성숙으로, JavaScript는 더 이상 "브라우저 �
 
 **❌ 실수 3: 프로젝트 없이 알고리즘만 풀기**
 
-LeetCode 200문제를 풀었는데 웹사이트를 못 만들면 취업 면접에서 탈락합니다. **문법 → 알고리즘(2주) → 프로젝트(4주 이상)** 순서가 정답입니다.
+LeetCode 200문제를 풀었는데 웹사이트를 못 만들면 취업 면접에서 탈락합니다. <span style="font-size:1.3em;font-weight:800">문법 → 알고리즘(2주) → 프로젝트(4주 이상)</span> 순서가 정답입니다.
 
 **❌ 실수 4: 과도한 완벽함 추구**
 

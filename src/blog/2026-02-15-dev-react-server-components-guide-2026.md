@@ -29,7 +29,7 @@ faq:
 
 ## React Server Components: 2026년 프론트엔드 패러다임 전환
 
-React 19의 안정화와 함께 **Server Components(RSC)**는 더 이상 실험 기능이 아닙니다. 2026년 현재, Next.js 15, Remix, 그리고 Waku 같은 프레임워크들이 RSC를 기본 아키텍처로 채택하면서, React 개발의 중심축이 되어가고 있습니다.
+React 19의 안정화와 함께 Server Components(RSC)는 더 이상 실험 기능이 아닙니다. 2026년 현재, Next.js 15, Remix, 그리고 Waku 같은 프레임워크들이 RSC를 기본 아키텍처로 채택하면서, React 개발의 중심축이 되어가고 있습니다.
 
 Traditional 클라이언트 사이드 렌더링의 한계를 넘어서, 서버에서 데이터를 가져오고 처리한 후 HTML을 직접 생성하는 방식이 성능 최적화의 핵심이 되고 있습니다. 이 글에서는 RSC의 작동 원리부터 실전 구현까지 다루겠습니다.
 
@@ -47,7 +47,7 @@ Traditional 클라이언트 사이드 렌더링의 한계를 넘어서, 서버�
 
 ### 핵심 차이점
 
-Server Components는 **서버에서만 실행되며 클라이언트로 자바스크립트 코드가 전송되지 않습니다**. 반면 Client Components는 전통적인 React 컴포넌트로, 브라우저에서 실행되며 상태 관리와 상호작용을 처리합니다.
+Server Components는 서버에서만 실행되며 클라이언트로 자바스크립트 코드가 전송되지 않습니다. 반면 Client Components는 전통적인 React 컴포넌트로, 브라우저에서 실행되며 상태 관리와 상호작용을 처리합니다.
 
 | 항목 | Server Components | Client Components |
 |------|-------------------|-------------------|
@@ -63,7 +63,7 @@ Server Components는 **서버에서만 실행되며 클라이언트로 자바스
 
 **1. JavaScript 번들 크기 감소**
 
-기존 React 앱에서는 모든 로직이 번들에 포함되어야 했습니다. Server Components로 마이그레이션하면, 데이터 처리 로직, 인증 확인, 복잡한 계산 등을 서버에서만 실행할 수 있어 **평균 35~45% 번들 크기 감소** 효과를 기대할 수 있습니다.
+기존 React 앱에서는 모든 로직이 번들에 포함되어야 했습니다. Server Components로 마이그레이션하면, 데이터 처리 로직, 인증 확인, 복잡한 계산 등을 서버에서만 실행할 수 있어 <span style="font-size:1.3em;font-weight:800">평균 35~45% 번들 크기 감소</span> 효과를 기대할 수 있습니다.
 
 **2. 직접 데이터베이스 접근**
 
@@ -179,13 +179,13 @@ export default async function Page() {
 }
 ```
 
-**효과**: 필요한 부분만 JavaScript를 전송하여 **Time to Interactive(TTI) 40% 단축**.
+**효과**: 필요한 부분만 JavaScript를 전송하여 <span style="font-size:1.15em;font-weight:700">Time to Interactive(TTI) 40% 단축</span>.
 
 ## Server Components 성능 개선 효과 실측 데이터
 
 <div class="chart-progress" data-title="마이그레이션 후 개선 수치" data-labels="번들 크기 감소,LCP 개선,CLS 감소,TTI 단축" data-values="42,48,35,40" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-max="100" data-unit="%"></div>
 
-위 수치는 **12개의 중규모 프로덕션 앱에서 Server Components 도입 전후를 비교한 결과**입니다. 특히 초기 번들 크기 감소와 Largest Contentful Paint(LCP) 개선이 가장 큰 효과를 보였습니다.
+위 수치는 12개의 중규모 프로덕션 앱에서 Server Components 도입 전후를 비교한 결과입니다. 특히 초기 번들 크기 감소와 Largest Contentful Paint(LCP) 개선이 가장 큰 효과를 보였습니다.
 
 ## 2026년 주의사항: 흔한 실수 3가지
 
@@ -211,7 +211,7 @@ export default function Counter() {
 
 ### 2. 과도한 hydration
 
-지나치게 많은 컴포넌트를 Client Component로 지정하면 Server Components의 이점이 사라집니다. **한 페이지에서 Client Components가 전체 크기의 30% 이상을 차지하면 재검토가 필요**합니다.
+지나치게 많은 컴포넌트를 Client Component로 지정하면 Server Components의 이점이 사라집니다. 한 페이지에서 Client Components가 전체 크기의 30% 이상을 차지하면 재검토가 필요합니다.
 
 ### 3. 동기 데이터 페칭 무시
 
@@ -233,9 +233,9 @@ Server Components에서 데이터 페칭은 반드시 `async/await`로 처리하
 
 ## 결론: 2026년 React 개발의 현재형
 
-Server Components는 **선택이 아닌 필수**로 가고 있습니다. Vercel, Netlify, AWS Amplify 같은 주요 호스팅 플랫폼들이 모두 RSC를 기본 지원하고 있으며, 새로운 프로젝트는 대부분 Server Components 우선으로 설계됩니다.
+Server Components는 선택이 아닌 필수로 가고 있습니다. Vercel, Netlify, AWS Amplify 같은 주요 호스팅 플랫폼들이 모두 RSC를 기본 지원하고 있으며, 새로운 프로젝트는 대부분 Server Components 우선으로 설계됩니다.
 
-특히 **성능이 비즈니스 지표와 직결되는 프로덕션 환경**에서는 Server Components 도입이 CTR 개선, 이탈율 감소, SEO 순위 향상으로 이어지는 경향을 보이고 있습니다.
+특히 성능이 비즈니스 지표와 직결되는 프로덕션 환경에서는 Server Components 도입이 CTR 개선, 이탈율 감소, SEO 순위 향상으로 이어지는 경향을 보이고 있습니다.
 
 더 자세한 프론트엔드 최신 트렌드는 [2026년 프론트엔드 개발 트렌드: React 19, Next.js 15, 그리고 AI 통합](/blog/2026-02-05-frontend-trends-2026-react-nextjs-ai/)에서 확인할 수 있습니다.
 

@@ -105,7 +105,7 @@ Godot를 실행하면 Project Manager가 나타납니다.
 
 ## Godot의 핵심 개념: Node와 Scene
 
-Godot의 구조는 Unity와 다릅니다. **Node**와 **Scene** 시스템을 이해하는 것이 핵심입니다.
+Godot의 구조는 Unity와 다릅니다. <span style="font-size:1.3em;font-weight:800">Node</span>와 <span style="font-size:1.15em;font-weight:700">Scene</span> 시스템을 이해하는 것이 핵심입니다.
 
 ### Node (노드)
 

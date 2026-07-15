@@ -29,7 +29,7 @@ faq:
 
 ## Phaser 3 물리 엔진이란?
 
-Phaser 3는 웹 게임 개발을 위한 가장 인기 있는 자바스크립트 프레임워크로, **두 가지 강력한 물리 엔진**을 기본으로 제공합니다. 바로 **Arcade Physics**와 **Matter.js**입니다. 이 중 Arcade는 간단하고 빠른 2D 게임에 최적화되어 있으며, 대부분의 인디 개발자들이 선택하는 엔진입니다.
+Phaser 3는 웹 게임 개발을 위한 가장 인기 있는 자바스크립트 프레임워크로, 두 가지 강력한 물리 엔진을 기본으로 제공합니다. 바로 Arcade Physics와 Matter.js입니다. 이 중 Arcade는 간단하고 빠른 2D 게임에 최적화되어 있으며, 대부분의 인디 개발자들이 선택하는 엔진입니다.
 
 2D 게임에서 리얼한 움직임과 상호작용을 표현하려면 물리 엔진의 이해가 필수입니다. 캐릭터가 떨어지고, 벽에 부딪히고, 아이템을 집는 모든 동작이 물리 엔진을 통해 구현되기 때문입니다.
 
@@ -47,7 +47,7 @@ Phaser 3는 웹 게임 개발을 위한 가장 인기 있는 자바스크립트 
 
 ### 1. 물리 바디(Physics Body) 생성
 
-Phaser 3에서 게임 객체에 물리를 적용하려면 반드시 **물리 바디**를 추가해야 합니다. 이는 게임 월드에서 충돌 감지와 움직임을 담당하는 가상의 형태입니다.
+Phaser 3에서 게임 객체에 물리를 적용하려면 반드시 물리 바디를 추가해야 합니다. 이는 게임 월드에서 충돌 감지와 움직임을 담당하는 가상의 형태입니다.
 
 ```javascript
 const player = this.physics.add.sprite(100, 100, 'player');
@@ -68,14 +68,14 @@ player.setGravityY(-0.5); // 음수 값으로 역중력 표현
 
 ### 3. 충돌 감지(Collision Detection)
 
-Phaser 3의 충돌 시스템은 **매우 효율적**으로 설계되었습니다. 매 프레임마다 모든 물리 바디를 검사하며, 겹치는 영역이 발생하면 콜백 함수를 실행합니다.
+Phaser 3의 충돌 시스템은 매우 효율적으로 설계되었습니다. 매 프레임마다 모든 물리 바디를 검사하며, 겹치는 영역이 발생하면 콜백 함수를 실행합니다.
 
 ```javascript
 this.physics.add.collider(player, platforms);
 this.physics.add.overlap(player, coins, collectCoin, null, this);
 ```
 
-**collider**는 실제 충돌로 객체를 밀어내고, **overlap**은 겹침을 감지하기만 합니다.
+collider는 실제 충돌로 객체를 밀어내고, overlap은 겹침을 감지하기만 합니다.
 
 <div class="chart-bar" data-title="물리 엔진 연산 비용 비교 (상대값)" data-labels="Babylon.js,Matter.js,Arcade" data-values="220,180,100" data-colors="#f59e0b,#3b82f6,#10b981" data-unit="상대값"></div>
 
@@ -83,7 +83,7 @@ this.physics.add.overlap(player, coins, collectCoin, null, this);
 
 ### 속도 및 가속도 제어
 
-게임의 반응성을 결정하는 가장 중요한 요소는 **속도(velocity) 설정**입니다. Phaser 3에서는 다음과 같이 직관적으로 제어합니다.
+게임의 반응성을 결정하는 가장 중요한 요소는 속도(velocity) 설정입니다. Phaser 3에서는 다음과 같이 직관적으로 제어합니다.
 
 ```javascript
 player.setVelocity(0, 0); // 정지
@@ -93,7 +93,7 @@ player.setAccelerationX(500); // 가속도 적용
 
 ### 점프 메커닉 구현
 
-플랫포머 게임의 핵심인 점프 기능을 구현하려면 **지면 감지**가 필수입니다.
+플랫포머 게임의 핵심인 점프 기능을 구현하려면 지면 감지가 필수입니다.
 
 ```javascript
 const isGrounded = player.body.touching.down;
@@ -221,7 +221,7 @@ player.setCollidesWith([ENEMY, ITEM]);
 
 ## 2026년 Phaser 3 커뮤니티 현황
 
-Phaser 3는 **GitHub에서 약 37,000개의 스타**를 받았으며, 매월 활발한 업데이트를 진행 중입니다. 공식 문서는 한국어 번역본도 부분적으로 제공되고 있습니다.
+Phaser 3는 <span style="font-size:1.3em;font-weight:800">GitHub에서 약 37,000개의 스타</span>를 받았으며, 매월 활발한 업데이트를 진행 중입니다. 공식 문서는 한국어 번역본도 부분적으로 제공되고 있습니다.
 
 더 자세한 수익화 전략은 [2026년 웹 게임 수익화 전략 완벽 가이드: 5가지 실전 모델](/blog/2026-02-18-game-web-game-monetization-strategies-2026-complete-guide/)을 참고하세요.
 

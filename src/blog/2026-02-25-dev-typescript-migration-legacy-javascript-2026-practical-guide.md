@@ -28,7 +28,7 @@ faq:
 
 ## 왜 지금 TypeScript로 마이그레이션할까?
 
-2026년 현재 JavaScript 생태계는 타입 안정성을 필수로 여기고 있습니다. Stack Overflow 2025 개발자 설문조사에 따르면 **전 세계 기업 중 68%가 TypeScript 채택을 완료하거나 진행 중**입니다. 특히 엔터프라이즈급 프로젝트에서는 TypeScript가 표준이 되었고, 유지보수 비용 감소와 버그 예방 효과가 검증되었습니다.
+2026년 현재 JavaScript 생태계는 타입 안정성을 필수로 여기고 있습니다. Stack Overflow 2025 개발자 설문조사에 따르면 <span style="font-size:1.3em;font-weight:800">전 세계 기업 중 68%가 TypeScript 채택을 완료하거나 진행 중</span>입니다. 특히 엔터프라이즈급 프로젝트에서는 TypeScript가 표준이 되었고, 유지보수 비용 감소와 버그 예방 효과가 검증되었습니다.
 
 기존 JavaScript 프로젝트를 TypeScript로 마이그레이션하면 다음과 같은 이점을 얻을 수 있습니다:
 
@@ -179,7 +179,7 @@ npx type-coverage --at-least 95
 | 6개월 후 버그 감소 | 35% | 50% | 60% |
 | 연간 유지보수 비용 절감 | 15% | 25% | 35% |
 
-이 데이터는 **2025년 Thoughtworks Technology Radar**와 **The State of Developer Ecosystem 2025** 보고서를 기반으로 합니다.
+이 데이터는 2025년 Thoughtworks Technology Radar와 The State of Developer Ecosystem 2025 보고서를 기반으로 합니다.
 
 ## 마이그레이션 중 실수 5가지
 

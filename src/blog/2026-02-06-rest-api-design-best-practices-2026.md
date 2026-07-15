@@ -18,9 +18,9 @@ coupangLinks:
 ---
 ## 좋은 API vs 나쁜 API, 차이는 설계에 있다
 
-API는 서비스의 **얼굴**입니다. 잘 설계된 API는 프론트엔드 개발자의 생산성을 높이고, 외부 파트너와의 통합을 쉽게 만듭니다. 반면 나쁜 API는 끝없는 버그와 혼란의 원인이 됩니다.
+API는 서비스의 얼굴입니다. 잘 설계된 API는 프론트엔드 개발자의 생산성을 높이고, 외부 파트너와의 통합을 쉽게 만듭니다. 반면 나쁜 API는 끝없는 버그와 혼란의 원인이 됩니다.
 
-이 글에서는 수백 개의 API를 설계하며 쌓은 경험을 바탕으로, **실무에서 바로 적용 가능한 REST API 설계 원칙**을 정리합니다.
+이 글에서는 수백 개의 API를 설계하며 쌓은 경험을 바탕으로, 실무에서 바로 적용 가능한 REST API 설계 원칙을 정리합니다.
 
 
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C" target="_blank" rel="noopener noreferrer nofollow">
@@ -239,7 +239,7 @@ GET /users/123
 Accept: application/vnd.myapi.v2+json
 ```
 
-URL 방식이 가장 직관적이고 디버깅이 쉬워 **대부분의 팀에서 선호**합니다.
+URL 방식이 가장 직관적이고 디버깅이 쉬워 대부분의 팀에서 선호합니다.
 
 ## 실전: Express.js 예제
 
@@ -280,9 +280,9 @@ router.post('/', validate(createUserSchema), async (req, res) => {
 
 ## 결론: 좋은 API는 개발자 경험(DX)이다
 
-API 설계는 단순한 기술 결정이 아니라 **개발자 경험(DX) 설계**입니다. 이 글에서 소개한 7가지 원칙을 적용하면, 사용하기 쉽고 유지보수가 편한 API를 만들 수 있습니다.
+API 설계는 단순한 기술 결정이 아니라 개발자 경험(DX) 설계입니다. 이 글에서 소개한 7가지 원칙을 적용하면, 사용하기 쉽고 유지보수가 편한 API를 만들 수 있습니다.
 
-핵심을 요약하면: **일관성**, **명확성**, **표준 준수**. 이 세 가지만 지켜도 상위 20%의 API가 됩니다.
+핵심을 요약하면: 일관성, 명확성, 표준 준수. 이 세 가지만 지켜도 상위 <span style="font-size:1.3em;font-weight:800">20%</span>의 API가 됩니다.
 
 
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive" target="_blank" rel="noopener noreferrer nofollow">

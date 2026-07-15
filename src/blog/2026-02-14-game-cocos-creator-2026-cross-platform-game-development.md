@@ -43,7 +43,7 @@ Cocos Creator는 Cocos 엔진의 공식 편집기로, 웹 기반의 2D/3D 게임
 
 ### TypeScript 기반 개발 환경
 
-2024년부터 TypeScript 지원이 완전히 강화되었습니다. 기존 JavaScript 대비 타입 안정성과 IDE 자동완성이 크게 개선되어, 대규모 프로젝트에서 버그 방지 효율이 약 35% 향상되었습니다(Cocos 공식 개발 팀 내부 사례).
+2024년부터 TypeScript 지원이 완전히 강화되었습니다. 기존 JavaScript 대비 타입 안정성과 IDE 자동완성이 크게 개선되어, 대규모 프로젝트에서 버그 방지 효율이 약 <span style="font-size:1.2em;font-weight:800">35% 향상</span>되었습니다(Cocos 공식 개발 팀 내부 사례).
 
 ```typescript
 // 실제 예시: 플레이어 이동 스크립트
@@ -73,7 +73,7 @@ Cocos Creator는 C++ 기반 네이티브 엔진과 JavaScript/TypeScript VM을 �
 
 - **메모리 사용량**: 약 40MB (앱 최소 설정)
 - **초기 로딩 시간**: 평균 2~3초 (모바일 4G 기준)
-- **프레임 유지율**: 2D 게임 기준 60fps 안정성 98% 이상
+- **프레임 유지율**: 2D 게임 기준 60fps 안정성 <span style="font-size:1.15em;font-weight:700">98% 이상</span>
 
 ## Cocos Creator vs 경쟁 플랫폼 비교
 
@@ -95,8 +95,8 @@ Cocos Creator는 C++ 기반 네이티브 엔진과 JavaScript/TypeScript VM을 �
 
 ### 설치 및 환경 설정
 
-1. Cocos Creator 공식 사이트에서 **3.8.3 이상** 버전 다운로드
-2. 프로젝트 생성 시 **2D Game** 템플릿 선택
+1. Cocos Creator 공식 사이트에서 3.8.3 이상 버전 다운로드
+2. 프로젝트 생성 시 2D Game 템플릿 선택
 3. Node.js 16.x 이상 필수 (TypeScript 컴파일링)
 
 ### 간단한 게임 로직 예제
@@ -197,9 +197,9 @@ export class ObjectPool {
 
 ## 결론: 2026년 Cocos Creator의 위치
 
-Cocos Creator는 **웹 게임과 경량 모바일 게임** 개발 분야에서 최고의 선택지입니다. 완전 무료이면서도 프로페셔널한 수준의 기능을 제공하며, 특히 초보 개발자부터 중급 개발자까지 진입 장벽이 매우 낮습니다.
+Cocos Creator는 웹 게임과 경량 모바일 게임 개발 분야에서 최고의 선택지입니다. 완전 무료이면서도 프로페셔널한 수준의 기능을 제공하며, 특히 초보 개발자부터 중급 개발자까지 진입 장벽이 매우 낮습니다.
 
-2026년 기준 하이퍼 캐주얼 게임 시장이 지속 성장 중이고, 웹 게임의 부활이 이어지는 만큼, Cocos Creator는 인디 개발자에게 가장 실용적인 도구로 평가됩니다. 특히 **빠른 프로토타입** 개발과 **멀티플랫폼 배포**가 필요한 팀이라면 강력히 추천합니다.
+2026년 기준 하이퍼 캐주얼 게임 시장이 지속 성장 중이고, 웹 게임의 부활이 이어지는 만큼, Cocos Creator는 인디 개발자에게 가장 실용적인 도구로 평가됩니다. 특히 빠른 프로토타입 개발과 멀티플랫폼 배포가 필요한 팀이라면 강력히 추천합니다.
 
 
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20G%20Pro%20X%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EB%A7%88%EC%9A%B0%EC%8A%A4" target="_blank" rel="noopener noreferrer nofollow">

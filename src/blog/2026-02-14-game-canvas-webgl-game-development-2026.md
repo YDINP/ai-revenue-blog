@@ -26,9 +26,9 @@ coupangLinks:
 
 웹 게임 개발을 시작할 때 가장 먼저 마주하는 선택지는 Canvas 2D와 WebGL입니다. 2026년 기준으로 이 두 기술의 역할 분담이 명확해졌습니다.
 
-**Canvas 2D API**는 2D 게임, 간단한 인터랙티브 콘텐츠, 그리고 프로토타입 개발에 여전히 최적입니다. 최근 OffscreenCanvas의 안정화로 Worker 스레드에서의 렌더링이 표준화되면서 성능이 크게 개선되었습니다. 특히 한국의 캐주얼 게임 시장에서는 Canvas 2D만으로도 충분한 성능을 낼 수 있는 타이틀들이 많습니다.
+Canvas 2D API는 2D 게임, 간단한 인터랙티브 콘텐츠, 그리고 프로토타입 개발에 여전히 최적입니다. 최근 OffscreenCanvas의 안정화로 Worker 스레드에서의 렌더링이 표준화되면서 성능이 크게 개선되었습니다. 특히 한국의 캐주얼 게임 시장에서는 Canvas 2D만으로도 충분한 성능을 낼 수 있는 타이틀들이 많습니다.
 
-반면 **WebGL**은 3D 게임, 고사양 그래픽이 필요한 타이틀, 그리고 실시간 렌더링이 중요한 게임에 필수적입니다. 2026년 현재 WebGL 2.0이 모든 주요 브라우저에서 완전히 지원되며, 일부 브라우저는 WebGL 3.0 프리뷰도 제공하고 있습니다.
+반면 WebGL은 3D 게임, 고사양 그래픽이 필요한 타이틀, 그리고 실시간 렌더링이 중요한 게임에 필수적입니다. 2026년 현재 WebGL 2.0이 모든 주요 브라우저에서 완전히 지원되며, 일부 브라우저는 WebGL 3.0 프리뷰도 제공하고 있습니다.
 
 <div class="chart-bar" data-title="2026년 게임 장르별 기술 선호도" data-labels="메타버스,3D 액션,멀티플레이,2D 캐주얼" data-values="96,92,85,78" data-colors="#ef4444,#3b82f6,#f59e0b,#10b981" data-unit="%"></div>
 
@@ -44,7 +44,7 @@ coupangLinks:
 | PlayCanvas | 낮음 | 우수 | 중간 | 2026년 1월 | 클라우드 기반 게임 개발 |
 | PixiJS | 매우 낮음 | 최고 | 활발 | 2025년 12월 | 2D 렌더링, 성능 최적화 필요 게임 |
 
-2026년 특별히 주목할 점은 **Phaser 4의 정식 출시**입니다. Phaser 3에서의 핵심 피드백을 반영하여 번들 크기를 35% 줄이고, WebGPU 지원을 추가했습니다. 특히 한국 게임사들이 많이 사용하는 Phaser는 이번 업데이트로 모바일 웹 게임 최적화가 크게 개선되었습니다.
+2026년 특별히 주목할 점은 Phaser 4의 정식 출시입니다. Phaser 3에서의 핵심 피드백을 반영하여 번들 크기를 <span style="font-size:1.15em;font-weight:700">35%</span> 줄이고, WebGPU 지원을 추가했습니다. 특히 한국 게임사들이 많이 사용하는 Phaser는 이번 업데이트로 모바일 웹 게임 최적화가 크게 개선되었습니다.
 
 <div class="chart-versus" data-title="Three.js vs Babylon.js (2026)" data-name-a="Three.js" data-name-b="Babylon.js" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"학습 용이성","a":70,"b":85},{"label":"성능","a":88,"b":90},{"label":"문서화","a":85,"b":92},{"label":"커뮤니티","a":95,"b":75}]'></div>
 
@@ -55,7 +55,7 @@ WebGPU가 브라우저 표준으로 확립되면서 게임 개발자들의 선�
 **1단계 - 브라우저 호환성 전략**
 - WebGPU를 지원하는 모던 브라우저(Chrome 132+, Firefox 133+, Safari 18+) 대상 개발
 - 구형 브라우저 지원이 필요한 경우 WebGL 폴백 제공
-- 2026년 현재 전 세계 웹 브라우저의 약 72%가 WebGPU를 지원합니다
+- 2026년 현재 전 세계 웹 브라우저의 약 <span style="font-size:1.2em;font-weight:800">72%</span>가 WebGPU를 지원합니다
 
 **2단계 - 엔진 선택**
 - Babylon.js: 이미 WebGPU 백엔드를 정식 지원하며, WebGL과의 자동 폴백 기능 제공

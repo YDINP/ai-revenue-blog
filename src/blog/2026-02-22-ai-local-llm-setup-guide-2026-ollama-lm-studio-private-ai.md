@@ -29,7 +29,7 @@ faq:
 
 ## 2026년 로컬 LLM이 주목받는 이유
 
-2026년 현재, **클라우드 기반 AI API 비용 급증으로 로컬 LLM 구축이 필수 선택**이 되어가고 있습니다. ChatGPT API는 2025년 이후 가격 인상이 지속되었고, Claude API의 100만 토큰 컨텍스트 윈도우도 월 사용량이 늘어나면 비용 부담이 큽니다.
+2026년 현재, 클라우드 기반 AI API 비용 급증으로 로컬 LLM 구축이 필수 선택이 되어가고 있습니다. ChatGPT API는 2025년 이후 가격 인상이 지속되었고, Claude API의 100만 토큰 컨텍스트 윈도우도 월 사용량이 늘어나면 비용 부담이 큽니다.
 
 로컬 LLM의 장점은 명확합니다:
 
@@ -38,7 +38,7 @@ faq:
 - **지연 시간 감소**: 네트워크 왕복 없이 로컬 GPU에서 직접 추론
 - **커스터마이징**: 파인튜닝과 양자화로 특정 도메인에 최적화 가능
 
-2026년 현재 Llama 3.3(8B, 70B), Mistral 7B, Phi 3.5 같은 오픈소스 모델들이 충분히 실용적 성능에 도달했습니다. **클라우드 모델과의 성능 격차는 이전보다 훨씬 좁혀졌습니다.**
+2026년 현재 Llama 3.3(8B, 70B), Mistral 7B, Phi 3.5 같은 오픈소스 모델들이 충분히 실용적 성능에 도달했습니다. 클라우드 모델과의 성능 격차는 이전보다 훨씬 좁혀졌습니다.
 
 
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%B1%97GPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
@@ -54,7 +54,7 @@ faq:
 
 ### 1. Ollama: 입문자 최고의 선택
 
-Ollama는 2024년 이후 가장 빠르게 성장한 로컬 LLM 런타임입니다. macOS, Linux, Windows(WSL2) 지원하며, **CLI 명령어 하나로 모델 다운로드와 실행이 완료**됩니다.
+Ollama는 2024년 이후 가장 빠르게 성장한 로컬 LLM 런타임입니다. macOS, Linux, Windows(WSL2) 지원하며, CLI 명령어 하나로 모델 다운로드와 실행이 완료됩니다.
 
 ```bash
 ollama pull llama2:7b
@@ -72,7 +72,7 @@ ollama run llama2:7b
 
 ### 2. LM Studio: 시각화 중심 사용자용
 
-LM Studio는 **그래픽 인터페이스 기반 로컬 LLM 매니저**입니다. 웹 브라우저 UI를 제공하므로 명령어에 익숙하지 않은 사용자도 쉽게 시작할 수 있습니다.
+LM Studio는 그래픽 인터페이스 기반 로컬 LLM 매니저입니다. 웹 브라우저 UI를 제공하므로 명령어에 익숙하지 않은 사용자도 쉽게 시작할 수 있습니다.
 
 2026년 2월 현재 LM Studio 최신 버전의 주요 기능:
 - 모델 다운로드 가속화 (P2P 네트워크 활용)
@@ -85,7 +85,7 @@ LM Studio는 **그래픽 인터페이스 기반 로컬 LLM 매니저**입니다.
 
 ### 3. vLLM: 고성능 서빙 프레임워크
 
-vLLM은 **프로덕션 수준의 로컬 LLM 서빙**을 목표로 하는 프레임워크입니다. 배치 처리와 KV 캐시 최적화로 높은 처리량을 달성합니다.
+vLLM은 프로덕션 수준의 로컬 LLM 서빙을 목표로 하는 프레임워크입니다. 배치 처리와 KV 캐시 최적화로 높은 처리량을 달성합니다.
 
 ```bash
 python -m vllm.entrypoints.openai.api_server --model meta-llama/Llama-2-7b-hf
@@ -115,7 +115,7 @@ python -m vllm.entrypoints.openai.api_server --model meta-llama/Llama-2-7b-hf
 | 13B (원본) | 16GB | A100, RTX 4090 | 불가 |
 | 70B (양자화) | 24GB | A6000, 멀티 GPU | 불가 |
 
-> 예산이 부족하다면 **4비트 양자화된 7B 모델부터 시작**하는 것을 추천합니다. NVIDIA 구형 GPU(GTX 1080Ti)에서도 충분히 동작하며, 추론 속도는 1초/문장 수준입니다.
+> 예산이 부족하다면 <span style="font-size:1.15em;font-weight:700">4비트 양자화된 7B 모델부터 시작</span>하는 것을 추천합니다. NVIDIA 구형 GPU(GTX 1080Ti)에서도 충분히 동작하며, 추론 속도는 1초/문장 수준입니다.
 
 더 자세한 GPU 선택 가이드는 [2026년 개발자용 노트북 CPU/GPU 선택 완벽 가이드](/blog/2026-02-20-review-developer-laptop-cpu-gpu-selection-guide-2026/)를 참고하세요.
 
@@ -178,7 +178,7 @@ docker run -d --gpus all -p 3000:8080 --add-host=host.docker.internal:host-gatew
 
 <div class="chart-versus" data-title="연간 비용 비교 (월 1만 API 호출 기준)" data-name-a="ChatGPT API" data-name-b="로컬 LLM" data-color-a="#ef4444" data-color-b="#10b981" data-items='[{"label":"월평균 비용","a":250000,"b":5000},{"label":"연간 비용","a":3000000,"b":60000},{"label":"초기 GPU 투자","a":0,"b":450000}]'></div>
 
-분석: RTX 4070 Super GPU(약 85만원)를 구매하고 Ollama를 운영하면, **단 12개월 내 API 비용 대비 ROI를 달성**합니다. 2년차부터는 순전히 전기료(월 5000원)만 부담하면 됩니다.
+분석: RTX 4070 Super GPU(약 85만원)를 구매하고 Ollama를 운영하면, <span style="font-size:1.3em;font-weight:800">단 12개월 내</span> API 비용 대비 ROI를 달성합니다. 2년차부터는 순전히 전기료(월 5000원)만 부담하면 됩니다.
 
 ## 실제 사용 사례: 프롬프트 엔지니어링 시뮬레이터
 

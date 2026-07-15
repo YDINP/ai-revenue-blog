@@ -21,9 +21,9 @@ coupangLinks:
 
 ## 2026년, AI 코딩 도구의 현주소
 
-2026년 현재, AI 코딩 도구는 단순한 자동완성을 넘어 **자율적 에이전트 수준**으로 진화했습니다. 개발자의 생산성을 2~5배까지 높여주는 이 도구들을 실제로 사용해보고 비교해봤습니다.
+2026년 현재, AI 코딩 도구는 단순한 자동완성을 넘어 자율적 에이전트 수준으로 진화했습니다. 개발자의 생산성을 2~5배까지 높여주는 이 도구들을 실제로 사용해보고 비교해봤습니다.
 
-2026년 중반을 기준으로 도구 생태계는 세 갈래로 분화했습니다: **인라인 제안형**(Copilot 계열), **자율 에이전트형**(Claude Code 등), **에이전트 통합 IDE형**(Cursor·Windsurf 계열). 현장에서는 'IDE 어시스턴트 + 터미널 에이전트' 페어링이 사실상 표준 워크플로우로 자리잡고 있습니다.
+2026년 중반을 기준으로 도구 생태계는 세 갈래로 분화했습니다: 인라인 제안형(Copilot 계열), 자율 에이전트형(Claude Code 등), 에이전트 통합 IDE형(Cursor·Windsurf 계열). 현장에서는 'IDE 어시스턴트 + 터미널 에이전트' 페어링이 사실상 표준 워크플로우로 자리잡고 있습니다.
 
 
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C" target="_blank" rel="noopener noreferrer nofollow">
@@ -39,7 +39,7 @@ coupangLinks:
 
 **가격**: 월 $20 (Pro) / 사용량 기반 (API)
 
-Claude Code는 CLI 기반의 자율 AI 코딩 에이전트로, 2026년 7월 현재 **Opus 4.8**을 탑재했습니다. 출시 6개월 만에 **$1B ARR**를 달성했으며, 엔터프라이즈 코딩 시장에서 **42% 점유율**로 1위를 기록 중입니다. SWE-bench Verified 기준 Opus 4.5 모델이 **80.9%**를 달성한 데이터가 업계 표준 벤치마크로 자리잡았습니다.
+Claude Code는 CLI 기반의 자율 AI 코딩 에이전트로, 2026년 7월 현재 Opus 4.8을 탑재했습니다. 출시 6개월 만에 <span style="font-size:1.3em;font-weight:800">$1B ARR</span>를 달성했으며, 엔터프라이즈 코딩 시장에서 <span style="font-size:1.15em;font-weight:700">42%</span> 점유율로 1위를 기록 중입니다. SWE-bench Verified 기준 Opus 4.5 모델이 <span style="font-size:1.15em;font-weight:700">80.9%</span>를 달성한 데이터가 업계 표준 벤치마크로 자리잡았습니다.
 
 ### 장점
 - 대규모 코드베이스 이해 능력이 뛰어남
@@ -56,7 +56,7 @@ Claude Code는 CLI 기반의 자율 AI 코딩 에이전트로, 2026년 7월 현�
 
 **가격**: 월 $10 (Individual) / $19 (Business)
 
-가장 대중적인 AI 코딩 도구로, VS Code를 포함한 주요 IDE에 통합되어 있습니다. 2026년 기준 엔터프라이즈 팀에서 **안전한 기본값**으로 가장 많이 채택되는 도구이며, 기업 보안·컴플라이언스 요건을 가장 잘 충족합니다.
+가장 대중적인 AI 코딩 도구로, VS Code를 포함한 주요 IDE에 통합되어 있습니다. 2026년 기준 엔터프라이즈 팀에서 안전한 기본값으로 가장 많이 채택되는 도구이며, 기업 보안·컴플라이언스 요건을 가장 잘 충족합니다.
 
 ### 장점
 - IDE 통합이 자연스러움
@@ -72,7 +72,7 @@ Claude Code는 CLI 기반의 자율 AI 코딩 에이전트로, 2026년 7월 현�
 
 **가격**: 월 $20 (Pro)
 
-2026년 7월 **Cursor 3** 출시로 한 단계 도약했습니다. **Composer 2.5**는 IDE 네이티브 병렬 에이전트를 지원하며, AI 코딩 도구 중 **최대 커뮤니티**를 보유합니다. VS Code를 포크한 AI-first 에디터로, 편집기 자체에 AI가 깊이 통합되어 있습니다.
+2026년 7월 Cursor 3 출시로 한 단계 도약했습니다. Composer 2.5는 IDE 네이티브 병렬 에이전트를 지원하며, AI 코딩 도구 중 최대 커뮤니티를 보유합니다. VS Code를 포크한 AI-first 에디터로, 편집기 자체에 AI가 깊이 통합되어 있습니다.
 
 ### 장점
 - Cursor 3 + Composer 2.5: IDE 네이티브 병렬 에이전트 지원
@@ -88,7 +88,7 @@ Claude Code는 CLI 기반의 자율 AI 코딩 에이전트로, 2026년 7월 현�
 
 **가격**: Pro 월 $15
 
-2026년 중반 **Windsurf 2.0**이 출시되며 판도를 바꿨습니다. 핵심은 **Devin 클라우드 에이전트 내장**으로, 원클릭으로 복잡한 작업을 클라우드 에이전트에 위임할 수 있습니다. Codeium이 만든 AI 코딩 에디터로 에이전트 통합 IDE의 새 표준을 제시하고 있습니다.
+2026년 중반 Windsurf 2.0이 출시되며 판도를 바꿨습니다. 핵심은 Devin 클라우드 에이전트 내장으로, 원클릭으로 복잡한 작업을 클라우드 에이전트에 위임할 수 있습니다. Codeium이 만든 AI 코딩 에디터로 에이전트 통합 IDE의 새 표준을 제시하고 있습니다.
 
 ### 장점
 - Devin 클라우드 에이전트 내장 (원클릭 위임)
@@ -130,11 +130,11 @@ AWS 생태계에 최적화된 AI 코딩 도구입니다.
 
 ## 결론
 
-2026년 7월 기준 AI 코딩 도구 생태계는 세 갈래로 정착했습니다. **자율 에이전트**에는 Claude Code(엔터프라이즈 42%), **에이전트 통합 IDE**에는 Cursor 3 또는 Windsurf 2.0, **팀 안전 기본값**에는 GitHub Copilot이 자리를 굳혔습니다.
+2026년 7월 기준 AI 코딩 도구 생태계는 세 갈래로 정착했습니다. 자율 에이전트에는 Claude Code(엔터프라이즈 42%), 에이전트 통합 IDE에는 Cursor 3 또는 Windsurf 2.0, 팀 안전 기본값에는 GitHub Copilot이 자리를 굳혔습니다.
 
-주목할 신흥 도구도 있습니다. **OpenAI Codex CLI**는 터미널 에이전트로 재출시됐고, **Google Antigravity 2.0**은 Gemini 기반으로 GoogleAI 생태계를 파고들며, **Kiro**는 AWS 기반 스펙-드리븐 IDE로 새로운 개발 패러다임을 제안하고 있습니다.
+주목할 신흥 도구도 있습니다. OpenAI Codex CLI는 터미널 에이전트로 재출시됐고, Google Antigravity 2.0은 Gemini 기반으로 GoogleAI 생태계를 파고들며, Kiro는 AWS 기반 스펙-드리븐 IDE로 새로운 개발 패러다임을 제안하고 있습니다.
 
-현장 표준 워크플로우는 **'IDE 어시스턴트 + 터미널 에이전트' 페어링**입니다. 예: Cursor 3(일상 편집) + Claude Code(대규모 리팩토링). AI 코딩을 처음 시작한다면 [AI 바이브코딩 입문 가이드](/blog/2026-07-07-ai-vibe-coding-beginner-guide-2026/)를, 도구 간 심층 비교는 [ChatGPT vs Claude 비교 분석](/blog/2026-02-08-chatgpt-vs-claude-ai-assistant-comparison-2026/)을 참고하세요.
+현장 표준 워크플로우는 'IDE 어시스턴트 + 터미널 에이전트' 페어링입니다. 예: Cursor 3(일상 편집) + Claude Code(대규모 리팩토링). AI 코딩을 처음 시작한다면 [AI 바이브코딩 입문 가이드](/blog/2026-07-07-ai-vibe-coding-beginner-guide-2026/)를, 도구 간 심층 비교는 [ChatGPT vs Claude 비교 분석](/blog/2026-02-08-chatgpt-vs-claude-ai-assistant-comparison-2026/)을 참고하세요.
 
 개발 생산성을 높이는 것은 도구만이 아닙니다. 좋은 키보드와 넓은 모니터도 중요하죠!
 

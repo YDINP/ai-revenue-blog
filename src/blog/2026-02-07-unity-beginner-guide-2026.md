@@ -87,9 +87,9 @@ Unity를 처음 실행하면 다소 복잡해 보일 수 있지만, 핵심 창�
 
 ### GameObject와 Component 시스템
 
-Unity의 모든 것은 **GameObject**입니다. 캐릭터, 카메라, 조명, UI 버튼 모두 GameObject입니다.
+Unity의 모든 것은 <span style="font-size:1.3em;font-weight:800">GameObject</span>입니다. 캐릭터, 카메라, 조명, UI 버튼 모두 GameObject입니다.
 
-GameObject 자체는 빈 껍데기에 불과하며, **Component**를 부착해서 기능을 부여합니다.
+GameObject 자체는 빈 껍데기에 불과하며, <span style="font-size:1.15em;font-weight:700">Component</span>를 부착해서 기능을 부여합니다.
 
 **주요 Component들:**
 - **Transform**: 위치, 회전, 크기 (모든 GameObject에 필수)

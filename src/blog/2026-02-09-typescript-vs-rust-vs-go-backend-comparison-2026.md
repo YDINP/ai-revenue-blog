@@ -18,7 +18,7 @@ coupangLinks:
 ---
 ## 백엔드 언어, 2026년에는 무엇을 써야 할까?
 
-프로젝트를 시작할 때 가장 먼저 하는 고민: **"어떤 언어로 백엔드를 만들까?"** 2026년 현재 가장 뜨거운 세 언어 — TypeScript(Node.js/Bun), Rust, Go를 실전 관점에서 비교합니다.
+프로젝트를 시작할 때 가장 먼저 하는 고민: "어떤 언어로 백엔드를 만들까?" 2026년 현재 가장 뜨거운 세 언어 — TypeScript(Node.js/Bun), Rust, Go를 실전 관점에서 비교합니다.
 
 
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
@@ -38,7 +38,7 @@ coupangLinks:
 
 ### 왜 선택하는가?
 
-프론트엔드와 백엔드를 **하나의 언어로** 작성할 수 있다는 건 엄청난 이점입니다. 2026년에는 Bun 2.0의 등장으로 Node.js의 성능 한계마저 극복하고 있습니다.
+프론트엔드와 백엔드를 <span style="font-size:1.15em;font-weight:700">하나의 언어로</span> 작성할 수 있다는 건 엄청난 이점입니다. 2026년에는 Bun 2.0의 등장으로 Node.js의 성능 한계마저 극복하고 있습니다.
 
 ```typescript
 // Bun + Hono — 초간단 API 서버
@@ -63,7 +63,7 @@ export default app;
 
 ### 왜 선택하는가?
 
-**제로 코스트 추상화**와 **메모리 안전성**을 동시에 제공하는 유일한 언어입니다. 시스템 프로그래밍부터 웹 서버까지, 성능이 중요한 곳에서 빛을 발합니다.
+제로 코스트 추상화와 <span style="font-size:1.15em;font-weight:700">메모리 안전성</span>을 동시에 제공하는 유일한 언어입니다. 시스템 프로그래밍부터 웹 서버까지, 성능이 중요한 곳에서 빛을 발합니다.
 
 ### 장점
 - C/C++ 수준 성능을 메모리 안전하게
@@ -80,7 +80,7 @@ export default app;
 
 ### 왜 선택하는가?
 
-Google이 만든 Go는 **심플함**이 최고의 무기입니다. 배우기 쉽고, 빠르고, 동시성(concurrency) 처리가 탁월합니다.
+Google이 만든 Go는 <span style="font-size:1.15em;font-weight:700">심플함</span>이 최고의 무기입니다. 배우기 쉽고, 빠르고, 동시성(concurrency) 처리가 탁월합니다.
 
 ### 장점
 - 1주일이면 생산적으로 코딩 가능
@@ -113,7 +113,7 @@ Google이 만든 Go는 **심플함**이 최고의 무기입니다. 배우기 쉽
 - **빠르게 실행되어야 한다면** → Rust
 - **빠르게 배우고 안정적이어야 한다면** → Go
 
-2026년에는 하나만 고집할 필요 없습니다. TypeScript로 프로토타입을 만들고, 병목 구간만 Rust나 Go로 최적화하는 **폴리글랏 접근**이 현실적인 최선입니다.
+2026년에는 하나만 고집할 필요 없습니다. TypeScript로 프로토타입을 만들고, 병목 구간만 Rust나 Go로 최적화하는 <span style="font-size:1.3em;font-weight:800">폴리글랏 접근</span>이 현실적인 최선입니다.
 
 
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EB%A7%A5%EB%B6%81%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EB%A7%A5%EB%B6%81%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EB%A7%A5%EB%B6%81%20%ED%94%84%EB%A1%9C" target="_blank" rel="noopener noreferrer nofollow">

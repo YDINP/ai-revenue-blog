@@ -21,7 +21,7 @@ coupangLinks:
 ---
 ## AI가 코드를 쓰는 시대, 어떤 도구를 써야 할까?
 
-2026년, AI 코딩 어시스턴트는 선택이 아닌 **필수**가 되었습니다. 하지만 GitHub Copilot, Cursor, Windsurf 중 어떤 도구가 나에게 맞을까요? 각 도구를 실제로 사용하며 5가지 핵심 기준으로 비교해봤습니다.
+2026년, AI 코딩 어시스턴트는 선택이 아닌 필수가 되었습니다. 하지만 GitHub Copilot, Cursor, Windsurf 중 어떤 도구가 나에게 맞을까요? 각 도구를 실제로 사용하며 5가지 핵심 기준으로 비교해봤습니다.
 
 
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=AI%20%EC%8B%9C%EB%8C%80%EC%9D%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%8F%84%EC%84%9C" target="_blank" rel="noopener noreferrer nofollow">
@@ -39,10 +39,10 @@ coupangLinks:
 
 ## 1. GitHub Copilot — 안정적인 올라운더
 
-Microsoft와 OpenAI의 합작품인 Copilot은 2026년 현재 **가장 많은 사용자**를 보유한 AI 코딩 도구입니다.
+Microsoft와 OpenAI의 합작품인 Copilot은 2026년 현재 <span style="font-size:1.3em;font-weight:800">가장 많은 사용자</span>를 보유한 AI 코딩 도구입니다.
 
 ### 장점
-- **GPT-5.3 기반** 코드 생성으로 정확도 크게 향상
+- GPT-5.3 기반 코드 생성으로 정확도 크게 향상
 - VS Code, JetBrains, Neovim 등 거의 모든 IDE 지원
 - GitHub 생태계와 완벽한 통합 (PR 리뷰, 이슈 분석)
 - Workspace 모드로 전체 프로젝트 맥락 이해
@@ -53,10 +53,10 @@ Microsoft와 OpenAI의 합작품인 Copilot은 2026년 현재 **가장 많은 �
 
 ## 2. Cursor — 파워 유저의 선택
 
-Cursor는 VS Code를 포크한 전용 AI IDE로, **에이전트 기능**이 가장 강력합니다.
+Cursor는 VS Code를 포크한 전용 AI IDE로, <span style="font-size:1.15em;font-weight:700">에이전트 기능</span>이 가장 강력합니다.
 
 ### 장점
-- **멀티파일 편집**이 가장 자연스러움
+- 멀티파일 편집이 가장 자연스러움
 - Composer 모드로 복잡한 리팩토링 한 번에 처리
 - Claude, GPT, Gemini 등 모델 자유 선택
 - `.cursorrules` 파일로 프로젝트별 AI 행동 커스터마이징
@@ -71,7 +71,7 @@ Cursor는 VS Code를 포크한 전용 AI IDE로, **에이전트 기능**이 가�
 Codeium 팀이 만든 Windsurf는 2025년 말 출시되어 빠르게 성장 중입니다.
 
 ### 장점
-- **무료 티어**가 가장 넉넉 (일 50회 자동완성)
+- <span style="font-size:1.15em;font-weight:700">무료 티어</span>가 가장 넉넉 (일 50회 자동완성)
 - Cascade 에이전트로 자동 디버깅
 - 가벼운 리소스 사용량
 - 월 $15로 가장 저렴한 프로 플랜

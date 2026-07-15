@@ -26,7 +26,7 @@ faq:
 
 ## 2026년 React 상태 관리 솔루션 현황
 
-2026년 React 생태계에서 상태 관리는 더 이상 선택이 아닌 필수입니다. 그러나 **Redux, Context API, Zustand, Jotai, TanStack Query** 등 너무 많은 선택지가 있어서 프로젝트 규모와 팀 역량에 맞는 솔루션을 찾기 어렵습니다.
+2026년 React 생태계에서 상태 관리는 더 이상 선택이 아닌 필수입니다. 그러나 Redux, Context API, Zustand, Jotai, TanStack Query 등 너무 많은 선택지가 있어서 프로젝트 규모와 팀 역량에 맞는 솔루션을 찾기 어렵습니다.
 
 이 글에서는 2026년 기준 실제 프로덕션 프로젝트에서 검증된 5가지 상태 관리 라이브러리를 성능, 번들 크기, 학습곡선, 개발 생산성으로 비교합니다. 각 솔루션이 왜 필요한지, 어떤 상황에서 써야 하는지 구체적인 사례 코드와 함께 알아봅시다.
 
@@ -44,7 +44,7 @@ faq:
 
 ### 1. Zustand: 경량성과 단순성의 정점
 
-**Zustand**는 2026년 가장 빠르게 성장하는 상태 관리 라이브러리입니다. 번들 크기 단 **2.2KB(gzipped)**로 가장 작으면서도 강력한 기능을 제공합니다.
+Zustand는 2026년 가장 빠르게 성장하는 상태 관리 라이브러리입니다. 번들 크기 단 <span style="font-size:1.3em;font-weight:800">2.2KB(gzipped)</span>로 가장 작으면서도 강력한 기능을 제공합니다.
 
 ```javascript
 import create from 'zustand';
@@ -68,7 +68,7 @@ const useStore = create((set) => ({
 
 ### 2. Jotai: 원자적 상태 관리
 
-**Jotai**는 Recoil의 영감을 받아 만들어진 라이브러리로, 원자적(atomic) 상태 관리를 제공합니다. 번들 크기 **3.3KB(gzipped)**로 작으면서도 세밀한 제어가 가능합니다.
+Jotai는 Recoil의 영감을 받아 만들어진 라이브러리로, 원자적(atomic) 상태 관리를 제공합니다. 번들 크기 3.3KB(gzipped)로 작으면서도 세밀한 제어가 가능합니다.
 
 ```javascript
 import { atom, useAtom } from 'jotai';
@@ -97,7 +97,7 @@ function Counter() {
 
 ### 3. TanStack Query: 서버 상태 관리
 
-**TanStack Query**(구 React Query)는 서버 상태와 캐싱을 전문으로 합니다. API 응답 캐싱, 백그라운드 동기화, 무한 스크롤 등을 자동으로 처리합니다.
+TanStack Query(구 React Query)는 서버 상태와 캐싱을 전문으로 합니다. API 응답 캐싱, 백그라운드 동기화, 무한 스크롤 등을 자동으로 처리합니다.
 
 ```javascript
 import { useQuery } from '@tanstack/react-query';
@@ -130,7 +130,7 @@ function UserProfile() {
 
 ### 4. Context API: 표준 라이브러리
 
-**Context API**는 React 내장 기능으로, 추가 설치 없이 사용 가능합니다. 소규모 프로젝트나 단순한 상태 전달에 적합합니다.
+Context API는 React 내장 기능으로, 추가 설치 없이 사용 가능합니다. 소규모 프로젝트나 단순한 상태 전달에 적합합니다.
 
 ```javascript
 const ThemeContext = React.createContext();
@@ -158,7 +158,7 @@ function App() {
 
 ### 5. Redux Toolkit: 엔터프라이즈급 솔루션
 
-**Redux Toolkit**는 Redux의 복잡성을 대폭 줄인 공식 권장 라이브러리입니다. 2026년에도 여전히 엔터프라이즈 프로젝트의 표준입니다.
+Redux Toolkit는 Redux의 복잡성을 대폭 줄인 공식 권장 라이브러리입니다. 2026년에도 여전히 엔터프라이즈 프로젝트의 표준입니다.
 
 ```javascript
 import { createSlice } from '@reduxjs/toolkit';
@@ -204,7 +204,7 @@ const counterSlice = createSlice({
 
 ### 1. 하이브리드 접근법 (권장)
 
-2026년 현실적인 선택은 **TanStack Query + Zustand** 조합입니다.
+2026년 현실적인 선택은 <span style="font-size:1.15em;font-weight:700">TanStack Query + Zustand</span> 조합입니다.
 
 - **TanStack Query**: 서버 상태 (API 데이터, 캐싱, 동기화)
 - **Zustand**: 클라이언트 상태 (UI 상태, 테마, 사용자 선택)
@@ -213,7 +213,7 @@ const counterSlice = createSlice({
 
 ### 2. 점진적 마이그레이션
 
-Redux를 사용 중인 프로젝트라면 **완전 교체보다 점진적 전환**을 권장합니다.
+Redux를 사용 중인 프로젝트라면 완전 교체보다 점진적 전환을 권장합니다.
 
 ```javascript
 // Redux와 Zustand를 동시에 사용

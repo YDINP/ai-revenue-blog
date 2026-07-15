@@ -21,7 +21,7 @@ faq:
     a: "SpeechAnalyzer는 애플 OS에 내장된 온디바이스 API라 별도 사용료가 없지만 애플 기기에 묶입니다. Whisper는 오픈소스라 직접 호스팅하면 서버 비용만 들고, 관리형 API로 쓰면 사용량 과금입니다. '기기 위에서 무료로' vs '서버에서 유연하게' 사이의 선택입니다. 트래픽 규모와 인프라 여력으로 판단하세요."
 ---
 
-앱에 **음성-텍스트 변환(STT)**을 붙일 때 2026년의 대표 선택지는 둘입니다 — 오픈소스의 표준 **OpenAI Whisper**, 그리고 애플이 밀고 있는 온디바이스 **SpeechAnalyzer**. "뭐가 더 좋냐"는 질문엔 답이 하나가 아닙니다. 속도·정확도·플랫폼·비용을 갈라서 봐야 합니다.
+앱에 음성-텍스트 변환(STT)을 붙일 때 2026년의 대표 선택지는 둘입니다 — 오픈소스의 표준 OpenAI Whisper, 그리고 애플이 밀고 있는 온디바이스 SpeechAnalyzer. "뭐가 더 좋냐"는 질문엔 답이 하나가 아닙니다. 속도·정확도·플랫폼·비용을 갈라서 봐야 합니다.
 
 ![음성인식·AI를 상징하는 이미지](https://images.pexels.com/photos/30530407/pexels-photo-30530407.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=430&w=940)
 
@@ -37,7 +37,7 @@ faq:
 
 ## 속도: SpeechAnalyzer가 55% 빠르다
 
-벤치마크에서 **34분 영상을 45초**에 처리해, 약 101초 걸린 Whisper보다 **약 55% 빨랐습니다**. 비결은 완전한 온디바이스 처리 — 네트워크 왕복이 없습니다.
+벤치마크에서 34분 영상을 45초에 처리해, 약 101초 걸린 Whisper보다 <span style="font-size:1.3em;font-weight:800">약 55% 빨랐습니다</span>. 비결은 완전한 온디바이스 처리 — 네트워크 왕복이 없습니다.
 
 <div class="chart-bar" data-title="34분 영상 전사 소요 시간 (짧을수록 빠름)" data-labels="Apple SpeechAnalyzer,OpenAI Whisper" data-values="45,101" data-colors="#10b981,#3b82f6" data-unit="초"></div>
 
@@ -45,7 +45,7 @@ faq:
 
 ## 정확도: 용도가 가른다
 
-SpeechAnalyzer는 **온디바이스 엔진 중 최상위**로 평가되고, 긴 대화형 음성에서 중간급 Whisper 모델과 비슷합니다. 하지만 전문 용어·복잡한 오디오에서는 **대형 Whisper 모델**이 더 정확할 수 있습니다.
+SpeechAnalyzer는 온디바이스 엔진 중 최상위로 평가되고, 긴 대화형 음성에서 중간급 Whisper 모델과 비슷합니다. 하지만 전문 용어·복잡한 오디오에서는 대형 Whisper 모델이 더 정확할 수 있습니다.
 
 <div class="callout-tip">💡 팁: '일상 대화·받아쓰기·자막'은 SpeechAnalyzer로 충분하고 빠릅니다. '의학·법률 용어, 잡음 많은 오디오, 최고 정확도'가 필요하면 대형 Whisper를 고려하세요.</div>
 
@@ -53,7 +53,7 @@ SpeechAnalyzer는 **온디바이스 엔진 중 최상위**로 평가되고, 긴 
 
 ![어두운 화면의 코드](https://images.pexels.com/photos/34804018/pexels-photo-34804018.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=430&w=940)
 
-SpeechAnalyzer는 모든 처리가 **기기에서** 일어나, 오디오가 외부로 나가지 않고 오프라인에서도 동작합니다.
+SpeechAnalyzer는 모든 처리가 기기에서 일어나, 오디오가 외부로 나가지 않고 오프라인에서도 동작합니다.
 
 <div class="callout-warning">⚠️ 중요: 의료·법률·사내 회의처럼 <b>민감한 음성</b>을 다룬다면 온디바이스가 사실상 필수입니다. 클라우드 전송은 규정 위반·유출 리스크가 될 수 있습니다.</div>
 
