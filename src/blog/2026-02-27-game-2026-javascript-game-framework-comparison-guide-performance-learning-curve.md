@@ -114,7 +114,7 @@ faq:
 
 ## 학습 난이도와 개발 속도 비교
 
-<div class="chart-bar" data-title="프레임워크별 개발 속도와 학습곡선" data-labels="Phaser 3,Babylon.js,Three.js,PlayCanvas,PixiJS" data-values="92,75,60,85,80" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-title="프레임워크별 개발 속도와 학습곡선" data-labels="Phaser 3,PlayCanvas,PixiJS,Babylon.js,Three.js" data-values="92,85,80,75,60" data-colors="#10b981,#ef4444,#8b5cf6,#3b82f6,#f59e0b" data-unit="점"></div>
 
 **Phaser 3**이 가장 빠른 개발 속도를 제공합니다. 초보자도 몇 시간 안에 간단한 게임을 만들 수 있으며, 필요한 모든 기능이 통합되어 있습니다. **Babylon.js**는 3D 개발에서는 비교할 수 없는 장점이 있지만, 학습곡선이 더 가파릅니다.
 

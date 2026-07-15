@@ -148,7 +148,7 @@ export class GameManager extends Component {
 
 ## Cocos Creator가 적합한 프로젝트 유형
 
-<div class="chart-bar" data-title="게임 장르별 추천도" data-labels="캐주얼 게임,하이퍼 캐주얼,퍼즐,액션,RPG" data-values="95,98,90,75,65" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-title="게임 장르별 추천도" data-labels="하이퍼 캐주얼,캐주얼 게임,퍼즐,액션,RPG" data-values="98,95,90,75,65" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="점"></div>
 
 **특히 강한 영역:**
 - 하이퍼 캐주얼 게임 (Idle, Clicker, Match3)

@@ -131,7 +131,7 @@ Claude Opus 4.6의 가장 주목할 기능은 **에이전트 팀(Agent Teams)**�
 
 ### 벤치마크가 증명하는 실력
 
-<div class="chart-bar" data-title="Claude Opus 4.6 벤치마크 성적표" data-labels="SWE-bench Verified,Terminal-Bench 2.0,GPQA Diamond,ARC AGI 2,BrowseComp,BigLaw Bench" data-values="80.8,65.4,91.3,68.8,84.0,90.2" data-colors="#8b5cf6,#3b82f6,#10b981,#f59e0b,#ef4444,#06b6d4" data-unit="%"></div>
+<div class="chart-bar" data-title="Claude Opus 4.6 벤치마크 성적표" data-labels="GPQA Diamond,BigLaw Bench,BrowseComp,SWE-bench Verified,ARC AGI 2,Terminal-Bench 2.0" data-values="91.3,90.2,84.0,80.8,68.8,65.4" data-colors="#10b981,#06b6d4,#ef4444,#8b5cf6,#f59e0b,#3b82f6" data-unit="%"></div>
 
 특히 **SWE-bench Verified 80.8%**는 실제 오픈소스 프로젝트의 GitHub 이슈를 자동으로 해결하는 능력을 의미합니다. 100개의 실제 버그 중 81개를 스스로 고칠 수 있다는 뜻입니다.
 

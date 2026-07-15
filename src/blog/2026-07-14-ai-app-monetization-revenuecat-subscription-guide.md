@@ -45,7 +45,7 @@ RevenueCat은 StoreKit(iOS)·Google Play·웹·스마트TV의 결제를 **단일
 
 핵심은 **서버측 영수증 검증**을 직접 운영하지 않아도 된다는 점입니다. 클라이언트 SDK가 결제를 처리하면, RevenueCat 서버가 검증·갱신·동기화를 맡고, 앱은 "이 사용자가 프리미엄인가?"만 물어보면 됩니다.
 
-<div class="chart-bar" data-title="구독 인프라 부담: 직접 구현 vs 도구 활용 (참고용, 낮을수록 좋음)" data-labels="영수증 검증,크로스플랫폼 동기화,환불 처리,분석 구축" data-values="9,10,8,7" data-colors="#3b82f6,#10b981,#f59e0b,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-title="구독 인프라 부담: 직접 구현 vs 도구 활용 (참고용, 낮을수록 좋음)" data-labels="분석 구축,환불 처리,영수증 검증,크로스플랫폼 동기화" data-values="7,8,9,10" data-colors="#8b5cf6,#f59e0b,#3b82f6,#10b981" data-unit="점"></div>
 
 ## 요금: 어디까지 무료인가
 

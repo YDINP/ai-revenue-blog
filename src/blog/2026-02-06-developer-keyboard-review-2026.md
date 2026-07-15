@@ -44,7 +44,7 @@ coupangLinks:
 
 <div class="chart-radar" data-title="개발자 키보드 TOP 5 종합 평가" data-items='[{"name":"MX Keys S","scores":[{"label":"타이핑감","value":7,"color":"#10b981"},{"label":"소음","value":9,"color":"#10b981"},{"label":"무선","value":10,"color":"#10b981"},{"label":"가성비","value":7,"color":"#10b981"},{"label":"내구성","value":8,"color":"#10b981"}]},{"name":"레오폴드 FC660M","scores":[{"label":"타이핑감","value":10,"color":"#3b82f6"},{"label":"소음","value":5,"color":"#3b82f6"},{"label":"무선","value":1,"color":"#3b82f6"},{"label":"가성비","value":7,"color":"#3b82f6"},{"label":"내구성","value":10,"color":"#3b82f6"}]},{"name":"리얼포스 R3","scores":[{"label":"타이핑감","value":10,"color":"#8b5cf6"},{"label":"소음","value":10,"color":"#8b5cf6"},{"label":"무선","value":8,"color":"#8b5cf6"},{"label":"가성비","value":4,"color":"#8b5cf6"},{"label":"내구성","value":10,"color":"#8b5cf6"}]}]'></div>
 
-<div class="chart-bar" data-title="가격대 비교 (만원)" data-labels="한성 GK898B,키크론 K3 Pro,MX Keys S,레오폴드 FC660M,리얼포스 R3" data-values="10,12,15,18,25" data-colors="#f59e0b,#ef4444,#10b981,#3b82f6,#8b5cf6" data-unit="만"></div>
+<div class="chart-bar" data-title="가격대 비교 (만원)" data-labels="리얼포스 R3,레오폴드 FC660M,MX Keys S,키크론 K3 Pro,한성 GK898B" data-values="25,18,15,12,10" data-colors="#8b5cf6,#3b82f6,#10b981,#ef4444,#f59e0b" data-unit="만"></div>
 
 ## 1. 로지텍 MX Keys S - 멀티 디바이스 환경 최적화
 

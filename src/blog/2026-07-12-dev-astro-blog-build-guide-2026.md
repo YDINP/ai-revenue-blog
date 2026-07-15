@@ -33,7 +33,7 @@ Astro는 **콘텐츠 중심 사이트**(블로그·문서·랜딩)에 특화된 
 
 SEO의 절반은 **속도**와 **크롤러 가독성**입니다. Astro는 둘 다 유리합니다.
 
-<div class="chart-bar" data-title="콘텐츠 사이트에서 Astro의 강점 (참고용)" data-labels="로딩 속도,SEO 친화,JS 최소화,콘텐츠 관리" data-values="9,9,10,8" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-title="콘텐츠 사이트에서 Astro의 강점 (참고용)" data-labels="JS 최소화,로딩 속도,SEO 친화,콘텐츠 관리" data-values="10,9,9,8" data-colors="#f59e0b,#10b981,#3b82f6,#8b5cf6" data-unit="점"></div>
 
 - **미리 만든 정적 HTML** → 로딩이 빠름
 - **콘텐츠가 HTML에 그대로** → 검색엔진·AI가 읽기 좋음

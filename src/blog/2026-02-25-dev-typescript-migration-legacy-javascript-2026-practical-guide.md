@@ -226,7 +226,7 @@ function process(data: unknown): string {
 
 ## 2026년 TypeScript 마이그레이션 최신 도구
 
-<div class="chart-bar" data-title="인기 마이그레이션 도구" data-labels="ts-migrate,tsc,Codemod,Lerna,TypeScript Compiler" data-values="78,92,68,55,88" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="개발자%"></div>
+<div class="chart-bar" data-title="인기 마이그레이션 도구" data-labels="tsc,TypeScript Compiler,ts-migrate,Codemod,Lerna" data-values="92,88,78,68,55" data-colors="#10b981,#8b5cf6,#3b82f6,#f59e0b,#ef4444" data-unit="개발자%"></div>
 
 ### **TypeScript Compiler (tsc)**
 

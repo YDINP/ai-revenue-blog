@@ -129,9 +129,9 @@ Claude Opus 4.6은 **"개발 팀"** 컨셉입니다. 복잡한 작업을 여러 
 | API 출력 | $60/M 토큰 | $75/M 토큰 |
 | 토큰 효율 | 더 적은 토큰 사용 | 더 많은 컨텍스트 활용 |
 
-<div class="chart-bar" data-title="API 가격 비교 (입력 $/M 토큰)" data-labels="GPT-5.3 Codex,Claude Opus 4.6" data-values="12,15" data-colors="#10b981,#3b82f6" data-unit="$"></div>
+<div class="chart-bar" data-title="API 가격 비교 (입력 $/M 토큰)" data-labels="Claude Opus 4.6,GPT-5.3 Codex" data-values="15,12" data-colors="#3b82f6,#10b981" data-unit="$"></div>
 
-<div class="chart-bar" data-title="컨텍스트 윈도우 (K 토큰)" data-labels="GPT-5.3 Codex,Claude Opus 4.6" data-values="256,1000" data-colors="#10b981,#3b82f6" data-unit="K"></div>
+<div class="chart-bar" data-title="컨텍스트 윈도우 (K 토큰)" data-labels="Claude Opus 4.6,GPT-5.3 Codex" data-values="1000,256" data-colors="#3b82f6,#10b981" data-unit="K"></div>
 
 GPT-5.3 Codex가 API 가격 면에서 약 20% 저렴하며, 동일 작업에 더 적은 토큰을 사용합니다.
 

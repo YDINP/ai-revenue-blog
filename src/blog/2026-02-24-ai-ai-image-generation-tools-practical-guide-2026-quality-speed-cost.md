@@ -186,7 +186,7 @@ Canon EOS R5, f/2.8, professional, 4K"
 - 월 생성 비용: $0 (전기료만 해당, 약 $2~5)
 - 연간 절감: $600+ (기존 클라우드 기준 $720/년 vs 로컬 $24/년)
 
-<div class="chart-bar" data-title="AI 이미지 생성 도구별 월간 실제 비용 (프로젝트 500개 생성 기준)" data-labels="DALL-E 4 Only,Midjourney Only,Stable Diffusion Only,하이브리드 (추천),로컬 + API" data-values="85,150,5,45,8" data-colors="#3b82f6,#10b981,#f59e0b,#8b5cf6,#ef4444" data-unit="$"></div>
+<div class="chart-bar" data-title="AI 이미지 생성 도구별 월간 실제 비용 (프로젝트 500개 생성 기준)" data-labels="Midjourney Only,DALL-E 4 Only,하이브리드 (추천),로컬 + API,Stable Diffusion Only" data-values="150,85,45,8,5" data-colors="#10b981,#3b82f6,#8b5cf6,#ef4444,#f59e0b" data-unit="$"></div>
 
 ## 2026년 주의사항: 저작권 및 상용 라이선스
 

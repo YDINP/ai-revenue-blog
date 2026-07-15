@@ -87,7 +87,7 @@ faq:
 
 ## 예산대별 현실적 추천 기준
 
-<div class="chart-bar" data-title="모니터 타입별 예상 가격대(2026년 2월 기준)" data-labels="27형 QHD IPS,32형 4K IPS,34형 울트라와이드,27형 QHD USB-C" data-values="280,450,520,680" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444" data-unit="만원"></div>
+<div class="chart-bar" data-title="모니터 타입별 예상 가격대(2026년 2월 기준)" data-labels="27형 QHD USB-C,34형 울트라와이드,32형 4K IPS,27형 QHD IPS" data-values="680,520,450,280" data-colors="#ef4444,#f59e0b,#10b981,#3b82f6" data-unit="만원"></div>
 
 **30만원대**: 27인치 QHD IPS, 색감 정확도 sRGB 95% 수준. 기본기가 탄탄하면 충분합니다. 예산 제약이 있는 개발자의 무난한 선택입니다.
 

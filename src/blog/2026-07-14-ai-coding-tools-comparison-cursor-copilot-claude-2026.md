@@ -37,7 +37,7 @@ faq:
 
 올해 가장 큰 변화는 단일 도구에서 **여러 도구를 파이프라인으로 조합**하는 흐름입니다. 챗봇 + IDE 어시스턴트 + 터미널 에이전트를 함께 쓰고, 한 에이전트가 코드를 짜는 동안 다른 에이전트가 테스트를, 또 다른 에이전트가 보안 리뷰를 병렬로 도는 **멀티 에이전트 코딩**이 부상했습니다.
 
-<div class="chart-bar" data-title="AI 코딩 도구 활용 현황 (2026, 참고용)" data-labels="AI 도구 사용 개발자,매일 사용,생산성 향상 체감,멀티툴 병행" data-values="85,51,66,58" data-colors="#3b82f6,#10b981,#f59e0b,#8b5cf6" data-unit="%"></div>
+<div class="chart-bar" data-title="AI 코딩 도구 활용 현황 (2026, 참고용)" data-labels="AI 도구 사용 개발자,생산성 향상 체감,멀티툴 병행,매일 사용" data-values="85,66,58,51" data-colors="#3b82f6,#f59e0b,#8b5cf6,#10b981" data-unit="%"></div>
 
 ## 생산성의 현실: '몇 배'가 아니라 '어디서'
 

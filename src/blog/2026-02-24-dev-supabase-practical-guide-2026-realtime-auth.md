@@ -281,7 +281,7 @@ function TodoApp() {
 
 ## 2026년 Supabase 성능 지표
 
-<div class="chart-bar" data-title="Supabase vs Firebase 성능 비교" data-labels="데이터베이스 응답시간,실시간동기화지연,RLS오버헤드" data-values="28,87,12" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="ms"></div>
+<div class="chart-bar" data-title="Supabase vs Firebase 성능 비교" data-labels="RLS오버헤드,데이터베이스 응답시간,실시간동기화지연" data-values="12,28,87" data-colors="#f59e0b,#10b981,#3b82f6" data-unit="ms"></div>
 
 위 벤치마크는 **평균 1000개 행 데이터셋 기준**입니다. Supabase의 PostgreSQL 백엔드는 Firebase의 NoSQL과 달리 복잡한 쿼리에서 더 유리합니다.
 

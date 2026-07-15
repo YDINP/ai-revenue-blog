@@ -65,7 +65,7 @@ faq:
 
 더 자세한 AI 모델 비교는 [Claude AI 2026년 최신 사용법: Opus 4.6 & Claude Code 활용 가이드](/blog/2026-02-14-ai-claude-ai-usage-guide-2026/)을 참고하세요.
 
-<div class="chart-bar" data-title="2026년 주요 AI API 비용 비교 (100만 토큰 기준)" data-labels="GPT-4o mini,Claude Haiku,GPT-4o,Claude Sonnet" data-values="600,480,7500,18000" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444" data-unit="원"></div>
+<div class="chart-bar" data-title="2026년 주요 AI API 비용 비교 (100만 토큰 기준)" data-labels="Claude Sonnet,GPT-4o,GPT-4o mini,Claude Haiku" data-values="18000,7500,600,480" data-colors="#ef4444,#f59e0b,#3b82f6,#10b981" data-unit="원"></div>
 
 ## 5가지 AI API 자동화 수익 모델
 

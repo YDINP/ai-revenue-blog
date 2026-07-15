@@ -97,7 +97,7 @@ Plus 사용자는 CSV, Excel 파일을 직접 업로드하여 복잡한 데이�
 
 ## 구체적 활용 시나리오별 ROI 계산
 
-<div class="chart-bar" data-title="직업별 월간 예상 시간 절약 (시간)" data-labels="개발자,콘텐츠 크리에이터,마케터,번역가,소프트웨어 엔지니어" data-values="50,35,25,40,55" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#8b5cf6" data-unit="시간"></div>
+<div class="chart-bar" data-title="직업별 월간 예상 시간 절약 (시간)" data-labels="소프트웨어 엔지니어,개발자,번역가,콘텐츠 크리에이터,마케터" data-values="55,50,40,35,25" data-colors="#8b5cf6,#10b981,#ef4444,#3b82f6,#f59e0b" data-unit="시간"></div>
 
 ### 시나리오 1: 프리랜서 개발자
 

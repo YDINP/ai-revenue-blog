@@ -124,7 +124,7 @@ AI에게 **"어떤 형식으로", "어느 정도 길이로", "누구를 대상�
 
 이렇게 **단계를 명시하면** 표면적인 답변이 아닌 **근거 있는 조언**을 받을 수 있습니다.
 
-<div class="chart-bar" data-title="프롬프트 기법별 응답 품질 개선 효과" data-labels="기본 질문,맥락 제공,역할 할당,제약 조건,Few-shot,사고과정" data-values="45,68,72,65,78,82" data-colors="#ef4444,#f59e0b,#eab308,#10b981,#3b82f6,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-title="프롬프트 기법별 응답 품질 개선 효과" data-labels="사고과정,Few-shot,역할 할당,맥락 제공,제약 조건,기본 질문" data-values="82,78,72,68,65,45" data-colors="#8b5cf6,#3b82f6,#eab308,#f59e0b,#10b981,#ef4444" data-unit="점"></div>
 
 ## 2026년 실전 활용 팁: 체인 프롬프팅
 

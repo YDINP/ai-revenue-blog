@@ -74,7 +74,7 @@ faq:
 
 ## 용도별 추천
 
-<div class="chart-bar" data-title="용도별 추천 적합도 (10점, 참고용)" data-labels="소리 있는 내러티브,정밀 연출,저비용 대량,입문 무료" data-values="10,9,10,8" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-title="용도별 추천 적합도 (10점, 참고용)" data-labels="소리 있는 내러티브,저비용 대량,정밀 연출,입문 무료" data-values="10,10,9,8" data-colors="#10b981,#f59e0b,#3b82f6,#8b5cf6" data-unit="점"></div>
 
 | 목적 | 추천 |
 |------|------|

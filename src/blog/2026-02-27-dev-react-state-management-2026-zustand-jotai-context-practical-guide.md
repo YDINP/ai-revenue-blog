@@ -188,7 +188,7 @@ const counterSlice = createSlice({
 
 아래는 2026년 2월 기준 npm 공식 데이터에 기반한 번들 크기 비교입니다:
 
-<div class="chart-bar" data-title="상태 관리 라이브러리 번들 크기(Gzipped)" data-labels="Zustand,Jotai,Context API,Redux Toolkit,TanStack Query" data-values="2.2,3.3,0,8.5,13.0" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6,#ef4444" data-unit="KB"></div>
+<div class="chart-bar" data-title="상태 관리 라이브러리 번들 크기(Gzipped)" data-labels="TanStack Query,Redux Toolkit,Jotai,Zustand,Context API" data-values="13.0,8.5,3.3,2.2,0" data-colors="#ef4444,#8b5cf6,#3b82f6,#10b981,#f59e0b" data-unit="KB"></div>
 
 ## 상황별 선택 가이드
 

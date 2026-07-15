@@ -157,7 +157,7 @@ faq:
 
 ## 2026년 AI 자동화 수익화 성공 요인
 
-<div class="chart-bar" data-title="AI 자동화 SaaS 성공 요인별 영향도" data-labels="제품력,고객지원,마케팅,가격책정,고객유지" data-values="92,78,65,71,88" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-title="AI 자동화 SaaS 성공 요인별 영향도" data-labels="제품력,고객유지,고객지원,가격책정,마케팅" data-values="92,88,78,71,65" data-colors="#10b981,#8b5cf6,#3b82f6,#ef4444,#f59e0b" data-unit="점"></div>
 
 **핵심 포인트:**
 

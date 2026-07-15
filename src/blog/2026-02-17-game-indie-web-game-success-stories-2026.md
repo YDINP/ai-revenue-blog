@@ -107,7 +107,7 @@ faq:
 
 ## 기술 스택: 성공한 팀들의 선택
 
-<div class="chart-bar" data-title="인디 웹게임 개발 엔진 선호도 (2026년 설문)" data-labels="Phaser.js,Babylon.js,Three.js,Cocos Creator,Canvas 순수 코드" data-values="32,18,15,22,13" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6,#ec4899" data-unit="%"></div>
+<div class="chart-bar" data-title="인디 웹게임 개발 엔진 선호도 (2026년 설문)" data-labels="Phaser.js,Cocos Creator,Babylon.js,Three.js,Canvas 순수 코드" data-values="32,22,18,15,13" data-colors="#10b981,#8b5cf6,#3b82f6,#f59e0b,#ec4899" data-unit="%"></div>
 
 **Phaser.js와 Cocos Creator가 양강 구도**를 형성하고 있습니다. Phaser.js는 단순 2D 게임에, Cocos Creator는 중상급 멀티플레이어 게임에 선호됩니다.
 

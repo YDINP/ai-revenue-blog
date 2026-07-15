@@ -56,7 +56,7 @@ coupangLinks:
 
 <div class="chart-radar" data-title="개발자 마우스 TOP 3 종합 평가" data-items='[{"name":"MX Master 3S","scores":[{"label":"인체공학","value":9,"color":"#10b981"},{"label":"스크롤","value":10,"color":"#10b981"},{"label":"배터리","value":8,"color":"#10b981"},{"label":"커스텀","value":9,"color":"#10b981"},{"label":"휴대성","value":6,"color":"#10b981"}]},{"name":"MX Ergo S","scores":[{"label":"인체공학","value":10,"color":"#3b82f6"},{"label":"스크롤","value":7,"color":"#3b82f6"},{"label":"배터리","value":10,"color":"#3b82f6"},{"label":"커스텀","value":7,"color":"#3b82f6"},{"label":"휴대성","value":4,"color":"#3b82f6"}]},{"name":"MX Anywhere 3S","scores":[{"label":"인체공학","value":6,"color":"#f59e0b"},{"label":"스크롤","value":9,"color":"#f59e0b"},{"label":"배터리","value":8,"color":"#f59e0b"},{"label":"커스텀","value":7,"color":"#f59e0b"},{"label":"휴대성","value":10,"color":"#f59e0b"}]}]'></div>
 
-<div class="chart-bar" data-title="배터리 수명 비교 (일)" data-labels="Magic Mouse 3,Pro Click Mini,MX Master 3S,MX Anywhere 3S,MX Ergo S" data-values="30,60,70,70,120" data-colors="#94a3b8,#ef4444,#10b981,#f59e0b,#3b82f6" data-unit="일"></div>
+<div class="chart-bar" data-title="배터리 수명 비교 (일)" data-labels="MX Ergo S,MX Master 3S,MX Anywhere 3S,Pro Click Mini,Magic Mouse 3" data-values="120,70,70,60,30" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#94a3b8" data-unit="일"></div>
 
 ## 1위: 로지텍 MX Master 3S — 개발자의 표준
 

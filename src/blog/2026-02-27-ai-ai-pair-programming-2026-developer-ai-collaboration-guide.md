@@ -114,7 +114,7 @@ AI가 입력 검증 실패, 네트워크 오류, 정렬 순서 변경 등 실제
 
 ## AI 페어 프로그래밍의 실제 성과
 
-<div class="chart-bar" data-title="AI 페어 프로그래밍 도입 후 생산성 변화" data-labels="코드 작성 속도,버그 발견 시간,리뷰 시간,학습 곡선" data-values="48,35,42,55" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-unit="%"></div>
+<div class="chart-bar" data-title="AI 페어 프로그래밍 도입 후 생산성 변화" data-labels="학습 곡선,코드 작성 속도,리뷰 시간,버그 발견 시간" data-values="55,48,42,35" data-colors="#ef4444,#10b981,#f59e0b,#3b82f6" data-unit="%"></div>
 
 **Microsoft와 GitClear의 2025년 연구에 따르면**:
 - 신입 개발자: 생산성 **50% 향상**

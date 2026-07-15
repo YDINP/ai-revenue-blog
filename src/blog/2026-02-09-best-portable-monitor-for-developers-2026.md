@@ -124,7 +124,7 @@ coupangLinks:
 
 ## 가격대 비교
 
-<div class="chart-bar" data-title="가격대 비교 (만원)" data-labels="ASUS,Lenovo,Samsung,LG gram,Innocn" data-values="38,33,55,50,28" data-colors="#3b82f6,#ef4444,#1428a0,#a50034,#22c55e" data-unit="만원"></div>
+<div class="chart-bar" data-title="가격대 비교 (만원)" data-labels="Samsung,LG gram,ASUS,Lenovo,Innocn" data-values="55,50,38,33,28" data-colors="#1428a0,#a50034,#3b82f6,#ef4444,#22c55e" data-unit="만원"></div>
 
 ## 개발자를 위한 선택 가이드
 

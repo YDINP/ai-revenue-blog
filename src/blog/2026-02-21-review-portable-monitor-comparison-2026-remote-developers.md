@@ -162,7 +162,7 @@ faq:
 | ASUS ZenScreen MB16AC | 15.6" | FHD | sRGB 87% | 5ms | 5시간 | 440g | 28~32만원 |
 | Lepow Z1 | 15.6" | FHD | sRGB 70% | 6ms | 4시간 | 410g | 12~16만원 |
 
-<div class="chart-bar" data-title="포터블 모니터 색감 정확도 비교" data-labels="ASUS ProArt,ViewSonic,AOC,ASUS ZenScreen,Lepow" data-values="99.5,98,72,87,70" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#8b5cf6" data-unit="%"></div>
+<div class="chart-bar" data-title="포터블 모니터 색감 정확도 비교" data-labels="ASUS ProArt,ViewSonic,ASUS ZenScreen,AOC,Lepow" data-values="99.5,98,87,72,70" data-colors="#10b981,#3b82f6,#ef4444,#f59e0b,#8b5cf6" data-unit="%"></div>
 
 ## 포터블 모니터 선택 시 피해야 할 실수 3가지
 

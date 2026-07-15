@@ -136,9 +136,9 @@ Cocos Creator는 **3.8.x 라인**(최신 3.8.8)이 현행 안정 버전이다. �
 
 <div class="chart-donut" data-title="게임 엔진 커뮤니티 크기 (상대 비중)" data-labels="Unity,Unreal,Godot,Phaser,Cocos" data-values="95,85,70,60,45" data-colors="#3b82f6,#10b981,#8b5cf6,#f59e0b,#ef4444" data-value-mode="percent"></div>
 
-<div class="chart-bar" data-orient="vertical" data-title="게임 엔진 2D 게임 지원 강도" data-labels="Unity,Unreal,Godot,Phaser,Cocos" data-values="90,65,90,95,90" data-colors="#3b82f6,#10b981,#8b5cf6,#f59e0b,#ef4444" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="게임 엔진 2D 게임 지원 강도" data-labels="Phaser,Unity,Godot,Cocos,Unreal" data-values="95,90,90,90,65" data-colors="#f59e0b,#3b82f6,#8b5cf6,#ef4444,#10b981" data-unit="점"></div>
 
-<div class="chart-bar" data-orient="vertical" data-title="게임 엔진 3D 게임 지원 강도" data-labels="Unity,Unreal,Godot,Phaser,Cocos" data-values="85,98,70,0,40" data-colors="#3b82f6,#10b981,#8b5cf6,#f59e0b,#ef4444" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="게임 엔진 3D 게임 지원 강도" data-labels="Unreal,Unity,Godot,Cocos,Phaser" data-values="98,85,70,40,0" data-colors="#10b981,#3b82f6,#8b5cf6,#ef4444,#f59e0b" data-unit="점"></div>
 
 ※ 위 점수는 공식 수치가 아니라, 2026년 7월 기준 기능·생태계를 종합해 매긴 상대적 참고 지표다.
 

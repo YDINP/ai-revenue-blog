@@ -30,7 +30,7 @@ coupangLinks:
 
 반면 **WebGL**은 3D 게임, 고사양 그래픽이 필요한 타이틀, 그리고 실시간 렌더링이 중요한 게임에 필수적입니다. 2026년 현재 WebGL 2.0이 모든 주요 브라우저에서 완전히 지원되며, 일부 브라우저는 WebGL 3.0 프리뷰도 제공하고 있습니다.
 
-<div class="chart-bar" data-title="2026년 게임 장르별 기술 선호도" data-labels="2D 캐주얼,3D 액션,멀티플레이,메타버스" data-values="78,92,85,96" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-unit="%"></div>
+<div class="chart-bar" data-title="2026년 게임 장르별 기술 선호도" data-labels="메타버스,3D 액션,멀티플레이,2D 캐주얼" data-values="96,92,85,78" data-colors="#ef4444,#3b82f6,#f59e0b,#10b981" data-unit="%"></div>
 
 ### 2026년 주요 WebGL 프레임워크 비교
 

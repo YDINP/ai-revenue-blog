@@ -60,7 +60,7 @@ coupangLinks:
 
 <div class="chart-bar" data-title="무게 비교 (kg)" data-labels="맥북 에어 M3,LG 그램 17,갤럭시북4 프로" data-values="1.24,1.35,1.56" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="kg"></div>
 
-<div class="chart-bar" data-title="배터리 수명 (시간)" data-labels="맥북 에어 M3,LG 그램 17,갤럭시북4 프로" data-values="18,22,21" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="h"></div>
+<div class="chart-bar" data-title="배터리 수명 (시간)" data-labels="LG 그램 17,갤럭시북4 프로,맥북 에어 M3" data-values="22,21,18" data-colors="#3b82f6,#f59e0b,#10b981" data-unit="h"></div>
 
 ## 맥북 에어 M3: 개발자의 로망
 

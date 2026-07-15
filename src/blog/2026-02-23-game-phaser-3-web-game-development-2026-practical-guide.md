@@ -362,7 +362,7 @@ const config = {
 };
 ```
 
-<div class="chart-bar" data-title="Phaser 3 기능별 성능 요구도" data-labels="애니메이션,물리엔진,사운드,입자효과,카메라" data-values="20,45,15,30,25" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#8b5cf6" data-unit="%"></div>
+<div class="chart-bar" data-title="Phaser 3 기능별 성능 요구도" data-labels="물리엔진,입자효과,카메라,애니메이션,사운드" data-values="45,30,25,20,15" data-colors="#3b82f6,#ef4444,#8b5cf6,#10b981,#f59e0b" data-unit="%"></div>
 
 ## 결론: 2026년 웹게임 개발자라면 Phaser 3을 선택해야 하는 이유
 

@@ -48,7 +48,7 @@ faq:
 
 외장 SSD 속도는 **SSD 성능 + USB 인터페이스 상한**에 함께 좌우됩니다. 아무리 빠른 SSD라도 느린 규격에 물리면 제 속도를 못 냅니다.
 
-<div class="chart-bar" data-title="외장 SSD 속도를 결정하는 요소 (참고용)" data-labels="SSD 자체 성능,USB 규격,케이블 규격,PC 포트" data-values="9,10,8,8" data-colors="#3b82f6,#10b981,#f59e0b,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-title="외장 SSD 속도를 결정하는 요소 (참고용)" data-labels="USB 규격,SSD 자체 성능,케이블 규격,PC 포트" data-values="10,9,8,8" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6" data-unit="점"></div>
 
 <div class="callout-warning">⚠️ 주의: 제 속도를 내려면 (1) SSD, (2) USB 규격(예: USB 3.2 Gen2 이상), (3) 케이블, (4) PC 포트가 모두 같은 고속 규격을 지원해야 합니다. 하나라도 낮으면 그 수준으로 묶입니다. 대용량 영상을 자주 옮긴다면 이 4가지를 함께 확인하세요.</div>
 

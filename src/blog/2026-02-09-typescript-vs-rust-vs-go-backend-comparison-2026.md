@@ -95,7 +95,7 @@ Google이 만든 Go는 **심플함**이 최고의 무기입니다. 배우기 쉽
 
 ## 벤치마크: HTTP 요청 처리 성능
 
-<div class="chart-bar" data-title="초당 HTTP 요청 처리량 (req/sec)" data-labels="TypeScript (Bun),Rust (Actix),Go (Gin)" data-values="145000,312000,198000" data-colors="#3178c6,#dea584,#00add8" data-unit="req/s"></div>
+<div class="chart-bar" data-title="초당 HTTP 요청 처리량 (req/sec)" data-labels="Rust (Actix),Go (Gin),TypeScript (Bun)" data-values="312000,198000,145000" data-colors="#dea584,#00add8,#3178c6" data-unit="req/s"></div>
 
 ## 프로젝트별 추천
 

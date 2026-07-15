@@ -77,7 +77,7 @@ this.physics.add.overlap(player, coins, collectCoin, null, this);
 
 **collider**는 실제 충돌로 객체를 밀어내고, **overlap**은 겹침을 감지하기만 합니다.
 
-<div class="chart-bar" data-title="물리 엔진 연산 비용 비교 (상대값)" data-labels="Arcade,Matter.js,Babylon.js" data-values="100,180,220" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="상대값"></div>
+<div class="chart-bar" data-title="물리 엔진 연산 비용 비교 (상대값)" data-labels="Babylon.js,Matter.js,Arcade" data-values="220,180,100" data-colors="#f59e0b,#3b82f6,#10b981" data-unit="상대값"></div>
 
 ## 2026년 Phaser 3 물리 엔진 실전 활용법
 

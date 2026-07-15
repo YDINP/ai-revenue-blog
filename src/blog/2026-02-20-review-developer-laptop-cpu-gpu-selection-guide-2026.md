@@ -99,7 +99,7 @@ Swift, Objective-C 개발자와 AI/ML 엔지니어에게 최적입니다.
 
 ## CPU 성능 벤치마크: 실제 개발 작업 기준
 
-<div class="chart-bar" data-title="프로젝트 빌드 시간 비교 (초, 낮을수록 좋음)" data-labels="Node.js 번들,Rust 컴파일,Docker 이미지" data-values="42,128,95" data-colors="#3b82f6,#10b981,#f59e0b" data-unit="초"></div>
+<div class="chart-bar" data-title="프로젝트 빌드 시간 비교 (초, 낮을수록 좋음)" data-labels="Node.js 번들,Docker 이미지,Rust 컴파일" data-values="42,95,128" data-colors="#3b82f6,#f59e0b,#10b981" data-unit="초"></div>
 
 *측정 환경: 동일 SSD, 16GB RAM, 동일 네트워크 환경*
 
