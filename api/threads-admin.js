@@ -2,7 +2,7 @@
 //  ?action=post          body{text,topic?,linkUrl?}  → 즉석 발행
 //  ?action=find&q=&topic= → keyword_search 후보 카드 발송
 //  ?action=reply-delete[&rid=N|&media=id]  → 대댓글 삭제(목록/삭제)
-import { sb, publish, publishReply, insertPost, getAccounts, deleteMedia } from './_threads.js';
+import { sb, publish, publishReply, insertPost, insertQueue, getAccounts, deleteMedia } from './_threads.js';
 import { findAndQueue } from './_threads-bot.js';
 
 export default async function handler(req, res) {
@@ -27,6 +27,22 @@ export default async function handler(req, res) {
       await insertPost({ account_id: acct.id, threads_media_id: mediaId }).catch(() => {});
       await sb(`threads_accounts?id=eq.${acct.id}`, { method: 'PATCH', body: { hottime_started_at: null } }).catch(() => {});
       return res.status(200).json({ ok: true, mediaId });
+    }
+
+    if (action === 'queue') {
+      const topic = b.topic || req.query?.topic || 'life';
+      const text = (b.text || '').trim();
+      if (!text) return res.status(400).json({ error: 'no text' });
+      const acct = (await sb(`threads_accounts?topic=eq.${encodeURIComponent(topic)}&active=eq.true&limit=1`))[0];
+      if (!acct) return res.status(400).json({ error: `no account for ${topic}` });
+      const row = await insertQueue({
+        account_id: acct.id, text,
+        image_url: b.imageUrl || null,
+        link_url: b.linkUrl || null,
+        link_kind: b.linkUrl ? 'blog' : 'none',
+        status: 'draft',
+      });
+      return res.status(200).json({ ok: true, id: row.id });
     }
 
     if (action === 'find') {
