@@ -4,8 +4,9 @@ import { dispatchWorkflow } from './_github.js';
 import { setState, getState, clearState } from './_state.js';
 import {
   getAccounts, sb, getQueue, updateQueue, publishDraft,
-  getReply, updateReply, publishReply, publish, insertPost,
+  getReply, updateReply, publishReply, publish, insertPost, insertQueue,
   keywordSearch, insertEngage, getEngage, updateEngage, engageExists, draftEngageReply,
+  splitThread, isThreadItem,
 } from './_threads.js';
 
 const REPO = 'YDINP/ai-revenue-blog';
@@ -49,6 +50,21 @@ export async function threadsGenMessage(topic = 'life', count = '2', linkmode = 
 // ── 초안 카드 (승인 버튼) ──
 export function threadsCard(row) {
   const link = row.link_url ? `\n🔗 <code>${row.link_kind}</code>: ${escapeHtml(row.link_url.slice(0, 60))}…` : '';
+  const thread = isThreadItem(row);
+  if (thread) {
+    const segs = splitThread(row.text);
+    const body = segs.map((s, i) => `<b>[${i + 1}편]</b> ${escapeHtml(s)}`).join('\n\n');
+    return {
+      text: `🧵 <b>타래 초안 #${row.id}</b> — ${segs.length}편\n\n${body}${link}`,
+      reply_markup: {
+        inline_keyboard: [[
+          { text: '✅ 발행', callback_data: `thr:pub:${row.id}` },
+          { text: '⏰ 예약', callback_data: `thr:sched:${row.id}` },
+          { text: '🗑 버림', callback_data: `thr:rej:${row.id}` },
+        ]],
+      },
+    };
+  }
   return {
     text: `🧵 <b>초안 #${row.id}</b> (${escapeHtml(row.link_kind || 'none')})\n\n${escapeHtml(row.text)}${link}`,
     reply_markup: {
@@ -107,6 +123,7 @@ export function threadsMenu() {
     text: '🧵 <b>Threads 메뉴</b> — 뭐 할래?',
     reply_markup: {
       inline_keyboard: [
+        [{ text: '🧵 타래 올리기', callback_data: 'thr:newthread' }],
         [{ text: '📋 큐 보기', callback_data: 'thr:list:life' }, { text: '🔀 랜덤 발행', callback_data: 'thr:rand:life' }],
         [{ text: '📊 성과', callback_data: 'thr:insights' }, { text: 'ℹ️ 명령어', callback_data: 'thr:cmds' }],
       ],
@@ -200,6 +217,53 @@ export async function findAndQueue(keyword, chatId, topic = 'life') {
     : `'${escapeHtml(kw)}' 새 후보 없음(이미 봤거나 텍스트 글 없음).`;
 }
 
+// ── 타래 올리기 안내문 ──
+export function newThreadPrompt(topic = 'life') {
+  return [
+    `🧵 <b>[${escapeHtml(topic)}] 타래 붙여넣기</b>`,
+    '',
+    '• 편 구분: 줄 하나에 <code>---</code> 만',
+    '• 링크(선택): 아무 줄에 <code>링크: https://...</code> → 첫 댓글로 자동 게시',
+    '• 편당 500자 이하 (Threads 한도)',
+    '',
+    '예시:',
+    '<code>1편 훅 문장\n---\n2편 내용\n---\n3편 마무리\n링크: https://...</code>',
+    '',
+    '아래 입력창에 통째로 붙여넣어 보내줘. (취소 /cancel)',
+  ].join('\n');
+}
+
+// ── 타래 초안 파싱 + 큐 insert → 미리보기 카드 ──
+export async function createThreadDraft(topic, rawText) {
+  const acct = (await sb(`threads_accounts?topic=eq.${encodeURIComponent(topic)}&active=eq.true&limit=1`))[0];
+  if (!acct) return { note: `❌ '${escapeHtml(topic)}' 활성 계정이 없어.` };
+
+  // 링크 줄 추출(있으면) 후 본문에서 제거
+  let linkUrl = null;
+  const lines = String(rawText || '').split('\n');
+  const kept = [];
+  for (const ln of lines) {
+    const m = /^\s*링크\s*[:：]\s*(\S+)/.exec(ln);
+    if (m && !linkUrl) { linkUrl = m[1]; continue; }
+    kept.push(ln);
+  }
+  const segs = splitThread(kept.join('\n'));
+  if (!segs.length) return { note: '❌ 편이 하나도 없어. `---`로 구분해서 다시 보내줘.' };
+
+  const tooLong = segs.map((s, i) => (s.length > 500 ? i + 1 : 0)).filter(Boolean);
+  const warn = tooLong.length ? `\n⚠️ ${tooLong.join('·')}편이 500자 초과 — 발행 시 잘릴 수 있어.` : '';
+
+  const row = await insertQueue({
+    account_id: acct.id,
+    text: segs.join('\n---\n'),
+    link_kind: 'thread',
+    link_url: linkUrl,
+    status: 'draft',
+  });
+  const card = threadsCard(row);
+  return { card, note: `🧵 타래 초안 #${row.id} 저장됨 (${segs.length}편${linkUrl ? ' + 링크' : ''}).${warn}` };
+}
+
 // ── 즉석 발행 (/post) — 큐 안 거치고 바로 Threads 발행 ──
 export async function threadsPostNow(rawText, topic = 'life') {
   const body = String(rawText || '').trim();
@@ -269,6 +333,23 @@ export async function handleThreadsCallback(chatId, data) {
   if (data === 'thr:find') {
     await setState(chatId, { flow: 'engage_find' });
     return { text: '🔎 검색할 키워드를 보내줘 (예: 재테크 · 전세 · 여행). 관련 공개글 후보를 찾아줄게.', force_reply: true };
+  }
+  // 타래 올리기 — 활성 계정 1개면 바로 입력, 2+개면 토픽 선택
+  if (data === 'thr:newthread') {
+    const accts = await getAccounts(true);
+    if (!accts.length) return { text: '❌ 연결된 활성 Threads 계정이 없어. OAuth로 먼저 연결해줘.' };
+    if (accts.length === 1) {
+      await setState(chatId, { flow: 'threads_newthread', topic: accts[0].topic });
+      return { text: newThreadPrompt(accts[0].topic), force_reply: true };
+    }
+    return {
+      text: '🧵 어느 계정에 올릴 타래야?',
+      reply_markup: { inline_keyboard: [accts.map((a) => ({ text: escapeHtml(a.topic), callback_data: `thr:nt:${a.topic}` }))] },
+    };
+  }
+  if ((mm = /^thr:nt:(.+)$/.exec(data || ''))) {
+    await setState(chatId, { flow: 'threads_newthread', topic: mm[1] });
+    return { text: newThreadPrompt(mm[1]), force_reply: true };
   }
   // 목록 닫기
   if (data === 'thr:close') {
@@ -398,6 +479,10 @@ export async function handleReplyCallback(chatId, data) {
 export async function maybeHandleThreadsFlow(chatId, text) {
   const st = await getState(chatId);
   if (!st) return null;
+  if (st.flow === 'threads_newthread') {
+    await clearState(chatId);
+    return await createThreadDraft(st.topic || 'life', text);
+  }
   if (st.flow === 'threads_edit') {
     await updateQueue(st.queueId, { text });
     await clearState(chatId);

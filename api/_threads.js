@@ -167,14 +167,55 @@ export function coupangSearchUrl(keyword) {
   return `https://www.coupang.com/np/search?q=${q}&src=1139000&spec=10799999&addtag=200&ctag=${q}&lptag=${COUPANG_LPTAG}&pageType=SEARCH&pageValue=${q}`;
 }
 
-// 큐 항목 발행 오케스트레이션 (본문 → 링크는 첫 댓글 자답 → 기록)
-export async function publishDraft(account, item) {
-  const mediaId = await publish(account, { text: item.text, imageUrl: item.image_url });
-  if (item.link_url) {
+// 타래 구분자 — 한 줄에 --- (3개 이상) 만 있으면 편 경계
+export const THREAD_SEP = /\n\s*-{3,}\s*\n/;
+export const splitThread = (text) =>
+  String(text || '').split(THREAD_SEP).map((s) => s.trim()).filter(Boolean);
+export const isThreadItem = (item) =>
+  item?.link_kind === 'thread' || THREAD_SEP.test(item?.text || '');
+
+// 타래 발행 — 1편(root) → 2편~ 직전 글에 체인 답글 → 링크는 root 첫 댓글.
+// hook-writer 규칙: 외부 링크는 본문 아닌 첫 댓글에(도달 보호).
+export async function publishThread(account, segments, { linkUrl, imageUrl } = {}) {
+  const segs = (segments || []).filter((s) => s && s.trim());
+  if (!segs.length) throw new Error('빈 타래');
+  let rootId = null;
+  let prevId = null;
+  for (let i = 0; i < segs.length; i++) {
+    const mid =
+      i === 0
+        ? await publish(account, { text: segs[i], imageUrl })
+        : await publishReply(account, { text: segs[i], replyToId: prevId });
+    if (i === 0) rootId = mid;
+    prevId = mid;
+  }
+  if (linkUrl && rootId) {
     try {
-      await publishReply(account, { text: `전문 👇\n${item.link_url}`, replyToId: mediaId });
+      await publishReply(account, { text: `전문 👇\n${linkUrl}`, replyToId: rootId });
     } catch (e) {
-      console.error('link reply failed (본문은 정상 발행됨):', e.message);
+      console.error('thread link reply failed (본문 타래는 정상 발행됨):', e.message);
+    }
+  }
+  return rootId;
+}
+
+// 큐 항목 발행 오케스트레이션 — 타래면 체인 발행, 아니면 단일 글.
+// (본문 → 링크는 첫 댓글 자답 → 기록)
+export async function publishDraft(account, item) {
+  let mediaId;
+  if (isThreadItem(item)) {
+    mediaId = await publishThread(account, splitThread(item.text), {
+      linkUrl: item.link_url,
+      imageUrl: item.image_url,
+    });
+  } else {
+    mediaId = await publish(account, { text: item.text, imageUrl: item.image_url });
+    if (item.link_url) {
+      try {
+        await publishReply(account, { text: `전문 👇\n${item.link_url}`, replyToId: mediaId });
+      } catch (e) {
+        console.error('link reply failed (본문은 정상 발행됨):', e.message);
+      }
     }
   }
   await updateQueue(item.id, { status: 'published', error: null });
