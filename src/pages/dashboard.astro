@@ -1942,6 +1942,14 @@ const ICONS: Record<string, string> = {
       .funnel-rate { font-size: 0.6875rem; font-weight: 700; color: #facc15; margin-left: auto; }
       .funnel-bar-wrap { height: 14px; background: var(--surface-2); border-radius: 7px; overflow: hidden; }
       .funnel-bar { height: 100%; border-radius: 7px; min-width: 4px; }
+      /* 숫자 중심 퍼널 플로우 (전환율 <1% 라 비례막대 대신) */
+      .funnel-flow { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; padding: 0.75rem 0; }
+      .funnel-node { text-align: center; }
+      .funnel-node-count { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+      .funnel-node-label { font-size: 0.8125rem; color: var(--text-2); margin-top: 0.3rem; }
+      .funnel-conn { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; color: var(--text-3); }
+      .funnel-conn-arrow { font-size: 0.85rem; line-height: 1; }
+      .funnel-conn-rate { font-size: 0.8125rem; font-weight: 700; color: #facc15; }
 
       /* 목표 카드 */
       .goal-cards { display: flex; flex-direction: column; gap: 0.75rem; }
@@ -3789,35 +3797,24 @@ const ICONS: Record<string, string> = {
         const nl = _funnelCounts.newsletter || 0;
         const el = document.getElementById('funnel-steps');
         if (el) {
+          // 전환율이 1% 미만이라 비례 막대는 사실상 안 보임 → 숫자 중심 세로 플로우로 표시
+          // (페이지뷰 → 전환율 → 쿠팡 클릭). 각 수치를 크게, 단계 사이에 전환율을 배지로.
           const cvr = pv > 0 ? (cc / pv * 100) : 0;
-          const max = pv || 1;
-          const steps = [
-            { label: '페이지뷰', count: pv, color: 'linear-gradient(90deg,#2563eb,#60a5fa)', rate: null },
-            { label: '쿠팡 클릭', count: cc, color: 'linear-gradient(90deg,#ea580c,#facc15)', rate: cvr },
-          ];
-          el.innerHTML = steps.map((s, i) => {
-            // 첫 스텝(페이지뷰)은 퍼널의 분모=기준선이라 막대가 항상 100%로 정보량이 없음.
-            // → 색막대 없이 '기준' 표기만, 하단 전환 스텝만 전환율 막대(width=전환율)로 렌더.
-            if (s.rate === null) {
-              return `<div class="funnel-step">
-                <div class="funnel-step-head">
-                  <span class="funnel-step-label">${s.label}</span>
-                  <span class="funnel-step-count">${fmt(s.count)}</span>
-                  <span class="funnel-rate" style="color:var(--text-3)">기준 100%</span>
-                </div>
-                <div class="funnel-bar-wrap funnel-baseline"></div>
-              </div>`;
-            }
-            const w = Math.max(s.rate, 2.5);
-            return `<div class="funnel-step">
-              <div class="funnel-step-head">
-                <span class="funnel-step-label">${s.label}</span>
-                <span class="funnel-step-count">${fmt(s.count)}</span>
-                <span class="funnel-rate">전환 ${s.rate.toFixed(2)}%</span>
+          el.innerHTML = `
+            <div class="funnel-flow">
+              <div class="funnel-node">
+                <div class="funnel-node-count">${fmt(pv)}</div>
+                <div class="funnel-node-label">페이지뷰</div>
               </div>
-              <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:${w}%;background:${s.color}"></div></div>
+              <div class="funnel-conn">
+                <span class="funnel-conn-arrow">▼</span>
+                <span class="funnel-conn-rate">전환 ${cvr.toFixed(2)}%</span>
+              </div>
+              <div class="funnel-node">
+                <div class="funnel-node-count" style="color:#f59e0b">${fmt(cc)}</div>
+                <div class="funnel-node-label">쿠팡 클릭</div>
+              </div>
             </div>`;
-          }).join('');
         }
         const gc = document.getElementById('goal-cards');
         if (gc) {
