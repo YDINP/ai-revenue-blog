@@ -6,7 +6,7 @@ category: "Dev"
 tags: ["Python자동화", "파이썬", "업무자동화", "코딩입문", "자동화"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/1181281/pexels-photo-1181281.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/5203849/pexels-photo-5203849.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "노트북 키보드에서 타이핑하는 손의 클로즈업, Python 책이 보이며 코딩 진행 중"
 coupangLinks:
   - title: "혼자 공부하는 파이썬"

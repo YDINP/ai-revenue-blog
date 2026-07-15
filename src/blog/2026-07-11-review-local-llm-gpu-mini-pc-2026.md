@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Review"
 tags: ["로컬 LLM", "GPU 추천", "VRAM", "RTX 5090", "AI PC", "2026 하드웨어"]
 image:
-  url: "https://images.pexels.com/photos/2115256/pexels-photo-2115256.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/28666524/pexels-photo-28666524.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "그래픽카드 등 PC 부품 — 로컬 LLM용 하드웨어를 상징하는 이미지"
 coupangLinks:
   - title: "NVIDIA RTX 5090 그래픽카드"

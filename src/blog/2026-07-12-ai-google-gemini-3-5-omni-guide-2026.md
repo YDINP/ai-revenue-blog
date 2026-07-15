@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["Gemini 3.5", "Gemini Omni", "구글 AI", "Gemini Flash", "AI 모델", "2026 AI 트렌드"]
 image:
-  url: "https://images.pexels.com/photos/18068728/pexels-photo-18068728.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/6598982/pexels-photo-6598982.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "빛나는 네트워크 노드 — 구글 Gemini AI를 상징하는 이미지"
 faq:
   - q: "Gemini 3.5와 3.5 Flash는 어떻게 다른가요?"

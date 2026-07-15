@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Game"
 tags: ["게임 개발 세금", "사업자등록", "종합소득세", "1인 개발자", "간이과세"]
 image:
-  url: "https://images.pexels.com/photos/8128188/pexels-photo-8128188.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+  url: "https://images.pexels.com/photos/270488/pexels-photo-270488.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "노트북으로 작업에 집중하는 개발자"
 faq:
   - q: "스팀에서 첫 매출이 났는데 바로 사업자등록을 해야 하나요?"

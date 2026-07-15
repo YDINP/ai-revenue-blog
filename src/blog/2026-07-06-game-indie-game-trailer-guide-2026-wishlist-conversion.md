@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Game"
 tags: ["인디게임", "게임 트레일러", "위시리스트", "게임 마케팅", "숏폼"]
 image:
-  url: "https://images.pexels.com/photos/33899322/pexels-photo-33899322.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+  url: "https://images.pexels.com/photos/4581902/pexels-photo-4581902.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "카메라와 모니터를 갖춘 전문 영상 촬영 세팅"
 coupangLinks:
   - title: "무기가 되는 스토리"

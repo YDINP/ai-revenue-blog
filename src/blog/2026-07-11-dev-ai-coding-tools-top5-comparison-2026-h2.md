@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Dev"
 tags: ["AI 코딩 툴", "Cursor", "Claude Code", "Codex", "GitHub Copilot", "2026 개발 트렌드"]
 image:
-  url: "https://images.pexels.com/photos/270488/pexels-photo-270488.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/1181281/pexels-photo-1181281.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "코드 에디터가 열린 노트북 — AI 코딩 툴 비교를 상징하는 이미지"
 faq:
   - q: "AI 코딩 툴, 결국 뭘 골라야 하나요?"

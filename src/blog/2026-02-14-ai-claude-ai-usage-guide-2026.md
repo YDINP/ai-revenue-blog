@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["Claude AI", "생성형AI", "AI 활용법", "2026 트렌드"]
 image:
-  url: "https://images.pexels.com/photos/9028873/pexels-photo-9028873.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/34804017/pexels-photo-34804017.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "A robotic arm carefully pouring ingredients into a mixing bowl in a modern kitchen setting."
 coupangLinks:
   - title: "챗GPT 활용법 도서"

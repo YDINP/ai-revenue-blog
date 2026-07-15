@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["GPT-5.6", "Codex", "OpenAI", "AI 코딩", "Sol Terra Luna", "2026 AI 트렌드"]
 image:
-  url: "https://images.pexels.com/photos/11035393/pexels-photo-11035393.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "코드가 표시된 모니터 화면 — GPT-5.6와 Codex를 상징하는 개발 환경 이미지"
 coupangLinks:
   - title: "혼자 공부하는 파이썬 (개정판)"

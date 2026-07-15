@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["ChatGPT Plus", "AI 구독 서비스", "생산성 도구", "비용 분석"]
 image:
-  url: "https://images.pexels.com/photos/15863103/pexels-photo-15863103.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/9028873/pexels-photo-9028873.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "Close-up of a monitor displaying ChatGPT Plus introduction on a green background."
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"

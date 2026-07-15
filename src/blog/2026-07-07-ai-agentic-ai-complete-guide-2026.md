@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["에이전틱 AI", "AI 에이전트", "AI 트렌드", "자동화", "인공지능"]
 image:
-  url: "https://images.pexels.com/photos/17483868/pexels-photo-17483868.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+  url: "https://images.pexels.com/photos/30530416/pexels-photo-30530416.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "디지털 뉴럴 네트워크를 형상화한 3D 추상 이미지"
 coupangLinks:
   - title: "AI 2041"

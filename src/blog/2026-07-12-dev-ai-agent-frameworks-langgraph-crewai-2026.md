@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Dev"
 tags: ["AI 에이전트", "LangGraph", "CrewAI", "AutoGen", "멀티 에이전트", "2026 개발 트렌드"]
 image:
-  url: "https://images.pexels.com/photos/18068728/pexels-photo-18068728.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/30517083/pexels-photo-30517083.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "연결된 노드 그래프 — AI 에이전트 프레임워크를 상징하는 이미지"
 faq:
   - q: "에이전트 프레임워크가 왜 필요한가요?"

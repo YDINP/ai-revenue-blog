@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Review"
 tags: ["키보드 마우스 세트", "무선 세트", "인체공학", "사무용품", "2026년"]
 image:
-  url: "https://images.pexels.com/photos/20509994/pexels-photo-20509994.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/693859/pexels-photo-693859.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "Top view of a black Acer keyboard and mouse set on a white background."
 coupangLinks:
   - title: "맥북 에어 M3"

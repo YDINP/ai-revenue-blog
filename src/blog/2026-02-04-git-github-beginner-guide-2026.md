@@ -6,7 +6,7 @@ category: "Dev"
 tags: ["Git 입문", "GitHub 사용법", "버전 관리", "개발 입문"]
 author: "TechFlow"
 image:
-  url: "https://images.pexels.com/photos/11035539/pexels-photo-11035539.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750"
   alt: "Git 스티커를 들고 있는 사람의 클로즈업, 소프트웨어 개발 강조"
 coupangLinks:
   - title: "모던 자바스크립트 Deep Dive"

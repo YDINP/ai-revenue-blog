@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["AI 음악", "Suno", "Suno v5.5", "AI 작곡", "BGM 생성", "2026 AI 트렌드"]
 image:
-  url: "https://images.pexels.com/photos/12832570/pexels-photo-12832570.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/30479283/pexels-photo-30479283.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "음악 작업 공간 — AI 음악 생성을 상징하는 이미지"
 faq:
   - q: "Suno로 정말 노래를 만들 수 있나요?"

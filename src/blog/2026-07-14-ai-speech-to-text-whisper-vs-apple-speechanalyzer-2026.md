@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["음성인식", "STT", "Whisper", "Apple SpeechAnalyzer", "온디바이스 AI", "2026 개발"]
 image:
-  url: "https://images.pexels.com/photos/30530407/pexels-photo-30530407.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/18068728/pexels-photo-18068728.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "컴퓨터 화면의 AI 인터페이스 — 음성인식·AI 기술을 상징하는 이미지"
 faq:
   - q: "Whisper와 Apple SpeechAnalyzer, 뭐가 더 빠른가요?"

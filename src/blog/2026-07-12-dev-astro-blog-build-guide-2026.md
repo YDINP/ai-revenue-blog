@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Dev"
 tags: ["Astro", "정적 사이트", "블로그 만들기", "SSG", "웹 성능", "2026 개발 트렌드"]
 image:
-  url: "https://images.pexels.com/photos/11035539/pexels-photo-11035539.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/574069/pexels-photo-574069.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "코드 에디터 화면 — Astro로 사이트를 만드는 개발 환경 이미지"
 faq:
   - q: "Astro가 뭔가요?"

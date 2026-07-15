@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Game"
 tags: ["인디게임", "AI 게임 개발", "생성형 AI", "게임 개발", "게임 수익화"]
 image:
-  url: "https://images.pexels.com/photos/8566470/pexels-photo-8566470.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+  url: "https://images.pexels.com/photos/7489031/pexels-photo-7489031.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "푸른빛이 감도는 첨단 휴머노이드 로봇"
 coupangLinks:
   - title: "게임 프로그래밍 패턴"

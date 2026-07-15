@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["멀티 에이전트", "AI 오케스트레이션", "AI 에이전트", "에이전틱 AI", "GPT-5.6", "2026 AI 트렌드"]
 image:
-  url: "https://images.pexels.com/photos/18068728/pexels-photo-18068728.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/8849295/pexels-photo-8849295.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "여러 노드가 연결된 네트워크 — 여러 AI 에이전트의 협업을 상징하는 이미지"
 faq:
   - q: "멀티 에이전트 오케스트레이션이 뭔가요?"

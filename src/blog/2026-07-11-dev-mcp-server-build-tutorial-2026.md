@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Dev"
 tags: ["MCP", "MCP 서버", "AI 에이전트", "AI 툴 연동", "개발 튜토리얼", "2026 개발 트렌드"]
 image:
-  url: "https://images.pexels.com/photos/1181279/pexels-photo-1181279.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/10816120/pexels-photo-10816120.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "코드가 표시된 화면 — MCP 서버 개발을 상징하는 이미지"
 faq:
   - q: "MCP 서버를 만들려면 꼭 개발자여야 하나요?"

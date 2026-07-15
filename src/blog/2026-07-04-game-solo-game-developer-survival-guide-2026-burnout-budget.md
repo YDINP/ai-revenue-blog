@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "Game"
 tags: ["인디게임", "1인 개발", "인디 개발자", "게임 개발", "번아웃"]
 image:
-  url: "https://images.pexels.com/photos/8128188/pexels-photo-8128188.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+  url: "https://images.pexels.com/photos/60713/coconut-coconut-tree-plant-60713.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "노트북으로 작업에 집중하는 개발자"
 coupangLinks:
   - title: "게임 프로그래밍 패턴"

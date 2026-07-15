@@ -6,7 +6,7 @@ author: "TechFlow"
 category: "AI"
 tags: ["ChatGPT", "AI 활용법", "생산성", "2026 트렌드"]
 image:
-  url: "https://images.pexels.com/photos/16027815/pexels-photo-16027815.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  url: "https://images.pexels.com/photos/30869075/pexels-photo-30869075.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "Curved monitor screen showing ChatGPT interface in low-light, focus on technology and AI."
 coupangLinks:
   - title: "챗GPT 활용법 도서"
