@@ -33,16 +33,16 @@ function needBlog(arg) {
   return b;
 }
 
-// 날짜 프리픽스 + 한글 제목 → 파일 slug
+// 제목 → 파일 slug (URL=파일명이므로 날짜 prefix 금지 — BLOG_GUIDELINES §3.6)
+// 정렬·표시 날짜는 frontmatter pubDate가 담당하며, 파일명은 날짜를 포함하지 않는다.
 function makeSlug(title) {
-  const today = new Date(Date.now() + 9 * 3600 * 1000).toISOString().split('T')[0];
   const base = String(title)
     .toLowerCase()
     .replace(/[^a-z0-9가-힣\s-]/g, '')
     .trim()
     .replace(/\s+/g, '-')
     .slice(0, 60);
-  return `${today}-${base || 'post'}`;
+  return base || 'post';
 }
 
 // ── /blogs ──
