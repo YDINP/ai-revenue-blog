@@ -8,8 +8,8 @@ author: "TechFlow"
 category: "Game"
 tags: ["스팀 리뷰", "게임 판매량", "박스라이터", "인디게임 매출", "스팀 통계"]
 image:
-  url: "https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=1200"
-  alt: "스팀 게임의 리뷰 수와 판매량 상관관계를 분석하는 데이터 화면"
+  url: "/images/game-reviews-sales-correlation.webp"
+  alt: "게임 별점 리뷰가 상승 추세선을 따라 판매량 코인으로 이어지는 아이소메트릭 일러스트"
 faq:
   - q: "스팀 리뷰 1개는 판매량 몇 개에 해당하나?"
     a: "고정된 값이 아니라 시대와 장르에 따라 변한다. 2014년경에는 리뷰 1개당 약 70개가 통용됐지만, 2019년 말 스팀이 '이 게임을 평가하시겠습니까?' 버튼을 도입해 리뷰 작성률이 올라가면서 배수가 크게 떨어졌다. 2020년 이후 출시작은 리뷰 1개당 대략 40~50개, 최근 표본에서는 20~60개 범위로 관측된다. GameDiscoverCo의 New Boxleiter 값은 평균 약 63으로 보고된다. 자기 게임의 장르·가격을 감안해 범위로 잡는 것이 안전하다."
