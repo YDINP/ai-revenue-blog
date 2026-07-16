@@ -32,3 +32,7 @@ Thumbs.db
 .vercel
 
 .env*
+
+# 임시 DB 접속(커밋 금지)
+.dbcred
+apply-vip.mjs

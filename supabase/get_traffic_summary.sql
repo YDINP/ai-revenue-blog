@@ -10,6 +10,9 @@
 -- 2026-07-16: tf_total_clicks / lf_total_clicks 추가. 대시보드가 이 두 필드를
 -- 읽어 TechFlow/LifeFlow 총 클릭·CVR·쿠팡 소스별 상세를 표시하는데 기존 함수가
 -- 반환하지 않아 해당 UI가 전부 0 / 0.00% 로 나오던 버그(라이브 검증으로 확인).
+--
+-- 2026-07-17: vip_today_views / vip_total_views 추가. VIP(playcast) 블로그를
+-- 대시보드에 TF/LF와 동일 패턴으로 분리 집계(조회수만 — VIP는 쿠팡 클릭 없음).
 -- ============================================================
 CREATE OR REPLACE FUNCTION public.get_traffic_summary()
  RETURNS json
@@ -41,7 +44,10 @@ BEGIN
     'lf_today_views',   COALESCE((SELECT count(*) FROM analytics WHERE event_type = 'pageview' AND source = 'lifeflow' AND created_at >= today_start), 0),
     'lf_total_views',   COALESCE((SELECT count(*) FROM analytics WHERE event_type = 'pageview' AND source = 'lifeflow'), 0),
     'lf_today_clicks',  COALESCE((SELECT count(*) FROM analytics WHERE event_type = 'coupang_click' AND source = 'lifeflow' AND created_at >= today_start), 0),
-    'lf_total_clicks',  COALESCE((SELECT count(*) FROM analytics WHERE event_type = 'coupang_click' AND source = 'lifeflow'), 0)
+    'lf_total_clicks',  COALESCE((SELECT count(*) FROM analytics WHERE event_type = 'coupang_click' AND source = 'lifeflow'), 0),
+    -- VIP (playcast, source = 'vip') — 조회수만(쿠팡 클릭 없음)
+    'vip_today_views',  COALESCE((SELECT count(*) FROM analytics WHERE event_type = 'pageview' AND source = 'vip' AND created_at >= today_start), 0),
+    'vip_total_views',  COALESCE((SELECT count(*) FROM analytics WHERE event_type = 'pageview' AND source = 'vip'), 0)
   ) INTO result;
   RETURN result;
 END;

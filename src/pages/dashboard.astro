@@ -505,6 +505,7 @@ const ICONS: Record<string, string> = {
 
       .dot-tf { width: 7px; height: 7px; border-radius: 50%; background: var(--tf); display: inline-block; }
       .dot-lf { width: 7px; height: 7px; border-radius: 50%; background: var(--lf); display: inline-block; }
+      .dot-vip { width: 7px; height: 7px; border-radius: 50%; background: #57e6c3; display: inline-block; }
 
       /* ── 날짜별 상세 테이블 ───────────────────────────── */
       .daily-detail-wrap {
@@ -4470,27 +4471,6 @@ const ICONS: Record<string, string> = {
         });
       });
 
-      // VIP(playcast) 조회수 — 전용 RPC 없이 analytics 테이블을 REST count 로 집계.
-      // get_traffic_summary 총계엔 이미 vip가 섞여 있고, 여기선 vip만 분리해 KPI 카드에 표기.
-      async function fetchVipViews() {
-        const base = `${SUPABASE_URL}/rest/v1/analytics?source=eq.vip&event_type=eq.pageview&select=id&limit=1`;
-        // created_at 은 UTC. KST 오늘 자정을 UTC 로 환산해 경계로 사용.
-        const kstNow = new Date(Date.now() + 9 * 3600 * 1000);
-        const kstMidnightUtc = new Date(
-          Date.UTC(kstNow.getUTCFullYear(), kstNow.getUTCMonth(), kstNow.getUTCDate()) - 9 * 3600 * 1000
-        );
-        async function count(url) {
-          const r = await fetch(url, { headers: { ...headers, Prefer: 'count=exact' } });
-          const m = (r.headers.get('content-range') || '').match(/\/(\d+)$/);
-          return m ? Number(m[1]) : 0;
-        }
-        const [total, today] = await Promise.all([
-          count(base),
-          count(base + '&created_at=gte.' + encodeURIComponent(kstMidnightUtc.toISOString())),
-        ]);
-        return { total, today };
-      }
-
       async function loadTraffic(force) {
         try {
           const [summary, hourly, topPages, events, topLiked, dailyDetail, heatmap, deviceTrend] = await Promise.all([
@@ -4531,11 +4511,13 @@ const ICONS: Record<string, string> = {
           // Source breakdown
           const tfTv = Number(summary?.tf_today_views) || 0;
           const lfTv = Number(summary?.lf_today_views) || 0;
+          const vipTv = Number(summary?.vip_today_views) || 0;
+          const vipTotal = Number(summary?.vip_total_views) || 0;
           const tfTc = Number(summary?.tf_today_clicks) || 0;
           const lfTc = Number(summary?.lf_today_clicks) || 0;
 
           const vbEl = document.getElementById('t-views-breakdown');
-          if (vbEl) vbEl.innerHTML = `<span><i class="dot-tf"></i> TF: ${fmt(tfTv)}</span><span><i class="dot-lf"></i> LF: ${fmt(lfTv)}</span>`;
+          if (vbEl) vbEl.innerHTML = `<span><i class="dot-tf"></i> TF: ${fmt(tfTv)}</span><span><i class="dot-lf"></i> LF: ${fmt(lfTv)}</span><span><i class="dot-vip"></i> VIP: ${fmt(vipTv)}</span>`;
 
           const cbEl = document.getElementById('t-clicks-breakdown');
           if (cbEl) cbEl.innerHTML = `<span><i class="dot-tf"></i> TF: ${fmt(tfTc)}</span><span><i class="dot-lf"></i> LF: ${fmt(lfTc)}</span>`;
@@ -4565,11 +4547,9 @@ const ICONS: Record<string, string> = {
           if (splitTfEl) splitTfEl.style.width = Math.round(tfTotal / totalV * 100) + '%';
           if (splitLfEl) splitLfEl.style.width = Math.round(lfTotal / totalV * 100) + '%';
 
-          // VIP(playcast) 조회수 집계 — REST count(비동기, 로드와 병행)
-          fetchVipViews().then(function (vip) {
-            const el = document.getElementById('vip-total-views');
-            if (el) el.textContent = fmt(vip.total) + (vip.today > 0 ? ` (+${vip.today})` : '');
-          }).catch(function () {});
+          // VIP(playcast) 조회수 — RPC get_traffic_summary 의 vip_ 필드 사용
+          const vipEl = document.getElementById('vip-total-views');
+          if (vipEl) vipEl.textContent = fmt(vipTotal) + (vipTv > 0 ? ` (+${vipTv})` : '');
 
           // === 탭별 데이터 업데이트 ===
           // TechFlow 탭
