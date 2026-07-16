@@ -6,8 +6,8 @@ author: "TechFlow"
 category: "AI"
 tags: ["Claude API", "AI 개발", "통합 가이드", "실전 예제"]
 image:
-  url: "https://images.pexels.com/photos/10816120/pexels-photo-10816120.jpeg?auto=compress&cs=tinysrgb&w=1200"
-  alt: "A robotic arm carefully pouring ingredients into a mixing bowl in a modern kitchen setting."
+  url: "/images/ai-api-integration.webp"
+  alt: "앱과 AI를 API로 연결하는 과정을 플러그와 데이터 흐름으로 표현한 아이소메트릭 일러스트"
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C"

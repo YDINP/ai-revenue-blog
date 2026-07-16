@@ -6,8 +6,8 @@ author: "TechFlow"
 category: "AI"
 tags: ["AI 코딩", "개발 도구", "생산성", "2026년 트렌드"]
 image:
-  url: "https://images.pexels.com/photos/34804017/pexels-photo-34804017.jpeg?auto=compress&cs=tinysrgb&w=1200"
-  alt: "Close-up of AI-assisted coding with menu options for debugging and problem-solving."
+  url: "/images/ai-coding-practical.webp"
+  alt: "AI 코딩 어시스턴트가 코드 자동완성을 돕는 모습의 아이소메트릭 일러스트"
 coupangLinks:
   - title: "로지텍 MX Keys S 키보드"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C"

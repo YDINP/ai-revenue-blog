@@ -6,8 +6,8 @@ author: "TechFlow"
 category: "Game"
 tags: ["인디 게임", "게임 개발 도구", "게임 엔진", "Unity", "Godot"]
 image:
-  url: "https://images.pexels.com/photos/12832570/pexels-photo-12832570.jpeg?auto=compress&cs=tinysrgb&w=1200"
-  alt: "Focused gamer with headset playing a video game on a desktop computer indoors."
+  url: "/images/game-dev-toolbox.webp"
+  alt: "인디 게임 개발 도구를 공구함과 게임 요소로 표현한 아이소메트릭 일러스트"
 coupangLinks:
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"

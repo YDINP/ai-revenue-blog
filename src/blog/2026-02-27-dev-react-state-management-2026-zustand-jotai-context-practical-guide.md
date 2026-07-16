@@ -6,8 +6,8 @@ author: "TechFlow"
 category: "Dev"
 tags: ["React", "상태관리", "Zustand", "Jotai", "성능최적화"]
 image:
-  url: "https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  alt: "Close-up of HTML and JavaScript code on a computer screen in Visual Studio Code."
+  url: "/images/dev-react-state.webp"
+  alt: "프론트엔드 상태 관리를 연결된 노드와 데이터 흐름으로 표현한 아이소메트릭 일러스트"
 coupangLinks:
   - title: "러스트 프로그래밍"
     url: "https://www.coupang.com/np/search?q=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&src=1139000&spec=10799999&addtag=200&ctag=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%9F%AC%EC%8A%A4%ED%8A%B8%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D"

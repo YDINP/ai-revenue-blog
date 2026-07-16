@@ -6,8 +6,8 @@ author: "TechFlow"
 category: "Review"
 tags: ["개발자 모니터", "모니터 구매 가이드", "개발자 장비", "2026년 추천"]
 image:
-  url: "https://images.pexels.com/photos/159299/pexels-photo-159299.jpeg?auto=compress&cs=tinysrgb&w=1200"
-  alt: "Flat lay of real estate brochures, checklists, and a calculator for home buying."
+  url: "/images/dev-monitor-setup.webp"
+  alt: "개발자 듀얼 모니터 데스크 셋업을 표현한 아이소메트릭 일러스트"
 coupangLinks:
   - title: "로지텍 MX Master 3S"
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Master%203S"
