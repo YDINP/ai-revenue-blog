@@ -2809,6 +2809,13 @@ const ICONS: Record<string, string> = {
         return n.toLocaleString();
       }
 
+      // 외부(analytics) URL 허용 스킴 화이트리스트 — javascript:/data: 등 스킴 차단.
+      // 반환 문자열은 href 삽입 전 반드시 escHtml()로 속성 이스케이프까지 병행할 것.
+      function safeUrl(u) {
+        const s = String(u || '').trim();
+        return /^(https?:\/\/|\/)/i.test(s) ? s : '';
+      }
+
       async function rpc(name, params = {}) {
         const res = await fetch(`${API}/${name}`, {
           method: 'POST', headers, body: JSON.stringify(params)
@@ -3450,14 +3457,16 @@ const ICONS: Record<string, string> = {
         } else if (_trafficPeriod === 'daily') {
           const raw = bucketDetail(_trafficDetail, 'daily');
           const map = {}; raw.forEach(b => map[b.key] = b);
+          // KST(UTC+9) 기준 날짜키 — RPC의 d.day가 KST 일자이므로 로컬→UTC 변환 없이 맞춘다
+          const kstDay = i => new Date(Date.now() + 9 * 3600000 - i * 86400000).toISOString().split('T')[0];
           const padded = [];
           for (let i = 13; i >= 0; i--) {
-            const dt = new Date(); dt.setDate(dt.getDate() - i);
-            const k = dt.toISOString().split('T')[0];
-            padded.push(map[k] || { key:k, label:`${dt.getMonth()+1}/${dt.getDate()}`, views:0, visitors:0, tf:0, lf:0, web:0, mobile:0, webV:0, mobileV:0, sortKey:k });
+            const k = kstDay(i);
+            const [, mo, da] = k.split('-');
+            padded.push(map[k] || { key:k, label:`${+mo}/${+da}`, views:0, visitors:0, tf:0, lf:0, web:0, mobile:0, webV:0, mobileV:0, sortKey:k });
           }
           buckets = padded;
-          for (let i = 27; i >= 14; i--) { const dt = new Date(); dt.setDate(dt.getDate() - i); prevSum += (map[dt.toISOString().split('T')[0]] || {}).views || 0; }
+          for (let i = 27; i >= 14; i--) { prevSum += (map[kstDay(i)] || {}).views || 0; }
           currLabel = '14일';
         } else {
           const n = limits[_trafficPeriod];
@@ -3580,10 +3589,10 @@ const ICONS: Record<string, string> = {
           const displayTitle = title.length > 40 ? title.substring(0, 40) + '…' : title;
           const path = p.path || (p.slug ? `/blog/${p.slug}` : '/');
           const href = p.source === 'lifeflow' ? `https://life-revenue-blog.vercel.app${path}` : path;
-          return `<a class="top-page-item" href="${href}" target="_blank" rel="noopener">
+          return `<a class="top-page-item" href="${escHtml(safeUrl(href))}" target="_blank" rel="noopener">
             <span class="top-page-rank">${i + 1}</span>
             ${sourceBadge(p.source)}
-            <span class="top-page-title" title="${title}">${displayTitle || '(home)'}</span>
+            <span class="top-page-title" title="${escHtml(title)}">${escHtml(displayTitle) || '(home)'}</span>
             <span class="top-page-views">${p.views}회 <span class="tp-go">↗</span></span>
           </a>`;
         }).join('');
@@ -3697,8 +3706,9 @@ const ICONS: Record<string, string> = {
           const pct = Math.round(it.count / total * 100);
           const barPct = Math.max(Math.round(it.count / max * 100), 3);
           const color = it.color || opts.color || '#60a5fa';
+          const nm = it.name.length > 14 ? it.name.slice(0,14)+'…' : it.name;
           return `<div class="cat-traffic-row">
-            <span class="cat-traffic-name" title="${it.name}">${it.name.length > 14 ? it.name.slice(0,14)+'…' : it.name}</span>
+            <span class="cat-traffic-name" title="${escHtml(it.name)}">${escHtml(nm)}</span>
             <div class="cat-traffic-bar-wrap"><div class="cat-traffic-bar" style="width:${barPct}%;background:${color}"></div></div>
             <span class="cat-traffic-value">${fmt(it.count)}</span>
             <span class="cat-traffic-share">${pct}%</span>
@@ -3727,7 +3737,7 @@ const ICONS: Record<string, string> = {
           const color = c.color || DONUT_PALETTE[i % DONUT_PALETTE.length];
           const frac = c.count / total;
           const pctTxt = Math.round(frac * 100);
-          const attrs = `class="donut-seg" data-name="${c.name}" data-val="${c.count}" data-pct="${pctTxt}" data-color="${color}"`;
+          const attrs = `class="donut-seg" data-name="${escHtml(c.name)}" data-val="${c.count}" data-pct="${pctTxt}" data-color="${color}"`;
           if (list.length === 1) {
             segs += `<circle cx="${cx}" cy="${cy}" r="${(rO + rI) / 2}" fill="none" stroke="${color}" stroke-width="${rO - rI}" ${attrs}/>`;
           } else {
@@ -3742,7 +3752,7 @@ const ICONS: Record<string, string> = {
           const nm = c.name.length > 14 ? c.name.slice(0, 14) + '…' : c.name;
           return `<div class="cat-legend-item">
             <span class="cat-legend-dot" style="background:${color}"></span>
-            <span class="cat-legend-name" title="${c.name}">${nm}</span>
+            <span class="cat-legend-name" title="${escHtml(c.name)}">${escHtml(nm)}</span>
             <span class="cat-legend-count">${fmt(c.count)}</span>
             <span class="cat-legend-pct">${Math.round(c.count / total * 100)}%</span>
           </div>`;
@@ -3758,7 +3768,7 @@ const ICONS: Record<string, string> = {
         const tip = ensureDonutTip();
         el.querySelectorAll('.donut-seg').forEach(seg => {
           seg.addEventListener('mouseenter', () => {
-            tip.innerHTML = `<span class="dt-dot" style="background:${seg.dataset.color}"></span><b>${seg.dataset.name}</b> ${fmt(+seg.dataset.val)} · ${seg.dataset.pct}%`;
+            tip.innerHTML = `<span class="dt-dot" style="background:${seg.dataset.color}"></span><b>${escHtml(seg.dataset.name)}</b> ${fmt(+seg.dataset.val)} · ${seg.dataset.pct}%`;
             tip.style.display = 'flex';
           });
           seg.addEventListener('mousemove', (e) => {
@@ -3866,7 +3876,7 @@ const ICONS: Record<string, string> = {
         if (!el) return;
         const map = {};
         _trafficDetail.forEach(d => { if (d.day) map[d.day] = Number(d.views) || 0; });
-        const sum = (start, len) => { let s = 0; for (let i = 0; i < len; i++) { const dt = new Date(); dt.setDate(dt.getDate() - start - i); s += map[dt.toISOString().split('T')[0]] || 0; } return s; };
+        const sum = (start, len) => { let s = 0; for (let i = 0; i < len; i++) { const k = new Date(Date.now() + 9 * 3600000 - (start + i) * 86400000).toISOString().split('T')[0]; s += map[k] || 0; } return s; };
         const last7 = sum(0, 7), prev7 = sum(7, 7);
         let trend;
         if (prev7 > 0) { const p = Math.round((last7 - prev7) / prev7 * 100); trend = p >= 0 ? `지난주 대비 <b style="color:#4ade80">+${p}%</b>` : `지난주 대비 <b style="color:#f87171">${p}%</b>`; }
@@ -3948,9 +3958,10 @@ const ICONS: Record<string, string> = {
           const barPct = Math.max(Math.round((p.count / max) * 100), 4);
           const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}`;
           const name = p.product.length > 42 ? p.product.slice(0, 42) + '…' : p.product;
-          const nameEl = p.url
-            ? `<a href="${p.url}" target="_blank" rel="noopener" class="top-page-title" title="${p.product}">${name}</a>`
-            : `<span class="top-page-title" title="${p.product}">${name}</span>`;
+          const safe = safeUrl(p.url);
+          const nameEl = safe
+            ? `<a href="${escHtml(safe)}" target="_blank" rel="noopener" class="top-page-title" title="${escHtml(p.product)}">${escHtml(name)}</a>`
+            : `<span class="top-page-title" title="${escHtml(p.product)}">${escHtml(name)}</span>`;
           const todayBadge = p.today > 0 ? `<span class="delta-chip up" style="margin-left:0;">오늘 +${p.today}</span>` : '';
           return `<div class="like-top-item">
             <span class="top-page-rank">${medal}</span>
@@ -3977,14 +3988,16 @@ const ICONS: Record<string, string> = {
           const postTitle = getPageTitle({ title: m.title, slug: m.slug, path: m.path });
           const path = m.path || (m.slug ? `/blog/${m.slug}/` : '');
           const src = r.source === 'lifeflow' ? 'lifeflow' : 'blog';
-          const prodEl = m.url
-            ? `<a href="${m.url}" target="_blank" rel="noopener" class="event-action" style="color:#facc15" title="${m.url}">🔗 ${prod.length > 44 ? prod.slice(0,44)+'…' : prod}</a>`
-            : `<div class="event-action" style="color:#facc15">${prod.length > 44 ? prod.slice(0,44)+'…' : prod}</div>`;
+          const prodTxt = escHtml(prod.length > 44 ? prod.slice(0,44)+'…' : prod);
+          const safe = safeUrl(m.url);
+          const prodEl = safe
+            ? `<a href="${escHtml(safe)}" target="_blank" rel="noopener" class="event-action" style="color:#facc15" title="${escHtml(m.url)}">🔗 ${prodTxt}</a>`
+            : `<div class="event-action" style="color:#facc15">${prodTxt}</div>`;
           return `<div class="event-item">
             <span class="event-icon coupang_click">🛒</span>
             <div class="event-content">
               ${prodEl}
-              <div class="event-page-title" title="${path}">${sourceBadge(src)} 📄 ${postTitle.length > 40 ? postTitle.slice(0,40)+'…' : postTitle}</div>
+              <div class="event-page-title" title="${escHtml(path)}">${sourceBadge(src)} 📄 ${escHtml(postTitle.length > 40 ? postTitle.slice(0,40)+'…' : postTitle)}</div>
             </div>
             <span class="event-time">${timeAgo(r.created_at)}</span>
           </div>`;
@@ -4086,7 +4099,7 @@ const ICONS: Record<string, string> = {
         container.innerHTML = arr.map((p, i) => {
           const barPct = Math.max(Math.round((p.count / max) * 100), 4);
           const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}`;
-          const name = PD_PLACE_LABEL[p.key] || p.key;
+          const name = escHtml(PD_PLACE_LABEL[p.key] || p.key);
           return `<div class="like-top-item">
             <span class="top-page-rank">${medal}</span>
             <span class="top-page-title" title="${name}">${name}</span>
@@ -4106,14 +4119,14 @@ const ICONS: Record<string, string> = {
         }
         container.innerHTML = list.map(r => {
           const m = r.metadata || {};
-          const place = PD_PLACE_LABEL[m.placement] || m.placement || '기타';
+          const place = escHtml(PD_PLACE_LABEL[m.placement] || m.placement || '기타');
           const postTitle = getPageTitle({ title: m.title, slug: m.slug, path: m.path });
           const path = m.path || (m.slug ? `/blog/${m.slug}/` : '');
           return `<div class="event-item">
             <span class="event-icon paperdoc_click">📄</span>
             <div class="event-content">
               <div class="event-action" style="color:#d8b4fe">${place}</div>
-              <div class="event-page-title" title="${path}">${sourceBadge(r.source)} 📄 ${postTitle.length > 40 ? postTitle.slice(0,40)+'…' : postTitle}</div>
+              <div class="event-page-title" title="${escHtml(path)}">${sourceBadge(r.source)} 📄 ${escHtml(postTitle.length > 40 ? postTitle.slice(0,40)+'…' : postTitle)}</div>
             </div>
             <span class="event-time">${timeAgo(r.created_at)}</span>
           </div>`;
@@ -4149,7 +4162,7 @@ const ICONS: Record<string, string> = {
           return `<div class="like-top-item">
             <span class="top-page-rank">${medal}</span>
             ${sourceBadge(p.source)}
-            <span class="top-page-title" title="${title}">${displayTitle || '(홈)'}</span>
+            <span class="top-page-title" title="${escHtml(title)}">${escHtml(displayTitle) || '(홈)'}</span>
             <div class="like-bar-wrap">
               <div class="like-bar-fill" style="width:${barPct}%"></div>
             </div>
@@ -4294,13 +4307,13 @@ const ICONS: Record<string, string> = {
           const isCoup = e.event_type === 'coupang_click';
           const prod = isCoup ? (e.product || (e.metadata && e.metadata.product) || '') : '';
           const detail = isCoup && prod
-            ? `<div class="event-page-title" title="${prod}" style="color:#facc15">🛒 ${prod.length > 30 ? prod.slice(0,30)+'…' : prod}</div>`
-            : `<div class="event-page-title" title="${title}">${shortTitle || '홈페이지'}</div>`;
+            ? `<div class="event-page-title" title="${escHtml(prod)}" style="color:#facc15">🛒 ${escHtml(prod.length > 30 ? prod.slice(0,30)+'…' : prod)}</div>`
+            : `<div class="event-page-title" title="${escHtml(title)}">${escHtml(shortTitle) || '홈페이지'}</div>`;
 
-          return `<a class="event-item event-link" href="${eventLink(e)}" target="_blank" rel="noopener" title="글 열기 (집계 제외)">
-            <span class="event-icon ${e.event_type}">${icon}</span>
+          return `<a class="event-item event-link" href="${escHtml(safeUrl(eventLink(e)))}" target="_blank" rel="noopener" title="글 열기 (집계 제외)">
+            <span class="event-icon ${escHtml(e.event_type)}">${icon}</span>
             <div class="event-content">
-              <div class="event-action">${srcBadge} ${label}</div>
+              <div class="event-action">${srcBadge} ${escHtml(label)}</div>
               ${detail}
             </div>
             <span class="event-time">${timeAgo(e.created_at)}</span>
@@ -4798,7 +4811,7 @@ const ICONS: Record<string, string> = {
 
           const postHref = (c.source === 'lifeflow' ? 'https://life-revenue-blog.vercel.app' : '') + '/blog/' + encodeURIComponent(c.post_slug) + '/';
           return `
-            <div class="cm-item" data-id="${c.id}" data-slug="${c.post_slug}" data-source="${c.source}">
+            <div class="cm-item" data-id="${c.id}" data-slug="${escHtml(c.post_slug)}" data-source="${escHtml(c.source)}">
               <span class="cm-source ${srcClass}">${srcLabel}</span>
               <div class="cm-body">
                 <div class="cm-meta">
