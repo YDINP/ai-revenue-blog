@@ -1,6 +1,6 @@
 ---
-title: "인디게임 개발 로드맵 시리즈 2탄: 게임 엔진 완벽 비교 (Unity·Unreal·Godot·Phaser·Cocos)"
-description: "인디게임 로드맵 2탄 엔진·도구 선택. 2026년 7월 기준 Unity 6.3 LTS, Unreal 5.8, Godot 4.7, Phaser 4, Cocos Creator 3.8의 최신 버전·요금·로열티를 비교하고 프로젝트별 선택 기준을 정리합니다."
+title: "2026 게임엔진 비교: Unity·Unreal·Godot"
+description: "유니티 런타임비용, 언리얼 로열티, 갓닷 무료 라이선스까지 2026년 7월 기준 5대 게임엔진의 요금·버전·성능을 한눈에 비교합니다. 내 프로젝트 규모와 목표 플랫폼에 맞는 엔진 선택 기준도 함께 정리했습니다."
 pubDate: 2026-07-12T20:00:00+09:00
 updatedDate: 2026-07-12
 category: "Game"

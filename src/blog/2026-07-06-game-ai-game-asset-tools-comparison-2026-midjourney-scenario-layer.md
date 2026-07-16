@@ -1,6 +1,6 @@
 ---
-title: "AI 게임 에셋 도구 비교 2026: Midjourney·Scenario·Layer 실전 정리"
-description: "인디 개발자를 위한 AI 게임 에셋 도구, 뭘 써야 할까? 2026년 기준 Midjourney·Scenario·Layer 등 주요 도구의 강점과 용도, 라이선스 주의점을 비교 정리했습니다. 지금 확인하세요."
+title: "게임 에셋 AI 도구 2026: Midjourney 외"
+description: "인디 개발자에게 맞는 AI 게임 에셋 도구는 무엇일까? 2026년 기준 Midjourney·Scenario·Layer의 강점·용도·라이선스 주의점을 비교하고, 상업적 이용 가능 여부까지 정리했습니다."
 pubDate: 2026-07-06
 author: "TechFlow"
 category: "Game"

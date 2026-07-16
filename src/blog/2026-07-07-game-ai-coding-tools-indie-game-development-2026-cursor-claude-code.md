@@ -1,6 +1,6 @@
 ---
-title: "인디게임 개발 로드맵 시리즈 3탄: AI 코딩 도구로 개발하기 (Cursor·Claude Code 실전)"
-description: "인디게임 개발 로드맵 3탄. 2026년 7월 기준 Cursor·Claude Code 요금제와 모델 라인업, 1인 개발자용 페어링 워크플로우, AI 에셋 도구 현황과 검증·저작권 주의점을 정리했습니다."
+title: "게임 AI코딩 2026: Cursor·Claude Code"
+description: "게임 코드를 AI로 얼마나 빨리 짤 수 있을까? 2026년 7월 기준 Cursor·Claude Code 요금제와 모델 라인업, 1인 개발자용 페어링 워크플로우, 에셋 AI 검증·저작권 주의점까지 실전 정리했습니다."
 pubDate: 2026-07-12T19:00:00+09:00
 updatedDate: 2026-07-12
 author: "TechFlow"

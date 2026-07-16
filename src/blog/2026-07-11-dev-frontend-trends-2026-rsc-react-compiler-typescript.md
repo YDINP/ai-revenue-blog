@@ -1,6 +1,6 @@
 ---
-title: "2026 프론트엔드 트렌드 총정리: RSC·React Compiler·TypeScript 우위"
-description: "2026년 프론트엔드 개발의 큰 흐름을 정리했습니다. AI 우선 개발, 메타프레임워크 기본화, React Server Components, React Compiler, TypeScript 독점까지 지금 알아야 할 트렌드를 한 번에 확인하세요."
+title: "2026 프론트엔드 트렌드: RSC·컴파일러 핵심"
+description: "2026년 프론트엔드 핵심 트렌드 5가지를 정리했습니다. React Server Components, React Compiler 자동 최적화, TypeScript 독점화까지 지금 알아야 할 변화를 한 번에 확인하세요."
 pubDate: 2026-07-11
 author: "TechFlow"
 category: "Dev"

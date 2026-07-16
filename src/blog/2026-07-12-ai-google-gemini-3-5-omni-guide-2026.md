@@ -1,6 +1,6 @@
 ---
-title: "구글 Gemini 3.5 & Gemini Omni 완벽 가이드 (2026): 무엇이 달라졌나"
-description: "2026년 구글 I/O에서 공개된 Gemini 3.5와 Gemini Omni를 쉽게 정리했습니다. 3.5 Flash의 강점, 어떤 입력이든 영상을 만드는 Omni, ChatGPT·Claude와의 차이, 언제 Gemini를 써야 하는지까지 최신 기준으로 확인하세요."
+title: "2026 구글 Gemini 3.5·Omni 달라진 점"
+description: "2026년 구글 I/O에서 공개된 Gemini 3.5와 Gemini Omni, 무엇이 달라졌을까요? 3.5 Flash 강점, 영상 생성 Omni, ChatGPT·Claude와 차이, 실시간 번역까지 최신 기준으로 정리했습니다."
 pubDate: 2026-07-12
 author: "TechFlow"
 category: "AI"

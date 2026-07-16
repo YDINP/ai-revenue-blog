@@ -1,6 +1,6 @@
 ---
-title: "Claude Fable 5 완벽 정리: 앤트로픽 첫 Mythos급 공개 모델 (2026)"
-description: "2026년 6월 공개된 Claude Fable 5를 쉽게 정리했습니다. Mythos급이라는 의미, 강점(소프트웨어·지식노동·비전·과학), 가격, 안전장치(일부 질의는 Opus 4.8 응답), Mythos 5와의 관계까지 공식 데이터로 확인하세요."
+title: "Claude Fable 5: 첫 Mythos급 모델"
+description: "2026년 6월 공개된 Claude Fable 5, 앤트로픽 최초의 Mythos급 모델을 정리했습니다. 강점(소프트웨어·비전·과학), 가격, 안전장치, Mythos 5와의 차이까지 공식 데이터로 확인하세요."
 pubDate: 2026-07-11
 author: "TechFlow"
 category: "AI"

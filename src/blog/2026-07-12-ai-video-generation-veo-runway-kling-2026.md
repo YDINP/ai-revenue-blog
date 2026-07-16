@@ -1,6 +1,6 @@
 ---
-title: "AI 영상 생성 도구 대전 2026: Veo 3.1 vs Runway Gen-4.5 vs Kling 3"
-description: "2026년 AI 영상 생성 도구를 정면 비교했습니다. 오디오·4K에 강한 구글 Veo 3.1, 벤치마크 1위 Runway Gen-4.5, 가성비·시네마틱의 Kling 3, 그리고 서비스 종료를 앞둔 Sora까지. 용도별로 무엇을 골라야 하는지 최신 기준으로 정리했습니다."
+title: "Veo 3.1 vs Runway vs Kling 영상 비교"
+description: "2026년 AI 영상 생성 도구를 정면 비교했습니다. 오디오·4K 강한 Veo 3.1, 벤치마크 1위 Runway Gen-4.5, 가성비 Kling 3 중 어떤 걸 골라야 할지 용도별로 정리했습니다."
 pubDate: 2026-07-12
 author: "TechFlow"
 category: "AI"

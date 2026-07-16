@@ -1,6 +1,6 @@
 ---
-title: "Claude AI 2026년 최신 사용법: Opus 4.6 & Claude Code 활용 가이드"
-description: "2026년 Claude AI Opus 4.6 최신 기능과 Claude Code 에이전트 팀을 다룹니다. 프롬프트 엔지니어링, API 연동, 고급 기능까지 실무 중심의 완벽한 가이드입니다."
+title: "Claude AI 사용법: Opus 4.6 활용가이드"
+description: "2026년 기준 Claude AI Opus 4.6과 Claude Code 에이전트 팀 활용법을 정리했습니다. 프롬프트 엔지니어링, API 연동, 실무 예시, 고급 기능까지 실전 코드 예제와 함께 확인하세요."
 pubDate: 2026-02-14
 author: "TechFlow"
 category: "AI"

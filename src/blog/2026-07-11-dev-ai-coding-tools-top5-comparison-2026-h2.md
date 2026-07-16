@@ -1,6 +1,6 @@
 ---
-title: "2026 하반기 AI 코딩 툴 TOP 5 비교: Cursor·Claude Code·Codex·Windsurf·Copilot"
-description: "2026년 하반기 개발자가 실제로 쓰는 AI 코딩 툴 5종을 비교했습니다. Cursor, Claude Code, OpenAI Codex, Windsurf, GitHub Copilot의 특징·강점·요금 방향을 정리해 내게 맞는 도구를 고르는 법을 알려드립니다."
+title: "AI 코딩 툴 TOP5: Cursor·Claude Code"
+description: "2026년 하반기 개발자가 실제로 쓰는 AI 코딩 툴 5종, Cursor·Claude Code·Codex·Windsurf·Copilot을 실무 관점에서 비교했습니다. 특징과 요금, 나에게 맞는 도구 고르는 기준까지 확인하세요."
 pubDate: 2026-07-11
 author: "TechFlow"
 category: "Dev"

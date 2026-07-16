@@ -1,6 +1,6 @@
 ---
-title: "AI 에이전트 프레임워크 비교 2026: LangGraph vs CrewAI vs AutoGen"
-description: "AI 에이전트를 실제로 만들 때 쓰는 프레임워크를 비교했습니다. 세밀한 제어의 LangGraph, 역할 기반 협업의 CrewAI, 대화형 멀티에이전트 AutoGen, 그리고 공식 SDK까지. 무엇을 언제 골라야 하는지 정리했습니다."
+title: "AI 에이전트 비교: LangGraph vs CrewAI"
+description: "AI 에이전트를 실제로 만들 때 쓰는 3대 프레임워크를 비교했습니다. 세밀한 제어의 LangGraph, 역할 기반 협업의 CrewAI, 대화형 멀티에이전트 AutoGen까지 무엇을 언제 골라야 하는지 정리했습니다."
 pubDate: 2026-07-12
 author: "TechFlow"
 category: "Dev"
