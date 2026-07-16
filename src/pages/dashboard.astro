@@ -310,7 +310,8 @@ const ICONS: Record<string, string> = {
       .main-tab.active-lf,
       .main-tab.active-coupang,
       .main-tab.active-paperdoc,
-      .main-tab.active-comments {
+      .main-tab.active-comments,
+      .main-tab.active-vip {
         color: var(--text);
         border-bottom-color: var(--accent);
       }
@@ -2018,6 +2019,7 @@ const ICONS: Record<string, string> = {
         <button class="main-tab active" data-tab="all">전체 요약</button>
         <button class="main-tab" data-tab="techflow">TechFlow</button>
         <button class="main-tab" data-tab="lifeflow">LifeFlow</button>
+        <button class="main-tab" data-tab="vip">VIP</button>
         <button class="main-tab" data-tab="coupang">쿠팡</button>
         <button class="main-tab" data-tab="paperdoc">페이퍼닥</button>
         <button class="main-tab" data-tab="comments">댓글</button>
@@ -2617,6 +2619,31 @@ const ICONS: Record<string, string> = {
             <div class="recent-list" id="lf-recent-list-tab">
               <div class="loading"><div class="spinner"></div>RSS 로딩 중...</div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: VIP -->
+      <div class="tab-content" id="tab-vip">
+        <div class="summary-grid">
+          <div class="summary-card accent-blue color-blue">
+            <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['file-text']}></svg></span><div class="label">VIP Posts</div></div>
+            <div class="value">{vipPostCount}</div>
+            <div class="sub">게임 소개 영상</div>
+          </div>
+          <div class="summary-card accent-purple color-purple">
+            <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['eye']}></svg></span><div class="label">조회수</div></div>
+            <div class="value" id="vip-tab-views">--</div>
+            <div class="sub" id="vip-tab-views-sub">로딩 중...</div>
+          </div>
+        </div>
+        <div class="blog-section">
+          <div class="section-header">
+            <div class="section-title"><svg class="ico sec-ico" style="color:#57e6c3" viewBox="0 0 24 24" set:html={ICONS['pie']}></svg>VIP (playcast) 채널</div>
+            <span class="section-badge" style="background:rgba(87,230,195,0.15);color:#7fe9d0">{vipPostCount}편</span>
+          </div>
+          <div class="section-body">
+            <p class="dd-note">VIP는 버추얼 호스트 로지의 게임 소개 영상 채널이에요. 조회수만 집계되며(쿠팡·전환·카테고리 없음), <b>Top Pages·Live Activity·시간대/일별 차트</b>에서 VIP 소스로 필터·표기됩니다. → <a href="https://virtual-in-playing.vercel.app" target="_blank" rel="noopener" style="color:#7fe9d0">사이트 열기</a></p>
           </div>
         </div>
       </div>
@@ -3619,7 +3646,7 @@ const ICONS: Record<string, string> = {
           const title = getPageTitle(p);
           const displayTitle = title.length > 40 ? title.substring(0, 40) + '…' : title;
           const path = p.path || (p.slug ? `/blog/${p.slug}` : '/');
-          const href = p.source === 'lifeflow' ? `https://life-revenue-blog.vercel.app${path}` : path;
+          const href = p.source === 'vip' ? `https://virtual-in-playing.vercel.app${path}` : p.source === 'lifeflow' ? `https://life-revenue-blog.vercel.app${path}` : path;
           return `<a class="top-page-item" href="${escHtml(safeUrl(href))}" target="_blank" rel="noopener">
             <span class="top-page-rank">${i + 1}</span>
             ${sourceBadge(p.source)}
@@ -4298,6 +4325,7 @@ const ICONS: Record<string, string> = {
       const SITE_BY_SOURCE = {
         blog: 'https://ai-revenue-blog.vercel.app',
         lifeflow: 'https://life-revenue-blog.vercel.app',
+        vip: 'https://virtual-in-playing.vercel.app',
       };
 
       function eventLink(e) {
@@ -4577,6 +4605,11 @@ const ICONS: Record<string, string> = {
           // VIP(playcast) 조회수 — RPC get_traffic_summary 의 vip_ 필드 사용
           const vipEl = document.getElementById('vip-total-views');
           if (vipEl) vipEl.textContent = fmt(vipTotal) + (vipTv > 0 ? ` (+${vipTv})` : '');
+          // VIP 독립 탭 KPI
+          const vipTabViews = document.getElementById('vip-tab-views');
+          if (vipTabViews) vipTabViews.textContent = fmt(vipTotal);
+          const vipTabSub = document.getElementById('vip-tab-views-sub');
+          if (vipTabSub) vipTabSub.textContent = vipTv > 0 ? `오늘 +${vipTv}` : `총 ${fmt(vipTotal)}회`;
 
           // === 탭별 데이터 업데이트 ===
           // TechFlow 탭
@@ -4709,7 +4742,7 @@ const ICONS: Record<string, string> = {
 
           // 모든 탭 비활성화
           mainTabs.forEach(t => {
-            t.classList.remove('active', 'active-tf', 'active-lf', 'active-coupang', 'active-paperdoc');
+            t.classList.remove('active', 'active-tf', 'active-lf', 'active-coupang', 'active-paperdoc', 'active-comments', 'active-vip');
           });
 
           // 클릭한 탭 활성화
@@ -4724,6 +4757,8 @@ const ICONS: Record<string, string> = {
           } else if (targetTab === 'comments') {
             tab.classList.add('active-comments');
             loadCommentDashboard();
+          } else if (targetTab === 'vip') {
+            tab.classList.add('active-vip');
           } else {
             tab.classList.add('active');
           }
@@ -4857,7 +4892,9 @@ const ICONS: Record<string, string> = {
           const parentNote = c.parent_id
             ? '<span style="color:var(--dash-cyan);">↩ 답글</span>' : '';
 
-          const postHref = (c.source === 'lifeflow' ? 'https://life-revenue-blog.vercel.app' : '') + '/blog/' + encodeURIComponent(c.post_slug) + '/';
+          const postHref = c.source === 'vip'
+            ? 'https://virtual-in-playing.vercel.app/watch/' + encodeURIComponent(c.post_slug) + '/'
+            : (c.source === 'lifeflow' ? 'https://life-revenue-blog.vercel.app' : '') + '/blog/' + encodeURIComponent(c.post_slug) + '/';
           return `
             <div class="cm-item" data-id="${c.id}" data-slug="${escHtml(c.post_slug)}" data-source="${escHtml(c.source)}">
               <span class="cm-source ${srcClass}">${srcLabel}</span>
