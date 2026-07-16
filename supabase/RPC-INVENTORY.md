@@ -25,23 +25,33 @@
 > `get_daily_trend`은 2026-07-16 커밋에서 **호출 제거**됨(결과 미사용 데드 페치).
 > 레포밖 함수를 실 정의로 백업하려면 → `DUMP-rpc-functions.sql`.
 
-## 소비 계약 (대시보드 사용처 기준 — 실 DDL로 검증 권장)
+## 소비 계약 (2026-07-16 service_role 라이브 호출로 검증)
 
-아래 반환 필드는 **대시보드 코드가 읽는 필드**에서 역산한 것이다(권위 정의 아님).
-백필 시 최소한 이 필드를 만족해야 화면이 깨지지 않는다. 날짜/시간은 **KST(UTC+9)** 기준.
+반환 필드는 실제 RPC 응답에서 확인함(get_top_liked_posts만 라이브 0행이라 사용처 역산).
+날짜/시간은 **KST(UTC+9)** 기준.
 
-- **`get_hourly_views()`** → `[{ hour:int(0-23, KST), tf_views:int, lf_views:int }]`
-  (조회수 = tf_views + lf_views. 오늘 KST 당일)
-- **`get_top_pages(p_limit)`** → `[{ slug|path:text, source:'blog'|'lifeflow'|'gameflow', title:text, views:int }]`
-- **`get_recent_events(p_limit)`** → `[{ event_type:text, source:text, created_at:timestamptz,
-  path|slug:text, metadata:jsonb{path,slug,title,product}, product?:text }]`
-  (최신순. event_type: pageview/like/coupang_click/paperdoc_click/newsletter_subscribe)
-- **`get_top_liked_posts(p_limit)`** → `[{ title:text, slug|path:text, source:text, like_count:int }]`
+- **`get_hourly_views()`** → `[{ hour:int(0-23, KST), views:int, tf_views:int, lf_views:int }]`
+  (views = tf_views + lf_views. 오늘 KST 당일) ✔검증
+- **`get_top_pages(p_limit)`** → `[{ slug:text, path:text, title:text,
+  source:'blog'|'lifeflow'|'gameflow', views:int }]` ✔검증(slug·path 둘 다 반환)
+- **`get_recent_events(p_limit)`** → `[{ event_type:text, source:text, slug:text, title:text,
+  path:text, product:text, referrer:text, created_at:timestamptz }]` ✔검증
+  ⚠ **평면 컬럼**(metadata 중첩 아님). 최신순. event_type: pageview/like/coupang_click/
+  paperdoc_click/newsletter_subscribe
+- **`get_top_liked_posts(p_limit)`** → `[{ title, slug, path, source, like_count }]`
+  (라이브 0행 — 사용처 역산, 실 필드명은 추후 데이터 생기면 재검증)
 - **`get_daily_detail(p_days)`** → `[{ day:date(KST 'YYYY-MM-DD'), views:int, visitors:int,
-  tf_views:int, lf_views:int }]` (방문 추이 일/주/월 집계의 원천)
-- **`get_daily_hourly_heatmap(p_days)`** → `[{ day:date(KST), hour:int(0-23), views:int }]`
+  tf_views:int, lf_views:int }]` ✔검증 (방문 추이 일/주/월 집계 원천)
+- **`get_daily_hourly_heatmap(p_days)`** → `[{ day:date(KST), hour:int(0-23), views:int }]` ✔검증
 - **`get_daily_device_trend(p_days)`** (레포백업 있음) → `[{ day:date(KST),
-  web_views, mobile_views, web_visitors, mobile_visitors:int }]`
+  web_views, mobile_views, web_visitors, mobile_visitors:int }]` ✔검증
+- **`get_traffic_summary()`** (레포백업 있음) → object. ✔검증. 반환 키:
+  today_views, yesterday_views, total_views, today_clicks, total_clicks, today_likes,
+  total_likes, today_subscribers, total_subscribers, tf_today_views, tf_total_views,
+  tf_today_clicks, lf_today_views, lf_total_views, lf_today_clicks
+  ⚠ **버그**: 대시보드가 `tf_total_clicks`/`lf_total_clicks`를 읽는데 함수가 반환하지
+  않아 TF/LF 총클릭·CVR·쿠팡 소스별 상세가 전부 0/0.00%였음. `get_traffic_summary.sql`에
+  두 필드 추가(2026-07-16) → **SQL Editor에서 CREATE OR REPLACE 재실행 필요**.
 
 ## 백필 절차
 
