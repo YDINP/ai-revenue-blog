@@ -2949,7 +2949,8 @@ const ICONS: Record<string, string> = {
         };
         container.innerHTML = posts.map((p, i) => {
           const date = p.date || p.pubDate || '';
-          const formattedDate = date ? new Date(date).toISOString().split('T')[0] : '';
+          let formattedDate = '';
+          if (date) { const dt = new Date(date); if (!isNaN(dt.getTime())) formattedDate = dt.toISOString().split('T')[0]; }
           return `<div class="recent-item">
             <span class="recent-rank">${i + 1}</span>
             <span class="recent-title">${p.title}</span>
@@ -3438,6 +3439,7 @@ const ICONS: Record<string, string> = {
 
 
       let _trafficBuckets = [];
+      let _lastHeavy = 0;             // 오디언스/쿠팡/페이퍼닥 원시행 조회의 마지막 실행(ms) — 라이트/헤비 틱 분리
       let _trafficCustom = null;   // {from, to} 설정 시 커스텀 범위
 
       function renderTrafficPanel() {
@@ -4460,19 +4462,18 @@ const ICONS: Record<string, string> = {
       document.getElementById('refresh-traffic-panel')?.addEventListener('click', () => {
         const btn = document.getElementById('refresh-traffic-panel');
         if (btn) { btn.textContent = '갱신 중…'; btn.disabled = true; }
-        Promise.resolve(loadTraffic()).finally(() => {
+        Promise.resolve(loadTraffic(true)).finally(() => {
           setTimeout(() => { if (btn) { btn.textContent = '↻ 새로고침'; btn.disabled = false; } }, 400);
         });
       });
 
-      async function loadTraffic() {
+      async function loadTraffic(force) {
         try {
-          const [summary, hourly, topPages, events, trend, topLiked, dailyDetail, heatmap, deviceTrend] = await Promise.all([
+          const [summary, hourly, topPages, events, topLiked, dailyDetail, heatmap, deviceTrend] = await Promise.all([
             rpc('get_traffic_summary'),
             rpc('get_hourly_views'),
             rpc('get_top_pages', { p_limit: 50 }),
             rpc('get_recent_events', { p_limit: 20 }),
-            rpc('get_daily_trend'),
             rpc('get_top_liked_posts', { p_limit: 10 }),
             rpc('get_daily_detail', { p_days: 180 }),
             rpc('get_daily_hourly_heatmap', { p_days: 14 }),
@@ -4625,20 +4626,30 @@ const ICONS: Record<string, string> = {
           renderTopLikedPosts(topLiked);
           // 오디언스(유입경로·기기) + 쿠팡 + 뉴스레터 → 퍼널·인사이트 일괄 렌더
           _funnelCounts.pageviews = Number(summary?.total_views) || 0;   // 퍼널 분모=실제 총 페이지뷰
-          Promise.all([fetchAudience(), fetchCoupangProducts(), fetchNewsletterCount(), fetchPaperdocClicks()]).then(([aud, coup, nl, pd]) => {
-            renderAudience(aud);
-            _hourlyVisitors = computeHourlyVisitors(aud);   // 시간대 방문자(방문자 모드용)
-            if (_trafficMetric === 'visitors') renderHourlyChart();
-            if (_topPagesPeriod !== 'all') renderTopPages();   // 기간별 Top Pages는 오디언스 로드 후 갱신
-            renderCoupangProducts(coup);
-            renderCoupangFeed(coup);
-            renderPaperdoc(pd, _paperdocPeriod);
-            _funnelCounts.coupang = Array.isArray(coup) ? coup.length : 0;
-            _funnelCounts.newsletter = nl;
-            _funnelCounts.paperdoc = Array.isArray(pd) ? pd.length : 0;
+          // 무거운 원시행 조회(오디언스 5000 · 쿠팡/뉴스레터/페이퍼닥 각 2000행)는 느리게 변하므로
+          // 30초 라이트 틱마다 재요청하지 않고 약 4.5분 간격(또는 수동 새로고침 force)에만 재조회한다.
+          const doHeavy = force || (Date.now() - _lastHeavy > 270000);
+          if (doHeavy) {
+            _lastHeavy = Date.now();
+            Promise.all([fetchAudience(), fetchCoupangProducts(), fetchNewsletterCount(), fetchPaperdocClicks()]).then(([aud, coup, nl, pd]) => {
+              renderAudience(aud);
+              _hourlyVisitors = computeHourlyVisitors(aud);   // 시간대 방문자(방문자 모드용)
+              if (_trafficMetric === 'visitors') renderHourlyChart();
+              if (_topPagesPeriod !== 'all') renderTopPages();   // 기간별 Top Pages는 오디언스 로드 후 갱신
+              renderCoupangProducts(coup);
+              renderCoupangFeed(coup);
+              renderPaperdoc(pd, _paperdocPeriod);
+              _funnelCounts.coupang = Array.isArray(coup) ? coup.length : 0;
+              _funnelCounts.newsletter = nl;
+              _funnelCounts.paperdoc = Array.isArray(pd) ? pd.length : 0;
+              renderFunnelGoals();
+              computeInsight();
+            });
+          } else {
+            // 라이트 틱: 캐시된 오디언스/전환 데이터로 파생 지표(퍼널 분모·인사이트)만 재계산
             renderFunnelGoals();
             computeInsight();
-          });
+          }
           document.getElementById('last-updated').textContent =
             `Updated: ${new Date().toLocaleString('ko-KR')}`;
 
@@ -4648,7 +4659,7 @@ const ICONS: Record<string, string> = {
       }
 
       document.getElementById('refresh-traffic')?.addEventListener('click', () => {
-        loadTraffic();
+        loadTraffic(true);
       });
 
       // === 탭 전환 로직 ===
