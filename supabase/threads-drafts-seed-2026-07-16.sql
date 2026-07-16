@@ -1,10 +1,10 @@
 -- Threads 초안 시드 — 2026-07-16 신규 6글 (스팀 전환율·광고eCPM·리뷰매출 / 추석상여금·추석여행·가을알레르기)
 -- 실행: Supabase SQL Editor에 붙여넣고 RUN. 중복 실행 금지(초안이 또 쌓임). 1회만.
 -- 발행: /threads queue 에서 카드 확인 후 발행/예약. 링크는 publishDraft가 첫 댓글에 자동 배치.
--- 계정: TF 글=topic='tech', LF 글=topic='life'. ⚠️ tech 계정 미연결이면 TF 3건은 0행 삽입됨
---        → tech 계정 연결 후 재실행하거나, 임시로 아래 TF 3건의 topic='tech'를 'life'로 바꿔 실행.
+-- 계정: 현재 연결 계정은 topic='life' 1개뿐(2026-07-16 확인). game/ai 계정 미연결이라
+--        TF 인디게임 글도 임시로 life 계정에 넣음. 별도 game/ai 계정 연결 시 TF는 그쪽으로 이전 권장.
 
--- ══════════════ TechFlow (tech 계정) ══════════════
+-- ══════════════ TechFlow (⚠️ game/ai 계정 미연결 → 임시 life 계정) ══════════════
 
 -- 스팀 상점페이지 전환율
 insert into threads_queue (account_id, text, image_url, link_url, link_kind, status)
@@ -12,7 +12,7 @@ select id,
 E'스팀 위시리스트 안 늘면 캡슐 이미지부터 의심해.\n\n상점페이지 클릭률(CTR) 3% 넘어야 스팀이 노출을 밀어주더라.\n캡슐만 바꿔서 CTR 8%→24% 된 사례도 있고.\n트레일러는 첫 30초에서 절반이 이탈하니까 앞을 세게 가야 함.\n\n스친들 겜 상점페이지 뭐부터 손봐? 👇',
 'https://images.pexels.com/photos/12670693/pexels-photo-12670693.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200',
 'https://ai-revenue-blog.vercel.app/blog/steam-store-page-conversion-optimization-2026/', 'blog', 'draft'
-from threads_accounts where topic='tech' limit 1;
+from threads_accounts where topic='life' limit 1;
 
 -- 게임 광고수익 eCPM
 insert into threads_queue (account_id, text, image_url, link_url, link_kind, status)
@@ -20,7 +20,7 @@ select id,
 E'같은 광고인데 미국 유저가 베트남보다 10배 벌어줘.\n\n보상형 eCPM이 티어1(미국·한국)은 $15~30인데 동남아는 $2~3대거든.\n그래서 인디는 DAU당 매출(ARPDAU)로 안 보면 착시 옴.\n광고·인앱결제·웹플랫폼이 수익구조가 다 달라서 섞어 봐야 하고.\n\n스친들 게임 수익 광고파야 결제파야? 👇',
 'https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=1200',
 'https://ai-revenue-blog.vercel.app/blog/indie-game-ad-revenue-iaa-ecpm-2026/', 'blog', 'draft'
-from threads_accounts where topic='tech' limit 1;
+from threads_accounts where topic='life' limit 1;
 
 -- 스팀 리뷰로 매출 역산
 insert into threads_queue (account_id, text, image_url, link_url, link_kind, status)
@@ -28,7 +28,7 @@ select id,
 E'스팀 리뷰 300개면 판매량 대충 계산돼.\n\n리뷰 1개당 판매 배수(박스라이터)가 2014년 70배에서 지금 30배 아래로 떨어졌거든.\n긍정률 90% 넘으면 이 배수가 또 달라지고.\n그래서 남 게임 매출도 리뷰 수로 역산이 되더라.\n\n스친들은 리뷰 몇 개부터 ''되는'' 것 같아? 👇',
 'https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=1200',
 'https://ai-revenue-blog.vercel.app/blog/steam-reviews-sales-correlation-2026/', 'blog', 'draft'
-from threads_accounts where topic='tech' limit 1;
+from threads_accounts where topic='life' limit 1;
 
 -- ══════════════ LifeFlow (life 계정) ══════════════
 
@@ -85,4 +85,4 @@ insert into threads_queue (account_id, text, link_kind, status)
 select id,
 E'만들다 만 사이드프로젝트 몇 개씩 쌓아둔 스친… 우리 손 잡자.\n\n시작할 땐 세상 바꿀 기세였는데 지금은 README만 멋짐 ㅋㅋ\n깃허브에 잠든 레포가 벌써 몇 개인지.\n\n스친들 방치 중인 프로젝트 하나만 고백해봐 👇',
 'none', 'draft'
-from threads_accounts where topic='tech' limit 1;
+from threads_accounts where topic='life' limit 1;
