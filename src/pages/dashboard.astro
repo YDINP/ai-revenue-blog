@@ -841,6 +841,7 @@ const ICONS: Record<string, string> = {
       .src-badge.tf { background: rgba(59, 130, 246, 0.15); color: #93bbfd; }
       .src-badge.lf { background: rgba(22, 163, 74, 0.15); color: #6ee7a5; }
       .src-badge.gf { background: rgba(168, 85, 247, 0.15); color: #d8b4fe; }
+      .src-badge.vip { background: rgba(87, 230, 195, 0.15); color: #7fe9d0; }
 
       /* ── 추천 TOP ─────────────────────────────────────── */
       .like-top-panel { margin-top: 1.25rem; }
@@ -2068,6 +2069,7 @@ const ICONS: Record<string, string> = {
           <div class="split-legend">
             <span>TF: <b id="tf-total-views">--</b></span>
             <span>LF: <b id="lf-total-views">--</b></span>
+            <span>VIP: <b id="vip-total-views">--</b></span>
           </div>
         </div>
         <div class="summary-card accent-purple color-purple">
@@ -3527,6 +3529,7 @@ const ICONS: Record<string, string> = {
         if (source === 'blog') return '<span class="src-badge tf">TF</span>';
         if (source === 'lifeflow') return '<span class="src-badge lf">LF</span>';
         if (source === 'gameflow') return '<span class="src-badge gf">GF</span>';
+        if (source === 'vip') return '<span class="src-badge vip">VIP</span>';
         return '';
       }
 
@@ -4467,6 +4470,27 @@ const ICONS: Record<string, string> = {
         });
       });
 
+      // VIP(playcast) 조회수 — 전용 RPC 없이 analytics 테이블을 REST count 로 집계.
+      // get_traffic_summary 총계엔 이미 vip가 섞여 있고, 여기선 vip만 분리해 KPI 카드에 표기.
+      async function fetchVipViews() {
+        const base = `${SUPABASE_URL}/rest/v1/analytics?source=eq.vip&event_type=eq.pageview&select=id&limit=1`;
+        // created_at 은 UTC. KST 오늘 자정을 UTC 로 환산해 경계로 사용.
+        const kstNow = new Date(Date.now() + 9 * 3600 * 1000);
+        const kstMidnightUtc = new Date(
+          Date.UTC(kstNow.getUTCFullYear(), kstNow.getUTCMonth(), kstNow.getUTCDate()) - 9 * 3600 * 1000
+        );
+        async function count(url) {
+          const r = await fetch(url, { headers: { ...headers, Prefer: 'count=exact' } });
+          const m = (r.headers.get('content-range') || '').match(/\/(\d+)$/);
+          return m ? Number(m[1]) : 0;
+        }
+        const [total, today] = await Promise.all([
+          count(base),
+          count(base + '&created_at=gte.' + encodeURIComponent(kstMidnightUtc.toISOString())),
+        ]);
+        return { total, today };
+      }
+
       async function loadTraffic(force) {
         try {
           const [summary, hourly, topPages, events, topLiked, dailyDetail, heatmap, deviceTrend] = await Promise.all([
@@ -4540,6 +4564,12 @@ const ICONS: Record<string, string> = {
           const splitLfEl = document.getElementById('views-split-lf');
           if (splitTfEl) splitTfEl.style.width = Math.round(tfTotal / totalV * 100) + '%';
           if (splitLfEl) splitLfEl.style.width = Math.round(lfTotal / totalV * 100) + '%';
+
+          // VIP(playcast) 조회수 집계 — REST count(비동기, 로드와 병행)
+          fetchVipViews().then(function (vip) {
+            const el = document.getElementById('vip-total-views');
+            if (el) el.textContent = fmt(vip.total) + (vip.today > 0 ? ` (+${vip.today})` : '');
+          }).catch(function () {});
 
           // === 탭별 데이터 업데이트 ===
           // TechFlow 탭
