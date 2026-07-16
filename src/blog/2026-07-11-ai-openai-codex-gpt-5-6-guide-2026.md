@@ -1,6 +1,6 @@
 ---
-title: "OpenAI Codex + GPT-5.6 완벽 가이드: Sol·Terra·Luna 총정리 (2026)"
-description: "2026년 7월 공개된 GPT-5.6(Sol·Terra·Luna)와 새로워진 Codex를 한 번에 정리했습니다. 세 모델의 차이, 코딩 벤치마크, 가격, Codex 신기능(diff 인라인 편집·PR 리뷰·멀티레포)까지 실제 공식 데이터로 확인하세요."
+title: 'GPT-5.6 Codex: Sol·Terra·Luna 정리'
+description: '2026년 7월 공개된 GPT-5.6 3등급(Sol·Terra·Luna)과 새 Codex를 정리했습니다. Terminal-Bench 88.8%, 가격, PR 리뷰·멀티레포 등 신기능까지 공식 데이터로 확인하세요.'
 pubDate: 2026-07-11
 author: "TechFlow"
 category: "AI"

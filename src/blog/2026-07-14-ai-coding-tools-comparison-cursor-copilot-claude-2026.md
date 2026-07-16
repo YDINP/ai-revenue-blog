@@ -1,6 +1,6 @@
 ---
-title: "AI 코딩 도구 TOP 3 비교 2026: Cursor vs Copilot vs Claude Code"
-description: "2026년 개발자가 가장 많이 쓰는 AI 코딩 도구 3종 — Cursor, GitHub Copilot, Claude Code를 실사용 관점에서 비교합니다. 자동완성·에이전트·터미널 워크플로 차이, 생산성 데이터의 현실(10~30%), 도구 조합 전략과 유형별 추천까지 정리했습니다."
+title: 'Cursor vs Copilot vs Claude 비교'
+description: '2026년 개발자가 가장 많이 쓰는 AI 코딩 도구 Cursor·Copilot·Claude Code를 실사용 기준으로 비교했습니다. 실제 생산성은 10~30%, 도구별 강점과 조합 전략을 확인하세요.'
 pubDate: 2026-07-14
 author: "TechFlow"
 category: "AI"

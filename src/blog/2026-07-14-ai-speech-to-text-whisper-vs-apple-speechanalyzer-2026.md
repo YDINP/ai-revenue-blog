@@ -1,6 +1,6 @@
 ---
-title: "음성인식 API 비교 2026: Whisper vs Apple SpeechAnalyzer 개발자 가이드"
-description: "2026년 음성-텍스트 변환(STT)을 앱에 붙일 때 Whisper와 Apple SpeechAnalyzer 중 뭘 골라야 할까요? 속도(55% 빠름)·정확도·온디바이스 여부·비용을 개발자 관점에서 비교하고, 용도별 선택 기준을 정리했습니다."
+title: 'Whisper vs 애플 음성인식: 55% 더 빠른 선택'
+description: 'Whisper와 Apple SpeechAnalyzer, 2026년 지금 뭘 써야 할까요? 속도 55% 차이·정확도·온디바이스 여부·비용까지 개발자 관점으로 비교하고 용도별 선택 기준을 한 번에 정리했습니다.'
 pubDate: 2026-07-14
 author: "TechFlow"
 category: "AI"

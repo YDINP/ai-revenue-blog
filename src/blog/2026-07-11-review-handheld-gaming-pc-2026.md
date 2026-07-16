@@ -1,6 +1,6 @@
 ---
-title: "휴대용 게이밍 PC 대전 2026: 스팀덱 OLED vs ROG Ally X vs 스위치2"
-description: "2026년 휴대용 게이밍 기기 3파전을 비교했습니다. 밸브 스팀덱 OLED, 아수스 ROG Ally X, 닌텐도 스위치2의 성격·강점·한계를 정리해, 내게 맞는 한 대를 고르는 법을 알려드립니다."
+title: '휴대용 게이밍PC 3파전 2026: 스팀덱 vs 스위치2'
+description: '2026년 최대 화제 휴대용 게이밍 기기 스팀덱 OLED·ROG Ally X·스위치2를 정면 비교했습니다. 성능, 배터리, 게임 라이브러리 차이부터 내 플레이 스타일에 맞는 선택 기준까지 한눈에 정리했습니다.'
 pubDate: 2026-07-11
 author: "TechFlow"
 category: "Review"
