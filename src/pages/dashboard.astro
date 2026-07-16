@@ -3544,8 +3544,20 @@ const ICONS: Record<string, string> = {
         return Object.values(by).sort((a, b) => b.views - a.views);
       }
 
+      // 같은 URL(슬러그)인데 제목 변경 등으로 여러 행으로 쪼개진 걸 합침 (조회수 합산)
+      function dedupBySlug(rows) {
+        const by = {};
+        for (const r of (rows || [])) {
+          const bare = String(r.slug || r.path || '').replace(/^\/blog\//, '').replace(/^\//, '').replace(/\/$/, '');
+          const key = bare || String(r.title || '');
+          if (!by[key]) by[key] = { ...r, views: 0 };
+          by[key].views += Number(r.views) || 0;
+        }
+        return Object.values(by).sort((a, b) => (b.views || 0) - (a.views || 0));
+      }
+
       function renderTopPages(data, filter, period) {
-        if (data !== undefined) _topPagesData = data || [];
+        if (data !== undefined) _topPagesData = dedupBySlug(data);
         if (filter !== undefined) _topPagesFilter = filter;
         if (period !== undefined) _topPagesPeriod = period;
 
