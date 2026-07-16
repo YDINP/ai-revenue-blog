@@ -55,3 +55,34 @@ E'가을에 콧물 나면 감기 아니라 알레르기일 수도.\n\n8~10월 �
 'https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=1200',
 'https://life-revenue-blog.vercel.app/blog/2026-07-16-health-autumn-allergy-rhinitis-prevention-2026/', 'blog', 'draft'
 from threads_accounts where topic='life' limit 1;
+
+-- ══════════════ 공감성 완충글 (링크 없음, 순수 댓글 유도 · 계정 온도용) ══════════════
+-- 광고글 3~4개마다 1개씩 끼워 피드가 광고밭 안 되게. 계절(한여름→추석) 맞춤.
+
+-- [life] 열대야
+insert into threads_queue (account_id, text, link_kind, status)
+select id,
+E'요즘 밤에 더워서 몇 번씩 깨는 스친… 나만 그래?\n\n에어컨 켜고 자자니 전기세, 끄자니 열대야.\n선풍기 각도만 계속 바꾸다 새벽 3시 됨 ㅋㅋㅠ\n\n스친들은 여름밤 어떻게 자? 꿀팁 좀 👇',
+'none', 'draft'
+from threads_accounts where topic='life' limit 1;
+
+-- [life] 휴가비 텅장
+insert into threads_queue (account_id, text, link_kind, status)
+select id,
+E'여름휴가 다녀오니까 통장이 조용해진 스친 손 🙋\n\n분명 아낀다고 아꼈는데 숙소·먹거리에서 다 나가더라.\n다음 달 카드값 보기가 벌써 무섭다 ㅋㅋ\n\n스친들 이번 여름휴가 예산 지켰어? 👇',
+'none', 'draft'
+from threads_accounts where topic='life' limit 1;
+
+-- [life] 시간 빠름(추석 전환)
+insert into threads_queue (account_id, text, link_kind, status)
+select id,
+E'벌써 추석 얘기 나오는 거 보고 놀란 스친 나뿐이야?\n\n엊그제 새해 다짐한 것 같은데 벌써 하반기라니.\n올해 목표 반이라도 지킨 사람 있으면 존경 ㅋㅋㅠ\n\n스친들 올해 남은 반년 뭐 하고 싶어? 👇',
+'none', 'draft'
+from threads_accounts where topic='life' limit 1;
+
+-- [tech] 사이드프로젝트 방치
+insert into threads_queue (account_id, text, link_kind, status)
+select id,
+E'만들다 만 사이드프로젝트 몇 개씩 쌓아둔 스친… 우리 손 잡자.\n\n시작할 땐 세상 바꿀 기세였는데 지금은 README만 멋짐 ㅋㅋ\n깃허브에 잠든 레포가 벌써 몇 개인지.\n\n스친들 방치 중인 프로젝트 하나만 고백해봐 👇',
+'none', 'draft'
+from threads_accounts where topic='tech' limit 1;
