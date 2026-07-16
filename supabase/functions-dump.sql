@@ -154,7 +154,7 @@ CREATE OR REPLACE FUNCTION public.get_comment_stats()
  RETURNS json
  LANGUAGE sql
  STABLE
-AS $function$ SELECT json_build_object('total', (SELECT count(*) FROM comments), 'today', (SELECT count(*) FROM comments WHERE created_at >= CURRENT_DATE), 'reports', (SELECT count(DISTINCT comment_id) FROM comment_reports), 'blog_count', (SELECT count(*) FROM comments WHERE source = 'blog'), 'lifeflow_count', (SELECT count(*) FROM comments WHERE source = 'lifeflow')); $function$
+AS $function$ SELECT json_build_object('total', (SELECT count(*) FROM comments), 'today', (SELECT count(*) FROM comments WHERE created_at >= CURRENT_DATE), 'reports', (SELECT count(DISTINCT comment_id) FROM comment_reports), 'blog_count', (SELECT count(*) FROM comments WHERE source = 'blog'), 'lifeflow_count', (SELECT count(*) FROM comments WHERE source = 'lifeflow'), 'vip_count', (SELECT count(*) FROM comments WHERE source = 'vip')); $function$
 
 
 -- ------------------------------------------------------------
@@ -163,7 +163,7 @@ CREATE OR REPLACE FUNCTION public.get_comment_trend()
  RETURNS json
  LANGUAGE sql
  STABLE
-AS $function$ SELECT coalesce(json_agg(row_to_json(t) ORDER BY t.day ASC), '[]'::json) FROM (SELECT date_trunc('day', created_at)::date as day, count(*) as count, count(*) FILTER (WHERE source = 'blog') as blog_count, count(*) FILTER (WHERE source = 'lifeflow') as lf_count FROM comments WHERE created_at >= CURRENT_DATE - INTERVAL '6 days' GROUP BY date_trunc('day', created_at)::date) t; $function$
+AS $function$ SELECT coalesce(json_agg(row_to_json(t) ORDER BY t.day ASC), '[]'::json) FROM (SELECT date_trunc('day', created_at)::date as day, count(*) as count, count(*) FILTER (WHERE source = 'blog') as blog_count, count(*) FILTER (WHERE source = 'lifeflow') as lf_count, count(*) FILTER (WHERE source = 'vip') as vip_count FROM comments WHERE created_at >= CURRENT_DATE - INTERVAL '6 days' GROUP BY date_trunc('day', created_at)::date) t; $function$
 
 
 -- ------------------------------------------------------------

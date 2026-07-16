@@ -98,7 +98,9 @@ const lfPostCount = lfPosts.length;
 const lfCategoryCount = lfCategories.length;
 
 // 통합 통계 (분모 0 방지 — RSS 실패 시에도 레이아웃이 깨지지 않게)
-const totalPosts = tfPostCount + lfPostCount;
+// VIP(playcast)는 별도 Vercel 레포라 빌드타임 파일 카운트 불가 → 발행 글 수 수동 상수
+const vipPostCount = 12;
+const totalPosts = tfPostCount + lfPostCount + vipPostCount;
 const totalCategories = tfCategoryStats.length + lfCategoryCount;
 const pctBase = totalPosts || 1;
 const lfBase = lfPostCount || 1;
@@ -376,6 +378,7 @@ const ICONS: Record<string, string> = {
 
       .split-tf { background: var(--tf); }
       .split-lf { background: var(--lf); margin-left: 2px; }
+      .split-vip { background: #57e6c3; margin-left: 2px; }
 
       .split-legend {
         display: flex;
@@ -771,6 +774,7 @@ const ICONS: Record<string, string> = {
       .source-tab.active { background: var(--surface-2); border-color: var(--border-strong); color: var(--text); }
       .source-tab.active-tf { background: rgba(59, 130, 246, 0.15); border-color: var(--tf); color: #93bbfd; }
       .source-tab.active-lf { background: rgba(22, 163, 74, 0.15); border-color: var(--lf); color: #6ee7a5; }
+      .source-tab.active-vip { background: rgba(87, 230, 195, 0.15); border-color: #57e6c3; color: #7fe9d0; }
 
       .top-page-list, .event-feed { display: flex; flex-direction: column; }
 
@@ -1339,6 +1343,7 @@ const ICONS: Record<string, string> = {
 
       .trend-bar.tf { background: var(--tf); }
       .trend-bar.lf { background: var(--lf); }
+      .trend-bar.vip { background: #57e6c3; }
 
       .trend-label { font-size: 0.6875rem; color: var(--text-2); }
       .trend-count { font-size: 0.6875rem; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
@@ -2035,14 +2040,16 @@ const ICONS: Record<string, string> = {
           <div class="kpi-value-row">
             <div class="value" id="total-post-count">{totalPosts}</div>
           </div>
-          <div class="sub" id="total-post-sub">TechFlow {tfPostCount} + LifeFlow {lfPostCount}</div>
+          <div class="sub" id="total-post-sub">TechFlow {tfPostCount} + LifeFlow {lfPostCount} + VIP {vipPostCount}</div>
           <div class="source-split-bar" style="margin-top:0.5rem;">
             <div class="split-tf" id="total-split-tf" style={`width:${Math.round(tfPostCount / pctBase * 100)}%`}></div>
             <div class="split-lf" id="total-split-lf" style={`width:${Math.round(lfPostCount / pctBase * 100)}%`}></div>
+            <div class="split-vip" id="total-split-vip" style={`width:${Math.round(vipPostCount / pctBase * 100)}%`}></div>
           </div>
           <div class="split-legend">
             <span id="total-split-tf-pct">TF {Math.round(tfPostCount / pctBase * 100)}%</span>
             <span id="total-split-lf-pct">LF {Math.round(lfPostCount / pctBase * 100)}%</span>
+            <span id="total-split-vip-pct">VIP {Math.round(vipPostCount / pctBase * 100)}%</span>
           </div>
         </div>
         <div class="summary-card accent-green color-green">
@@ -2068,6 +2075,7 @@ const ICONS: Record<string, string> = {
           <div class="source-split-bar" id="views-split-bar">
             <div class="split-tf" id="views-split-tf" style="width:50%"></div>
             <div class="split-lf" id="views-split-lf" style="width:50%"></div>
+            <div class="split-vip" id="views-split-vip" style="width:0%"></div>
           </div>
           <div class="split-legend">
             <span>TF: <b id="tf-total-views">--</b></span>
@@ -2246,6 +2254,7 @@ const ICONS: Record<string, string> = {
             <button class="source-tab active" data-filter="all">All</button>
             <button class="source-tab" data-filter="blog">TechFlow</button>
             <button class="source-tab" data-filter="lifeflow">LifeFlow</button>
+            <button class="source-tab" data-filter="vip">VIP</button>
           </div>
           <div class="top-page-list" id="top-pages">
             <div class="no-data">Loading...</div>
@@ -2258,6 +2267,7 @@ const ICONS: Record<string, string> = {
             <button class="source-tab active" data-filter="all">All</button>
             <button class="source-tab" data-filter="blog">TechFlow</button>
             <button class="source-tab" data-filter="lifeflow">LifeFlow</button>
+            <button class="source-tab" data-filter="vip">VIP</button>
           </div>
           <div class="event-feed" id="event-feed">
             <div class="no-data">Loading...</div>
@@ -2796,6 +2806,7 @@ const ICONS: Record<string, string> = {
       SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5cHJic21hZ3RsemVieHl4c3ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjY4NTQsImV4cCI6MjA4NjA0Mjg1NH0.dajN0n0IWzOgYOSCglxVLzddg7jJFRHNCHwTWMG62uU',
       TF_SLUG_CAT: Object.fromEntries(allPosts.map(p => [p.id, p.data.category])),
       TF_POST_COUNT: tfPostCount,
+      VIP_POST_COUNT: vipPostCount,
       // 슬러그→현재 제목(TF+LF) — topPages가 옛 제목 대신 현재 제목 표시
       SLUG_TITLES: { ...slugTitles, ...Object.fromEntries(lfPosts.map(p => [p.slug, p.title])) },
       // LifeFlow 는 빌드타임 RSS 산출물 — 카테고리 트래픽 매칭은 전체 글의 slug→category 로
@@ -2881,16 +2892,22 @@ const ICONS: Record<string, string> = {
           setText('lf-badge-count', totalLf);
           setText('lf-overview-badge', `${totalLf}편`);
 
-          const totalAll = TF_POST_COUNT + totalLf;
-          const tfPct = Math.round((TF_POST_COUNT / (totalAll || 1)) * 100);
+          const totalAll = TF_POST_COUNT + totalLf + VIP_POST_COUNT;
+          const _base = totalAll || 1;
+          const tfPct = Math.round((TF_POST_COUNT / _base) * 100);
+          const lfPct = Math.round((totalLf / _base) * 100);
+          const vipPct = Math.max(0, 100 - tfPct - lfPct);
           setText('total-post-count', totalAll);
-          setText('total-post-sub', `TechFlow ${TF_POST_COUNT} + LifeFlow ${totalLf}`);
+          setText('total-post-sub', `TechFlow ${TF_POST_COUNT} + LifeFlow ${totalLf} + VIP ${VIP_POST_COUNT}`);
           setText('total-split-tf-pct', `TF ${tfPct}%`);
-          setText('total-split-lf-pct', `LF ${100 - tfPct}%`);
+          setText('total-split-lf-pct', `LF ${lfPct}%`);
+          setText('total-split-vip-pct', `VIP ${vipPct}%`);
           const splitTf = document.getElementById('total-split-tf');
           const splitLf = document.getElementById('total-split-lf');
+          const splitVip = document.getElementById('total-split-vip');
           if (splitTf) splitTf.style.width = `${tfPct}%`;
-          if (splitLf) splitLf.style.width = `${100 - tfPct}%`;
+          if (splitLf) splitLf.style.width = `${lfPct}%`;
+          if (splitVip) splitVip.style.width = `${vipPct}%`;
 
           // 도넛 차트 배경 재생성 (세그먼트 사이 서피스 갭 포함)
           let gradient = 'conic-gradient(';
@@ -3353,9 +3370,10 @@ const ICONS: Record<string, string> = {
           const devSub = _deviceDataReady && (dw + dm) > 0
             ? ` <span style="color:var(--text-3)">·</span> <span style="color:#f59e0b">🖥 ${fmt(dw)}</span> <span style="color:#ec4899">📱 ${fmt(dm)}</span>`
             : '';
+          const vipVis = b.views ? Math.round(b.visitors * b.vip / b.views) : 0;
           const sub = (metric === 'visitors'
-            ? `<span style="color:#60a5fa">TF ${fmt(vis.tf)}</span> · <span style="color:#4ade80">LF ${fmt(vis.lf)}</span> <span style="color:var(--text-3)">· 조회 ${fmt(b.views)}</span>`
-            : `<span style="color:#60a5fa">TF ${fmt(b.tf)}</span> · <span style="color:#4ade80">LF ${fmt(b.lf)}</span>`) + devSub;
+            ? `<span style="color:#60a5fa">TF ${fmt(vis.tf)}</span> · <span style="color:#4ade80">LF ${fmt(vis.lf)}</span> · <span style="color:#57e6c3">VIP ${fmt(vipVis)}</span> <span style="color:var(--text-3)">· 조회 ${fmt(b.views)}</span>`
+            : `<span style="color:#60a5fa">TF ${fmt(b.tf)}</span> · <span style="color:#4ade80">LF ${fmt(b.lf)}</span> · <span style="color:#57e6c3">VIP ${fmt(b.vip)}</span>`) + devSub;
           return `<div class="tl-row ${cur ? 'tl-cur' : ''}">
             <div class="tl-top">
               <span class="tl-date">${b.label}${cur ? ' ·현재' : ''}</span>
@@ -4340,7 +4358,7 @@ const ICONS: Record<string, string> = {
         if (!btn) return;
         document.querySelectorAll('#top-pages-tabs .source-tab').forEach(b => b.className = 'source-tab');
         const f = btn.dataset.filter;
-        btn.className = 'source-tab ' + (f === 'blog' ? 'active-tf' : f === 'lifeflow' ? 'active-lf' : 'active');
+        btn.className = 'source-tab ' + (f === 'blog' ? 'active-tf' : f === 'lifeflow' ? 'active-lf' : f === 'vip' ? 'active-vip' : 'active');
         renderTopPages(undefined, f);
       });
 
@@ -4364,7 +4382,7 @@ const ICONS: Record<string, string> = {
         if (!btn) return;
         document.querySelectorAll('#event-tabs .source-tab').forEach(b => b.className = 'source-tab');
         const f = btn.dataset.filter;
-        btn.className = 'source-tab ' + (f === 'blog' ? 'active-tf' : f === 'lifeflow' ? 'active-lf' : 'active');
+        btn.className = 'source-tab ' + (f === 'blog' ? 'active-tf' : f === 'lifeflow' ? 'active-lf' : f === 'vip' ? 'active-vip' : 'active');
         renderEventFeed(undefined, f);
       });
 
@@ -4551,8 +4569,10 @@ const ICONS: Record<string, string> = {
           // Animated split bar
           const splitTfEl = document.getElementById('views-split-tf');
           const splitLfEl = document.getElementById('views-split-lf');
+          const splitVipEl = document.getElementById('views-split-vip');
           if (splitTfEl) splitTfEl.style.width = Math.round(tfTotal / totalV * 100) + '%';
           if (splitLfEl) splitLfEl.style.width = Math.round(lfTotal / totalV * 100) + '%';
+          if (splitVipEl) splitVipEl.style.width = Math.round(vipTotal / totalV * 100) + '%';
 
           // VIP(playcast) 조회수 — RPC get_traffic_summary 의 vip_ 필드 사용
           const vipEl = document.getElementById('vip-total-views');
@@ -4791,7 +4811,7 @@ const ICONS: Record<string, string> = {
             document.getElementById('cm-today').textContent = fmt(stats.today || 0);
             document.getElementById('cm-reports').textContent = fmt(stats.reports || 0);
             document.getElementById('cm-by-source').textContent =
-              `TechFlow ${stats.blog_count || 0} / LifeFlow ${stats.lifeflow_count || 0}`;
+              `TechFlow ${stats.blog_count || 0} / LifeFlow ${stats.lifeflow_count || 0} / VIP ${stats.vip_count || 0}`;
           }
 
           // 댓글 목록 저장 + 렌더
@@ -4972,6 +4992,7 @@ const ICONS: Record<string, string> = {
         const barsHtml = data.map(d => {
           const tfH = Math.max((d.blog_count / maxCount) * maxH, 4);
           const lfH = Math.max((d.lf_count / maxCount) * maxH, 4);
+          const vipH = d.vip_count > 0 ? Math.max((d.vip_count / maxCount) * maxH, 4) : 0;
           const dayLabel = new Date(d.day).toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' });
           return `
             <div class="trend-bar-group">
@@ -4979,6 +5000,7 @@ const ICONS: Record<string, string> = {
               <div class="trend-bars">
                 <div class="trend-bar tf" style="height:${tfH}px" title="TF: ${d.blog_count}"></div>
                 <div class="trend-bar lf" style="height:${lfH}px" title="LF: ${d.lf_count}"></div>
+                <div class="trend-bar vip" style="height:${vipH}px" title="VIP: ${d.vip_count || 0}"></div>
               </div>
               <div class="trend-label">${dayLabel}</div>
             </div>

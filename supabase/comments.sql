@@ -91,7 +91,8 @@ RETURNS json AS $$
     'today', (SELECT count(*) FROM comments WHERE created_at >= CURRENT_DATE),
     'reports', (SELECT count(DISTINCT comment_id) FROM comment_reports),
     'blog_count', (SELECT count(*) FROM comments WHERE source = 'blog'),
-    'lifeflow_count', (SELECT count(*) FROM comments WHERE source = 'lifeflow')
+    'lifeflow_count', (SELECT count(*) FROM comments WHERE source = 'lifeflow'),
+    'vip_count', (SELECT count(*) FROM comments WHERE source = 'vip')
   );
 $$ LANGUAGE sql STABLE;
 
@@ -117,7 +118,8 @@ RETURNS json AS $$
     SELECT date_trunc('day', created_at)::date as day,
            count(*) as count,
            count(*) FILTER (WHERE source = 'blog') as blog_count,
-           count(*) FILTER (WHERE source = 'lifeflow') as lf_count
+           count(*) FILTER (WHERE source = 'lifeflow') as lf_count,
+           count(*) FILTER (WHERE source = 'vip') as vip_count
     FROM comments
     WHERE created_at >= CURRENT_DATE - INTERVAL '6 days'
     GROUP BY date_trunc('day', created_at)::date
