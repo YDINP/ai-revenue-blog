@@ -36,3 +36,4 @@ Thumbs.db
 # 임시 DB 접속(커밋 금지)
 .dbcred
 apply-vip.mjs
+apply-vip2.mjs

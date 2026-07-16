@@ -712,6 +712,7 @@ const ICONS: Record<string, string> = {
 
       .bar-tf { background: var(--tf); }
       .bar-lf { background: var(--lf); }
+      .bar-vip { background: #57e6c3; }
 
       .chart-bar-label {
         position: absolute;
@@ -1828,6 +1829,7 @@ const ICONS: Record<string, string> = {
       .hbar { width: 42%; max-width: 11px; border-radius: 2px 2px 0 0; }
       .hbar.bar-tf { background: var(--tf); }
       .hbar.bar-lf { background: var(--lf); }
+      .hbar.bar-vip { background: #57e6c3; }
 
       /* 히트맵 컨트롤 + 고정 프레임(내부 스크롤) */
       .hm-controls { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.85rem; flex-wrap: wrap; }
@@ -3136,29 +3138,31 @@ const ICONS: Record<string, string> = {
         const metric = _trafficMetric || 'views';
         const map = {};
         if (metric === 'visitors') {
-          _hourlyVisitors.forEach(d => { map[d.hour] = { tf: d.tf || 0, lf: d.lf || 0 }; });
+          _hourlyVisitors.forEach(d => { map[d.hour] = { tf: d.tf || 0, lf: d.lf || 0, vip: d.vip || 0 }; });
         } else {
-          _hourlyViews.forEach(d => { map[d.hour] = { tf: d.tf_views || 0, lf: d.lf_views || 0 }; });
+          _hourlyViews.forEach(d => { map[d.hour] = { tf: d.tf_views || 0, lf: d.lf_views || 0, vip: d.vip_views || 0 }; });
         }
-        const hasData = Object.values(map).some(h => h.tf + h.lf > 0);
+        const hasData = Object.values(map).some(h => h.tf + h.lf + h.vip > 0);
         if (!hasData) {
           container.innerHTML = `<div class="no-data" style="width:100%">오늘 ${metric === 'visitors' ? '방문자' : '조회'} 데이터 없음</div>`;
           renderHourlyHot(map, metric);
           return;
         }
-        const maxV = Math.max(1, ...Object.values(map).flatMap(h => [h.tf, h.lf]));
+        const maxV = Math.max(1, ...Object.values(map).flatMap(h => [h.tf, h.lf, h.vip]));
         const unit = metric === 'visitors' ? '명' : '회';
         const rowHtml = (h0, h1) => {
           let html = '';
           for (let h = h0; h <= h1; h++) {
-            const d = map[h] || { tf: 0, lf: 0 };
+            const d = map[h] || { tf: 0, lf: 0, vip: 0 };
             const tfH = d.tf > 0 ? Math.max(d.tf / maxV * 82, 2) : 0;
             const lfH = d.lf > 0 ? Math.max(d.lf / maxV * 82, 2) : 0;
+            const vipH = d.vip > 0 ? Math.max(d.vip / maxV * 82, 2) : 0;
             html += `<div class="chart-bar-col">
-              <div class="chart-bar-tooltip">${h}:00 · TF ${fmt(d.tf)} · LF ${fmt(d.lf)} ${unit}</div>
+              <div class="chart-bar-tooltip">${h}:00 · TF ${fmt(d.tf)} · LF ${fmt(d.lf)} · VIP ${fmt(d.vip)} ${unit}</div>
               <div class="hbar-group">
                 <div class="hbar bar-tf" style="height:${tfH}px"></div>
                 <div class="hbar bar-lf" style="height:${lfH}px"></div>
+                <div class="hbar bar-vip" style="height:${vipH}px"></div>
               </div>
               <span class="chart-bar-label">${h}</span>
             </div>`;
@@ -3242,12 +3246,13 @@ const ICONS: Record<string, string> = {
             label = `${date.getMonth()+1}/${date.getDate()}`;
             sortKey = key;
           }
-          if (!buckets[key]) buckets[key] = { key, label, views:0, visitors:0, tf:0, lf:0, web:0, mobile:0, webV:0, mobileV:0, sortKey };
+          if (!buckets[key]) buckets[key] = { key, label, views:0, visitors:0, tf:0, lf:0, vip:0, web:0, mobile:0, webV:0, mobileV:0, sortKey };
           const b = buckets[key];
           b.views += Number(d.views)||0;
           b.visitors += Number(d.visitors)||0;
           b.tf += Number(d.tf_views)||0;
           b.lf += Number(d.lf_views)||0;
+          b.vip += Number(d.vip_views)||0;
           b.web += Number(d.web_views)||0;
           b.mobile += Number(d.mobile_views)||0;
           b.webV += Number(d.web_visitors)||0;
@@ -3275,9 +3280,11 @@ const ICONS: Record<string, string> = {
         const metric = _trafficMetric || 'views';
         const series = metric === 'visitors'
           ? [{ name: 'TechFlow', color: '#3b82f6', vals: buckets.map(b => splitVisitors(b).tf) },
-             { name: 'LifeFlow', color: '#22c55e', vals: buckets.map(b => splitVisitors(b).lf) }]
+             { name: 'LifeFlow', color: '#22c55e', vals: buckets.map(b => splitVisitors(b).lf) },
+             { name: 'VIP', color: '#57e6c3', vals: buckets.map(b => b.views ? Math.round(b.visitors * b.vip / b.views) : 0) }]
           : [{ name: 'TechFlow', color: '#3b82f6', vals: buckets.map(b => b.tf) },
-             { name: 'LifeFlow', color: '#22c55e', vals: buckets.map(b => b.lf) }];
+             { name: 'LifeFlow', color: '#22c55e', vals: buckets.map(b => b.lf) },
+             { name: 'VIP', color: '#57e6c3', vals: buckets.map(b => b.vip) }];
         if (legend) {
           legend.innerHTML = series.map(s =>
             `<span style="display:flex;align-items:center;gap:0.3rem"><i style="width:14px;height:0;border-top:2.5px dashed ${s.color};display:inline-block"></i>${s.name}</span>`

@@ -190,7 +190,8 @@ BEGIN
       count(*) AS views,
       count(DISTINCT (metadata->>'user_agent')) AS visitors,
       count(*) FILTER (WHERE source = 'blog') AS tf_views,
-      count(*) FILTER (WHERE source = 'lifeflow') AS lf_views
+      count(*) FILTER (WHERE source = 'lifeflow') AS lf_views,
+      count(*) FILTER (WHERE source = 'vip') AS vip_views
     FROM analytics
     WHERE event_type = 'pageview'
       AND (created_at AT TIME ZONE 'Asia/Seoul')::date > ((now() AT TIME ZONE 'Asia/Seoul')::date - p_days)
@@ -329,7 +330,8 @@ BEGIN
       EXTRACT(hour FROM created_at AT TIME ZONE 'Asia/Seoul') AS hour,
       count(*) AS views,
       count(*) FILTER (WHERE source = 'blog') AS tf_views,
-      count(*) FILTER (WHERE source = 'lifeflow') AS lf_views
+      count(*) FILTER (WHERE source = 'lifeflow') AS lf_views,
+      count(*) FILTER (WHERE source = 'vip') AS vip_views
     FROM analytics
     WHERE event_type = 'pageview' AND created_at >= CURRENT_DATE
     GROUP BY hour
