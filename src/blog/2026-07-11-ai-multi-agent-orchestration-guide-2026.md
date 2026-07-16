@@ -23,6 +23,10 @@ faq:
 
 2026년 하반기 AI 이야기에서 빠지지 않는 단어가 있습니다. 바로 멀티 에이전트 오케스트레이션. GPT-5.6가 이를 정식 기능(beta)으로 넣으면서 더 화제가 됐죠. 이름은 거창하지만 개념은 의외로 단순합니다. "혼자 다 하지 말고, 역할 나눠서 팀으로 하자"입니다.
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-11-ai-gpt-5-6-vs-claude-fable-5-coding-showdown/">GPT-5.6 vs Claude Fable 5: 20…</a> · <a href="/blog/2026-07-11-ai-mcp-model-context-protocol-guide-2026/">MCP(모델 컨텍스트 프로토콜) 완벽 가이드: 202…</a> · <a href="/blog/2026-07-11-ai-openai-codex-gpt-5-6-guide-2026/">OpenAI Codex + GPT</a></div>
+
 ## 한마디로: 'AI 1인 작업 → AI 팀 작업'
 
 기존에는 하나의 AI가 조사도 하고, 코드도 짜고, 검증도 했습니다. 멀티 에이전트는 이를 <span style="font-size:1.3em;font-weight:800">역할별 에이전트로 나누고, 지휘자가 조율</span>합니다.

@@ -23,6 +23,10 @@ faq:
 
 2026년 여름, 코딩 AI 판이 다시 뒤집혔습니다. 6월엔 앤트로픽의 Claude Fable 5, 7월엔 OpenAI의 GPT-5.6(Sol·Terra·Luna)가 나왔죠. 둘 다 "코딩 최강"을 내세우는데, 실제로 개발에 쓸 땐 어느 쪽이 나을까요? 공식 데이터로 정면 비교했습니다.
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-11-ai-openai-codex-gpt-5-6-guide-2026/">OpenAI Codex + GPT</a> · <a href="/blog/2026-07-11-ai-claude-fable-5-guide-2026/">Claude Fable 5 완벽 정리</a> · <a href="/blog/2026-07-11-ai-multi-agent-orchestration-guide-2026/">AI 멀티 에이전트 오케스트레이션 완벽 가이드</a></div>
+
 ## 한눈에 보는 결론
 
 <div class="chart-versus" data-title="GPT-5.6 Sol vs Claude Fable 5 — 코딩 관점 종합" data-name-a="GPT-5.6 Sol" data-name-b="Claude Fable 5" data-color-a="#10b981" data-color-b="#3b82f6" data-items='[{"label":"코딩 벤치마크","a":92,"b":94},{"label":"속도","a":90,"b":78},{"label":"장기·복잡 작업","a":85,"b":96},{"label":"가성비","a":88,"b":68},{"label":"에이전트 실행력","a":90,"b":93}]'></div>

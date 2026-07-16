@@ -23,6 +23,10 @@ faq:
 
 "AI가 똑똑한 건 알겠는데, 우리 회사 문서는 모르잖아?" 맞습니다. 그리고 이 문제를 푸는 표준 해법이 RAG(검색증강생성)입니다. 사내 지식·최신 자료를 AI에 물려주는 이 기술을, 개념부터 실전 팁까지 쉽게 정리했습니다.
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-12-dev-ai-agent-frameworks-langgraph-crewai-2026/">AI 에이전트 프레임워크 비교 2026</a> · <a href="/blog/2026-07-12-dev-astro-blog-build-guide-2026/">Astro로 블로그·사이트 만들기 완벽 가이드 2026</a> · <a href="/blog/2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2/">2026 하반기 AI 코딩 툴 TOP 5 비교</a></div>
+
 ## RAG를 한마디로: '오픈북 시험'
 
 AI에게 그냥 답하라고 하면, 모르는 건 그럴듯하게 지어냅니다(환각). RAG는 답하기 전에 관련 자료를 먼저 찾아서 그 근거로 답하게 합니다. 폐쇄형 시험이 아니라 <span style="font-size:1.3em;font-weight:800">오픈북 시험</span>을 치게 하는 셈이죠.

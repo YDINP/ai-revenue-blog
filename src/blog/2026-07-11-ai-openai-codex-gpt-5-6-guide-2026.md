@@ -27,6 +27,10 @@ faq:
 
 2026년 7월 9일, OpenAI가 GPT-5.6를 공개하며 코딩 도구 Codex도 함께 업데이트했습니다. 이번엔 모델 하나가 아니라 Sol·Terra·Luna 세 가지가 동시에 나왔는데요, 이름만 봐선 헷갈리기 쉽습니다. 세 모델의 차이부터 실제 벤치마크, 가격, 새 Codex 기능까지 공식 데이터 기준으로 깔끔하게 정리했습니다.
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-11-ai-gpt-5-6-vs-claude-fable-5-coding-showdown/">GPT-5.6 vs Claude Fable 5: 20…</a> · <a href="/blog/2026-07-11-ai-multi-agent-orchestration-guide-2026/">AI 멀티 에이전트 오케스트레이션 완벽 가이드</a> · <a href="/blog/2026-07-14-ai-coding-tools-comparison-cursor-copilot-claude-2026/">AI 코딩 도구 TOP 3 비교 2026</a></div>
+
 ## GPT-5.6는 '한 모델'이 아니라 '3등급'
 
 가장 먼저 알아야 할 점. GPT-5.6는 등급이 셋으로 나뉩니다.

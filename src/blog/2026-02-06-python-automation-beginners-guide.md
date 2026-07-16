@@ -16,6 +16,10 @@ coupangLinks:
     url: "https://www.coupang.com/np/search?q=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%90%ED%94%84%20%ED%88%AC%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
     imageUrl: "https://ads-partners.coupang.com/image1/0On6H424FU-r321w0IKYNHFbCTvQZcxWO7MrWHJh0lPiI-TqHGfr2BoQ7aScV3gjq0pXEEid9GaTek5MdF_fSes76-X8XYB9I0QbG5lt569cmgVQR4GurvRPIpOu05CKpjvebmiMEbhHgxEjibMLq1LLbW4hscQAbdUGF8dR0A2A0rXUjC3edghaw9g4p0ERz_DO1mivI3eDzNubOUTF0y8QI2LoWp9uCfbvBsfnw1cdkGRUg0FhhCVmdD-XvzvfkVADF727qIGm-blvZtHpPLaNfd9rgx_A40SSwQ-y2-gL4LRrQj6LesfP5o3ZNBn41ntzpw=="
 ---
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-14-ai-side-income-systems-2026-guide/">2026 AI 부업 현실 가이드</a> · <a href="/blog/2026-07-11-ai-agent-side-income-2026/">AI 에이전트로 사이드 수익 만들기</a> · <a href="/blog/2026-07-07-ai-agentic-ai-complete-guide-2026/">에이전틱 AI 완벽 가이드 2026</a></div>
+
 ## 왜 Python 자동화인가?
 
 매일 반복되는 파일 정리, 데이터 복사, 이메일 발송 같은 업무를 손으로 하고 계신가요? Python 자동화를 배우면 클릭 100번을 코드 <span style="font-size:1.15em;font-weight:700">10줄</span>로 줄일 수 있습니다. Python은 배우기 쉬운 문법과 강력한 라이브러리 덕분에 비개발자도 업무자동화를 시작하기 좋은 언어입니다.

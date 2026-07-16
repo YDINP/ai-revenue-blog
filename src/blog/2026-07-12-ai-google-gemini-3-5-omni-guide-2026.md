@@ -23,6 +23,10 @@ faq:
 
 ChatGPT와 Claude 이야기는 많이 들었어도, 구글 Gemini의 최신 소식은 놓치기 쉽습니다. 그런데 2026년 구글은 I/O에서 Gemini 3.5와 Gemini Omni를 내놓으며 '에이전트 시대'로 본격 진입했습니다. 무엇이 달라졌고, 언제 Gemini를 쓰면 좋은지 최신 기준으로 정리했습니다.
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-11-ai-claude-fable-5-guide-2026/">Claude Fable 5 완벽 정리</a> · <a href="/blog/2026-07-12-ai-elevenlabs-voice-dubbing-guide-2026/">AI 음성·더빙 완벽 가이드 2026</a> · <a href="/blog/2026-07-12-ai-suno-music-generation-guide-2026/">AI 음악 만들기 2026</a></div>
+
 ## 큰 그림: 구글이 '에이전트 시대'를 선언했다
 
 2026년 구글 I/O의 핵심은 둘입니다.

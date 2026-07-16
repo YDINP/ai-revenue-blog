@@ -25,6 +25,10 @@ faq:
 
 ![네온 픽셀아트 Game Over 사인](https://images.pexels.com/photos/29096088/pexels-photo-29096088.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=430&w=940)
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-11-game-indie-first-game-sales-reality-2026-median-wishlist-data/">인디게임 첫 출시 매출의 현실 2026</a> · <a href="/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/">인디게임 수익 현실 2026</a> · <a href="/blog/2026-06-30-game-indie-game-steam-launch-guide-2026-wishlist-to-launch/">인디게임 개발 로드맵 시리즈 6탄</a></div>
+
 ## 숫자가 말하는 현지화의 힘
 
 | 지표 | 수치 |

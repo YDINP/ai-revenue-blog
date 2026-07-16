@@ -23,6 +23,10 @@ faq:
 
 2026년, "글로 쓰면 영상이 나온다"가 현실이 됐습니다. 문제는 도구가 우후죽순이라는 것. 구글 Veo 3.1, Runway Gen-4.5, Kling 3를 중심으로, 서비스 종료를 앞둔 Sora까지 최신 기준으로 정면 비교했습니다.
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-12-ai-elevenlabs-voice-dubbing-guide-2026/">AI 음성·더빙 완벽 가이드 2026</a> · <a href="/blog/2026-07-12-ai-google-gemini-3-5-omni-guide-2026/">구글 Gemini 3.5 &amp; Gemini Omni 완…</a> · <a href="/blog/2026-07-12-ai-suno-music-generation-guide-2026/">AI 음악 만들기 2026</a></div>
+
 ## 먼저 알아둘 큰 변화: Sora 종료, 중국 모델 부상
 
 - **OpenAI Sora** — 2026년 웹·앱 종료, API도 <span style="font-size:1.15em;font-weight:700">9월 24일 종료 예정</span>. 신규 시작엔 비권장.

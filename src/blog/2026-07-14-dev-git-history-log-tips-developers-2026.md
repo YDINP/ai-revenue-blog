@@ -23,6 +23,10 @@ faq:
 
 ![Git 스티커를 든 손](https://images.pexels.com/photos/11035539/pexels-photo-11035539.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=430&w=940)
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-14-dev-ship-ios-mac-apps-without-xcode-2026/">Xcode 없이 iOS·Mac 앱 빌드·배포하기 20…</a> · <a href="/blog/2026-02-04-git-github-beginner-guide-2026/">2026년 Git &amp; GitHub 완벽 입문 가이드</a> · <a href="/blog/2026-07-14-ai-app-monetization-revenuecat-subscription-guide/">앱 수익화 자동화 2026</a></div>
+
 ## 1. 특정 코드의 등장·삭제 추적 — pickaxe (`-S`)
 
 "이 함수 이름이 언제 사라졌지?"를 찾는 최강 도구입니다.

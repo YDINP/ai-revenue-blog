@@ -33,6 +33,10 @@ faq:
 
 "내 컴퓨터에서 직접 AI를 돌리고 싶다." 프라이버시, 비용, 커스터마이징 때문에 로컬 LLM에 관심 갖는 분이 늘었습니다. 그런데 하드웨어를 잘못 고르면 돈만 쓰고 제대로 못 돌립니다. 핵심은 하나. <span style="font-size:1.3em;font-weight:800">VRAM</span>입니다.
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-14-review-mechanical-keyboard-recommendation-2026/">기계식 키보드 추천 2026</a> · <a href="/blog/2026-07-12-review-desk-setup-monitor-arm-usb-c-hub-2026/">개발자·재택 데스크 셋업 완벽 가이드 2026</a> · <a href="/blog/2026-07-12-review-external-ssd-recommendation-2026/">외장 SSD 추천 2026</a></div>
+
 ## 왜 VRAM이 전부인가
 
 LLM은 모델 크기(파라미터)에 비례해 메모리를 먹습니다. 그리고 모델이 그래픽카드 메모리(VRAM)에 다 올라가야 빠르게 돌아갑니다. 넘치면 느린 시스템 메모리로 밀려나 속도가 급락하죠.

@@ -23,6 +23,10 @@ faq:
 
 블로그나 문서 사이트를 만들려는데 Next.js는 좀 과한 것 같고, 순수 HTML은 관리가 번거롭다면 — Astro가 정답일 수 있습니다. 2026년 콘텐츠 사이트의 강자로 자리 잡은 Astro를, 왜 빠르고 SEO에 강한지부터 만드는 흐름까지 정리했습니다. (참고로 이 블로그도 Astro로 만들어졌습니다.)
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-12-dev-ai-agent-frameworks-langgraph-crewai-2026/">AI 에이전트 프레임워크 비교 2026</a> · <a href="/blog/2026-07-12-dev-rag-retrieval-augmented-generation-guide-2026/">RAG(검색증강생성) 실전 입문 2026: AI에게…</a> · <a href="/blog/2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2/">2026 하반기 AI 코딩 툴 TOP 5 비교</a></div>
+
 ## Astro를 한마디로: '읽는 사이트'의 최적해
 
 Astro는 콘텐츠 중심 사이트(블로그·문서·랜딩)에 특화된 프레임워크입니다. 핵심은 하나. <span style="font-size:1.3em;font-weight:800">기본적으로 자바스크립트를 거의 안 보낸다</span>는 것.

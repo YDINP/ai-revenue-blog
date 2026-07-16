@@ -23,6 +23,10 @@ faq:
 
 2026년 하반기, AI 없이 코딩하는 개발자를 찾기가 더 어려워졌습니다. 문제는 도구가 너무 많다는 것. Cursor, Claude Code, OpenAI Codex, Windsurf, GitHub Copilot — 자주 언급되는 5종을 성격별로 비교해, 내 작업에 맞는 걸 고르는 법을 정리했습니다.
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-14-ai-coding-tools-comparison-cursor-copilot-claude-2026/">AI 코딩 도구 TOP 3 비교 2026</a> · <a href="/blog/2026-07-07-game-ai-coding-tools-indie-game-development-2026-cursor-claude-code/">인디게임 개발 로드맵 시리즈 3탄</a> · <a href="/blog/2026-07-12-dev-ai-agent-frameworks-langgraph-crewai-2026/">AI 에이전트 프레임워크 비교 2026</a></div>
+
 ## 먼저 큰 그림: 두 갈래로 나뉜다
 
 AI 코딩 툴은 크게 두 방식입니다.

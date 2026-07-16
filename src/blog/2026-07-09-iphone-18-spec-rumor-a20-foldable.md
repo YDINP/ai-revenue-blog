@@ -21,6 +21,10 @@ faq:
 
 아이폰 17이 이제 막 손에 익었는데, 벌써 다음 모델 이야기가 슬금슬금 나오고 있어요. "지금 17 사도 될까, 아니면 18을 기다리는 게 나을까?" 한 번쯤 고민해보셨죠. 애플이 공식 발표한 건 아직 없지만, 부품 공급망 정보와 MacRumors·AppleInsider 같은 해외 매체 보도를 모으면 대략적인 그림은 그려집니다. 아래 내용은 전부 '루머' 기반이라는 점만 기억하고 편하게 읽어보세요.
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-14-review-mechanical-keyboard-recommendation-2026/">기계식 키보드 추천 2026</a> · <a href="/blog/2026-07-12-review-desk-setup-monitor-arm-usb-c-hub-2026/">개발자·재택 데스크 셋업 완벽 가이드 2026</a> · <a href="/blog/2026-07-12-review-external-ssd-recommendation-2026/">외장 SSD 추천 2026</a></div>
+
 ## 1. 출시일 — 사상 첫 '분할 출시'가 유력해요
 
 그동안 아이폰은 매년 9월에 온 라인업이 한꺼번에 나왔죠. 그런데 아이폰 18부터는 이 공식이 깨질 거란 관측이 강합니다. 정리하면 두 번에 나눠 출시된다는 거예요.

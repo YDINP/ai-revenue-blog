@@ -23,6 +23,10 @@ faq:
 
 "AI가 알아서 돈을 벌어준다"는 광고, 한 번쯤 보셨죠? 대부분은 과장입니다. 하지만 2026년의 AI 에이전트가 <span style="font-size:1.3em;font-weight:800">사이드 프로젝트의 진입 장벽을 크게 낮춘 것</span>은 사실입니다. 혼자서도 운영할 수 있는 범위가 넓어졌으니까요. 과장 없이, 현실적인 5가지 방법을 정리했습니다.
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-14-ai-side-income-systems-2026-guide/">2026 AI 부업 현실 가이드</a> · <a href="/blog/2026-07-07-ai-agentic-ai-complete-guide-2026/">에이전틱 AI 완벽 가이드 2026</a> · <a href="/blog/2026-07-11-ai-mcp-model-context-protocol-guide-2026/">MCP(모델 컨텍스트 프로토콜) 완벽 가이드: 202…</a></div>
+
 ## 먼저 오해부터 풀기
 
 <div class="callout-warning">⚠️ 현실 체크: AI는 '자동 수익 기계'가 아니라 '생산성 증폭기'입니다. 수익의 원천은 여전히 가치 있는 결과물이고, AI는 그걸 만드는 시간을 몇 배로 줄여줄 뿐입니다. 방향과 꾸준함이 없으면 AI가 있어도 안 됩니다.</div>

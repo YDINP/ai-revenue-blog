@@ -23,6 +23,10 @@ faq:
 
 2026년, 검색창의 풍경이 완전히 바뀌었습니다. 구글은 AI 오버뷰로 답을 요약해 보여주고, 퍼플렉시티 같은 AI 검색엔진은 출처를 달아 대화하듯 답합니다. 문제는 하나. 사용자가 더 이상 링크를 클릭하지 않는다는 것. 블로그·사이트 운영자는 어떻게 대응해야 할까요?
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-14-ai-app-monetization-revenuecat-subscription-guide/">앱 수익화 자동화 2026</a> · <a href="/blog/2026-07-14-ai-coding-tools-comparison-cursor-copilot-claude-2026/">AI 코딩 도구 TOP 3 비교 2026</a> · <a href="/blog/2026-07-14-ai-llm-as-judge-evaluation-guide-2026/">LLM-as-Judge 2026: AI로 AI 출력…</a></div>
+
 ## 무엇이 달라졌나: '클릭 없는 검색'
 
 예전 SEO의 목표는 단순했습니다. "검색 결과 1페이지에 올라 클릭을 받는 것." 그런데 AI가 답을 바로 보여주면서, <span style="font-size:1.15em;font-weight:700">원문을 클릭하지 않는 검색(zero-click)</span>이 크게 늘었습니다.

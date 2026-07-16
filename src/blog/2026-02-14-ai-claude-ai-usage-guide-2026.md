@@ -16,6 +16,10 @@ coupangLinks:
     url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20MX%20Keys%20S%20%ED%82%A4%EB%B3%B4%EB%93%9C"
     imageUrl: "https://ads-partners.coupang.com/image1/kRP2tNtRYuy67cg-kT0hp84di-RGopkc313iCV1Lh5i5GeM4DhkTeP9ivodQ9DLjolpAA4Rc0zhZQkGD9cldunGR06JVyC5_jk9J2O-M27lvERPIgXHWxi0FXp6wDo0KpYOINUEHILwDPngc8kECd4WtMOWYar5-usBIXTGESmkU04o1ptIrIfLeolko_FU9mqqSVIW_IuBWCD_5frY760QrK7VTk6NUtnUmpG6egd_nUhde8eEDc0pE5hcjZ1lY9egeYK_HgzndsftYgUDMK6ZxYzSAI7KcWkw="
 ---
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-02-14-ai-chatgpt-usage-guide-2026/">2026년 ChatGPT 활용법</a> · <a href="/blog/2026-02-20-ai-prompt-engineering-practical-tips-2026-efficiency-triple/">프롬프트 엔지니어링 실전 팁 2026</a> · <a href="/blog/2026-07-06-game-ai-game-asset-tools-comparison-2026-midjourney-scenario-layer/">AI 게임 에셋 도구 비교 2026</a></div>
+
 ## Claude AI, 2026년 현황과 주목할 변화
 
 2026년 2월 기준, Anthropic의 Claude AI는 단순한 챗봇을 넘어 엔터프라이즈급 AI 솔루션으로 자리잡았습니다. 특히 2월 5일 출시된 최신 모델 Claude Opus 4.6은 SWE-bench Verified 80.8%를 기록하며 GPT-5.3 Codex와의 경쟁에서 코드 생성, 데이터 분석, 창의 콘텐츠 작성에서 업계 최고 수준의 성능을 보여주고 있습니다.

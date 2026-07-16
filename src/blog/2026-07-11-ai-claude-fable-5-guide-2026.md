@@ -23,6 +23,10 @@ faq:
 
 2026년 6월, 앤트로픽이 지금까지 일반에 공개한 모델 중 <span style="font-size:1.15em;font-weight:700">가장 강력한 Claude Fable 5</span>를 내놓았습니다. 'Mythos급'이라는 낯선 표현과 함께 등장했는데, 대체 무엇이 달라졌고 왜 화제인지, 공식 발표 기준으로 정리했습니다.
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-12-ai-google-gemini-3-5-omni-guide-2026/">구글 Gemini 3.5 &amp; Gemini Omni 완…</a> · <a href="/blog/2026-07-11-ai-gpt-5-6-vs-claude-fable-5-coding-showdown/">GPT-5.6 vs Claude Fable 5: 20…</a> · <a href="/blog/2026-07-11-ai-mcp-model-context-protocol-guide-2026/">MCP(모델 컨텍스트 프로토콜) 완벽 가이드: 202…</a></div>
+
 ## Fable 5를 한마디로: '봉인 해제된 상위 티어'
 
 앤트로픽에는 공개 라인업(Haiku·Sonnet·Opus) 위에, 더 강력한 Mythos 계열이 있습니다. 그동안은 일반에 열지 않았죠. Fable 5는 이 Mythos급 능력을 '안전하게 쓸 수 있도록' 다듬어 처음으로 일반 공개한 모델입니다.

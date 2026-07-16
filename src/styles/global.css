@@ -1034,6 +1034,19 @@ section > h2::after {
 .post-content .mid-related a { font-weight: 600; text-decoration: none; }
 .post-content .mid-related a:hover { text-decoration: underline; }
 
+/* seo-inlink: 본문 도입부 관련글 문맥링크(내부링크 SEO). div 라서 첫문단 드롭캡 규칙과 무관. */
+.post-content .seo-inlink {
+  margin: 1.5rem 0;
+  padding: 0.7rem 1rem;
+  background: var(--color-bg-secondary);
+  border-left: 3px solid var(--color-primary);
+  border-radius: 8px;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+.post-content .seo-inlink strong { font-weight: 800; }
+.post-content .seo-inlink a { font-weight: 600; }
+
 /* 본문 중간 쿠팡 인라인 CTA (자동 삽입) */
 .post-content .mid-coupang-wrap { margin: 2rem 0; }
 .post-content .coupang-cta-inline {

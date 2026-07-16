@@ -33,6 +33,10 @@ faq:
 
 2026년, 소파에서도 침대에서도 '제대로 된 게임'을 즐기려는 사람에게 선택지는 셋입니다. 밸브 스팀덱 OLED, 아수스 ROG Ally X, 닌텐도 스위치2. 셋 다 '휴대용'이지만 성격은 완전히 다릅니다. 내게 맞는 한 대를 고르는 법을 정리했습니다.
 
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-14-review-mechanical-keyboard-recommendation-2026/">기계식 키보드 추천 2026</a> · <a href="/blog/2026-07-12-review-desk-setup-monitor-arm-usb-c-hub-2026/">개발자·재택 데스크 셋업 완벽 가이드 2026</a> · <a href="/blog/2026-07-12-review-external-ssd-recommendation-2026/">외장 SSD 추천 2026</a></div>
+
 ## 먼저 큰 그림: 세 갈래 성격
 
 - **스팀덱 OLED** — 스팀 특화 PC 게임기, OLED 화면, 가성비

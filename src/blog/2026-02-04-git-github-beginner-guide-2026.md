@@ -16,6 +16,10 @@ coupangLinks:
     url: "https://www.coupang.com/np/search?q=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C"
     imageUrl: "https://ads-partners.coupang.com/image1/qne2hGD15JjE-w8hqo-MIq8aqUK_0f6v3E8XQlEFvv_LaEm4y69h-5ppYWEK0wpO7o5i3xkey6XCYHkvSQ-1Mtpx--gADkLLFuTOjvmEzTFoGsWXqOBAh8TGi_5iuograMtNjGVrOG5MWcCgUb_lLlCWN-4IoFOEVjz7WZ-5sBryOzYHn0IfFzzYJFq0YFiGCawa1UzMEl36TPgJMy2a6Yz4GMqp1TMPb5RK8xoANwm9RW7hjJ_kLIZVCPAYmBSmjvuJa8A3Lq3bAomXj95KraTyHhLJxpwtApSjczIEHTKbC7iQM1Ad3wM="
 ---
+
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>함께 보면 좋은 글:</strong> <a href="/blog/2026-07-14-dev-git-history-log-tips-developers-2026/">개발자가 놓치는 Git 히스토리 활용 10가지</a> · <a href="/blog/2026-07-14-dev-ship-ios-mac-apps-without-xcode-2026/">Xcode 없이 iOS·Mac 앱 빌드·배포하기 20…</a> · <a href="/blog/2026-07-12-dev-ai-agent-frameworks-langgraph-crewai-2026/">AI 에이전트 프레임워크 비교 2026</a></div>
+
 ## Git, 왜 배워야 할까?
 
 프로그래밍을 시작하면 반드시 만나게 되는 도구가 바로 Git입니다. Git은 코드의 변경 이력을 관리하는 버전 관리 시스템으로, 전 세계 개발자의 <span style="font-size:1.3em;font-weight:800">93%</span> 이상이 사용하고 있습니다.
