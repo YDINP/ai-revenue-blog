@@ -1,13 +1,13 @@
 ---
-title: '정보처리기사 3회 실기 일정·준비 2026 하반기'
-description: '2026년 정보처리기사 3회 필기·실기 시험일정과 원서접수 기간, 실기 합격률·공부법까지 한 번에 정리했습니다. 접수 놓치기 전에 확인하세요.'
+title: '정보처리기사 실기 일정 2026 3회, 접수 단 4일'
+description: '2026년 정보처리기사 3회 필기·실기 시험일정과 원서접수 기간을 정리했습니다. 필기 원서접수는 단 4일, 실기 합격률은 20%대라 미리 준비해야 합니다. 6주 역산 공부법까지 한 번에 확인하세요.'
 pubDate: 2026-07-17
 author: "TechFlow"
 category: "Dev"
 tags: ["정보처리기사", "정보처리기사 실기", "정보처리기사 시험일정", "큐넷", "자격증", "2026 하반기"]
 image:
   url: "/images/info-processing-engineer.webp"
-  alt: "노트북과 자격증 서류, 합격 체크리스트를 아이소메트릭 스타일로 표현한 일러스트"
+  alt: "정보처리기사 자격증 노트북과 서류, 합격 체크리스트를 아이소메트릭 스타일로 표현한 일러스트"
 coupangLinks:
   - title: "정보처리기사 실기 교재"
     url: "https://www.coupang.com/np/search?q=%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0%20%EA%B5%90%EC%9E%AC&channel=user"
