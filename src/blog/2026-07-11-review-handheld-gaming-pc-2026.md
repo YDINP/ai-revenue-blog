@@ -94,6 +94,9 @@ faq:
 
 <div class="callout-tip">💡 팁: PC 게임기(스팀덱·Ally X)는 '내 스팀 게임을 들고 다닌다'는 개념이고, 스위치2는 '닌텐도 세계'입니다. 겹치지 않으니, 이미 스팀 게임이 많으면 스팀덱/Ally X, 닌텐도 게임이 하고 싶으면 스위치2로 갈리는 게 자연스럽습니다.</div>
 
+<!-- seo-inlink -->
+<div class="seo-inlink">🔗 <strong>이 주제 더 깊이 보기:</strong> <a href="/blog/steam-deck-oled-price-worth-2026/">스팀덱 OLED 지금 살까?</a> · <a href="/blog/switch2-vs-steam-deck-games-2026/">스위치2 vs 스팀덱 게임 비교</a> · <a href="/blog/budget-handheld-gaming-pc-2026/">가성비 핸드헬드 추천</a> · <a href="/blog/handheld-gaming-pc-buying-guide-2026/">휴대용 게이밍PC 고르는 법</a></div>
+
 ## 정리
 
 - **스팀덱 OLED** — 스팀 유저를 위한 가성비·OLED 명기
