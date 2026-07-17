@@ -4,7 +4,7 @@
 // Vercel Hobby 의 cron 은 지정 시각에서 최대 1시간 지연돼 09시 발송이 보장되지 않아 옮겼다.
 // 수동 확인: 봇에서 /report [YYYY-MM-DD]
 
-import { escapeHtml, sendToAdmin } from './_shared.js';
+import { escapeHtml, sendToAdmin, supabaseRpc } from './_shared.js';
 import { reportMessage } from './_report.js';
 import { syncGsc } from './_gsc-sync.js';
 
@@ -15,6 +15,8 @@ export default async function handler(req, res) {
   }
 
   try {
+    // 봇 트래픽 플래그(같은 UA 반복접속·선언형 봇 → event_type=pageview_bot) — best-effort
+    await supabaseRpc('flag_bot_pageviews', {}).catch((e) => console.error('bot flag (report):', e.message));
     // GSC 검색 실적을 Supabase(gsc_daily)에 저장 — best-effort(실패해도 리포트는 진행)
     await syncGsc({ days: 5 }).catch((e) => console.error('gsc sync (report):', e.message));
 
