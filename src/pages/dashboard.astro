@@ -2032,6 +2032,15 @@ const ICONS: Record<string, string> = {
         <span class="skeleton" style="width:60%;height:1rem;"></span>
       </div>
 
+      <!-- ══ 검색 실적 (GSC · 애드블록 무관 실측) ══ -->
+      <div class="traffic-section" id="gsc-panel" style="margin-bottom:1.25rem;">
+        <div style="font-weight:800;font-size:0.9rem;margin-bottom:0.75rem;">
+          🔍 검색 실적 (GSC)
+          <span style="font-weight:500;color:var(--text-2);font-size:0.72rem;">최근 7일 · Google 실측(2~3일 지연)</span>
+        </div>
+        <div id="gsc-body"><span class="skeleton" style="width:50%;height:1rem;display:inline-block;"></span></div>
+      </div>
+
       <!-- ══ Row 1: KPI 히어로 스트립 ══ -->
       <div class="summary-grid">
         <div class="summary-card accent-blue color-blue">
@@ -3660,6 +3669,65 @@ const ICONS: Record<string, string> = {
       let _audienceRows = [];
       let _funnelCounts = { pageviews: 0, coupang: 0, newsletter: 0, paperdoc: 0 };
 
+      // GSC 검색 실적 (gsc_daily) — 애드블록에 안 막히는 Google 실측
+      async function fetchGscStats() {
+        try {
+          const since = new Date(Date.now() - 8 * 864e5).toISOString().slice(0, 10);
+          const res = await fetch(
+            `${SUPABASE_URL}/rest/v1/gsc_daily?date=gte.${since}&select=date,source,page,clicks,impressions,ctr,position&limit=20000`,
+            { headers }
+          );
+          if (!res.ok) return null;
+          return await res.json();
+        } catch { return null; }
+      }
+
+      function renderGsc(rows) {
+        const el = document.getElementById('gsc-body');
+        if (!el) return;
+        if (!Array.isArray(rows) || !rows.length) {
+          el.innerHTML =
+            '<div style="color:var(--text-2);font-size:0.78rem;line-height:1.5;">아직 데이터가 없습니다 — 매일 리포트 동기화 후 채워집니다.<br>즉시 채우려면 <code>/api/gsc-sync?days=30&amp;secret=CRON_SECRET</code> 를 호출하세요.</div>';
+          return;
+        }
+        const fmt = (n) => Number(n || 0).toLocaleString('en-US');
+        const pct = (v) => (Number(v || 0) * 100).toFixed(1) + '%';
+        const META = { blog: 'TechFlow', lifeflow: 'LifeFlow' };
+        const slugOf = (p) => (p || '').replace(/^\/blog\//, '').replace(/\/$/, '');
+        const cut = (s, n) => (s = String(s || ''), s.length > n ? s.slice(0, n) + '…' : s);
+        let html = '';
+        for (const src of ['blog', 'lifeflow']) {
+          const rs = rows.filter((r) => r.source === src);
+          if (!rs.length) continue;
+          const tot = rs.filter((r) => r.page === '_TOTAL_');
+          const clicks = tot.reduce((s, r) => s + (r.clicks || 0), 0);
+          const impr = tot.reduce((s, r) => s + (r.impressions || 0), 0);
+          const byPage = {};
+          for (const r of rs) {
+            if (r.page === '_TOTAL_') continue;
+            const a = (byPage[r.page] ||= { page: r.page, clicks: 0, impressions: 0 });
+            a.clicks += r.clicks || 0;
+            a.impressions += r.impressions || 0;
+          }
+          const pages = Object.values(byPage)
+            .sort((a, b) => b.clicks - a.clicks || b.impressions - a.impressions)
+            .slice(0, 5);
+          html += `<div style="margin-bottom:0.9rem;">
+            <div style="font-weight:700;font-size:0.83rem;margin-bottom:0.35rem;">${META[src] || src}
+              <span style="font-weight:500;color:var(--text-2);">· 클릭 <b>${fmt(clicks)}</b> · 노출 <b>${fmt(impr)}</b> · CTR ${pct(impr ? clicks / impr : 0)}</span></div>`;
+          if (pages.length) {
+            html += '<div style="font-size:0.74rem;">' + pages.map((p) => {
+              const label = (typeof SLUG_TITLES !== 'undefined' && SLUG_TITLES[slugOf(p.page)]) || slugOf(p.page) || p.page;
+              return `<div style="display:flex;justify-content:space-between;gap:0.6rem;padding:0.18rem 0;border-bottom:1px solid var(--border);">
+                <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${cut(label, 34)}</span>
+                <span style="color:var(--text-2);white-space:nowrap;">클릭 ${fmt(p.clicks)} · 노출 ${fmt(p.impressions)}</span></div>`;
+            }).join('') + '</div>';
+          }
+          html += '</div>';
+        }
+        el.innerHTML = html || '<div style="color:var(--text-2);font-size:0.78rem;">표시할 데이터가 없습니다.</div>';
+      }
+
       async function fetchAudience() {
         try {
           const res = await fetch(
@@ -4730,7 +4798,11 @@ const ICONS: Record<string, string> = {
 
       document.getElementById('refresh-traffic')?.addEventListener('click', () => {
         loadTraffic(true);
+        fetchGscStats().then(renderGsc);
       });
+
+      // GSC 검색 실적 초기 로드
+      fetchGscStats().then(renderGsc);
 
       // === 탭 전환 로직 ===
       const mainTabs = document.querySelectorAll('.main-tab');

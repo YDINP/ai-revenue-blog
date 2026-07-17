@@ -115,4 +115,45 @@ export function gscDay(offsetDays) {
   return new Date(Date.now() - offsetDays * 86400000).toISOString().split('T')[0];
 }
 
+// [date × page] 행 — Supabase 저장용. 앵커 URL(#heading)은 본문 URL로 합산.
+export async function gscDatePageRows(site, startDate, endDate, rowLimit = 5000) {
+  const rows = await query(site, {
+    startDate,
+    endDate,
+    dimensions: ['date', 'page'],
+    rowLimit,
+    type: 'web',
+  });
+  const acc = {};
+  for (const r of rows) {
+    const date = r.keys[0];
+    const page = r.keys[1].split('#')[0];
+    const k = `${date}|${page}`;
+    const a = (acc[k] ||= { date, page, clicks: 0, impressions: 0, _pos: 0 });
+    a.clicks += r.clicks || 0;
+    a.impressions += r.impressions || 0;
+    a._pos += (r.position || 0) * (r.impressions || 0);
+  }
+  return Object.values(acc).map((a) => ({
+    date: a.date,
+    page: a.page,
+    clicks: a.clicks,
+    impressions: a.impressions,
+    ctr: a.impressions ? a.clicks / a.impressions : 0,
+    position: a.impressions ? a._pos / a.impressions : 0,
+  }));
+}
+
+// [date] 사이트 일별 합계
+export async function gscDateTotals(site, startDate, endDate) {
+  const rows = await query(site, { startDate, endDate, dimensions: ['date'], type: 'web' });
+  return rows.map((r) => ({
+    date: r.keys[0],
+    clicks: r.clicks || 0,
+    impressions: r.impressions || 0,
+    ctr: r.ctr || 0,
+    position: r.position || 0,
+  }));
+}
+
 export { sum };

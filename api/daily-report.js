@@ -6,6 +6,7 @@
 
 import { escapeHtml, sendToAdmin } from './_shared.js';
 import { reportMessage } from './_report.js';
+import { syncGsc } from './_gsc-sync.js';
 
 export default async function handler(req, res) {
   const secret = process.env.CRON_SECRET;
@@ -14,6 +15,9 @@ export default async function handler(req, res) {
   }
 
   try {
+    // GSC 검색 실적을 Supabase(gsc_daily)에 저장 — best-effort(실패해도 리포트는 진행)
+    await syncGsc({ days: 5 }).catch((e) => console.error('gsc sync (report):', e.message));
+
     // ?day=YYYY-MM-DD 로 특정 날짜 재발송 (워크플로 수동 실행용). 기본 = 어제(KST)
     const day = new URL(req.url, 'http://x').searchParams.get('day') || undefined;
     const text = await reportMessage(/^\d{4}-\d{2}-\d{2}$/.test(day || '') ? day : undefined);
