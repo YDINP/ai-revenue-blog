@@ -10,13 +10,13 @@ image:
   alt: "책상 위의 마이크와 촬영 장비 — 웹캠·마이크 셋업을 상징하는 이미지"
 coupangLinks:
   - title: "로지텍 웹캠 (Full HD)"
-    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20%EC%9B%B9%EC%BA%A0&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A1%9C%EC%A7%80%ED%85%8D%20%EC%9B%B9%EC%BA%A0&src=1139000&spec=10799999&addtag=200&ctag=%EB%A1%9C%EC%A7%80%ED%85%8D%20%EC%9B%B9%EC%BA%A0&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A1%9C%EC%A7%80%ED%85%8D%20%EC%9B%B9%EC%BA%A0"
     imageUrl: "https://ads-partners.coupang.com/image1/-hiuU5P5lq6ooBV8-qtBhMgvmbBoAj-b3aDcxG9qqBZpv4XReoIsr4XF0nG4hNoqVITLSEd24x2m7i6PQAsOI7ZafSydxKxAjvB15ypMNIfX0KUhVoAuKHr5JIGFTqTXVDDmcXub8yqyU9SfpzrtZrFtZiuJfIrlFoJykfDnPSDLXssrt0DZj6pVfg8i9sx6_wzFFxW2y-sI94r3wtK8miFUbwVQXN0Z7LtCPqCQrhfg3Urpit9_XMvED-ThVkW8rwtZI8B5Z7d4q4mIo4PPsQHxIwE6--b0iUer0tDAqnppKBIsU0lxpN1a"
   - title: "USB 콘덴서 마이크"
-    url: "https://www.coupang.com/np/search?q=USB%20%EC%BD%98%EB%8D%B4%EC%84%9C%20%EB%A7%88%EC%9D%B4%ED%81%AC&channel=user"
+    url: "https://www.coupang.com/np/search?q=USB%20%EC%BD%98%EB%8D%B4%EC%84%9C%20%EB%A7%88%EC%9D%B4%ED%81%AC&src=1139000&spec=10799999&addtag=200&ctag=USB%20%EC%BD%98%EB%8D%B4%EC%84%9C%20%EB%A7%88%EC%9D%B4%ED%81%AC&lptag=AF7838146&pageType=SEARCH&pageValue=USB%20%EC%BD%98%EB%8D%B4%EC%84%9C%20%EB%A7%88%EC%9D%B4%ED%81%AC"
     imageUrl: "https://ads-partners.coupang.com/image1/unPezx6Ov__pFGXIuiJCwE5xdVr0PEoVgOwce1Aryye8EKj8OmjFCbDGQfjksjVwQnoLUG07FadcgKwaidB9aDJs-j4Yp22WPw9jdh-h3AMjq_Psfblsf5yuGp0065jq0p8ROLKFv7_J8etABRyBo9pc94bww2Ay8_NbehKCB0wWth5JyNz-KhfOKgo0qOdHyIFXcdJn1-YmX-iJQKZ_KYZsmn6SqBG42aEImdBi5mFKAvWUJTGMI6KpT1lOwGk_rjuLnOhMcw-_L5lUtjw40aYQ9LSPsYNOW65ebQ3UiVC22krnD8Q-F-kx4JQbVzbwcpX0vIC941er2X4XGYllybF-StLwaQ3utSe_Mvc="
   - title: "다이나믹 방송용 마이크"
-    url: "https://www.coupang.com/np/search?q=%EB%B0%A9%EC%86%A1%EC%9A%A9%20%EB%8B%A4%EC%9D%B4%EB%82%98%EB%AF%B9%20%EB%A7%88%EC%9D%B4%ED%81%AC&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%B0%A9%EC%86%A1%EC%9A%A9%20%EB%8B%A4%EC%9D%B4%EB%82%98%EB%AF%B9%20%EB%A7%88%EC%9D%B4%ED%81%AC&src=1139000&spec=10799999&addtag=200&ctag=%EB%B0%A9%EC%86%A1%EC%9A%A9%20%EB%8B%A4%EC%9D%B4%EB%82%98%EB%AF%B9%20%EB%A7%88%EC%9D%B4%ED%81%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%B0%A9%EC%86%A1%EC%9A%A9%20%EB%8B%A4%EC%9D%B4%EB%82%98%EB%AF%B9%20%EB%A7%88%EC%9D%B4%ED%81%AC"
 faq:
   - q: "노트북 내장 웹캠·마이크로는 부족한가요?"
     a: "화상회의 정도는 가능하지만, '전문적으로 보이고 들리고 싶다'면 부족합니다. 내장 웹캠은 저조도에서 노이즈가 심하고, 내장 마이크는 울림·주변 소음을 그대로 담습니다. 외장 웹캠·마이크만 더해도 인상이 확 달라져, 회의·면접·강의·방송에서 신뢰도가 올라갑니다. 특히 마이크의 체감 개선 폭이 큽니다."

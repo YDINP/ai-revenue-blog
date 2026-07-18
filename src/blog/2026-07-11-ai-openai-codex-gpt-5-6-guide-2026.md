@@ -10,7 +10,7 @@ image:
   alt: "코드가 표시된 모니터 화면 — GPT-5.6와 Codex를 상징하는 개발 환경 이미지"
 coupangLinks:
   - title: "혼자 공부하는 파이썬 (개정판)"
-    url: "https://www.coupang.com/np/search?q=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&src=1139000&spec=10799999&addtag=200&ctag=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20%ED%8C%8C%EC%9D%B4%EC%8D%AC"
     imageUrl: "https://ads-partners.coupang.com/image1/1SytjviI3qxQS-nn1W7V8Bvn_Kl17UUV7ZXuC4XsXLH4KE0qWXz1hrihYmkB4df9yB89YSwj3wQSrtSik5ew_j2AzZ8-MysZaJOYJRAV9Yy18PgvXQ0mft-i7lK9-W0qqH_VGOnkhsO1bUrG4J08nn88woUN57KCMH2LZF33fDCEjEkkEx8ogGuEmPoYGqNFxF6yLms8C1b7Lm2tybt_g3ZzDcCMlFgxCAIFn6vhD-BIPB7FZDW5N32Jam4DJmBVY80rK8st0Ch22CBVs8G5Z7jSwKSbeOI0jXSRSQFXbpG-qj8HNVBQM_q735uNbL8LRUav-2U="
 faq:
   - q: "GPT-5.6 Sol·Terra·Luna는 어떻게 다른가요?"

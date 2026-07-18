@@ -10,9 +10,9 @@ image:
   alt: "저울 위에 놓인 구글 제미나이와 챗GPT 로고를 형상화한 아이소메트릭 일러스트 — 두 AI 서비스의 균형 비교를 상징하는 이미지"
 coupangLinks:
   - title: "챗GPT 활용법 도서"
-    url: "https://www.coupang.com/np/search?q=ChatGPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=ChatGPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=ChatGPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=ChatGPT%20%ED%99%9C%EC%9A%A9%EB%B2%95%20%EB%8F%84%EC%84%9C"
   - title: "제미나이 활용 가이드"
-    url: "https://www.coupang.com/np/search?q=%EC%A0%9C%EB%AF%B8%EB%82%98%EC%9D%B4%20%ED%99%9C%EC%9A%A9&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%A0%9C%EB%AF%B8%EB%82%98%EC%9D%B4%20%ED%99%9C%EC%9A%A9&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%9C%EB%AF%B8%EB%82%98%EC%9D%B4%20%ED%99%9C%EC%9A%A9&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%9C%EB%AF%B8%EB%82%98%EC%9D%B4%20%ED%99%9C%EC%9A%A9"
 faq:
   - q: "제미나이가 챗GPT보다 만족도가 높다는 게 사실인가요?"
     a: "네. 2026년 7월 오픈서베이 'AI 검색 트렌드 리포트'에 따르면 제미나이 만족도는 77.3%, 챗GPT는 70.6%로 6.7%p 차이가 났습니다. 2025년 12월에는 챗GPT(75.6%)가 제미나이(72.6%)보다 높았던 것과 비교하면 반년 만에 순위가 뒤집힌 셈입니다."

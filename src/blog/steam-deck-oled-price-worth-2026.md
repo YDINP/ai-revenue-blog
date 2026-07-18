@@ -10,11 +10,11 @@ image:
   alt: "가격표와 스팀덱 OLED 콘솔을 함께 그린 아이소메트릭 일러스트 — 가격 인상 이후의 구매 판단을 상징하는 이미지"
 coupangLinks:
   - title: "밸브 스팀덱 OLED"
-    url: "https://www.coupang.com/np/search?q=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED&src=1139000&spec=10799999&addtag=200&ctag=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED"
   - title: "스팀덱 전용 케이스"
-    url: "https://www.coupang.com/np/search?q=%EC%8A%A4%ED%8C%80%EB%8D%B1%20%EC%BC%80%EC%9D%B4%EC%8A%A4&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%8A%A4%ED%8C%80%EB%8D%B1%20%EC%BC%80%EC%9D%B4%EC%8A%A4&src=1139000&spec=10799999&addtag=200&ctag=%EC%8A%A4%ED%8C%80%EB%8D%B1%20%EC%BC%80%EC%9D%B4%EC%8A%A4&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%8A%A4%ED%8C%80%EB%8D%B1%20%EC%BC%80%EC%9D%B4%EC%8A%A4"
   - title: "마이크로SD 카드 512GB"
-    url: "https://www.coupang.com/np/search?q=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9CSD%20512GB&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9CSD%20512GB&src=1139000&spec=10799999&addtag=200&ctag=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9CSD%20512GB&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9CSD%20512GB"
 faq:
   - q: "스팀덱 OLED 512GB는 정확히 얼마나 올랐나요?"
     a: "2026년 5월 밸브가 512GB 모델 가격을 549달러에서 789달러로 조정했습니다. 240달러, 비율로는 40%대 인상이라 체감이 큰 편입니다. 다른 용량 모델의 인상 폭은 이 글 기준 세부 공지가 갈리므로 구매 전 밸브 공식 스토어에서 현재가를 다시 확인하는 게 안전합니다."

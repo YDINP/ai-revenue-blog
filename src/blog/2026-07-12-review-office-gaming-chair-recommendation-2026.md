@@ -10,13 +10,13 @@ image:
   alt: "사무 공간의 의자 — 개발자·재택 의자를 상징하는 이미지"
 coupangLinks:
   - title: "인체공학 메쉬 사무용 의자"
-    url: "https://www.coupang.com/np/search?q=%EC%9D%B8%EC%B2%B4%EA%B3%B5%ED%95%99%20%EB%A9%94%EC%89%AC%20%EC%9D%98%EC%9E%90&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%9D%B8%EC%B2%B4%EA%B3%B5%ED%95%99%20%EB%A9%94%EC%89%AC%20%EC%9D%98%EC%9E%90&src=1139000&spec=10799999&addtag=200&ctag=%EC%9D%B8%EC%B2%B4%EA%B3%B5%ED%95%99%20%EB%A9%94%EC%89%AC%20%EC%9D%98%EC%9E%90&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9D%B8%EC%B2%B4%EA%B3%B5%ED%95%99%20%EB%A9%94%EC%89%AC%20%EC%9D%98%EC%9E%90"
     imageUrl: "https://ads-partners.coupang.com/image1/1CTnEm-JD3rO6NQQ1CgI3AaAqAal_fmMeEz9kWyBT9LzoellP-dl6ztKv0eeUdtORxyygkgyyH3pomcH7GJ96fFKNhAcbPyHzvqlYVC0_-ra0CbP9zIqVT_4jBvpu2d3YNB_aF5hUpNy8M72U0ckl0EjuRLy8XSvrT14VLcRqDxfBV-4mjH9Q4Uv0MThgO8Kdm1C9vzApLtipkEhC4O_1ivvtzHJ5yGW47IlulEc-hDIP7yGswnL4RPKPr3BZh1kQpGKO3ekD3ivorluzE4LyHDHRF2WHFzTWfkZCOiVxkkQSnZSB7_quBPJPPxfbJ523d8-Gg=="
   - title: "게이밍 의자 (요추 지지)"
-    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EC%9D%98%EC%9E%90&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EC%9D%98%EC%9E%90&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EC%9D%98%EC%9E%90&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%EC%9D%98%EC%9E%90"
     imageUrl: "https://ads-partners.coupang.com/image1/o1X1p-ko_0Kk9RrMo2Axz6w4R0CjUS54PovIbTDh7qR9xOVFszpoe1nOwaZhZ1mndvfEYeQ4l3VzDkQqZmsmBZBi9-ZQbkutqJWdzNtTs6Nyw_ar1lRcgKRr8jjkRoDkZTUmMB5eDbJBZv03YoKdNT1sMbXSN280WzRRLWfDnLO9iEL7-RPQ_tBK9FbPPiFGFUqB79Tn7Kqt6AGwqpwHac1n57WqkwqTp5BdqkvgwwPxQal2dcTHfQaXWpaIhhW-yZp9zTZCB1oHFBCQUVFyUCchUSRd4C9ZU8pGVEhov4IWYp7xOJCHdNXD"
   - title: "허리 쿠션 (요추 서포트)"
-    url: "https://www.coupang.com/np/search?q=%ED%97%88%EB%A6%AC%20%EC%BF%A0%EC%85%98%20%EC%9A%94%EC%B6%94&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%97%88%EB%A6%AC%20%EC%BF%A0%EC%85%98%20%EC%9A%94%EC%B6%94&src=1139000&spec=10799999&addtag=200&ctag=%ED%97%88%EB%A6%AC%20%EC%BF%A0%EC%85%98%20%EC%9A%94%EC%B6%94&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%97%88%EB%A6%AC%20%EC%BF%A0%EC%85%98%20%EC%9A%94%EC%B6%94"
     imageUrl: "https://ads-partners.coupang.com/image1/SdLC_9utN_NzdtwtSUl7PYDG_3Xx3QeJ2Tw82O4qmg9YySouUpv6EKRV-t6nmp0Px3Ksu9VIIUGVtplpmDxW08Sy6mJKElKu0AG-rtzxRD6kLHyNERFg6OCv4UmPacPYbGkpLV40vgfbKywLylH8vATvkzmRPXWo8rEYPaGgGY7WQLITJmUkbUFqirKxPDrYPIz5_xz8gYx7CV5mrfB7JPl2DT5ncbmRQN5bXEdxMO8ThUnaMP4pyckCliUyiikqsB760NW0kEDbV-LoFvX0Ckck5CDvJKStquhRD1QDSJrPwm8qozHIKH7II_Tj37cr2t_hj60="
 faq:
   - q: "사무용(메쉬) 의자와 게이밍 체어 중 뭐가 나은가요?"

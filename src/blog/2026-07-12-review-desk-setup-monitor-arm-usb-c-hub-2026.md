@@ -10,13 +10,13 @@ image:
   alt: "깔끔하게 정리된 책상 셋업 — 개발자 데스크 셋업을 상징하는 이미지"
 coupangLinks:
   - title: "모니터암 (싱글/듀얼)"
-    url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8B%88%ED%84%B0%EC%95%94&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8B%88%ED%84%B0%EC%95%94&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8B%88%ED%84%B0%EC%95%94&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8B%88%ED%84%B0%EC%95%94"
     imageUrl: "https://ads-partners.coupang.com/image1/-7Z499aP34z92TtW-8znk3UQ7nxLvbEKmUeFqfdsABlpJLg7FfJloUiY9Av_3rjIZy3n_9_xn6X3GfRe2OM4sGaY0fbx1bvZvqnps6BKf09owoc_26Y-6Zi8xrZaR7_syzUiMWXWIzdXbt9LDUci5-EKT-qVuwCCBM2aD40txaBq8koEmnpVd0Ep9VqbTQm-40mG00H-K9aqAUziB9e9HdET7oUDYpU6-HEQtE7enVk8LzjsHBI4K0iU1cJ54OHbDkxoK_KS9tsynlAnhybsUcq-d_TYqZmSbvbd2xQ_BQLSxTc1_03S"
   - title: "USB-C 허브 · 도킹 스테이션"
-    url: "https://www.coupang.com/np/search?q=USB-C%20%ED%97%88%EB%B8%8C%20%EB%8F%84%ED%82%B9&channel=user"
+    url: "https://www.coupang.com/np/search?q=USB-C%20%ED%97%88%EB%B8%8C%20%EB%8F%84%ED%82%B9&src=1139000&spec=10799999&addtag=200&ctag=USB-C%20%ED%97%88%EB%B8%8C%20%EB%8F%84%ED%82%B9&lptag=AF7838146&pageType=SEARCH&pageValue=USB-C%20%ED%97%88%EB%B8%8C%20%EB%8F%84%ED%82%B9"
     imageUrl: "https://ads-partners.coupang.com/image1/sPI0MfTpOcHB_LMssPtcqBPaoIOlzE-DDS-HoLdi-XnOmrqNnv21p67EiGUR9DBWBPlavIN17LvrBLSgtNoN7-8YKc0zpQtCuSDSoktuS93BV49NHPV8JEE5UuVgddjwXX2RfSKc5Bd7_cL6AzrpkR1RGtqNQ4bmDKtIuR4eGzYzjVzMbrRffqXLT1pujTzrkHEDEeClps2ca9WRL1QrVum9C9y6RYgdMUW1ZRFm2EBF8A3Vki3VAoHKDAzD-hw40ReCTEGflj69VyqUzdEr_L9E4VWxrPTyn8Z8urR4yJCdM3qooVn8"
   - title: "전동 스탠딩데스크"
-    url: "https://www.coupang.com/np/search?q=%EC%A0%84%EB%8F%99%20%EC%8A%A4%ED%83%A0%EB%94%A9%EB%8D%B0%EC%8A%A4%ED%81%AC&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%A0%84%EB%8F%99%20%EC%8A%A4%ED%83%A0%EB%94%A9%EB%8D%B0%EC%8A%A4%ED%81%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%84%EB%8F%99%20%EC%8A%A4%ED%83%A0%EB%94%A9%EB%8D%B0%EC%8A%A4%ED%81%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%84%EB%8F%99%20%EC%8A%A4%ED%83%A0%EB%94%A9%EB%8D%B0%EC%8A%A4%ED%81%AC"
     imageUrl: "https://ads-partners.coupang.com/image1/wXeia2GsuK34iTVfwRNCxnVNJVgD-M_vHvDXSnSa0wsQL1PCuc9AELKdme8Km-kbGY9Chjw8YG9UzZ7-C6hxBq5U-SCVjTQP84LkUoyc6jYtSGygNr6MsCjDqIuY_I3CGnQL1G2OY3Ql_XG3LICN3hUVcQRDh2vTN0N7T5Tlp4DYuW1Fh-f6PK22COClJqxuf0B911b0NzvB8Ifnd6gJH-QdbE9Fgr7VL4dpJmOZSXtfg26tZIEVylNTV21CodVkuCbADGqbdfwUuKO3A27eu3oFZr36Uv51CtumgVPbMGFaoXukuwzyovWHUg=="
 faq:
   - q: "데스크 셋업, 어디에 먼저 투자해야 하나요?"

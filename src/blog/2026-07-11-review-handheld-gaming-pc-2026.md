@@ -10,13 +10,13 @@ image:
   alt: "휴대용 게이밍 기기를 손에 든 모습 — 핸드헬드 게이밍 PC를 상징하는 이미지"
 coupangLinks:
   - title: "밸브 스팀덱 OLED"
-    url: "https://www.coupang.com/np/search?q=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED&src=1139000&spec=10799999&addtag=200&ctag=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED"
     imageUrl: "https://ads-partners.coupang.com/image1/MvNXEEMQUxTOWOGFMlJn_KImjHnng8m6LF1LolBLQqQgyAGFDSNPb0OpnVbJ7hLXvggzyLg7gx1P_vp9wQwrcyoDq3ANo9N9K4Iea4UVjSkjk3GBKQDDg6H3Iflm40LksQF85hCeqRS_Bkvo7n6hMR-wtDzSjgCJc3Nzz6inD29VhbQhdtEAErkaNSjjyOvZhIMRS_35LHPhmQJgVUQHt5RxSt5sedioBYBaW9o6vFPCWquVx8Kfo1kj70p-8FNLADmCdsSWjxBOZ8yGQPpoKOMSTdt2tFrpo-9uSCq8pAMlN-571BFcNRuEgvRsYnsWZtGDQqs="
   - title: "ASUS ROG Ally X"
-    url: "https://www.coupang.com/np/search?q=ROG%20Ally%20X&channel=user"
+    url: "https://www.coupang.com/np/search?q=ROG%20Ally%20X&src=1139000&spec=10799999&addtag=200&ctag=ROG%20Ally%20X&lptag=AF7838146&pageType=SEARCH&pageValue=ROG%20Ally%20X"
     imageUrl: "https://ads-partners.coupang.com/image1/_JCp6IUPWFVNsVIC_LWJj3-JwkhuzW7XfzxeTPJQ0HzLrOCYnk_v8ceI4pujLx7Qnu8xOCjiCTQomo9mBUaK0kOEPcUTivp3_nuztYgRddpOfzHUP9yx468cA-y04i6yCrYPbbhDWipxPterKi4YX1p85xdDY4QlNiuKtod21xpExjWfSKUAIjHl-mWPxb1snlebLglf1qsS1zLg7QTcRGFXneO9ti-xq94XNoVzAEVkTpkzK0wvHopo_v2Ik95IQ7eGkpRoI867rPVDLjkYDVJINwcw9y2dV5cADs6vsps60LzS"
   - title: "닌텐도 스위치2"
-    url: "https://www.coupang.com/np/search?q=%EB%8B%8C%ED%85%90%EB%8F%84%20%EC%8A%A4%EC%9C%84%EC%B9%982&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%8B%8C%ED%85%90%EB%8F%84%20%EC%8A%A4%EC%9C%84%EC%B9%982&src=1139000&spec=10799999&addtag=200&ctag=%EB%8B%8C%ED%85%90%EB%8F%84%20%EC%8A%A4%EC%9C%84%EC%B9%982&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%8B%8C%ED%85%90%EB%8F%84%20%EC%8A%A4%EC%9C%84%EC%B9%982"
     imageUrl: "https://ads-partners.coupang.com/image1/qWNZjFIbkZxcss2cqcBfi7J8CUJ-tR9gJULOR8xzXMpstjE9Hz597u58wogOAiYaGEhxJLScnsUKE4MudEaM6Tkhc7wxjFFtvcEJ5UP6In4L0eDFywrqMLq_zdSukPzLU9ed8NPYe50banaUuGj-jlVBqWBjIVx_QDnMqYOt8Qs2LYS8knWkXKGkyQiDH67-U-AICbJ6ln1bqMLCCwJEL1GZh-_RVihOHd5gnbxdCMuO1Uom-CfgMrmUGOtgBYexx6UmUyMZ5c8SPYE0owsr9r-1IDzlOr0V2sbWqyRUQZFngBmcS-c7PGs="
 faq:
   - q: "세 기기 중 뭘 사야 하나요?"

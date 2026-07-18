@@ -10,13 +10,13 @@ image:
   alt: "외장 저장장치와 케이블 — 외장 SSD를 상징하는 이미지"
 coupangLinks:
   - title: "포터블 외장 SSD (USB-C)"
-    url: "https://www.coupang.com/np/search?q=%EC%99%B8%EC%9E%A5%20SSD&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%99%B8%EC%9E%A5%20SSD&src=1139000&spec=10799999&addtag=200&ctag=%EC%99%B8%EC%9E%A5%20SSD&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%99%B8%EC%9E%A5%20SSD"
     imageUrl: "https://ads-partners.coupang.com/image1/cGHFJ4VBtZq_ylGncAFrJywdsSW1IvStesKFus1r4W-JKTfXLttUrWv7YuIdLy2ptSbq0G9OYvnOop8iFAS-jIe-wxIHaWiRCkPaUley_1WyG7ZJYOIlOZ8hu4QrvIXQol77SzGaypq9XDZWgxsFviSC0g_vwrDlSzwNS6VuliH8SKndjXUAPeeGvZ0WZV8lT69Eli2fSpMyMkzg1LIVVr1-D9rgJAcW2KXzRyhXV3CGkV-JsS7Sy_pvjECsAoSzsIU3k8AqcPZB5lXzjcIVSEDOMVDZYY2UaT3q7qpB0kU2pP3FOCW2eUA="
   - title: "고속 외장 SSD (영상편집용)"
-    url: "https://www.coupang.com/np/search?q=%EA%B3%A0%EC%86%8D%20%EC%99%B8%EC%9E%A5%20SSD&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B3%A0%EC%86%8D%20%EC%99%B8%EC%9E%A5%20SSD&src=1139000&spec=10799999&addtag=200&ctag=%EA%B3%A0%EC%86%8D%20%EC%99%B8%EC%9E%A5%20SSD&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B3%A0%EC%86%8D%20%EC%99%B8%EC%9E%A5%20SSD"
     imageUrl: "https://ads-partners.coupang.com/image1/Dfb0V5aAf44Qc9Z0DaljltCUV1QN3h4fSQjdTV0TaqKGt8ob9OPh31B5sL_Hu6xLaRkOt6l4e4ee78lYbqUIWgTEEi1Li7sh4xzzVF01zMSTOxtfz4JkLSDQq5xl3wmqSs-G8yO4plA_mb4xa5mXMklvVIUtBzCoNeD3tQebQmlIbI70EUSw06sTOelvUUqUP0iddxnNEM8oh9Rmxj5KD03VEDqfWYD3wImaZM_EmojibOmSWmcrDervZFo6yhyQ-J9759LJyrRu9LWcXopqc1IKvIEho0g6NeV2JINupviWCIYQvQeLLdMJ"
   - title: "USB-C 케이블 (고속 데이터)"
-    url: "https://www.coupang.com/np/search?q=USB-C%20%EA%B3%A0%EC%86%8D%20%EC%BC%80%EC%9D%B4%EB%B8%94&channel=user"
+    url: "https://www.coupang.com/np/search?q=USB-C%20%EA%B3%A0%EC%86%8D%20%EC%BC%80%EC%9D%B4%EB%B8%94&src=1139000&spec=10799999&addtag=200&ctag=USB-C%20%EA%B3%A0%EC%86%8D%20%EC%BC%80%EC%9D%B4%EB%B8%94&lptag=AF7838146&pageType=SEARCH&pageValue=USB-C%20%EA%B3%A0%EC%86%8D%20%EC%BC%80%EC%9D%B4%EB%B8%94"
     imageUrl: "https://ads-partners.coupang.com/image1/i9AFLUS9azGhkXnvi99zQn80qjPJeFHfIEfXFUZAGBk5uLVA-dth9DOjT-iDOFVUiUSn_fosc5p5SmC9T_OIIRHLw3sNaRybCk3prI5NeEK2j0deiAGrEb0ACi0gtDJP4dlio3xHQuieF4LeRl2n_oezipgy4Z_343cBu1vY8nyFZvRMT_TA6aocPRpButvodCLE9kQ6XzUN03HjGYyR80wsh6slIw7dKaa-28DjXwgmT3dBYpRCYBAmA8CHngf1jUGbBCTmEfnOQS0mWchstvsJPKV6bOGm14DfipDlZ9HddmsqYkWZCOAiSHvXylIs_HS0876YJFjmKKDP0xyWlp-0YDT-ZxBL0dWo5Tl6AjkA8UgW0ZG8"
 faq:
   - q: "외장 SSD와 외장 HDD 중 뭘 사야 하나요?"

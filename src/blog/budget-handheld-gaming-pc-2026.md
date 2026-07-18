@@ -10,11 +10,11 @@ image:
   alt: "예산별 핸드헬드 게이밍PC 세 대를 저울 위에 올려놓은 아이소메트릭 일러스트"
 coupangLinks:
   - title: "ASUS ROG Ally X"
-    url: "https://www.coupang.com/np/search?q=ROG%20Ally%20X&channel=user"
+    url: "https://www.coupang.com/np/search?q=ROG%20Ally%20X&src=1139000&spec=10799999&addtag=200&ctag=ROG%20Ally%20X&lptag=AF7838146&pageType=SEARCH&pageValue=ROG%20Ally%20X"
   - title: "레노버 리전 고"
-    url: "https://www.coupang.com/np/search?q=%EB%A0%88%EB%85%B8%EB%B2%84%20%EB%A6%AC%EC%A0%84%20%EA%B3%A0&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%A0%88%EB%85%B8%EB%B2%84%20%EB%A6%AC%EC%A0%84%20%EA%B3%A0&src=1139000&spec=10799999&addtag=200&ctag=%EB%A0%88%EB%85%B8%EB%B2%84%20%EB%A6%AC%EC%A0%84%20%EA%B3%A0&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%A0%88%EB%85%B8%EB%B2%84%20%EB%A6%AC%EC%A0%84%20%EA%B3%A0"
   - title: "밸브 스팀덱 OLED"
-    url: "https://www.coupang.com/np/search?q=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED&src=1139000&spec=10799999&addtag=200&ctag=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED"
 faq:
   - q: "핸드헬드 게이밍PC, 예산이 얼마나 있어야 시작할 수 있나요?"
     a: "가장 저렴한 라인은 스팀덱 계열이라 이쪽이 진입 기준입니다. 다만 2026년 5월 밸브가 스팀덱 OLED 512GB 가격을 인상해 예전만큼 저렴하진 않습니다. 그래도 윈도우 기반 상위 모델보다는 여전히 부담이 적은 편입니다."

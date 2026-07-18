@@ -10,11 +10,11 @@ image:
   alt: "닌텐도 스위치2와 스팀덱을 나란히 든 손, 각 화면에 서로 다른 게임 아이콘이 떠 있는 아이소메트릭 일러스트"
 coupangLinks:
   - title: "닌텐도 스위치2"
-    url: "https://www.coupang.com/np/search?q=%EB%8B%8C%ED%85%90%EB%8F%84%20%EC%8A%A4%EC%9C%84%EC%B9%982&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%8B%8C%ED%85%90%EB%8F%84%20%EC%8A%A4%EC%9C%84%EC%B9%982&src=1139000&spec=10799999&addtag=200&ctag=%EB%8B%8C%ED%85%90%EB%8F%84%20%EC%8A%A4%EC%9C%84%EC%B9%982&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%8B%8C%ED%85%90%EB%8F%84%20%EC%8A%A4%EC%9C%84%EC%B9%982"
   - title: "밸브 스팀덱 OLED"
-    url: "https://www.coupang.com/np/search?q=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED&src=1139000&spec=10799999&addtag=200&ctag=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED"
   - title: "스위치2 인기 게임"
-    url: "https://www.coupang.com/np/search?q=%EC%8A%A4%EC%9C%84%EC%B9%982%20%EA%B2%8C%EC%9E%84&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%8A%A4%EC%9C%84%EC%B9%982%20%EA%B2%8C%EC%9E%84&src=1139000&spec=10799999&addtag=200&ctag=%EC%8A%A4%EC%9C%84%EC%B9%982%20%EA%B2%8C%EC%9E%84&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%8A%A4%EC%9C%84%EC%B9%982%20%EA%B2%8C%EC%9E%84"
 faq:
   - q: "스위치2에서 스팀 게임을 할 수 있나요?"
     a: "불가능합니다. 스위치2는 닌텐도 전용 콘솔이라 스팀 계정을 연결하거나 스팀 라이브러리를 실행하는 기능 자체가 없습니다. 스팀 게임을 하려면 스팀덱이나 일반 PC가 필요합니다."

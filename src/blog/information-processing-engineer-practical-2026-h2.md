@@ -10,9 +10,9 @@ image:
   alt: "정보처리기사 자격증 노트북과 서류, 합격 체크리스트를 아이소메트릭 스타일로 표현한 일러스트"
 coupangLinks:
   - title: "정보처리기사 실기 교재"
-    url: "https://www.coupang.com/np/search?q=%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0%20%EA%B5%90%EC%9E%AC&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0%20%EA%B5%90%EC%9E%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0%20%EA%B5%90%EC%9E%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0%20%EA%B5%90%EC%9E%AC"
   - title: "정보처리기사 인강"
-    url: "https://www.coupang.com/np/search?q=%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%9D%B8%EA%B0%95&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%9D%B8%EA%B0%95&src=1139000&spec=10799999&addtag=200&ctag=%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%9D%B8%EA%B0%95&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%9D%B8%EA%B0%95"
 faq:
   - q: "2026년 정보처리기사 3회 필기 원서접수는 언제인가요?"
     a: "큐넷 공고 기준 2026년 7월 20일(월)부터 7월 23일(목)까지입니다. 원서접수는 첫날 오전 10시부터 마지막 날 오후 6시까지만 열리므로, 큐넷 회원가입과 사진 등록을 미리 끝내두는 것이 안전합니다. 정확한 시간과 변동 여부는 큐넷 홈페이지 공지에서 최종 확인하시기 바랍니다."

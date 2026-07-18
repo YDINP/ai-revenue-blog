@@ -10,11 +10,11 @@ image:
   alt: "휴대용 게이밍PC 구매 체크리스트를 손에 든 사람을 그린 아이소메트릭 일러스트"
 coupangLinks:
   - title: "밸브 스팀덱 OLED"
-    url: "https://www.coupang.com/np/search?q=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED&src=1139000&spec=10799999&addtag=200&ctag=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%8A%A4%ED%8C%80%EB%8D%B1%20OLED"
   - title: "ASUS ROG Ally X"
-    url: "https://www.coupang.com/np/search?q=ROG%20Ally%20X&channel=user"
+    url: "https://www.coupang.com/np/search?q=ROG%20Ally%20X&src=1139000&spec=10799999&addtag=200&ctag=ROG%20Ally%20X&lptag=AF7838146&pageType=SEARCH&pageValue=ROG%20Ally%20X"
   - title: "휴대용 게임기 파우치"
-    url: "https://www.coupang.com/np/search?q=%ED%9C%B4%EB%8C%80%EC%9A%A9%20%EA%B2%8C%EC%9E%84%EA%B8%B0%20%ED%8C%8C%EC%9A%B0%EC%B9%98&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%9C%B4%EB%8C%80%EC%9A%A9%20%EA%B2%8C%EC%9E%84%EA%B8%B0%20%ED%8C%8C%EC%9A%B0%EC%B9%98&src=1139000&spec=10799999&addtag=200&ctag=%ED%9C%B4%EB%8C%80%EC%9A%A9%20%EA%B2%8C%EC%9E%84%EA%B8%B0%20%ED%8C%8C%EC%9A%B0%EC%B9%98&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%9C%B4%EB%8C%80%EC%9A%A9%20%EA%B2%8C%EC%9E%84%EA%B8%B0%20%ED%8C%8C%EC%9A%B0%EC%B9%98"
 faq:
   - q: "처음 사는 사람은 SteamOS와 윈도우 중 뭘 골라야 하나요?"
     a: "평소 게임을 스팀으로만 산다면 SteamOS 기반 스팀덱 쪽이 설정 부담이 적어 입문자에게 무난합니다. 게임패스나 에픽 등 여러 스토어를 오가고 싶다면 윈도우11 기반 기기가 자유도 면에서 유리합니다. '내가 게임을 어디서 사는지'를 먼저 정하면 OS 고민은 절반이 풀립니다."

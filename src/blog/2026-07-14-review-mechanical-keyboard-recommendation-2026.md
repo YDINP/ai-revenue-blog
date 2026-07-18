@@ -10,11 +10,11 @@ image:
   alt: "백라이트가 켜진 기계식 키보드 — 기계식 키보드를 상징하는 이미지"
 coupangLinks:
   - title: "기계식 키보드 (타이핑·개발용)"
-    url: "https://www.coupang.com/np/search?q=%EA%B8%B0%EA%B3%84%EC%8B%9D%20%ED%82%A4%EB%B3%B4%EB%93%9C%20%EC%B6%94%EC%B2%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EA%B8%B0%EA%B3%84%EC%8B%9D%20%ED%82%A4%EB%B3%B4%EB%93%9C%20%EC%B6%94%EC%B2%9C&src=1139000&spec=10799999&addtag=200&ctag=%EA%B8%B0%EA%B3%84%EC%8B%9D%20%ED%82%A4%EB%B3%B4%EB%93%9C%20%EC%B6%94%EC%B2%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B8%B0%EA%B3%84%EC%8B%9D%20%ED%82%A4%EB%B3%B4%EB%93%9C%20%EC%B6%94%EC%B2%9C"
   - title: "무선 기계식 키보드"
-    url: "https://www.coupang.com/np/search?q=%EB%AC%B4%EC%84%A0%20%EA%B8%B0%EA%B3%84%EC%8B%9D%20%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%EB%AC%B4%EC%84%A0%20%EA%B8%B0%EA%B3%84%EC%8B%9D%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EB%AC%B4%EC%84%A0%20%EA%B8%B0%EA%B3%84%EC%8B%9D%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AC%B4%EC%84%A0%20%EA%B8%B0%EA%B3%84%EC%8B%9D%20%ED%82%A4%EB%B3%B4%EB%93%9C"
   - title: "홀이펙트 게이밍 키보드"
-    url: "https://www.coupang.com/np/search?q=%ED%99%80%EC%9D%B4%ED%8E%99%ED%8A%B8%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%ED%82%A4%EB%B3%B4%EB%93%9C&channel=user"
+    url: "https://www.coupang.com/np/search?q=%ED%99%80%EC%9D%B4%ED%8E%99%ED%8A%B8%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%ED%99%80%EC%9D%B4%ED%8E%99%ED%8A%B8%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%ED%99%80%EC%9D%B4%ED%8E%99%ED%8A%B8%20%EA%B2%8C%EC%9D%B4%EB%B0%8D%20%ED%82%A4%EB%B3%B4%EB%93%9C"
 faq:
   - q: "청축·갈축·적축, 뭘 골라야 하나요?"
     a: "타건감과 소음의 취향 문제입니다. 청축은 '딸깍' 소리와 확실한 구분감(타이핑 손맛↑, 소음↑), 갈축은 약한 걸림이 있는 중간 성향(타이핑·게임 두루 무난), 적축은 걸림 없이 부드럽고 조용한 편(게임·연타·사무실 유리)입니다. 사무실·공용 공간이면 적축이나 저소음 계열, 타건감을 즐기고 싶으면 갈축·청축을 권합니다. 가능하면 매장에서 직접 눌러보고 정하세요."
