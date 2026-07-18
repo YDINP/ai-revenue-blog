@@ -42,7 +42,7 @@ faq:
 
 ## 한눈에 보는 플랫폼별 수수료
 
-<div class="chart-bar" data-orient="vertical" data-title="플랫폼별 기본 수수료율 (인디 규모 기준, %)" data-labels="스팀,콘솔,앱스토어,구글플레이,에픽,itch.io" data-values="30,30,15,15,12,10" data-colors="#d55e00,#d55e00,#f59e0b,#009e73,#3b82f6,#8b5cf6" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-highlight="min" data-title="인디 수수료: itch.io(10%)가 스팀·콘솔(30%)의 1/3 (낮을수록 좋음)" data-labels="스팀,콘솔,앱스토어,구글플레이,에픽,itch.io" data-values="30,30,15,15,12,10" data-colors="#d55e00,#d55e00,#f59e0b,#009e73,#3b82f6,#8b5cf6" data-unit="%"></div>
 
 주의할 점은 위 수치가 '조건부'라는 것이다. 같은 플랫폼도 매출 규모와 프로그램 가입 여부에 따라 수수료가 달라진다. 아래 표로 정확히 정리했다.
 

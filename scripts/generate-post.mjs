@@ -34,7 +34,7 @@ const PEXELS_API_URL = "https://api.pexels.com/v1/search";
 
 const AUTHOR = "TechFlow";
 const CATEGORY_ORDER = ["AI", "Dev", "Review", "Game"];
-const CHART_COLORS = ["#10b981", "#3b82f6", "#f59e0b", "#ef4444", "#8b5cf6"];
+const CHART_COLORS = ["#3b82f6", "#f59e0b", "#009e73", "#d55e00", "#8b5cf6"];
 
 // ─── Helpers ──────────────────────────────────────────────────────────
 
@@ -164,23 +164,29 @@ async function generatePostContent(categoryName, keyword, searchTerm, existingTi
   const chartInstruction = `
 본문 중간에 아래 5가지 차트 유형 중 주제에 맞는 것을 1~2개 선택하여 반드시 포함하세요:
 
-1) chart-bar (막대 차트) - 항목별 수치 비교:
-<div class="chart-bar" data-title="차트 제목" data-labels="항목1,항목2,항목3" data-values="85,72,90" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="점"></div>
+1) chart-bar (막대 차트) - 항목별 수치 비교. 라벨 짧으면 data-orient="vertical"(세로), 핵심 하나 강조는 data-highlight="max":
+<div class="chart-bar" data-orient="vertical" data-title="A 엔진이 빌드 속도 40% 빠르다" data-labels="A,B,C" data-values="90,72,64" data-colors="#3b82f6,#f59e0b,#009e73" data-unit="점"></div>
 
 2) chart-radar (카드형 점수 비교) - 제품/서비스 다항목 평가:
-<div class="chart-radar" data-title="종합 비교" data-items='[{"name":"제품A","scores":[{"label":"성능","value":9,"color":"#10b981"},{"label":"가격","value":7,"color":"#3b82f6"}]},{"name":"제품B","scores":[{"label":"성능","value":8,"color":"#f59e0b"},{"label":"가격","value":9,"color":"#ef4444"}]}]'></div>
+<div class="chart-radar" data-title="종합 비교" data-items='[{"name":"제품A","scores":[{"label":"성능","value":9,"color":"#009e73"},{"label":"가격","value":7,"color":"#3b82f6"}]},{"name":"제품B","scores":[{"label":"성능","value":8,"color":"#f59e0b"},{"label":"가격","value":9,"color":"#d55e00"}]}]'></div>
 
 3) chart-donut (도넛 차트) - 비율/점유율/구성비 시각화:
-<div class="chart-donut" data-title="시장 점유율" data-labels="항목1,항목2,항목3" data-values="60,25,15" data-colors="#3b82f6,#10b981,#f59e0b" data-unit="%"></div>
+<div class="chart-donut" data-title="시장 점유율" data-labels="항목1,항목2,항목3" data-values="60,25,15" data-colors="#3b82f6,#009e73,#f59e0b" data-unit="%"></div>
 
 4) chart-versus (VS 비교) - 두 대상 1:1 대결 비교:
-<div class="chart-versus" data-title="A vs B" data-name-a="제품A" data-name-b="제품B" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"성능","a":85,"b":90},{"label":"가격","a":70,"b":80}]'></div>
+<div class="chart-versus" data-title="A vs B" data-name-a="제품A" data-name-b="제품B" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"성능","a":85,"b":90},{"label":"가격","a":70,"b":80}]'></div>
 
 5) chart-progress (원형 게이지) - 개별 점수/달성률:
-<div class="chart-progress" data-title="평가 점수" data-labels="항목1,항목2,항목3" data-values="85,72,90" data-colors="#10b981,#3b82f6,#f59e0b" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="평가 점수" data-labels="항목1,항목2,항목3" data-values="85,72,90" data-colors="#009e73,#3b82f6,#f59e0b" data-max="100" data-unit="점"></div>
 
 선택 가이드: 비율/점유율→donut, 1:1 대결→versus, 개별 평점→progress, 수치 비교→bar, 다항목 제품 평가→radar.
 주의: div 안에 자식 요소를 넣지 마세요. 항목 3~5개. chart-bar만 반복하지 말고 다양한 유형을 활용하세요.
+
+차트 공통 규칙(필수):
+- 제목은 결론형: "A vs B 비교"가 아니라 "A가 B보다 40% 빠르다"처럼 결론이 한눈에 읽히게.
+- 색은 색맹 안전 팔레트만: #3b82f6·#f59e0b·#009e73·#d55e00·#8b5cf6. ⚠️빨강(#ef4444)-초록(#10b981) 조합 절대 금지.
+- 비교 막대는 라벨 짧으면(각 8자↓·2~6개) data-orient="vertical". 세로 막대 축은 0 기준(자르지 말 것).
+- 핵심 하나 강조: chart-bar에 data-highlight="max"|"min"|인덱스(0부터) → 나머지 회색, 그 막대만 강조색.
 
 **강조 포인트 — 콜아웃 박스 사용 금지**:
 - 콜아웃 박스(callout-tip/warning/info)를 사용하지 마세요.
