@@ -3917,7 +3917,10 @@ const ICONS: Record<string, string> = {
         if (!s.length) { el.innerHTML = gscEmpty(); if (upd) upd.textContent = ''; return; }
         const cur = s[s.length - 1];
         const prev = s.length >= 2 ? s[s.length - 2] : null;
-        if (upd) upd.textContent = `최신 ${cur.date}${prev ? ` · 전일(${prev.date}) 대비` : ''} · Google 실측(2~3일 지연)`;
+        const allDates = [...new Set((_gscTotals || []).map((r) => r.date))].sort();
+        const rangeTxt = allDates.length ? `보유 데이터 ${allDates[0]}~${allDates[allDates.length - 1]} (${allDates.length}일)` : '';
+        const shortWarn = allDates.length && allDates.length < _gscDays ? ` · ⚠️ ${_gscDays}일 미만이라 구간 동일` : '';
+        if (upd) upd.textContent = `${rangeTxt}${shortWarn} · 최신 ${cur.date}${prev ? ` · 전일(${prev.date}) 대비` : ''} · Google 실측(2~3일 지연)`;
         const cards = [
           { k: '클릭', v: gscFmt(cur.clicks), d: prev ? cur.clicks - prev.clicks : null, up: true, fd: (x) => gscFmt(Math.abs(x)) },
           { k: '노출', v: gscFmt(cur.impressions), d: prev ? cur.impressions - prev.impressions : null, up: true, fd: (x) => gscFmt(Math.abs(x)) },
