@@ -3404,7 +3404,7 @@ const ICONS: Record<string, string> = {
           const dw = metric === 'visitors' ? b.webV : b.web;
           const dm = metric === 'visitors' ? b.mobileV : b.mobile;
           const devSub = _deviceDataReady && (dw + dm) > 0
-            ? ` <span style="color:var(--text-3)">·</span> <span style="color:#f59e0b">🖥 ${fmt(dw)}</span> <span style="color:#ec4899">📱 ${fmt(dm)}</span>`
+            ? ` <span style="color:var(--text-3)">·</span> <span style="color:#f59e0b">🖥 PC ${fmt(dw)}</span> <span style="color:#ec4899">📱 모바일 ${fmt(dm)}</span>`
             : '';
           const vipVis = b.views ? Math.round(b.visitors * b.vip / b.views) : 0;
           const sub = (metric === 'visitors'
@@ -3447,7 +3447,7 @@ const ICONS: Record<string, string> = {
           const dw = metric === 'visitors' ? (b.webV || 0) : (b.web || 0);
           const dm = metric === 'visitors' ? (b.mobileV || 0) : (b.mobile || 0);
           const devRow = _deviceDataReady && (dw + dm) > 0
-            ? `<div class="ct-row"><i style="background:#f59e0b"></i>🖥/📱<b>${fmt(dw)} / ${fmt(dm)}</b></div>`
+            ? `<div class="ct-row"><i style="background:#f59e0b"></i>🖥 PC<b>${fmt(dw)}</b></div><div class="ct-row"><i style="background:#ec4899"></i>📱 모바일<b>${fmt(dm)}</b></div>`
             : '';
           tip.innerHTML = `<div class="ct-date">${b.label}</div>` +
             series.map(se => `<div class="ct-row"><i style="background:${se.color}"></i>${se.name}<b>${fmt(se.vals[idx])}</b></div>`).join('') +
