@@ -87,7 +87,7 @@ e-스포츠 수준의 반응속도를 개발자 친화적 인터페이스와 결
 
 ## 개발자 키보드 비교: 주요 평가 항목
 
-<div class="chart-radar" data-title="2026년 개발자 키보드 성능 비교" data-items='[{"name":"KEYCHRON K8 Pro AI","scores":[{"label":"타이핑감","value":9,"color":"#10b981"},{"label":"커스터마이징","value":9,"color":"#3b82f6"},{"label":"이동성","value":8,"color":"#f59e0b"},{"label":"가격대","value":8,"color":"#ef4444"},{"label":"호환성","value":9,"color":"#8b5cf6"}]},{"name":"SteelSeries Apex Pro Mini 2","scores":[{"label":"타이핑감","value":10,"color":"#10b981"},{"label":"커스터마이징","value":8,"color":"#3b82f6"},{"label":"이동성","value":9,"color":"#f59e0b"},{"label":"가격대","value":6,"color":"#ef4444"},{"label":"호환성","value":8,"color":"#8b5cf6"}]},{"name":"Kinesis Advantage 360","scores":[{"label":"타이핑감","value":10,"color":"#10b981"},{"label":"커스터마이징","value":10,"color":"#3b82f6"},{"label":"이동성","value":5,"color":"#f59e0b"},{"label":"가격대","value":4,"color":"#ef4444"},{"label":"호환성","value":9,"color":"#8b5cf6"}]}]'></div>
+<div class="chart-radar" data-title="2026년 개발자 키보드 성능 비교" data-items='[{"name":"KEYCHRON K8 Pro AI","scores":[{"label":"타이핑감","value":9,"color":"#009e73"},{"label":"커스터마이징","value":9,"color":"#3b82f6"},{"label":"이동성","value":8,"color":"#f59e0b"},{"label":"가격대","value":8,"color":"#d55e00"},{"label":"호환성","value":9,"color":"#8b5cf6"}]},{"name":"SteelSeries Apex Pro Mini 2","scores":[{"label":"타이핑감","value":10,"color":"#009e73"},{"label":"커스터마이징","value":8,"color":"#3b82f6"},{"label":"이동성","value":9,"color":"#f59e0b"},{"label":"가격대","value":6,"color":"#d55e00"},{"label":"호환성","value":8,"color":"#8b5cf6"}]},{"name":"Kinesis Advantage 360","scores":[{"label":"타이핑감","value":10,"color":"#009e73"},{"label":"커스터마이징","value":10,"color":"#3b82f6"},{"label":"이동성","value":5,"color":"#f59e0b"},{"label":"가격대","value":4,"color":"#d55e00"},{"label":"호환성","value":9,"color":"#8b5cf6"}]}]'></div>
 
 ## 개발자별 추천 키보드 선택 가이드
 
@@ -136,7 +136,7 @@ AI 기반 자동 최적화 기능이 키맵을 배우는 과정을 단축해줍�
 
 ## 2026년 개발자 커뮤니티 평가 종합
 
-<div class="chart-progress" data-title="제품별 개발자 만족도" data-labels="KEYCHRON K8 AI,SteelSeries Apex Pro,Razer Pro Type,Corsair K70,Kinesis" data-values="88,92,85,90,94" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#8b5cf6" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="제품별 개발자 만족도" data-labels="KEYCHRON K8 AI,SteelSeries Apex Pro,Razer Pro Type,Corsair K70,Kinesis" data-values="88,92,85,90,94" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00,#8b5cf6" data-max="100" data-unit="점"></div>
 
 ## 구매 시 고려사항 및 최신 트렌드
 

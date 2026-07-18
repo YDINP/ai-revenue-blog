@@ -44,7 +44,7 @@ faq:
 
 유저는 트레일러를 보다가 흥미를 잃으면 즉시 탭을 닫는다. 이 결정이 내려지는 시간이 <span style="font-size:1.3em;font-weight:800">첫 3초</span>다. 개념적으로 정리하면, 전환에 성공하는 트레일러와 실패하는 트레일러 사이의 차이는 초반 구성에서 대부분 결정된다.
 
-<div class="chart-versus" data-title="전환되는 트레일러 vs 실패하는 트레일러" data-name-a="전환되는 트레일러" data-name-b="실패하는 트레일러" data-color-a="#10b981" data-color-b="#ef4444" data-items='[{"label":"첫 3초 훅","a":95,"b":40},{"label":"핵심 재미 즉시 노출","a":90,"b":45},{"label":"길이 적정(60~90초)","a":85,"b":50},{"label":"명확한 CTA","a":90,"b":35}]'></div>
+<div class="chart-versus" data-title="전환되는 트레일러 vs 실패하는 트레일러" data-name-a="전환되는 트레일러" data-name-b="실패하는 트레일러" data-color-a="#009e73" data-color-b="#d55e00" data-items='[{"label":"첫 3초 훅","a":95,"b":40},{"label":"핵심 재미 즉시 노출","a":90,"b":45},{"label":"길이 적정(60~90초)","a":85,"b":50},{"label":"명확한 CTA","a":90,"b":35}]'></div>
 
 *(위 수치는 개념적·업계 통념 기준이며 실제 수치는 게임마다 상이하다.)*
 

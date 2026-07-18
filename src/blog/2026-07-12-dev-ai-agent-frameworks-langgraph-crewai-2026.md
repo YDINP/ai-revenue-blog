@@ -41,9 +41,9 @@ API 호출 하나면 되는 간단한 작업엔 필요 없습니다. 하지만 <
 
 <div class="chart-radar" data-title="에이전트 프레임워크 특성 (10점, 참고용)" data-items='[
   {"name":"LangGraph","scores":[
-    {"label":"제어력","value":10,"color":"#10b981"},
-    {"label":"진입장벽","value":6,"color":"#10b981"},
-    {"label":"협업 구성","value":8,"color":"#10b981"}
+    {"label":"제어력","value":10,"color":"#009e73"},
+    {"label":"진입장벽","value":6,"color":"#009e73"},
+    {"label":"협업 구성","value":8,"color":"#009e73"}
   ]},
   {"name":"CrewAI","scores":[
     {"label":"제어력","value":7,"color":"#3b82f6"},

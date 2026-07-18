@@ -42,7 +42,7 @@ noindex: true
 
 ## 주요 게임 엔진 비교
 
-<div class="chart-radar" data-title="주요 게임 엔진 종합 평가" data-items='[{"name":"Unity","scores":[{"label":"학습곡선","value":8,"color":"#3b82f6"},{"label":"커뮤니티","value":10,"color":"#10b981"},{"label":"성능","value":8,"color":"#f59e0b"},{"label":"가격","value":7,"color":"#ef4444"}]},{"name":"Godot","scores":[{"label":"학습곡선","value":7,"color":"#3b82f6"},{"label":"커뮤니티","value":7,"color":"#10b981"},{"label":"성능","value":8,"color":"#f59e0b"},{"label":"가격","value":10,"color":"#ef4444"}]},{"name":"Unreal Engine","scores":[{"label":"학습곡선","value":5,"color":"#3b82f6"},{"label":"커뮤니티","value":9,"color":"#10b981"},{"label":"성능","value":10,"color":"#f59e0b"},{"label":"가격","value":8,"color":"#ef4444"}]}]'></div>
+<div class="chart-radar" data-title="주요 게임 엔진 종합 평가" data-items='[{"name":"Unity","scores":[{"label":"학습곡선","value":8,"color":"#3b82f6"},{"label":"커뮤니티","value":10,"color":"#009e73"},{"label":"성능","value":8,"color":"#f59e0b"},{"label":"가격","value":7,"color":"#d55e00"}]},{"name":"Godot","scores":[{"label":"학습곡선","value":7,"color":"#3b82f6"},{"label":"커뮤니티","value":7,"color":"#009e73"},{"label":"성능","value":8,"color":"#f59e0b"},{"label":"가격","value":10,"color":"#d55e00"}]},{"name":"Unreal Engine","scores":[{"label":"학습곡선","value":5,"color":"#3b82f6"},{"label":"커뮤니티","value":9,"color":"#009e73"},{"label":"성능","value":10,"color":"#f59e0b"},{"label":"가격","value":8,"color":"#d55e00"}]}]'></div>
 
 ### Unity: 가장 인기 있는 멀티플랫폼 엔진
 
@@ -99,7 +99,7 @@ FMOD Studio는 게임 음향의 산업 표준으로, 실시간 음향 처리와 
 
 ## 2026년 인디 게임 개발 도구 트렌드
 
-<div class="chart-donut" data-title="인디 게임 개발자 게임 엔진 선택 비율" data-labels="Unity,Godot,Unreal Engine,GameMaker,기타" data-values="45,25,15,10,5" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="%"></div>
+<div class="chart-donut" data-title="인디 게임 개발자 게임 엔진 선택 비율" data-labels="Unity,Godot,Unreal Engine,GameMaker,기타" data-values="45,25,15,10,5" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="%"></div>
 
 ### AI 기반 개발 자동화
 
@@ -115,7 +115,7 @@ FMOD Studio는 게임 음향의 산업 표준으로, 실시간 음향 처리와 
 
 ## 개발 수준별 인디 게임 개발 도구 추천
 
-<div class="chart-progress" data-title="인디 게임 개발 도구 학습난이도" data-labels="GameMaker,Godot,Unity,Unreal Engine" data-values="30,40,60,80" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="인디 게임 개발 도구 학습난이도" data-labels="GameMaker,Godot,Unity,Unreal Engine" data-values="30,40,60,80" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00" data-max="100" data-unit="점"></div>
 
 ### 초보자 단계
 

@@ -85,7 +85,7 @@ noindex: true
 
 ## 실제 개발 작업별 최적 축 추천
 
-<div class="chart-radar" data-title="개발 작업 유형별 축 평가" data-items='[{"name":"멤브레인","scores":[{"label":"코딩 속도","value":7,"color":"#10b981"},{"label":"손목 편함","value":9,"color":"#3b82f6"},{"label":"소음","value":9,"color":"#f59e0b"},{"label":"수명","value":7,"color":"#ef4444"},{"label":"가격","value":8,"color":"#8b5cf6"}]},{"name":"기계식","scores":[{"label":"코딩 속도","value":9,"color":"#10b981"},{"label":"손목 편함","value":7,"color":"#3b82f6"},{"label":"소음","value":5,"color":"#f59e0b"},{"label":"수명","value":8,"color":"#ef4444"},{"label":"가격","value":6,"color":"#8b5cf6"}]},{"name":"정전식","scores":[{"label":"코딩 속도","value":10,"color":"#10b981"},{"label":"손목 편함","value":8,"color":"#3b82f6"},{"label":"소음","value":10,"color":"#f59e0b"},{"label":"수명","value":10,"color":"#ef4444"},{"label":"가격","value":3,"color":"#8b5cf6"}]}]'></div>
+<div class="chart-radar" data-title="개발 작업 유형별 축 평가" data-items='[{"name":"멤브레인","scores":[{"label":"코딩 속도","value":7,"color":"#009e73"},{"label":"손목 편함","value":9,"color":"#3b82f6"},{"label":"소음","value":9,"color":"#f59e0b"},{"label":"수명","value":7,"color":"#d55e00"},{"label":"가격","value":8,"color":"#8b5cf6"}]},{"name":"기계식","scores":[{"label":"코딩 속도","value":9,"color":"#009e73"},{"label":"손목 편함","value":7,"color":"#3b82f6"},{"label":"소음","value":5,"color":"#f59e0b"},{"label":"수명","value":8,"color":"#d55e00"},{"label":"가격","value":6,"color":"#8b5cf6"}]},{"name":"정전식","scores":[{"label":"코딩 속도","value":10,"color":"#009e73"},{"label":"손목 편함","value":8,"color":"#3b82f6"},{"label":"소음","value":10,"color":"#f59e0b"},{"label":"수명","value":10,"color":"#d55e00"},{"label":"가격","value":3,"color":"#8b5cf6"}]}]'></div>
 
 ### 1) 장시간 문서 작업 + 코딩 병행 개발자
 **추천: 고급 멤브레인 (7만~8만원)**
@@ -153,7 +153,7 @@ Algorithm 경진대회, 대규모 리팩토링, 또는 데이터 마이그레이
 
 ## 최종 선택 가이드: 당신은 어디에 해당하는가?
 
-<div class="chart-versus" data-title="당신의 상황에 맞는 축 선택" data-name-a="멤브레인" data-name-b="기계식" data-color-a="#10b981" data-color-b="#3b82f6" data-items='[{"label":"소음민감도","a":90,"b":40},{"label":"손목편함","a":90,"b":70},{"label":"입력속도","a":75,"b":95},{"label":"수명","a":80,"b":85},{"label":"가격","a":85,"b":65}]'></div>
+<div class="chart-versus" data-title="당신의 상황에 맞는 축 선택" data-name-a="멤브레인" data-name-b="기계식" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"소음민감도","a":90,"b":40},{"label":"손목편함","a":90,"b":70},{"label":"입력속도","a":75,"b":95},{"label":"수명","a":80,"b":85},{"label":"가격","a":85,"b":65}]'></div>
 
 **멤브레인을 선택하세요:**
 - ✓ 공유 오피스나 기숙사에서 근무

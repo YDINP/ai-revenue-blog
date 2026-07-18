@@ -52,7 +52,7 @@ noindex: true
 
 프로젝트 규모와 우선순위에 따라 5가지 마이그레이션 전략이 존재합니다:
 
-<div class="chart-versus" data-title="마이그레이션 전략별 비교" data-name-a="점진적 마이그레이션" data-name-b="일괄 전환" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"실행 속도","a":60,"b":95},{"label":"리스크","a":25,"b":80},{"label":"팀 학습곡선","a":70,"b":40},{"label":"프로덕션 안정성","a":90,"b":60}]'></div>
+<div class="chart-versus" data-title="마이그레이션 전략별 비교" data-name-a="점진적 마이그레이션" data-name-b="일괄 전환" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"실행 속도","a":60,"b":95},{"label":"리스크","a":25,"b":80},{"label":"팀 학습곡선","a":70,"b":40},{"label":"프로덕션 안정성","a":90,"b":60}]'></div>
 
 ### 1. **점진적 마이그레이션 (추천: 중대형 프로젝트)**
 
@@ -96,7 +96,7 @@ declare module 'legacy-lib' {
 
 ## 실제 마이그레이션 단계별 로드맵
 
-<div class="chart-progress" data-title="마이그레이션 진행도" data-labels="계획·환경설정,기존코드분석,타입정의,핵심로직전환,테스트·최적화" data-values="100,100,75,45,20" data-colors="#10b981,#10b981,#f59e0b,#f59e0b,#ef4444" data-max="100" data-unit="%"></div>
+<div class="chart-progress" data-title="마이그레이션 진행도" data-labels="계획·환경설정,기존코드분석,타입정의,핵심로직전환,테스트·최적화" data-values="100,100,75,45,20" data-colors="#009e73,#009e73,#f59e0b,#f59e0b,#d55e00" data-max="100" data-unit="%"></div>
 
 ### **Phase 1: 계획 및 환경 설정 (1-2주)**
 
@@ -227,7 +227,7 @@ function process(data: unknown): string {
 
 ## 2026년 TypeScript 마이그레이션 최신 도구
 
-<div class="chart-bar" data-title="인기 마이그레이션 도구" data-labels="tsc,TypeScript Compiler,ts-migrate,Codemod,Lerna" data-values="92,88,78,68,55" data-colors="#10b981,#8b5cf6,#3b82f6,#f59e0b,#ef4444" data-unit="개발자%"></div>
+<div class="chart-bar" data-title="인기 마이그레이션 도구" data-labels="tsc,TypeScript Compiler,ts-migrate,Codemod,Lerna" data-values="92,88,78,68,55" data-colors="#009e73,#8b5cf6,#3b82f6,#f59e0b,#d55e00" data-unit="개발자%"></div>
 
 ### **TypeScript Compiler (tsc)**
 

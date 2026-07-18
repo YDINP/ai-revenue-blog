@@ -27,7 +27,7 @@ faq:
 
 먼저 큰 그림. 실패는 한 가지 이유로 오지 않지만, 무게중심은 분명하다.
 
-<div class="chart-donut" data-title="인디게임 실패 원인 비중 (2025~2026 포스트모템 종합, 개념적)" data-labels="가시성·마케팅 실패,스코프 크립,차별성 부재,품질·버그,기타" data-values="42,28,15,10,5" data-colors="#ef4444,#f59e0b,#8b5cf6,#3b82f6,#94a3b8" data-unit="%"></div>
+<div class="chart-donut" data-title="인디게임 실패 원인 비중 (2025~2026 포스트모템 종합, 개념적)" data-labels="가시성·마케팅 실패,스코프 크립,차별성 부재,품질·버그,기타" data-values="42,28,15,10,5" data-colors="#d55e00,#f59e0b,#8b5cf6,#3b82f6,#94a3b8" data-unit="%"></div>
 
 주목할 점: 상위 두 원인(가시성·스코프)이 전체의 약 70%다. 둘 다 '게임 재미'가 아니라 '프로젝트 관리와 마케팅'의 문제라는 게 핵심이다.
 

@@ -63,9 +63,9 @@ Omni의 콘셉트는 명확합니다. <span style="font-size:1.3em;font-weight:8
     {"label":"실시간/검색","value":9,"color":"#f59e0b"}
   ]},
   {"name":"ChatGPT","scores":[
-    {"label":"멀티모달","value":8,"color":"#10b981"},
-    {"label":"생태계 통합","value":7,"color":"#10b981"},
-    {"label":"실시간/검색","value":8,"color":"#10b981"}
+    {"label":"멀티모달","value":8,"color":"#009e73"},
+    {"label":"생태계 통합","value":7,"color":"#009e73"},
+    {"label":"실시간/검색","value":8,"color":"#009e73"}
   ]},
   {"name":"Claude","scores":[
     {"label":"멀티모달","value":7,"color":"#3b82f6"},

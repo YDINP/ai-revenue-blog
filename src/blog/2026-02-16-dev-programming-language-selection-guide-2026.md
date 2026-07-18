@@ -47,7 +47,7 @@ noindex: true
 
 ## 초보자 입문 난이도별 비교
 
-<div class="chart-bar" data-title="프로그래밍 언어 학습 난이도 (1~10점, 낮을수록 쉬움)" data-labels="Python,JavaScript,TypeScript,Java,Go,Rust" data-values="2,3,4,5,6,8" data-colors="#10b981,#3b82f6,#8b5cf6,#f59e0b,#06b6d4,#ef4444" data-unit="난이도"></div>
+<div class="chart-bar" data-title="프로그래밍 언어 학습 난이도 (1~10점, 낮을수록 쉬움)" data-labels="Python,JavaScript,TypeScript,Java,Go,Rust" data-values="2,3,4,5,6,8" data-colors="#009e73,#3b82f6,#8b5cf6,#f59e0b,#06b6d4,#d55e00" data-unit="난이도"></div>
 
 **Python**은 자연스러운 영어 같은 문법으로 가장 배우기 쉽습니다. 초보자 입문용으로는 더 없이 좋은 선택이며, [Python 자동화 입문 가이드](/blog/2026-02-06-python-automation-beginners-guide/)에서 실제 활용 사례를 배울 수 있습니다.
 
@@ -134,7 +134,7 @@ IDE, 컴파일러, 라이브러리 설치... 입문자는 종종 개발 환경 �
 
 ## 2026년 초보자가 꼭 알아야 할 3가지 트렌드
 
-<div class="chart-progress" data-title="2026년 개발 분야 성장률" data-labels="AI/ML 통합,클라우드 네이티브,엣지 컴퓨팅" data-values="87,72,54" data-colors="#10b981,#3b82f6,#f59e0b" data-max="100" data-unit="%"></div>
+<div class="chart-progress" data-title="2026년 개발 분야 성장률" data-labels="AI/ML 통합,클라우드 네이티브,엣지 컴퓨팅" data-values="87,72,54" data-colors="#009e73,#3b82f6,#f59e0b" data-max="100" data-unit="%"></div>
 
 ### 1. AI 페어 프로그래밍의 표준화
 

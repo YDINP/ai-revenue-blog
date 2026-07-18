@@ -49,7 +49,7 @@ faq:
 
 이번 GPT-5.6의 주무기는 코딩입니다. 공개된 공식·독립 지표를 보면:
 
-<div class="chart-bar" data-title="GPT-5.6 코딩 벤치마크 (Terminal-Bench 2.1, %)" data-labels="GPT-5.6 Sol,GPT-5.6 Sol Ultra" data-values="88.8,91.9" data-colors="#10b981,#3b82f6" data-unit="%"></div>
+<div class="chart-bar" data-title="GPT-5.6 코딩 벤치마크 (Terminal-Bench 2.1, %)" data-labels="GPT-5.6 Sol,GPT-5.6 Sol Ultra" data-values="88.8,91.9" data-colors="#009e73,#3b82f6" data-unit="%"></div>
 
 - **Terminal-Bench 2.1**: Sol 88.8%, 상위 변형 Sol Ultra 91.9%
 - **Artificial Analysis 코딩 에이전트 지수**: Sol(max) 80점으로 선두권
@@ -87,9 +87,9 @@ faq:
 
 <div class="chart-radar" data-title="GPT-5.6 등급별 특성 (10점 만점)" data-items='[
   {"name":"Sol","scores":[
-    {"label":"성능","value":10,"color":"#10b981"},
-    {"label":"가성비","value":6,"color":"#10b981"},
-    {"label":"속도","value":7,"color":"#10b981"}
+    {"label":"성능","value":10,"color":"#009e73"},
+    {"label":"가성비","value":6,"color":"#009e73"},
+    {"label":"속도","value":7,"color":"#009e73"}
   ]},
   {"name":"Terra","scores":[
     {"label":"성능","value":8,"color":"#3b82f6"},

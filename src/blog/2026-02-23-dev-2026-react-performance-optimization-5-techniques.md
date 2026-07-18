@@ -117,7 +117,7 @@ function App() {
 
 이 방식으로 초기 번들을 40~50% 감소시킬 수 있으며, 사용자는 필요한 페이지만 로드합니다.
 
-<div class="chart-bar" data-title="번들 크기 감소 효과 (KB)" data-labels="최적화 전,메모이제이션,코드 스플리팅,트리 쉐이킹 적용" data-values="320,280,180,145" data-colors="#ef4444,#f59e0b,#10b981,#0ea5e9" data-unit="KB"></div>
+<div class="chart-bar" data-title="번들 크기 감소 효과 (KB)" data-labels="최적화 전,메모이제이션,코드 스플리팅,트리 쉐이킹 적용" data-values="320,280,180,145" data-colors="#d55e00,#f59e0b,#009e73,#0ea5e9" data-unit="KB"></div>
 
 ## 3. 가상 스크롤과 동적 로딩
 
@@ -248,7 +248,7 @@ npm install -g lighthouse
 lighthouse https://yourapp.com --view
 ```
 
-<div class="chart-progress" data-title="최적화 후 Lighthouse 점수" data-labels="성능,접근성,모범 사례,SEO" data-values="92,88,85,95" data-colors="#10b981,#3b82f6,#f59e0b,#0ea5e9" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="최적화 후 Lighthouse 점수" data-labels="성능,접근성,모범 사례,SEO" data-values="92,88,85,95" data-colors="#009e73,#3b82f6,#f59e0b,#0ea5e9" data-max="100" data-unit="점"></div>
 
 ## 결론: 지속적 최적화 문화
 

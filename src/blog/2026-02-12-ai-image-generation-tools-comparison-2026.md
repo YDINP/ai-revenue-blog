@@ -67,7 +67,7 @@ Stable Diffusion은 오픈소스 기반으로 로컬 환경에서도 실행 가�
 
 ## AI 이미지 생성 도구 성능 비교
 
-<div class="chart-radar" data-title="AI 이미지 생성 도구 종합 평가" data-items='[{"name":"DALL-E 3","scores":[{"label":"이미지 품질","value":9,"color":"#10b981"},{"label":"텍스트 이해","value":9.5,"color":"#3b82f6"},{"label":"사용 편의성","value":8.5,"color":"#f59e0b"},{"label":"가격 경쟁력","value":8,"color":"#ef4444"},{"label":"커스터마이징","value":7,"color":"#8b5cf6"}]},{"name":"Midjourney","scores":[{"label":"이미지 품질","value":9.5,"color":"#10b981"},{"label":"텍스트 이해","value":8,"color":"#3b82f6"},{"label":"사용 편의성","value":7,"color":"#f59e0b"},{"label":"가격 경쟁력","value":6,"color":"#ef4444"},{"label":"커스터마이징","value":8.5,"color":"#8b5cf6"}]},{"name":"Stable Diffusion","scores":[{"label":"이미지 품질","value":8,"color":"#10b981"},{"label":"텍스트 이해","value":7.5,"color":"#3b82f6"},{"label":"사용 편의성","value":6.5,"color":"#f59e0b"},{"label":"가격 경쟁력","value":9.5,"color":"#ef4444"},{"label":"커스터마이징","value":9.5,"color":"#8b5cf6"}]}]'></div>
+<div class="chart-radar" data-title="AI 이미지 생성 도구 종합 평가" data-items='[{"name":"DALL-E 3","scores":[{"label":"이미지 품질","value":9,"color":"#009e73"},{"label":"텍스트 이해","value":9.5,"color":"#3b82f6"},{"label":"사용 편의성","value":8.5,"color":"#f59e0b"},{"label":"가격 경쟁력","value":8,"color":"#d55e00"},{"label":"커스터마이징","value":7,"color":"#8b5cf6"}]},{"name":"Midjourney","scores":[{"label":"이미지 품질","value":9.5,"color":"#009e73"},{"label":"텍스트 이해","value":8,"color":"#3b82f6"},{"label":"사용 편의성","value":7,"color":"#f59e0b"},{"label":"가격 경쟁력","value":6,"color":"#d55e00"},{"label":"커스터마이징","value":8.5,"color":"#8b5cf6"}]},{"name":"Stable Diffusion","scores":[{"label":"이미지 품질","value":8,"color":"#009e73"},{"label":"텍스트 이해","value":7.5,"color":"#3b82f6"},{"label":"사용 편의성","value":6.5,"color":"#f59e0b"},{"label":"가격 경쟁력","value":9.5,"color":"#d55e00"},{"label":"커스터마이징","value":9.5,"color":"#8b5cf6"}]}]'></div>
 
 ## 가격과 기본 스펙 비교표
 
@@ -79,7 +79,7 @@ Stable Diffusion은 오픈소스 기반으로 로컬 환경에서도 실행 가�
 
 ## 사용자 만족도 분석
 
-<div class="chart-progress" data-title="사용자 만족도 점수" data-labels="DALL-E 3,Midjourney,Stable Diffusion" data-values="87,85,78" data-colors="#10b981,#3b82f6,#f59e0b" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="사용자 만족도 점수" data-labels="DALL-E 3,Midjourney,Stable Diffusion" data-values="87,85,78" data-colors="#009e73,#3b82f6,#f59e0b" data-max="100" data-unit="점"></div>
 
 ## 2026년 AI 이미지 생성 도구 선택 가이드
 

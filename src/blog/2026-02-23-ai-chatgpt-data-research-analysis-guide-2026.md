@@ -87,7 +87,7 @@ ChatGPT의 진정한 가치는 대량의 비정형 데이터를 체계적으로 
 
 이 방식은 전문 시장 분석 도구(예: Semrush, Similarweb)의 기본 기능을 <span style="font-size:1.3em;font-weight:800">30초 내에</span> 구현합니다.
 
-<div class="chart-bar" data-orient="vertical" data-title="ChatGPT 활용 시 업무 시간 단축률" data-labels="영어번역,보고서작성,정보검색,데이터분석" data-values="80,72,65,58" data-colors="#ef4444,#3b82f6,#10b981,#f59e0b" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="ChatGPT 활용 시 업무 시간 단축률" data-labels="영어번역,보고서작성,정보검색,데이터분석" data-values="80,72,65,58" data-colors="#d55e00,#3b82f6,#009e73,#f59e0b" data-unit="%"></div>
 
 ## 3단계: 보고서 자동화 및 시각화 준비
 
@@ -131,7 +131,7 @@ ChatGPT의 진정한 가치는 대량의 비정형 데이터를 체계적으로 
 
 기술 블로그 20개 링크를 전달하고 "새로운 프레임워크의 장단점 비교표"를 요청하면, ChatGPT가 각 출처의 벤치마크 데이터를 종합한 객관적 비교표를 생성합니다. "[2026년 React 상태 관리 전쟁: Zustand vs Jotai vs TanStack Query 실전 비교](/blog/2026-02-19-dev-react-state-management-comparison-2026-zustand-jotai-tanstack/)" 같은 심화 학습도 이 방법으로 준비할 수 있습니다.
 
-<div class="chart-radar" data-title="ChatGPT 업무별 적합도 평가" data-items='[{"name":"정보검색","scores":[{"label":"정확도","value":8,"color":"#10b981"},{"label":"속도","value":9,"color":"#3b82f6"},{"label":"비용","value":10,"color":"#f59e0b"}]},{"name":"데이터분석","scores":[{"label":"정확도","value":7,"color":"#10b981"},{"label":"속도","value":8,"color":"#3b82f6"},{"label":"비용","value":10,"color":"#f59e0b"}]},{"name":"보고서작성","scores":[{"label":"정확도","value":8,"color":"#10b981"},{"label":"속도","value":9,"color":"#3b82f6"},{"label":"비용","value":10,"color":"#f59e0b"}]}]'></div>
+<div class="chart-radar" data-title="ChatGPT 업무별 적합도 평가" data-items='[{"name":"정보검색","scores":[{"label":"정확도","value":8,"color":"#009e73"},{"label":"속도","value":9,"color":"#3b82f6"},{"label":"비용","value":10,"color":"#f59e0b"}]},{"name":"데이터분석","scores":[{"label":"정확도","value":7,"color":"#009e73"},{"label":"속도","value":8,"color":"#3b82f6"},{"label":"비용","value":10,"color":"#f59e0b"}]},{"name":"보고서작성","scores":[{"label":"정확도","value":8,"color":"#009e73"},{"label":"속도","value":9,"color":"#3b82f6"},{"label":"비용","value":10,"color":"#f59e0b"}]}]'></div>
 
 ## 5단계: 고급 활용 — 이미지·파일 분석
 

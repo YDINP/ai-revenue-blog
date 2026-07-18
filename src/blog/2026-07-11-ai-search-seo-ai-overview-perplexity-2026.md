@@ -37,7 +37,7 @@ faq:
 
 2026년 웹 환경의 큰 흐름을 보면, 프라이버시 강화로 상당수 전환이 추적조차 어려워졌고, AI 요약으로 클릭률도 압박받고 있습니다.
 
-<div class="chart-bar" data-title="검색 트래픽을 둘러싼 2026 압력 요인 (영향 체감, 참고용)" data-labels="AI 요약(zero-click),AI 검색엔진 확산,프라이버시 추적 제한" data-values="9,8,7" data-colors="#ef4444,#3b82f6,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-title="검색 트래픽을 둘러싼 2026 압력 요인 (영향 체감, 참고용)" data-labels="AI 요약(zero-click),AI 검색엔진 확산,프라이버시 추적 제한" data-values="9,8,7" data-colors="#d55e00,#3b82f6,#f59e0b" data-unit="점"></div>
 
 숫자 자체보다 방향이 중요합니다. "검색 = 클릭"이라는 공식이 약해지고 있다는 것.
 

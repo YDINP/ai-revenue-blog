@@ -201,7 +201,7 @@ const { data } = await supabase.rpc('search_documents', {
 
 이것은 AI 검색 엔진, 추천 시스템, 챗봇을 만드는 데 핵심입니다.
 
-<div class="chart-progress" data-title="2026년 Supabase 개발자 만족도" data-labels="실시간 성능,보안,개발자경험,가격" data-values="94,92,88,85" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="2026년 Supabase 개발자 만족도" data-labels="실시간 성능,보안,개발자경험,가격" data-values="94,92,88,85" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00" data-max="100" data-unit="점"></div>
 
 ## 실전 예제: 협업 투두 앱 구축
 
@@ -281,7 +281,7 @@ function TodoApp() {
 
 ## 2026년 Supabase 성능 지표
 
-<div class="chart-bar" data-title="Supabase vs Firebase 성능 비교" data-labels="RLS오버헤드,데이터베이스 응답시간,실시간동기화지연" data-values="12,28,87" data-colors="#f59e0b,#10b981,#3b82f6" data-unit="ms"></div>
+<div class="chart-bar" data-title="Supabase vs Firebase 성능 비교" data-labels="RLS오버헤드,데이터베이스 응답시간,실시간동기화지연" data-values="12,28,87" data-colors="#f59e0b,#009e73,#3b82f6" data-unit="ms"></div>
 
 위 벤치마크는 <span style="font-size:1.15em;font-weight:700">평균 1000개 행 데이터셋 기준</span>입니다. Supabase의 PostgreSQL 백엔드는 Firebase의 NoSQL과 달리 복잡한 쿼리에서 더 유리합니다.
 

@@ -63,7 +63,7 @@ faq:
 
 아래 점수는 실제 벤치마크가 아닌 개념적 평가(각 도구의 공개 기능 및 사용자 리포트 기반)다.
 
-<div class="chart-bar" data-title="용도별 AI 에셋 도구 적합도 (개념적 평가, 10점)" data-labels="Scenario,Midjourney,Leonardo,Layer.ai" data-values="9,8,8,7" data-colors="#10b981,#3b82f6,#ef4444,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-title="용도별 AI 에셋 도구 적합도 (개념적 평가, 10점)" data-labels="Scenario,Midjourney,Leonardo,Layer.ai" data-values="9,8,8,7" data-colors="#009e73,#3b82f6,#d55e00,#f59e0b" data-unit="점"></div>
 
 **상황별 추천 기준**:
 

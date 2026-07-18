@@ -128,7 +128,7 @@ noindex: true
 
 ## 비용별 개발 환경 수준 비교
 
-<div class="chart-versus" data-title="개발 환경 레벨별 월평균 비용" data-name-a="초보자" data-name-b="엔터프라이즈" data-color-a="#10b981" data-color-b="#ef4444" data-items='[{"label":"소프트웨어","a":0,"b":8500},{"label":"클라우드","a":10,"b":5000},{"label":"협업도구","a":0,"b":15000},{"label":"보안/모니터링","a":0,"b":3000}]'></div>
+<div class="chart-versus" data-title="개발 환경 레벨별 월평균 비용" data-name-a="초보자" data-name-b="엔터프라이즈" data-color-a="#009e73" data-color-b="#d55e00" data-items='[{"label":"소프트웨어","a":0,"b":8500},{"label":"클라우드","a":10,"b":5000},{"label":"협업도구","a":0,"b":15000},{"label":"보안/모니터링","a":0,"b":3000}]'></div>
 
 ## 개발 환경 비용 절감 전략
 
@@ -180,7 +180,7 @@ noindex: true
 
 ## 실제 개발자들의 월평균 지출
 
-<div class="chart-bar" data-orient="vertical" data-title="2026년 개발자 월평균 개발 환경 지출액" data-labels="초보자,주니어,시니어,CTO" data-values="5,85,350,2500" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-unit="달러"></div>
+<div class="chart-bar" data-orient="vertical" data-title="2026년 개발자 월평균 개발 환경 지출액" data-labels="초보자,주니어,시니어,CTO" data-values="5,85,350,2500" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00" data-unit="달러"></div>
 
 ## 2026년 개발 환경 트렌드: 비용 절감의 새로운 방향
 

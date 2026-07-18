@@ -60,7 +60,7 @@ faq:
 
 성능이 최고인 만큼 가격도 높습니다.
 
-<div class="chart-bar" data-title="100만 토큰당 가격 비교 ($, 입력/출력 합산 참고용)" data-labels="Fable 5 출력,Fable 5 입력" data-values="50,10" data-colors="#ef4444,#3b82f6" data-unit="$"></div>
+<div class="chart-bar" data-title="100만 토큰당 가격 비교 ($, 입력/출력 합산 참고용)" data-labels="Fable 5 출력,Fable 5 입력" data-values="50,10" data-colors="#d55e00,#3b82f6" data-unit="$"></div>
 
 - <span style="font-size:1.3em;font-weight:800">입력 $10 / 출력 $50</span> (100만 토큰당)
 - Claude Opus 4.8의 약 2배 수준

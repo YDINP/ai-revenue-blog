@@ -242,7 +242,7 @@ F5 키를 누르면 게임이 실행됩니다. 방향키로 플레이어를 움�
 
 ## Godot 장점 비교
 
-<div class="chart-bar" data-title="Godot 주요 장점 평가" data-labels="가격 (무료),오픈소스,파일 크기 (경량),2D 개발,학습 난이도 (쉬움),커뮤니티" data-values="100,100,95,90,85,75" data-colors="#8b5cf6,#10b981,#8b5cf6,#10b981,#8b5cf6,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-title="Godot 주요 장점 평가" data-labels="가격 (무료),오픈소스,파일 크기 (경량),2D 개발,학습 난이도 (쉬움),커뮤니티" data-values="100,100,95,90,85,75" data-colors="#8b5cf6,#009e73,#8b5cf6,#009e73,#8b5cf6,#f59e0b" data-unit="점"></div>
 
 ## Godot vs Unity 비교
 

@@ -192,7 +192,7 @@ this.physics.world.enabled = false;  // 메뉴 화면
 this.physics.world.enabled = true;   // 게임플레이
 ```
 
-<div class="chart-progress" data-title="Phaser 3 성능 최적화 효과" data-labels="객체풀,텍스처아틀라스,캐시관리,물리최적화,LOD" data-values="92,88,85,80,87" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#8b5cf6" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="Phaser 3 성능 최적화 효과" data-labels="객체풀,텍스처아틀라스,캐시관리,물리최적화,LOD" data-values="92,88,85,80,87" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00,#8b5cf6" data-max="100" data-unit="점"></div>
 
 ## 실전: 슈팅 게임 만들기 (완성도 높은 예제)
 
@@ -289,7 +289,7 @@ class MainScene extends Phaser.Scene {
 
 ## Phaser 3 vs 다른 웹게임 엔진 비교
 
-<div class="chart-radar" data-title="웹게임 엔진 종합 평가" data-items='[{"name":"Phaser 3","scores":[{"label":"학습곡선","value":9,"color":"#10b981"},{"label":"성능","value":8,"color":"#3b82f6"},{"label":"커뮤니티","value":9,"color":"#f59e0b"},{"label":"기능성","value":8,"color":"#ef4444"},{"label":"가격","value":10,"color":"#8b5cf6"}]},{"name":"PixiJS","scores":[{"label":"학습곡선","value":8,"color":"#10b981"},{"label":"성능","value":10,"color":"#3b82f6"},{"label":"커뮤니티","value":7,"color":"#f59e0b"},{"label":"기능성","value":7,"color":"#ef4444"},{"label":"가격","value":10,"color":"#8b5cf6"}]},{"name":"Babylon.js","scores":[{"label":"학습곡선","value":6,"color":"#10b981"},{"label":"성능","value":9,"color":"#3b82f6"},{"label":"커뮤니티","value":8,"color":"#f59e0b"},{"label":"기능성","value":10,"color":"#ef4444"},{"label":"가격","value":10,"color":"#8b5cf6"}]}]'></div>
+<div class="chart-radar" data-title="웹게임 엔진 종합 평가" data-items='[{"name":"Phaser 3","scores":[{"label":"학습곡선","value":9,"color":"#009e73"},{"label":"성능","value":8,"color":"#3b82f6"},{"label":"커뮤니티","value":9,"color":"#f59e0b"},{"label":"기능성","value":8,"color":"#d55e00"},{"label":"가격","value":10,"color":"#8b5cf6"}]},{"name":"PixiJS","scores":[{"label":"학습곡선","value":8,"color":"#009e73"},{"label":"성능","value":10,"color":"#3b82f6"},{"label":"커뮤니티","value":7,"color":"#f59e0b"},{"label":"기능성","value":7,"color":"#d55e00"},{"label":"가격","value":10,"color":"#8b5cf6"}]},{"name":"Babylon.js","scores":[{"label":"학습곡선","value":6,"color":"#009e73"},{"label":"성능","value":9,"color":"#3b82f6"},{"label":"커뮤니티","value":8,"color":"#f59e0b"},{"label":"기능성","value":10,"color":"#d55e00"},{"label":"가격","value":10,"color":"#8b5cf6"}]}]'></div>
 
 더 자세한 비교는 [PixiJS 2D 게임 개발 완벽 가이드 2026](/blog/2026-02-19-game-pixijs-2d-game-development-guide-2026/)을 참고하세요.
 
@@ -363,7 +363,7 @@ const config = {
 };
 ```
 
-<div class="chart-bar" data-orient="vertical" data-title="Phaser 3 기능별 성능 요구도" data-labels="물리엔진,입자효과,카메라,애니메이션,사운드" data-values="45,30,25,20,15" data-colors="#3b82f6,#ef4444,#8b5cf6,#10b981,#f59e0b" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="Phaser 3 기능별 성능 요구도" data-labels="물리엔진,입자효과,카메라,애니메이션,사운드" data-values="45,30,25,20,15" data-colors="#3b82f6,#d55e00,#8b5cf6,#009e73,#f59e0b" data-unit="%"></div>
 
 ## 결론: 2026년 웹게임 개발자라면 Phaser 3을 선택해야 하는 이유
 

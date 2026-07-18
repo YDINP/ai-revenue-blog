@@ -47,7 +47,7 @@ noindex: true
 
 먼저 2026년 공식 벤치마크를 확인해봅시다. GitHub의 Copilot 사용자 2만 명 대상 설문과 Cursor 커뮤니티 분석 결과입니다.
 
-<div class="chart-bar" data-orient="vertical" data-title="AI 코딩 도구별 개발 시간 단축률" data-labels="단순 자동완성,코드 리뷰 활용,테스트 자동생성,아키텍처 설계" data-values="15,38,52,67" data-colors="#ef4444,#f59e0b,#10b981,#3b82f6" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="AI 코딩 도구별 개발 시간 단축률" data-labels="단순 자동완성,코드 리뷰 활용,테스트 자동생성,아키텍처 설계" data-values="15,38,52,67" data-colors="#d55e00,#f59e0b,#009e73,#3b82f6" data-unit="%"></div>
 
 차트에서 보듯이 같은 도구라도 활용 방식에 따라 생산성 향상도가 <span style="font-size:1.3em;font-weight:800">4배 이상</span> 차이난다는 것이 핵심입니다. 단순 자동완성에만 의존하면 15% 정도의 속도 향상에 그치지만, 아키텍처 설계 단계부터 AI를 활용하면 67%의 시간 단축이 가능합니다.
 
@@ -156,7 +156,7 @@ tree -I 'node_modules' > project_structure.txt
 
 ## 2026년 AI 코딩 도구별 활용도 비교
 
-<div class="chart-versus" data-title="기법별 최적 도구 비교" data-name-a="GitHub Copilot" data-name-b="Cursor" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"테스트 자동생성","a":82,"b":90},{"label":"컨텍스트 확장","a":75,"b":88},{"label":"코드 리뷰","a":85,"b":92},{"label":"리팩토링","a":78,"b":89}]'></div>
+<div class="chart-versus" data-title="기법별 최적 도구 비교" data-name-a="GitHub Copilot" data-name-b="Cursor" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"테스트 자동생성","a":82,"b":90},{"label":"컨텍스트 확장","a":75,"b":88},{"label":"코드 리뷰","a":85,"b":92},{"label":"리팩토링","a":78,"b":89}]'></div>
 
 표에서 보듯이 각 기법마다 최적의 도구가 다릅니다. Cursor가 종합적으로 우수하지만, GitHub Copilot도 VS Code 네이티브 통합이라는 강점이 있습니다.
 

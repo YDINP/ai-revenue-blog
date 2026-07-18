@@ -43,7 +43,7 @@ Canvas 2D는 고급 API로, 직선, 도형, 텍스트 같은 기본 요소를 �
 
 WebGL은 GPU의 저수준 그래픽 API인 OpenGL ES를 브라우저에서 직접 사용합니다. 더 복잡하지만, GPU 병렬 처리를 최대한 활용할 수 있습니다. 특히 수천 개의 객체를 렌더링할 때 WebGL의 성능 우위는 압도적입니다.
 
-<div class="chart-versus" data-title="Canvas 2D vs WebGL 성능 비교" data-name-a="Canvas 2D" data-name-b="WebGL" data-color-a="#ef4444" data-color-b="#10b981" data-items='[{"label":"기본 도형 (100개)","a":92,"b":88},{"label":"스프라이트 (1000개)","a":45,"b":88},{"label":"파티클 (5000개)","a":12,"b":75},{"label":"학습곡선","a":90,"b":35}]'></div>
+<div class="chart-versus" data-title="Canvas 2D vs WebGL 성능 비교" data-name-a="Canvas 2D" data-name-b="WebGL" data-color-a="#d55e00" data-color-b="#009e73" data-items='[{"label":"기본 도형 (100개)","a":92,"b":88},{"label":"스프라이트 (1000개)","a":45,"b":88},{"label":"파티클 (5000개)","a":12,"b":75},{"label":"학습곡선","a":90,"b":35}]'></div>
 
 
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&src=1139000&spec=10799999&addtag=200&ctag=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B2%8C%EC%9E%84%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%ED%84%B4" target="_blank" rel="noopener noreferrer nofollow">
@@ -162,7 +162,7 @@ void main() {
 
 게임의 프레임율을 결정하는 가장 중요한 요소는 <span style="font-size:1.15em;font-weight:700">셰이더 복잡도</span>입니다. 2026년 기준 모바일 기기도 고려해야 합니다.
 
-<div class="chart-progress" data-title="셰이더 성능 영향도" data-labels="텍스처 샘플링,루프문,분기문,삼각함수" data-values="92,68,45,75" data-colors="#10b981,#3b82f6,#ef4444,#f59e0b" data-max="100" data-unit="상대성능"></div>
+<div class="chart-progress" data-title="셰이더 성능 영향도" data-labels="텍스처 샘플링,루프문,분기문,삼각함수" data-values="92,68,45,75" data-colors="#009e73,#3b82f6,#d55e00,#f59e0b" data-max="100" data-unit="상대성능"></div>
 
 ### 최적화 기법 5가지
 

@@ -80,7 +80,7 @@ Godot Asset Library는 오픈소스 게임 엔진 Godot의 공식 에셋 허브�
 
 ## 8가지 기준으로 비교
 
-<div class="chart-radar" data-title="에셋 스토어 종합 비교 (100점 만점)" data-items='[{"name":"Unity Asset Store","scores":[{"label":"에셋 수","value":95,"color":"#10b981"},{"label":"평균 가격","value":60,"color":"#3b82f6"},{"label":"품질 기준","value":88,"color":"#f59e0b"},{"label":"커뮤니티","value":90,"color":"#ef4444"},{"label":"지원/문서","value":85,"color":"#8b5cf6"}]},{"name":"Epic Marketplace","scores":[{"label":"에셋 수","value":70,"color":"#10b981"},{"label":"평균 가격","value":72,"color":"#3b82f6"},{"label":"품질 기준","value":92,"color":"#f59e0b"},{"label":"커뮤니티","value":75,"color":"#ef4444"},{"label":"지원/문서","value":88,"color":"#8b5cf6"}]},{"name":"Godot Asset Library","scores":[{"label":"에셋 수","value":45,"color":"#10b981"},{"label":"평균 가격","value":95,"color":"#3b82f6"},{"label":"품질 기준","value":65,"color":"#f59e0b"},{"label":"커뮤니티","value":70,"color":"#ef4444"},{"label":"지원/문서","value":72,"color":"#8b5cf6"}]}]'></div>
+<div class="chart-radar" data-title="에셋 스토어 종합 비교 (100점 만점)" data-items='[{"name":"Unity Asset Store","scores":[{"label":"에셋 수","value":95,"color":"#009e73"},{"label":"평균 가격","value":60,"color":"#3b82f6"},{"label":"품질 기준","value":88,"color":"#f59e0b"},{"label":"커뮤니티","value":90,"color":"#d55e00"},{"label":"지원/문서","value":85,"color":"#8b5cf6"}]},{"name":"Epic Marketplace","scores":[{"label":"에셋 수","value":70,"color":"#009e73"},{"label":"평균 가격","value":72,"color":"#3b82f6"},{"label":"품질 기준","value":92,"color":"#f59e0b"},{"label":"커뮤니티","value":75,"color":"#d55e00"},{"label":"지원/문서","value":88,"color":"#8b5cf6"}]},{"name":"Godot Asset Library","scores":[{"label":"에셋 수","value":45,"color":"#009e73"},{"label":"평균 가격","value":95,"color":"#3b82f6"},{"label":"품질 기준","value":65,"color":"#f59e0b"},{"label":"커뮤니티","value":70,"color":"#d55e00"},{"label":"지원/문서","value":72,"color":"#8b5cf6"}]}]'></div>
 
 | 기준 | Unity Asset Store | Epic Marketplace | Godot Asset Library |
 |------|------------------|------------------|--------------------|
@@ -133,7 +133,7 @@ Godot Asset Library는 오픈소스 게임 엔진 Godot의 공식 에셋 허브�
 
 더 자세한 내용은 [2026년 인디게임 수익화 현실: 개발자들이 숨기는 5가지 진실](/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/)을 참고하세요.
 
-<div class="chart-bar" data-title="연간 에셋 예산 비교 (소규모 프로젝트 기준)" data-labels="Unity\n(구독 미포함),Unity\n(Plus 구독),Epic\n(무료 활용),Godot" data-values="480,250,150,30" data-colors="#3b82f6,#10b981,#f59e0b,#8b5cf6" data-unit="$"></div>
+<div class="chart-bar" data-title="연간 에셋 예산 비교 (소규모 프로젝트 기준)" data-labels="Unity\n(구독 미포함),Unity\n(Plus 구독),Epic\n(무료 활용),Godot" data-values="480,250,150,30" data-colors="#3b82f6,#009e73,#f59e0b,#8b5cf6" data-unit="$"></div>
 
 ## 2026년 에셋 스토어 시장 동향
 

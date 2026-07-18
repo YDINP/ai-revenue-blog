@@ -107,7 +107,7 @@ noindex: true
 
 2026년 기준, 월 500만원 이상 벌이를 하는 인디 개발자 80%는 <span style="font-size:1.15em;font-weight:700">3가지 이상의 수익화 채널을 병행</span>하고 있습니다.
 
-<div class="chart-bar" data-title="웹 게임 수익화 모델별 월 수익 추정 (DAU 1,000 기준 · 광고 ARPDAU $0.013 앵커)" data-labels="하이브리드(3개 이상),광고+IAP,IAP 단독,광고 단독,구독 단독" data-values="288,180,112,60,48" data-colors="#ec4899,#8b5cf6,#10b981,#3b82f6,#f59e0b" data-unit="만원"></div>
+<div class="chart-bar" data-title="웹 게임 수익화 모델별 월 수익 추정 (DAU 1,000 기준 · 광고 ARPDAU $0.013 앵커)" data-labels="하이브리드(3개 이상),광고+IAP,IAP 단독,광고 단독,구독 단독" data-values="288,180,112,60,48" data-colors="#ec4899,#8b5cf6,#009e73,#3b82f6,#f59e0b" data-unit="만원"></div>
 
 > 위 막대에서 광고 단독 60만원은 바로 앞에서 계산한 `DAU × 노출 × eCPM ÷ 1,000` 공식(DAU 1,000, ARPDAU $0.013)에 앵커링한 값이고, 나머지는 광고 대비 상대 배수로 잡은 개념적 추정입니다. DAU가 늘면 이 값들도 비례해 커집니다(예: DAU 1만이면 광고 단독 약 600만원). 이는 [스팀·모바일·웹 수익 비교](/blog/2026-07-13-game-revenue-comparison-2026-steam-mobile-web/)의 웹게임 계산(DAU 1,000 → 월 약 62만원)과 같은 기준입니다.
 
@@ -177,7 +177,7 @@ Web3 & NFT 통합: 블록체인 기반 아이템 거래는 아직 초기 단계�
 
 <div class="chart-donut" data-title="2026년 웹 게임 개발자 주요 수익원 비율" data-labels="광고" data-values="35" data-colors="#3b82f6"></div>
 
-<div class="chart-donut" data-title="2026년 웹 게임 개발자 주요 수익원 비율" data-labels="광고,인앱구매,구독,기타" data-values="35,40,18,7" data-colors="#3b82f6,#10b981,#f59e0b,#8b5cf6"></div>
+<div class="chart-donut" data-title="2026년 웹 게임 개발자 주요 수익원 비율" data-labels="광고,인앱구매,구독,기타" data-values="35,40,18,7" data-colors="#3b82f6,#009e73,#f59e0b,#8b5cf6"></div>
 
 ## 수익화 단계별 로드맵
 

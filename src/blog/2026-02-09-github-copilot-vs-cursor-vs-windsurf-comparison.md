@@ -36,7 +36,7 @@ noindex: true
 
 ## 5가지 기준 종합 비교
 
-<div class="chart-radar" data-title="AI 코딩 어시스턴트 종합 비교" data-items='[{"name":"GitHub Copilot","scores":[{"label":"코드품질","value":8,"color":"#10b981"},{"label":"속도","value":9,"color":"#3b82f6"},{"label":"가격","value":7,"color":"#f59e0b"},{"label":"언어지원","value":9,"color":"#ef4444"},{"label":"IDE통합","value":8,"color":"#8b5cf6"}]},{"name":"Cursor","scores":[{"label":"코드품질","value":9,"color":"#10b981"},{"label":"속도","value":8,"color":"#3b82f6"},{"label":"가격","value":6,"color":"#f59e0b"},{"label":"언어지원","value":8,"color":"#ef4444"},{"label":"IDE통합","value":9,"color":"#8b5cf6"}]},{"name":"Windsurf","scores":[{"label":"코드품질","value":8,"color":"#10b981"},{"label":"속도","value":7,"color":"#3b82f6"},{"label":"가격","value":8,"color":"#f59e0b"},{"label":"언어지원","value":7,"color":"#ef4444"},{"label":"IDE통합","value":8,"color":"#8b5cf6"}]}]'></div>
+<div class="chart-radar" data-title="AI 코딩 어시스턴트 종합 비교" data-items='[{"name":"GitHub Copilot","scores":[{"label":"코드품질","value":8,"color":"#009e73"},{"label":"속도","value":9,"color":"#3b82f6"},{"label":"가격","value":7,"color":"#f59e0b"},{"label":"언어지원","value":9,"color":"#d55e00"},{"label":"IDE통합","value":8,"color":"#8b5cf6"}]},{"name":"Cursor","scores":[{"label":"코드품질","value":9,"color":"#009e73"},{"label":"속도","value":8,"color":"#3b82f6"},{"label":"가격","value":6,"color":"#f59e0b"},{"label":"언어지원","value":8,"color":"#d55e00"},{"label":"IDE통합","value":9,"color":"#8b5cf6"}]},{"name":"Windsurf","scores":[{"label":"코드품질","value":8,"color":"#009e73"},{"label":"속도","value":7,"color":"#3b82f6"},{"label":"가격","value":8,"color":"#f59e0b"},{"label":"언어지원","value":7,"color":"#d55e00"},{"label":"IDE통합","value":8,"color":"#8b5cf6"}]}]'></div>
 
 ## 1. GitHub Copilot — 안정적인 올라운더
 

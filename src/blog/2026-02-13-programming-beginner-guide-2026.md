@@ -76,7 +76,7 @@ JavaScript는 웹 개발을 목표로 하는 프로그래밍 입문자들에게 
 
 프로그래밍 입문 시대가 바뀌면서 필수 도구들도 변화했습니다. 2026년 기준 초보자가 꼭 알아야 할 도구들입니다.
 
-<div class="chart-progress" data-title="도구별 추천 점수" data-labels="VS Code,GitHub Copilot,Git,Docker" data-values="98,92,95,78" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="도구별 추천 점수" data-labels="VS Code,GitHub Copilot,Git,Docker" data-values="98,92,95,78" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00" data-max="100" data-unit="점"></div>
 
 ### 코드 에디터: VS Code
 
@@ -110,7 +110,7 @@ Stack Overflow, Reddit, 한국 개발자 커뮤니티 등에 참여하면서 질
 
 ## 프로그래밍 입문 학습 자원
 
-<div class="chart-donut" data-title="추천 학습 방법 분포" data-labels="온라인 강의,코딩 실습,프로젝트,커뮤니티" data-values="25,35,25,15" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444" data-unit="%"></div>
+<div class="chart-donut" data-title="추천 학습 방법 분포" data-labels="온라인 강의,코딩 실습,프로젝트,커뮤니티" data-values="25,35,25,15" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00" data-unit="%"></div>
 
 프로그래밍 입문 자원은 매우 풍부합니다. 위 차트처럼 균형 잡힌 학습이 효과적입니다:
 

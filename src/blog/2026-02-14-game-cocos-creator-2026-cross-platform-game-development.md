@@ -78,7 +78,7 @@ Cocos Creator는 C++ 기반 네이티브 엔진과 JavaScript/TypeScript VM을 �
 
 ## Cocos Creator vs 경쟁 플랫폼 비교
 
-<div class="chart-versus" data-title="Cocos Creator vs Unity (2D 게임 개발 기준)" data-name-a="Cocos Creator" data-name-b="Unity" data-color-a="#10b981" data-color-b="#f59e0b" data-items='[{"label":"학습 곡선","a":90,"b":72},{"label":"최종 빌드 크기","a":88,"b":65},{"label":"개발 속도","a":85,"b":75},{"label":"커뮤니티 규모","a":60,"b":95},{"label":"기업 지원","a":70,"b":95}]'></div>
+<div class="chart-versus" data-title="Cocos Creator vs Unity (2D 게임 개발 기준)" data-name-a="Cocos Creator" data-name-b="Unity" data-color-a="#009e73" data-color-b="#f59e0b" data-items='[{"label":"학습 곡선","a":90,"b":72},{"label":"최종 빌드 크기","a":88,"b":65},{"label":"개발 속도","a":85,"b":75},{"label":"커뮤니티 규모","a":60,"b":95},{"label":"기업 지원","a":70,"b":95}]'></div>
 
 더 자세한 기술 특성을 표로 정리하면:
 
@@ -133,7 +133,7 @@ export class GameManager extends Component {
 
 ## 2026년 Cocos Creator 생태계 현황
 
-<div class="chart-progress" data-title="플랫폼별 배포 성숙도" data-labels="HTML5 웹,iOS,Android,Windows,Mac" data-values="95,85,88,80,78" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="플랫폼별 배포 성숙도" data-labels="HTML5 웹,iOS,Android,Windows,Mac" data-values="95,85,88,80,78" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-max="100" data-unit="점"></div>
 
 ### 커뮤니티 및 자료
 
@@ -149,7 +149,7 @@ export class GameManager extends Component {
 
 ## Cocos Creator가 적합한 프로젝트 유형
 
-<div class="chart-bar" data-orient="vertical" data-title="게임 장르별 추천도" data-labels="하이퍼 캐주얼,캐주얼 게임,퍼즐,액션,RPG" data-values="98,95,90,75,65" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="게임 장르별 추천도" data-labels="하이퍼 캐주얼,캐주얼 게임,퍼즐,액션,RPG" data-values="98,95,90,75,65" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="점"></div>
 
 **특히 강한 영역:**
 - 하이퍼 캐주얼 게임 (Idle, Clicker, Match3)

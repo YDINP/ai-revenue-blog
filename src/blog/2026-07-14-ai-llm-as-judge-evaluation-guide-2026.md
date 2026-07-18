@@ -40,7 +40,7 @@ AI 출력은 정답이 하나가 아니라 '품질'의 문제라, 단위 테스�
 | 자기선호(Self-preference) | 같은 모델로 채점 시 점수 부풀림 | 구조적 |
 | 권위(Authority) | 자신 있는 어투가 정확성을 이김 | — |
 
-<div class="chart-bar" data-orient="vertical" data-title="편향이 승률에 주는 왜곡 (참고용)" data-labels="장황함 편향,위치 편향" data-values="30,15" data-colors="#ef4444,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="편향이 승률에 주는 왜곡 (참고용)" data-labels="장황함 편향,위치 편향" data-values="30,15" data-colors="#d55e00,#f59e0b" data-unit="점"></div>
 
 ## 대처법 1: 페어와이즈 + 순서 뒤집기
 

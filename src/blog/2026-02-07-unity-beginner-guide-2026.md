@@ -168,7 +168,7 @@ Unity는 2D와 3D 게임을 모두 지원하지만, 접근 방식이 다릅니�
 
 ## Unity 학습 단계별 난이도
 
-<div class="chart-bar" data-title="Unity 학습 단계별 난이도 (초보자 기준)" data-labels="설치 및 인터페이스,GameObject/Component,C# 기초,물리 시스템,애니메이션,UI 시스템,네트워킹" data-values="20,35,50,60,70,65,85" data-colors="#3b82f6,#3b82f6,#10b981,#10b981,#f59e0b,#f59e0b,#ef4444" data-unit="점"></div>
+<div class="chart-bar" data-title="Unity 학습 단계별 난이도 (초보자 기준)" data-labels="설치 및 인터페이스,GameObject/Component,C# 기초,물리 시스템,애니메이션,UI 시스템,네트워킹" data-values="20,35,50,60,70,65,85" data-colors="#3b82f6,#3b82f6,#009e73,#009e73,#f59e0b,#f59e0b,#d55e00" data-unit="점"></div>
 
 ## Unity 강점 분석
 

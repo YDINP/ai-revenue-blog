@@ -70,7 +70,7 @@ noindex: true
 
 ## 2026년 인기 키보드 마우스 세트 4가지 비교
 
-<div class="chart-radar" data-title="키보드 마우스 세트 종합 평가" data-items='[{"name":"Corsair K55 + Harpoon","scores":[{"label":"가격","value":8,"color":"#10b981"},{"label":"인체공학","value":7,"color":"#3b82f6"},{"label":"응답속도","value":8,"color":"#f59e0b"},{"label":"배터리","value":9,"color":"#ef4444"},{"label":"동기화","value":9,"color":"#8b5cf6"}]},{"name":"Logitech MX Keys + MX Master 3S","scores":[{"label":"가격","value":5,"color":"#10b981"},{"label":"인체공학","value":9,"color":"#3b82f6"},{"label":"응답속도","value":8,"color":"#f59e0b"},{"label":"배터리","value":9,"color":"#ef4444"},{"label":"동기화","value":8,"color":"#8b5cf6"}]},{"name":"Razer Pro Type + Focus","scores":[{"label":"가격","value":6,"color":"#10b981"},{"label":"인체공학","value":8,"color":"#3b82f6"},{"label":"응답속도","value":9,"color":"#f59e0b"},{"label":"배터리","value":8,"color":"#ef4444"},{"label":"동기화","value":8,"color":"#8b5cf6"}]}]'></div>
+<div class="chart-radar" data-title="키보드 마우스 세트 종합 평가" data-items='[{"name":"Corsair K55 + Harpoon","scores":[{"label":"가격","value":8,"color":"#009e73"},{"label":"인체공학","value":7,"color":"#3b82f6"},{"label":"응답속도","value":8,"color":"#f59e0b"},{"label":"배터리","value":9,"color":"#d55e00"},{"label":"동기화","value":9,"color":"#8b5cf6"}]},{"name":"Logitech MX Keys + MX Master 3S","scores":[{"label":"가격","value":5,"color":"#009e73"},{"label":"인체공학","value":9,"color":"#3b82f6"},{"label":"응답속도","value":8,"color":"#f59e0b"},{"label":"배터리","value":9,"color":"#d55e00"},{"label":"동기화","value":8,"color":"#8b5cf6"}]},{"name":"Razer Pro Type + Focus","scores":[{"label":"가격","value":6,"color":"#009e73"},{"label":"인체공학","value":8,"color":"#3b82f6"},{"label":"응답속도","value":9,"color":"#f59e0b"},{"label":"배터리","value":8,"color":"#d55e00"},{"label":"동기화","value":8,"color":"#8b5cf6"}]}]'></div>
 
 ### 1. Corsair K55 + Harpoon RGB 세트 (약 139,000원)
 
@@ -145,7 +145,7 @@ Logitech MX 세트는 Bluetooth로 3개 기기를 페어링할 수 있고, Razer
 
 ### 배터리 교체 주기
 
-<div class="chart-bar" data-title="세트별 배터리 지속력 비교" data-labels="MX Keys+Master,K55+Harpoon,ROG Keris+Scope,Pro Type+Focus" data-values="350,70,55,50" data-colors="#3b82f6,#10b981,#ef4444,#f59e0b" data-unit="시간 (마우스 기준)"></div>
+<div class="chart-bar" data-title="세트별 배터리 지속력 비교" data-labels="MX Keys+Master,K55+Harpoon,ROG Keris+Scope,Pro Type+Focus" data-values="350,70,55,50" data-colors="#3b82f6,#009e73,#d55e00,#f59e0b" data-unit="시간 (마우스 기준)"></div>
 
 Logitech MX Master 3S는 70일 지속력으로 거의 배터리 교체가 필요 없는 수준입니다. 반면 기계식 키보드 세트들은 40~50시간 단위로 관리해야 합니다.
 

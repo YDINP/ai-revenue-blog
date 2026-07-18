@@ -95,7 +95,7 @@ PDF, 엑셀, 파워포인트 파일을 직접 업로드하여 분석 가능합�
 
 ### 4단계: Claude AI 성능 평가
 
-<div class="chart-progress" data-title="Claude AI 기능별 만족도 평가" data-labels="한국어 처리,코드 생성,이미지 분석,응답 속도,비용 효율" data-values="92,95,88,85,82" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6,#ec4899" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="Claude AI 기능별 만족도 평가" data-labels="한국어 처리,코드 생성,이미지 분석,응답 속도,비용 효율" data-values="92,95,88,85,82" data-colors="#009e73,#3b82f6,#f59e0b,#8b5cf6,#ec4899" data-max="100" data-unit="점"></div>
 
 한국 기업 500개사 대상 조사 결과, Claude는 코드 생성(95점), 한국어 처리(92점)에서 최고 평가를 받았습니다. 다만 응답 속도와 비용 효율에서는 개선 요청이 지속되고 있습니다.
 

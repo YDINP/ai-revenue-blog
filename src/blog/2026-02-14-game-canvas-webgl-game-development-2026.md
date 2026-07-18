@@ -31,7 +31,7 @@ Canvas 2D API는 2D 게임, 간단한 인터랙티브 콘텐츠, 그리고 프�
 
 반면 WebGL은 3D 게임, 고사양 그래픽이 필요한 타이틀, 그리고 실시간 렌더링이 중요한 게임에 필수적입니다. 2026년 현재 WebGL 2.0이 모든 주요 브라우저에서 완전히 지원되며, 일부 브라우저는 WebGL 3.0 프리뷰도 제공하고 있습니다.
 
-<div class="chart-bar" data-orient="vertical" data-title="2026년 게임 장르별 기술 선호도" data-labels="메타버스,3D 액션,멀티플레이,2D 캐주얼" data-values="96,92,85,78" data-colors="#ef4444,#3b82f6,#f59e0b,#10b981" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="2026년 게임 장르별 기술 선호도" data-labels="메타버스,3D 액션,멀티플레이,2D 캐주얼" data-values="96,92,85,78" data-colors="#d55e00,#3b82f6,#f59e0b,#009e73" data-unit="%"></div>
 
 ### 2026년 주요 WebGL 프레임워크 비교
 
@@ -47,7 +47,7 @@ Canvas 2D API는 2D 게임, 간단한 인터랙티브 콘텐츠, 그리고 프�
 
 2026년 특별히 주목할 점은 Phaser 4의 정식 출시입니다. Phaser 3에서의 핵심 피드백을 반영하여 번들 크기를 <span style="font-size:1.15em;font-weight:700">35%</span> 줄이고, WebGPU 지원을 추가했습니다. 특히 한국 게임사들이 많이 사용하는 Phaser는 이번 업데이트로 모바일 웹 게임 최적화가 크게 개선되었습니다.
 
-<div class="chart-versus" data-title="Three.js vs Babylon.js (2026)" data-name-a="Three.js" data-name-b="Babylon.js" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"학습 용이성","a":70,"b":85},{"label":"성능","a":88,"b":90},{"label":"문서화","a":85,"b":92},{"label":"커뮤니티","a":95,"b":75}]'></div>
+<div class="chart-versus" data-title="Three.js vs Babylon.js (2026)" data-name-a="Three.js" data-name-b="Babylon.js" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"학습 용이성","a":70,"b":85},{"label":"성능","a":88,"b":90},{"label":"문서화","a":85,"b":92},{"label":"커뮤니티","a":95,"b":75}]'></div>
 
 ### WebGPU 시대의 게임 개발 전략
 
@@ -94,7 +94,7 @@ WebAssembly와 Canvas의 결합으로 메모리 효율이 중요해졌습니다.
 - 동적 배치 생성으로 메모리 재사용
 - 가비지 컬렉션 튜닝으로 프레임 드롭 방지
 
-<div class="chart-progress" data-title="2026년 웹 게임 성능 최적화 영역별 중요도" data-labels="텍스처 최적화,메모리 관리,렌더링 파이프라인" data-values="92,88,95" data-colors="#10b981,#3b82f6,#f59e0b" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="2026년 웹 게임 성능 최적화 영역별 중요도" data-labels="텍스처 최적화,메모리 관리,렌더링 파이프라인" data-values="92,88,95" data-colors="#009e73,#3b82f6,#f59e0b" data-max="100" data-unit="점"></div>
 
 ### 한국 게임 개발사들의 2026년 선택 현황
 

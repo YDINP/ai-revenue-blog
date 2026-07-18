@@ -54,7 +54,7 @@ faq:
 
 서버를 처음 만들 때 채널을 너무 많이 만드는 것이 흔한 실수다. 초기에는 역할을 명확히 구분한 최소 채널로 시작하고, 커뮤니티 요청에 따라 늘리는 것이 원칙이다.
 
-<div class="chart-donut" data-title="건강한 인디게임 디스코드의 채널 구성 (개념적 예시)" data-labels="공지/업데이트,피드백/버그,잡담,쇼케이스,베타테스트" data-values="20,25,30,15,10" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="%"></div>
+<div class="chart-donut" data-title="건강한 인디게임 디스코드의 채널 구성 (개념적 예시)" data-labels="공지/업데이트,피드백/버그,잡담,쇼케이스,베타테스트" data-values="20,25,30,15,10" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="%"></div>
 
 **권장 초기 채널 구성(5~7개):**
 

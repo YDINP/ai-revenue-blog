@@ -58,7 +58,7 @@ faq:
 
 기획서가 아무리 그럴듯해도, 손으로 만져보기 전엔 재미를 알 수 없다. 프로토타입의 유일한 목적은 "이 코어 루프가 실제로 재밌는가?" 하나다.
 
-<div class="chart-versus" data-title="프로토타입 vs 수직 슬라이스: 목적이 다르다" data-name-a="프로토타입" data-name-b="수직 슬라이스" data-color-a="#f59e0b" data-color-b="#10b981" data-items='[{"label":"목적: 재미 검증","a":95,"b":40},{"label":"목적: 품질 시연","a":20,"b":95},{"label":"아트 완성도","a":15,"b":90},{"label":"제작 속도","a":90,"b":35},{"label":"버릴 각오","a":90,"b":10}]'></div>
+<div class="chart-versus" data-title="프로토타입 vs 수직 슬라이스: 목적이 다르다" data-name-a="프로토타입" data-name-b="수직 슬라이스" data-color-a="#f59e0b" data-color-b="#009e73" data-items='[{"label":"목적: 재미 검증","a":95,"b":40},{"label":"목적: 품질 시연","a":20,"b":95},{"label":"아트 완성도","a":15,"b":90},{"label":"제작 속도","a":90,"b":35},{"label":"버릴 각오","a":90,"b":10}]'></div>
 
 핵심 원칙:
 

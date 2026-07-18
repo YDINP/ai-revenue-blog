@@ -33,7 +33,7 @@ faq:
 
 ## 현실적인 5가지 방법
 
-<div class="chart-bar" data-orient="vertical" data-title="방법별 진입 난이도 vs 지속 가능성 (10점, 참고용)" data-labels="콘텐츠/제휴,디지털 상품,자동화 대행,자동화 툴 판매,소규모 SaaS" data-values="7,7,6,6,5" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6,#ef4444" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="방법별 진입 난이도 vs 지속 가능성 (10점, 참고용)" data-labels="콘텐츠/제휴,디지털 상품,자동화 대행,자동화 툴 판매,소규모 SaaS" data-values="7,7,6,6,5" data-colors="#009e73,#3b82f6,#f59e0b,#8b5cf6,#d55e00" data-unit="점"></div>
 
 ### 1) 콘텐츠 + 제휴 (진입 쉬움)
 AI로 리서치·초안·구조화를 빠르게 하고, 사람이 검수·차별화해 발행합니다. 제휴·광고·뉴스레터로 수익화. 단, AI가 만든 얕은 글 양산은 역효과. 정확하고 깊은 콘텐츠만 살아남습니다.

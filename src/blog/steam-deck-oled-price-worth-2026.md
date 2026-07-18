@@ -53,7 +53,7 @@ faq:
 
 윈도우11 기반의 ROG Ally X는 스팀 외에도 원하는 어떤 스토어든 자유롭게 쓸 수 있고, 대용량 배터리로 상대적으로 오래 버티는 편입니다. 이번 스팀덱 가격 인상으로 두 기기의 격차가 줄어든 만큼, 자유도와 배터리를 중요하게 보는 사람이라면 지금이 오히려 Ally X 쪽으로 저울을 기울일 타이밍일 수 있습니다.
 
-<div class="chart-bar" data-title="가격 인상 이후 대안별 가성비 체감 점수(참고용)" data-labels="스팀덱 OLED(신품),스팀덱 LCD/중고,ROG Ally X" data-values="6,9,7" data-colors="#6366f1,#10b981,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-title="가격 인상 이후 대안별 가성비 체감 점수(참고용)" data-labels="스팀덱 OLED(신품),스팀덱 LCD/중고,ROG Ally X" data-values="6,9,7" data-colors="#6366f1,#009e73,#f59e0b" data-unit="점"></div>
 
 ## 이런 사람에게
 

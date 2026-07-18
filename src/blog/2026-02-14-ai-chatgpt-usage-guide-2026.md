@@ -29,7 +29,7 @@ coupangLinks:
 
 ### ChatGPT 최신 모델 비교
 
-<div class="chart-versus" data-title="GPT-5.3 Codex vs GPT-5.3 Codex Spark" data-name-a="GPT-5.3 Codex" data-name-b="Codex Spark" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"정확도","a":92,"b":78},{"label":"속도","a":65,"b":100},{"label":"멀티모달","a":90,"b":50},{"label":"컨텍스트","a":95,"b":65}]'></div>
+<div class="chart-versus" data-title="GPT-5.3 Codex vs GPT-5.3 Codex Spark" data-name-a="GPT-5.3 Codex" data-name-b="Codex Spark" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"정확도","a":92,"b":78},{"label":"속도","a":65,"b":100},{"label":"멀티모달","a":90,"b":50},{"label":"컨텍스트","a":95,"b":65}]'></div>
 
 2026년 2월, OpenAI는 GPT-5.3 Codex(2월 5일)와 GPT-5.3 Codex Spark(2월 12일)를 연달아 출시했습니다. 풀 Codex는 400K 토큰 컨텍스트와 멀티모달을 지원하며, Spark는 Cerebras 칩 기반으로 초당 1,000+ 토큰의 초고속 생성이 특징입니다. 이제 전체 학위 논문이나 대규모 코드베이스를 한 번에 분석할 수 있습니다.
 
@@ -69,7 +69,7 @@ GPT-5.3의 향상된 분석 능력으로 구조화되지 않은 데이터를 의
 
 2026년 ChatGPT는 20개 이상의 프로그래밍 언어를 실시간으로 지원하며, GitHub Copilot과의 경쟁 속에서 콘텍스트 이해도가 대폭 향상되었습니다. 특히 레거시 코드 리팩토링과 보안 취약점 진단에서 높은 정확도를 보입니다.
 
-<div class="chart-bar" data-orient="vertical" data-title="ChatGPT 코딩 작업별 성공률" data-labels="버그 수정,코드 최적화,보안 감시,기능 구현" data-values="94,91,88,87" data-colors="#10b981,#f59e0b,#ef4444,#3b82f6" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="ChatGPT 코딩 작업별 성공률" data-labels="버그 수정,코드 최적화,보안 감시,기능 구현" data-values="94,91,88,87" data-colors="#009e73,#f59e0b,#d55e00,#3b82f6" data-unit="%"></div>
 
 ### 4. 다국어 커뮤니케이션
 
@@ -86,7 +86,7 @@ GPT-5.3의 향상된 분석 능력으로 구조화되지 않은 데이터를 의
 
 ## 2026년 ChatGPT 마켓플레이스 인기 GPT TOP 5
 
-<div class="chart-donut" data-title="마켓플레이스 GPT 카테고리 점유율" data-labels="콘텐츠 생성,데이터 분석,프로그래밍,교육,비즈니스 자동화" data-values="35,22,18,15,10" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="%"></div>
+<div class="chart-donut" data-title="마켓플레이스 GPT 카테고리 점유율" data-labels="콘텐츠 생성,데이터 분석,프로그래밍,교육,비즈니스 자동화" data-values="35,22,18,15,10" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="%"></div>
 
 현재 가장 많이 다운로드되는 커스텀 GPT는 전문 분야별로 나뉩니다:
 

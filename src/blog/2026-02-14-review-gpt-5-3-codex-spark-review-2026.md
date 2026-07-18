@@ -32,7 +32,7 @@ GPT-5.3 Codex Spark의 가장 큰 특징은 컨텍스트 이해도의 비약적 
 
 이는 실무 환경에서 코드 품질을 크게 향상시킬 수 있음을 의미합니다.
 
-<div class="chart-bar" data-orient="vertical" data-title="AI 코딩 도구 성능 비교 (2026년)" data-labels="코드 정확도,속도,컨텍스트 이해,보안 감지" data-values="95.2,93.5,92.8,89.1" data-colors="#10b981,#ef4444,#3b82f6,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="AI 코딩 도구 성능 비교 (2026년)" data-labels="코드 정확도,속도,컨텍스트 이해,보안 감지" data-values="95.2,93.5,92.8,89.1" data-colors="#009e73,#d55e00,#3b82f6,#f59e0b" data-unit="점"></div>
 
 ### 실무 테스트: 개발 생산성 향상도
 
@@ -59,7 +59,7 @@ GPT-5.3 Codex Spark의 가장 큰 특징은 컨텍스트 이해도의 비약적 
 
 GPT-5.3 Codex Spark는 전 언어에서 고르게 우수한 성능을 보였습니다.
 
-<div class="chart-radar" data-title="프로그래밍 언어별 성능 평가" data-items='[{"name":"Python","scores":[{"label":"코드 정확도","value":96,"color":"#10b981"},{"label":"속도","value":94,"color":"#3b82f6"},{"label":"안정성","value":93,"color":"#f59e0b"}]},{"name":"JavaScript","scores":[{"label":"코드 정확도","value":94,"color":"#10b981"},{"label":"속도","value":95,"color":"#3b82f6"},{"label":"안정성","value":91,"color":"#f59e0b"}]},{"name":"TypeScript","scores":[{"label":"코드 정확도","value":95,"color":"#10b981"},{"label":"속도","value":93,"color":"#3b82f6"},{"label":"안정성","value":94,"color":"#f59e0b"}]}]'></div>
+<div class="chart-radar" data-title="프로그래밍 언어별 성능 평가" data-items='[{"name":"Python","scores":[{"label":"코드 정확도","value":96,"color":"#009e73"},{"label":"속도","value":94,"color":"#3b82f6"},{"label":"안정성","value":93,"color":"#f59e0b"}]},{"name":"JavaScript","scores":[{"label":"코드 정확도","value":94,"color":"#009e73"},{"label":"속도","value":95,"color":"#3b82f6"},{"label":"안정성","value":91,"color":"#f59e0b"}]},{"name":"TypeScript","scores":[{"label":"코드 정확도","value":95,"color":"#009e73"},{"label":"속도","value":93,"color":"#3b82f6"},{"label":"안정성","value":94,"color":"#f59e0b"}]}]'></div>
 
 **언어별 특징:**
 - **Python**: 데이터 과학 라이브러리(NumPy, Pandas) 활용 제안이 특히 정교함
@@ -89,7 +89,7 @@ GPT-5.3 Codex Spark는 주요 개발 도구와의 네이티브 통합을 지원�
 
 실제 사용 시 Ctrl+Space로 제안을 호출하면 <span style="font-size:1.2em;font-weight:800">평균 0.8초</span> 내에 결과를 제시하며, 응답 속도가 매우 빠릅니다.
 
-<div class="chart-versus" data-title="AI 코딩 도구 비교" data-name-a="GPT-5.3 Codex Spark" data-name-b="GitHub Copilot X" data-color-a="#10b981" data-color-b="#3b82f6" data-items='[{"label":"코드 정확도","a":95,"b":91},{"label":"속도","a":94,"b":92},{"label":"가격대","a":85,"b":75},{"label":"IDE 통합","a":93,"b":96},{"label":"보안","a":89,"b":87}]'></div>
+<div class="chart-versus" data-title="AI 코딩 도구 비교" data-name-a="GPT-5.3 Codex Spark" data-name-b="GitHub Copilot X" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"코드 정확도","a":95,"b":91},{"label":"속도","a":94,"b":92},{"label":"가격대","a":85,"b":75},{"label":"IDE 통합","a":93,"b":96},{"label":"보안","a":89,"b":87}]'></div>
 
 ### 보안 및 라이센스 고려사항
 

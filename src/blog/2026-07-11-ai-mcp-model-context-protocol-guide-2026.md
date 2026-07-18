@@ -41,7 +41,7 @@ MCP는 <span style="font-size:1.3em;font-weight:800">AI 모델을 외부 도구�
 
 문제는 연결 방식이었습니다. 도구가 M개, 모델이 N개라면 예전엔 M×N개의 개별 연동을 만들어야 했어요.
 
-<div class="chart-bar" data-title="연동 방식별 필요한 작업량(도구 10개·모델 5개 기준)" data-labels="개별 연동(M×N),MCP 표준(M+N)" data-values="50,15" data-colors="#ef4444,#10b981" data-unit="개"></div>
+<div class="chart-bar" data-title="연동 방식별 필요한 작업량(도구 10개·모델 5개 기준)" data-labels="개별 연동(M×N),MCP 표준(M+N)" data-values="50,15" data-colors="#d55e00,#009e73" data-unit="개"></div>
 
 MCP는 이 숫자를 M+N으로 줄입니다. 도구 하나를 MCP 서버로 만들면 모든 모델이 쓸 수 있고, 모델 하나가 MCP를 지원하면 모든 도구에 접근할 수 있으니까요. 이 표준화가 올해 에이전트 생태계 폭발의 밑바탕이 됐습니다.
 

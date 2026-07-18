@@ -117,7 +117,7 @@ Samsung T7 Shield 특징:
 
 ## 예산별 개발자 장비 셋업 전략
 
-<div class="chart-bar" data-orient="vertical" data-title="개발자 장비 예산 배분 현황 (1인 기준)" data-labels="모니터,외장SSD,키보드,마우스,허브" data-values="35,27,18,12,8" data-colors="#3b82f6,#8b5cf6,#10b981,#f59e0b,#ef4444" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="개발자 장비 예산 배분 현황 (1인 기준)" data-labels="모니터,외장SSD,키보드,마우스,허브" data-values="35,27,18,12,8" data-colors="#3b82f6,#8b5cf6,#009e73,#f59e0b,#d55e00" data-unit="%"></div>
 
 ### 타입 A: 초급 개발자 (₩500,000 이내)
 
@@ -151,7 +151,7 @@ Samsung T7 Shield 특징:
 
 ## 개발자 장비 구입 시 놓쳐서는 안 될 체크리스트
 
-<div class="chart-progress" data-title="개발 장비 선택 평가 항목" data-labels="호환성,인체공학,확장성,내구성,A/S" data-values="95,88,82,90,85" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#8b5cf6" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="개발 장비 선택 평가 항목" data-labels="호환성,인체공학,확장성,내구성,A/S" data-values="95,88,82,90,85" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00,#8b5cf6" data-max="100" data-unit="점"></div>
 
 ### 체크리스트
 

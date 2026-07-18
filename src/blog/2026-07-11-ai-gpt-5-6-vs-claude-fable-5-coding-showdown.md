@@ -29,7 +29,7 @@ faq:
 
 ## 한눈에 보는 결론
 
-<div class="chart-versus" data-title="GPT-5.6 Sol vs Claude Fable 5 — 코딩 관점 종합" data-name-a="GPT-5.6 Sol" data-name-b="Claude Fable 5" data-color-a="#10b981" data-color-b="#3b82f6" data-items='[{"label":"코딩 벤치마크","a":92,"b":94},{"label":"속도","a":90,"b":78},{"label":"장기·복잡 작업","a":85,"b":96},{"label":"가성비","a":88,"b":68},{"label":"에이전트 실행력","a":90,"b":93}]'></div>
+<div class="chart-versus" data-title="GPT-5.6 Sol vs Claude Fable 5 — 코딩 관점 종합" data-name-a="GPT-5.6 Sol" data-name-b="Claude Fable 5" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"코딩 벤치마크","a":92,"b":94},{"label":"속도","a":90,"b":78},{"label":"장기·복잡 작업","a":85,"b":96},{"label":"가성비","a":88,"b":68},{"label":"에이전트 실행력","a":90,"b":93}]'></div>
 
 - **속도·가성비** → GPT-5.6 Sol 우위
 - **길고 복잡한 작업의 완성도** → Fable 5 우위
@@ -39,7 +39,7 @@ faq:
 
 먼저 검증된 공식·독립 수치부터.
 
-<div class="chart-bar" data-title="코딩 벤치마크 (Terminal-Bench 2.1, %)" data-labels="GPT-5.6 Sol,GPT-5.6 Sol Ultra" data-values="88.8,91.9" data-colors="#10b981,#3b82f6" data-unit="%"></div>
+<div class="chart-bar" data-title="코딩 벤치마크 (Terminal-Bench 2.1, %)" data-labels="GPT-5.6 Sol,GPT-5.6 Sol Ultra" data-values="88.8,91.9" data-colors="#009e73,#3b82f6" data-unit="%"></div>
 
 - **GPT-5.6 Sol**: Terminal-Bench 2.1 88.8%, 상위 변형 Sol Ultra 91.9%. Artificial Analysis 코딩 에이전트 지수 Sol(max) 80점.
 - **Claude Fable 5**: 소프트웨어 엔지니어링을 포함해 거의 모든 벤치마크에서 SOTA. 공식 발표는 개별 점수보다 "길고 복잡한 작업일수록 격차가 커진다"는 특성을 강조.

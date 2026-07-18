@@ -59,7 +59,7 @@ noindex: true
 
 **가장 중요한 통계**: 2026년 2월 기준, 전 세계 전문 디자이너의 <span style="font-size:1.3em;font-weight:800">53%는 프로젝트별로 3개 이상의 도구를 조합 사용</span>하고 있습니다. 단일 도구에 의존하기보다는 각 도구의 장점을 상황에 맞게 활용하는 것이 생산성 향상의 핵심입니다.
 
-<div class="chart-radar" data-title="AI 이미지 생성 도구 종합 비교 (2026년 2월)" data-items='[{"name":"DALL-E 4","scores":[{"label":"이미지 품질","value":9.2,"color":"#3b82f6"},{"label":"생성 속도","value":7,"color":"#10b981"},{"label":"가성비","value":8.5,"color":"#f59e0b"},{"label":"프롬프트 이해","value":9,"color":"#ef4444"},{"label":"세부 제어","value":7.5,"color":"#8b5cf6"}]},{"name":"Midjourney v7","scores":[{"label":"이미지 품질","value":9.5,"color":"#3b82f6"},{"label":"생성 속도","value":5.5,"color":"#10b981"},{"label":"가성비","value":7,"color":"#f59e0b"},{"label":"프롬프트 이해","value":9.5,"color":"#ef4444"},{"label":"세부 제어","value":8.5,"color":"#8b5cf6"}]},{"name":"Stable Diffusion 3.5","scores":[{"label":"이미지 품질","value":8.8,"color":"#3b82f6"},{"label":"생성 속도","value":9,"color":"#10b981"},{"label":"가성비","value":9.5,"color":"#f59e0b"},{"label":"프롬프트 이해","value":8,"color":"#ef4444"},{"label":"세부 제어","value":9.5,"color":"#8b5cf6"}]}]'></div>
+<div class="chart-radar" data-title="AI 이미지 생성 도구 종합 비교 (2026년 2월)" data-items='[{"name":"DALL-E 4","scores":[{"label":"이미지 품질","value":9.2,"color":"#3b82f6"},{"label":"생성 속도","value":7,"color":"#009e73"},{"label":"가성비","value":8.5,"color":"#f59e0b"},{"label":"프롬프트 이해","value":9,"color":"#d55e00"},{"label":"세부 제어","value":7.5,"color":"#8b5cf6"}]},{"name":"Midjourney v7","scores":[{"label":"이미지 품질","value":9.5,"color":"#3b82f6"},{"label":"생성 속도","value":5.5,"color":"#009e73"},{"label":"가성비","value":7,"color":"#f59e0b"},{"label":"프롬프트 이해","value":9.5,"color":"#d55e00"},{"label":"세부 제어","value":8.5,"color":"#8b5cf6"}]},{"name":"Stable Diffusion 3.5","scores":[{"label":"이미지 품질","value":8.8,"color":"#3b82f6"},{"label":"생성 속도","value":9,"color":"#009e73"},{"label":"가성비","value":9.5,"color":"#f59e0b"},{"label":"프롬프트 이해","value":8,"color":"#d55e00"},{"label":"세부 제어","value":9.5,"color":"#8b5cf6"}]}]'></div>
 
 ## 프로젝트 유형별 최적 도구 선택 전략
 
@@ -91,7 +91,7 @@ noindex: true
 - LoRA(Low-Rank Adaptation) 모델을 활용하면 특정 스타일을 100개 이상의 이미지에 일관되게 적용할 수 있습니다
 - 월 생성 비용을 $0~10 범위로 유지할 수 있습니다
 
-<div class="chart-donut" data-title="프로젝트 유형별 AI 도구 선호도 (2026년 2월 조사, n=500)" data-labels="Midjourney,DALL-E,Stable Diffusion,기타" data-values="42,28,22,8" data-colors="#3b82f6,#10b981,#f59e0b,#e5e7eb" data-unit="%"></div>
+<div class="chart-donut" data-title="프로젝트 유형별 AI 도구 선호도 (2026년 2월 조사, n=500)" data-labels="Midjourney,DALL-E,Stable Diffusion,기타" data-values="42,28,22,8" data-colors="#3b82f6,#009e73,#f59e0b,#e5e7eb" data-unit="%"></div>
 
 ## 실전 워크플로우: 3단계 하이브리드 프로세스
 
@@ -187,7 +187,7 @@ Canon EOS R5, f/2.8, professional, 4K"
 - 월 생성 비용: $0 (전기료만 해당, 약 $2~5)
 - 연간 절감: $600+ (기존 클라우드 기준 $720/년 vs 로컬 $24/년)
 
-<div class="chart-bar" data-title="AI 이미지 생성 도구별 월간 실제 비용 (프로젝트 500개 생성 기준)" data-labels="Midjourney Only,DALL-E 4 Only,하이브리드 (추천),로컬 + API,Stable Diffusion Only" data-values="150,85,45,8,5" data-colors="#10b981,#3b82f6,#8b5cf6,#ef4444,#f59e0b" data-unit="$"></div>
+<div class="chart-bar" data-title="AI 이미지 생성 도구별 월간 실제 비용 (프로젝트 500개 생성 기준)" data-labels="Midjourney Only,DALL-E 4 Only,하이브리드 (추천),로컬 + API,Stable Diffusion Only" data-values="150,85,45,8,5" data-colors="#009e73,#3b82f6,#8b5cf6,#d55e00,#f59e0b" data-unit="$"></div>
 
 ## 2026년 주의사항: 저작권 및 상용 라이선스
 

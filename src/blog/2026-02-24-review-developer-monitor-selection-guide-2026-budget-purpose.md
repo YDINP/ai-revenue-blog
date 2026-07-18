@@ -85,7 +85,7 @@ VESA 마운트를 지원하는지도 확인하세요. 모니터 암을 사용하
 
 ## 개발자 모니터 선택 의사결정 맵
 
-<div class="chart-versus" data-title="QHD (27") vs 4K (27") vs 울트라와이드 (34") 개발자 관점 비교" data-name-a="QHD 27\"" data-name-b="4K 27\"" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"텍스트 선명도","a":85,"b":95},{"label":"작업 공간","a":80,"b":75},{"label":"가격","a":90,"b":50},{"label":"GPU 요구","a":95,"b":70},{"label":"일반적 추천도","a":95,"b":75}]'></div>
+<div class="chart-versus" data-title="QHD (27") vs 4K (27") vs 울트라와이드 (34") 개발자 관점 비교" data-name-a="QHD 27\"" data-name-b="4K 27\"" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"텍스트 선명도","a":85,"b":95},{"label":"작업 공간","a":80,"b":75},{"label":"가격","a":90,"b":50},{"label":"GPU 요구","a":95,"b":70},{"label":"일반적 추천도","a":95,"b":75}]'></div>
 
 ## 개발 분야별 맞춤형 추천
 

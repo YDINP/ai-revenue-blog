@@ -139,7 +139,7 @@ Vercel의 주요 경쟁자로, JAMstack 배포에 특화되어 있습니다.
 
 **단점:** 국내 문서와 커뮤니티가 아직 많지 않습니다.
 
-<div class="chart-versus" data-title="배포 플랫폼 비교" data-name-a="Vercel" data-name-b="Docker (Self-hosted)" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"배포 난이도 (낮을수록 좋음)","a":95,"b":40},{"label":"비용 효율성","a":60,"b":85},{"label":"커스터마이징 자유도","a":50,"b":95},{"label":"성능 최적화","a":95,"b":70}]'></div>
+<div class="chart-versus" data-title="배포 플랫폼 비교" data-name-a="Vercel" data-name-b="Docker (Self-hosted)" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"배포 난이도 (낮을수록 좋음)","a":95,"b":40},{"label":"비용 효율성","a":60,"b":85},{"label":"커스터마이징 자유도","a":50,"b":95},{"label":"성능 최적화","a":95,"b":70}]'></div>
 
 ## 배포 방식별 성능 비교
 
@@ -171,7 +171,7 @@ DynamoDB, Lambda, RDS 같은 AWS 서비스를 함께 사용해야 한다면 Ampl
 
 전 세계 사용자를 타겟하고, 가격을 최소화하고 싶다면 Fly.io가 매력적입니다.
 
-<div class="chart-donut" data-title="개발자의 Next.js 배포 플랫폼 선택 비율 (2026년)" data-labels="Vercel,Docker,AWS,Netlify,Fly.io" data-values="42,28,15,10,5" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6"></div>
+<div class="chart-donut" data-title="개발자의 Next.js 배포 플랫폼 선택 비율 (2026년)" data-labels="Vercel,Docker,AWS,Netlify,Fly.io" data-values="42,28,15,10,5" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6"></div>
 
 ## 실제 배포 스텝: Vercel 예시
 

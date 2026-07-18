@@ -189,7 +189,7 @@ const counterSlice = createSlice({
 
 아래는 2026년 2월 기준 npm 공식 데이터에 기반한 번들 크기 비교입니다:
 
-<div class="chart-bar" data-title="상태 관리 라이브러리 번들 크기(Gzipped)" data-labels="TanStack Query,Redux Toolkit,Jotai,Zustand,Context API" data-values="13.0,8.5,3.3,2.2,0" data-colors="#ef4444,#8b5cf6,#3b82f6,#10b981,#f59e0b" data-unit="KB"></div>
+<div class="chart-bar" data-title="상태 관리 라이브러리 번들 크기(Gzipped)" data-labels="TanStack Query,Redux Toolkit,Jotai,Zustand,Context API" data-values="13.0,8.5,3.3,2.2,0" data-colors="#d55e00,#8b5cf6,#3b82f6,#009e73,#f59e0b" data-unit="KB"></div>
 
 ## 상황별 선택 가이드
 
@@ -232,7 +232,7 @@ function Component() {
 
 ### 3. 개발 생산성 향상
 
-<div class="chart-progress" data-title="개발자 만족도 점수(5점 만점)" data-labels="Zustand,Jotai,Redux Toolkit,Context API,TanStack Query" data-values="4.6,4.2,3.8,3.5,4.7" data-colors="#10b981,#3b82f6,#8b5cf6,#f59e0b,#ef4444" data-max="5" data-unit="점"></div>
+<div class="chart-progress" data-title="개발자 만족도 점수(5점 만점)" data-labels="Zustand,Jotai,Redux Toolkit,Context API,TanStack Query" data-values="4.6,4.2,3.8,3.5,4.7" data-colors="#009e73,#3b82f6,#8b5cf6,#f59e0b,#d55e00" data-max="5" data-unit="점"></div>
 
 ## 마이그레이션 팁
 

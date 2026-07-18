@@ -300,13 +300,13 @@ noindex: true
 
 ## 도구 카테고리별 추천 점수
 
-<div class="chart-bar" data-orient="vertical" data-title="게임 개발 도구 카테고리별 중요도" data-labels="게임 엔진,그래픽 도구,버전 관리,프로젝트 관리,사운드 도구,에셋 스토어" data-values="100,90,85,75,70,65" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6,#06b6d4" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="게임 개발 도구 카테고리별 중요도" data-labels="게임 엔진,그래픽 도구,버전 관리,프로젝트 관리,사운드 도구,에셋 스토어" data-values="100,90,85,75,70,65" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6,#06b6d4" data-unit="점"></div>
 
-<div class="chart-bar" data-orient="vertical" data-title="게임 개발 도구 학습 난이도 (높을수록 어려움)" data-labels="Blender,Unity,Git,Phaser,Audacity,Trello" data-values="80,60,50,40,30,20" data-colors="#10b981,#3b82f6,#f59e0b,#06b6d4,#8b5cf6,#ef4444" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="게임 개발 도구 학습 난이도 (높을수록 어려움)" data-labels="Blender,Unity,Git,Phaser,Audacity,Trello" data-values="80,60,50,40,30,20" data-colors="#009e73,#3b82f6,#f59e0b,#06b6d4,#8b5cf6,#d55e00" data-unit="점"></div>
 
 ## 무료 vs 유료 도구 비교
 
-<div class="chart-radar" data-title="무료 도구 vs 유료 도구 종합 비교" data-items='[{"name":"무료 도구","scores":[{"label":"접근성","value":10,"color":"#10b981"},{"label":"기능","value":7,"color":"#10b981"},{"label":"커뮤니티","value":9,"color":"#10b981"},{"label":"학습곡선","value":6,"color":"#10b981"},{"label":"지원","value":5,"color":"#10b981"},{"label":"업데이트","value":7,"color":"#10b981"}]},{"name":"유료 도구","scores":[{"label":"접근성","value":5,"color":"#3b82f6"},{"label":"기능","value":10,"color":"#3b82f6"},{"label":"커뮤니티","value":8,"color":"#3b82f6"},{"label":"학습곡선","value":7,"color":"#3b82f6"},{"label":"지원","value":10,"color":"#3b82f6"},{"label":"업데이트","value":9,"color":"#3b82f6"}]}]'></div>
+<div class="chart-radar" data-title="무료 도구 vs 유료 도구 종합 비교" data-items='[{"name":"무료 도구","scores":[{"label":"접근성","value":10,"color":"#009e73"},{"label":"기능","value":7,"color":"#009e73"},{"label":"커뮤니티","value":9,"color":"#009e73"},{"label":"학습곡선","value":6,"color":"#009e73"},{"label":"지원","value":5,"color":"#009e73"},{"label":"업데이트","value":7,"color":"#009e73"}]},{"name":"유료 도구","scores":[{"label":"접근성","value":5,"color":"#3b82f6"},{"label":"기능","value":10,"color":"#3b82f6"},{"label":"커뮤니티","value":8,"color":"#3b82f6"},{"label":"학습곡선","value":7,"color":"#3b82f6"},{"label":"지원","value":10,"color":"#3b82f6"},{"label":"업데이트","value":9,"color":"#3b82f6"}]}]'></div>
 
 ## 게임 개발 단계별 필수 도구
 

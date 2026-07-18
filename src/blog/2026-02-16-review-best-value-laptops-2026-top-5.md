@@ -50,7 +50,7 @@ noindex: true
 
 ## 가성비 노트북 TOP 5 종합 비교
 
-<div class="chart-bar" data-title="가성비 노트북 5종 종합 평가" data-labels="LG 그램 16","삼성 갤럭시북 13","레노버 ThinkPad E16","ASUS Vivobook 15","HP Pavilion 15" data-values="88,85,84,82,79" data-colors="#10b981,#f59e0b,#8b5cf6,#3b82f6,#ef4444" data-unit="점"></div>
+<div class="chart-bar" data-title="가성비 노트북 5종 종합 평가" data-labels="LG 그램 16","삼성 갤럭시북 13","레노버 ThinkPad E16","ASUS Vivobook 15","HP Pavilion 15" data-values="88,85,84,82,79" data-colors="#009e73,#f59e0b,#8b5cf6,#3b82f6,#d55e00" data-unit="점"></div>
 
 ## 1. LG 그램 16 (약 165만원) — 가벼움과 성능의 완벽한 조화
 
@@ -170,7 +170,7 @@ ThinkPad 시리즈는 업무용 노트북의 표준으로 평가받습니다. E1
 
 또한 모니터 선택도 노트북 성능을 최대한 활용하는 데 중요한 역할을 합니다. 더 자세한 모니터 정보는 [2026년 최신 코딩 모니터 비교: 개발자 필수 선택 가이드](/blog/2026-02-10-2026년-최신-코딩-모니터-비교-개발자-필수-선택-가이드/)를 확인하세요.
 
-<div class="chart-radar" data-title="5가지 모델 다항목 비교" data-items='[{"name":"LG 그램 16","scores":[{"label":"가격","value":8,"color":"#10b981"},{"label":"성능","value":8,"color":"#3b82f6"},{"label":"화면","value":9,"color":"#f59e0b"},{"label":"무게","value":9,"color":"#ef4444"},{"label":"배터리","value":9,"color":"#8b5cf6"}]},{"name":"ASUS Vivobook","scores":[{"label":"가격","value":10,"color":"#10b981"},{"label":"성능","value":7,"color":"#3b82f6"},{"label":"화면","value":7,"color":"#f59e0b"},{"label":"무게","value":7,"color":"#ef4444"},{"label":"배터리","value":8,"color":"#8b5cf6"}]},{"name":"삼성 갤럭시북","scores":[{"label":"가격","value":7,"color":"#10b981"},{"label":"성능","value":8,"color":"#3b82f6"},{"label":"화면","value":10,"color":"#f59e0b"},{"label":"무게","value":10,"color":"#ef4444"},{"label":"배터리","value":9,"color":"#8b5cf6"}]}]'></div>
+<div class="chart-radar" data-title="5가지 모델 다항목 비교" data-items='[{"name":"LG 그램 16","scores":[{"label":"가격","value":8,"color":"#009e73"},{"label":"성능","value":8,"color":"#3b82f6"},{"label":"화면","value":9,"color":"#f59e0b"},{"label":"무게","value":9,"color":"#d55e00"},{"label":"배터리","value":9,"color":"#8b5cf6"}]},{"name":"ASUS Vivobook","scores":[{"label":"가격","value":10,"color":"#009e73"},{"label":"성능","value":7,"color":"#3b82f6"},{"label":"화면","value":7,"color":"#f59e0b"},{"label":"무게","value":7,"color":"#d55e00"},{"label":"배터리","value":8,"color":"#8b5cf6"}]},{"name":"삼성 갤럭시북","scores":[{"label":"가격","value":7,"color":"#009e73"},{"label":"성능","value":8,"color":"#3b82f6"},{"label":"화면","value":10,"color":"#f59e0b"},{"label":"무게","value":10,"color":"#d55e00"},{"label":"배터리","value":9,"color":"#8b5cf6"}]}]'></div>
 
 ## 구매처별 추가 혜택 확인
 

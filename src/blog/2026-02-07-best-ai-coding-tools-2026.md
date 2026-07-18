@@ -125,9 +125,9 @@ AWS 생태계에 최적화된 AI 코딩 도구입니다.
 | Windsurf 2.0 | $15/월 | Devin 에이전트 내장, 원클릭 위임 | 팀 프로젝트 |
 | Amazon Q | 무료~ | AWS 최적화, 보안 스캔 | 클라우드 개발자 |
 
-<div class="chart-radar" data-title="AI 코딩 도구 종합 평가" data-items='[{"name":"Claude Code","scores":[{"label":"코딩 능력","value":9.5,"color":"#8b5cf6"},{"label":"자율성","value":10,"color":"#8b5cf6"},{"label":"접근성","value":6,"color":"#8b5cf6"},{"label":"가성비","value":7,"color":"#8b5cf6"},{"label":"확장성","value":9,"color":"#8b5cf6"}]},{"name":"GitHub Copilot","scores":[{"label":"코딩 능력","value":8,"color":"#10b981"},{"label":"자율성","value":6,"color":"#10b981"},{"label":"접근성","value":10,"color":"#10b981"},{"label":"가성비","value":9,"color":"#10b981"},{"label":"확장성","value":7,"color":"#10b981"}]},{"name":"Cursor","scores":[{"label":"코딩 능력","value":8.5,"color":"#3b82f6"},{"label":"자율성","value":8,"color":"#3b82f6"},{"label":"접근성","value":8,"color":"#3b82f6"},{"label":"가성비","value":7,"color":"#3b82f6"},{"label":"확장성","value":7,"color":"#3b82f6"}]}]'></div>
+<div class="chart-radar" data-title="AI 코딩 도구 종합 평가" data-items='[{"name":"Claude Code","scores":[{"label":"코딩 능력","value":9.5,"color":"#8b5cf6"},{"label":"자율성","value":10,"color":"#8b5cf6"},{"label":"접근성","value":6,"color":"#8b5cf6"},{"label":"가성비","value":7,"color":"#8b5cf6"},{"label":"확장성","value":9,"color":"#8b5cf6"}]},{"name":"GitHub Copilot","scores":[{"label":"코딩 능력","value":8,"color":"#009e73"},{"label":"자율성","value":6,"color":"#009e73"},{"label":"접근성","value":10,"color":"#009e73"},{"label":"가성비","value":9,"color":"#009e73"},{"label":"확장성","value":7,"color":"#009e73"}]},{"name":"Cursor","scores":[{"label":"코딩 능력","value":8.5,"color":"#3b82f6"},{"label":"자율성","value":8,"color":"#3b82f6"},{"label":"접근성","value":8,"color":"#3b82f6"},{"label":"가성비","value":7,"color":"#3b82f6"},{"label":"확장성","value":7,"color":"#3b82f6"}]}]'></div>
 
-<div class="chart-donut" data-title="월 구독 가격 비교 ($)" data-labels="Copilot,Windsurf,Amazon Q,Claude Code,Cursor" data-values="10,15,19,20,20" data-colors="#10b981,#f59e0b,#ef4444,#8b5cf6,#3b82f6" data-unit="$"></div>
+<div class="chart-donut" data-title="월 구독 가격 비교 ($)" data-labels="Copilot,Windsurf,Amazon Q,Claude Code,Cursor" data-values="10,15,19,20,20" data-colors="#009e73,#f59e0b,#d55e00,#8b5cf6,#3b82f6" data-unit="$"></div>
 
 ## 결론
 

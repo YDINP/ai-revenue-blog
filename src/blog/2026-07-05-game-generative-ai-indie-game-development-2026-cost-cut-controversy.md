@@ -44,7 +44,7 @@ faq:
 
 AI의 절감 효과는 영역마다 다르다. 아래는 인디 개발에서 AI 도입 시 체감되는 시간 절감을 개념적으로 정리한 것이다.
 
-<div class="chart-bar" data-title="AI 도입 시 작업 영역별 시간 절감 (개념적 추정, %)" data-labels="컨셉 아트/무드보드,배경·텍스처,사운드·보이스,코드 보조,QA·로컬라이징" data-values="80,70,65,45,40" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="%"></div>
+<div class="chart-bar" data-title="AI 도입 시 작업 영역별 시간 절감 (개념적 추정, %)" data-labels="컨셉 아트/무드보드,배경·텍스처,사운드·보이스,코드 보조,QA·로컬라이징" data-values="80,70,65,45,40" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="%"></div>
 
 특히 초기 컨셉 아트와 배경·텍스처 생성에서 절감폭이 크다. Midjourney류 이미지 도구로 방향을 잡고 마켓플레이스 에셋을 다듬는 워크플로우가 인디의 표준이 되어가고 있다. 음성은 ElevenLabs 같은 합성 보이스가, NPC 대사는 Inworld류 도구가 대표적이다.
 

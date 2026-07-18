@@ -78,7 +78,7 @@ this.physics.add.overlap(player, coins, collectCoin, null, this);
 
 collider는 실제 충돌로 객체를 밀어내고, overlap은 겹침을 감지하기만 합니다.
 
-<div class="chart-bar" data-title="물리 엔진 연산 비용 비교 (상대값)" data-labels="Babylon.js,Matter.js,Arcade" data-values="220,180,100" data-colors="#f59e0b,#3b82f6,#10b981" data-unit="상대값"></div>
+<div class="chart-bar" data-title="물리 엔진 연산 비용 비교 (상대값)" data-labels="Babylon.js,Matter.js,Arcade" data-values="220,180,100" data-colors="#f59e0b,#3b82f6,#009e73" data-unit="상대값"></div>
 
 ## 2026년 Phaser 3 물리 엔진 실전 활용법
 
@@ -175,7 +175,7 @@ class GameScene extends Phaser.Scene {
 
 ## Arcade vs Matter.js: 언제 어느 것을 쓸까?
 
-<div class="chart-versus" data-title="Arcade vs Matter.js" data-name-a="Arcade" data-name-b="Matter.js" data-color-a="#10b981" data-color-b="#3b82f6" data-items='[{"label":"성능","a":95,"b":75},{"label":"학습곡선","a":95,"b":70},{"label":"정확도","a":80,"b":95},{"label":"유연성","a":75,"b":95}]'></div>
+<div class="chart-versus" data-title="Arcade vs Matter.js" data-name-a="Arcade" data-name-b="Matter.js" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"성능","a":95,"b":75},{"label":"학습곡선","a":95,"b":70},{"label":"정확도","a":80,"b":95},{"label":"유연성","a":75,"b":95}]'></div>
 
 **Arcade Physics를 선택하세요:**
 - 간단한 2D 게임, 플랫포머, 슈팅 게임

@@ -64,7 +64,7 @@ xcodebuild -scheme MyApp -archivePath build/MyApp.xcarchive archive
 - **GitHub Actions macOS 러너** — 저장소와 통합, 무료 한도 존재
 - **Appcircle / Codemagic** — 맥 환경 빌드·서명·배포 특화
 
-<div class="chart-bar" data-title="워크플로 단계별 자동화 난이도 (참고용, 높을수록 까다로움)" data-labels="빌드(xcodebuild),아카이브,코드 서명,스토어 업로드" data-values="3,5,9,6" data-colors="#3b82f6,#10b981,#ef4444,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-title="워크플로 단계별 자동화 난이도 (참고용, 높을수록 까다로움)" data-labels="빌드(xcodebuild),아카이브,코드 서명,스토어 업로드" data-values="3,5,9,6" data-colors="#3b82f6,#009e73,#d55e00,#f59e0b" data-unit="점"></div>
 
 ## 최대 난관: 코드 서명
 

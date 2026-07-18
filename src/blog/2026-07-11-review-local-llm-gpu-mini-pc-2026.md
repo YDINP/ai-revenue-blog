@@ -45,7 +45,7 @@ LLM은 모델 크기(파라미터)에 비례해 메모리를 먹습니다. 그�
 
 ## VRAM별 돌릴 수 있는 모델 (양자화 기준)
 
-<div class="chart-progress" data-title="모델 크기별 권장 VRAM (GB)" data-labels="7~8B 소형,13~14B 중형,30B급,70B급 이상" data-values="8,16,24,48" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-max="48" data-unit="GB"></div>
+<div class="chart-progress" data-title="모델 크기별 권장 VRAM (GB)" data-labels="7~8B 소형,13~14B 중형,30B급,70B급 이상" data-values="8,16,24,48" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00" data-max="48" data-unit="GB"></div>
 
 - **7~8B 소형** → 8GB (입문·가벼운 작업)
 - **13~14B 중형** → 12~16GB
@@ -76,9 +76,9 @@ LLM은 모델 크기(파라미터)에 비례해 메모리를 먹습니다. 그�
 
 <div class="chart-radar" data-title="선택지별 특성 (10점, 참고용)" data-items='[
   {"name":"RTX 50","scores":[
-    {"label":"속도","value":9,"color":"#10b981"},
-    {"label":"범용성","value":9,"color":"#10b981"},
-    {"label":"저소음/효율","value":6,"color":"#10b981"}
+    {"label":"속도","value":9,"color":"#009e73"},
+    {"label":"범용성","value":9,"color":"#009e73"},
+    {"label":"저소음/효율","value":6,"color":"#009e73"}
   ]},
   {"name":"맥(대용량)","scores":[
     {"label":"속도","value":7,"color":"#3b82f6"},

@@ -46,7 +46,7 @@ noindex: true
 
 ## TOP 5 종합 비교
 
-<div class="chart-radar" data-title="포터블 모니터 종합 비교" data-items='[{"name":"ASUS ZenScreen","scores":[{"label":"화질","value":8,"color":"#10b981"},{"label":"휴대성","value":9,"color":"#3b82f6"},{"label":"연결성","value":8,"color":"#f59e0b"},{"label":"배터리","value":7,"color":"#ef4444"},{"label":"가격","value":7,"color":"#8b5cf6"}]},{"name":"Lenovo ThinkVision","scores":[{"label":"화질","value":8,"color":"#10b981"},{"label":"휴대성","value":8,"color":"#3b82f6"},{"label":"연결성","value":9,"color":"#f59e0b"},{"label":"배터리","value":6,"color":"#ef4444"},{"label":"가격","value":8,"color":"#8b5cf6"}]},{"name":"Samsung ViewFinity","scores":[{"label":"화질","value":9,"color":"#10b981"},{"label":"휴대성","value":7,"color":"#3b82f6"},{"label":"연결성","value":8,"color":"#f59e0b"},{"label":"배터리","value":8,"color":"#ef4444"},{"label":"가격","value":6,"color":"#8b5cf6"}]},{"name":"LG gram +view","scores":[{"label":"화질","value":9,"color":"#10b981"},{"label":"휴대성","value":9,"color":"#3b82f6"},{"label":"연결성","value":7,"color":"#f59e0b"},{"label":"배터리","value":1,"color":"#ef4444"},{"label":"가격","value":5,"color":"#8b5cf6"}]},{"name":"Innocn 15K1F","scores":[{"label":"화질","value":9,"color":"#10b981"},{"label":"휴대성","value":7,"color":"#3b82f6"},{"label":"연결성","value":8,"color":"#f59e0b"},{"label":"배터리","value":8,"color":"#ef4444"},{"label":"가격","value":9,"color":"#8b5cf6"}]}]'></div>
+<div class="chart-radar" data-title="포터블 모니터 종합 비교" data-items='[{"name":"ASUS ZenScreen","scores":[{"label":"화질","value":8,"color":"#009e73"},{"label":"휴대성","value":9,"color":"#3b82f6"},{"label":"연결성","value":8,"color":"#f59e0b"},{"label":"배터리","value":7,"color":"#d55e00"},{"label":"가격","value":7,"color":"#8b5cf6"}]},{"name":"Lenovo ThinkVision","scores":[{"label":"화질","value":8,"color":"#009e73"},{"label":"휴대성","value":8,"color":"#3b82f6"},{"label":"연결성","value":9,"color":"#f59e0b"},{"label":"배터리","value":6,"color":"#d55e00"},{"label":"가격","value":8,"color":"#8b5cf6"}]},{"name":"Samsung ViewFinity","scores":[{"label":"화질","value":9,"color":"#009e73"},{"label":"휴대성","value":7,"color":"#3b82f6"},{"label":"연결성","value":8,"color":"#f59e0b"},{"label":"배터리","value":8,"color":"#d55e00"},{"label":"가격","value":6,"color":"#8b5cf6"}]},{"name":"LG gram +view","scores":[{"label":"화질","value":9,"color":"#009e73"},{"label":"휴대성","value":9,"color":"#3b82f6"},{"label":"연결성","value":7,"color":"#f59e0b"},{"label":"배터리","value":1,"color":"#d55e00"},{"label":"가격","value":5,"color":"#8b5cf6"}]},{"name":"Innocn 15K1F","scores":[{"label":"화질","value":9,"color":"#009e73"},{"label":"휴대성","value":7,"color":"#3b82f6"},{"label":"연결성","value":8,"color":"#f59e0b"},{"label":"배터리","value":8,"color":"#d55e00"},{"label":"가격","value":9,"color":"#8b5cf6"}]}]'></div>
 
 ## 1. ASUS ZenScreen MB16ACV (16인치)
 
@@ -125,7 +125,7 @@ noindex: true
 
 ## 가격대 비교
 
-<div class="chart-bar" data-orient="vertical" data-title="가격대 비교 (만원)" data-labels="Samsung,LG gram,ASUS,Lenovo,Innocn" data-values="55,50,38,33,28" data-colors="#1428a0,#a50034,#3b82f6,#ef4444,#22c55e" data-unit="만원"></div>
+<div class="chart-bar" data-orient="vertical" data-title="가격대 비교 (만원)" data-labels="Samsung,LG gram,ASUS,Lenovo,Innocn" data-values="55,50,38,33,28" data-colors="#1428a0,#a50034,#3b82f6,#d55e00,#22c55e" data-unit="만원"></div>
 
 ## 개발자를 위한 선택 가이드
 

@@ -44,7 +44,7 @@ faq:
 
 위시리스트는 인디 마케팅의 핵심 지표지만, 오해가 많다. 중앙값 기준 전환율은 다음과 같다.
 
-<div class="chart-bar" data-orient="vertical" data-title="위시리스트 → 구매 전환율 (중앙값, 기간별)" data-labels="출시 첫날,첫 주,첫 해" data-values="5,20,60" data-colors="#3b82f6,#10b981,#f59e0b" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="위시리스트 → 구매 전환율 (중앙값, 기간별)" data-labels="출시 첫날,첫 주,첫 해" data-values="5,20,60" data-colors="#3b82f6,#009e73,#f59e0b" data-unit="%"></div>
 
 즉 출시 첫날에 팔리는 건 위시리스트의 5% 안팎이고, 나머지는 세일·업데이트를 거쳐 1년에 걸쳐 천천히 전환된다. 출시일 매출만 보고 실망할 필요가 없다는 뜻이자, 반대로 "출시 대박"은 확률이 낮다는 뜻이다.
 

@@ -124,7 +124,7 @@ Few-shot learning은 매우 강력한 기법입니다. AI에게 원하는 형식
 
 이렇게 단계를 명시하면 표면적인 답변이 아닌 근거 있는 조언을 받을 수 있습니다.
 
-<div class="chart-bar" data-orient="vertical" data-title="프롬프트 기법별 응답 품질 개선 효과" data-labels="사고과정,Few-shot,역할 할당,맥락 제공,제약 조건,기본 질문" data-values="82,78,72,68,65,45" data-colors="#8b5cf6,#3b82f6,#eab308,#f59e0b,#10b981,#ef4444" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="프롬프트 기법별 응답 품질 개선 효과" data-labels="사고과정,Few-shot,역할 할당,맥락 제공,제약 조건,기본 질문" data-values="82,78,72,68,65,45" data-colors="#8b5cf6,#3b82f6,#eab308,#f59e0b,#009e73,#d55e00" data-unit="점"></div>
 
 ## 2026년 실전 활용 팁: 체인 프롬프팅
 
@@ -168,7 +168,7 @@ Few-shot learning은 매우 강력한 기법입니다. AI에게 원하는 형식
 
 ## 2026년 AI 도구별 프롬프트 최적화
 
-<div class="chart-versus" data-title="AI 모델별 프롬프트 반응 특성" data-name-a="ChatGPT 4.5" data-name-b="Claude 3.5 Opus" data-color-a="#10b981" data-color-b="#3b82f6" data-items='[{"label":"맥락 활용","a":82,"b":88},{"label":"역할 이해","a":80,"b":85},{"label":"지시 준수","a":85,"b":90},{"label":"창의성","a":83,"b":78}]'></div>
+<div class="chart-versus" data-title="AI 모델별 프롬프트 반응 특성" data-name-a="ChatGPT 4.5" data-name-b="Claude 3.5 Opus" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"맥락 활용","a":82,"b":88},{"label":"역할 이해","a":80,"b":85},{"label":"지시 준수","a":85,"b":90},{"label":"창의성","a":83,"b":78}]'></div>
 
 **ChatGPT 4.5**: 명확한 지시와 제약 조건에 강하고, 창의적인 결과물 생성에 우수
 **Claude 3.5 Opus**: 복잡한 맥락 이해와 논리적 추론에 강하며, 지시 준수도 더욱 정확

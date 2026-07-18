@@ -94,7 +94,7 @@ noindex: true
 
 ## 수익 모델 심층 분석
 
-<div class="chart-donut" data-title="2026년 인디 웹게임 수익 구성" data-labels="광고수익,인앱결제,구독료,후원/기부" data-values="45,30,15,10" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444" data-unit="%"></div>
+<div class="chart-donut" data-title="2026년 인디 웹게임 수익 구성" data-labels="광고수익,인앱결제,구독료,후원/기부" data-values="45,30,15,10" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00" data-unit="%"></div>
 
 2026년 성공한 인디 웹게임들의 수익원 구성입니다. 광고 수익이 여전히 가장 큰 비중을 차지하지만, 인앱결제와 구독료 모델의 비중이 빠르게 증가하고 있습니다.
 
@@ -108,7 +108,7 @@ noindex: true
 
 ## 기술 스택: 성공한 팀들의 선택
 
-<div class="chart-bar" data-title="인디 웹게임 개발 엔진 선호도 (2026년 설문)" data-labels="Phaser.js,Cocos Creator,Babylon.js,Three.js,Canvas 순수 코드" data-values="32,22,18,15,13" data-colors="#10b981,#8b5cf6,#3b82f6,#f59e0b,#ec4899" data-unit="%"></div>
+<div class="chart-bar" data-title="인디 웹게임 개발 엔진 선호도 (2026년 설문)" data-labels="Phaser.js,Cocos Creator,Babylon.js,Three.js,Canvas 순수 코드" data-values="32,22,18,15,13" data-colors="#009e73,#8b5cf6,#3b82f6,#f59e0b,#ec4899" data-unit="%"></div>
 
 Phaser.js와 Cocos Creator가 양강 구도를 형성하고 있습니다. Phaser.js는 단순 2D 게임에, Cocos Creator는 중상급 멀티플레이어 게임에 선호됩니다.
 

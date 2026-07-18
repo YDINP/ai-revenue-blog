@@ -81,7 +81,7 @@ noindex: true
 
 ## 2026년 추천 포터블 모니터 5가지 비교
 
-<div class="chart-radar" data-title="포터블 모니터 5가지 종합 평가" data-items='[{"name":"ASUS ProArt PA148CTC","scores":[{"label":"색감 정확도","value":9,"color":"#10b981"},{"label":"화면 품질","value":9,"color":"#3b82f6"},{"label":"휴대성","value":7,"color":"#f59e0b"},{"label":"가성비","value":7,"color":"#ef4444"}]},{"name":"ViewSonic VX1655","scores":[{"label":"색감 정확도","value":8,"color":"#10b981"},{"label":"화면 품질","value":8,"color":"#3b82f6"},{"label":"휴대성","value":8,"color":"#f59e0b"},{"label":"가성비","value":8,"color":"#ef4444"}]},{"name":"AOC I1659FWUX","scores":[{"label":"색감 정확도","value":7,"color":"#10b981"},{"label":"화면 품질","value":7,"color":"#3b82f6"},{"label":"휴대성","value":9,"color":"#f59e0b"},{"label":"가성비","value":9,"color":"#ef4444"}]},{"name":"ASUS ZenScreen MB16AC","scores":[{"label":"색감 정확도","value":7,"color":"#10b981"},{"label":"화면 품질","value":8,"color":"#3b82f6"},{"label":"휴대성","value":9,"color":"#f59e0b"},{"label":"가성비","value":8,"color":"#ef4444"}]},{"name":"Lepow Z1","scores":[{"label":"색감 정확도","value":6,"color":"#10b981"},{"label":"화면 품질","value":7,"color":"#3b82f6"},{"label":"휴대성","value":9,"color":"#f59e0b"},{"label":"가성비","value":9,"color":"#ef4444"}]}]'></div>
+<div class="chart-radar" data-title="포터블 모니터 5가지 종합 평가" data-items='[{"name":"ASUS ProArt PA148CTC","scores":[{"label":"색감 정확도","value":9,"color":"#009e73"},{"label":"화면 품질","value":9,"color":"#3b82f6"},{"label":"휴대성","value":7,"color":"#f59e0b"},{"label":"가성비","value":7,"color":"#d55e00"}]},{"name":"ViewSonic VX1655","scores":[{"label":"색감 정확도","value":8,"color":"#009e73"},{"label":"화면 품질","value":8,"color":"#3b82f6"},{"label":"휴대성","value":8,"color":"#f59e0b"},{"label":"가성비","value":8,"color":"#d55e00"}]},{"name":"AOC I1659FWUX","scores":[{"label":"색감 정확도","value":7,"color":"#009e73"},{"label":"화면 품질","value":7,"color":"#3b82f6"},{"label":"휴대성","value":9,"color":"#f59e0b"},{"label":"가성비","value":9,"color":"#d55e00"}]},{"name":"ASUS ZenScreen MB16AC","scores":[{"label":"색감 정확도","value":7,"color":"#009e73"},{"label":"화면 품질","value":8,"color":"#3b82f6"},{"label":"휴대성","value":9,"color":"#f59e0b"},{"label":"가성비","value":8,"color":"#d55e00"}]},{"name":"Lepow Z1","scores":[{"label":"색감 정확도","value":6,"color":"#009e73"},{"label":"화면 품질","value":7,"color":"#3b82f6"},{"label":"휴대성","value":9,"color":"#f59e0b"},{"label":"가성비","value":9,"color":"#d55e00"}]}]'></div>
 
 ### ASUS ProArt PA148CTC — 전문가 지향
 
@@ -163,7 +163,7 @@ noindex: true
 | ASUS ZenScreen MB16AC | 15.6" | FHD | sRGB 87% | 5ms | 5시간 | 440g | 28~32만원 |
 | Lepow Z1 | 15.6" | FHD | sRGB 70% | 6ms | 4시간 | 410g | 12~16만원 |
 
-<div class="chart-bar" data-title="포터블 모니터 색감 정확도 비교" data-labels="ASUS ProArt,ViewSonic,ASUS ZenScreen,AOC,Lepow" data-values="99.5,98,87,72,70" data-colors="#10b981,#3b82f6,#ef4444,#f59e0b,#8b5cf6" data-unit="%"></div>
+<div class="chart-bar" data-title="포터블 모니터 색감 정확도 비교" data-labels="ASUS ProArt,ViewSonic,ASUS ZenScreen,AOC,Lepow" data-values="99.5,98,87,72,70" data-colors="#009e73,#3b82f6,#d55e00,#f59e0b,#8b5cf6" data-unit="%"></div>
 
 ## 포터블 모니터 선택 시 피해야 할 실수 3가지
 

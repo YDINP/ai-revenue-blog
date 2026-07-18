@@ -88,7 +88,7 @@ DisplayPort 1.4 이상은 고해상도 고주사율을 지원하므로, 향후 �
 
 ## 예산대별 현실적 추천 기준
 
-<div class="chart-bar" data-title="모니터 타입별 예상 가격대(2026년 2월 기준)" data-labels="27형 QHD USB-C,34형 울트라와이드,32형 4K IPS,27형 QHD IPS" data-values="680,520,450,280" data-colors="#ef4444,#f59e0b,#10b981,#3b82f6" data-unit="만원"></div>
+<div class="chart-bar" data-title="모니터 타입별 예상 가격대(2026년 2월 기준)" data-labels="27형 QHD USB-C,34형 울트라와이드,32형 4K IPS,27형 QHD IPS" data-values="680,520,450,280" data-colors="#d55e00,#f59e0b,#009e73,#3b82f6" data-unit="만원"></div>
 
 **30만원대**: 27인치 QHD IPS, 색감 정확도 sRGB 95% 수준. 기본기가 탄탄하면 충분합니다. 예산 제약이 있는 개발자의 무난한 선택입니다.
 
@@ -100,7 +100,7 @@ DisplayPort 1.4 이상은 고해상도 고주사율을 지원하므로, 향후 �
 
 ## 구매 전 체크리스트
 
-<div class="chart-progress" data-title="모니터 선택 필수 확인 항목" data-labels="해상도·화면크기,색감정확도,연결성,인체공학" data-values="100,95,80,85" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="모니터 선택 필수 확인 항목" data-labels="해상도·화면크기,색감정확도,연결성,인체공학" data-values="100,95,80,85" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00" data-max="100" data-unit="점"></div>
 
 1. **자신의 주요 작업 파악**: 웹 개발 vs 데이터 과학 vs 게임 개발 vs UI 설계. 각각 모니터 요구사항이 다릅니다.
 

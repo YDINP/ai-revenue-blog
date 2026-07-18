@@ -89,7 +89,7 @@ const batchRenderer = {
 };
 ```
 
-<div class="chart-bar" data-orient="vertical" data-title="최적화 기법별 성능 개선" data-labels="GPU 가속,텍스처 아틀라스,배치 렌더링,드로우콜 감소" data-values="85,72,68,55" data-colors="#ef4444,#3b82f6,#10b981,#f59e0b" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="최적화 기법별 성능 개선" data-labels="GPU 가속,텍스처 아틀라스,배치 렌더링,드로우콜 감소" data-values="85,72,68,55" data-colors="#d55e00,#3b82f6,#009e73,#f59e0b" data-unit="%"></div>
 
 ## 2. 메모리 관리 및 가비지 컬렉션 최적화
 
@@ -199,7 +199,7 @@ const assetManager = {
 
 ### 이미지 포맷 최적화
 
-<div class="chart-donut" data-title="이미지 포맷별 파일 크기" data-labels="WebP,PNG,JPG" data-values="45,65,58" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="KB"></div>
+<div class="chart-donut" data-title="이미지 포맷별 파일 크기" data-labels="WebP,PNG,JPG" data-values="45,65,58" data-colors="#009e73,#3b82f6,#f59e0b" data-unit="KB"></div>
 
 WebP 포맷이 PNG 대비 35~40% 작으면서 품질을 유지합니다. 브라우저 호환성을 고려해 폴백을 제공해야 합니다.
 
@@ -261,7 +261,7 @@ class PerformanceMonitor {
 
 ## 최적화 효과 측정
 
-<div class="chart-progress" data-title="최적화 전후 성능 비교" data-labels="로딩시간,평균FPS,메모리사용,네트워크" data-values="35,92,42,55" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="최적화 전후 성능 비교" data-labels="로딩시간,평균FPS,메모리사용,네트워크" data-values="35,92,42,55" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00" data-max="100" data-unit="점"></div>
 
 위 차트는 위의 최적화 기법을 모두 적용했을 때의 개선율을 나타냅니다.
 - **로딩시간**: 65% 단축

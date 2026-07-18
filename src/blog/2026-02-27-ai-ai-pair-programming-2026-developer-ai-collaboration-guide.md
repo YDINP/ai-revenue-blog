@@ -77,7 +77,7 @@ Claude API와 Cursor의 "Agent Mode"에서 지원하는 패턴으로, 개발자�
 
 ## 2026년 주요 AI 페어 프로그래밍 도구 비교
 
-<div class="chart-versus" data-title="GitHub Copilot vs Claude API vs Cursor" data-name-a="GitHub Copilot" data-name-b="Claude API" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"실시간 제안","a":90,"b":70},{"label":"대화형 리팩토링","a":75,"b":95},{"label":"멀티파일 이해","a":85,"b":92},{"label":"가격 효율성","a":80,"b":75}]'></div>
+<div class="chart-versus" data-title="GitHub Copilot vs Claude API vs Cursor" data-name-a="GitHub Copilot" data-name-b="Claude API" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"실시간 제안","a":90,"b":70},{"label":"대화형 리팩토링","a":75,"b":95},{"label":"멀티파일 이해","a":85,"b":92},{"label":"가격 효율성","a":80,"b":75}]'></div>
 
 | 도구 | 실시간 제안 | 코드 리뷰 | 테스트 생성 | 월간 비용 | 추천 용도 |
 |------|----------|---------|----------|---------|----------|
@@ -115,7 +115,7 @@ AI가 입력 검증 실패, 네트워크 오류, 정렬 순서 변경 등 실제
 
 ## AI 페어 프로그래밍의 실제 성과
 
-<div class="chart-bar" data-orient="vertical" data-title="AI 페어 프로그래밍 도입 후 생산성 변화" data-labels="학습 곡선,코드 작성 속도,리뷰 시간,버그 발견 시간" data-values="55,48,42,35" data-colors="#ef4444,#10b981,#f59e0b,#3b82f6" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="AI 페어 프로그래밍 도입 후 생산성 변화" data-labels="학습 곡선,코드 작성 속도,리뷰 시간,버그 발견 시간" data-values="55,48,42,35" data-colors="#d55e00,#009e73,#f59e0b,#3b82f6" data-unit="%"></div>
 
 **Microsoft와 GitClear의 2025년 연구에 따르면**:
 - 신입 개발자: <span style="font-size:1.3em;font-weight:800">생산성 50% 향상</span>

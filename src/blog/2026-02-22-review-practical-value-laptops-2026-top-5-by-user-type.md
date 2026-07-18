@@ -146,7 +146,7 @@ ThinkBook은 기업용 노트북의 신뢰성을 대중 가격대에서 제공�
 
 ## 용도별 추천 모델
 
-<div class="chart-radar" data-title="2026년 가성비 노트북 종합 비교" data-items='[{"name":"LG 그램 15","scores":[{"label":"경량성","value":10,"color":"#10b981"},{"label":"배터리","value":10,"color":"#3b82f6"},{"label":"성능","value":8,"color":"#f59e0b"},{"label":"화면품질","value":8,"color":"#ef4444"},{"label":"가격","value":7,"color":"#8b5cf6"}]},{"name":"삼성 갤럭시북4","scores":[{"label":"경량성","value":8,"color":"#10b981"},{"label":"배터리","value":8,"color":"#3b82f6"},{"label":"성능","value":8,"color":"#f59e0b"},{"label":"화면품질","value":10,"color":"#ef4444"},{"label":"가격","value":7,"color":"#8b5cf6"}]},{"name":"ASUS Vivobook 15","scores":[{"label":"경량성","value":7,"color":"#10b981"},{"label":"배터리","value":7,"color":"#3b82f6"},{"label":"성능","value":9,"color":"#f59e0b"},{"label":"화면품질","value":8,"color":"#ef4444"},{"label":"가격","value":9,"color":"#8b5cf6"}]}]'></div>
+<div class="chart-radar" data-title="2026년 가성비 노트북 종합 비교" data-items='[{"name":"LG 그램 15","scores":[{"label":"경량성","value":10,"color":"#009e73"},{"label":"배터리","value":10,"color":"#3b82f6"},{"label":"성능","value":8,"color":"#f59e0b"},{"label":"화면품질","value":8,"color":"#d55e00"},{"label":"가격","value":7,"color":"#8b5cf6"}]},{"name":"삼성 갤럭시북4","scores":[{"label":"경량성","value":8,"color":"#009e73"},{"label":"배터리","value":8,"color":"#3b82f6"},{"label":"성능","value":8,"color":"#f59e0b"},{"label":"화면품질","value":10,"color":"#d55e00"},{"label":"가격","value":7,"color":"#8b5cf6"}]},{"name":"ASUS Vivobook 15","scores":[{"label":"경량성","value":7,"color":"#009e73"},{"label":"배터리","value":7,"color":"#3b82f6"},{"label":"성능","value":9,"color":"#f59e0b"},{"label":"화면품질","value":8,"color":"#d55e00"},{"label":"가격","value":9,"color":"#8b5cf6"}]}]'></div>
 
 ### 노트북 추천 기준표
 

@@ -45,7 +45,7 @@ faq:
 
 인디 게임 발굴이 취미라면 스팀덱 쪽이 유리합니다. 매일 신작이 올라오는 스팀 스토어, 반복되는 시즌 세일, 유저 모드 지원까지 이어지는 생태계는 e숍과 결이 다릅니다. 스위치2 e숍에도 괜찮은 인디작이 있지만, 물량과 할인 빈도에서는 격차가 있습니다.
 
-<div class="chart-bar" data-title="영역별 라이브러리 강점 비교" data-labels="닌텐도 독점작,멀티플랫폼 자유도,인디·모드 물량,세일 빈도" data-values="10,7,9,9" data-colors="#e60012,#3b82f6,#10b981,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-title="영역별 라이브러리 강점 비교" data-labels="닌텐도 독점작,멀티플랫폼 자유도,인디·모드 물량,세일 빈도" data-values="10,7,9,9" data-colors="#e60012,#3b82f6,#009e73,#f59e0b" data-unit="점"></div>
 
 ## 가격: 접근성과 장기 비용은 다른 얘기
 

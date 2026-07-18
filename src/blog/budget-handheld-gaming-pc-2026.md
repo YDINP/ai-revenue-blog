@@ -49,7 +49,7 @@ faq:
 
 레노버 리전 고와 MSI Claw는 스팀덱과 Ally X 사이 어딘가에 위치합니다. 분리형 컨트롤러나 특정 화면 비율처럼 폼팩터 취향이 확실한 경우, 혹은 두 대표 모델의 재고·프로모션 타이밍이 애매할 때 대안으로 살펴볼 만합니다. 다만 예산 기준 추천에서는 우선순위가 스팀덱·Ally X보다는 뒤로 밀리는 편입니다. 특정 조건이 맞을 때 고르는 옵션으로 접근하는 게 맞습니다.
 
-<div class="chart-bar" data-title="예산대별 가성비 체감도 (참고용)" data-labels="스팀덱 OLED,레노버 리전 고,MSI Claw,ROG Ally X" data-values="9,7,6,8" data-colors="#10b981,#6366f1,#f59e0b,#3b82f6" data-unit="점"></div>
+<div class="chart-bar" data-title="예산대별 가성비 체감도 (참고용)" data-labels="스팀덱 OLED,레노버 리전 고,MSI Claw,ROG Ally X" data-values="9,7,6,8" data-colors="#009e73,#6366f1,#f59e0b,#3b82f6" data-unit="점"></div>
 
 ## 하이엔드는 대다수에게 과하다
 

@@ -65,7 +65,7 @@ faq:
 
 ## 장르별로 고르는 내 취향 라인업
 
-<div class="chart-donut" data-title="하반기 기대 신작 장르 분포 (개념적 예시)" data-labels="액션/RPG,생존/서바이벌,전략,인디,공포" data-values="30,22,20,18,10" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="%"></div>
+<div class="chart-donut" data-title="하반기 기대 신작 장르 분포 (개념적 예시)" data-labels="액션/RPG,생존/서바이벌,전략,인디,공포" data-values="30,22,20,18,10" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="%"></div>
 
 하반기 라인업은 <span style="font-size:1.3em;font-weight:800">액션/RPG 계열</span>이 가장 두꺼운 비중을 차지한다. 어쌔신 크리드 리싱크드, 페이블, 드래곤소드 어웨이크닝이 여기에 해당한다. 생존/서바이벌 계열은 블라이트 서바이벌과 아크 확장팩이 대표 주자다. [2026 뜨는 게임 장르 완벽 정리](/blog/2026-07-05-game-hot-game-genres-2026-roguelike-survivorlike-trends/)에서 분석했듯, 프리미엄 서바이버라이크 흐름이 하반기 신작에도 고스란히 반영되고 있다.
 

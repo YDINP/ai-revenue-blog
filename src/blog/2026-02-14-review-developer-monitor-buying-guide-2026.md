@@ -55,7 +55,7 @@ noindex: true
 
 목과 허리 건강을 위해서는 필수적입니다. 최소 높이 조정만 되어야 하고, 가능하면 회전(피벗) 기능이 있어서 세로 모드를 지원하는 모니터가 유용합니다.
 
-<div class="chart-progress" data-title="개발자 모니터 선택 기준 중요도" data-labels="색정확도,응답속도,밝기균일성,블루라이트,인체공학" data-values="95,78,82,75,88" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#8b5cf6" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="개발자 모니터 선택 기준 중요도" data-labels="색정확도,응답속도,밝기균일성,블루라이트,인체공학" data-values="95,78,82,75,88" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00,#8b5cf6" data-max="100" data-unit="점"></div>
 
 
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=ASUS%20ZenScreen%20MB16ACV&src=1139000&spec=10799999&addtag=200&ctag=ASUS%20ZenScreen%20MB16ACV&lptag=AF7838146&pageType=SEARCH&pageValue=ASUS%20ZenScreen%20MB16ACV" target="_blank" rel="noopener noreferrer nofollow">
@@ -95,7 +95,7 @@ noindex: true
 
 흔히 "큰 게 좋다"고 생각하기 쉽지만, 화면 크기와 해상도의 조합이 맞지 않으면 오히려 불편합니다.
 
-<div class="chart-versus" data-title="FHD vs 2K vs 4K 개발자 사용성 비교" data-name-a="FHD (1920x1080)" data-name-b="2K (2560x1440)" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"코드 가시성","a":70,"b":92},{"label":"멀티태스킹","a":65,"b":88},{"label":"가격","a":95,"b":70},{"label":"GPU 부담","a":95,"b":85}]'></div>
+<div class="chart-versus" data-title="FHD vs 2K vs 4K 개발자 사용성 비교" data-name-a="FHD (1920x1080)" data-name-b="2K (2560x1440)" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"코드 가시성","a":70,"b":92},{"label":"멀티태스킹","a":65,"b":88},{"label":"가격","a":95,"b":70},{"label":"GPU 부담","a":95,"b":85}]'></div>
 
 ### 크기별 추천 해상도
 
@@ -113,7 +113,7 @@ noindex: true
 
 ## 4단계: 2026년 개발자 추천 모니터 가격대별 선택
 
-<div class="chart-bar" data-orient="vertical" data-title="개발자용 모니터 가격대별 평균 스펙 점수" data-labels="20만원대,30만원대,40만원대,50만원 이상" data-values="62,78,88,95" data-colors="#ef4444,#f59e0b,#3b82f6,#10b981" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="개발자용 모니터 가격대별 평균 스펙 점수" data-labels="20만원대,30만원대,40만원대,50만원 이상" data-values="62,78,88,95" data-colors="#d55e00,#f59e0b,#3b82f6,#009e73" data-unit="점"></div>
 
 ### 예산별 선택 가이드
 

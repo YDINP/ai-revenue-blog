@@ -52,9 +52,9 @@ AI 코딩 툴은 크게 두 방식입니다.
 
 <div class="chart-radar" data-title="AI 코딩 툴 특성 비교 (10점 만점, 참고용)" data-items='[
   {"name":"Cursor","scores":[
-    {"label":"통합경험","value":9,"color":"#10b981"},
-    {"label":"에이전트","value":8,"color":"#10b981"},
-    {"label":"진입장벽","value":8,"color":"#10b981"}
+    {"label":"통합경험","value":9,"color":"#009e73"},
+    {"label":"에이전트","value":8,"color":"#009e73"},
+    {"label":"진입장벽","value":8,"color":"#009e73"}
   ]},
   {"name":"Claude Code","scores":[
     {"label":"통합경험","value":6,"color":"#3b82f6"},

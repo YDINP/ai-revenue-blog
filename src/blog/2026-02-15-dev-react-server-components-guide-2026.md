@@ -92,7 +92,7 @@ API 키, 토큰, 민감한 로직이 클라이언트에 노출되지 않습니�
 
 ## 2026년 React Server Components 성능 비교
 
-<div class="chart-versus" data-title="Server Components vs Client Components" data-name-a="Server Components" data-name-b="Client Components" data-color-a="#10b981" data-color-b="#3b82f6" data-items='[{"label":"초기 로딩 속도","a":92,"b":68},{"label":"번들 크기","a":95,"b":45},{"label":"SEO 최적화","a":98,"b":70},{"label":"개발 복잡도","a":65,"b":80}]'></div>
+<div class="chart-versus" data-title="Server Components vs Client Components" data-name-a="Server Components" data-name-b="Client Components" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"초기 로딩 속도","a":92,"b":68},{"label":"번들 크기","a":95,"b":45},{"label":"SEO 최적화","a":98,"b":70},{"label":"개발 복잡도","a":65,"b":80}]'></div>
 
 실제 성능 측정 기준:
 - **초기 로딩 속도**: First Contentful Paint(FCP) 기준
@@ -184,7 +184,7 @@ export default async function Page() {
 
 ## Server Components 성능 개선 효과 실측 데이터
 
-<div class="chart-progress" data-title="마이그레이션 후 개선 수치" data-labels="번들 크기 감소,LCP 개선,CLS 감소,TTI 단축" data-values="42,48,35,40" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-max="100" data-unit="%"></div>
+<div class="chart-progress" data-title="마이그레이션 후 개선 수치" data-labels="번들 크기 감소,LCP 개선,CLS 감소,TTI 단축" data-values="42,48,35,40" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00" data-max="100" data-unit="%"></div>
 
 위 수치는 12개의 중규모 프로덕션 앱에서 Server Components 도입 전후를 비교한 결과입니다. 특히 초기 번들 크기 감소와 Largest Contentful Paint(LCP) 개선이 가장 큰 효과를 보였습니다.
 

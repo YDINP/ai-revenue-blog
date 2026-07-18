@@ -96,11 +96,11 @@ Swift, Objective-C 개발자와 AI/ML 엔지니어에게 최적입니다.
 
 ## 프로세서 성능 실측 비교
 
-<div class="chart-radar" data-title="개발자용 프로세서 종합 평가 (100점 만점)" data-items='[{"name":"Intel Core Ultra 9","scores":[{"label":"멀티스레드","value":95,"color":"#3b82f6"},{"label":"단일코어","value":88,"color":"#10b981"},{"label":"에너지효율","value":72,"color":"#f59e0b"},{"label":"가격대비성능","value":80,"color":"#ef4444"}]},{"name":"AMD Ryzen 9","scores":[{"label":"멀티스레드","value":92,"color":"#3b82f6"},{"label":"단일코어","value":85,"color":"#10b981"},{"label":"에너지효율","value":78,"color":"#f59e0b"},{"label":"가격대비성능","value":85,"color":"#ef4444"}]},{"name":"Apple M4 Pro","scores":[{"label":"멀티스레드","value":88,"color":"#3b82f6"},{"label":"단일코어","value":92,"color":"#10b981"},{"label":"에너지효율","value":98,"color":"#f59e0b"},{"label":"가격대비성능","value":75,"color":"#ef4444"}]}]'></div>
+<div class="chart-radar" data-title="개발자용 프로세서 종합 평가 (100점 만점)" data-items='[{"name":"Intel Core Ultra 9","scores":[{"label":"멀티스레드","value":95,"color":"#3b82f6"},{"label":"단일코어","value":88,"color":"#009e73"},{"label":"에너지효율","value":72,"color":"#f59e0b"},{"label":"가격대비성능","value":80,"color":"#d55e00"}]},{"name":"AMD Ryzen 9","scores":[{"label":"멀티스레드","value":92,"color":"#3b82f6"},{"label":"단일코어","value":85,"color":"#009e73"},{"label":"에너지효율","value":78,"color":"#f59e0b"},{"label":"가격대비성능","value":85,"color":"#d55e00"}]},{"name":"Apple M4 Pro","scores":[{"label":"멀티스레드","value":88,"color":"#3b82f6"},{"label":"단일코어","value":92,"color":"#009e73"},{"label":"에너지효율","value":98,"color":"#f59e0b"},{"label":"가격대비성능","value":75,"color":"#d55e00"}]}]'></div>
 
 ## CPU 성능 벤치마크: 실제 개발 작업 기준
 
-<div class="chart-bar" data-title="프로젝트 빌드 시간 비교 (초, 낮을수록 좋음)" data-labels="Node.js 번들,Docker 이미지,Rust 컴파일" data-values="42,95,128" data-colors="#3b82f6,#f59e0b,#10b981" data-unit="초"></div>
+<div class="chart-bar" data-title="프로젝트 빌드 시간 비교 (초, 낮을수록 좋음)" data-labels="Node.js 번들,Docker 이미지,Rust 컴파일" data-values="42,95,128" data-colors="#3b82f6,#f59e0b,#009e73" data-unit="초"></div>
 
 *측정 환경: 동일 SSD, 16GB RAM, 동일 네트워크 환경*
 

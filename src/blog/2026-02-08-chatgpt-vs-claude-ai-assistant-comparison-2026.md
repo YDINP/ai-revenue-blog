@@ -57,7 +57,7 @@ noindex: true
 | API 입력 가격 | $10/M 토큰 | $15/M 토큰 |
 | API 출력 가격 | $50/M 토큰 | $75/M 토큰 |
 
-<div class="chart-versus" data-title="GPT-5.5 vs Claude Opus 4.8 — 종합 능력 비교" data-name-a="GPT-5.5" data-name-b="Claude Opus 4.8" data-color-a="#10b981" data-color-b="#3b82f6" data-items='[{"label":"코딩","a":88,"b":96},{"label":"글쓰기","a":87,"b":92},{"label":"추론/분석","a":83,"b":97},{"label":"속도","a":93,"b":78},{"label":"가성비","a":87,"b":72}]'></div>
+<div class="chart-versus" data-title="GPT-5.5 vs Claude Opus 4.8 — 종합 능력 비교" data-name-a="GPT-5.5" data-name-b="Claude Opus 4.8" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"코딩","a":88,"b":96},{"label":"글쓰기","a":87,"b":92},{"label":"추론/분석","a":83,"b":97},{"label":"속도","a":93,"b":78},{"label":"가성비","a":87,"b":72}]'></div>
 
 ## 코딩 능력 비교: 개발자 필독
 
@@ -136,7 +136,7 @@ Google의 Gemini 3.1 Pro는 장문 처리와 멀티모달에서 주목할 만한
 | Gemini 3.1 Pro | $4/M | $15/M | 최고 가성비, 추론 다관왕 |
 | Claude Haiku | 저렴 | 저렴 | 가성비 좋은 복잡한 작업 |
 
-<div class="chart-bar" data-title="API 출력 가격 비교 ($/M 토큰)" data-labels="Claude Opus 4.8,GPT-5.5,Gemini 3.1 Pro,Claude Haiku" data-values="75,50,15,4" data-colors="#3b82f6,#10b981,#f59e0b,#94a3b8" data-unit="$"></div>
+<div class="chart-bar" data-title="API 출력 가격 비교 ($/M 토큰)" data-labels="Claude Opus 4.8,GPT-5.5,Gemini 3.1 Pro,Claude Haiku" data-values="75,50,15,4" data-colors="#3b82f6,#009e73,#f59e0b,#94a3b8" data-unit="$"></div>
 
 단순 비용만 보면 Gemini 3.1 Pro가 유리하지만, 대규모 프로젝트에서는 Claude의 100만 토큰 컨텍스트가 여러 번 호출을 한 번으로 줄여주어 오히려 경제적일 수 있습니다. Claude는 엔터프라이즈 시장 점유율 32%로 1위를 기록하며 기업 신뢰도에서도 앞서 있습니다.
 

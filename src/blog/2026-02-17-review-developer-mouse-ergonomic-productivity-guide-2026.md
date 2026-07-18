@@ -113,7 +113,7 @@ noindex: true
 
 ## 개발자 마우스 선택 기준 실전 체크리스트
 
-<div class="chart-progress" data-title="마우스 선택 평가 항목" data-labels="인체공학 설계,응답속도(DPI 정밀도),배터리 지속력,프로그래밍 버튼" data-values="90,85,75,80" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="마우스 선택 평가 항목" data-labels="인체공학 설계,응답속도(DPI 정밀도),배터리 지속력,프로그래밍 버튼" data-values="90,85,75,80" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00" data-max="100" data-unit="점"></div>
 
 ### 1. DPI와 응답 속도
 
@@ -176,7 +176,7 @@ IDE 단축키를 마우스 버튼에 할당할 수 있으면 작업 효율이 �
 
 ## 개발자 업무 특성별 마우스 추천
 
-<div class="chart-radar" data-title="개발자 프로필별 마우스 추천" data-items='[{"name":"웹 개발자","scores":[{"label":"손목 건강","value":9,"color":"#10b981"},{"label":"DPI 정밀도","value":8,"color":"#3b82f6"},{"label":"배터리","value":7,"color":"#f59e0b"},{"label":"프로그래밍 버튼","value":8,"color":"#ef4444"}]},{"name":"데이터 과학자","scores":[{"label":"손목 건강","value":7,"color":"#10b981"},{"label":"DPI 정밀도","value":9,"color":"#3b82f6"},{"label":"배터리","value":8,"color":"#f59e0b"},{"label":"프로그래밍 버튼","value":6,"color":"#ef4444"}]},{"name":"풀스택 개발자","scores":[{"label":"손목 건강","value":9,"color":"#10b981"},{"label":"DPI 정밀도","value":8,"color":"#3b82f6"},{"label":"배터리","value":8,"color":"#f59e0b"},{"label":"프로그래밍 버튼","value":9,"color":"#ef4444"}]}]'></div>
+<div class="chart-radar" data-title="개발자 프로필별 마우스 추천" data-items='[{"name":"웹 개발자","scores":[{"label":"손목 건강","value":9,"color":"#009e73"},{"label":"DPI 정밀도","value":8,"color":"#3b82f6"},{"label":"배터리","value":7,"color":"#f59e0b"},{"label":"프로그래밍 버튼","value":8,"color":"#d55e00"}]},{"name":"데이터 과학자","scores":[{"label":"손목 건강","value":7,"color":"#009e73"},{"label":"DPI 정밀도","value":9,"color":"#3b82f6"},{"label":"배터리","value":8,"color":"#f59e0b"},{"label":"프로그래밍 버튼","value":6,"color":"#d55e00"}]},{"name":"풀스택 개발자","scores":[{"label":"손목 건강","value":9,"color":"#009e73"},{"label":"DPI 정밀도","value":8,"color":"#3b82f6"},{"label":"배터리","value":8,"color":"#f59e0b"},{"label":"프로그래밍 버튼","value":9,"color":"#d55e00"}]}]'></div>
 
 ### 웹 개발자
 **최우선**: 손목 건강 + IDE 빠른 네비게이션
@@ -213,7 +213,7 @@ IDE 단축키를 마우스 버튼에 할당할 수 있으면 작업 효율이 �
 
 ## 가성비 vs 프로급 마우스: 실제 차이는?
 
-<div class="chart-versus" data-title="저가형 vs 프로급 마우스 성능 비교" data-name-a="저가형(2~4만원)" data-name-b="프로급(10~15만원)" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"센서 정밀도","a":70,"b":95},{"label":"배터리 지속력","a":60,"b":85},{"label":"인체공학 설계","a":65,"b":90},{"label":"내구성(수명)","a":50,"b":88},{"label":"프로그래밍 기능","a":40,"b":85}]'></div>
+<div class="chart-versus" data-title="저가형 vs 프로급 마우스 성능 비교" data-name-a="저가형(2~4만원)" data-name-b="프로급(10~15만원)" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"센서 정밀도","a":70,"b":95},{"label":"배터리 지속력","a":60,"b":85},{"label":"인체공학 설계","a":65,"b":90},{"label":"내구성(수명)","a":50,"b":88},{"label":"프로그래밍 기능","a":40,"b":85}]'></div>
 
 **개발자 입장에서의 투자 판단**:
 

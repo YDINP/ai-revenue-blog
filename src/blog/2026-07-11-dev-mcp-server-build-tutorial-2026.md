@@ -41,7 +41,7 @@ MCP는 AI(호스트)와 도구·데이터(서버)를 잇는 표준입니다. 구
 
 아무거나 만들 필요는 없습니다. <span style="font-size:1.15em;font-weight:700">AI가 자주 필요로 하지만 기본으로는 못 하는 것</span>을 골라야 값이 큽니다.
 
-<div class="chart-bar" data-title="자주 만드는 MCP 서버 유형 (활용도 체감, 참고용)" data-labels="사내 DB 조회,내부 문서 검색,업무 자동화,사내 API 호출" data-values="9,8,8,7" data-colors="#10b981,#3b82f6,#8b5cf6,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-title="자주 만드는 MCP 서버 유형 (활용도 체감, 참고용)" data-labels="사내 DB 조회,내부 문서 검색,업무 자동화,사내 API 호출" data-values="9,8,8,7" data-colors="#009e73,#3b82f6,#8b5cf6,#f59e0b" data-unit="점"></div>
 
 - 사내 데이터베이스 조회
 - 내부 위키·문서 검색

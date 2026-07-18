@@ -44,7 +44,7 @@ faq:
 
 가장 큰 갈림길은 정가 판매(프리미엄)와 무료 배포 후 인앱결제(F2P) 사이의 선택이다.
 
-<div class="chart-versus" data-title="프리미엄 vs 부분유료(F2P) 종합 비교" data-name-a="프리미엄(정가판매)" data-name-b="부분유료(F2P)" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"진입 장벽 낮음","a":40,"b":95},{"label":"초기 수익 안정성","a":85,"b":45},{"label":"장기 수익 잠재력","a":55,"b":90},{"label":"개발 난이도","a":70,"b":40},{"label":"인디 적합도","a":85,"b":50}]'></div>
+<div class="chart-versus" data-title="프리미엄 vs 부분유료(F2P) 종합 비교" data-name-a="프리미엄(정가판매)" data-name-b="부분유료(F2P)" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"진입 장벽 낮음","a":40,"b":95},{"label":"초기 수익 안정성","a":85,"b":45},{"label":"장기 수익 잠재력","a":55,"b":90},{"label":"개발 난이도","a":70,"b":40},{"label":"인디 적합도","a":85,"b":50}]'></div>
 
 프리미엄은 유저가 처음에 값을 지불하므로 초기 수익이 안정적이고, 게임을 '완성된 작품'으로 설계할 수 있다. 반면 F2P는 진입 장벽이 없어 유저 유입은 크지만, 지속적인 라이브 운영·밸런싱·과금 설계가 필요해 1인~소규모팀에는 부담이 크다.
 
@@ -54,7 +54,7 @@ faq:
 
 2026년 인디게임 시장에서 각 모델이 차지하는 대략적 비중은 다음과 같다(개념적 예시).
 
-<div class="chart-donut" data-title="인디게임 수익 모델 채택 비중 (개념적 예시)" data-labels="프리미엄(정가),부분유료(F2P),구독/시즌패스,광고 기반,기부/후원" data-values="46,26,14,9,5" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="%"></div>
+<div class="chart-donut" data-title="인디게임 수익 모델 채택 비중 (개념적 예시)" data-labels="프리미엄(정가),부분유료(F2P),구독/시즌패스,광고 기반,기부/후원" data-values="46,26,14,9,5" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="%"></div>
 
 여전히 프리미엄이 인디의 주류지만, 시즌 패스·구독 같은 반복 수익(recurring revenue) 모델의 비중이 꾸준히 커지고 있다.
 

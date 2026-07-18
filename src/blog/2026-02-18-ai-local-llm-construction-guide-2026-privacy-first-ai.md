@@ -56,7 +56,7 @@ noindex: true
 
 NVIDIA RTX 4070 Super(12GB)는 13B 모델 구동에 최적화되었으며, AMD Radeon RX 7900 GRE도 유사 성능을 제공합니다. <span style="font-size:1.3em;font-weight:800">CPU 전용 구축은 가능하지만 추론 속도가 10배 이상 느려지므로 실무용으로는 부적합</span>합니다.
 
-<div class="chart-bar" data-orient="vertical" data-title="모델 크기별 최소 하드웨어 요구사항" data-labels="7B 모델,13B 모델,70B 모델" data-values="6,12,24" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="GB VRAM"></div>
+<div class="chart-bar" data-orient="vertical" data-title="모델 크기별 최소 하드웨어 요구사항" data-labels="7B 모델,13B 모델,70B 모델" data-values="6,12,24" data-colors="#009e73,#3b82f6,#f59e0b" data-unit="GB VRAM"></div>
 
 ### 2. 오픈소스 모델 선택: 성능과 라이선스 비교
 
@@ -166,7 +166,7 @@ ollama run mistral:with-lora ./lora_adapter
 
 ## 성능 벤치마크: 클라우드 vs 로컬
 
-<div class="chart-versus" data-title="API 기반 LLM vs 로컬 LLM 비교" data-name-a="ChatGPT API" data-name-b="로컬 Mistral" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"토큰당 비용","a":0.06,"b":0},{"label":"응답 지연시간(ms)","a":800,"b":150},{"label":"데이터 프라이버시","a":5,"b":10},{"label":"커스터마이제이션","a":3,"b":9}]'></div>
+<div class="chart-versus" data-title="API 기반 LLM vs 로컬 LLM 비교" data-name-a="ChatGPT API" data-name-b="로컬 Mistral" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"토큰당 비용","a":0.06,"b":0},{"label":"응답 지연시간(ms)","a":800,"b":150},{"label":"데이터 프라이버시","a":5,"b":10},{"label":"커스터마이제이션","a":3,"b":9}]'></div>
 
 **결론**: 로컬 LLM은 응답 속도 5배 우수하고, 데이터 프라이버시는 완벽하며, 월 비용은 0원입니다. 다만 GPU 초기 투자비용(약 150만 원)이 필요합니다.
 

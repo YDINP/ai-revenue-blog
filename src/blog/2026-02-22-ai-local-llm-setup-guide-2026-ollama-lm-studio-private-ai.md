@@ -102,7 +102,7 @@ python -m vllm.entrypoints.openai.api_server --model meta-llama/Llama-2-7b-hf
 
 ## 실전: 각 도구별 성능 비교
 
-<div class="chart-radar" data-title="로컬 LLM 도구 종합 비교" data-items='[{"name":"Ollama","scores":[{"label":"설치 용이성","value":9,"color":"#10b981"},{"label":"추론 속도","value":7,"color":"#3b82f6"},{"label":"메모리 효율","value":8,"color":"#f59e0b"},{"label":"커스터마이징","value":6,"color":"#ef4444"},{"label":"커뮤니티","value":9,"color":"#8b5cf6"}]},{"name":"LM Studio","scores":[{"label":"설치 용이성","value":10,"color":"#10b981"},{"label":"추론 속도","value":6,"color":"#3b82f6"},{"label":"메모리 효율","value":6,"color":"#f59e0b"},{"label":"커스터마이징","value":5,"color":"#ef4444"},{"label":"커뮤니티","value":7,"color":"#8b5cf6"}]},{"name":"vLLM","scores":[{"label":"설치 용이성","value":5,"color":"#10b981"},{"label":"추론 속도","value":10,"color":"#3b82f6"},{"label":"메모리 효율","value":8,"color":"#f59e0b"},{"label":"커스터마이징","value":9,"color":"#ef4444"},{"label":"커뮤니티","value":8,"color":"#8b5cf6"}]}]'></div>
+<div class="chart-radar" data-title="로컬 LLM 도구 종합 비교" data-items='[{"name":"Ollama","scores":[{"label":"설치 용이성","value":9,"color":"#009e73"},{"label":"추론 속도","value":7,"color":"#3b82f6"},{"label":"메모리 효율","value":8,"color":"#f59e0b"},{"label":"커스터마이징","value":6,"color":"#d55e00"},{"label":"커뮤니티","value":9,"color":"#8b5cf6"}]},{"name":"LM Studio","scores":[{"label":"설치 용이성","value":10,"color":"#009e73"},{"label":"추론 속도","value":6,"color":"#3b82f6"},{"label":"메모리 효율","value":6,"color":"#f59e0b"},{"label":"커스터마이징","value":5,"color":"#d55e00"},{"label":"커뮤니티","value":7,"color":"#8b5cf6"}]},{"name":"vLLM","scores":[{"label":"설치 용이성","value":5,"color":"#009e73"},{"label":"추론 속도","value":10,"color":"#3b82f6"},{"label":"메모리 효율","value":8,"color":"#f59e0b"},{"label":"커스터마이징","value":9,"color":"#d55e00"},{"label":"커뮤니티","value":8,"color":"#8b5cf6"}]}]'></div>
 
 ## 하드웨어 요구 사양: GPU vs CPU 선택
 
@@ -177,7 +177,7 @@ docker run -d --gpus all -p 3000:8080 --add-host=host.docker.internal:host-gatew
 
 ## 비용 절감 계산: API vs 로컬 LLM
 
-<div class="chart-versus" data-title="연간 비용 비교 (월 1만 API 호출 기준)" data-name-a="ChatGPT API" data-name-b="로컬 LLM" data-color-a="#ef4444" data-color-b="#10b981" data-items='[{"label":"월평균 비용","a":250000,"b":5000},{"label":"연간 비용","a":3000000,"b":60000},{"label":"초기 GPU 투자","a":0,"b":450000}]'></div>
+<div class="chart-versus" data-title="연간 비용 비교 (월 1만 API 호출 기준)" data-name-a="ChatGPT API" data-name-b="로컬 LLM" data-color-a="#d55e00" data-color-b="#009e73" data-items='[{"label":"월평균 비용","a":250000,"b":5000},{"label":"연간 비용","a":3000000,"b":60000},{"label":"초기 GPU 투자","a":0,"b":450000}]'></div>
 
 분석: RTX 4070 Super GPU(약 85만원)를 구매하고 Ollama를 운영하면, <span style="font-size:1.3em;font-weight:800">단 12개월 내</span> API 비용 대비 ROI를 달성합니다. 2년차부터는 순전히 전기료(월 5000원)만 부담하면 됩니다.
 

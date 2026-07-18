@@ -123,7 +123,7 @@ Mac 생태계 사용자를 위한 공식 순정 세트입니다. 2024년 M4 Mac 
 
 ## 세트 제품 성능 비교
 
-<div class="chart-radar" data-title="2026년 주요 키보드 마우스 세트 비교" data-items='[{"name":"로지텍 MK470","scores":[{"label":"가격","value":9,"color":"#10b981"},{"label":"내구성","value":8,"color":"#3b82f6"},{"label":"편의성","value":7,"color":"#f59e0b"},{"label":"기술","value":6,"color":"#ef4444"}]},{"name":"마이크로소프트 Sculpt","scores":[{"label":"가격","value":6,"color":"#10b981"},{"label":"내구성","value":9,"color":"#3b82f6"},{"label":"편의성","value":9,"color":"#f59e0b"},{"label":"기술","value":8,"color":"#ef4444"}]},{"name":"레이저 Pro Click","scores":[{"label":"가격","value":5,"color":"#10b981"},{"label":"내구성","value":9,"color":"#3b82f6"},{"label":"편의성","value":9,"color":"#f59e0b"},{"label":"기술","value":10,"color":"#ef4444"}]},{"name":"애플 Magic","scores":[{"label":"가격","value":3,"color":"#10b981"},{"label":"내구성","value":9,"color":"#3b82f6"},{"label":"편의성","value":10,"color":"#f59e0b"},{"label":"기술","value":10,"color":"#ef4444"}]}]'></div>
+<div class="chart-radar" data-title="2026년 주요 키보드 마우스 세트 비교" data-items='[{"name":"로지텍 MK470","scores":[{"label":"가격","value":9,"color":"#009e73"},{"label":"내구성","value":8,"color":"#3b82f6"},{"label":"편의성","value":7,"color":"#f59e0b"},{"label":"기술","value":6,"color":"#d55e00"}]},{"name":"마이크로소프트 Sculpt","scores":[{"label":"가격","value":6,"color":"#009e73"},{"label":"내구성","value":9,"color":"#3b82f6"},{"label":"편의성","value":9,"color":"#f59e0b"},{"label":"기술","value":8,"color":"#d55e00"}]},{"name":"레이저 Pro Click","scores":[{"label":"가격","value":5,"color":"#009e73"},{"label":"내구성","value":9,"color":"#3b82f6"},{"label":"편의성","value":9,"color":"#f59e0b"},{"label":"기술","value":10,"color":"#d55e00"}]},{"name":"애플 Magic","scores":[{"label":"가격","value":3,"color":"#009e73"},{"label":"내구성","value":9,"color":"#3b82f6"},{"label":"편의성","value":10,"color":"#f59e0b"},{"label":"기술","value":10,"color":"#d55e00"}]}]'></div>
 
 ## 세트 선택 기준별 구분
 
@@ -169,7 +169,7 @@ Mac 생태계 사용자를 위한 공식 순정 세트입니다. 2024년 M4 Mac 
 
 ## 2026년 시장 트렌드 분석
 
-<div class="chart-progress" data-title="세트 제품 선택 요소 중요도" data-labels="가격","무선 연결","배터리","인체공학","커스터마이징" data-values="75,92,88,85,72" data-colors="#f59e0b,#10b981,#3b82f6,#8b5cf6,#ec4899" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="세트 제품 선택 요소 중요도" data-labels="가격","무선 연결","배터리","인체공학","커스터마이징" data-values="75,92,88,85,72" data-colors="#f59e0b,#009e73,#3b82f6,#8b5cf6,#ec4899" data-max="100" data-unit="점"></div>
 
 2026년 통계 기준으로 <span style="font-size:1.3em;font-weight:800">무선 연결(92점)</span>과 배터리 지속성(88점)이 가장 중요한 선택 요소로 평가됩니다. 재택근무 확대로 인해 인체공학 설계(85점)의 중요도도 빠르게 상승하고 있습니다.
 

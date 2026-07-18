@@ -23,7 +23,7 @@ faq:
 
 AI가 가장 크게 기여하는 영역은 '수익'이 아니라 '개발 속도'다. 단계별로 체감 변화가 다르다.
 
-<div class="chart-bar" data-orient="vertical" data-title="게임 개발 단계별 AI 활용 비중 2026(추정)" data-labels="기획,프로그래밍,아트,사운드,QA/테스트" data-values="55,60,70,50,35" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="게임 개발 단계별 AI 활용 비중 2026(추정)" data-labels="기획,프로그래밍,아트,사운드,QA/테스트" data-values="55,60,70,50,35" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="%"></div>
 
 아트와 프로그래밍에서 AI 활용도가 가장 높다. 반면 QA·테스트는 여전히 사람의 플레이 검증이 중요해 활용도가 낮다. AI 게임 개발이 가장 크게 줄이는 것은 '혼자서 커버할 수 있는 영역의 폭'이다 — 즉 그림을 못 그리는 프로그래머도 그럴듯한 아트를, 코딩을 모르는 기획자도 프로토타입을 만들 수 있게 됐다는 뜻이다.
 

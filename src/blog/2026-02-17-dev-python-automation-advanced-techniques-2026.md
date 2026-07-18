@@ -42,7 +42,7 @@ noindex: true
 
 더 자세한 자동화 기초는 [Python 자동화 입문: 반복 업무를 코드로 해결하는 5가지 실전 예제](/blog/2026-02-06-python-automation-beginners-guide/)를 참고하면, 이 글과의 연계학습이 가능합니다.
 
-<div class="chart-bar" data-title="2026년 기업 자동화 투자 영역별 비중" data-labels="API 통합,데이터 파이프라인,RPA,모니터링,기타" data-values="28,24,22,18,8" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="%"></div>
+<div class="chart-bar" data-title="2026년 기업 자동화 투자 영역별 비중" data-labels="API 통합,데이터 파이프라인,RPA,모니터링,기타" data-values="28,24,22,18,8" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="%"></div>
 
 
 <a class="coupang-inline" href="https://www.coupang.com/np/search?q=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&src=1139000&spec=10799999&addtag=200&ctag=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive&lptag=AF7838146&pageType=SEARCH&pageValue=%EB%AA%A8%EB%8D%98%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20Deep%20Dive" target="_blank" rel="noopener noreferrer nofollow">
@@ -452,7 +452,7 @@ print(f"병렬 처리 소요 시간: {parallel_time:.2f}초")
 print(f"예상 순차 처리 시간: {parallel_time * 4:.2f}초 (4코어 기준)")
 ```
 
-<div class="chart-versus" data-title="처리 방식별 성능 비교 (100만 행 데이터)" data-name-a="순차 처리" data-name-b="병렬 처리 (4코어)" data-color-a="#ef4444" data-color-b="#10b981" data-items='[{"label":"소요 시간(초)","a":180,"b":48},{"label":"CPU 활용률(%)","a":25,"b":95},{"label":"메모리 사용(MB)","a":520,"b":1200}]'></div>
+<div class="chart-versus" data-title="처리 방식별 성능 비교 (100만 행 데이터)" data-name-a="순차 처리" data-name-b="병렬 처리 (4코어)" data-color-a="#d55e00" data-color-b="#009e73" data-items='[{"label":"소요 시간(초)","a":180,"b":48},{"label":"CPU 활용률(%)","a":25,"b":95},{"label":"메모리 사용(MB)","a":520,"b":1200}]'></div>
 
 ## 실무 적용: 종합 자동화 시스템 구축 예시
 

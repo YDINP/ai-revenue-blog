@@ -35,7 +35,7 @@ faq:
 
 ## 2026년 프로그래밍 언어 채택 현황
 
-<div class="chart-bar" data-title="2026년 개발자 선호 언어 TOP 5" data-labels="Python,JavaScript,TypeScript,Java,Go" data-values="88,82,76,68,62" data-colors="#3b82f6,#f59e0b,#10b981,#ef4444,#8b5cf6" data-unit="만 명"></div>
+<div class="chart-bar" data-title="2026년 개발자 선호 언어 TOP 5" data-labels="Python,JavaScript,TypeScript,Java,Go" data-values="88,82,76,68,62" data-colors="#3b82f6,#f59e0b,#009e73,#d55e00,#8b5cf6" data-unit="만 명"></div>
 
 Stack Overflow 2025 개발자 설문 결과, Python이 여전히 압도적인 1위를 차지하고 있습니다. 그러나 언어의 인기도가 반드시 여러분에게 최적이라는 의미는 아닙니다. 취업 목표, 희망 분야, 학습 속도에 따라 최적의 선택은 완전히 달라집니다.
 
@@ -123,7 +123,7 @@ WebAssembly와 Node.js의 성숙으로, JavaScript는 더 이상 "브라우저 �
 
 ## 첫 언어 선택 후 학습 순서
 
-<div class="chart-progress" data-title="프로그래밍 학습 진도 가이드" data-labels="문법 기초,자료구조·알고리즘,프로젝트 구현,협업·버전관리,심화 기술" data-values="80,60,40,30,20" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6,#ef4444" data-max="100" data-unit="%"></div>
+<div class="chart-progress" data-title="프로그래밍 학습 진도 가이드" data-labels="문법 기초,자료구조·알고리즘,프로젝트 구현,협업·버전관리,심화 기술" data-values="80,60,40,30,20" data-colors="#009e73,#3b82f6,#f59e0b,#8b5cf6,#d55e00" data-max="100" data-unit="%"></div>
 
 **1단계: 언어 문법 (2~4주)**
 - 변수, 자료형, 반복문, 조건문, 함수

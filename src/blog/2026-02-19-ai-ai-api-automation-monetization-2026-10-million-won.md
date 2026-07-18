@@ -66,7 +66,7 @@ noindex: true
 
 더 자세한 AI 모델 비교는 [Claude AI 2026년 최신 사용법: Opus 4.6 & Claude Code 활용 가이드](/blog/2026-02-14-ai-claude-ai-usage-guide-2026/)을 참고하세요.
 
-<div class="chart-bar" data-title="2026년 주요 AI API 비용 비교 (100만 토큰 기준)" data-labels="Claude Sonnet,GPT-4o,GPT-4o mini,Claude Haiku" data-values="18000,7500,600,480" data-colors="#ef4444,#f59e0b,#3b82f6,#10b981" data-unit="원"></div>
+<div class="chart-bar" data-title="2026년 주요 AI API 비용 비교 (100만 토큰 기준)" data-labels="Claude Sonnet,GPT-4o,GPT-4o mini,Claude Haiku" data-values="18000,7500,600,480" data-colors="#d55e00,#f59e0b,#3b82f6,#009e73" data-unit="원"></div>
 
 ## 5가지 AI API 자동화 수익 모델
 
@@ -225,7 +225,7 @@ def generate_product_description(product_info):
 > 
 > Phase 1~2 단계에선 혼자 모든 것을 처리할 수 있습니다. 이 기간에 프로세스를 최대한 자동화해야 나중에 팀을 구성할 수 있습니다.
 
-<div class="chart-donut" data-title="AI API 자동화 수익의 구성요소 (월 1000만원 기준)" data-labels="API 비용,마케팅/인프라,순수익" data-values="15,20,65" data-colors="#ef4444,#f59e0b,#10b981" data-unit="%"></div>
+<div class="chart-donut" data-title="AI API 자동화 수익의 구성요소 (월 1000만원 기준)" data-labels="API 비용,마케팅/인프라,순수익" data-values="15,20,65" data-colors="#d55e00,#f59e0b,#009e73" data-unit="%"></div>
 
 ## 결론: 지금 시작하기에 최적의 시점
 

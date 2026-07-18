@@ -203,7 +203,7 @@ function UserCard({ user, onDelete }: UserCardProps): JSX.Element {
 
 ## 마이그레이션 시간 비교
 
-<div class="chart-bar" data-title="프로젝트 규모별 마이그레이션 기간" data-labels="소규모 (100개 파일),중규모 (500개 파일),대규모 (1000+ 파일)" data-values="3,12,28" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="주"></div>
+<div class="chart-bar" data-title="프로젝트 규모별 마이그레이션 기간" data-labels="소규모 (100개 파일),중규모 (500개 파일),대규모 (1000+ 파일)" data-values="3,12,28" data-colors="#009e73,#3b82f6,#f59e0b" data-unit="주"></div>
 
 ## 도구 및 자동화
 

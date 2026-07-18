@@ -42,7 +42,7 @@ faq:
 - **본문 2문단**: 왜 이 채널에 맞는지 개인화된 한두 줄 (최근 방송한 게임 언급 등)
 - **CTA**: 무료 키 + 원하는 날짜 조율 여부 명시
 
-<div class="chart-bar" data-title="아웃리치 메일 유형별 응답률 (참고용, 대략)" data-labels="일반 대량발송,템플릿+이름만변경,개인화 메일" data-values="2,8,20" data-colors="#ef4444,#f59e0b,#10b981" data-unit="%"></div>
+<div class="chart-bar" data-title="아웃리치 메일 유형별 응답률 (참고용, 대략)" data-labels="일반 대량발송,템플릿+이름만변경,개인화 메일" data-values="2,8,20" data-colors="#d55e00,#f59e0b,#009e73" data-unit="%"></div>
 
 <div class="callout-warning">⚠️ 주의: 복사·붙여넣기 메일은 응답률이 한 자릿수에 그치는 경우가 많습니다. 개인화 문구 한두 줄만 추가해도 응답률이 눈에 띄게 올라간다는 것이 업계의 공통된 경험칙입니다.</div>
 

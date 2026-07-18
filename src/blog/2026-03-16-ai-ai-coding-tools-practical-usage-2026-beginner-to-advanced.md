@@ -63,7 +63,7 @@ Copilot은 속도에 최적화되어 있습니다. 일상적인 반복 코드, �
 
 **실무 예시**: CRUD API 작성, 유틸리티 함수, 단순 데이터 변환 로직 같은 패턴화된 코드는 Copilot이 가장 효율적입니다.
 
-<div class="chart-radar" data-title="AI 코딩 도구 다항목 평가 (2026년 3월)" data-items='[{"name":"Cursor","scores":[{"label":"TypeScript 지원","value":10,"color":"#3b82f6"},{"label":"IDE 통합","value":9,"color":"#10b981"},{"label":"속도","value":8,"color":"#f59e0b"},{"label":"가격","value":7,"color":"#ef4444"}]},{"name":"Claude Opus","scores":[{"label":"TypeScript 지원","value":8,"color":"#3b82f6"},{"label":"IDE 통합","value":6,"color":"#10b981"},{"label":"속도","value":7,"color":"#f59e0b"},{"label":"가격","value":6,"color":"#ef4444"}]},{"name":"GitHub Copilot","scores":[{"label":"TypeScript 지원","value":8,"color":"#3b82f6"},{"label":"IDE 통합","value":10,"color":"#10b981"},{"label":"속도","value":10,"color":"#f59e0b"},{"label":"가격","value":9,"color":"#ef4444"}]}]'></div>
+<div class="chart-radar" data-title="AI 코딩 도구 다항목 평가 (2026년 3월)" data-items='[{"name":"Cursor","scores":[{"label":"TypeScript 지원","value":10,"color":"#3b82f6"},{"label":"IDE 통합","value":9,"color":"#009e73"},{"label":"속도","value":8,"color":"#f59e0b"},{"label":"가격","value":7,"color":"#d55e00"}]},{"name":"Claude Opus","scores":[{"label":"TypeScript 지원","value":8,"color":"#3b82f6"},{"label":"IDE 통합","value":6,"color":"#009e73"},{"label":"속도","value":7,"color":"#f59e0b"},{"label":"가격","value":6,"color":"#d55e00"}]},{"name":"GitHub Copilot","scores":[{"label":"TypeScript 지원","value":8,"color":"#3b82f6"},{"label":"IDE 통합","value":10,"color":"#009e73"},{"label":"속도","value":10,"color":"#f59e0b"},{"label":"가격","value":9,"color":"#d55e00"}]}]'></div>
 
 ## 2. 실무에서 검증된 5가지 활용 패턴
 
@@ -149,7 +149,7 @@ frontend 팀은 백엔드 완성 대기 없이 개발 시작
 
 더 자세한 내용은 [AI 페어 프로그래밍 2026: 개발자와 AI의 협력 완벽 가이드](/blog/2026-02-27-ai-ai-pair-programming-2026-developer-ai-collaboration-guide/)을 참고하세요.
 
-<div class="chart-donut" data-title="2026년 개발자 AI 도구 선택 분포" data-labels="GitHub Copilot,Cursor,Claude,Windsurf,기타" data-values="35,28,22,10,5" data-colors="#3b82f6,#10b981,#f59e0b,#8b5cf6,#6b7280" data-unit="%"></div>
+<div class="chart-donut" data-title="2026년 개발자 AI 도구 선택 분포" data-labels="GitHub Copilot,Cursor,Claude,Windsurf,기타" data-values="35,28,22,10,5" data-colors="#3b82f6,#009e73,#f59e0b,#8b5cf6,#6b7280" data-unit="%"></div>
 
 ## 5. 실수하기 쉬운 3가지 함정
 

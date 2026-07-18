@@ -128,7 +128,7 @@ batch = client.beta.messages.batches.create(
 print(f"배치 ID: {batch.id}")
 ```
 
-<div class="chart-bar" data-title="Claude 모델별 가격 비교 (백만 토큰당 USD)" data-labels="Sonnet 입력,Sonnet 출력,Opus 입력,Opus 출력" data-values="3,15,15,75" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-unit="$"></div>
+<div class="chart-bar" data-title="Claude 모델별 가격 비교 (백만 토큰당 USD)" data-labels="Sonnet 입력,Sonnet 출력,Opus 입력,Opus 출력" data-values="3,15,15,75" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00" data-unit="$"></div>
 
 ## 2026년 실전 활용 시나리오
 
@@ -236,7 +236,7 @@ result = call_claude_with_retry("안녕하세요?")
 print(result)
 ```
 
-<div class="chart-progress" data-title="Claude API 통합 체크리스트" data-labels="API 키 설정,토큰 관리,에러 처리,성능 모니터링" data-values="100,75,85,60" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-max="100" data-unit="%"></div>
+<div class="chart-progress" data-title="Claude API 통합 체크리스트" data-labels="API 키 설정,토큰 관리,에러 처리,성능 모니터링" data-values="100,75,85,60" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00" data-max="100" data-unit="%"></div>
 
 ## Claude API vs 로컬 LLM: 언제 어느 것을 쓸까
 

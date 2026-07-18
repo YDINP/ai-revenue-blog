@@ -61,7 +61,7 @@ Texture Atlas, Spritesheets, 애니메이션 프레임워크를 내장하고 있
 
 PixiJS는 특정 영역에서 강점을 보입니다:
 
-<div class="chart-versus" data-title="PixiJS vs Phaser.js 비교" data-name-a="PixiJS" data-name-b="Phaser.js" data-color-a="#10b981" data-color-b="#3b82f6" data-items='[{"label":"렌더링 속도","a":95,"b":85},{"label":"파일 크기","a":90,"b":60},{"label":"학습곡선","a":65,"b":85},{"label":"기능의 완성도","a":70,"b":95}]'></div>
+<div class="chart-versus" data-title="PixiJS vs Phaser.js 비교" data-name-a="PixiJS" data-name-b="Phaser.js" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"렌더링 속도","a":95,"b":85},{"label":"파일 크기","a":90,"b":60},{"label":"학습곡선","a":65,"b":85},{"label":"기능의 완성도","a":70,"b":95}]'></div>
 
 | 항목 | PixiJS | Phaser.js | Canvas 2D |
 |------|--------|-----------|----------|
@@ -156,7 +156,7 @@ PixiJS는 이러한 대규모 객체 렌더링을 자동으로 배치 처리하�
 
 ## PixiJS 2026년 최신 버전 기능
 
-<div class="chart-progress" data-title="PixiJS v8.x 주요 기능 지원도" data-labels="WebGL 성능,입자 효과,필터 효과,반응형 디자인,TypeScript 지원" data-values="98,92,88,85,95" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444,#8b5cf6" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="PixiJS v8.x 주요 기능 지원도" data-labels="WebGL 성능,입자 효과,필터 효과,반응형 디자인,TypeScript 지원" data-values="98,92,88,85,95" data-colors="#009e73,#3b82f6,#f59e0b,#d55e00,#8b5cf6" data-max="100" data-unit="점"></div>
 
 **주요 업데이트 항목:**
 - **WebGPU 실험적 지원**: 향후 버전에서 WebGPU 기반 렌더링으로 전환 가능

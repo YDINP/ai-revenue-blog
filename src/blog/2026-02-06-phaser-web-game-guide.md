@@ -337,7 +337,7 @@ export default class GameScene extends Phaser.Scene {
 
 ## 웹 게임 프레임워크 비교
 
-<div class="chart-bar" data-title="웹 게임 프레임워크 인기도 및 활성화 (2026년)" data-labels="Phaser,Three.js,PixiJS,Babylon.js,Cocos Creator" data-values="90,85,75,70,60" data-colors="#3b82f6,#8b5cf6,#10b981,#f59e0b,#ef4444" data-unit="점"></div>
+<div class="chart-bar" data-title="웹 게임 프레임워크 인기도 및 활성화 (2026년)" data-labels="Phaser,Three.js,PixiJS,Babylon.js,Cocos Creator" data-values="90,85,75,70,60" data-colors="#3b82f6,#8b5cf6,#009e73,#f59e0b,#d55e00" data-unit="점"></div>
 
 ## Phaser 강점 분석
 

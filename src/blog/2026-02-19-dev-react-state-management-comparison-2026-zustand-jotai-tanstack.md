@@ -54,7 +54,7 @@ React 개발에서 상태 관리는 프로젝트의 유지보수성과 성능을
 
 ## 세 가지 솔루션의 핵심 스펙 비교
 
-<div class="chart-bar" data-title="상태 관리 라이브러리 번들 크기 비교" data-labels="Zustand,Jotai,TanStack Query" data-values="2.3,3.1,10.2" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="KB (minified+gzipped)"></div>
+<div class="chart-bar" data-title="상태 관리 라이브러리 번들 크기 비교" data-labels="Zustand,Jotai,TanStack Query" data-values="2.3,3.1,10.2" data-colors="#009e73,#3b82f6,#f59e0b" data-unit="KB (minified+gzipped)"></div>
 
 ### Zustand: 심플함의 정점
 
@@ -143,7 +143,7 @@ function UserProfile({ userId }) {
 
 ## 실전 비교: 상황별 선택 가이드
 
-<div class="chart-radar" data-title="프로젝트 특성별 적합도" data-items='[{"name":"Zustand","scores":[{"label":"번들 크기","value":10,"color":"#10b981"},{"label":"학습곡선","value":10,"color":"#3b82f6"},{"label":"서버상태관리","value":5,"color":"#f59e0b"},{"label":"복잡도","value":3,"color":"#ef4444"}]},{"name":"Jotai","scores":[{"label":"번들 크기","value":9,"color":"#10b981"},{"label":"학습곡선","value":7,"color":"#3b82f6"},{"label":"서버상태관리","value":6,"color":"#f59e0b"},{"label":"복잡도","value":4,"color":"#ef4444"}]},{"name":"TanStack Query","scores":[{"label":"번들 크기","value":6,"color":"#10b981"},{"label":"학습곡선","value":6,"color":"#3b82f6"},{"label":"서버상태관리","value":10,"color":"#f59e0b"},{"label":"복잡도","value":7,"color":"#ef4444"}]}]'></div>
+<div class="chart-radar" data-title="프로젝트 특성별 적합도" data-items='[{"name":"Zustand","scores":[{"label":"번들 크기","value":10,"color":"#009e73"},{"label":"학습곡선","value":10,"color":"#3b82f6"},{"label":"서버상태관리","value":5,"color":"#f59e0b"},{"label":"복잡도","value":3,"color":"#d55e00"}]},{"name":"Jotai","scores":[{"label":"번들 크기","value":9,"color":"#009e73"},{"label":"학습곡선","value":7,"color":"#3b82f6"},{"label":"서버상태관리","value":6,"color":"#f59e0b"},{"label":"복잡도","value":4,"color":"#d55e00"}]},{"name":"TanStack Query","scores":[{"label":"번들 크기","value":6,"color":"#009e73"},{"label":"학습곡선","value":6,"color":"#3b82f6"},{"label":"서버상태관리","value":10,"color":"#f59e0b"},{"label":"복잡도","value":7,"color":"#d55e00"}]}]'></div>
 
 | 프로젝트 특성 | 추천 솔루션 | 이유 |
 |---|---|---|
@@ -168,7 +168,7 @@ function UserProfile({ userId }) {
 
 ## 성능 측면: 실제 벤치마크 분석
 
-<div class="chart-versus" data-title="초기 로딩 시간 비교" data-name-a="Zustand" data-name-b="TanStack Query" data-color-a="#10b981" data-color-b="#f59e0b" data-items='[{"label":"First Paint (ms)","a":145,"b":168},{"label":"LCP (ms)","a":312,"b":389},{"label":"TTI (ms)","a":428,"b":521}]'></div>
+<div class="chart-versus" data-title="초기 로딩 시간 비교" data-name-a="Zustand" data-name-b="TanStack Query" data-color-a="#009e73" data-color-b="#f59e0b" data-items='[{"label":"First Paint (ms)","a":145,"b":168},{"label":"LCP (ms)","a":312,"b":389},{"label":"TTI (ms)","a":428,"b":521}]'></div>
 
 2026년 2월 기준 Chrome DevTools로 측정한 실제 데이터입니다. Zustand는 극소 번들 크기 덕분에 <span style="font-size:1.15em;font-weight:700">초기 로딩 성능에서 우위</span>를 보입니다. 다만 데이터 페칭 작업이 많으면 TanStack Query의 캐싱 효율성이 점진적으로 이득을 만들어냅니다.
 

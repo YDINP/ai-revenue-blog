@@ -110,7 +110,7 @@ WebGL은 셰이더 프로그래밍을 통해 GPU에서 직접 연산을 수행�
 
 ## Canvas vs WebGL 성능 비교
 
-<div class="chart-versus" data-title="Canvas vs WebGL 성능 비교" data-name-a="Canvas" data-name-b="WebGL" data-color-a="#f59e0b" data-color-b="#10b981" data-items='[{"label":"10,000 스프라이트","a":12,"b":58},{"label":"3D 회전 오브젝트","a":25,"b":85},{"label":"파티클 효과","a":18,"b":92},{"label":"셰이더 필터","a":10,"b":80}]'></div>
+<div class="chart-versus" data-title="Canvas vs WebGL 성능 비교" data-name-a="Canvas" data-name-b="WebGL" data-color-a="#f59e0b" data-color-b="#009e73" data-items='[{"label":"10,000 스프라이트","a":12,"b":58},{"label":"3D 회전 오브젝트","a":25,"b":85},{"label":"파티클 효과","a":18,"b":92},{"label":"셰이더 필터","a":10,"b":80}]'></div>
 
 위 차트에서 보듯이 WebGL은 대규모 렌더링 작업에서 <span style="font-size:1.3em;font-weight:800">Canvas보다 4~8배</span> 빠릅니다. 따라서 게임 규모가 크거나 3D 요소가 필요하면 WebGL을 선택하는 것이 현명합니다.
 

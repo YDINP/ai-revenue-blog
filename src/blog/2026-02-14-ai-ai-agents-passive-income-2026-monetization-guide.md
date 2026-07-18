@@ -150,7 +150,7 @@ AI 에이전트는 단순히 작업을 자동화하는 것을 넘어 반복되�
 
 솔직히 말하면, 도구 선택이 수익성을 70% 좌우합니다. 가장 유명한 플랫폼들의 실제 사용 경험을 정리했습니다.
 
-<div class="chart-versus" data-title="AI 에이전트 플랫폼 비교" data-name-a="Make" data-name-b="n8n" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"진입 난이도","a":85,"b":65},{"label":"자동화 유연성","a":80,"b":90},{"label":"API 통합 수","a":85,"b":75},{"label":"가성비","a":70,"b":85},{"label":"커뮤니티","a":90,"b":70}]'></div>
+<div class="chart-versus" data-title="AI 에이전트 플랫폼 비교" data-name-a="Make" data-name-b="n8n" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"진입 난이도","a":85,"b":65},{"label":"자동화 유연성","a":80,"b":90},{"label":"API 통합 수","a":85,"b":75},{"label":"가성비","a":70,"b":85},{"label":"커뮤니티","a":90,"b":70}]'></div>
 
 | 플랫폼 | 월 비용 | 추천 대상 | 강점 | 약점 |
 |--------|--------|---------|------|------|
@@ -231,7 +231,7 @@ AI 에이전트는 단순히 작업을 자동화하는 것을 넘어 반복되�
 
 ---
 
-<div class="chart-progress" data-title="AI 에이전트 수익화 난이도" data-labels="기술 난이도,ROI 기간,수익 규모" data-values="35,60,85" data-colors="#3b82f6,#f59e0b,#10b981" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="AI 에이전트 수익화 난이도" data-labels="기술 난이도,ROI 기간,수익 규모" data-values="35,60,85" data-colors="#3b82f6,#f59e0b,#009e73" data-max="100" data-unit="점"></div>
 
 ---
 

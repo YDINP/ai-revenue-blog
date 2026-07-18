@@ -35,7 +35,7 @@ Codex Spark는 Cerebras 웨이퍼 스케일 엔진 위에서 초당 1,000+ 토�
 
 ## 핵심 스펙 비교: 숫자로 보는 진실
 
-<div class="chart-versus" data-title="GPT-5.3 Codex Spark vs Claude Code Opus 4.6" data-name-a="Codex Spark" data-name-b="Claude Opus 4.6" data-color-a="#10b981" data-color-b="#8b5cf6" data-items='[{"label":"SWE-bench Verified(%)","a":56,"b":81},{"label":"Terminal-Bench 2.0(%)","a":58,"b":65},{"label":"속도(tok/s)","a":100,"b":6},{"label":"컨텍스트(K)","a":128,"b":200},{"label":"최대출력(K)","a":32,"b":128}]'></div>
+<div class="chart-versus" data-title="GPT-5.3 Codex Spark vs Claude Code Opus 4.6" data-name-a="Codex Spark" data-name-b="Claude Opus 4.6" data-color-a="#009e73" data-color-b="#8b5cf6" data-items='[{"label":"SWE-bench Verified(%)","a":56,"b":81},{"label":"Terminal-Bench 2.0(%)","a":58,"b":65},{"label":"속도(tok/s)","a":100,"b":6},{"label":"컨텍스트(K)","a":128,"b":200},{"label":"최대출력(K)","a":32,"b":128}]'></div>
 
 | 항목 | GPT-5.3 Codex Spark | Claude Code Opus 4.6 |
 |------|:-------------------:|:--------------------:|
@@ -59,7 +59,7 @@ Codex Spark는 Cerebras 웨이퍼 스케일 엔진 위에서 초당 1,000+ 토�
 
 Codex Spark를 제대로 이해하려면 같은 날 출시된 풀 GPT-5.3 Codex와의 차이를 먼저 파악해야 합니다. 이 둘은 같은 "5.3" 이름을 공유하지만 완전히 다른 설계 철학을 가진 모델입니다.
 
-<div class="chart-versus" data-title="GPT-5.3 Codex(풀) vs Codex Spark" data-name-a="Codex(풀)" data-name-b="Codex Spark" data-color-a="#3b82f6" data-color-b="#10b981" data-items='[{"label":"Terminal-Bench 2.0(%)","a":77,"b":58},{"label":"SWE-bench Pro(%)","a":57,"b":56},{"label":"컨텍스트(K)","a":400,"b":128},{"label":"최대출력(K)","a":128,"b":32},{"label":"속도(tok/s ×10)","a":7,"b":100}]'></div>
+<div class="chart-versus" data-title="GPT-5.3 Codex(풀) vs Codex Spark" data-name-a="Codex(풀)" data-name-b="Codex Spark" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"Terminal-Bench 2.0(%)","a":77,"b":58},{"label":"SWE-bench Pro(%)","a":57,"b":56},{"label":"컨텍스트(K)","a":400,"b":128},{"label":"최대출력(K)","a":128,"b":32},{"label":"속도(tok/s ×10)","a":7,"b":100}]'></div>
 
 | 항목 | GPT-5.3 Codex (풀) | GPT-5.3 Codex Spark |
 |------|:-------------------:|:-------------------:|
@@ -132,7 +132,7 @@ Claude Opus 4.6의 가장 주목할 기능은 에이전트 팀(Agent Teams)입�
 
 ### 벤치마크가 증명하는 실력
 
-<div class="chart-bar" data-title="Claude Opus 4.6 벤치마크 성적표" data-labels="GPQA Diamond,BigLaw Bench,BrowseComp,SWE-bench Verified,ARC AGI 2,Terminal-Bench 2.0" data-values="91.3,90.2,84.0,80.8,68.8,65.4" data-colors="#10b981,#06b6d4,#ef4444,#8b5cf6,#f59e0b,#3b82f6" data-unit="%"></div>
+<div class="chart-bar" data-title="Claude Opus 4.6 벤치마크 성적표" data-labels="GPQA Diamond,BigLaw Bench,BrowseComp,SWE-bench Verified,ARC AGI 2,Terminal-Bench 2.0" data-values="91.3,90.2,84.0,80.8,68.8,65.4" data-colors="#009e73,#06b6d4,#d55e00,#8b5cf6,#f59e0b,#3b82f6" data-unit="%"></div>
 
 특히 <span style="font-size:1.15em;font-weight:700">SWE-bench Verified 80.8%</span>는 실제 오픈소스 프로젝트의 GitHub 이슈를 자동으로 해결하는 능력을 의미합니다. 100개의 실제 버그 중 81개를 스스로 고칠 수 있다는 뜻입니다.
 
@@ -162,7 +162,7 @@ Claude Opus 4.6은 100만 토큰 컨텍스트(베타)를 지원합니다. MRCR v
 
 ## 2026년 현실적 추천: 상황별 최적 도구
 
-<div class="chart-radar" data-title="2026년 AI 코딩 도구 종합 평가" data-items='[{"name":"GPT-5.3 Codex(풀)","scores":[{"label":"속도","value":6,"color":"#3b82f6"},{"label":"정확도","value":8.5,"color":"#3b82f6"},{"label":"컨텍스트","value":9,"color":"#3b82f6"},{"label":"에이전틱","value":8,"color":"#3b82f6"},{"label":"가격","value":7.5,"color":"#3b82f6"}]},{"name":"GPT-5.3 Codex Spark","scores":[{"label":"속도","value":10,"color":"#10b981"},{"label":"정확도","value":6.5,"color":"#10b981"},{"label":"컨텍스트","value":6.5,"color":"#10b981"},{"label":"에이전틱","value":7,"color":"#10b981"},{"label":"가격","value":8.5,"color":"#10b981"}]},{"name":"Claude Code Opus 4.6","scores":[{"label":"속도","value":5,"color":"#8b5cf6"},{"label":"정확도","value":9.5,"color":"#8b5cf6"},{"label":"컨텍스트","value":9.5,"color":"#8b5cf6"},{"label":"에이전틱","value":10,"color":"#8b5cf6"},{"label":"가격","value":6,"color":"#8b5cf6"}]}]'></div>
+<div class="chart-radar" data-title="2026년 AI 코딩 도구 종합 평가" data-items='[{"name":"GPT-5.3 Codex(풀)","scores":[{"label":"속도","value":6,"color":"#3b82f6"},{"label":"정확도","value":8.5,"color":"#3b82f6"},{"label":"컨텍스트","value":9,"color":"#3b82f6"},{"label":"에이전틱","value":8,"color":"#3b82f6"},{"label":"가격","value":7.5,"color":"#3b82f6"}]},{"name":"GPT-5.3 Codex Spark","scores":[{"label":"속도","value":10,"color":"#009e73"},{"label":"정확도","value":6.5,"color":"#009e73"},{"label":"컨텍스트","value":6.5,"color":"#009e73"},{"label":"에이전틱","value":7,"color":"#009e73"},{"label":"가격","value":8.5,"color":"#009e73"}]},{"name":"Claude Code Opus 4.6","scores":[{"label":"속도","value":5,"color":"#8b5cf6"},{"label":"정확도","value":9.5,"color":"#8b5cf6"},{"label":"컨텍스트","value":9.5,"color":"#8b5cf6"},{"label":"에이전틱","value":10,"color":"#8b5cf6"},{"label":"가격","value":6,"color":"#8b5cf6"}]}]'></div>
 
 ### Codex Spark를 선택해야 할 때
 - 프론트엔드 UI를 빠르게 프로토타이핑할 때

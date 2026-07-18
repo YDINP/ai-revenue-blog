@@ -101,7 +101,7 @@ PixiJS는 WebGL 기반의 2D 렌더링 엔진으로, <span style="font-size:1.3e
 
 ## 프레임워크별 성능 및 기능 비교
 
-<div class="chart-radar" data-title="JavaScript 게임 프레임워크 종합 평가" data-items='[{"name":"Phaser 3","scores":[{"label":"학습곡선","value":9,"color":"#10b981"},{"label":"성능","value":8,"color":"#3b82f6"},{"label":"커뮤니티","value":9,"color":"#f59e0b"},{"label":"기능성","value":8,"color":"#ef4444"}]},{"name":"Babylon.js","scores":[{"label":"학습곡선","value":7,"color":"#10b981"},{"label":"성능","value":9,"color":"#3b82f6"},{"label":"커뮤니티","value":8,"color":"#f59e0b"},{"label":"기능성","value":9,"color":"#ef4444"}]},{"name":"Three.js","scores":[{"label":"학습곡선","value":6,"color":"#10b981"},{"label":"성능","value":8,"color":"#3b82f6"},{"label":"커뮤니티","value":9,"color":"#f59e0b"},{"label":"기능성","value":7,"color":"#ef4444"}]},{"name":"PixiJS","scores":[{"label":"학습곡선","value":8,"color":"#10b981"},{"label":"성능","value":9,"color":"#3b82f6"},{"label":"커뮤니티","value":7,"color":"#f59e0b"},{"label":"기능성","value":6,"color":"#ef4444"}]}]'></div>
+<div class="chart-radar" data-title="JavaScript 게임 프레임워크 종합 평가" data-items='[{"name":"Phaser 3","scores":[{"label":"학습곡선","value":9,"color":"#009e73"},{"label":"성능","value":8,"color":"#3b82f6"},{"label":"커뮤니티","value":9,"color":"#f59e0b"},{"label":"기능성","value":8,"color":"#d55e00"}]},{"name":"Babylon.js","scores":[{"label":"학습곡선","value":7,"color":"#009e73"},{"label":"성능","value":9,"color":"#3b82f6"},{"label":"커뮤니티","value":8,"color":"#f59e0b"},{"label":"기능성","value":9,"color":"#d55e00"}]},{"name":"Three.js","scores":[{"label":"학습곡선","value":6,"color":"#009e73"},{"label":"성능","value":8,"color":"#3b82f6"},{"label":"커뮤니티","value":9,"color":"#f59e0b"},{"label":"기능성","value":7,"color":"#d55e00"}]},{"name":"PixiJS","scores":[{"label":"학습곡선","value":8,"color":"#009e73"},{"label":"성능","value":9,"color":"#3b82f6"},{"label":"커뮤니티","value":7,"color":"#f59e0b"},{"label":"기능성","value":6,"color":"#d55e00"}]}]'></div>
 
 ## 프로젝트 유형별 추천 프레임워크
 
@@ -115,7 +115,7 @@ PixiJS는 WebGL 기반의 2D 렌더링 엔진으로, <span style="font-size:1.3e
 
 ## 학습 난이도와 개발 속도 비교
 
-<div class="chart-bar" data-title="프레임워크별 개발 속도와 학습곡선" data-labels="Phaser 3,PlayCanvas,PixiJS,Babylon.js,Three.js" data-values="92,85,80,75,60" data-colors="#10b981,#ef4444,#8b5cf6,#3b82f6,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-title="프레임워크별 개발 속도와 학습곡선" data-labels="Phaser 3,PlayCanvas,PixiJS,Babylon.js,Three.js" data-values="92,85,80,75,60" data-colors="#009e73,#d55e00,#8b5cf6,#3b82f6,#f59e0b" data-unit="점"></div>
 
 Phaser 3이 가장 빠른 개발 속도를 제공합니다. 초보자도 몇 시간 안에 간단한 게임을 만들 수 있으며, 필요한 모든 기능이 통합되어 있습니다. Babylon.js는 3D 개발에서는 비교할 수 없는 장점이 있지만, 학습곡선이 더 가파릅니다.
 

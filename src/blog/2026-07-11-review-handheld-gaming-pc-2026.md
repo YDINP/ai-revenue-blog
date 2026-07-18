@@ -57,7 +57,7 @@ faq:
 
 ## 성능·성향 비교
 
-<div class="chart-versus" data-title="스팀덱 OLED vs ROG Ally X — PC 게임기 대결" data-name-a="스팀덱 OLED" data-name-b="ROG Ally X" data-color-a="#10b981" data-color-b="#3b82f6" data-items='[{"label":"성능","a":75,"b":92},{"label":"화면 품질","a":92,"b":80},{"label":"스토어 자유도","a":78,"b":95},{"label":"배터리","a":78,"b":88},{"label":"가성비","a":90,"b":72}]'></div>
+<div class="chart-versus" data-title="스팀덱 OLED vs ROG Ally X — PC 게임기 대결" data-name-a="스팀덱 OLED" data-name-b="ROG Ally X" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"성능","a":75,"b":92},{"label":"화면 품질","a":92,"b":80},{"label":"스토어 자유도","a":78,"b":95},{"label":"배터리","a":78,"b":88},{"label":"가성비","a":90,"b":72}]'></div>
 
 - **성능·자유도·배터리** → ROG Ally X
 - **화면 품질·가성비** → 스팀덱 OLED
@@ -68,9 +68,9 @@ faq:
 
 <div class="chart-radar" data-title="세 기기 성향 (10점, 참고용)" data-items='[
   {"name":"스팀덱 OLED","scores":[
-    {"label":"성능","value":7,"color":"#10b981"},
-    {"label":"편의성","value":8,"color":"#10b981"},
-    {"label":"독점작","value":5,"color":"#10b981"}
+    {"label":"성능","value":7,"color":"#009e73"},
+    {"label":"편의성","value":8,"color":"#009e73"},
+    {"label":"독점작","value":5,"color":"#009e73"}
   ]},
   {"name":"ROG Ally X","scores":[
     {"label":"성능","value":9,"color":"#3b82f6"},
