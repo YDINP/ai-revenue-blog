@@ -2084,6 +2084,28 @@ const ICONS: Record<string, string> = {
       <div class="summary-grid">
         <div class="summary-card accent-blue color-blue">
           <div class="kpi-top">
+            <span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['activity']}></svg></span>
+            <div class="label">금일 방문자</div>
+          </div>
+          <div class="kpi-value-row">
+            <div class="value" id="kpi-today-visitors">--</div>
+            <span class="delta-chip flat" id="kpi-tv-delta">--</span>
+          </div>
+          <div class="sub" id="kpi-today-visitors-sub">전일 대비 · KST 기준</div>
+        </div>
+        <div class="summary-card accent-purple color-purple">
+          <div class="kpi-top">
+            <span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['eye']}></svg></span>
+            <div class="label">금일 조회수</div>
+          </div>
+          <div class="kpi-value-row">
+            <div class="value" id="kpi-today-views">--</div>
+            <span class="delta-chip flat" id="kpi-tw-delta">--</span>
+          </div>
+          <div class="sub" id="kpi-today-views-sub">전일 대비 · KST 기준</div>
+        </div>
+        <div class="summary-card accent-blue color-blue">
+          <div class="kpi-top">
             <span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['file-text']}></svg></span>
             <div class="label">Total Posts</div>
           </div>
@@ -4975,6 +4997,27 @@ const ICONS: Record<string, string> = {
           const tc = Number(summary?.today_clicks) || 0;
           const tl = Number(summary?.today_likes) || 0;
           const ts = Number(summary?.today_subscribers) || 0;
+
+          // 상단 KPI 카드: 금일 방문자/조회수 (전일 대비 델타칩) — 다른 카드와 동일 규격
+          const todayKstStr = new Date(Date.now() + 9 * 3600e3).toISOString().split('T')[0];
+          const ydayKstStr = new Date(Date.now() + 9 * 3600e3 - 86400e3).toISOString().split('T')[0];
+          const ddArr = Array.isArray(dailyDetail) ? dailyDetail : [];
+          const todayVis = Number(ddArr.find((d) => d.day === todayKstStr)?.visitors) || 0;
+          const ydayVis = Number(ddArr.find((d) => d.day === ydayKstStr)?.visitors) || 0;
+          const setKpiDelta = (id, cur, prev, better = 'up') => {
+            const el = document.getElementById(id); if (!el) return;
+            const dd = cur - prev;
+            if (!prev && !cur) { el.className = 'delta-chip flat'; el.textContent = '–'; return; }
+            const good = better === 'up' ? dd >= 0 : dd <= 0;
+            el.className = 'delta-chip ' + (dd === 0 ? 'flat' : (good ? 'up' : 'down'));
+            el.textContent = dd === 0 ? '–' : `${dd > 0 ? '▲' : '▼'} ${fmt(Math.abs(dd))}`;
+          };
+          const kv = document.getElementById('kpi-today-visitors'); if (kv) kv.textContent = fmt(todayVis);
+          setKpiDelta('kpi-tv-delta', todayVis, ydayVis);
+          const kvs = document.getElementById('kpi-today-visitors-sub'); if (kvs) kvs.textContent = `어제 ${fmt(ydayVis)}명 · KST`;
+          const kw = document.getElementById('kpi-today-views'); if (kw) kw.textContent = fmt(tv);
+          setKpiDelta('kpi-tw-delta', tv, yv);
+          const kws = document.getElementById('kpi-today-views-sub'); if (kws) kws.textContent = `어제 ${fmt(yv)}회 · KST`;
 
           document.getElementById('t-today-views').textContent = fmt(tv);
           const vd = deltaText(tv, yv);
