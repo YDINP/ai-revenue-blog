@@ -54,8 +54,9 @@ export const BLOGS = {
     branch: 'master',
     contentDir: 'src/videos',
     site: 'https://virtual-in-playing.vercel.app',
+    gscSite: 'https://virtual-in-playing.vercel.app/',  // GSC 동기화용(서비스계정을 이 속성 사용자로 추가해야 데이터 수집)
     vercel: 'virtual-in-playing',
-    source: null,
+    source: 'playcast',
     generator: null,
   },
 };
