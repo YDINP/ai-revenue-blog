@@ -124,7 +124,7 @@ Few-shot learning은 매우 강력한 기법입니다. AI에게 원하는 형식
 
 이렇게 단계를 명시하면 표면적인 답변이 아닌 근거 있는 조언을 받을 수 있습니다.
 
-<div class="chart-bar" data-title="프롬프트 기법별 응답 품질 개선 효과" data-labels="사고과정,Few-shot,역할 할당,맥락 제공,제약 조건,기본 질문" data-values="82,78,72,68,65,45" data-colors="#8b5cf6,#3b82f6,#eab308,#f59e0b,#10b981,#ef4444" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="프롬프트 기법별 응답 품질 개선 효과" data-labels="사고과정,Few-shot,역할 할당,맥락 제공,제약 조건,기본 질문" data-values="82,78,72,68,65,45" data-colors="#8b5cf6,#3b82f6,#eab308,#f59e0b,#10b981,#ef4444" data-unit="점"></div>
 
 ## 2026년 실전 활용 팁: 체인 프롬프팅
 

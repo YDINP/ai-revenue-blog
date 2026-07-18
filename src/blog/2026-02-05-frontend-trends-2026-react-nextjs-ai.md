@@ -207,7 +207,7 @@ React·Next.js 독주 시대에 균열이 생기고 있습니다. 렌더 속도�
 | **Solid.js 2** | 세밀한 반응성(Fine-Grained Reactivity), React 문법 유사 | 작음 | 고성능 대시보드 |
 | **Qwik 2** | 즉각적 상호작용(Resumability), HTML 우선 | 최소 JS | 전자상거래, LCP 최적화 |
 
-<div class="chart-bar" data-title="2026 신흥 프론트엔드 프레임워크 관심도 (개념적 예시, 100점 기준)" data-labels="Svelte,Astro,Solid.js,Qwik" data-values="88,85,80,72" data-colors="#3b82f6,#ef4444,#10b981,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="2026 신흥 프론트엔드 프레임워크 관심도 (개념적 예시, 100점 기준)" data-labels="Svelte,Astro,Solid.js,Qwik" data-values="88,85,80,72" data-colors="#3b82f6,#ef4444,#10b981,#f59e0b" data-unit="점"></div>
 
 ### 왜 지금 신흥 프레임워크인가
 

@@ -44,7 +44,7 @@ faq:
 
 텍스트가 많지 않은 게임이라면 진입 문턱이 생각보다 낮습니다. 인디 사례로는 5개 언어에 $12k~$25k를 투자해 1년차 <span style="font-size:1.3em;font-weight:800">$120k~$400k+ 추가 매출</span>을 본 경우가 보고됩니다.
 
-<div class="chart-bar" data-title="현지화 투자 대비 1년차 추가 매출 (인디 사례, 참고용)" data-labels="투자(최소),투자(최대),추가매출(최소),추가매출(최대)" data-values="12,25,120,400" data-colors="#f59e0b,#f59e0b,#10b981,#10b981" data-unit="k$"></div>
+<div class="chart-bar" data-orient="vertical" data-title="현지화 투자 대비 1년차 추가 매출 (인디 사례, 참고용)" data-labels="투자(최소),투자(최대),추가매출(최소),추가매출(최대)" data-values="12,25,120,400" data-colors="#f59e0b,#f59e0b,#10b981,#10b981" data-unit="k$"></div>
 
 <div class="callout-warning">⚠️ 주의: 이 수익은 <b>게임 품질·마케팅이 뒷받침될 때</b>의 이야기입니다. 재미없는 게임을 여러 언어로 낸다고 팔리진 않습니다. 현지화는 좋은 게임의 '증폭기'입니다.</div>
 

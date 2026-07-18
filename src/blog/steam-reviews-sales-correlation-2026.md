@@ -65,7 +65,7 @@ Jake Birkett은 게임디벨로퍼에 기고한 [리뷰로 판매량 추정하�
 
 박스라이터 배수의 역사는 "하락의 역사"다.
 
-<div class="chart-bar" data-title="스팀 리뷰 1개당 판매량 배수의 변화(중앙값 기준, 추정)" data-labels="2014,2018,2022,2026" data-values="70,64,45,32" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444" data-unit="배"></div>
+<div class="chart-bar" data-orient="vertical" data-title="스팀 리뷰 1개당 판매량 배수의 변화(중앙값 기준, 추정)" data-labels="2014,2018,2022,2026" data-values="70,64,45,32" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444" data-unit="배"></div>
 
 초기 박스라이터 연구(2014년경)는 AAA와 인디를 섞어 30~100배, 중간값 약 70배를 제시했다. 2018년 시점 인디 표본에서는 평균 82배·중앙값 77배까지 올라가기도 했다. 그런데 2014년 출시작을 제외하고 다시 계산하면 평균은 약 71배, 중앙값은 약 64배로 내려앉는다. 초창기 게임일수록 배수가 높게 잡히는 것이다.
 
@@ -89,7 +89,7 @@ Jake Birkett은 게임디벨로퍼에 기고한 [리뷰로 판매량 추정하�
 
 만족한 유저는 리뷰를 남길 확률이 높고, 그저 그런 게임은 산 사람 다수가 침묵한다. 그래서 긍정률이 높을수록 판매량 대비 리뷰가 많아지고, 리뷰 1개당 판매량 배수는 오히려 작아진다.
 
-<div class="chart-bar" data-title="긍정 리뷰율에 따른 리뷰 1개당 판매량 배수(추정)" data-labels="90% 이상,80%대,70%대" data-values="30,45,60" data-colors="#10b981,#f59e0b,#ef4444" data-unit="배"></div>
+<div class="chart-bar" data-orient="vertical" data-title="긍정 리뷰율에 따른 리뷰 1개당 판매량 배수(추정)" data-labels="90% 이상,80%대,70%대" data-values="30,45,60" data-colors="#10b981,#f59e0b,#ef4444" data-unit="배"></div>
 
 VG Insights와 Gamalytic 계열 분석을 종합하면, 90% 이상 긍정 게임은 리뷰 1개당 약 30개, 70%대 긍정 게임은 약 60개로 배수가 벌어진다. 같은 리뷰 300개라도 긍정률 92%인 게임과 72%인 게임의 추정 판매량이 거의 두 배 차이가 날 수 있다는 뜻이다. 그래서 정교한 추정에서는 긍정률 구간별로 배수를 다르게 적용한다.
 

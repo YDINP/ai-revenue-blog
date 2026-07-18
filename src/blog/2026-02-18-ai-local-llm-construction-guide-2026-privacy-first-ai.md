@@ -56,7 +56,7 @@ noindex: true
 
 NVIDIA RTX 4070 Super(12GB)는 13B 모델 구동에 최적화되었으며, AMD Radeon RX 7900 GRE도 유사 성능을 제공합니다. <span style="font-size:1.3em;font-weight:800">CPU 전용 구축은 가능하지만 추론 속도가 10배 이상 느려지므로 실무용으로는 부적합</span>합니다.
 
-<div class="chart-bar" data-title="모델 크기별 최소 하드웨어 요구사항" data-labels="7B 모델,13B 모델,70B 모델" data-values="6,12,24" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="GB VRAM"></div>
+<div class="chart-bar" data-orient="vertical" data-title="모델 크기별 최소 하드웨어 요구사항" data-labels="7B 모델,13B 모델,70B 모델" data-values="6,12,24" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="GB VRAM"></div>
 
 ### 2. 오픈소스 모델 선택: 성능과 라이선스 비교
 

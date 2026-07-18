@@ -180,7 +180,7 @@ noindex: true
 
 ## 실제 개발자들의 월평균 지출
 
-<div class="chart-bar" data-title="2026년 개발자 월평균 개발 환경 지출액" data-labels="초보자,주니어,시니어,CTO" data-values="5,85,350,2500" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-unit="달러"></div>
+<div class="chart-bar" data-orient="vertical" data-title="2026년 개발자 월평균 개발 환경 지출액" data-labels="초보자,주니어,시니어,CTO" data-values="5,85,350,2500" data-colors="#10b981,#3b82f6,#f59e0b,#ef4444" data-unit="달러"></div>
 
 ## 2026년 개발 환경 트렌드: 비용 절감의 새로운 방향
 

@@ -69,7 +69,7 @@ GPT-5.3의 향상된 분석 능력으로 구조화되지 않은 데이터를 의
 
 2026년 ChatGPT는 20개 이상의 프로그래밍 언어를 실시간으로 지원하며, GitHub Copilot과의 경쟁 속에서 콘텍스트 이해도가 대폭 향상되었습니다. 특히 레거시 코드 리팩토링과 보안 취약점 진단에서 높은 정확도를 보입니다.
 
-<div class="chart-bar" data-title="ChatGPT 코딩 작업별 성공률" data-labels="버그 수정,코드 최적화,보안 감시,기능 구현" data-values="94,91,88,87" data-colors="#10b981,#f59e0b,#ef4444,#3b82f6" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="ChatGPT 코딩 작업별 성공률" data-labels="버그 수정,코드 최적화,보안 감시,기능 구현" data-values="94,91,88,87" data-colors="#10b981,#f59e0b,#ef4444,#3b82f6" data-unit="%"></div>
 
 ### 4. 다국어 커뮤니케이션
 

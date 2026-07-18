@@ -59,9 +59,9 @@ noindex: true
 
 <div class="chart-radar" data-title="노트북 3종 종합 비교" data-items='[{"name":"맥북 에어 M3","scores":[{"label":"성능","value":9,"color":"#10b981"},{"label":"화면","value":7.5,"color":"#10b981"},{"label":"휴대성","value":9,"color":"#10b981"},{"label":"배터리","value":9,"color":"#10b981"},{"label":"가성비","value":8,"color":"#10b981"}]},{"name":"LG 그램 17","scores":[{"label":"성능","value":7.5,"color":"#3b82f6"},{"label":"화면","value":9.5,"color":"#3b82f6"},{"label":"휴대성","value":9.5,"color":"#3b82f6"},{"label":"배터리","value":10,"color":"#3b82f6"},{"label":"가성비","value":8.5,"color":"#3b82f6"}]},{"name":"갤럭시북4 프로","scores":[{"label":"성능","value":8,"color":"#f59e0b"},{"label":"화면","value":10,"color":"#f59e0b"},{"label":"휴대성","value":7,"color":"#f59e0b"},{"label":"배터리","value":9,"color":"#f59e0b"},{"label":"가성비","value":7,"color":"#f59e0b"}]}]'></div>
 
-<div class="chart-bar" data-title="무게 비교 (kg)" data-labels="맥북 에어 M3,LG 그램 17,갤럭시북4 프로" data-values="1.24,1.35,1.56" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="kg"></div>
+<div class="chart-bar" data-orient="vertical" data-title="무게 비교 (kg)" data-labels="맥북 에어 M3,LG 그램 17,갤럭시북4 프로" data-values="1.24,1.35,1.56" data-colors="#10b981,#3b82f6,#f59e0b" data-unit="kg"></div>
 
-<div class="chart-bar" data-title="배터리 수명 (시간)" data-labels="LG 그램 17,갤럭시북4 프로,맥북 에어 M3" data-values="22,21,18" data-colors="#3b82f6,#f59e0b,#10b981" data-unit="h"></div>
+<div class="chart-bar" data-orient="vertical" data-title="배터리 수명 (시간)" data-labels="LG 그램 17,갤럭시북4 프로,맥북 에어 M3" data-values="22,21,18" data-colors="#3b82f6,#f59e0b,#10b981" data-unit="h"></div>
 
 ## 맥북 에어 M3: 개발자의 로망
 

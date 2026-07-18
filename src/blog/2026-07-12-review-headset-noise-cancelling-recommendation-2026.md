@@ -54,7 +54,7 @@ ANC는 일정한 소음 차단에 강합니다.
 
 ## 체크할 5가지
 
-<div class="chart-bar" data-title="헤드셋 선택 시 중요도 (참고용)" data-labels="착용감,마이크(회의),ANC,배터리,멀티포인트" data-values="10,9,8,7,7" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6,#94a3b8" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="헤드셋 선택 시 중요도 (참고용)" data-labels="착용감,마이크(회의),ANC,배터리,멀티포인트" data-values="10,9,8,7,7" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6,#94a3b8" data-unit="점"></div>
 
 1. **착용감** — 오래 써도 안 아픈가 (가장 중요, 안 아파야 계속 씀)
 2. **마이크 품질** — 회의 잦으면 필수(붐 마이크가 유리)

@@ -32,7 +32,7 @@ GPT-5.3 Codex Spark의 가장 큰 특징은 컨텍스트 이해도의 비약적 
 
 이는 실무 환경에서 코드 품질을 크게 향상시킬 수 있음을 의미합니다.
 
-<div class="chart-bar" data-title="AI 코딩 도구 성능 비교 (2026년)" data-labels="코드 정확도,속도,컨텍스트 이해,보안 감지" data-values="95.2,93.5,92.8,89.1" data-colors="#10b981,#ef4444,#3b82f6,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="AI 코딩 도구 성능 비교 (2026년)" data-labels="코드 정확도,속도,컨텍스트 이해,보안 감지" data-values="95.2,93.5,92.8,89.1" data-colors="#10b981,#ef4444,#3b82f6,#f59e0b" data-unit="점"></div>
 
 ### 실무 테스트: 개발 생산성 향상도
 

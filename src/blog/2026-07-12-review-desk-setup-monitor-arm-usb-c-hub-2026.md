@@ -41,7 +41,7 @@ faq:
 
 <div class="callout-info">💡 핵심: 투자 우선순위는 ① 모니터암(눈높이) → ② 스탠딩데스크(자세) → ③ 도킹/허브(연결) → ④ 케이블 정리. 장식보다 '자세와 눈높이'가 체감이 가장 큽니다.</div>
 
-<div class="chart-bar" data-title="데스크 셋업 요소별 체감 효과 (참고용)" data-labels="모니터암,스탠딩데스크,도킹/허브,케이블 정리" data-values="9,8,7,6" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="데스크 셋업 요소별 체감 효과 (참고용)" data-labels="모니터암,스탠딩데스크,도킹/허브,케이블 정리" data-values="9,8,7,6" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6" data-unit="점"></div>
 
 ## 1) 모니터암 — 목·어깨의 구원자
 

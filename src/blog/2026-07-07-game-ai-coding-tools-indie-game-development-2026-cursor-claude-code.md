@@ -117,7 +117,7 @@ Claude Code는 두 가지 방식으로 쓸 수 있고, 1인 개발자에게는 �
 
 아래는 게임 개발 작업 유형별 AI 코딩 도구의 효과를 개념적으로 정리한 것이다(공개 사용자 리포트 기반 추정).
 
-<div class="chart-bar" data-title="게임개발 작업별 AI 코딩 도구 효과 (개념적 평가, 100점 기준)" data-labels="보일러플레이트,버그수정,리팩터링,신규기능,밸런싱로직" data-values="90,80,75,70,55" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="게임개발 작업별 AI 코딩 도구 효과 (개념적 평가, 100점 기준)" data-labels="보일러플레이트,버그수정,리팩터링,신규기능,밸런싱로직" data-values="90,80,75,70,55" data-colors="#3b82f6,#10b981,#f59e0b,#ef4444,#8b5cf6" data-unit="점"></div>
 
 보일러플레이트 생성과 버그 수정에서 효과가 가장 크고, 밸런싱 로직처럼 게임 고유 판단이 필요한 영역일수록 AI 의존도를 낮춰야 한다.
 

@@ -47,7 +47,7 @@ noindex: true
 
 먼저 2026년 공식 벤치마크를 확인해봅시다. GitHub의 Copilot 사용자 2만 명 대상 설문과 Cursor 커뮤니티 분석 결과입니다.
 
-<div class="chart-bar" data-title="AI 코딩 도구별 개발 시간 단축률" data-labels="단순 자동완성,코드 리뷰 활용,테스트 자동생성,아키텍처 설계" data-values="15,38,52,67" data-colors="#ef4444,#f59e0b,#10b981,#3b82f6" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="AI 코딩 도구별 개발 시간 단축률" data-labels="단순 자동완성,코드 리뷰 활용,테스트 자동생성,아키텍처 설계" data-values="15,38,52,67" data-colors="#ef4444,#f59e0b,#10b981,#3b82f6" data-unit="%"></div>
 
 차트에서 보듯이 같은 도구라도 활용 방식에 따라 생산성 향상도가 <span style="font-size:1.3em;font-weight:800">4배 이상</span> 차이난다는 것이 핵심입니다. 단순 자동완성에만 의존하면 15% 정도의 속도 향상에 그치지만, 아키텍처 설계 단계부터 AI를 활용하면 67%의 시간 단축이 가능합니다.
 

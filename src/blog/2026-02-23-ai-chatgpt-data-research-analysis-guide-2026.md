@@ -87,7 +87,7 @@ ChatGPT의 진정한 가치는 대량의 비정형 데이터를 체계적으로 
 
 이 방식은 전문 시장 분석 도구(예: Semrush, Similarweb)의 기본 기능을 <span style="font-size:1.3em;font-weight:800">30초 내에</span> 구현합니다.
 
-<div class="chart-bar" data-title="ChatGPT 활용 시 업무 시간 단축률" data-labels="영어번역,보고서작성,정보검색,데이터분석" data-values="80,72,65,58" data-colors="#ef4444,#3b82f6,#10b981,#f59e0b" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="ChatGPT 활용 시 업무 시간 단축률" data-labels="영어번역,보고서작성,정보검색,데이터분석" data-values="80,72,65,58" data-colors="#ef4444,#3b82f6,#10b981,#f59e0b" data-unit="%"></div>
 
 ## 3단계: 보고서 자동화 및 시각화 준비
 

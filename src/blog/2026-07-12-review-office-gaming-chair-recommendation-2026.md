@@ -51,7 +51,7 @@ faq:
 
 ## 체크할 5가지 기능
 
-<div class="chart-bar" data-title="의자 선택 시 중요도 (참고용)" data-labels="요추 지지,높이/깊이 조절,팔걸이 조절,리클라이닝,통풍" data-values="10,9,8,7,7" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6,#94a3b8" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="의자 선택 시 중요도 (참고용)" data-labels="요추 지지,높이/깊이 조절,팔걸이 조절,리클라이닝,통풍" data-values="10,9,8,7,7" data-colors="#10b981,#3b82f6,#f59e0b,#8b5cf6,#94a3b8" data-unit="점"></div>
 
 1. **요추 지지** — 허리 곡선을 받쳐주는가 (가장 중요)
 2. **좌판 높이·깊이** — 발이 바닥에 닿고 허벅지가 눌리지 않게

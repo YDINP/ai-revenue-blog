@@ -89,7 +89,7 @@ const batchRenderer = {
 };
 ```
 
-<div class="chart-bar" data-title="최적화 기법별 성능 개선" data-labels="GPU 가속,텍스처 아틀라스,배치 렌더링,드로우콜 감소" data-values="85,72,68,55" data-colors="#ef4444,#3b82f6,#10b981,#f59e0b" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="최적화 기법별 성능 개선" data-labels="GPU 가속,텍스처 아틀라스,배치 렌더링,드로우콜 감소" data-values="85,72,68,55" data-colors="#ef4444,#3b82f6,#10b981,#f59e0b" data-unit="%"></div>
 
 ## 2. 메모리 관리 및 가비지 컬렉션 최적화
 

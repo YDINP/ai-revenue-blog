@@ -167,7 +167,7 @@ AI의 응답을 JSON, Markdown, CSV 같은 구조화된 형식으로 요구하�
 - "가장 중요한 포인트 3가지로 요약해줘" → 핵심 추출
 ```
 
-<div class="chart-bar" data-title="프롬프트 개선 시 응답 품질 변화" data-labels="초기 프롬프트,1회 개선,2회 개선,3회 개선" data-values="62,75,84,89" data-colors="#ef4444,#f59e0b,#3b82f6,#10b981" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="프롬프트 개선 시 응답 품질 변화" data-labels="초기 프롬프트,1회 개선,2회 개선,3회 개선" data-values="62,75,84,89" data-colors="#ef4444,#f59e0b,#3b82f6,#10b981" data-unit="점"></div>
 
 ## 보너스: 2026년 최신 프롬프팅 트렌드
 

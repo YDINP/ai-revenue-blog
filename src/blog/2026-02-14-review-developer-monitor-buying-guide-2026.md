@@ -113,7 +113,7 @@ noindex: true
 
 ## 4단계: 2026년 개발자 추천 모니터 가격대별 선택
 
-<div class="chart-bar" data-title="개발자용 모니터 가격대별 평균 스펙 점수" data-labels="20만원대,30만원대,40만원대,50만원 이상" data-values="62,78,88,95" data-colors="#ef4444,#f59e0b,#3b82f6,#10b981" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="개발자용 모니터 가격대별 평균 스펙 점수" data-labels="20만원대,30만원대,40만원대,50만원 이상" data-values="62,78,88,95" data-colors="#ef4444,#f59e0b,#3b82f6,#10b981" data-unit="점"></div>
 
 ### 예산별 선택 가이드
 
