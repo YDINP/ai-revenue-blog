@@ -319,6 +319,46 @@ const ICONS: Record<string, string> = {
       .tab-content { display: none; }
       .tab-content.active { display: block; }
 
+      /* ── GSC 상세 탭 ─────────────────────────────────── */
+      .gsc-controls { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 1rem; }
+      .gsc-seg { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+      .gsc-seg button { border: none; background: transparent; color: var(--text-2); font-size: 0.75rem; font-weight: 600; padding: 0.35rem 0.7rem; cursor: pointer; }
+      .gsc-seg button.active { background: var(--accent); color: #fff; }
+      .gsc-updated { font-size: 0.7rem; color: var(--text-3); margin-left: auto; }
+      .gsc-kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-bottom: 1.25rem; }
+      .gsc-kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0.75rem 0.85rem; }
+      .gsc-kpi-k { font-size: 0.72rem; color: var(--text-2); margin-bottom: 0.25rem; }
+      .gsc-kpi-v { font-size: 1.35rem; font-weight: 800; font-variant-numeric: tabular-nums; margin-bottom: 0.3rem; }
+      .gsc-sec-title { font-weight: 800; font-size: 0.9rem; margin-bottom: 0.6rem; }
+      .gsc-sec-title span { font-weight: 500; color: var(--text-2); font-size: 0.72rem; }
+      .gsc-metric-tabs { display: inline-flex; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 0.75rem; }
+      .gsc-metric-tabs button { border: 1px solid var(--border); background: var(--surface-2); color: var(--text-2); font-size: 0.72rem; font-weight: 600; padding: 0.3rem 0.65rem; border-radius: 999px; cursor: pointer; }
+      .gsc-metric-tabs button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+      .gsc-chart-wrap { width: 100%; overflow-x: auto; }
+      .gsc-source-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.25rem 0; }
+      .gsc-src-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0.85rem; }
+      .gsc-src-head { font-weight: 700; font-size: 0.83rem; margin-bottom: 0.5rem; }
+      .gsc-src-head span { font-weight: 500; color: var(--text-2); font-size: 0.72rem; display: block; margin-top: 0.2rem; }
+      .gsc-src-row { display: flex; justify-content: space-between; gap: 0.6rem; font-size: 0.74rem; padding: 0.2rem 0; border-bottom: 1px solid var(--border); }
+      .gsc-src-row span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .gsc-src-row span:last-child { color: var(--text-2); white-space: nowrap; }
+      #gsc-page-search { width: 100%; max-width: 320px; margin-bottom: 0.6rem; padding: 0.4rem 0.6rem; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); color: var(--text); font-size: 0.78rem; }
+      .gsc-table-wrap { overflow-x: auto; }
+      .gsc-table { width: 100%; border-collapse: collapse; font-size: 0.76rem; }
+      .gsc-table th { text-align: left; color: var(--text-2); font-weight: 700; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--border); cursor: pointer; white-space: nowrap; user-select: none; }
+      .gsc-table th.num { text-align: right; }
+      .gsc-table th.sorted { color: var(--text); }
+      .gsc-table td { padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+      .gsc-table td.num { text-align: right; white-space: nowrap; }
+      .gsc-page-cell { max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .gsc-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; padding: 0.05rem 0.3rem; border-radius: 4px; margin-right: 0.35rem; }
+      .gsc-badge-blog { background: rgba(96,165,250,0.16); color: #60a5fa; }
+      .gsc-badge-lifeflow { background: rgba(74,222,128,0.16); color: #4ade80; }
+      @media (max-width: 640px) {
+        .gsc-kpi-row { grid-template-columns: repeat(2, 1fr); }
+        .gsc-source-grid { grid-template-columns: 1fr; }
+      }
+
       /* ── 카드 공통 ────────────────────────────────────── */
       .summary-card,
       .blog-section,
@@ -2020,6 +2060,7 @@ const ICONS: Record<string, string> = {
         <button class="main-tab" data-tab="techflow">TechFlow</button>
         <button class="main-tab" data-tab="lifeflow">LifeFlow</button>
         <button class="main-tab" data-tab="vip">VIP</button>
+        <button class="main-tab" data-tab="gsc">🔍 검색(GSC)</button>
         <button class="main-tab" data-tab="coupang">쿠팡</button>
         <button class="main-tab" data-tab="paperdoc">페이퍼닥</button>
         <button class="main-tab" data-tab="comments">댓글</button>
@@ -2654,6 +2695,51 @@ const ICONS: Record<string, string> = {
           <div class="section-body">
             <p class="dd-note">VIP는 버추얼 호스트 로지의 게임 소개 영상 채널이에요. 조회수만 집계되며(쿠팡·전환·카테고리 없음), <b>Top Pages·Live Activity·시간대/일별 차트</b>에서 VIP 소스로 필터·표기됩니다. → <a href="https://virtual-in-playing.vercel.app" target="_blank" rel="noopener" style="color:#7fe9d0">사이트 열기</a></p>
           </div>
+        </div>
+      </div>
+
+      <!-- Tab: 검색 실적 (GSC) 상세 -->
+      <div class="tab-content" id="tab-gsc">
+        <div class="gsc-controls">
+          <div class="gsc-seg" id="gsc-period">
+            <button data-days="7">7일</button>
+            <button data-days="28">28일</button>
+            <button data-days="90">90일</button>
+          </div>
+          <div class="gsc-seg" id="gsc-source">
+            <button data-src="all">전체</button>
+            <button data-src="blog">TechFlow</button>
+            <button data-src="lifeflow">LifeFlow</button>
+          </div>
+          <span class="gsc-updated" id="gsc-updated"></span>
+        </div>
+
+        <!-- 전날/당일 비교 KPI -->
+        <div class="gsc-kpi-row" id="gsc-kpi">
+          <span class="skeleton" style="width:60%;height:1rem;display:inline-block;"></span>
+        </div>
+
+        <!-- 일별 추이 차트 -->
+        <div class="traffic-section" style="margin-bottom:1.25rem;">
+          <div class="gsc-sec-title">일별 추이 <span id="gsc-chart-metric-label"></span></div>
+          <div class="gsc-metric-tabs" id="gsc-metric-tabs">
+            <button data-m="clicks">클릭</button>
+            <button data-m="impressions">노출</button>
+            <button data-m="ctr">CTR</button>
+            <button data-m="position">평균순위</button>
+          </div>
+          <div class="gsc-chart-wrap" id="gsc-chart"></div>
+        </div>
+
+        <!-- 소스별 분리 (TF/LF 상시 병렬) -->
+        <div class="gsc-sec-title">소스별 요약 <span>(선택 기간 합계)</span></div>
+        <div class="gsc-source-grid" id="gsc-source-sections"></div>
+
+        <!-- 페이지별 상세 -->
+        <div class="traffic-section">
+          <div class="gsc-sec-title">페이지별 상세 <span>(전반→후반 클릭 변화 Δ · 헤더 클릭 정렬)</span></div>
+          <input id="gsc-page-search" type="text" placeholder="페이지 제목·URL 검색..." />
+          <div class="gsc-table-wrap"><table class="gsc-table" id="gsc-table"></table></div>
         </div>
       </div>
 
@@ -3726,6 +3812,239 @@ const ICONS: Record<string, string> = {
           html += '</div>';
         }
         el.innerHTML = html || '<div style="color:var(--text-2);font-size:0.78rem;">표시할 데이터가 없습니다.</div>';
+      }
+
+      // ═══════════════════════════════════════════════════════════
+      // GSC 상세 탭 — 일별 추이 / 전날·당일 비교 / 소스별 / 페이지별
+      // 데이터 소스: gsc_daily. _TOTAL_=소스별 일별 합계(추이/비교),
+      // page!=_TOTAL_=페이지별(테이블/소스섹션). CTR·순위는 노출 가중.
+      // ═══════════════════════════════════════════════════════════
+      let _gscTotals = null;        // _TOTAL_ 90일 (소스별 일별 합계)
+      let _gscPageCache = {};       // days → page-level rows (기간별 캐시)
+      let _gscDays = 7;
+      let _gscSrc = 'all';          // 'all' | 'blog' | 'lifeflow'
+      let _gscMetric = 'clicks';    // clicks | impressions | ctr | position
+      let _gscSort = { key: 'clicks', dir: -1 };
+      let _gscSearch = '';
+      let _gscInit = false;
+
+      const GSC_SRC_META = { blog: 'TechFlow', lifeflow: 'LifeFlow' };
+      const gscFmt = (n) => Number(n || 0).toLocaleString('en-US');
+      const gscPct = (v) => (Number(v || 0) * 100).toFixed(2) + '%';
+      const gscPos = (v) => Number(v || 0).toFixed(1);
+      const gscSlug = (p) => (p || '').replace(/^\/blog\//, '').replace(/\/$/, '');
+      const gscTitle = (p) => (typeof SLUG_TITLES !== 'undefined' && SLUG_TITLES[gscSlug(p)]) || gscSlug(p) || p;
+      const gscCut = (s, n) => { s = String(s || ''); return s.length > n ? s.slice(0, n) + '…' : s; };
+      const gscEmpty = () => '<div style="color:var(--text-2);font-size:0.8rem;line-height:1.5;padding:0.5rem 0;">아직 GSC 데이터가 없습니다 — 매일 동기화 후 채워집니다.<br>즉시 채우려면 <code>/api/gsc-sync?days=30&amp;secret=CRON_SECRET</code> 를 호출하세요.</div>';
+
+      async function loadGscDetail() {
+        if (_gscInit) return;
+        _gscInit = true;
+        try {
+          const since = new Date(Date.now() - 92 * 864e5).toISOString().slice(0, 10);
+          const res = await fetch(
+            `${SUPABASE_URL}/rest/v1/gsc_daily?page=eq._TOTAL_&date=gte.${since}&select=date,source,clicks,impressions,ctr,position&order=date.asc&limit=5000`,
+            { headers }
+          );
+          _gscTotals = res.ok ? await res.json() : [];
+        } catch { _gscTotals = []; }
+        wireGscControls();
+        await ensureGscPages(_gscDays);
+        renderGscDetail();
+      }
+
+      async function ensureGscPages(days) {
+        if (_gscPageCache[days]) return;
+        try {
+          const since = new Date(Date.now() - (days + 2) * 864e5).toISOString().slice(0, 10);
+          const res = await fetch(
+            `${SUPABASE_URL}/rest/v1/gsc_daily?page=neq._TOTAL_&date=gte.${since}&select=date,source,page,clicks,impressions,ctr,position&limit=50000`,
+            { headers }
+          );
+          _gscPageCache[days] = res.ok ? await res.json() : [];
+        } catch { _gscPageCache[days] = []; }
+      }
+
+      function wireGscControls() {
+        const seg = (id, attr, curFn, cb) => {
+          document.querySelectorAll(`#${id} button`).forEach((b) => {
+            b.classList.toggle('active', b.dataset[attr] === String(curFn()));
+            b.onclick = () => {
+              document.querySelectorAll(`#${id} button`).forEach((x) => x.classList.remove('active'));
+              b.classList.add('active');
+              cb(b.dataset[attr]);
+            };
+          });
+        };
+        seg('gsc-period', 'days', () => _gscDays, async (v) => { _gscDays = +v; await ensureGscPages(_gscDays); renderGscDetail(); });
+        seg('gsc-source', 'src', () => _gscSrc, (v) => { _gscSrc = v; renderGscDetail(); });
+        seg('gsc-metric-tabs', 'm', () => _gscMetric, (v) => { _gscMetric = v; renderGscChart(); });
+        const search = document.getElementById('gsc-page-search');
+        if (search) search.oninput = () => { _gscSearch = search.value.trim().toLowerCase(); renderGscTable(); };
+      }
+
+      // _TOTAL_ 기반 일별 시계열 (source 필터·기간 반영). ctr/position=노출 가중.
+      function gscDailySeries() {
+        const cutoff = new Date(Date.now() - (_gscDays + 2) * 864e5).toISOString().slice(0, 10);
+        const rows = (_gscTotals || []).filter((r) => r.date >= cutoff && (_gscSrc === 'all' || r.source === _gscSrc));
+        const byDate = {};
+        for (const r of rows) {
+          const d = (byDate[r.date] ||= { date: r.date, clicks: 0, impressions: 0, posW: 0 });
+          d.clicks += r.clicks || 0;
+          d.impressions += r.impressions || 0;
+          d.posW += (r.position || 0) * (r.impressions || 0);
+        }
+        return Object.values(byDate).sort((a, b) => (a.date < b.date ? -1 : 1)).map((d) => ({
+          date: d.date, clicks: d.clicks, impressions: d.impressions,
+          ctr: d.impressions ? d.clicks / d.impressions : 0,
+          position: d.impressions ? d.posW / d.impressions : 0,
+        })).slice(-_gscDays);
+      }
+
+      function renderGscKpi() {
+        const el = document.getElementById('gsc-kpi'); if (!el) return;
+        const s = gscDailySeries();
+        const upd = document.getElementById('gsc-updated');
+        if (!s.length) { el.innerHTML = gscEmpty(); if (upd) upd.textContent = ''; return; }
+        const cur = s[s.length - 1];
+        const prev = s.length >= 2 ? s[s.length - 2] : null;
+        if (upd) upd.textContent = `최신 ${cur.date}${prev ? ` · 전일(${prev.date}) 대비` : ''} · Google 실측(2~3일 지연)`;
+        const cards = [
+          { k: '클릭', v: gscFmt(cur.clicks), d: prev ? cur.clicks - prev.clicks : null, up: true, fd: (x) => gscFmt(Math.abs(x)) },
+          { k: '노출', v: gscFmt(cur.impressions), d: prev ? cur.impressions - prev.impressions : null, up: true, fd: (x) => gscFmt(Math.abs(x)) },
+          { k: 'CTR', v: gscPct(cur.ctr), d: prev ? cur.ctr - prev.ctr : null, up: true, fd: (x) => (Math.abs(x) * 100).toFixed(2) + '%p' },
+          { k: '평균순위', v: gscPos(cur.position), d: prev ? cur.position - prev.position : null, up: false, fd: (x) => Math.abs(x).toFixed(1) },
+        ];
+        el.innerHTML = cards.map((c) => {
+          let chip = '<span class="delta-chip flat">–</span>';
+          if (c.d !== null && Math.abs(c.d) > 1e-9) {
+            const good = c.up ? c.d > 0 : c.d < 0;
+            chip = `<span class="delta-chip ${good ? 'up' : 'down'}">${c.d > 0 ? '▲' : '▼'} ${c.fd(c.d)}</span>`;
+          }
+          return `<div class="gsc-kpi-card"><div class="gsc-kpi-k">${c.k}</div><div class="gsc-kpi-v">${c.v}</div>${chip}</div>`;
+        }).join('');
+      }
+
+      function renderGscChart() {
+        const wrap = document.getElementById('gsc-chart'); if (!wrap) return;
+        const s = gscDailySeries();
+        const metaMap = { clicks: '클릭', impressions: '노출', ctr: 'CTR', position: '평균순위 (낮을수록 좋음)' };
+        const lbl = document.getElementById('gsc-chart-metric-label');
+        if (lbl) lbl.textContent = metaMap[_gscMetric] || '';
+        if (!s.length) { wrap.innerHTML = ''; return; }
+        const vals = s.map((d) => d[_gscMetric] || 0);
+        const isPos = _gscMetric === 'position';
+        const maxV = Math.max(...vals, isPos ? 0 : 1);
+        const minV = isPos ? Math.max(0, Math.min(...vals) - 1) : 0;
+        const span = (maxV - minV) || 1;
+        const W = 720, H = 220, padL = 46, padR = 12, padT = 14, padB = 26, n = s.length;
+        const x = (i) => padL + (n === 1 ? (W - padL - padR) / 2 : i * (W - padL - padR) / (n - 1));
+        const y = (v) => padT + (H - padT - padB) * (1 - (v - minV) / span);
+        const fmtV = _gscMetric === 'ctr' ? gscPct : (isPos ? gscPos : gscFmt);
+        const grid = [0, 0.5, 1].map((t) => {
+          const gv = minV + span * t, gy = y(gv);
+          return `<line x1="${padL}" y1="${gy}" x2="${W - padR}" y2="${gy}" stroke="var(--border)" stroke-width="1"/><text x="${padL - 6}" y="${gy + 3}" text-anchor="end" font-size="10" fill="var(--text-3)">${fmtV(gv)}</text>`;
+        }).join('');
+        const pts = s.map((d, i) => `${x(i)},${y(vals[i])}`).join(' ');
+        const area = `M ${x(0)},${y(minV)} L ` + s.map((d, i) => `${x(i)},${y(vals[i])}`).join(' L ') + ` L ${x(n - 1)},${y(minV)} Z`;
+        const dots = s.map((d, i) => `<circle cx="${x(i)}" cy="${y(vals[i])}" r="2.6" fill="var(--accent)"><title>${d.date} · ${metaMap[_gscMetric]}: ${fmtV(vals[i])}</title></circle>`).join('');
+        const xi = [...new Set([0, Math.floor((n - 1) / 2), n - 1])];
+        const xlab = xi.map((i) => `<text x="${x(i)}" y="${H - 8}" text-anchor="middle" font-size="10" fill="var(--text-3)">${s[i].date.slice(5)}</text>`).join('');
+        wrap.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:420px" preserveAspectRatio="xMidYMid meet">
+          ${grid}<path d="${area}" fill="var(--accent)" opacity="0.12"/>
+          <polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2"/>${dots}${xlab}</svg>`;
+      }
+
+      function renderGscSources() {
+        const el = document.getElementById('gsc-source-sections'); if (!el) return;
+        const rows = _gscPageCache[_gscDays] || [];
+        const cutoff = new Date(Date.now() - _gscDays * 864e5).toISOString().slice(0, 10);
+        let html = '';
+        for (const src of ['blog', 'lifeflow']) {
+          const rs = rows.filter((r) => r.source === src && r.date >= cutoff);
+          const clicks = rs.reduce((a, r) => a + (r.clicks || 0), 0);
+          const impr = rs.reduce((a, r) => a + (r.impressions || 0), 0);
+          const posW = rs.reduce((a, r) => a + (r.position || 0) * (r.impressions || 0), 0);
+          const byPage = {};
+          for (const r of rs) {
+            const a = (byPage[r.page] ||= { page: r.page, clicks: 0, impressions: 0 });
+            a.clicks += r.clicks || 0; a.impressions += r.impressions || 0;
+          }
+          const top = Object.values(byPage).sort((a, b) => b.clicks - a.clicks || b.impressions - a.impressions).slice(0, 5);
+          html += `<div class="gsc-src-card">
+            <div class="gsc-src-head">${GSC_SRC_META[src]}
+              <span>클릭 <b>${gscFmt(clicks)}</b> · 노출 <b>${gscFmt(impr)}</b> · CTR ${gscPct(impr ? clicks / impr : 0)} · 평균순위 ${gscPos(impr ? posW / impr : 0)}</span></div>
+            ${top.length ? top.map((p) => `<div class="gsc-src-row"><span>${gscCut(gscTitle(p.page), 32)}</span><span>클릭 ${gscFmt(p.clicks)} · 노출 ${gscFmt(p.impressions)}</span></div>`).join('') : '<div class="gsc-src-row" style="color:var(--text-3)">데이터 없음</div>'}
+          </div>`;
+        }
+        el.innerHTML = html;
+      }
+
+      // 페이지별 집계: 선택 기간 합계 + 전반/후반 클릭 델타(상승·하락).
+      function gscPageAgg() {
+        const rows = (_gscPageCache[_gscDays] || []).filter((r) => _gscSrc === 'all' || r.source === _gscSrc);
+        const cutoff = new Date(Date.now() - _gscDays * 864e5).toISOString().slice(0, 10);
+        const mid = new Date(Date.now() - Math.floor(_gscDays / 2) * 864e5).toISOString().slice(0, 10);
+        const agg = {};
+        for (const r of rows) {
+          if (r.date < cutoff) continue;
+          const a = (agg[r.page] ||= { page: r.page, source: r.source, clicks: 0, impressions: 0, posW: 0, firstC: 0, secondC: 0 });
+          a.clicks += r.clicks || 0;
+          a.impressions += r.impressions || 0;
+          a.posW += (r.position || 0) * (r.impressions || 0);
+          if (r.date >= mid) a.secondC += r.clicks || 0; else a.firstC += r.clicks || 0;
+        }
+        return Object.values(agg).map((a) => ({
+          ...a, ctr: a.impressions ? a.clicks / a.impressions : 0,
+          position: a.impressions ? a.posW / a.impressions : 0, delta: a.secondC - a.firstC,
+        }));
+      }
+
+      function renderGscTable() {
+        const el = document.getElementById('gsc-table'); if (!el) return;
+        let rows = gscPageAgg();
+        if (_gscSearch) rows = rows.filter((r) => (gscTitle(r.page) + ' ' + r.page).toLowerCase().includes(_gscSearch));
+        const { key, dir } = _gscSort;
+        rows.sort((a, b) => {
+          if (key === 'page') { const r = gscTitle(a.page).localeCompare(gscTitle(b.page)); return dir < 0 ? -r : r; }
+          return (b[key] - a[key]) * (dir < 0 ? 1 : -1);
+        });
+        rows = rows.slice(0, 100);
+        const cols = [
+          { k: 'page', t: '페이지', num: false }, { k: 'clicks', t: '클릭', num: true },
+          { k: 'impressions', t: '노출', num: true }, { k: 'ctr', t: 'CTR', num: true },
+          { k: 'position', t: '평균순위', num: true }, { k: 'delta', t: 'Δ클릭', num: true },
+        ];
+        const head = `<tr>${cols.map((c) => `<th data-k="${c.k}" class="${c.num ? 'num' : ''} ${key === c.k ? 'sorted' : ''}">${c.t}${key === c.k ? (dir < 0 ? ' ▾' : ' ▴') : ''}</th>`).join('')}</tr>`;
+        const body = rows.length ? rows.map((r) => {
+          const dChip = Math.abs(r.delta) < 1 ? '<span class="delta-chip flat">–</span>' : `<span class="delta-chip ${r.delta > 0 ? 'up' : 'down'}">${r.delta > 0 ? '▲' : '▼'} ${gscFmt(Math.abs(r.delta))}</span>`;
+          const badge = _gscSrc === 'all' ? `<span class="gsc-badge gsc-badge-${r.source}">${r.source === 'blog' ? 'TF' : 'LF'}</span>` : '';
+          return `<tr><td class="gsc-page-cell">${badge}${gscCut(gscTitle(r.page), 40)}</td><td class="num">${gscFmt(r.clicks)}</td><td class="num">${gscFmt(r.impressions)}</td><td class="num">${gscPct(r.ctr)}</td><td class="num">${gscPos(r.position)}</td><td class="num">${dChip}</td></tr>`;
+        }).join('') : '<tr><td colspan="6" style="color:var(--text-3);padding:0.75rem 0.5rem;">표시할 페이지 데이터가 없습니다.</td></tr>';
+        el.innerHTML = head + body;
+        el.querySelectorAll('th').forEach((th) => {
+          th.onclick = () => {
+            const k = th.dataset.k;
+            if (_gscSort.key === k) _gscSort.dir *= -1;
+            else _gscSort = { key: k, dir: k === 'position' ? 1 : -1 };
+            renderGscTable();
+          };
+        });
+      }
+
+      function renderGscDetail() {
+        const hasTot = Array.isArray(_gscTotals) && _gscTotals.length;
+        const hasPage = ((_gscPageCache[_gscDays] || []).length) > 0;
+        if (!hasTot && !hasPage) {
+          const kpi = document.getElementById('gsc-kpi'); if (kpi) kpi.innerHTML = gscEmpty();
+          ['gsc-chart', 'gsc-source-sections'].forEach((id) => { const e = document.getElementById(id); if (e) e.innerHTML = ''; });
+          const tbl = document.getElementById('gsc-table'); if (tbl) tbl.innerHTML = '';
+          return;
+        }
+        renderGscKpi();
+        renderGscChart();
+        renderGscSources();
+        renderGscTable();
       }
 
       async function fetchAudience() {
@@ -4833,6 +5152,9 @@ const ICONS: Record<string, string> = {
             loadCommentDashboard();
           } else if (targetTab === 'vip') {
             tab.classList.add('active-vip');
+          } else if (targetTab === 'gsc') {
+            tab.classList.add('active');
+            loadGscDetail();
           } else {
             tab.classList.add('active');
           }
