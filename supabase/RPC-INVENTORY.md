@@ -21,6 +21,10 @@
 | `get_top_liked_posts` | (p_limit) | ❌ **레포밖** | 추천 TOP |
 | `get_daily_detail` | (p_days) | ❌ **레포밖** | 방문 추이 핵심 |
 | `get_daily_hourly_heatmap` | (p_days) | ❌ **레포밖** | 날짜×시간 히트맵 |
+| `flag_excluded_pageviews` | () | ✅ `excluded-uas.sql` | 내 방문(UA) 소급 제외 플립. force 로드에서 호출 |
+| `admin_add_excluded_ua` | (p_ua, p_note, p_admin_key) | ✅ `excluded-uas.sql` | 제외 UA 추가+즉시 소급 플립 |
+| `admin_remove_excluded_ua` | (p_ua, p_admin_key) | ✅ `excluded-uas.sql` | 제외 UA 제거+복원 |
+| `admin_list_excluded_uas` | (p_admin_key) | ✅ `excluded-uas.sql` | 제외 UA 목록(건수 병기) |
 
 > `get_daily_trend`은 2026-07-16 커밋에서 **호출 제거**됨(결과 미사용 데드 페치).
 > 레포밖 함수를 실 정의로 백업하려면 → `DUMP-rpc-functions.sql`.

@@ -606,6 +606,37 @@ const ICONS: Record<string, string> = {
       .dd-bar-col { width: 120px; }
       .dd-note { margin: 8px 2px 0; font-size: 0.72rem; color: var(--text-3); }
 
+      /* ── 내 방문 제외 카드 ─────────────────────────────── */
+      .exclude-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
+      @media (max-width: 860px) { .exclude-row { grid-template-columns: 1fr; } }
+      .exclude-block { background: var(--surface-2, rgba(255,255,255,0.02)); border: 1px solid var(--border, rgba(255,255,255,0.08)); border-radius: 12px; padding: 14px 16px; }
+      .exclude-block-title { font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+      .exclude-tag { font-size: 0.62rem; font-weight: 600; color: #4ade80; border: 1px solid rgba(74,222,128,0.4); border-radius: 999px; padding: 1px 8px; }
+      .exclude-tag.warn { color: #fbbf24; border-color: rgba(251,191,36,0.4); }
+      .exclude-desc { font-size: 0.72rem; color: var(--text-3); margin: 8px 0 0; line-height: 1.5; }
+      .exclude-warn { color: #fbbf24; }
+      .exclude-actions { display: flex; align-items: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+      .ex-btn { font-size: 0.75rem; font-weight: 600; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border, rgba(255,255,255,0.15)); background: transparent; color: var(--text-1, #e5e7eb); cursor: pointer; transition: background .15s, border-color .15s; }
+      .ex-btn:hover { background: rgba(255,255,255,0.06); }
+      .ex-btn.primary { background: #ef4444; border-color: #ef4444; color: #fff; }
+      .ex-btn.primary:hover { background: #dc2626; }
+      .ex-btn.on { background: #4ade80; border-color: #4ade80; color: #0b0f14; }
+      .ex-btn:disabled { opacity: .55; cursor: default; }
+      .exclude-status { font-size: 0.72rem; color: var(--text-3); }
+      .exclude-links { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+      .ex-link { font-size: 0.7rem; padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(96,165,250,0.4); color: #60a5fa; text-decoration: none; }
+      .ex-link.off { border-color: rgba(255,255,255,0.2); color: var(--text-3); }
+      .ex-link:hover { background: rgba(96,165,250,0.12); }
+      .exclude-ua-now { font-size: 0.66rem; color: var(--text-3); background: rgba(0,0,0,0.25); border-radius: 8px; padding: 8px 10px; margin-top: 10px; word-break: break-all; font-family: ui-monospace, monospace; line-height: 1.45; }
+      .exclude-list-head { font-size: 0.72rem; font-weight: 700; color: var(--text-2, #9ca3af); margin: 14px 0 6px; }
+      .exclude-list { display: flex; flex-direction: column; gap: 6px; }
+      .exclude-item { display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 7px 10px; }
+      .exclude-item .ua-txt { flex: 1; min-width: 0; font-size: 0.66rem; color: var(--text-2, #9ca3af); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: ui-monospace, monospace; }
+      .exclude-item .ua-cnt { font-size: 0.66rem; color: #fb7185; white-space: nowrap; }
+      .exclude-item .ua-del { font-size: 0.7rem; padding: 3px 9px; border-radius: 7px; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: var(--text-3); cursor: pointer; }
+      .exclude-item .ua-del:hover { border-color: #ef4444; color: #ef4444; }
+      .exclude-empty { font-size: 0.7rem; color: var(--text-3); padding: 4px 2px; }
+
       /* ── 히트맵 ───────────────────────────────────────── */
       .heatmap-wrap { overflow-x: auto; padding-bottom: 6px; }
       .heatmap-grid { display: inline-block; min-width: 100%; }
@@ -2557,6 +2588,55 @@ const ICONS: Record<string, string> = {
               <span class="link-icon">&#128176;</span>
               AdSense
             </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ Row 8: 내 방문 제외 (관리자 본인 트래픽 필터) ══ -->
+      <div class="dash-grid">
+        <div class="status-section col-12 exclude-card">
+          <h3><svg class="ico sec-ico i-red" viewBox="0 0 24 24" set:html={ICONS['server']}></svg> 내 방문 제외</h3>
+          <p class="dd-note" style="margin-top:-4px">
+            내가 대시보드 확인·글 점검하며 남긴 방문이 조회수에 섞이지 않게 걸러요.
+            제외해도 데이터는 지우지 않고 <b>집계에서만 빼는</b> 가역 방식(<code>pageview_bot</code> 플립)이에요.
+          </p>
+
+          <div class="exclude-row">
+            <!-- A: 이 브라우저 즉시 제외 (기록 자체를 안 남김) -->
+            <div class="exclude-block">
+              <div class="exclude-block-title">① 이 브라우저 즉시 제외 <span class="exclude-tag">미래 · 기록 안 남김</span></div>
+              <p class="exclude-desc">이 브라우저(TechFlow 도메인)의 앞으로의 방문을 <b>아예 기록하지 않게</b> 해요. 지금 보는 이 대시보드에 바로 적용.</p>
+              <div class="exclude-actions">
+                <button id="notrack-toggle" class="ex-btn">…</button>
+                <span id="notrack-status" class="exclude-status">확인 중…</span>
+              </div>
+              <p class="exclude-desc" style="margin-top:8px">다른 사이트(LifeFlow·VIP)는 도메인이 달라 각각 눌러 켜야 해요:</p>
+              <div class="exclude-links">
+                <a class="ex-link" href="https://life-revenue-blog.vercel.app/?admin=1" target="_blank" rel="noopener">LifeFlow 제외 ON</a>
+                <a class="ex-link off" href="https://life-revenue-blog.vercel.app/?admin=0" target="_blank" rel="noopener">OFF</a>
+                <a class="ex-link" href="https://virtual-in-playing.vercel.app/?admin=1" target="_blank" rel="noopener">VIP 제외 ON</a>
+                <a class="ex-link off" href="https://virtual-in-playing.vercel.app/?admin=0" target="_blank" rel="noopener">OFF</a>
+              </div>
+            </div>
+
+            <!-- B: UA 기준 서버 제외 (과거 소급 + 미래 + 전 기기) -->
+            <div class="exclude-block">
+              <div class="exclude-block-title">② 내 기기 집계 제외 <span class="exclude-tag warn">과거+미래 · 전 기기</span></div>
+              <p class="exclude-desc">
+                이 기기의 브라우저 식별자(User-Agent)를 제외목록에 올려, 이미 쌓인 방문까지 <b>소급 제외</b>하고 앞으로도 자동 제외해요.
+                기기(폰·태블릿·다른 PC)마다 여기서 한 번씩 눌러주세요.
+              </p>
+              <div class="exclude-ua-now" id="my-ua-now">UA 확인 중…</div>
+              <div class="exclude-actions">
+                <button id="ua-add-btn" class="ex-btn primary">＋ 이 기기 제외 추가</button>
+                <span id="ua-add-status" class="exclude-status"></span>
+              </div>
+              <div class="exclude-list-head">제외 중인 기기</div>
+              <div id="ua-list" class="exclude-list"><div class="exclude-empty">불러오는 중…</div></div>
+              <p class="exclude-desc exclude-warn" style="display:none" id="ua-setup-hint">
+                ⚠️ 서버 함수가 아직 설치되지 않았어요. <code>supabase/excluded-uas.sql</code> 을 Supabase SQL Editor에서 1회 실행하면 활성화됩니다.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -4979,7 +5059,10 @@ const ICONS: Record<string, string> = {
       async function loadTraffic(force) {
         try {
           // 초기 로드·수동 새로고침 시 봇 트래픽 선정리(같은 UA 반복접속·선언형 봇 제외) — 폴링마다는 생략
-          if (force) { try { await rpc('flag_bot_pageviews'); } catch {} }
+          if (force) {
+            try { await rpc('flag_bot_pageviews'); } catch {}
+            try { await rpc('flag_excluded_pageviews'); } catch {}   // 내 방문(UA) 제외목록 소급 플립
+          }
           const [summary, hourly, topPages, events, topLiked, dailyDetail, heatmap, deviceTrend] = await Promise.all([
             rpc('get_traffic_summary'),
             rpc('get_hourly_views'),
@@ -5562,9 +5645,109 @@ const ICONS: Record<string, string> = {
         checkSupabase();
         initChartHover();
         initHeatmapHover();
+        initExcludeControls();
         enableDragScroll(document.getElementById('traffic-list'));
         enableDragScroll(document.getElementById('hourly-hot'));
         setInterval(loadTraffic, 30000);
+      }
+
+      // ── 내 방문 제외 ─────────────────────────────────────
+      const NOTRACK_KEY = '__notrack';   // BaseLayout 트래커와 동일 키(동일 오리진 = TechFlow)
+      function initExcludeControls() {
+        // A) 이 브라우저 즉시 제외 토글 (localStorage.__notrack)
+        const tBtn = document.getElementById('notrack-toggle');
+        const tSt = document.getElementById('notrack-status');
+        const syncNotrack = () => {
+          let on = false;
+          try { on = localStorage.getItem(NOTRACK_KEY) === '1'; } catch {}
+          if (tBtn) { tBtn.textContent = on ? '제외 켜짐 — 끄기' : '이 브라우저 제외하기'; tBtn.classList.toggle('on', on); }
+          if (tSt) tSt.textContent = on ? '이 브라우저의 TechFlow 방문은 기록되지 않아요.' : '지금은 이 브라우저 방문도 집계에 잡혀요.';
+        };
+        tBtn?.addEventListener('click', () => {
+          try {
+            const on = localStorage.getItem(NOTRACK_KEY) === '1';
+            if (on) localStorage.removeItem(NOTRACK_KEY); else localStorage.setItem(NOTRACK_KEY, '1');
+          } catch {}
+          syncNotrack();
+        });
+        syncNotrack();
+
+        // B) UA 기준 서버 제외
+        const uaNow = document.getElementById('my-ua-now');
+        const myUa = navigator.userAgent || '';
+        if (uaNow) uaNow.textContent = myUa || '(User-Agent 없음)';
+        document.getElementById('ua-add-btn')?.addEventListener('click', addMyDeviceExclusion);
+        refreshExcludedUaList();
+      }
+
+      // UA 라벨: 긴 UA 대신 사람이 알아볼 짧은 이름 추정
+      function uaLabel(ua) {
+        const s = String(ua || '');
+        let os = /iPhone/.test(s) ? 'iPhone' : /iPad/.test(s) ? 'iPad' : /Android/.test(s) ? 'Android'
+          : /Windows/.test(s) ? 'Windows' : /Mac OS X|Macintosh/.test(s) ? 'Mac' : /Linux/.test(s) ? 'Linux' : '기기';
+        let br = /Edg\//.test(s) ? 'Edge' : /OPR\/|Opera/.test(s) ? 'Opera' : /SamsungBrowser/.test(s) ? 'Samsung'
+          : /Whale/.test(s) ? 'Whale' : /Firefox\//.test(s) ? 'Firefox' : /Chrome\//.test(s) ? 'Chrome'
+          : /Safari\//.test(s) ? 'Safari' : '브라우저';
+        return `${os} · ${br}`;
+      }
+
+      async function addMyDeviceExclusion() {
+        const btn = document.getElementById('ua-add-btn');
+        const st = document.getElementById('ua-add-status');
+        const ua = navigator.userAgent || '';
+        if (!ua) { if (st) st.textContent = 'User-Agent를 읽을 수 없어요.'; return; }
+        if (btn) { btn.disabled = true; btn.textContent = '추가 중…'; }
+        try {
+          const r = await rpc('admin_add_excluded_ua', { p_ua: ua, p_note: uaLabel(ua), p_admin_key: adminKey });
+          if (r && r.success) {
+            if (st) st.textContent = `추가됨 · 과거 방문 ${fmt(Number(r.flagged) || 0)}건 소급 제외`;
+            await refreshExcludedUaList();
+            loadTraffic(true);   // 집계 즉시 갱신
+          } else if (r && r.error === 'unauthorized') {
+            if (st) st.textContent = '관리자 키 인증이 필요해요(재로그인).';
+          } else {
+            if (st) st.textContent = '추가 실패 — SQL 미설치일 수 있어요.';
+            showUaSetupHint();
+          }
+        } catch {
+          if (st) st.textContent = '추가 실패 — SQL 미설치일 수 있어요.';
+          showUaSetupHint();
+        } finally {
+          if (btn) { btn.disabled = false; btn.textContent = '＋ 이 기기 제외 추가'; }
+        }
+      }
+
+      function showUaSetupHint() {
+        const h = document.getElementById('ua-setup-hint');
+        if (h) h.style.display = 'block';
+      }
+
+      async function refreshExcludedUaList() {
+        const box = document.getElementById('ua-list');
+        if (!box) return;
+        let list = null;
+        try { list = await rpc('admin_list_excluded_uas', { p_admin_key: adminKey }); } catch { list = null; }
+        if (!Array.isArray(list)) { box.innerHTML = '<div class="exclude-empty">목록을 불러오지 못했어요.</div>'; showUaSetupHint(); return; }
+        if (!list.length) { box.innerHTML = '<div class="exclude-empty">아직 제외한 기기가 없어요.</div>'; return; }
+        const myUa = navigator.userAgent || '';
+        box.innerHTML = list.map((e) => {
+          const isMe = e.ua === myUa ? ' <span style="color:#4ade80">(현재 기기)</span>' : '';
+          const label = escHtml((e.note && String(e.note)) || uaLabel(e.ua));
+          return `<div class="exclude-item">
+            <span class="ua-txt" title="${escHtml(e.ua)}">${label}${isMe} — ${escHtml(String(e.ua).slice(0, 60))}…</span>
+            <span class="ua-cnt">${fmt(Number(e.flagged) || 0)}건 제외</span>
+            <button class="ua-del" data-ua="${escHtml(e.ua)}">제거</button>
+          </div>`;
+        }).join('');
+        box.querySelectorAll('.ua-del').forEach((b) => b.addEventListener('click', () => removeExcludedUa(b.getAttribute('data-ua'))));
+      }
+
+      async function removeExcludedUa(ua) {
+        if (!ua) return;
+        try {
+          const r = await rpc('admin_remove_excluded_ua', { p_ua: ua, p_admin_key: adminKey });
+          if (r && r.success) { await refreshExcludedUaList(); loadTraffic(true); }
+        } catch {}
       }
 
       function unlockDashboard() {
