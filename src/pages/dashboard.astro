@@ -334,7 +334,14 @@ const ICONS: Record<string, string> = {
       .gsc-metric-tabs { display: inline-flex; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 0.75rem; }
       .gsc-metric-tabs button { border: 1px solid var(--border); background: var(--surface-2); color: var(--text-2); font-size: 0.72rem; font-weight: 600; padding: 0.3rem 0.65rem; border-radius: 999px; cursor: pointer; }
       .gsc-metric-tabs button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-      .gsc-chart-wrap { width: 100%; overflow-x: auto; }
+      .gsc-chart-wrap { width: 100%; position: relative; }
+      .gsc-chart-wrap svg { max-width: 100%; }
+      .gsc-tip { position: absolute; z-index: 5; pointer-events: none; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem 0.6rem; font-size: 0.72rem; min-width: 120px; box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+      .gsc-tip-d { font-weight: 700; margin-bottom: 0.3rem; color: var(--text); }
+      .gsc-tip-r { display: flex; justify-content: space-between; gap: 0.75rem; color: var(--text-2); line-height: 1.5; }
+      .gsc-tip-r b { color: var(--text); font-variant-numeric: tabular-nums; }
+      .gsc-help { font-size: 0.72rem; color: var(--text-2); line-height: 1.55; margin-top: 0.6rem; padding: 0.55rem 0.7rem; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; }
+      .gsc-help b { color: var(--text); }
       .gsc-source-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.25rem 0; }
       .gsc-src-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0.85rem; }
       .gsc-src-head { font-weight: 700; font-size: 0.83rem; margin-bottom: 0.5rem; }
@@ -2073,15 +2080,6 @@ const ICONS: Record<string, string> = {
         <span class="skeleton" style="width:60%;height:1rem;"></span>
       </div>
 
-      <!-- ══ 검색 실적 (GSC · 애드블록 무관 실측) ══ -->
-      <div class="traffic-section" id="gsc-panel" style="margin-bottom:1.25rem;">
-        <div style="font-weight:800;font-size:0.9rem;margin-bottom:0.75rem;">
-          🔍 검색 실적 (GSC)
-          <span style="font-weight:500;color:var(--text-2);font-size:0.72rem;">최근 7일 · Google 실측(2~3일 지연)</span>
-        </div>
-        <div id="gsc-body"><span class="skeleton" style="width:50%;height:1rem;display:inline-block;"></span></div>
-      </div>
-
       <!-- ══ Row 1: KPI 히어로 스트립 ══ -->
       <div class="summary-grid">
         <div class="summary-card accent-blue color-blue">
@@ -2156,6 +2154,17 @@ const ICONS: Record<string, string> = {
             <span class="delta-chip flat" id="clicks-delta-chip">--</span>
           </div>
           <div class="sub" id="clicks-sub">추적 중...</div>
+        </div>
+        <div class="summary-card accent-green color-green" id="gsc-sum-card" style="cursor:pointer;" title="클릭하면 검색(GSC) 상세 탭으로 이동">
+          <div class="kpi-top">
+            <span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['trending-up']}></svg></span>
+            <div class="label">Search Clicks (GSC)</div>
+          </div>
+          <div class="kpi-value-row">
+            <div class="value" id="gsc-sum-clicks">--</div>
+            <span class="delta-chip flat" id="gsc-sum-delta">--</span>
+          </div>
+          <div class="sub" id="gsc-sum-sub">최근 7일 · Google 실측(2~3일 지연)</div>
         </div>
       </div>
 
@@ -2729,6 +2738,9 @@ const ICONS: Record<string, string> = {
             <button data-m="position">평균순위</button>
           </div>
           <div class="gsc-chart-wrap" id="gsc-chart"></div>
+          <div class="gsc-help">
+            <b>지표 설명</b> · <b>클릭</b> 검색결과에서 내 글이 눌린 횟수 · <b>노출</b> 검색결과에 내 글이 표시된 횟수 · <b>CTR</b> 노출 대비 클릭률(클릭÷노출) · <b>평균순위</b> 검색결과에서 내 글이 노출된 평균 위치(1위에 가까울수록 상단, <b>숫자가 낮을수록 좋음</b>). 차트에 마우스를 올리면 날짜별 상세값이 표시됩니다.
+          </div>
         </div>
 
         <!-- 소스별 분리 (TF/LF 상시 병렬) -->
@@ -3768,50 +3780,47 @@ const ICONS: Record<string, string> = {
         } catch { return null; }
       }
 
+      // 메인 전체요약 KPI 카드에 GSC 요약을 다른 카드와 동일 규격으로 표시.
+      // 값=최근 7일 총 클릭, 델타칩=최신일 vs 전일 클릭, sub=노출·CTR·평균순위.
       function renderGsc(rows) {
-        const el = document.getElementById('gsc-body');
-        if (!el) return;
+        const clicksEl = document.getElementById('gsc-sum-clicks');
+        const deltaEl = document.getElementById('gsc-sum-delta');
+        const subEl = document.getElementById('gsc-sum-sub');
+        if (!clicksEl) return;
+        const fmt = (n) => Number(n || 0).toLocaleString('en-US');
         if (!Array.isArray(rows) || !rows.length) {
-          el.innerHTML =
-            '<div style="color:var(--text-2);font-size:0.78rem;line-height:1.5;">아직 데이터가 없습니다 — 매일 리포트 동기화 후 채워집니다.<br>즉시 채우려면 <code>/api/gsc-sync?days=30&amp;secret=CRON_SECRET</code> 를 호출하세요.</div>';
+          clicksEl.textContent = '0';
+          if (subEl) subEl.textContent = '데이터 없음 — 동기화 대기';
+          if (deltaEl) { deltaEl.className = 'delta-chip flat'; deltaEl.textContent = '–'; }
           return;
         }
-        const fmt = (n) => Number(n || 0).toLocaleString('en-US');
-        const pct = (v) => (Number(v || 0) * 100).toFixed(1) + '%';
-        const META = { blog: 'TechFlow', lifeflow: 'LifeFlow' };
-        const slugOf = (p) => (p || '').replace(/^\/blog\//, '').replace(/\/$/, '');
-        const cut = (s, n) => (s = String(s || ''), s.length > n ? s.slice(0, n) + '…' : s);
-        let html = '';
-        for (const src of ['blog', 'lifeflow']) {
-          const rs = rows.filter((r) => r.source === src);
-          if (!rs.length) continue;
-          const tot = rs.filter((r) => r.page === '_TOTAL_');
-          const clicks = tot.reduce((s, r) => s + (r.clicks || 0), 0);
-          const impr = tot.reduce((s, r) => s + (r.impressions || 0), 0);
-          const byPage = {};
-          for (const r of rs) {
-            if (r.page === '_TOTAL_') continue;
-            const a = (byPage[r.page] ||= { page: r.page, clicks: 0, impressions: 0 });
-            a.clicks += r.clicks || 0;
-            a.impressions += r.impressions || 0;
-          }
-          const pages = Object.values(byPage)
-            .sort((a, b) => b.clicks - a.clicks || b.impressions - a.impressions)
-            .slice(0, 5);
-          html += `<div style="margin-bottom:0.9rem;">
-            <div style="font-weight:700;font-size:0.83rem;margin-bottom:0.35rem;">${META[src] || src}
-              <span style="font-weight:500;color:var(--text-2);">· 클릭 <b>${fmt(clicks)}</b> · 노출 <b>${fmt(impr)}</b> · CTR ${pct(impr ? clicks / impr : 0)}</span></div>`;
-          if (pages.length) {
-            html += '<div style="font-size:0.74rem;">' + pages.map((p) => {
-              const label = (typeof SLUG_TITLES !== 'undefined' && SLUG_TITLES[slugOf(p.page)]) || slugOf(p.page) || p.page;
-              return `<div style="display:flex;justify-content:space-between;gap:0.6rem;padding:0.18rem 0;border-bottom:1px solid var(--border);">
-                <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${cut(label, 34)}</span>
-                <span style="color:var(--text-2);white-space:nowrap;">클릭 ${fmt(p.clicks)} · 노출 ${fmt(p.impressions)}</span></div>`;
-            }).join('') + '</div>';
-          }
-          html += '</div>';
+        // _TOTAL_(소스별 일별 합계) 우선, 없으면 페이지행으로 폴백
+        const totals = rows.filter((r) => r.page === '_TOTAL_');
+        const src = totals.length ? totals : rows.filter((r) => r.page !== '_TOTAL_');
+        let clicks = 0, impr = 0, posW = 0;
+        const byDate = {};
+        for (const r of src) {
+          clicks += r.clicks || 0;
+          impr += r.impressions || 0;
+          posW += (r.position || 0) * (r.impressions || 0);
+          const d = (byDate[r.date] ||= { clicks: 0 });
+          d.clicks += r.clicks || 0;
         }
-        el.innerHTML = html || '<div style="color:var(--text-2);font-size:0.78rem;">표시할 데이터가 없습니다.</div>';
+        const ctr = impr ? clicks / impr : 0;
+        const pos = impr ? posW / impr : 0;
+        clicksEl.textContent = fmt(clicks);
+        if (subEl) subEl.innerHTML = `노출 ${fmt(impr)} · CTR ${(ctr * 100).toFixed(1)}% · 평균순위 ${pos.toFixed(1)}`;
+        const dates = Object.keys(byDate).sort();
+        if (deltaEl && dates.length >= 2) {
+          const cur = byDate[dates[dates.length - 1]].clicks;
+          const prev = byDate[dates[dates.length - 2]].clicks;
+          const dd = cur - prev;
+          deltaEl.className = 'delta-chip ' + (dd > 0 ? 'up' : (dd < 0 ? 'down' : 'flat'));
+          deltaEl.textContent = dd === 0 ? '–' : `${dd > 0 ? '▲' : '▼'} ${fmt(Math.abs(dd))}`;
+        } else if (deltaEl) {
+          deltaEl.className = 'delta-chip flat';
+          deltaEl.textContent = '–';
+        }
       }
 
       // ═══════════════════════════════════════════════════════════
@@ -3937,7 +3946,7 @@ const ICONS: Record<string, string> = {
         const maxV = Math.max(...vals, isPos ? 0 : 1);
         const minV = isPos ? Math.max(0, Math.min(...vals) - 1) : 0;
         const span = (maxV - minV) || 1;
-        const W = 720, H = 220, padL = 46, padR = 12, padT = 14, padB = 26, n = s.length;
+        const W = 720, H = 220, padL = 46, padR = 22, padT = 14, padB = 26, n = s.length;
         const x = (i) => padL + (n === 1 ? (W - padL - padR) / 2 : i * (W - padL - padR) / (n - 1));
         const y = (v) => padT + (H - padT - padB) * (1 - (v - minV) / span);
         const fmtV = _gscMetric === 'ctr' ? gscPct : (isPos ? gscPos : gscFmt);
@@ -3947,12 +3956,43 @@ const ICONS: Record<string, string> = {
         }).join('');
         const pts = s.map((d, i) => `${x(i)},${y(vals[i])}`).join(' ');
         const area = `M ${x(0)},${y(minV)} L ` + s.map((d, i) => `${x(i)},${y(vals[i])}`).join(' L ') + ` L ${x(n - 1)},${y(minV)} Z`;
-        const dots = s.map((d, i) => `<circle cx="${x(i)}" cy="${y(vals[i])}" r="2.6" fill="var(--accent)"><title>${d.date} · ${metaMap[_gscMetric]}: ${fmtV(vals[i])}</title></circle>`).join('');
+        const dots = s.map((d, i) => `<circle cx="${x(i)}" cy="${y(vals[i])}" r="2.6" fill="var(--accent)"/>`).join('');
         const xi = [...new Set([0, Math.floor((n - 1) / 2), n - 1])];
         const xlab = xi.map((i) => `<text x="${x(i)}" y="${H - 8}" text-anchor="middle" font-size="10" fill="var(--text-3)">${s[i].date.slice(5)}</text>`).join('');
-        wrap.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:420px" preserveAspectRatio="xMidYMid meet">
+        wrap.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block;height:auto" preserveAspectRatio="xMidYMid meet">
           ${grid}<path d="${area}" fill="var(--accent)" opacity="0.12"/>
-          <polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2"/>${dots}${xlab}</svg>`;
+          <polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <line class="gsc-cross" x1="0" y1="${padT}" x2="0" y2="${H - padB}" stroke="var(--text-3)" stroke-width="1" stroke-dasharray="3 3" style="display:none"/>
+          <circle class="gsc-cross-dot" r="4" fill="var(--accent)" stroke="var(--surface)" stroke-width="2" style="display:none"/>
+          ${dots}${xlab}</svg>
+          <div class="gsc-tip" id="gsc-tip" style="display:none"></div>`;
+        // 마우스 호버: 최근접 일자의 전 지표 상세값 표시
+        const svgEl = wrap.querySelector('svg');
+        const tip = wrap.querySelector('#gsc-tip');
+        const cross = wrap.querySelector('.gsc-cross');
+        const crossDot = wrap.querySelector('.gsc-cross-dot');
+        const move = (e) => {
+          const rect = svgEl.getBoundingClientRect();
+          const px = (e.clientX - rect.left) * (W / rect.width);
+          let idx = n <= 1 ? 0 : Math.round((px - padL) / ((W - padL - padR) / (n - 1)));
+          idx = Math.max(0, Math.min(n - 1, idx));
+          const d = s[idx], cx = x(idx);
+          cross.setAttribute('x1', cx); cross.setAttribute('x2', cx); cross.style.display = '';
+          crossDot.setAttribute('cx', cx); crossDot.setAttribute('cy', y(vals[idx])); crossDot.style.display = '';
+          tip.innerHTML = `<div class="gsc-tip-d">${d.date}</div>
+            <div class="gsc-tip-r"><span>클릭</span><b>${gscFmt(d.clicks)}</b></div>
+            <div class="gsc-tip-r"><span>노출</span><b>${gscFmt(d.impressions)}</b></div>
+            <div class="gsc-tip-r"><span>CTR</span><b>${gscPct(d.ctr)}</b></div>
+            <div class="gsc-tip-r"><span>평균순위</span><b>${gscPos(d.position)}</b></div>`;
+          tip.style.display = 'block';
+          const wr = wrap.getBoundingClientRect();
+          let left = e.clientX - wr.left + 14;
+          if (left > wr.width - 140) left = e.clientX - wr.left - 140;
+          tip.style.left = Math.max(4, left) + 'px';
+          tip.style.top = '6px';
+        };
+        svgEl.addEventListener('mousemove', move);
+        svgEl.addEventListener('mouseleave', () => { tip.style.display = 'none'; cross.style.display = 'none'; crossDot.style.display = 'none'; });
       }
 
       function renderGscSources() {
@@ -5122,8 +5162,12 @@ const ICONS: Record<string, string> = {
         fetchGscStats().then(renderGsc);
       });
 
-      // GSC 검색 실적 초기 로드
+      // GSC 검색 실적 초기 로드 (전체요약 KPI 카드)
       fetchGscStats().then(renderGsc);
+      // 요약 카드 클릭 → 검색(GSC) 상세 탭 열기
+      document.getElementById('gsc-sum-card')?.addEventListener('click', () => {
+        document.querySelector('.main-tab[data-tab="gsc"]')?.click();
+      });
 
       // === 탭 전환 로직 ===
       const mainTabs = document.querySelectorAll('.main-tab');
