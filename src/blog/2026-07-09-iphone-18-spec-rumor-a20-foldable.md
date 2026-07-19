@@ -8,6 +8,11 @@ tags: ["아이폰18", "아이폰18 스펙", "아이폰18 출시일", "A20칩", "
 image:
   url: "https://images.pexels.com/photos/32136396/pexels-photo-32136396.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "펼친 폴더블 스마트폰 컨셉 — 아이폰 18 폴더블 예상 이미지"
+coupangLinks:
+  - title: "아이폰 맥세이프 충전기"
+    url: "https://www.coupang.com/np/search?q=%EC%95%84%EC%9D%B4%ED%8F%B0%20%EB%A7%A5%EC%84%B8%EC%9D%B4%ED%94%84%20%EC%B6%A9%EC%A0%84%EA%B8%B0&src=1139000&spec=10799999&addtag=200&ctag=%EC%95%84%EC%9D%B4%ED%8F%B0%20%EB%A7%A5%EC%84%B8%EC%9D%B4%ED%94%84%20%EC%B6%A9%EC%A0%84%EA%B8%B0&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%95%84%EC%9D%B4%ED%8F%B0%20%EB%A7%A5%EC%84%B8%EC%9D%B4%ED%94%84%20%EC%B6%A9%EC%A0%84%EA%B8%B0"
+  - title: "고속충전 보조배터리"
+    url: "https://www.coupang.com/np/search?q=%EA%B3%A0%EC%86%8D%EC%B6%A9%EC%A0%84%20%EB%B3%B4%EC%A1%B0%EB%B0%B0%ED%84%B0%EB%A6%AC&src=1139000&spec=10799999&addtag=200&ctag=%EA%B3%A0%EC%86%8D%EC%B6%A9%EC%A0%84%20%EB%B3%B4%EC%A1%B0%EB%B0%B0%ED%84%B0%EB%A6%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B3%A0%EC%86%8D%EC%B6%A9%EC%A0%84%20%EB%B3%B4%EC%A1%B0%EB%B0%B0%ED%84%B0%EB%A6%AC"
 faq:
   - q: "아이폰 18은 언제 나오나?"
     a: "사상 처음으로 출시가 두 번으로 갈릴 거란 관측이 유력하다. 아이폰 18 Pro·Pro Max와 첫 폴더블 모델은 2026년 9월(가을)에, 일반형 아이폰 18과 보급형 18e는 이듬해 2027년 봄(3~5월)에 나뉘어 나올 전망이다. 폴더블·2나노 양산 복잡성과 프리미엄 모델에 연말 스포트라이트를 몰아주려는 전략으로 해석된다."

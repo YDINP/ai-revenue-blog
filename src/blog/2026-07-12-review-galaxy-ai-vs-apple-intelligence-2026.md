@@ -8,6 +8,11 @@ tags: ["갤럭시 AI", "애플 인텔리전스", "온디바이스 AI", "AI폰", 
 image:
   url: "https://images.pexels.com/photos/18465017/pexels-photo-18465017.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   alt: "스마트폰을 든 손 — 온디바이스 AI 비교를 상징하는 이미지"
+coupangLinks:
+  - title: "삼성 갤럭시 버즈"
+    url: "https://www.coupang.com/np/search?q=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%20%EB%B2%84%EC%A6%88&src=1139000&spec=10799999&addtag=200&ctag=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%20%EB%B2%84%EC%A6%88&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%82%BC%EC%84%B1%20%EA%B0%A4%EB%9F%AD%EC%8B%9C%20%EB%B2%84%EC%A6%88"
+  - title: "애플 에어팟 프로"
+    url: "https://www.coupang.com/np/search?q=%EC%95%A0%ED%94%8C%20%EC%97%90%EC%96%B4%ED%8C%9F%20%ED%94%84%EB%A1%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%95%A0%ED%94%8C%20%EC%97%90%EC%96%B4%ED%8C%9F%20%ED%94%84%EB%A1%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%95%A0%ED%94%8C%20%EC%97%90%EC%96%B4%ED%8C%9F%20%ED%94%84%EB%A1%9C"
 faq:
   - q: "2026년 기준 어느 쪽이 앞서 있나요?"
     a: "실제 이용률에서는 갤럭시 AI가 앞선 것으로 나타났습니다. 2026년 조사 기준 기능별 월 1회 이상 이용률이 '정보 검색·알림 보조' 67% 대 47%, '사진·영상 편집' 64% 대 44%, '요약·기록·작성 보조' 50% 대 29%로 갤럭시 AI가 애플 인텔리전스를 앞섰습니다. 인지도는 갤럭시 39%·애플 37%로 비슷했지만, 실사용에서 격차가 벌어졌습니다."
