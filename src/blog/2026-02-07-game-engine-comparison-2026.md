@@ -132,19 +132,19 @@ Cocos Creator는 3.8.x 라인(최신 3.8.8)이 현행 안정 버전이다. 경�
 
 ## 엔진별 핵심 지표 비교
 
-<div class="chart-progress" data-title="게임 엔진 학습 난이도 (높을수록 어려움)" data-labels="Unity,Unreal,Godot,Phaser,Cocos" data-values="60,85,40,30,50" data-colors="#3b82f6,#009e73,#8b5cf6,#f59e0b,#d55e00" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="Unreal이 가장 배우기 어려운 엔진 (높을수록 어려움)" data-labels="Unity,Unreal,Godot,Phaser,Cocos" data-values="60,85,40,30,50" data-colors="#3b82f6,#009e73,#8b5cf6,#f59e0b,#d55e00" data-max="100" data-unit="점"></div>
 
-<div class="chart-donut" data-title="게임 엔진 커뮤니티 크기 (상대 비중)" data-labels="Unity,Unreal,Godot,Phaser,Cocos" data-values="95,85,70,60,45" data-colors="#3b82f6,#009e73,#8b5cf6,#f59e0b,#d55e00" data-value-mode="percent"></div>
+<div class="chart-donut" data-title="Unity가 가장 큰 커뮤니티 보유 (상대 비중)" data-labels="Unity,Unreal,Godot,Phaser,Cocos" data-values="95,85,70,60,45" data-colors="#3b82f6,#009e73,#8b5cf6,#f59e0b,#d55e00" data-value-mode="percent"></div>
 
-<div class="chart-bar" data-orient="vertical" data-title="게임 엔진 2D 게임 지원 강도" data-labels="Phaser,Unity,Godot,Cocos,Unreal" data-values="95,90,90,90,65" data-colors="#f59e0b,#3b82f6,#8b5cf6,#d55e00,#009e73" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-highlight="max" data-title="Phaser가 2D 게임 지원 강도 1위" data-labels="Phaser,Unity,Godot,Cocos,Unreal" data-values="95,90,90,90,65" data-colors="#f59e0b,#3b82f6,#8b5cf6,#d55e00,#009e73" data-unit="점"></div>
 
-<div class="chart-bar" data-orient="vertical" data-title="게임 엔진 3D 게임 지원 강도" data-labels="Unreal,Unity,Godot,Cocos,Phaser" data-values="98,85,70,40,0" data-colors="#009e73,#3b82f6,#8b5cf6,#d55e00,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-highlight="max" data-title="Unreal이 3D 게임 지원 강도 압도적 1위" data-labels="Unreal,Unity,Godot,Cocos,Phaser" data-values="98,85,70,40,0" data-colors="#009e73,#3b82f6,#8b5cf6,#d55e00,#f59e0b" data-unit="점"></div>
 
 ※ 위 점수는 공식 수치가 아니라, 2026년 7월 기준 기능·생태계를 종합해 매긴 상대적 참고 지표다.
 
 ## Unity vs Unreal vs Godot 3대 엔진 레이더 비교
 
-<div class="chart-radar" data-title="Unity vs Unreal vs Godot 종합 비교" data-items='[{"name":"Unity","scores":[{"label":"학습곡선","value":7,"color":"#3b82f6"},{"label":"커뮤니티","value":10,"color":"#3b82f6"},{"label":"2D성능","value":9,"color":"#3b82f6"},{"label":"3D성능","value":8,"color":"#3b82f6"},{"label":"가격","value":6,"color":"#3b82f6"}]},{"name":"Unreal","scores":[{"label":"학습곡선","value":4,"color":"#009e73"},{"label":"커뮤니티","value":9,"color":"#009e73"},{"label":"2D성능","value":6,"color":"#009e73"},{"label":"3D성능","value":10,"color":"#009e73"},{"label":"가격","value":8,"color":"#009e73"}]},{"name":"Godot","scores":[{"label":"학습곡선","value":9,"color":"#8b5cf6"},{"label":"커뮤니티","value":7,"color":"#8b5cf6"},{"label":"2D성능","value":9,"color":"#8b5cf6"},{"label":"3D성능","value":7,"color":"#8b5cf6"},{"label":"가격","value":10,"color":"#8b5cf6"}]}]'></div>
+<div class="chart-radar" data-title="Godot이 종합 점수에서 가장 앞선다" data-items='[{"name":"Unity","scores":[{"label":"학습곡선","value":7,"color":"#3b82f6"},{"label":"커뮤니티","value":10,"color":"#3b82f6"},{"label":"2D성능","value":9,"color":"#3b82f6"},{"label":"3D성능","value":8,"color":"#3b82f6"},{"label":"가격","value":6,"color":"#3b82f6"}]},{"name":"Unreal","scores":[{"label":"학습곡선","value":4,"color":"#009e73"},{"label":"커뮤니티","value":9,"color":"#009e73"},{"label":"2D성능","value":6,"color":"#009e73"},{"label":"3D성능","value":10,"color":"#009e73"},{"label":"가격","value":8,"color":"#009e73"}]},{"name":"Godot","scores":[{"label":"학습곡선","value":9,"color":"#8b5cf6"},{"label":"커뮤니티","value":7,"color":"#8b5cf6"},{"label":"2D성능","value":9,"color":"#8b5cf6"},{"label":"3D성능","value":7,"color":"#8b5cf6"},{"label":"가격","value":10,"color":"#8b5cf6"}]}]'></div>
 
 ## 엔진 선택 가이드
 

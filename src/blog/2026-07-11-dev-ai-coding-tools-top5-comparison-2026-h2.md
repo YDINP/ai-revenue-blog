@@ -50,7 +50,7 @@ AI 코딩 툴은 크게 두 방식입니다.
 
 같은 조건은 아니지만, 도구 성격을 상대적으로 비교하면 대략 이렇습니다(체감 기준).
 
-<div class="chart-radar" data-title="AI 코딩 툴 특성 비교 (10점 만점, 참고용)" data-items='[
+<div class="chart-radar" data-title="에이전트는 Claude Code, 진입장벽 낮음은 Copilot이 최고 (10점 만점, 참고용)" data-items='[
   {"name":"Cursor","scores":[
     {"label":"통합경험","value":9,"color":"#009e73"},
     {"label":"에이전트","value":8,"color":"#009e73"},

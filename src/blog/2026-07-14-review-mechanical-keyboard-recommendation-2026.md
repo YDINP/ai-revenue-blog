@@ -65,7 +65,7 @@ faq:
 
 2026년 게이밍 키보드의 화두는 <span style="font-size:1.25em;font-weight:800">홀이펙트 스위치</span>입니다. 자기 센서로 눌린 깊이를 읽어 작동 지점을 소프트웨어로 조절하고, 접점 마모가 없어 내구성도 좋습니다.
 
-<div class="chart-bar" data-orient="vertical" data-title="용도별 우선순위 (참고용)" data-labels="반응속도,커스터마이즈,타건감,저소음" data-values="10,9,7,6" data-colors="#f59e0b,#8b5cf6,#3b82f6,#009e73" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="반응속도가 키보드 선택 최우선 기준 (참고용)" data-labels="반응속도,커스터마이즈,타건감,저소음" data-values="10,9,7,6" data-highlight="max" data-colors="#f59e0b,#8b5cf6,#3b82f6,#009e73" data-unit="점"></div>
 
 <div class="callout-warning">⚠️ 주의: 홀이펙트는 경쟁 게임엔 확실히 유리하지만, 일반 사무·개발엔 <b>과할 수 있습니다</b>. 반응속도·커스터마이즈가 중요하면 홀이펙트, 아니면 일반 기계식으로 충분합니다.</div>
 

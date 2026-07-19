@@ -27,7 +27,7 @@ faq:
 
 가장 먼저 깨야 할 환상은 "평균"이다. 데뷔작 평균 매출은 약 12만 달러로 집계되지만, 이는 소수의 초대박작이 끌어올린 수치다. 실제 중앙값(딱 가운데 게임)의 생애 총매출은 <span style="font-size:1.3em;font-weight:800">약 5,000~15,000달러</span>, 여기서 밸브의 30% 수수료를 빼면 개발자 몫은 3,500~10,500달러에 불과하다.
 
-<div class="chart-versus" data-title="첫 게임 매출: 평균 vs 중앙값 (스팀, 2026)" data-name-a="평균(착시)" data-name-b="중앙값(현실)" data-color-a="#f59e0b" data-color-b="#3b82f6" data-items='[{"label":"데뷔작 매출($)","a":95,"b":10},{"label":"체감 성공 가능성","a":90,"b":25},{"label":"재현 가능성","a":20,"b":80}]'></div>
+<div class="chart-versus" data-title="평균은 착시일 뿐, 중앙값이 진짜 현실이다 (스팀, 2026)" data-name-a="평균(착시)" data-name-b="중앙값(현실)" data-color-a="#f59e0b" data-color-b="#3b82f6" data-items='[{"label":"데뷔작 매출($)","a":95,"b":10},{"label":"체감 성공 가능성","a":90,"b":25},{"label":"재현 가능성","a":20,"b":80}]'></div>
 
 평균은 "가능성"을, 중앙값은 "확률"을 말한다. 사업 계획은 반드시 중앙값 기준으로 세워야 한다.
 
@@ -44,7 +44,7 @@ faq:
 
 위시리스트는 인디 마케팅의 핵심 지표지만, 오해가 많다. 중앙값 기준 전환율은 다음과 같다.
 
-<div class="chart-bar" data-orient="vertical" data-title="위시리스트 → 구매 전환율 (중앙값, 기간별)" data-labels="출시 첫날,첫 주,첫 해" data-values="5,20,60" data-colors="#3b82f6,#009e73,#f59e0b" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="위시리스트 전환율, 첫 해 60%까지 상승 (중앙값, 기간별)" data-labels="출시 첫날,첫 주,첫 해" data-values="5,20,60" data-colors="#3b82f6,#009e73,#f59e0b" data-unit="%"></div>
 
 즉 출시 첫날에 팔리는 건 위시리스트의 5% 안팎이고, 나머지는 세일·업데이트를 거쳐 1년에 걸쳐 천천히 전환된다. 출시일 매출만 보고 실망할 필요가 없다는 뜻이자, 반대로 "출시 대박"은 확률이 낮다는 뜻이다.
 

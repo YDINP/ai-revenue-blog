@@ -35,7 +35,7 @@ faq:
 
 2026년 조사 기준, 인지도는 팽팽했지만 <span style="font-size:1.3em;font-weight:800">실제 이용률에서 갤럭시 AI가 앞섰습니다</span>.
 
-<div class="chart-versus" data-title="기능별 월 1회 이상 이용률 (%, 2026 조사)" data-name-a="갤럭시 AI" data-name-b="애플 인텔리전스" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"정보검색/알림","a":67,"b":47},{"label":"사진/영상편집","a":64,"b":44},{"label":"요약/작성보조","a":50,"b":29}]'></div>
+<div class="chart-versus" data-title="갤럭시 AI가 모든 기능에서 이용률 앞선다 (%, 2026 조사)" data-name-a="갤럭시 AI" data-name-b="애플 인텔리전스" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"정보검색/알림","a":67,"b":47},{"label":"사진/영상편집","a":64,"b":44},{"label":"요약/작성보조","a":50,"b":29}]'></div>
 
 - **인지도**: 갤럭시 39% vs 애플 37% (비슷)
 - **탑재 인식**: 갤럭시 29% vs 애플 21%
@@ -63,7 +63,7 @@ faq:
 
 ## 그래서 폰 바꿀 때는?
 
-<div class="chart-radar" data-title="선택 기준별 성향 (10점, 참고용)" data-items='[
+<div class="chart-radar" data-title="갤럭시는 즉시성·기능폭, 애플은 프라이버시 우위 (10점, 참고용)" data-items='[
   {"name":"갤럭시 AI","scores":[
     {"label":"즉시성","value":9,"color":"#009e73"},
     {"label":"기능 폭","value":9,"color":"#009e73"},

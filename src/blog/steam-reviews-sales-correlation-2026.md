@@ -65,7 +65,7 @@ Jake Birkett은 게임디벨로퍼에 기고한 [리뷰로 판매량 추정하�
 
 박스라이터 배수의 역사는 "하락의 역사"다.
 
-<div class="chart-bar" data-orient="vertical" data-title="스팀 리뷰 1개당 판매량 배수의 변화(중앙값 기준, 추정)" data-labels="2014,2018,2022,2026" data-values="70,64,45,32" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00" data-unit="배"></div>
+<div class="chart-bar" data-orient="vertical" data-title="리뷰당 판매 배수, 12년 새 70→32배로 반토막(중앙값 기준, 추정)" data-labels="2014,2018,2022,2026" data-values="70,64,45,32" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00" data-unit="배"></div>
 
 초기 박스라이터 연구(2014년경)는 AAA와 인디를 섞어 30~100배, 중간값 약 70배를 제시했다. 2018년 시점 인디 표본에서는 평균 82배·중앙값 77배까지 올라가기도 했다. 그런데 2014년 출시작을 제외하고 다시 계산하면 평균은 약 71배, 중앙값은 약 64배로 내려앉는다. 초창기 게임일수록 배수가 높게 잡히는 것이다.
 
@@ -89,7 +89,7 @@ Jake Birkett은 게임디벨로퍼에 기고한 [리뷰로 판매량 추정하�
 
 만족한 유저는 리뷰를 남길 확률이 높고, 그저 그런 게임은 산 사람 다수가 침묵한다. 그래서 긍정률이 높을수록 판매량 대비 리뷰가 많아지고, 리뷰 1개당 판매량 배수는 오히려 작아진다.
 
-<div class="chart-bar" data-orient="vertical" data-title="긍정 리뷰율에 따른 리뷰 1개당 판매량 배수(추정)" data-labels="90% 이상,80%대,70%대" data-values="30,45,60" data-colors="#009e73,#f59e0b,#d55e00" data-unit="배"></div>
+<div class="chart-bar" data-orient="vertical" data-title="긍정률 70%대, 배수가 90%대의 2배(추정)" data-labels="90% 이상,80%대,70%대" data-values="30,45,60" data-colors="#009e73,#f59e0b,#d55e00" data-unit="배"></div>
 
 VG Insights와 Gamalytic 계열 분석을 종합하면, 90% 이상 긍정 게임은 리뷰 1개당 약 30개, 70%대 긍정 게임은 약 60개로 배수가 벌어진다. 같은 리뷰 300개라도 긍정률 92%인 게임과 72%인 게임의 추정 판매량이 거의 두 배 차이가 날 수 있다는 뜻이다. 그래서 정교한 추정에서는 긍정률 구간별로 배수를 다르게 적용한다.
 
@@ -113,7 +113,7 @@ VG Insights와 Gamalytic 계열 분석을 종합하면, 90% 이상 긍정 게임
 
 4단계 — 순수익 보정. 스팀 수수료 30%, 환불 약 12%, 상시 할인·지역가 편차를 반영하면 실제 손에 들어오는 값은 크게 줄어든다.
 
-<div class="chart-bar" data-title="리뷰 300개 게임의 매출 추정(정가 기준 → 순수익, 만 달러)" data-labels="정가 총매출,수수료 30% 차감,환불·할인 반영" data-values="24,16.8,11" data-colors="#3b82f6,#f59e0b,#009e73" data-unit="만$"></div>
+<div class="chart-bar" data-title="순수익, 정가 총매출의 46%로 감소(정가 기준 → 순수익, 만 달러)" data-labels="정가 총매출,수수료 30% 차감,환불·할인 반영" data-values="24,16.8,11" data-colors="#3b82f6,#f59e0b,#009e73" data-unit="만$"></div>
 
 24만 달러에서 수수료 30%를 빼면 약 16만 8,000달러, 여기에 환불과 상시 할인까지 반영하면 순액은 대략 11만 달러(약 1억 6,500만원) 안팎으로 내려온다. GameDiscoverCo가 지적하듯 "가변 할인·부가세·환불·플랫폼 수수료를 감안하면 실순액은 총매출 추정치의 절반 이하로 떨어질 수 있다".
 

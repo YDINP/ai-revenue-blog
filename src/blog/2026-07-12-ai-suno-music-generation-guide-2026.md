@@ -35,7 +35,7 @@ faq:
 
 ## v5.5의 3가지 새 무기
 
-<div class="chart-bar" data-title="v5.5 핵심 기능 (주목도 체감, 참고용)" data-labels="Voices(내 목소리),Custom Models(내 스타일),마스터링 향상,12트랙 스템" data-values="10,8,8,7" data-colors="#009e73,#3b82f6,#8b5cf6,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-highlight="max" data-title="Voices(내 목소리)가 v5.5 최고 주목 기능 (참고용)" data-labels="Voices(내 목소리),Custom Models(내 스타일),마스터링 향상,12트랙 스템" data-values="10,8,8,7" data-colors="#009e73,#3b82f6,#8b5cf6,#f59e0b" data-unit="점"></div>
 
 ### 1) Voices — 내 목소리로 노래
 샘플을 등록하고 신원 확인을 거치면, 어떤 장르든 내 목소리로 부르는 노래를 만들 수 있습니다.

@@ -54,7 +54,7 @@ faq:
 
 ## 대표 도구 비교
 
-<div class="chart-bar" data-title="바이브 코딩 적합도: 작업 유형별 (개념적 평가, 100점 기준)" data-labels="프로토타입/MVP,단순 자동화,UI 초안,복잡 로직,대규모 유지보수" data-values="92,85,80,55,40" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-title="바이브 코딩은 프로토타입·MVP에 가장 적합(92점) (개념적 평가, 100점 기준)" data-labels="프로토타입/MVP,단순 자동화,UI 초안,복잡 로직,대규모 유지보수" data-values="92,85,80,55,40" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="점"></div>
 
 2026년 현재 바이브 코딩 생태계를 이끄는 도구는 다음과 같다.
 

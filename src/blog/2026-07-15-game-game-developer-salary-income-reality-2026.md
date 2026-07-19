@@ -31,7 +31,7 @@ faq:
 | 시니어(8~10년) | 9,000만원~1억 2천만원 | 7,000만~9,000만원 |
 | 리드/테크리드(10년+) | 1억 2천만~1억 8천만원 이상 | 8,000만~1억 2천만원 |
 
-<div class="chart-bar" data-orient="vertical" data-title="연차별 게임 개발자 연봉 밴드(대기업 기준 대략, 만원)" data-labels="신입,주니어,미드,시니어,리드급" data-values="5000,6300,8000,10500,15000" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="만원"></div>
+<div class="chart-bar" data-orient="vertical" data-title="리드급 연봉이 신입 대비 3배(대기업 기준 대략, 만원)" data-labels="신입,주니어,미드,시니어,리드급" data-values="5000,6300,8000,10500,15000" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="만원"></div>
 
 숫자만 보면 게임 개발자 연봉은 일반 IT 개발자와 크게 다르지 않다. 다만 게임업계 특유의 크런치·프로젝트 리스크(출시 실패 시 스튜디오 폐쇄) 때문에 체감 안정성은 낮다는 평가가 많다.
 

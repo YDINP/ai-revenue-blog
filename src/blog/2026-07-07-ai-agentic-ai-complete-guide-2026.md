@@ -59,7 +59,7 @@ faq:
 
 에이전틱 AI가 실제로 쓰이는 분야는 크게 다섯 가지로 나뉜다.
 
-<div class="chart-donut" data-title="에이전틱 AI 활용 분야 관심도 (개념적 예시)" data-labels="코딩 에이전트,업무 자동화,고객 응대,리서치,개인 비서" data-values="32,26,16,15,11" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="%"></div>
+<div class="chart-donut" data-title="코딩 에이전트가 관심도 32%로 가장 높음 (개념적 예시)" data-labels="코딩 에이전트,업무 자동화,고객 응대,리서치,개인 비서" data-values="32,26,16,15,11" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="%"></div>
 
 **코딩 에이전트**가 현재 가장 성숙한 분야다. [AI 코딩 도구 완전 가이드](/blog/2026-02-07-best-ai-coding-tools-2026/)에서 다뤘듯, Claude Code·OpenAI Codex·Cursor Agent 등은 이미 수천 줄 규모의 코드베이스를 분석하고 버그를 수정하며 테스트까지 실행한다. 개발자가 요구사항을 영어로 설명하면 에이전트가 PR(풀 리퀘스트) 단위로 변경을 제안한다.
 

@@ -51,7 +51,7 @@ faq:
 
 ## 체크할 5가지 기능
 
-<div class="chart-bar" data-orient="vertical" data-title="의자 선택 시 중요도 (참고용)" data-labels="요추 지지,높이/깊이 조절,팔걸이 조절,리클라이닝,통풍" data-values="10,9,8,7,7" data-colors="#009e73,#3b82f6,#f59e0b,#8b5cf6,#94a3b8" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-highlight="max" data-title="의자 고를 때 요추 지지가 최우선 기준 (참고용)" data-labels="요추 지지,높이/깊이 조절,팔걸이 조절,리클라이닝,통풍" data-values="10,9,8,7,7" data-colors="#009e73,#3b82f6,#f59e0b,#8b5cf6,#94a3b8" data-unit="점"></div>
 
 1. **요추 지지** — 허리 곡선을 받쳐주는가 (가장 중요)
 2. **좌판 높이·깊이** — 발이 바닥에 닿고 허벅지가 눌리지 않게
@@ -61,7 +61,7 @@ faq:
 
 ## 예산별 접근
 
-<div class="chart-progress" data-title="예산대별 만족 포인트 (참고용, 10점)" data-labels="쿠션 보강(저예산),중저가 메쉬+쿠션,중급 인체공학,고급 인체공학" data-values="6,7,8,10" data-colors="#94a3b8,#f59e0b,#3b82f6,#009e73" data-max="10" data-unit="점"></div>
+<div class="chart-progress" data-title="예산이 높을수록 만족 포인트도 오른다 (참고용, 10점)" data-labels="쿠션 보강(저예산),중저가 메쉬+쿠션,중급 인체공학,고급 인체공학" data-values="6,7,8,10" data-colors="#94a3b8,#f59e0b,#3b82f6,#009e73" data-max="10" data-unit="점"></div>
 
 | 예산 | 추천 접근 |
 |------|----------|

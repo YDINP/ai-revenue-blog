@@ -47,14 +47,14 @@ ANC는 일정한 소음 차단에 강합니다.
 
 ## 오버이어 헤드폰 vs 무선 이어폰
 
-<div class="chart-versus" data-title="오버이어 헤드폰 vs 무선 이어폰" data-name-a="오버이어 헤드폰" data-name-b="무선 이어폰" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"ANC 성능","a":92,"b":80},{"label":"통화 마이크","a":88,"b":75},{"label":"장시간 착용","a":85,"b":80},{"label":"휴대성","a":60,"b":95},{"label":"간편함","a":70,"b":92}]'></div>
+<div class="chart-versus" data-title="오버이어는 성능, 무선 이어폰은 휴대성 우위" data-name-a="오버이어 헤드폰" data-name-b="무선 이어폰" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"ANC 성능","a":92,"b":80},{"label":"통화 마이크","a":88,"b":75},{"label":"장시간 착용","a":85,"b":80},{"label":"휴대성","a":60,"b":95},{"label":"간편함","a":70,"b":92}]'></div>
 
 - **집중·ANC·마이크** → 오버이어 헤드폰
 - **휴대성·간편함** → 무선 이어폰
 
 ## 체크할 5가지
 
-<div class="chart-bar" data-orient="vertical" data-title="헤드셋 선택 시 중요도 (참고용)" data-labels="착용감,마이크(회의),ANC,배터리,멀티포인트" data-values="10,9,8,7,7" data-colors="#009e73,#3b82f6,#f59e0b,#8b5cf6,#94a3b8" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-highlight="max" data-title="헤드셋 고를 때 착용감이 최우선 기준 (참고용)" data-labels="착용감,마이크(회의),ANC,배터리,멀티포인트" data-values="10,9,8,7,7" data-colors="#009e73,#3b82f6,#f59e0b,#8b5cf6,#94a3b8" data-unit="점"></div>
 
 1. **착용감** — 오래 써도 안 아픈가 (가장 중요, 안 아파야 계속 씀)
 2. **마이크 품질** — 회의 잦으면 필수(붐 마이크가 유리)

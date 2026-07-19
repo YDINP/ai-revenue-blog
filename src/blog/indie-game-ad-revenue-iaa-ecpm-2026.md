@@ -47,7 +47,7 @@ faq:
 
 화면 구석에 상시 붙어 있다. 개별 단가는 티어1에서도 0.5~1.5달러로 초라하지만, 노출 횟수가 압도적으로 많아 누적으로는 무시할 수 없다. 문제는 유저가 배너를 아예 보지 않는 '배너 블라인드니스'다.
 
-<div class="chart-bar" data-orient="vertical" data-title="광고 형식별 eCPM (티어1 게임 기준 대표값 · 달러)" data-labels="보상형,전면,배너" data-values="20,6.5,1" data-colors="#f59e0b,#3b82f6,#009e73" data-unit="달러"></div>
+<div class="chart-bar" data-orient="vertical" data-title="보상형 광고 eCPM이 배너의 20배 (티어1 게임 기준 대표값 · 달러)" data-labels="보상형,전면,배너" data-values="20,6.5,1" data-highlight="max" data-colors="#f59e0b,#3b82f6,#009e73" data-unit="달러"></div>
 
 세 형식의 단가 격차가 20배에 이른다. 그래서 대부분의 인디게임은 보상형을 매출의 축으로 삼고, 전면을 보조로, 배너를 '있으면 좋은' 부수입으로 배치한다. 출처: [Playwire AdMob eCPM Benchmarks](https://www.playwire.com/blog/admob-ecpm-benchmarks-what-publishers-should-expect).
 
@@ -67,7 +67,7 @@ eCPM(effective Cost Per Mille)은 노출 1,000회당 매출이다. 여기서 인
 | 베트남 | 약 $2.2 | $1~2 | $0.1~0.2 | 티어3 |
 | 인도 | $1~2 | $0.5~1.5 | $0.05~0.2 | 티어3 |
 
-<div class="chart-bar" data-orient="vertical" data-title="보상형 광고 eCPM 국가별 비교 (달러)" data-labels="미국,유럽·북미,한국·일본,인도네시아,베트남,인도" data-values="18,12.2,10,3,2.2,1.5" data-colors="#f59e0b,#3b82f6,#6366f1,#009e73,#14b8a6,#d55e00" data-unit="달러"></div>
+<div class="chart-bar" data-orient="vertical" data-title="미국 eCPM이 인도의 12배 (보상형 광고, 달러)" data-labels="미국,유럽·북미,한국·일본,인도네시아,베트남,인도" data-values="18,12.2,10,3,2.2,1.5" data-colors="#f59e0b,#3b82f6,#6366f1,#009e73,#14b8a6,#d55e00" data-unit="달러"></div>
 
 전체 지역 서열을 정리하면 유럽·북미 > 홍콩·대만 > 일본·한국 > 러시아 > 기타 티어3 > 동남아·남아시아·중남미 순이다. 티어1 유저와 티어3 유저의 보상형 단가 차이는 10배 안팎이다. 출처: [TopOn H1 2025 Global Mobile Games Monetization Report](https://mores.toponad.com/reports/TopOn%20Global%20Mobile%20Games%20Monetization%20Report%20_%202025%20H1.pdf).
 
@@ -98,7 +98,7 @@ DAU 1,000명이 하루 54달러, ARPDAU는 <span style="font-size:1.25em;font-we
 
 장르별 ARPDAU 벤치마크는 다음과 같다. 자기 게임이 같은 장르의 어디쯤 있는지 가늠하는 자로 쓰면 된다.
 
-<div class="chart-bar" data-orient="vertical" data-title="장르별 ARPDAU 벤치마크 상단값 (달러)" data-labels="소셜카지노,전략,미드코어,캐주얼,하이퍼캐주얼" data-values="0.8,0.35,0.2,0.1,0.05" data-colors="#f59e0b,#3b82f6,#6366f1,#009e73,#94a3b8" data-unit="달러"></div>
+<div class="chart-bar" data-orient="vertical" data-title="소셜카지노 ARPDAU가 하이퍼캐주얼의 16배 (장르별 벤치마크 상단값·달러)" data-labels="소셜카지노,전략,미드코어,캐주얼,하이퍼캐주얼" data-values="0.8,0.35,0.2,0.1,0.05" data-colors="#f59e0b,#3b82f6,#6366f1,#009e73,#94a3b8" data-unit="달러"></div>
 
 하이퍼캐주얼은 0.01~0.05달러로 가장 낮고, 소셜 카지노는 0.20~0.80달러 이상으로 가장 높다. 하이퍼캐주얼 유저의 생애 ARPU는 0.86달러에 불과해 전 장르 최저다. 출처: [Juego Studio ARPDAU Benchmarks by Genre](https://www.juegostudio.com/blog/arpdau-benchmarks-by-game-genre).
 

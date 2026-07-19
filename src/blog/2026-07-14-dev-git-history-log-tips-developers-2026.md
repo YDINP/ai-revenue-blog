@@ -92,7 +92,7 @@ git blame -L 20,30 src/app.js          # 20~30줄을 마지막에 바꾼 커밋
 | 9. 저자별 커밋 요약 | `git shortlog -sn` |
 | 10. 두 브랜치의 커밋 비교 | `git range-diff main..featureA main..featureB` |
 
-<div class="chart-bar" data-title="상황별 첫 번째로 볼 명령 (참고용)" data-labels="버그 심은 커밋(bisect),코드 언제 바뀜(-S),커밋 복구(reflog),줄 이력(-L/blame)" data-values="10,9,8,8" data-colors="#009e73,#3b82f6,#f59e0b,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-title="버그 추적 첫 선택은 bisect (참고용)" data-labels="버그 심은 커밋(bisect),코드 언제 바뀜(-S),커밋 복구(reflog),줄 이력(-L/blame)" data-values="10,9,8,8" data-colors="#009e73,#3b82f6,#f59e0b,#8b5cf6" data-unit="점"></div>
 
 ## 히스토리를 무기로 만드는 습관
 

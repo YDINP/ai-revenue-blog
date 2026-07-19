@@ -44,7 +44,7 @@ faq:
 
 ## 웹캠, 무엇을 볼까
 
-<div class="chart-bar" data-title="웹캠 선택 시 중요도 (참고용)" data-labels="저조도 성능,해상도,오토포커스/시야각,내장 마이크" data-values="9,8,7,5" data-colors="#009e73,#3b82f6,#f59e0b,#94a3b8" data-unit="점"></div>
+<div class="chart-bar" data-title="저조도 성능이 웹캠 선택 최우선 기준 (참고용)" data-labels="저조도 성능,해상도,오토포커스/시야각,내장 마이크" data-values="9,8,7,5" data-highlight="max" data-colors="#009e73,#3b82f6,#f59e0b,#94a3b8" data-unit="점"></div>
 
 - **저조도 성능** — 실제 만족도를 가장 크게 좌우(어두운 방에서 깨끗한가)
 - **해상도** — 최소 Full HD(1080p), 여유되면 그 이상

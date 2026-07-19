@@ -39,7 +39,7 @@ faq:
 
 벤치마크에서 34분 영상을 45초에 처리해, 약 101초 걸린 Whisper보다 <span style="font-size:1.3em;font-weight:800">약 55% 빨랐습니다</span>. 비결은 완전한 온디바이스 처리 — 네트워크 왕복이 없습니다.
 
-<div class="chart-bar" data-title="34분 영상 전사 소요 시간 (짧을수록 빠름)" data-labels="Apple SpeechAnalyzer,OpenAI Whisper" data-values="45,101" data-colors="#009e73,#3b82f6" data-unit="초"></div>
+<div class="chart-bar" data-title="Apple SpeechAnalyzer가 Whisper보다 2.2배 빠름 (짧을수록 빠름)" data-labels="Apple SpeechAnalyzer,OpenAI Whisper" data-values="45,101" data-highlight="min" data-colors="#009e73,#3b82f6" data-unit="초"></div>
 
 <div class="callout-info">💡 핵심: 55%는 <b>속도</b> 이야기입니다. 정확도는 별개로 봐야 하며, '빠르다=낫다'가 아닙니다.</div>
 

@@ -53,7 +53,7 @@ faq:
 
 실무에서 반복되는 조율 패턴은 크게 셋입니다.
 
-<div class="chart-bar" data-orient="vertical" data-title="패턴별 적합한 상황 (사용 빈도 체감, 참고용)" data-labels="수퍼바이저,병렬(팬아웃),파이프라인" data-values="40,30,30" data-colors="#009e73,#3b82f6,#f59e0b" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="수퍼바이저 패턴이 사용 빈도 40%로 가장 흔함 (체감, 참고용)" data-labels="수퍼바이저,병렬(팬아웃),파이프라인" data-values="40,30,30" data-colors="#009e73,#3b82f6,#f59e0b" data-unit="%"></div>
 
 ### 1) 수퍼바이저(감독) 패턴
 한 에이전트가 지휘자가 되어 하위 에이전트에게 작업을 나눠 주고 결과를 취합합니다. 가장 흔한 기본형입니다.

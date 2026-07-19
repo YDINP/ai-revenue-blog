@@ -102,7 +102,7 @@ faq:
 
 같은 이야기를 다섯 축으로 펼치면 이렇다. 위 표의 정량 데이터를 상대 비교(10점 척도, 높을수록 유리)로 요약한 것으로, 세 플랫폼의 강점 축이 서로 어긋나 있다는 게 한눈에 보인다.
 
-<div class="chart-radar" data-title="세 플랫폼 강점 비교 (10점 척도 · 본문 데이터 기반 상대 평가)" data-items='[{"name":"스팀 (PC)","scores":[{"label":"유저당 객단가","value":9,"color":"#3b82f6"},{"label":"수수료 유리","value":4,"color":"#3b82f6"},{"label":"발견 가능성","value":2,"color":"#3b82f6"},{"label":"초기비용 낮음","value":7,"color":"#3b82f6"},{"label":"트래픽 확보","value":2,"color":"#3b82f6"}]},{"name":"모바일","scores":[{"label":"유저당 객단가","value":8,"color":"#f59e0b"},{"label":"수수료 유리","value":8,"color":"#f59e0b"},{"label":"발견 가능성","value":3,"color":"#f59e0b"},{"label":"초기비용 낮음","value":8,"color":"#f59e0b"},{"label":"트래픽 확보","value":3,"color":"#f59e0b"}]},{"name":"웹 / H5","scores":[{"label":"유저당 객단가","value":3,"color":"#009e73"},{"label":"수수료 유리","value":5,"color":"#009e73"},{"label":"발견 가능성","value":8,"color":"#009e73"},{"label":"초기비용 낮음","value":10,"color":"#009e73"},{"label":"트래픽 확보","value":8,"color":"#009e73"}]}]'></div>
+<div class="chart-radar" data-title="웹은 트래픽·초기비용 최고, 객단가는 최저 (10점 척도)" data-items='[{"name":"스팀 (PC)","scores":[{"label":"유저당 객단가","value":9,"color":"#3b82f6"},{"label":"수수료 유리","value":4,"color":"#3b82f6"},{"label":"발견 가능성","value":2,"color":"#3b82f6"},{"label":"초기비용 낮음","value":7,"color":"#3b82f6"},{"label":"트래픽 확보","value":2,"color":"#3b82f6"}]},{"name":"모바일","scores":[{"label":"유저당 객단가","value":8,"color":"#f59e0b"},{"label":"수수료 유리","value":8,"color":"#f59e0b"},{"label":"발견 가능성","value":3,"color":"#f59e0b"},{"label":"초기비용 낮음","value":8,"color":"#f59e0b"},{"label":"트래픽 확보","value":3,"color":"#f59e0b"}]},{"name":"웹 / H5","scores":[{"label":"유저당 객단가","value":3,"color":"#009e73"},{"label":"수수료 유리","value":5,"color":"#009e73"},{"label":"발견 가능성","value":8,"color":"#009e73"},{"label":"초기비용 낮음","value":10,"color":"#009e73"},{"label":"트래픽 확보","value":8,"color":"#009e73"}]}]'></div>
 
 스팀은 객단가 축이 홀로 높고 발견·트래픽 축이 바닥이다. 모바일은 객단가·수수료가 좋지만 트래픽 확보가 발목을 잡는다. 웹은 트래픽·초기비용은 만점에 가깝지만 객단가 축이 낮다. 어느 축도 다 높은 플랫폼은 없다 — 그래서 "가장 좋은 플랫폼"이 아니라 "내가 감당할 약점이 있는 플랫폼"을 고르는 문제다.
 
@@ -170,7 +170,7 @@ ARPDAU로 환산하면 $0.065다. 업계에서 인용되는 하이퍼캐주얼 A
 
 여기서 뒤에 나올 웹게임과 규모를 맞춰 보자. 같은 DAU 1,000을 대입하면 모바일 광고 매출은 하루 $65, 월 약 $1,950(약 293만원)이다. 뒤에서 계산할 웹게임의 DAU 1,000이 월 62만원이니, 유저 한 명의 값이 <span style="font-size:1.15em;font-weight:700">모바일이 웹의 약 4.7배</span>라는 뜻이다. eCPM 격차(모바일 전면 $11 vs 웹 $3.75)가 그대로 반영된 결과다.
 
-<div class="chart-bar" data-orient="vertical" data-title="같은 DAU 1,000일 때 월 광고매출(위 가정 기준, 1달러 = 약 1,500원)" data-labels="모바일,웹게임" data-values="1950,410" data-colors="#f59e0b,#009e73" data-unit="달러"></div>
+<div class="chart-bar" data-orient="vertical" data-title="모바일 광고매출이 웹게임의 4.8배(위 가정 기준, 1달러≈1,500원)" data-labels="모바일,웹게임" data-values="1950,410" data-highlight="max" data-colors="#f59e0b,#009e73" data-unit="달러"></div>
 
 단, 이 막대를 그대로 믿으면 안 된다. 웹의 DAU 1,000은 포털이 태워주는 트래픽이라 획득 비용이 사실상 0이지만, 모바일의 DAU 1,000은 광고비를 주고 사 온 유저다. 다음 문단이 그 뺄셈이다.
 
@@ -206,7 +206,7 @@ DAU 1,000짜리 웹게임을 가정하자. 유저당 보상형 2회 + 전면 1�
 
 그렇다면 자체 유입은 어떻게 만드나. 게임 안에 자기 채널(디스코드·뉴스레터·자체 도메인)을 심고, 게임명 검색과 커뮤니티 유입을 만들고, 포털 밖 랜딩을 하나 확보하는 것이 광고 최적화보다 배율이 크다. 구체적 실행은 [웹 게임 수익화 전략 가이드](/blog/2026-02-18-game-web-game-monetization-strategies-2026-complete-guide/)와 [인디 웹게임 성공 사례](/blog/2026-02-17-game-indie-web-game-success-stories-2026/)에서 다룬다.
 
-<div class="chart-bar" data-orient="vertical" data-title="DAU 1,000 웹게임의 월 광고매출: 자체 유입(레브셰어 100%) vs 포털 유입(50:50) · 1달러 ≈ 1,500원" data-labels="자체 유입,포털 유입" data-values="410,205" data-colors="#009e73,#3b82f6" data-unit="달러"></div>
+<div class="chart-bar" data-orient="vertical" data-title="자체 유입 매출이 포털 유입의 2배(레브셰어 100% vs 50:50, 1달러≈1,500원)" data-labels="자체 유입,포털 유입" data-values="410,205" data-highlight="max" data-colors="#009e73,#3b82f6" data-unit="달러"></div>
 
 지급 조건도 현실적인 변수다. CrazyGames는 월 지급, 최소 임계치 100유로(미달 시 이월)다. DAU가 수백 수준이면 몇 달간 정산 자체가 발생하지 않을 수 있다.
 

@@ -44,7 +44,7 @@ faq:
 
 ## 특성별 점수
 
-<div class="chart-radar" data-title="AI 영상 도구 특성 비교 (10점, 참고용)" data-items='[
+<div class="chart-radar" data-title="Veo는 화질·오디오, Runway는 제어력, Kling은 가성비 (10점, 참고용)" data-items='[
   {"name":"Veo 3.1","scores":[
     {"label":"오디오","value":10,"color":"#009e73"},
     {"label":"해상도(4K)","value":10,"color":"#009e73"},
@@ -78,7 +78,7 @@ faq:
 
 ## 용도별 추천
 
-<div class="chart-bar" data-title="용도별 추천 적합도 (10점, 참고용)" data-labels="소리 있는 내러티브,저비용 대량,정밀 연출,입문 무료" data-values="10,10,9,8" data-colors="#009e73,#f59e0b,#3b82f6,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-title="소리 있는 내러티브·저비용 대량에 가장 적합 (10점, 참고용)" data-labels="소리 있는 내러티브,저비용 대량,정밀 연출,입문 무료" data-values="10,10,9,8" data-colors="#009e73,#f59e0b,#3b82f6,#8b5cf6" data-unit="점"></div>
 
 | 목적 | 추천 |
 |------|------|

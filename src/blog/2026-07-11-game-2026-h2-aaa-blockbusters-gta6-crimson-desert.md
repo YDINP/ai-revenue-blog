@@ -64,7 +64,7 @@ GTA 6 외에도 놓치기 아까운 대작이 가득합니다.
 
 ## 장르별로 보는 관전 포인트
 
-<div class="chart-progress" data-title="하반기 대작 장르별 기대 열기(체감)" data-labels="오픈월드 액션,소울라이크,서바이벌 호러,루터 슈터" data-values="95,80,72,68" data-colors="#d55e00,#8b5cf6,#009e73,#f59e0b" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="오픈월드 액션이 기대 열기 1위, 95점(체감)" data-labels="오픈월드 액션,소울라이크,서바이벌 호러,루터 슈터" data-values="95,80,72,68" data-colors="#d55e00,#8b5cf6,#009e73,#f59e0b" data-max="100" data-unit="점"></div>
 
 - **오픈월드 액션**: GTA 6·붉은사막이 견인, 하반기 최대 화력
 - **소울라이크**: 인왕 3 등 액션 마니아 겨냥

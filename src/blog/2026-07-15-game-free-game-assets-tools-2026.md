@@ -43,7 +43,7 @@ Kenney.nl은 스타일이 통일돼 있어 프로토타입 단계에서 여러 �
 - **Zapsplat**: 무료 회원가입 시 일정 다운로드 한도 내에서 SFX·음악을 제공, 상업적 이용 가능.
 - **OpenGameArt 오디오 섹션**: BGM 루프 트랙이 다수 있으며, 그래픽과 마찬가지로 업로더별 라이선스 확인이 필요하다.
 
-<div class="chart-bar" data-orient="vertical" data-title="무료 에셋 카테고리별 확보 난이도(체감, 2026)" data-labels="그래픽,사운드,BGM,폰트" data-values="30,45,60,20" data-colors="#3b82f6,#009e73,#f59e0b,#8b5cf6" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="BGM 확보가 무료 에셋 중 가장 어려움(체감, 2026)" data-labels="그래픽,사운드,BGM,폰트" data-values="30,45,60,20" data-colors="#3b82f6,#009e73,#f59e0b,#8b5cf6" data-unit="%"></div>
 
 체감상 BGM(배경음악)이 무료로 구하기 가장 까다롭다. 짧은 SFX나 스프라이트에 비해 완성도 있는 루프 음악은 절대량 자체가 적기 때문이다. 최근에는 AI 음악 생성 도구로 이 공백을 메우는 개발자도 늘고 있는데, 관련 도구는 [AI 게임 에셋 도구 비교](/blog/2026-07-06-game-ai-game-asset-tools-comparison-2026-midjourney-scenario-layer/)에서 다뤘다.
 

@@ -57,7 +57,7 @@ faq:
 
 ## 성능·성향 비교
 
-<div class="chart-versus" data-title="스팀덱 OLED vs ROG Ally X — PC 게임기 대결" data-name-a="스팀덱 OLED" data-name-b="ROG Ally X" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"성능","a":75,"b":92},{"label":"화면 품질","a":92,"b":80},{"label":"스토어 자유도","a":78,"b":95},{"label":"배터리","a":78,"b":88},{"label":"가성비","a":90,"b":72}]'></div>
+<div class="chart-versus" data-title="성능·자유도는 Ally X, 화질·가성비는 스팀덱 우위" data-name-a="스팀덱 OLED" data-name-b="ROG Ally X" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"성능","a":75,"b":92},{"label":"화면 품질","a":92,"b":80},{"label":"스토어 자유도","a":78,"b":95},{"label":"배터리","a":78,"b":88},{"label":"가성비","a":90,"b":72}]'></div>
 
 - **성능·자유도·배터리** → ROG Ally X
 - **화면 품질·가성비** → 스팀덱 OLED
@@ -66,7 +66,7 @@ faq:
 
 스위치2는 PC 게임기와 직접 비교하기 애매합니다. PC 게임은 못 돌리지만, 마리오·젤다·포켓몬 같은 닌텐도 독점작과 콘솔 특유의 간편함은 대체 불가입니다. 2025년 출시로 전작보다 화면·성능이 올라갔고 기존 스위치 게임 호환도 지원합니다.
 
-<div class="chart-radar" data-title="세 기기 성향 (10점, 참고용)" data-items='[
+<div class="chart-radar" data-title="스위치2는 편의성·독점작, Ally X는 성능 우위 (10점, 참고용)" data-items='[
   {"name":"스팀덱 OLED","scores":[
     {"label":"성능","value":7,"color":"#009e73"},
     {"label":"편의성","value":8,"color":"#009e73"},

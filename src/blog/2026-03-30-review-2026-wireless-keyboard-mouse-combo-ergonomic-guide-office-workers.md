@@ -128,11 +128,11 @@ faq:
 
 ### 인체공학적 평가
 
-<div class="chart-radar" data-title="세트 인체공학 평가" data-items='[{"name":"로지텍 MK850","scores":[{"label":"마우스 그립","value":9,"color":"#3b82f6"},{"label":"키보드 높이","value":8,"color":"#009e73"},{"label":"손목지지","value":8,"color":"#f59e0b"},{"label":"배터리","value":10,"color":"#d55e00"}]},{"name":"마이크로소프트 Sculpt","scores":[{"label":"마우스 그립","value":9,"color":"#3b82f6"},{"label":"키보드 높이","value":9,"color":"#009e73"},{"label":"손목지지","value":9,"color":"#f59e0b"},{"label":"배터리","value":8,"color":"#d55e00"}]}]'></div>
+<div class="chart-radar" data-title="배터리는 로지텍, 인체공학은 스컬프트 우위" data-items='[{"name":"로지텍 MK850","scores":[{"label":"마우스 그립","value":9,"color":"#3b82f6"},{"label":"키보드 높이","value":8,"color":"#009e73"},{"label":"손목지지","value":8,"color":"#f59e0b"},{"label":"배터리","value":10,"color":"#d55e00"}]},{"name":"마이크로소프트 Sculpt","scores":[{"label":"마우스 그립","value":9,"color":"#3b82f6"},{"label":"키보드 높이","value":9,"color":"#009e73"},{"label":"손목지지","value":9,"color":"#f59e0b"},{"label":"배터리","value":8,"color":"#d55e00"}]}]'></div>
 
 ### 예산별 최적 선택
 
-<div class="chart-versus" data-title="가성비 vs 프리미엄" data-name-a="저예산" data-name-b="고예산" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"배터리 수명","a":70,"b":95},{"label":"인체공학","a":75,"b":92},{"label":"연결 안정성","a":80,"b":98},{"label":"추가 기능","a":60,"b":90},{"label":"가격","a":95,"b":50}]'></div>
+<div class="chart-versus" data-title="고예산이 가격 빼고 전 항목서 앞선다" data-name-a="저예산" data-name-b="고예산" data-color-a="#009e73" data-color-b="#3b82f6" data-items='[{"label":"배터리 수명","a":70,"b":95},{"label":"인체공학","a":75,"b":92},{"label":"연결 안정성","a":80,"b":98},{"label":"추가 기능","a":60,"b":90},{"label":"가격","a":95,"b":50}]'></div>
 
 ## 구매 전 필수 확인사항
 

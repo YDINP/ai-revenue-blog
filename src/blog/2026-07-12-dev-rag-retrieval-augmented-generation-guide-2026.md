@@ -46,7 +46,7 @@ AI에게 그냥 답하라고 하면, 모르는 건 그럴듯하게 지어냅니�
 
 ## 작동 원리: 4개 구성 요소
 
-<div class="chart-bar" data-title="RAG 파이프라인 단계별 비중 (품질 영향, 참고용)" data-labels="청킹(문서 분할),임베딩,벡터 검색,생성(LLM)" data-values="8,8,10,7" data-colors="#3b82f6,#009e73,#f59e0b,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-title="벡터 검색이 RAG 품질을 가장 좌우한다 (품질 영향, 참고용)" data-labels="청킹(문서 분할),임베딩,벡터 검색,생성(LLM)" data-values="8,8,10,7" data-colors="#3b82f6,#009e73,#f59e0b,#8b5cf6" data-unit="점"></div>
 
 1. **청킹(Chunking)** — 문서를 의미 단위로 잘게 나눕니다.
 2. **임베딩(Embedding)** — 각 조각을 '의미 벡터'로 변환합니다.

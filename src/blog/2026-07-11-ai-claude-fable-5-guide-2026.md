@@ -46,7 +46,7 @@ faq:
 
 가장 인상적인 특징은 "작업이 길고 복잡할수록 다른 모델과의 격차가 더 커진다"는 점입니다. 짧은 질문 하나로는 차이를 못 느낄 수 있지만, 여러 단계를 거치는 긴 프로젝트일수록 진가가 드러납니다.
 
-<div class="chart-radar" data-title="Claude Fable 5 강점 프로필 (10점 만점, 상대 비교)" data-items='[
+<div class="chart-radar" data-title="SW엔지니어링·장기 작업 만점, 가성비는 약점(5점) (10점 만점, 상대 비교)" data-items='[
   {"name":"Fable 5","scores":[
     {"label":"SW엔지니어링","value":10,"color":"#3b82f6"},
     {"label":"장기 작업","value":10,"color":"#3b82f6"},
@@ -60,7 +60,7 @@ faq:
 
 성능이 최고인 만큼 가격도 높습니다.
 
-<div class="chart-bar" data-title="100만 토큰당 가격 비교 ($, 입력/출력 합산 참고용)" data-labels="Fable 5 출력,Fable 5 입력" data-values="50,10" data-colors="#d55e00,#3b82f6" data-unit="$"></div>
+<div class="chart-bar" data-title="Fable 5 출력 가격이 입력의 5배 ($, 100만 토큰당 참고용)" data-labels="Fable 5 출력,Fable 5 입력" data-values="50,10" data-colors="#d55e00,#3b82f6" data-unit="$" data-highlight="max"></div>
 
 - <span style="font-size:1.3em;font-weight:800">입력 $10 / 출력 $50</span> (100만 토큰당)
 - Claude Opus 4.8의 약 2배 수준

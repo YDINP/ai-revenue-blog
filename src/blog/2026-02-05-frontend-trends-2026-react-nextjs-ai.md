@@ -159,7 +159,7 @@ CSS도 혁신적으로 발전하고 있습니다.
 | 생태계 | 풍부한 플러그인 | Next.js 중심 |
 | 사용처 | 범용 | Next.js 전용 |
 
-<div class="chart-radar" data-title="프론트엔드 프레임워크 종합 비교" data-items='[{"name":"Next.js 15","scores":[{"label":"SSR","value":10,"color":"#009e73"},{"label":"생태계","value":10,"color":"#009e73"},{"label":"학습곡선","value":6,"color":"#009e73"},{"label":"빌드속도","value":9,"color":"#009e73"},{"label":"풀스택","value":10,"color":"#009e73"}]},{"name":"Astro 5","scores":[{"label":"SSR","value":8,"color":"#8b5cf6"},{"label":"생태계","value":7,"color":"#8b5cf6"},{"label":"학습곡선","value":9,"color":"#8b5cf6"},{"label":"빌드속도","value":10,"color":"#8b5cf6"},{"label":"풀스택","value":5,"color":"#8b5cf6"}]},{"name":"Vite 6","scores":[{"label":"SSR","value":5,"color":"#f59e0b"},{"label":"생태계","value":9,"color":"#f59e0b"},{"label":"학습곡선","value":8,"color":"#f59e0b"},{"label":"빌드속도","value":10,"color":"#f59e0b"},{"label":"풀스택","value":4,"color":"#f59e0b"}]}]'></div>
+<div class="chart-radar" data-title="Next.js 15가 종합 점수에서 가장 앞선다" data-items='[{"name":"Next.js 15","scores":[{"label":"SSR","value":10,"color":"#009e73"},{"label":"생태계","value":10,"color":"#009e73"},{"label":"학습곡선","value":6,"color":"#009e73"},{"label":"빌드속도","value":9,"color":"#009e73"},{"label":"풀스택","value":10,"color":"#009e73"}]},{"name":"Astro 5","scores":[{"label":"SSR","value":8,"color":"#8b5cf6"},{"label":"생태계","value":7,"color":"#8b5cf6"},{"label":"학습곡선","value":9,"color":"#8b5cf6"},{"label":"빌드속도","value":10,"color":"#8b5cf6"},{"label":"풀스택","value":5,"color":"#8b5cf6"}]},{"name":"Vite 6","scores":[{"label":"SSR","value":5,"color":"#f59e0b"},{"label":"생태계","value":9,"color":"#f59e0b"},{"label":"학습곡선","value":8,"color":"#f59e0b"},{"label":"빌드속도","value":10,"color":"#f59e0b"},{"label":"풀스택","value":4,"color":"#f59e0b"}]}]'></div>
 
 독립 프로젝트라면 Vite, Next.js 프로젝트라면 Turbopack이 자연스러운 선택입니다.
 
@@ -207,7 +207,7 @@ React·Next.js 독주 시대에 균열이 생기고 있습니다. 렌더 속도�
 | **Solid.js 2** | 세밀한 반응성(Fine-Grained Reactivity), React 문법 유사 | 작음 | 고성능 대시보드 |
 | **Qwik 2** | 즉각적 상호작용(Resumability), HTML 우선 | 최소 JS | 전자상거래, LCP 최적화 |
 
-<div class="chart-bar" data-orient="vertical" data-title="2026 신흥 프론트엔드 프레임워크 관심도 (개념적 예시, 100점 기준)" data-labels="Svelte,Astro,Solid.js,Qwik" data-values="88,85,80,72" data-colors="#3b82f6,#d55e00,#009e73,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-highlight="max" data-title="Svelte가 신흥 프레임워크 중 관심도 1위 (개념적 예시, 100점 기준)" data-labels="Svelte,Astro,Solid.js,Qwik" data-values="88,85,80,72" data-colors="#3b82f6,#d55e00,#009e73,#f59e0b" data-unit="점"></div>
 
 ### 왜 지금 신흥 프레임워크인가
 

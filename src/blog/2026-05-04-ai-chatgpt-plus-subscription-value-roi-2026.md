@@ -97,7 +97,7 @@ Plus 사용자는 CSV, Excel 파일을 직접 업로드하여 복잡한 데이�
 
 ## 구체적 활용 시나리오별 ROI 계산
 
-<div class="chart-bar" data-title="직업별 월간 예상 시간 절약 (시간)" data-labels="소프트웨어 엔지니어,개발자,번역가,콘텐츠 크리에이터,마케터" data-values="55,50,40,35,25" data-colors="#8b5cf6,#009e73,#d55e00,#3b82f6,#f59e0b" data-unit="시간"></div>
+<div class="chart-bar" data-highlight="max" data-title="소프트웨어 엔지니어가 시간 절약 최대 (월 기준)" data-labels="소프트웨어 엔지니어,개발자,번역가,콘텐츠 크리에이터,마케터" data-values="55,50,40,35,25" data-colors="#8b5cf6,#009e73,#d55e00,#3b82f6,#f59e0b" data-unit="시간"></div>
 
 ### 시나리오 1: 프리랜서 개발자
 
@@ -141,7 +141,7 @@ Plus 사용자는 CSV, Excel 파일을 직접 업로드하여 복잡한 데이�
 
 ## 2026년 ChatGPT Plus의 기회비용 관점
 
-<div class="chart-versus" data-title="Plus 구독 vs 비구독" data-name-a="Plus 구독" data-name-b="무료 버전" data-color-a="#009e73" data-color-b="#d55e00" data-items='[{"label":"월간 시간 절약 (시간)","a":45,"b":0},{"label":"응답 속도 (1~10)","a":9,"b":4},{"label":"기능 다양성 (1~10)","a":9,"b":3},{"label":"실무 활용성 (1~10)","a":9,"b":4}]'></div>
+<div class="chart-versus" data-title="Plus 구독이 전 항목서 무료 버전 압도" data-name-a="Plus 구독" data-name-b="무료 버전" data-color-a="#009e73" data-color-b="#d55e00" data-items='[{"label":"월간 시간 절약 (시간)","a":45,"b":0},{"label":"응답 속도 (1~10)","a":9,"b":4},{"label":"기능 다양성 (1~10)","a":9,"b":3},{"label":"실무 활용성 (1~10)","a":9,"b":4}]'></div>
 
 **기회비용 계산**: 만약 당신이 월 100만원 이상 추가 수익을 창출할 수 있는 분야에 종사한다면, <span style="font-size:1.15em;font-weight:700">Plus 구독료 26,000원은 고민할 가치도 없는 투자</span>입니다.
 

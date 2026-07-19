@@ -37,7 +37,7 @@ faq:
 
 관련성 평가(제미나이 75.5% vs 챗GPT 71.2%), 신뢰도(제미나이 57.5% vs 챗GPT 48.0%)에서도 제미나이가 우세했습니다. 다만 리포트는 두 서비스 모두 신뢰도가 50%대에 머물러 개선 여지가 크다고 짚었습니다.
 
-<div class="chart-bar" data-orient="vertical" data-title="오픈서베이 2026-07 만족도·신뢰도 비교" data-labels="만족도,관련성,신뢰도" data-values="77.3,75.5,57.5" data-colors="#6366f1,#f59e0b,#009e73" data-unit="%"></div>
+<div class="chart-bar" data-orient="vertical" data-title="제미나이 신뢰도만 57.5%로 다른 지표보다 낮음 (오픈서베이 2026-07)" data-labels="만족도,관련성,신뢰도" data-values="77.3,75.5,57.5" data-colors="#6366f1,#f59e0b,#009e73" data-unit="%"></div>
 
 ## 이용률은 아직 챗GPT가 앞선다
 

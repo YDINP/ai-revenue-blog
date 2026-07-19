@@ -82,7 +82,7 @@ end)
 
 아래 단계가 입문자에게 권장하는 로드맵이다.
 
-<div class="chart-bar" data-title="로블록스 개발 입문 로드맵 단계별 학습 비중 (개념적 예시)" data-labels="Studio 익히기,Luau 기초,게임 제작,테스트/퍼블리시,수익화" data-values="20,25,30,15,10" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="%"></div>
+<div class="chart-bar" data-title="게임 제작 단계가 학습 비중 30%로 가장 큼 (개념적 예시)" data-labels="Studio 익히기,Luau 기초,게임 제작,테스트/퍼블리시,수익화" data-values="20,25,30,15,10" data-colors="#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6" data-unit="%"></div>
 
 1. **Studio 익히기 (1~2주)**: 파트 배치·그룹화·기본 파트 속성 조작 연습. 공식 튜토리얼 'Obby(장애물 코스)' 완성이 목표.
 2. **Luau 기초 (2~4주)**: 변수·함수·이벤트·RemoteEvent(서버↔클라이언트 통신) 학습. 'kill brick(닿으면 사망)' 같은 단순 인터랙션부터 시작.

@@ -56,7 +56,7 @@ Omni의 콘셉트는 명확합니다. <span style="font-size:1.3em;font-weight:8
 
 ## 세 진영 어떻게 다른가
 
-<div class="chart-radar" data-title="AI 어시스턴트 성향 비교 (10점, 참고용)" data-items='[
+<div class="chart-radar" data-title="Gemini가 세 항목 모두 최고점으로 앞선다 (10점, 참고용)" data-items='[
   {"name":"Gemini","scores":[
     {"label":"멀티모달","value":10,"color":"#f59e0b"},
     {"label":"생태계 통합","value":10,"color":"#f59e0b"},

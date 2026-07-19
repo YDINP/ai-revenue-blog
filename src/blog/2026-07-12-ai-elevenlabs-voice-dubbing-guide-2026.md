@@ -45,7 +45,7 @@ faq:
 
 ## 이런 데 씁니다
 
-<div class="chart-bar" data-title="AI 음성·더빙 활용처 (활용도 체감, 참고용)" data-labels="유튜브/숏폼 내레이션,다국어 더빙,오디오북/팟캐스트,광고/안내 음성" data-values="9,9,8,7" data-colors="#009e73,#f59e0b,#3b82f6,#8b5cf6" data-unit="점"></div>
+<div class="chart-bar" data-title="유튜브 내레이션·다국어 더빙이 활용도 최고 (참고용)" data-labels="유튜브/숏폼 내레이션,다국어 더빙,오디오북/팟캐스트,광고/안내 음성" data-values="9,9,8,7" data-colors="#009e73,#f59e0b,#3b82f6,#8b5cf6" data-unit="점"></div>
 
 | 용도 | 효과 |
 |------|------|

@@ -42,7 +42,7 @@ faq:
 
 ## 숫자로 보는 UGC 이코노미
 
-<div class="chart-bar" data-title="플랫폼별 크리에이터 지급액 (2024년, 백만 달러)" data-labels="로블록스,포트나이트(UEFN)" data-values="923,352" data-colors="#d55e00,#3b82f6" data-unit="M$"></div>
+<div class="chart-bar" data-title="로블록스 크리에이터 지급액, 포트나이트의 2.6배 (2024년, 백만 달러)" data-labels="로블록스,포트나이트(UEFN)" data-values="923,352" data-colors="#d55e00,#3b82f6" data-unit="M$" data-highlight="max"></div>
 
 - **로블록스**: 2024년 크리에이터 지급액 약 9억 2,300만 달러. 160만 명의 수익화 크리에이터가 누적 1억 개 이상의 UGC 경험을 만들었다. 대표 히트작 'Grow a Garden'은 2025년 여름 동시접속 1,600만 명을 기록했다.
 - **포트나이트(UEFN)**: Epic이 2023년 UEFN을 외부에 개방한 이후 크리에이터에게 10억 달러 이상을 지급했다. 크리에이터가 만든 섬은 이제 포트나이트 전체 플레이타임의 47%(전년 38%)를 차지한다.
@@ -63,7 +63,7 @@ faq:
 
 ## 인디 개발자에게 UGC는 기회인가
 
-<div class="chart-versus" data-title="스팀 자체 출시 vs UGC 플랫폼 진입" data-name-a="스팀 자체 출시" data-name-b="UGC 플랫폼" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"초기 트래픽 확보","a":45,"b":90},{"label":"창작 자유도","a":95,"b":55},{"label":"IP 소유권","a":95,"b":40},{"label":"진입 장벽 낮음","a":50,"b":85},{"label":"반복 수익 잠재력","a":60,"b":85}]'></div>
+<div class="chart-versus" data-title="UGC는 트래픽·수익성, 스팀은 자유도·IP서 우위" data-name-a="스팀 자체 출시" data-name-b="UGC 플랫폼" data-color-a="#3b82f6" data-color-b="#009e73" data-items='[{"label":"초기 트래픽 확보","a":45,"b":90},{"label":"창작 자유도","a":95,"b":55},{"label":"IP 소유권","a":95,"b":40},{"label":"진입 장벽 낮음","a":50,"b":85},{"label":"반복 수익 잠재력","a":60,"b":85}]'></div>
 
 **기회**: 이미 수억 명이 모인 플랫폼 위에서 시작하므로 '아무도 모른다'는 인디 최대의 약점([수익화 현실](/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/) 참고)을 건너뛸 수 있다. 진입 장벽도 낮다.
 

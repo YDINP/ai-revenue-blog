@@ -35,7 +35,7 @@ faq:
 
 ## 2026년 프로그래밍 언어 채택 현황
 
-<div class="chart-bar" data-title="2026년 개발자 선호 언어 TOP 5" data-labels="Python,JavaScript,TypeScript,Java,Go" data-values="88,82,76,68,62" data-colors="#3b82f6,#f59e0b,#009e73,#d55e00,#8b5cf6" data-unit="만 명"></div>
+<div class="chart-bar" data-highlight="max" data-title="Python이 개발자 선호도 1위 (2026년)" data-labels="Python,JavaScript,TypeScript,Java,Go" data-values="88,82,76,68,62" data-colors="#3b82f6,#f59e0b,#009e73,#d55e00,#8b5cf6" data-unit="만 명"></div>
 
 Stack Overflow 2025 개발자 설문 결과, Python이 여전히 압도적인 1위를 차지하고 있습니다. 그러나 언어의 인기도가 반드시 여러분에게 최적이라는 의미는 아닙니다. 취업 목표, 희망 분야, 학습 속도에 따라 최적의 선택은 완전히 달라집니다.
 
@@ -123,7 +123,7 @@ WebAssembly와 Node.js의 성숙으로, JavaScript는 더 이상 "브라우저 �
 
 ## 첫 언어 선택 후 학습 순서
 
-<div class="chart-progress" data-title="프로그래밍 학습 진도 가이드" data-labels="문법 기초,자료구조·알고리즘,프로젝트 구현,협업·버전관리,심화 기술" data-values="80,60,40,30,20" data-colors="#009e73,#3b82f6,#f59e0b,#8b5cf6,#d55e00" data-max="100" data-unit="%"></div>
+<div class="chart-progress" data-title="학습자 대부분이 문법 기초 단계에 머무른다" data-labels="문법 기초,자료구조·알고리즘,프로젝트 구현,협업·버전관리,심화 기술" data-values="80,60,40,30,20" data-colors="#009e73,#3b82f6,#f59e0b,#8b5cf6,#d55e00" data-max="100" data-unit="%"></div>
 
 **1단계: 언어 문법 (2~4주)**
 - 변수, 자료형, 반복문, 조건문, 함수
@@ -168,7 +168,7 @@ LeetCode 200문제를 풀었는데 웹사이트를 못 만들면 취업 면접�
 
 ## 2026년 데이터 기반 추천
 
-<div class="chart-versus" data-title="Python vs JavaScript 입문자 관점" data-name-a="Python" data-name-b="JavaScript" data-color-a="#3b82f6" data-color-b="#f59e0b" data-items='[{"label":"배우기 쉬움","a":95,"b":75},{"label":"취업 수요","a":82,"b":88},{"label":"커뮤니티","a":90,"b":85},{"label":"첫 프로젝트","a":92,"b":80},{"label":"진로 다양성","a":85,"b":80}]'></div>
+<div class="chart-versus" data-title="Python이 취업 수요 빼고 전 항목서 앞선다" data-name-a="Python" data-name-b="JavaScript" data-color-a="#3b82f6" data-color-b="#f59e0b" data-items='[{"label":"배우기 쉬움","a":95,"b":75},{"label":"취업 수요","a":82,"b":88},{"label":"커뮤니티","a":90,"b":85},{"label":"첫 프로젝트","a":92,"b":80},{"label":"진로 다양성","a":85,"b":80}]'></div>
 
 **최종 추천:**
 

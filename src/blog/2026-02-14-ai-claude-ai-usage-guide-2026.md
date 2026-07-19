@@ -38,7 +38,7 @@ coupangLinks:
 
 ## Claude AI의 핵심 모델 비교
 
-<div class="chart-versus" data-title="Claude Opus 4.6 vs Sonnet 4.5" data-name-a="Opus 4.6" data-name-b="Sonnet 4.5" data-color-a="#8b5cf6" data-color-b="#3b82f6" data-items='[{"label":"코드 생성","a":96,"b":90},{"label":"한국어 처리","a":94,"b":91},{"label":"이미지 분석","a":92,"b":85},{"label":"응답 속도","a":60,"b":90}]'></div>
+<div class="chart-versus" data-title="Opus는 품질, Sonnet은 속도가 강점" data-name-a="Opus 4.6" data-name-b="Sonnet 4.5" data-color-a="#8b5cf6" data-color-b="#3b82f6" data-items='[{"label":"코드 생성","a":96,"b":90},{"label":"한국어 처리","a":94,"b":91},{"label":"이미지 분석","a":92,"b":85},{"label":"응답 속도","a":60,"b":90}]'></div>
 
 Opus 4.6은 SWE-bench 80.8%, 200K(1M 베타) 컨텍스트, 에이전트 팀 기능을 갖춘 최상위 모델입니다. Sonnet 4.5는 빠른 응답 속도와 합리적 비용으로 일상 작업에 적합합니다. 정확도 우선이면 Opus, 속도/비용 우선이면 Sonnet을 선택하세요.
 
@@ -95,7 +95,7 @@ PDF, 엑셀, 파워포인트 파일을 직접 업로드하여 분석 가능합�
 
 ### 4단계: Claude AI 성능 평가
 
-<div class="chart-progress" data-title="Claude AI 기능별 만족도 평가" data-labels="한국어 처리,코드 생성,이미지 분석,응답 속도,비용 효율" data-values="92,95,88,85,82" data-colors="#009e73,#3b82f6,#f59e0b,#8b5cf6,#ec4899" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="코드 생성이 만족도 가장 높은 기능" data-labels="한국어 처리,코드 생성,이미지 분석,응답 속도,비용 효율" data-values="92,95,88,85,82" data-colors="#009e73,#3b82f6,#f59e0b,#8b5cf6,#ec4899" data-max="100" data-unit="점"></div>
 
 한국 기업 500개사 대상 조사 결과, Claude는 코드 생성(95점), 한국어 처리(92점)에서 최고 평가를 받았습니다. 다만 응답 속도와 비용 효율에서는 개선 요청이 지속되고 있습니다.
 

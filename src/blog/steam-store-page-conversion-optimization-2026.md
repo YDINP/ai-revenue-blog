@@ -33,7 +33,7 @@ faq:
 
 위시리스트가 왜 그렇게 중요한지도 이 구조로 설명된다. 위시리스트는 출시 시점의 매출을 예측하는 가장 강력한 선행지표다. How To Market A Game의 벤치마크에 따르면, 출시 첫 주에 위시리스트가 구매로 전환되는 비율은 위시리스트 규모에 따라 다음과 같이 달라진다.
 
-<div class="chart-bar" data-orient="vertical" data-labels="5천 미만,5천~4만,4만~10만,10만 이상" data-values="15,20,23,25"></div>
+<div class="chart-bar" data-orient="vertical" data-title="위시리스트 10만 이상, 전환율 25%로 최고" data-labels="5천 미만,5천~4만,4만~10만,10만 이상" data-values="15,20,23,25"></div>
 
 <p style="text-align:center;font-size:0.85em;color:#888;margin-top:-0.5em">출시 시점 위시리스트 규모별 첫 주 구매 전환율(중앙값, %) · 출처: How To Market A Game</p>
 

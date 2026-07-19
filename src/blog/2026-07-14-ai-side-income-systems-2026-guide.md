@@ -45,7 +45,7 @@ Make.com·n8n 같은 도구로 기업의 반복 업무(SNS·블로그 콘텐츠 
 
 기업용 프롬프트 세트 설계, 워크플로 자동화 도입 자문 등입니다. Deloitte에 따르면 <span style="font-size:1.15em;font-weight:700">기업의 약 75%가 2026년까지 AI 에이전트에 투자</span>할 계획이지만, 대다수 중소기업은 내부 역량이 없습니다. 이 간극이 곧 기회입니다.
 
-<div class="chart-bar" data-orient="vertical" data-title="AI 부업 모델별 특성 (참고용, 10점·높을수록 좋음)" data-labels="현금화 속도,확장성,자동화 잠재력,경쟁 여유" data-values="9,5,4,4" data-colors="#3b82f6,#8b5cf6,#009e73,#f59e0b" data-unit="점"></div>
+<div class="chart-bar" data-orient="vertical" data-title="현금화 속도가 AI 부업 최대 강점 (참고용, 10점·높을수록 좋음)" data-labels="현금화 속도,확장성,자동화 잠재력,경쟁 여유" data-values="9,5,4,4" data-highlight="max" data-colors="#3b82f6,#8b5cf6,#009e73,#f59e0b" data-unit="점"></div>
 
 ## 3. 콘텐츠 자동화 — 느리지만 자산이 된다
 

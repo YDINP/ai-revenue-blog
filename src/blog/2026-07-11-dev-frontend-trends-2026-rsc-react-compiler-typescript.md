@@ -45,7 +45,7 @@ faq:
 
 TypeScript는 이제 '선택'이 아니라 '기본'입니다. 개발자의 약 40%가 JavaScript 대신 TypeScript를 독점적으로 쓴다는 조사가 나올 만큼요. 아래는 2026년 주요 기술의 실무 채택 흐름입니다.
 
-<div class="chart-progress" data-title="2026 프론트엔드 기술 실무 채택도" data-labels="TypeScript,메타프레임워크,RSC 도입,React Compiler" data-values="88,82,64,55" data-colors="#3178c6,#000000,#61dafb,#8b5cf6" data-max="100" data-unit="%"></div>
+<div class="chart-progress" data-title="TypeScript 채택도 88%로 압도적 1위" data-labels="TypeScript,메타프레임워크,RSC 도입,React Compiler" data-values="88,82,64,55" data-colors="#3178c6,#000000,#61dafb,#8b5cf6" data-max="100" data-unit="%"></div>
 
 ## 5. React Compiler의 주류화
 

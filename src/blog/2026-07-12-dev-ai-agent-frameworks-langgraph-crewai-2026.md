@@ -39,7 +39,7 @@ API 호출 하나면 되는 간단한 작업엔 필요 없습니다. 하지만 <
 
 ## 특성별 점수
 
-<div class="chart-radar" data-title="에이전트 프레임워크 특성 (10점, 참고용)" data-items='[
+<div class="chart-radar" data-title="LangGraph는 제어력, CrewAI는 진입장벽·협업 우위 (10점, 참고용)" data-items='[
   {"name":"LangGraph","scores":[
     {"label":"제어력","value":10,"color":"#009e73"},
     {"label":"진입장벽","value":6,"color":"#009e73"},
