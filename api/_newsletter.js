@@ -163,35 +163,20 @@ function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
   const line = '#e6e3dd';
   const serif = "Georgia,'Times New Roman',serif";
   const noun = source === 'vip' ? '영상' : '글';
-  // VIP 리드는 블로그 watch 페이지의 '뉴스룸' 구도를 그대로 재현(배경 스튜디오+모니터+로지 앵커)
+  // VIP는 블로그 watch 페이지 '뉴스룸' 구도를 빌드시 합성해둔 단일 이미지(/newsroom-cards/<slug>.png)로.
+  //   이메일 클라(Gmail 등)는 position:absolute 를 제거해 레이어드 오버레이가 세로로 무너지므로 단일 이미지가 필수.
   const vipStage = source === 'vip' && site ? site.replace(/\/$/, '') : '';
-  const stageBg = vipStage ? `${vipStage}/host/newsroom-bg.webp` : '';
-  const anchor = vipStage ? `${vipStage}/host/char2/base.webp` : '';
   const intro = vipStage
     ? '로지가 이번에 새로 올라온 영상을 골라봤어요 📩'
     : `새로 올라온 ${noun} 중에서 골라봤어요 📩`;
   const [lead, ...rest] = posts;
 
   const leadUrl = lead ? withUtm(lead.link) : '';
-  // VIP 리드 = 뉴스룸 스테이지(스튜디오 배경 위 좌상단 게임 모니터 + 우측 로지 앵커 + VIP 데스크 + 재생)
-  const leadMedia =
-    lead && lead.image
-      ? vipStage
-        ? `<a href="${leadUrl}" style="display:block;text-decoration:none">
-        <div style="position:relative;width:100%;max-width:516px;margin:0 auto;padding-bottom:56.25%;background:#080d1a url('${stageBg}') center/cover no-repeat;border-radius:12px;overflow:hidden">
-          <img src="${stageBg}" alt="" width="516" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block">
-          <div style="position:absolute;left:3.5%;top:5%;width:55%;height:55%;border-radius:9px;overflow:hidden;border:2px solid rgba(130,175,255,.55);box-shadow:0 10px 30px rgba(0,0,0,.55)">
-            <img src="${escapeHtml(lead.image)}" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
-            <span style="position:absolute;left:7px;top:7px;background:rgba(214,42,64,.95);color:#fff;font:700 10px/1 Arial,sans-serif;letter-spacing:.06em;padding:4px 7px;border-radius:4px">● LIVE</span>
-          </div>
-          <img src="${anchor}" alt="로지" style="position:absolute;right:1%;bottom:12%;width:45%;height:auto;display:block;filter:drop-shadow(0 10px 20px rgba(0,0,0,.5))">
-          <div style="position:absolute;left:0;right:0;bottom:0;height:12%;background:linear-gradient(180deg,#1a2c56,#0a1428);border-top:2px solid rgba(130,175,255,.4)"></div>
-          <span style="position:absolute;right:14px;bottom:3%;color:#8fb2ff;font:800 14px/1 Georgia,serif;letter-spacing:.1em">VIP</span>
-          <span style="position:absolute;top:50%;left:50%;margin:-26px 0 0 -26px;width:52px;height:52px;background:rgba(255,61,84,.94);border-radius:50%;text-align:center;box-shadow:0 3px 12px rgba(0,0,0,.4)"><span style="color:#fff;font-size:18px;line-height:52px">▶</span></span>
-        </div>
-      </a>`
-        : `<a href="${leadUrl}"><img src="${escapeHtml(lead.image)}" width="516" alt="" style="width:100%;max-width:516px;height:auto;border-radius:12px;display:block"></a>`
-      : '';
+  const slugM = lead ? lead.link.match(/\/watch\/([^/?#]+)/) : null;
+  const leadImg = vipStage && slugM ? `${vipStage}/newsroom-cards/${slugM[1]}.png` : lead ? lead.image : '';
+  const leadMedia = lead && leadImg
+    ? `<a href="${leadUrl}"><img src="${escapeHtml(leadImg)}" width="516" alt="" style="width:100%;max-width:516px;height:auto;border-radius:12px;display:block"></a>`
+    : '';
   const leadBlock = lead
     ? `
     <tr><td style="padding:2px 0 0">
