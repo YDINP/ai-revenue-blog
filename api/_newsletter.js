@@ -140,6 +140,7 @@ function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
   const ground = '#f4f3f1';
   const line = '#e6e3dd';
   const serif = "Georgia,'Times New Roman',serif";
+  const noun = source === 'vip' ? '영상' : '글';
   const [lead, ...rest] = posts;
 
   const leadUrl = lead ? withUtm(lead.link) : '';
@@ -155,7 +156,7 @@ function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
     <tr><td style="padding:14px 0 4px">
       <a href="${leadUrl}" style="font-family:${serif};font-size:22px;line-height:1.32;font-weight:700;color:${ink};text-decoration:none">${escapeHtml(lead.title)}</a>
       ${lead.desc ? `<div style="font-size:14px;color:${sub};margin-top:9px;line-height:1.65">${escapeHtml(lead.desc)}…</div>` : ''}
-      <a href="${leadUrl}" style="display:inline-block;margin-top:12px;font-size:13px;font-weight:700;color:${brand};text-decoration:none">글 읽어보기 →</a>
+      <a href="${leadUrl}" style="display:inline-block;margin-top:12px;font-size:13px;font-weight:700;color:${brand};text-decoration:none">${noun} 보러가기 →</a>
     </td></tr>`
     : '';
 
@@ -192,12 +193,12 @@ function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
         <td align="right" style="font-size:11px;color:${muted};letter-spacing:.06em">NEWSLETTER</td>
       </tr></table>
       <div style="height:2px;background:${ink};margin:11px 0 4px"></div>
-      <p style="font-size:12px;color:${sub};margin:8px 0 18px">새로 올라온 글 중에서 골라봤어요 📩</p>
+      <p style="font-size:12px;color:${sub};margin:8px 0 18px">새로 올라온 ${noun} 중에서 골라봤어요 📩</p>
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${leadBlock}${restBlock}</table>
       ${
         site
           ? `<div style="text-align:center;margin:26px 0 2px">
-        <a href="${escapeHtml(withUtm(site))}" style="display:inline-block;background:${brand};color:#fff;font-size:13px;font-weight:700;text-decoration:none;padding:11px 24px;border-radius:9px">블로그에서 전체 글 보기 →</a>
+        <a href="${escapeHtml(withUtm(site))}" style="display:inline-block;background:${brand};color:#fff;font-size:13px;font-weight:700;text-decoration:none;padding:11px 24px;border-radius:9px">전체 ${noun} 보러가기 →</a>
       </div>`
           : ''
       }
@@ -231,10 +232,11 @@ async function sendForBlog(blog) {
     })
   );
   const label = sourceLabel ? sourceLabel(source) : blog.label || source;
+  const noun = source === 'vip' ? '영상' : '글';
   const subject =
     fresh.length === 1
-      ? `📩 방금 새 글 올렸어요 — ${fresh[0].title}`
-      : `📩 ${label} 새 글 ${fresh.length}편 왔어요, 골라 읽어보세요`;
+      ? `📩 방금 새 ${noun} 올렸어요 — ${fresh[0].title}`
+      : `📩 ${label} 새 ${noun} ${fresh.length}편 왔어요, 골라 보세요`;
   let ok = 0;
   for (const email of subs) {
     try {
