@@ -124,29 +124,79 @@ async function sendEmail(to, subject, html) {
 function unsubUrl(source, email) {
   return `${BACKEND}/api/daily-report?action=unsubscribe&source=${encodeURIComponent(source)}&email=${encodeURIComponent(email)}`;
 }
-function digestHtml(label, posts, source, email) {
-  const rows = posts
-    .map(
-      (p) => `
-    <tr><td style="padding:16px 0;border-bottom:1px solid #eee">
+// 신문/큐레이션 레이아웃: 리드 기사(큰 이미지+요약) 1개 + 나머지는 작은 썸네일 헤드라인
+function digestHtml(label, posts, source, email, site) {
+  const brand = '#1e6b5c';
+  const ink = '#1a1712';
+  const sub = '#5f5a51';
+  const muted = '#938d80';
+  const ground = '#f3f2ec';
+  const line = '#e3e0d6';
+  const serif = "Georgia,'Times New Roman',serif";
+  const [lead, ...rest] = posts;
+
+  const leadBlock = lead
+    ? `
+    <tr><td style="padding:2px 0 0">
       ${
-        p.image
-          ? `<a href="${p.link}"><img src="${escapeHtml(p.image)}" alt="" width="536" style="width:100%;max-width:536px;height:auto;border-radius:12px;display:block;margin-bottom:11px"></a>`
+        lead.image
+          ? `<a href="${lead.link}"><img src="${escapeHtml(lead.image)}" width="516" alt="" style="width:100%;max-width:516px;height:auto;border-radius:12px;display:block"></a>`
           : ''
       }
-      <a href="${p.link}" style="font-size:16px;font-weight:700;color:#1e6b5c;text-decoration:none">${escapeHtml(p.title)}</a>
-      ${p.desc ? `<div style="font-size:13px;color:#666;margin-top:5px;line-height:1.5">${escapeHtml(p.desc)}…</div>` : ''}
+    </td></tr>
+    <tr><td style="padding:14px 0 4px">
+      <a href="${lead.link}" style="font-family:${serif};font-size:22px;line-height:1.32;font-weight:700;color:${ink};text-decoration:none">${escapeHtml(lead.title)}</a>
+      ${lead.desc ? `<div style="font-size:14px;color:${sub};margin-top:9px;line-height:1.65">${escapeHtml(lead.desc)}…</div>` : ''}
+      <a href="${lead.link}" style="display:inline-block;margin-top:12px;font-size:13px;font-weight:700;color:${brand};text-decoration:none">글 읽어보기 →</a>
     </td></tr>`
-    )
-    .join('');
-  return `<div style="max-width:560px;margin:0 auto;font-family:'Apple SD Gothic Neo',sans-serif;color:#222;padding:8px">
-    <h2 style="color:#1e6b5c;margin:0 0 4px">${escapeHtml(label)}</h2>
-    <p style="color:#555;margin:0 0 18px">새로 올라온 글이에요. 골라서 읽어보세요 📩</p>
-    <table style="width:100%;border-collapse:collapse">${rows}</table>
-    <p style="font-size:12px;color:#999;margin-top:26px;line-height:1.6">
-      이 메일은 ${escapeHtml(label)} 뉴스레터 구독자에게 발송됩니다.<br/>
-      <a href="${unsubUrl(source, email)}" style="color:#999">구독 취소</a>
-    </p>
+    : '';
+
+  const restBlock = rest.length
+    ? `
+    <tr><td style="padding:24px 0 8px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:${muted};border-top:2px solid ${ink};padding-top:11px">MORE STORIES</div>
+    </td></tr>
+    ${rest
+      .map(
+        (p) => `
+    <tr><td style="padding:11px 0;border-bottom:1px solid ${line}">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        ${
+          p.image
+            ? `<td width="72" valign="top" style="padding-right:13px">
+          <a href="${p.link}"><img src="${escapeHtml(p.image)}" width="72" height="72" alt="" style="width:72px;height:72px;object-fit:cover;border-radius:8px;display:block"></a>
+        </td>`
+            : ''
+        }
+        <td valign="middle">
+          <a href="${p.link}" style="font-size:15px;font-weight:700;line-height:1.42;color:${ink};text-decoration:none">${escapeHtml(p.title)}</a>
+        </td>
+      </tr></table>
+    </td></tr>`
+      )
+      .join('')}`
+    : '';
+
+  return `<div style="max-width:560px;margin:0 auto;background:${ground};font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;padding:6px">
+    <div style="background:#fff;border:1px solid ${line};border-radius:16px;padding:26px 22px">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td style="font-family:${serif};font-size:20px;font-weight:700;color:${brand}">${escapeHtml(label)}</td>
+        <td align="right" style="font-size:11px;color:${muted};letter-spacing:.06em">NEWSLETTER</td>
+      </tr></table>
+      <div style="height:2px;background:${ink};margin:11px 0 4px"></div>
+      <p style="font-size:12px;color:${sub};margin:8px 0 18px">새로 올라온 글 중에서 골라봤어요 📩</p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${leadBlock}${restBlock}</table>
+      ${
+        site
+          ? `<div style="text-align:center;margin:26px 0 2px">
+        <a href="${escapeHtml(site)}" style="display:inline-block;background:${brand};color:#fff;font-size:13px;font-weight:700;text-decoration:none;padding:11px 24px;border-radius:9px">블로그에서 전체 글 보기 →</a>
+      </div>`
+          : ''
+      }
+      <p style="font-size:11px;color:${muted};margin:22px 0 0;line-height:1.6;text-align:center">
+        이 메일은 ${escapeHtml(label)} 뉴스레터 구독자에게 발송됩니다 · <a href="${unsubUrl(source, email)}" style="color:${muted}">구독 취소</a>
+      </p>
+    </div>
   </div>`;
 }
 
@@ -180,7 +230,7 @@ async function sendForBlog(blog) {
   let ok = 0;
   for (const email of subs) {
     try {
-      await sendEmail(email, subject, digestHtml(label, fresh, source, email));
+      await sendEmail(email, subject, digestHtml(label, fresh, source, email, blog.site));
       ok++;
     } catch (e) {
       console.error(`newsletter send fail (${source}/${email}):`, e.message);
