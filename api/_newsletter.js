@@ -173,7 +173,9 @@ function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
 
   const leadUrl = lead ? withUtm(lead.link) : '';
   const slugM = lead ? lead.link.match(/\/watch\/([^/?#]+)/) : null;
-  const leadImg = vipStage && slugM ? `${vipStage}/newsroom-cards/${slugM[1]}.png` : lead ? lead.image : '';
+  // ?v=pubDate 캐시버스터 — 같은 URL 이미지를 캐시하는 메일 클라(Gmail 프록시)에서 옛 카드가 남는 것 방지
+  const leadImg =
+    vipStage && slugM ? `${vipStage}/newsroom-cards/${slugM[1]}.png?v=${lead.ts}` : lead ? lead.image : '';
   const leadMedia = lead && leadImg
     ? `<a href="${leadUrl}"><img src="${escapeHtml(leadImg)}" width="516" alt="" style="width:100%;max-width:516px;height:auto;border-radius:12px;display:block"></a>`
     : '';
