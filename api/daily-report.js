@@ -52,8 +52,12 @@ export default async function handler(req, res) {
     await supabaseRpc('flag_bot_pageviews', {}).catch((e) => console.error('bot flag (report):', e.message));
     // GSC 검색 실적을 Supabase(gsc_daily)에 저장 — best-effort(실패해도 리포트는 진행)
     await syncGsc({ days: 5 }).catch((e) => console.error('gsc sync (report):', e.message));
-    // 새 글(최근 48h) 뉴스레터 발송 — best-effort(GMAIL_USER/APP_PASSWORD 없으면 조용히 스킵)
-    await runNewsletter().catch((e) => console.error('newsletter (report):', e.message));
+    // 새 글(최근 48h) 뉴스레터 발송 — 월·수·금 09시(KST)만. best-effort(GMAIL env 없으면 스킵)
+    //   daily-report 는 매일 09시(KST=00:00 UTC) 실행되므로 KST 요일로 게이트한다.
+    const kstDow = new Date(Date.now() + 9 * 3600 * 1000).getUTCDay(); // 0=일 … 1=월,3=수,5=금
+    if ([1, 3, 5].includes(kstDow)) {
+      await runNewsletter().catch((e) => console.error('newsletter (report):', e.message));
+    }
 
     // ?day=YYYY-MM-DD 로 특정 날짜 재발송 (워크플로 수동 실행용). 기본 = 어제(KST)
     const day = url.searchParams.get('day') || undefined;
