@@ -106,7 +106,7 @@ async function sendEmail(to, subject, html) {
 }
 
 function unsubUrl(source, email) {
-  return `${BACKEND}/api/newsletter-unsubscribe?source=${encodeURIComponent(source)}&email=${encodeURIComponent(email)}`;
+  return `${BACKEND}/api/daily-report?action=unsubscribe&source=${encodeURIComponent(source)}&email=${encodeURIComponent(email)}`;
 }
 function digestHtml(label, posts, source, email) {
   const rows = posts
