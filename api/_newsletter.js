@@ -1,19 +1,29 @@
 // 뉴스레터 발송 파이프라인
 //   새 글(RSS 최근 48h) → 블로그별 구독자에게 Resend로 다이제스트 메일 1통.
 //   중복 발송은 newsletter_sends(post_url) 로 방지.
-// 필요 env: RESEND_API_KEY, SUPABASE_SERVICE_ROLE_KEY, (선택)NEWSLETTER_FROM
+// 발송 = 내 Gmail SMTP(nodemailer). 발신인 = 내 이메일, 실구독자 누구에게나 발송(하루 ~500).
+// 필요 env: GMAIL_USER, GMAIL_APP_PASSWORD(16자리 앱 비밀번호), SUPABASE_SERVICE_ROLE_KEY
+import nodemailer from 'nodemailer';
 import { SUPABASE_URL, escapeHtml, sourceLabel } from './_shared.js';
 import { blogList } from './_blogs.js';
 
-const RESEND_URL = 'https://api.resend.com/emails';
-const FROM = process.env.NEWSLETTER_FROM || 'onboarding@resend.dev';
-// 발신 주소만 추출(NEWSLETTER_FROM 이 "Name <addr>" 형태여도 addr만) → 표시명은 블로그별로 붙임
-function fromAddress() {
-  const m = FROM.match(/<([^>]+)>/);
-  return (m ? m[1] : FROM).trim();
+let _transport;
+function transport() {
+  if (_transport) return _transport;
+  const user = process.env.GMAIL_USER;
+  const pass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, ''); // 앱 비번은 공백 포함 표기 → 제거
+  if (!user || !pass) throw new Error('GMAIL_USER / GMAIL_APP_PASSWORD not set');
+  _transport = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: { user, pass },
+  });
+  return _transport;
 }
+// 발신 주소는 인증한 Gmail 계정 고정, 표시명만 블로그별로
 function fromHeader(label) {
-  return `"${label}" <${fromAddress()}>`;
+  return `"${label}" <${process.env.GMAIL_USER || 'me'}>`;
 }
 const BACKEND = 'https://ai-revenue-blog.vercel.app'; // 공유 api/가 배포되는 곳(구독취소 링크용)
 const WINDOW_H = 48; // 최근 48시간 내 발행글만(첫 실행 폭주 방지)
@@ -131,16 +141,13 @@ async function recordSent(source, post_url, subject, count) {
 }
 
 async function sendEmail(to, subject, html, from) {
-  const key = process.env.RESEND_API_KEY;
-  if (!key) throw new Error('RESEND_API_KEY not set');
-  const r = await fetch(RESEND_URL, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from: from || fromHeader('Insights'), to, subject, html }),
+  const info = await transport().sendMail({
+    from: from || fromHeader('Insights'),
+    to,
+    subject,
+    html,
   });
-  const data = await r.json().catch(() => null);
-  if (!r.ok) throw new Error(`resend ${r.status}: ${JSON.stringify(data)}`);
-  return data;
+  return { id: info.messageId };
 }
 
 function unsubUrl(source, email) {
