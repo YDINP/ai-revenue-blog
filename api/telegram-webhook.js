@@ -1,7 +1,7 @@
 // 텔레그램 봇 웹훅 — 대시보드 조회 / 댓글 관리 / 블로그 제어(글·배포)
 // setWebhook 시 secret_token=WEBHOOK_SECRET 지정 필수 (SETUP-telegram-comment-bot.md)
 
-import { escapeHtml, getComment, postUrl, supabaseRpc, tg } from './_shared.js';
+import { escapeHtml, getComment, postUrl, sourceLabel, supabaseRpc, tg } from './_shared.js';
 import {
   commentStatsMessage,
   commentsMessages,
@@ -31,6 +31,7 @@ import {
 import { gscMessage, seoMessage } from './_gsc-view.js';
 import { moneyMessage } from './_money.js';
 import { reportMessage } from './_report.js';
+import { runNewsletter } from './_newsletter.js';
 import { indexMessage } from './_seo.js';
 import {
   threadsStatusMessage,
@@ -56,6 +57,7 @@ const HELP = [
   '<b>📊 대시보드 조회 (실시간)</b>',
   '• /stats — 전체 요약 (조회·클릭·좋아요·구독·댓글)',
   '• /report [YYYY-MM-DD] — 일일 종합 리포트 (기본 어제, 매일 09시 자동 발송)',
+  '• /newsletter [force] — 새 글 뉴스레터 수동 발송 (force=이미 보낸 글도 재발송)',
   '• /gsc [일수] — 구글 검색 유입 (검색어·노출·CTR·평균순위, 기본 7일)',
   '• /tf · /lf — TechFlow / LifeFlow 소스별 요약',
   '• /coupang — 쿠팡 클릭 상세 (어떤 글→어떤 링크)',
@@ -309,6 +311,17 @@ export default async function handler(req, res) {
         deploy: () => deployMessage(a1),
         status: () => statusMessage(a1),
         report: () => reportMessage(/^\d{4}-\d{2}-\d{2}$/.test(a1 || '') ? a1 : undefined),
+        newsletter: async () => {
+          const force = (a1 || '').toLowerCase() === 'force';
+          const res = await runNewsletter({ force });
+          const lines = res.map((r) => {
+            if (r.error) return `• ${r.source}: ⚠️ ${escapeHtml(r.error)}`;
+            if (r.skipped) return `• ${r.source}: (건너뜀)`;
+            const note = r.note ? ` (${escapeHtml(r.note)})` : '';
+            return `• ${escapeHtml(sourceLabel(r.source))}: 새 ${r.new || 0}편 → ${r.sent || 0}명 발송${note}`;
+          });
+          return `📩 <b>뉴스레터 ${force ? '강제 ' : ''}발송</b>\n\n${lines.join('\n')}`;
+        },
         gsc: () => gscMessage(a1 ? parseInt(a1, 10) : 7),
         seo: () => seoMessage(a1 ? parseInt(a1, 10) : 28),
         money: () => moneyMessage(/^\d+$/.test(a1 || '') ? null : a1, /^\d+$/.test(a1 || '') ? parseInt(a1, 10) : 8),

@@ -248,7 +248,8 @@ function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
 }
 
 // 한 블로그 처리: 신규글 찾아 구독자에게 다이제스트 1통
-async function sendForBlog(blog) {
+//   force=true → 발송기록(newsletter_sends) 무시하고 최근 48h 글 강제 재발송(수동 발송용)
+async function sendForBlog(blog, force = false) {
   const source = blog.source;
   if (!source) return { source: blog.key, skipped: 'no source' };
   const [posts0, sent, subs] = await Promise.all([
@@ -256,7 +257,9 @@ async function sendForBlog(blog) {
     sentUrls(source),
     activeSubscribers(source),
   ]);
-  const fresh = posts0.filter((p) => !sent.has(p.link)).sort((a, b) => b.ts - a.ts);
+  const fresh = (force ? posts0 : posts0.filter((p) => !sent.has(p.link))).sort(
+    (a, b) => b.ts - a.ts
+  );
   if (!fresh.length) return { source, new: 0, sent: 0 };
   if (!subs.length) {
     // 구독자 없어도 발송기록은 남겨 다음에 중복 안 되게
@@ -293,12 +296,12 @@ async function sendForBlog(blog) {
   return { source, new: fresh.length, sent: ok, subscribers: subs.length };
 }
 
-// 전 블로그 실행(daily-report / 크론에서 호출)
-export async function runNewsletter() {
+// 전 블로그 실행(daily-report / 크론 / 수동에서 호출). force=true → 강제 재발송
+export async function runNewsletter({ force = false } = {}) {
   const out = [];
   for (const blog of blogList()) {
     try {
-      out.push(await sendForBlog(blog));
+      out.push(await sendForBlog(blog, force));
     } catch (e) {
       out.push({ source: blog.source || blog.key, error: e.message });
     }
