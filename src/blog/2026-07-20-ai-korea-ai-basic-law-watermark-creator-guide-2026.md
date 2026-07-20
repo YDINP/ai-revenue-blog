@@ -9,6 +9,11 @@ tags: ["AI기본법", "생성형 AI", "워터마크", "AI 규제 2026", "크리�
 image:
   url: "/images/ai-korea-basic-law-2026.webp"
   alt: "Digital watermark and AI disclosure concept over a laptop screen, symbolizing Korea's AI Basic Act"
+coupangLinks:
+  - title: "콘텐츠 크리에이터 마이크"
+    url: "https://www.coupang.com/np/search?q=%EC%BD%98%ED%85%90%EC%B8%A0%20%ED%81%AC%EB%A6%AC%EC%97%90%EC%9D%B4%ED%84%B0%20%EB%A7%88%EC%9D%B4%ED%81%AC&src=1139000&spec=10799999&addtag=200&ctag=%EC%BD%98%ED%85%90%EC%B8%A0%20%ED%81%AC%EB%A6%AC%EC%97%90%EC%9D%B4%ED%84%B0%20%EB%A7%88%EC%9D%B4%ED%81%AC&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%BD%98%ED%85%90%EC%B8%A0%20%ED%81%AC%EB%A6%AC%EC%97%90%EC%9D%B4%ED%84%B0%20%EB%A7%88%EC%9D%B4%ED%81%AC"
+  - title: "인공지능 활용 도서"
+    url: "https://www.coupang.com/np/search?q=%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5%20%ED%99%9C%EC%9A%A9%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5%20%ED%99%9C%EC%9A%A9%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5%20%ED%99%9C%EC%9A%A9%20%EB%8F%84%EC%84%9C"
 faq:
   - q: "블로그 대표 이미지나 유튜브 썸네일을 미드저니·챗GPT로 만들면 워터마크를 꼭 붙여야 하나요?"
     a: "AI기본법에 생성형 AI 결과물에 대한 워터마크·AI 생성 사실 고지 의무가 명시돼 있는 것은 확인됐지만, 이 의무의 정확한 대상(AI 서비스 제공사인지, 콘텐츠를 올리는 개인인지)과 표시 방식 세부 규정은 이 글 작성 시점에 별도로 확인되지 않았습니다. 법의 방향성 자체가 'AI 생성물은 밝히는 쪽'이므로, 의무 여부와 무관하게 지금부터 표시하는 습관을 들이는 것이 안전합니다."
