@@ -6,7 +6,15 @@ import { SUPABASE_URL, escapeHtml, sourceLabel } from './_shared.js';
 import { blogList } from './_blogs.js';
 
 const RESEND_URL = 'https://api.resend.com/emails';
-const FROM = process.env.NEWSLETTER_FROM || 'Insights <onboarding@resend.dev>';
+const FROM = process.env.NEWSLETTER_FROM || 'onboarding@resend.dev';
+// 발신 주소만 추출(NEWSLETTER_FROM 이 "Name <addr>" 형태여도 addr만) → 표시명은 블로그별로 붙임
+function fromAddress() {
+  const m = FROM.match(/<([^>]+)>/);
+  return (m ? m[1] : FROM).trim();
+}
+function fromHeader(label) {
+  return `"${label}" <${fromAddress()}>`;
+}
 const BACKEND = 'https://ai-revenue-blog.vercel.app'; // 공유 api/가 배포되는 곳(구독취소 링크용)
 const WINDOW_H = 48; // 최근 48시간 내 발행글만(첫 실행 폭주 방지)
 
@@ -122,13 +130,13 @@ async function recordSent(source, post_url, subject, count) {
   });
 }
 
-async function sendEmail(to, subject, html) {
+async function sendEmail(to, subject, html, from) {
   const key = process.env.RESEND_API_KEY;
   if (!key) throw new Error('RESEND_API_KEY not set');
   const r = await fetch(RESEND_URL, {
     method: 'POST',
     headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from: FROM, to, subject, html }),
+    body: JSON.stringify({ from: from || fromHeader('Insights'), to, subject, html }),
   });
   const data = await r.json().catch(() => null);
   if (!r.ok) throw new Error(`resend ${r.status}: ${JSON.stringify(data)}`);
@@ -155,7 +163,7 @@ function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
   const line = '#e6e3dd';
   const serif = "Georgia,'Times New Roman',serif";
   const noun = source === 'vip' ? '영상' : '글';
-  // VIP는 호스트 캐릭터 '로지'를 제호에 등장
+  // VIP는 호스트 캐릭터 '로지'를 리드 영상의 진행자 페이스캠으로 등장
   const host = source === 'vip' && site ? `${site.replace(/\/$/, '')}/host/rosie.png` : '';
   const intro = host
     ? '로지가 이번에 새로 올라온 영상을 골라봤어요 📩'
@@ -163,14 +171,21 @@ function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
   const [lead, ...rest] = posts;
 
   const leadUrl = lead ? withUtm(lead.link) : '';
+  // VIP 리드는 블로그 영상 진행처럼: 썸네일 + 재생버튼 + 로지 호스트 페이스캠
+  const leadMedia =
+    lead && lead.image
+      ? host
+        ? `<div style="position:relative;line-height:0;max-width:516px;margin:0 auto">
+        <a href="${leadUrl}"><img src="${escapeHtml(lead.image)}" width="516" alt="" style="width:100%;max-width:516px;height:auto;border-radius:12px;display:block"></a>
+        <a href="${leadUrl}" style="position:absolute;top:50%;left:50%;margin:-28px 0 0 -28px;width:56px;height:56px;background:${brand};border-radius:50%;display:block;text-align:center;text-decoration:none;box-shadow:0 3px 12px rgba(0,0,0,.4)"><span style="color:#fff;font-size:20px;line-height:56px">▶</span></a>
+        <img src="${host}" width="84" height="84" alt="로지" style="position:absolute;right:12px;bottom:12px;width:84px;height:84px;border-radius:50%;border:3px solid #fff;object-fit:cover;object-position:50% 8%;box-shadow:0 2px 10px rgba(0,0,0,.45)">
+      </div>`
+        : `<a href="${leadUrl}"><img src="${escapeHtml(lead.image)}" width="516" alt="" style="width:100%;max-width:516px;height:auto;border-radius:12px;display:block"></a>`
+      : '';
   const leadBlock = lead
     ? `
     <tr><td style="padding:2px 0 0">
-      ${
-        lead.image
-          ? `<a href="${leadUrl}"><img src="${escapeHtml(lead.image)}" width="516" alt="" style="width:100%;max-width:516px;height:auto;border-radius:12px;display:block"></a>`
-          : ''
-      }
+      ${leadMedia}
     </td></tr>
     <tr><td style="padding:14px 0 4px">
       <a href="${leadUrl}" style="font-family:${serif};font-size:22px;line-height:1.32;font-weight:700;color:${ink};text-decoration:none">${escapeHtml(lead.title)}</a>
@@ -208,16 +223,7 @@ function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
   return `<div style="max-width:560px;margin:0 auto;background:${ground};font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;padding:6px">
     <div style="background:#fff;border:1px solid ${line};border-radius:16px;padding:26px 22px">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-        <td>
-          <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-            ${
-              host
-                ? `<td width="50" style="padding-right:11px"><img src="${host}" width="46" height="46" alt="로지" style="width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:50% 10%;border:2px solid ${brand};display:block"></td>`
-                : ''
-            }
-            <td style="font-family:${serif};font-size:20px;font-weight:700;color:${brand}">${escapeHtml(label)}</td>
-          </tr></table>
-        </td>
+        <td style="font-family:${serif};font-size:20px;font-weight:700;color:${brand}">${escapeHtml(label)}</td>
         <td align="right" valign="middle" style="font-size:11px;color:${muted};letter-spacing:.06em">NEWSLETTER</td>
       </tr></table>
       <div style="height:2px;background:${ink};margin:11px 0 4px"></div>
@@ -268,7 +274,12 @@ async function sendForBlog(blog) {
   let ok = 0;
   for (const email of subs) {
     try {
-      await sendEmail(email, subject, digestHtml(label, fresh, source, email, blog.site, BRAND[source] || '#1e6b5c'));
+      await sendEmail(
+        email,
+        subject,
+        digestHtml(label, fresh, source, email, blog.site, BRAND[source] || '#1e6b5c'),
+        fromHeader(label)
+      );
       ok++;
     } catch (e) {
       console.error(`newsletter send fail (${source}/${email}):`, e.message);
