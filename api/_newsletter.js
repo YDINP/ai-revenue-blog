@@ -130,14 +130,15 @@ function withUtm(url) {
   if (!url) return url;
   return url + (url.includes('?') ? '&' : '?') + UTM;
 }
+// 블로그별 브랜드 accent(제목/링크/버튼 색)
+const BRAND = { blog: '#6d5cf0', lifeflow: '#1e6b5c', vip: '#ff3d54' };
 // 신문/큐레이션 레이아웃: 리드 기사(큰 이미지+요약) 1개 + 나머지는 작은 썸네일 헤드라인
-function digestHtml(label, posts, source, email, site) {
-  const brand = '#1e6b5c';
+function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
   const ink = '#1a1712';
   const sub = '#5f5a51';
   const muted = '#938d80';
-  const ground = '#f3f2ec';
-  const line = '#e3e0d6';
+  const ground = '#f4f3f1';
+  const line = '#e6e3dd';
   const serif = "Georgia,'Times New Roman',serif";
   const [lead, ...rest] = posts;
 
@@ -237,7 +238,7 @@ async function sendForBlog(blog) {
   let ok = 0;
   for (const email of subs) {
     try {
-      await sendEmail(email, subject, digestHtml(label, fresh, source, email, blog.site));
+      await sendEmail(email, subject, digestHtml(label, fresh, source, email, blog.site, BRAND[source] || '#1e6b5c'));
       ok++;
     } catch (e) {
       console.error(`newsletter send fail (${source}/${email}):`, e.message);
