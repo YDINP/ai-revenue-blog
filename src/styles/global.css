@@ -704,10 +704,9 @@ section > h2::after {
 
 .breadcrumb li[aria-current="page"] {
   color: var(--color-text-secondary);
-  max-width: 300px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .post-back {
@@ -2173,7 +2172,9 @@ section > h2::after {
   }
 
   .breadcrumb li[aria-current="page"] {
-    max-width: 200px;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 }
 
