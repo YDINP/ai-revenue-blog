@@ -163,23 +163,33 @@ function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
   const line = '#e6e3dd';
   const serif = "Georgia,'Times New Roman',serif";
   const noun = source === 'vip' ? '영상' : '글';
-  // VIP는 호스트 캐릭터 '로지'를 리드 영상의 진행자 페이스캠으로 등장
-  const host = source === 'vip' && site ? `${site.replace(/\/$/, '')}/host/rosie.png` : '';
-  const intro = host
+  // VIP 리드는 블로그 watch 페이지의 '뉴스룸' 구도를 그대로 재현(배경 스튜디오+모니터+로지 앵커)
+  const vipStage = source === 'vip' && site ? site.replace(/\/$/, '') : '';
+  const stageBg = vipStage ? `${vipStage}/host/newsroom-bg.webp` : '';
+  const anchor = vipStage ? `${vipStage}/host/char2/base.webp` : '';
+  const intro = vipStage
     ? '로지가 이번에 새로 올라온 영상을 골라봤어요 📩'
     : `새로 올라온 ${noun} 중에서 골라봤어요 📩`;
   const [lead, ...rest] = posts;
 
   const leadUrl = lead ? withUtm(lead.link) : '';
-  // VIP 리드는 블로그 영상 진행처럼: 썸네일 + 재생버튼 + 로지 호스트 페이스캠
+  // VIP 리드 = 뉴스룸 스테이지(스튜디오 배경 위 좌상단 게임 모니터 + 우측 로지 앵커 + VIP 데스크 + 재생)
   const leadMedia =
     lead && lead.image
-      ? host
-        ? `<div style="position:relative;line-height:0;max-width:516px;margin:0 auto">
-        <a href="${leadUrl}"><img src="${escapeHtml(lead.image)}" width="516" alt="" style="width:100%;max-width:516px;height:auto;border-radius:12px;display:block"></a>
-        <a href="${leadUrl}" style="position:absolute;top:50%;left:50%;margin:-28px 0 0 -28px;width:56px;height:56px;background:${brand};border-radius:50%;display:block;text-align:center;text-decoration:none;box-shadow:0 3px 12px rgba(0,0,0,.4)"><span style="color:#fff;font-size:20px;line-height:56px">▶</span></a>
-        <img src="${host}" width="84" height="84" alt="로지" style="position:absolute;right:12px;bottom:12px;width:84px;height:84px;border-radius:50%;border:3px solid #fff;object-fit:cover;object-position:50% 8%;box-shadow:0 2px 10px rgba(0,0,0,.45)">
-      </div>`
+      ? vipStage
+        ? `<a href="${leadUrl}" style="display:block;text-decoration:none">
+        <div style="position:relative;width:100%;max-width:516px;margin:0 auto;padding-bottom:56.25%;background:#080d1a url('${stageBg}') center/cover no-repeat;border-radius:12px;overflow:hidden">
+          <img src="${stageBg}" alt="" width="516" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block">
+          <div style="position:absolute;left:3.5%;top:5%;width:55%;height:55%;border-radius:9px;overflow:hidden;border:2px solid rgba(130,175,255,.55);box-shadow:0 10px 30px rgba(0,0,0,.55)">
+            <img src="${escapeHtml(lead.image)}" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
+            <span style="position:absolute;left:7px;top:7px;background:rgba(214,42,64,.95);color:#fff;font:700 10px/1 Arial,sans-serif;letter-spacing:.06em;padding:4px 7px;border-radius:4px">● LIVE</span>
+          </div>
+          <img src="${anchor}" alt="로지" style="position:absolute;right:1%;bottom:12%;width:45%;height:auto;display:block;filter:drop-shadow(0 10px 20px rgba(0,0,0,.5))">
+          <div style="position:absolute;left:0;right:0;bottom:0;height:12%;background:linear-gradient(180deg,#1a2c56,#0a1428);border-top:2px solid rgba(130,175,255,.4)"></div>
+          <span style="position:absolute;right:14px;bottom:3%;color:#8fb2ff;font:800 14px/1 Georgia,serif;letter-spacing:.1em">VIP</span>
+          <span style="position:absolute;top:50%;left:50%;margin:-26px 0 0 -26px;width:52px;height:52px;background:rgba(255,61,84,.94);border-radius:50%;text-align:center;box-shadow:0 3px 12px rgba(0,0,0,.4)"><span style="color:#fff;font-size:18px;line-height:52px">▶</span></span>
+        </div>
+      </a>`
         : `<a href="${leadUrl}"><img src="${escapeHtml(lead.image)}" width="516" alt="" style="width:100%;max-width:516px;height:auto;border-radius:12px;display:block"></a>`
       : '';
   const leadBlock = lead
