@@ -769,7 +769,9 @@ section > h2::after {
 }
 
 .post-hero-image {
+  display: block;
   width: 100%;
+  height: auto; /* img height 속성이 모바일에서 세로 크롭 유발 → auto로 자연 16:9 강제 */
   border-radius: 12px;
   margin-bottom: 2rem;
   aspect-ratio: 16 / 9;
