@@ -77,7 +77,7 @@ Valve가 GDC 2026에서 공개한 수치로는 2025년에 10만 달러 이상을
 
 **번들·묶음 판매** — 출시 직후가 아니라 롱테일 구간에서 카탈로그 매출을 되살리는 도구로 쓴다.
 
-2026년의 현실적인 정답은 하나를 고르는 게 아니라 프리미엄 본편 + 선택적 DLC + 시즌성 코스메틱의 하이브리드다. 각 모델의 장단점과 장르별 적합도는 [인디게임 수익 모델 완벽 정리](/blog/2026-07-03-game-indie-game-revenue-models-2026-premium-f2p-subscription/)에서, 웹·모바일 쪽 수익화는 [웹 게임 수익화 전략 가이드](/blog/2026-02-18-game-web-game-monetization-strategies-2026-complete-guide/)에서 이어진다.
+2026년의 현실적인 정답은 하나를 고르는 게 아니라 프리미엄 본편 + 선택적 DLC + 시즌성 코스메틱의 하이브리드다. 각 모델의 장단점과 장르별 적합도는 [인디게임 수익 모델 완벽 정리](/blog/2026-07-03-game-indie-game-revenue-models-2026-premium-f2p-subscription/)에서, 웹·모바일 쪽 수익화는 [웹 게임 수익화 전략 가이드](/blog/2026-02-18-game-web-game-monetization-strategies-2026-complete-guide/)에서 이어진다. 세 모델을 진입장벽·유저당 매출·적합 장르로 한눈에 갈라 본 [유료 vs F2P vs 광고형 수익화 비교표](/compare/game-monetization-premium-vs-f2p-vs-ads-2026/)도 함께 보면 좋다.
 
 ### 진실 4: 수수료 30%는 사실상 당신의 고정비다
 
