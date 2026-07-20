@@ -78,6 +78,22 @@ async function recentPosts(site) {
   return out;
 }
 
+// 글 페이지에서 og:image 1장 추출(RSS엔 이미지가 없어 페이지를 직접 읽음)
+async function ogImage(pageUrl) {
+  try {
+    const r = await fetch(pageUrl);
+    if (!r.ok) return '';
+    const html = await r.text();
+    const m =
+      html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i) ||
+      html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
+    if (!m) return '';
+    return m[1].replace(/&amp;/g, '&'); // 속성 내 엔티티 해제(재삽입 시 escapeHtml로 다시 이스케이프)
+  } catch {
+    return '';
+  }
+}
+
 async function sentUrls(source) {
   const rows = await sbn(
     `newsletter_sends?source=eq.${encodeURIComponent(source)}&select=post_url`
@@ -112,7 +128,12 @@ function digestHtml(label, posts, source, email) {
   const rows = posts
     .map(
       (p) => `
-    <tr><td style="padding:14px 0;border-bottom:1px solid #eee">
+    <tr><td style="padding:16px 0;border-bottom:1px solid #eee">
+      ${
+        p.image
+          ? `<a href="${p.link}"><img src="${escapeHtml(p.image)}" alt="" width="536" style="width:100%;max-width:536px;height:auto;border-radius:12px;display:block;margin-bottom:11px"></a>`
+          : ''
+      }
       <a href="${p.link}" style="font-size:16px;font-weight:700;color:#1e6b5c;text-decoration:none">${escapeHtml(p.title)}</a>
       ${p.desc ? `<div style="font-size:13px;color:#666;margin-top:5px;line-height:1.5">${escapeHtml(p.desc)}…</div>` : ''}
     </td></tr>`
@@ -145,9 +166,17 @@ async function sendForBlog(blog) {
     for (const p of fresh) await recordSent(source, p.link, null, 0);
     return { source, new: fresh.length, sent: 0, note: 'no subscribers' };
   }
+  // 발송 대상 글에만 og:image 채움(전체 글 fetch 방지)
+  await Promise.all(
+    fresh.map(async (p) => {
+      p.image = await ogImage(p.link);
+    })
+  );
   const label = sourceLabel ? sourceLabel(source) : blog.label || source;
   const subject =
-    fresh.length === 1 ? `[${label}] ${fresh[0].title}` : `[${label}] 새 글 ${fresh.length}편`;
+    fresh.length === 1
+      ? `📩 방금 새 글 올렸어요 — ${fresh[0].title}`
+      : `📩 ${label} 새 글 ${fresh.length}편 왔어요, 골라 읽어보세요`;
   let ok = 0;
   for (const email of subs) {
     try {
