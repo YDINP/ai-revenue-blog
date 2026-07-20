@@ -35,23 +35,40 @@ const categories = Object.entries(categoryMap)
   .sort((a, b) => b[1].count - a[1].count)
   .map(([key, val]) => ({ slug: key, label: val.label, count: val.count }));
 
-// WebSite JSON-LD schema with SearchAction
+// 사이트 전역 JSON-LD: WebSite(+검색) + Organization — 페이지당 한 번만, @graph 로 결합
+const siteUrl = new URL('/', Astro.site).href;
+const siteLogoUrl = new URL('/favicon.svg', Astro.site).href;
+
 const websiteSchema = {
-  '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'TechFlow',
   alternateName: 'TechFlow Blog',
-  url: 'https://ai-revenue-blog.vercel.app',
+  url: siteUrl,
   description: 'AI, 개발, 기술 리뷰 전문 블로그 - 최신 기술 트렌드와 실용적인 개발 가이드',
   inLanguage: 'ko-KR',
   potentialAction: {
     '@type': 'SearchAction',
     target: {
       '@type': 'EntryPoint',
-      urlTemplate: 'https://ai-revenue-blog.vercel.app/blog/?q={search_term_string}',
+      urlTemplate: `${siteUrl}blog/?q={search_term_string}`,
     },
     'query-input': 'required name=search_term_string',
   },
+};
+
+const organizationSchema = {
+  '@type': 'Organization',
+  name: 'TechFlow',
+  url: siteUrl,
+  logo: {
+    '@type': 'ImageObject',
+    url: siteLogoUrl,
+  },
+};
+
+const siteLd = {
+  '@context': 'https://schema.org',
+  '@graph': [websiteSchema, organizationSchema],
 };
 ---
 
@@ -97,8 +114,8 @@ const websiteSchema = {
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json" />
 
-    <!-- WebSite Schema -->
-    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <!-- 사이트 전역 Schema: WebSite + Organization (post 페이지 BlogPosting과 중복되지 않음) -->
+    <script type="application/ld+json" set:html={JSON.stringify(siteLd)} />
 
     <!-- Pretendard Font -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />

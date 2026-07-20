@@ -55,6 +55,7 @@ export const BLOGS = {
     contentDir: 'src/videos',
     site: 'https://virtual-in-playing.vercel.app',
     gscSite: 'https://virtual-in-playing.vercel.app/',  // GSC 동기화용(서비스계정을 이 속성 사용자로 추가해야 데이터 수집)
+    indexNowKey: 'c35215b7a57806accdc3775204221bf6',    // public/<key>.txt 로 호스팅됨(playcast-blog)
     vercel: 'virtual-in-playing',
     source: 'playcast',
     generator: null,
