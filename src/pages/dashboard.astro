@@ -361,6 +361,7 @@ const ICONS: Record<string, string> = {
       .gsc-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; padding: 0.05rem 0.3rem; border-radius: 4px; margin-right: 0.35rem; }
       .gsc-badge-blog { background: rgba(96,165,250,0.16); color: #60a5fa; }
       .gsc-badge-lifeflow { background: rgba(74,222,128,0.16); color: #4ade80; }
+      .gsc-badge-playcast { background: rgba(87,230,195,0.16); color: #57e6c3; }
       @media (max-width: 640px) {
         .gsc-kpi-row { grid-template-columns: repeat(2, 1fr); }
         .gsc-source-grid { grid-template-columns: 1fr; }
@@ -2821,6 +2822,7 @@ const ICONS: Record<string, string> = {
             <button data-src="all">전체</button>
             <button data-src="blog">TechFlow</button>
             <button data-src="lifeflow">LifeFlow</button>
+            <button data-src="playcast">VIP</button>
           </div>
           <span class="gsc-updated" id="gsc-updated"></span>
         </div>
@@ -3933,13 +3935,14 @@ const ICONS: Record<string, string> = {
       let _gscTotals = null;        // _TOTAL_ 90일 (소스별 일별 합계)
       let _gscPageCache = {};       // days → page-level rows (기간별 캐시)
       let _gscDays = 7;
-      let _gscSrc = 'all';          // 'all' | 'blog' | 'lifeflow'
+      let _gscSrc = 'all';          // 'all' | 'blog' | 'lifeflow' | 'playcast'(VIP)
       let _gscMetric = 'clicks';    // clicks | impressions | ctr | position
       let _gscSort = { key: 'clicks', dir: -1 };
       let _gscSearch = '';
       let _gscInit = false;
 
-      const GSC_SRC_META = { blog: 'TechFlow', lifeflow: 'LifeFlow' };
+      const GSC_SRC_META = { blog: 'TechFlow', lifeflow: 'LifeFlow', playcast: 'VIP' };
+      const GSC_SRC_BADGE = { blog: 'TF', lifeflow: 'LF', playcast: 'VIP' };
       const gscFmt = (n) => Number(n || 0).toLocaleString('en-US');
       const gscPct = (v) => (Number(v || 0) * 100).toFixed(2) + '%';
       const gscPos = (v) => Number(v || 0).toFixed(1);
@@ -4105,7 +4108,7 @@ const ICONS: Record<string, string> = {
         const rows = _gscPageCache[_gscDays] || [];
         const cutoff = new Date(Date.now() - _gscDays * 864e5).toISOString().slice(0, 10);
         let html = '';
-        for (const src of ['blog', 'lifeflow']) {
+        for (const src of ['blog', 'lifeflow', 'playcast']) {
           const rs = rows.filter((r) => r.source === src && r.date >= cutoff);
           const clicks = rs.reduce((a, r) => a + (r.clicks || 0), 0);
           const impr = rs.reduce((a, r) => a + (r.impressions || 0), 0);
@@ -4163,7 +4166,7 @@ const ICONS: Record<string, string> = {
         const head = `<tr>${cols.map((c) => `<th data-k="${c.k}" class="${c.num ? 'num' : ''} ${key === c.k ? 'sorted' : ''}">${c.t}${key === c.k ? (dir < 0 ? ' ▾' : ' ▴') : ''}</th>`).join('')}</tr>`;
         const body = rows.length ? rows.map((r) => {
           const dChip = Math.abs(r.delta) < 1 ? '<span class="delta-chip flat">–</span>' : `<span class="delta-chip ${r.delta > 0 ? 'up' : 'down'}">${r.delta > 0 ? '▲' : '▼'} ${gscFmt(Math.abs(r.delta))}</span>`;
-          const badge = _gscSrc === 'all' ? `<span class="gsc-badge gsc-badge-${r.source}">${r.source === 'blog' ? 'TF' : 'LF'}</span>` : '';
+          const badge = _gscSrc === 'all' ? `<span class="gsc-badge gsc-badge-${r.source}">${GSC_SRC_BADGE[r.source] || r.source}</span>` : '';
           return `<tr><td class="gsc-page-cell">${badge}${gscCut(gscTitle(r.page), 40)}</td><td class="num">${gscFmt(r.clicks)}</td><td class="num">${gscFmt(r.impressions)}</td><td class="num">${gscPct(r.ctr)}</td><td class="num">${gscPos(r.position)}</td><td class="num">${dChip}</td></tr>`;
         }).join('') : '<tr><td colspan="6" style="color:var(--text-3);padding:0.75rem 0.5rem;">표시할 페이지 데이터가 없습니다.</td></tr>';
         el.innerHTML = head + body;
