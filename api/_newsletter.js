@@ -78,17 +78,31 @@ async function recentPosts(site) {
   return out;
 }
 
-// 글 페이지에서 og:image 1장 추출(RSS엔 이미지가 없어 페이지를 직접 읽음)
+// 글 페이지에서 대표이미지 1장 추출(RSS엔 이미지가 없어 페이지를 직접 읽음)
+//   og:image가 자동생성 OG카드(/open-graph/…, 제목 텍스트가 그려진 이미지)면
+//   메일엔 실제 사진이 낫다 → 본문 대표사진(/images/…)으로 대체.
 async function ogImage(pageUrl) {
   try {
     const r = await fetch(pageUrl);
     if (!r.ok) return '';
     const html = await r.text();
-    const m =
+    const abs = (src) => {
+      if (!src) return '';
+      try {
+        return new URL(src.replace(/&amp;/g, '&'), pageUrl).href;
+      } catch {
+        return src.replace(/&amp;/g, '&');
+      }
+    };
+    const ogm =
       html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i) ||
       html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
-    if (!m) return '';
-    return m[1].replace(/&amp;/g, '&'); // 속성 내 엔티티 해제(재삽입 시 escapeHtml로 다시 이스케이프)
+    const og = ogm ? abs(ogm[1]) : '';
+    if (og && !/\/open-graph\//i.test(og)) return og;
+    // OG카드거나 없음 → 본문 첫 대표사진으로 대체(프로모/광고 이미지 제외)
+    const imgs = [...html.matchAll(/<img[^>]+src=["']([^"']+)["']/gi)].map((x) => x[1]);
+    const hero = imgs.find((s) => /\/images\//i.test(s) && !/pd-|promo|banner|logo/i.test(s));
+    return hero ? abs(hero) : og;
   } catch {
     return '';
   }
@@ -141,6 +155,11 @@ function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
   const line = '#e6e3dd';
   const serif = "Georgia,'Times New Roman',serif";
   const noun = source === 'vip' ? '영상' : '글';
+  // VIP는 호스트 캐릭터 '로지'를 제호에 등장
+  const host = source === 'vip' && site ? `${site.replace(/\/$/, '')}/host/rosie.png` : '';
+  const intro = host
+    ? '로지가 이번에 새로 올라온 영상을 골라봤어요 📩'
+    : `새로 올라온 ${noun} 중에서 골라봤어요 📩`;
   const [lead, ...rest] = posts;
 
   const leadUrl = lead ? withUtm(lead.link) : '';
@@ -189,11 +208,20 @@ function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
   return `<div style="max-width:560px;margin:0 auto;background:${ground};font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;padding:6px">
     <div style="background:#fff;border:1px solid ${line};border-radius:16px;padding:26px 22px">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-        <td style="font-family:${serif};font-size:20px;font-weight:700;color:${brand}">${escapeHtml(label)}</td>
-        <td align="right" style="font-size:11px;color:${muted};letter-spacing:.06em">NEWSLETTER</td>
+        <td>
+          <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+            ${
+              host
+                ? `<td width="50" style="padding-right:11px"><img src="${host}" width="46" height="46" alt="로지" style="width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:50% 10%;border:2px solid ${brand};display:block"></td>`
+                : ''
+            }
+            <td style="font-family:${serif};font-size:20px;font-weight:700;color:${brand}">${escapeHtml(label)}</td>
+          </tr></table>
+        </td>
+        <td align="right" valign="middle" style="font-size:11px;color:${muted};letter-spacing:.06em">NEWSLETTER</td>
       </tr></table>
       <div style="height:2px;background:${ink};margin:11px 0 4px"></div>
-      <p style="font-size:12px;color:${sub};margin:8px 0 18px">새로 올라온 ${noun} 중에서 골라봤어요 📩</p>
+      <p style="font-size:12px;color:${sub};margin:8px 0 18px">${intro}</p>
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${leadBlock}${restBlock}</table>
       ${
         site

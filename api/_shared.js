@@ -12,7 +12,7 @@ export const SUPABASE_ANON_KEY =
 export const SOURCE_META = {
   blog: { label: 'TechFlow', base: 'https://ai-revenue-blog.vercel.app' },
   lifeflow: { label: 'LifeFlow', base: 'https://life-revenue-blog.vercel.app' },
-  vip: { label: 'Playcast', base: 'https://virtual-in-playing.vercel.app' },
+  vip: { label: 'VIP', base: 'https://virtual-in-playing.vercel.app' },
 };
 
 export function postUrl(source, slug) {
