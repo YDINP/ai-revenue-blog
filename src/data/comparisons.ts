@@ -315,4 +315,59 @@ export const comparisons: Comparison[] = [
       { title: '인디게임 수익화의 현실 5가지', url: '/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/' },
     ],
   },
+  {
+    slug: 'mobile-ad-network-admob-vs-applovin-vs-levelplay-2026',
+    title: '모바일 게임 광고 네트워크 비교 2026: AdMob vs AppLovin MAX vs Unity LevelPlay',
+    description:
+      '광고형 모바일 게임의 핵심인 광고 네트워크·미디에이션을 AdMob·AppLovin MAX·Unity LevelPlay(구 ironSource)로 통합 난이도·eCPM 경쟁·엔진 궁합 기준 비교했습니다.',
+    updated: '2026-07-20',
+    intro:
+      '광고형(IAA) 수익의 크기는 결국 "어느 네트워크로, 어떻게 미디에이션하느냐"에서 갈립니다. 초보가 시작하기 좋은 곳과, 규모가 커졌을 때 eCPM을 짜내는 곳은 다릅니다. 세 축을 비교합니다.',
+    options: [
+      {
+        name: 'Google AdMob',
+        tagline: '가장 넓은 수요·초보 친화',
+        pros: ['구글의 방대한 광고주 수요로 안정적 fill', '문서·통합이 쉬워 초보에 적합', '미디에이션도 지원'],
+        cons: ['최상위 eCPM 경쟁에선 전용 미디에이션에 밀릴 수 있음'],
+        best: '첫 광고 수익화·안정성 우선 인디',
+      },
+      {
+        name: 'AppLovin MAX',
+        tagline: '미디에이션 강자·eCPM 최적화',
+        pros: ['실시간 입찰(비딩) 미디에이션으로 eCPM 극대화', '하이브리드 수익화 도구 강력', '리포팅·최적화 성숙'],
+        cons: ['설정·최적화에 학습·운영 필요'],
+        best: '규모가 붙은 뒤 수익 극대화',
+      },
+      {
+        name: 'Unity LevelPlay',
+        tagline: '유니티 통합·게임 특화',
+        pros: ['유니티 엔진과 통합이 매끄러움', '게임 특화 미디에이션·A/B 도구', 'ironSource 자산 기반'],
+        cons: ['비유니티 프로젝트엔 이점 감소'],
+        best: '유니티로 만든 광고형 게임',
+      },
+    ],
+    rows: [
+      { label: '유형', values: ['네트워크(+미디에이션)', '미디에이션 허브', '미디에이션 허브'] },
+      { label: '통합 난이도', values: ['낮음', '중', '낮음(유니티)'] },
+      { label: 'eCPM 최적화', values: ['중', '최상(비딩)', '상'] },
+      { label: '엔진 궁합', values: ['무관', '무관', '유니티 최적'] },
+      { label: '적합 단계', values: ['시작·안정', '스케일업', '유니티 게임'] },
+    ],
+    verdict:
+      '보통은 미디에이션 허브 하나(MAX 또는 LevelPlay)를 두고 그 아래 AdMob 등 여러 네트워크를 붙여 입찰 경쟁을 시킵니다. 시작은 AdMob이 쉽고, 유니티면 LevelPlay 통합이 편하며, eCPM을 짜내는 스케일업 단계에선 AppLovin MAX가 강합니다.',
+    faq: [
+      {
+        q: '광고 미디에이션이 뭔가요?',
+        a: '여러 광고 네트워크를 하나로 묶어, 노출 한 건마다 가장 높은 단가를 부르는 광고를 실시간으로 선택하는 구조입니다. 단일 네트워크만 쓸 때보다 eCPM(노출당 수익)이 올라갑니다.',
+      },
+      {
+        q: '초보 인디는 뭘로 시작해야 하나요?',
+        a: '통합이 쉽고 수요가 안정적인 AdMob으로 시작하는 편이 무난합니다. 이후 유저 규모가 커지면 AppLovin MAX나 Unity LevelPlay 같은 미디에이션으로 옮겨 eCPM을 최적화하세요.',
+      },
+    ],
+    related: [
+      { title: '게임 수익화 모델 비교: 유료 vs F2P vs 광고형', url: '/compare/game-monetization-premium-vs-f2p-vs-ads-2026/' },
+      { title: '인디 게임 마케팅 채널 비교', url: '/compare/game-marketing-wishlist-vs-influencer-vs-ads-2026/' },
+    ],
+  },
 ];
