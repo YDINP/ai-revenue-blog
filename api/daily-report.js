@@ -7,6 +7,7 @@
 import { escapeHtml, sendToAdmin, supabaseRpc } from './_shared.js';
 import { reportMessage } from './_report.js';
 import { syncGsc } from './_gsc-sync.js';
+import { runNewsletter } from './_newsletter.js';
 
 export default async function handler(req, res) {
   const secret = process.env.CRON_SECRET;
@@ -19,6 +20,8 @@ export default async function handler(req, res) {
     await supabaseRpc('flag_bot_pageviews', {}).catch((e) => console.error('bot flag (report):', e.message));
     // GSC 검색 실적을 Supabase(gsc_daily)에 저장 — best-effort(실패해도 리포트는 진행)
     await syncGsc({ days: 5 }).catch((e) => console.error('gsc sync (report):', e.message));
+    // 새 글(최근 48h) 뉴스레터 발송 — best-effort(RESEND_API_KEY 없으면 조용히 스킵)
+    await runNewsletter().catch((e) => console.error('newsletter (report):', e.message));
 
     // ?day=YYYY-MM-DD 로 특정 날짜 재발송 (워크플로 수동 실행용). 기본 = 어제(KST)
     const day = new URL(req.url, 'http://x').searchParams.get('day') || undefined;
