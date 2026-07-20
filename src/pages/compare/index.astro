@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { comparisons } from '../../data/comparisons';
+
+const title = '비교 허브 — 게임개발 도구·플랫폼 X vs Y';
+const description =
+  '게임 엔진, 출시 플랫폼, 수수료, 개발 도구를 실제 수치로 비교합니다. 인디 개발자가 선택 앞에서 헷갈릴 때 바로 답을 찾는 비교 허브.';
+const site = Astro.site ?? new URL('https://ai-revenue-blog.vercel.app');
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      name: title,
+      description,
+      url: new URL('/compare/', site).href,
+    },
+    {
+      '@type': 'ItemList',
+      itemListElement: comparisons.map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: new URL(`/compare/${c.slug}/`, site).href,
+        name: c.title,
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <article class="cmpx">
+    <header class="cmpx-head">
+      <h1>비교 허브</h1>
+      <p>게임 엔진·플랫폼·도구를 실제 수치로 나란히. 선택 앞에서 헷갈릴 때 바로 답을 찾으세요.</p>
+    </header>
+
+    <div class="cmpx-grid">
+      {comparisons.map((c) => (
+        <a class="cmpx-card" href={`/compare/${c.slug}/`}>
+          <div class="cmpx-vs">{c.options.map((o) => o.name).join(' vs ')}</div>
+          <div class="cmpx-title">{c.title}</div>
+          <div class="cmpx-desc">{c.description}</div>
+          <div class="cmpx-go">비교 보기 →</div>
+        </a>
+      ))}
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .cmpx { max-width: 860px; margin: 0 auto; padding: 1.75rem 1rem 3rem; }
+  .cmpx-head h1 { font-size: 2rem; margin: 0 0 0.5rem; }
+  .cmpx-head p { color: var(--color-text-secondary); line-height: 1.7; }
+  .cmpx-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1.75rem; }
+  .cmpx-card { display: block; border: 1px solid var(--color-border); border-radius: var(--radius, 12px); padding: 1.25rem; background: var(--color-bg-secondary); text-decoration: none; color: inherit; transition: transform 0.15s, border-color 0.15s; }
+  .cmpx-card:hover { transform: translateY(-3px); border-color: var(--color-primary); }
+  .cmpx-vs { font-size: 0.72rem; font-weight: 700; color: var(--color-primary); letter-spacing: 0.02em; margin-bottom: 0.4rem; }
+  .cmpx-title { font-size: 1.05rem; font-weight: 800; line-height: 1.4; margin-bottom: 0.5rem; }
+  .cmpx-desc { font-size: 0.84rem; color: var(--color-text-secondary); line-height: 1.6; }
+  .cmpx-go { margin-top: 0.85rem; font-size: 0.82rem; font-weight: 700; color: var(--color-primary); }
+</style>

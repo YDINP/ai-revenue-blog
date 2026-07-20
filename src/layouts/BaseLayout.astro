@@ -152,6 +152,7 @@ const siteLd = {
               <a href={`/blog/${cat.slug}/`} class={currentPath.includes(`/blog/${cat.slug}`) ? 'active' : ''}>{cat.label}</a>
             ))}
             <a href="/blog/tags/" class={currentPath.includes('/blog/tags') ? 'active' : ''}>태그</a>
+            <a href="/compare/" class={currentPath.startsWith('/compare') ? 'active' : ''}>비교</a>
             <a href="https://life-revenue-blog.vercel.app/" target="_blank" rel="noopener" class="nav-external">LifeFlow ↗</a>
             <a href="https://virtual-in-playing.vercel.app/" target="_blank" rel="noopener" class="nav-external">VIP ↗</a>
           </div>

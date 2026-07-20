@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { comparisons } from '../../data/comparisons';
+
+export function getStaticPaths() {
+  return comparisons.map((c) => ({ params: { slug: c.slug }, props: { c } }));
+}
+
+const { c } = Astro.props;
+const site = Astro.site ?? new URL('https://ai-revenue-blog.vercel.app');
+const pageUrl = new URL(`/compare/${c.slug}/`, site).href;
+
+// 숫자 강조(min/max) — 각 행 값의 선행 숫자를 파싱해 최소/최대 셀을 굵게
+const numOf = (s: string) => {
+  const m = String(s).match(/-?\d+(\.\d+)?/);
+  return m ? parseFloat(m[0]) : NaN;
+};
+const bestIdx = (values: string[], mode: 'min' | 'max') => {
+  const nums = values.map(numOf);
+  if (nums.some((n) => Number.isNaN(n))) return -1;
+  const target = mode === 'min' ? Math.min(...nums) : Math.max(...nums);
+  return nums.indexOf(target);
+};
+
+// JSON-LD (Article + FAQPage + BreadcrumbList)
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      '@id': `${pageUrl}#article`,
+      headline: c.title,
+      description: c.description,
+      dateModified: new Date(c.updated).toISOString(),
+      datePublished: new Date(c.updated).toISOString(),
+      author: { '@type': 'Organization', name: 'TechFlow' },
+      publisher: {
+        '@type': 'Organization',
+        name: 'TechFlow',
+        url: site.href,
+        logo: { '@type': 'ImageObject', url: new URL('/favicon.svg', site).href },
+      },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: '홈', item: site.href },
+        { '@type': 'ListItem', position: 2, name: '비교', item: new URL('/compare/', site).href },
+        { '@type': 'ListItem', position: 3, name: c.title, item: pageUrl },
+      ],
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: c.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={c.title} description={c.description} ogType="article">
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <article class="cmp">
+    <nav class="cmp-crumb" aria-label="breadcrumb">
+      <a href="/">홈</a> <span>›</span> <a href="/compare/">비교</a> <span>›</span>
+      <span aria-current="page">{c.title}</span>
+    </nav>
+
+    <header class="cmp-head">
+      <h1>{c.title}</h1>
+      <p class="cmp-intro">{c.intro}</p>
+      <p class="cmp-updated">업데이트: {c.updated}</p>
+    </header>
+
+    <!-- 한눈 비교표 -->
+    <div class="cmp-table-wrap">
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th>항목</th>
+            {c.options.map((o) => <th>{o.name}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {c.rows.map((row) => {
+            const hi = row.highlight ? bestIdx(row.values, row.highlight) : -1;
+            return (
+              <tr>
+                <td class="cmp-row-label">{row.label}</td>
+                {row.values.map((v, i) => (
+                  <td class={i === hi ? 'cmp-best' : ''}>{v}{i === hi && <span class="cmp-badge">유리</span>}</td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 옵션별 카드 -->
+    <div class="cmp-cards">
+      {c.options.map((o) => (
+        <div class="cmp-card">
+          <div class="cmp-card-name">{o.name}</div>
+          <div class="cmp-card-tag">{o.tagline}</div>
+          <ul class="cmp-pros">{o.pros.map((p) => <li>{p}</li>)}</ul>
+          <ul class="cmp-cons">{o.cons.map((p) => <li>{p}</li>)}</ul>
+          <div class="cmp-best-for"><b>이런 사람에게</b> — {o.best}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- 결론 -->
+    <div class="cmp-verdict">
+      <div class="cmp-verdict-t">결론</div>
+      <p>{c.verdict}</p>
+    </div>
+
+    <!-- FAQ -->
+    <section class="cmp-faq">
+      <h2>자주 묻는 질문</h2>
+      {c.faq.map((f) => (
+        <details>
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </section>
+
+    <!-- 관련 -->
+    {c.related?.length > 0 && (
+      <section class="cmp-related">
+        <h2>함께 보면 좋은 글</h2>
+        <ul>{c.related.map((r) => <li><a href={r.url}>{r.title} →</a></li>)}</ul>
+      </section>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .cmp { max-width: 860px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+  .cmp-crumb { font-size: 0.78rem; color: var(--color-text-muted); margin-bottom: 1rem; }
+  .cmp-crumb a { color: var(--color-text-secondary); text-decoration: none; }
+  .cmp-crumb a:hover { color: var(--color-primary); }
+  .cmp-crumb span { margin: 0 0.15rem; }
+  .cmp-head h1 { font-size: 1.9rem; line-height: 1.3; margin: 0 0 0.75rem; }
+  .cmp-intro { color: var(--color-text-secondary); line-height: 1.7; margin: 0 0 0.4rem; }
+  .cmp-updated { font-size: 0.74rem; color: var(--color-text-muted); }
+  .cmp-table-wrap { overflow-x: auto; margin: 1.75rem 0; }
+  .cmp-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+  .cmp-table th, .cmp-table td { padding: 0.65rem 0.75rem; border: 1px solid var(--color-border); text-align: left; vertical-align: top; }
+  .cmp-table thead th { background: var(--color-bg-secondary); font-weight: 700; }
+  .cmp-table thead th:first-child { width: 22%; }
+  .cmp-row-label { font-weight: 600; color: var(--color-text-secondary); white-space: nowrap; }
+  .cmp-best { background: color-mix(in srgb, var(--color-primary) 12%, transparent); font-weight: 700; }
+  .cmp-badge { display: inline-block; margin-left: 0.35rem; font-size: 0.6rem; font-weight: 700; color: var(--color-primary); border: 1px solid var(--color-primary); border-radius: 999px; padding: 0 0.35rem; vertical-align: middle; }
+  .cmp-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 1.75rem 0; }
+  .cmp-card { border: 1px solid var(--color-border); border-radius: var(--radius, 12px); padding: 1.1rem; background: var(--color-bg-secondary); }
+  .cmp-card-name { font-size: 1.15rem; font-weight: 800; }
+  .cmp-card-tag { font-size: 0.76rem; color: var(--color-text-muted); margin-bottom: 0.75rem; }
+  .cmp-pros, .cmp-cons { list-style: none; padding: 0; margin: 0 0 0.5rem; font-size: 0.82rem; line-height: 1.6; }
+  .cmp-pros li::before { content: '＋ '; color: #16a34a; font-weight: 700; }
+  .cmp-cons li::before { content: '－ '; color: #dc2626; font-weight: 700; }
+  .cmp-best-for { font-size: 0.8rem; color: var(--color-text-secondary); border-top: 1px solid var(--color-border); padding-top: 0.6rem; margin-top: 0.4rem; }
+  .cmp-verdict { border-left: 4px solid var(--color-primary); background: var(--color-bg-secondary); border-radius: 0 10px 10px 0; padding: 1rem 1.25rem; margin: 1.75rem 0; }
+  .cmp-verdict-t { font-weight: 800; margin-bottom: 0.4rem; }
+  .cmp-verdict p { margin: 0; line-height: 1.7; color: var(--color-text-secondary); }
+  .cmp-faq { margin: 2rem 0; }
+  .cmp-faq h2, .cmp-related h2 { font-size: 1.3rem; margin-bottom: 0.85rem; }
+  .cmp-faq details { border: 1px solid var(--color-border); border-radius: 8px; padding: 0.7rem 0.9rem; margin-bottom: 0.55rem; }
+  .cmp-faq summary { font-weight: 700; cursor: pointer; font-size: 0.9rem; }
+  .cmp-faq p { margin: 0.6rem 0 0; color: var(--color-text-secondary); line-height: 1.65; font-size: 0.88rem; }
+  .cmp-related ul { list-style: none; padding: 0; }
+  .cmp-related li { margin: 0.35rem 0; }
+  .cmp-related a { color: var(--color-primary); text-decoration: none; font-weight: 600; }
+  .cmp-related a:hover { text-decoration: underline; }
+</style>
