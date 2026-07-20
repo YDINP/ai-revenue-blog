@@ -10,10 +10,10 @@ image:
   url: "/images/ai-kimi-k3-2026.webp"
   alt: "Abstract visualization of a large open-source AI model with glowing neural network nodes"
 coupangLinks:
-  - title: "개발자 기계식 키보드"
-    url: "https://www.coupang.com/np/search?q=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EA%B8%B0%EA%B3%84%EC%8B%9D%20%ED%82%A4%EB%B3%B4%EB%93%9C&src=1139000&spec=10799999&addtag=200&ctag=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EA%B8%B0%EA%B3%84%EC%8B%9D%20%ED%82%A4%EB%B3%B4%EB%93%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EA%B8%B0%EA%B3%84%EC%8B%9D%20%ED%82%A4%EB%B3%B4%EB%93%9C"
-  - title: "AI 활용 도서"
-    url: "https://www.coupang.com/np/search?q=AI%20%ED%99%9C%EC%9A%A9%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=AI%20%ED%99%9C%EC%9A%A9%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=AI%20%ED%99%9C%EC%9A%A9%20%EB%8F%84%EC%84%9C"
+  - title: "생성형 AI 프롬프트 엔지니어링 도서"
+    url: "https://www.coupang.com/np/search?q=%EC%83%9D%EC%84%B1%ED%98%95%20AI%20%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81%20%EB%8F%84%EC%84%9C&src=1139000&spec=10799999&addtag=200&ctag=%EC%83%9D%EC%84%B1%ED%98%95%20AI%20%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81%20%EB%8F%84%EC%84%9C&lptag=AF7838146&pageType=SEARCH&pageValue=%EC%83%9D%EC%84%B1%ED%98%95%20AI%20%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81%20%EB%8F%84%EC%84%9C"
+  - title: "LLM 구동 그래픽카드 RTX"
+    url: "https://www.coupang.com/np/search?q=LLM%20%EA%B5%AC%EB%8F%99%20%EA%B7%B8%EB%9E%98%ED%94%BD%EC%B9%B4%EB%93%9C%20RTX&src=1139000&spec=10799999&addtag=200&ctag=LLM%20%EA%B5%AC%EB%8F%99%20%EA%B7%B8%EB%9E%98%ED%94%BD%EC%B9%B4%EB%93%9C%20RTX&lptag=AF7838146&pageType=SEARCH&pageValue=LLM%20%EA%B5%AC%EB%8F%99%20%EA%B7%B8%EB%9E%98%ED%94%BD%EC%B9%B4%EB%93%9C%20RTX"
 faq:
   - q: "Kimi K3는 정말 무료로 쓸 수 있나요?"
     a: "정확히는 '오픈소스로 공개된다'는 뜻입니다. 문샷AI는 2026년 7월 17일 발표에서 전체 가중치를 7월 27일까지 공개하겠다고 밝혔지만, 발표 시점인 7월 17일 기준으로는 가중치·기술보고서·라이선스가 아직 공개되지 않은 상태입니다. 실제로 누구나 내려받아 자체 서버에서 돌릴 수 있는지, 어떤 라이선스 조건이 붙는지는 7월 27일 공개 이후에 확인해야 합니다."
