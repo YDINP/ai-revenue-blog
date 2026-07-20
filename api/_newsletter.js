@@ -124,6 +124,12 @@ async function sendEmail(to, subject, html) {
 function unsubUrl(source, email) {
   return `${BACKEND}/api/daily-report?action=unsubscribe&source=${encodeURIComponent(source)}&email=${encodeURIComponent(email)}`;
 }
+// 이메일 유입을 분석에서 따로 잡기 위한 UTM(이메일 클라는 referrer를 지워 UTM이 유일 신호)
+const UTM = 'utm_source=newsletter&utm_medium=email&utm_campaign=digest';
+function withUtm(url) {
+  if (!url) return url;
+  return url + (url.includes('?') ? '&' : '?') + UTM;
+}
 // 신문/큐레이션 레이아웃: 리드 기사(큰 이미지+요약) 1개 + 나머지는 작은 썸네일 헤드라인
 function digestHtml(label, posts, source, email, site) {
   const brand = '#1e6b5c';
@@ -135,19 +141,20 @@ function digestHtml(label, posts, source, email, site) {
   const serif = "Georgia,'Times New Roman',serif";
   const [lead, ...rest] = posts;
 
+  const leadUrl = lead ? withUtm(lead.link) : '';
   const leadBlock = lead
     ? `
     <tr><td style="padding:2px 0 0">
       ${
         lead.image
-          ? `<a href="${lead.link}"><img src="${escapeHtml(lead.image)}" width="516" alt="" style="width:100%;max-width:516px;height:auto;border-radius:12px;display:block"></a>`
+          ? `<a href="${leadUrl}"><img src="${escapeHtml(lead.image)}" width="516" alt="" style="width:100%;max-width:516px;height:auto;border-radius:12px;display:block"></a>`
           : ''
       }
     </td></tr>
     <tr><td style="padding:14px 0 4px">
-      <a href="${lead.link}" style="font-family:${serif};font-size:22px;line-height:1.32;font-weight:700;color:${ink};text-decoration:none">${escapeHtml(lead.title)}</a>
+      <a href="${leadUrl}" style="font-family:${serif};font-size:22px;line-height:1.32;font-weight:700;color:${ink};text-decoration:none">${escapeHtml(lead.title)}</a>
       ${lead.desc ? `<div style="font-size:14px;color:${sub};margin-top:9px;line-height:1.65">${escapeHtml(lead.desc)}…</div>` : ''}
-      <a href="${lead.link}" style="display:inline-block;margin-top:12px;font-size:13px;font-weight:700;color:${brand};text-decoration:none">글 읽어보기 →</a>
+      <a href="${leadUrl}" style="display:inline-block;margin-top:12px;font-size:13px;font-weight:700;color:${brand};text-decoration:none">글 읽어보기 →</a>
     </td></tr>`
     : '';
 
@@ -164,12 +171,12 @@ function digestHtml(label, posts, source, email, site) {
         ${
           p.image
             ? `<td width="72" valign="top" style="padding-right:13px">
-          <a href="${p.link}"><img src="${escapeHtml(p.image)}" width="72" height="72" alt="" style="width:72px;height:72px;object-fit:cover;border-radius:8px;display:block"></a>
+          <a href="${withUtm(p.link)}"><img src="${escapeHtml(p.image)}" width="72" height="72" alt="" style="width:72px;height:72px;object-fit:cover;border-radius:8px;display:block"></a>
         </td>`
             : ''
         }
         <td valign="middle">
-          <a href="${p.link}" style="font-size:15px;font-weight:700;line-height:1.42;color:${ink};text-decoration:none">${escapeHtml(p.title)}</a>
+          <a href="${withUtm(p.link)}" style="font-size:15px;font-weight:700;line-height:1.42;color:${ink};text-decoration:none">${escapeHtml(p.title)}</a>
         </td>
       </tr></table>
     </td></tr>`
@@ -189,7 +196,7 @@ function digestHtml(label, posts, source, email, site) {
       ${
         site
           ? `<div style="text-align:center;margin:26px 0 2px">
-        <a href="${escapeHtml(site)}" style="display:inline-block;background:${brand};color:#fff;font-size:13px;font-weight:700;text-decoration:none;padding:11px 24px;border-radius:9px">블로그에서 전체 글 보기 →</a>
+        <a href="${escapeHtml(withUtm(site))}" style="display:inline-block;background:${brand};color:#fff;font-size:13px;font-weight:700;text-decoration:none;padding:11px 24px;border-radius:9px">블로그에서 전체 글 보기 →</a>
       </div>`
           : ''
       }
