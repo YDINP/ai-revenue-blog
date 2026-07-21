@@ -1,0 +1,862 @@
+<style id="mg-chart-css">
+
+/* ── 콜아웃 박스 (강조 포인트) ── */
+.callout-tip,
+.callout-warning,
+.callout-info {
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  border-left: 4px solid;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.callout-tip {
+  background: rgba(16, 185, 129, 0.08);
+  border-left-color: #10b981;
+  color: var(--color-text);
+}
+
+.callout-warning {
+  background: rgba(245, 158, 11, 0.08);
+  border-left-color: #f59e0b;
+  color: var(--color-text);
+}
+
+.callout-info {
+  background: rgba(59, 130, 246, 0.08);
+  border-left-color: #3b82f6;
+  color: var(--color-text);
+}
+
+:root.dark .callout-tip { background: rgba(16, 185, 129, 0.12); }
+:root.dark .callout-warning { background: rgba(245, 158, 11, 0.12); }
+:root.dark .callout-info { background: rgba(59, 130, 246, 0.12); }
+
+/* 콜아웃 내부 링크(다른 글 인용) — 링크임을 명확히 */
+.callout-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1.5px;
+  font-weight: 700;
+}
+.callout-link:hover { opacity: 0.75; }
+
+/* 본문 중간 관련글 블록 (자동 삽입 · 내부링크 강화) */
+.mid-related {
+  margin: 2rem 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(127, 127, 127, 0.18);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 10px;
+  background: rgba(127, 127, 127, 0.05);
+}
+.mid-related-label { display: block; font-weight: 800; font-size: 0.92rem; margin-bottom: 0.5rem; }
+.mid-related ul { margin: 0; padding-left: 1.1rem; }
+.mid-related li { margin: 0.35rem 0; }
+.mid-related a { font-weight: 600; text-decoration: none; }
+.mid-related a:hover { text-decoration: underline; }
+
+/* seo-inlink: 본문 도입부 관련글 문맥링크(내부링크 SEO). div 라서 첫문단 드롭캡 규칙과 무관. */
+.seo-inlink {
+  margin: 1.5rem 0;
+  padding: 0.7rem 1rem;
+  background: var(--color-bg-secondary);
+  border-left: 3px solid var(--color-primary);
+  border-radius: 8px;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+.seo-inlink strong { font-weight: 800; }
+.seo-inlink a { font-weight: 600; }
+
+/* 본문 중간 쿠팡 인라인 CTA (자동 삽입) */
+.mid-coupang-wrap { margin: 2rem 0; }
+
+  line-height: 1.5;
+}
+@media (max-width: 480px) {
+  .coupang-cta-inline { justify-content: center; text-align: center; }
+}
+
+.callout-tip strong,
+.callout-warning strong,
+.callout-info strong {
+  display: inline;
+  font-weight: 700;
+}
+
+/* ── 인라인 쿠팡 추천 (본문 맥락 삽입) ── */
+.coupang-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin: 1.6rem 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(127, 127, 127, 0.22);
+  border-radius: 12px;
+  background: rgba(255, 179, 0, 0.07);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.coupang-inline:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.45);
+  border-color: #ffb300;
+}
+.coupang-inline .ci-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.coupang-inline .ci-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.coupang-inline .ci-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: #e8632a;
+}
+.coupang-inline .ci-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.coupang-inline .ci-cta {
+  flex-shrink: 0;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #0b1020;
+  background: #ffd400;
+  padding: 0.45em 0.85em;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+@media (prefers-reduced-motion: reduce) {
+  .coupang-inline { transition: none; }
+  .coupang-inline:hover { transform: none; }
+}
+@media (max-width: 520px) {
+  .coupang-inline { flex-wrap: wrap; }
+  .coupang-inline .ci-cta { margin-left: auto; }
+}
+
+/* ─── Code Copy Button ─── */
+.code-block-wrapper {
+
+}
+
+.chart-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+  text-align: center;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+.chart-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.chart-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.chart-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  min-width: 120px;
+  text-align: right;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chart-track {
+  flex: 1;
+  height: 32px;
+  background: var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+:root.dark .chart-track {
+  background: #334155;
+}
+
+.chart-fill {
+  height: 100%;
+  border-radius: 8px;
+  min-width: 4px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.chart-fill.animated {
+  animation: chartGrow 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes chartGrow {
+  from { width: 0 !important; }
+}
+
+.chart-fill-inner-val {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  white-space: nowrap;
+}
+
+.chart-value {
+  font-size: 0.9rem;
+  font-weight: 800;
+  min-width: 55px;
+  color: var(--color-text);
+}
+
+/* Bar Chart — 세로형 (data-orient="vertical") */
+.chart-columns {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.chart-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chart-col .chart-value {
+  min-width: 0;
+  font-size: 0.85rem;
+}
+
+.chart-col-track {
+  width: 100%;
+  max-width: 64px;
+  height: 180px;
+  display: flex;
+  align-items: flex-end;
+  background: var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+:root.dark .chart-col-track {
+  background: #334155;
+}
+
+.chart-col-fill {
+  width: 100%;
+  min-height: 4px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.chart-col-fill.animated {
+  animation: chartGrowVertical 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes chartGrowVertical {
+  from { height: 0 !important; }
+}
+
+.chart-col-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+/* 세로 비교 막대에서 최댓값 대비 차이(%) 배지 — 축을 자르지 않고 근접값 대비를 명시 */
+.chart-delta {
+  font-size: 0.72em;
+  font-weight: 700;
+  color: #d55e00;
+  background: rgba(213,94,0,0.10);
+  padding: 0.05em 0.4em;
+  border-radius: 999px;
+  margin-left: 0.2em;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+@media (max-width: 640px) {
+  .chart-columns { gap: 0.35rem; }
+  .chart-col-track { height: 140px; }
+  .chart-col-label { font-size: 0.75rem; }
+  .chart-col .chart-value { font-size: 0.75rem; }
+}
+
+/* Radar/Score Chart (Enhanced) */
+.chart-radar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.radar-item {
+  padding: 1.25rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.radar-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+:root.dark .radar-item {
+  background: #1e293b;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+
+.radar-item-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.radar-name {
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.radar-avg {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.radar-avg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.radar-scores {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radar-score-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.radar-score-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  min-width: 65px;
+  text-align: right;
+  color: var(--color-text-secondary);
+}
+
+.radar-score-track {
+  flex: 1;
+  height: 20px;
+  background: var(--color-border);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+:root.dark .radar-score-track {
+  background: #334155;
+}
+
+.radar-score-fill {
+  height: 100%;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+.radar-score-fill.animated {
+  animation: chartGrow 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.radar-score-val {
+  font-size: 0.8rem;
+  font-weight: 800;
+  min-width: 40px;
+  color: var(--color-text);
+}
+
+/* Chart responsive */
+@media (max-width: 640px) {
+  .chart-bar,
+  .chart-radar,
+  .chart-donut,
+  .chart-versus,
+  .chart-progress {
+    padding: 1.25rem 1rem;
+    margin: 1.5rem 0;
+  }
+  .chart-title {
+    font-size: 0.95rem;
+  }
+  .chart-label {
+    min-width: 80px;
+    font-size: 0.75rem;
+  }
+  .chart-value {
+    min-width: 45px;
+    font-size: 0.8rem;
+  }
+  .chart-track {
+    height: 26px;
+  }
+  .chart-radar-grid {
+    grid-template-columns: 1fr;
+  }
+  .radar-score-track {
+    height: 16px;
+  }
+}
+
+/* ===== Donut Chart ===== */
+.chart-donut-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.donut-ring {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transition: transform 0.3s;
+}
+.donut-ring:hover { transform: scale(1.03); }
+.donut-hole {
+  position: absolute;
+  inset: 22%;
+  border-radius: 50%;
+  background: var(--color-bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+:root.dark .donut-hole { background: #1e293b; }
+.donut-total {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.1;
+}
+.donut-total-label {
+  font-size: 0.65rem;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+.donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.donut-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.donut-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.donut-legend-label {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+.donut-legend-value {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-left: auto;
+}
+@media (max-width: 640px) {
+  .chart-donut-container { flex-direction: column; gap: 1.25rem; }
+  .donut-ring { width: 150px; height: 150px; }
+  .donut-legend { flex-direction: row; flex-wrap: wrap; gap: 0.5rem 1rem; }
+}
+
+/* ===== Versus Chart ===== */
+.versus-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.versus-name {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+.versus-vs {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--color-text-secondary);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  background: var(--color-border);
+  letter-spacing: 0.05em;
+}
+:root.dark .versus-vs { background: #334155; }
+.versus-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.versus-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.5rem;
+}
+.versus-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+.versus-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.versus-track {
+  flex: 1;
+  height: 28px;
+  background: var(--color-border);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+:root.dark .versus-track { background: #334155; }
+.versus-track-left {
+  display: flex;
+  justify-content: flex-end;
+}
+.versus-fill {
+  height: 100%;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  min-width: 4px;
+}
+.versus-fill.animated {
+  animation: chartGrow 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.versus-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  min-width: 65px;
+  text-align: center;
+  color: var(--color-text);
+  padding: 0.2rem 0.4rem;
+  background: var(--color-bg-secondary);
+  border-radius: 6px;
+}
+:root.dark .versus-label { background: #1e293b; }
+.versus-val {
+  font-size: 0.8rem;
+  font-weight: 800;
+  min-width: 30px;
+  color: var(--color-text);
+}
+.versus-bar-left .versus-val { text-align: right; }
+@media (max-width: 640px) {
+  .versus-header { gap: 0.75rem; }
+  .versus-name { font-size: 0.9rem; }
+  .versus-track { height: 22px; }
+  .versus-label { min-width: 50px; font-size: 0.7rem; }
+}
+
+/* ===== Progress Circle Chart ===== */
+.progress-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.progress-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.progress-circle {
+  width: 110px;
+  height: 110px;
+  position: relative;
+}
+.progress-circle svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.progress-bg {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 8;
+}
+:root.dark .progress-bg { stroke: #334155; }
+.progress-ring {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.progress-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+.progress-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+@media (max-width: 640px) {
+  .progress-circle { width: 90px; height: 90px; }
+  .progress-value { font-size: 1rem; }
+  .progress-grid { gap: 1rem; }
+}
+
+/* ===== Post Navigation (Prev/Next) ===== */
+.post-navigation {
+
+   ========================================================================== */
+/* 숫자 정렬 안정(카운트업 중 흔들림 방지) */
+.chart-value, .versus-val, .radar-score-val, .progress-value, .donut-total {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* 막대 내부 상단 하이라이트 + sheen 컨테이너 */
+.chart-fill, .versus-fill, .radar-score-fill {
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 2px 8px rgba(0,0,0,0.14);
+}
+/* 등장 후 1회 광택 스윕 */
+.chart-fill.animated::after,
+.versus-fill.animated::after,
+.radar-score-fill.animated::after {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 45%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: translateX(-140%) skewX(-18deg);
+  animation: chart-sheen 1.05s ease 0.45s 1;
+  pointer-events: none;
+}
+@keyframes chart-sheen {
+  to { transform: translateX(320%) skewX(-18deg); }
+}
+
+/* hover: 해당 행 강조 */
+.chart-row, .versus-row, .radar-score-row { transition: filter 0.2s ease; }
+.chart-row:hover .chart-fill,
+.radar-score-row:hover .radar-score-fill { filter: brightness(1.1) saturate(1.1); }
+.chart-row:hover .chart-value { color: var(--color-primary); }
+
+/* versus 승자 강조 */
+.versus-val.versus-win {
+  font-size: 1.05em;
+  font-weight: 900;
+  color: var(--color-primary);
+  text-shadow: 0 0 14px rgba(109,92,240,0.35);
+}
+.versus-val.versus-win::after { content: ' ▲'; font-size: 0.6em; vertical-align: 2px; opacity: 0.7; }
+.versus-fill.win { box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 0 14px -2px currentColor; }
+
+@media (prefers-reduced-motion: reduce) {
+  .chart-fill.animated::after,
+  .versus-fill.animated::after,
+</style>
+<script id="mg-chart-js">
+(function(){
+  if (window.__mgCharts) return; window.__mgCharts = true;
+  function run(){
+    function hexToRgba(hex, a){var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return 'rgba('+r+','+g+','+b+','+a+')';}
+    function countUp(el, delay){
+      var m=(el.textContent||'').trim().match(/^(-?\d+(?:\.\d+)?)(.*)$/); if(!m) return;
+      var target=parseFloat(m[1]), suffix=m[2]||'', dec=(m[1].split('.')[1]||'').length, dur=1000, startT=0;
+      el.textContent='0'+(dec?'.'+'0'.repeat(dec):'')+suffix;
+      function step(t){ if(!startT)startT=t; var p=Math.min((t-startT)/dur,1), e=1-Math.pow(1-p,3);
+        el.textContent=(target*e).toFixed(dec)+suffix; if(p<1)requestAnimationFrame(step);}
+      setTimeout(function(){requestAnimationFrame(step);}, delay||0);
+    }
+    var chartObserver=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.querySelectorAll('.chart-fill, .chart-col-fill, .radar-score-fill, .versus-fill').forEach(function(f){f.classList.add('animated');});
+          entry.target.querySelectorAll('.progress-ring').forEach(function(ring){ring.style.strokeDashoffset=ring.dataset.target;});
+          var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if(!reduce){ entry.target.querySelectorAll('.chart-value, .versus-val, .radar-score-val, .progress-value, .donut-total').forEach(function(v,i){countUp(v,150+i*40);}); }
+          chartObserver.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.2});
+
+    // 1) bar
+    document.querySelectorAll('.chart-bar').forEach(function(el){
+      var labels=(el.dataset.labels||'').split(','), values=(el.dataset.values||'').split(',').map(Number);
+      var colors=(el.dataset.colors||'#3b82f6,#f59e0b,#009e73,#d55e00,#8b5cf6').split(',');
+      var title=el.dataset.title||'', unit=el.dataset.unit||'', max=Math.max.apply(null,values)*1.15;
+      var vertical=el.dataset.orient==='vertical', vMax=Math.max.apply(null,values);
+      var hl=el.dataset.highlight, hlIdx=-1;
+      if(hl==='max')hlIdx=values.indexOf(Math.max.apply(null,values));
+      else if(hl==='min')hlIdx=values.indexOf(Math.min.apply(null,values));
+      else if(hl!=null&&hl!=='')hlIdx=parseInt(hl,10);
+      var ACCENT=el.dataset.accent||'#3b82f6', MUTE='#94a3b8', html='';
+      if(title)html+='<div class="chart-title">'+title+'</div>';
+      html+=vertical?'<div class="chart-columns">':'<div class="chart-bars">';
+      labels.forEach(function(label,i){
+        var pct=max>0?(values[i]/max)*100:0;
+        var color=hlIdx>=0?(i===hlIdx?ACCENT:MUTE):colors[i%colors.length].trim();
+        if(vertical){
+          var gradV='linear-gradient(0deg, '+color+', '+hexToRgba(color,0.7)+')';
+          var d=vMax>0?Math.round(((values[i]-vMax)/vMax)*100):0;
+          var delta=(values.length===2&&values[i]!==vMax&&d!==0)?' <span class="chart-delta">'+d+'%</span>':'';
+          html+='<div class="chart-col"><span class="chart-value">'+values[i]+unit+delta+'</span><div class="chart-col-track"><div class="chart-col-fill" style="height:'+pct+'%;background:'+gradV+'"></div></div><span class="chart-col-label">'+label.trim()+'</span></div>';
+          return;
+        }
+        var grad='linear-gradient(90deg, '+color+', '+hexToRgba(color,0.7)+')';
+        html+='<div class="chart-row"><span class="chart-label">'+label.trim()+'</span><div class="chart-track"><div class="chart-fill" style="width:'+pct+'%;background:'+grad+'"></div></div><span class="chart-value">'+values[i]+unit+'</span></div>';
+      });
+      html+='</div>'; el.innerHTML=html; chartObserver.observe(el);
+    });
+
+    // 2) radar
+    document.querySelectorAll('.chart-radar').forEach(function(el){
+      var items=JSON.parse(el.dataset.items||'[]'), title=el.dataset.title||'', html='';
+      if(title)html+='<div class="chart-title">'+title+'</div>';
+      html+='<div class="chart-radar-grid">';
+      var allVals=items.flatMap(function(it){return (it.scores||[]).map(function(s){return Number(s.value)||0;});});
+      var rawMax=Math.max.apply(null,allVals.concat([1]));
+      var scaleMax=rawMax<=10?10:(rawMax<=100?100:Math.ceil(rawMax/50)*50);
+      items.forEach(function(item){
+        var scores=item.scores||[];
+        var avg=scores.length>0?(scores.reduce(function(a,s){return a+s.value;},0)/scores.length).toFixed(1):'0';
+        var mainColor=(scores[0]&&scores[0].color)||'#3b82f6';
+        html+='<div class="radar-item"><div class="radar-item-accent" style="background:'+mainColor+'"></div><div class="radar-name" style="color:'+mainColor+'">'+item.name+'</div><div class="radar-avg"><span class="radar-avg-badge" style="background:'+hexToRgba(mainColor,0.12)+';color:'+mainColor+'">평균 '+avg+'/'+scaleMax+'</span></div><div class="radar-scores">';
+        scores.forEach(function(s){
+          var pct=Math.min((s.value/scaleMax)*100,100), col=s.color||'#3b82f6';
+          var grad='linear-gradient(90deg, '+col+', '+hexToRgba(col,0.6)+')';
+          html+='<div class="radar-score-row"><span class="radar-score-label">'+s.label+'</span><div class="radar-score-track"><div class="radar-score-fill" style="width:'+pct+'%;background:'+grad+'"></div></div><span class="radar-score-val" style="color:'+col+'">'+s.value+'</span></div>';
+        });
+        html+='</div></div>';
+      });
+      html+='</div>'; el.innerHTML=html; chartObserver.observe(el);
+    });
+
+    // 3) donut
+    document.querySelectorAll('.chart-donut').forEach(function(el){
+      var labels=(el.dataset.labels||'').split(','), values=(el.dataset.values||'').split(',').map(Number);
+      var colors=(el.dataset.colors||'#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6').split(',');
+      var title=el.dataset.title||'', unit=el.dataset.unit||'', total=values.reduce(function(a,v){return a+v;},0);
+      var gradient='', cumPct=0;
+      values.forEach(function(v,i){var pct=total>0?(v/total)*100:0, color=colors[i%colors.length].trim();
+        gradient+=color+' '+cumPct+'% '+(cumPct+pct)+'%'; cumPct+=pct; if(i<values.length-1)gradient+=', ';});
+      var percentOnly=el.dataset.valueMode==='percent', topIdx=0;
+      values.forEach(function(v,i){if(v>values[topIdx])topIdx=i;});
+      var topPct=total>0?((values[topIdx]/total)*100).toFixed(1):'0', html='';
+      if(title)html+='<div class="chart-title">'+title+'</div>';
+      html+='<div class="chart-donut-container"><div class="donut-ring" style="background:conic-gradient('+gradient+')">';
+      html+=percentOnly?'<div class="donut-hole"><span class="donut-total">'+topPct+'%</span><span class="donut-total-label">'+labels[topIdx].trim()+'</span></div>':'<div class="donut-hole"><span class="donut-total">'+total+unit+'</span><span class="donut-total-label">합계</span></div>';
+      html+='</div><div class="donut-legend">';
+      labels.forEach(function(label,i){
+        var pct=total>0?((values[i]/total)*100).toFixed(1):'0';
+        var valText=percentOnly?pct+'%':values[i]+unit+' ('+pct+'%)';
+        html+='<div class="donut-legend-item"><span class="donut-legend-dot" style="background:'+colors[i%colors.length].trim()+'"></span><span class="donut-legend-label">'+label.trim()+'</span><span class="donut-legend-value">'+valText+'</span></div>';
+      });
+      html+='</div></div>'; el.innerHTML=html;
+    });
+
+    // 4) versus
+    document.querySelectorAll('.chart-versus').forEach(function(el){
+      var items=JSON.parse(el.dataset.items||'[]'), title=el.dataset.title||'';
+      var nameA=el.dataset.nameA||'A', nameB=el.dataset.nameB||'B', colorA=el.dataset.colorA||'#3b82f6', colorB=el.dataset.colorB||'#009e73';
+      var maxVal=Math.max.apply(null,items.flatMap(function(i){return [i.a,i.b];}))*1.1, html='';
+      if(title)html+='<div class="chart-title">'+title+'</div>';
+      html+='<div class="versus-header"><span class="versus-name" style="color:'+colorA+'">'+nameA+'</span><span class="versus-vs">VS</span><span class="versus-name" style="color:'+colorB+'">'+nameB+'</span></div><div class="versus-rows">';
+      items.forEach(function(item){
+        var pctA=maxVal>0?(item.a/maxVal)*100:0, pctB=maxVal>0?(item.b/maxVal)*100:0, aWin=item.a>item.b, bWin=item.b>item.a;
+        html+='<div class="versus-row"><div class="versus-bar-left"><span class="versus-val'+(aWin?' versus-win':'')+'">'+item.a+'</span><div class="versus-track versus-track-left"><div class="versus-fill'+(aWin?' win':'')+'" style="width:'+pctA+'%;background:linear-gradient(270deg, '+colorA+', '+hexToRgba(colorA,0.6)+')"></div></div></div><div class="versus-label">'+item.label+'</div><div class="versus-bar-right"><div class="versus-track"><div class="versus-fill'+(bWin?' win':'')+'" style="width:'+pctB+'%;background:linear-gradient(90deg, '+colorB+', '+hexToRgba(colorB,0.6)+')"></div></div><span class="versus-val'+(bWin?' versus-win':'')+'">'+item.b+'</span></div></div>';
+      });
+      html+='</div>'; el.innerHTML=html; chartObserver.observe(el);
+    });
+
+    // 5) progress
+    document.querySelectorAll('.chart-progress').forEach(function(el){
+      var labels=(el.dataset.labels||'').split(','), values=(el.dataset.values||'').split(',').map(Number);
+      var colors=(el.dataset.colors||'#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6').split(',');
+      var title=el.dataset.title||'', max=Number(el.dataset.max||'100'), unit=el.dataset.unit||'', circ=2*Math.PI*45, html='';
+      if(title)html+='<div class="chart-title">'+title+'</div>';
+      html+='<div class="progress-grid">';
+      labels.forEach(function(label,i){
+        var pct=Math.min(values[i]/max,1), offset=circ-(circ*pct), color=colors[i%colors.length].trim();
+        html+='<div class="progress-item"><div class="progress-circle"><svg viewBox="0 0 100 100"><circle class="progress-bg" cx="50" cy="50" r="45" /><circle class="progress-ring" cx="50" cy="50" r="45" style="stroke:'+color+';stroke-dasharray:'+circ+';stroke-dashoffset:'+circ+'" data-target="'+offset+'" /></svg><div class="progress-value" style="color:'+color+'">'+values[i]+unit+'</div></div><div class="progress-label">'+label.trim()+'</div></div>';
+      });
+      html+='</div>'; el.innerHTML=html; chartObserver.observe(el);
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', run); else run();
+})();
+
+</script>
