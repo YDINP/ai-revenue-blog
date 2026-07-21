@@ -1,6 +1,6 @@
 ---
 title: "Supabase 무료 티어로 프로덕션 서비스 운영하기 완전 가이드"
-description: "Supabase 무료 플랜의 한도를 정확히 파악하고, 비용 없이 실서비스를 운영하는 전략을 알려드립니다."
+description: "Supabase 무료 티어의 데이터베이스·스토리지·Edge Functions 한도를 정확히 파악하고, 개인 블로그부터 SaaS MVP, 모바일 앱 백엔드까지 비용 없이 실서비스를 운영하는 절약 전략을 정리했습니다."
 pubDate: 2026-02-06
 category: "Dev"
 tags: ["Supabase", "백엔드", "무료", "서버리스", "데이터베이스"]

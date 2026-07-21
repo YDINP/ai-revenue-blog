@@ -1,6 +1,6 @@
 ---
 title: "Phaser.js 웹 게임 개발 완벽 가이드: 브라우저에서 바로 실행되는 게임 만들기"
-description: "HTML5 게임 프레임워크 Phaser로 웹 게임을 만드는 방법, Vite 설정부터 배포까지 실전 가이드입니다."
+description: "Phaser.js로 브라우저에서 바로 실행되는 웹 게임을 만드는 방법을 정리했습니다. Vite 프로젝트 설정부터 기본 게임 코드 작성, 개발 서버 실행과 실전 배포까지 순서대로 안내하는 가이드입니다."
 pubDate: 2026-02-06
 category: "Game"
 tags: ["Phaser", "웹게임", "JavaScript", "HTML5게임", "게임개발"]

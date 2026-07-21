@@ -1,6 +1,6 @@
 ---
 title: "Godot 4.x 완벽 입문: 인디 개발자를 위한 무료 오픈소스 게임 엔진"
-description: "Godot Engine을 선택해야 하는 이유와 시작 방법, GDScript부터 첫 게임까지 단계별 가이드를 제공합니다."
+description: "인디 개발자를 위한 무료 오픈소스 게임 엔진 Godot 4.x 입문 가이드입니다. 선택해야 하는 이유와 새로운 기능, 설치 방법부터 GDScript로 첫 프로젝트를 만드는 과정까지 단계별로 정리했습니다."
 pubDate: 2026-02-08
 category: "Game"
 tags: ["Godot", "인디게임", "오픈소스", "GDScript", "게임개발"]

@@ -1,6 +1,6 @@
 ---
 title: "2026년 키보드 마우스 세트 추천: 업무와 게이밍 병행 개발자 가이드"
-description: "개발자·게이머 위한 키보드 마우스 세트 4가지 비교! 인체공학, 응답속도, 배터리까지 완벽 정리. 지금 확인하세요."
+description: "업무와 게이밍을 병행하는 개발자를 위해 Corsair, Logitech, Razer, ASUS ROG 키보드 마우스 세트 4종을 인체공학, 응답 속도, 배터리 지속시간 기준으로 비교 정리한 2026년 가이드입니다."
 pubDate: 2026-02-18
 author: "TechFlow"
 category: "Review"

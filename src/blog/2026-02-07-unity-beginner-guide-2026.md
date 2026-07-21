@@ -1,6 +1,6 @@
 ---
 title: "Unity 입문 완벽 가이드: 2026년 기준 2D/3D 게임 개발 시작하기"
-description: "Unity 설치부터 첫 게임 제작까지, 초보자를 위한 단계별 Unity 학습 로드맵을 제공합니다."
+description: "Unity를 처음 시작하는 분을 위한 입문 가이드입니다. Unity Hub 설치 방법부터 에디터 인터페이스 사용법, 2D·3D 프로젝트 제작까지 2026년 기준 단계별 학습 로드맵을 순서대로 자세히 안내합니다."
 pubDate: 2026-02-07
 category: "Game"
 tags: ["Unity", "게임개발", "C#", "입문가이드"]
