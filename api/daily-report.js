@@ -56,7 +56,22 @@ export default async function handler(req, res) {
     //   daily-report 는 매일 09시(KST=00:00 UTC) 실행되므로 KST 요일로 게이트한다.
     const kstDow = new Date(Date.now() + 9 * 3600 * 1000).getUTCDay(); // 0=일 … 1=월,3=수,5=금
     if ([1, 3, 5].includes(kstDow)) {
-      await runNewsletter().catch((e) => console.error('newsletter (report):', e.message));
+      const nl = await runNewsletter().catch((e) => {
+        console.error('newsletter (report):', e.message);
+        return null;
+      });
+      // 발송 결과를 텔레그램으로 알림(신규글 있거나 에러난 블로그만 — 조용한 날은 알림 없음)
+      if (nl) {
+        const active = nl.filter((r) => r.error || (r.new || 0) > 0 || (r.sent || 0) > 0);
+        if (active.length) {
+          const lines = active.map((r) =>
+            r.error
+              ? `• ${escapeHtml(r.source)}: ⚠️ ${escapeHtml(r.error)}`
+              : `• ${escapeHtml(sourceLabel(r.source))}: 새 ${r.new || 0}편 → ${r.sent || 0}명 발송`
+          );
+          await sendToAdmin(`📩 <b>뉴스레터 발송</b>\n${lines.join('\n')}`).catch(() => {});
+        }
+      }
     }
 
     // ?day=YYYY-MM-DD 로 특정 날짜 재발송 (워크플로 수동 실행용). 기본 = 어제(KST)
