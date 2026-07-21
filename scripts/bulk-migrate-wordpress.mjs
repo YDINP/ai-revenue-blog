@@ -21,6 +21,7 @@ import { publishPost, envFromProcess } from './publish-wordpress.mjs';
 const dir = process.argv[2];
 const listOnly = process.argv.includes('--list');
 const keepCharts = process.argv.includes('--keep-charts'); // WP에 blog-post.js+CSS 이식 완료 시 chart div 그대로 발행
+const silo = process.argv.includes('--silo') ? process.argv[process.argv.indexOf('--silo') + 1] : ''; // 1사이트 통합: 부모 카테고리(예: "테크·개발" / "생활·재테크")
 const status = process.argv.includes('--status') ? process.argv[process.argv.indexOf('--status') + 1] : 'draft';
 const delayMs = 2500;
 if (!dir) { console.error('사용: node scripts/bulk-migrate-wordpress.mjs <blogDir> [--list|--status draft|publish]'); process.exit(1); }
@@ -59,7 +60,7 @@ for (const f of keep) {
   const slug = basename(f, '.md');
   if (done[slug]) { skip++; continue; }
   try {
-    const r = await publishPost(f, { status, env, keepChartDivs: keepCharts });
+    const r = await publishPost(f, { status, env, keepChartDivs: keepCharts, silo });
     done[slug] = r.id;
     writeFileSync(logPath, JSON.stringify(done, null, 2));
     ok++;
