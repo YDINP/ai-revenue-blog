@@ -2801,7 +2801,7 @@ const ICONS: Record<string, string> = {
         <div class="summary-grid">
           <div class="summary-card accent-blue color-blue">
             <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['file-text']}></svg></span><div class="label">VIP Posts</div></div>
-            <div class="value">{vipPostCount}</div>
+            <div class="value" id="vip-post-count">{vipPostCount}</div>
             <div class="sub">게임 소개 영상</div>
           </div>
           <div class="summary-card accent-purple color-purple">
@@ -2813,10 +2813,13 @@ const ICONS: Record<string, string> = {
         <div class="blog-section">
           <div class="section-header">
             <div class="section-title"><svg class="ico sec-ico" style="color:#57e6c3" viewBox="0 0 24 24" set:html={ICONS['pie']}></svg>VIP (playcast) 채널</div>
-            <span class="section-badge" style="background:rgba(87,230,195,0.15);color:#7fe9d0">{vipPostCount}편</span>
+            <span class="section-badge" id="vip-badge-count" style="background:rgba(87,230,195,0.15);color:#7fe9d0">{vipPostCount}편</span>
           </div>
           <div class="section-body">
-            <p class="dd-note">VIP는 버추얼 호스트 로지의 게임 소개 영상 채널이에요. 조회수만 집계되며(쿠팡·전환·카테고리 없음), <b>Top Pages·Live Activity·시간대/일별 차트</b>에서 VIP 소스로 필터·표기됩니다. → <a href="https://virtual-in-playing.vercel.app" target="_blank" rel="noopener" style="color:#7fe9d0">사이트 열기</a></p>
+            <p class="dd-note">VIP는 버추얼 호스트 로지의 게임 소개 영상 채널이에요. 카테고리·쿠팡 없이 <b>조회수</b>만 집계돼요. 각 영상 조회수는 아래 목록과 <b>Top Pages·Live Activity</b>에서 확인할 수 있어요. → <a href="https://virtual-in-playing.vercel.app" target="_blank" rel="noopener" style="color:#7fe9d0">사이트 열기</a></p>
+            <div class="recent-list" id="vip-recent-list-tab">
+              <div class="loading"><div class="spinner"></div>RSS 로딩 중...</div>
+            </div>
           </div>
         </div>
       </div>
@@ -3228,6 +3231,59 @@ const ICONS: Record<string, string> = {
             <span class="cat-badge cat-${catMap[p.category] || p.category.toLowerCase()}">${p.category}</span>
             <span class="recent-date">${formattedDate}</span>
           </div>`;
+        }).join('');
+      }
+
+      // === VIP(playcast) 영상 목록 + 조회수 (TF/LF 탭과 동일하게) ===
+      let vipRssData = [];
+      async function fetchVipRSS() {
+        try {
+          const res = await fetch('https://virtual-in-playing.vercel.app/rss.xml');
+          const text = await res.text();
+          const xml = new DOMParser().parseFromString(text, 'text/xml');
+          const items = xml.querySelectorAll('item');
+          vipRssData = Array.from(items).map(item => {
+            const link = item.querySelector('link')?.textContent || '';
+            const m = link.match(/\/watch\/([^/?#]+)/);
+            return {
+              title: item.querySelector('title')?.textContent || '',
+              link,
+              slug: m ? m[1] : '',
+              pubDate: item.querySelector('pubDate')?.textContent || '',
+            };
+          });
+          const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+          setText('vip-post-count', vipRssData.length);
+          setText('vip-badge-count', `${vipRssData.length}편`);
+          renderVipRecentPosts();
+        } catch (e) {
+          console.error('Failed to fetch VIP RSS:', e);
+          const c = document.getElementById('vip-recent-list-tab');
+          if (c) c.innerHTML = '<div class="no-data">RSS를 불러오지 못했습니다</div>';
+        }
+      }
+
+      function renderVipRecentPosts() {
+        const container = document.getElementById('vip-recent-list-tab');
+        if (!container || !vipRssData.length) return;
+        // slug별 조회수 (Top Pages 데이터의 vip 소스에서)
+        const viewsBySlug = {};
+        _topPagesData.filter(p => p.source === 'vip').forEach(p => {
+          const path = p.path || (p.slug ? `/watch/${p.slug}/` : '');
+          const mm = path.match(/\/watch\/([^/?#]+)/);
+          const slug = mm ? mm[1] : (p.slug || '');
+          if (slug) viewsBySlug[slug] = (viewsBySlug[slug] || 0) + (p.views || 0);
+        });
+        container.innerHTML = vipRssData.slice(0, 15).map((p, i) => {
+          let fd = '';
+          if (p.pubDate) { const dt = new Date(p.pubDate); if (!isNaN(dt.getTime())) fd = dt.toISOString().split('T')[0]; }
+          const views = viewsBySlug[p.slug] || 0;
+          return `<a class="recent-item" href="${escHtml(safeUrl(p.link))}" target="_blank" rel="noopener">
+            <span class="recent-rank">${i + 1}</span>
+            <span class="recent-title" title="${escHtml(p.title)}">${escHtml(p.title)}</span>
+            <span class="recent-date">${fd}</span>
+            <span class="top-page-views">${fmt(views)}회</span>
+          </a>`;
         }).join('');
       }
 
@@ -5253,6 +5309,7 @@ const ICONS: Record<string, string> = {
           _hourlyViews = Array.isArray(hourly) ? hourly : [];
           renderHourlyChart();
           renderTopPages(topPages);
+          renderVipRecentPosts(); // VIP 목록 조회수 채우기(topPages 로드 후)
           renderEventFeed(events);
           _trafficDetail = Array.isArray(dailyDetail) ? dailyDetail : [];
           // 웹/모바일 일별 집계 병합 (get_daily_device_trend — KST 일자 기준으로 daily_detail 과 동일)
@@ -5661,6 +5718,7 @@ const ICONS: Record<string, string> = {
         if (_inited) return;
         _inited = true;
         fetchLifeFlowRSS();
+        fetchVipRSS();
         loadTraffic();
         checkSupabase();
         initChartHover();
