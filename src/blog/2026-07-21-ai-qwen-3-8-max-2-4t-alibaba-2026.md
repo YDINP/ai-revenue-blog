@@ -40,7 +40,7 @@ draft: false
 
 ## 파라미터 경쟁: 조 단위 숫자로 보는 두 모델
 
-<div class="chart-bar" data-title="중국발 초대형 모델 파라미터 비교 (조 단위)" data-labels="Kimi K3 (문샷AI),Qwen 3.8-Max (알리바바)" data-values="2.8,2.4" data-colors="#009e73,#3b82f6" data-unit="조"></div>
+<div class="chart-bar" data-title="중국발 초대형 모델 파라미터 비교 (조 단위)" data-labels="Kimi K3,Qwen 3.8-Max" data-values="2.8,2.4" data-colors="#009e73,#3b82f6" data-unit="조"></div>
 
 | 항목 | Kimi K3 | Qwen 3.8-Max |
 |------|---------|--------------|
