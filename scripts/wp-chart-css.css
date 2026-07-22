@@ -965,14 +965,7 @@ h1, h2, h3, h4, h5, h6,
 .donut-hole .donut-total,
 .donut-hole .donut-total-label { display: none !important; }
 
-/* ③ 세로막대: 바마다 팔레트 색 구분(회색 강조 대신) */
-.chart-columns .chart-col:nth-child(1) .chart-col-fill { background: var(--ok-blue) !important; }
-.chart-columns .chart-col:nth-child(2) .chart-col-fill { background: var(--ok-green) !important; }
-.chart-columns .chart-col:nth-child(3) .chart-col-fill { background: var(--ok-amber) !important; }
-.chart-columns .chart-col:nth-child(4) .chart-col-fill { background: var(--ok-orange) !important; }
-.chart-columns .chart-col:nth-child(5) .chart-col-fill { background: var(--ok-purple) !important; }
-.chart-columns .chart-col:nth-child(6) .chart-col-fill { background: #ec4899 !important; }
-.chart-columns .chart-col:nth-child(7) .chart-col-fill { background: #14b8a6 !important; }
+/* ③ 세로막대 색상은 chart-static 렌더가 인라인 지정(v2) */
 
 /* ── 제목 폰트 세리프→Pretendard 확실히 (Kadence heading 변수 + 직접) ── */
 :root, body {
@@ -1040,3 +1033,14 @@ h1.entry-title, .entry-title, .entry-hero .entry-title, .single-title,
   .coupang-inline .ci-title { white-space: normal; }
   .coupang-inline .ci-cta { margin-left: auto; }
 }
+
+/* ── 세로막대 v2: 색막대 + 우측 범례(항목·점수) ── */
+.chart-vbar-wrap { display: flex; align-items: stretch; gap: 1.5rem; flex-wrap: wrap; }
+.chart-vbar-wrap .chart-columns { flex: 1 1 54%; min-width: 240px; align-items: flex-end; margin: 0; }
+.chart-vlegend { flex: 1 1 34%; min-width: 190px; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: center; gap: 0.45rem; align-self: center; }
+.chart-vlegend-item { display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.75rem; border-radius: 10px; background: var(--zebra, rgba(127,127,127,.04)); }
+.chart-vlegend-dot { flex-shrink: 0; width: 12px; height: 12px; border-radius: 4px; }
+.chart-vlegend-name { flex: 1; font-size: 0.92rem; font-weight: 600; color: var(--color-text, #26272b); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chart-vlegend-score { flex-shrink: 0; font-size: 0.95rem; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--color-text, #26272b); }
+:root.dark .chart-vlegend-name, :root.dark .chart-vlegend-score { color: #e6e7ea; }
+@media (max-width: 560px){ .chart-vbar-wrap { flex-direction: column; } .chart-vlegend { width: 100%; flex-basis: auto; } }

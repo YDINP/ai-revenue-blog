@@ -20,18 +20,28 @@ function bar(a) {
   else if (hl === 'min') hlIdx = values.indexOf(Math.min(...values));
   else if (hl != null && hl !== '') hlIdx = parseInt(hl, 10);
   const ACCENT = a.accent || '#3b82f6', MUTE = '#94a3b8';
+  const VPAL = ['#3b82f6', '#009e73', '#f59e0b', '#d55e00', '#8b5cf6', '#ec4899', '#14b8a6'];
   let h = title ? `<div class="chart-title">${title}</div>` : '';
-  h += vertical ? '<div class="chart-columns">' : '<div class="chart-bars">';
+  if (vertical) {
+    // 세로막대: 바별 색 구분(팔레트) + 우측 범례(항목·점수). 값/라벨은 막대 안이 아닌 범례에.
+    h += '<div class="chart-vbar-wrap"><div class="chart-columns">';
+    labels.forEach((label, i) => {
+      const pct = max > 0 ? (values[i] / max) * 100 : 0;
+      const color = VPAL[i % VPAL.length];
+      const gradV = `linear-gradient(180deg, ${color}, ${rgba(color, 0.72)})`;
+      h += `<div class="chart-col"><div class="chart-col-track"><div class="chart-col-fill" style="height:${pct}%;background:${gradV}"></div></div></div>`;
+    });
+    h += '</div><ol class="chart-vlegend">';
+    labels.forEach((label, i) => {
+      const color = VPAL[i % VPAL.length];
+      h += `<li class="chart-vlegend-item"><span class="chart-vlegend-dot" style="background:${color}"></span><span class="chart-vlegend-name">${label.trim()}</span><span class="chart-vlegend-score">${values[i]}${unit}</span></li>`;
+    });
+    return h + '</ol></div>';
+  }
+  h += '<div class="chart-bars">';
   labels.forEach((label, i) => {
     const pct = max > 0 ? (values[i] / max) * 100 : 0;
     const color = hlIdx >= 0 ? (i === hlIdx ? ACCENT : MUTE) : colors[i % colors.length].trim();
-    if (vertical) {
-      const gradV = `linear-gradient(0deg, ${color}, ${rgba(color, 0.7)})`;
-      const d = vMax > 0 ? Math.round(((values[i] - vMax) / vMax) * 100) : 0;
-      const delta = (values.length === 2 && values[i] !== vMax && d !== 0) ? ` <span class="chart-delta">${d}%</span>` : '';
-      h += `<div class="chart-col"><span class="chart-value">${values[i]}${unit}${delta}</span><div class="chart-col-track"><div class="chart-col-fill" style="height:${pct}%;background:${gradV}"></div></div><span class="chart-col-label">${label.trim()}</span></div>`;
-      return;
-    }
     const grad = `linear-gradient(90deg, ${color}, ${rgba(color, 0.7)})`;
     h += `<div class="chart-row"><span class="chart-label">${label.trim()}</span><div class="chart-track"><div class="chart-fill" style="width:${pct}%;background:${grad}"></div></div><span class="chart-value">${values[i]}${unit}</span></div>`;
   });
