@@ -937,3 +937,106 @@ body.home .entry-content-wrap { max-width: none; margin-inline: 0; }    /* 홈�
 .wp-block-latest-posts__post-excerpt { padding: 0.6rem 1.15rem 1.15rem; font-size: 0.9rem; line-height: 1.7; color: #55575c; margin: 0; }
 @media (max-width: 900px){ .wp-block-latest-posts.is-grid { grid-template-columns: repeat(2,1fr);} }
 @media (max-width: 600px){ .wp-block-latest-posts.is-grid { grid-template-columns: 1fr;} }
+
+/* ── 표 셀: 영문 단어 글자단위 끊김 방지(Unreal→Unre al 버그) ── */
+.entry-content-wrap table th,
+.entry-content-wrap table td {
+  overflow-wrap: normal;      /* anywhere 상속 취소 */
+  word-break: keep-all;       /* 단어(영문 포함) 통째 유지, 공백에서만 줄바꿈 */
+}
+.entry-content-wrap table th:first-child,
+.entry-content-wrap table td:first-child {
+  white-space: nowrap;        /* 첫 열(엔진명 등)은 한 줄 유지 */
+}
+
+/* ============================================================================
+   피드백 반영 — 폰트 통일 · 도넛 중앙글자 제거 · 세로막대 바별 색구분
+   ============================================================================ */
+/* ① 전체 폰트 = Pretendard(가시성). 세리프 제목까지 통일 */
+body, input, button, select, textarea,
+h1, h2, h3, h4, h5, h6,
+.entry-title, .site-title, .site-title a, .archive-title, .page-title, .entry-hero .entry-title,
+.wp-block-latest-posts__post-title, .widget-title, .kadence-navigation a,
+.entry-content-wrap h1, .entry-content-wrap h2, .entry-content-wrap h3, .entry-content-wrap h4 {
+  font-family: var(--font-kr) !important;
+}
+
+/* ② 도넛(피자판) 중앙 글자 제거 — 값은 우측 범례로 확인 */
+.donut-hole .donut-total,
+.donut-hole .donut-total-label { display: none !important; }
+
+/* ③ 세로막대: 바마다 팔레트 색 구분(회색 강조 대신) */
+.chart-columns .chart-col:nth-child(1) .chart-col-fill { background: var(--ok-blue) !important; }
+.chart-columns .chart-col:nth-child(2) .chart-col-fill { background: var(--ok-green) !important; }
+.chart-columns .chart-col:nth-child(3) .chart-col-fill { background: var(--ok-amber) !important; }
+.chart-columns .chart-col:nth-child(4) .chart-col-fill { background: var(--ok-orange) !important; }
+.chart-columns .chart-col:nth-child(5) .chart-col-fill { background: var(--ok-purple) !important; }
+.chart-columns .chart-col:nth-child(6) .chart-col-fill { background: #ec4899 !important; }
+.chart-columns .chart-col:nth-child(7) .chart-col-fill { background: #14b8a6 !important; }
+
+/* ── 제목 폰트 세리프→Pretendard 확실히 (Kadence heading 변수 + 직접) ── */
+:root, body {
+  --global-heading-font-family: var(--font-kr) !important;
+  --headingFont: var(--font-kr) !important;
+}
+h1.entry-title, .entry-title, .entry-hero .entry-title, .single-title,
+.wp-site-blocks h1, .wp-site-blocks h2, .wp-site-blocks h3,
+.post-title, .content-title { font-family: var(--font-kr) !important; font-weight: 800 !important; }
+
+/* ============================================================================
+   쿠팡 추천 CTA — 트렌디 재디자인 v2
+   ============================================================================ */
+.coupang-inline {
+  display: flex !important; align-items: center; gap: 1rem;
+  margin: 1.75rem 0; padding: 0.95rem 1.15rem 0.95rem 1.3rem;
+  background: linear-gradient(135deg, #ffffff 0%, #fff7f2 100%);
+  border: 1px solid rgba(232, 99, 42, 0.20);
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 14px 30px -20px rgba(232,99,42,.45);
+  text-decoration: none !important; color: inherit;
+  position: relative; overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.coupang-inline::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  background: linear-gradient(180deg, #ffb300, #e8632a);
+}
+.coupang-inline:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 2px 4px rgba(0,0,0,.05), 0 20px 38px -18px rgba(232,99,42,.55);
+  border-color: #e8632a;
+}
+.coupang-inline .ci-icon {
+  flex-shrink: 0; width: 46px; height: 46px; display: grid; place-items: center;
+  font-size: 1.4rem; border-radius: 13px;
+  background: linear-gradient(135deg, #ffe8dc, #ffd7c0);
+}
+.coupang-inline .ci-body { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; flex: 1; }
+.coupang-inline .ci-label {
+  display: inline-flex; align-items: center; align-self: flex-start; gap: 0.25rem;
+  font-size: 0.68rem; font-weight: 800; letter-spacing: 0.03em; text-transform: uppercase;
+  color: #e8632a; background: rgba(232, 99, 42, 0.10);
+  padding: 0.18em 0.6em; border-radius: 999px;
+}
+.coupang-inline .ci-title {
+  font-size: 1.02rem; font-weight: 700; color: #26272b; line-height: 1.4; letter-spacing: -0.01em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.coupang-inline .ci-cta {
+  flex-shrink: 0; display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.9rem; font-weight: 800; color: #fff !important;
+  background: linear-gradient(135deg, #ff9053, #e8632a);
+  padding: 0.62em 1.15em; border-radius: 999px; border: 0;
+  box-shadow: 0 6px 14px -6px rgba(232,99,42,.6);
+  transition: gap .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+.coupang-inline:hover .ci-cta { gap: 0.6rem; box-shadow: 0 9px 20px -6px rgba(232,99,42,.7); }
+:root.dark .coupang-inline { background: linear-gradient(135deg, #1e293b 0%, #2a1f1a 100%); border-color: rgba(232,99,42,.3); }
+:root.dark .coupang-inline .ci-title { color: #e6e7ea; }
+:root.dark .coupang-inline .ci-icon { background: linear-gradient(135deg, #3a2a20, #4a2f1f); }
+@media (max-width: 560px) {
+  .coupang-inline { flex-wrap: wrap; }
+  .coupang-inline .ci-body { flex-basis: calc(100% - 46px - 1rem); }
+  .coupang-inline .ci-title { white-space: normal; }
+  .coupang-inline .ci-cta { margin-left: auto; }
+}
