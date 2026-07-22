@@ -1056,3 +1056,10 @@ body.home .header-navigation a:hover, body.home .header-menu-container a:hover {
 /* ── 최신글 썸네일: 커버 크롭 확실히(반쪽 잘림/왜곡 방지) ── */
 .wp-block-latest-posts__featured-image { display: block; margin: 0 !important; }
 .wp-block-latest-posts__featured-image img { width: 100% !important; height: 200px !important; object-fit: cover !important; object-position: center !important; display: block; border-radius: 0 !important; }
+
+/* ── 최신글 썸네일 링크 <a> inline → block(카드 풀폭, 잘림/여백 해결) ── */
+.wp-block-latest-posts__featured-image,
+.wp-block-latest-posts__featured-image.aligncenter,
+.wp-block-latest-posts__featured-image a { display: block !important; width: 100% !important; margin: 0 !important; text-align: initial; }
+.wp-block-latest-posts__featured-image a { line-height: 0; }
+.wp-block-latest-posts__featured-image img { width: 100% !important; height: 200px !important; object-fit: cover !important; object-position: center; display: block !important; max-width: none !important; border-radius: 0 !important; }
