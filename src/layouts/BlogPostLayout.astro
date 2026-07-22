@@ -196,7 +196,7 @@ const jsonLd = {
 };
 ---
 
-<BaseLayout title={title} description={description} image={ogImageUrl} noindex={noindex}>
+<BaseLayout title={title} description={description} image={ogImageUrl} noindex={noindex} canonicalUrl={noindex ? undefined : `https://mungge.com/${slug}/`}>
   <!-- JSON-LD Structured Data (BlogPosting + BreadcrumbList + 선택: FAQPage/ItemList) -->
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
