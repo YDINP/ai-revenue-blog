@@ -1044,3 +1044,15 @@ h1.entry-title, .entry-title, .entry-hero .entry-title, .single-title,
 .chart-vlegend-score { flex-shrink: 0; font-size: 0.95rem; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--color-text, #26272b); }
 :root.dark .chart-vlegend-name, :root.dark .chart-vlegend-score { color: #e6e7ea; }
 @media (max-width: 560px){ .chart-vbar-wrap { flex-direction: column; } .chart-vlegend { width: 100%; flex-basis: auto; } }
+
+/* ── 홈 헤더(투명) 흰글자 → 어둡게 (밝은 히어로 가독성) ── */
+body.home #masthead a, body.home .site-title a, body.home .site-title,
+body.home .header-navigation a, body.home .header-menu-container a { color: #1e293b !important; }
+body.home .header-navigation a:hover, body.home .header-menu-container a:hover { color: #3b82f6 !important; }
+
+/* ── 히어로 도메인 라인 ── */
+.mungge-hero__domain { margin: 0.35rem 0 0; text-align: center; font-size: 1.05rem; font-weight: 800; color: #3b82f6; letter-spacing: 0.01em; }
+
+/* ── 최신글 썸네일: 커버 크롭 확실히(반쪽 잘림/왜곡 방지) ── */
+.wp-block-latest-posts__featured-image { display: block; margin: 0 !important; }
+.wp-block-latest-posts__featured-image img { width: 100% !important; height: 200px !important; object-fit: cover !important; object-position: center !important; display: block; border-radius: 0 !important; }

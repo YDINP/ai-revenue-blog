@@ -15,6 +15,7 @@
  */
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
+import { autoPublishToWP } from "./wp-autopublish.mjs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -632,6 +633,8 @@ async function main() {
 
       // Register to Supabase
       await registerToSupabase(post, categoryName, slug, today, heroImage);
+      // mungge.com(WordPress) 자동 발행 — WP env 있을 때만(없으면 Astro만)
+      await autoPublishToWP(outputPath, { silo: "테크·개발" });
       generated++;
     } catch (err) {
       console.error(`[ERROR] Post ${i + 1}/${count} (${categoryName}) failed: ${err.message}`);
