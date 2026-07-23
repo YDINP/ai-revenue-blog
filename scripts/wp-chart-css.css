@@ -1283,3 +1283,15 @@ html[data-wp-dark-mode-active] .wp-block-latest-posts__post-excerpt { color: #c5
 html[data-wp-dark-mode-active] .mg-tldr { background: linear-gradient(180deg, rgba(59,130,246,.1), transparent 90%); }
 html[data-wp-dark-mode-active] .mg-tldr-text { color: #c5cbd8; }
 @media (max-width: 600px){ .mg-tldr { flex-direction: column; gap: 0.3rem; } }
+
+/* ── 모바일 하단 앵커 광고(320x100, sticky). 미충전 시 완전 투명 + 닫기버튼 ── */
+.mg-anchor { display: none; }
+@media (max-width: 782px) {
+  .mg-anchor { position: fixed; left: 0; right: 0; bottom: 0; z-index: 9998; display: flex; justify-content: center; align-items: center; padding: 5px 0; background: rgba(255,255,255,.97); border-top: 1px solid rgba(0,0,0,.08); }
+  html[data-wp-dark-mode-active] .mg-anchor { background: rgba(18,23,33,.97); border-top-color: rgba(255,255,255,.08); }
+  .mg-anchor:not(:has(.kakao_ad_area iframe)) { background: transparent; border: 0; padding: 0; pointer-events: none; }
+  .mg-anchor-x { position: absolute; top: -23px; right: 8px; width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(0,0,0,.12); background: #fff; color: #666; font-size: 15px; line-height: 22px; text-align: center; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.15); pointer-events: auto; }
+  .mg-anchor:not(:has(.kakao_ad_area iframe)) .mg-anchor-x { display: none; }
+  body:has(.mg-anchor .kakao_ad_area iframe) { padding-bottom: 116px; }
+}
+.mg-anchor.mg-closed { display: none !important; }
