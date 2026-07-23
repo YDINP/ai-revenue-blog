@@ -5,6 +5,9 @@ pubDate: 2026-07-23
 author: "TechFlow"
 category: "Game"
 tags: ["Phaser 3", "웹게임 개발", "JavaScript 게임", "게임 물리 엔진", "웹 게임 프레임워크"]
+image:
+  url: "https://mungge.com/wp-content/uploads/2026/07/tf-phaser-2026-07-23.jpg"
+  alt: "Phaser 3 물리 엔진 — 발광 도형의 충돌과 애니메이션을 상징하는 이미지"
 
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
