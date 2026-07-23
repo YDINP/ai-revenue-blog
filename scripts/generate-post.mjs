@@ -24,13 +24,14 @@ const __dirname = dirname(__filename);
 const PROJECT_ROOT = join(__dirname, "..");
 
 // ─── Config ───────────────────────────────────────────────────────────
-const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_AUTH_TOKEN;
 const PEXELS_API_KEY = process.env.PEXELS_API_KEY;
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 
-const CLAUDE_MODEL = "claude-haiku-4-5-20251001";
-const CLAUDE_API_URL = "https://api.anthropic.com/v1/messages";
+// 게이트웨이 호환: ANTHROPIC_BASE_URL/BLOG_CLAUDE_MODEL 있으면 우선(로컬), 없으면 공식 API(GH Actions)
+const CLAUDE_MODEL = process.env.BLOG_CLAUDE_MODEL || "claude-haiku-4-5-20251001";
+const CLAUDE_API_URL = `${process.env.ANTHROPIC_BASE_URL || "https://api.anthropic.com"}/v1/messages`;
 const PEXELS_API_URL = "https://api.pexels.com/v1/search";
 
 const AUTHOR = "TechFlow";
