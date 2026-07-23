@@ -358,12 +358,17 @@ export async function sendCopyLatest(toEmail) {
     const source = blog.source;
     if (!source) continue;
     try {
-      const rows = await sbn(
-        `newsletter_sends?source=eq.${encodeURIComponent(source)}&select=post_url,subject,created_at&order=created_at.desc&limit=30`
-      );
+      const rows = await sbn(`newsletter_sends?source=eq.${encodeURIComponent(source)}&select=*`);
       if (!rows.length) { out.push({ source, skipped: 'no sends' }); continue; }
-      const subject = rows[0].subject;
-      const urls = rows.filter((r) => r.subject === subject && r.post_url).map((r) => r.post_url);
+      // 정렬 컬럼 자동 탐지: 타임스탬프류 → id → 삽입순(마지막=최신)
+      const keys = Object.keys(rows[0] || {});
+      const tsKey = keys.find((k) => /(created|inserted|sent|updated).*(at|date|time)|_at$|date$/i.test(k));
+      let ordered;
+      if (tsKey) ordered = [...rows].sort((a, b) => new Date(b[tsKey] || 0) - new Date(a[tsKey] || 0));
+      else if (keys.includes('id')) ordered = [...rows].sort((a, b) => (b.id > a.id ? 1 : b.id < a.id ? -1 : 0));
+      else ordered = [...rows].reverse();
+      const subject = ordered[0].subject;
+      const urls = ordered.filter((r) => r.subject === subject && r.post_url).map((r) => r.post_url);
       if (!urls.length) { out.push({ source, subject, skipped: 'no post_url' }); continue; }
       const posts = [];
       for (const u of urls) {
