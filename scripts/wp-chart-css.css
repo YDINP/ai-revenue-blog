@@ -666,7 +666,11 @@
 .versus-track-left { display: flex; justify-content: flex-end; }
 .versus-fill { height: 100%; min-width: 4px; border-radius: var(--r-bar); box-shadow: none; }
 .versus-label {
-  min-width: 64px;
+  width: 100px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: center;
   font-size: 0.8125rem;
   font-weight: 600;
@@ -675,7 +679,7 @@
   background: var(--chart-track);
   border-radius: 8px;
 }
-.versus-val { min-width: 30px; font-size: 0.875rem; font-weight: 700; color: var(--color-text); }
+.versus-val { width: 2.8em; box-sizing: border-box; flex-shrink: 0; font-size: 0.875rem; font-weight: 700; color: var(--color-text); }
 .versus-bar-left .versus-val { text-align: right; }
 .versus-val.versus-win { font-weight: 700; color: var(--color-primary); }
 .versus-val.versus-win::after { content: ' ▲'; font-size: 0.62em; vertical-align: 2px; opacity: 0.65; }
