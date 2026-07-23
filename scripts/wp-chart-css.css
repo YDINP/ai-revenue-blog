@@ -1209,3 +1209,15 @@ html[data-wp-dark-mode-active] .mg-featured__title { color: #f2f3f5; }
   .pum-overlay { display: none !important; }
   html.pum-open-overlay, .pum-open-overlay { overflow: auto !important; }
 }
+
+/* ── progress 게이지 5~6개 → 3열(3-2 / 3-3) 강제. 해상도로 4-1 되는 문제 해결 ── */
+.progress-grid:has(.progress-item:nth-child(5)):not(:has(.progress-item:nth-child(7))) {
+  max-width: 430px; margin-left: auto; margin-right: auto;
+}
+
+/* ── 본문 광고 반응형: 데스크톱=728(Ad Inserter .code-block-1), 모바일=320x50 ── */
+.mg-inpost-mo { display: none; }
+@media (max-width: 782px) {
+  .code-block-1 { display: none !important; }   /* 728 배너 모바일 숨김 */
+  .mg-inpost-mo { display: flex !important; }    /* 320x50 모바일 노출 */
+}

@@ -24,9 +24,12 @@ function bar(a) {
   let h = title ? `<div class="chart-title">${title}</div>` : '';
   if (vertical) {
     // 세로막대: 바별 색 구분(팔레트) + 우측 범례(항목·점수). 값/라벨은 막대 안이 아닌 범례에.
+    // 스케일 증폭: 최고값→100%, 최저값→FLOOR%. 값 차이가 작아도 눈에 보이게(동일값이면 모두 100%).
+    const vMin = Math.min(...values), VFLOOR = 14;
+    const vScale = (v) => (vMax === vMin ? 100 : VFLOOR + ((v - vMin) / (vMax - vMin)) * (100 - VFLOOR));
     h += '<div class="chart-vbar-wrap"><div class="chart-columns">';
     labels.forEach((label, i) => {
-      const pct = max > 0 ? (values[i] / max) * 100 : 0;
+      const pct = vScale(values[i]);
       const color = VPAL[i % VPAL.length];
       const gradV = `linear-gradient(180deg, ${color}, ${rgba(color, 0.72)})`;
       h += `<div class="chart-col"><div class="chart-col-track"><div class="chart-col-fill" style="height:${pct}%;background:${gradV}"></div></div></div>`;
@@ -107,8 +110,13 @@ function versus(a) {
 }
 
 function progress(a) {
-  const labels = arr(a.labels), values = num(a.values);
-  const colors = arr(a.colors || '#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6');
+  const labels0 = arr(a.labels), values0 = num(a.values);
+  const colors0 = arr(a.colors || '#3b82f6,#009e73,#f59e0b,#d55e00,#8b5cf6');
+  // 점수순(내림차순) 정렬 — 라벨·값·색을 한 묶음으로 재정렬(원래 색 매칭 유지)
+  const order = labels0.map((_, i) => i).sort((x, y) => (values0[y] || 0) - (values0[x] || 0));
+  const labels = order.map((i) => labels0[i]);
+  const values = order.map((i) => values0[i]);
+  const colors = order.map((i) => colors0[i % colors0.length]);
   const title = a.title || '', max = Number(a.max || '100'), unit = a.unit || '', circ = 2 * Math.PI * 45;
   let h = title ? `<div class="chart-title">${title}</div>` : '';
   h += '<div class="progress-grid">';
