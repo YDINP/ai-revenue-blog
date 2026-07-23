@@ -160,7 +160,7 @@ function withUtm(url) {
   return url + (url.includes('?') ? '&' : '?') + UTM;
 }
 // 블로그별 브랜드 accent(제목/링크/버튼 색)
-const BRAND = { blog: '#6d5cf0', lifeflow: '#1e6b5c', vip: '#ff3d54' };
+const BRAND = { blog: '#6d5cf0', lifeflow: '#1e6b5c', vip: '#ff3d54', playcast: '#ff3d54' };
 // 신문/큐레이션 레이아웃: 리드 기사(큰 이미지+요약) 1개 + 나머지는 작은 썸네일 헤드라인
 function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
   const ink = '#1a1712';
@@ -169,10 +169,10 @@ function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
   const ground = '#f4f3f1';
   const line = '#e6e3dd';
   const serif = "Georgia,'Times New Roman',serif";
-  const noun = source === 'vip' ? '영상' : '글';
+  const noun = source === 'vip' || source === 'playcast' ? '영상' : '글';
   // VIP는 블로그 watch 페이지 '뉴스룸' 구도를 빌드시 합성해둔 단일 이미지(/newsroom-cards/<slug>.png)로.
   //   이메일 클라(Gmail 등)는 position:absolute 를 제거해 레이어드 오버레이가 세로로 무너지므로 단일 이미지가 필수.
-  const vipStage = source === 'vip' && site ? site.replace(/\/$/, '') : '';
+  const vipStage = (source === 'vip' || source === 'playcast') && site ? site.replace(/\/$/, '') : '';
   const intro = vipStage
     ? '로지가 이번에 새로 올라온 영상을 골라봤어요 📩'
     : `새로 올라온 ${noun} 중에서 골라봤어요 📩`;
@@ -273,7 +273,7 @@ async function sendForBlog(blog, force = false) {
     })
   );
   const label = sourceLabel ? sourceLabel(source) : blog.label || source;
-  const noun = source === 'vip' ? '영상' : '글';
+  const noun = source === 'vip' || source === 'playcast' ? '영상' : '글';
   const subject =
     fresh.length === 1
       ? `📩 방금 새 ${noun} 올렸어요 — ${fresh[0].title}`
@@ -377,7 +377,7 @@ export async function sendCopyLatest(toEmail, { only } = {}) {
         posts.push({ link: u, title: m.title || u, desc: m.desc || '', image: m.image || '', ts: 0 });
       }
       const label = sourceLabel ? sourceLabel(source) : blog.label || source;
-      const noun = source === 'vip' ? '영상' : '글';
+      const noun = source === 'vip' || source === 'playcast' ? '영상' : '글';
       // 발송기록에 제목이 없으면(구독자 0으로 기록된 배치 등) 뉴스레터와 동일 규칙으로 제목 생성
       const subjectLine =
         subject ||

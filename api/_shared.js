@@ -12,6 +12,8 @@ export const SUPABASE_ANON_KEY =
 export const SOURCE_META = {
   blog: { label: 'TechFlow', base: 'https://ai-revenue-blog.vercel.app' },
   lifeflow: { label: 'LifeFlow', base: 'https://life-revenue-blog.vercel.app' },
+  // analytics·newsletter 소스값은 'playcast'. 'vip'는 별칭(하위호환).
+  playcast: { label: 'VIP (Virtual-in-Playing)', base: 'https://virtual-in-playing.vercel.app' },
   vip: { label: 'VIP (Virtual-in-Playing)', base: 'https://virtual-in-playing.vercel.app' },
 };
 
