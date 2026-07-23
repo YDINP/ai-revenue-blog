@@ -12,8 +12,10 @@ image:
 coupangLinks:
   - title: "게임 프로그래밍 패턴"
     url: "https://link.coupang.com/a/dJj5U5"
+    imageUrl: "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=200"
   - title: "유니티 교과서"
     url: "https://link.coupang.com/a/dJj8Bn"
+    imageUrl: "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=200"
 faq:
   - q: "Phaser 3에서 충돌 감지와 오버랩의 정확한 차이는?"
     a: "collider는 두 물체가 부딪히면 이동을 멈추고(물리 반응), overlap은 만났는지만 감지하고 통과합니다. 플레이어가 플랫폼에 서야 하면 collider, 수집 아이템이라면 overlap을 사용합니다."

@@ -1247,3 +1247,23 @@ html[data-wp-dark-mode-active] .mg-featured__title { color: #f2f3f5; }
 .code-card .token.class-name,.code-card .token.builtin,.code-card .token.tag,.code-card .token.selector { color:#2ac3de; }
 .code-card .token.property,.code-card .token.attr-name,.code-card .token.variable { color:#c5cbd8; }
 .code-card .token.operator,.code-card .token.entity,.code-card .token.url { color:#89ddff; }
+
+/* ── 쿠팡 상품 이미지 카드 (.cpc-*) ── */
+.cpc-wrap { margin: 2.2rem 0; padding: 1.1rem 1.15rem 0.95rem; border: 1px solid var(--hairline); border-radius: 14px; background: linear-gradient(180deg, rgba(232,99,42,.045), transparent 55%); }
+.cpc-head { font-size: 0.95rem; font-weight: 800; color: #1a1b1e; margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.5rem; }
+.cpc-badge { font-size: 0.68rem; font-weight: 800; color: #fff; background: var(--cp-coral); padding: 3px 8px; border-radius: 6px; letter-spacing: 0.02em; }
+:root.dark .cpc-head { color: #f2f3f5; }
+.cpc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 0.8rem; }
+.cpc-item { display: flex; flex-direction: column; border: 1px solid var(--hairline); border-radius: 12px; overflow: hidden; text-decoration: none !important; background: #fff; transition: transform .16s ease, box-shadow .16s ease; }
+.cpc-item:hover { transform: translateY(-3px); box-shadow: 0 14px 28px -16px rgba(0,0,0,.28); }
+:root.dark .cpc-item { background: #1a2130; }
+.cpc-thumb { display: block; aspect-ratio: 16/10; overflow: hidden; background: var(--chart-track); }
+.cpc-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0; margin: 0; }
+.cpc-body { display: flex; flex-direction: column; gap: 0.35rem; padding: 0.7rem 0.8rem 0.85rem; }
+.cpc-title { font-size: 0.86rem; font-weight: 600; line-height: 1.4; color: #26272b; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+:root.dark .cpc-title { color: #e6e7ea; }
+.cpc-cta { font-size: 0.8rem; font-weight: 700; color: var(--cp-coral); margin-top: auto; }
+.cpc-item.cpc-noimg { flex-direction: row; align-items: center; }
+.cpc-item.cpc-noimg .cpc-body { padding: 0.85rem 1rem; }
+.cpc-disc { font-size: 0.72rem; color: var(--color-text-secondary, #8b8d92); margin: 0.8rem 0 0.15rem; line-height: 1.5; }
+@media (max-width: 480px){ .cpc-grid { grid-template-columns: 1fr 1fr; } }

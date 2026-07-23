@@ -429,7 +429,7 @@ function buildMarkdownFile(post, category, heroImage, coupangLinks, date) {
   if (coupangLinks.length > 0) {
     coupangYaml = `coupangLinks:\n`;
     for (const link of coupangLinks) {
-      coupangYaml += `  - title: "${link.title}"\n    url: "${link.url}"\n`;
+      coupangYaml += `  - title: "${link.title}"\n    url: "${link.url}"\n    imageUrl: "${link.imageUrl || ''}"\n`;
     }
   }
 
