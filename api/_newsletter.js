@@ -351,12 +351,13 @@ async function pageMeta(pageUrl) {
 
 // 가장 최근에 발송된 다이제스트를 한 주소로 복사 발송(미리보기/자기확인용).
 //   newsletter_sends 의 최신 subject 그룹 = 마지막 발송분. 그 글들로 digest 재구성.
-export async function sendCopyLatest(toEmail) {
+export async function sendCopyLatest(toEmail, { only } = {}) {
   if (!toEmail) throw new Error('email required');
   const out = [];
   for (const blog of blogList()) {
     const source = blog.source;
     if (!source) continue;
+    if (only && source !== only) continue;
     try {
       const rows = await sbn(`newsletter_sends?source=eq.${encodeURIComponent(source)}&select=*`);
       if (!rows.length) { out.push({ source, skipped: 'no sends' }); continue; }
@@ -376,13 +377,20 @@ export async function sendCopyLatest(toEmail) {
         posts.push({ link: u, title: m.title || u, desc: m.desc || '', image: m.image || '', ts: 0 });
       }
       const label = sourceLabel ? sourceLabel(source) : blog.label || source;
+      const noun = source === 'vip' ? '영상' : '글';
+      // 발송기록에 제목이 없으면(구독자 0으로 기록된 배치 등) 뉴스레터와 동일 규칙으로 제목 생성
+      const subjectLine =
+        subject ||
+        (posts.length === 1
+          ? `📩 방금 새 ${noun} 올렸어요 — ${posts[0].title}`
+          : `📩 ${label} 새 ${noun} ${posts.length}편 왔어요, 골라 보세요`);
       await sendEmail(
         toEmail,
-        `[미리보기] ${subject}`,
+        `[미리보기] ${subjectLine}`,
         digestHtml(label, posts, source, toEmail, blog.site, BRAND[source] || '#1e6b5c'),
         fromHeader(label)
       );
-      out.push({ source, subject, posts: posts.length, sentTo: toEmail });
+      out.push({ source, subject: subjectLine, posts: posts.length, sentTo: toEmail });
     } catch (e) {
       out.push({ source, error: e.message });
     }

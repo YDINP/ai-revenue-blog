@@ -52,7 +52,8 @@ export default async function handler(req, res) {
     const email = url.searchParams.get('email') || '';
     if (!email) return res.status(400).json({ error: 'email required' });
     try {
-      const result = await sendCopyLatest(email);
+      const only = url.searchParams.get('source') || undefined;
+      const result = await sendCopyLatest(email, { only });
       return res.status(200).json({ ok: true, email, result });
     } catch (e) {
       return res.status(500).json({ error: e.message });
