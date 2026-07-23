@@ -1,8 +1,10 @@
 // 관리자/자동화 통합 트리거 (CRON_SECRET). Hobby 함수 12개 한도 절약용 통합.
 //  ?action=post          body{text,topic?,linkUrl?}  → 즉석 발행
+//  ?action=queue         body{text,topic?,linkUrl?,imageUrl?}  → draft 큐 저장
+//  ?action=set-mode      body{mode:'auto'|'review',topic?}  → 계정 발행모드 전환(auto=크론 1일1개 자동발행)
 //  ?action=find&q=&topic= → keyword_search 후보 카드 발송
 //  ?action=reply-delete[&rid=N|&media=id]  → 대댓글 삭제(목록/삭제)
-import { sb, publish, publishReply, insertPost, insertQueue, getAccounts, deleteMedia } from './_threads.js';
+import { sb, publish, publishReply, insertPost, insertQueue, getAccounts, updateAccount, deleteMedia } from './_threads.js';
 import { findAndQueue } from './_threads-bot.js';
 
 export default async function handler(req, res) {
@@ -45,6 +47,16 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true, id: row.id });
     }
 
+    if (action === 'set-mode') {
+      const topic = b.topic || req.query?.topic || 'life';
+      const mode = b.mode || req.query?.mode;
+      if (!['auto', 'review'].includes(mode)) return res.status(400).json({ error: 'mode must be auto|review' });
+      const acct = (await sb(`threads_accounts?topic=eq.${encodeURIComponent(topic)}&active=eq.true&limit=1`))[0];
+      if (!acct) return res.status(400).json({ error: `no account for ${topic}` });
+      await updateAccount(acct.id, { publish_mode: mode });
+      return res.status(200).json({ ok: true, account: acct.id, topic, publish_mode: mode });
+    }
+
     if (action === 'find') {
       const q = req.query?.q || b.q || '';
       const topic = req.query?.topic || b.topic || 'life';
@@ -78,7 +90,7 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true, deleted: mediaId, result: out });
     }
 
-    return res.status(400).json({ error: 'unknown action — post | find | reply-delete' });
+    return res.status(400).json({ error: 'unknown action — post | queue | set-mode | find | reply-delete' });
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }
