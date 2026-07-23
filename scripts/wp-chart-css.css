@@ -1267,3 +1267,11 @@ html[data-wp-dark-mode-active] .mg-featured__title { color: #f2f3f5; }
 .cpc-item.cpc-noimg .cpc-body { padding: 0.85rem 1rem; }
 .cpc-disc { font-size: 0.72rem; color: var(--color-text-secondary, #8b8d92); margin: 0.8rem 0 0.15rem; line-height: 1.5; }
 @media (max-width: 480px){ .cpc-grid { grid-template-columns: 1fr 1fr; } }
+
+/* ── 다크모드: 홈 포스트 리스트 카드(background:#fff 명시라 다크에서 안 덮이던 문제) ── */
+html[data-wp-dark-mode-active] .wp-block-latest-posts.is-grid > li,
+html[data-wp-dark-mode-active] .wp-block-latest-posts__list > li { background: #1a2130 !important; border-color: var(--hairline) !important; }
+html[data-wp-dark-mode-active] .wp-block-latest-posts__post-title,
+html[data-wp-dark-mode-active] .wp-block-latest-posts__post-title a { color: #f2f3f5 !important; }
+html[data-wp-dark-mode-active] .wp-block-latest-posts__post-date { color: #aab1bd !important; }
+html[data-wp-dark-mode-active] .wp-block-latest-posts__post-excerpt { color: #c5cbd8 !important; }
