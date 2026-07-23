@@ -1,10 +1,11 @@
 // 관리자/자동화 통합 트리거 (CRON_SECRET). Hobby 함수 12개 한도 절약용 통합.
 //  ?action=post          body{text,topic?,linkUrl?}  → 즉석 발행
 //  ?action=queue         body{text,topic?,linkUrl?,imageUrl?}  → draft 큐 저장
+//  ?action=queue-update  body{id,text?,linkUrl?,imageUrl?}  → draft 내용 수정(제자리)
 //  ?action=set-mode      body{mode:'auto'|'review',topic?}  → 계정 발행모드 전환(auto=크론 1일1개 자동발행)
 //  ?action=find&q=&topic= → keyword_search 후보 카드 발송
 //  ?action=reply-delete[&rid=N|&media=id]  → 대댓글 삭제(목록/삭제)
-import { sb, publish, publishReply, insertPost, insertQueue, getAccounts, updateAccount, deleteMedia } from './_threads.js';
+import { sb, publish, publishReply, insertPost, insertQueue, updateQueue, getAccounts, updateAccount, deleteMedia } from './_threads.js';
 import { findAndQueue } from './_threads-bot.js';
 
 export default async function handler(req, res) {
@@ -45,6 +46,18 @@ export default async function handler(req, res) {
         status: 'draft',
       });
       return res.status(200).json({ ok: true, id: row.id });
+    }
+
+    if (action === 'queue-update') {
+      const id = b.id || req.query?.id;
+      if (!id) return res.status(400).json({ error: 'no id' });
+      const patch = {};
+      if (typeof b.text === 'string') patch.text = b.text;
+      if (typeof b.imageUrl === 'string') patch.image_url = b.imageUrl;
+      if (typeof b.linkUrl === 'string') { patch.link_url = b.linkUrl; patch.link_kind = 'blog'; }
+      if (!Object.keys(patch).length) return res.status(400).json({ error: 'nothing to update' });
+      const row = await updateQueue(Number(id), patch);
+      return res.status(200).json({ ok: true, id: row?.id, status: row?.status });
     }
 
     if (action === 'set-mode') {
@@ -90,7 +103,7 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true, deleted: mediaId, result: out });
     }
 
-    return res.status(400).json({ error: 'unknown action — post | queue | set-mode | find | reply-delete' });
+    return res.status(400).json({ error: 'unknown action — post | queue | queue-update | set-mode | find | reply-delete' });
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }
