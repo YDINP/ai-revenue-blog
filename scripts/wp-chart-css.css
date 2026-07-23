@@ -1063,3 +1063,85 @@ body.home .header-navigation a:hover, body.home .header-menu-container a:hover {
 .wp-block-latest-posts__featured-image a { display: block !important; width: 100% !important; margin: 0 !important; text-align: initial; }
 .wp-block-latest-posts__featured-image a { line-height: 0; }
 .wp-block-latest-posts__featured-image img { width: 100% !important; height: 200px !important; object-fit: cover !important; object-position: center; display: block !important; max-width: none !important; border-radius: 0 !important; }
+
+/* ── 본문 폭 확대 — 42rem 제약 해제 + Kadence narrow 완화(양옆 여백 축소) ── */
+:root { --global-content-width: 850px; --content-width: 850px; }
+.entry-content-wrap { max-width: none !important; margin-inline: 0 !important; }
+.single .content-container.site-container,
+.single.content-width-narrow .content-container,
+body.single .entry-content-wrap { max-width: 850px !important; }
+
+/* ============================================================================
+   폴리시 배치 — 푸터좌정렬 · By ben제거 · 쿠팡배너 · 차트 모던화(2026 트렌드)
+   ============================================================================ */
+/* ① 푸터 위젯 좌정렬 */
+.site-footer .widget, .site-footer .footer-widget, .site-footer-section-wrap,
+.site-footer .widget-title, .site-footer .widget * { text-align: left !important; }
+.site-footer .widget ul { padding-left: 0; }
+
+/* ② By ben(작성자) 제거 — 날짜는 유지 */
+.entry-meta .posted-by, .single .posted-by, .loop-entry .posted-by { display: none !important; }
+
+/* ③ 쿠팡 제휴 — 공격적 배너 리디자인(브랜드 그라디언트·배지·샤인) */
+.coupang-inline {
+  display: flex !important; align-items: center; gap: 1.1rem;
+  margin: 2rem 0; padding: 1.15rem 1.35rem;
+  background: linear-gradient(115deg, #eef4ff 0%, #ffffff 45%, #fff4ee 100%);
+  border: 1.5px solid transparent;
+  background-origin: border-box;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 18px 40px -22px rgba(52,106,255,.4);
+  border-radius: 18px; position: relative; overflow: hidden;
+  text-decoration: none !important; color: inherit;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.coupang-inline::before { content: ""; position: absolute; inset: 0; border-radius: 18px; padding: 1.5px; background: linear-gradient(115deg, #346aff, #e8632a); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+.coupang-inline::after { content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); transform: skewX(-18deg); transition: left .6s ease; }
+.coupang-inline:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(0,0,0,.05), 0 24px 48px -20px rgba(52,106,255,.5); }
+.coupang-inline:hover::after { left: 130%; }
+.coupang-inline .ci-icon { flex-shrink: 0; width: 52px; height: 52px; display: grid; place-items: center; font-size: 1.55rem; border-radius: 15px; background: linear-gradient(135deg, #346aff, #5b86ff); box-shadow: 0 8px 18px -6px rgba(52,106,255,.5); color: #fff; }
+.coupang-inline .ci-body { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; flex: 1; }
+.coupang-inline .ci-label { display: inline-flex; align-self: flex-start; align-items: center; gap: 0.3rem; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #fff; background: linear-gradient(90deg, #e8632a, #ff8f4d); padding: 0.22em 0.7em; border-radius: 999px; }
+.coupang-inline .ci-label::before { content: "🔥"; font-size: 0.8em; }
+.coupang-inline .ci-title { font-size: 1.08rem; font-weight: 800; color: #1a1b1e; line-height: 1.35; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.coupang-inline .ci-cta { flex-shrink: 0; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.92rem; font-weight: 800; color: #fff !important; background: linear-gradient(135deg, #346aff, #e8632a); padding: 0.7em 1.3em; border-radius: 999px; box-shadow: 0 8px 18px -6px rgba(232,99,42,.55); white-space: nowrap; }
+.coupang-inline:hover .ci-cta { gap: 0.65rem; }
+:root.dark .coupang-inline { background: linear-gradient(115deg, #1a2438 0%, #1e293b 45%, #2a1f1a 100%); }
+:root.dark .coupang-inline .ci-title { color: #f2f3f5; }
+@media (max-width: 560px){ .coupang-inline { flex-wrap: wrap; } .coupang-inline .ci-body { flex-basis: calc(100% - 52px - 1.1rem); } .coupang-inline .ci-title { white-space: normal; } .coupang-inline .ci-cta { margin-left: auto; } }
+
+/* ④ 차트 모던화 — 플랫·여백·뮤트(무거운 그라디언트·그림자 완화) */
+.chart-bar, .chart-versus, .chart-radar, .chart-donut, .chart-progress { box-shadow: 0 1px 2px rgba(0,0,0,.03), 0 8px 20px -16px rgba(0,0,0,.12) !important; border: 1px solid var(--hairline) !important; }
+.chart-col-fill, .chart-fill, .radar-score-fill, .versus-fill { box-shadow: none !important; }
+.chart-title { letter-spacing: -0.01em; }
+.chart-vlegend-item { background: transparent !important; border-bottom: 1px solid var(--hairline); border-radius: 0 !important; padding: 0.55rem 0.2rem !important; }
+.chart-vlegend-item:last-child { border-bottom: 0; }
+
+/* 푸터 위젯 왼쪽으로 정렬(가운데→좌측) */
+.site-footer .site-footer-row-container-inner,
+.site-middle-footer-inner-wrap,
+.footer-widget-area-inner { justify-content: flex-start !important; text-align: left !important; }
+.site-footer .site-container { margin-left: 0 !important; }
+
+/* ============================================================================
+   WP Dark Mode 연동 — 컴포넌트 다크 테마 매핑 (data-wp-dark-mode-active)
+   ============================================================================ */
+html[data-wp-dark-mode-active] { --chart-track:#2a3542; --hairline:rgba(255,255,255,.09); --zebra:rgba(255,255,255,.035); }
+/* 본문 텍스트/제목 */
+html[data-wp-dark-mode-active] .entry-content-wrap { color:#dfe1e5; }
+html[data-wp-dark-mode-active] .entry-content-wrap h2, html[data-wp-dark-mode-active] .entry-content-wrap h3, html[data-wp-dark-mode-active] .entry-content-wrap h4 { color:#f2f3f5; }
+/* 표 */
+html[data-wp-dark-mode-active] .entry-content-wrap table { background:#1a2130 !important; color:#dfe1e5 !important; }
+html[data-wp-dark-mode-active] .entry-content-wrap table thead th { color:#f2f3f5 !important; }
+html[data-wp-dark-mode-active] .entry-content-wrap table td { border-color:var(--hairline) !important; }
+/* 차트 컨테이너 */
+html[data-wp-dark-mode-active] .chart-bar, html[data-wp-dark-mode-active] .chart-versus, html[data-wp-dark-mode-active] .chart-radar, html[data-wp-dark-mode-active] .chart-donut, html[data-wp-dark-mode-active] .chart-progress { background:#1a2130 !important; border-color:var(--hairline) !important; }
+html[data-wp-dark-mode-active] .chart-title, html[data-wp-dark-mode-active] .chart-value, html[data-wp-dark-mode-active] .chart-col-label, html[data-wp-dark-mode-active] .chart-label, html[data-wp-dark-mode-active] .chart-vlegend-name, html[data-wp-dark-mode-active] .chart-vlegend-score, html[data-wp-dark-mode-active] .versus-val, html[data-wp-dark-mode-active] .radar-score-label, html[data-wp-dark-mode-active] .donut-legend-label, html[data-wp-dark-mode-active] .donut-legend-value, html[data-wp-dark-mode-active] .progress-label { color:#dfe1e5 !important; }
+html[data-wp-dark-mode-active] .chart-track, html[data-wp-dark-mode-active] .chart-col-track, html[data-wp-dark-mode-active] .radar-score-track, html[data-wp-dark-mode-active] .versus-track { background:#2a3542 !important; }
+html[data-wp-dark-mode-active] .donut-hole { background:#1a2130 !important; }
+/* 콜아웃 */
+html[data-wp-dark-mode-active] .callout-info, html[data-wp-dark-mode-active] .callout-tip, html[data-wp-dark-mode-active] .callout-warning { color:#dfe1e5 !important; }
+/* 쿠팡 배너 */
+html[data-wp-dark-mode-active] .coupang-inline { background:linear-gradient(115deg,#141c2e 0%,#1a2130 45%,#2a1c15 100%) !important; }
+html[data-wp-dark-mode-active] .coupang-inline .ci-title { color:#f2f3f5 !important; }
+/* 코드블록 */
+html[data-wp-dark-mode-active] .entry-content-wrap pre { background:#0f1621 !important; border-color:var(--hairline) !important; }
