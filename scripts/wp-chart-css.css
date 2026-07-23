@@ -1295,3 +1295,23 @@ html[data-wp-dark-mode-active] .mg-tldr-text { color: #c5cbd8; }
   body:has(.mg-anchor .kakao_ad_area iframe) { padding-bottom: 116px; }
 }
 .mg-anchor.mg-closed { display: none !important; }
+
+/* ── 목차(TOC) 자동 ── */
+html { scroll-behavior: smooth; }
+.entry-content-wrap h2 { scroll-margin-top: 80px; }
+.mg-toc { margin: 0 0 1.9rem; padding: 1rem 1.2rem 1.1rem; background: #f7f9fb; border: 1px solid var(--hairline); border-radius: 12px; }
+.mg-toc-head { font-weight: 800; font-size: 0.98rem; color: #1a1b1e; letter-spacing: -0.01em; }
+.mg-toc ol { margin: 0.6rem 0 0; padding-left: 1.35rem; }
+.mg-toc li { margin: 0.34rem 0; line-height: 1.5; }
+.mg-toc li::marker { color: var(--color-primary,#3b82f6); font-weight: 700; }
+.mg-toc a { color: #3a4552; text-decoration: none; font-size: 0.93rem; }
+.mg-toc a:hover { color: var(--color-primary,#3b82f6); text-decoration: underline; }
+html[data-wp-dark-mode-active] .mg-toc { background: #161d2b; }
+html[data-wp-dark-mode-active] .mg-toc-head { color: #f2f3f5; }
+html[data-wp-dark-mode-active] .mg-toc a { color: #c5cbd8; }
+@media (max-width: 782px){
+  .mg-toc-head { cursor: pointer; user-select: none; }
+  .mg-toc-head::after { content: ' ▾'; font-size: 0.8em; opacity: 0.6; }
+  .mg-toc.mg-toc-collapsed ol { display: none; }
+  .mg-toc.mg-toc-collapsed .mg-toc-head::after { content: ' ▸'; }
+}
