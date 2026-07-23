@@ -317,3 +317,70 @@ export async function unsubscribe(source, email) {
   );
   return rows.length;
 }
+
+// 글 페이지에서 제목/요약/대표이미지를 한 번의 fetch로 추출(복사 발송용 — RSS 윈도우 밖 글도 처리)
+async function pageMeta(pageUrl) {
+  try {
+    const r = await fetch(pageUrl);
+    if (!r.ok) return { title: '', desc: '', image: '' };
+    const html = await r.text();
+    const abs = (src) => {
+      if (!src) return '';
+      try { return new URL(src.replace(/&amp;/g, '&'), pageUrl).href; } catch { return src.replace(/&amp;/g, '&'); }
+    };
+    const decode = (s) =>
+      String(s || '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&');
+    const meta = (prop) =>
+      (html.match(new RegExp(`<meta[^>]+property=["']${prop}["'][^>]+content=["']([^"']+)["']`, 'i')) ||
+        html.match(new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]+property=["']${prop}["']`, 'i')) || [])[1] || '';
+    let title = decode(meta('og:title')) || decode((html.match(/<title>([^]*?)<\/title>/i) || [])[1] || '');
+    title = title.replace(/\s*[|·\-–—]\s*(TechFlow|LifeFlow|VIP)[^]*$/i, '').trim();
+    let desc = decode(meta('og:description') || (html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i) || [])[1] || '');
+    desc = desc.replace(/\s+/g, ' ').slice(0, 140);
+    let image = meta('og:image') ? abs(meta('og:image')) : '';
+    if (!image || /\/open-graph\//i.test(image)) {
+      const imgs = [...html.matchAll(/<img[^>]+src=["']([^"']+)["']/gi)].map((x) => x[1]);
+      const hero = imgs.find((s) => /\/images\//i.test(s) && !/pd-|promo|banner|logo/i.test(s));
+      if (hero) image = abs(hero);
+    }
+    return { title, desc, image };
+  } catch {
+    return { title: '', desc: '', image: '' };
+  }
+}
+
+// 가장 최근에 발송된 다이제스트를 한 주소로 복사 발송(미리보기/자기확인용).
+//   newsletter_sends 의 최신 subject 그룹 = 마지막 발송분. 그 글들로 digest 재구성.
+export async function sendCopyLatest(toEmail) {
+  if (!toEmail) throw new Error('email required');
+  const out = [];
+  for (const blog of blogList()) {
+    const source = blog.source;
+    if (!source) continue;
+    try {
+      const rows = await sbn(
+        `newsletter_sends?source=eq.${encodeURIComponent(source)}&select=post_url,subject,created_at&order=created_at.desc&limit=30`
+      );
+      if (!rows.length) { out.push({ source, skipped: 'no sends' }); continue; }
+      const subject = rows[0].subject;
+      const urls = rows.filter((r) => r.subject === subject && r.post_url).map((r) => r.post_url);
+      if (!urls.length) { out.push({ source, subject, skipped: 'no post_url' }); continue; }
+      const posts = [];
+      for (const u of urls) {
+        const m = await pageMeta(u);
+        posts.push({ link: u, title: m.title || u, desc: m.desc || '', image: m.image || '', ts: 0 });
+      }
+      const label = sourceLabel ? sourceLabel(source) : blog.label || source;
+      await sendEmail(
+        toEmail,
+        `[미리보기] ${subject}`,
+        digestHtml(label, posts, source, toEmail, blog.site, BRAND[source] || '#1e6b5c'),
+        fromHeader(label)
+      );
+      out.push({ source, subject, posts: posts.length, sentTo: toEmail });
+    } catch (e) {
+      out.push({ source, error: e.message });
+    }
+  }
+  return out;
+}

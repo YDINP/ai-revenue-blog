@@ -7,7 +7,7 @@
 import { escapeHtml, sendToAdmin, supabaseRpc, sourceLabel } from './_shared.js';
 import { reportMessage } from './_report.js';
 import { syncGsc } from './_gsc-sync.js';
-import { runNewsletter, unsubscribe } from './_newsletter.js';
+import { runNewsletter, unsubscribe, sendCopyLatest } from './_newsletter.js';
 
 // 구독 취소 확인 페이지 (메일의 '구독 취소' 링크가 이 함수로 옴 — Hobby 12함수 제한 통합)
 function unsubPage(title, msg) {
@@ -45,6 +45,18 @@ export default async function handler(req, res) {
   const secret = process.env.CRON_SECRET;
   if (!secret || req.headers.authorization !== `Bearer ${secret}`) {
     return res.status(401).json({ error: 'unauthorized' });
+  }
+
+  // ── 최근 발송 뉴스레터를 특정 주소로 복사 발송 (자기확인/미리보기) ──
+  if (url.searchParams.get('action') === 'newsletter-copy') {
+    const email = url.searchParams.get('email') || '';
+    if (!email) return res.status(400).json({ error: 'email required' });
+    try {
+      const result = await sendCopyLatest(email);
+      return res.status(200).json({ ok: true, email, result });
+    } catch (e) {
+      return res.status(500).json({ error: e.message });
+    }
   }
 
   try {
