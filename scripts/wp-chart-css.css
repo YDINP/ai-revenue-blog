@@ -1225,3 +1225,25 @@ html[data-wp-dark-mode-active] .mg-featured__title { color: #f2f3f5; }
   .code-block-1 { display: none !important; }   /* 728 배너 모바일 숨김 */
   .mg-inpost-mo { display: flex !important; }    /* 320x50 모바일 노출 */
 }
+
+/* ── 코드 블록 (Astro 스타일: 다크 + mac 도트 + 언어라벨 + 복사버튼) ── */
+.code-card { margin: 1.6rem 0; border-radius: 12px; overflow: hidden; background: #0f1420; border: 1px solid #1e2740; box-shadow: 0 8px 24px -12px rgba(0,0,0,.55); }
+.cc-head { display: flex; align-items: center; gap: 12px; padding: 9px 14px; background: #171d2e; border-bottom: 1px solid #232c44; }
+.cc-dots { display: inline-flex; gap: 7px; }
+.cc-dots i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+.cc-dots i:nth-child(1){ background:#ff5f56; } .cc-dots i:nth-child(2){ background:#ffbd2e; } .cc-dots i:nth-child(3){ background:#27c93f; }
+.cc-lang { flex: 1; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; color: #8b95ad; }
+.cc-copy { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; font-weight: 600; color: #c5cbd8; background: #232c44; border: 1px solid #333e5c; border-radius: 7px; padding: 4px 11px; cursor: pointer; font-family: inherit; transition: background .15s; }
+.cc-copy:hover { background: #2d374f; }
+.cc-copy::before { content: "\1F4CB"; font-size: 0.9em; }
+.code-card .cc-pre { margin: 0; padding: 15px 18px; overflow-x: auto; background: #0f1420; border: 0; border-radius: 0; }
+.code-card code, .cc-pre code { font-family: 'JetBrains Mono','Fira Code',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size: 0.855rem; line-height: 1.65; color: #c5cbd8; background: none; padding: 0; white-space: pre; tab-size: 2; -webkit-text-size-adjust: 100%; }
+.code-card .token.comment,.code-card .token.prolog,.code-card .token.doctype,.code-card .token.cdata { color:#5c6580; font-style:italic; }
+.code-card .token.punctuation { color:#8b95ad; }
+.code-card .token.keyword,.code-card .token.rule,.code-card .token.important,.code-card .token.atrule { color:#f7768e; }
+.code-card .token.boolean,.code-card .token.number,.code-card .token.constant,.code-card .token.symbol { color:#ff9e64; }
+.code-card .token.string,.code-card .token.char,.code-card .token.attr-value,.code-card .token.regex,.code-card .token.inserted { color:#9ece6a; }
+.code-card .token.function,.code-card .token.method { color:#7aa2f7; }
+.code-card .token.class-name,.code-card .token.builtin,.code-card .token.tag,.code-card .token.selector { color:#2ac3de; }
+.code-card .token.property,.code-card .token.attr-name,.code-card .token.variable { color:#c5cbd8; }
+.code-card .token.operator,.code-card .token.entity,.code-card .token.url { color:#89ddff; }
