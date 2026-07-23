@@ -1183,11 +1183,12 @@ html[data-wp-dark-mode-active] .coupang-inline { background: linear-gradient(135
 html[data-wp-dark-mode-active] .coupang-inline .ci-title { color:#f2f3f5 !important; }
 @media (max-width:560px){ .coupang-inline{flex-wrap:wrap;} .coupang-inline .ci-body{flex-basis:calc(100% - 44px - 0.85rem);} .coupang-inline .ci-title{white-space:normal;} .coupang-inline .ci-cta{margin-left:auto;} }
 
-/* ── 데스크톱 세로 사이드 배너(고정, 본문 양옆 여백에) ── */
-.mg-siderail { position: fixed; top: 130px; width: 160px; z-index: 40; }
-.mg-siderail-left { left: calc((100vw - 1120px) / 2 - 176px); }
-.mg-siderail-right { right: calc((100vw - 1120px) / 2 - 176px); }
-@media (max-width: 1480px) { .mg-siderail { display: none !important; } }
+/* ── 데스크톱 세로 사이드 배너(가장자리 고정, 본문 안 겹치게) ── */
+.mg-siderail { position: fixed; top: 100px; width: 160px; z-index: 30; }
+.mg-siderail-left { left: 16px; }
+.mg-siderail-right { right: 16px; }
+/* 콘텐츠 1080 + 배너 좌우 여유 확보되는 넓은 화면(>=1600px)에서만. 짧은 뷰포트도 제외 */
+@media (max-width: 1600px), (max-height: 780px) { .mg-siderail { display: none !important; } }
 
 /* ── 홈 "인기 글" 피처드 섹션 ── */
 .mg-featured { margin: 0 0 2.75rem; }
@@ -1202,3 +1203,9 @@ html[data-wp-dark-mode-active] .mg-featured__card { background: linear-gradient(
 html[data-wp-dark-mode-active] .mg-featured__title { color: #f2f3f5; }
 @media (max-width: 900px){ .mg-featured__grid { grid-template-columns: repeat(2,1fr); } }
 @media (max-width: 520px){ .mg-featured__grid { grid-template-columns: 1fr; } }
+
+/* ── 팝업(Popup Maker) 모바일 숨김 — 구글 침입형 인터스티셜 패널티 회피 ── */
+@media (max-width: 782px){
+  .pum-overlay { display: none !important; }
+  html.pum-open-overlay, .pum-open-overlay { overflow: auto !important; }
+}
