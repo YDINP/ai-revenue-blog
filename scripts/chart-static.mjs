@@ -24,9 +24,8 @@ function bar(a) {
   let h = title ? `<div class="chart-title">${title}</div>` : '';
   if (vertical) {
     // 세로막대: 바별 색 구분(팔레트) + 우측 범례(항목·점수). 값/라벨은 막대 안이 아닌 범례에.
-    // 스케일 증폭: 최고값→100%, 최저값→FLOOR%. 값 차이가 작아도 눈에 보이게(동일값이면 모두 100%).
-    const vMin = Math.min(...values), VFLOOR = 14;
-    const vScale = (v) => (vMax === vMin ? 100 : VFLOOR + ((v - vMin) / (vMax - vMin)) * (100 - VFLOOR));
+    // 정직한 비례 스케일: 최댓값→100%(상단 채움), 나머지는 값에 비례. (증폭 금지 — 돈/수량이 왜곡되면 오해)
+    const vScale = (v) => (vMax > 0 ? (v / vMax) * 100 : 0);
     h += '<div class="chart-vbar-wrap"><div class="chart-columns">';
     labels.forEach((label, i) => {
       const pct = vScale(values[i]);
@@ -98,11 +97,12 @@ function donut(a) {
 function versus(a) {
   const items = JSON.parse(a.items || '[]'), title = a.title || '';
   const nameA = a.nameA || 'A', nameB = a.nameB || 'B', colorA = a.colorA || '#3b82f6', colorB = a.colorB || '#009e73';
-  const maxVal = Math.max(...items.flatMap((i) => [i.a, i.b])) * 1.1;
   let h = title ? `<div class="chart-title">${title}</div>` : '';
   h += `<div class="versus-header"><span class="versus-name" style="color:${colorA}">${nameA}</span><span class="versus-vs">VS</span><span class="versus-name" style="color:${colorB}">${nameB}</span></div><div class="versus-rows">`;
   items.forEach((item) => {
-    const pctA = maxVal > 0 ? (item.a / maxVal) * 100 : 0, pctB = maxVal > 0 ? (item.b / maxVal) * 100 : 0;
+    // 행별 독립 스케일: 항목마다 단위·규모가 달라 전역 최대값으로 재면 작은 항목이 안 보임.
+    const rowMax = Math.max(item.a, item.b) * 1.15;
+    const pctA = rowMax > 0 ? (item.a / rowMax) * 100 : 0, pctB = rowMax > 0 ? (item.b / rowMax) * 100 : 0;
     const aWin = item.a > item.b, bWin = item.b > item.a;
     h += `<div class="versus-row"><div class="versus-bar-left"><span class="versus-val${aWin ? ' versus-win' : ''}">${item.a}</span><div class="versus-track versus-track-left"><div class="versus-fill${aWin ? ' win' : ''}" style="width:${pctA}%;background:linear-gradient(270deg, ${colorA}, ${rgba(colorA, 0.6)})"></div></div></div><div class="versus-label">${item.label}</div><div class="versus-bar-right"><div class="versus-track"><div class="versus-fill${bWin ? ' win' : ''}" style="width:${pctB}%;background:linear-gradient(90deg, ${colorB}, ${rgba(colorB, 0.6)})"></div></div><span class="versus-val${bWin ? ' versus-win' : ''}">${item.b}</span></div></div>`;
   });
