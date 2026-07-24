@@ -696,9 +696,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 1.25rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--color-text);
+  white-space: nowrap;
+  line-height: 1;
+  letter-spacing: -0.02em;
 }
 .progress-label { font-size: 0.8125rem; font-weight: 600; color: var(--color-text-secondary); text-align: center; }
 
