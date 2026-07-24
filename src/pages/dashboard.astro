@@ -906,6 +906,33 @@ const ICONS: Record<string, string> = {
         font-variant-numeric: tabular-nums;
       }
 
+      /* 도구 탭: 카테고리 칩 + 점유율 바 */
+      .tool-cat {
+        display: inline-block;
+        font-size: 0.625rem;
+        font-weight: 700;
+        padding: 0.05rem 0.4rem;
+        border-radius: 999px;
+        background: var(--surface-2);
+        color: var(--text-2);
+        flex-shrink: 0;
+      }
+      .tool-emoji { font-size: 0.95rem; flex-shrink: 0; }
+      .tool-share {
+        flex-shrink: 0;
+        width: 68px;
+        height: 5px;
+        border-radius: 999px;
+        background: var(--surface-2);
+        overflow: hidden;
+      }
+      .tool-share > i {
+        display: block;
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #16a34a, #4ade80);
+      }
+
       .recent-date {
         font-size: 0.6875rem;
         color: var(--text-3);
@@ -2113,6 +2140,7 @@ const ICONS: Record<string, string> = {
         <button class="main-tab" data-tab="gsc">🔍 검색(GSC)</button>
         <button class="main-tab" data-tab="coupang">쿠팡</button>
         <button class="main-tab" data-tab="paperdoc">페이퍼닥</button>
+        <button class="main-tab" data-tab="tools">🛠 도구</button>
         <button class="main-tab" data-tab="comments">댓글</button>
       </div>
 
@@ -2978,6 +3006,48 @@ const ICONS: Record<string, string> = {
           <div class="traffic-body">
             <div class="event-feed" id="paperdoc-events">
               <div class="no-data">페이퍼닥 클릭 데이터 로딩 중...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: 도구(생활 계산기) 페이지별 방문 -->
+      <div class="tab-content" id="tab-tools">
+        <div class="traffic-header" style="margin-bottom:0.75rem;">
+          <h3 style="margin:0;"><svg class="ico sec-ico i-green" viewBox="0 0 24 24" set:html={ICONS['list']}></svg> LifeFlow 생활 도구 방문 <span class="src-badge lf">LF</span></h3>
+          <div class="seg-toggle seg-sm" id="tools-period">
+            <button class="seg-btn active" data-tp="all">전체</button>
+            <button class="seg-btn" data-tp="day">일간</button>
+            <button class="seg-btn" data-tp="week">주간</button>
+            <button class="seg-btn" data-tp="month">월간</button>
+          </div>
+        </div>
+
+        <div class="coupang-stats">
+          <div class="coupang-card">
+            <h4>총 도구 조회</h4>
+            <div class="conversion-rate" id="tools-total-views">--</div>
+            <div class="sub" id="tools-total-sub">선택 기간 /tools 페이지뷰</div>
+          </div>
+          <div class="coupang-card">
+            <h4>유입된 도구</h4>
+            <div class="conversion-rate" id="tools-active-count">--</div>
+            <div class="sub">조회 발생 도구 / 전체 26</div>
+          </div>
+          <div class="coupang-card">
+            <h4>Top 도구</h4>
+            <div class="conversion-rate" id="tools-top-name" style="font-size:1.1rem;">--</div>
+            <div class="sub" id="tools-top-views">최다 조회 도구</div>
+          </div>
+        </div>
+
+        <div class="traffic-section">
+          <div class="traffic-header">
+            <h3><svg class="ico sec-ico i-green" viewBox="0 0 24 24" set:html={ICONS['list']}></svg> 도구별 조회 순위 <span class="like-top-total" id="tools-rank-total"></span></h3>
+          </div>
+          <div class="traffic-body">
+            <div class="top-page-list" id="tools-rank">
+              <div class="no-data">도구 방문 데이터 로딩 중...</div>
             </div>
           </div>
         </div>
@@ -3930,6 +4000,128 @@ const ICONS: Record<string, string> = {
             ${sourceBadge(p.source)}
             <span class="top-page-title" title="${escHtml(title)}">${escHtml(displayTitle) || '(home)'}</span>
             <span class="top-page-views">${p.views}회 <span class="tp-go">↗</span></span>
+          </a>`;
+        }).join('');
+      }
+
+      // === 도구(LifeFlow 생활 계산기) 페이지별 방문 ===
+      // slug → { emoji, name, cat } (life-revenue-blog/src/pages/tools/index.astro 기준, 26종)
+      const TOOL_META = {
+        'salary-calculator': { emoji: '💰', name: '연봉 실수령액 계산기', cat: '금융' },
+        'severance-calculator': { emoji: '📤', name: '퇴직금 계산기', cat: '금융' },
+        'hourly-wage-calculator': { emoji: '⏱️', name: '시급 계산기', cat: '금융' },
+        'compound-interest-calculator': { emoji: '📈', name: '복리 계산기', cat: '금융' },
+        'savings-calculator': { emoji: '🏦', name: '예·적금 계산기', cat: '금융' },
+        'loan-calculator': { emoji: '📉', name: '대출 이자 계산기', cat: '금융' },
+        'debt-payoff-calculator': { emoji: '💳', name: '부채 상환 계산기', cat: '금융' },
+        'unemployment-benefit-calculator': { emoji: '🧑‍⚖️', name: '실업급여 계산기', cat: '금융' },
+        'vat-calculator': { emoji: '🧮', name: '부가세 계산기', cat: '금융' },
+        'gold-price-calculator': { emoji: '🪙', name: '금 시세 계산기', cat: '금융' },
+        'annual-leave-calculator': { emoji: '🌴', name: '연차수당 계산기', cat: '금융' },
+        'age-calculator': { emoji: '🎂', name: '만 나이 계산기', cat: '생활' },
+        'dday-calculator': { emoji: '📅', name: 'D-day·날짜 계산기', cat: '생활' },
+        'dutchpay-calculator': { emoji: '🧾', name: '더치페이 계산기', cat: '생활' },
+        'electricity-bill-calculator': { emoji: '⚡', name: '전기요금 계산기', cat: '생활' },
+        'discount-calculator': { emoji: '🏷️', name: '할인율 계산기', cat: '생활' },
+        'unit-converter': { emoji: '📐', name: '단위 변환기', cat: '생활' },
+        'time-calculator': { emoji: '⏳', name: '시간 계산기', cat: '생활' },
+        'bmi-calorie-calculator': { emoji: '🩺', name: 'BMI·칼로리 계산기', cat: '건강' },
+        'water-intake-calculator': { emoji: '💧', name: '물 섭취량 계산기', cat: '건강' },
+        'sleep-calculator': { emoji: '😴', name: '수면 시간 계산기', cat: '건강' },
+        'calorie-burn-calculator': { emoji: '🔥', name: '칼로리 소모 계산기', cat: '건강' },
+        'character-count': { emoji: '✍️', name: '글자수 세기', cat: '교육' },
+        'gpa-calculator': { emoji: '🎓', name: '학점(GPA) 계산기', cat: '교육' },
+        'timezone-calculator': { emoji: '🌐', name: '세계 시차 계산기', cat: '여행' },
+        'exchange-rate-calculator': { emoji: '💱', name: '환율 계산기', cat: '여행' },
+      };
+      const TOOL_TOTAL = Object.keys(TOOL_META).length;
+
+      let _toolRows = null;          // fetchToolPageviews 결과(null=미로드)
+      let _toolsPeriod = 'all';      // 'all'|'day'|'week'|'month'
+
+      // path(/tools/<slug>/ 또는 /tools/<slug>)에서 slug 추출. 허브(/tools 또는 /tools/)는 제외.
+      function toolSlugFromPath(p) {
+        const m = String(p || '').match(/^\/tools\/([^/?#]+)/);
+        return m ? m[1] : null;
+      }
+
+      // 도구 페이지뷰만 별도 조회 — 전체기간+타임스탬프(기간필터용). audience 5000행 캡과 무관.
+      async function fetchToolPageviews() {
+        try {
+          const res = await fetch(
+            `${SUPABASE_URL}/rest/v1/analytics?event_type=eq.pageview&metadata->>path=like./tools/*&metadata->>__probe=is.null&select=created_at,path:metadata->>path&order=created_at.desc&limit=20000`,
+            { headers }
+          );
+          if (!res.ok) return [];
+          return await res.json();
+        } catch { return []; }
+      }
+
+      // 기간 창(window)으로 slug별 조회수 집계 → [{slug, views}] 내림차순
+      function computeToolStats(period) {
+        const nowMs = Date.now();
+        const todayKst = new Date(nowMs + 9 * 3600 * 1000).toISOString().split('T')[0];
+        const cutoff = period === 'week' ? nowMs - 7 * 86400000 : period === 'month' ? nowMs - 30 * 86400000 : null;
+        const by = {};
+        (_toolRows || []).forEach(r => {
+          const slug = toolSlugFromPath(r.path);
+          if (!slug) return;
+          const t = new Date(r.created_at).getTime();
+          if (period === 'day') {
+            const day = new Date(t + 9 * 3600 * 1000).toISOString().split('T')[0];
+            if (day !== todayKst) return;
+          } else if (cutoff && t < cutoff) return;
+          by[slug] = (by[slug] || 0) + 1;
+        });
+        return Object.entries(by).map(([slug, views]) => ({ slug, views })).sort((a, b) => b.views - a.views);
+      }
+
+      function renderTools(period) {
+        if (period !== undefined) _toolsPeriod = period;
+        const container = document.getElementById('tools-rank');
+        if (!container) return;
+
+        const totalViewsEl = document.getElementById('tools-total-views');
+        const activeEl = document.getElementById('tools-active-count');
+        const topNameEl = document.getElementById('tools-top-name');
+        const topViewsEl = document.getElementById('tools-top-views');
+        const rankTotalEl = document.getElementById('tools-rank-total');
+
+        if (_toolRows === null) {
+          container.innerHTML = '<div class="no-data">도구 방문 데이터 로딩 중...</div>';
+          return;
+        }
+
+        const stats = computeToolStats(_toolsPeriod);
+        const totalViews = stats.reduce((s, t) => s + t.views, 0);
+        const maxViews = stats.length ? stats[0].views : 0;
+
+        if (totalViewsEl) totalViewsEl.textContent = fmt(totalViews);
+        if (activeEl) activeEl.textContent = `${stats.length} / ${TOOL_TOTAL}`;
+        if (topNameEl) {
+          const top = stats[0];
+          topNameEl.textContent = top ? (TOOL_META[top.slug]?.name || top.slug) : '—';
+          if (topViewsEl) topViewsEl.textContent = top ? `${fmt(top.views)}회 조회` : '최다 조회 도구';
+        }
+        if (rankTotalEl) rankTotalEl.textContent = stats.length ? `${stats.length}종 · ${fmt(totalViews)}회` : '';
+
+        if (!stats.length) {
+          container.innerHTML = `<div class="no-data">${_toolsPeriod === 'all' ? '아직 도구 방문 데이터가 없어요' : '해당 기간 도구 방문 없음'}</div>`;
+          return;
+        }
+
+        container.innerHTML = stats.map((t, i) => {
+          const meta = TOOL_META[t.slug] || { emoji: '🛠', name: t.slug, cat: '기타' };
+          const href = `https://life-revenue-blog.vercel.app/tools/${t.slug}/`;
+          const pct = maxViews ? Math.max(4, Math.round((t.views / maxViews) * 100)) : 0;
+          const name = meta.name.length > 22 ? meta.name.slice(0, 22) + '…' : meta.name;
+          return `<a class="top-page-item" href="${escHtml(safeUrl(href))}" target="_blank" rel="noopener">
+            <span class="top-page-rank">${i + 1}</span>
+            <span class="tool-emoji">${meta.emoji}</span>
+            <span class="top-page-title" title="${escHtml(meta.name)}">${escHtml(name)}</span>
+            <span class="tool-cat">${escHtml(meta.cat)}</span>
+            <span class="tool-share"><i style="width:${pct}%"></i></span>
+            <span class="top-page-views">${fmt(t.views)}회 <span class="tp-go">↗</span></span>
           </a>`;
         }).join('');
       }
@@ -5013,6 +5205,13 @@ const ICONS: Record<string, string> = {
         renderPaperdoc(undefined, btn.dataset.pd);
       });
 
+      document.getElementById('tools-period')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('.seg-btn');
+        if (!btn) return;
+        document.querySelectorAll('#tools-period .seg-btn').forEach(b => b.classList.toggle('active', b === btn));
+        renderTools(btn.dataset.tp);
+      });
+
       document.getElementById('event-tabs')?.addEventListener('click', (e) => {
         const btn = e.target.closest('.source-tab');
         if (!btn) return;
@@ -5350,6 +5549,10 @@ const ICONS: Record<string, string> = {
               renderFunnelGoals();
               computeInsight();
             });
+            // 도구 탭을 이미 연 적 있으면(로드됨) 무거운 틱마다 갱신
+            if (_toolRows !== null) {
+              fetchToolPageviews().then(rows => { _toolRows = Array.isArray(rows) ? rows : []; renderTools(); });
+            }
           } else {
             // 라이트 틱: 캐시된 오디언스/전환 데이터로 파생 지표(퍼널 분모·인사이트)만 재계산
             renderFunnelGoals();
@@ -5405,6 +5608,13 @@ const ICONS: Record<string, string> = {
           } else if (targetTab === 'gsc') {
             tab.classList.add('active');
             loadGscDetail();
+          } else if (targetTab === 'tools') {
+            tab.classList.add('active');
+            if (_toolRows === null) {
+              fetchToolPageviews().then(rows => { _toolRows = Array.isArray(rows) ? rows : []; renderTools(); });
+            } else {
+              renderTools();
+            }
           } else {
             tab.classList.add('active');
           }
