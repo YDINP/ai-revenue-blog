@@ -1315,3 +1315,21 @@ html[data-wp-dark-mode-active] .mg-toc a { color: #c5cbd8; }
   .mg-toc.mg-toc-collapsed ol { display: none; }
   .mg-toc.mg-toc-collapsed .mg-toc-head::after { content: ' ▸'; }
 }
+
+/* ── 뉴스레터 인라인 구독 폼 ── */
+.mg-sub { margin: 2.6rem 0 1rem; padding: 1.5rem 1.4rem; border-radius: 16px; background: linear-gradient(135deg, #eef4ff, #f3eeff); border: 1px solid var(--hairline); text-align: center; }
+html[data-wp-dark-mode-active] .mg-sub { background: linear-gradient(135deg,#141c2e,#1a1730); }
+.mg-sub-h { font-size: 1.15rem; font-weight: 800; color: #1a1b1e; letter-spacing: -0.01em; margin-bottom: 0.4rem; }
+html[data-wp-dark-mode-active] .mg-sub-h { color: #f2f3f5; }
+.mg-sub-d { font-size: 0.9rem; color: #55606e; margin-bottom: 1rem; line-height: 1.6; }
+html[data-wp-dark-mode-active] .mg-sub-d { color: #a9b1bd; }
+.mg-sub-f { display: flex; gap: 0.5rem; max-width: 420px; margin: 0 auto; }
+.mg-sub-i { flex: 1; padding: 0.7rem 0.9rem; border: 1px solid var(--hairline); border-radius: 10px; font-size: 0.95rem; background: #fff; color: #26272b; }
+html[data-wp-dark-mode-active] .mg-sub-i { background: #0f1420; color: #e6e7ea; border-color: rgba(255,255,255,.14); }
+.mg-sub-b { padding: 0.7rem 1.3rem; border: 0; border-radius: 10px; background: var(--color-primary,#3b82f6); color: #fff; font-weight: 700; font-size: 0.95rem; cursor: pointer; white-space: nowrap; transition: opacity .15s; }
+.mg-sub-b:hover { opacity: .9; }
+.mg-sub-b:disabled { opacity: .6; cursor: default; }
+.mg-sub-msg { margin-top: 0.7rem; font-size: 0.9rem; font-weight: 600; min-height: 1em; }
+.mg-sub-msg.ok { color: #059669; }
+.mg-sub-msg.err { color: #dc2626; }
+@media (max-width: 480px){ .mg-sub-f { flex-direction: column; } }

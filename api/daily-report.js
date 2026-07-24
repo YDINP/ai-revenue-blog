@@ -7,7 +7,7 @@
 import { escapeHtml, sendToAdmin, supabaseRpc, sourceLabel } from './_shared.js';
 import { reportMessage } from './_report.js';
 import { syncGsc } from './_gsc-sync.js';
-import { runNewsletter, unsubscribe, sendCopyLatest } from './_newsletter.js';
+import { runNewsletter, unsubscribe, sendCopyLatest, sbn } from './_newsletter.js';
 
 // 구독 취소 확인 페이지 (메일의 '구독 취소' 링크가 이 함수로 옴 — Hobby 12함수 제한 통합)
 function unsubPage(title, msg) {
@@ -39,6 +39,29 @@ export default async function handler(req, res) {
     } catch (e) {
       console.error('unsubscribe error:', e);
       return res.status(500).send(unsubPage('오류', '잠시 후 다시 시도해 주세요.'));
+    }
+  }
+
+  // ── 뉴스레터 구독 (공개, 인증 전) — mungge.com 인라인 폼에서 POST ──
+  if (url.searchParams.get('action') === 'subscribe') {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    if (req.method === 'OPTIONS') { res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); return res.status(204).end(); }
+    const email = (url.searchParams.get('email') || '').trim().toLowerCase();
+    const source = url.searchParams.get('source') === 'lifeflow' ? 'lifeflow' : 'blog';
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return res.status(400).json({ ok: false, error: 'invalid email' });
+    try {
+      const enc = encodeURIComponent(email);
+      const existing = await sbn(`newsletter_subscribers?source=eq.${source}&email=eq.${enc}&select=email`);
+      if (existing.length) {
+        await sbn(`newsletter_subscribers?source=eq.${source}&email=eq.${enc}`, { method: 'PATCH', body: { is_active: true }, prefer: 'return=minimal' });
+      } else {
+        await sbn('newsletter_subscribers', { method: 'POST', body: { source, email, is_active: true }, prefer: 'return=minimal' });
+      }
+      return res.status(200).json({ ok: true });
+    } catch (e) {
+      console.error('subscribe error:', e);
+      return res.status(500).json({ ok: false, error: 'server' });
     }
   }
 

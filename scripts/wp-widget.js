@@ -77,4 +77,30 @@
       sc.textContent = JSON.stringify(schema); document.head.appendChild(sc);
     }
   }
+
+  // ── ⑤ 뉴스레터 인라인 구독 폼 (글 말미) ──
+  if (!document.querySelector('.mg-sub')) {
+    var lf = /생활|재테크|finance|lifestyle|health|money/i.test(document.body.className + ' ' + (document.querySelector('.entry-taxonomies, .breadcrumbs, .cat-links') || {}).textContent || '');
+    var SRC = lf ? 'lifeflow' : 'blog';
+    var box = document.createElement('div'); box.className = 'mg-sub';
+    box.innerHTML = '<div class="mg-sub-h">📬 새 글, 이메일로 받아보세요</div>'
+      + '<div class="mg-sub-d">테크·재테크 인사이트를 주 1~2회. 스팸 없이, 언제든 구독 취소.</div>'
+      + '<form class="mg-sub-f"><input type="email" class="mg-sub-i" placeholder="이메일 주소" required autocomplete="email"><button type="submit" class="mg-sub-b">구독</button></form>'
+      + '<div class="mg-sub-msg"></div>';
+    content.appendChild(box);
+    box.querySelector('.mg-sub-f').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = box.querySelector('.mg-sub-i').value.trim();
+      var msg = box.querySelector('.mg-sub-msg'), btn = box.querySelector('.mg-sub-b');
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { msg.textContent = '올바른 이메일을 입력해주세요.'; msg.className = 'mg-sub-msg err'; return; }
+      btn.disabled = true; btn.textContent = '...';
+      fetch('https://ai-revenue-blog.vercel.app/api/daily-report?action=subscribe&source=' + SRC + '&email=' + encodeURIComponent(email), { method: 'POST' })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (j && j.ok) { box.querySelector('.mg-sub-f').style.display = 'none'; msg.textContent = '✅ 구독 완료! 새 글을 이메일로 보내드릴게요.'; msg.className = 'mg-sub-msg ok'; }
+          else throw new Error();
+        })
+        .catch(function () { msg.textContent = '잠시 후 다시 시도해주세요.'; msg.className = 'mg-sub-msg err'; btn.disabled = false; btn.textContent = '구독'; });
+    });
+  }
 })();
