@@ -14,7 +14,8 @@
  *   SUPABASE_ANON_KEY - Supabase anon key (선택)
  */
 
-import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync } from "node:fs";
+import { spawnSync } from "node:child_process";
 import { autoPublishToWP } from "./wp-autopublish.mjs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -372,6 +373,31 @@ ${chartInstruction}
 
 // ─── Pexels API ───────────────────────────────────────────────────────
 
+// TF(개발/AI=추상)용 codex 일러스트 히어로. 실패 시 Pexels 폴백. 로컬 /heroes/*.jpg 반환(setFeatured가 업로드)
+async function fetchHeroImageCodex(searchTerm) {
+  const safe = (searchTerm || "hero").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || "hero";
+  const rel = ".tmp-hero/" + safe + ".png";
+  const png = join(PROJECT_ROOT, rel);
+  const outDir = join(PROJECT_ROOT, "public", "heroes");
+  const jpg = join(outDir, safe + ".jpg");
+  const RESIZE = join(PROJECT_ROOT, "..", ".claude", "skills", "codex-imagegen", "scripts", "resize-cover.mjs");
+  try {
+    mkdirSync(join(PROJECT_ROOT, ".tmp-hero"), { recursive: true });
+    mkdirSync(outDir, { recursive: true });
+    const prompt = "Use your built-in image_gen tool to generate 1 image and save it to " + rel + ". A clean modern flat vector editorial illustration representing the software/tech/AI topic \"" + searchTerm + "\". Blue and teal palette, soft gradients, subtle geometric tech shapes, NO TEXT, NO LOGOS, NO letters, wide 16:9, professional hero banner. Do not ask questions; generate and save to that exact path, then stop.";
+    console.log("[Codex] Generating hero for \"" + searchTerm + "\"...");
+    const r = spawnSync("codex", ["exec", "-s", "workspace-write", "--skip-git-repo-check", "-C", PROJECT_ROOT, prompt], { timeout: 360000, stdio: "ignore" });
+    if (r.status !== 0 || !existsSync(png)) throw new Error("codex no output");
+    spawnSync("node", [RESIZE, "--in", png, "--out", jpg, "--w", "1200", "--h", "630", "--q", "0.85"], { timeout: 60000, stdio: "ignore" });
+    if (!existsSync(jpg)) throw new Error("resize failed");
+    console.log("[Codex] Hero saved: /heroes/" + safe + ".jpg");
+    return { url: "/heroes/" + safe + ".jpg", alt: searchTerm };
+  } catch (e) {
+    console.log("[Codex] failed (" + e.message + "), fallback to Pexels");
+    return await fetchHeroImage(searchTerm);
+  }
+}
+
 async function fetchHeroImage(searchTerm) {
   if (!PEXELS_API_KEY) {
     console.log("[Pexels] No API key, skipping hero image");
@@ -622,7 +648,7 @@ async function main() {
       console.log(`[Claude] Generated: "${post.title}"`);
 
       // Fetch hero image via Pexels
-      const heroImage = await fetchHeroImage(searchTerm);
+      const heroImage = await fetchHeroImageCodex(searchTerm);
 
       // Select coupang links
       const categoryKey = categoryName.toLowerCase();
