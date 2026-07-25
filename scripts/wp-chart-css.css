@@ -1336,3 +1336,12 @@ html[data-wp-dark-mode-active] .mg-sub-i { background: #0f1420; color: #e6e7ea; 
 .mg-sub-msg.ok { color: #059669; }
 .mg-sub-msg.err { color: #dc2626; }
 @media (max-width: 480px){ .mg-sub-f { flex-direction: column; } }
+
+/* ── 모바일 가로넘침 방어 + 광고 클리핑 방지(실기기 애드핏 채움 대비) ── */
+@media (max-width: 640px) {
+  html, body { overflow-x: hidden; max-width: 100%; }
+  .entry-content-wrap { overflow-x: clip; }            /* 본문 가로넘침 차단(표는 자체 스크롤 유지) */
+  .mg-inpost-mo, .mg-anchor { max-width: 100vw; box-sizing: border-box; overflow: hidden; }
+  .mg-inpost-mo ins.kakao_ad_area, .mg-anchor ins.kakao_ad_area { max-width: 100% !important; }
+  .entry-content-wrap img, .entry-content-wrap iframe, .entry-content-wrap video { max-width: 100%; height: auto; }
+}
