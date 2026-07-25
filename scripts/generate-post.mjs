@@ -411,6 +411,17 @@ async function fetchHeroImage(searchTerm) {
 
 // ─── Coupang Links ────────────────────────────────────────────────────
 
+// 차트 div의 data-labels/title에 LLM이 넣은 \\n·따옴표·중복콤마 정리(HTML 속성 깨짐 방지)
+function fixChartLabels(md) {
+  return md.replace(/<div class="chart-[^"]*"[^>]*><\/div>/g, (tag) =>
+    tag
+      .replace(/data-labels="([\s\S]*?)"(?=\s+data-|\s*>)/g, (m, v) =>
+        `data-labels="${v.replace(/\\n|\n/g, ' ').replace(/"/g, '').replace(/\s*,\s*/g, ',').replace(/\s+/g, ' ').trim()}"`)
+      .replace(/data-title="([\s\S]*?)"(?=\s+data-|\s*>)/g, (m, v) =>
+        `data-title="${v.replace(/\\n|\n/g, ' ').replace(/"/g, '').trim()}"`)
+  );
+}
+
 function selectCoupangLinks(coupangData, categoryKey) {
   const links = coupangData[categoryKey];
   if (!links || links.length === 0) return [];
@@ -615,7 +626,7 @@ async function main() {
 
       // Select coupang links
       const categoryKey = categoryName.toLowerCase();
-      const coupangLinks = selectCoupangLinks(coupangData, categoryKey);
+      const coupangLinks = revenue ? selectCoupangLinks(coupangData, categoryKey) : [];
       console.log(`[Coupang] Selected ${coupangLinks.length} product links`);
 
       // Assemble markdown file
@@ -629,7 +640,7 @@ async function main() {
 
       // Write file
       const outputPath = join(PROJECT_ROOT, "src", "blog", filename);
-      writeFileSync(outputPath, content, "utf-8");
+      writeFileSync(outputPath, fixChartLabels(content), "utf-8");
       console.log(`[File] Written: src/blog/${filename}`);
 
       // Register to Supabase

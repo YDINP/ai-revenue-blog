@@ -6,16 +6,6 @@ author: "TechFlow"
 category: "Dev"
 tags: ["바이브코딩", "코딩기법", "개발자", "프로그래밍", "코드품질"]
 
-coupangLinks:
-  - title: "모던 자바스크립트 Deep Dive"
-    url: "https://link.coupang.com/a/dJjX0Z"
-    imageUrl: "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=200"
-  - title: "자바스크립트 완벽 가이드"
-    url: "https://link.coupang.com/a/dJjZe2"
-    imageUrl: "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=200"
-  - title: "클린 코드"
-    url: "https://link.coupang.com/a/dJjVjr"
-    imageUrl: "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=200"
 faq:
   - q: "바이브코딩은 초급자도 적용할 수 있나요?"
     a: "네, 오히려 초급자에게 더 효과적입니다. IDE 테마 설정과 단축키 커스터마이징만으로도 시작할 수 있고, 일관된 환경이 코드 품질 향상으로 이어집니다. 어렵지 않은 만큼 즉시 시작하기 좋습니다."
@@ -115,7 +105,7 @@ Essential Extensions (필수):
 
 확장이 많을수록 IDE 로딩 시간이 증가하고, 이는 개발 리듬을 방해합니다.
 
-<div class="chart-bar" data-orient="vertical" data-title="확장 프로그램 개수에 따른 IDE 시작 시간" data-labels="최소설정\n(4개)","표준설정\n(8개)","과다설정\n(15개)" data-values="1.2,2.8,5.1" data-colors="#009e73,#3b82f6,#f59e0b" data-highlight="0" data-unit="초"></div>
+<div class="chart-bar" data-orient="vertical" data-title="확장 프로그램 개수에 따른 IDE 시작 시간" data-labels="최소설정 (4개),표준설정 (8개),과다설정 (15개)" data-values="1.2,2.8,5.1" data-colors="#009e73,#3b82f6,#f59e0b" data-highlight="0" data-unit="초"></div>
 
 ## 바이브코딩 실전 예제: 3가지 사례
 
@@ -242,7 +232,7 @@ const useAppStore = create<AppStore>((set) => ({
 
 ## 바이브코딩이 코드 품질에 미치는 영향: 데이터
 
-<div class="chart-donut" data-title="바이브코딩 도입 팀의 메트릭 개선 결과" data-labels="버그율 감소","개발속도 증가","코드리뷰 시간 단축" data-values="50,35,15" data-colors="#009e73,#3b82f6,#f59e0b" data-unit="%"></div>
+<div class="chart-donut" data-title="바이브코딩 도입 팀의 메트릭 개선 결과" data-labels="버그율 감소,개발속도 증가,코드리뷰 시간 단축" data-values="50,35,15" data-colors="#009e73,#3b82f6,#f59e0b" data-unit="%"></div>
 
 2026년 GitHub와 Stack Overflow 커뮤니티 조사 결과:
 
