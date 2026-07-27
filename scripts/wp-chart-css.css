@@ -1498,6 +1498,11 @@ html[data-wp-dark-mode-active] .mg-cats__desc { color: #a9b1bd; }
    ⚠️ `.site-header{position:sticky}`(0,1,0)는 테마의 `#masthead{position:relative}`(1,0,0)에
    진다. 그리고 이 헤더는 이미 flow 밖이라(내려오는 콘텐츠가 헤더 높이만큼 이미 확보됨)
    fixed로 바꿔도 레이아웃 시프트가 0 — 실측 확인. 그래서 sticky 대신 fixed. */
+/* 이 사이트는 Kadence transparent-header 설정이라 `.transparent-header #wrapper #masthead`가
+   배경을 rgba(255,255,255,.08)로 만든다. 헤더가 fixed가 되면 본문이 그대로 비쳐 보이므로
+   (2,1,0)을 이기는 선택자로 불투명 배경을 준다. 다크값 #1d1f27은 실측(html 배경). */
+html:not([data-wp-dark-mode-active]) #wrapper #masthead.site-header { background-color: #ffffff; }
+html[data-wp-dark-mode-active] #wrapper #masthead.site-header { background-color: #1d1f27; }
 #masthead.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 500; transition: box-shadow .22s ease, background-color .22s ease; }
 body.admin-bar #masthead.site-header { top: 32px; }   /* 로그인 시 WP 관리바 아래로 */
 @media (max-width: 782px) { body.admin-bar #masthead.site-header { top: 46px; } }
@@ -1630,13 +1635,14 @@ html[data-wp-dark-mode-active] .mg-hcard--mini .mg-hcard__t { color: #f2f3f5; }
 .mg-more { font-size: 0.85rem; font-weight: 700; color: var(--mg-accent); text-decoration: none !important; }
 
 /* ── ⑤ 2컬럼 + 사이드 레일 ────────────────────────────────────────────────── */
-.mg-cols.wp-block-columns { gap: 1.75rem; align-items: flex-start; margin-bottom: 2.5rem; }
+.mg-cols.wp-block-columns { gap: 1.75rem; align-items: stretch; margin-bottom: 2.5rem; }
 .mg-cols .wp-block-latest-posts.is-grid { grid-template-columns: repeat(2, 1fr); margin-top: 0; }
 @media (max-width: 600px) { .mg-cols .wp-block-latest-posts.is-grid { grid-template-columns: 1fr; } }
 
 .mg-rail { display: flex; flex-direction: column; gap: 1.1rem; }
-/* 레일이 그리드보다 짧아 하단이 비므로 통째로 따라오게 한다(광고 노출시간도 증가) */
-@media (min-width: 901px) { .mg-rail { position: sticky; top: 96px; } }
+/* 레일 통째 sticky는 인기글·카테고리 패널까지 따라와 산만하다 → 컬럼을 그리드 높이만큼
+   늘려두고(align-items:stretch) 광고 패널만 sticky로 이동시킨다. */
+.mg-rail { height: 100%; }
 .mg-panel { background: #fff; border: 1px solid var(--hairline); border-radius: 16px; padding: 1.15rem 1.2rem; box-shadow: var(--sh-card); }
 .mg-panel h3 { font-size: 0.98rem; font-weight: 800; margin: 0 0 0.85rem; letter-spacing: -0.01em; display: flex; align-items: center; gap: 0.4rem; }
 html[data-wp-dark-mode-active] .mg-panel { background: #141c2e; }
@@ -1659,7 +1665,6 @@ html[data-wp-dark-mode-active] .mg-chips a { color: #a9b1bd; }
 @media (max-width: 900px) {
   .mg-cols.wp-block-columns { flex-wrap: wrap; }
   .mg-cols .wp-block-column { flex-basis: 100%; }
-  .mg-panel--slot { position: static; }
 }
 
 /* ── ⑥ 광고 슬롯 ──────────────────────────────────────────────────────────── */
@@ -1668,7 +1673,10 @@ html[data-wp-dark-mode-active] .mg-chips a { color: #a9b1bd; }
 .mg-slot--lead { margin: 1.75rem 0 0; }
 .mg-slot--lead:not(:empty) { min-height: 90px; }     /* CLS 방지용 자리 예약 */
 .mg-slot--rail:not(:empty) { min-height: 250px; }
-.mg-panel--slot { position: sticky; top: 96px; padding: 0.9rem; }
+/* sticky 포기: 조상 .site.wp-site-blocks(overflow:clip)와 body(overflow:auto)가 모두
+   스크롤 컨테이너를 만들어 CSS sticky가 무력화된다. 전역 overflow를 건드리는 건
+   가로 넘침 방어와 충돌해 위험 → 정적 배치로 확정. */
+.mg-panel--slot { padding: 0.9rem; }
 .mg-panel--slot:has(.mg-slot:empty) { display: none; }
 
 /* ── 최신글 카드 카테고리 칩 (JS 주입) ───────────────────────────────────── */
@@ -1683,3 +1691,8 @@ html[data-wp-dark-mode-active] .mg-chips a { color: #a9b1bd; }
 .mg-cta .mg-sub { margin: 0; padding: 0; background: none; border: 0; }
 .mg-cta .mg-sub-b { background: #0b0e14; }
 .mg-cta .mg-sub-msg { color: #fff; }
+/* html[data-wp-dark-mode-active] .mg-sub (0,2,1)이 .mg-cta .mg-sub (0,2,0)를 이겨
+   다크에서 CTA 안에 어두운 박스가 남았다. 같은 층위로 올려 무력화. */
+html[data-wp-dark-mode-active] .mg-cta .mg-sub { background: none; border: 0; padding: 0; }
+.mg-cta .mg-sub-f { max-width: 460px; margin: 0 auto; }
+.mg-cta .mg-sub-i, html[data-wp-dark-mode-active] .mg-cta .mg-sub-i { background: #fff; color: #26272b; border-color: transparent; }

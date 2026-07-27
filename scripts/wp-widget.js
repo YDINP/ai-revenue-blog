@@ -29,8 +29,9 @@
   //    안 된다(데드락). 그래서 화면 폭에 맞는 유닛 1개만 DOM에 넣는다.
   var MG_UNITS = {
     // slot 이름 → [PC유닛, PC폭, PC높이, 모바일유닛, 모바일폭, 모바일높이]
-    'home-lead': ['DAN-5RN4pAjuK5XJ0oHO', 728, 90, 'DAN-FxUxEhp2LCne6gT3', 320, 50]
-    // 'rail': 300x250 전용 유닛이 아직 없음 → 유닛 발급 후 여기에 추가하면 즉시 노출된다.
+    'home-lead': ['DAN-5RN4pAjuK5XJ0oHO', 728, 90, 'DAN-FxUxEhp2LCne6gT3', 320, 50],
+    // 레일 300x250은 모바일에서도 그대로 들어간다(레일이 그리드 아래로 내려갈 뿐 폭은 충분)
+    'rail': ['DAN-uWiPfWhdunksUrWW', 300, 250, 'DAN-uWiPfWhdunksUrWW', 300, 250]
   };
   [].forEach.call(document.querySelectorAll('.mg-slot[data-slot]'), function (slot) {
     var u = MG_UNITS[slot.getAttribute('data-slot')];
