@@ -51,7 +51,8 @@ export function blogsMessage() {
   blogList().forEach((b) => {
     lines.push(
       `<code>${b.key}</code> — <b>${escapeHtml(b.label)}</b>`,
-      `    ${b.repo} (${b.branch}) · <a href="${b.site}">사이트</a>`,
+      // repo 없는 항목(WordPress 직접 운영)은 "undefined (undefined)"로 찍히지 않게 분기
+      `    ${b.repo ? `${b.repo} (${b.branch})` : 'WordPress 직접 운영'} · <a href="${b.site}">사이트</a>`,
       `    자동생성 ${b.generator ? '가능' : '없음'} · 통계 ${b.source ? '연동' : '미연동'}`
     );
   });

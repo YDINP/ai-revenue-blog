@@ -57,17 +57,29 @@ async function accessToken() {
 // site: 'https://ai-revenue-blog.vercel.app/' (URL 프리픽스 속성)
 async function query(site, body) {
   const token = await accessToken();
-  const r = await fetch(
-    `https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(site)}/searchAnalytics/query`,
-    {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    }
-  );
-  const j = await r.json();
-  if (!r.ok) throw new Error(`GSC ${r.status}: ${j.error?.message || 'unknown'}`);
-  return j.rows || [];
+  const call = async (s) => {
+    const r = await fetch(
+      `https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(s)}/searchAnalytics/query`,
+      {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      }
+    );
+    return { ok: r.ok, status: r.status, json: await r.json() };
+  };
+
+  let res = await call(site);
+  // 같은 사이트라도 GSC 속성이 URL 프리픽스가 아니라 도메인 속성(sc-domain:)으로만
+  // 등록돼 있는 경우가 흔하다. 그러면 403/404가 나고 조용히 0으로 보이므로 1회 폴백한다.
+  if (!res.ok && (res.status === 403 || res.status === 404) && /^https?:\/\//.test(site)) {
+    try {
+      res = await call(`sc-domain:${new URL(site).hostname}`);
+    } catch (_) { /* 폴백 실패 시 아래에서 원래 오류를 던진다 */ }
+  }
+
+  if (!res.ok) throw new Error(`GSC ${res.status}: ${res.json.error?.message || 'unknown'}`);
+  return res.json.rows || [];
 }
 
 const sum = (rows, k) => rows.reduce((s, r) => s + (r[k] || 0), 0);

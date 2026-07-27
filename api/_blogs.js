@@ -60,6 +60,20 @@ export const BLOGS = {
     source: 'playcast',
     generator: null,
   },
+  mg: {
+    key: 'mg',
+    label: 'Mungge (mungge.com)',
+    site: 'https://mungge.com',
+    gscSite: 'https://mungge.com/',   // 도메인 속성이면 _gsc.js가 sc-domain:으로 자동 폴백
+    // WordPress로 직접 운영하는 사이트 — repo/generator/source가 없다.
+    // blogList() 소비처가 모두 이 필드들로 필터링하므로 일일리포트·뉴스레터·자동포스팅에서
+    // 자동 제외되고, gscSite로 거르는 GSC 동기화·조회에만 잡힌다.
+    repo: null,
+    branch: null,
+    vercel: null,
+    source: null,
+    generator: null,
+  },
 };
 
 // 'tf' / 'techflow' / 'ai-revenue' 등 느슨한 입력 허용
@@ -70,9 +84,10 @@ export function resolveBlog(input) {
   return (
     Object.values(BLOGS).find(
       (b) =>
-        b.repo.toLowerCase().endsWith('/' + s) ||
+        // repo/vercel이 없는 항목(WordPress 직접 운영)도 있으므로 옵셔널로 접근한다
+        b.repo?.toLowerCase().endsWith('/' + s) ||
         b.label.toLowerCase().includes(s) ||
-        b.vercel === s
+        (b.vercel && b.vercel === s)
     ) || null
   );
 }
