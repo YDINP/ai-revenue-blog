@@ -29,6 +29,10 @@ export async function syncGsc({ days = 5 } = {}) {
   const start = gscDay(2 + Math.max(1, days) - 1);
   const out = { start, end };
   for (const b of blogList().filter((x) => x.gscSite)) {
+    // WordPress 직접 운영 블로그(mungge)는 레지스트리 source 가 null 이다 — 일일리포트·뉴스레터·
+    // 자동포스팅에서 빠지려면 null 이어야 하지만, gsc_daily.source 는 NOT NULL 이라 그대로 넣으면
+    // 매번 23502 로 저장이 통째로 실패한다. 저장용 키만 blog key 로 폴백한다.
+    const src = b.source || b.key;
     try {
       const [pages, totals] = await Promise.all([
         gscDatePageRows(b.gscSite, start, end),
@@ -37,7 +41,7 @@ export async function syncGsc({ days = 5 } = {}) {
       const rows = [
         ...pages.map((p) => ({
           date: p.date,
-          source: b.source,
+          source: src,
           page: pathOf(p.page),
           clicks: p.clicks,
           impressions: p.impressions,
@@ -46,7 +50,7 @@ export async function syncGsc({ days = 5 } = {}) {
         })),
         ...totals.map((t) => ({
           date: t.date,
-          source: b.source,
+          source: src,
           page: '_TOTAL_',
           clicks: t.clicks,
           impressions: t.impressions,
@@ -54,9 +58,9 @@ export async function syncGsc({ days = 5 } = {}) {
           position: t.position,
         })),
       ];
-      out[b.source] = await upsert(rows);
+      out[src] = await upsert(rows);
     } catch (e) {
-      out[b.source] = `error: ${e.message}`;
+      out[src] = `error: ${e.message}`;
     }
   }
   return out;
