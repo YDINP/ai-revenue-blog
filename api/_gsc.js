@@ -90,6 +90,10 @@ async function query(site, body) {
   return res.json.rows || [];
 }
 
+// 임의 차원(query, page, query×page …) 원본 조회. 대시보드/gsc_daily 는 page 차원만 저장하므로
+// 검색어 단위 진단(어떤 쿼리가 어떤 글로 떨어지는지)은 이 통로로만 가능하다.
+export const gscRaw = (site, body) => query(site, body);
+
 const sum = (rows, k) => rows.reduce((s, r) => s + (r[k] || 0), 0);
 
 // 특정 기간의 총계 + 상위 검색어/페이지
