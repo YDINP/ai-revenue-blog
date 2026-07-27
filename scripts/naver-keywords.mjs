@@ -47,8 +47,19 @@ if (!keywords.length) {
   process.exit(1);
 }
 
-// 네이버 규격: 힌트키워드는 공백 제거, 최대 5개
-const hints = keywords.map((k) => k.replace(/\s+/g, '')).slice(0, 5);
+// 네이버 규격: 힌트키워드는 공백 제거, 최대 5개.
+// ⚠️ 공백만 지우면 부족하다. 한글·영숫자 외 문자가 하나라도 남으면 API가 요청 전체를
+//    400(code 11001 "hintKeywords 파라미터가 유효하지 않습니다")으로 거절한다.
+//    실제 사례: "METAL GEAR SOLID Δ: SNAKE EATER"의 Δ와 콜론 때문에 같은 배치의
+//    멀쩡한 키워드까지 검색량 0으로 떨어졌다.
+const normalizeHint = (k) => String(k).replace(/[^0-9A-Za-z가-힣]/g, '');
+// 원본→정규화 대응을 남긴다. 응답의 keyword는 정규화형이라 호출자가 원본으로 못 찾는다.
+const hintPairs = keywords.map((k) => ({ raw: k, hint: normalizeHint(k) })).filter((p) => p.hint).slice(0, 5);
+const hints = hintPairs.map((p) => p.hint);
+if (!hints.length) {
+  if (jsonOut) console.log('[]'); else console.error('유효한 키워드 없음(정규화 후 빈 문자열)');
+  process.exit(0);
+}
 
 function sign(ts, method, uri) {
   return crypto.createHmac('sha256', SECRET).update(`${ts}.${method}.${uri}`).digest('base64');
@@ -85,6 +96,9 @@ async function main() {
   // 기본: 내가 물어본 힌트 키워드만. --related: 연관까지 전부(검색량순).
   const hintSet = new Set(hints.map((h) => h.toLowerCase()));
   if (!wide) list = list.filter((r) => hintSet.has(String(r.keyword).toLowerCase()));
+  // 정규화 때문에 응답 keyword가 원본과 달라지므로 원본 표기를 함께 실어준다.
+  const rawOf = new Map(hintPairs.map((p) => [p.hint.toLowerCase(), p.raw]));
+  list = list.map((r) => ({ ...r, input: rawOf.get(String(r.keyword).toLowerCase()) ?? r.keyword }));
   list.sort((a, b) => b.total - a.total);
   if (wide) list = list.slice(0, 40);
 
