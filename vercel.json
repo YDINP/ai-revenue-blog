@@ -9,5 +9,982 @@
       "path": "/api/threads-cron",
       "schedule": "0 14 * * *"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-04-git-github-beginner-guide-2026",
+      "destination": "https://mungge.com/2026-02-04-git-github-beginner-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-04-git-github-beginner-guide-2026/",
+      "destination": "https://mungge.com/2026-02-04-git-github-beginner-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-05-frontend-trends-2026-react-nextjs-ai",
+      "destination": "https://mungge.com/2026-02-05-frontend-trends-2026-react-nextjs-ai/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-05-frontend-trends-2026-react-nextjs-ai/",
+      "destination": "https://mungge.com/2026-02-05-frontend-trends-2026-react-nextjs-ai/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-06-python-automation-beginners-guide",
+      "destination": "https://mungge.com/2026-02-06-python-automation-beginners-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-06-python-automation-beginners-guide/",
+      "destination": "https://mungge.com/2026-02-06-python-automation-beginners-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-07-game-engine-comparison-2026",
+      "destination": "https://mungge.com/2026-02-07-game-engine-comparison-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-07-game-engine-comparison-2026/",
+      "destination": "https://mungge.com/2026-02-07-game-engine-comparison-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-14-ai-chatgpt-usage-guide-2026",
+      "destination": "https://mungge.com/2026-02-14-ai-chatgpt-usage-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-14-ai-chatgpt-usage-guide-2026/",
+      "destination": "https://mungge.com/2026-02-14-ai-chatgpt-usage-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-14-ai-claude-ai-usage-guide-2026",
+      "destination": "https://mungge.com/2026-02-14-ai-claude-ai-usage-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-14-ai-claude-ai-usage-guide-2026/",
+      "destination": "https://mungge.com/2026-02-14-ai-claude-ai-usage-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-14-dev-nextjs-deployment-guide-5-methods-comparison-2026",
+      "destination": "https://mungge.com/2026-02-14-dev-nextjs-deployment-guide-5-methods-comparison-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-14-dev-nextjs-deployment-guide-5-methods-comparison-2026/",
+      "destination": "https://mungge.com/2026-02-14-dev-nextjs-deployment-guide-5-methods-comparison-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-20-ai-prompt-engineering-practical-tips-2026-efficiency-triple",
+      "destination": "https://mungge.com/2026-02-20-ai-prompt-engineering-practical-tips-2026-efficiency-triple/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-20-ai-prompt-engineering-practical-tips-2026-efficiency-triple/",
+      "destination": "https://mungge.com/2026-02-20-ai-prompt-engineering-practical-tips-2026-efficiency-triple/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-24-dev-supabase-practical-guide-2026-realtime-auth",
+      "destination": "https://mungge.com/2026-02-24-dev-supabase-practical-guide-2026-realtime-auth/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-24-dev-supabase-practical-guide-2026-realtime-auth/",
+      "destination": "https://mungge.com/2026-02-24-dev-supabase-practical-guide-2026-realtime-auth/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths",
+      "destination": "https://mungge.com/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/",
+      "destination": "https://mungge.com/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers",
+      "destination": "https://mungge.com/2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers/",
+      "destination": "https://mungge.com/2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-04-13-dev-2026-programming-first-language-selection-goal-based-roadmap",
+      "destination": "https://mungge.com/2026-04-13-dev-2026-programming-first-language-selection-goal-based-roadmap/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-04-13-dev-2026-programming-first-language-selection-goal-based-roadmap/",
+      "destination": "https://mungge.com/2026-04-13-dev-2026-programming-first-language-selection-goal-based-roadmap/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-05-04-ai-chatgpt-plus-subscription-value-roi-2026",
+      "destination": "https://mungge.com/2026-05-04-ai-chatgpt-plus-subscription-value-roi-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-05-04-ai-chatgpt-plus-subscription-value-roi-2026/",
+      "destination": "https://mungge.com/2026-05-04-ai-chatgpt-plus-subscription-value-roi-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-06-30-game-indie-game-steam-launch-guide-2026-wishlist-to-launch",
+      "destination": "https://mungge.com/2026-06-30-game-indie-game-steam-launch-guide-2026-wishlist-to-launch/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-06-30-game-indie-game-steam-launch-guide-2026-wishlist-to-launch/",
+      "destination": "https://mungge.com/2026-06-30-game-indie-game-steam-launch-guide-2026-wishlist-to-launch/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-01-game-indie-game-marketing-zero-budget-2026-wishlist-growth",
+      "destination": "https://mungge.com/2026-07-01-game-indie-game-marketing-zero-budget-2026-wishlist-growth/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-01-game-indie-game-marketing-zero-budget-2026-wishlist-growth/",
+      "destination": "https://mungge.com/2026-07-01-game-indie-game-marketing-zero-budget-2026-wishlist-growth/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-02-game-game-platform-fees-comparison-2026-steam-epic-mobile-itch",
+      "destination": "https://mungge.com/2026-07-02-game-game-platform-fees-comparison-2026-steam-epic-mobile-itch/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-02-game-game-platform-fees-comparison-2026-steam-epic-mobile-itch/",
+      "destination": "https://mungge.com/2026-07-02-game-game-platform-fees-comparison-2026-steam-epic-mobile-itch/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-03-game-indie-game-revenue-models-2026-premium-f2p-subscription",
+      "destination": "https://mungge.com/2026-07-03-game-indie-game-revenue-models-2026-premium-f2p-subscription/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-03-game-indie-game-revenue-models-2026-premium-f2p-subscription/",
+      "destination": "https://mungge.com/2026-07-03-game-indie-game-revenue-models-2026-premium-f2p-subscription/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-04-game-solo-game-developer-survival-guide-2026-burnout-budget",
+      "destination": "https://mungge.com/2026-07-04-game-solo-game-developer-survival-guide-2026-burnout-budget/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-04-game-solo-game-developer-survival-guide-2026-burnout-budget/",
+      "destination": "https://mungge.com/2026-07-04-game-solo-game-developer-survival-guide-2026-burnout-budget/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-05-game-generative-ai-indie-game-development-2026-cost-cut-controversy",
+      "destination": "https://mungge.com/2026-07-05-game-generative-ai-indie-game-development-2026-cost-cut-controversy/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-05-game-generative-ai-indie-game-development-2026-cost-cut-controversy/",
+      "destination": "https://mungge.com/2026-07-05-game-generative-ai-indie-game-development-2026-cost-cut-controversy/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-05-game-hot-game-genres-2026-roguelike-survivorlike-trends",
+      "destination": "https://mungge.com/2026-07-05-game-hot-game-genres-2026-roguelike-survivorlike-trends/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-05-game-hot-game-genres-2026-roguelike-survivorlike-trends/",
+      "destination": "https://mungge.com/2026-07-05-game-hot-game-genres-2026-roguelike-survivorlike-trends/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-05-game-ugc-creator-economy-2026-roblox-uefn-monetization",
+      "destination": "https://mungge.com/2026-07-05-game-ugc-creator-economy-2026-roblox-uefn-monetization/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-05-game-ugc-creator-economy-2026-roblox-uefn-monetization/",
+      "destination": "https://mungge.com/2026-07-05-game-ugc-creator-economy-2026-roblox-uefn-monetization/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-06-game-ai-game-asset-tools-comparison-2026-midjourney-scenario-layer",
+      "destination": "https://mungge.com/2026-07-06-game-ai-game-asset-tools-comparison-2026-midjourney-scenario-layer/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-06-game-ai-game-asset-tools-comparison-2026-midjourney-scenario-layer/",
+      "destination": "https://mungge.com/2026-07-06-game-ai-game-asset-tools-comparison-2026-midjourney-scenario-layer/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-06-game-game-discord-community-building-2026",
+      "destination": "https://mungge.com/2026-07-06-game-game-discord-community-building-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-06-game-game-discord-community-building-2026/",
+      "destination": "https://mungge.com/2026-07-06-game-game-discord-community-building-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-06-game-indie-game-trailer-guide-2026-wishlist-conversion",
+      "destination": "https://mungge.com/2026-07-06-game-indie-game-trailer-guide-2026-wishlist-conversion/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-06-game-indie-game-trailer-guide-2026-wishlist-conversion/",
+      "destination": "https://mungge.com/2026-07-06-game-indie-game-trailer-guide-2026-wishlist-conversion/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-06-game-roblox-game-development-beginner-guide-2026",
+      "destination": "https://mungge.com/2026-07-06-game-roblox-game-development-beginner-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-06-game-roblox-game-development-beginner-guide-2026/",
+      "destination": "https://mungge.com/2026-07-06-game-roblox-game-development-beginner-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-06-game-steam-next-fest-guide-2026-wishlist-boost",
+      "destination": "https://mungge.com/2026-07-06-game-steam-next-fest-guide-2026-wishlist-boost/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-06-game-steam-next-fest-guide-2026-wishlist-boost/",
+      "destination": "https://mungge.com/2026-07-06-game-steam-next-fest-guide-2026-wishlist-boost/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-07-ai-agentic-ai-complete-guide-2026",
+      "destination": "https://mungge.com/2026-07-07-ai-agentic-ai-complete-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-07-ai-agentic-ai-complete-guide-2026/",
+      "destination": "https://mungge.com/2026-07-07-ai-agentic-ai-complete-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-07-ai-vibe-coding-beginner-guide-2026",
+      "destination": "https://mungge.com/2026-07-07-ai-vibe-coding-beginner-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-07-ai-vibe-coding-beginner-guide-2026/",
+      "destination": "https://mungge.com/2026-07-07-ai-vibe-coding-beginner-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-07-game-ai-coding-tools-indie-game-development-2026-cursor-claude-code",
+      "destination": "https://mungge.com/2026-07-07-game-ai-coding-tools-indie-game-development-2026-cursor-claude-code/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-07-game-ai-coding-tools-indie-game-development-2026-cursor-claude-code/",
+      "destination": "https://mungge.com/2026-07-07-game-ai-coding-tools-indie-game-development-2026-cursor-claude-code/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-07-game-steam-upcoming-games-2026-h2-wishlist",
+      "destination": "https://mungge.com/2026-07-07-game-steam-upcoming-games-2026-h2-wishlist/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-07-game-steam-upcoming-games-2026-h2-wishlist/",
+      "destination": "https://mungge.com/2026-07-07-game-steam-upcoming-games-2026-h2-wishlist/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-09-iphone-18-spec-rumor-a20-foldable",
+      "destination": "https://mungge.com/2026-07-09-iphone-18-spec-rumor-a20-foldable/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-09-iphone-18-spec-rumor-a20-foldable/",
+      "destination": "https://mungge.com/2026-07-09-iphone-18-spec-rumor-a20-foldable/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-ai-agent-side-income-2026",
+      "destination": "https://mungge.com/2026-07-11-ai-agent-side-income-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-ai-agent-side-income-2026/",
+      "destination": "https://mungge.com/2026-07-11-ai-agent-side-income-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-ai-claude-fable-5-guide-2026",
+      "destination": "https://mungge.com/2026-07-11-ai-claude-fable-5-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-ai-claude-fable-5-guide-2026/",
+      "destination": "https://mungge.com/2026-07-11-ai-claude-fable-5-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-ai-gpt-5-6-vs-claude-fable-5-coding-showdown",
+      "destination": "https://mungge.com/2026-07-11-ai-gpt-5-6-vs-claude-fable-5-coding-showdown/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-ai-gpt-5-6-vs-claude-fable-5-coding-showdown/",
+      "destination": "https://mungge.com/2026-07-11-ai-gpt-5-6-vs-claude-fable-5-coding-showdown/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-ai-mcp-model-context-protocol-guide-2026",
+      "destination": "https://mungge.com/2026-07-11-ai-mcp-model-context-protocol-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-ai-mcp-model-context-protocol-guide-2026/",
+      "destination": "https://mungge.com/2026-07-11-ai-mcp-model-context-protocol-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-ai-multi-agent-orchestration-guide-2026",
+      "destination": "https://mungge.com/2026-07-11-ai-multi-agent-orchestration-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-ai-multi-agent-orchestration-guide-2026/",
+      "destination": "https://mungge.com/2026-07-11-ai-multi-agent-orchestration-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-ai-openai-codex-gpt-5-6-guide-2026",
+      "destination": "https://mungge.com/2026-07-11-ai-openai-codex-gpt-5-6-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-ai-openai-codex-gpt-5-6-guide-2026/",
+      "destination": "https://mungge.com/2026-07-11-ai-openai-codex-gpt-5-6-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-ai-search-seo-ai-overview-perplexity-2026",
+      "destination": "https://mungge.com/2026-07-11-ai-search-seo-ai-overview-perplexity-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-ai-search-seo-ai-overview-perplexity-2026/",
+      "destination": "https://mungge.com/2026-07-11-ai-search-seo-ai-overview-perplexity-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2",
+      "destination": "https://mungge.com/2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2/",
+      "destination": "https://mungge.com/2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-dev-frontend-trends-2026-rsc-react-compiler-typescript",
+      "destination": "https://mungge.com/2026-07-11-dev-frontend-trends-2026-rsc-react-compiler-typescript/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-dev-frontend-trends-2026-rsc-react-compiler-typescript/",
+      "destination": "https://mungge.com/2026-07-11-dev-frontend-trends-2026-rsc-react-compiler-typescript/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-dev-mcp-server-build-tutorial-2026",
+      "destination": "https://mungge.com/2026-07-11-dev-mcp-server-build-tutorial-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-dev-mcp-server-build-tutorial-2026/",
+      "destination": "https://mungge.com/2026-07-11-dev-mcp-server-build-tutorial-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-game-2026-h2-aaa-blockbusters-gta6-crimson-desert",
+      "destination": "https://mungge.com/2026-07-11-game-2026-h2-aaa-blockbusters-gta6-crimson-desert/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-game-2026-h2-aaa-blockbusters-gta6-crimson-desert/",
+      "destination": "https://mungge.com/2026-07-11-game-2026-h2-aaa-blockbusters-gta6-crimson-desert/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-game-indie-first-game-sales-reality-2026-median-wishlist-data",
+      "destination": "https://mungge.com/2026-07-11-game-indie-first-game-sales-reality-2026-median-wishlist-data/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-game-indie-first-game-sales-reality-2026-median-wishlist-data/",
+      "destination": "https://mungge.com/2026-07-11-game-indie-first-game-sales-reality-2026-median-wishlist-data/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-game-indie-game-concept-prototype-2026-from-idea-to-vertical-slice",
+      "destination": "https://mungge.com/2026-07-11-game-indie-game-concept-prototype-2026-from-idea-to-vertical-slice/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-game-indie-game-concept-prototype-2026-from-idea-to-vertical-slice/",
+      "destination": "https://mungge.com/2026-07-11-game-indie-game-concept-prototype-2026-from-idea-to-vertical-slice/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-game-indie-game-failure-reasons-2026-postmortem-lessons",
+      "destination": "https://mungge.com/2026-07-11-game-indie-game-failure-reasons-2026-postmortem-lessons/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-game-indie-game-failure-reasons-2026-postmortem-lessons/",
+      "destination": "https://mungge.com/2026-07-11-game-indie-game-failure-reasons-2026-postmortem-lessons/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-game-indie-genre-profitability-2026-steam-revenue-by-genre",
+      "destination": "https://mungge.com/2026-07-11-game-indie-genre-profitability-2026-steam-revenue-by-genre/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-game-indie-genre-profitability-2026-steam-revenue-by-genre/",
+      "destination": "https://mungge.com/2026-07-11-game-indie-genre-profitability-2026-steam-revenue-by-genre/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-review-galaxy-z-flip8-spec-rumor-2026",
+      "destination": "https://mungge.com/2026-07-11-review-galaxy-z-flip8-spec-rumor-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-review-galaxy-z-flip8-spec-rumor-2026/",
+      "destination": "https://mungge.com/2026-07-11-review-galaxy-z-flip8-spec-rumor-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-review-handheld-gaming-pc-2026",
+      "destination": "https://mungge.com/2026-07-11-review-handheld-gaming-pc-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-review-handheld-gaming-pc-2026/",
+      "destination": "https://mungge.com/2026-07-11-review-handheld-gaming-pc-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-review-local-llm-gpu-mini-pc-2026",
+      "destination": "https://mungge.com/2026-07-11-review-local-llm-gpu-mini-pc-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-11-review-local-llm-gpu-mini-pc-2026/",
+      "destination": "https://mungge.com/2026-07-11-review-local-llm-gpu-mini-pc-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-ai-elevenlabs-voice-dubbing-guide-2026",
+      "destination": "https://mungge.com/2026-07-12-ai-elevenlabs-voice-dubbing-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-ai-elevenlabs-voice-dubbing-guide-2026/",
+      "destination": "https://mungge.com/2026-07-12-ai-elevenlabs-voice-dubbing-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-ai-google-gemini-3-5-omni-guide-2026",
+      "destination": "https://mungge.com/2026-07-12-ai-google-gemini-3-5-omni-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-ai-google-gemini-3-5-omni-guide-2026/",
+      "destination": "https://mungge.com/2026-07-12-ai-google-gemini-3-5-omni-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-ai-suno-music-generation-guide-2026",
+      "destination": "https://mungge.com/2026-07-12-ai-suno-music-generation-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-ai-suno-music-generation-guide-2026/",
+      "destination": "https://mungge.com/2026-07-12-ai-suno-music-generation-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-ai-video-generation-veo-runway-kling-2026",
+      "destination": "https://mungge.com/2026-07-12-ai-video-generation-veo-runway-kling-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-ai-video-generation-veo-runway-kling-2026/",
+      "destination": "https://mungge.com/2026-07-12-ai-video-generation-veo-runway-kling-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-dev-ai-agent-frameworks-langgraph-crewai-2026",
+      "destination": "https://mungge.com/2026-07-12-dev-ai-agent-frameworks-langgraph-crewai-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-dev-ai-agent-frameworks-langgraph-crewai-2026/",
+      "destination": "https://mungge.com/2026-07-12-dev-ai-agent-frameworks-langgraph-crewai-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-dev-astro-blog-build-guide-2026",
+      "destination": "https://mungge.com/2026-07-12-dev-astro-blog-build-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-dev-astro-blog-build-guide-2026/",
+      "destination": "https://mungge.com/2026-07-12-dev-astro-blog-build-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-dev-rag-retrieval-augmented-generation-guide-2026",
+      "destination": "https://mungge.com/2026-07-12-dev-rag-retrieval-augmented-generation-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-dev-rag-retrieval-augmented-generation-guide-2026/",
+      "destination": "https://mungge.com/2026-07-12-dev-rag-retrieval-augmented-generation-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-review-desk-setup-monitor-arm-usb-c-hub-2026",
+      "destination": "https://mungge.com/2026-07-12-review-desk-setup-monitor-arm-usb-c-hub-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-review-desk-setup-monitor-arm-usb-c-hub-2026/",
+      "destination": "https://mungge.com/2026-07-12-review-desk-setup-monitor-arm-usb-c-hub-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-review-external-ssd-recommendation-2026",
+      "destination": "https://mungge.com/2026-07-12-review-external-ssd-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-review-external-ssd-recommendation-2026/",
+      "destination": "https://mungge.com/2026-07-12-review-external-ssd-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-review-galaxy-ai-vs-apple-intelligence-2026",
+      "destination": "https://mungge.com/2026-07-12-review-galaxy-ai-vs-apple-intelligence-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-review-galaxy-ai-vs-apple-intelligence-2026/",
+      "destination": "https://mungge.com/2026-07-12-review-galaxy-ai-vs-apple-intelligence-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-review-headset-noise-cancelling-recommendation-2026",
+      "destination": "https://mungge.com/2026-07-12-review-headset-noise-cancelling-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-review-headset-noise-cancelling-recommendation-2026/",
+      "destination": "https://mungge.com/2026-07-12-review-headset-noise-cancelling-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-review-office-gaming-chair-recommendation-2026",
+      "destination": "https://mungge.com/2026-07-12-review-office-gaming-chair-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-review-office-gaming-chair-recommendation-2026/",
+      "destination": "https://mungge.com/2026-07-12-review-office-gaming-chair-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-review-webcam-mic-recommendation-2026",
+      "destination": "https://mungge.com/2026-07-12-review-webcam-mic-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-12-review-webcam-mic-recommendation-2026/",
+      "destination": "https://mungge.com/2026-07-12-review-webcam-mic-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-13-game-revenue-comparison-2026-steam-mobile-web",
+      "destination": "https://mungge.com/2026-07-13-game-revenue-comparison-2026-steam-mobile-web/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-13-game-revenue-comparison-2026-steam-mobile-web/",
+      "destination": "https://mungge.com/2026-07-13-game-revenue-comparison-2026-steam-mobile-web/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-ai-app-monetization-revenuecat-subscription-guide",
+      "destination": "https://mungge.com/2026-07-14-ai-app-monetization-revenuecat-subscription-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-ai-app-monetization-revenuecat-subscription-guide/",
+      "destination": "https://mungge.com/2026-07-14-ai-app-monetization-revenuecat-subscription-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-ai-coding-tools-comparison-cursor-copilot-claude-2026",
+      "destination": "https://mungge.com/2026-07-14-ai-coding-tools-comparison-cursor-copilot-claude-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-ai-coding-tools-comparison-cursor-copilot-claude-2026/",
+      "destination": "https://mungge.com/2026-07-14-ai-coding-tools-comparison-cursor-copilot-claude-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-ai-llm-as-judge-evaluation-guide-2026",
+      "destination": "https://mungge.com/2026-07-14-ai-llm-as-judge-evaluation-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-ai-llm-as-judge-evaluation-guide-2026/",
+      "destination": "https://mungge.com/2026-07-14-ai-llm-as-judge-evaluation-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-ai-side-income-systems-2026-guide",
+      "destination": "https://mungge.com/2026-07-14-ai-side-income-systems-2026-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-ai-side-income-systems-2026-guide/",
+      "destination": "https://mungge.com/2026-07-14-ai-side-income-systems-2026-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-ai-speech-to-text-whisper-vs-apple-speechanalyzer-2026",
+      "destination": "https://mungge.com/2026-07-14-ai-speech-to-text-whisper-vs-apple-speechanalyzer-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-ai-speech-to-text-whisper-vs-apple-speechanalyzer-2026/",
+      "destination": "https://mungge.com/2026-07-14-ai-speech-to-text-whisper-vs-apple-speechanalyzer-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-dev-git-history-log-tips-developers-2026",
+      "destination": "https://mungge.com/2026-07-14-dev-git-history-log-tips-developers-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-dev-git-history-log-tips-developers-2026/",
+      "destination": "https://mungge.com/2026-07-14-dev-git-history-log-tips-developers-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-dev-ship-ios-mac-apps-without-xcode-2026",
+      "destination": "https://mungge.com/2026-07-14-dev-ship-ios-mac-apps-without-xcode-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-dev-ship-ios-mac-apps-without-xcode-2026/",
+      "destination": "https://mungge.com/2026-07-14-dev-ship-ios-mac-apps-without-xcode-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-game-localization-revenue-indie-guide-2026",
+      "destination": "https://mungge.com/2026-07-14-game-localization-revenue-indie-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-game-localization-revenue-indie-guide-2026/",
+      "destination": "https://mungge.com/2026-07-14-game-localization-revenue-indie-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-review-mechanical-keyboard-recommendation-2026",
+      "destination": "https://mungge.com/2026-07-14-review-mechanical-keyboard-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-14-review-mechanical-keyboard-recommendation-2026/",
+      "destination": "https://mungge.com/2026-07-14-review-mechanical-keyboard-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-15-game-ai-game-development-monetization-2026",
+      "destination": "https://mungge.com/2026-07-15-game-ai-game-development-monetization-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-15-game-ai-game-development-monetization-2026/",
+      "destination": "https://mungge.com/2026-07-15-game-ai-game-development-monetization-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-15-game-free-game-assets-tools-2026",
+      "destination": "https://mungge.com/2026-07-15-game-free-game-assets-tools-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-15-game-free-game-assets-tools-2026/",
+      "destination": "https://mungge.com/2026-07-15-game-free-game-assets-tools-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-15-game-game-developer-salary-income-reality-2026",
+      "destination": "https://mungge.com/2026-07-15-game-game-developer-salary-income-reality-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-15-game-game-developer-salary-income-reality-2026/",
+      "destination": "https://mungge.com/2026-07-15-game-game-developer-salary-income-reality-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-15-game-influencer-streamer-outreach-2026",
+      "destination": "https://mungge.com/2026-07-15-game-influencer-streamer-outreach-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-15-game-influencer-streamer-outreach-2026/",
+      "destination": "https://mungge.com/2026-07-15-game-influencer-streamer-outreach-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-15-game-solo-developer-tax-business-guide-2026",
+      "destination": "https://mungge.com/2026-07-15-game-solo-developer-tax-business-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-15-game-solo-developer-tax-business-guide-2026/",
+      "destination": "https://mungge.com/2026-07-15-game-solo-developer-tax-business-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-18-game-google-play-appstore-opening-2026-dev-guide",
+      "destination": "https://mungge.com/2026-07-18-game-google-play-appstore-opening-2026-dev-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-18-game-google-play-appstore-opening-2026-dev-guide/",
+      "destination": "https://mungge.com/2026-07-18-game-google-play-appstore-opening-2026-dev-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-20-ai-kimi-k3-open-source-2-8t-2026",
+      "destination": "https://mungge.com/2026-07-20-ai-kimi-k3-open-source-2-8t-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-20-ai-kimi-k3-open-source-2-8t-2026/",
+      "destination": "https://mungge.com/2026-07-20-ai-kimi-k3-open-source-2-8t-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-20-ai-korea-ai-basic-law-watermark-creator-guide-2026",
+      "destination": "https://mungge.com/2026-07-20-ai-korea-ai-basic-law-watermark-creator-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-20-ai-korea-ai-basic-law-watermark-creator-guide-2026/",
+      "destination": "https://mungge.com/2026-07-20-ai-korea-ai-basic-law-watermark-creator-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-20-game-roblox-lootbox-odds-disclosure-korea-law-2026",
+      "destination": "https://mungge.com/2026-07-20-game-roblox-lootbox-odds-disclosure-korea-law-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-20-game-roblox-lootbox-odds-disclosure-korea-law-2026/",
+      "destination": "https://mungge.com/2026-07-20-game-roblox-lootbox-odds-disclosure-korea-law-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-21-ai-qwen-3-8-max-2-4t-alibaba-2026",
+      "destination": "https://mungge.com/2026-07-21-ai-qwen-3-8-max-2-4t-alibaba-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-21-ai-qwen-3-8-max-2-4t-alibaba-2026/",
+      "destination": "https://mungge.com/2026-07-21-ai-qwen-3-8-max-2-4t-alibaba-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-23-game-phaser-3-advanced-collision-physics-animation-2026",
+      "destination": "https://mungge.com/2026-07-23-game-phaser-3-advanced-collision-physics-animation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-23-game-phaser-3-advanced-collision-physics-animation-2026/",
+      "destination": "https://mungge.com/2026-07-23-game-phaser-3-advanced-collision-physics-animation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-24-ai-chatgpt-plus-subscription-annual-vs-monthly-roi-2026",
+      "destination": "https://mungge.com/2026-07-24-ai-chatgpt-plus-subscription-annual-vs-monthly-roi-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-24-ai-chatgpt-plus-subscription-annual-vs-monthly-roi-2026/",
+      "destination": "https://mungge.com/2026-07-24-ai-chatgpt-plus-subscription-annual-vs-monthly-roi-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-25-dev-vibe-coding-complete-guide-2026",
+      "destination": "https://mungge.com/2026-07-25-dev-vibe-coding-complete-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-25-dev-vibe-coding-complete-guide-2026/",
+      "destination": "https://mungge.com/2026-07-25-dev-vibe-coding-complete-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-26-review-claude-opus-5-complete-guide-performance-usage-2026",
+      "destination": "https://mungge.com/2026-07-26-review-claude-opus-5-complete-guide-performance-usage-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-26-review-claude-opus-5-complete-guide-performance-usage-2026/",
+      "destination": "https://mungge.com/2026-07-26-review-claude-opus-5-complete-guide-performance-usage-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-27-ai-claude-5-context-engineering-guide-1m-token-2026",
+      "destination": "https://mungge.com/2026-07-27-ai-claude-5-context-engineering-guide-1m-token-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-27-ai-claude-5-context-engineering-guide-1m-token-2026/",
+      "destination": "https://mungge.com/2026-07-27-ai-claude-5-context-engineering-guide-1m-token-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/budget-handheld-gaming-pc-2026",
+      "destination": "https://mungge.com/budget-handheld-gaming-pc-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/budget-handheld-gaming-pc-2026/",
+      "destination": "https://mungge.com/budget-handheld-gaming-pc-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/gemini-vs-chatgpt-comparison-2026",
+      "destination": "https://mungge.com/gemini-vs-chatgpt-comparison-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/gemini-vs-chatgpt-comparison-2026/",
+      "destination": "https://mungge.com/gemini-vs-chatgpt-comparison-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/handheld-gaming-pc-buying-guide-2026",
+      "destination": "https://mungge.com/handheld-gaming-pc-buying-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/handheld-gaming-pc-buying-guide-2026/",
+      "destination": "https://mungge.com/handheld-gaming-pc-buying-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/indie-game-ad-revenue-iaa-ecpm-2026",
+      "destination": "https://mungge.com/indie-game-ad-revenue-iaa-ecpm-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/indie-game-ad-revenue-iaa-ecpm-2026/",
+      "destination": "https://mungge.com/indie-game-ad-revenue-iaa-ecpm-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/information-processing-engineer-practical-2026-h2",
+      "destination": "https://mungge.com/information-processing-engineer-practical-2026-h2/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/information-processing-engineer-practical-2026-h2/",
+      "destination": "https://mungge.com/information-processing-engineer-practical-2026-h2/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/steam-deck-oled-price-worth-2026",
+      "destination": "https://mungge.com/steam-deck-oled-price-worth-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/steam-deck-oled-price-worth-2026/",
+      "destination": "https://mungge.com/steam-deck-oled-price-worth-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/steam-reviews-sales-correlation-2026",
+      "destination": "https://mungge.com/steam-reviews-sales-correlation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/steam-reviews-sales-correlation-2026/",
+      "destination": "https://mungge.com/steam-reviews-sales-correlation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/steam-store-page-conversion-optimization-2026",
+      "destination": "https://mungge.com/steam-store-page-conversion-optimization-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/steam-store-page-conversion-optimization-2026/",
+      "destination": "https://mungge.com/steam-store-page-conversion-optimization-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/switch2-vs-steam-deck-games-2026",
+      "destination": "https://mungge.com/switch2-vs-steam-deck-games-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/switch2-vs-steam-deck-games-2026/",
+      "destination": "https://mungge.com/switch2-vs-steam-deck-games-2026/",
+      "permanent": true
+    }
   ]
 }
