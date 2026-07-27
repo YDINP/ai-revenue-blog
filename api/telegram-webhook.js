@@ -28,6 +28,7 @@ import {
   statusMessage,
   toggleDraftMessage,
 } from './_control.js';
+import { feedbackCards, handleFeedbackCallback } from './_feedback.js';
 import { gscMessage, seoMessage } from './_gsc-view.js';
 import { moneyMessage } from './_money.js';
 import { reportMessage } from './_report.js';
@@ -70,6 +71,10 @@ const HELP = [
   '• 새 댓글 알림에 <b>답장</b> → 관리자 대댓글 등록',
   '• <code>/reply &lt;댓글ID&gt; &lt;내용&gt;</code> · <code>/delete &lt;댓글ID&gt;</code>',
   '',
+  '<b>🗳 사이트 피드백</b> (입시 아카이브 등)',
+  '• /feedback [n] — 최근 피드백 (기본 10건, 카드마다 🗑 삭제 버튼)',
+  '• <code>/feedback &lt;사이트&gt; [n]</code> — 사이트별 (예: <code>/feedback ipsi-archive 5</code>)',
+  '',
   '<b>💰 수익화·SEO</b>',
   '• /seo [일수] — SEO 기회 진단 (CTR 개선 대상·문턱 앞 검색어·미공략 검색어)',
   '• /money [블로그] [n] — 트래픽 있는데 쿠팡 링크 없는 글',
@@ -109,6 +114,25 @@ export default async function handler(req, res) {
     }
     // 로딩 스피너 즉시 해제 (텔레그램은 응답 없으면 버튼이 계속 도는 것처럼 보임)
     await tg('answerCallbackQuery', { callback_query_id: cb.id });
+
+    // ── 피드백 콜백 (fb:del|ok|no:ID) — 삭제는 확인 한 단계 거침 ──
+    if ((cb.data || '').startsWith('fb:')) {
+      try {
+        const out = await handleFeedbackCallback(cb.data || '');
+        await tg('editMessageText', {
+          chat_id: cbChat,
+          message_id: cb.message.message_id,
+          text: out.text,
+          parse_mode: 'HTML',
+          disable_web_page_preview: true,
+          reply_markup: out.reply_markup ?? { inline_keyboard: [] },
+        });
+      } catch (e) {
+        console.error('feedback callback error:', e);
+        await tg('sendMessage', { chat_id: cbChat, text: `❌ 피드백 처리 실패: ${e.message}` });
+      }
+      return res.status(200).json({ ok: true });
+    }
 
     // ── Threads 초안 콜백 (thr:pub|edit|sched|rej:ID) ──
     if ((cb.data || '').startsWith('thr:')) {
@@ -242,6 +266,34 @@ export default async function handler(req, res) {
 
   if (text === '/help') {
     await reply(HELP);
+    return res.status(200).json({ ok: true });
+  }
+
+  // ── /feedback [사이트] [n] — 사이트 피드백 목록 (카드마다 삭제 버튼) ──
+  const fbCmd = text.match(/^\/feedback(?:@\w+)?(?:\s+([\s\S]+))?$/i);
+  if (fbCmd) {
+    try {
+      const parts = (fbCmd[1] || '').trim().split(/\s+/).filter(Boolean);
+      const site = parts.find((p) => !/^\d+$/.test(p)) || null;
+      const n = Number(parts.find((p) => /^\d+$/.test(p)));
+      const { header, cards } = await feedbackCards({
+        limit: Number.isFinite(n) ? n : 10,
+        site,
+      });
+      await reply(header);
+      for (const c of cards) {
+        await tg('sendMessage', {
+          chat_id: chatId,
+          text: c.text,
+          parse_mode: 'HTML',
+          disable_web_page_preview: true,
+          reply_markup: c.reply_markup,
+        });
+      }
+    } catch (e) {
+      console.error('feedback list error:', e);
+      await reply(`❌ 피드백 조회 실패: ${escapeHtml(e.message)}`);
+    }
     return res.status(200).json({ ok: true });
   }
 

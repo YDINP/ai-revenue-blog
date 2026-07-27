@@ -5,9 +5,29 @@ process.env.TELEGRAM_ADMIN_CHAT_ID = '11111';
 process.env.COMMENT_ADMIN_KEY = 'testadminkey';
 process.env.GITHUB_TOKEN = 'ghtest';
 process.env.CRON_SECRET = 'croncron';
+process.env.SUPABASE_SERVICE_ROLE_KEY = 'testsrk'; // site_feedback은 RLS 차단이라 service_role 필요
 
 // 봇 대화 상태(newpost/edit/delete 흐름)를 인메모리로 모킹
 let botState = null;
+
+// 사이트 피드백 인메모리 스토어 (조회/삭제 검증용)
+let feedbackRows = [
+  {
+    id: 7, site: 'ipsi-archive', category: '데이터오류',
+    target: '인덕대학교|웹툰만화학과(방송문화콘텐츠 학부)',
+    message: '실기 일정이 <b>작년</b> 기준이에요',
+    context: { view: 'card', shown: 40, q: '인덕', fields: ['만화·웹툰'], types: [], regions: [], admits: [], practs: [], screen: '390x844' },
+    page_url: 'https://ipsi-archive-site.vercel.app/', user_agent: 'Mozilla/5.0 (iPhone)',
+    created_at: '2026-07-27 05:21:01.624642+00',
+  },
+  {
+    id: 8, site: 'ipsi-archive', category: '기능제안', target: null,
+    message: '등록금도 같이 보여주세요',
+    context: { view: 'table', shown: 40 },
+    page_url: 'https://ipsi-archive-site.vercel.app/', user_agent: 'Mozilla/5.0 (Windows NT 10.0)',
+    created_at: '2026-07-27 06:00:00+00',
+  },
+];
 
 const calls = [];
 globalThis.fetch = async (url, opts = {}) => {
@@ -120,6 +140,21 @@ globalThis.fetch = async (url, opts = {}) => {
     if (url.includes('/git/commits/')) return { ok: true, status: 200, json: async () => ({ tree: { sha: 'treesha' } }) };
     if (url.includes('/git/commits')) return { ok: true, status: 200, json: async () => ({ sha: 'abcdef1234' }) };
     if (url.includes('/git/refs/')) return { ok: true, status: 200, json: async () => ({}) };
+  }
+  // ── 사이트 피드백(site_feedback) — RLS 차단이라 service_role REST로만 접근 ──
+  if (url.includes('/rest/v1/site_feedback')) {
+    if (opts.method === 'DELETE') {
+      const id = (url.match(/id=eq\.(\d+)/) || [])[1];
+      feedbackRows = feedbackRows.filter((f) => String(f.id) !== id);
+      return { ok: true, status: 200, json: async () => [] };
+    }
+    const idEq = (url.match(/id=eq\.(\d+)/) || [])[1];
+    if (idEq) return { ok: true, status: 200, json: async () => feedbackRows.filter((f) => String(f.id) === idEq) };
+    const siteEq = decodeURIComponent((url.match(/site=eq\.([^&]+)/) || [])[1] || '');
+    let rows = siteEq ? feedbackRows.filter((f) => f.site === siteEq) : feedbackRows;
+    const lim = Number((url.match(/limit=(\d+)/) || [])[1]);
+    if (Number.isFinite(lim)) rows = rows.slice(0, lim);
+    return { ok: true, status: 200, json: async () => rows };
   }
   throw new Error('unexpected fetch ' + url);
 };
@@ -466,5 +501,58 @@ assert(out.includes('오늘의 추천 주제') && out.includes('/generate'), 're
 calls.length = 0; res = mockRes();
 await tgHook(tgMsg('/report'), res);
 assert(sentTexts()[0].includes('일일 리포트'), '/report command works');
+
+// ── 29. 사이트 피드백 목록/삭제 ──
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/feedback'), res);
+let fbTexts = sentTexts();
+assert(fbTexts[0].includes('사이트 피드백') && fbTexts[0].includes('전체 2건'), '/feedback shows header with total');
+assert(fbTexts.length === 3, '/feedback sends one card per item');
+assert(fbTexts[1].includes('#7') && fbTexts[1].includes('데이터오류') && fbTexts[1].includes('인덕대학교 — 웹툰만화학과'), 'card shows id, category, target');
+assert(fbTexts[1].includes('&lt;b&gt;작년&lt;/b&gt;'), 'feedback message is HTML-escaped');
+assert(fbTexts[1].includes('카드 뷰') && fbTexts[1].includes('표시 40개') && fbTexts[1].includes('검색 "인덕"') && fbTexts[1].includes('만화·웹툰'), 'card shows capture context');
+assert(fbTexts[1].includes('📱 모바일'), 'card shows device from user agent');
+let fbCards = calls.filter(c => c.url.includes('sendMessage') && c.body.reply_markup);
+assert(fbCards.length === 2 && fbCards[0].body.reply_markup.inline_keyboard[0][0].callback_data === 'fb:del:7', 'each card has a delete button');
+
+// 사이트 필터 + 개수 인자
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/feedback ipsi-archive 1'), res);
+assert(sentTexts().length === 2, '/feedback <site> <n> limits results');
+
+// 삭제는 확인 한 단계를 거친다 (즉시 지우지 않음)
+calls.length = 0; res = mockRes();
+await tgHook(cbUpdate('fb:del:7'), res);
+let edit = calls.find(c => c.url.includes('editMessageText'));
+assert(edit && edit.body.text.includes('정말 삭제할까요'), 'delete button asks for confirmation');
+assert(edit.body.reply_markup.inline_keyboard[0].map(b => b.callback_data).join(',') === 'fb:ok:7,fb:no:7', 'confirm offers ok/cancel');
+assert(feedbackRows.length === 2, 'nothing is deleted before confirming');
+
+// 취소 → 원래 카드로 복귀
+calls.length = 0; res = mockRes();
+await tgHook(cbUpdate('fb:no:7'), res);
+edit = calls.find(c => c.url.includes('editMessageText'));
+assert(edit && !edit.body.text.includes('정말 삭제할까요') && edit.body.reply_markup.inline_keyboard[0][0].callback_data === 'fb:del:7', 'cancel restores the card');
+assert(feedbackRows.length === 2, 'cancel keeps the row');
+
+// 확정 삭제
+calls.length = 0; res = mockRes();
+await tgHook(cbUpdate('fb:ok:7'), res);
+edit = calls.find(c => c.url.includes('editMessageText'));
+assert(edit && edit.body.text.includes('삭제 완료'), 'confirmed delete reports success');
+assert(feedbackRows.length === 1 && feedbackRows[0].id === 8, 'row is actually deleted');
+assert(calls.some(c => c.url.includes('/rest/v1/site_feedback') && c.url.includes('id=eq.7')), 'delete hits supabase with the right id');
+
+// 이미 지운 건 재삭제해도 안전
+calls.length = 0; res = mockRes();
+await tgHook(cbUpdate('fb:ok:7'), res);
+edit = calls.find(c => c.url.includes('editMessageText'));
+assert(edit && edit.body.text.includes('이미 삭제된'), 'deleting a gone row is handled');
+
+// 빈 목록
+calls.length = 0; res = mockRes();
+feedbackRows = [];
+await tgHook(tgMsg('/feedback'), res);
+assert(sentTexts()[0].includes('등록된 피드백이 없습니다'), 'empty list is handled');
 
 console.log('\nDONE');
