@@ -94,6 +94,53 @@ async function query(site, body) {
 // 검색어 단위 진단(어떤 쿼리가 어떤 글로 떨어지는지)은 이 통로로만 가능하다.
 export const gscRaw = (site, body) => query(site, body);
 
+// 제출된 사이트맵 목록 + 처리 결과. 이전 직후 "구글이 새 도메인을 아예 모르는" 상태인지
+// 판별하려면 사이트맵 제출 여부부터 봐야 한다.
+export async function gscSitemaps(site) {
+  const token = await accessToken();
+  const r = await fetch(
+    `https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(site)}/sitemaps`,
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+  const j = await r.json();
+  if (!r.ok) throw new Error(`사이트맵 ${r.status}: ${j.error?.message || 'unknown'}`);
+  return (j.sitemap || []).map((s) => ({
+    path: s.path,
+    lastSubmitted: s.lastSubmitted,
+    lastDownloaded: s.lastDownloaded,
+    isPending: s.isPending,
+    errors: s.errors,
+    warnings: s.warnings,
+    contents: s.contents,
+  }));
+}
+
+// URL 검사 API — 색인 여부/마지막 크롤/구글이 고른 canonical.
+// 301 이전 직후에는 searchAnalytics(노출 0)만으로는 "아직 안 걸린 것"인지 "색인이 안 된 것"인지
+// 구분이 안 된다. 이전 진행률은 이 API로만 확인할 수 있다.
+export async function gscInspect(site, inspectionUrl) {
+  const token = await accessToken();
+  const r = await fetch('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ inspectionUrl, siteUrl: site, languageCode: 'ko' }),
+  });
+  const j = await r.json();
+  if (!r.ok) throw new Error(`URL검사 ${r.status}: ${j.error?.message || 'unknown'}`);
+  const idx = j.inspectionResult?.indexStatusResult || {};
+  return {
+    url: inspectionUrl,
+    verdict: idx.verdict,                 // PASS / NEUTRAL / FAIL
+    coverageState: idx.coverageState,     // '제출됨, 색인 생성됨' 등
+    lastCrawlTime: idx.lastCrawlTime,
+    googleCanonical: idx.googleCanonical,
+    userCanonical: idx.userCanonical,
+    robotsTxtState: idx.robotsTxtState,
+    indexingState: idx.indexingState,
+    pageFetchState: idx.pageFetchState,
+  };
+}
+
 const sum = (rows, k) => rows.reduce((s, r) => s + (r[k] || 0), 0);
 
 // 특정 기간의 총계 + 상위 검색어/페이지

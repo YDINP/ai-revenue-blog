@@ -8,7 +8,7 @@
 // 만들면 Hobby 플랜 서버리스 함수 12개 상한에 걸리므로 이 핸들러에 조회 모드를 얹는다.
 import { syncGsc } from './_gsc-sync.js';
 import { blogList } from './_blogs.js';
-import { gscDay, gscRaw, hasGsc } from './_gsc.js';
+import { gscDay, gscInspect, gscRaw, gscSitemaps, hasGsc } from './_gsc.js';
 
 export default async function handler(req, res) {
   const secret = process.env.CRON_SECRET;
@@ -21,6 +21,8 @@ export default async function handler(req, res) {
 
   const dim = url.searchParams.get('dim');
   if (dim) return probe(url, res);
+  if (url.searchParams.get('inspect')) return inspect(url, res);
+  if (url.searchParams.get('sitemaps')) return sitemaps(url, res);
 
   const days = Math.min(Math.max(parseInt(url.searchParams.get('days') || '5', 10) || 5, 1), 90);
   try {
@@ -30,6 +32,48 @@ export default async function handler(req, res) {
     console.error('gsc-sync error:', e);
     return res.status(500).json({ error: e.message });
   }
+}
+
+// 제출된 사이트맵 현황 — /api/gsc-sync?blog=mg&sitemaps=1&secret=…
+async function sitemaps(url, res) {
+  if (!hasGsc()) return res.status(500).json({ error: 'no-gsc-env' });
+  const blogs = blogList().filter((b) => b.gscSite);
+  const blog = blogs.find((b) => b.key === (url.searchParams.get('blog') || 'mg'));
+  if (!blog) return res.status(400).json({ error: 'unknown blog', available: blogs.map((b) => b.key) });
+  try {
+    return res.status(200).json({ ok: true, site: blog.gscSite, sitemaps: await gscSitemaps(blog.gscSite) });
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
+}
+
+// URL 색인 상태 검사 — 301 이전 진행률 확인용
+//   /api/gsc-sync?blog=mg&inspect=/2026-02-26-…/,/indie-game-ad-revenue-iaa-ecpm-2026/&secret=…
+// inspect 는 경로 또는 절대 URL을 콤마로 구분. GSC 쿼터가 낮아 한 번에 최대 10개.
+async function inspect(url, res) {
+  if (!hasGsc()) return res.status(500).json({ error: 'no-gsc-env' });
+  const blogs = blogList().filter((b) => b.gscSite);
+  const blog = blogs.find((b) => b.key === (url.searchParams.get('blog') || 'mg'));
+  if (!blog) return res.status(400).json({ error: 'unknown blog', available: blogs.map((b) => b.key) });
+
+  const origin = new URL(blog.gscSite).origin;
+  const targets = url.searchParams
+    .get('inspect')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .slice(0, 10)
+    .map((u) => (/^https?:\/\//.test(u) ? u : origin + (u.startsWith('/') ? u : `/${u}`)));
+
+  const results = [];
+  for (const t of targets) {
+    try {
+      results.push(await gscInspect(blog.gscSite, t));
+    } catch (e) {
+      results.push({ url: t, error: e.message });
+    }
+  }
+  return res.status(200).json({ ok: true, site: blog.gscSite, count: results.length, results });
 }
 
 // 저장 없이 GSC 원본 행만 반환 — 검색어 진단용
