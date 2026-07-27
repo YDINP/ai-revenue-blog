@@ -126,8 +126,10 @@
     // (d) 카테고리 필터 — 최신글 그리드를 REST 카테고리로 태깅 후 칩으로 필터.
     //     ⚠️ 매거진 히어로도 같은 블록(.wp-block-latest-posts.is-grid)이라 2컬럼 안쪽만 잡는다.
     var mgGrid = document.querySelector('.mg-cols .wp-block-latest-posts.is-grid');
-    var mgBar = document.querySelector('.mg-sec-head--latest .mg-filter');
-    if (mgGrid && mgBar) {
+    // ⚠️ 변수명 주의: 상단 스크롤 진행바가 var mgBar를 쓴다. var는 함수 스코프라
+    //    여기서 mgBar를 재선언하면 진행바가 이 칩 컨테이너에 width를 쓴다(칩이 스크롤마다 재배치됨).
+    var mgChips = document.querySelector('.mg-sec-head--latest .mg-filter');
+    if (mgGrid && mgChips) {
       var mgLis = [].slice.call(mgGrid.children);
       // 카테고리명 → 칩 색 (프리뷰 A 팔레트)
       var MG_CC = { game: '#7c3aed', finance: '#0e9f6e', ai: '#4f7cff', travel: '#f59e0b', lifestyle: '#ec4899', review: '#ef4444', dev: '#0891b2', health: '#10b981', education: '#6366f1' };
@@ -174,14 +176,14 @@
           b.textContent = label;
           b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
           b.addEventListener('click', function () {
-            [].forEach.call(mgBar.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', 'false'); });
+            [].forEach.call(mgChips.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', 'false'); });
             b.setAttribute('aria-pressed', 'true');
             mgLis.forEach(function (li) {
               var tags = '|' + (li.getAttribute('data-cats') || '') + '|';
               li.hidden = !(label === '전체' || tags.indexOf('|' + label + '|') >= 0);
             });
           });
-          mgBar.appendChild(b);
+          mgChips.appendChild(b);
         });
       }).catch(function () {});
     }
