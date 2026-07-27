@@ -50,7 +50,7 @@ noindex: true
 
 ## 가성비 노트북 TOP 5 종합 비교
 
-<div class="chart-bar" data-title="가성비 노트북 5종 종합 평가" data-labels="LG 그램 16","삼성 갤럭시북 13","레노버 ThinkPad E16","ASUS Vivobook 15","HP Pavilion 15" data-values="88,85,84,82,79" data-colors="#009e73,#f59e0b,#8b5cf6,#3b82f6,#d55e00" data-unit="점"></div>
+<div class="chart-bar" data-title="가성비 노트북 5종 종합 평가" data-labels="LG 그램 16,삼성 갤럭시북 13,레노버 ThinkPad E16,ASUS Vivobook 15,HP Pavilion 15" data-values="88,85,84,82,79" data-colors="#009e73,#f59e0b,#8b5cf6,#3b82f6,#d55e00" data-unit="점"></div>
 
 ## 1. LG 그램 16 (약 165만원) — 가벼움과 성능의 완벽한 조화
 

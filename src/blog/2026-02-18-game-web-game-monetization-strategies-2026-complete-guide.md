@@ -175,8 +175,6 @@ Web3 & NFT 통합: 블록체인 기반 아이템 거래는 아직 초기 단계�
 
 웹 게임에서 출발한 후 모바일 네이티브 앱으로 확대하는 전략이 표준화되었습니다. 이 경우 같은 계정으로 진행 상황을 동기화하면 사용자 체류 시간이 40% 증가합니다.
 
-<div class="chart-donut" data-title="2026년 웹 게임 개발자 주요 수익원 비율" data-labels="광고" data-values="35" data-colors="#3b82f6"></div>
-
 <div class="chart-donut" data-title="2026년 웹 게임 개발자 주요 수익원 비율" data-labels="광고,인앱구매,구독,기타" data-values="35,40,18,7" data-colors="#3b82f6,#009e73,#f59e0b,#8b5cf6"></div>
 
 ## 수익화 단계별 로드맵

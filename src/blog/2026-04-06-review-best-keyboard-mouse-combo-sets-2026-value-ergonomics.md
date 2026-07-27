@@ -169,7 +169,7 @@ Mac 생태계 사용자를 위한 공식 순정 세트입니다. 2024년 M4 Mac 
 
 ## 2026년 시장 트렌드 분석
 
-<div class="chart-progress" data-title="세트 제품 선택 요소 중요도" data-labels="가격","무선 연결","배터리","인체공학","커스터마이징" data-values="75,92,88,85,72" data-colors="#f59e0b,#009e73,#3b82f6,#8b5cf6,#ec4899" data-max="100" data-unit="점"></div>
+<div class="chart-progress" data-title="세트 제품 선택 요소 중요도" data-labels="가격,무선 연결,배터리,인체공학,커스터마이징" data-values="75,92,88,85,72" data-colors="#f59e0b,#009e73,#3b82f6,#8b5cf6,#ec4899" data-max="100" data-unit="점"></div>
 
 2026년 통계 기준으로 <span style="font-size:1.3em;font-weight:800">무선 연결(92점)</span>과 배터리 지속성(88점)이 가장 중요한 선택 요소로 평가됩니다. 재택근무 확대로 인해 인체공학 설계(85점)의 중요도도 빠르게 상승하고 있습니다.
 
