@@ -2259,6 +2259,17 @@ const ICONS: Record<string, string> = {
           </div>
           <div class="sub" id="gsc-sum-sub">최근 7일 · Google 실측(2~3일 지연)</div>
         </div>
+        <div class="summary-card accent-cyan color-cyan" id="tools-sum-card" style="cursor:pointer;" title="클릭하면 도구 탭으로 이동">
+          <div class="kpi-top">
+            <span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['grid']}></svg></span>
+            <div class="label">LF 도구 방문 <span class="src-badge lf">LF</span></div>
+          </div>
+          <div class="kpi-value-row">
+            <div class="value" id="tools-sum-today">--</div>
+            <span class="delta-chip flat" id="tools-sum-delta">--</span>
+          </div>
+          <div class="sub" id="tools-sum-sub">생활 계산기 · KST 기준</div>
+        </div>
       </div>
 
 
@@ -4076,7 +4087,47 @@ const ICONS: Record<string, string> = {
         return Object.entries(by).map(([slug, views]) => ({ slug, views })).sort((a, b) => b.views - a.views);
       }
 
+      // 상단 KPI 스트립의 'LF 도구 방문' 카드. 도구 탭을 열지 않아도 보여야 하므로
+      // renderTools와 분리해 두고, 초기 로드와 탭 렌더 양쪽에서 호출한다.
+      function renderToolsKpi() {
+        const todayEl = document.getElementById('tools-sum-today');
+        if (!todayEl) return;
+        const subEl = document.getElementById('tools-sum-sub');
+        if (_toolRows === null) { todayEl.textContent = '--'; return; }
+
+        const kstDay = (ms) => new Date(ms + 9 * 3600 * 1000).toISOString().split('T')[0];
+        const todayKst = kstDay(Date.now());
+        const ydayKst = kstDay(Date.now() - 86400000);
+        let today = 0, yday = 0, total = 0;
+        (_toolRows || []).forEach((r) => {
+          if (!toolSlugFromPath(r.path)) return;   // /tools/ 목록 페이지는 제외, 개별 도구만
+          total++;
+          const d = kstDay(new Date(r.created_at).getTime());
+          if (d === todayKst) today++;
+          else if (d === ydayKst) yday++;
+        });
+
+        todayEl.textContent = fmt(today);
+        const dEl = document.getElementById('tools-sum-delta');
+        if (dEl) {
+          const dd = today - yday;
+          if (!today && !yday) { dEl.className = 'delta-chip flat'; dEl.textContent = '–'; }
+          else {
+            dEl.className = 'delta-chip ' + (dd === 0 ? 'flat' : (dd > 0 ? 'up' : 'down'));
+            dEl.textContent = dd === 0 ? '–' : `${dd > 0 ? '▲' : '▼'} ${fmt(Math.abs(dd))}`;
+          }
+        }
+        if (subEl) {
+          const top = computeToolStats('day')[0] || computeToolStats()[0];
+          const topName = top ? (TOOL_META[top.slug]?.name || top.slug) : null;
+          subEl.textContent = topName
+            ? `누적 ${fmt(total)}회 · Top ${topName}`
+            : `누적 ${fmt(total)}회 · 생활 계산기`;
+        }
+      }
+
       function renderTools(period) {
+        renderToolsKpi();
         if (period !== undefined) _toolsPeriod = period;
         const container = document.getElementById('tools-rank');
         if (!container) return;
@@ -5573,6 +5624,17 @@ const ICONS: Record<string, string> = {
 
       // GSC 검색 실적 초기 로드 (전체요약 KPI 카드)
       fetchGscStats().then(renderGsc);
+
+      // LF 도구 방문 초기 로드 — 도구 탭을 열지 않아도 상단 KPI가 채워지도록.
+      // 여기서 _toolRows를 채워두면 탭을 열 때 재요청 없이 바로 렌더된다.
+      fetchToolPageviews().then((rows) => {
+        _toolRows = Array.isArray(rows) ? rows : [];
+        renderToolsKpi();
+      });
+      // 요약 카드 클릭 → 도구 탭 열기
+      document.getElementById('tools-sum-card')?.addEventListener('click', () => {
+        document.querySelector('.main-tab[data-tab="tools"]')?.click();
+      });
       // 요약 카드 클릭 → 검색(GSC) 상세 탭 열기
       document.getElementById('gsc-sum-card')?.addEventListener('click', () => {
         document.querySelector('.main-tab[data-tab="gsc"]')?.click();
