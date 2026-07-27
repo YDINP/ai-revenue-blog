@@ -90,6 +90,23 @@ function extract(slug) {
 // Kadence 가 <h1 class="entry-title"> 를 따로 렌더해 계산기 자체 h1 과 중복된다 → 테마 제목만 숨긴다.
 const HIDE_THEME_TITLE = '.entry-hero,.page-hero-section{display:none!important}';
 
+// WP Dark Mode 플러그인이 다크모드에서 다음을 주입한다.
+//   .dpc .grad{-webkit-text-fill-color:transparent;background:var(--wp-dark-mode-bgimg--gradtext)}
+// `background` **축약형**이라 원래 CSS 의 background-clip:text 가 border-box 로 되돌아간다.
+// 결과: 그라디언트가 글자가 아니라 박스 전체를 칠하고 글자는 투명 → 제목·결과 숫자가 통째로 사라진다.
+// 플러그인이 !important 를 쓰지 않으므로 clip 만 되돌리면 된다(다크 그라디언트 색은 그대로 살린다).
+// 두 번째 피해: 플러그인이 다크모드에서 .seg-btn 을 **활성/비활성 구분 없이** 전부 파란 배경으로
+// 칠해버린다. 원본은 비활성=투명·활성=그라디언트라, 선택 상태가 사라지는 데다 안쪽 <small> 이
+// 흐린 색 그대로여서 파란 배경 위에서 1.04:1 로 안 읽힌다(예·적금 등 4개 계산기).
+// 다크모드에만 적용되도록 html.wp-dark-mode-active 로 스코프한다.
+const DARK_MODE_GRAD_FIX = [
+  '.dpc .grad{-webkit-background-clip:text!important;background-clip:text!important}',
+  'html.wp-dark-mode-active .dpc .seg-btn{background:transparent!important}',
+  'html.wp-dark-mode-active .dpc .seg-btn small{color:inherit!important;opacity:.72}',
+  'html.wp-dark-mode-active .dpc .seg-btn.active{background:var(--grad)!important;color:#fff!important}',
+  'html.wp-dark-mode-active .dpc .seg-btn.active small{color:#fff!important;opacity:.8}',
+].join('\n');
+
 // mungge 출력 필터가 본문을 두 가지로 망가뜨린다. 저장은 멀쩡하고 **렌더 시점**에만 일어난다.
 //
 //  (1) wpautop 이 <script> 안에서도 줄머리의 `<div` 를 블록 태그로 보고 </p><p> 를 끼워 넣는다.
@@ -110,7 +127,11 @@ function scriptTag(js) {
 
 function buildContent({ body, css, js, ld }) {
   const parts = [];
-  parts.push(css ? `<style>${HIDE_THEME_TITLE}\n${css}</style>` : `<style>${HIDE_THEME_TITLE}</style>`);
+  parts.push(
+    css
+      ? `<style>${HIDE_THEME_TITLE}\n${css}\n${DARK_MODE_GRAD_FIX}</style>`
+      : `<style>${HIDE_THEME_TITLE}\n${DARK_MODE_GRAD_FIX}</style>`
+  );
   parts.push(body);
   for (const x of ld) parts.push(`<script type="application/ld+json">${x}</script>`);
   if (js) parts.push(scriptTag(js));
