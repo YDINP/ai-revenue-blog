@@ -186,6 +186,20 @@
       }).catch(function () {});
     }
 
+    // (d-2) 추천 상품 회전 — 다이나믹 배너 대체. 로드 시 무작위 1개, 이후 7초 간격 순환.
+    //       인라인 style로 토글해 CSS 특이도 문제를 원천 차단.
+    var mgShop = document.querySelectorAll('.mg-shop .mg-shop__it');
+    if (mgShop.length > 1) {
+      var mgIdx = Math.floor(Math.random() * mgShop.length);
+      var mgShow = function () {
+        [].forEach.call(mgShop, function (el, i) { el.style.display = i === mgIdx ? 'flex' : 'none'; });
+      };
+      mgShow();
+      if (!mgReduce) {
+        setInterval(function () { mgIdx = (mgIdx + 1) % mgShop.length; mgShow(); }, 7000);
+      }
+    }
+
     // (e) 홈 하단 뉴스레터 CTA — 마크업은 페이지에 서버 렌더돼 있고 제출만 붙인다
     var mgCta = document.querySelector('.mg-sub--cta');
     if (mgCta) {
