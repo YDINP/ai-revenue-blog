@@ -1422,11 +1422,13 @@ html:not([data-wp-dark-mode-active]) body {
   background-color: #eef1f5; background-size: cover; background-position: center;
   box-shadow: 0 8px 18px -10px rgba(16, 24, 40, 0.55);
 }
+/* 히어로는 상위 카테고리(테크·개발 / 생활·재테크), 아래 .mg-cats는 하위(게임·AI·재테크·리뷰).
+   처음엔 mg-dev / mg-finance를 돌려썼는데 하위 카드와 그림이 그대로 겹쳐서 전용 아트로 분리. */
 .mungge-hero__card--tech .mungge-hero__card-icon {
-  background-image: url('https://mungge.com/wp-content/uploads/2026/07/mg-dev.jpg');
+  background-image: url('https://mungge.com/wp-content/uploads/2026/07/mg-tech.jpg');
 }
 .mungge-hero__card--money .mungge-hero__card-icon {
-  background-image: url('https://mungge.com/wp-content/uploads/2026/07/mg-finance.jpg');
+  background-image: url('https://mungge.com/wp-content/uploads/2026/07/mg-life.jpg');
 }
 .mungge-hero__card--tech { border-left-color: var(--mg-accent); }
 .mungge-hero__card--tech .mungge-hero__card-arrow { color: var(--mg-accent); }
