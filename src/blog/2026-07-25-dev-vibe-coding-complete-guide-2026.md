@@ -5,6 +5,9 @@ pubDate: 2026-07-25
 author: "TechFlow"
 category: "Dev"
 tags: ["바이브코딩", "코딩기법", "개발자", "프로그래밍", "코드품질"]
+image:
+  url: "/images/vibe-coding-2026.jpg"
+  alt: "야간 작업 환경에서 다크 테마 코드 에디터가 켜진 모니터와 백라이트 키보드, 헤드폰이 놓인 개발자 책상"
 
 faq:
   - q: "바이브코딩은 초급자도 적용할 수 있나요?"
