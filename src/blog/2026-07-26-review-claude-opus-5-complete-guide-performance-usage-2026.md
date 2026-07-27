@@ -6,8 +6,8 @@ author: "TechFlow"
 category: "Review"
 tags: ["Claude Opus 5", "AI 코딩", "성능 비교", "생산성 도구"]
 image:
-  url: "https://images.pexels.com/photos/12537427/pexels-photo-12537427.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  alt: "청록빛으로 빛나는 회로 형태의 추상 그래픽 — Claude Opus 5 성능·활용 가이드 대표 이미지"
+  url: "/images/claude-opus-5-2026.jpg"
+  alt: "어두운 배경 위로 빛나는 노드가 계단처럼 위로 이어지는 추상 그래픽 — Claude Opus 5의 세대 도약을 표현한 대표 이미지"
 faq:
   - q: "Claude Opus 5의 응답 속도는 어떤가요?"
     a: "공식 문서는 Opus 5의 지연을 정성 등급 'Moderate'로만 표기합니다. adaptive thinking이 기본 동작이라 첫 토큰까지 대기가 있고, effort를 low/medium으로 낮추면 짧아집니다. Claude API 전용 fast mode(입력 $10/출력 $50 per MTok)는 출력 속도를 더 높이는 별도 옵션입니다."
