@@ -1345,3 +1345,141 @@ html[data-wp-dark-mode-active] .mg-sub-i { background: #0f1420; color: #e6e7ea; 
   .mg-inpost-mo ins.kakao_ad_area, .mg-anchor ins.kakao_ad_area { max-width: 100% !important; }
   .entry-content-wrap img, .entry-content-wrap iframe, .entry-content-wrap video { max-width: 100%; height: auto; }
 }
+
+/* ============================================================================
+   9. 리디자인 v1 — "클라우드 3D" 브랜드 (A안 채택, 2026-07-27)
+   프리뷰 A(3D 렌더풍) 확정 → 라이브 이식.
+   구성: ① Kadence 전역 팔레트 크림/탄 → 블루·바이올렛  ② 헤더 로고마크
+        ③ 히어로 3D 아트 + 카드 아이콘 이미지화  ④ 카테고리 3D 카드
+        ⑤ 최신글 그리드 고급화
+   원칙: 다크모드(WP Dark Mode)는 건드리지 않음 — 팔레트 교체는
+        html:not([data-wp-dark-mode-active])로 한정해 기존 다크 동작 보존.
+   롤백: 이 섹션만 삭제 후 reinject-css.mjs 재실행.
+   ============================================================================ */
+
+/* ── ① 전역 팔레트: 크림/탄(#dbb189) → 클라우드 블루→바이올렛 ──────────────
+   Kadence는 링크·버튼·강조·배경을 전부 --global-paletteN으로 굴린다.
+   :root(0,1,0)보다 높은 html:root(0,1,1)로 선언해 로드 순서와 무관하게 승리. */
+html:root:not([data-wp-dark-mode-active]),
+html:not([data-wp-dark-mode-active]) body {
+  --global-palette1: #4f7cff;   /* accent (링크·버튼·강조) */
+  --global-palette2: #3d63d9;   /* accent hover */
+  --global-palette3: #0f1420;   /* 제목 */
+  --global-palette4: #1b2333;   /* 보조 제목 */
+  --global-palette5: #5c6675;   /* 본문 */
+  --global-palette6: #8a93a3;   /* 흐린 텍스트 */
+  --global-palette7: #f6f7f9;   /* 사이트 배경 */
+  --global-palette8: #f9fafc;   /* 옅은 배경 */
+  --global-palette9: #ffffff;
+}
+:root {
+  --mg-accent: #4f7cff;
+  --mg-accent2: #8b7bff;
+  --mg-grad: linear-gradient(135deg, #4f7cff, #8b7bff);
+  --mg-cdn: 'https://mungge.com/wp-content/uploads/2026/07';
+}
+
+/* ── ② 헤더: 텍스트 "뭉게" 앞에 3D 구름 로고마크 ─────────────────────────── */
+.site-branding .brand { display: flex; align-items: center; gap: 0.55rem; }
+.site-branding .brand::before {
+  content: ""; flex: none; width: 36px; height: 36px; border-radius: 11px;
+  background: url('https://mungge.com/wp-content/uploads/2026/07/mg-logo.jpg') center / cover no-repeat;
+  box-shadow: 0 6px 16px -8px rgba(79, 124, 255, 0.65);
+}
+.site-title, .site-title a { letter-spacing: -0.02em; font-weight: 800; }
+
+/* ── ③ 히어로: 3D 아트 레이어 + 아이콘 이미지화 ──────────────────────────── */
+/* 3D 히어로 아트는 "부분 오버레이"가 아니라 섹션 전체를 덮는 배경 레이어로 쓴다.
+   부분 배치는 이미지 자체 배경 때문에 사각 이음새가 보였음(마스크로도 못 지움).
+   위에 반투명 화이트 레이어를 깔아 텍스트 대비 확보. */
+.mungge-hero {
+  background-color: #f7f9fc;
+  background-image:
+    radial-gradient(120% 120% at 15% 20%, rgba(79, 124, 255, 0.26), transparent 55%),
+    radial-gradient(110% 110% at 85% 25%, rgba(139, 123, 255, 0.22), transparent 52%),
+    linear-gradient(180deg, rgba(248, 250, 253, 0.86), rgba(248, 250, 253, 0.93)),
+    url('https://mungge.com/wp-content/uploads/2026/07/mg-hero.jpg');
+  background-size: auto, auto, auto, cover;
+  background-position: center, center, center, center;
+  background-repeat: no-repeat;
+  box-shadow: 0 26px 72px -30px rgba(79, 124, 255, 0.45);
+}
+
+.mungge-hero__brand { letter-spacing: -0.03em; }
+.mungge-hero__eyebrow { color: var(--mg-accent); }
+
+/* 본문 링크 밑줄 규칙이 히어로/카테고리 카드 내부 텍스트까지 먹어서 제거 */
+.mungge-hero__card, .mungge-hero__card *,
+.mg-cats__card, .mg-cats__card *,
+.mg-featured__card, .mg-featured__card * {
+  text-decoration: none !important;
+  text-underline-offset: unset;
+}
+
+/* 이모지(💻/💰) → 3D 렌더 썸네일. 텍스트 노드는 font-size:0으로 감춤 */
+.mungge-hero__card-icon {
+  width: 46px; height: 46px; border-radius: 13px; font-size: 0 !important;
+  background-color: #eef1f5; background-size: cover; background-position: center;
+  box-shadow: 0 8px 18px -10px rgba(16, 24, 40, 0.55);
+}
+.mungge-hero__card--tech .mungge-hero__card-icon {
+  background-image: url('https://mungge.com/wp-content/uploads/2026/07/mg-dev.jpg');
+}
+.mungge-hero__card--money .mungge-hero__card-icon {
+  background-image: url('https://mungge.com/wp-content/uploads/2026/07/mg-finance.jpg');
+}
+.mungge-hero__card--tech { border-left-color: var(--mg-accent); }
+.mungge-hero__card--tech .mungge-hero__card-arrow { color: var(--mg-accent); }
+.mungge-hero__card--money { border-left-color: var(--mg-accent2); }
+.mungge-hero__card--money .mungge-hero__card-arrow { color: var(--mg-accent2); }
+.mungge-hero__card--tech:hover, .mungge-hero__card--tech:focus-visible {
+  box-shadow: 0 18px 42px -18px rgba(79, 124, 255, 0.5); border-color: var(--mg-accent);
+}
+.mungge-hero__card--money:hover, .mungge-hero__card--money:focus-visible {
+  box-shadow: 0 18px 42px -18px rgba(139, 123, 255, 0.5); border-color: var(--mg-accent2);
+}
+
+/* ── ④ 카테고리 3D 카드 (.mg-cats) — 홈 히어로 아래 신규 섹션 ────────────── */
+.mg-cats { margin: 0 0 2.75rem; }
+.mg-cats__head {
+  font-size: 1.2rem; font-weight: 800; margin: 0 0 1.1rem;
+  letter-spacing: -0.01em; display: flex; align-items: center; gap: 0.45rem;
+}
+.mg-cats__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.mg-cats__card {
+  display: block; position: relative; overflow: hidden;
+  border-radius: 16px; text-decoration: none !important; color: inherit;
+  border: 1px solid var(--hairline); background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 10px 24px -16px rgba(16,24,40,.30);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.mg-cats__card:hover { transform: translateY(-4px); box-shadow: 0 2px 4px rgba(0,0,0,.05), 0 22px 40px -18px rgba(79,124,255,.45); }
+.mg-cats__art { display: block; width: 100%; aspect-ratio: 8 / 5; object-fit: cover; }
+.mg-cats__card:hover .mg-cats__art { transform: scale(1.04); }
+.mg-cats__art { transition: transform .35s ease; }
+.mg-cats__label { display: block; padding: 0.85rem 1rem 0.35rem; font-size: 1rem; font-weight: 800; letter-spacing: -0.01em; }
+.mg-cats__desc  { display: block; padding: 0 1rem 1rem; font-size: 0.82rem; color: #5c6675; line-height: 1.5; }
+html[data-wp-dark-mode-active] .mg-cats__card { background: #141c2e; }
+html[data-wp-dark-mode-active] .mg-cats__desc { color: #a9b1bd; }
+@media (max-width: 900px) { .mg-cats__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .mg-cats__grid { grid-template-columns: 1fr; } }
+
+/* ── ⑤ 인기 글 · 최신글 그리드 — 브랜드 톤 정렬 ──────────────────────────── */
+.mg-featured__card::before { background: var(--mg-grad); }
+.mg-featured__cat { color: var(--mg-accent); }
+.mg-featured__card { background: linear-gradient(135deg, #ffffff, #f4f7ff); }
+
+.wp-block-latest-posts.is-grid > li { border-radius: 16px; }
+.wp-block-latest-posts__featured-image { overflow: hidden; }
+.wp-block-latest-posts__featured-image img { transition: transform .35s ease; }
+.wp-block-latest-posts.is-grid > li:hover .wp-block-latest-posts__featured-image img { transform: scale(1.05); }
+.wp-block-latest-posts.is-grid > li:hover { box-shadow: 0 22px 44px -20px rgba(79, 124, 255, 0.42); }
+.wp-block-latest-posts__post-date { color: var(--mg-accent); font-weight: 700; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mg-cats__card, .mg-cats__art,
+  .wp-block-latest-posts__featured-image img { transition: none !important; }
+  .mg-cats__card:hover { transform: none; }
+  .mg-cats__card:hover .mg-cats__art,
+  .wp-block-latest-posts.is-grid > li:hover .wp-block-latest-posts__featured-image img { transform: none; }
+}
