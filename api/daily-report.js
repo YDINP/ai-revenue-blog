@@ -130,6 +130,31 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'unauthorized' });
   }
 
+  // ── 구독자 목록 조회 / 삭제 (관리자) ──
+  // 배달 불가 주소(테스트로 들어간 @example.com 등)는 매 발송마다 반송메일을 만들고
+  // Gmail 발신 평판도 깎으므로 목록에서 실제로 지울 수단이 필요하다.
+  if (url.searchParams.get('action') === 'subscribers') {
+    try {
+      const rows = await sbn('newsletter_subscribers?select=source,email,is_active&order=source');
+      return res.status(200).json({ ok: true, count: rows.length, rows });
+    } catch (e) {
+      return res.status(500).json({ error: e.message });
+    }
+  }
+  if (url.searchParams.get('action') === 'subscriber-delete') {
+    const email = (url.searchParams.get('email') || '').trim().toLowerCase();
+    const source = url.searchParams.get('source') || '';   // 생략 시 전 소스에서 삭제
+    if (!email) return res.status(400).json({ error: 'email required' });
+    try {
+      const q = `newsletter_subscribers?email=eq.${encodeURIComponent(email)}` +
+        (source ? `&source=eq.${encodeURIComponent(source)}` : '');
+      const gone = await sbn(q, { method: 'DELETE', prefer: 'return=representation' });
+      return res.status(200).json({ ok: true, deleted: gone.length, rows: gone });
+    } catch (e) {
+      return res.status(500).json({ error: e.message });
+    }
+  }
+
   // ── 최근 발송 뉴스레터를 특정 주소로 복사 발송 (자기확인/미리보기) ──
   if (url.searchParams.get('action') === 'newsletter-copy') {
     const email = url.searchParams.get('email') || '';
