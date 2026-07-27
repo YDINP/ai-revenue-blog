@@ -1562,3 +1562,124 @@ html.mg-js .mg-reveal.mg-in { opacity: 1; transform: none; transition: opacity .
   .site-header, .site-header .site-branding .brand::before { transition: none !important; }
   html.mg-js .mg-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
+
+/* ============================================================================
+   11. 리디자인 v3 — 프리뷰 A 레이아웃 전면 이식 + 광고 슬롯 (2026-07-27)
+   ① 스크롤 진행바  ② 인기 티커(헤더 아래 바)  ③ 매거진 히어로(리드1+미니2)
+   ④ 섹션 헤드  ⑤ 2컬럼(그리드 + 사이드 레일)  ⑥ 광고 슬롯  ⑦ 뉴스레터 CTA
+   ⚠️ 광고: 슬롯 래퍼는 "비었을 때만" 숨긴다(:empty). 유닛이 들어간 뒤 display:none으로
+      감추면 애드핏이 요청 자체를 안 해서 데드락 — 뷰포트별 유닛은 JS가 1개만 삽입한다.
+   ※ .mungge-hero / .mg-featured 는 홈 재구성으로 미사용(구버전 대비 CSS는 유지).
+   ============================================================================ */
+
+/* ── ① 스크롤 진행바 ──────────────────────────────────────────────────────── */
+#mg-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 600; background: var(--mg-grad); transition: width .1s linear; pointer-events: none; }
+
+/* ── ② 인기 티커 — 알약형 → 헤더 아래 바 ─────────────────────────────────── */
+.mg-ticker { border-radius: 12px; margin: 1.25rem 0 0; padding: 0.5rem 0.9rem; }
+
+/* ── ③ 매거진 히어로 — 리드 1(오버레이) + 미니 2 ───────────────────────────
+   처음엔 core latest-posts 블록을 CSS로 비틀었는데, Kadence 블록 CSS가
+   `.wp-block-latest-posts.wp-block-latest-posts__list.is-grid.columns-3`(0,4,0)와
+   `__featured-image:not(.alignleft):not(.alignright)`(0,6,0)로 계속 이겨서
+   특이도 경쟁이 반복됐다. → [mg_hero] 숏코드로 전용 마크업을 서버 렌더하고
+   그 위에 이 CSS만 얹는다(충돌 0, 카테고리 칩·요약·날짜까지 자유롭게 구성). */
+.mg-hero-mag { display: grid; grid-template-columns: 1.7fr 1fr; grid-auto-rows: 1fr; gap: 1.1rem; margin: 1.5rem 0 0; }
+.mg-hcard {
+  position: relative; display: flex; flex-direction: column; justify-content: flex-end;
+  border-radius: 18px; overflow: hidden; background: #fff; border: 1px solid var(--hairline);
+  box-shadow: var(--sh-card); text-decoration: none !important; color: inherit;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.mg-hcard:hover { transform: translateY(-3px); box-shadow: var(--sh-card-hover); }
+.mg-hcard__img { display: block; width: 100%; object-fit: cover; }
+.mg-hcard__body { display: flex; flex-direction: column; gap: 0.35rem; }
+.mg-hcard__cat { align-self: flex-start; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 999px; background: var(--mg-grad); color: #fff; }
+.mg-hcard__t { font-weight: 800; letter-spacing: -0.015em; line-height: 1.34; }
+.mg-hcard__m { font-size: 0.78rem; font-weight: 700; color: var(--mg-accent); }
+
+/* 리드: 이미지를 카드 전체에 깔고 텍스트를 하단에 오버레이 */
+.mg-hcard--lead { grid-row: span 2; min-height: 420px; padding: 1.5rem; }
+.mg-hcard--lead .mg-hcard__img { position: absolute; inset: 0; height: 100%; }
+.mg-hcard--lead::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(9,12,18,0) 28%, rgba(9,12,18,.58) 62%, rgba(9,12,18,.92));
+}
+.mg-hcard--lead .mg-hcard__body { position: relative; z-index: 2; }
+.mg-hcard--lead .mg-hcard__t { font-size: 1.6rem; color: #fff; }
+.mg-hcard--lead .mg-hcard__x { font-size: 0.92rem; line-height: 1.6; color: #d4dae6; }
+.mg-hcard--lead .mg-hcard__m { color: #aab4c6; }
+
+/* 미니: 이미지 위 + 텍스트 아래 */
+/* 미니는 위에서부터 쌓는다 — flex-end는 리드 오버레이 전용 */
+.mg-hcard--mini { justify-content: flex-start; }
+.mg-hcard--mini .mg-hcard__img { height: 132px; }
+.mg-hcard--mini .mg-hcard__body { padding: 0.85rem 1rem 1rem; }
+.mg-hcard--mini .mg-hcard__t { font-size: 1rem; }
+html[data-wp-dark-mode-active] .mg-hcard { background: #141c2e; }
+html[data-wp-dark-mode-active] .mg-hcard--mini .mg-hcard__t { color: #f2f3f5; }
+@media (max-width: 780px) {
+  /* 1열이 되면 행 높이를 lead에 맞추면 안 된다(미니에 거대한 빈 공간 생김) */
+  .mg-hero-mag { grid-template-columns: 1fr; grid-auto-rows: auto; }
+  .mg-hcard--lead { grid-row: auto; min-height: 320px; }
+}
+
+/* ── ④ 섹션 헤드 ──────────────────────────────────────────────────────────── */
+.mg-sec-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin: 2.75rem 0 1.1rem; }
+.mg-sec-head h2 { font-size: 1.2rem; font-weight: 800; margin: 0; letter-spacing: -0.01em; display: flex; align-items: center; gap: 0.45rem; border: 0; padding: 0; }
+.mg-more { font-size: 0.85rem; font-weight: 700; color: var(--mg-accent); text-decoration: none !important; }
+
+/* ── ⑤ 2컬럼 + 사이드 레일 ────────────────────────────────────────────────── */
+.mg-cols.wp-block-columns { gap: 1.75rem; align-items: flex-start; margin-bottom: 2.5rem; }
+.mg-cols .wp-block-latest-posts.is-grid { grid-template-columns: repeat(2, 1fr); margin-top: 0; }
+@media (max-width: 600px) { .mg-cols .wp-block-latest-posts.is-grid { grid-template-columns: 1fr; } }
+
+.mg-rail { display: flex; flex-direction: column; gap: 1.1rem; }
+/* 레일이 그리드보다 짧아 하단이 비므로 통째로 따라오게 한다(광고 노출시간도 증가) */
+@media (min-width: 901px) { .mg-rail { position: sticky; top: 96px; } }
+.mg-panel { background: #fff; border: 1px solid var(--hairline); border-radius: 16px; padding: 1.15rem 1.2rem; box-shadow: var(--sh-card); }
+.mg-panel h3 { font-size: 0.98rem; font-weight: 800; margin: 0 0 0.85rem; letter-spacing: -0.01em; display: flex; align-items: center; gap: 0.4rem; }
+html[data-wp-dark-mode-active] .mg-panel { background: #141c2e; }
+
+.mg-ranks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+.mg-rank a { display: flex; gap: 0.7rem; align-items: flex-start; text-decoration: none !important; color: inherit; }
+.mg-rank__n { flex: none; width: 22px; height: 22px; border-radius: 7px; display: grid; place-items: center; font-size: 0.72rem; font-weight: 800; color: #fff; background: var(--mg-grad); }
+.mg-rank:nth-child(n+4) .mg-rank__n { background: #aeb6c4; }
+.mg-rank__b { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.mg-rank__cat { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.04em; color: var(--mg-accent); text-transform: uppercase; }
+.mg-rank__t { font-size: 0.86rem; font-weight: 600; line-height: 1.45; }
+.mg-rank a:hover .mg-rank__t { color: var(--mg-accent); }
+
+.mg-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.mg-chips a { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.78rem; font-weight: 700; padding: 0.32rem 0.6rem; border-radius: 999px; border: 1px solid var(--hairline); color: #5c6675; text-decoration: none !important; }
+.mg-chips a span { font-size: 0.68rem; font-weight: 800; color: var(--mg-accent); }
+.mg-chips a:hover { border-color: var(--mg-accent); color: var(--mg-accent); }
+html[data-wp-dark-mode-active] .mg-chips a { color: #a9b1bd; }
+
+@media (max-width: 900px) {
+  .mg-cols.wp-block-columns { flex-wrap: wrap; }
+  .mg-cols .wp-block-column { flex-basis: 100%; }
+  .mg-panel--slot { position: static; }
+}
+
+/* ── ⑥ 광고 슬롯 ──────────────────────────────────────────────────────────── */
+.mg-slot { display: flex; justify-content: center; align-items: center; }
+.mg-slot:empty { display: none; }                    /* 유닛 미삽입 시 빈 여백 제거 */
+.mg-slot--lead { margin: 1.75rem 0 0; }
+.mg-slot--lead:not(:empty) { min-height: 90px; }     /* CLS 방지용 자리 예약 */
+.mg-slot--rail:not(:empty) { min-height: 250px; }
+.mg-panel--slot { position: sticky; top: 96px; padding: 0.9rem; }
+.mg-panel--slot:has(.mg-slot:empty) { display: none; }
+
+/* ── 최신글 카드 카테고리 칩 (JS 주입) ───────────────────────────────────── */
+.wp-block-latest-posts.is-grid > li { position: relative; }
+.mg-cardchip { position: absolute; top: 10px; left: 10px; z-index: 2; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.03em; text-transform: uppercase; color: #fff; padding: 0.24rem 0.55rem; border-radius: 999px; background: var(--c, #4f7cff); box-shadow: 0 4px 10px -4px rgba(16,24,40,.5); }
+
+/* ── ⑦ 뉴스레터 CTA ──────────────────────────────────────────────────────── */
+.mg-cta { margin: 3rem 0 1rem; padding: clamp(1.75rem, 5vw, 2.75rem); border-radius: 22px; text-align: center; color: #fff; background: var(--mg-grad); box-shadow: 0 26px 60px -30px rgba(79,124,255,.7); }
+.mg-cta__eyebrow { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; opacity: .9; }
+.mg-cta h2 { margin: 0.5rem 0 0.4rem; font-size: clamp(1.3rem, 3.5vw, 1.8rem); font-weight: 800; color: #fff; border: 0; padding: 0; letter-spacing: -0.02em; }
+.mg-cta p { margin: 0 0 1.2rem; font-size: 0.92rem; opacity: .92; }
+.mg-cta .mg-sub { margin: 0; padding: 0; background: none; border: 0; }
+.mg-cta .mg-sub-b { background: #0b0e14; }
+.mg-cta .mg-sub-msg { color: #fff; }

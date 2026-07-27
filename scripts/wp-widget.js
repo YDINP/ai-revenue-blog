@@ -22,6 +22,29 @@
     var a = x.closest('.mg-anchor'); if (a) a.classList.add('mg-closed');
     try { sessionStorage.setItem('mgAnchorClosed', '1'); } catch (_) {}
   });
+  // ── ②-b 광고 슬롯 채우기 ──
+  // ⚠️ 반드시 ba.min.js 로드 "앞"에서 실행한다. 애드핏 스크립트는 로드 시점에 DOM의
+  //    ins.kakao_ad_area를 훑기 때문에, 나중에 붙인 ins는 요청되지 않을 수 있다.
+  // ⚠️ 뷰포트별 유닛을 둘 다 넣고 CSS로 하나를 display:none 하면 그 슬롯은 요청조차
+  //    안 된다(데드락). 그래서 화면 폭에 맞는 유닛 1개만 DOM에 넣는다.
+  var MG_UNITS = {
+    // slot 이름 → [PC유닛, PC폭, PC높이, 모바일유닛, 모바일폭, 모바일높이]
+    'home-lead': ['DAN-5RN4pAjuK5XJ0oHO', 728, 90, 'DAN-FxUxEhp2LCne6gT3', 320, 50]
+    // 'rail': 300x250 전용 유닛이 아직 없음 → 유닛 발급 후 여기에 추가하면 즉시 노출된다.
+  };
+  [].forEach.call(document.querySelectorAll('.mg-slot[data-slot]'), function (slot) {
+    var u = MG_UNITS[slot.getAttribute('data-slot')];
+    if (!u || slot.children.length) return;
+    var mo = window.innerWidth < 768;
+    var ins = document.createElement('ins');
+    ins.className = 'kakao_ad_area';
+    ins.style.display = 'none';                 // 애드핏 표준 스니펫 형식(스크립트가 해제)
+    ins.setAttribute('data-ad-unit', mo ? u[3] : u[0]);
+    ins.setAttribute('data-ad-width', String(mo ? u[4] : u[1]));
+    ins.setAttribute('data-ad-height', String(mo ? u[5] : u[2]));
+    slot.appendChild(ins);
+  });
+
   if (!document.querySelector('script[src*="ba.min.js"]')) {
     var s = document.createElement('script');
     s.src = '//t1.kakaocdn.net/kas/static/ba.min.js'; s.async = true;
@@ -41,6 +64,18 @@
     window.addEventListener('scroll', mgStick, { passive: true });
   }
 
+  // (a-2) 스크롤 진행바
+  var mgBar = document.createElement('div');
+  mgBar.id = 'mg-progress';
+  document.body.appendChild(mgBar);
+  var mgProg = function () {
+    var d = document.documentElement;
+    var max = d.scrollHeight - d.clientHeight;
+    mgBar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+  };
+  mgProg();
+  window.addEventListener('scroll', mgProg, { passive: true });
+
   // (b) 스크롤 리빌 — 카드류가 뷰포트에 들어올 때 페이드업
   if ('IntersectionObserver' in window) {
     var mgIo = new IntersectionObserver(function (ens) {
@@ -50,7 +85,7 @@
         mgIo.unobserve(en.target);
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
-    var mgCards = document.querySelectorAll('.mg-cats__card, .mg-featured__card, .wp-block-latest-posts.is-grid > li');
+    var mgCards = document.querySelectorAll('.mg-hcard, .mg-cats__card, .mg-featured__card, .mg-cols .wp-block-latest-posts.is-grid > li, .mg-rail .mg-panel');
     [].forEach.call(mgCards, function (el, i) {
       el.classList.add('mg-reveal');
       el.style.transitionDelay = (i % 3) * 60 + 'ms';   // 행 단위 계단식
@@ -61,11 +96,11 @@
   if (document.body.classList.contains('home')) {
     var mgReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // (c) 인기 티커 — 인기 글 섹션 데이터를 재사용(추가 요청 0). 히어로 위에 배치
-    var mgFeat = document.querySelectorAll('.mg-featured__card');
+    // (c) 인기 티커 — 레일의 인기 글 TOP5를 재사용(추가 요청 0). 매거진 히어로 위에 배치
+    var mgFeat = document.querySelectorAll('.mg-ranks .mg-rank a');
     if (mgFeat.length && !mgReduce) {
       var mgItems = [].map.call(mgFeat, function (a) {
-        return { href: a.getAttribute('href'), text: ((a.querySelector('.mg-featured__title') || {}).textContent || '').trim() };
+        return { href: a.getAttribute('href'), text: ((a.querySelector('.mg-rank__t') || {}).textContent || '').trim() };
       });
       var mgMake = function (dup) {
         return mgItems.map(function (it) {
@@ -79,23 +114,22 @@
       };
       var mgTick = document.createElement('div');
       mgTick.className = 'mg-ticker';
-      mgTick.innerHTML = '<span class="mg-ticker__label">인기</span><div class="mg-ticker__viewport"><div class="mg-ticker__track"></div></div>';
+      mgTick.innerHTML = '<span class="mg-ticker__label">🔥 인기</span><div class="mg-ticker__viewport"><div class="mg-ticker__track"></div></div>';
       var mgTrack = mgTick.querySelector('.mg-ticker__track');
       // translateX(-50%) 무한루프가 이음새 없이 돌려면 트랙에 정확히 2벌이 필요
       mgMake(false).concat(mgMake(true)).forEach(function (n) { mgTrack.appendChild(n); });
-      var mgHero = document.querySelector('.mungge-hero');
+      var mgHero = document.querySelector('.mg-hero-mag');
       if (mgHero && mgHero.parentNode) mgHero.parentNode.insertBefore(mgTick, mgHero);
     }
 
-    // (d) 카테고리 필터 — 최신글 그리드를 REST 카테고리로 태깅 후 칩으로 필터
-    var mgGrid = document.querySelector('.wp-block-latest-posts.is-grid');
-    if (mgGrid) {
+    // (d) 카테고리 필터 — 최신글 그리드를 REST 카테고리로 태깅 후 칩으로 필터.
+    //     ⚠️ 매거진 히어로도 같은 블록(.wp-block-latest-posts.is-grid)이라 2컬럼 안쪽만 잡는다.
+    var mgGrid = document.querySelector('.mg-cols .wp-block-latest-posts.is-grid');
+    var mgBar = document.querySelector('.mg-sec-head--latest .mg-filter');
+    if (mgGrid && mgBar) {
       var mgLis = [].slice.call(mgGrid.children);
-      var mgHead = document.createElement('div');
-      mgHead.className = 'mg-latest-head';
-      mgHead.innerHTML = '<h2>📰 최신 글</h2><div class="mg-filter"></div>';
-      mgGrid.parentNode.insertBefore(mgHead, mgGrid);   // 데이터 실패해도 제목은 남김
-      var mgBar = mgHead.querySelector('.mg-filter');
+      // 카테고리명 → 칩 색 (프리뷰 A 팔레트)
+      var MG_CC = { game: '#7c3aed', finance: '#0e9f6e', ai: '#4f7cff', travel: '#f59e0b', lifestyle: '#ec4899', review: '#ef4444', dev: '#0891b2', health: '#10b981', education: '#6366f1' };
       var mgNorm = function (u) {
         try { return new URL(u, location.origin).pathname.replace(/\/+$/, ''); } catch (e) { return u; }
       };
@@ -116,6 +150,15 @@
           var names = (mgByPath[mgNorm(a.getAttribute('href'))] || []).map(function (id) { return mgName[id]; }).filter(Boolean);
           li.setAttribute('data-cats', names.join('|'));
           names.forEach(function (n) { mgCount[n] = (mgCount[n] || 0) + 1; });
+          // 카드 좌상단 카테고리 칩 — 상위 카테고리는 변별력이 없어 제외
+          var leaf = names.filter(function (n) { return !/^(테크·개발|생활·재테크)$/.test(n); })[0];
+          if (leaf && !li.querySelector('.mg-cardchip')) {
+            var chip = document.createElement('span');
+            chip.className = 'mg-cardchip';
+            chip.textContent = leaf;
+            chip.style.setProperty('--c', MG_CC[leaf.toLowerCase()] || '#4f7cff');
+            li.appendChild(chip);
+          }
         });
         // 상위 카테고리(테크·개발/생활·재테크)와 미분류는 칩에서 제외 — 변별력 없음
         var mgSkip = /^(테크·개발|생활·재테크|Uncategorized|Blog)$/;
@@ -140,6 +183,25 @@
           mgBar.appendChild(b);
         });
       }).catch(function () {});
+    }
+
+    // (e) 홈 하단 뉴스레터 CTA — 마크업은 페이지에 서버 렌더돼 있고 제출만 붙인다
+    var mgCta = document.querySelector('.mg-sub--cta');
+    if (mgCta) {
+      mgCta.querySelector('.mg-sub-f').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var email = mgCta.querySelector('.mg-sub-i').value.trim();
+        var msg = mgCta.querySelector('.mg-sub-msg'), btn = mgCta.querySelector('.mg-sub-b');
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { msg.textContent = '올바른 이메일을 입력해주세요.'; msg.className = 'mg-sub-msg err'; return; }
+        btn.disabled = true; btn.textContent = '...';
+        fetch('https://ai-revenue-blog.vercel.app/api/daily-report?action=subscribe&source=blog&email=' + encodeURIComponent(email), { method: 'POST' })
+          .then(function (r) { return r.json(); })
+          .then(function (j) {
+            if (j && j.ok) { mgCta.querySelector('.mg-sub-f').style.display = 'none'; msg.textContent = '✅ 구독 완료! 새 글을 이메일로 보내드릴게요.'; msg.className = 'mg-sub-msg ok'; }
+            else throw new Error();
+          })
+          .catch(function () { msg.textContent = '잠시 후 다시 시도해주세요.'; msg.className = 'mg-sub-msg err'; btn.disabled = false; btn.textContent = '무료 구독'; });
+      });
     }
   }
 
