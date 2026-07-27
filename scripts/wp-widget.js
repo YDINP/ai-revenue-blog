@@ -28,6 +28,121 @@
     document.body.appendChild(s);
   }
 
+  // ── 홈 동적 요소 (리디자인 v2) ──────────────────────────────────────────
+  // 스티키 헤더 · 스크롤 리빌은 전 페이지, 인기 티커 · 카테고리 필터는 홈 전용.
+  // 전부 점진적 향상: JS 실패/미실행이어도 원래 레이아웃 그대로 남는다.
+  document.documentElement.classList.add('mg-js');
+
+  // (a) 스티키 헤더 — 24px 넘게 스크롤되면 축소 + 그림자
+  var mgHdr = document.querySelector('.site-header');
+  if (mgHdr) {
+    var mgStick = function () { mgHdr.classList.toggle('mg-stuck', window.scrollY > 24); };
+    mgStick();
+    window.addEventListener('scroll', mgStick, { passive: true });
+  }
+
+  // (b) 스크롤 리빌 — 카드류가 뷰포트에 들어올 때 페이드업
+  if ('IntersectionObserver' in window) {
+    var mgIo = new IntersectionObserver(function (ens) {
+      ens.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add('mg-in');
+        mgIo.unobserve(en.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    var mgCards = document.querySelectorAll('.mg-cats__card, .mg-featured__card, .wp-block-latest-posts.is-grid > li');
+    [].forEach.call(mgCards, function (el, i) {
+      el.classList.add('mg-reveal');
+      el.style.transitionDelay = (i % 3) * 60 + 'ms';   // 행 단위 계단식
+      mgIo.observe(el);
+    });
+  }
+
+  if (document.body.classList.contains('home')) {
+    var mgReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // (c) 인기 티커 — 인기 글 섹션 데이터를 재사용(추가 요청 0). 히어로 위에 배치
+    var mgFeat = document.querySelectorAll('.mg-featured__card');
+    if (mgFeat.length && !mgReduce) {
+      var mgItems = [].map.call(mgFeat, function (a) {
+        return { href: a.getAttribute('href'), text: ((a.querySelector('.mg-featured__title') || {}).textContent || '').trim() };
+      });
+      var mgMake = function (dup) {
+        return mgItems.map(function (it) {
+          var a = document.createElement('a');
+          a.className = 'mg-ticker__item';
+          a.href = it.href;
+          a.textContent = '🔥 ' + it.text;
+          if (dup) { a.setAttribute('aria-hidden', 'true'); a.tabIndex = -1; }
+          return a;
+        });
+      };
+      var mgTick = document.createElement('div');
+      mgTick.className = 'mg-ticker';
+      mgTick.innerHTML = '<span class="mg-ticker__label">인기</span><div class="mg-ticker__viewport"><div class="mg-ticker__track"></div></div>';
+      var mgTrack = mgTick.querySelector('.mg-ticker__track');
+      // translateX(-50%) 무한루프가 이음새 없이 돌려면 트랙에 정확히 2벌이 필요
+      mgMake(false).concat(mgMake(true)).forEach(function (n) { mgTrack.appendChild(n); });
+      var mgHero = document.querySelector('.mungge-hero');
+      if (mgHero && mgHero.parentNode) mgHero.parentNode.insertBefore(mgTick, mgHero);
+    }
+
+    // (d) 카테고리 필터 — 최신글 그리드를 REST 카테고리로 태깅 후 칩으로 필터
+    var mgGrid = document.querySelector('.wp-block-latest-posts.is-grid');
+    if (mgGrid) {
+      var mgLis = [].slice.call(mgGrid.children);
+      var mgHead = document.createElement('div');
+      mgHead.className = 'mg-latest-head';
+      mgHead.innerHTML = '<h2>📰 최신 글</h2><div class="mg-filter"></div>';
+      mgGrid.parentNode.insertBefore(mgHead, mgGrid);   // 데이터 실패해도 제목은 남김
+      var mgBar = mgHead.querySelector('.mg-filter');
+      var mgNorm = function (u) {
+        try { return new URL(u, location.origin).pathname.replace(/\/+$/, ''); } catch (e) { return u; }
+      };
+      Promise.all([
+        fetch('/wp-json/wp/v2/posts?per_page=' + mgLis.length + '&_fields=link,categories').then(function (r) { return r.json(); }),
+        fetch('/wp-json/wp/v2/categories?per_page=50&_fields=id,name').then(function (r) { return r.json(); })
+      ]).then(function (res) {
+        var posts = res[0], cats = res[1];
+        if (!Array.isArray(posts) || !Array.isArray(cats)) return;
+        var mgName = {};
+        cats.forEach(function (c) { mgName[c.id] = c.name; });
+        var mgByPath = {};
+        posts.forEach(function (p) { mgByPath[mgNorm(p.link)] = p.categories || []; });
+        var mgCount = {};
+        mgLis.forEach(function (li) {
+          var a = li.querySelector('a[href]');
+          if (!a) return;
+          var names = (mgByPath[mgNorm(a.getAttribute('href'))] || []).map(function (id) { return mgName[id]; }).filter(Boolean);
+          li.setAttribute('data-cats', names.join('|'));
+          names.forEach(function (n) { mgCount[n] = (mgCount[n] || 0) + 1; });
+        });
+        // 상위 카테고리(테크·개발/생활·재테크)와 미분류는 칩에서 제외 — 변별력 없음
+        var mgSkip = /^(테크·개발|생활·재테크|Uncategorized|Blog)$/;
+        var mgTop = Object.keys(mgCount)
+          .filter(function (n) { return !mgSkip.test(n); })
+          .sort(function (a, b) { return mgCount[b] - mgCount[a]; })
+          .slice(0, 5);
+        if (!mgTop.length) return;
+        ['전체'].concat(mgTop).forEach(function (label, i) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.textContent = label;
+          b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+          b.addEventListener('click', function () {
+            [].forEach.call(mgBar.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', 'false'); });
+            b.setAttribute('aria-pressed', 'true');
+            mgLis.forEach(function (li) {
+              var tags = '|' + (li.getAttribute('data-cats') || '') + '|';
+              li.hidden = !(label === '전체' || tags.indexOf('|' + label + '|') >= 0);
+            });
+          });
+          mgBar.appendChild(b);
+        });
+      }).catch(function () {});
+    }
+  }
+
   // ── 단일 글에서만 TOC/FAQ ──
   if (!document.body.classList.contains('single')) return;
   var content = document.querySelector('.entry-content-wrap');

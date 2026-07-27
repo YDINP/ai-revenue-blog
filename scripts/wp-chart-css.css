@@ -1483,3 +1483,80 @@ html[data-wp-dark-mode-active] .mg-cats__desc { color: #a9b1bd; }
   .mg-cats__card:hover .mg-cats__art,
   .wp-block-latest-posts.is-grid > li:hover .wp-block-latest-posts__featured-image img { transform: none; }
 }
+
+/* ============================================================================
+   10. 리디자인 v2 — 동적 요소 (프리뷰 A의 인터랙션 이식, 2026-07-27)
+   ① 스티키 헤더(축소+그림자)  ② 인기 티커(홈)  ③ 카테고리 필터 칩(홈)
+   ④ 스크롤 리빌
+   원칙: 전부 점진적 향상 — JS 없으면 원래 레이아웃 그대로. reduced-motion 전량 무효화.
+   롤백: 이 섹션 + wp-widget.js의 "홈 동적 요소" 블록 삭제 후 reinject-css.mjs 재실행.
+   ============================================================================ */
+
+/* ── ① 스티키 헤더 ──────────────────────────────────────────────────────────
+   ⚠️ `.site-header{position:sticky}`(0,1,0)는 테마의 `#masthead{position:relative}`(1,0,0)에
+   진다. 그리고 이 헤더는 이미 flow 밖이라(내려오는 콘텐츠가 헤더 높이만큼 이미 확보됨)
+   fixed로 바꿔도 레이아웃 시프트가 0 — 실측 확인. 그래서 sticky 대신 fixed. */
+#masthead.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 500; transition: box-shadow .22s ease, background-color .22s ease; }
+body.admin-bar #masthead.site-header { top: 32px; }   /* 로그인 시 WP 관리바 아래로 */
+@media (max-width: 782px) { body.admin-bar #masthead.site-header { top: 46px; } }
+/* TOC·앵커가 고정 헤더 밑에 숨지 않도록. scroll-padding만으로는 실측상 안 먹어서
+   (앵커 이동 후 제목 top=0.7px) 대상 요소의 scroll-margin-top을 함께 지정. */
+html { scroll-padding-top: 96px; }
+.entry-content-wrap h2[id], .entry-content-wrap h3[id], .entry-content-wrap h4[id],
+[id^="sec-"] { scroll-margin-top: 96px; }
+.site-header.mg-stuck { box-shadow: 0 8px 28px -16px rgba(16, 24, 40, 0.45); }
+html:not([data-wp-dark-mode-active]) .site-header.mg-stuck .site-header-row-container-inner {
+  background-color: rgba(255, 255, 255, 0.88);
+  -webkit-backdrop-filter: saturate(1.25) blur(10px);
+          backdrop-filter: saturate(1.25) blur(10px);
+}
+/* 스크롤 시 헤더 높이 축소 — 로고마크·패딩만 줄여 레이아웃 점프 최소화 */
+.site-header.mg-stuck .site-branding .brand::before { width: 30px; height: 30px; }
+.site-header .site-branding .brand::before { transition: width .22s ease, height .22s ease; }
+
+/* ── ② 인기 티커 (홈 전용, 헤더 바로 아래) ───────────────────────────────── */
+.mg-ticker {
+  display: flex; align-items: center; gap: 0.85rem;
+  margin: 0 0 1.75rem; padding: 0.55rem 0.9rem;
+  border-radius: 999px; overflow: hidden;
+  background: linear-gradient(135deg, rgba(79,124,255,.10), rgba(139,123,255,.10));
+  border: 1px solid var(--hairline);
+}
+.mg-ticker__label {
+  flex: none; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.02em;
+  padding: 0.22rem 0.6rem; border-radius: 999px; color: #fff;
+  background: var(--mg-grad); white-space: nowrap;
+}
+.mg-ticker__viewport { flex: 1; min-width: 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 3%, #000 92%, transparent); }
+.mg-ticker__track { display: flex; gap: 2.5rem; width: max-content; animation: mg-ticker-roll 46s linear infinite; }
+.mg-ticker:hover .mg-ticker__track, .mg-ticker:focus-within .mg-ticker__track { animation-play-state: paused; }
+.mg-ticker__item { font-size: 0.86rem; font-weight: 600; color: #35405270; white-space: nowrap; text-decoration: none !important; color: #3a4557; }
+.mg-ticker__item:hover { color: var(--mg-accent); }
+@keyframes mg-ticker-roll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+html[data-wp-dark-mode-active] .mg-ticker__item { color: #b8c0cc; }
+@media (max-width: 600px) { .mg-ticker__label { display: none; } }
+
+/* ── ③ 카테고리 필터 칩 (홈 최신글 위) ───────────────────────────────────── */
+.mg-latest-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin: 2.75rem 0 1.1rem; }
+.mg-latest-head h2 { font-size: 1.2rem; font-weight: 800; margin: 0; letter-spacing: -0.01em; display: flex; align-items: center; gap: 0.45rem; }
+.mg-filter { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+.mg-filter button {
+  font: inherit; font-size: 0.82rem; font-weight: 700; cursor: pointer;
+  padding: 0.38rem 0.85rem; border-radius: 999px;
+  border: 1px solid var(--hairline); background: #fff; color: #5c6675;
+  transition: color .16s ease, border-color .16s ease, background-color .16s ease;
+}
+.mg-filter button:hover { color: var(--mg-accent); border-color: var(--mg-accent); }
+.mg-filter button[aria-pressed="true"] { background: var(--mg-grad); border-color: transparent; color: #fff; }
+html[data-wp-dark-mode-active] .mg-filter button { background: #141c2e; color: #a9b1bd; }
+.wp-block-latest-posts.is-grid > li[hidden] { display: none; }
+
+/* ── ④ 스크롤 리빌 — JS 있을 때만 초기 상태 적용(노스크립트 안전) ────────── */
+html.mg-js .mg-reveal { opacity: 0; transform: translateY(14px); }
+html.mg-js .mg-reveal.mg-in { opacity: 1; transform: none; transition: opacity .5s ease, transform .5s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mg-ticker__track { animation: none !important; }
+  .site-header, .site-header .site-branding .brand::before { transition: none !important; }
+  html.mg-js .mg-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
