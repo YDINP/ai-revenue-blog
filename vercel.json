@@ -847,6 +847,16 @@
       "permanent": true
     },
     {
+      "source": "/blog/2026-07-22-review-galaxy-z-fold8-vs-flip8-2026",
+      "destination": "https://mungge.com/2026-07-22-review-galaxy-z-fold8-vs-flip8-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-07-22-review-galaxy-z-fold8-vs-flip8-2026/",
+      "destination": "https://mungge.com/2026-07-22-review-galaxy-z-fold8-vs-flip8-2026/",
+      "permanent": true
+    },
+    {
       "source": "/blog/2026-07-23-game-phaser-3-advanced-collision-physics-animation-2026",
       "destination": "https://mungge.com/2026-07-23-game-phaser-3-advanced-collision-physics-animation-2026/",
       "permanent": true
@@ -984,16 +994,6 @@
     {
       "source": "/blog/switch2-vs-steam-deck-games-2026/",
       "destination": "https://mungge.com/switch2-vs-steam-deck-games-2026/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/2026-07-22-review-galaxy-z-fold8-vs-flip8-2026",
-      "destination": "https://mungge.com/2026-07-22-review-galaxy-z-fold8-vs-flip8-2026/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/2026-07-22-review-galaxy-z-fold8-vs-flip8-2026/",
-      "destination": "https://mungge.com/2026-07-22-review-galaxy-z-fold8-vs-flip8-2026/",
       "permanent": true
     }
   ]
