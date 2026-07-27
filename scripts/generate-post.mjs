@@ -165,7 +165,16 @@ async function generatePostContent(categoryName, keyword, searchTerm, existingTi
   const dateStr = `${yyyy}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 
   const chartInstruction = `
-본문 중간에 아래 5가지 차트 유형 중 주제에 맞는 것을 1~2개 선택하여 반드시 포함하세요:
+시각자료 배치 규칙(필수):
+- **## 대(H2) 섹션마다 1개**를 원칙으로, 글 전체에 차트 **4~6개**를 넣으세요.
+  (도입부·마무리/FAQ 섹션은 제외. 수치 근거가 전혀 없는 섹션도 제외 — 아래 금지 규칙 우선)
+- **유형을 반드시 분산**: 한 글에서 같은 유형은 **최대 2개까지**, 서로 다른 유형을 **3종 이상** 쓰세요.
+  chart-bar만 반복하는 글은 반려됩니다(실제로 최근 글의 80%가 bar 편중이었습니다).
+- ⛔ **데이터가 없으면 차트를 만들지 마세요.** 개수를 채우려고 본문에 없는 수치를 지어내는 것은
+  절대 금지입니다. 근거가 없는 섹션은 표·목록으로 대체하고 차트는 건너뛰세요.
+  (실제 사고: 체크리스트 섹션에 없는 값 95를 만들고 단위를 "필수"로 붙여 "95필수"가 렌더됨)
+
+아래 5가지 차트 유형 중 각 섹션의 데이터 성격에 맞는 것을 고르세요:
 
 1) chart-bar (막대 차트) - 항목별 수치 비교. 라벨 짧으면 data-orient="vertical"(세로), 핵심 하나 강조는 data-highlight="max":
 <div class="chart-bar" data-orient="vertical" data-title="A 엔진이 빌드 속도 40% 빠르다" data-labels="A,B,C" data-values="90,72,64" data-colors="#3b82f6,#f59e0b,#009e73" data-unit="점"></div>
@@ -182,8 +191,19 @@ async function generatePostContent(categoryName, keyword, searchTerm, existingTi
 5) chart-progress (원형 게이지) - 개별 점수/달성률:
 <div class="chart-progress" data-title="평가 점수" data-labels="항목1,항목2,항목3" data-values="85,72,90" data-colors="#009e73,#3b82f6,#f59e0b" data-max="100" data-unit="점"></div>
 
-선택 가이드: 비율/점유율→donut, 1:1 대결→versus, 개별 평점→progress, 수치 비교→bar, 다항목 제품 평가→radar.
-주의: div 안에 자식 요소를 넣지 마세요. 항목 3~5개. chart-bar만 반복하지 말고 다양한 유형을 활용하세요.
+선택 가이드: 비율/점유율→donut, 1:1 대결→versus, 개별 평점·달성률→progress, 수치 비교→bar, 다항목 제품 평가→radar.
+섹션 역할별 권장 배치(예): 시장/현황 섹션→donut, 제품·요금제 비교 섹션→versus 또는 radar,
+성능·비용 수치 섹션→bar, 체크리스트·단계별 달성 섹션→progress(단, 실제 점수 데이터가 있을 때만).
+
+주의:
+- div 안에 자식 요소를 넣지 마세요.
+- **항목은 반드시 2개 이상(권장 3~5개).** 1항목 차트는 비교 정보가 0이라 자리만 차지합니다.
+- data-labels는 쉼표로 구분한 하나의 문자열입니다. \`data-labels="A","B"\`처럼 항목마다
+  따옴표를 씌우면 첫 항목만 인식됩니다. 반드시 \`data-labels="A,B,C"\` 형식으로.
+- data-labels 개수와 data-values 개수가 정확히 일치해야 합니다.
+- data-unit에는 실제 단위(%, 원, 만원, 점, 시간 등)만. "필수"·"권장" 같은 낱말을 넣으면
+  값과 붙어 "95필수"처럼 렌더됩니다.
+- 같은 제목의 차트를 두 번 넣지 마세요.
 
 차트 공통 규칙(필수):
 - 제목은 결론형: "A vs B 비교"가 아니라 "A가 B보다 40% 빠르다"처럼 결론이 한눈에 읽히게.
