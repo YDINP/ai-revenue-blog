@@ -46,8 +46,8 @@
     {
       "id": 8,
       "title": "LF /tools/* → mungge 301 + 메뉴 추가",
-      "status": "blocked",
-      "note": "사용자 확인 대기. 이식·검증은 끝났고 LF 원본은 아직 살아 있음"
+      "status": "done",
+      "note": "LF vercel.json 에 54건(슬래시 유무) 추가·배포 → 27개 전부 308 정확 매칭. mungge primary 메뉴(id 18)에 '도구' 항목 #2617 추가(menu_order 17)"
     }
   ],
   "gotchas": [
