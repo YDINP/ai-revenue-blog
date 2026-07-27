@@ -8,10 +8,14 @@
 //   node scripts/naver-index-check.mjs                     # mungge.com 확인 + 이력 저장
 //   node scripts/naver-index-check.mjs --site example.com
 //   node scripts/naver-index-check.mjs --json              # JSON 출력(자동화용)
-//   node scripts/naver-index-check.mjs --no-save           # 이력 저장 안 함
+//   node scripts/naver-index-check.mjs --no-save           # 로컬 이력 저장 안 함
+//   node scripts/naver-index-check.mjs --no-push           # Supabase 전송 안 함
 //   node scripts/naver-index-check.mjs --history           # 저장된 이력만 출력하고 종료
 //
 // 이력: scripts/naver-index-history.json (실행할 때마다 1건 append, 같은 날 재실행은 덮어씀)
+// 전송: Supabase analytics(event_type=naver_index) → 텔레그램 일일리포트가 이 값을 읽어 표시한다.
+//       (네이버 검색결과는 클라이언트 렌더라 Vercel 서버리스에선 측정 자체가 불가능 →
+//        측정은 로컬, 표시는 서버로 분리)
 // 종료코드: 색인 0건이면 1 (cron/CI에서 실패로 잡고 싶을 때)
 
 import fs from 'node:fs';
@@ -33,6 +37,7 @@ const SITE = opt('site', 'mungge.com').replace(/^https?:\/\//, '').replace(/\/$/
 const MAX_PAGES = Number(opt('pages', 10));
 const JSON_OUT = flag('json');
 const SAVE = !flag('no-save');
+const PUSH = !flag('no-push');
 
 // gsc_daily 의 source 키 — 블로그 레지스트리 key 와 같다(_gsc-sync.js 참고)
 const GSC_SOURCE = { 'mungge.com': 'mg' }[SITE] || null;
@@ -170,6 +175,33 @@ async function gscRecent(source, days = 7) {
   }
 }
 
+// ── 측정치를 Supabase 로 전송(텔레그램 일일리포트가 읽는다) ────────
+// 전용 테이블 대신 기존 analytics 를 쓴다 — DDL 없이 event_type 하나만 추가하면 되고,
+// 대시보드/리포트의 기존 소비처는 전부 event_type 으로 필터링하므로 서로 간섭하지 않는다.
+async function pushToSupabase(entry) {
+  const r = await fetch(`${SUPABASE_URL}/rest/v1/analytics`, {
+    method: 'POST',
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal',
+    },
+    body: JSON.stringify({
+      event_type: 'naver_index',
+      source: GSC_SOURCE || entry.site,
+      metadata: {
+        site: entry.site,
+        date: entry.date,
+        indexed: entry.indexed,
+        sitemap: entry.sitemap,
+        blocked: entry.blocked,
+      },
+    }),
+  });
+  if (!r.ok) throw new Error(`analytics insert ${r.status}: ${(await r.text()).slice(0, 120)}`);
+}
+
 // ── 이력만 출력 ────────────────────────────────────────────────────
 if (flag('history')) {
   const h = loadHistory().filter((x) => x.site === SITE);
@@ -221,8 +253,20 @@ if (SAVE) {
   fs.writeFileSync(HISTORY, JSON.stringify(kept, null, 2) + '\n');
 }
 
+let pushed = null;
+if (PUSH) {
+  // 전송 실패로 측정 자체를 버리면 안 된다 — 로컬 이력은 이미 남았으므로 경고만 하고 진행
+  pushed = await pushToSupabase(entry).then(
+    () => true,
+    (e) => {
+      console.error(`⚠️ Supabase 전송 실패: ${e.message}`);
+      return false;
+    }
+  );
+}
+
 if (JSON_OUT) {
-  console.log(JSON.stringify({ ...entry, delta, rate: Number(rate.toFixed(2)), gsc }, null, 2));
+  console.log(JSON.stringify({ ...entry, delta, rate: Number(rate.toFixed(2)), gsc, pushed }, null, 2));
 } else {
   console.log(`\n🔍 네이버 색인 추적 — ${SITE}   (${entry.at.replace('T', ' ').slice(0, 16)} KST)`);
   console.log('─'.repeat(52));
@@ -257,6 +301,7 @@ if (JSON_OUT) {
     }
   }
   if (SAVE) console.log(`\n이력 저장: ${path.relative(process.cwd(), HISTORY)}  (--history 로 추이 보기)`);
+  if (PUSH) console.log(pushed ? '텔레그램 일일리포트 전송: ✅' : '텔레그램 일일리포트 전송: ❌');
 }
 
 process.exit(indexed > 0 ? 0 : 1);

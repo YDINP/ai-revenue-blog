@@ -198,6 +198,48 @@ function movers(cur, prev, minViews = 3) {
   return { up, down };
 }
 
+// ── 네이버 색인 (로컬 측정치) ──
+//
+// 네이버 검색결과는 클라이언트 렌더라 서버리스에서 못 읽는다. 측정은 로컬
+// scripts/naver-index-check.mjs 가 하고, 결과를 analytics(event_type=naver_index)에 남긴다.
+// 여기서는 그 최신치를 읽어 리포트에 붙이기만 한다.
+// → 값이 오래됐으면 "색인이 안 늘었다"가 아니라 "측정이 안 돌았다"이므로 반드시 구분해 표기한다.
+async function naverIndexLines() {
+  const rows = await rest(
+    'analytics?event_type=eq.naver_index&metadata->>__probe=is.null' +
+      '&select=source,metadata,created_at&order=created_at.desc&limit=60'
+  );
+  if (!rows.length) return [];
+
+  // 사이트별로 최신 2건(측정일 기준)만 남겨 전회 대비 증감을 낸다
+  const bySite = new Map();
+  for (const r of rows) {
+    const site = r.metadata?.site || r.source || '?';
+    const day = String(r.metadata?.date || r.created_at).slice(0, 10);
+    const list = bySite.get(site) || [];
+    if (list.some((x) => x.day === day)) continue;      // 같은 날 재측정은 최신 1건만
+    if (list.length < 2) list.push({ day, ...r.metadata, at: r.created_at });
+    bySite.set(site, list);
+  }
+
+  const out = ['', '<b>네이버 색인</b>'];
+  for (const [site, [cur, prevRow]] of bySite) {
+    const indexed = Number(cur.indexed || 0);
+    const total = Number(cur.sitemap || 0);
+    const rate = total ? ((indexed / total) * 100).toFixed(1) : '0.0';
+    const d = prevRow ? indexed - Number(prevRow.indexed || 0) : null;
+    const dTxt = d === null ? '' : ` (전회 ${d >= 0 ? '+' : ''}${d})`;
+    out.push(`· ${escapeHtml(site)} — <b>${fmt(indexed)}</b>/${fmt(total)} (${rate}%)${dTxt}`);
+
+    const ageH = (Date.now() - new Date(cur.at).getTime()) / 3600000;
+    if (ageH > 48) {
+      out.push(`  ⚠️ 마지막 측정 ${Math.floor(ageH / 24)}일 전 — 로컬 측정 스크립트가 안 돌고 있습니다`);
+    }
+    if (cur.blocked) out.push('  ⚠️ 측정 시 네이버 자동접근 차단(보안문자) — 수치 신뢰 불가');
+  }
+  return out.length > 2 ? out : [];
+}
+
 // ── 오늘 쓸 만한 소재 (커뮤니티 실시간 화제) ──
 async function todaysTopics() {
   const jobs = blogList()
@@ -220,12 +262,13 @@ export async function reportMessage(dayArg) {
     .toISOString()
     .split('T')[0];
 
-  const [cur, prev, fresh, topics, gscLines] = await Promise.all([
+  const [cur, prev, fresh, topics, gscLines, naverLines] = await Promise.all([
     collect(day),
     collect(prevDay),
     newPosts(day),
     todaysTopics().catch(() => []),
     gscReportLines().catch(() => []),   // Search Console 미연동이면 빈 배열
+    naverIndexLines().catch(() => []),  // 로컬 측정치가 없으면 빈 배열
   ]);
 
   // day 는 이미 KST 달력 날짜(YYYY-MM-DD)이므로 UTC 자정으로 파싱해 getUTCDay 로 요일을 뽑는다.
@@ -261,6 +304,9 @@ export async function reportMessage(dayArg) {
 
   // ── 검색 유입 (Search Console) ──
   lines.push(...gscLines);
+
+  // ── 네이버 색인 (구글 옆에 붙여야 "어느 쪽이 막혔는지"가 한눈에 보인다) ──
+  lines.push(...naverLines);
 
   if (cur.topPosts.length) {
     lines.push('', '<b>인기 글 TOP</b>');
