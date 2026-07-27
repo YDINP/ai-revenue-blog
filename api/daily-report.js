@@ -7,7 +7,7 @@
 import { escapeHtml, sendToAdmin, supabaseRpc, sourceLabel } from './_shared.js';
 import { reportMessage } from './_report.js';
 import { syncGsc } from './_gsc-sync.js';
-import { runNewsletter, unsubscribe, sendCopyLatest, sbn } from './_newsletter.js';
+import { runNewsletter, unsubscribe, sendCopyLatest, changeEmail, sbn } from './_newsletter.js';
 
 // 구독 취소 확인 페이지 (메일의 '구독 취소' 링크가 이 함수로 옴 — Hobby 12함수 제한 통합)
 function unsubPage(title, msg) {
@@ -17,6 +17,35 @@ function unsubPage(title, msg) {
 .card{background:#fff;border-radius:16px;padding:40px 32px;max-width:400px;text-align:center;box-shadow:0 12px 30px -14px rgba(30,107,92,.35)}
 h1{color:#1e6b5c;font-size:1.3rem;margin:0 0 8px}p{color:#5f5a51;line-height:1.6;margin:0}</style></head>
 <body><div class="card"><h1>${escapeHtml(title)}</h1><p>${msg}</p></div></body></html>`;
+}
+
+// 이메일 변경 입력 폼 (메일의 '이메일 변경' 링크가 이 함수로 옴)
+function changeEmailForm(source, email, err) {
+  const q = `action=change-email&source=${encodeURIComponent(source)}&email=${encodeURIComponent(email)}`;
+  return `<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>구독 이메일 변경</title>
+<style>body{font-family:'Apple SD Gothic Neo',system-ui,sans-serif;background:#f5f6f4;color:#1a1712;display:grid;place-items:center;min-height:100vh;margin:0}
+.card{background:#fff;border-radius:16px;padding:40px 32px;max-width:400px;width:calc(100% - 32px);box-shadow:0 12px 30px -14px rgba(30,107,92,.35)}
+h1{color:#1e6b5c;font-size:1.3rem;margin:0 0 8px;text-align:center}p{color:#5f5a51;line-height:1.6;margin:0 0 18px;text-align:center;font-size:.92rem}
+label{display:block;font-size:.8rem;color:#938d80;margin:0 0 6px}
+input{width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid #e6e3dd;border-radius:9px;font-size:.95rem;margin-bottom:14px}
+button{width:100%;padding:12px;border:0;border-radius:9px;background:#1e6b5c;color:#fff;font-size:.95rem;font-weight:700;cursor:pointer}
+.err{color:#c0392b;font-size:.85rem;margin:0 0 12px;text-align:center}</style></head>
+<body><div class="card"><h1>구독 이메일 변경</h1>
+<p>새로 받으실 주소를 입력하시면 이후 뉴스레터가 그 주소로 발송됩니다.</p>
+${err ? `<div class="err">${escapeHtml(err)}</div>` : ''}
+<form method="GET" action="/api/daily-report">
+  <input type="hidden" name="action" value="change-email">
+  <input type="hidden" name="source" value="${escapeHtml(source)}">
+  <input type="hidden" name="email" value="${escapeHtml(email)}">
+  <label>현재 주소</label>
+  <input type="email" value="${escapeHtml(email)}" disabled>
+  <label>새 주소</label>
+  <input type="email" name="new" placeholder="변경할 이메일 주소" required autocomplete="email">
+  <button type="submit">변경하기</button>
+</form>
+<p style="margin:14px 0 0;font-size:.78rem;color:#938d80">문제가 있으면 이 메일에 회신해 주세요. (<a href="/api/daily-report?${q}&amp;_=1" style="color:#938d80">새로고침</a>)</p>
+</div></body></html>`;
 }
 
 export default async function handler(req, res) {
@@ -38,6 +67,37 @@ export default async function handler(req, res) {
       );
     } catch (e) {
       console.error('unsubscribe error:', e);
+      return res.status(500).send(unsubPage('오류', '잠시 후 다시 시도해 주세요.'));
+    }
+  }
+
+  // ── 뉴스레터 구독 이메일 변경 (공개, 인증 전) ──
+  // 신뢰모델은 구독 취소 링크와 동일: 링크는 구독자 본인 메일함에만 들어간다.
+  if (url.searchParams.get('action') === 'change-email') {
+    const source = url.searchParams.get('source') || '';
+    const email = url.searchParams.get('email') || '';
+    const next = (url.searchParams.get('new') || '').trim();
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    if (!source || !email) return res.status(400).send(unsubPage('요청 오류', '구독 정보가 올바르지 않습니다.'));
+    if (!next) return res.status(200).send(changeEmailForm(source, email));   // 폼 표시
+    try {
+      const r = await changeEmail(source, email, next);
+      const label = sourceLabel ? sourceLabel(source) : source;
+      if (r === 'same') return res.status(200).send(changeEmailForm(source, email, '현재 주소와 동일합니다.'));
+      if (r === 'notfound') return res.status(200).send(unsubPage('구독 정보를 찾을 수 없음', '이미 구독이 취소되었거나 목록에 없는 주소입니다.'));
+      return res.status(200).send(
+        unsubPage(
+          '이메일이 변경되었습니다',
+          r === 'merged'
+            ? `${escapeHtml(label)} 뉴스레터를 <b>${escapeHtml(next)}</b> 로 보내드립니다. (이미 구독 중이던 주소라 하나로 합쳤어요)`
+            : `${escapeHtml(label)} 뉴스레터를 이제 <b>${escapeHtml(next)}</b> 로 보내드립니다.`
+        )
+      );
+    } catch (e) {
+      if (/invalid email/.test(e.message || '')) {
+        return res.status(200).send(changeEmailForm(source, email, '이메일 주소 형식이 올바르지 않습니다.'));
+      }
+      console.error('change-email error:', e);
       return res.status(500).send(unsubPage('오류', '잠시 후 다시 시도해 주세요.'));
     }
   }

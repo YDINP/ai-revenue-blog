@@ -153,6 +153,10 @@ async function sendEmail(to, subject, html, from) {
 function unsubUrl(source, email) {
   return `${BACKEND}/api/daily-report?action=unsubscribe&source=${encodeURIComponent(source)}&email=${encodeURIComponent(email)}`;
 }
+// 받는 주소 변경 — 취소 대신 주소만 바꾸고 싶은 구독자용(푸터에서 구독취소와 나란히 노출)
+function changeEmailUrl(source, email) {
+  return `${BACKEND}/api/daily-report?action=change-email&source=${encodeURIComponent(source)}&email=${encodeURIComponent(email)}`;
+}
 // 이메일 유입을 분석에서 따로 잡기 위한 UTM(이메일 클라는 referrer를 지워 UTM이 유일 신호)
 const UTM = 'utm_source=newsletter&utm_medium=email&utm_campaign=digest';
 function withUtm(url) {
@@ -241,7 +245,7 @@ function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
           : ''
       }
       <p style="font-size:11px;color:${muted};margin:22px 0 0;line-height:1.6;text-align:center">
-        이 메일은 ${escapeHtml(label)} 뉴스레터 구독자에게 발송됩니다 · <a href="${unsubUrl(source, email)}" style="color:${muted}">구독 취소</a>
+        이 메일은 ${escapeHtml(label)} 뉴스레터 구독자에게 발송됩니다 · <a href="${changeEmailUrl(source, email)}" style="color:${muted}">이메일 변경</a> · <a href="${unsubUrl(source, email)}" style="color:${muted}">구독 취소</a>
       </p>
     </div>
   </div>`;
@@ -316,6 +320,37 @@ export async function unsubscribe(source, email) {
     { method: 'PATCH', body: { is_active: false }, prefer: 'return=representation' }
   );
   return rows.length;
+}
+
+// 구독 이메일 주소 변경. 뉴스레터 푸터의 '이메일 변경' 링크에서 호출한다.
+// 반환: 'changed' | 'merged'(새 주소가 이미 있어 통합) | 'notfound' | 'same'
+export async function changeEmail(source, oldEmail, newEmail) {
+  if (!source || !oldEmail || !newEmail) throw new Error('source/email required');
+  const from = String(oldEmail).trim().toLowerCase();
+  const to = String(newEmail).trim().toLowerCase();
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(to)) throw new Error('invalid email');
+  if (from === to) return 'same';
+
+  const src = encodeURIComponent(source);
+  const cur = await sbn(`newsletter_subscribers?source=eq.${src}&email=eq.${encodeURIComponent(from)}&select=email`);
+  if (!cur.length) return 'notfound';
+
+  // 새 주소가 같은 소스에 이미 있으면 UNIQUE 충돌이 나므로, 그쪽을 활성화하고 옛 행은 비활성화(통합)
+  const dup = await sbn(`newsletter_subscribers?source=eq.${src}&email=eq.${encodeURIComponent(to)}&select=email`);
+  if (dup.length) {
+    await sbn(`newsletter_subscribers?source=eq.${src}&email=eq.${encodeURIComponent(to)}`, {
+      method: 'PATCH', body: { is_active: true }, prefer: 'return=minimal',
+    });
+    await sbn(`newsletter_subscribers?source=eq.${src}&email=eq.${encodeURIComponent(from)}`, {
+      method: 'PATCH', body: { is_active: false }, prefer: 'return=minimal',
+    });
+    return 'merged';
+  }
+
+  await sbn(`newsletter_subscribers?source=eq.${src}&email=eq.${encodeURIComponent(from)}`, {
+    method: 'PATCH', body: { email: to, is_active: true }, prefer: 'return=minimal',
+  });
+  return 'changed';
 }
 
 // 글 페이지에서 제목/요약/대표이미지를 한 번의 fetch로 추출(복사 발송용 — RSS 윈도우 밖 글도 처리)
