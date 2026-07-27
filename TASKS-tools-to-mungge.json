@@ -1,0 +1,60 @@
+{
+  "task": "tools-to-mungge",
+  "prd": "PRD-tools-to-mungge.md",
+  "created": "2026-07-27",
+  "tasks": [
+    {
+      "id": 1,
+      "title": "WP 인라인 script/style 보존 검증",
+      "status": "done",
+      "note": "ben=administrator. draft 생성→raw 재조회→삭제로 확인. 저장은 원문 그대로 들어간다"
+    },
+    {
+      "id": 2,
+      "title": "26개 계산기 구조 일관성 스캔",
+      "status": "done",
+      "note": "timezone-calculator만 .map() 사용 → dist에서 렌더된 본문 추출로 해결(option 28개 정상)"
+    },
+    {
+      "id": 3,
+      "title": "CSS 테마 의존성 확인",
+      "status": "done",
+      "note": "16개 변수 전부 각 파일 style 블록에서 자체 정의. 테마 무관"
+    },
+    {
+      "id": 4,
+      "title": "이식 스크립트 작성 (port-tools-to-mungge.mjs)",
+      "status": "done"
+    },
+    {
+      "id": 5,
+      "title": "부모 페이지 tools 생성 + 표본 검증",
+      "status": "done",
+      "note": "index.astro는 스코프드 style이라 번들 CSS에 섞임 → 목록 데이터로 카드 그리드 자체 생성"
+    },
+    {
+      "id": 6,
+      "title": "26개 전체 발행",
+      "status": "done"
+    },
+    {
+      "id": 7,
+      "title": "라이브 검증",
+      "status": "done",
+      "note": "27개 200 · JS/CSS 원문 바이트 일치 · H1 1개 · 전 페이지 JS 에러 0"
+    },
+    {
+      "id": 8,
+      "title": "LF /tools/* → mungge 301 + 메뉴 추가",
+      "status": "blocked",
+      "note": "사용자 확인 대기. 이식·검증은 끝났고 LF 원본은 아직 살아 있음"
+    }
+  ],
+  "gotchas": [
+    "저장은 멀쩡한데 렌더 시점 필터가 본문을 망가뜨린다. 원인 두 가지를 각각 다르게 막아야 한다",
+    "wpautop: <script> 안 템플릿 리터럴의 줄머리 `<div` 를 블록 태그로 보고 </p><p> 삽입 → wp:html 블록으로 감싸면 차단",
+    "& → &#038; 치환: <script> 안에서는 엔티티가 해석되지 않아 `a && b` 가 문법 오류가 된다. wp:html로도 못 막음 → & 포함 JS 7개는 base64 + (0,eval) 부트스트랩. 간접 eval이라 전역 정의가 유지돼 인라인 onclick 핸들러가 동작",
+    "Kadence 제목 중복: CSS로 숨기면 DOM에 H1이 남는다. post meta _kad_post_title='hide' 로 출력 자체를 끔 (disable/false/0 은 저장만 되고 안 먹음)",
+    "WP 미디어 라이브러리는 .js 업로드 차단 → 외부 파일 분리 불가"
+  ]
+}
