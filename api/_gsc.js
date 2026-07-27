@@ -70,15 +70,23 @@ async function query(site, body) {
   };
 
   let res = await call(site);
+  const tried = [site];
+
   // 같은 사이트라도 GSC 속성이 URL 프리픽스가 아니라 도메인 속성(sc-domain:)으로만
   // 등록돼 있는 경우가 흔하다. 그러면 403/404가 나고 조용히 0으로 보이므로 1회 폴백한다.
   if (!res.ok && (res.status === 403 || res.status === 404) && /^https?:\/\//.test(site)) {
+    const alt = `sc-domain:${new URL(site).hostname}`;
+    tried.push(alt);
     try {
-      res = await call(`sc-domain:${new URL(site).hostname}`);
+      res = await call(alt);
     } catch (_) { /* 폴백 실패 시 아래에서 원래 오류를 던진다 */ }
   }
 
-  if (!res.ok) throw new Error(`GSC ${res.status}: ${res.json.error?.message || 'unknown'}`);
+  if (!res.ok) {
+    // 폴백을 타면 오류 메시지에 sc-domain만 남아 "어느 속성을 설정했는지"가 가려진다.
+    // 서비스계정을 어느 속성에 추가해야 하는지 바로 알 수 있게 시도한 형식을 모두 적는다.
+    throw new Error(`GSC ${res.status}: ${res.json.error?.message || 'unknown'} (시도한 속성: ${tried.join(' , ')})`);
+  }
   return res.json.rows || [];
 }
 
