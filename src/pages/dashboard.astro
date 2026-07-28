@@ -2170,7 +2170,7 @@ const ICONS: Record<string, string> = {
         <div class="summary-card accent-blue color-blue">
           <div class="kpi-top">
             <span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['activity']}></svg></span>
-            <div class="label">금일 방문자</div>
+            <div class="label">금일 방문자 <span class="src-badge tf">TF</span><span class="src-badge lf">LF</span><span class="src-badge vip">VIP</span><span class="src-badge mg">뭉게</span></div>
           </div>
           <div class="kpi-value-row">
             <div class="value" id="kpi-today-visitors">--</div>
@@ -2181,7 +2181,7 @@ const ICONS: Record<string, string> = {
         <div class="summary-card accent-purple color-purple">
           <div class="kpi-top">
             <span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['eye']}></svg></span>
-            <div class="label">금일 조회수</div>
+            <div class="label">금일 조회수 <span class="src-badge tf">TF</span><span class="src-badge lf">LF</span><span class="src-badge vip">VIP</span><span class="src-badge mg">뭉게</span></div>
           </div>
           <div class="kpi-value-row">
             <div class="value" id="kpi-today-views">--</div>
@@ -2282,17 +2282,18 @@ const ICONS: Record<string, string> = {
           </div>
           <div class="sub" id="gsc-sum-sub">최근 7일 · Google 실측(2~3일 지연)</div>
         </div>
-        <div class="summary-card accent-cyan color-cyan" id="tools-sum-card" style="cursor:pointer;" title="클릭하면 도구 탭으로 이동">
+        <div class="summary-card accent-cyan color-cyan" id="mg-sum-card" style="cursor:pointer;" title="클릭하면 뭉게 유입 탭으로 이동">
           <div class="kpi-top">
-            <span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['grid']}></svg></span>
-            <!-- 계산기 26종은 LF(원본)와 뭉게(이식본) 양쪽에 있다 → 합산해서 보여준다 -->
-            <div class="label">도구 방문 <span class="src-badge lf">LF</span><span class="src-badge mg">뭉게</span></div>
+            <span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['activity']}></svg></span>
+            <!-- 다른 카드는 전부 4개 사이트 합산값이라 뭉게 몫만 따로 볼 방법이 없었다.
+                 출처가 GA4(Site Kit) 하나뿐이라 자체 트래커와 달리 내 방문도 섞여 있다. -->
+            <div class="label">뭉게 방문자 / 조회수 <span class="src-badge mg">뭉게</span></div>
           </div>
           <div class="kpi-value-row">
-            <div class="value" id="tools-sum-today">--</div>
-            <span class="delta-chip flat" id="tools-sum-delta">--</span>
+            <div class="value" id="mg-sum-today">--</div>
+            <span class="delta-chip flat" id="mg-sum-delta">--</span>
           </div>
-          <div class="sub" id="tools-sum-sub">생활 계산기 · KST 기준</div>
+          <div class="sub" id="mg-sum-sub">GA4 · KST 기준</div>
         </div>
       </div>
 
@@ -4287,47 +4288,7 @@ const ICONS: Record<string, string> = {
         return Object.entries(by).map(([slug, views]) => ({ slug, views })).sort((a, b) => b.views - a.views);
       }
 
-      // 상단 KPI 스트립의 'LF 도구 방문' 카드. 도구 탭을 열지 않아도 보여야 하므로
-      // renderTools와 분리해 두고, 초기 로드와 탭 렌더 양쪽에서 호출한다.
-      function renderToolsKpi() {
-        const todayEl = document.getElementById('tools-sum-today');
-        if (!todayEl) return;
-        const subEl = document.getElementById('tools-sum-sub');
-        if (_toolRows === null) { todayEl.textContent = '--'; return; }
-
-        const kstDay = (ms) => new Date(ms + 9 * 3600 * 1000).toISOString().split('T')[0];
-        const todayKst = kstDay(Date.now());
-        const ydayKst = kstDay(Date.now() - 86400000);
-        let today = 0, yday = 0, total = 0;
-        (_toolRows || []).forEach((r) => {
-          if (!toolSlugFromPath(r.path)) return;   // /tools/ 목록 페이지는 제외, 개별 도구만
-          total++;
-          const d = kstDay(new Date(r.created_at).getTime());
-          if (d === todayKst) today++;
-          else if (d === ydayKst) yday++;
-        });
-
-        todayEl.textContent = fmt(today);
-        const dEl = document.getElementById('tools-sum-delta');
-        if (dEl) {
-          const dd = today - yday;
-          if (!today && !yday) { dEl.className = 'delta-chip flat'; dEl.textContent = '–'; }
-          else {
-            dEl.className = 'delta-chip ' + (dd === 0 ? 'flat' : (dd > 0 ? 'up' : 'down'));
-            dEl.textContent = dd === 0 ? '–' : `${dd > 0 ? '▲' : '▼'} ${fmt(Math.abs(dd))}`;
-          }
-        }
-        if (subEl) {
-          const top = computeToolStats('day')[0] || computeToolStats()[0];
-          const topName = top ? (TOOL_META[top.slug]?.name || top.slug) : null;
-          subEl.textContent = topName
-            ? `누적 ${fmt(total)}회 · Top ${topName}`
-            : `누적 ${fmt(total)}회 · 생활 계산기`;
-        }
-      }
-
       function renderTools(period) {
-        renderToolsKpi();
         if (period !== undefined) _toolsPeriod = period;
         const container = document.getElementById('tools-rank');
         if (!container) return;
@@ -5441,16 +5402,15 @@ const ICONS: Record<string, string> = {
           if (!/뭉게/.test(gsub.textContent)) gsub.innerHTML += ` · <span style="color:#fbbf24">뭉게 ${fmt(mgClicks)}</span>`;
         }
 
-        // Row 1 · 도구 방문 — LF(원본)와 뭉게(이식본)에 같은 계산기 26종이 있다
-        const tSub = document.getElementById('tools-sum-sub');
-        const tVal = document.getElementById('tools-sum-today');
-        const mgTools = mgAgg('page').filter((r) => /^\/tools\//.test(r.key.split('?')[0]) && r.key.split('?')[0] !== '/tools/');
-        const mgToolViews = mgTools.reduce((a, r) => a + (r.views || 0), 0);
-        if (tVal && !tVal.dataset.mgApplied && mgToolViews) {
-          tVal.textContent = fmt((Number(String(tVal.textContent).replace(/[^\d]/g, '')) || 0) + mgToolViews);
-          tVal.dataset.mgApplied = '1';
-        }
-        if (tSub && !/뭉게/.test(tSub.textContent)) tSub.textContent += ` · 뭉게 ${fmt(mgToolViews)}`;
+        // Row 1 · 뭉게 방문자/조회수 — 나머지 카드는 모두 합산값이라 뭉게 몫을 따로 못 봤다.
+        // 방문자는 GA4 totalUsers(당일 중복 제거)라 날짜를 넘겨 합산하면 부풀려지므로
+        // 누적은 조회수만 적는다.
+        setEl('mg-sum-today', `${fmt(today.users)} / ${fmt(today.views)}`);
+        t.setKpiDelta('mg-sum-delta', today.users, yday.users);
+        const mgAt = ga4SyncedLabel();
+        setEl('mg-sum-sub',
+          `어제 ${fmt(yday.users)} / ${fmt(yday.views)} · 누적 조회 ${fmt(all.views)}` +
+          (mgAt ? ` · 동기화 ${mgAt}` : ''));
 
         // Row 3 · Likes — 뭉게 추천 버튼(source='mg')이 생겨 분리 표시가 가능해졌다
         const likeBox = document.getElementById('t-likes-total');
@@ -6776,15 +6736,9 @@ const ICONS: Record<string, string> = {
       // GSC 검색 실적 초기 로드 (전체요약 KPI 카드)
       fetchGscStats().then(renderGsc);
 
-      // LF 도구 방문 초기 로드 — 도구 탭을 열지 않아도 상단 KPI가 채워지도록.
-      // 여기서 _toolRows를 채워두면 탭을 열 때 재요청 없이 바로 렌더된다.
-      fetchToolPageviews().then((rows) => {
-        _toolRows = Array.isArray(rows) ? rows : [];
-        renderToolsKpi();
-      });
-      // 요약 카드 클릭 → 도구 탭 열기
-      document.getElementById('tools-sum-card')?.addEventListener('click', () => {
-        document.querySelector('.main-tab[data-tab="tools"]')?.click();
+      // 요약 카드 클릭 → 뭉게 유입 탭 열기
+      document.getElementById('mg-sum-card')?.addEventListener('click', () => {
+        document.querySelector('.main-tab[data-tab="ga4"]')?.click();
       });
       // 요약 카드 클릭 → 검색(GSC) 상세 탭 열기
       document.getElementById('gsc-sum-card')?.addEventListener('click', () => {
