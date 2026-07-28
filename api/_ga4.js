@@ -94,7 +94,7 @@ const MET = ['sessions', 'totalUsers', 'screenPageViews', 'engagedSessions'];
 export async function ga4DailyBreakdown(propertyId, startDate, endDate, { pageLimit = 3000 } = {}) {
   const daily = (dim, limit) =>
     ga4Report(propertyId, { startDate, endDate, dimensions: dim ? ['date', dim] : ['date'], metrics: MET, limit });
-  const [channel, sourceMedium, page, totals, device, browser, os] = await Promise.all([
+  const [channel, sourceMedium, page, totals, device, browser, os, pageSource] = await Promise.all([
     daily('sessionDefaultChannelGroup', 5000),
     daily('sessionSourceMedium', 5000),
     daily('landingPagePlusQueryString', pageLimit),
@@ -102,6 +102,13 @@ export async function ga4DailyBreakdown(propertyId, startDate, endDate, { pageLi
     daily('deviceCategory', 2000),
     daily('browser', 2000),
     daily('operatingSystem', 2000),
+    // 소스와 페이지를 따로 저장하면 "네이버 블로그에서 온 방문이 어느 글에 떨어졌나"를
+    // 알 수 없다. 교차 차원이 따로 필요하다.
+    ga4Report(propertyId, {
+      startDate, endDate,
+      dimensions: ['date', 'landingPagePlusQueryString', 'sessionSourceMedium'],
+      metrics: MET, limit: 10000,
+    }),
   ]);
-  return { channel, sourceMedium, page, totals, device, browser, os };
+  return { channel, sourceMedium, page, totals, device, browser, os, pageSource };
 }

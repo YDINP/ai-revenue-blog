@@ -45,7 +45,7 @@ export async function syncGa4({ days = 7 } = {}) {
   for (const b of blogList().filter((x) => x.ga4Property)) {
     const src = b.key;
     try {
-      const { channel, sourceMedium, page, totals, device, browser, os } = await ga4DailyBreakdown(b.ga4Property, start, end);
+      const { channel, sourceMedium, page, totals, device, browser, os, pageSource } = await ga4DailyBreakdown(b.ga4Property, start, end);
       const rows = [
         ...totals.rows.map((r) => ({
           date: ga4Date(r.date),
@@ -63,6 +63,18 @@ export async function syncGa4({ days = 7 } = {}) {
         ...device.rows.map(toRow(src, 'device', 'deviceCategory')),
         ...browser.rows.map(toRow(src, 'browser', 'browser')),
         ...os.rows.map(toRow(src, 'os', 'operatingSystem')),
+        // dim='page_source' 의 key 는 "<랜딩경로>\t<소스/매체>". 탭은 GA4 값에 나올 수 없어
+        // 구분자로 안전하고, 대시보드는 split('\t') 한 번으로 양쪽을 얻는다.
+        ...pageSource.rows.map((r) => ({
+          date: ga4Date(r.date),
+          source: src,
+          dim: 'page_source',
+          key: `${r.landingPagePlusQueryString || '(not set)'}\t${r.sessionSourceMedium || '(not set)'}`,
+          sessions: r.sessions,
+          users: r.totalUsers,
+          views: r.screenPageViews,
+          engaged: r.engagedSessions,
+        })),
       ];
       out[src] = await upsert(rows);
     } catch (e) {
