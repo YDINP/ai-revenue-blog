@@ -351,6 +351,10 @@ const ICONS: Record<string, string> = {
       .gsc-src-row { display: flex; justify-content: space-between; gap: 0.6rem; font-size: 0.74rem; padding: 0.2rem 0; border-bottom: 1px solid var(--border); }
       .gsc-src-row span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .gsc-src-row span:last-child { color: var(--text-2); white-space: nowrap; }
+      .gsc-src-row.ga4-pick { cursor: pointer; }
+      .gsc-src-row.ga4-pick:hover span:first-child { color: var(--accent); }
+      .gsc-src-row.ga4-pick.on span:first-child { color: var(--accent); font-weight: 700; }
+      .ga4-chip { display: inline-flex; align-items: center; gap: 6px; background: rgba(59,130,246,0.15); border: 1px solid var(--accent); color: var(--accent); border-radius: 999px; padding: 1px 9px; font-size: 0.7rem; font-weight: 600; cursor: pointer; }
       #gsc-page-search { width: 100%; max-width: 320px; margin-bottom: 0.6rem; padding: 0.4rem 0.6rem; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); color: var(--text); font-size: 0.78rem; }
       .gsc-table-wrap { overflow-x: auto; }
       .gsc-table { width: 100%; border-collapse: collapse; font-size: 0.76rem; }
@@ -3044,7 +3048,7 @@ const ICONS: Record<string, string> = {
         </div>
 
         <div class="traffic-section">
-          <div class="gsc-sec-title">랜딩 페이지 <span>(방문자가 처음 도착한 페이지 · 헤더 클릭 정렬)</span></div>
+          <div class="gsc-sec-title">랜딩 페이지 <span>(방문자가 처음 도착한 페이지 · 헤더 클릭 정렬)</span> <span id="ga4-table-filter"></span></div>
           <input id="ga4-page-search" type="text" placeholder="페이지 경로 검색..." />
           <div class="gsc-table-wrap"><table class="gsc-table" id="ga4-table"></table></div>
         </div>
@@ -4681,6 +4685,7 @@ const ICONS: Record<string, string> = {
       let _ga4Bucket = 'daily';     // daily | weekly | monthly
       let _ga4Metric = 'sessions';  // sessions | users | views
       let _ga4Sort = { key: 'sessions', dir: -1 };
+      let _ga4Filter = null;        // {dim,key} — 유입경로로 랜딩 페이지 좁히기
       let _ga4Search = '';
       let _ga4Init = false;
 
@@ -4901,19 +4906,57 @@ const ICONS: Record<string, string> = {
         const rows = ga4AggBy(dim);
         if (!rows.length) { el.innerHTML = '<div style="color:var(--text-3);font-size:0.74rem;padding:0.3rem 0;">데이터 없음</div>'; return; }
         const total = rows.reduce((a, r) => a + r.sessions, 0) || 1;
+        // 행을 누르면 아래 랜딩 페이지 표가 그 유입경로로 좁혀진다 —
+        // "네이버 블로그에서 온 사람이 어느 글을 봤나"를 여기서 확인한다.
         el.innerHTML = rows.slice(0, 12).map((r) => {
           const p = r.sessions / total;
-          return `<div class="gsc-src-row" title="${ga4Cut(r.key, 80)}">
-            <span>${ga4Cut(koFn ? koFn(r.key) : r.key, 34)}</span>
+          const on = _ga4Filter && _ga4Filter.dim === dim && _ga4Filter.key === r.key;
+          return `<div class="gsc-src-row ga4-pick${on ? ' on' : ''}" data-dim="${escHtml(dim)}" data-key="${escHtml(r.key)}" title="클릭하면 이 경로로 들어온 랜딩 페이지만 봅니다 — ${escHtml(ga4Cut(r.key, 80))}">
+            <span>${on ? '▸ ' : ''}${ga4Cut(koFn ? koFn(r.key) : r.key, 32)}</span>
             <span>${ga4Fmt(r.sessions)} · ${ga4Pct(p)}</span>
           </div>
-          <div style="height:3px;background:var(--accent);opacity:0.35;border-radius:2px;width:${(p * 100).toFixed(1)}%;margin:0 0 0.25rem;"></div>`;
+          <div style="height:3px;background:var(--accent);opacity:${on ? '0.9' : '0.35'};border-radius:2px;width:${(p * 100).toFixed(1)}%;margin:0 0 0.25rem;"></div>`;
         }).join('');
+        el.querySelectorAll('.ga4-pick').forEach((row) => {
+          row.onclick = () => {
+            const k = row.dataset.key, d = row.dataset.dim;
+            _ga4Filter = (_ga4Filter && _ga4Filter.dim === d && _ga4Filter.key === k) ? null : { dim: d, key: k };
+            renderGa4Detail();
+          };
+        });
+      }
+
+      // 랜딩 페이지 목록. 유입경로 필터가 걸리면 page_source 교차 차원에서 뽑는다.
+      function ga4PageRows() {
+        if (!_ga4Filter) return ga4AggBy('page');
+        const want = _ga4Filter.key;
+        const acc = {};
+        for (const r of ga4Of('page_source')) {
+          const i = r.key.indexOf('\t');
+          if (i < 0) continue;
+          const page = r.key.slice(0, i), sm = r.key.slice(i + 1);
+          // 채널(Organic Search 등)은 소스/매체와 값이 달라 교차 차원으로 좁힐 수 없다.
+          // 그 경우엔 필터를 무시하고 전체를 보여주는 편이 빈 표보다 낫다.
+          if (_ga4Filter.dim === 'source_medium' ? sm !== want : false) continue;
+          const a = (acc[page] ||= { key: page, sessions: 0, users: 0, views: 0, engaged: 0 });
+          a.sessions += r.sessions || 0; a.users += r.users || 0;
+          a.views += r.views || 0; a.engaged += r.engaged || 0;
+        }
+        const out = Object.values(acc).sort((a, b) => b.sessions - a.sessions);
+        return out.length ? out : ga4AggBy('page');
       }
 
       function renderGa4Table() {
         const tbl = document.getElementById('ga4-table'); if (!tbl) return;
-        let rows = ga4AggBy('page');
+        const cap = document.getElementById('ga4-table-filter');
+        if (cap) {
+          cap.innerHTML = _ga4Filter
+            ? `<span class="ga4-chip">${escHtml(ga4Cut(_ga4Filter.key, 40))} <b>×</b></span>`
+            : '';
+          const x = cap.querySelector('.ga4-chip');
+          if (x) x.onclick = () => { _ga4Filter = null; renderGa4Detail(); };
+        }
+        let rows = ga4PageRows();
         if (_ga4Search) rows = rows.filter((r) => r.key.toLowerCase().includes(_ga4Search));
         const { key, dir } = _ga4Sort;
         rows = rows.slice().sort((a, b) => (a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0) * dir);
