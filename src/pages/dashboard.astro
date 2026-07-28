@@ -2738,8 +2738,10 @@ const ICONS: Record<string, string> = {
           <p class="dd-note" style="margin-top:-4px">
             내가 대시보드 확인·글 점검하며 남긴 방문이 조회수에 섞이지 않게 걸러요.
             제외해도 데이터는 지우지 않고 <b>집계에서만 빼는</b> 가역 방식(<code>pageview_bot</code> 플립)이에요.
-            <br><span class="exclude-warn">뭉게는 여기서 못 걸러요</span> — 뭉게 조회수는 자체 트래커가 아니라 GA4(Site Kit)라
-            <a href="https://analytics.google.com/analytics/web/#/a/p547003762/admin/filters" target="_blank" rel="noopener">GA4 관리 &gt; 데이터 필터</a>에서 내부 트래픽으로 제외해야 해요.
+            <br><span class="exclude-warn">뭉게는 절반만 걸러져요</span> — ②로 UA를 올리면 뭉게 <b>자체 트래커</b>(Live Activity·홈→글 실측·기기 카드의
+            '내 방문 제외' 기준)에서는 빠지지만, <b>조회수·방문자·유입경로는 GA4(Site Kit)</b> 수치라 제외 장치가 없어요.
+            GA4까지 걸러면 <a href="https://analytics.google.com/analytics/web/#/a/p547003762/admin/filters" target="_blank" rel="noopener">GA4 관리 &gt; 데이터 필터</a>에서
+            내부 트래픽(IP)으로 잡아야 하고, 그것도 <b>소급 적용은 안 돼요</b>.
           </p>
 
           <div class="exclude-row">
@@ -3039,13 +3041,13 @@ const ICONS: Record<string, string> = {
               <div id="ga4-view-kind"></div>
             </div>
           </div>
-          <div class="gsc-sec-title" style="margin-top:1rem;">홈에서 넘어간 글 <span>(자체 트래커 실측 · 최근 3일)</span></div>
+          <div class="gsc-sec-title" style="margin-top:1rem;">홈에서 넘어간 글 <span id="ga4-internal-note">(자체 트래커 실측)</span></div>
           <div class="gsc-table-wrap"><table class="gsc-table" id="ga4-internal-table"></table></div>
           <div id="ga4-internal-sum" style="font-size:0.76rem;color:var(--text-2);margin-top:0.4rem;"></div>
           <div class="gsc-help">
             <b>읽는 법</b> · <b>세션당 쪽수</b>가 1.0이면 그 유형으로 들어온 사람은 <b>첫 페이지만 보고 나갔다</b>는 뜻이다(GA4는 랜딩 페이지에 그 세션의 전체 조회수를 귀속시킨다). 홈 진입이 1.0에 가까우면 홈이 글로 넘겨주지 못하고 있는 것.<br>
             <b>진입 유형</b>은 세션이 시작된 페이지, <b>조회 유형</b>은 열린 모든 페이지 — 두 표에서 홈 비중 차이가 벌어질수록 사이트 안에서 이동이 많다는 뜻이다.<br>
-            <b>홈에서 넘어간 글</b>은 GA4가 아니라 뭉게에 심은 자체 트래커(<code>pageview_mg</code>)의 referrer를 그대로 읽은 것이라 <b>어느 글로 갔는지까지</b> 알 수 있다(수집 시작 2026-07-28, 기간 선택과 무관하게 최근 3일).
+            <b>홈에서 넘어간 글</b>은 GA4가 아니라 뭉게에 심은 자체 트래커(<code>pageview_mg</code>)의 referrer를 그대로 읽은 것이라 <b>어느 글로 갔는지까지</b> 알 수 있다(수집 시작 2026-07-28, 수집 창 31일 상한). 이 표와 기기 카드의 <b>내 방문 제외</b> 기준은 자체 트래커라 제외 UA(대시보드 → 내 방문 제외)가 실제로 빠진다 — GA4 수치는 Site Kit 태그라 제외가 불가능하다.
           </div>
         </div>
 
@@ -3079,8 +3081,16 @@ const ICONS: Record<string, string> = {
         </div>
 
         <!-- 기기 구분은 전체요약 Row5 도넛에도 있지만 거기는 전 기간·블로그 합산 기준이라
-             "뭉게만, 이 기간" 을 볼 수 없었다 → 기간 선택이 걸리는 이 탭에도 둔다 -->
-        <div class="gsc-source-grid cols-3">
+             "뭉게만, 이 기간" 을 볼 수 없었다 → 기간 선택이 걸리는 이 탭에도 둔다.
+             기준 토글: GA4 는 내 방문을 못 걸러내므로(Site Kit 태그) 자체 트래커 기준을 기본으로 둔다 -->
+        <div class="gsc-sec-title" style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;margin-top:1.25rem;">
+          기기 · 브라우저 · OS <span id="ga4-aud-note"></span>
+          <div class="gsc-seg" id="ga4-aud-src" style="margin-left:auto;">
+            <button data-src="mg">내 방문 제외</button>
+            <button data-src="ga4">GA4 전체</button>
+          </div>
+        </div>
+        <div class="gsc-source-grid cols-3" style="margin-top:0;">
           <div class="gsc-src-card">
             <div class="gsc-src-head">기기 <span>모바일 / PC</span></div>
             <div id="ga4-device"></div>
@@ -4699,6 +4709,9 @@ const ICONS: Record<string, string> = {
       let _ga4Filter = null;        // {dim,key} — 유입경로로 랜딩 페이지 좁히기
       let _ga4Search = '';
       let _ga4Init = false;
+      // 기기·브라우저·OS 기준. 'mg'=자체 트래커(내 방문 제외) / 'ga4'=GA4 전체(내 방문 포함).
+      // GA4 는 관리자 제외 장치가 없어 기본값을 제외 기준으로 둔다.
+      let _ga4AudSrc = 'mg';
 
       const ga4Fmt = (n) => Number(n || 0).toLocaleString('en-US');
       const ga4Pct = (v) => (Number(v || 0) * 100).toFixed(1) + '%';
@@ -4713,7 +4726,11 @@ const ICONS: Record<string, string> = {
       };
       const ga4ChKo = (k) => GA4_CH_KO[k] || k;
       // GA4 deviceCategory 는 소문자 영어로 온다 — 그대로 두면 표 안에서 유독 튄다
-      const GA4_DEV_KO = { desktop: 'PC', mobile: '모바일', tablet: '태블릿', smart_tv: 'TV' };
+      // 대문자 키는 자체 트래커(parseUA) 쪽 표기 — 같은 기기가 두 이름으로 갈리지 않게 함께 매핑한다
+      const GA4_DEV_KO = {
+        desktop: 'PC', mobile: '모바일', tablet: '태블릿', smart_tv: 'TV',
+        Desktop: 'PC', Mobile: '모바일', Tablet: '태블릿',
+      };
       const ga4DevKo = (k) => GA4_DEV_KO[k] || k;
 
       async function loadGa4Detail() {
@@ -4740,6 +4757,7 @@ const ICONS: Record<string, string> = {
         seg('ga4-metric-tabs', 'm', () => _ga4Metric, (v) => { _ga4Metric = v; renderGa4Chart(); });
         const search = document.getElementById('ga4-page-search');
         if (search) search.oninput = () => { _ga4Search = search.value.trim().toLowerCase(); renderGa4Table(); };
+        seg('ga4-aud-src', 'src', () => _ga4AudSrc, (v) => { _ga4AudSrc = v; renderGa4Audience(); });
         const syncBtn = document.getElementById('ga4-sync-now');
         if (syncBtn) syncBtn.onclick = () => syncGa4Now(syncBtn);
       }
@@ -5029,7 +5047,7 @@ const ICONS: Record<string, string> = {
 
       // 홈 → 글 이동 실측. GA4 는 페이지 이동 시퀀스를 주지 않아 "홈에서 어느 글로 갔나"를 만들 수 없다.
       // 뭉게 자체 트래커(pageview_mg)는 referrer 를 원문 그대로 남기므로, referrer 가 뭉게 홈인
-      // 조회가 곧 홈에서 눌러 들어간 클릭이다. _mgLive 는 최근 3일치라 기간 선택과 무관하다.
+      // 조회가 곧 홈에서 눌러 들어간 클릭이다. 제외 UA 는 pageview_mg_bot 으로 플립돼 여기서 빠진다.
       function renderGa4InternalNav() {
         const tbl = document.getElementById('ga4-internal-table');
         const sum = document.getElementById('ga4-internal-sum');
@@ -5045,9 +5063,15 @@ const ICONS: Record<string, string> = {
             return /(^|\.)mungge\.com$/.test(u.hostname) ? (u.pathname || '/') : null;
           } catch { return null; }
         };
+        const days = Math.min(_ga4Days, MG_LIVE_DAYS);
+        const from = new Date(Date.now() - (days - 1) * 864e5).toISOString().slice(0, 10);
+        const note = document.getElementById('ga4-internal-note');
+        if (note) note.textContent = `(자체 트래커 실측 · 내 방문 제외 · 최근 ${days}일)`;
         let homeViews = 0, fromHome = 0;
         const acc = {};
         for (const e of (_mgLive || [])) {
+          const day = new Date(new Date(e.created_at).getTime() + 9 * 3600e3).toISOString().slice(0, 10);
+          if (day < from) continue;
           const path = ga4Path(e.path || '/');
           if (mgKindOf(path) === 'home') homeViews++;
           const rp = refPath(e.ref);
@@ -5064,21 +5088,21 @@ const ICONS: Record<string, string> = {
                 <td><a href="https://mungge.com${escHtml(r.path)}" target="_blank" rel="noopener" style="color:inherit">${escHtml(ga4Cut(r.title || r.path, 60))}</a>
                 <div style="color:var(--text-3);font-size:0.7rem">${escHtml(ga4Cut(r.path, 60))}</div></td>
                 <td class="num">${ga4Fmt(r.n)}</td></tr>`).join('')
-            : '<tr><td colspan="2" style="color:var(--text-3)">최근 3일 동안 홈에서 다른 페이지로 넘어간 기록이 없습니다.</td></tr>') +
+            : `<tr><td colspan="2" style="color:var(--text-3)">최근 ${days}일 동안 홈에서 다른 페이지로 넘어간 기록이 없습니다.</td></tr>`) +
           '</tbody>';
         if (sum) {
           sum.innerHTML = homeViews
-            ? `최근 3일 홈 조회 <b>${ga4Fmt(homeViews)}</b>건 → 글·도구로 이동 <b>${ga4Fmt(fromHome)}</b>건 (<b>${ga4Pct(fromHome / homeViews)}</b>)`
-            : '최근 3일 홈 조회 기록 없음';
+            ? `최근 ${days}일 홈 조회 <b>${ga4Fmt(homeViews)}</b>건 → 글·도구로 이동 <b>${ga4Fmt(fromHome)}</b>건 (<b>${ga4Pct(fromHome / homeViews)}</b>)`
+            : `최근 ${days}일 홈 조회 기록 없음`;
         }
       }
 
       // 채널·소스매체·기기 목록 — 비중을 막대로 같이 보여줘야 "어디가 주력인지"가 한눈에 들어온다
       // pickable=false: 기기·브라우저·OS 는 랜딩 페이지를 좁힐 수 없다(교차 차원이 page_source
       // 하나뿐이라 소스/매체만 가능). 클릭 가능하게 두면 눌러도 표가 안 바뀌어 고장으로 보인다.
-      function renderGa4Breakdown(elId, dim, koFn, pickable = true) {
+      function renderGa4Breakdown(elId, dim, koFn, pickable = true, rowsOverride = null) {
         const el = document.getElementById(elId); if (!el) return;
-        const rows = ga4AggBy(dim);
+        const rows = rowsOverride || ga4AggBy(dim);
         if (!rows.length) { el.innerHTML = '<div style="color:var(--text-3);font-size:0.74rem;padding:0.3rem 0;">데이터 없음</div>'; return; }
         const total = rows.reduce((a, r) => a + r.sessions, 0) || 1;
         // 행을 누르면 아래 랜딩 페이지 표가 그 유입경로로 좁혀진다 —
@@ -5101,6 +5125,32 @@ const ICONS: Record<string, string> = {
             renderGa4Detail();
           };
         });
+      }
+
+      // 기기·브라우저·OS. 기준이 둘이다.
+      //   GA4      = 전체 방문(내 방문 포함). Site Kit 태그라 관리자 제외 장치가 없다.
+      //   내 방문 제외 = 자체 트래커(pageview_mg). 제외 UA 는 pageview_mg_bot 으로 플립돼 빠진다.
+      // 단위가 GA4=세션 / 자체=페이지뷰로 다르므로 라벨에 기준을 반드시 적는다.
+      function renderGa4Audience() {
+        const mine = _ga4AudSrc === 'mg';
+        const days = Math.min(_ga4Days, MG_LIVE_DAYS);
+        const note = document.getElementById('ga4-aud-note');
+        if (note) {
+          note.textContent = mine
+            ? `자체 트래커 · 페이지뷰 기준 · 최근 ${days}일${_ga4Days > MG_LIVE_DAYS ? ` (수집 창 ${MG_LIVE_DAYS}일 상한)` : ''}`
+            : `GA4 · 세션 기준 · 내 방문 포함`;
+        }
+        // 자체 트래커 기준인데 아직 안 받아왔으면 '데이터 없음'이 아니라 로딩으로 표시해야 한다
+        if (mine && !_mgLiveLoaded) {
+          ['ga4-device', 'ga4-browser', 'ga4-os'].forEach((id) => {
+            const e = document.getElementById(id);
+            if (e) e.innerHTML = '<div style="color:var(--text-3);font-size:0.74rem;padding:0.3rem 0;">불러오는 중…</div>';
+          });
+          return;
+        }
+        for (const [id, kind, dim] of [['ga4-device', 'device', 'device'], ['ga4-browser', 'browser', 'browser'], ['ga4-os', 'os', 'os']]) {
+          renderGa4Breakdown(id, dim, ga4DevKo, false, mine ? mgLiveAudience(kind) : null);
+        }
       }
 
       // 랜딩 페이지 목록. 유입경로 필터가 걸리면 page_source 교차 차원에서 뽑는다.
@@ -5178,9 +5228,7 @@ const ICONS: Record<string, string> = {
         renderGa4DailyTable();
         renderGa4Breakdown('ga4-channel', 'channel', ga4ChKo);
         renderGa4Breakdown('ga4-sourcemedium', 'source_medium', null);
-        renderGa4Breakdown('ga4-device', 'device', ga4DevKo, false);
-        renderGa4Breakdown('ga4-browser', 'browser', null, false);
-        renderGa4Breakdown('ga4-os', 'os', null, false);
+        renderGa4Audience();
         renderGa4Table();
       }
 
@@ -5498,17 +5546,39 @@ const ICONS: Record<string, string> = {
       let _naverIdx = {};
       const naverIndexAt = (ts) => _naverIdx[String(ts || '').slice(0, 19)] || null;
 
-      // 뭉게 실시간 방문 — 최근 3일치만. 30초 폴링으로 갱신한다.
+      // 뭉게 실시간 방문. 30초 폴링으로 갱신한다.
+      // 창은 31일 — GA4 는 내 방문을 걸러낼 수 없고(Site Kit 태그) 자체 트래커만 걸러진다.
+      // 그 "내 방문 제외" 기준으로 기기·유입을 보려면 오늘치만으론 표본이 안 되므로 한 달을 받는다.
+      // event_type='pageview_mg' 만 읽는 게 곧 제외 필터다 — 제외 UA 는 pageview_mg_bot 으로 플립된다.
+      const MG_LIVE_DAYS = 31;
       async function refreshMgLive() {
-        const since = new Date(Date.now() - 3 * 864e5).toISOString();
+        const since = new Date(Date.now() - MG_LIVE_DAYS * 864e5).toISOString();
         try {
           const r = await fetch(
             `${SUPABASE_URL}/rest/v1/analytics?event_type=eq.pageview_mg&created_at=gte.${since}` +
-            `&select=created_at,path:metadata->>path,title:metadata->>title,ref:metadata->>referrer&order=created_at.desc&limit=3000`,
+            `&select=created_at,path:metadata->>path,title:metadata->>title,ref:metadata->>referrer,ua:metadata->>user_agent&order=created_at.desc&limit=5000`,
             { headers }
           );
           if (r.ok) { _mgLive = await r.json(); _mgLiveLoaded = true; }
         } catch {}
+      }
+
+      // 자체 트래커 기준 기기/브라우저/OS — GA4 차원과 달리 내 방문이 빠져 있다.
+      // 기간은 GA4 탭 선택값을 따르되 수집 창(31일)을 넘지 못한다.
+      function mgLiveAudience(kind) {
+        const days = Math.min(_ga4Days, MG_LIVE_DAYS);
+        const from = new Date(Date.now() - (days - 1) * 864e5).toISOString().slice(0, 10);
+        const acc = {};
+        for (const e of (_mgLive || [])) {
+          const day = new Date(new Date(e.created_at).getTime() + 9 * 3600e3).toISOString().slice(0, 10);
+          if (day < from) continue;
+          const k = parseUA(e.ua)[kind];
+          const a = (acc[k] ||= { key: k, sessions: 0, users: 0, views: 0, engaged: 0 });
+          // 자체 트래커는 페이지뷰 단위 기록이라 세션 개념이 없다 — 표 컬럼(세션)에 조회수를 넣고
+          // 라벨에서 기준을 밝힌다. 여기서 굳이 세션을 추정하면 GA4 쪽과 헷갈린다.
+          a.sessions++; a.views++;
+        }
+        return Object.values(acc).sort((a, b) => b.sessions - a.sessions);
       }
 
       // 오늘(KST) 뭉게 방문을 경로별로 집계 — GA4 배치를 기다리지 않는 실시간 값
