@@ -3762,10 +3762,13 @@ const ICONS: Record<string, string> = {
             label = `${date.getMonth()+1}/${date.getDate()}`;
             sortKey = key;
           }
-          if (!buckets[key]) buckets[key] = { key, label, views:0, visitors:0, tf:0, lf:0, vip:0, web:0, mobile:0, webV:0, mobileV:0, sortKey };
+          if (!buckets[key]) buckets[key] = { key, label, views:0, visitors:0, tf:0, lf:0, vip:0, mg:0, mgV:0, web:0, mobile:0, webV:0, mobileV:0, sortKey };
           const b = buckets[key];
-          b.views += Number(d.views)||0;
-          b.visitors += Number(d.visitors)||0;
+          // 뭉게는 analytics RPC 밖(GA4)이라 mergeMgIntoDetail 이 일자 행에 미리 얹어 둔다
+          b.mg += Number(d.mg_views)||0;
+          b.mgV += Number(d.mg_visitors)||0;
+          b.views += (Number(d.views)||0) + (Number(d.mg_views)||0);
+          b.visitors += (Number(d.visitors)||0) + (Number(d.mg_visitors)||0);
           b.tf += Number(d.tf_views)||0;
           b.lf += Number(d.lf_views)||0;
           b.vip += Number(d.vip_views)||0;
@@ -3778,10 +3781,20 @@ const ICONS: Record<string, string> = {
       }
 
       // 방문자를 TF/LF로 안분(조회 비율 추정) — 방문자엔 소스별 원본이 없음
+      // TF/LF 방문자는 조회 비율로 역산한다. b.views·b.visitors 에는 뭉게(GA4)가 합산돼
+      // 있으므로 그대로 나누면 뭉게 방문자가 LF 로 흡수된다 → 블로그 몫만 떼어 계산.
       function splitVisitors(b) {
-        if (!b.views) return { tf: 0, lf: 0 };
-        const tf = Math.round(b.visitors * b.tf / b.views);
-        return { tf, lf: Math.max(0, b.visitors - tf) };
+        const bViews = (b.views || 0) - (b.mg || 0);
+        const bVis = (b.visitors || 0) - (b.mgV || 0);
+        if (bViews <= 0 || bVis <= 0) return { tf: 0, lf: 0 };
+        const tf = Math.round(bVis * b.tf / bViews);
+        return { tf, lf: Math.max(0, bVis - tf) };
+      }
+      // VIP 방문자도 같은 이유로 블로그 몫 기준
+      function vipVisitors(b) {
+        const bViews = (b.views || 0) - (b.mg || 0);
+        const bVis = (b.visitors || 0) - (b.mgV || 0);
+        return bViews > 0 ? Math.round(bVis * b.vip / bViews) : 0;
       }
 
       let _chartHover = null;
@@ -3794,13 +3807,17 @@ const ICONS: Record<string, string> = {
         if (!buckets.length) { container.innerHTML = '<div class="no-data">데이터 없음</div>'; _chartHover = null; return; }
 
         const metric = _trafficMetric || 'views';
+        // 뭉게는 GA4 에서 실제 방문자(totalUsers)를 그대로 받으므로 TF/LF/VIP 처럼
+        // 조회 비율로 추정하지 않고 mgV 를 그대로 쓴다.
         const series = metric === 'visitors'
           ? [{ name: 'TechFlow', color: '#3b82f6', vals: buckets.map(b => splitVisitors(b).tf) },
              { name: 'LifeFlow', color: '#22c55e', vals: buckets.map(b => splitVisitors(b).lf) },
-             { name: 'VIP', color: '#57e6c3', vals: buckets.map(b => b.views ? Math.round(b.visitors * b.vip / b.views) : 0) }]
+             { name: 'VIP', color: '#57e6c3', vals: buckets.map(vipVisitors) },
+             { name: '뭉게', color: '#f59e0b', vals: buckets.map(b => b.mgV || 0) }]
           : [{ name: 'TechFlow', color: '#3b82f6', vals: buckets.map(b => b.tf) },
              { name: 'LifeFlow', color: '#22c55e', vals: buckets.map(b => b.lf) },
-             { name: 'VIP', color: '#57e6c3', vals: buckets.map(b => b.vip) }];
+             { name: 'VIP', color: '#57e6c3', vals: buckets.map(b => b.vip) },
+             { name: '뭉게', color: '#f59e0b', vals: buckets.map(b => b.mg || 0) }];
         if (legend) {
           legend.innerHTML = series.map(s =>
             `<span style="display:flex;align-items:center;gap:0.3rem"><i style="width:14px;height:0;border-top:2.5px dashed ${s.color};display:inline-block"></i>${s.name}</span>`
@@ -3869,10 +3886,12 @@ const ICONS: Record<string, string> = {
           const devSub = _deviceDataReady && (dw + dm) > 0
             ? ` <span style="color:var(--text-3)">·</span> <span style="color:#f59e0b">🖥 PC ${fmt(dw)}</span> <span style="color:#ec4899">📱 모바일 ${fmt(dm)}</span>`
             : '';
-          const vipVis = b.views ? Math.round(b.visitors * b.vip / b.views) : 0;
+          const vipVis = vipVisitors(b);
+          const mgPart = (metric === 'visitors' ? b.mgV : b.mg)
+            ? ` · <span style="color:#fbbf24">뭉게 ${fmt(metric === 'visitors' ? b.mgV : b.mg)}</span>` : '';
           const sub = (metric === 'visitors'
-            ? `<span style="color:#60a5fa">TF ${fmt(vis.tf)}</span> · <span style="color:#4ade80">LF ${fmt(vis.lf)}</span> · <span style="color:#57e6c3">VIP ${fmt(vipVis)}</span> <span style="color:var(--text-3)">· 조회 ${fmt(b.views)}</span>`
-            : `<span style="color:#60a5fa">TF ${fmt(b.tf)}</span> · <span style="color:#4ade80">LF ${fmt(b.lf)}</span> · <span style="color:#57e6c3">VIP ${fmt(b.vip)}</span>`) + devSub;
+            ? `<span style="color:#60a5fa">TF ${fmt(vis.tf)}</span> · <span style="color:#4ade80">LF ${fmt(vis.lf)}</span> · <span style="color:#57e6c3">VIP ${fmt(vipVis)}</span>${mgPart} <span style="color:var(--text-3)">· 조회 ${fmt(b.views)}</span>`
+            : `<span style="color:#60a5fa">TF ${fmt(b.tf)}</span> · <span style="color:#4ade80">LF ${fmt(b.lf)}</span> · <span style="color:#57e6c3">VIP ${fmt(b.vip)}</span>${mgPart}`) + devSub;
           return `<div class="tl-row ${cur ? 'tl-cur' : ''}">
             <div class="tl-top">
               <span class="tl-date">${b.label}${cur ? ' ·현재' : ''}</span>
@@ -4914,7 +4933,17 @@ const ICONS: Record<string, string> = {
           : period === 'week' ? new Date(Date.now() - 7 * 864e5).toISOString().slice(0, 10)
           : period === 'month' ? new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10)
           : null;
-        return mgAgg('page', from).filter((r) => r.key && r.key !== '(not set)').map((r) => ({
+        // GA4 landingPage 는 쿼리스트링을 붙여 준다. 뭉게는 캐시버스터(`/?v=…`)가 붙은
+        // 방문이 많아 그대로 두면 같은 홈이 여러 행으로 쪼개져 Top Pages 를 잠식한다.
+        const strip = (k) => k.split('?')[0] || '/';
+        const merged = {};
+        for (const r of mgAgg('page', from)) {
+          if (!r.key || r.key === '(not set)') continue;
+          const k = strip(r.key);
+          const a = (merged[k] ||= { key: k, sessions: 0, views: 0 });
+          a.sessions += r.sessions || 0; a.views += r.views || 0;
+        }
+        return Object.values(merged).sort((a, b) => b.views - a.views).map((r) => ({
           path: r.key.startsWith('/') ? r.key : '/' + r.key,
           slug: r.key,
           source: 'mg',
@@ -5080,10 +5109,32 @@ const ICONS: Record<string, string> = {
         }
       }
 
+      // Row 2 방문 추이용 — get_daily_detail 행에 뭉게 일별 수치를 얹는다.
+      // bucketDetail 이 mg_views/mg_visitors 를 읽어 버킷의 mg·mgV 와 총합에 반영한다.
+      // 여러 번 호출돼도 대입(=)이라 누적되지 않는다.
+      function mergeMgIntoDetail() {
+        if (!Array.isArray(_ga4Rows) || !_trafficDetail) return;
+        const byDay = {};
+        for (const r of _ga4Rows) {
+          if (r.dim !== 'total') continue;
+          const a = (byDay[r.date] ||= { views: 0, users: 0 });
+          a.views += r.views || 0; a.users += r.users || 0;
+        }
+        const idx = {};
+        _trafficDetail.forEach((d) => { if (d.day) idx[d.day] = d; });
+        for (const [day, v] of Object.entries(byDay)) {
+          if (idx[day]) { idx[day].mg_views = v.views; idx[day].mg_visitors = v.users; }
+          else _trafficDetail.push({ day, views: 0, visitors: 0, tf_views: 0, lf_views: 0, mg_views: v.views, mg_visitors: v.users });
+        }
+        _trafficDetail.sort((a, b) => (a.day < b.day ? -1 : 1));
+      }
+
       async function loadMunggeAll() {
         await Promise.all([ensureGa4Rows(), loadMunggePosts()]);
         renderMunggeSection();
         applyMungge();
+        mergeMgIntoDetail();
+        if (typeof renderTrafficPanel === 'function' && _trafficDetail.length) renderTrafficPanel();
         renderTopPages();            // 뭉게 페이지를 Top Pages 에 합류
         if (_audienceRows) renderAudience(_audienceRows);   // 유입경로·기기 토글 반영
       }
@@ -6217,6 +6268,8 @@ const ICONS: Record<string, string> = {
           renderVipRecentPosts(); // VIP 목록 조회수 채우기(topPages 로드 후)
           renderEventFeed(events);
           _trafficDetail = Array.isArray(dailyDetail) ? dailyDetail : [];
+          // RPC 응답으로 통째 교체되므로 뭉게 일별 수치를 매번 다시 얹는다(30초 폴링)
+          mergeMgIntoDetail();
           // 웹/모바일 일별 집계 병합 (get_daily_device_trend — KST 일자 기준으로 daily_detail 과 동일)
           _deviceDataReady = Array.isArray(deviceTrend) && deviceTrend.length > 0;
           if (_deviceDataReady) {
