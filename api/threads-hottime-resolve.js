@@ -39,12 +39,25 @@ export default async function handler(req, res) {
     return res.status(200).json({ ok: true, skipped: 'already_posted' });
   }
 
-  const drafts = await sb(`threads_queue?status=eq.draft&account_id=eq.${acct.id}&select=*`);
+  // 발행 순서를 정해두고 쓰는 경우가 있어 scheduled_at → id 순으로 가장 앞의 것을 집는다.
+  // (예전엔 랜덤이라 "다음에 뭐가 나갈지"를 알 수 없었고 순서를 짜둬도 무의미했다)
+  const drafts = await sb(`threads_queue?status=eq.draft&account_id=eq.${acct.id}&select=*&order=scheduled_at.asc.nullslast,id.asc&limit=1`);
   // 마커·메시지id 클리어(다음 창을 위해)
   await sb(`threads_accounts?id=eq.${acct.id}`, { method: 'PATCH', body: { hottime_started_at: null, hottime_msg_id: null } });
-  if (!drafts.length) { await notifyDone('🔥 핫타임 종료 — 큐가 비어 자동발행 못 함. <code>/threads gen life 2</code>'); return res.status(200).json({ ok: true, skipped: 'no_drafts' }); }
+  if (!drafts.length) {
+    // draft 가 없어도 예약(scheduled)이 남아 있으면 큐가 빈 게 아니다 — 그냥 아직 때가 안 됐을 뿐.
+    // 이걸 구분 안 하면 "큐가 비었다"는 잘못된 알림이 매 창마다 나간다.
+    const pending = await sb(`threads_queue?status=eq.scheduled&account_id=eq.${acct.id}&select=id,scheduled_at&order=scheduled_at.asc&limit=1`);
+    if (pending.length) {
+      const at = new Date(pending[0].scheduled_at).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+      await notifyDone(`✅ 핫타임 종료 — 예약 발행 대기 중(다음: ${escapeHtml(at)}). 자동발행은 건너뜀.`);
+      return res.status(200).json({ ok: true, skipped: 'scheduled_pending' });
+    }
+    await notifyDone('🔥 핫타임 종료 — 큐가 비어 자동발행 못 함. <code>/threads gen life 2</code>');
+    return res.status(200).json({ ok: true, skipped: 'no_drafts' });
+  }
 
-  const pick = drafts[Math.floor(Math.random() * drafts.length)];
+  const pick = drafts[0];
   try {
     const mediaId = await publishDraft(acct, pick);
     await notifyDone(`✅ 핫타임 종료 — 10분 무응답이라 큐에서 <b>자동 발행</b>했어 (#${pick.id}${pick.link_url ? ', 링크=첫 댓글' : ''}) 🐶\n\n${escapeHtml(pick.text.slice(0, 80))}…`);
