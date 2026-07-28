@@ -965,6 +965,7 @@ const ICONS: Record<string, string> = {
       .src-badge.gf { background: rgba(168, 85, 247, 0.15); color: #d8b4fe; }
       .src-badge.vip { background: rgba(87, 230, 195, 0.15); color: #7fe9d0; }
       .src-badge.mg { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+      .event-ref { font-size: 0.66rem; color: var(--text-3); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .mg-untracked { color: #fbbf24; opacity: 0.85; }
 
       /* ── 추천 TOP ─────────────────────────────────────── */
@@ -3002,6 +3003,7 @@ const ICONS: Record<string, string> = {
       <div class="tab-content" id="tab-ga4">
         <div class="gsc-controls">
           <div class="gsc-seg" id="ga4-period">
+            <button data-days="1">오늘</button>
             <button data-days="7">7일</button>
             <button data-days="28">28일</button>
             <button data-days="90">90일</button>
@@ -3539,11 +3541,14 @@ const ICONS: Record<string, string> = {
         like: '\u2764\uFE0F',
         coupang_click: '\uD83D\uDED2',
         paperdoc_click: '\uD83D\uDCC4',
-        newsletter_subscribe: '\uD83D\uDCE7'
+        newsletter_subscribe: '\uD83D\uDCE7',
+        pageview_mg: '\uD83D\uDC41'
       };
 
       const EVENT_LABELS = {
         pageview: 'Viewed',
+        // 뭉게 방문(자체 트래커). 조회수 집계는 GA4가 하므로 event_type을 분리했다 — scripts/wp-track.js 참조
+        pageview_mg: 'Viewed',
         like: 'Liked',
         coupang_click: 'Coupang Click',
         paperdoc_click: 'Paperdoc Click',
@@ -4791,13 +4796,16 @@ const ICONS: Record<string, string> = {
         const s = ga4DailySeries();
         const sum = (k) => s.reduce((a, d) => a + (d[k] || 0), 0);
         const sessions = sum('sessions'), users = sum('users'), views = sum('views'), engaged = sum('engaged');
+        // 기간 합계와 별개로 '오늘'을 항상 병기한다 — 기간을 바꾸지 않고도 당일치를 본다.
+        const td = mgTotal(kstToday(), kstToday());
         const card = (k, v, sub) =>
           `<div class="gsc-kpi-card"><div class="gsc-kpi-k">${k}</div><div class="gsc-kpi-v">${v}</div><div class="gsc-kpi-k">${sub}</div></div>`;
+        const per = _ga4Days === 1 ? '오늘' : `최근 ${_ga4Days}일`;
         el.innerHTML =
-          card('세션', ga4Fmt(sessions), `최근 ${_ga4Days}일`) +
-          card('사용자', ga4Fmt(users), '중복 제거') +
-          card('페이지뷰', ga4Fmt(views), `세션당 ${sessions ? (views / sessions).toFixed(1) : '0.0'}쪽`) +
-          card('참여율', ga4Pct(sessions ? engaged / sessions : 0), `참여 세션 ${ga4Fmt(engaged)}`);
+          card('세션', ga4Fmt(sessions), `${per} · 오늘 ${ga4Fmt(td.sessions)}`) +
+          card('사용자', ga4Fmt(users), `중복 제거 · 오늘 ${ga4Fmt(td.users)}`) +
+          card('페이지뷰', ga4Fmt(views), `세션당 ${sessions ? (views / sessions).toFixed(1) : '0.0'}쪽 · 오늘 ${ga4Fmt(td.views)}`) +
+          card('참여율', ga4Pct(sessions ? engaged / sessions : 0), `참여 세션 ${ga4Fmt(engaged)} · 오늘 ${ga4Fmt(td.engaged)}`);
         const up = document.getElementById('ga4-updated');
         const last = (_ga4Rows || []).reduce((m, r) => (r.date > m ? r.date : m), '');
         if (up) up.textContent = last ? `최근 데이터: ${last}` : '';
@@ -6020,6 +6028,7 @@ const ICONS: Record<string, string> = {
         blog: 'https://ai-revenue-blog.vercel.app',
         lifeflow: 'https://life-revenue-blog.vercel.app',
         vip: 'https://virtual-in-playing.vercel.app',
+        mg: 'https://mungge.com',
       };
 
       function eventLink(e) {
@@ -6073,10 +6082,19 @@ const ICONS: Record<string, string> = {
             ? `<div class="event-page-title" title="${escHtml(prod)}" style="color:#facc15">🛒 ${escHtml(prod.length > 30 ? prod.slice(0,30)+'…' : prod)}</div>`
             : `<div class="event-page-title" title="${escHtml(title)}">${escHtml(shortTitle) || '홈페이지'}</div>`;
 
+          // 유입 원문 — "네이버 블로그 어느 글에서 왔나"가 여기 남는다.
+          // 같은 사이트 내부 이동과 direct 는 노이즈라 제외한다.
+          const ref = String(e.referrer || (e.metadata && e.metadata.referrer) || '');
+          const refHost = /^https?:\/\//.test(ref) ? ref.replace(/^https?:\/\//, '').split('/')[0] : '';
+          const isSelf = refHost && Object.values(SITE_BY_SOURCE || {}).some((s) => String(s).includes(refHost));
+          const refLine = refHost && !isSelf
+            ? `<div class="event-ref" title="${escHtml(ref)}">↩ ${escHtml(ref.length > 46 ? ref.slice(0, 46) + '…' : ref)}</div>`
+            : '';
+
           const inner = `<span class="event-icon ${escHtml(e.event_type)}">${icon}</span>
             <div class="event-content">
               <div class="event-action">${srcBadge} ${escHtml(label)}${emailTag}</div>
-              ${detail}
+              ${detail}${refLine}
             </div>
             <span class="event-time">${timeAgo(e.created_at)}</span>`;
           return isIdx
