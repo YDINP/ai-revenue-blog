@@ -4,10 +4,6 @@
     {
       "path": "/api/daily-report",
       "schedule": "0 23 * * *"
-    },
-    {
-      "path": "/api/threads-cron",
-      "schedule": "0 14 * * *"
     }
   ],
   "redirects": [

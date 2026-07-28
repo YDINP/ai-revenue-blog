@@ -1,6 +1,6 @@
 // Threads Cron — 예약/자동 발행 + 토큰 갱신 + 인사이트 동기화
 // Vercel Cron이 Authorization: Bearer CRON_SECRET 로 호출. (GH Actions cron으로 더 자주 핑도 가능)
-import { sendToAdmin, tg } from './_shared.js';
+import { sendToAdmin, tg, escapeHtml } from './_shared.js';
 import {
   sb, getAccounts, publishDraft, refreshLongLived, updateAccount,
   getInsights, publishedCount24h,
@@ -18,6 +18,9 @@ export default async function handler(req, res) {
 
   const log = { scheduled: 0, auto: 0, refreshed: 0, insights: 0, errors: [] };
   const now = new Date().toISOString();
+  // 무엇이 나갔는지 남긴다 — 건수만 알리면 "뭐가 발행됐지?" 를 확인하러 앱을 열어야 한다.
+  const posted = [];
+  const note = (row) => posted.push({ id: row.id, text: String(row.text || '').split('\n')[0], link: row.link_url || '' });
 
   // ── 1) 예약 발행 (scheduled_at 도래) ──
   try {
@@ -25,7 +28,7 @@ export default async function handler(req, res) {
     for (const row of due) {
       const acct = (await sb(`threads_accounts?id=eq.${row.account_id}&limit=1`))[0];
       if (!acct?.access_token) continue;
-      try { await publishDraft(acct, row); log.scheduled++; }
+      try { await publishDraft(acct, row); log.scheduled++; note(row); }
       catch (e) { await sb(`threads_queue?id=eq.${row.id}`, { method: 'PATCH', body: { status: 'failed', error: e.message } }); log.errors.push(`sched#${row.id}:${e.message}`); }
     }
   } catch (e) { log.errors.push(`scheduled:${e.message}`); }
@@ -37,7 +40,7 @@ export default async function handler(req, res) {
       if ((await publishedCount24h(a.id)) >= AUTO_DAILY_CAP) continue;
       const drafts = await sb(`threads_queue?status=eq.draft&account_id=eq.${a.id}&select=*&order=id&limit=1`);
       if (!drafts.length) continue;
-      try { await publishDraft(a, drafts[0]); log.auto++; }
+      try { await publishDraft(a, drafts[0]); log.auto++; note(drafts[0]); }
       catch (e) { await sb(`threads_queue?id=eq.${drafts[0].id}`, { method: 'PATCH', body: { status: 'failed', error: e.message } }); log.errors.push(`auto#${drafts[0].id}:${e.message}`); }
     }
   } catch (e) { log.errors.push(`auto:${e.message}`); }
@@ -122,11 +125,31 @@ export default async function handler(req, res) {
     }
   } catch (e) { log.errors.push(`replies:${e.message}`); }
 
+  // 다음 예정 1건 — 핫타임 알림을 껐으니 "다음에 뭐가 나가는지"를 알려줄 창구가 여기뿐이다.
+  let next = null;
+  try {
+    const p = await sb(`threads_queue?status=eq.scheduled&select=id,text,scheduled_at&order=scheduled_at.asc&limit=1`);
+    if (p.length) next = p[0];
+  } catch (e) { log.errors.push(`next:${e.message}`); }
+  log.posted = posted.map((p) => p.id);
+  log.next = next ? { id: next.id, at: next.scheduled_at } : null;
+
+  const kst = (iso) =>
+    new Date(iso).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+  const cut = (s, n) => (String(s).length > n ? String(s).slice(0, n) + '…' : String(s));
+
   if (log.scheduled || log.auto || log.replies || log.errors.length) {
-    await sendToAdmin(
-      `🧵 Threads Cron\n예약발행 ${log.scheduled} · 자동발행 ${log.auto} · 토큰갱신 ${log.refreshed} · 인사이트 ${log.insights} · 새댓글 ${log.replies}` +
-        (log.errors.length ? `\n⚠️ ${log.errors.slice(0, 5).join(' / ')}` : '')
-    ).catch(() => {});
+    const lines = [
+      `🧵 Threads Cron`,
+      `예약발행 ${log.scheduled} · 자동발행 ${log.auto} · 토큰갱신 ${log.refreshed} · 인사이트 ${log.insights} · 새댓글 ${log.replies}`,
+    ];
+    for (const p of posted) {
+      lines.push(`\n📤 <b>#${p.id}</b> ${escapeHtml(cut(p.text, 60))}`);
+      if (p.link) lines.push(`   ${escapeHtml(p.link.split('?')[0])}`);
+    }
+    if (next) lines.push(`\n🗓 다음: <b>#${next.id}</b> ${escapeHtml(kst(next.scheduled_at))}\n   ${escapeHtml(cut(String(next.text || '').split('\n')[0], 60))}`);
+    if (log.errors.length) lines.push(`\n⚠️ ${escapeHtml(log.errors.slice(0, 5).join(' / '))}`);
+    await sendToAdmin(lines.join('\n')).catch(() => {});
   }
   return res.status(200).json({ ok: true, ...log });
 }

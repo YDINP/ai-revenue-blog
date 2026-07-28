@@ -1,0 +1,29 @@
+name: Threads Cron (예약발행 · 인사이트 · 댓글수집)
+
+# Vercel Hobby 크론은 지정 시각에서 최대 1시간 지연되고 실제로 안 뜨는 날도 있다.
+# 2026-07-23~28 사이 자동발행이 5일간 멈춘 정황이 있어(초안 10건이 auto 모드로 대기 중이었음)
+# daily-report 와 같은 이유로 GH Actions 로 옮긴다. vercel.json 의 crons 에서는 제거했다.
+#
+# 22:00 KST 에 예약이 도래하도록 큐를 잡아두므로 23:00 KST 한 번이면 충분하지만,
+# GH Actions cron 도 지연되므로 여유를 두고 두 번 친다(중복 발행은 status 전이로 방지됨).
+on:
+  schedule:
+    - cron: '0 14 * * *'   # 14:00 UTC = 23:00 KST
+    - cron: '0 16 * * *'   # 16:00 UTC = 01:00 KST — 앞 실행이 밀렸을 때의 보조
+  workflow_dispatch:
+
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call threads-cron
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          BASE: https://ai-revenue-blog.vercel.app
+        run: |
+          code=$(curl -sS -o /tmp/out.json -w '%{http_code}' \
+            -H "Authorization: Bearer $CRON_SECRET" "$BASE/api/threads-cron")
+          echo "HTTP $code"
+          cat /tmp/out.json; echo
+          # 200 이 아니면 워크플로를 실패시켜 GitHub 알림을 받는다(조용히 죽는 게 제일 나쁘다)
+          test "$code" = "200"
