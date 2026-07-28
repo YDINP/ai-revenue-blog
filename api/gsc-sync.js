@@ -6,9 +6,17 @@
 //   /api/gsc-sync?dim=query,page&…   (어떤 검색어가 어떤 글로 떨어지는지)
 // gsc_daily 는 date×page 만 저장해서 검색어 단위 진단(CTR·식인)이 불가능하다. 별도 엔드포인트를
 // 만들면 Hobby 플랜 서버리스 함수 12개 상한에 걸리므로 이 핸들러에 조회 모드를 얹는다.
+//
+// GA4(유입경로) 도 같은 서비스 계정을 쓰므로 이 핸들러에 함께 얹는다.
+//   /api/gsc-sync?ga4=whoami&secret=…                 서비스계정 이메일·연동 상태
+//   /api/gsc-sync?ga4=properties&secret=…             접근 가능한 GA4 속성 목록(속성 ID 확인)
+//   /api/gsc-sync?ga4=probe&blog=mg&days=28&dim=sessionSourceMedium&secret=…   원본 조회
+//   /api/gsc-sync?ga4=sync&days=30&secret=…           ga4_daily 저장
 import { syncGsc } from './_gsc-sync.js';
-import { blogList } from './_blogs.js';
+import { syncGa4 } from './_ga4-sync.js';
+import { blogList, resolveBlog } from './_blogs.js';
 import { gscDay, gscInspect, gscRaw, gscSitemaps, hasGsc } from './_gsc.js';
+import { ga4Day, ga4Properties, ga4Report, hasGa4, saEmail } from './_ga4.js';
 
 export default async function handler(req, res) {
   const secret = process.env.CRON_SECRET;
@@ -18,6 +26,8 @@ export default async function handler(req, res) {
   if (secret && token !== secret) {
     return res.status(401).json({ error: 'unauthorized' });
   }
+
+  if (url.searchParams.get('ga4')) return ga4(url, res);
 
   const dim = url.searchParams.get('dim');
   if (dim) return probe(url, res);
@@ -74,6 +84,70 @@ async function inspect(url, res) {
     }
   }
   return res.status(200).json({ ok: true, site: blog.gscSite, count: results.length, results });
+}
+
+// ── GA4(유입경로) ───────────────────────────────────────────────────────────
+// GSC 는 구글 검색 유입만 보여준다. 네이버·직접·추천·소셜이 어디서 얼마나 오는지는 GA4 만 안다.
+async function ga4(url, res) {
+  const mode = url.searchParams.get('ga4');
+  if (!hasGa4()) return res.status(500).json({ error: 'no-google-sa-env' });
+
+  try {
+    // 연동 진단 — GA4 속성에 어느 이메일을 '뷰어'로 추가해야 하는지 알려준다
+    if (mode === 'whoami') {
+      const out = { ok: true, serviceAccount: saEmail(), adminApi: null, properties: null };
+      try {
+        const props = await ga4Properties();
+        out.adminApi = 'ok';
+        out.properties = props;
+        if (!props.length) {
+          out.hint = '접근 가능한 GA4 속성이 없습니다 — GA4 관리 > 속성 액세스 관리에서 위 serviceAccount 를 뷰어로 추가하세요.';
+        }
+      } catch (e) {
+        out.adminApi = `error: ${e.message}`;
+        out.hint = /SERVICE_DISABLED|has not been used/i.test(e.message)
+          ? 'GCP 프로젝트에서 Google Analytics Admin API / Data API 를 활성화하세요.'
+          : 'GA4 관리 > 속성 액세스 관리에서 위 serviceAccount 를 뷰어로 추가하세요.';
+      }
+      return res.status(200).json(out);
+    }
+
+    if (mode === 'properties') {
+      return res.status(200).json({ ok: true, serviceAccount: saEmail(), properties: await ga4Properties() });
+    }
+
+    if (mode === 'sync') {
+      const days = Math.min(Math.max(parseInt(url.searchParams.get('days') || '7', 10) || 7, 1), 400);
+      return res.status(200).json({ ok: true, days, ...(await syncGa4({ days })) });
+    }
+
+    if (mode === 'probe') {
+      const blog = resolveBlog(url.searchParams.get('blog') || 'mg');
+      const propertyId = url.searchParams.get('property') || blog?.ga4Property;
+      if (!propertyId) {
+        return res.status(400).json({
+          error: 'GA4 속성 ID 없음 — ?property=<숫자> 로 직접 주거나 _blogs.js 의 ga4Property 를 설정하세요.',
+        });
+      }
+      const days = Math.min(Math.max(parseInt(url.searchParams.get('days') || '28', 10) || 28, 1), 400);
+      const dimensions = (url.searchParams.get('dim') || 'sessionSourceMedium')
+        .split(',').map((s) => s.trim()).filter(Boolean);
+      const limit = Math.min(Math.max(parseInt(url.searchParams.get('limit') || '100', 10) || 100, 1), 5000);
+      const r = await ga4Report(propertyId, {
+        startDate: ga4Day(days),
+        endDate: ga4Day(0),
+        dimensions,
+        metrics: ['sessions', 'totalUsers', 'screenPageViews', 'engagedSessions'],
+        limit,
+        orderBys: [{ metric: { metricName: 'sessions' }, desc: true }],
+      });
+      return res.status(200).json({ ok: true, propertyId, days, ...r });
+    }
+
+    return res.status(400).json({ error: `unknown ga4 mode '${mode}'`, modes: ['whoami', 'properties', 'probe', 'sync'] });
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
 }
 
 // 저장 없이 GSC 원본 행만 반환 — 검색어 진단용

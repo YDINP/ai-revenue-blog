@@ -6,53 +6,14 @@
 //   GOOGLE_SA_PRIVATE_KEY 서비스 계정 개인키 (PEM, 줄바꿈은 \n 이스케이프 그대로 넣어도 됨)
 // 서비스 계정 이메일을 각 사이트의 Search Console 사용자로 추가해야 조회된다.
 
-import crypto from 'node:crypto';
+// JWT 서명·토큰 캐시는 GA4 와 공유한다(_google-auth.js). 스코프만 다르다.
+import { googleToken, hasGoogleSa } from './_google-auth.js';
 
 const SCOPE = 'https://www.googleapis.com/auth/webmasters.readonly';
 
-export function hasGsc() {
-  return !!(process.env.GOOGLE_SA_EMAIL && process.env.GOOGLE_SA_PRIVATE_KEY);
-}
+export const hasGsc = hasGoogleSa;
 
-const b64url = (buf) =>
-  Buffer.from(buf).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-
-let cachedToken = null;   // 함수 인스턴스가 살아있는 동안 재사용 (만료 1분 전까지)
-
-async function accessToken() {
-  if (cachedToken && cachedToken.exp > Date.now() + 60_000) return cachedToken.token;
-
-  const email = process.env.GOOGLE_SA_EMAIL;
-  const key = String(process.env.GOOGLE_SA_PRIVATE_KEY).replace(/\\n/g, '\n');
-  const now = Math.floor(Date.now() / 1000);
-
-  const header = b64url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
-  const claim = b64url(
-    JSON.stringify({
-      iss: email,
-      scope: SCOPE,
-      aud: 'https://oauth2.googleapis.com/token',
-      exp: now + 3600,
-      iat: now,
-    })
-  );
-  const signer = crypto.createSign('RSA-SHA256');
-  signer.update(`${header}.${claim}`);
-  const sig = b64url(signer.sign(key));
-
-  const r = await fetch('https://oauth2.googleapis.com/token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
-      assertion: `${header}.${claim}.${sig}`,
-    }),
-  });
-  const j = await r.json();
-  if (!r.ok) throw new Error(`GSC 인증 실패: ${j.error_description || j.error || r.status}`);
-  cachedToken = { token: j.access_token, exp: Date.now() + (j.expires_in || 3600) * 1000 };
-  return cachedToken.token;
-}
+const accessToken = () => googleToken(SCOPE);
 
 // site: 'https://ai-revenue-blog.vercel.app/' (URL 프리픽스 속성)
 async function query(site, body) {

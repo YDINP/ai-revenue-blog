@@ -7,6 +7,7 @@
 import { escapeHtml, sendToAdmin, supabaseRpc, sourceLabel } from './_shared.js';
 import { reportMessage } from './_report.js';
 import { syncGsc } from './_gsc-sync.js';
+import { syncGa4 } from './_ga4-sync.js';
 import { runNewsletter, unsubscribe, sendCopyLatest, changeEmail, sbn } from './_newsletter.js';
 
 // 구독 취소 확인 페이지 (메일의 '구독 취소' 링크가 이 함수로 옴 — Hobby 12함수 제한 통합)
@@ -173,6 +174,9 @@ export default async function handler(req, res) {
     await supabaseRpc('flag_bot_pageviews', {}).catch((e) => console.error('bot flag (report):', e.message));
     // GSC 검색 실적을 Supabase(gsc_daily)에 저장 — best-effort(실패해도 리포트는 진행)
     await syncGsc({ days: 5 }).catch((e) => console.error('gsc sync (report):', e.message));
+    // GA4 유입경로(네이버·직접·추천·소셜)를 ga4_daily 에 저장 — mungge 처럼 자체 트래커가 없는
+    // 사이트는 이 경로가 유일한 유입 통계다. GSC 와 달리 당일치도 갱신되므로 소급 재집계한다.
+    await syncGa4({ days: 5 }).catch((e) => console.error('ga4 sync (report):', e.message));
     // 새 글(최근 48h) 뉴스레터 발송 — 월·수·금 09시(KST)만. best-effort(GMAIL env 없으면 스킵)
     //   daily-report 는 매일 09시(KST=00:00 UTC) 실행되므로 KST 요일로 게이트한다.
     const kstDow = new Date(Date.now() + 9 * 3600 * 1000).getUTCDay(); // 0=일 … 1=월,3=수,5=금
