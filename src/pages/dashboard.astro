@@ -859,6 +859,7 @@ const ICONS: Record<string, string> = {
       .source-tab.active-tf { background: rgba(59, 130, 246, 0.15); border-color: var(--tf); color: #93bbfd; }
       .source-tab.active-lf { background: rgba(22, 163, 74, 0.15); border-color: var(--lf); color: #6ee7a5; }
       .source-tab.active-vip { background: rgba(87, 230, 195, 0.15); border-color: #57e6c3; color: #7fe9d0; }
+      .source-tab.active-mg { background: rgba(245, 158, 11, 0.15); border-color: var(--mg); color: #fbbf24; }
 
       .top-page-list, .event-feed { display: flex; flex-direction: column; }
 
@@ -2210,9 +2211,10 @@ const ICONS: Record<string, string> = {
             <div class="label">Categories</div>
           </div>
           <div class="kpi-value-row">
-            <div class="value">{totalCategories}</div>
+            <!-- 뭉게 카테고리는 WP REST 로 런타임에 더해진다(빌드시점에 알 수 없음) -->
+            <div class="value" id="total-cat-count" data-base={totalCategories}>{totalCategories}</div>
           </div>
-          <div class="sub">TechFlow {tfCategoryStats.length} + LifeFlow {lfCategoryCount}</div>
+          <div class="sub" id="total-cat-sub" data-base={`TechFlow ${tfCategoryStats.length} + LifeFlow ${lfCategoryCount}`}>TechFlow {tfCategoryStats.length} + LifeFlow {lfCategoryCount}</div>
         </div>
         <div class="summary-card accent-purple color-purple">
           <div class="kpi-top">
@@ -2273,7 +2275,8 @@ const ICONS: Record<string, string> = {
         <div class="summary-card accent-cyan color-cyan" id="tools-sum-card" style="cursor:pointer;" title="클릭하면 도구 탭으로 이동">
           <div class="kpi-top">
             <span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['grid']}></svg></span>
-            <div class="label">LF 도구 방문 <span class="src-badge lf">LF</span></div>
+            <!-- 계산기 26종은 LF(원본)와 뭉게(이식본) 양쪽에 있다 → 합산해서 보여준다 -->
+            <div class="label">도구 방문 <span class="src-badge lf">LF</span><span class="src-badge mg">뭉게</span></div>
           </div>
           <div class="kpi-value-row">
             <div class="value" id="tools-sum-today">--</div>
@@ -2440,11 +2443,14 @@ const ICONS: Record<string, string> = {
 
         <div class="panel col-4">
           <div class="panel-head"><h4><svg class="ico sec-ico i-green" viewBox="0 0 24 24" set:html={ICONS['activity']}></svg> Live Activity</h4></div>
+          <!-- 뭉게도 이벤트(추천·네이버 색인)를 보내므로 필터 대상이다.
+               다만 pageview 는 GA4 라 여기엔 안 잡힌다 — 조회수는 '뭉게 유입' 탭에서 본다. -->
           <div class="source-tabs" id="event-tabs">
             <button class="source-tab active" data-filter="all">All</button>
             <button class="source-tab" data-filter="blog">TechFlow</button>
             <button class="source-tab" data-filter="lifeflow">LifeFlow</button>
             <button class="source-tab" data-filter="vip">VIP</button>
+            <button class="source-tab" data-filter="mg">뭉게</button>
           </div>
           <div class="event-feed" id="event-feed">
             <div class="no-data">Loading...</div>
@@ -2511,7 +2517,8 @@ const ICONS: Record<string, string> = {
             <div class="skel-list"><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span></div>
           </div>
         </div>
-        <p class="dd-note">※ 전환율 = 목표 이벤트 수 ÷ 전체 페이지뷰. 페이지뷰 대비 클릭/구독 비율(세션 기반 아님).</p>
+        <p class="dd-note">※ 전환율 = 목표 이벤트 수 ÷ 전체 페이지뷰. 페이지뷰 대비 클릭/구독 비율(세션 기반 아님).
+          <b>뭉게는 제외</b> — 뭉게에는 쿠팡·페이퍼닥 클릭 추적이 없어 페이지뷰만 더하면 분모만 커져 전환율이 실제보다 낮게 나온다.</p>
       </div>
 
       <!-- ══ Row 6: TechFlow(6) + LifeFlow(6) 콘텐츠 구성 ══ -->
@@ -2709,6 +2716,8 @@ const ICONS: Record<string, string> = {
           <p class="dd-note" style="margin-top:-4px">
             내가 대시보드 확인·글 점검하며 남긴 방문이 조회수에 섞이지 않게 걸러요.
             제외해도 데이터는 지우지 않고 <b>집계에서만 빼는</b> 가역 방식(<code>pageview_bot</code> 플립)이에요.
+            <br><span class="exclude-warn">뭉게는 여기서 못 걸러요</span> — 뭉게 조회수는 자체 트래커가 아니라 GA4(Site Kit)라
+            <a href="https://analytics.google.com/analytics/web/#/a/p547003762/admin/filters" target="_blank" rel="noopener">GA4 관리 &gt; 데이터 필터</a>에서 내부 트래픽으로 제외해야 해요.
           </p>
 
           <div class="exclude-row">
@@ -2980,6 +2989,11 @@ const ICONS: Record<string, string> = {
             <button data-days="7">7일</button>
             <button data-days="28">28일</button>
             <button data-days="90">90일</button>
+          </div>
+          <div class="gsc-seg" id="ga4-bucket">
+            <button data-b="daily">일간</button>
+            <button data-b="weekly">주간</button>
+            <button data-b="monthly">월간</button>
           </div>
           <span class="gsc-updated" id="ga4-updated"></span>
         </div>
@@ -4513,7 +4527,7 @@ const ICONS: Record<string, string> = {
         const area = `M ${x(0)},${y(minV)} L ` + s.map((d, i) => `${x(i)},${y(vals[i])}`).join(' L ') + ` L ${x(n - 1)},${y(minV)} Z`;
         const dots = s.map((d, i) => `<circle cx="${x(i)}" cy="${y(vals[i])}" r="2.6" fill="var(--accent)"/>`).join('');
         const xi = [...new Set([0, Math.floor((n - 1) / 2), n - 1])];
-        const xlab = xi.map((i) => `<text x="${x(i)}" y="${H - 8}" text-anchor="middle" font-size="10" fill="var(--text-3)">${s[i].date.slice(5)}</text>`).join('');
+        const xlab = xi.map((i) => `<text x="${x(i)}" y="${H - 8}" text-anchor="middle" font-size="10" fill="var(--text-3)">${s[i].label || s[i].date}</text>`).join('');
         wrap.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block;height:auto" preserveAspectRatio="xMidYMid meet">
           ${grid}<path d="${area}" fill="var(--accent)" opacity="0.12"/>
           <polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2"/>
@@ -4534,7 +4548,7 @@ const ICONS: Record<string, string> = {
           const d = s[idx], cx = x(idx);
           cross.setAttribute('x1', cx); cross.setAttribute('x2', cx); cross.style.display = '';
           crossDot.setAttribute('cx', cx); crossDot.setAttribute('cy', y(vals[idx])); crossDot.style.display = '';
-          tip.innerHTML = `<div class="gsc-tip-d">${d.date}</div>
+          tip.innerHTML = `<div class="gsc-tip-d">${d.label || d.date}</div>
             <div class="gsc-tip-r"><span>클릭</span><b>${gscFmt(d.clicks)}</b></div>
             <div class="gsc-tip-r"><span>노출</span><b>${gscFmt(d.impressions)}</b></div>
             <div class="gsc-tip-r"><span>CTR</span><b>${gscPct(d.ctr)}</b></div>
@@ -4649,6 +4663,7 @@ const ICONS: Record<string, string> = {
       // ═══════════════════════════════════════════════════════════
       let _ga4Rows = null;          // ga4_daily 90일 전체 (dim 구분 포함)
       let _ga4Days = 28;
+      let _ga4Bucket = 'daily';     // daily | weekly | monthly
       let _ga4Metric = 'sessions';  // sessions | users | views
       let _ga4Sort = { key: 'sessions', dir: -1 };
       let _ga4Search = '';
@@ -4687,6 +4702,7 @@ const ICONS: Record<string, string> = {
           });
         };
         seg('ga4-period', 'days', () => _ga4Days, (v) => { _ga4Days = +v; renderGa4Detail(); });
+        seg('ga4-bucket', 'b', () => _ga4Bucket, (v) => { _ga4Bucket = v; renderGa4Detail(); });
         seg('ga4-metric-tabs', 'm', () => _ga4Metric, (v) => { _ga4Metric = v; renderGa4Chart(); });
         const search = document.getElementById('ga4-page-search');
         if (search) search.oninput = () => { _ga4Search = search.value.trim().toLowerCase(); renderGa4Table(); };
@@ -4722,6 +4738,30 @@ const ICONS: Record<string, string> = {
         return out;
       }
 
+      // 일간/주간/월간 버킷. 사용자(users)는 기간 내 중복 제거가 불가능한 값이라
+      // 주·월로 묶으면 실제 순사용자보다 커진다 — 라벨에 '합산'임을 밝힌다.
+      function ga4Series() {
+        const days = ga4DailySeries();
+        if (_ga4Bucket === 'daily') return days.map((d) => ({ ...d, label: d.date.slice(5) }));
+        const acc = {};
+        for (const d of days) {
+          const dt = new Date(d.date + 'T00:00:00');
+          let key, label;
+          if (_ga4Bucket === 'weekly') {
+            const wd = (dt.getDay() + 6) % 7;                 // 0=월
+            const mon = new Date(dt); mon.setDate(dt.getDate() - wd);
+            key = mon.toISOString().slice(0, 10);
+            label = `${mon.getMonth() + 1}/${mon.getDate()}~`;
+          } else {
+            key = d.date.slice(0, 7);
+            label = `${key.slice(2, 4)}.${key.slice(5, 7)}`;
+          }
+          const a = (acc[key] ||= { date: key, label, sessions: 0, users: 0, views: 0, engaged: 0 });
+          a.sessions += d.sessions; a.users += d.users; a.views += d.views; a.engaged += d.engaged;
+        }
+        return Object.values(acc).sort((a, b) => (a.date < b.date ? -1 : 1));
+      }
+
       function renderGa4Kpi() {
         const el = document.getElementById('ga4-kpi'); if (!el) return;
         const s = ga4DailySeries();
@@ -4741,7 +4781,7 @@ const ICONS: Record<string, string> = {
 
       function renderGa4Chart() {
         const wrap = document.getElementById('ga4-chart'); if (!wrap) return;
-        const s = ga4DailySeries();
+        const s = ga4Series();
         const metaMap = { sessions: '세션', users: '사용자', views: '페이지뷰' };
         const lbl = document.getElementById('ga4-chart-metric-label');
         if (lbl) lbl.textContent = metaMap[_ga4Metric] || '';
@@ -4759,7 +4799,7 @@ const ICONS: Record<string, string> = {
         const area = `M ${x(0)},${y(0)} L ` + s.map((d, i) => `${x(i)},${y(vals[i])}`).join(' L ') + ` L ${x(n - 1)},${y(0)} Z`;
         const dots = s.map((d, i) => `<circle cx="${x(i)}" cy="${y(vals[i])}" r="2.6" fill="var(--accent)"/>`).join('');
         const xi = [...new Set([0, Math.floor((n - 1) / 2), n - 1])];
-        const xlab = xi.map((i) => `<text x="${x(i)}" y="${H - 8}" text-anchor="middle" font-size="10" fill="var(--text-3)">${s[i].date.slice(5)}</text>`).join('');
+        const xlab = xi.map((i) => `<text x="${x(i)}" y="${H - 8}" text-anchor="middle" font-size="10" fill="var(--text-3)">${s[i].label || s[i].date}</text>`).join('');
         wrap.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block;height:auto" preserveAspectRatio="xMidYMid meet">
           ${grid}<path d="${area}" fill="var(--accent)" opacity="0.12"/>
           <polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2"/>
@@ -4779,7 +4819,7 @@ const ICONS: Record<string, string> = {
           const d = s[idx], cx = x(idx);
           cross.setAttribute('x1', cx); cross.setAttribute('x2', cx); cross.style.display = '';
           crossDot.setAttribute('cx', cx); crossDot.setAttribute('cy', y(vals[idx])); crossDot.style.display = '';
-          tip.innerHTML = `<div class="gsc-tip-d">${d.date}</div>
+          tip.innerHTML = `<div class="gsc-tip-d">${d.label || d.date}</div>
             <div class="gsc-tip-r"><span>세션</span><b>${ga4Fmt(d.sessions)}</b></div>
             <div class="gsc-tip-r"><span>사용자</span><b>${ga4Fmt(d.users)}</b></div>
             <div class="gsc-tip-r"><span>페이지뷰</span><b>${ga4Fmt(d.views)}</b></div>
@@ -4799,7 +4839,7 @@ const ICONS: Record<string, string> = {
       // 세션 0인 날은 건너뛴다(차트와 달리 표에서는 빈 줄이 노이즈일 뿐).
       function renderGa4DailyTable() {
         const tbl = document.getElementById('ga4-daily-table'); if (!tbl) return;
-        const days = ga4DailySeries().filter((d) => d.sessions || d.views).slice().reverse();
+        const days = ga4Series().filter((d) => d.sessions || d.views).slice().reverse();
 
         // 그날 최다 유입경로 — source_medium 을 날짜별로 묶어 1등만 뽑는다
         const topBy = {};
@@ -4895,6 +4935,8 @@ const ICONS: Record<string, string> = {
       // GA4 screenPageViews 를 analytics 의 pageview 와 같은 단위로 취급한다.
       // ═══════════════════════════════════════════════════════════
       let _mgPosts = null;      // WP REST: { total, categories[], recent[] }
+      let _gscMgRows = null;    // gsc_daily 의 뭉게(source='mg') 최근 7일 _TOTAL_ 행
+      let _mgLikes = null;      // analytics 의 뭉게 추천(like) 이벤트
       let _ga4Ready = null;     // ga4_daily 로드 프라미스 (탭·요약이 공유해 중복 요청 방지)
       let _traffic = null;      // loadTraffic 이 계산한 analytics 측 수치 스냅샷
 
@@ -5085,6 +5127,47 @@ const ICONS: Record<string, string> = {
             `<span><i class="dot-mg"></i> 뭉게: ${fmt(today.views)}</span>`;
         }
 
+        // Row 1 · Categories — 뭉게 카테고리 수 합류
+        if (_mgPosts) {
+          const cEl = document.getElementById('total-cat-count');
+          const cSub = document.getElementById('total-cat-sub');
+          const mgCats = _mgPosts.categories.length;
+          if (cEl) cEl.textContent = fmt((Number(cEl.dataset.base) || 0) + mgCats);
+          if (cSub) cSub.textContent = `${cSub.dataset.base} + 뭉게 ${mgCats}`;
+        }
+
+        // Row 1 · Search Clicks (GSC) — 카드 값은 이미 전 소스 합계다(뭉게 포함).
+        // 다만 뭉게 몫이 안 보여서 "포함됐는지" 알 수 없으므로 sub 에 병기한다.
+        const gsub = document.getElementById('gsc-sum-sub');
+        if (gsub && Array.isArray(_gscMgRows)) {
+          const mgClicks = _gscMgRows.reduce((a, r) => a + (r.clicks || 0), 0);
+          if (!/뭉게/.test(gsub.textContent)) gsub.innerHTML += ` · <span style="color:#fbbf24">뭉게 ${fmt(mgClicks)}</span>`;
+        }
+
+        // Row 1 · 도구 방문 — LF(원본)와 뭉게(이식본)에 같은 계산기 26종이 있다
+        const tSub = document.getElementById('tools-sum-sub');
+        const tVal = document.getElementById('tools-sum-today');
+        const mgTools = mgAgg('page').filter((r) => /^\/tools\//.test(r.key.split('?')[0]) && r.key.split('?')[0] !== '/tools/');
+        const mgToolViews = mgTools.reduce((a, r) => a + (r.views || 0), 0);
+        if (tVal && !tVal.dataset.mgApplied && mgToolViews) {
+          tVal.textContent = fmt((Number(String(tVal.textContent).replace(/[^\d]/g, '')) || 0) + mgToolViews);
+          tVal.dataset.mgApplied = '1';
+        }
+        if (tSub && !/뭉게/.test(tSub.textContent)) tSub.textContent += ` · 뭉게 ${fmt(mgToolViews)}`;
+
+        // Row 1·3 · 쿠팡/페이퍼닥 — 뭉게에는 클릭 추적이 없다. 0 을 조용히 두면
+        // "뭉게에서 클릭이 없다"로 오해하므로 미추적임을 밝힌다.
+        ['clicks-sub', 'pd-summary-sub'].forEach((id) => {
+          const e = document.getElementById(id);
+          if (e && !/뭉게/.test(e.textContent)) e.textContent += ' · 뭉게 미추적';
+        });
+
+        // Row 3 · Likes — 뭉게 추천 버튼(source='mg')이 생겨 분리 표시가 가능해졌다
+        const likeBox = document.getElementById('t-likes-total');
+        if (likeBox && Array.isArray(_mgLikes) && !/뭉게/.test(likeBox.textContent)) {
+          likeBox.textContent += ` · 뭉게 ${fmt(_mgLikes.length)}`;
+        }
+
         // Row 7 · GA4 동기화 상태 — 마지막 데이터가 이틀 이상 밀리면 경고
         const st = document.getElementById('mungge-ga4-status');
         if (st) {
@@ -5129,8 +5212,19 @@ const ICONS: Record<string, string> = {
         _trafficDetail.sort((a, b) => (a.day < b.day ? -1 : 1));
       }
 
+      // 카드 병기용 보조 데이터 — GSC 뭉게 클릭(최근 7일), 뭉게 추천 이벤트
+      async function loadMunggeExtras() {
+        const since = new Date(Date.now() - 8 * 864e5).toISOString().slice(0, 10);
+        const get = (url) => fetch(url, { headers }).then((r) => (r.ok ? r.json() : [])).catch(() => []);
+        const [gsc, likes] = await Promise.all([
+          get(`${SUPABASE_URL}/rest/v1/gsc_daily?source=eq.mg&page=eq._TOTAL_&date=gte.${since}&select=date,clicks,impressions&limit=200`),
+          get(`${SUPABASE_URL}/rest/v1/analytics?event_type=eq.like&source=eq.mg&select=id&limit=5000`),
+        ]);
+        _gscMgRows = gsc; _mgLikes = likes;
+      }
+
       async function loadMunggeAll() {
-        await Promise.all([ensureGa4Rows(), loadMunggePosts()]);
+        await Promise.all([ensureGa4Rows(), loadMunggePosts(), loadMunggeExtras()]);
         renderMunggeSection();
         applyMungge();
         mergeMgIntoDetail();
@@ -5915,7 +6009,7 @@ const ICONS: Record<string, string> = {
         if (!btn) return;
         document.querySelectorAll('#top-pages-tabs .source-tab').forEach(b => b.className = 'source-tab');
         const f = btn.dataset.filter;
-        btn.className = 'source-tab ' + (f === 'blog' ? 'active-tf' : f === 'lifeflow' ? 'active-lf' : f === 'vip' ? 'active-vip' : 'active');
+        btn.className = 'source-tab ' + (f === 'blog' ? 'active-tf' : f === 'lifeflow' ? 'active-lf' : f === 'vip' ? 'active-vip' : f === 'mg' ? 'active-mg' : 'active');
         renderTopPages(undefined, f);
       });
 
@@ -5946,7 +6040,7 @@ const ICONS: Record<string, string> = {
         if (!btn) return;
         document.querySelectorAll('#event-tabs .source-tab').forEach(b => b.className = 'source-tab');
         const f = btn.dataset.filter;
-        btn.className = 'source-tab ' + (f === 'blog' ? 'active-tf' : f === 'lifeflow' ? 'active-lf' : f === 'vip' ? 'active-vip' : 'active');
+        btn.className = 'source-tab ' + (f === 'blog' ? 'active-tf' : f === 'lifeflow' ? 'active-lf' : f === 'vip' ? 'active-vip' : f === 'mg' ? 'active-mg' : 'active');
         renderEventFeed(undefined, f);
       });
 
