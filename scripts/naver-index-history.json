@@ -9,5 +9,17 @@
     "urls": [
       "https://mungge.com/"
     ]
+  },
+  {
+    "site": "mungge.com",
+    "date": "2026-07-28",
+    "at": "2026-07-28T08:30:11.881Z",
+    "sitemap": 228,
+    "indexed": 2,
+    "blocked": false,
+    "urls": [
+      "https://mungge.com/",
+      "https://mungge.com/2026-07-11-lifestyle-cooling-appliances-fan-dehumidifier-2026/"
+    ]
   }
 ]
