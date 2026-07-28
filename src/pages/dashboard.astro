@@ -2943,6 +2943,11 @@ const ICONS: Record<string, string> = {
           </div>
         </div>
 
+        <div class="traffic-section" style="margin-bottom:1.25rem;">
+          <div class="gsc-sec-title">일별 집계 <span>(최신순 · 그날 가장 많이 들어온 경로 병기)</span></div>
+          <div class="gsc-table-wrap"><table class="gsc-table" id="ga4-daily-table"></table></div>
+        </div>
+
         <div class="gsc-source-grid">
           <div class="gsc-src-card">
             <div class="gsc-src-head">채널별 <span>어떤 종류의 경로로 들어왔는지</span></div>
@@ -4714,6 +4719,40 @@ const ICONS: Record<string, string> = {
         svgEl.addEventListener('mouseleave', () => { tip.style.display = 'none'; cross.style.display = 'none'; crossDot.style.display = 'none'; });
       }
 
+      // 일별 집계 표 — 차트 호버로만 볼 수 있던 날짜별 수치를 숫자로 나열한다.
+      // 세션 0인 날은 건너뛴다(차트와 달리 표에서는 빈 줄이 노이즈일 뿐).
+      function renderGa4DailyTable() {
+        const tbl = document.getElementById('ga4-daily-table'); if (!tbl) return;
+        const days = ga4DailySeries().filter((d) => d.sessions || d.views).slice().reverse();
+
+        // 그날 최다 유입경로 — source_medium 을 날짜별로 묶어 1등만 뽑는다
+        const topBy = {};
+        for (const r of ga4Of('source_medium')) {
+          const cur = topBy[r.date];
+          if (!cur || (r.sessions || 0) > cur.sessions) topBy[r.date] = { key: r.key, sessions: r.sessions || 0 };
+        }
+
+        tbl.innerHTML = `<thead><tr>
+            <th>날짜</th><th class="num">세션</th><th class="num">사용자</th><th class="num">페이지뷰</th>
+            <th class="num">세션당</th><th class="num">참여율</th><th>최다 유입경로</th>
+          </tr></thead><tbody>` +
+          (days.length
+            ? days.map((d) => {
+                const t = topBy[d.date];
+                return `<tr>
+                  <td>${d.date}</td>
+                  <td class="num">${ga4Fmt(d.sessions)}</td>
+                  <td class="num">${ga4Fmt(d.users)}</td>
+                  <td class="num">${ga4Fmt(d.views)}</td>
+                  <td class="num">${d.sessions ? (d.views / d.sessions).toFixed(1) : '0.0'}</td>
+                  <td class="num">${ga4Pct(d.sessions ? d.engaged / d.sessions : 0)}</td>
+                  <td>${t ? `${ga4Cut(t.key, 32)} <span style="color:var(--text-3)">${ga4Fmt(t.sessions)}</span>` : '-'}</td>
+                </tr>`;
+              }).join('')
+            : '<tr><td colspan="7" style="color:var(--text-3)">기간 내 방문 없음</td></tr>') +
+          '</tbody>';
+      }
+
       // 채널·소스매체 목록 — 비중을 막대로 같이 보여줘야 "어디가 주력인지"가 한눈에 들어온다
       function renderGa4Breakdown(elId, dim, koFn) {
         const el = document.getElementById(elId); if (!el) return;
@@ -4761,11 +4800,12 @@ const ICONS: Record<string, string> = {
         if (!Array.isArray(_ga4Rows) || !_ga4Rows.length) {
           const kpi = document.getElementById('ga4-kpi'); if (kpi) kpi.innerHTML = ga4Empty();
           ['ga4-chart', 'ga4-channel', 'ga4-sourcemedium'].forEach((id) => { const e = document.getElementById(id); if (e) e.innerHTML = ''; });
-          const tbl = document.getElementById('ga4-table'); if (tbl) tbl.innerHTML = '';
+          ['ga4-table', 'ga4-daily-table'].forEach((id) => { const e = document.getElementById(id); if (e) e.innerHTML = ''; });
           return;
         }
         renderGa4Kpi();
         renderGa4Chart();
+        renderGa4DailyTable();
         renderGa4Breakdown('ga4-channel', 'channel', ga4ChKo);
         renderGa4Breakdown('ga4-sourcemedium', 'source_medium', null);
         renderGa4Table();
