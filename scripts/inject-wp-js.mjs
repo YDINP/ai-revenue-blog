@@ -27,6 +27,7 @@ const BLOCKS = [
   { marker: 'MG-DARK', file: 'wp-darkmode.js', desc: '경량 다크모드(WP Dark Mode 플러그인 대체)' },
   { marker: 'MG-LIKE', file: 'wp-like.js', desc: '글 하단 추천 버튼' },
   { marker: 'MG-STH', file: 'wp-scroll-highlight.js', desc: '본문 강조(strong) 스크롤 형광펜' },
+  { marker: 'MG-CHARTANIM', file: 'wp-chart-anim.js', desc: '차트 바 스크롤 진입 시 채움' },
 ];
 
 function loadEnv(p) {

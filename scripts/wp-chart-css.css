@@ -511,6 +511,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* wpautop 이 차트 마크업 안에 끼워 넣는 <p> 무력화.
+   .chart-row 는 flex 라서 빈 <p> 가 아이템으로 잡혀 gap(12px)을 한 칸 더 먹고,
+   값(.chart-value)을 감싼 <p> 는 자기 flex-shrink:0 / min-width 를 못 받는다.
+   display:contents 면 둘 다 박스가 사라져 원래 의도대로 배치된다.
+   근본 수정은 발행 시 차트 블록을 wp:html 로 감싸는 것 — 그건 발행 스크립트 쪽 일. */
+.chart-row > p,
+.progress-circle > p { display: contents; }
+
 .chart-track { flex: 1; height: 28px; background: var(--chart-track); border-radius: var(--r-bar); overflow: hidden; }
 .chart-fill { height: 100%; min-width: 4px; border-radius: var(--r-bar); box-shadow: none; }
 .chart-value { flex-shrink: 0; min-width: 52px; font-size: 0.875rem; font-weight: 700; color: var(--color-text); }
