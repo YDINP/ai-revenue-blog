@@ -1464,7 +1464,59 @@ html:not([data-wp-dark-mode-active]) body {
 html[data-wp-dark-mode-active] .mg-cats__card { background: #141c2e; }
 html[data-wp-dark-mode-active] .mg-cats__desc { color: #a9b1bd; }
 @media (max-width: 900px) { .mg-cats__grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .mg-cats__grid { grid-template-columns: 1fr; } }
+
+/* 모바일은 카드가 아니라 목록이다 — 8:5 아트를 세로로 4장 쌓으면 카테고리 4개 보는 데
+   스크롤 두 화면이 든다. 아트를 44px 아이콘으로 줄여 왼쪽에 붙이고 한 행씩 나열한다.
+   마크업(<a> 안에 img/label/desc 형제)은 그대로 두고 grid 배치만 바꿔서 처리. */
+@media (max-width: 600px) {
+  .mg-cats__grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 10px 24px -18px rgba(16,24,40,.30);
+  }
+  .mg-cats__card {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 0.8rem;
+    align-content: center;
+    padding: 0.72rem 2rem 0.72rem 0.85rem;
+    border: 0;
+    border-top: 1px solid var(--hairline);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .mg-cats__grid > .mg-cats__card:first-child { border-top: 0; }
+  .mg-cats__art {
+    grid-column: 1; grid-row: 1 / 3; align-self: center;
+    width: 44px; height: 44px; aspect-ratio: 1 / 1;
+    border-radius: 11px;
+  }
+  .mg-cats__label {
+    grid-column: 2; grid-row: 1; align-self: end;
+    padding: 0; font-size: 0.95rem;
+  }
+  .mg-cats__desc {
+    grid-column: 2; grid-row: 2; align-self: start;
+    padding: 0.12rem 0 0; font-size: 0.76rem; line-height: 1.4;
+  }
+  /* 오른쪽 꺾쇠 — 탭 가능한 행이라는 신호. 형제 span 이 아니라 ::after 라 grid 흐름 밖. */
+  .mg-cats__card::after {
+    content: '›';
+    position: absolute; right: 0.85rem; top: 50%; transform: translateY(-50%);
+    font-size: 1.15rem; line-height: 1; color: #9aa3b0;
+  }
+  /* 터치 기기엔 hover 가 탭 후 잔상으로 남는다 — 들림 효과 대신 눌림 배경으로 교체 */
+  .mg-cats__card:hover { transform: none; box-shadow: none; }
+  .mg-cats__card:active { background: rgba(79,124,255,.07); }
+  html[data-wp-dark-mode-active] .mg-cats__grid { background: #141c2e; }
+  html[data-wp-dark-mode-active] .mg-cats__card { background: transparent; }
+}
 
 /* ── ⑤ 인기 글 · 최신글 그리드 — 브랜드 톤 정렬 ──────────────────────────── */
 .mg-featured__card::before { background: var(--mg-grad); }
