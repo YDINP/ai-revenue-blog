@@ -28,6 +28,8 @@ const BLOCKS = [
   { marker: 'MG-LIKE', file: 'wp-like.js', desc: '글 하단 추천 버튼' },
   { marker: 'MG-STH', file: 'wp-scroll-highlight.js', desc: '본문 강조(strong) 스크롤 형광펜' },
   { marker: 'MG-CHARTANIM', file: 'wp-chart-anim.js', desc: '차트 바 스크롤 진입 시 채움' },
+  // MG-LIKE 뒤에 와야 한다 — 추천 캡션(.mg-like-cap)을 기준으로 삽입 위치를 잡는다
+  { marker: 'MG-ADEND', file: 'wp-ad-postend.js', desc: '글 하단 추천 버튼 아래 애드핏 300x250(데스크톱)' },
 ];
 
 function loadEnv(p) {
