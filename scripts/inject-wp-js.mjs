@@ -21,8 +21,10 @@ const ENV_PATH = path.resolve(ROOT, '..', 'automation', '.env');
 const WIDGET_ID = 'custom_html-2';
 
 // 주입 순서 = 실행 순서. 추적기를 먼저 둬서 뒤 블록이 죽어도 방문 집계는 남게 한다.
+// 다크모드는 추적 다음, 나머지보다 앞 — 화면 색을 바꾸는 블록이라 늦을수록 깜빡임이 길다.
 const BLOCKS = [
   { marker: 'MG-TRACK', file: 'wp-track.js', desc: '방문 추적(analytics pageview)' },
+  { marker: 'MG-DARK', file: 'wp-darkmode.js', desc: '경량 다크모드(WP Dark Mode 플러그인 대체)' },
   { marker: 'MG-LIKE', file: 'wp-like.js', desc: '글 하단 추천 버튼' },
 ];
 
