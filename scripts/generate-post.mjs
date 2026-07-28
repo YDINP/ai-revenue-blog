@@ -35,6 +35,47 @@ const CLAUDE_MODEL = process.env.BLOG_CLAUDE_MODEL || "claude-haiku-4-5-20251001
 const CLAUDE_API_URL = `${process.env.ANTHROPIC_BASE_URL || "https://api.anthropic.com"}/v1/messages`;
 const PEXELS_API_URL = "https://api.pexels.com/v1/search";
 
+// 글 생성 LLM 호출 경로.
+// 기본은 Claude Code CLI(사용자 구독 세션) — 게이트웨이 크레딧 소진(403)이나
+// 장시간 요청 504를 타지 않는다. CLI를 못 쓰면 기존 HTTP 경로로 폴백하고,
+// BLOG_LLM=http 면 처음부터 HTTP를 쓴다(GitHub Actions 등 CLI 없는 환경).
+async function callLLM(prompt) {
+  if (process.env.BLOG_LLM !== "http") {
+    try {
+      const cli = await import("../../automation/llm-cli.mjs");
+      if (cli.claudeCliAvailable()) {
+        console.log("[LLM] Claude Code CLI");
+        return await cli.callClaudeCli(prompt, { model: process.env.BLOG_CLAUDE_CLI_MODEL || "" });
+      }
+      console.warn("[LLM] CLI 없음 → HTTP 폴백");
+    } catch (e) {
+      console.warn(`[LLM] CLI 경로 실패(${e.message}) → HTTP 폴백`);
+    }
+  }
+
+  console.log("[LLM] HTTP API");
+  const response = await fetch(CLAUDE_API_URL, {
+    method: "POST",
+    headers: {
+      "x-api-key": ANTHROPIC_API_KEY,
+      "anthropic-version": "2023-06-01",
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      model: CLAUDE_MODEL,
+      max_tokens: 8192,
+      stream: true,
+      messages: [{ role: "user", content: prompt }],
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Claude API ${response.status}: ${errorText}`);
+  }
+  return await readClaudeStream(response);
+}
+
 // SSE(stream:true) 응답에서 텍스트 델타만 이어붙여 반환.
 // 왜 스트리밍인가: 본문 생성은 max_tokens 8192짜리 장시간 요청이라, 논스트리밍으로 보내면
 // 게이트웨이(nginx)가 첫 바이트를 못 받고 504 Gateway Time-out을 낸다(2026-07-28 발행 실패).
@@ -328,27 +369,7 @@ ${chartInstruction}
 
   console.log(`[Claude] Generating post for "${keyword}"...`);
 
-  const response = await fetch(CLAUDE_API_URL, {
-    method: "POST",
-    headers: {
-      "x-api-key": ANTHROPIC_API_KEY,
-      "anthropic-version": "2023-06-01",
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({
-      model: CLAUDE_MODEL,
-      max_tokens: 8192,
-      stream: true,
-      messages: [{ role: "user", content: prompt }],
-    }),
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Claude API ${response.status}: ${errorText}`);
-  }
-
-  const text = (await readClaudeStream(response)).trim();
+  const text = (await callLLM(prompt)).trim();
 
   // JSON 파싱 (코드블록 감싸기 + 잘림 대응)
   let jsonStr = text.replace(/^```json?\s*/, "").replace(/\s*```$/, "");
