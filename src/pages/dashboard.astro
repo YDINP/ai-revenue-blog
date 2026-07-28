@@ -5020,6 +5020,11 @@ const ICONS: Record<string, string> = {
         const tbl = document.getElementById('ga4-internal-table');
         const sum = document.getElementById('ga4-internal-sum');
         if (!tbl) return;
+        if (!_mgLiveLoaded) {
+          tbl.innerHTML = '<tbody><tr><td style="color:var(--text-3)">실시간 방문 기록 불러오는 중…</td></tr></tbody>';
+          if (sum) sum.innerHTML = '';
+          return;
+        }
         const refPath = (ref) => {
           try {
             const u = new URL(ref);
@@ -5171,6 +5176,9 @@ const ICONS: Record<string, string> = {
       // 뭉게 방문 이벤트(pageview_mg). GA4 는 하루 1회 배치라 '지금 뭘 보고 있나'를 못 준다 —
       // 오늘치는 이 이벤트로 실시간 집계한다.
       let _mgLive = [];
+      // 아직 안 받아온 상태와 "이동 기록이 정말 없는" 상태는 화면에서 구분해야 한다 —
+      // 탭을 일찍 누르면 로딩 중인데 '기록 없음'으로 읽혀 잘못된 결론이 나온다
+      let _mgLiveLoaded = false;
       let _ga4Ready = null;     // ga4_daily 로드 프라미스 (탭·요약이 공유해 중복 요청 방지)
       let _traffic = null;      // loadTraffic 이 계산한 analytics 측 수치 스냅샷
 
@@ -5461,7 +5469,7 @@ const ICONS: Record<string, string> = {
             `&select=created_at,path:metadata->>path,title:metadata->>title,ref:metadata->>referrer&order=created_at.desc&limit=3000`,
             { headers }
           );
-          if (r.ok) _mgLive = await r.json();
+          if (r.ok) { _mgLive = await r.json(); _mgLiveLoaded = true; }
         } catch {}
       }
 
