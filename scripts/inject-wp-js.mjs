@@ -30,6 +30,7 @@ const BLOCKS = [
   { marker: 'MG-CHARTANIM', file: 'wp-chart-anim.js', desc: '차트 바 스크롤 진입 시 채움' },
   // MG-LIKE 뒤에 와야 한다 — 추천 캡션(.mg-like-cap)을 기준으로 삽입 위치를 잡는다
   { marker: 'MG-ADEND', file: 'wp-ad-postend.js', desc: '글 하단 추천 버튼 아래 애드핏 300x250(데스크톱)' },
+  { marker: 'MG-ADMID', file: 'wp-ad-inarticle.js', desc: '본문 한가운데 h2 앞 애드핏 300x250' },
 ];
 
 function loadEnv(p) {

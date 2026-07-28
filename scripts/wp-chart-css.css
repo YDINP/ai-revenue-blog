@@ -1295,6 +1295,14 @@ html[data-wp-dark-mode-active] .mg-tldr { background: linear-gradient(180deg, rg
 html[data-wp-dark-mode-active] .mg-tldr-text { color: #c5cbd8; }
 @media (max-width: 600px){ .mg-tldr { flex-direction: column; gap: 0.3rem; } }
 
+/* ── JS로 끼워 넣는 광고 슬롯(글 하단·본문 중간) ─────────────────────────────
+   ⚠️ .mg-slot--lead 처럼 :not(:empty) 로 자리를 미리 예약하면 안 된다. 광고가 안 채워졌을
+   때(광고차단기·인벤토리 없음) 본문 한가운데 250px 빈 구멍이 남는다 — 실측으로 확인했다.
+   90px 은 넘어가도 250px 은 그냥 고장으로 보인다. 애드핏이 실제로 렌더한 뒤에만
+   .is-filled 가 붙어 자리를 받는다(붙이는 건 각 슬롯 JS 의 MutationObserver). */
+.mg-adslot { display: flex; justify-content: center; margin: 0; min-height: 0; }
+.mg-adslot.is-filled { margin: 2.2rem auto; min-height: 250px; }
+
 /* ── 모바일 하단 앵커 광고(320x100, sticky). 미충전 시 완전 투명 + 닫기버튼 ── */
 .mg-anchor { display: none; }
 @media (max-width: 782px) {
