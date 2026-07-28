@@ -1658,13 +1658,22 @@ html.mg-js .mg-reveal.mg-in { opacity: 1; transform: none; transition: opacity .
 /* 리드: 이미지를 카드 전체에 깔고 텍스트를 하단에 오버레이 */
 .mg-hcard--lead { grid-row: span 2; min-height: 420px; padding: 1.5rem; }
 .mg-hcard--lead .mg-hcard__img { position: absolute; inset: 0; height: 100%; }
+/* 스크림을 카드 높이 비율(28%→92%)에 묶어놨더니 모바일에서 깨진다 — 제목이 4줄로 접히면
+   텍스트 블록이 카드의 3분의 2까지 올라오는데 그 위쪽 절반은 아직 투명 구간이라
+   밝은 하늘·나뭇잎 위에 흰 글씨가 그대로 얹혔다. 카드 배경 스크림은 옅은 균일 틴트만
+   맡고, 진한 스크림은 .mg-hcard__body 자신이 깔아 텍스트 길이에 따라 같이 늘어나게 한다. */
 .mg-hcard--lead::after {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(9,12,18,0) 28%, rgba(9,12,18,.58) 62%, rgba(9,12,18,.92));
+  background: linear-gradient(180deg, rgba(9,12,18,.10), rgba(9,12,18,.34));
 }
-.mg-hcard--lead .mg-hcard__body { position: relative; z-index: 2; }
-.mg-hcard--lead .mg-hcard__t { font-size: 1.6rem; color: #fff; }
-.mg-hcard--lead .mg-hcard__x { font-size: 0.92rem; line-height: 1.6; color: #d4dae6; }
+.mg-hcard--lead .mg-hcard__body {
+  position: relative; z-index: 2;
+  margin: 0 -1.5rem -1.5rem;          /* 카드 패딩을 상쇄해 스크림을 좌우·아래 끝까지 */
+  padding: 3.4rem 1.5rem 1.5rem;      /* 위 3.4rem = 스크림이 서서히 올라오는 페이드 구간 */
+  background: linear-gradient(180deg, rgba(9,12,18,0), rgba(9,12,18,.86) 3.4rem, rgba(9,12,18,.95));
+}
+.mg-hcard--lead .mg-hcard__t { font-size: 1.6rem; color: #fff; text-shadow: 0 1px 10px rgba(9,12,18,.5); }
+.mg-hcard--lead .mg-hcard__x { font-size: 0.92rem; line-height: 1.6; color: #dde2ec; }
 .mg-hcard--lead .mg-hcard__m { color: #aab4c6; }
 
 /* 미니: 이미지 위 + 텍스트 아래 */
@@ -1678,7 +1687,16 @@ html[data-wp-dark-mode-active] .mg-hcard--mini .mg-hcard__t { color: #f2f3f5; }
 @media (max-width: 780px) {
   /* 1열이 되면 행 높이를 lead에 맞추면 안 된다(미니에 거대한 빈 공간 생김) */
   .mg-hero-mag { grid-template-columns: 1fr; grid-auto-rows: auto; }
-  .mg-hcard--lead { grid-row: auto; min-height: 320px; }
+  /* 스크림에 가린 만큼 카드를 키워야 사진이 한 조각이라도 남는다(340px면 105px뿐) */
+  .mg-hcard--lead { grid-row: auto; min-height: 400px; padding: 1.15rem; }
+  .mg-hcard--lead .mg-hcard__body { margin: 0 -1.15rem -1.15rem; padding: 2.8rem 1.15rem 1.15rem; }
+  /* 좁은 폭에서 제목·요약이 통째로 풀리면 사진이 한 조각도 안 남는다 → 줄 수를 묶는다 */
+  .mg-hcard--lead .mg-hcard__t,
+  .mg-hcard--lead .mg-hcard__x {
+    display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .mg-hcard--lead .mg-hcard__t { font-size: 1.3rem; -webkit-line-clamp: 3; }
+  .mg-hcard--lead .mg-hcard__x { font-size: 0.87rem; -webkit-line-clamp: 3; }
 }
 
 /* ── ④ 섹션 헤드 ──────────────────────────────────────────────────────────── */
