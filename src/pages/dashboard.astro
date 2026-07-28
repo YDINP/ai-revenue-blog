@@ -354,6 +354,7 @@ const ICONS: Record<string, string> = {
       .gsc-src-row.ga4-pick { cursor: pointer; }
       .gsc-src-row.ga4-pick:hover span:first-child { color: var(--accent); }
       .gsc-src-row.ga4-pick.on span:first-child { color: var(--accent); font-weight: 700; }
+      .ga4-live { color: #4ade80; font-size: 0.68rem; font-weight: 700; }
       .ga4-chip { display: inline-flex; align-items: center; gap: 6px; background: rgba(59,130,246,0.15); border: 1px solid var(--accent); color: var(--accent); border-radius: 999px; padding: 1px 9px; font-size: 0.7rem; font-weight: 600; cursor: pointer; }
       #gsc-page-search { width: 100%; max-width: 320px; margin-bottom: 0.6rem; padding: 0.4rem 0.6rem; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); color: var(--text); font-size: 0.78rem; }
       .gsc-table-wrap { overflow-x: auto; }
@@ -4936,6 +4937,11 @@ const ICONS: Record<string, string> = {
 
       // 랜딩 페이지 목록. 유입경로 필터가 걸리면 page_source 교차 차원에서 뽑는다.
       function ga4PageRows() {
+        // 기간='오늘' + 필터 없음이면 실시간 이벤트를 쓴다(GA4 배치는 몇 시간 지연)
+        if (!_ga4Filter && _ga4Days === 1) {
+          const live = mgLiveToday();
+          if (live.length) return live;
+        }
         if (!_ga4Filter) return ga4AggBy('page');
         const want = _ga4Filter.key;
         const acc = {};
@@ -4957,10 +4963,11 @@ const ICONS: Record<string, string> = {
       function renderGa4Table() {
         const tbl = document.getElementById('ga4-table'); if (!tbl) return;
         const cap = document.getElementById('ga4-table-filter');
+        const isLive = !_ga4Filter && _ga4Days === 1 && mgLiveToday().length > 0;
         if (cap) {
           cap.innerHTML = _ga4Filter
             ? `<span class="ga4-chip">${escHtml(ga4Cut(_ga4Filter.key, 40))} <b>×</b></span>`
-            : '';
+            : isLive ? '<span class="ga4-live">● 실시간</span>' : '';
           const x = cap.querySelector('.ga4-chip');
           if (x) x.onclick = () => { _ga4Filter = null; renderGa4Detail(); };
         }
@@ -5014,6 +5021,9 @@ const ICONS: Record<string, string> = {
       let _mgPosts = null;      // WP REST: { total, categories[], recent[] }
       let _gscMgRows = null;    // gsc_daily 의 뭉게(source='mg') 최근 7일 _TOTAL_ 행
       let _mgLikes = null;      // analytics 의 뭉게 추천(like) 이벤트
+      // 뭉게 방문 이벤트(pageview_mg). GA4 는 하루 1회 배치라 '지금 뭘 보고 있나'를 못 준다 —
+      // 오늘치는 이 이벤트로 실시간 집계한다.
+      let _mgLive = [];
       let _ga4Ready = null;     // ga4_daily 로드 프라미스 (탭·요약이 공유해 중복 요청 방지)
       let _traffic = null;      // loadTraffic 이 계산한 analytics 측 수치 스냅샷
 
@@ -5048,6 +5058,14 @@ const ICONS: Record<string, string> = {
 
       // Top Pages 합류용 — analytics 행과 같은 모양으로 맞춘다
       function mgTopPages(period) {
+        // '일'(오늘)은 GA4 배치(하루 1회)를 기다리지 않고 pageview_mg 이벤트로 실시간 집계.
+        // 두 소스를 합치면 같은 방문이 두 번 세지므로 기간별로 하나만 쓴다.
+        if (period === 'day') {
+          const live = mgLiveToday();
+          if (live.length) {
+            return live.map((r) => ({ path: r.path, slug: r.path, source: 'mg', title: r.title || r.path, views: r.views }));
+          }
+        }
         const from = period === 'day' ? kstToday()
           : period === 'week' ? new Date(Date.now() - 7 * 864e5).toISOString().slice(0, 10)
           : period === 'month' ? new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10)
@@ -5287,6 +5305,33 @@ const ICONS: Record<string, string> = {
       let _naverIdx = {};
       const naverIndexAt = (ts) => _naverIdx[String(ts || '').slice(0, 19)] || null;
 
+      // 뭉게 실시간 방문 — 최근 3일치만. 30초 폴링으로 갱신한다.
+      async function refreshMgLive() {
+        const since = new Date(Date.now() - 3 * 864e5).toISOString();
+        try {
+          const r = await fetch(
+            `${SUPABASE_URL}/rest/v1/analytics?event_type=eq.pageview_mg&created_at=gte.${since}` +
+            `&select=created_at,path:metadata->>path,title:metadata->>title,ref:metadata->>referrer&order=created_at.desc&limit=3000`,
+            { headers }
+          );
+          if (r.ok) _mgLive = await r.json();
+        } catch {}
+      }
+
+      // 오늘(KST) 뭉게 방문을 경로별로 집계 — GA4 배치를 기다리지 않는 실시간 값
+      function mgLiveToday() {
+        const today = kstToday();
+        const acc = {};
+        for (const e of (_mgLive || [])) {
+          const day = new Date(new Date(e.created_at).getTime() + 9 * 3600e3).toISOString().slice(0, 10);
+          if (day !== today) continue;
+          const path = (e.path || '/').split('?')[0] || '/';
+          const a = (acc[path] ||= { key: path, path, title: e.title || '', sessions: 0, users: 0, views: 0, engaged: 0 });
+          a.views++; a.sessions++; a.users++;
+        }
+        return Object.values(acc).sort((a, b) => b.views - a.views);
+      }
+
       // 카드 병기용 보조 데이터 — GSC 뭉게 클릭(최근 7일), 뭉게 추천 이벤트, 네이버 색인 측정
       async function loadMunggeExtras() {
         const since = new Date(Date.now() - 8 * 864e5).toISOString().slice(0, 10);
@@ -5297,6 +5342,7 @@ const ICONS: Record<string, string> = {
           get(`${SUPABASE_URL}/rest/v1/analytics?event_type=eq.naver_index&select=created_at,metadata&order=created_at.desc&limit=50`),
         ]);
         _gscMgRows = gsc; _mgLikes = likes;
+        await refreshMgLive();
         _naverIdx = {};
         for (const r of idx) {
           const m = r.metadata || {};
@@ -6900,6 +6946,13 @@ const ICONS: Record<string, string> = {
         checkSupabase();
         checkMungge();
         loadMunggeAll();
+        // 뭉게 실시간 방문 폴링 — GA4 배치와 달리 지금 보고 있는 페이지가 바로 반영된다
+        setInterval(() => {
+          refreshMgLive().then(() => {
+            renderTopPages();
+            if (_ga4Init) renderGa4Detail();
+          });
+        }, 30000);
         initChartHover();
         initHeatmapHover();
         initExcludeControls();
