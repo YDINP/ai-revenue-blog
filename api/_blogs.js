@@ -69,7 +69,7 @@ export const BLOGS = {
     gscSite: 'https://mungge.com/',   // 도메인 속성이면 _gsc.js가 sc-domain:으로 자동 폴백
     // Site Kit 이 심은 GA4 태그(GT-K525DMFX)의 속성. WP 관리화면으로는 유입경로 상세를 볼 수
     // 없어서 GA4 Data API 로 끌어와 대시보드에서 본다.
-    ga4Property: process.env.GA4_PROPERTY_MG || null,
+    ga4Property: process.env.GA4_PROPERTY_MG || '547003762',
     // WordPress로 직접 운영하는 사이트 — repo/generator/source가 없다.
     // blogList() 소비처가 모두 이 필드들로 필터링하므로 일일리포트·뉴스레터·자동포스팅에서
     // 자동 제외되고, gscSite로 거르는 GSC 동기화·조회에만 잡힌다.
