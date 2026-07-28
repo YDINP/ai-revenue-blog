@@ -369,9 +369,12 @@ const ICONS: Record<string, string> = {
       .gsc-badge-blog { background: rgba(96,165,250,0.16); color: #60a5fa; }
       .gsc-badge-lifeflow { background: rgba(74,222,128,0.16); color: #4ade80; }
       .gsc-badge-playcast { background: rgba(87,230,195,0.16); color: #57e6c3; }
+      /* 기기·브라우저·OS 3열 — 2열 그리드(gsc-source-grid)에 3장을 넣으면 마지막 장만 아래로 떨어진다 */
+      .gsc-source-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
       @media (max-width: 640px) {
         .gsc-kpi-row { grid-template-columns: repeat(2, 1fr); }
         .gsc-source-grid { grid-template-columns: 1fr; }
+        .gsc-source-grid.cols-3 { grid-template-columns: 1fr; }
       }
 
       /* ── 카드 공통 ────────────────────────────────────── */
@@ -3075,6 +3078,23 @@ const ICONS: Record<string, string> = {
           </div>
         </div>
 
+        <!-- 기기 구분은 전체요약 Row5 도넛에도 있지만 거기는 전 기간·블로그 합산 기준이라
+             "뭉게만, 이 기간" 을 볼 수 없었다 → 기간 선택이 걸리는 이 탭에도 둔다 -->
+        <div class="gsc-source-grid cols-3">
+          <div class="gsc-src-card">
+            <div class="gsc-src-head">기기 <span>모바일 / PC</span></div>
+            <div id="ga4-device"></div>
+          </div>
+          <div class="gsc-src-card">
+            <div class="gsc-src-head">브라우저 <span>Chrome · Safari · 웨일 등</span></div>
+            <div id="ga4-browser"></div>
+          </div>
+          <div class="gsc-src-card">
+            <div class="gsc-src-head">OS <span>Android · iOS · Windows</span></div>
+            <div id="ga4-os"></div>
+          </div>
+        </div>
+
         <div class="traffic-section">
           <div class="gsc-sec-title">랜딩 페이지 <span>(방문자가 처음 도착한 페이지 · 헤더 클릭 정렬)</span> <span id="ga4-table-filter"></span></div>
           <input id="ga4-page-search" type="text" placeholder="페이지 경로 검색..." />
@@ -4692,6 +4712,9 @@ const ICONS: Record<string, string> = {
         'Organic Video': '동영상', 'AI Assistant': 'AI 어시스턴트', 'Unassigned': '미분류',
       };
       const ga4ChKo = (k) => GA4_CH_KO[k] || k;
+      // GA4 deviceCategory 는 소문자 영어로 온다 — 그대로 두면 표 안에서 유독 튄다
+      const GA4_DEV_KO = { desktop: 'PC', mobile: '모바일', tablet: '태블릿', smart_tv: 'TV' };
+      const ga4DevKo = (k) => GA4_DEV_KO[k] || k;
 
       async function loadGa4Detail() {
         if (_ga4Init) return;
@@ -5050,8 +5073,10 @@ const ICONS: Record<string, string> = {
         }
       }
 
-      // 채널·소스매체 목록 — 비중을 막대로 같이 보여줘야 "어디가 주력인지"가 한눈에 들어온다
-      function renderGa4Breakdown(elId, dim, koFn) {
+      // 채널·소스매체·기기 목록 — 비중을 막대로 같이 보여줘야 "어디가 주력인지"가 한눈에 들어온다
+      // pickable=false: 기기·브라우저·OS 는 랜딩 페이지를 좁힐 수 없다(교차 차원이 page_source
+      // 하나뿐이라 소스/매체만 가능). 클릭 가능하게 두면 눌러도 표가 안 바뀌어 고장으로 보인다.
+      function renderGa4Breakdown(elId, dim, koFn, pickable = true) {
         const el = document.getElementById(elId); if (!el) return;
         const rows = ga4AggBy(dim);
         if (!rows.length) { el.innerHTML = '<div style="color:var(--text-3);font-size:0.74rem;padding:0.3rem 0;">데이터 없음</div>'; return; }
@@ -5060,8 +5085,10 @@ const ICONS: Record<string, string> = {
         // "네이버 블로그에서 온 사람이 어느 글을 봤나"를 여기서 확인한다.
         el.innerHTML = rows.slice(0, 12).map((r) => {
           const p = r.sessions / total;
-          const on = _ga4Filter && _ga4Filter.dim === dim && _ga4Filter.key === r.key;
-          return `<div class="gsc-src-row ga4-pick${on ? ' on' : ''}" data-dim="${escHtml(dim)}" data-key="${escHtml(r.key)}" title="클릭하면 이 경로로 들어온 랜딩 페이지만 봅니다 — ${escHtml(ga4Cut(r.key, 80))}">
+          const on = pickable && _ga4Filter && _ga4Filter.dim === dim && _ga4Filter.key === r.key;
+          const cls = pickable ? ` ga4-pick${on ? ' on' : ''}` : '';
+          const tip = pickable ? ` title="클릭하면 이 경로로 들어온 랜딩 페이지만 봅니다 — ${escHtml(ga4Cut(r.key, 80))}"` : '';
+          return `<div class="gsc-src-row${cls}" data-dim="${escHtml(dim)}" data-key="${escHtml(r.key)}"${tip}>
             <span>${on ? '▸ ' : ''}${ga4Cut(koFn ? koFn(r.key) : r.key, 32)}</span>
             <span>${ga4Fmt(r.sessions)} · ${ga4Pct(p)}</span>
           </div>
@@ -5140,7 +5167,7 @@ const ICONS: Record<string, string> = {
       function renderGa4Detail() {
         if (!Array.isArray(_ga4Rows) || !_ga4Rows.length) {
           const kpi = document.getElementById('ga4-kpi'); if (kpi) kpi.innerHTML = ga4Empty();
-          ['ga4-chart', 'ga4-channel', 'ga4-sourcemedium'].forEach((id) => { const e = document.getElementById(id); if (e) e.innerHTML = ''; });
+          ['ga4-chart', 'ga4-channel', 'ga4-sourcemedium', 'ga4-device', 'ga4-browser', 'ga4-os'].forEach((id) => { const e = document.getElementById(id); if (e) e.innerHTML = ''; });
           ['ga4-table', 'ga4-daily-table', 'ga4-internal-table'].forEach((id) => { const e = document.getElementById(id); if (e) e.innerHTML = ''; });
           ['ga4-entry-kpi', 'ga4-entry-kind', 'ga4-view-kind', 'ga4-internal-sum'].forEach((id) => { const e = document.getElementById(id); if (e) e.innerHTML = ''; });
           return;
@@ -5151,6 +5178,9 @@ const ICONS: Record<string, string> = {
         renderGa4DailyTable();
         renderGa4Breakdown('ga4-channel', 'channel', ga4ChKo);
         renderGa4Breakdown('ga4-sourcemedium', 'source_medium', null);
+        renderGa4Breakdown('ga4-device', 'device', ga4DevKo, false);
+        renderGa4Breakdown('ga4-browser', 'browser', null, false);
+        renderGa4Breakdown('ga4-os', 'os', null, false);
         renderGa4Table();
       }
 
