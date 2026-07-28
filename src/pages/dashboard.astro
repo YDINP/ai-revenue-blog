@@ -2138,6 +2138,7 @@ const ICONS: Record<string, string> = {
         <button class="main-tab" data-tab="lifeflow">LifeFlow</button>
         <button class="main-tab" data-tab="vip">VIP</button>
         <button class="main-tab" data-tab="gsc">🔍 검색(GSC)</button>
+        <button class="main-tab" data-tab="ga4">🌐 뭉게 유입</button>
         <button class="main-tab" data-tab="coupang">쿠팡</button>
         <button class="main-tab" data-tab="paperdoc">페이퍼닥</button>
         <button class="main-tab" data-tab="tools">🛠 도구</button>
@@ -2909,6 +2910,54 @@ const ICONS: Record<string, string> = {
           <div class="gsc-sec-title">페이지별 상세 <span>(전반→후반 클릭 변화 Δ · 헤더 클릭 정렬)</span></div>
           <input id="gsc-page-search" type="text" placeholder="페이지 제목·URL 검색..." />
           <div class="gsc-table-wrap"><table class="gsc-table" id="gsc-table"></table></div>
+        </div>
+      </div>
+
+      <!-- Tab: 뭉게 유입경로 (GA4) -->
+      <!-- mungge 는 WordPress 직접 운영이라 자체 트래커가 없다. GSC 가 '구글 검색' 유입만
+           보여주는 것과 달리 이 탭은 네이버·직접·추천·소셜까지 전 경로를 보여준다. -->
+      <div class="tab-content" id="tab-ga4">
+        <div class="gsc-controls">
+          <div class="gsc-seg" id="ga4-period">
+            <button data-days="7">7일</button>
+            <button data-days="28">28일</button>
+            <button data-days="90">90일</button>
+          </div>
+          <span class="gsc-updated" id="ga4-updated"></span>
+        </div>
+
+        <div class="gsc-kpi-row" id="ga4-kpi">
+          <span class="skeleton" style="width:60%;height:1rem;display:inline-block;"></span>
+        </div>
+
+        <div class="traffic-section" style="margin-bottom:1.25rem;">
+          <div class="gsc-sec-title">일별 추이 <span id="ga4-chart-metric-label"></span></div>
+          <div class="gsc-metric-tabs" id="ga4-metric-tabs">
+            <button data-m="sessions">세션</button>
+            <button data-m="users">사용자</button>
+            <button data-m="views">페이지뷰</button>
+          </div>
+          <div class="gsc-chart-wrap" id="ga4-chart"></div>
+          <div class="gsc-help">
+            <b>지표 설명</b> · <b>세션</b> 방문 1회(30분 무활동 시 종료) · <b>사용자</b> 중복 제거한 방문자 수 · <b>페이지뷰</b> 열람한 페이지 총합 · <b>참여율</b> 10초 이상 머물거나 2페이지 이상 본 세션 비율(낮으면 유입은 되는데 바로 이탈한다는 뜻).
+          </div>
+        </div>
+
+        <div class="gsc-source-grid">
+          <div class="gsc-src-card">
+            <div class="gsc-src-head">채널별 <span>어떤 종류의 경로로 들어왔는지</span></div>
+            <div id="ga4-channel"></div>
+          </div>
+          <div class="gsc-src-card">
+            <div class="gsc-src-head">소스 / 매체 <span>구체적으로 어느 사이트에서 왔는지</span></div>
+            <div id="ga4-sourcemedium"></div>
+          </div>
+        </div>
+
+        <div class="traffic-section">
+          <div class="gsc-sec-title">랜딩 페이지 <span>(방문자가 처음 도착한 페이지 · 헤더 클릭 정렬)</span></div>
+          <input id="ga4-page-search" type="text" placeholder="페이지 경로 검색..." />
+          <div class="gsc-table-wrap"><table class="gsc-table" id="ga4-table"></table></div>
         </div>
       </div>
 
@@ -4505,6 +4554,223 @@ const ICONS: Record<string, string> = {
         renderGscTable();
       }
 
+      // ═══════════════════════════════════════════════════════════
+      // 뭉게 유입경로 탭 (GA4) — 채널 / 소스·매체 / 랜딩페이지 / 일별 추이
+      // 데이터 소스: ga4_daily (dim='total'|'channel'|'source_medium'|'page').
+      // mungge 는 WordPress 라 자체 트래커가 없어 GA4 가 유일한 전체유입 통계다.
+      // ═══════════════════════════════════════════════════════════
+      let _ga4Rows = null;          // ga4_daily 90일 전체 (dim 구분 포함)
+      let _ga4Days = 28;
+      let _ga4Metric = 'sessions';  // sessions | users | views
+      let _ga4Sort = { key: 'sessions', dir: -1 };
+      let _ga4Search = '';
+      let _ga4Init = false;
+
+      const ga4Fmt = (n) => Number(n || 0).toLocaleString('en-US');
+      const ga4Pct = (v) => (Number(v || 0) * 100).toFixed(1) + '%';
+      const ga4Cut = (s, n) => { s = String(s || ''); return s.length > n ? s.slice(0, n) + '…' : s; };
+      const ga4Empty = () => '<div style="color:var(--text-2);font-size:0.8rem;line-height:1.5;padding:0.5rem 0;">아직 GA4 데이터가 없습니다 — 매일 09시 동기화 후 채워집니다.<br>즉시 채우려면 <code>/api/gsc-sync?ga4=sync&amp;days=90&amp;secret=CRON_SECRET</code> 를 호출하세요.</div>';
+
+      // GA4 의 소스/매체 표기는 영어라 한눈에 안 들어온다 — 자주 나오는 것만 한글 병기
+      const GA4_CH_KO = {
+        'Organic Search': '검색(자연)', 'Direct': '직접 유입', 'Referral': '추천(외부링크)',
+        'Organic Social': '소셜(자연)', 'Paid Search': '검색광고', 'Email': '이메일',
+        'Organic Video': '동영상', 'AI Assistant': 'AI 어시스턴트', 'Unassigned': '미분류',
+      };
+      const ga4ChKo = (k) => GA4_CH_KO[k] || k;
+
+      async function loadGa4Detail() {
+        if (_ga4Init) return;
+        _ga4Init = true;
+        try {
+          const since = new Date(Date.now() - 92 * 864e5).toISOString().slice(0, 10);
+          const res = await fetch(
+            `${SUPABASE_URL}/rest/v1/ga4_daily?date=gte.${since}&select=date,dim,key,sessions,users,views,engaged&order=date.asc&limit=50000`,
+            { headers }
+          );
+          _ga4Rows = res.ok ? await res.json() : [];
+        } catch { _ga4Rows = []; }
+        wireGa4Controls();
+        renderGa4Detail();
+      }
+
+      function wireGa4Controls() {
+        const seg = (id, attr, curFn, cb) => {
+          document.querySelectorAll(`#${id} button`).forEach((b) => {
+            b.classList.toggle('active', b.dataset[attr] === String(curFn()));
+            b.onclick = () => {
+              document.querySelectorAll(`#${id} button`).forEach((x) => x.classList.remove('active'));
+              b.classList.add('active');
+              cb(b.dataset[attr]);
+            };
+          });
+        };
+        seg('ga4-period', 'days', () => _ga4Days, (v) => { _ga4Days = +v; renderGa4Detail(); });
+        seg('ga4-metric-tabs', 'm', () => _ga4Metric, (v) => { _ga4Metric = v; renderGa4Chart(); });
+        const search = document.getElementById('ga4-page-search');
+        if (search) search.oninput = () => { _ga4Search = search.value.trim().toLowerCase(); renderGa4Table(); };
+      }
+
+      const ga4Cutoff = () => new Date(Date.now() - (_ga4Days - 1) * 864e5).toISOString().slice(0, 10);
+      const ga4Of = (dim) => (_ga4Rows || []).filter((r) => r.dim === dim && r.date >= ga4Cutoff());
+
+      // 같은 key 를 기간 전체로 합산 (일별 행이 쌓여 있으므로)
+      function ga4AggBy(dim) {
+        const acc = {};
+        for (const r of ga4Of(dim)) {
+          const a = (acc[r.key] ||= { key: r.key, sessions: 0, users: 0, views: 0, engaged: 0 });
+          a.sessions += r.sessions || 0; a.users += r.users || 0;
+          a.views += r.views || 0; a.engaged += r.engaged || 0;
+        }
+        return Object.values(acc).sort((a, b) => b.sessions - a.sessions);
+      }
+
+      // dim='total' 일별 시계열. 데이터 없는 날은 0 으로 채워야 추이가 끊기지 않는다.
+      function ga4DailySeries() {
+        const byDate = {};
+        for (const r of ga4Of('total')) {
+          const d = (byDate[r.date] ||= { date: r.date, sessions: 0, users: 0, views: 0, engaged: 0 });
+          d.sessions += r.sessions || 0; d.users += r.users || 0;
+          d.views += r.views || 0; d.engaged += r.engaged || 0;
+        }
+        const out = [];
+        for (let i = _ga4Days - 1; i >= 0; i--) {
+          const day = new Date(Date.now() - i * 864e5).toISOString().slice(0, 10);
+          out.push(byDate[day] || { date: day, sessions: 0, users: 0, views: 0, engaged: 0 });
+        }
+        return out;
+      }
+
+      function renderGa4Kpi() {
+        const el = document.getElementById('ga4-kpi'); if (!el) return;
+        const s = ga4DailySeries();
+        const sum = (k) => s.reduce((a, d) => a + (d[k] || 0), 0);
+        const sessions = sum('sessions'), users = sum('users'), views = sum('views'), engaged = sum('engaged');
+        const card = (k, v, sub) =>
+          `<div class="gsc-kpi-card"><div class="gsc-kpi-k">${k}</div><div class="gsc-kpi-v">${v}</div><div class="gsc-kpi-k">${sub}</div></div>`;
+        el.innerHTML =
+          card('세션', ga4Fmt(sessions), `최근 ${_ga4Days}일`) +
+          card('사용자', ga4Fmt(users), '중복 제거') +
+          card('페이지뷰', ga4Fmt(views), `세션당 ${sessions ? (views / sessions).toFixed(1) : '0.0'}쪽`) +
+          card('참여율', ga4Pct(sessions ? engaged / sessions : 0), `참여 세션 ${ga4Fmt(engaged)}`);
+        const up = document.getElementById('ga4-updated');
+        const last = (_ga4Rows || []).reduce((m, r) => (r.date > m ? r.date : m), '');
+        if (up) up.textContent = last ? `최근 데이터: ${last}` : '';
+      }
+
+      function renderGa4Chart() {
+        const wrap = document.getElementById('ga4-chart'); if (!wrap) return;
+        const s = ga4DailySeries();
+        const metaMap = { sessions: '세션', users: '사용자', views: '페이지뷰' };
+        const lbl = document.getElementById('ga4-chart-metric-label');
+        if (lbl) lbl.textContent = metaMap[_ga4Metric] || '';
+        if (!s.length) { wrap.innerHTML = ''; return; }
+        const vals = s.map((d) => d[_ga4Metric] || 0);
+        const maxV = Math.max(...vals, 1);
+        const W = 720, H = 220, padL = 46, padR = 22, padT = 14, padB = 26, n = s.length;
+        const x = (i) => padL + (n === 1 ? (W - padL - padR) / 2 : i * (W - padL - padR) / (n - 1));
+        const y = (v) => padT + (H - padT - padB) * (1 - v / maxV);
+        const grid = [0, 0.5, 1].map((t) => {
+          const gv = maxV * t, gy = y(gv);
+          return `<line x1="${padL}" y1="${gy}" x2="${W - padR}" y2="${gy}" stroke="var(--border)" stroke-width="1"/><text x="${padL - 6}" y="${gy + 3}" text-anchor="end" font-size="10" fill="var(--text-3)">${ga4Fmt(Math.round(gv))}</text>`;
+        }).join('');
+        const pts = s.map((d, i) => `${x(i)},${y(vals[i])}`).join(' ');
+        const area = `M ${x(0)},${y(0)} L ` + s.map((d, i) => `${x(i)},${y(vals[i])}`).join(' L ') + ` L ${x(n - 1)},${y(0)} Z`;
+        const dots = s.map((d, i) => `<circle cx="${x(i)}" cy="${y(vals[i])}" r="2.6" fill="var(--accent)"/>`).join('');
+        const xi = [...new Set([0, Math.floor((n - 1) / 2), n - 1])];
+        const xlab = xi.map((i) => `<text x="${x(i)}" y="${H - 8}" text-anchor="middle" font-size="10" fill="var(--text-3)">${s[i].date.slice(5)}</text>`).join('');
+        wrap.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block;height:auto" preserveAspectRatio="xMidYMid meet">
+          ${grid}<path d="${area}" fill="var(--accent)" opacity="0.12"/>
+          <polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <line class="ga4-cross" x1="0" y1="${padT}" x2="0" y2="${H - padB}" stroke="var(--text-3)" stroke-width="1" stroke-dasharray="3 3" style="display:none"/>
+          <circle class="ga4-cross-dot" r="4" fill="var(--accent)" stroke="var(--surface)" stroke-width="2" style="display:none"/>
+          ${dots}${xlab}</svg>
+          <div class="gsc-tip" id="ga4-tip" style="display:none"></div>`;
+        const svgEl = wrap.querySelector('svg');
+        const tip = wrap.querySelector('#ga4-tip');
+        const cross = wrap.querySelector('.ga4-cross');
+        const crossDot = wrap.querySelector('.ga4-cross-dot');
+        const move = (e) => {
+          const rect = svgEl.getBoundingClientRect();
+          const px = (e.clientX - rect.left) * (W / rect.width);
+          let idx = n <= 1 ? 0 : Math.round((px - padL) / ((W - padL - padR) / (n - 1)));
+          idx = Math.max(0, Math.min(n - 1, idx));
+          const d = s[idx], cx = x(idx);
+          cross.setAttribute('x1', cx); cross.setAttribute('x2', cx); cross.style.display = '';
+          crossDot.setAttribute('cx', cx); crossDot.setAttribute('cy', y(vals[idx])); crossDot.style.display = '';
+          tip.innerHTML = `<div class="gsc-tip-d">${d.date}</div>
+            <div class="gsc-tip-r"><span>세션</span><b>${ga4Fmt(d.sessions)}</b></div>
+            <div class="gsc-tip-r"><span>사용자</span><b>${ga4Fmt(d.users)}</b></div>
+            <div class="gsc-tip-r"><span>페이지뷰</span><b>${ga4Fmt(d.views)}</b></div>
+            <div class="gsc-tip-r"><span>참여율</span><b>${ga4Pct(d.sessions ? d.engaged / d.sessions : 0)}</b></div>`;
+          tip.style.display = 'block';
+          const wr = wrap.getBoundingClientRect();
+          let left = e.clientX - wr.left + 14;
+          if (left > wr.width - 140) left = e.clientX - wr.left - 140;
+          tip.style.left = Math.max(4, left) + 'px';
+          tip.style.top = '6px';
+        };
+        svgEl.addEventListener('mousemove', move);
+        svgEl.addEventListener('mouseleave', () => { tip.style.display = 'none'; cross.style.display = 'none'; crossDot.style.display = 'none'; });
+      }
+
+      // 채널·소스매체 목록 — 비중을 막대로 같이 보여줘야 "어디가 주력인지"가 한눈에 들어온다
+      function renderGa4Breakdown(elId, dim, koFn) {
+        const el = document.getElementById(elId); if (!el) return;
+        const rows = ga4AggBy(dim);
+        if (!rows.length) { el.innerHTML = '<div style="color:var(--text-3);font-size:0.74rem;padding:0.3rem 0;">데이터 없음</div>'; return; }
+        const total = rows.reduce((a, r) => a + r.sessions, 0) || 1;
+        el.innerHTML = rows.slice(0, 12).map((r) => {
+          const p = r.sessions / total;
+          return `<div class="gsc-src-row" title="${ga4Cut(r.key, 80)}">
+            <span>${ga4Cut(koFn ? koFn(r.key) : r.key, 34)}</span>
+            <span>${ga4Fmt(r.sessions)} · ${ga4Pct(p)}</span>
+          </div>
+          <div style="height:3px;background:var(--accent);opacity:0.35;border-radius:2px;width:${(p * 100).toFixed(1)}%;margin:0 0 0.25rem;"></div>`;
+        }).join('');
+      }
+
+      function renderGa4Table() {
+        const tbl = document.getElementById('ga4-table'); if (!tbl) return;
+        let rows = ga4AggBy('page');
+        if (_ga4Search) rows = rows.filter((r) => r.key.toLowerCase().includes(_ga4Search));
+        const { key, dir } = _ga4Sort;
+        rows = rows.slice().sort((a, b) => (a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0) * dir);
+        const th = (k, label, cls) =>
+          `<th class="${cls || ''}${key === k ? ' sorted' : ''}" data-k="${k}">${label}${key === k ? (dir < 0 ? ' ▾' : ' ▴') : ''}</th>`;
+        tbl.innerHTML = `<thead><tr>
+            ${th('key', '랜딩 페이지')}${th('sessions', '세션', 'num')}${th('users', '사용자', 'num')}${th('views', '조회', 'num')}${th('engaged', '참여', 'num')}
+          </tr></thead><tbody>` +
+          (rows.length
+            ? rows.slice(0, 100).map((r) => `<tr>
+                <td><a href="https://mungge.com${r.key.startsWith('/') ? r.key : '/' + r.key}" target="_blank" rel="noopener" style="color:inherit">${ga4Cut(r.key, 60)}</a></td>
+                <td class="num">${ga4Fmt(r.sessions)}</td><td class="num">${ga4Fmt(r.users)}</td>
+                <td class="num">${ga4Fmt(r.views)}</td><td class="num">${ga4Fmt(r.engaged)}</td></tr>`).join('')
+            : '<tr><td colspan="5" style="color:var(--text-3)">해당 페이지 없음</td></tr>') +
+          '</tbody>';
+        tbl.querySelectorAll('th').forEach((h) => {
+          h.onclick = () => {
+            const k = h.dataset.k;
+            _ga4Sort = { key: k, dir: _ga4Sort.key === k ? -_ga4Sort.dir : -1 };
+            renderGa4Table();
+          };
+        });
+      }
+
+      function renderGa4Detail() {
+        if (!Array.isArray(_ga4Rows) || !_ga4Rows.length) {
+          const kpi = document.getElementById('ga4-kpi'); if (kpi) kpi.innerHTML = ga4Empty();
+          ['ga4-chart', 'ga4-channel', 'ga4-sourcemedium'].forEach((id) => { const e = document.getElementById(id); if (e) e.innerHTML = ''; });
+          const tbl = document.getElementById('ga4-table'); if (tbl) tbl.innerHTML = '';
+          return;
+        }
+        renderGa4Kpi();
+        renderGa4Chart();
+        renderGa4Breakdown('ga4-channel', 'channel', ga4ChKo);
+        renderGa4Breakdown('ga4-sourcemedium', 'source_medium', null);
+        renderGa4Table();
+      }
+
       async function fetchAudience() {
         try {
           const res = await fetch(
@@ -5670,6 +5936,9 @@ const ICONS: Record<string, string> = {
           } else if (targetTab === 'gsc') {
             tab.classList.add('active');
             loadGscDetail();
+          } else if (targetTab === 'ga4') {
+            tab.classList.add('active');
+            loadGa4Detail();
           } else if (targetTab === 'tools') {
             tab.classList.add('active');
             if (_toolRows === null) {
