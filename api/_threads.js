@@ -249,6 +249,23 @@ export async function getMyRecentMedia(account, limit = 25) {
   return Array.isArray(j.data) ? j.data : [];
 }
 
+// 내 계정 username — 자기 댓글에 자기가 답하는 루프를 막는 데 쓴다.
+// threads_accounts.handle 이 비어 있는 계정이 실제로 있었으므로(2026-07-29 실측 handle=null)
+// DB 값에만 의존하지 않고 API에서 받아온다. 받아오면 handle에 캐시.
+export async function getMyUsername(account) {
+  const cached = String(account.handle || '').replace(/^@/, '');
+  if (cached) return cached.toLowerCase();
+  const url = new URL(`${GRAPH_V}/me`);
+  url.searchParams.set('fields', 'username');
+  url.searchParams.set('access_token', account.access_token);
+  const r = await fetch(url);
+  const j = await r.json().catch(() => ({}));
+  const username = String(j?.username || '').replace(/^@/, '');
+  if (!username) return '';
+  await updateAccount(account.id, { handle: username }).catch(() => {});
+  return username.toLowerCase();
+}
+
 // 내 원글에 달린 직접 답글 목록. threads_manage_replies 스코프 필요.
 export async function getReplies(account, mediaId) {
   const url = new URL(`${GRAPH_V}/${mediaId}/replies`);
@@ -307,21 +324,34 @@ export const getEngage = (id) =>
 export const engageExists = (postId) =>
   sb(`threads_engage?post_id=eq.${encodeURIComponent(postId)}&select=id&limit=1`).then((r) => r.length > 0);
 
-// 남 글에 다는 답글 초안 — 공감/도움 위주, 홍보·링크 금지 (스팸 방지).
-export async function draftEngageReply(postText) {
-  const key = process.env.ANTHROPIC_API_KEY;
-  if (!key || !postText) return '';
-  const sys =
-    '너는 생활정보 스레드 계정 "미나"야. 다른 사람의 글에 다는 답글을 쓴다. ' +
-    '규칙: 반말+친근한 스친체(존댓말/격식체/~있음체 금지), 1~2줄, 글 내용에 진심으로 공감/반응. ' +
-    '절대 홍보·링크·내 계정 언급 금지. 자연스러운 대화만. 뻔한 "좋은 글이네요" 금지.';
+// ── LLM 초안 ──
+// 크레덴셜 2종을 모두 받는다: 직접키(ANTHROPIC_API_KEY) 또는 게이트웨이(BASE_URL+AUTH_TOKEN).
+// 어느 것도 없으면 '' → 호출부가 "초안 없음"으로 처리하고, 자동발행은 아예 하지 않는다.
+// (2026-07-29 현재 Vercel에 둘 다 없음 → 초안은 로컬 러너 automation/threads-reply-run.mjs가 채운다)
+export function llmConfigured() {
+  return !!(process.env.ANTHROPIC_API_KEY || (process.env.ANTHROPIC_BASE_URL && process.env.ANTHROPIC_AUTH_TOKEN));
+}
+
+async function anthropicText({ system, user, model = 'claude-haiku-4-5-20251001', maxTokens = 150 }) {
+  const direct = process.env.ANTHROPIC_API_KEY;
+  const base = (process.env.ANTHROPIC_BASE_URL || 'https://api.anthropic.com').replace(/\/+$/, '');
+  const token = direct || process.env.ANTHROPIC_AUTH_TOKEN;
+  if (!token) return '';
   try {
-    const r = await fetch('https://api.anthropic.com/v1/messages', {
+    const r = await fetch(`${base}/v1/messages`, {
       method: 'POST',
-      headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+      headers: {
+        'x-api-key': token,
+        // 게이트웨이(kone 계열)는 Bearer만 받는 경우가 있어 둘 다 붙인다.
+        ...(direct ? {} : { authorization: `Bearer ${token}` }),
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+      },
       body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001', max_tokens: 150, system: sys,
-        messages: [{ role: 'user', content: `[상대 글]\n${postText}\n\n이 글에 달 답글만 써줘.` }],
+        model: process.env.THREADS_LLM_MODEL || model,
+        max_tokens: maxTokens,
+        system,
+        messages: [{ role: 'user', content: user }],
       }),
     });
     const j = await r.json();
@@ -330,30 +360,43 @@ export async function draftEngageReply(postText) {
   } catch { return ''; }
 }
 
-// AI 추천 대댓글 초안 — ANTHROPIC_API_KEY 있으면 생성, 없으면 '' (사람이 직접 작성).
+// 남 글에 다는 답글 초안 — 공감/도움 위주, 홍보·링크 금지 (스팸 방지).
+export async function draftEngageReply(postText) {
+  if (!postText) return '';
+  return anthropicText({
+    system:
+      '너는 생활정보 스레드 계정 "미나"야. 다른 사람의 글에 다는 답글을 쓴다. ' +
+      '규칙: 반말+친근한 스친체(존댓말/격식체/~있음체 금지), 1~2줄, 글 내용에 진심으로 공감/반응. ' +
+      '절대 홍보·링크·내 계정 언급 금지. 자연스러운 대화만. 뻔한 "좋은 글이네요" 금지.',
+    user: `[상대 글]\n${postText}\n\n이 글에 달 답글만 써줘.`,
+  });
+}
+
+// AI 추천 대댓글 초안 — 크레덴셜 있으면 생성, 없으면 '' (사람이 직접 작성 / 로컬 러너가 채움).
 // 반말+스친체, 진심 1~2줄, 링크·영업 금지 (threads-hook-writer 규칙).
+export const REPLY_DRAFT_SYSTEM =
+  '너는 생활정보 스레드 계정 "미나"야. 댓글에 다는 대댓글을 쓴다. ' +
+  '규칙: 반말+친근한 스친체(존댓말/격식체/~있음체 금지), 1~2줄, 진심으로 반응, ' +
+  '외부 링크·영업·홍보 금지, 이모지 0~1개. 댓글 내용에 실제로 반응하는 답만.';
+
+export const replyDraftPrompt = (commentText, postText) =>
+  `${postText ? `[내 글]\n${postText}\n\n` : ''}[달린 댓글]\n${commentText}\n\n이 댓글에 달 대댓글만 써줘.`;
+
 export async function draftReply(commentText, { postText } = {}) {
-  const key = process.env.ANTHROPIC_API_KEY;
-  if (!key || !commentText) return '';
-  const sys =
-    '너는 생활정보 스레드 계정 "미나"야. 댓글에 다는 대댓글을 쓴다. ' +
-    '규칙: 반말+친근한 스친체(존댓말/격식체/~있음체 금지), 1~2줄, 진심으로 반응, ' +
-    '외부 링크·영업·홍보 금지, 이모지 0~1개. 댓글 내용에 실제로 반응하는 답만.';
-  try {
-    const r = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 150,
-        system: sys,
-        messages: [{ role: 'user', content: `${postText ? `[내 글]\n${postText}\n\n` : ''}[달린 댓글]\n${commentText}\n\n이 댓글에 달 대댓글만 써줘.` }],
-      }),
-    });
-    const j = await r.json();
-    if (!r.ok) return '';
-    return (j.content?.[0]?.text || '').trim();
-  } catch {
-    return '';
-  }
+  if (!commentText) return '';
+  return anthropicText({ system: REPLY_DRAFT_SYSTEM, user: replyDraftPrompt(commentText, postText) });
+}
+
+// ── 자동 대댓글 안전장치용 카운터 ──
+// 24h 자동발행 수 — created_at(수집시각)이 아니라 sent_at(발행시각) 기준이어야 캡이 정확하다.
+export async function autoRepliesSent24h(accountId) {
+  const since = new Date(Date.now() - 24 * 3600 * 1000).toISOString();
+  const r = await sb(`threads_replies?account_id=eq.${accountId}&auto=is.true&sent_at=gte.${since}&select=id`);
+  return Array.isArray(r) ? r.length : 0;
+}
+
+// 한 원글에 쌓인 미답변(pending) 수 — 바이럴 글에서 수집이 폭주하는 것을 막는다.
+export async function pendingRepliesForRoot(rootMediaId) {
+  const r = await sb(`threads_replies?root_media_id=eq.${encodeURIComponent(rootMediaId)}&status=eq.pending&select=id`);
+  return Array.isArray(r) ? r.length : 0;
 }

@@ -20,10 +20,33 @@
 - 알림 메시지 버튼: **[📋 큐 보기][⏭ 패스]**
 - 10분 내 발행/예약/패스 안 하면 → 큐에서 **랜덤 1개 자동 발행**, 그리고 **알림 메시지를 ✅완료로 편집(버튼 제거)**
 
-## 댓글 반자동 대댓글
-- `threads-cron`이 내 최근 글(48h, 수동 발행 포함) 새 댓글 수집 → (AI 초안) → 텔레그램 카드
-- 카드: **[✅ 이대로][✍️ 답글(입력창 자동)][🗑 무시]** → `publishReply`
-- 테이블 `threads_replies`. 삭제: `threads-admin?action=reply-delete[&rid=N]`
+## 댓글 대댓글 (반자동 + 자동) — 2026-07-29 갱신
+- **수집 주기 15분** — GH Actions `threads-replies.yml` → `threads-cron?only=replies`
+  (기존 `threads-cron.yml`은 하루 2번 발행·인사이트 담당. Hobby 함수 12/12 만석이라 신규
+  엔드포인트 대신 `?only=replies|posts` 쿼리로 분기)
+- `reply_mode='review'`(기본) → 텔레그램 카드 **[✅ 이대로][✍️ 답글][🗑 무시]** → `publishReply`
+- `reply_mode='auto'` → **초안이 있으면 승인 없이 즉시 발행** + 텔레그램 사후 보고(🤖 자동답글)
+  전환: `threads-admin?action=set-reply-mode` body`{mode:'auto'|'review',cap:20}`
+- 안전장치 4개: 계정 일일캡(`reply_daily_cap` 20) · 원글당 미답변 20 · **자기답글 차단** ·
+  **초안 없으면 발행 안 함**(빈 답글 방지)
+- 테이블 `threads_replies`(+sent_at, auto). 삭제: `threads-admin?action=reply-delete[&rid=N]`
+- 문서: `PRD-threads-auto-reply.md` / 스키마 `supabase/threads-reply-auto.sql`
+
+### ⚠️ 초안은 로컬에서 만든다 (서버 LLM 없음)
+Vercel에 `ANTHROPIC_API_KEY` 없음 + 게이트웨이 `api.mdbox.ai` 잔액 마이너스(403) → **서버는 초안을
+못 만든다**. 그래서 `auto`로 켜도 크론은 승인카드로 폴백된다(의도된 동작).
+초안은 `claude` CLI를 쓰는 로컬 러너가 채운다:
+```bash
+node automation/threads-reply-run.mjs            # 초안만 (Ben_Claude 레포)
+node automation/threads-reply-run.mjs --send     # 초안 + 즉시 발행
+node automation/threads-reply-run.mjs --dry      # 생성만, 저장 X
+```
+→ Vercel에 `ANTHROPIC_API_KEY`(또는 `ANTHROPIC_BASE_URL`+`ANTHROPIC_AUTH_TOKEN`)를 넣는 순간
+크론이 직접 초안을 만들어 완전 자동이 된다. 코드 수정 불필요.
+
+### 신규 admin 액션
+`reply-list[&nodraft=1&limit=N]`(pending 조회, 자기댓글 제외) · `reply-draft`{id,draft} ·
+`reply-send`{id,text?,auto?} · `set-reply-mode`{mode,topic?,cap?}
 
 ## 아웃바운드 인게이지먼트 `/find`
 - `/find <키워드>` → keyword_search → 후보 카드([✅이대로][✍️답글][🗑패스]) → 남 글에 답글

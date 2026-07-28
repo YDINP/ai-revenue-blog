@@ -471,20 +471,21 @@ export function threadsReplyCard(row) {
   return { text, reply_markup: { inline_keyboard: [buttons] } };
 }
 
-// 대댓글 실제 발행 (콜백/플로우 공용)
-async function sendReply(id, text) {
+// 대댓글 실제 발행 (텔레그램 콜백/플로우 · 크론 자동발행 · admin API 공용)
+// auto=true면 자동발행분으로 표시 → 일일 캡 계산과 사후 감사에 쓰인다.
+export async function sendReply(id, text, { auto = false } = {}) {
   const row = await getReply(id);
-  if (!row) return { text: `댓글 #${id} 없음(이미 처리됨?)` };
-  if (!text || !text.trim()) return { text: `❌ 빈 답변이라 취소.` };
+  if (!row) return { text: `댓글 #${id} 없음(이미 처리됨?)`, ok: false };
+  if (!text || !text.trim()) return { text: `❌ 빈 답변이라 취소.`, ok: false };
   const account = (await sb(`threads_accounts?id=eq.${row.account_id}&limit=1`))[0];
-  if (!account?.access_token) return { text: `❌ 계정 토큰 없음 (account_id=${row.account_id})` };
+  if (!account?.access_token) return { text: `❌ 계정 토큰 없음 (account_id=${row.account_id})`, ok: false };
   try {
     const mediaId = await publishReply(account, { text, replyToId: row.comment_id });
-    await updateReply(id, { status: 'sent', reply_media_id: mediaId });
-    return { text: `✅ 대댓글 발행 완료 (#${id})` };
+    await updateReply(id, { status: 'sent', reply_media_id: mediaId, sent_at: new Date().toISOString(), auto });
+    return { text: `✅ 대댓글 발행 완료 (#${id})`, ok: true, mediaId };
   } catch (e) {
     await updateReply(id, { status: 'failed', error: e.message });
-    return { text: `❌ 발행 실패 #${id}: ${escapeHtml(e.message)}` };
+    return { text: `❌ 발행 실패 #${id}: ${escapeHtml(e.message)}`, ok: false, error: e.message };
   }
 }
 

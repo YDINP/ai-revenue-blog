@@ -1,0 +1,78 @@
+{
+  "prd": "PRD-threads-auto-reply.md",
+  "created": "2026-07-29",
+  "tasks": [
+    {
+      "id": 1,
+      "title": "스키마: reply_mode/reply_daily_cap/sent_at/auto 컬럼 추가",
+      "files": ["supabase/threads-reply-auto.sql"],
+      "status": "pending",
+      "note": "DDL은 Supabase Management API(sbp_ 토큰)로 적용. service_role로는 DDL 불가."
+    },
+    {
+      "id": 2,
+      "title": "_threads.js: 크레덴셜 2종 지원 anthropicText() 헬퍼로 초안 함수 통합",
+      "files": ["api/_threads.js"],
+      "status": "pending",
+      "note": "ANTHROPIC_API_KEY(직접) 또는 ANTHROPIC_BASE_URL+ANTHROPIC_AUTH_TOKEN(게이트웨이). 둘 다 없으면 '' 반환."
+    },
+    {
+      "id": 3,
+      "title": "_threads.js: autoRepliesSent24h / pendingRepliesForRoot 카운터 추가",
+      "files": ["api/_threads.js"],
+      "status": "pending"
+    },
+    {
+      "id": 4,
+      "title": "_threads-bot.js: sendReply를 export + auto 플래그/sent_at 기록",
+      "files": ["api/_threads-bot.js"],
+      "status": "pending",
+      "note": "크론·admin·텔레그램 콜백이 같은 발행 경로를 쓰도록 단일화."
+    },
+    {
+      "id": 5,
+      "title": "threads-cron.js: only=replies|posts 분기",
+      "files": ["api/threads-cron.js"],
+      "status": "pending",
+      "note": "Hobby 12함수 만석 → 신규 엔드포인트 대신 쿼리 파라미터."
+    },
+    {
+      "id": 6,
+      "title": "threads-cron.js: auto 발행 + 일일캡 + 글당 미답변 20 + 자기답글 차단",
+      "files": ["api/threads-cron.js"],
+      "status": "pending"
+    },
+    {
+      "id": 7,
+      "title": "threads-admin.js: reply-list / reply-draft / reply-send / set-reply-mode",
+      "files": ["api/threads-admin.js"],
+      "status": "pending"
+    },
+    {
+      "id": 8,
+      "title": "GH Actions: threads-replies.yml 15분 주기",
+      "files": [".github/workflows/threads-replies.yml"],
+      "status": "pending",
+      "note": "레포 PUBLIC이라 Actions 분 무료. 실패 시 워크플로 실패로 알림."
+    },
+    {
+      "id": 9,
+      "title": "로컬 러너: automation/threads-reply-run.mjs (claude CLI로 초안 채우기)",
+      "files": ["../automation/threads-reply-run.mjs"],
+      "status": "pending",
+      "note": "서버에 LLM 크레덴셜이 없는 동안의 초안 공급원. --send로 발행까지."
+    },
+    {
+      "id": 10,
+      "title": "배포 + 검증 (only=replies 200, 폴백 확인)",
+      "status": "pending",
+      "note": "git 자동배포 멈춤 상태 → npx vercel --prod --yes 수동 배포."
+    },
+    {
+      "id": 11,
+      "title": "문서: THREADS-SYSTEM.md 갱신 + 커밋",
+      "files": ["THREADS-SYSTEM.md"],
+      "status": "pending"
+    }
+  ]
+}
