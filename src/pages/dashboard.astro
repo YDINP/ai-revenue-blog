@@ -3015,6 +3015,7 @@ const ICONS: Record<string, string> = {
             <button data-b="monthly">월간</button>
           </div>
           <span class="gsc-updated" id="ga4-updated"></span>
+          <button class="refresh-btn" id="ga4-sync-now" title="GA4에서 오늘·어제치를 지금 다시 가져옵니다 (평소엔 매일 09시 배치)">지금 동기화</button>
         </div>
 
         <div class="gsc-kpi-row" id="ga4-kpi">
@@ -4755,6 +4756,32 @@ const ICONS: Record<string, string> = {
         seg('ga4-metric-tabs', 'm', () => _ga4Metric, (v) => { _ga4Metric = v; renderGa4Chart(); });
         const search = document.getElementById('ga4-page-search');
         if (search) search.oninput = () => { _ga4Search = search.value.trim().toLowerCase(); renderGa4Table(); };
+        const syncBtn = document.getElementById('ga4-sync-now');
+        if (syncBtn) syncBtn.onclick = () => syncGa4Now(syncBtn);
+      }
+
+      // GA4 오늘치 즉시 재동기화.
+      // ga4_daily 는 매일 09시 배치로만 채워져서 오후에 보면 오늘 수치가 아침 시점에 멈춰 있다.
+      // Site Kit 실시간 값과 어긋나 보이는 원인이 이것이라, 손으로 당길 수단을 둔다.
+      // 인증은 대시보드 입장 비밀번호(x-admin-key) — 서버가 ga4=sync 모드에서만 받아준다.
+      async function syncGa4Now(btn) {
+        const label = btn.textContent;
+        btn.disabled = true; btn.textContent = '동기화 중…';
+        try {
+          // days=2 = 어제·오늘. GA4 는 당일치를 몇 시간에 걸쳐 재집계하므로 어제까지 다시 덮는다.
+          const r = await fetch('/api/gsc-sync?ga4=sync&days=2', { headers: { 'x-admin-key': adminKey } });
+          const j = await r.json().catch(() => ({}));
+          if (!r.ok) throw new Error(j.error || `HTTP ${r.status}`);
+          _ga4Ready = null; _ga4Rows = null;   // 캐시된 프라미스를 버려야 새 값을 다시 읽는다
+          await loadMunggeAll();               // 전체요약 쪽 뭉게 수치도 같은 데이터로 다시 그린다
+          renderGa4Detail();
+          btn.textContent = '갱신됨';
+        } catch (e) {
+          btn.textContent = '실패';
+          console.error('ga4 sync', e);
+        } finally {
+          setTimeout(() => { btn.disabled = false; btn.textContent = label; }, 2500);
+        }
       }
 
       const ga4Cutoff = () => new Date(Date.now() - (_ga4Days - 1) * 864e5).toISOString().slice(0, 10);
@@ -4838,7 +4865,10 @@ const ICONS: Record<string, string> = {
           card('참여율', ga4Pct(sessions ? engaged / sessions : 0), `참여 세션 ${ga4Fmt(engaged)} · 오늘 ${ga4Fmt(td.engaged)}`);
         const up = document.getElementById('ga4-updated');
         const last = (_ga4Rows || []).reduce((m, r) => (r.date > m ? r.date : m), '');
-        if (up) up.textContent = last ? `최근 데이터: ${last}` : '';
+        const at = ga4SyncedLabel();
+        // 오늘 행이 있어도 값은 마지막 동기화 시점 것이다 — 시각을 같이 적어야 Site Kit 과
+        // 숫자가 다를 때 "지연"인지 "틀림"인지 구분된다
+        if (up) up.textContent = last ? `최근 데이터: ${last}${at ? ` · 동기화 ${at}` : ''}` : '';
       }
 
       function renderGa4Chart() {
@@ -5180,6 +5210,7 @@ const ICONS: Record<string, string> = {
       // 탭을 일찍 누르면 로딩 중인데 '기록 없음'으로 읽혀 잘못된 결론이 나온다
       let _mgLiveLoaded = false;
       let _ga4Ready = null;     // ga4_daily 로드 프라미스 (탭·요약이 공유해 중복 요청 방지)
+      let _ga4Synced = null;    // ga4_daily 최신 updated_at — "이 수치가 몇 시 기준인가"
       let _traffic = null;      // loadTraffic 이 계산한 analytics 측 수치 스냅샷
 
       const MG_URL = 'https://mungge.com';
@@ -5189,12 +5220,28 @@ const ICONS: Record<string, string> = {
       function ensureGa4Rows() {
         if (_ga4Ready) return _ga4Ready;
         const since = new Date(Date.now() - 92 * 864e5).toISOString().slice(0, 10);
-        _ga4Ready = fetch(
+        const rowsP = fetch(
           `${SUPABASE_URL}/rest/v1/ga4_daily?date=gte.${since}&select=date,dim,key,sessions,users,views,engaged&order=date.asc&limit=50000`,
           { headers }
         ).then((r) => (r.ok ? r.json() : [])).catch(() => []).then((rows) => { _ga4Rows = rows; return rows; });
+        // "언제 가져온 값인가"는 날짜(date)로는 알 수 없다. 오늘 행이 있어도 그 값은 마지막
+        // 동기화 시점에 멈춰 있어서, Site Kit 실시간 수치와 비교하면 대시보드가 틀린 것처럼 보인다.
+        // 행 전체에 updated_at 을 실어 나르면 payload 만 커지므로 최신 1건만 따로 읽는다.
+        const syncP = fetch(`${SUPABASE_URL}/rest/v1/ga4_daily?select=updated_at&order=updated_at.desc&limit=1`, { headers })
+          .then((r) => (r.ok ? r.json() : []))
+          .then((rows) => { _ga4Synced = rows[0]?.updated_at || null; })
+          .catch(() => {});
+        // 둘 다 끝난 뒤 resolve — 렌더가 시각 표시 없이 한 번 그려졌다 바뀌는 깜빡임을 막는다
+        _ga4Ready = Promise.all([rowsP, syncP]).then(([rows]) => rows);
         return _ga4Ready;
       }
+
+      // 마지막 동기화 시각(KST HH:MM). 배치는 하루 1회라 오후엔 몇 시간 전 값일 수 있다.
+      const ga4SyncedLabel = () => {
+        if (!_ga4Synced) return '';
+        const d = new Date(new Date(_ga4Synced).getTime() + 9 * 3600e3);
+        return `${String(d.getUTCHours()).padStart(2, '0')}:${String(d.getUTCMinutes()).padStart(2, '0')}`;
+      };
 
       // dim 별 합계 — from(포함)~to(포함) 날짜 범위. 날짜 미지정이면 전 구간.
       function mgAgg(dim, from, to) {
@@ -5416,7 +5463,8 @@ const ICONS: Record<string, string> = {
         if (st) {
           const last = (_ga4Rows || []).reduce((m, r) => (r.date > m ? r.date : m), '');
           const stale = !last || last < kstYday();
-          st.textContent = last ? (stale ? `지연 (${last})` : `정상 (${last})`) : '데이터 없음';
+          const at = ga4SyncedLabel();
+          st.textContent = last ? (stale ? `지연 (${last})` : `정상 (${last}${at ? ` ${at}` : ''})`) : '데이터 없음';
           st.className = 'status-badge ' + (last && !stale ? 'online' : 'pending');
         }
       }

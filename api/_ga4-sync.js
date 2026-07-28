@@ -24,6 +24,11 @@ async function upsert(rows) {
   return rows.length;
 }
 
+// upsert 페이로드에 updated_at 을 직접 넣는다. 컬럼 기본값 now() 는 INSERT 에만 걸리고
+// on conflict UPDATE 에는 안 걸려서, 넣지 않으면 재동기화를 해도 값이 최초 삽입 시각에 멈춘다
+// → 대시보드가 "이 수치가 언제 것인지" 표시할 근거를 잃는다.
+const stamp = () => new Date().toISOString();
+
 const toRow = (src, dim, dimName) => (r) => ({
   date: ga4Date(r.date),
   source: src,
@@ -33,6 +38,7 @@ const toRow = (src, dim, dimName) => (r) => ({
   users: r.totalUsers,
   views: r.screenPageViews,
   engaged: r.engagedSessions,
+  updated_at: stamp(),
 });
 
 export async function syncGa4({ days = 7 } = {}) {
@@ -56,6 +62,7 @@ export async function syncGa4({ days = 7 } = {}) {
           users: r.totalUsers,
           views: r.screenPageViews,
           engaged: r.engagedSessions,
+          updated_at: stamp(),
         })),
         ...channel.rows.map(toRow(src, 'channel', 'sessionDefaultChannelGroup')),
         ...sourceMedium.rows.map(toRow(src, 'source_medium', 'sessionSourceMedium')),
@@ -77,6 +84,7 @@ export async function syncGa4({ days = 7 } = {}) {
           users: r.totalUsers,
           views: r.screenPageViews,
           engaged: r.engagedSessions,
+          updated_at: stamp(),
         })),
       ];
       out[src] = await upsert(rows);

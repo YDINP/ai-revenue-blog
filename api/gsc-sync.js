@@ -12,6 +12,7 @@
 //   /api/gsc-sync?ga4=properties&secret=…             접근 가능한 GA4 속성 목록(속성 ID 확인)
 //   /api/gsc-sync?ga4=probe&blog=mg&days=28&dim=sessionSourceMedium&secret=…   원본 조회
 //   /api/gsc-sync?ga4=sync&days=30&secret=…           ga4_daily 저장
+//     └ 이 모드만 대시보드 비밀번호로도 호출 가능: 헤더 `x-admin-key: <COMMENT_ADMIN_KEY>`
 import { syncGsc } from './_gsc-sync.js';
 import { syncGa4 } from './_ga4-sync.js';
 import { blogList, resolveBlog } from './_blogs.js';
@@ -23,7 +24,18 @@ export default async function handler(req, res) {
   const url = new URL(req.url, 'http://x');
   const token =
     url.searchParams.get('secret') || (req.headers.authorization || '').replace(/^Bearer\s+/, '');
-  if (secret && token !== secret) {
+  // 대시보드의 '지금 동기화' 버튼용 대안 자격.
+  // ga4_daily 는 하루 1회 배치라 오늘치가 마지막 동기화 시점에 멈춰 있고, 그 상태로 Site Kit
+  // 실시간 수치와 비교하면 대시보드가 틀린 것처럼 보인다. 브라우저에서 직접 갱신할 수 있어야
+  // 하는데 CRON_SECRET 을 클라이언트에 실을 수는 없다 → 대시보드 입장 비밀번호
+  // (COMMENT_ADMIN_KEY, 이미 서버에만 있는 값)를 헤더로 받는다.
+  // 권한은 ga4=sync 하나로만 좁힌다 — GSC 동기화·원본 조회는 여전히 CRON_SECRET 전용.
+  const adminKey = process.env.COMMENT_ADMIN_KEY;
+  const adminOk =
+    !!adminKey &&
+    (req.headers['x-admin-key'] || '') === adminKey &&
+    url.searchParams.get('ga4') === 'sync';
+  if (secret && token !== secret && !adminOk) {
     return res.status(401).json({ error: 'unauthorized' });
   }
 
