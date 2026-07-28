@@ -35,6 +35,31 @@ const CLAUDE_MODEL = process.env.BLOG_CLAUDE_MODEL || "claude-haiku-4-5-20251001
 const CLAUDE_API_URL = `${process.env.ANTHROPIC_BASE_URL || "https://api.anthropic.com"}/v1/messages`;
 const PEXELS_API_URL = "https://api.pexels.com/v1/search";
 
+// SSE(stream:true) 응답에서 텍스트 델타만 이어붙여 반환.
+// 왜 스트리밍인가: 본문 생성은 max_tokens 8192짜리 장시간 요청이라, 논스트리밍으로 보내면
+// 게이트웨이(nginx)가 첫 바이트를 못 받고 504 Gateway Time-out을 낸다(2026-07-28 발행 실패).
+async function readClaudeStream(response) {
+  const decoder = new TextDecoder();
+  let buf = "";
+  let text = "";
+  for await (const chunk of response.body) {
+    buf += decoder.decode(chunk, { stream: true });
+    let i;
+    while ((i = buf.indexOf("\n")) >= 0) {
+      const line = buf.slice(0, i).trim();
+      buf = buf.slice(i + 1);
+      if (!line.startsWith("data:")) continue;
+      const payload = line.slice(5).trim();
+      if (!payload || payload === "[DONE]") continue;
+      let ev;
+      try { ev = JSON.parse(payload); } catch { continue; }
+      if (ev.type === "content_block_delta" && ev.delta?.text) text += ev.delta.text;
+      if (ev.type === "error") throw new Error(`Claude stream error: ${JSON.stringify(ev.error)}`);
+    }
+  }
+  return text;
+}
+
 const AUTHOR = "TechFlow";
 const CATEGORY_ORDER = ["AI", "Dev", "Review", "Game"];
 const CHART_COLORS = ["#3b82f6", "#f59e0b", "#009e73", "#d55e00", "#8b5cf6"];
@@ -313,6 +338,7 @@ ${chartInstruction}
     body: JSON.stringify({
       model: CLAUDE_MODEL,
       max_tokens: 8192,
+      stream: true,
       messages: [{ role: "user", content: prompt }],
     }),
   });
@@ -322,8 +348,7 @@ ${chartInstruction}
     throw new Error(`Claude API ${response.status}: ${errorText}`);
   }
 
-  const data = await response.json();
-  const text = data.content[0].text.trim();
+  const text = (await readClaudeStream(response)).trim();
 
   // JSON 파싱 (코드블록 감싸기 + 잘림 대응)
   let jsonStr = text.replace(/^```json?\s*/, "").replace(/\s*```$/, "");
