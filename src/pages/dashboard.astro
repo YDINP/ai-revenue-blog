@@ -961,6 +961,7 @@ const ICONS: Record<string, string> = {
       .src-badge.gf { background: rgba(168, 85, 247, 0.15); color: #d8b4fe; }
       .src-badge.vip { background: rgba(87, 230, 195, 0.15); color: #7fe9d0; }
       .src-badge.mg { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+      .mg-untracked { color: #fbbf24; opacity: 0.85; }
 
       /* ── 추천 TOP ─────────────────────────────────────── */
       .like-top-panel { margin-top: 1.25rem; }
@@ -2249,6 +2250,8 @@ const ICONS: Record<string, string> = {
             <span class="delta-chip flat" id="pd-summary-delta">--</span>
           </div>
           <div class="sub" id="pd-summary-sub">추적 중...</div>
+          <!-- 뭉게에는 클릭 추적이 없다. 0을 조용히 두면 "뭉게에서 클릭이 없다"로 오해된다. -->
+          <div class="sub mg-untracked">뭉게 미추적</div>
         </div>
         <div class="summary-card accent-yellow color-amber">
           <div class="kpi-top">
@@ -2260,6 +2263,7 @@ const ICONS: Record<string, string> = {
             <span class="delta-chip flat" id="clicks-delta-chip">--</span>
           </div>
           <div class="sub" id="clicks-sub">추적 중...</div>
+          <div class="sub mg-untracked">뭉게 미추적</div>
         </div>
         <div class="summary-card accent-green color-green" id="gsc-sum-card" style="cursor:pointer;" title="클릭하면 검색(GSC) 상세 탭으로 이동">
           <div class="kpi-top">
@@ -4740,22 +4744,26 @@ const ICONS: Record<string, string> = {
 
       // 일간/주간/월간 버킷. 사용자(users)는 기간 내 중복 제거가 불가능한 값이라
       // 주·월로 묶으면 실제 순사용자보다 커진다 — 라벨에 '합산'임을 밝힌다.
+      // 날짜 → 현재 버킷 키/라벨. 시계열과 '최다 유입경로'가 같은 기준으로 묶이도록 공유한다.
+      function ga4BucketOf(date) {
+        if (_ga4Bucket === 'daily') return { key: date, label: date.slice(5) };
+        if (_ga4Bucket === 'monthly') {
+          const k = date.slice(0, 7);
+          return { key: k, label: `${k.slice(2, 4)}.${k.slice(5, 7)}` };
+        }
+        const dt = new Date(date + 'T00:00:00');
+        const wd = (dt.getDay() + 6) % 7;                   // 0=월
+        const mon = new Date(dt); mon.setDate(dt.getDate() - wd);
+        const k = mon.toISOString().slice(0, 10);
+        return { key: k, label: `${mon.getMonth() + 1}/${mon.getDate()}~` };
+      }
+
       function ga4Series() {
         const days = ga4DailySeries();
         if (_ga4Bucket === 'daily') return days.map((d) => ({ ...d, label: d.date.slice(5) }));
         const acc = {};
         for (const d of days) {
-          const dt = new Date(d.date + 'T00:00:00');
-          let key, label;
-          if (_ga4Bucket === 'weekly') {
-            const wd = (dt.getDay() + 6) % 7;                 // 0=월
-            const mon = new Date(dt); mon.setDate(dt.getDate() - wd);
-            key = mon.toISOString().slice(0, 10);
-            label = `${mon.getMonth() + 1}/${mon.getDate()}~`;
-          } else {
-            key = d.date.slice(0, 7);
-            label = `${key.slice(2, 4)}.${key.slice(5, 7)}`;
-          }
+          const { key, label } = ga4BucketOf(d.date);
           const a = (acc[key] ||= { date: key, label, sessions: 0, users: 0, views: 0, engaged: 0 });
           a.sessions += d.sessions; a.users += d.users; a.views += d.views; a.engaged += d.engaged;
         }
@@ -4841,11 +4849,18 @@ const ICONS: Record<string, string> = {
         const tbl = document.getElementById('ga4-daily-table'); if (!tbl) return;
         const days = ga4Series().filter((d) => d.sessions || d.views).slice().reverse();
 
-        // 그날 최다 유입경로 — source_medium 을 날짜별로 묶어 1등만 뽑는다
-        const topBy = {};
+        // 그 구간 최다 유입경로 — 시계열과 같은 버킷으로 묶고(일/주/월) 합산 후 1등만 뽑는다.
+        // 일별 1등을 그대로 쓰면 주간·월간에서 키가 안 맞아 전부 '-' 로 비어 보인다.
+        const sums = {};
         for (const r of ga4Of('source_medium')) {
-          const cur = topBy[r.date];
-          if (!cur || (r.sessions || 0) > cur.sessions) topBy[r.date] = { key: r.key, sessions: r.sessions || 0 };
+          const k = ga4BucketOf(r.date).key;
+          const m = (sums[k] ||= {});
+          m[r.key] = (m[r.key] || 0) + (r.sessions || 0);
+        }
+        const topBy = {};
+        for (const [k, m] of Object.entries(sums)) {
+          const best = Object.entries(m).sort((a, b) => b[1] - a[1])[0];
+          if (best) topBy[k] = { key: best[0], sessions: best[1] };
         }
 
         tbl.innerHTML = `<thead><tr>
@@ -5154,13 +5169,6 @@ const ICONS: Record<string, string> = {
           tVal.dataset.mgApplied = '1';
         }
         if (tSub && !/뭉게/.test(tSub.textContent)) tSub.textContent += ` · 뭉게 ${fmt(mgToolViews)}`;
-
-        // Row 1·3 · 쿠팡/페이퍼닥 — 뭉게에는 클릭 추적이 없다. 0 을 조용히 두면
-        // "뭉게에서 클릭이 없다"로 오해하므로 미추적임을 밝힌다.
-        ['clicks-sub', 'pd-summary-sub'].forEach((id) => {
-          const e = document.getElementById(id);
-          if (e && !/뭉게/.test(e.textContent)) e.textContent += ' · 뭉게 미추적';
-        });
 
         // Row 3 · Likes — 뭉게 추천 버튼(source='mg')이 생겨 분리 표시가 가능해졌다
         const likeBox = document.getElementById('t-likes-total');
