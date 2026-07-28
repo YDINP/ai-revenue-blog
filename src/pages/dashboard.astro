@@ -158,6 +158,8 @@ const ICONS: Record<string, string> = {
         --accent: #3b82f6;
         --tf: #3b82f6;
         --lf: #16a34a;
+        /* 뭉게(mungge.com) — TF 파랑·LF 초록·VIP 민트와 안 겹치도록 앰버 */
+        --mg: #f59e0b;
         --good: #22c55e;
         --warn: #eab308;
         --bad: #ef4444;
@@ -428,6 +430,7 @@ const ICONS: Record<string, string> = {
       .split-tf { background: var(--tf); }
       .split-lf { background: var(--lf); margin-left: 2px; }
       .split-vip { background: #57e6c3; margin-left: 2px; }
+      .split-mg { background: var(--mg); margin-left: 2px; }
 
       .split-legend {
         display: flex;
@@ -558,6 +561,7 @@ const ICONS: Record<string, string> = {
       .dot-tf { width: 7px; height: 7px; border-radius: 50%; background: var(--tf); display: inline-block; }
       .dot-lf { width: 7px; height: 7px; border-radius: 50%; background: var(--lf); display: inline-block; }
       .dot-vip { width: 7px; height: 7px; border-radius: 50%; background: #57e6c3; display: inline-block; }
+      .dot-mg { width: 7px; height: 7px; border-radius: 50%; background: var(--mg); display: inline-block; }
 
       /* ── 날짜별 상세 테이블 ───────────────────────────── */
       .daily-detail-wrap {
@@ -955,6 +959,7 @@ const ICONS: Record<string, string> = {
       .src-badge.lf { background: rgba(22, 163, 74, 0.15); color: #6ee7a5; }
       .src-badge.gf { background: rgba(168, 85, 247, 0.15); color: #d8b4fe; }
       .src-badge.vip { background: rgba(87, 230, 195, 0.15); color: #7fe9d0; }
+      .src-badge.mg { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
 
       /* ── 추천 TOP ─────────────────────────────────────── */
       .like-top-panel { margin-top: 1.25rem; }
@@ -2189,11 +2194,14 @@ const ICONS: Record<string, string> = {
             <div class="split-tf" id="total-split-tf" style={`width:${Math.round(tfPostCount / pctBase * 100)}%`}></div>
             <div class="split-lf" id="total-split-lf" style={`width:${Math.round(lfPostCount / pctBase * 100)}%`}></div>
             <div class="split-vip" id="total-split-vip" style={`width:${Math.round(vipPostCount / pctBase * 100)}%`}></div>
+            <!-- 뭉게는 WordPress라 빌드시점에 글 수를 알 수 없다 → WP REST로 런타임 주입 -->
+            <div class="split-mg" id="total-split-mg" style="width:0%"></div>
           </div>
           <div class="split-legend">
             <span id="total-split-tf-pct">TF {Math.round(tfPostCount / pctBase * 100)}%</span>
             <span id="total-split-lf-pct">LF {Math.round(lfPostCount / pctBase * 100)}%</span>
             <span id="total-split-vip-pct">VIP {Math.round(vipPostCount / pctBase * 100)}%</span>
+            <span id="total-split-mg-pct"></span>
           </div>
         </div>
         <div class="summary-card accent-green color-green">
@@ -2220,11 +2228,13 @@ const ICONS: Record<string, string> = {
             <div class="split-tf" id="views-split-tf" style="width:50%"></div>
             <div class="split-lf" id="views-split-lf" style="width:50%"></div>
             <div class="split-vip" id="views-split-vip" style="width:0%"></div>
+            <div class="split-mg" id="views-split-mg" style="width:0%"></div>
           </div>
           <div class="split-legend">
             <span>TF: <b id="tf-total-views">--</b></span>
             <span>LF: <b id="lf-total-views">--</b></span>
             <span>VIP: <b id="vip-total-views">--</b></span>
+            <span>뭉게: <b id="mg-total-views">--</b></span>
           </div>
         </div>
         <div class="summary-card accent-purple color-purple">
@@ -2421,6 +2431,7 @@ const ICONS: Record<string, string> = {
             <button class="source-tab" data-filter="blog">TechFlow</button>
             <button class="source-tab" data-filter="lifeflow">LifeFlow</button>
             <button class="source-tab" data-filter="vip">VIP</button>
+            <button class="source-tab" data-filter="mg">뭉게</button>
           </div>
           <div class="top-page-list" id="top-pages">
             <div class="no-data">Loading...</div>
@@ -2453,7 +2464,16 @@ const ICONS: Record<string, string> = {
       <!-- ══ Row 5: 유입경로(6) + 기기·브라우저·OS(6) ══ -->
       <div class="dash-grid">
         <div class="panel col-6">
-          <div class="panel-head"><h4><svg class="ico sec-ico i-cyan" viewBox="0 0 24 24" set:html={ICONS['link']}></svg> 유입경로</h4></div>
+          <div class="panel-head">
+            <h4><svg class="ico sec-ico i-cyan" viewBox="0 0 24 24" set:html={ICONS['link']}></svg> 유입경로</h4>
+            <!-- 블로그(TF·LF·VIP)는 analytics 의 referrer, 뭉게는 GA4 채널 — 소스를 섞으면
+                 분류 기준이 달라 오해를 부른다 → 토글로 분리해서 본다 -->
+            <div class="seg-toggle" id="ref-src">
+              <button class="seg-btn active" data-rs="all">전체</button>
+              <button class="seg-btn" data-rs="blog">블로그</button>
+              <button class="seg-btn" data-rs="mg">뭉게</button>
+            </div>
+          </div>
           <div class="cat-traffic-bars" id="ref-bars">
             <div class="skel-list"><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span><span class="skeleton skel-row"></span></div>
           </div>
@@ -2465,6 +2485,11 @@ const ICONS: Record<string, string> = {
               <button class="seg-btn active" data-aud="device">기기</button>
               <button class="seg-btn" data-aud="browser">브라우저</button>
               <button class="seg-btn" data-aud="os">OS</button>
+            </div>
+            <div class="seg-toggle" id="audience-src">
+              <button class="seg-btn active" data-as="all">전체</button>
+              <button class="seg-btn" data-as="blog">블로그</button>
+              <button class="seg-btn" data-as="mg">뭉게</button>
             </div>
           </div>
           <div id="audience-donut">
@@ -2575,6 +2600,23 @@ const ICONS: Record<string, string> = {
             </div>
           </div>
         </div>
+
+        <!-- 뭉게 Section — WordPress라 빌드시점 데이터가 없어 WP REST로 런타임 구성 -->
+        <div class="blog-section">
+          <div class="section-header">
+            <div class="section-title">
+              <svg class="ico sec-ico i-amber" viewBox="0 0 24 24" set:html={ICONS['pie']}></svg>
+              뭉게 (mungge.com)
+            </div>
+            <span class="section-badge" id="mg-overview-badge" style="background:rgba(245,158,11,0.15);color:#f59e0b;">--편</span>
+          </div>
+          <div class="section-body">
+            <div class="cat-donut-wrap" id="mg-overview-donut-wrap">
+              <div class="loading"><div class="spinner"></div>WordPress 조회 중</div>
+            </div>
+            <div class="recent-list" id="mg-recent-list"></div>
+          </div>
+        </div>
       </div>
 
       <!-- ══ Row 7: 시스템 상태(8) + 바로가기(4) ══ -->
@@ -2591,12 +2633,20 @@ const ICONS: Record<string, string> = {
               <span class="status-badge online">Online</span>
             </div>
             <div class="status-item">
+              <span>뭉게 (WordPress)</span>
+              <span class="status-badge" id="mungge-status">Checking...</span>
+            </div>
+            <div class="status-item">
               <span>Supabase DB</span>
               <span class="status-badge" id="supabase-status">Checking...</span>
             </div>
             <div class="status-item">
               <span>Pageview Tracking</span>
               <span class="status-badge online">Active</span>
+            </div>
+            <div class="status-item">
+              <span>뭉게 GA4 동기화</span>
+              <span class="status-badge" id="mungge-ga4-status">Checking...</span>
             </div>
             <div class="status-item">
               <span>AdSense</span>
@@ -2627,6 +2677,14 @@ const ICONS: Record<string, string> = {
             <a href="https://life-revenue-blog.vercel.app" target="_blank" rel="noopener" class="link-btn">
               <span class="link-icon">&#9650;</span>
               Vercel LifeFlow
+            </a>
+            <a href="https://mungge.com/wp-admin/" target="_blank" rel="noopener" class="link-btn">
+              <span class="link-icon">&#127760;</span>
+              뭉게 WP 관리
+            </a>
+            <a href="https://analytics.google.com/analytics/web/#/p547003762/reports/intelligenthome" target="_blank" rel="noopener" class="link-btn">
+              <span class="link-icon">&#128200;</span>
+              뭉게 GA4
             </a>
             <a href="https://supabase.com/dashboard" target="_blank" rel="noopener" class="link-btn">
               <span class="link-icon">&#9889;</span>
@@ -3193,6 +3251,7 @@ const ICONS: Record<string, string> = {
       SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5cHJic21hZ3RsemVieHl4c3ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjY4NTQsImV4cCI6MjA4NjA0Mjg1NH0.dajN0n0IWzOgYOSCglxVLzddg7jJFRHNCHwTWMG62uU',
       TF_SLUG_CAT: Object.fromEntries(allPosts.map(p => [p.id, p.data.category])),
       TF_POST_COUNT: tfPostCount,
+      LF_POST_COUNT: lfPostCount,
       VIP_POST_COUNT: vipPostCount,
       // 슬러그→현재 제목(TF+LF) — topPages가 옛 제목 대신 현재 제목 표시
       SLUG_TITLES: { ...slugTitles, ...Object.fromEntries(lfPosts.map(p => [p.slug, p.title])) },
@@ -3996,6 +4055,7 @@ const ICONS: Record<string, string> = {
         if (source === 'lifeflow') return '<span class="src-badge lf">LF</span>';
         if (source === 'gameflow') return '<span class="src-badge gf">GF</span>';
         if (source === 'vip') return '<span class="src-badge vip">VIP</span>';
+        if (source === 'mg') return '<span class="src-badge mg">뭉게</span>';
         return '';
       }
 
@@ -4044,7 +4104,11 @@ const ICONS: Record<string, string> = {
         const container = document.getElementById('top-pages');
         if (!container) return;
 
-        let base = _topPagesPeriod === 'all' ? _topPagesData : computeTopPagesByPeriod(_topPagesPeriod);
+        // 뭉게는 ga4_daily 에서 뽑아 여기서만 합친다 — _topPagesData 를 오염시키면
+        // 이걸 재사용하는 VIP·카테고리 집계까지 틀어진다.
+        const mgRows = (typeof mgTopPages === 'function' && Array.isArray(_ga4Rows)) ? mgTopPages(_topPagesPeriod) : [];
+        let base = (_topPagesPeriod === 'all' ? _topPagesData : computeTopPagesByPeriod(_topPagesPeriod)).concat(mgRows)
+          .sort((a, b) => (b.views || 0) - (a.views || 0));
         let filtered = base;
         if (_topPagesFilter !== 'all') {
           filtered = filtered.filter(p => p.source === _topPagesFilter);
@@ -4587,14 +4651,7 @@ const ICONS: Record<string, string> = {
       async function loadGa4Detail() {
         if (_ga4Init) return;
         _ga4Init = true;
-        try {
-          const since = new Date(Date.now() - 92 * 864e5).toISOString().slice(0, 10);
-          const res = await fetch(
-            `${SUPABASE_URL}/rest/v1/ga4_daily?date=gte.${since}&select=date,dim,key,sessions,users,views,engaged&order=date.asc&limit=50000`,
-            { headers }
-          );
-          _ga4Rows = res.ok ? await res.json() : [];
-        } catch { _ga4Rows = []; }
+        await ensureGa4Rows();   // 전체요약 통합과 같은 데이터를 공유(중복 요청 방지)
         wireGa4Controls();
         renderGa4Detail();
       }
@@ -4811,6 +4868,226 @@ const ICONS: Record<string, string> = {
         renderGa4Table();
       }
 
+      // ═══════════════════════════════════════════════════════════
+      // 뭉게 → 전체 요약 통합
+      // 뭉게는 이벤트 단위 데이터가 없다(WordPress+GA4 집계만). 그래서 이벤트가
+      // 필요한 항목(Live Activity·추천 TOP·전환 퍼널·쿠팡/페이퍼닥)에는 넣을 수 없고,
+      // 조회수/방문자/유입경로/기기/글 수처럼 집계로 표현되는 항목에만 합류시킨다.
+      // GA4 screenPageViews 를 analytics 의 pageview 와 같은 단위로 취급한다.
+      // ═══════════════════════════════════════════════════════════
+      let _mgPosts = null;      // WP REST: { total, categories[], recent[] }
+      let _ga4Ready = null;     // ga4_daily 로드 프라미스 (탭·요약이 공유해 중복 요청 방지)
+      let _traffic = null;      // loadTraffic 이 계산한 analytics 측 수치 스냅샷
+
+      const MG_URL = 'https://mungge.com';
+      const kstToday = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+      const kstYday = () => new Date(Date.now() + 9 * 3600e3 - 864e5).toISOString().slice(0, 10);
+
+      function ensureGa4Rows() {
+        if (_ga4Ready) return _ga4Ready;
+        const since = new Date(Date.now() - 92 * 864e5).toISOString().slice(0, 10);
+        _ga4Ready = fetch(
+          `${SUPABASE_URL}/rest/v1/ga4_daily?date=gte.${since}&select=date,dim,key,sessions,users,views,engaged&order=date.asc&limit=50000`,
+          { headers }
+        ).then((r) => (r.ok ? r.json() : [])).catch(() => []).then((rows) => { _ga4Rows = rows; return rows; });
+        return _ga4Ready;
+      }
+
+      // dim 별 합계 — from(포함)~to(포함) 날짜 범위. 날짜 미지정이면 전 구간.
+      function mgAgg(dim, from, to) {
+        const acc = {};
+        for (const r of (_ga4Rows || [])) {
+          if (r.dim !== dim) continue;
+          if (from && r.date < from) continue;
+          if (to && r.date > to) continue;
+          const a = (acc[r.key] ||= { key: r.key, sessions: 0, users: 0, views: 0, engaged: 0 });
+          a.sessions += r.sessions || 0; a.users += r.users || 0;
+          a.views += r.views || 0; a.engaged += r.engaged || 0;
+        }
+        return Object.values(acc).sort((a, b) => b.views - a.views);
+      }
+      const mgTotal = (from, to) => (mgAgg('total', from, to)[0] || { sessions: 0, users: 0, views: 0, engaged: 0 });
+
+      // Top Pages 합류용 — analytics 행과 같은 모양으로 맞춘다
+      function mgTopPages(period) {
+        const from = period === 'day' ? kstToday()
+          : period === 'week' ? new Date(Date.now() - 7 * 864e5).toISOString().slice(0, 10)
+          : period === 'month' ? new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10)
+          : null;
+        return mgAgg('page', from).filter((r) => r.key && r.key !== '(not set)').map((r) => ({
+          path: r.key.startsWith('/') ? r.key : '/' + r.key,
+          slug: r.key,
+          source: 'mg',
+          title: r.key,
+          views: r.views || r.sessions,
+        }));
+      }
+
+      // WP REST — 글 수 / 카테고리 구성 / 최근 글. 뭉게는 빌드시점 데이터가 없다.
+      async function loadMunggePosts() {
+        try {
+          const [pRes, cRes] = await Promise.all([
+            fetch(`${MG_URL}/wp-json/wp/v2/posts?per_page=5&_fields=title,link,date,categories`),
+            fetch(`${MG_URL}/wp-json/wp/v2/categories?per_page=100&orderby=count&order=desc&_fields=id,name,count`),
+          ]);
+          if (!pRes.ok) return null;
+          const total = Number(pRes.headers.get('x-wp-total')) || 0;
+          const posts = await pRes.json();
+          const cats = cRes.ok ? await cRes.json() : [];
+          const catById = {};
+          cats.forEach((c) => { catById[c.id] = c.name; });
+          const palette = ['#f59e0b', '#3b82f6', '#16a34a', '#a855f7', '#ef4444', '#06b6d4', '#eab308', '#ec4899'];
+          _mgPosts = {
+            total,
+            categories: cats.filter((c) => c.count > 0).slice(0, 8)
+              .map((c, i) => ({ name: c.name, count: c.count, color: palette[i % palette.length] })),
+            recent: posts.map((p) => ({
+              title: String(p.title?.rendered || '').replace(/<[^>]*>/g, ''),
+              link: p.link,
+              category: catById[(p.categories || [])[0]] || '기타',
+              pubDate: String(p.date || '').slice(0, 10),
+            })),
+          };
+          return _mgPosts;
+        } catch { return null; }
+      }
+
+      // Row 6 — 뭉게 콘텐츠 구성 (TF/LF 섹션과 같은 도넛+범례+최근글 형식)
+      function renderMunggeSection() {
+        const badge = document.getElementById('mg-overview-badge');
+        const wrap = document.getElementById('mg-overview-donut-wrap');
+        const list = document.getElementById('mg-recent-list');
+        if (!_mgPosts) {
+          if (wrap) wrap.innerHTML = '<div class="no-data">WordPress 조회 실패</div>';
+          return;
+        }
+        if (badge) badge.textContent = `${fmt(_mgPosts.total)}편`;
+        const cats = _mgPosts.categories;
+        const base = cats.reduce((s, c) => s + c.count, 0) || 1;
+        if (wrap) {
+          let before = 0;
+          const stops = cats.map((c) => {
+            const pct = c.count / base * 100;
+            const g = cats.length > 1 ? Math.min(1, pct / 4) : 0;
+            const s = `#1e293b ${before}% ${before + g}%, ${c.color} ${before + g}% ${before + pct}%`;
+            before += pct;
+            return s;
+          }).join(', ');
+          wrap.innerHTML = `
+            <div class="cat-donut" style="background: conic-gradient(${stops})">
+              <div class="cat-donut-hole">
+                <span class="donut-num">${fmt(_mgPosts.total)}</span>
+                <span class="donut-label">포스트</span>
+              </div>
+            </div>
+            <div class="cat-legend">${cats.map((c) => `
+              <div class="cat-legend-item">
+                <span class="cat-legend-dot" style="background:${c.color}"></span>
+                <span class="cat-legend-name">${c.name}</span>
+                <span class="cat-legend-count">${c.count}</span>
+                <span class="cat-legend-pct">${Math.round(c.count / base * 100)}%</span>
+              </div>`).join('')}</div>`;
+        }
+        if (list) {
+          list.innerHTML = _mgPosts.recent.map((p, i) => `
+            <div class="recent-item">
+              <span class="recent-rank">${i + 1}</span>
+              <span class="recent-title"><a href="${p.link}" target="_blank" rel="noopener" style="color:inherit">${p.title}</a></span>
+              <span class="cat-badge">${p.category}</span>
+              <span class="recent-date">${p.pubDate}</span>
+            </div>`).join('') || '<div class="no-data">글 없음</div>';
+        }
+      }
+
+      // Row 1·3·7 — analytics 수치에 뭉게를 합류시킨다. loadTraffic 이 끝난 뒤 호출.
+      function applyMungge() {
+        if (!_traffic || !Array.isArray(_ga4Rows)) return;
+        const t = _traffic;
+        const today = mgTotal(kstToday(), kstToday());
+        const yday = mgTotal(kstYday(), kstYday());
+        const all = mgTotal();
+
+        // Row 1 · 금일 방문자 / 금일 조회수 (뭉게 합산)
+        const vis = t.todayVis + today.users, visY = t.ydayVis + yday.users;
+        const vw = t.tv + today.views, vwY = t.yv + yday.views;
+        const setEl = (id, txt) => { const e = document.getElementById(id); if (e) e.textContent = txt; };
+        setEl('kpi-today-visitors', fmt(vis));
+        setEl('kpi-today-visitors-sub', `어제 ${fmt(visY)}명 · 뭉게 +${fmt(today.users)} · KST`);
+        setEl('kpi-today-views', fmt(vw));
+        setEl('kpi-today-views-sub', `어제 ${fmt(vwY)}회 · 뭉게 +${fmt(today.views)} · KST`);
+        t.setKpiDelta('kpi-tv-delta', vis, visY);
+        t.setKpiDelta('kpi-tw-delta', vw, vwY);
+
+        // Row 1 · 총 조회수 (누적) — 뭉게는 GA4 수집 시작일(2026-07-27) 이후만 존재
+        const totalV = t.totalViews + all.views;
+        setEl('total-views', fmt(totalV));
+        setEl('mg-total-views', fmt(all.views) + (today.views ? ` (+${today.views})` : ''));
+        const pct = (n) => Math.round(n / (totalV || 1) * 100) + '%';
+        const setW = (id, n) => { const e = document.getElementById(id); if (e) e.style.width = pct(n); };
+        setW('views-split-tf', t.tfTotal); setW('views-split-lf', t.lfTotal);
+        setW('views-split-vip', t.vipTotal); setW('views-split-mg', all.views);
+
+        // Row 1 · Total Posts
+        if (_mgPosts) {
+          const allPosts = t.postBase + _mgPosts.total;
+          setEl('total-post-count', fmt(allPosts));
+          const sub = document.getElementById('total-post-sub');
+          if (sub) sub.textContent = `${sub.dataset.base || sub.textContent.split(' + 뭉게')[0]} + 뭉게 ${_mgPosts.total}`;
+          if (sub && !sub.dataset.base) sub.dataset.base = sub.textContent.split(' + 뭉게')[0];
+          const mgBar = document.getElementById('total-split-mg');
+          if (mgBar) mgBar.style.width = Math.round(_mgPosts.total / allPosts * 100) + '%';
+          setEl('total-split-mg-pct', `뭉게 ${Math.round(_mgPosts.total / allPosts * 100)}%`);
+          ['tf', 'lf', 'vip'].forEach((k) => {
+            const bar = document.getElementById(`total-split-${k}`);
+            if (bar) bar.style.width = Math.round(t.postCounts[k] / allPosts * 100) + '%';
+            const lab = document.getElementById(`total-split-${k}-pct`);
+            if (lab) lab.textContent = `${k.toUpperCase()} ${Math.round(t.postCounts[k] / allPosts * 100)}%`;
+          });
+        }
+
+        // Row 3 · Today Views 브레이크다운에 뭉게 추가
+        const vbEl = document.getElementById('t-views-breakdown');
+        if (vbEl) {
+          setEl('t-today-views', fmt(vw));
+          vbEl.innerHTML =
+            `<span><i class="dot-tf"></i> TF: ${fmt(t.tfTv)}</span>` +
+            `<span><i class="dot-lf"></i> LF: ${fmt(t.lfTv)}</span>` +
+            `<span><i class="dot-vip"></i> VIP: ${fmt(t.vipTv)}</span>` +
+            `<span><i class="dot-mg"></i> 뭉게: ${fmt(today.views)}</span>`;
+        }
+
+        // Row 7 · GA4 동기화 상태 — 마지막 데이터가 이틀 이상 밀리면 경고
+        const st = document.getElementById('mungge-ga4-status');
+        if (st) {
+          const last = (_ga4Rows || []).reduce((m, r) => (r.date > m ? r.date : m), '');
+          const stale = !last || last < kstYday();
+          st.textContent = last ? (stale ? `지연 (${last})` : `정상 (${last})`) : '데이터 없음';
+          st.className = 'status-badge ' + (last && !stale ? 'online' : 'pending');
+        }
+      }
+
+      // Row 7 · 뭉게 사이트 응답 확인. WP REST 는 CORS 를 열어두므로 브라우저에서 직접 찔러본다.
+      async function checkMungge() {
+        const el = document.getElementById('mungge-status');
+        if (!el) return;
+        try {
+          const r = await fetch(`${MG_URL}/wp-json/wp/v2/posts?per_page=1&_fields=id`);
+          el.textContent = r.ok ? 'Online' : `HTTP ${r.status}`;
+          el.className = 'status-badge ' + (r.ok ? 'online' : 'pending');
+        } catch {
+          el.textContent = 'Unreachable';
+          el.className = 'status-badge pending';
+        }
+      }
+
+      async function loadMunggeAll() {
+        await Promise.all([ensureGa4Rows(), loadMunggePosts()]);
+        renderMunggeSection();
+        applyMungge();
+        renderTopPages();            // 뭉게 페이지를 Top Pages 에 합류
+        if (_audienceRows) renderAudience(_audienceRows);   // 유입경로·기기 토글 반영
+      }
+
       async function fetchAudience() {
         try {
           const res = await fetch(
@@ -5004,8 +5281,37 @@ const ICONS: Record<string, string> = {
       let _audActive = 'device';
       const AUD_LABEL = { device: '기기', browser: '브라우저', os: 'OS' };
 
+      // 소스 토글 — 블로그(analytics: referrer·user_agent 파싱)와 뭉게(GA4 차원)는 분류
+      // 기준이 달라 한 도넛에 섞으면 오해를 부른다. '전체'는 두 집계를 합쳐 보여주되
+      // 각각만 보고 싶을 때 분리할 수 있게 한다.
+      let _refSrc = 'all';   // all | blog | mg
+      let _audSrc = 'all';
+
+      // ga4_daily 의 dim 을 도넛 입력 모양({name,count,color})으로 변환
+      function mgDonutArr(dim, colors, koFn) {
+        if (!Array.isArray(_ga4Rows)) return [];
+        return mgAgg(dim)
+          .filter((r) => r.key && r.key !== '(not set)')
+          .map((r) => {
+            const name = koFn ? koFn(r.key) : r.key;
+            return { name, count: r.views || r.sessions, color: colors && colors[name] };
+          })
+          .filter((r) => r.count > 0);
+      }
+
+      // 같은 이름끼리 합산 후 상위 N — 블로그+뭉게 '전체' 병합용
+      function mergeDonut(a, b, limit) {
+        const acc = {};
+        for (const r of [...a, ...b]) {
+          const cur = (acc[r.name] ||= { name: r.name, count: 0, color: r.color });
+          cur.count += r.count;
+          if (!cur.color && r.color) cur.color = r.color;
+        }
+        return Object.values(acc).sort((x, y) => y.count - x.count).slice(0, limit);
+      }
+
       function renderAudience(rows) {
-        _audienceRows = Array.isArray(rows) ? rows : [];
+        if (rows !== undefined) _audienceRows = Array.isArray(rows) ? rows : [];
         // 유입경로 도넛
         const refBy = {};
         _audienceRows.forEach(r => {
@@ -5013,7 +5319,11 @@ const ICONS: Record<string, string> = {
           if (!refBy[c.key]) refBy[c.key] = { name: c.key, count: 0, color: REF_COLORS[c.kind] };
           refBy[c.key].count++;
         });
-        const refArr = Object.values(refBy).sort((a, b) => b.count - a.count).slice(0, 8);
+        const blogRef = Object.values(refBy).sort((a, b) => b.count - a.count);
+        const mgRef = mgDonutArr('channel', null, (k) => (typeof ga4ChKo === 'function' ? ga4ChKo(k) : k));
+        const refArr = _refSrc === 'blog' ? blogRef.slice(0, 8)
+          : _refSrc === 'mg' ? mgRef.slice(0, 8)
+          : mergeDonut(blogRef, mgRef, 8);
         renderDonut('ref-bars', refArr, { empty: '유입 데이터 없음', label: '유입' });
         // 기기/브라우저/OS 집계 저장 후 활성 항목만 도넛
         const dev = {}, br = {}, os = {};
@@ -5024,7 +5334,18 @@ const ICONS: Record<string, string> = {
           os[p.os] = (os[p.os] || 0) + 1;
         });
         const toArr = (o, colors) => Object.entries(o).map(([name, count]) => ({ name, count, color: colors && colors[name] })).sort((a, b) => b.count - a.count);
-        _audDist = { device: toArr(dev, DEV_COLORS), browser: toArr(br, BR_COLORS).slice(0, 7), os: toArr(os, OS_COLORS).slice(0, 7) };
+        const blogDist = { device: toArr(dev, DEV_COLORS), browser: toArr(br, BR_COLORS), os: toArr(os, OS_COLORS) };
+        // GA4 표기를 블로그 쪽 라벨과 맞춘다(desktop→Desktop 등). 안 맞추면 같은 기기가 두 조각이 된다.
+        const cap = (s) => String(s || '').charAt(0).toUpperCase() + String(s || '').slice(1);
+        const mgDist = {
+          device: mgDonutArr('device', DEV_COLORS, cap),
+          browser: mgDonutArr('browser', BR_COLORS, null),
+          os: mgDonutArr('os', OS_COLORS, null),
+        };
+        const pick = (k, limit) => _audSrc === 'blog' ? blogDist[k].slice(0, limit)
+          : _audSrc === 'mg' ? mgDist[k].slice(0, limit)
+          : mergeDonut(blogDist[k], mgDist[k], limit);
+        _audDist = { device: pick('device', 8), browser: pick('browser', 7), os: pick('os', 7) };
         renderAudienceDonut();
       }
 
@@ -5668,6 +5989,22 @@ const ICONS: Record<string, string> = {
         renderAudienceDonut();
       });
 
+      // 유입경로 / 기기 패널의 소스(블로그·뭉게) 토글
+      document.getElementById('ref-src')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('.seg-btn');
+        if (!btn) return;
+        _refSrc = btn.dataset.rs;
+        document.querySelectorAll('#ref-src .seg-btn').forEach(b => b.classList.toggle('active', b === btn));
+        renderAudience();
+      });
+      document.getElementById('audience-src')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('.seg-btn');
+        if (!btn) return;
+        _audSrc = btn.dataset.as;
+        document.querySelectorAll('#audience-src .seg-btn').forEach(b => b.classList.toggle('active', b === btn));
+        renderAudience();
+      });
+
       // 히트맵 일간/주간 토글
       document.getElementById('heatmap-mode')?.addEventListener('click', (e) => {
         const btn = e.target.closest('.seg-btn');
@@ -5791,6 +6128,18 @@ const ICONS: Record<string, string> = {
           if (splitTfEl) splitTfEl.style.width = Math.round(tfTotal / totalV * 100) + '%';
           if (splitLfEl) splitLfEl.style.width = Math.round(lfTotal / totalV * 100) + '%';
           if (splitVipEl) splitVipEl.style.width = Math.round(vipTotal / totalV * 100) + '%';
+
+          // 뭉게 합류용 스냅샷 — analytics 측 원본 수치를 남겨야 GA4 를 더해도 폴링마다
+          // 값이 누적되지 않는다(applyMungge 는 항상 이 원본 + 뭉게로 다시 계산).
+          _traffic = {
+            todayVis, ydayVis, tv, yv, setKpiDelta,
+            totalViews: Number(summary?.total_views) || 0,
+            tfTotal, lfTotal, vipTotal,
+            tfTv, lfTv, vipTv,
+            postBase: (TF_POST_COUNT || 0) + (LF_POST_COUNT || 0) + (VIP_POST_COUNT || 0),
+            postCounts: { tf: TF_POST_COUNT || 0, lf: LF_POST_COUNT || 0, vip: VIP_POST_COUNT || 0 },
+          };
+          applyMungge();
 
           // VIP(playcast) 조회수 — RPC get_traffic_summary 의 vip_ 필드 사용
           const vipEl = document.getElementById('vip-total-views');
@@ -6302,6 +6651,8 @@ const ICONS: Record<string, string> = {
         fetchVipRSS();
         loadTraffic();
         checkSupabase();
+        checkMungge();
+        loadMunggeAll();
         initChartHover();
         initHeatmapHover();
         initExcludeControls();
