@@ -5627,6 +5627,9 @@ const ICONS: Record<string, string> = {
         if (typeof renderTrafficPanel === 'function' && _trafficDetail.length) renderTrafficPanel();
         renderTopPages();            // 뭉게 페이지를 Top Pages 에 합류
         renderEventFeed();           // naver_index 측정값(색인 N건) 반영
+        // 뭉게 유입 탭을 이미 열어 뒀다면 다시 그린다 — 자체 트래커 기준 카드가 여기서야
+        // 데이터를 받으므로, 안 그리면 30초 폴링까지 '불러오는 중'이 남는다
+        if (_ga4Init) renderGa4Detail();
         if (_audienceRows) renderAudience(_audienceRows);   // 유입경로·기기 토글 반영
       }
 
