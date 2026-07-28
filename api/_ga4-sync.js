@@ -45,7 +45,7 @@ export async function syncGa4({ days = 7 } = {}) {
   for (const b of blogList().filter((x) => x.ga4Property)) {
     const src = b.key;
     try {
-      const { channel, sourceMedium, page, totals, device, browser, os, pageSource } = await ga4DailyBreakdown(b.ga4Property, start, end);
+      const { channel, sourceMedium, page, totals, device, browser, os, pageSource, pageAll } = await ga4DailyBreakdown(b.ga4Property, start, end);
       const rows = [
         ...totals.rows.map((r) => ({
           date: ga4Date(r.date),
@@ -60,6 +60,9 @@ export async function syncGa4({ days = 7 } = {}) {
         ...channel.rows.map(toRow(src, 'channel', 'sessionDefaultChannelGroup')),
         ...sourceMedium.rows.map(toRow(src, 'source_medium', 'sessionSourceMedium')),
         ...page.rows.map(toRow(src, 'page', 'landingPagePlusQueryString')),
+        // dim='page'(랜딩)와 짝. 랜딩은 "어디로 들어왔나", page_all 은 "어디가 열렸나".
+        // 홈 랜딩 세션수 대비 홈 조회수가 크면 홈을 거쳐 다른 글로 이동한 사람이 있다는 뜻이다.
+        ...pageAll.rows.map(toRow(src, 'page_all', 'pagePath')),
         ...device.rows.map(toRow(src, 'device', 'deviceCategory')),
         ...browser.rows.map(toRow(src, 'browser', 'browser')),
         ...os.rows.map(toRow(src, 'os', 'operatingSystem')),

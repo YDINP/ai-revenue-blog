@@ -94,7 +94,7 @@ const MET = ['sessions', 'totalUsers', 'screenPageViews', 'engagedSessions'];
 export async function ga4DailyBreakdown(propertyId, startDate, endDate, { pageLimit = 3000 } = {}) {
   const daily = (dim, limit) =>
     ga4Report(propertyId, { startDate, endDate, dimensions: dim ? ['date', dim] : ['date'], metrics: MET, limit });
-  const [channel, sourceMedium, page, totals, device, browser, os, pageSource] = await Promise.all([
+  const [channel, sourceMedium, page, totals, device, browser, os, pageSource, pageAll] = await Promise.all([
     daily('sessionDefaultChannelGroup', 5000),
     daily('sessionSourceMedium', 5000),
     daily('landingPagePlusQueryString', pageLimit),
@@ -109,6 +109,10 @@ export async function ga4DailyBreakdown(propertyId, startDate, endDate, { pageLi
       dimensions: ['date', 'landingPagePlusQueryString', 'sessionSourceMedium'],
       metrics: MET, limit: 10000,
     }),
+    // landingPage 는 "세션이 시작된 페이지"라 홈으로 들어와 글로 넘어간 조회수까지 전부
+    // 홈 행에 귀속된다. "실제로 어느 페이지가 몇 번 열렸나"(홈 vs 글 구성)를 보려면
+    // 이벤트 스코프 pagePath 가 따로 필요하다. 둘의 차이가 곧 사이트 내 이동량이다.
+    daily('pagePath', pageLimit),
   ]);
-  return { channel, sourceMedium, page, totals, device, browser, os, pageSource };
+  return { channel, sourceMedium, page, totals, device, browser, os, pageSource, pageAll };
 }

@@ -6,7 +6,8 @@
 create table if not exists public.ga4_daily (
   date       date    not null,
   source     text    not null,          -- 블로그 레지스트리 key ('mg' = mungge.com)
-  dim        text    not null,          -- 'total' | 'channel' | 'source_medium' | 'page'
+  dim        text    not null,          -- 'total'|'channel'|'source_medium'|'page'(랜딩)|'page_all'(전체조회)
+                                        -- |'device'|'browser'|'os'|'page_source'(랜딩\t소스매체)
   key        text    not null,          -- 차원값. dim='total' 이면 '_TOTAL_'
   sessions   integer not null default 0,
   users      integer not null default 0,

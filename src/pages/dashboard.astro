@@ -3022,6 +3022,29 @@ const ICONS: Record<string, string> = {
         </div>
 
         <div class="traffic-section" style="margin-bottom:1.25rem;">
+          <div class="gsc-sec-title">홈 vs 글 <span>(홈으로 들어온 사람이 글까지 보고 가는가)</span></div>
+          <div class="gsc-kpi-row" id="ga4-entry-kpi" style="margin-bottom:0.75rem;"></div>
+          <div class="gsc-source-grid">
+            <div class="gsc-src-card">
+              <div class="gsc-src-head">진입(랜딩) 유형 <span>세션이 어느 유형 페이지로 들어왔나</span></div>
+              <div id="ga4-entry-kind"></div>
+            </div>
+            <div class="gsc-src-card">
+              <div class="gsc-src-head">조회 유형 <span>실제로 열린 페이지의 구성</span></div>
+              <div id="ga4-view-kind"></div>
+            </div>
+          </div>
+          <div class="gsc-sec-title" style="margin-top:1rem;">홈에서 넘어간 글 <span>(자체 트래커 실측 · 최근 3일)</span></div>
+          <div class="gsc-table-wrap"><table class="gsc-table" id="ga4-internal-table"></table></div>
+          <div id="ga4-internal-sum" style="font-size:0.76rem;color:var(--text-2);margin-top:0.4rem;"></div>
+          <div class="gsc-help">
+            <b>읽는 법</b> · <b>세션당 쪽수</b>가 1.0이면 그 유형으로 들어온 사람은 <b>첫 페이지만 보고 나갔다</b>는 뜻이다(GA4는 랜딩 페이지에 그 세션의 전체 조회수를 귀속시킨다). 홈 진입이 1.0에 가까우면 홈이 글로 넘겨주지 못하고 있는 것.<br>
+            <b>진입 유형</b>은 세션이 시작된 페이지, <b>조회 유형</b>은 열린 모든 페이지 — 두 표에서 홈 비중 차이가 벌어질수록 사이트 안에서 이동이 많다는 뜻이다.<br>
+            <b>홈에서 넘어간 글</b>은 GA4가 아니라 뭉게에 심은 자체 트래커(<code>pageview_mg</code>)의 referrer를 그대로 읽은 것이라 <b>어느 글로 갔는지까지</b> 알 수 있다(수집 시작 2026-07-28, 기간 선택과 무관하게 최근 3일).
+          </div>
+        </div>
+
+        <div class="traffic-section" style="margin-bottom:1.25rem;">
           <div class="gsc-sec-title">일별 추이 <span id="ga4-chart-metric-label"></span></div>
           <div class="gsc-metric-tabs" id="ga4-metric-tabs">
             <button data-m="sessions">세션</button>
@@ -4737,11 +4760,17 @@ const ICONS: Record<string, string> = {
       const ga4Cutoff = () => new Date(Date.now() - (_ga4Days - 1) * 864e5).toISOString().slice(0, 10);
       const ga4Of = (dim) => (_ga4Rows || []).filter((r) => r.dim === dim && r.date >= ga4Cutoff());
 
+      // GA4 랜딩 키는 쿼리스트링을 달고 온다. 뭉게는 캐시버스터(`/?v=…`)와 페이스북 fbclid 가
+      // 붙어 같은 홈이 수십 행으로 쪼개지므로, 합산 전에 쿼리를 떼야 비중이 실제와 맞는다.
+      const ga4Path = (k) => String(k || '/').split('?')[0] || '/';
+
       // 같은 key 를 기간 전체로 합산 (일별 행이 쌓여 있으므로)
       function ga4AggBy(dim) {
         const acc = {};
+        const strip = dim === 'page' || dim === 'page_all';
         for (const r of ga4Of(dim)) {
-          const a = (acc[r.key] ||= { key: r.key, sessions: 0, users: 0, views: 0, engaged: 0 });
+          const key = strip ? ga4Path(r.key) : r.key;
+          const a = (acc[key] ||= { key, sessions: 0, users: 0, views: 0, engaged: 0 });
           a.sessions += r.sessions || 0; a.users += r.users || 0;
           a.views += r.views || 0; a.engaged += r.engaged || 0;
         }
@@ -4909,6 +4938,122 @@ const ICONS: Record<string, string> = {
           '</tbody>';
       }
 
+      // ── 홈 vs 글 ──────────────────────────────────────────────────
+      // "홈에 들어온 사람이 글까지 보고 가는가"를 세 각도로 본다.
+      //  1) 진입(랜딩) 유형 — 홈으로 들어오는지, 검색으로 글에 직행하는지
+      //  2) 세션당 쪽수 — GA4 는 세션의 전체 조회수를 '랜딩' 페이지에 귀속시키므로
+      //     홈 랜딩의 views/sessions 가 1.00 이면 홈만 보고 나갔다는 뜻이다
+      //  3) 조회 유형(dim='page_all') — 실제로 열린 페이지 구성. 진입보다 홈 비중이 낮으면
+      //     홈을 발판 삼아 글로 넘어갔다는 뜻
+      const MG_KIND_KO = { home: '홈', post: '글', tool: '도구', etc: '기타' };
+      // 뭉게 글 URL 은 `/2026-07-27-…/` 처럼 접두어가 없어서 "글" 을 화이트리스트로 못 잡는다.
+      // 반대로 아카이브·시스템 경로만 빼고 나머지를 글로 본다.
+      const MG_NONPOST = /^\/(category|tag|author|search|page|feed|comments|wp-|amp|privacy|about|contact|sitemap|404)(\/|$)/i;
+      function mgKindOf(rawKey) {
+        const p = ga4Path(rawKey);
+        if (!p.startsWith('/')) return 'etc';        // '(not set)' 등 경로가 아닌 값
+        const norm = p.replace(/\/+$/, '') || '/';
+        if (norm === '/') return 'home';
+        if (/^\/tools(\/|$)/.test(norm)) return 'tool';
+        if (MG_NONPOST.test(norm)) return 'etc';
+        return 'post';
+      }
+
+      function ga4KindAgg(dim) {
+        const acc = {};
+        for (const k of Object.keys(MG_KIND_KO)) acc[k] = { kind: k, sessions: 0, users: 0, views: 0, engaged: 0 };
+        for (const r of ga4Of(dim)) {
+          const a = acc[mgKindOf(r.key)];
+          a.sessions += r.sessions || 0; a.users += r.users || 0;
+          a.views += r.views || 0; a.engaged += r.engaged || 0;
+        }
+        return acc;
+      }
+
+      function renderGa4Entry() {
+        const entry = ga4KindAgg('page');
+        const view = ga4KindAgg('page_all');
+        const kpi = document.getElementById('ga4-entry-kpi');
+        if (kpi) {
+          const total = Object.values(entry).reduce((a, r) => a + r.sessions, 0);
+          const home = entry.home, post = entry.post;
+          const per = (r) => (r.sessions ? r.views / r.sessions : 0);
+          const card = (k, v, sub) =>
+            `<div class="gsc-kpi-card"><div class="gsc-kpi-k">${k}</div><div class="gsc-kpi-v">${v}</div><div class="gsc-kpi-k">${sub}</div></div>`;
+          kpi.innerHTML =
+            card('홈 진입', ga4Fmt(home.sessions), `전체 세션의 ${ga4Pct(total ? home.sessions / total : 0)}`) +
+            card('글 직행', ga4Fmt(post.sessions), `검색·SNS로 글에 바로 도착 · ${ga4Pct(total ? post.sessions / total : 0)}`) +
+            card('홈 진입 세션당', `${per(home).toFixed(2)}쪽`,
+              home.sessions ? `1.00 = 홈만 보고 이탈 · 추가 열람 ${ga4Fmt(Math.max(0, home.views - home.sessions))}쪽` : '홈 진입 없음') +
+            card('홈 참여율', ga4Pct(home.sessions ? home.engaged / home.sessions : 0),
+              `글 직행 ${ga4Pct(post.sessions ? post.engaged / post.sessions : 0)} · 글 세션당 ${per(post).toFixed(2)}쪽`);
+        }
+        renderGa4KindList('ga4-entry-kind', entry, 'sessions', true);
+        renderGa4KindList('ga4-view-kind', view, 'views', false);
+        renderGa4InternalNav();
+      }
+
+      // 유형별 막대 — 채널 목록(renderGa4Breakdown)과 같은 마크업이라 CSS 를 그대로 쓴다
+      function renderGa4KindList(elId, agg, metric, showPer) {
+        const el = document.getElementById(elId); if (!el) return;
+        const rows = Object.values(agg).filter((r) => r[metric] > 0).sort((a, b) => b[metric] - a[metric]);
+        if (!rows.length) {
+          // page_all 은 나중에 추가된 차원이라 동기화 전에는 비어 있다 — 원인을 적어야 오해가 없다
+          el.innerHTML = metric === 'views'
+            ? '<div style="color:var(--text-3);font-size:0.74rem;padding:0.3rem 0;line-height:1.5;">조회 유형은 <code>dim=page_all</code> 동기화 이후 채워집니다.<br><code>/api/gsc-sync?ga4=sync&amp;days=90&amp;secret=…</code></div>'
+            : '<div style="color:var(--text-3);font-size:0.74rem;padding:0.3rem 0;">데이터 없음</div>';
+          return;
+        }
+        const total = rows.reduce((a, r) => a + r[metric], 0) || 1;
+        el.innerHTML = rows.map((r) => {
+          const p = r[metric] / total;
+          const per = showPer && r.sessions ? ` <span style="color:var(--text-3)">세션당 ${(r.views / r.sessions).toFixed(2)}쪽</span>` : '';
+          return `<div class="gsc-src-row"><span>${MG_KIND_KO[r.kind]}${per}</span><span>${ga4Fmt(r[metric])} · ${ga4Pct(p)}</span></div>
+          <div style="height:3px;background:var(--accent);opacity:0.35;border-radius:2px;width:${(p * 100).toFixed(1)}%;margin:0 0 0.25rem;"></div>`;
+        }).join('');
+      }
+
+      // 홈 → 글 이동 실측. GA4 는 페이지 이동 시퀀스를 주지 않아 "홈에서 어느 글로 갔나"를 만들 수 없다.
+      // 뭉게 자체 트래커(pageview_mg)는 referrer 를 원문 그대로 남기므로, referrer 가 뭉게 홈인
+      // 조회가 곧 홈에서 눌러 들어간 클릭이다. _mgLive 는 최근 3일치라 기간 선택과 무관하다.
+      function renderGa4InternalNav() {
+        const tbl = document.getElementById('ga4-internal-table');
+        const sum = document.getElementById('ga4-internal-sum');
+        if (!tbl) return;
+        const refPath = (ref) => {
+          try {
+            const u = new URL(ref);
+            return /(^|\.)mungge\.com$/.test(u.hostname) ? (u.pathname || '/') : null;
+          } catch { return null; }
+        };
+        let homeViews = 0, fromHome = 0;
+        const acc = {};
+        for (const e of (_mgLive || [])) {
+          const path = ga4Path(e.path || '/');
+          if (mgKindOf(path) === 'home') homeViews++;
+          const rp = refPath(e.ref);
+          if (rp && mgKindOf(rp) === 'home' && mgKindOf(path) !== 'home') {
+            fromHome++;
+            const a = (acc[path] ||= { path, title: e.title || '', n: 0 });
+            a.n++;
+          }
+        }
+        const rows = Object.values(acc).sort((a, b) => b.n - a.n).slice(0, 15);
+        tbl.innerHTML = '<thead><tr><th>홈에서 눌러 들어간 페이지</th><th class="num">클릭</th></tr></thead><tbody>' +
+          (rows.length
+            ? rows.map((r) => `<tr>
+                <td><a href="https://mungge.com${escHtml(r.path)}" target="_blank" rel="noopener" style="color:inherit">${escHtml(ga4Cut(r.title || r.path, 60))}</a>
+                <div style="color:var(--text-3);font-size:0.7rem">${escHtml(ga4Cut(r.path, 60))}</div></td>
+                <td class="num">${ga4Fmt(r.n)}</td></tr>`).join('')
+            : '<tr><td colspan="2" style="color:var(--text-3)">최근 3일 동안 홈에서 다른 페이지로 넘어간 기록이 없습니다.</td></tr>') +
+          '</tbody>';
+        if (sum) {
+          sum.innerHTML = homeViews
+            ? `최근 3일 홈 조회 <b>${ga4Fmt(homeViews)}</b>건 → 글·도구로 이동 <b>${ga4Fmt(fromHome)}</b>건 (<b>${ga4Pct(fromHome / homeViews)}</b>)`
+            : '최근 3일 홈 조회 기록 없음';
+        }
+      }
+
       // 채널·소스매체 목록 — 비중을 막대로 같이 보여줘야 "어디가 주력인지"가 한눈에 들어온다
       function renderGa4Breakdown(elId, dim, koFn) {
         const el = document.getElementById(elId); if (!el) return;
@@ -5000,10 +5145,12 @@ const ICONS: Record<string, string> = {
         if (!Array.isArray(_ga4Rows) || !_ga4Rows.length) {
           const kpi = document.getElementById('ga4-kpi'); if (kpi) kpi.innerHTML = ga4Empty();
           ['ga4-chart', 'ga4-channel', 'ga4-sourcemedium'].forEach((id) => { const e = document.getElementById(id); if (e) e.innerHTML = ''; });
-          ['ga4-table', 'ga4-daily-table'].forEach((id) => { const e = document.getElementById(id); if (e) e.innerHTML = ''; });
+          ['ga4-table', 'ga4-daily-table', 'ga4-internal-table'].forEach((id) => { const e = document.getElementById(id); if (e) e.innerHTML = ''; });
+          ['ga4-entry-kpi', 'ga4-entry-kind', 'ga4-view-kind', 'ga4-internal-sum'].forEach((id) => { const e = document.getElementById(id); if (e) e.innerHTML = ''; });
           return;
         }
         renderGa4Kpi();
+        renderGa4Entry();
         renderGa4Chart();
         renderGa4DailyTable();
         renderGa4Breakdown('ga4-channel', 'channel', ga4ChKo);
