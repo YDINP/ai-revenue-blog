@@ -3543,7 +3543,10 @@ const ICONS: Record<string, string> = {
         like: 'Liked',
         coupang_click: 'Coupang Click',
         paperdoc_click: 'Paperdoc Click',
-        newsletter_subscribe: 'Subscribed'
+        newsletter_subscribe: 'Subscribed',
+        // 방문 이벤트가 아니라 하루 1건 기록되는 사이트 전체 색인 측정치
+        // (scripts/naver-index-check.mjs). path/slug 가 없어 그냥 두면 '홈페이지'로 잘못 보인다.
+        naver_index: '네이버 색인'
       };
 
       function timeAgo(dateStr) {
@@ -5228,15 +5231,28 @@ const ICONS: Record<string, string> = {
         _trafficDetail.sort((a, b) => (a.day < b.day ? -1 : 1));
       }
 
-      // 카드 병기용 보조 데이터 — GSC 뭉게 클릭(최근 7일), 뭉게 추천 이벤트
+      // naver_index 는 방문이 아니라 사이트 전체 색인 수 측정치다. get_recent_events RPC 는
+      // metadata 를 평면 컬럼으로만 돌려줘 indexed 값을 못 준다 → REST 로 따로 읽어 붙인다.
+      let _naverIdx = {};
+      const naverIndexAt = (ts) => _naverIdx[String(ts || '').slice(0, 19)] || null;
+
+      // 카드 병기용 보조 데이터 — GSC 뭉게 클릭(최근 7일), 뭉게 추천 이벤트, 네이버 색인 측정
       async function loadMunggeExtras() {
         const since = new Date(Date.now() - 8 * 864e5).toISOString().slice(0, 10);
         const get = (url) => fetch(url, { headers }).then((r) => (r.ok ? r.json() : [])).catch(() => []);
-        const [gsc, likes] = await Promise.all([
+        const [gsc, likes, idx] = await Promise.all([
           get(`${SUPABASE_URL}/rest/v1/gsc_daily?source=eq.mg&page=eq._TOTAL_&date=gte.${since}&select=date,clicks,impressions&limit=200`),
           get(`${SUPABASE_URL}/rest/v1/analytics?event_type=eq.like&source=eq.mg&select=id&limit=5000`),
+          get(`${SUPABASE_URL}/rest/v1/analytics?event_type=eq.naver_index&select=created_at,metadata&order=created_at.desc&limit=50`),
         ]);
         _gscMgRows = gsc; _mgLikes = likes;
+        _naverIdx = {};
+        for (const r of idx) {
+          const m = r.metadata || {};
+          _naverIdx[String(r.created_at).slice(0, 19)] = {
+            indexed: Number(m.indexed) || 0, site: m.site || '', blocked: !!m.blocked,
+          };
+        }
       }
 
       async function loadMunggeAll() {
@@ -5246,6 +5262,7 @@ const ICONS: Record<string, string> = {
         mergeMgIntoDetail();
         if (typeof renderTrafficPanel === 'function' && _trafficDetail.length) renderTrafficPanel();
         renderTopPages();            // 뭉게 페이지를 Top Pages 에 합류
+        renderEventFeed();           // naver_index 측정값(색인 N건) 반영
         if (_audienceRows) renderAudience(_audienceRows);   // 유입경로·기기 토글 반영
       }
 
@@ -6004,18 +6021,24 @@ const ICONS: Record<string, string> = {
             : '';
           const isCoup = e.event_type === 'coupang_click';
           const prod = isCoup ? (e.product || (e.metadata && e.metadata.product) || '') : '';
-          const detail = isCoup && prod
+          // 색인 측정은 페이지가 없다 → 글 제목 자리에 실제 측정값을 넣고 링크도 걸지 않는다
+          const isIdx = e.event_type === 'naver_index';
+          const idx = isIdx ? naverIndexAt(e.created_at) : null;
+          const detail = isIdx
+            ? `<div class="event-page-title" style="color:#fbbf24">${idx ? `색인 ${fmt(idx.indexed)}건` : '색인 측정'} · 사이트 전체</div>`
+            : isCoup && prod
             ? `<div class="event-page-title" title="${escHtml(prod)}" style="color:#facc15">🛒 ${escHtml(prod.length > 30 ? prod.slice(0,30)+'…' : prod)}</div>`
             : `<div class="event-page-title" title="${escHtml(title)}">${escHtml(shortTitle) || '홈페이지'}</div>`;
 
-          return `<a class="event-item event-link" href="${escHtml(safeUrl(eventLink(e)))}" target="_blank" rel="noopener" title="글 열기 (집계 제외)">
-            <span class="event-icon ${escHtml(e.event_type)}">${icon}</span>
+          const inner = `<span class="event-icon ${escHtml(e.event_type)}">${icon}</span>
             <div class="event-content">
               <div class="event-action">${srcBadge} ${escHtml(label)}${emailTag}</div>
               ${detail}
             </div>
-            <span class="event-time">${timeAgo(e.created_at)}</span>
-          </a>`;
+            <span class="event-time">${timeAgo(e.created_at)}</span>`;
+          return isIdx
+            ? `<div class="event-item" title="네이버 site: 검색 결과 수 — 글 단위가 아니라 사이트 전체 집계">${inner}</div>`
+            : `<a class="event-item event-link" href="${escHtml(safeUrl(eventLink(e)))}" target="_blank" rel="noopener" title="글 열기 (집계 제외)">${inner}</a>`;
         }).join('');
       }
 
