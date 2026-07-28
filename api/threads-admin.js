@@ -6,10 +6,11 @@
 //  ?action=find&q=&topic= → keyword_search 후보 카드 발송
 //  ?action=reply-delete[&rid=N|&media=id]  → 대댓글 삭제(목록/삭제)
 //  ?action=reply-list[&nodraft=1&limit=N]  → pending 댓글 조회 (로컬 러너 입력)
+//  ?action=reply-reconcile → 앱에서 이미 답장한 pending 정리(중복 답글 방지)
 //  ?action=reply-draft   body{id,draft}    → 초안 저장
 //  ?action=reply-send    body{id,text?,auto?} → 대댓글 발행(text 없으면 저장된 draft)
 //  ?action=set-reply-mode body{mode:'auto'|'review',topic?,cap?} → 대댓글 자동화 전환
-import { sb, publish, publishReply, insertPost, insertQueue, updateQueue, getAccounts, updateAccount, deleteMedia, updateReply, getReply, llmConfigured } from './_threads.js';
+import { sb, publish, publishReply, insertPost, insertQueue, updateQueue, getAccounts, updateAccount, deleteMedia, updateReply, getReply, llmConfigured, getMyUsername, myAnsweredCommentIds } from './_threads.js';
 import { findAndQueue, sendReply } from './_threads-bot.js';
 
 export default async function handler(req, res) {
@@ -132,6 +133,29 @@ export default async function handler(req, res) {
           ...r, topic: byId[r.account_id]?.topic, reply_mode: byId[r.account_id]?.reply_mode || 'review',
         })),
       });
+    }
+
+    // 앱에서 손으로 답장한 댓글이 pending으로 남아 있는 것을 정리한다(중복 답글 방지).
+    // 크론이 수집 단계에서 막지만, 그 가드 이전에 쌓인 잔여분은 이걸로 청소한다.
+    if (action === 'reply-reconcile') {
+      const rows = await sb('threads_replies?status=eq.pending&select=id,account_id,root_media_id,comment_id,comment_user&order=id.asc&limit=200');
+      const accounts = await getAccounts(false);
+      const byId = Object.fromEntries(accounts.map((a) => [a.id, a]));
+      const cache = new Map(); // account:root → Set(answered comment_id)
+      const cleaned = [];
+      for (const r of rows) {
+        const acct = byId[r.account_id];
+        if (!acct?.access_token) continue;
+        const handle = await getMyUsername(acct).catch(() => '');
+        if (!handle) continue;
+        const key = `${r.account_id}:${r.root_media_id}`;
+        if (!cache.has(key)) cache.set(key, await myAnsweredCommentIds(acct, r.root_media_id, handle).catch(() => new Set()));
+        if (cache.get(key).has(r.comment_id)) {
+          await updateReply(r.id, { status: 'ignored', error: 'already answered in app' });
+          cleaned.push({ id: r.id, user: r.comment_user });
+        }
+      }
+      return res.status(200).json({ ok: true, checked: rows.length, cleaned: cleaned.length, rows: cleaned });
     }
 
     if (action === 'reply-draft') {

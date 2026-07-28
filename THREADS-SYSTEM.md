@@ -27,8 +27,21 @@
 - `reply_mode='review'`(기본) → 텔레그램 카드 **[✅ 이대로][✍️ 답글][🗑 무시]** → `publishReply`
 - `reply_mode='auto'` → **초안이 있으면 승인 없이 즉시 발행** + 텔레그램 사후 보고(🤖 자동답글)
   전환: `threads-admin?action=set-reply-mode` body`{mode:'auto'|'review',cap:20}`
-- 안전장치 4개: 계정 일일캡(`reply_daily_cap` 20) · 원글당 미답변 20 · **자기답글 차단** ·
-  **초안 없으면 발행 안 함**(빈 답글 방지)
+- 안전장치 6개: 계정 일일캡(`reply_daily_cap` 20) · 원글당 미답변 20 · **자기답글 차단** ·
+  **초안 없으면 발행 안 함**(빈 답글 방지) · **앱에서 이미 답장한 댓글 차단**(conversation 조회) ·
+  **신선도 게이트**(기본 6h, `THREADS_REPLY_FRESH_HOURS`)
+
+### ⚠️ 중복 답글 함정 (2026-07-29 실측)
+**앱에서 손으로 단 답글은 우리 DB에 없다** — `threads_replies`에는 API로 발행한 것만 남는다.
+그래서 이미 답한 댓글이 pending으로 남고, auto를 켜면 **두 번째 답글이 나간다**.
+실측 당시 pending 7건 중 **5건이 이미 답장 완료** 상태였다.
+→ `GET /{root}/conversation`에서 내 username이 `replied_to.id`로 답한 댓글을 뽑아 차단.
+잔여분 청소는 `threads-admin?action=reply-reconcile`(러너가 매 실행마다 선행 호출).
+
+**좋아요는 감지 불가.** Threads API에 `has_liked`/`is_liked`/`liked` 필드가 없고(전부
+nonexisting field) 답글 media엔 likes 카운트조차 없다. "좋아요만 누르고 넘긴 댓글"을 알 방법이
+없어서, 대신 **신선도 게이트**로 근사한다 — 6시간 넘은 댓글은 자동발행 대상에서 빠지고 초안만
+채워 승인카드로 넘긴다(15분 크론이면 새 댓글은 항상 창 안에 들어오므로 백로그만 걸러진다).
 - 테이블 `threads_replies`(+sent_at, auto). 삭제: `threads-admin?action=reply-delete[&rid=N]`
 - 문서: `PRD-threads-auto-reply.md` / 스키마 `supabase/threads-reply-auto.sql`
 

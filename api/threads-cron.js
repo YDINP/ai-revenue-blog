@@ -10,13 +10,18 @@ import {
   sb, getAccounts, publishDraft, refreshLongLived, updateAccount,
   getInsights, publishedCount24h,
   getReplies, insertReply, replyExists, draftReply, getMyRecentMedia,
-  autoRepliesSent24h, pendingRepliesForRoot, getMyUsername,
+  autoRepliesSent24h, pendingRepliesForRoot, getMyUsername, myAnsweredCommentIds,
 } from './_threads.js';
 import { threadsReplyCard, sendReply } from './_threads-bot.js';
 
 const AUTO_DAILY_CAP = 3;      // 자동모드 계정당 24h 최대 발행(스팸 방지)
 const UNANSWERED_CAP = 20;     // 원글 1개당 pending 상한 — 바이럴 글에서 수집 폭주 방지
 const REPLY_DAILY_CAP = 20;    // 계정 reply_daily_cap 미설정 시 기본값
+// 자동발행은 "갓 달린 댓글"만. 오래된 댓글은 사람이 앱에서 좋아요·답글로 이미 처리했을 수 있는데,
+// ⚠️ Threads API에는 "내가 좋아요 눌렀는지" 필드가 없다(has_liked/is_liked 전부 nonexisting field,
+//    답글 media엔 likes 카운트조차 없음 — 2026-07-29 실측). 즉 좋아요는 감지할 방법이 아예 없다.
+//    15분 크론이면 새 댓글은 항상 이 창 안에 들어오므로, 이 게이트는 실질적으로 백로그만 막는다.
+const REPLY_FRESH_HOURS = Number(process.env.THREADS_REPLY_FRESH_HOURS || 6);
 
 export default async function handler(req, res) {
   const secret = process.env.CRON_SECRET;
@@ -103,6 +108,7 @@ export default async function handler(req, res) {
   //    ''를 반환하므로, 그 상태에서 auto를 켜도 "빈 답글 발행"이 아니라 승인카드로 폴백된다.
   log.replies = 0;
   log.autoReplies = 0;
+  log.alreadyAnswered = 0;
   const autoSent = [];
   if (doReplies) try {
     const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID;
@@ -127,11 +133,27 @@ export default async function handler(req, res) {
         let replies = [];
         try { replies = await getReplies(acct, p.id); }
         catch (e) { log.errors.push(`replies#${p.id}:${e.message}`); continue; }
+        let answered = null; // 이 글에서 내가 이미 답한 comment_id 집합 (필요할 때만 1회 조회)
         for (const c of replies) {
           if (!c.id) continue;
           // 내가 쓴 댓글에 내가 답하는 루프 차단 (reply_media_id 체크와 이중 방어)
           if (myHandle && String(c.username || '').toLowerCase() === myHandle) continue;
           if (await replyExists(c.id)) continue; // 이미 수집됐거나 내가 보낸 대댓글
+
+          // 앱에서 손으로 이미 답장한 댓글 → 다시 답하면 중복이다. ignored로 못박아
+          // 다음 런에서 replyExists로 걸리게 한다.
+          if (myHandle) {
+            if (!answered) answered = await myAnsweredCommentIds(acct, p.id, myHandle).catch(() => new Set());
+            if (answered.has(c.id)) {
+              await insertReply({
+                account_id: acct.id, root_media_id: p.id, comment_id: c.id,
+                comment_text: c.text || '', comment_user: c.username || '',
+                status: 'ignored', error: 'already answered in app',
+              }).catch(() => {});
+              log.alreadyAnswered++;
+              continue;
+            }
+          }
           const draft = await draftReply(c.text, {}).catch(() => '');
           let row;
           try {
@@ -142,8 +164,9 @@ export default async function handler(req, res) {
           } catch { continue; } // comment_id unique 충돌 = 동시성으로 이미 삽입됨
           log.replies++;
 
-          // 자동 발행 경로
-          if (row && draft && autoBudget > 0) {
+          // 자동 발행 경로 — 초안 있고 예산 남고, 댓글이 신선할 때만.
+          const fresh = !c.timestamp || (Date.now() - new Date(c.timestamp).getTime()) <= REPLY_FRESH_HOURS * 3600 * 1000;
+          if (row && draft && autoBudget > 0 && fresh) {
             const r = await sendReply(row.id, draft, { auto: true }).catch((e) => ({ ok: false, error: e.message }));
             if (r?.ok) {
               autoBudget--;

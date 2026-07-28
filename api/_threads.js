@@ -278,6 +278,33 @@ export async function getReplies(account, mediaId) {
   return Array.isArray(j.data) ? j.data : [];
 }
 
+// 원글의 대화 전체(중첩 답글 포함). /replies는 직접 답글만 주므로 "내가 이미 답했는지"는 이걸로 본다.
+export async function getConversation(account, rootMediaId, limit = 100) {
+  const url = new URL(`${GRAPH_V}/${rootMediaId}/conversation`);
+  url.searchParams.set('fields', 'id,text,username,replied_to');
+  url.searchParams.set('limit', String(limit));
+  url.searchParams.set('access_token', account.access_token);
+  const r = await fetch(url);
+  const j = await r.json();
+  if (!r.ok) throw new Error(`conversation fetch failed: ${JSON.stringify(j)}`);
+  return Array.isArray(j.data) ? j.data : [];
+}
+
+// ⚠️ 앱에서 손으로 단 답글은 우리 DB에 없다(threads_replies에는 API로 발행한 것만 남는다).
+// 그래서 이 체크 없이는 이미 답한 댓글이 pending으로 남아 중복 답글이 나간다.
+// 2026-07-29 실측: pending 7건 중 5건이 앱에서 이미 답장한 댓글이었다.
+export async function myAnsweredCommentIds(account, rootMediaId, myHandle) {
+  const me = String(myHandle || '').replace(/^@/, '').toLowerCase();
+  if (!me) return new Set();
+  const conv = await getConversation(account, rootMediaId);
+  const out = new Set();
+  for (const it of conv) {
+    if (String(it.username || '').toLowerCase() !== me) continue;
+    if (it.replied_to?.id) out.add(it.replied_to.id);
+  }
+  return out;
+}
+
 // 내 글/대댓글 삭제 — DELETE /{media-id}. threads_delete 스코프 필요(100/day 한도).
 export async function deleteMedia(account, mediaId) {
   const url = new URL(`${GRAPH_V}/${mediaId}`);
