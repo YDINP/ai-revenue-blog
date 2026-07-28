@@ -26,6 +26,7 @@ const BLOCKS = [
   { marker: 'MG-TRACK', file: 'wp-track.js', desc: '방문 추적(analytics pageview)' },
   { marker: 'MG-DARK', file: 'wp-darkmode.js', desc: '경량 다크모드(WP Dark Mode 플러그인 대체)' },
   { marker: 'MG-LIKE', file: 'wp-like.js', desc: '글 하단 추천 버튼' },
+  { marker: 'MG-STH', file: 'wp-scroll-highlight.js', desc: '핵심 요약 단어별 형광펜 스윕' },
 ];
 
 function loadEnv(p) {
