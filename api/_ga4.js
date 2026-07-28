@@ -87,14 +87,21 @@ export const ga4Day = (offsetDays) =>
 
 const MET = ['sessions', 'totalUsers', 'screenPageViews', 'engagedSessions'];
 
-// 대시보드가 쓰는 3종 리포트를 한 번에 — 일별 × (채널 / 소스·매체 / 랜딩페이지)
+// 대시보드가 쓰는 리포트를 한 번에 — 일별 × (채널 / 소스·매체 / 랜딩페이지 / 기기 / 브라우저 / OS)
 // GA4 는 하루 지연이 거의 없지만 당일은 계속 변하므로 소급 재집계를 전제로 upsert 한다.
+// 기기·브라우저·OS 는 TF/LF 가 analytics 의 user_agent 로 만드는 항목과 짝을 맞추기 위한 것.
+// 뭉게는 이벤트 단위 데이터가 없어 GA4 차원으로만 같은 화면을 채울 수 있다.
 export async function ga4DailyBreakdown(propertyId, startDate, endDate, { pageLimit = 3000 } = {}) {
-  const [channel, sourceMedium, page, totals] = await Promise.all([
-    ga4Report(propertyId, { startDate, endDate, dimensions: ['date', 'sessionDefaultChannelGroup'], metrics: MET, limit: 5000 }),
-    ga4Report(propertyId, { startDate, endDate, dimensions: ['date', 'sessionSourceMedium'], metrics: MET, limit: 5000 }),
-    ga4Report(propertyId, { startDate, endDate, dimensions: ['date', 'landingPagePlusQueryString'], metrics: MET, limit: pageLimit }),
-    ga4Report(propertyId, { startDate, endDate, dimensions: ['date'], metrics: MET, limit: 400 }),
+  const daily = (dim, limit) =>
+    ga4Report(propertyId, { startDate, endDate, dimensions: dim ? ['date', dim] : ['date'], metrics: MET, limit });
+  const [channel, sourceMedium, page, totals, device, browser, os] = await Promise.all([
+    daily('sessionDefaultChannelGroup', 5000),
+    daily('sessionSourceMedium', 5000),
+    daily('landingPagePlusQueryString', pageLimit),
+    daily(null, 400),
+    daily('deviceCategory', 2000),
+    daily('browser', 2000),
+    daily('operatingSystem', 2000),
   ]);
-  return { channel, sourceMedium, page, totals };
+  return { channel, sourceMedium, page, totals, device, browser, os };
 }

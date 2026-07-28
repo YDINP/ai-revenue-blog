@@ -45,7 +45,7 @@ export async function syncGa4({ days = 7 } = {}) {
   for (const b of blogList().filter((x) => x.ga4Property)) {
     const src = b.key;
     try {
-      const { channel, sourceMedium, page, totals } = await ga4DailyBreakdown(b.ga4Property, start, end);
+      const { channel, sourceMedium, page, totals, device, browser, os } = await ga4DailyBreakdown(b.ga4Property, start, end);
       const rows = [
         ...totals.rows.map((r) => ({
           date: ga4Date(r.date),
@@ -60,6 +60,9 @@ export async function syncGa4({ days = 7 } = {}) {
         ...channel.rows.map(toRow(src, 'channel', 'sessionDefaultChannelGroup')),
         ...sourceMedium.rows.map(toRow(src, 'source_medium', 'sessionSourceMedium')),
         ...page.rows.map(toRow(src, 'page', 'landingPagePlusQueryString')),
+        ...device.rows.map(toRow(src, 'device', 'deviceCategory')),
+        ...browser.rows.map(toRow(src, 'browser', 'browser')),
+        ...os.rows.map(toRow(src, 'os', 'operatingSystem')),
       ];
       out[src] = await upsert(rows);
     } catch (e) {
