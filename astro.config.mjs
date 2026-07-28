@@ -24,7 +24,9 @@ export default defineConfig({
   site: 'https://ai-revenue-blog.vercel.app',  // Vercel 배포 URL 확정
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/dashboard'),
+      // mungge.com 이전 중: 태그 아카이브는 mungge에 대응 페이지가 없어 301로만 흘려보낸다.
+      // 사이트맵에 남겨두면 이전 중인 구도메인이 계속 색인을 요청해 이전 신호가 희석된다.
+      filter: (page) => !page.includes('/dashboard') && !page.includes('/blog/tags/'),
     }),
   ],
   output: 'static',

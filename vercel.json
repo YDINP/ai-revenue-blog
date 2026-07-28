@@ -995,6 +995,21 @@
       "source": "/blog/switch2-vs-steam-deck-games-2026/",
       "destination": "https://mungge.com/switch2-vs-steam-deck-games-2026/",
       "permanent": true
+    },
+    {
+      "source": "/blog/tags",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tags/",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tags/:tag*",
+      "destination": "https://mungge.com/",
+      "permanent": true
     }
   ]
 }
