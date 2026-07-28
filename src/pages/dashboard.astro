@@ -3912,6 +3912,8 @@ const ICONS: Record<string, string> = {
              { name: 'LifeFlow', color: '#22c55e', vals: buckets.map(b => b.lf) },
              { name: 'VIP', color: '#57e6c3', vals: buckets.map(b => b.vip) },
              { name: '뭉게', color: '#f59e0b', vals: buckets.map(b => b.mg || 0) }];
+        // 버킷에 없는 필드 하나가 NaN 으로 번져 차트 전체를 지우는 사고를 막는 마지막 방어선
+        for (const s of series) s.vals = s.vals.map((v) => Number(v) || 0);
         if (legend) {
           legend.innerHTML = series.map(s =>
             `<span style="display:flex;align-items:center;gap:0.3rem"><i style="width:14px;height:0;border-top:2.5px dashed ${s.color};display:inline-block"></i>${s.name}</span>`
@@ -4105,7 +4107,9 @@ const ICONS: Record<string, string> = {
           for (let i = 13; i >= 0; i--) {
             const k = kstDay(i);
             const [, mo, da] = k.split('-');
-            padded.push(map[k] || { key:k, label:`${+mo}/${+da}`, views:0, visitors:0, tf:0, lf:0, web:0, mobile:0, webV:0, mobileV:0, sortKey:k });
+            // ⚠️ bucketDetail 이 만드는 버킷과 키가 하나라도 어긋나면 그 필드가 undefined 로 남고,
+            // maxV = Math.max(...) 가 NaN 이 되어 차트 4개 선이 통째로 사라진다(vip·mg 누락 사고).
+            padded.push(map[k] || { key:k, label:`${+mo}/${+da}`, views:0, visitors:0, tf:0, lf:0, vip:0, mg:0, mgV:0, web:0, mobile:0, webV:0, mobileV:0, sortKey:k });
           }
           buckets = padded;
           for (let i = 27; i >= 14; i--) { prevSum += (map[kstDay(i)] || {}).views || 0; }
