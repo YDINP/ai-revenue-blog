@@ -201,6 +201,28 @@ export default async function handler(req, res) {
     }
   }
 
+  // ── 함수 실행 리전 조회/변경 (관리자, 일회성) ──
+  // 한국금거래소가 해외 IP 를 403 으로 막아 금 시세 프록시가 실패한다. Hobby 는 vercel.json 의
+  // "regions" 를 무시하고 프로젝트 설정만 보므로(x-vercel-id 가 icn1::iad1) 여기서 직접 바꾼다.
+  // VERCEL_TOKEN 은 이 함수 런타임 env 에만 있고 로컬엔 없어 배포된 코드가 대신 호출한다.
+  if (url.searchParams.get('action') === 'region') {
+    const { getFunctionRegion, setFunctionRegion, redeploy, hasVercelToken } = await import('./_vercel.js');
+    if (!hasVercelToken()) return res.status(500).json({ error: 'VERCEL_TOKEN 미설정' });
+    const want = url.searchParams.get('set');
+    try {
+      const before = await getFunctionRegion('ai-revenue-blog');
+      if (!want) return res.status(200).json({ ok: true, current: before.region });
+      const after = await setFunctionRegion('ai-revenue-blog', want);
+      let dep = null;
+      if (url.searchParams.get('redeploy') === '1') {
+        dep = await redeploy({ vercel: 'ai-revenue-blog' });
+      }
+      return res.status(200).json({ ok: true, before: before.region, after: after.region, deploy: dep });
+    } catch (e) {
+      return res.status(500).json({ error: e.message });
+    }
+  }
+
   // ── 최근 발송 뉴스레터를 특정 주소로 복사 발송 (자기확인/미리보기) ──
   if (url.searchParams.get('action') === 'newsletter-copy') {
     const email = url.searchParams.get('email') || '';
