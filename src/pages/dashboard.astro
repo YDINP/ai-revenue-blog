@@ -5301,6 +5301,37 @@ const ICONS: Record<string, string> = {
       }
       const mgTotal = (from, to) => (mgAgg('total', from, to)[0] || { sessions: 0, users: 0, views: 0, engaged: 0 });
 
+      // ── 뭉게 일별 수치: GA4(배치) + 자체 트래커(실시간) 폴백 ────────────────
+      // ga4_daily 는 하루 1회 동기화라 오늘(동기화 전이면 어제까지) 행이 아예 없다.
+      // 그 날을 GA4 만으로 읽으면 뭉게 몫이 0 이 되어 "합산이 안 된다"로 보인다.
+      // 같은 날을 두 소스로 더하면 이중계산이므로, GA4 행이 있는 날은 GA4 만 쓴다
+      // (Top Pages 의 mgTopPages() 가 쓰는 원칙과 동일).
+      const mgDayKst = (ts) => new Date(new Date(ts).getTime() + 9 * 3600e3).toISOString().slice(0, 10);
+      const mgHasGa4 = (day) => (_ga4Rows || []).some((r) => r.dim === 'total' && r.date === day);
+      // 조회수=pageview_mg 이벤트 수, 방문자=고유 UA — 대시보드의 다른 방문자 지표와 같은 추정 기준
+      function mgLiveDay(day) {
+        const ua = new Set();
+        let views = 0;
+        for (const e of (_mgLive || [])) {
+          if (mgDayKst(e.created_at) !== day) continue;
+          views++; ua.add(e.ua || '?');
+        }
+        return { sessions: ua.size, users: ua.size, views, engaged: 0 };
+      }
+      // live=true 면 이 날 값이 GA4 가 아니라 자체 트래커 기준이라는 뜻(라벨에 밝힌다)
+      function mgDay(day) {
+        if (mgHasGa4(day)) return { ...mgTotal(day, day), live: false };
+        return { ...mgLiveDay(day), live: _mgLiveLoaded };
+      }
+      // 누적 조회수 — GA4 수집분 + GA4 가 아직 못 받은 날의 자체 트래커분
+      function mgCumViews() {
+        const ga4 = mgTotal().views;
+        const days = new Set((_mgLive || []).map((e) => mgDayKst(e.created_at)));
+        let live = 0;
+        for (const d of days) if (!mgHasGa4(d)) live += mgLiveDay(d).views;
+        return { ga4, live, views: ga4 + live };
+      }
+
       // Top Pages 합류용 — analytics 행과 같은 모양으로 맞춘다
       function mgTopPages(period) {
         // '일'(오늘)은 GA4 배치(하루 1회)를 기다리지 않고 pageview_mg 이벤트로 실시간 집계.
@@ -5414,9 +5445,9 @@ const ICONS: Record<string, string> = {
       function applyMungge() {
         if (!_traffic || !Array.isArray(_ga4Rows)) return;
         const t = _traffic;
-        const today = mgTotal(kstToday(), kstToday());
-        const yday = mgTotal(kstYday(), kstYday());
-        const all = mgTotal();
+        const today = mgDay(kstToday());
+        const yday = mgDay(kstYday());
+        const all = mgCumViews();
 
         // Row 1 · 금일 방문자 / 금일 조회수 (뭉게 합산)
         const vis = t.todayVis + today.users, visY = t.ydayVis + yday.users;
@@ -5433,6 +5464,14 @@ const ICONS: Record<string, string> = {
         const totalV = t.totalViews + all.views;
         setEl('total-views', fmt(totalV));
         setEl('mg-total-views', fmt(all.views) + (today.views ? ` (+${today.views})` : ''));
+        // 카드 값은 뭉게 포함 합계인데 sub 는 loadTraffic 이 TF/LF 만 적어 둔다 → 뭉게도 병기
+        const vSub = document.getElementById('views-sub');
+        if (vSub) {
+          const dayTotal = t.tv + today.views;
+          vSub.textContent = dayTotal > 0
+            ? `today +${dayTotal} (TF +${t.tfTv} / LF +${t.lfTv} / VIP +${t.vipTv} / 뭉게 +${today.views})`
+            : 'Collecting...';
+        }
         const pct = (n) => Math.round(n / (totalV || 1) * 100) + '%';
         const setW = (id, n) => { const e = document.getElementById(id); if (e) e.style.width = pct(n); };
         setW('views-split-tf', t.tfTotal); setW('views-split-lf', t.lfTotal);
@@ -5490,8 +5529,11 @@ const ICONS: Record<string, string> = {
         setEl('mg-sum-today', `${fmt(today.users)} / ${fmt(today.views)}`);
         t.setKpiDelta('mg-sum-delta', today.users, yday.users);
         const mgAt = ga4SyncedLabel();
+        // GA4 배치 전이라 오늘치를 자체 트래커로 메웠으면 기준을 밝힌다 — 밝히지 않으면
+        // Site Kit 수치와 달라 보일 때 어느 쪽이 틀린 건지 판단할 수 없다
         setEl('mg-sum-sub',
           `어제 ${fmt(yday.users)} / ${fmt(yday.views)} · 누적 조회 ${fmt(all.views)}` +
+          (today.live ? ' · 오늘은 자체 트래커 기준' : '') +
           (mgAt ? ` · 동기화 ${mgAt}` : ''));
 
         // Row 3 · Likes — 뭉게 추천 버튼(source='mg')이 생겨 분리 표시가 가능해졌다
@@ -5535,6 +5577,14 @@ const ICONS: Record<string, string> = {
           if (r.dim !== 'total') continue;
           const a = (byDay[r.date] ||= { views: 0, users: 0 });
           a.views += r.views || 0; a.users += r.users || 0;
+        }
+        // GA4 가 아직 못 받은 날(주로 오늘)은 자체 트래커로 메운다 — 안 그러면 추이 차트의
+        // 마지막 막대에서 뭉게 몫만 0 으로 꺼져 "오늘 유입이 줄었다"로 잘못 읽힌다.
+        // GA4 행이 있는 날은 건드리지 않으므로 이중계산이 되지 않는다.
+        for (const day of new Set((_mgLive || []).map((e) => mgDayKst(e.created_at)))) {
+          if (byDay[day]) continue;
+          const lv = mgLiveDay(day);
+          byDay[day] = { views: lv.views, users: lv.users };
         }
         const idx = {};
         _trafficDetail.forEach((d) => { if (d.day) idx[d.day] = d; });
@@ -7214,6 +7264,10 @@ const ICONS: Record<string, string> = {
         setInterval(() => {
           refreshMgLive().then(() => {
             renderTopPages();
+            // 요약 KPI·추이도 이 실시간 값을 쓴다(GA4 배치 전 오늘치 폴백) → 함께 갱신
+            applyMungge();
+            mergeMgIntoDetail();
+            if (typeof renderTrafficPanel === 'function' && _trafficDetail.length) renderTrafficPanel();
             if (_ga4Init) renderGa4Detail();
           });
         }, 30000);
