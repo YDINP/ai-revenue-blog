@@ -167,7 +167,7 @@ export default async function handler(req, res) {
     } catch (e) {
       console.error('gold-price error:', e.message);
       res.setHeader('Cache-Control', 'public, s-maxage=60');
-      return res.status(502).json({ ok: false, error: 'upstream' });
+      return res.status(502).json({ ok: false, error: 'upstream', detail: String(e.message || e).slice(0, 200) });
     }
   }
 
