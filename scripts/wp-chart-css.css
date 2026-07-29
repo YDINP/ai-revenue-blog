@@ -1054,21 +1054,28 @@ html[data-wp-dark-mode-active] .entry-content-wrap table tbody tr:nth-child(2n) 
 }
 .coupang-inline:hover .ci-cta { box-shadow: 0 4px 10px -3px rgba(213, 94, 0, 0.5); }
 
-/* 다크 — 자체 토글(:root.dark)과 WP Dark Mode 플러그인 속성 둘 다 커버 */
+/* 다크 — 라이브에서 실제로 걸리는 건 자체 토글 html[data-mg-theme="dark"] 다.
+   WP Dark Mode 플러그인은 꺼져 있고(켜지면 mg-dark 폴백이 스스로 비활성),
+   :root.dark 는 TF(Astro) 시절 잔재. 셋 다 나열해 어느 쪽이 켜져도 대응한다. */
+html[data-mg-theme="dark"] .coupang-inline,
 :root.dark .coupang-inline,
 html[data-wp-dark-mode-active] .coupang-inline {
   background: rgba(232, 99, 42, 0.10);
   border-color: rgba(232, 99, 42, 0.26);
   border-left-color: #ff8a5c;
 }
+html[data-mg-theme="dark"] .coupang-inline:hover,
 :root.dark .coupang-inline:hover,
 html[data-wp-dark-mode-active] .coupang-inline:hover { background: rgba(232, 99, 42, 0.15); }
+html[data-mg-theme="dark"] .coupang-inline .ci-icon,
 :root.dark .coupang-inline .ci-icon,
 html[data-wp-dark-mode-active] .coupang-inline .ci-icon { background: rgba(255, 179, 0, 0.16); }
+html[data-mg-theme="dark"] .coupang-inline .ci-label,
 :root.dark .coupang-inline .ci-label,
 html[data-wp-dark-mode-active] .coupang-inline .ci-label {
   color: #ffb08a; background: rgba(232, 99, 42, 0.20);
 }
+html[data-mg-theme="dark"] .coupang-inline .ci-title,
 :root.dark .coupang-inline .ci-title,
 html[data-wp-dark-mode-active] .coupang-inline .ci-title { color: #f2f3f5; }
 
