@@ -126,6 +126,51 @@ export default async function handler(req, res) {
     }
   }
 
+  // ── 금 시세 프록시 (공개) — mungge.com /tools/gold-price-calculator/ 가 호출한다 ──
+  // 한국금거래소(koreagoldx.co.kr)의 /api/main 은 Access-Control-Allow-Origin 을 주지 않아
+  // 브라우저에서 직접 읽을 수 없다. 고시가는 하루 몇 번만 갱신되므로 엣지에서 10분 캐시해
+  // 원본 부하를 없앤다. 신규 Vercel 함수를 만들지 않고 여기에 얹은 이유는 Hobby 12함수 제한.
+  if (url.searchParams.get('action') === 'gold-price') {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    if (req.method === 'OPTIONS') { res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS'); return res.status(204).end(); }
+    const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : null);
+    try {
+      const r = await fetch('https://www.koreagoldx.co.kr/api/main', {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36',
+          Accept: 'application/json',
+          Referer: 'https://www.koreagoldx.co.kr/',
+        },
+      });
+      if (!r.ok) throw new Error(`koreagoldx ${r.status}`);
+      const j = await r.json();
+      const o = j.officialPrice4 || {};
+      // s_=내가 살 때(VAT포함) / p_=내가 팔 때, turm_=전일대비 금액, per_=전일대비 %
+      const row = (k) => ({
+        buy: num(o[`s_${k}`]), sell: num(o[`p_${k}`]),
+        buyDiff: num(o[`turm_s_${k}`]), sellDiff: num(o[`turm_p_${k}`]),
+        buyPct: num(o[`per_s_${k}`]), sellPct: num(o[`per_p_${k}`]),
+      });
+      const au = (j.marketPriceList || []).find((m) => m.type === 'au') || {};
+      const out = {
+        ok: true,
+        source: '한국금거래소',
+        asof: o.date || j.date || null,
+        unitGram: 3.75,                       // 고시가는 3.75g(1돈) 단위
+        prices: { pure: row('pure'), k18: row('18k'), k14: row('14k'), white: row('white'), silver: row('silver') },
+        intl: { usdPerOz: num(au.ask), krwPerGram: num(au.priceGram) },
+      };
+      if (!out.prices.pure.buy || !out.prices.pure.sell) throw new Error('official price empty');
+      res.setHeader('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=3600');
+      return res.status(200).json(out);
+    } catch (e) {
+      console.error('gold-price error:', e.message);
+      res.setHeader('Cache-Control', 'public, s-maxage=60');
+      return res.status(502).json({ ok: false, error: 'upstream' });
+    }
+  }
+
   const secret = process.env.CRON_SECRET;
   if (!secret || req.headers.authorization !== `Bearer ${secret}`) {
     return res.status(401).json({ error: 'unauthorized' });
