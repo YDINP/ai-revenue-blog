@@ -738,7 +738,9 @@ async function main() {
       // Register to Supabase
       await registerToSupabase(post, categoryName, slug, today, heroImage);
       // mungge.com(WordPress) 자동 발행 — WP env 있을 때만(없으면 Astro만)
-      await autoPublishToWP(outputPath, { silo: "테크·개발" });
+      // INPUT_WP_STATUS=draft 면 라이브 대신 초안으로 올린다(사람이 검토 후 수동 공개).
+      // 기본은 publish — 기존 자동발행 동작을 바꾸지 않는다.
+      await autoPublishToWP(outputPath, { silo: "테크·개발", status: process.env.INPUT_WP_STATUS || "publish" });
       generated++;
     } catch (err) {
       console.error(`[ERROR] Post ${i + 1}/${count} (${categoryName}) failed: ${err.message}`);
