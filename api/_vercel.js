@@ -56,17 +56,3 @@ export async function redeploy(blog) {
   });
   return { url: `https://${created.url}`, id: created.id };
 }
-
-// 함수 실행 리전 조회/변경 (Hobby 는 1개만) — vercel.json 의 "regions" 는 Hobby 에서 무시되고
-// 프로젝트 설정만 유효하다. 대시보드 접속 없이 바꾸기 위한 경로.
-export async function getFunctionRegion(project) {
-  const p = await vc(`/v9/projects/${project}`);
-  return { region: p?.serverlessFunctionRegion || null, name: p?.name };
-}
-export async function setFunctionRegion(project, region) {
-  const p = await vc(`/v9/projects/${project}`, {
-    method: 'PATCH',
-    body: JSON.stringify({ serverlessFunctionRegion: region }),
-  });
-  return { region: p?.serverlessFunctionRegion || null };
-}
