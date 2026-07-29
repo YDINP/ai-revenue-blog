@@ -1,5 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "//regions": "icn1(서울) 고정 — 한국금거래소가 해외/데이터센터 IP를 403 으로 막아 금 시세 프록시가 실패했다. 이 프로젝트는 리다이렉트+크론 API 만 남아 리전 변경의 부작용이 없다.",
+  "regions": ["icn1"],
   "crons": [
     {
       "path": "/api/daily-report",
