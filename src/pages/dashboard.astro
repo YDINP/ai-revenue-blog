@@ -5676,7 +5676,9 @@ const ICONS: Record<string, string> = {
       async function fetchCoupangProducts() {
         try {
           const res = await fetch(
-            `${SUPABASE_URL}/rest/v1/analytics?or=(event_type.eq.coupang_click,event_type.eq.affiliate_click)&metadata->>__probe=is.null&select=metadata,source,created_at&order=created_at.desc&limit=2000`,
+            // ⚠️ 소스 필터 필수. KPI 총계(get_traffic_summary)는 살아 있는 소스(mg·vip)만 세므로
+            // 여기서 전 소스를 가져오면 카드값과 아래 목록·퍼널 분자가 어긋난다.
+            `${SUPABASE_URL}/rest/v1/analytics?or=(event_type.eq.coupang_click,event_type.eq.affiliate_click)&source=in.(mg,vip,playcast)&metadata->>__probe=is.null&select=metadata,source,created_at&order=created_at.desc&limit=2000`,
             { headers }
           );
           if (!res.ok) return [];

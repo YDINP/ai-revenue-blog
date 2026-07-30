@@ -147,24 +147,39 @@ paperdoc_click source='mg'  metadata { placement, url, slug, path, title }
 - [x] `scripts/test-telegram-bot.mjs` — 133 assertion 전부 PASS
 - [x] 봇 명령 라이브 실측: `/stats` `/mg` `/top` `/trend` `/cstats` `/coupang` `/paperdoc`
       `/report` `/money` 모두 뭉게 실데이터로 응답
-- [ ] **사용자 조치 필요** ↓
+## 7. 외부 시스템 적용 (완료 — 2026-07-30)
 
-## 7. 남은 수동 조치 (코드 밖)
+### 7.1 뭉게 footer 위젯 (라이브 SSOT)
 
-이 세 가지는 코드가 아니라 외부 시스템 설정이라 사람이 실행해야 한다.
+```
+node scripts/inject-wp-js.mjs --only MG-AFF     # 클릭 트래커 블록 삽입
+```
+`139,897자 → 143,499자` · 라이브 글에서 확인: `MG-AFF:BEGIN`, `coupang_click`,
+`paperdoc_click` 모두 서빙되고 기존 블록(MG-TRACK/LIKE/ADEND)은 무손상.
 
-1. **뭉게 클릭 트래커 주입** — footer 위젯이 라이브 SSOT 다.
-   ```
-   node scripts/inject-wp-js.mjs --backup ./wp-widget-backup.txt   # 원문 백업 후 전체 주입
-   node scripts/inject-wp-js.mjs --only MG-AFF                     # 새 조각만
-   ```
-   (`WP_URL` / `WP_USER` / `WP_APP_PASS` = `automation/.env`)
+**⚠️ 함정 — `wp-widget.js` 는 관리 블록이 아니다.**
+`inject-wp-js.mjs` 의 `BLOCKS` 에는 `wp-widget.js` 가 없고, 그 내용이 **마커 없이**
+위젯에 인라인으로 박혀 있다 → 로컬 파일을 고쳐도 라이브에 절대 반영되지 않는다.
+구독 source(`var SRC`)는 라이브 내용을 읽어 해당 스니펫만 문자열 치환해 적용했다.
+(위젯 조회 시 `?context=edit` 이 없으면 `instance.raw` 가 비어 온다 — "내용이 비어 있음" 으로
+오진하기 쉽다.)
 
-2. **Supabase SQL 2개 실행** (SQL Editor)
-   - `supabase/get_traffic_summary.sql` — tf_/lf_ 필드 → mg_/vip_ 로 교체.
-     ⚠️ 실행 전에는 대시보드의 뭉게 클릭·CTR 카드가 `--` 로 뜬다(에러는 아님).
-   - `supabase/newsletter-source-to-mg.sql` — 구독자·발송이력 source 를 mg 로 통합.
-     ⚠️ 실행 전에는 기존 구독자 3명이 뉴스레터 발송 대상에서 빠진다.
+### 7.2 Supabase (Management API `/database/query`, `sbp_` 토큰)
 
-3. **Vercel 배포** — `api/` 변경은 배포 후에 적용된다. 새 action 을 호출하기 전에
-   배포 성공을 먼저 확인할 것(구버전이 기본 경로를 실행함).
+service_role 키로는 함수 생성이 안 되므로 Management API 를 썼다.
+
+- `supabase/get_traffic_summary.sql` → HTTP 201.
+  검증: 응답에 `tf_*`/`lf_*` 0개, `mg_*`/`vip_*` 존재.
+  **`total_clicks` 가 321 → 0 으로 떨어진 건 정상이다** — 누적 쿠팡클릭 12건이 전부
+  `source='blog'`(구 TF)여서 살아 있는 소스 집계에서 제외됐다("완전히 숨김" 결정).
+- `supabase/newsletter-source-to-mg.sql` → HTTP 201.
+  구독자 `blog 2 + lifeflow 1 → mg 3`, 발송이력 `blog 9 + lifeflow 12 → mg 21`(중복 손실 0).
+
+**⚠️ 실측 스키마** (처음 작성한 SQL 이 42703 으로 실패한 원인):
+`newsletter_subscribers(id, email, subscribed_at, source, is_active)` — `created_at` 없음,
+**UNIQUE 는 `email` 단독**(= `(source,email)` 아님)이라 구독자 dedupe 자체가 불필요.
+`newsletter_sends(…, sent_at)` 는 `UNIQUE(source, post_url)` 이라 dedupe 필요.
+
+### 7.3 배포
+
+`git push origin master` (`f2f1efe..fb2f5dc`) → Vercel Production 자동 빌드.

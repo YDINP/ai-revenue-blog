@@ -300,7 +300,9 @@ export async function coupangMessage() {
   const [s, rowsRaw] = await Promise.all([
     rpc('get_traffic_summary'),
     // 트래커 통일 전 인라인 링크는 affiliate_click 으로 기록 → 두 타입 모두 조회
-    restGet('analytics?or=(event_type.eq.coupang_click,event_type.eq.affiliate_click)&metadata->>__probe=is.null&select=metadata,source,created_at&order=created_at.desc&limit=200'),
+    // ⚠️ 소스 필터 필수. get_traffic_summary 의 총계는 살아 있는 소스(mg·vip)만 세는데
+    // 여기서 전 소스를 가져오면 "누적 0" 밑에 구 TF 클릭 12건이 나열돼 한 화면에서 숫자가 어긋난다.
+    restGet('analytics?or=(event_type.eq.coupang_click,event_type.eq.affiliate_click)&source=in.(mg,vip,playcast)&metadata->>__probe=is.null&select=metadata,source,created_at&order=created_at.desc&limit=200'),
   ]);
   const rows = (Array.isArray(rowsRaw) ? rowsRaw : [])
     .filter((r) => { const m = r.metadata || {}; return m.target === undefined || m.target === 'coupang'; })
