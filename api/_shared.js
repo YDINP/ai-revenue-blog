@@ -26,6 +26,33 @@ export function sourceLabel(source) {
   return SOURCE_META[source]?.label || source;
 }
 
+// ── KST 날짜 유틸 ──
+// 집계 기준일은 전부 KST 달력 날짜다. 서버(Vercel/GitHub Actions)는 UTC 로 돌기 때문에
+// new Date().toISOString() 을 그대로 쓰면 09시 이전에 하루가 밀린다.
+
+// offset일 전의 KST 날짜 문자열 (YYYY-MM-DD)
+export function kstDay(offsetDays = 0) {
+  return new Date(Date.now() + 9 * 3600 * 1000 - offsetDays * 86400000)
+    .toISOString()
+    .split('T')[0];
+}
+
+// KST 날짜 [00:00, 24:00) → UTC ISO 범위 (Supabase created_at 필터용)
+export function kstRange(day) {
+  const t0 = new Date(`${day}T00:00:00+09:00`).getTime();
+  return { start: new Date(t0).toISOString(), end: new Date(t0 + 86400000).toISOString() };
+}
+
+// 타임스탬프가 속한 KST 날짜
+export const kstDayOf = (ts) =>
+  new Date(new Date(ts).getTime() + 9 * 3600 * 1000).toISOString().split('T')[0];
+
+// day 의 offset일 전 KST 날짜 (day 기준 상대 이동)
+export const kstShift = (day, offsetDays) =>
+  new Date(new Date(`${day}T00:00:00+09:00`).getTime() - offsetDays * 86400000)
+    .toISOString()
+    .split('T')[0];
+
 export function escapeHtml(s) {
   return String(s ?? '')
     .replace(/&/g, '&amp;')

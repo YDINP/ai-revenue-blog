@@ -1,39 +1,36 @@
-// 전날(또는 지정일) 종합 리포트 — 조회수/방문자/신규 댓글/좋아요/쿠팡클릭
+// 전날(또는 지정일) 종합 리포트 — 뭉게(mungge.com) 기준
 // cron(daily-report.js) 과 봇 /report 명령이 공유
+//
+// 2026-07-30 재편성: TF·LF 는 mungge 로 301 통합돼 자체 조회가 한 자릿수로 떨어졌고,
+// 실제 트래픽은 전부 뭉게로 온다. 그런데 뭉게는 source=null(WP 직접 운영)이라 이 리포트에
+// 아예 안 잡혀서, 매일 아침 "조회수 3, 방문자 2" 같은 빈 사이트 수치만 오고 있었다.
+// → 본문은 뭉게 기준으로 세우고, TF/LF/VIP 잔존 활동은 맨 아래 '레거시' 한 블록으로 접는다.
+// 뭉게 수치의 두 소스와 이중계산 방지 원칙은 _mungge.js 주석 참조.
 
 import { blogList } from './_blogs.js';
 import { communityHot } from './_community.js';
 import { getFileJson } from './_github.js';
 import { gscReportLines } from './_gsc-view.js';
-import { SUPABASE_ANON_KEY, SUPABASE_URL, escapeHtml, postUrl } from './_shared.js';
+import { loadMungge, mgNaverIndex, mgPosts } from './_mungge.js';
+import { isSearch } from './_refs.js';
+import {
+  SUPABASE_ANON_KEY,
+  SUPABASE_URL,
+  escapeHtml,
+  kstDay,
+  kstRange,
+  kstShift,
+} from './_shared.js';
 
 const fmt = (n) => Number(n || 0).toLocaleString('en-US');
 const cut = (s, n) => (s = String(s || ''), s.length > n ? s.slice(0, n) + '…' : s);
 
-// RSS 제목의 엔티티를 먼저 풀어야 한다 (안 풀면 escapeHtml 을 거쳐 &amp;amp; 로 이중 인코딩)
-const decodeEntities = (s) =>
-  String(s)
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&apos;|&#39;/g, "'")
-    .replace(/&amp;/g, '&');
+// 레거시 블로그 source → 표시 약어
+const LEGACY_ABBR = { blog: 'TF', lifeflow: 'LF', playcast: 'VIP', vip: 'VIP' };
+const legacyAbbr = (s) => LEGACY_ABBR[s] || s || '?';
 
 // 홈페이지 조회는 사이트 제목으로 기록된다 → '홈' 으로 표시
-const postTitle = (t) => (/^(TechFlow|LifeFlow)/.test(t) ? '홈' : t);
-
-// KST 기준 날짜 문자열 (offset일 전)
-function kstDay(offsetDays = 0) {
-  const t = Date.now() + 9 * 3600 * 1000 - offsetDays * 86400000;
-  return new Date(t).toISOString().split('T')[0];
-}
-
-// KST 날짜 [00:00, 24:00) 을 UTC ISO 범위로
-function kstRange(day) {
-  const start = new Date(`${day}T00:00:00+09:00`).toISOString();
-  const end = new Date(new Date(`${day}T00:00:00+09:00`).getTime() + 86400000).toISOString();
-  return { start, end };
-}
+const postTitle = (t) => (/^(TechFlow|LifeFlow|뭉게)/.test(t) ? '홈' : t);
 
 async function rest(query) {
   const r = await fetch(`${SUPABASE_URL}/rest/v1/${query}`, {
@@ -43,59 +40,6 @@ async function rest(query) {
   return r.json();
 }
 
-// 유입 경로 분류 — 수익형 블로그에선 검색 유입이 핵심 지표
-const REF_RULES = [
-  [/google\./i, '구글 검색'],
-  [/naver\./i, '네이버 검색'],
-  [/daum\.|search\.daum/i, '다음 검색'],
-  [/bing\.|duckduckgo|yahoo/i, '기타 검색'],
-  [/facebook|instagram|threads|twitter|x\.com|t\.co|linkedin|reddit/i, 'SNS'],
-  [/kakao|band\.us/i, '카카오/밴드'],
-];
-
-// 빈 referrer 를 user_agent 로 재분류 — 메신저/SNS 인앱브라우저는 referrer 를 안 넘겨
-// 전부 '직접'으로 뭉치므로 UA 시그니처로 인앱 채널을 분리한다.
-function classifyInAppRef(ua) {
-  const u = String(ua || '');
-  if (/KAKAOTALK/i.test(u)) return '카카오톡 인앱';
-  if (/Instagram/i.test(u)) return 'Instagram 인앱';
-  if (/FBAN|FBAV|FB_IAB/i.test(u)) return 'Facebook 인앱';
-  if (/Line\//i.test(u)) return 'LINE 인앱';
-  if (/NAVER\(inapp/i.test(u)) return 'Naver 앱';
-  if (/DaumApps|DaumDevice/i.test(u)) return 'Daum 앱';
-  if (/BAND\//i.test(u)) return 'Band 인앱';
-  if (/Threads/i.test(u)) return 'Threads 인앱';
-  // 참조 없음 + 알려진 인앱 아님 → WebView 시그니처면 '앱 내(무참조)', 아니면 '직접/북마크'
-  if (/;\s?wv\)/.test(u) || (/(iPhone|iPad)/.test(u) && /Mobile\//.test(u) && !/Safari/.test(u))) return '앱 내(무참조)';
-  return '직접/북마크';
-}
-
-// 분류 우선순위: UTM > referrer 호스트 > (빈 referrer)UA 인앱감지 > 직접
-function classifyRef(referrer, ua, utm) {
-  if (utm) {
-    const s = String(utm).toLowerCase();
-    if (/google/.test(s)) return '구글 검색';
-    if (/naver/.test(s)) return '네이버 검색';
-    if (/daum/.test(s)) return '다음 검색';
-    if (/bing|yahoo|duckduckgo/.test(s)) return '기타 검색';
-    if (/kakao|band/.test(s)) return '카카오/밴드';
-    if (/facebook|instagram|threads|twitter|line|linkedin|reddit/.test(s)) return 'SNS';
-    return `기타(${utm})`;
-  }
-  const r = String(referrer || '').trim();
-  if (!r || r === 'direct') return classifyInAppRef(ua);
-  for (const [re, label] of REF_RULES) if (re.test(r)) return label;
-  try {
-    const host = new URL(r).hostname.replace(/^www\./, '');
-    if (/(ai-revenue-blog|life-revenue-blog)\.vercel\.app/.test(host)) return '사이트 내 이동';
-    return `기타(${host})`;
-  } catch {
-    return '기타';
-  }
-}
-
-const isSearch = (label) => /검색$/.test(label);
-
 function delta(cur, prev) {
   const c = Number(cur || 0), p = Number(prev || 0);
   if (p === 0) return c > 0 ? ` (<b>+${fmt(c)}</b>)` : '';
@@ -104,8 +48,9 @@ function delta(cur, prev) {
   return pct > 0 ? ` (전일 대비 ▲${pct}%)` : ` (전일 대비 ▼${Math.abs(pct)}%)`;
 }
 
-// 하루치 원자료 → 집계
-async function collect(day) {
+// ── 레거시(TF·LF·VIP) 하루치 — 자체 트래커 이벤트 ──
+// 뭉게 이전의 자산이라 조회수는 이제 잔존값이지만, 댓글·좋아요·쿠팡클릭은 아직 여기에만 있다.
+async function collectLegacy(day) {
   const { start, end } = kstRange(day);
   const range = `created_at=gte.${start}&created_at=lt.${end}`;
 
@@ -118,84 +63,44 @@ async function collect(day) {
     ),
   ]);
 
-  const uas = new Set();
-  const byPost = {};
-  const refs = {};        // 유입 경로별 조회수
-  let tf = 0, lf = 0;
+  // 이전에는 'lifeflow 가 아니면 전부 TF' 로 셌다 → VIP(playcast) 조회가 TF 로 흡수돼
+  // "TF 에 아직 트래픽이 있다"로 오독됐다. source 를 그대로 집계한다.
+  // 유입경로·방문자 분해는 뭉게 블록에서만 낸다 — 레거시는 잔존 규모만 알면 되므로 총량만 센다.
+  const bySrc = {};
   (pv || []).forEach((r) => {
-    const m = r.metadata || {};
-    if (m.user_agent) uas.add(m.user_agent);
-    if (r.source === 'lifeflow') lf++; else tf++;
-    const title = m.title && m.title !== 'null'
-      ? String(m.title).split(' | ')[0].split(' - ')[0]
-      : decodeURIComponent(m.slug || m.path || '홈');
-    const key = `${r.source === 'lifeflow' ? 'LF' : 'TF'}|${title}`;
-    byPost[key] = (byPost[key] || 0) + 1;
-    const c = classifyRef(m.referrer, m.user_agent, m.utm_source);
-    refs[c] = (refs[c] || 0) + 1;
+    const k = legacyAbbr(r.source);
+    bySrc[k] = (bySrc[k] || 0) + 1;
   });
 
   return {
     day,
     views: (pv || []).length,
-    tfViews: tf,
-    lfViews: lf,
-    visitors: uas.size,
-    refs,
-    byPostMap: byPost,
+    bySrc,
     comments: (comments || []).filter((c) => !c.is_admin),
     likes: (likes || []).length,
     clicks: (clicks || []).filter((c) => {
       const m = c.metadata || {};
       return m.target === undefined || m.target === 'coupang';
     }),
-    topPosts: Object.entries(byPost).sort((a, b) => b[1] - a[1]).slice(0, 5),
   };
 }
 
-// ── 어제 발행된 글 (블로그 RSS 의 pubDate 기준) ──
-async function newPosts(day) {
-  const jobs = blogList()
-    .filter((b) => b.source)
-    .map(async (b) => {
-      try {
-        const r = await fetch(`${b.site}/rss.xml`, { signal: AbortSignal.timeout(6000) });
-        if (!r.ok) return [];
-        const xml = await r.text();
-        return [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)]
-          .map((m) => {
-            const t = m[1].match(/<title>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/title>/);
-            const d = m[1].match(/<pubDate>([^<]+)<\/pubDate>/);
-            if (!t || !d) return null;
-            const at = new Date(d[1]);
-            if (isNaN(at)) return null;
-            // KST 날짜로 환산해 비교
-            const kst = new Date(at.getTime() + 9 * 3600 * 1000).toISOString().split('T')[0];
-            return kst === day
-              ? { src: b.source === 'lifeflow' ? 'LF' : 'TF', title: decodeEntities(t[1].trim()) }
-              : null;
-          })
-          .filter(Boolean);
-      } catch {
-        return [];
-      }
-    });
-  return (await Promise.all(jobs)).flat();
-}
-
-// ── 전일 대비 급상승/급락 글 ──
-function movers(cur, prev, minViews = 3) {
-  const keys = new Set([...Object.keys(cur.byPostMap), ...Object.keys(prev.byPostMap)]);
+// ── 전일 대비 급상승/급락 글 (뭉게 기준) ──
+function movers(curPages, prevPages, minViews = 3) {
+  const cur = {}, prev = {};
+  curPages.forEach((p) => (cur[p.path] = { views: p.views, title: p.title }));
+  prevPages.forEach((p) => (prev[p.path] = { views: p.views, title: p.title }));
   const rows = [];
-  for (const k of keys) {
-    const c = cur.byPostMap[k] || 0;
-    const p = prev.byPostMap[k] || 0;
-    if (Math.max(c, p) < minViews) continue;      // 표본이 너무 작으면 노이즈
-    rows.push({ key: k, cur: c, prev: p, diff: c - p });
+  for (const path of new Set([...Object.keys(cur), ...Object.keys(prev)])) {
+    const c = cur[path]?.views || 0;
+    const p = prev[path]?.views || 0;
+    if (Math.max(c, p) < minViews) continue;        // 표본이 너무 작으면 노이즈
+    rows.push({ title: cur[path]?.title || prev[path]?.title || path, cur: c, prev: p, diff: c - p });
   }
-  const up = rows.filter((r) => r.diff > 0).sort((a, b) => b.diff - a.diff).slice(0, 2);
-  const down = rows.filter((r) => r.diff < 0).sort((a, b) => a.diff - b.diff).slice(0, 2);
-  return { up, down };
+  return {
+    up: rows.filter((r) => r.diff > 0).sort((a, b) => b.diff - a.diff).slice(0, 2),
+    down: rows.filter((r) => r.diff < 0).sort((a, b) => a.diff - b.diff).slice(0, 2),
+  };
 }
 
 // ── 네이버 색인 (로컬 측정치) ──
@@ -204,40 +109,22 @@ function movers(cur, prev, minViews = 3) {
 // scripts/naver-index-check.mjs 가 하고, 결과를 analytics(event_type=naver_index)에 남긴다.
 // 여기서는 그 최신치를 읽어 리포트에 붙이기만 한다.
 // → 값이 오래됐으면 "색인이 안 늘었다"가 아니라 "측정이 안 돌았다"이므로 반드시 구분해 표기한다.
-async function naverIndexLines() {
-  const rows = await rest(
-    'analytics?event_type=eq.naver_index&metadata->>__probe=is.null' +
-      '&select=source,metadata,created_at&order=created_at.desc&limit=60'
-  );
-  if (!rows.length) return [];
+function naverIndexLines(idx) {
+  if (!idx?.cur) return [];
+  const { cur, prev } = idx;
+  const indexed = Number(cur.indexed || 0);
+  const total = Number(cur.sitemap || 0);
+  const rate = total ? ((indexed / total) * 100).toFixed(1) : '0.0';
+  const d = prev ? indexed - Number(prev.indexed || 0) : null;
+  const dTxt = d === null ? '' : ` (전회 ${d >= 0 ? '+' : ''}${d})`;
+  const out = ['', `<b>네이버 색인</b> — <b>${fmt(indexed)}</b>/${fmt(total)} (${rate}%)${dTxt}`];
 
-  // 사이트별로 최신 2건(측정일 기준)만 남겨 전회 대비 증감을 낸다
-  const bySite = new Map();
-  for (const r of rows) {
-    const site = r.metadata?.site || r.source || '?';
-    const day = String(r.metadata?.date || r.created_at).slice(0, 10);
-    const list = bySite.get(site) || [];
-    if (list.some((x) => x.day === day)) continue;      // 같은 날 재측정은 최신 1건만
-    if (list.length < 2) list.push({ day, ...r.metadata, at: r.created_at });
-    bySite.set(site, list);
+  const ageH = (Date.now() - new Date(cur.at).getTime()) / 3600000;
+  if (ageH > 48) {
+    out.push(`  ⚠️ 마지막 측정 ${Math.floor(ageH / 24)}일 전 — 로컬 측정 스크립트가 안 돌고 있습니다`);
   }
-
-  const out = ['', '<b>네이버 색인</b>'];
-  for (const [site, [cur, prevRow]] of bySite) {
-    const indexed = Number(cur.indexed || 0);
-    const total = Number(cur.sitemap || 0);
-    const rate = total ? ((indexed / total) * 100).toFixed(1) : '0.0';
-    const d = prevRow ? indexed - Number(prevRow.indexed || 0) : null;
-    const dTxt = d === null ? '' : ` (전회 ${d >= 0 ? '+' : ''}${d})`;
-    out.push(`· ${escapeHtml(site)} — <b>${fmt(indexed)}</b>/${fmt(total)} (${rate}%)${dTxt}`);
-
-    const ageH = (Date.now() - new Date(cur.at).getTime()) / 3600000;
-    if (ageH > 48) {
-      out.push(`  ⚠️ 마지막 측정 ${Math.floor(ageH / 24)}일 전 — 로컬 측정 스크립트가 안 돌고 있습니다`);
-    }
-    if (cur.blocked) out.push('  ⚠️ 측정 시 네이버 자동접근 차단(보안문자) — 수치 신뢰 불가');
-  }
-  return out.length > 2 ? out : [];
+  if (cur.blocked) out.push('  ⚠️ 측정 시 네이버 자동접근 차단(보안문자) — 수치 신뢰 불가');
+  return out;
 }
 
 // ── 오늘 쓸 만한 소재 (커뮤니티 실시간 화제) ──
@@ -258,47 +145,114 @@ async function todaysTopics() {
 
 export async function reportMessage(dayArg) {
   const day = dayArg || kstDay(1);                      // 기본 = 어제(KST)
-  const prevDay = new Date(new Date(`${day}T00:00:00+09:00`).getTime() - 86400000)
-    .toISOString()
-    .split('T')[0];
+  const prevDay = kstShift(day, 1);
 
-  const [cur, prev, fresh, topics, gscLines, naverLines] = await Promise.all([
-    collect(day),
-    collect(prevDay),
-    newPosts(day),
+  const [mg, legacy, prevLegacy, posts, naver, topics, gscLines] = await Promise.all([
+    loadMungge(prevDay, day),
+    collectLegacy(day),
+    collectLegacy(prevDay),
+    mgPosts(),
+    mgNaverIndex(),
     todaysTopics().catch(() => []),
     gscReportLines().catch(() => []),   // Search Console 미연동이면 빈 배열
-    naverIndexLines().catch(() => []),  // 로컬 측정치가 없으면 빈 배열
   ]);
+
+  const cur = mg.stats(day);
+  const prev = mg.stats(prevDay);
+  const curPages = mg.topPages(day, 30);
+  const prevPages = mg.topPages(prevDay, 30);
 
   // day 는 이미 KST 달력 날짜(YYYY-MM-DD)이므로 UTC 자정으로 파싱해 getUTCDay 로 요일을 뽑는다.
   // getDay()/+09:00 조합은 서버 로컬 TZ(UTC 러너)에서 하루 밀림 → 07-13(월)이 일요일로 표기됐음.
   const wd = ['일', '월', '화', '수', '목', '금', '토'][new Date(`${day}T00:00:00Z`).getUTCDay()];
+  const engRate = cur.sessions ? Math.round((cur.engaged / cur.sessions) * 100) : 0;
+
   const lines = [
     `📊 <b>일일 리포트</b> — ${day} (${wd})`,
+    `🌐 <b>뭉게</b> (mungge.com)`,
     '',
     `👁 조회수 <b>${fmt(cur.views)}</b>${delta(cur.views, prev.views)}`,
-    `    TF ${fmt(cur.tfViews)} · LF ${fmt(cur.lfViews)}`,
-    `🧑 방문자 <b>${fmt(cur.visitors)}</b>${delta(cur.visitors, prev.visitors)}`,
-    `💬 신규 댓글 <b>${fmt(cur.comments.length)}</b>${delta(cur.comments.length, prev.comments.length)}`,
-    `❤️ 신규 좋아요 <b>${fmt(cur.likes)}</b>${delta(cur.likes, prev.likes)}`,
-    `🛒 쿠팡 클릭 <b>${fmt(cur.clicks.length)}</b>${delta(cur.clicks.length, prev.clicks.length)}`,
+    `🧑 방문자 <b>${fmt(cur.users)}</b>${delta(cur.users, prev.users)}`,
   ];
+  // 세션·참여율은 GA4 만 주는 지표 — 폴백 날에는 0 이므로 아예 빼는 게 정확하다.
+  // 참여세션은 동기화 시점에 따라 아직 0 으로 들어오는 날이 있어(예: 07-29) 0 이면 생략한다
+  // — '참여율 0%' 로 찍으면 체류가 전멸한 것처럼 읽힌다.
+  if (!cur.live) {
+    lines.push(
+      `📈 세션 <b>${fmt(cur.sessions)}</b>` +
+        (cur.engaged ? ` · 참여 ${fmt(cur.engaged)} (참여율 ${engRate}%)` : '')
+    );
+  }
+  if (posts.total) lines.push(`📝 전체 글 <b>${fmt(posts.total)}</b>편`);
+  lines.push(
+    cur.live
+      ? '<i>※ GA4 배치 전 — 자체 트래커 실시간 집계 기준</i>'
+      : `<i>※ GA4 배치 기준${mg.syncedLabel() ? ` (${mg.syncedLabel()} KST 동기화)` : ''}</i>`
+  );
 
   // ── 유입 경로 (검색 유입이 핵심) ──
-  const refEntries = Object.entries(cur.refs || {}).sort((a, b) => b[1] - a[1]);
+  //
+  // ⚠️ GA4 기본 채널그룹은 네이버를 Referral 로 분류한다 → Organic Search 만 세면
+  // 검색 유입이 과소집계된다. 소스 호스트 기준으로 재분류한 값을 쓴다(_refs.js).
+  const { refs, internal, unit } = mg.refs(day);
+  const prevRefs = mg.refs(prevDay).refs;
+  const refEntries = Object.entries(refs).sort((a, b) => b[1] - a[1]);
   if (refEntries.length) {
+    const base = refEntries.reduce((s, [, n]) => s + n, 0);
     const searchCur = refEntries.filter(([l]) => isSearch(l)).reduce((s, [, n]) => s + n, 0);
-    const searchPrev = Object.entries(prev.refs || {})
+    const searchPrev = Object.entries(prevRefs)
       .filter(([l]) => isSearch(l))
       .reduce((s, [, n]) => s + n, 0);
-    const pct = (n) => (cur.views ? Math.round((n / cur.views) * 100) : 0);
+    const pct = (n) => (base ? Math.round((n / base) * 100) : 0);
     lines.push(
       '',
-      `<b>유입 경로</b> — 검색 <b>${fmt(searchCur)}</b> (${pct(searchCur)}%)${delta(searchCur, searchPrev)}`
+      `<b>유입 경로</b> (${unit === 'sessions' ? '세션' : '조회'} 기준) — 검색 <b>${fmt(searchCur)}</b> (${pct(searchCur)}%)${delta(searchCur, searchPrev)}`
     );
-    refEntries.slice(0, 5).forEach(([label, n]) =>
+    refEntries.slice(0, 6).forEach(([label, n]) =>
       lines.push(`· ${escapeHtml(label)} ${fmt(n)} (${pct(n)}%)`)
+    );
+    // 내부 이동은 유입이 아니라 분모에서 뺐다 → 뺀 사실과 크기를 밝힌다(회유 지표로도 유용)
+    if (internal) lines.push(`<i>+ 사이트 내 이동 ${fmt(internal)} (유입 집계 제외)</i>`);
+  }
+
+  // GA4 가 스스로 어떻게 분류했는지도 한 줄 남긴다 — 위 수치와 어긋나면 네이버 보정 때문이다
+  const ch = mg.channels(day);
+  if (ch.length) {
+    lines.push(
+      `<i>GA4 채널: ${ch.slice(0, 5).map((c) => `${escapeHtml(c.label)} ${fmt(c.sessions)}`).join(' · ')}</i>`
+    );
+  }
+
+  // ── 인기 글 ──
+  if (curPages.length) {
+    lines.push('', '<b>인기 글 TOP</b>');
+    curPages.slice(0, 5).forEach((p, i) =>
+      lines.push(`${i + 1}. ${escapeHtml(cut(postTitle(p.title), 34))} — ${fmt(p.views)}`)
+    );
+  }
+
+  // ── 어제 발행한 글 + 초기 성과 ──
+  const fresh = (posts.recent || []).filter((p) => p.day === day);
+  if (fresh.length) {
+    const withViews = fresh
+      .map((p) => ({ ...p, views: mg.viewsOfPath(day, p.path) }))
+      .sort((a, b) => b.views - a.views);
+    lines.push('', `<b>새로 발행한 글</b> ${withViews.length}편`);
+    withViews.slice(0, 5).forEach((p) =>
+      lines.push(`· ${escapeHtml(cut(p.title, 34))} — 조회 ${fmt(p.views)}`)
+    );
+    if (withViews.length > 5) lines.push(`  …외 ${withViews.length - 5}편`);
+  }
+
+  // ── 급상승 / 급락 ──
+  const mv = movers(curPages, prevPages);
+  if (mv.up.length || mv.down.length) {
+    lines.push('', '<b>전일 대비 변화</b>');
+    mv.up.forEach((r) =>
+      lines.push(`▲ ${escapeHtml(cut(postTitle(r.title), 30))} ${fmt(r.prev)}→<b>${fmt(r.cur)}</b>`)
+    );
+    mv.down.forEach((r) =>
+      lines.push(`▼ ${escapeHtml(cut(postTitle(r.title), 30))} ${fmt(r.prev)}→<b>${fmt(r.cur)}</b>`)
     );
   }
 
@@ -306,69 +260,47 @@ export async function reportMessage(dayArg) {
   lines.push(...gscLines);
 
   // ── 네이버 색인 (구글 옆에 붙여야 "어느 쪽이 막혔는지"가 한눈에 보인다) ──
-  lines.push(...naverLines);
+  lines.push(...naverIndexLines(naver));
 
-  if (cur.topPosts.length) {
-    lines.push('', '<b>인기 글 TOP</b>');
-    cur.topPosts.forEach(([key, n], i) => {
-      const [src, title] = key.split('|');
-      lines.push(`${i + 1}. [${src}] ${escapeHtml(cut(postTitle(title), 32))} — ${fmt(n)}`);
-    });
-  }
-
-  // ── 어제 발행한 글 + 초기 성과 (조회 많은 순, 많으면 접어서) ──
-  if (fresh.length) {
-    const withViews = fresh
-      .map((p) => ({
-        ...p,
-        views: cur.byPostMap[`${p.src}|${p.title.split(' | ')[0].split(' - ')[0]}`] || 0,
-      }))
-      .sort((a, b) => b.views - a.views);
-    lines.push('', `<b>새로 발행한 글</b> ${withViews.length}개`);
-    withViews.slice(0, 5).forEach((p) =>
-      lines.push(`· [${p.src}] ${escapeHtml(cut(p.title, 34))} — 조회 ${fmt(p.views)}`)
-    );
-    if (withViews.length > 5) lines.push(`  …외 ${withViews.length - 5}개`);
-  }
-
-  // ── 급상승 / 급락 ──
-  const mv = movers(cur, prev);
-  if (mv.up.length || mv.down.length) {
-    lines.push('', '<b>전일 대비 변화</b>');
-    mv.up.forEach((r) => {
-      const [src, title] = r.key.split('|');
-      lines.push(`▲ [${src}] ${escapeHtml(cut(postTitle(title), 28))} ${fmt(r.prev)}→<b>${fmt(r.cur)}</b>`);
-    });
-    mv.down.forEach((r) => {
-      const [src, title] = r.key.split('|');
-      lines.push(`▼ [${src}] ${escapeHtml(cut(postTitle(title), 28))} ${fmt(r.prev)}→<b>${fmt(r.cur)}</b>`);
-    });
-  }
-
-  if (cur.comments.length) {
-    lines.push('', '<b>새 댓글</b>');
-    cur.comments.slice(0, 5).forEach((c) => {
-      const src = c.source === 'lifeflow' ? 'LF' : 'TF';
-      lines.push(`· [${src}] <b>${escapeHtml(c.nickname)}</b>: ${escapeHtml(cut(c.content, 40))}`);
-    });
-    if (cur.comments.length > 5) lines.push(`  …외 ${cur.comments.length - 5}개 (<code>/comments</code>)`);
-  }
-
-  if (cur.clicks.length) {
-    lines.push('', '<b>쿠팡 클릭 상품</b>');
-    const by = {};
-    cur.clicks.forEach((c) => {
-      const m = c.metadata || {};
-      const p = m.product || m.label || '(상품 미상)';
-      by[p] = (by[p] || 0) + 1;
-    });
-    Object.entries(by)
+  // ── 레거시 (TF·LF·VIP → 뭉게 301) ──
+  // 조회는 잔존값이라 한 줄로 접고, 댓글·좋아요·쿠팡클릭은 아직 여기에만 있으므로 살려 둔다.
+  const legacyActive =
+    legacy.views || legacy.comments.length || legacy.likes || legacy.clicks.length;
+  if (legacyActive) {
+    const srcTxt = Object.entries(legacy.bySrc)
       .sort((a, b) => b[1] - a[1])
-      .slice(0, 5)
-      .forEach(([p, n]) => lines.push(`· ${escapeHtml(cut(p, 34))} — ${fmt(n)}`));
+      .map(([k, n]) => `${k} ${fmt(n)}`)
+      .join(' · ');
+    lines.push(
+      '',
+      '<b>레거시</b> <i>(TF·LF·VIP → 뭉게 301)</i>',
+      `👁 조회 ${fmt(legacy.views)}${srcTxt ? ` (${srcTxt})` : ''}${delta(legacy.views, prevLegacy.views)}`,
+      `💬 댓글 ${fmt(legacy.comments.length)} · ❤️ 좋아요 ${fmt(legacy.likes)} · 🛒 쿠팡클릭 ${fmt(legacy.clicks.length)}`
+    );
+
+    if (legacy.comments.length) {
+      legacy.comments.slice(0, 3).forEach((c) =>
+        lines.push(`  💬 [${legacyAbbr(c.source)}] <b>${escapeHtml(c.nickname)}</b>: ${escapeHtml(cut(c.content, 34))}`)
+      );
+      if (legacy.comments.length > 3) {
+        lines.push(`  …외 ${legacy.comments.length - 3}개 (<code>/comments</code>)`);
+      }
+    }
+    if (legacy.clicks.length) {
+      const by = {};
+      legacy.clicks.forEach((c) => {
+        const m = c.metadata || {};
+        const p = m.product || m.label || '(상품 미상)';
+        by[p] = (by[p] || 0) + 1;
+      });
+      Object.entries(by)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3)
+        .forEach(([p, n]) => lines.push(`  🛒 ${escapeHtml(cut(p, 32))} — ${fmt(n)}`));
+    }
   }
 
-  if (!cur.views && !cur.comments.length && !cur.clicks.length) {
+  if (!cur.views && !legacyActive) {
     lines.push('', '<i>해당 날짜의 활동 데이터가 없습니다.</i>');
   }
 
@@ -381,5 +313,3 @@ export async function reportMessage(dayArg) {
 
   return lines.join('\n');
 }
-
-export { kstDay };

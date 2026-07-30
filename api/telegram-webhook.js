@@ -6,6 +6,7 @@ import {
   commentStatsMessage,
   commentsMessages,
   coupangMessage,
+  munggeMessage,
   paperdocMessage,
   likesMessage,
   recentMessage,
@@ -53,17 +54,22 @@ import {
 const UUID_RE = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
 
 const HELP = [
-  '<b>블로그 운영 봇</b>',
+  '<b>블로그 운영 봇</b> — 기준 사이트: <b>뭉게</b>(mungge.com)',
   '',
   '<b>📊 대시보드 조회 (실시간)</b>',
-  '• /stats — 전체 요약 (조회·클릭·좋아요·구독·댓글)',
+  '• /stats — 전체 요약 (뭉게 조회·방문·검색유입 + 구독·댓글)',
+  '• /mg [일수] — 뭉게 상세 (일별 추이·유입경로·인기글·최근발행, 기본 7일)',
   '• /report [YYYY-MM-DD] — 일일 종합 리포트 (기본 어제, 매일 09시 자동 발송)',
-  '• /newsletter [force] — 새 글 뉴스레터 수동 발송 (force=이미 보낸 글도 재발송)',
   '• /gsc [일수] — 구글 검색 유입 (검색어·노출·CTR·평균순위, 기본 7일)',
-  '• /tf · /lf — TechFlow / LifeFlow 소스별 요약',
+  '• /top [n] — 인기 글 (뭉게 최근 30일)',
+  '• /trend — 최근 7일 조회수 추이',
+  '• /newsletter [force] — 새 글 뉴스레터 수동 발송 (force=이미 보낸 글도 재발송)',
+  '',
+  '<b>🕗 레거시</b> <i>(TF·LF·VIP → 뭉게 301 이관, 잔존 트래픽)</i>',
+  '• /tf · /lf — TechFlow / LifeFlow 잔존 요약',
   '• /coupang — 쿠팡 클릭 상세 (어떤 글→어떤 링크)',
-  '• /paperdoc — 페이퍼닥 클릭 (블로그별 TF·LF·GF, 위치별)',
-  '• /top [n] · /trend · /likes · /recent [n]',
+  '• /paperdoc — 페이퍼닥 클릭 (블로그별·위치별)',
+  '• /likes · /recent [n] — 추천 Top · 최근 이벤트 피드',
   '',
   '<b>💬 댓글 관리</b>',
   '• /comments [n] — 최근 댓글 (각 메시지에 답장=대댓글)',
@@ -430,6 +436,9 @@ export default async function handler(req, res) {
       const num = cmdMatch[2] ? parseInt(cmdMatch[2], 10) : undefined;
       const VIEWS = {
         stats: () => statsMessage(),
+        // 뭉게 = 기준 사이트. /tf·/lf 는 301 이관된 레거시 잔존 조회.
+        mg: () => munggeMessage(num ?? 7),
+        mungge: () => munggeMessage(num ?? 7),
         tf: () => sourceMessage('blog'),
         lf: () => sourceMessage('lifeflow'),
         top: () => topPagesMessage(num ?? 10),
