@@ -1,11 +1,11 @@
 // 실데이터로 /generate 핫 키워드 후보를 확인 (GITHUB_TOKEN 필요)
-// 실행: GITHUB_TOKEN=$(gh auth token) node scripts/check-hot-keywords.mjs [tf|lf]
+// 실행: GITHUB_TOKEN=$(gh auth token) node scripts/check-hot-keywords.mjs [mg|pc]
 
 import { resolveBlog } from '../api/_blogs.js';
 import { communityHot } from '../api/_community.js';
 import { hotKeywords } from '../api/_trends.js';
 
-const blog = resolveBlog(process.argv[2] || 'tf');
+const blog = resolveBlog(process.argv[2] || 'mg');
 
 const { getFileJson } = await import('../api/_github.js');
 const seeds = await getFileJson(blog, 'scripts/category-seeds.json').catch(() => null);

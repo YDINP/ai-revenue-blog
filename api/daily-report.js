@@ -109,7 +109,10 @@ export default async function handler(req, res) {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     if (req.method === 'OPTIONS') { res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); return res.status(204).end(); }
     const email = (url.searchParams.get('email') || '').trim().toLowerCase();
-    const source = url.searchParams.get('source') === 'lifeflow' ? 'lifeflow' : 'blog';
+    // 구독 소스는 뭉게('mg')와 VIP('playcast') 둘뿐이다. blog/lifeflow 로 오는 요청은
+    // 캐시된 구 위젯 스크립트 — 죽은 소스로 쌓이면 발송 대상에서 빠지므로 mg 로 접수한다.
+    const rawSrc = url.searchParams.get('source');
+    const source = rawSrc === 'playcast' || rawSrc === 'vip' ? 'playcast' : 'mg';
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return res.status(400).json({ ok: false, error: 'invalid email' });
     try {
       const enc = encodeURIComponent(email);

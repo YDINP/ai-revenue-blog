@@ -61,7 +61,10 @@ export function setDraft(md, value) {
 }
 
 // ── Contents API ──
+// 글 목록 — 콘텐츠 repo 전용이다. 뭉게(WordPress)는 repo 가 없으므로 명시적으로 거부한다.
+// generatorRepo 로 폴백하면 이관 전 Astro 마크다운(정지된 자료)을 현재 글로 보여 준다.
 export async function listPosts(blog, limit = 10) {
+  if (!blog.repo) throw new Error(`${blog.label} 은 GitHub 글 목록이 없습니다 (WordPress 직접 운영)`);
   const files = await gh(
     `/repos/${blog.repo}/contents/${blog.contentDir}?ref=${blog.branch}`
   );
@@ -80,8 +83,14 @@ export async function getPost(blog, slug) {
 }
 
 // 레포의 임의 JSON 파일 읽기 (category-seeds.json 등)
+// 설정 파일(scripts/category-seeds.json 등) 읽기.
+// ⚠️ 콘텐츠(글)와 달리 이건 파이프라인 설정이므로 generatorRepo 를 폴백으로 허용한다 —
+// 뭉게는 콘텐츠 repo 가 없지만(WordPress) 시드 파일은 생성 워크플로 레포에 있다.
 export async function getFileJson(blog, path) {
-  const f = await gh(`/repos/${blog.repo}/contents/${encodeURI(path)}?ref=${blog.branch}`);
+  const repo = blog.repo || blog.generatorRepo;
+  const ref = blog.repo ? blog.branch : (blog.generatorRef || 'master');
+  if (!repo) throw new Error(`${blog.label} 은 연결된 GitHub 레포가 없습니다`);
+  const f = await gh(`/repos/${repo}/contents/${encodeURI(path)}?ref=${ref}`);
   if (!f?.content) throw new Error('파일 없음: ' + path);
   return JSON.parse(b64decode(f.content.replace(/\n/g, '')));
 }
@@ -110,11 +119,15 @@ export async function deletePost(blog, path, sha, message) {
 // 시킨다 → dispatch 가 422 로 실패. 이때는 자동으로 다시 켜고 한 번 재시도한다.
 export async function dispatchGenerator(blog, inputs = {}) {
   if (!blog.generator) throw new Error(`${blog.label} 은 자동 포스팅 워크플로가 없습니다`);
-  const path = `/repos/${blog.repo}/actions/workflows/${blog.generator}`;
+  // 워크플로가 사는 레포는 콘텐츠 레포와 다를 수 있다 — 뭉게는 콘텐츠가 WordPress 라
+  // repo=null 이지만 생성 워크플로는 ai-revenue-blog 에 있다(_blogs.js generatorRepo).
+  const repo = blog.generatorRepo || blog.repo;
+  const ref = blog.generatorRef || blog.branch;
+  const path = `/repos/${repo}/actions/workflows/${blog.generator}`;
   const send = () =>
     gh(`${path}/dispatches`, {
       method: 'POST',
-      body: JSON.stringify({ ref: blog.branch, inputs }),
+      body: JSON.stringify({ ref, inputs }),
     });
   try {
     await send();
@@ -143,7 +156,7 @@ export async function dispatchWorkflow(repo, workflow, ref, inputs = {}) {
 export async function latestRun(blog) {
   if (!blog.generator) return null;
   const d = await gh(
-    `/repos/${blog.repo}/actions/workflows/${blog.generator}/runs?per_page=1`
+    `/repos/${blog.generatorRepo || blog.repo}/actions/workflows/${blog.generator}/runs?per_page=1`
   );
   const run = d?.workflow_runs?.[0];
   return run

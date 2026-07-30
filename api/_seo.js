@@ -30,7 +30,7 @@ export async function submitIndexNow(blog, urls) {
 // /index <blog> [slug]  — slug 없으면 최근 글 10개 + 홈/목록
 export async function indexMessage(blogArg, slug) {
   const blog = resolveBlog(blogArg);
-  if (!blog) throw new Error('블로그를 지정하세요: <code>tf</code> / <code>lf</code>');
+  if (!blog) throw new Error('블로그를 지정하세요: <code>mg</code>(뭉게) / <code>pc</code>(VIP)');
   if (!blog.indexNowKey) throw new Error(`${escapeHtml(blog.label)} 은 IndexNow 미설정`);
 
   let urls;

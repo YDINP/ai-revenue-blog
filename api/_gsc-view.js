@@ -9,7 +9,7 @@ const cut = (s, n) => (s = String(s || ''), s.length > n ? s.slice(0, n) + '…'
 const pct = (v) => `${(Number(v || 0) * 100).toFixed(1)}%`;
 const pos = (v) => Number(v || 0).toFixed(1);
 
-// 뭉게가 본 사이트다(TF·LF 는 301 이관) → 항상 먼저 나오게 정렬한다
+// 뭉게가 본 사이트다(TF·LF 는 301 이관 후 레지스트리에서 삭제) → 항상 먼저 나오게 정렬한다
 const gscBlogs = () =>
   blogList()
     .filter((b) => b.gscSite)
@@ -136,7 +136,7 @@ export async function seoMessage(days = 28) {
 //
 // 뭉게는 노출 0 이어도 반드시 한 줄 낸다 — 이관 직후엔 "0" 자체가 핵심 신호(구글이 아직 새
 // 도메인을 모른다)인데, 활동 없는 사이트처럼 건너뛰면 리포트에서 그 사실이 사라진다.
-// 레거시(TF·LF·VIP)는 잔존 노출이 있을 때만 한 줄로 접는다.
+// VIP(playcast)는 별개 사이트라 노출이 있을 때만 한 줄 붙인다.
 export async function gscReportLines() {
   if (!hasGsc()) return [];
   const end = gscDay(3);
@@ -145,7 +145,7 @@ export async function gscReportLines() {
   const prevStart = gscDay(16);      // 직전 7일
 
   const main = [];
-  const legacy = [];
+  const others = [];
   for (const b of gscBlogs()) {
     const isMg = b.key === 'mg';
     try {
@@ -164,7 +164,7 @@ export async function gscReportLines() {
       )} · 평균순위 ${pos(cur.position)}`;
 
       if (!isMg) {
-        legacy.push(`  <i>${escapeHtml(shortLabel(b))} — 클릭 ${fmt(cur.clicks)} · 노출 ${fmt(cur.impressions)}</i>`);
+        others.push(`  <i>${escapeHtml(shortLabel(b))} — 클릭 ${fmt(cur.clicks)} · 노출 ${fmt(cur.impressions)}</i>`);
         continue;
       }
       main.push(head);
@@ -177,11 +177,11 @@ export async function gscReportLines() {
       }
     } catch (e) {
       if (isMg) main.push(`⚠️ ${escapeHtml(e.message)}`);
-      /* 레거시는 연동 전이거나 권한 없으면 조용히 건너뜀 */
+      /* VIP 는 연동 전이거나 권한 없으면 조용히 건너뜀 */
     }
   }
-  if (!main.length && !legacy.length) return [];
+  if (!main.length && !others.length) return [];
   const out = ['', '<b>검색 유입 (최근 7일, Search Console)</b>', ...main];
-  if (legacy.length) out.push('  <b>레거시</b>', ...legacy);
+  if (others.length) out.push('  <b>기타 채널</b>', ...others);
   return out;
 }

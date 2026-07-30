@@ -58,8 +58,10 @@ async function activeSubscribers(source) {
 }
 
 // RSS <item> 파싱 → {title, link, desc, ts}
-async function recentPosts(site) {
-  const r = await fetch(`${site.replace(/\/$/, '')}/rss.xml`);
+// rssPath 는 블로그마다 다르다 — Astro 는 /rss.xml, WordPress(뭉게)는 /feed/ 다.
+// (뭉게에서 /rss.xml 을 부르면 404 → 새 글이 영원히 0편으로 보인다)
+async function recentPosts(site, rssPath = '/rss.xml') {
+  const r = await fetch(`${site.replace(/\/$/, '')}${rssPath}`);
   if (!r.ok) return [];
   const xml = await r.text();
   const decode = (s) =>
@@ -164,7 +166,7 @@ function withUtm(url) {
   return url + (url.includes('?') ? '&' : '?') + UTM;
 }
 // 블로그별 브랜드 accent(제목/링크/버튼 색)
-const BRAND = { blog: '#6d5cf0', lifeflow: '#1e6b5c', vip: '#ff3d54', playcast: '#ff3d54' };
+const BRAND = { mg: '#c2703a', vip: '#ff3d54', playcast: '#ff3d54' };
 // 신문/큐레이션 레이아웃: 리드 기사(큰 이미지+요약) 1개 + 나머지는 작은 썸네일 헤드라인
 function digestHtml(label, posts, source, email, site, brand = '#1e6b5c') {
   const ink = '#1a1712';
@@ -257,7 +259,7 @@ async function sendForBlog(blog, force = false) {
   const source = blog.source;
   if (!source) return { source: blog.key, skipped: 'no source' };
   const [posts0, sent, subs] = await Promise.all([
-    recentPosts(blog.site),
+    recentPosts(blog.site, blog.rssPath),
     sentUrls(source),
     activeSubscribers(source),
   ]);
@@ -369,7 +371,7 @@ async function pageMeta(pageUrl) {
       (html.match(new RegExp(`<meta[^>]+property=["']${prop}["'][^>]+content=["']([^"']+)["']`, 'i')) ||
         html.match(new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]+property=["']${prop}["']`, 'i')) || [])[1] || '';
     let title = decode(meta('og:title')) || decode((html.match(/<title>([^]*?)<\/title>/i) || [])[1] || '');
-    title = title.replace(/\s*[|·\-–—]\s*(TechFlow|LifeFlow|VIP)[^]*$/i, '').trim();
+    title = title.replace(/\s*[|·\-–—]\s*(뭉게|VIP)[^]*$/i, '').trim();
     let desc = decode(meta('og:description') || (html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i) || [])[1] || '');
     desc = desc.replace(/\s+/g, ' ').slice(0, 140);
     let image = meta('og:image') ? abs(meta('og:image')) : '';

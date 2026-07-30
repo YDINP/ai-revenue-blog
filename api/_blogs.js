@@ -14,40 +14,45 @@
 //              ('geeknews' | 'hn' | 'ppomppu:<board>')
 // newsQueries: 뉴스 검색어 폴백. 평소엔 커뮤니티 핫키워드(없으면 시드)에서 뽑는다
 
+// 2026-07-30 — TF(ai-revenue) · LF(life-revenue) 엔트리 삭제.
+// 두 사이트는 mungge.com 으로 301 통합돼 리다이렉트 셸만 남았다(자체 조회 한 자릿수).
+// 소스로 남겨 두면 대시보드·리포트가 죽은 사이트를 1급 지표로 세우고, 뭉게가 곁가지로 보인다.
+// ※ automation/daily-run.mjs 의 tf/lf 는 여기와 무관한 **발행 레인(silo)** 이다
+//   (tf=테크·개발, lf=생활·재테크 → 발행처는 mungge WP 하나). 그건 그대로 쓴다.
 export const BLOGS = {
-  tf: {
-    key: 'tf',
-    label: 'TechFlow (ai-revenue)',
-    repo: 'YDINP/ai-revenue-blog',
-    branch: 'master',
-    contentDir: 'src/blog',
-    site: 'https://ai-revenue-blog.vercel.app',
-    gscSite: 'https://ai-revenue-blog.vercel.app/',   // Search Console URL 프리픽스 속성
-    indexNowKey: 'f4a8e2c1b7d9306584ef1a2b3c4d5e6f',  // public/<key>.txt 로 호스팅됨
-    vercel: 'ai-revenue-blog',
-    source: 'blog',
+  mg: {
+    key: 'mg',
+    label: 'Mungge (mungge.com)',
+    site: 'https://mungge.com',
+    // WordPress RSS 는 /rss.xml 이 아니라 /feed/ 다 (/rss.xml 은 404)
+    rssPath: '/feed/',
+    gscSite: 'https://mungge.com/',   // 도메인 속성이면 _gsc.js가 sc-domain:으로 자동 폴백
+    // Site Kit 이 심은 GA4 태그(GT-K525DMFX)의 속성. WP 관리화면으로는 유입경로 상세를 볼 수
+    // 없어서 GA4 Data API 로 끌어와 대시보드에서 본다.
+    ga4Property: process.env.GA4_PROPERTY_MG || '547003762',
+    // analytics·comments·newsletter 의 source 값. 뭉게 트래커(scripts/wp-*.js)가 'mg' 로 쏜다.
+    source: 'mg',
+    // 커뮤니티 화제(추천 주제)는 TF·LF 두 레인 것을 합쳐 여기로 옮겼다 — 뭉게가 두 실로를
+    // 모두 품고 있으므로 개발/소비자/재테크 게시판을 함께 본다.
+    communities: [
+      'geeknews', 'hn', 'ppomppu:computer', 'ppomppu:phone', 'ruliweb:news',
+      'ppomppu:money', 'ppomppu:health', 'ppomppu:ppomppu',
+    ],
+    newsQueries: ['AI 도구', '개발자 생산성', '인디게임', '재테크 절세', '건강관리', '국내여행'],
+    useHackerNews: true,
+    // 콘텐츠는 WordPress 가 SSOT 다 → GitHub repo 기반 글 명령(/posts /newpost /edit /delpost /deploy)은
+    // 쓸 수 없다. repo·vercel 을 null 로 두면 그 소비처들이 자동으로 거부한다.
+    repo: null,
+    branch: null,
+    vercel: null,
+    // 자동 포스팅 워크플로는 **repo 와 분리**해 둔다. 워크플로는 이 레포(ai-revenue-blog)에 있고
+    // 발행처는 mungge WP 다(scripts/generate-post.mjs → autoPublishToWP). repo 에 같이 넣으면
+    // /posts·/edit 이 이관 전 Astro 마크다운(정지된 자료)을 만지게 된다.
+    // ⚠️ 이 워크플로는 2026-07-20부터 실패 중이다(게이트웨이 이슈). 실제 발행 경로는 로컬
+    //    automation/daily-run.mjs 이고, 여기 배선은 워크플로가 복구되면 봇에서 바로 쓰기 위한 것.
     generator: 'daily-post.yml',
-    // 개발자 커뮤니티(긱뉴스·HN)만 쓰면 화제가 개발 쪽으로 치우친다.
-    // TechFlow 는 AI 활용·기기 리뷰·게임도 다루므로 소비자/게이머 커뮤니티를 함께 본다.
-    communities: ['geeknews', 'hn', 'ppomppu:computer', 'ppomppu:phone', 'ruliweb:news'],
-    newsQueries: ['AI 도구', '개발자 생산성', '인디게임'],
-    useHackerNews: true,   // 기술 블로그만 (라이프스타일엔 코딩 글이 무의미)
-  },
-  lf: {
-    key: 'lf',
-    label: 'LifeFlow (life-revenue)',
-    repo: 'YDINP/life-revenue-blog',
-    branch: 'main',
-    contentDir: 'src/blog',
-    site: 'https://life-revenue-blog.vercel.app',
-    gscSite: 'https://life-revenue-blog.vercel.app/',
-    indexNowKey: 'c9d3f7a2e8b104569abc7d8e9f0a1b2c',
-    vercel: 'life-revenue-blog',
-    source: 'lifeflow',
-    generator: 'daily-post.yml',
-    // 재테크·건강·핫딜(소비) 게시판. 자유게시판은 정치·잡담이라 제외
-    communities: ['ppomppu:money', 'ppomppu:health', 'ppomppu:ppomppu'],
-    newsQueries: ['재테크 절세', '건강관리', '국내여행'],
+    generatorRepo: 'YDINP/ai-revenue-blog',
+    generatorRef: 'master',
   },
   pc: {
     key: 'pc',
@@ -62,26 +67,9 @@ export const BLOGS = {
     source: 'playcast',
     generator: null,
   },
-  mg: {
-    key: 'mg',
-    label: 'Mungge (mungge.com)',
-    site: 'https://mungge.com',
-    gscSite: 'https://mungge.com/',   // 도메인 속성이면 _gsc.js가 sc-domain:으로 자동 폴백
-    // Site Kit 이 심은 GA4 태그(GT-K525DMFX)의 속성. WP 관리화면으로는 유입경로 상세를 볼 수
-    // 없어서 GA4 Data API 로 끌어와 대시보드에서 본다.
-    ga4Property: process.env.GA4_PROPERTY_MG || '547003762',
-    // WordPress로 직접 운영하는 사이트 — repo/generator/source가 없다.
-    // blogList() 소비처가 모두 이 필드들로 필터링하므로 일일리포트·뉴스레터·자동포스팅에서
-    // 자동 제외되고, gscSite로 거르는 GSC 동기화·조회에만 잡힌다.
-    repo: null,
-    branch: null,
-    vercel: null,
-    source: null,
-    generator: null,
-  },
 };
 
-// 'tf' / 'techflow' / 'ai-revenue' 등 느슨한 입력 허용
+// 'mg' / 'mungge' / 'playcast' 등 느슨한 입력 허용
 export function resolveBlog(input) {
   if (!input) return null;
   const s = String(input).toLowerCase().trim();

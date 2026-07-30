@@ -235,6 +235,36 @@ export async function mgPosts({ perPage = 20 } = {}) {
   }
 }
 
+// ── WordPress REST — 댓글 ───────────────────────────────────
+// 뭉게 댓글은 WordPress 자체 댓글이라 Supabase `comments` 테이블에 안 들어온다.
+// TF·LF 는 CommentSection.astro 가 Supabase 로 보냈지만 뭉게엔 그 레이아웃이 없다.
+// → 집계·목록은 WP REST 로 읽는다. 답글은 WP 관리화면에서(여기서는 읽기만).
+export async function mgComments({ perPage = 20 } = {}) {
+  try {
+    const r = await fetch(
+      `${MG_SITE}/wp-json/wp/v2/comments?per_page=${perPage}&_fields=id,post,author_name,content,date,link,status`,
+      { signal: AbortSignal.timeout(8000) }
+    );
+    if (!r.ok) return { total: 0, recent: [] };
+    const total = Number(r.headers.get('x-wp-total')) || 0;
+    const rows = await r.json();
+    return {
+      total,
+      recent: (Array.isArray(rows) ? rows : []).map((c) => ({
+        id: c.id,
+        nickname: String(c.author_name || '익명'),
+        content: String(c.content?.rendered || '').replace(/<[^>]*>/g, '').trim(),
+        link: c.link,
+        // WP date 는 사이트 타임존(KST) 로컬시각
+        created_at: c.date,
+        day: String(c.date || '').slice(0, 10),
+      })),
+    };
+  } catch {
+    return { total: 0, recent: [] };
+  }
+}
+
 // 네이버 색인 최신치 (로컬 scripts/naver-index-check.mjs 가 analytics 에 남긴 값)
 export async function mgNaverIndex() {
   try {

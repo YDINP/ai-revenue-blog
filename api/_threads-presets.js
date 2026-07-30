@@ -7,7 +7,8 @@ export const THREAD_PRESETS = [
     id: 'indie-revenue',
     label: '인디수익 249달러 (4편)',
     topic: 'tech', // 없으면 첫 활성계정으로 폴백
-    link: 'https://ai-revenue-blog.vercel.app/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/',
+    // 구 TF URL 은 뭉게로 301 된다 — 스레드에 남는 링크는 리다이렉트 없는 최종 URL 로
+    link: 'https://mungge.com/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/',
     segments: [
       `스팀 신작 매출 중앙값, 249달러야.
 

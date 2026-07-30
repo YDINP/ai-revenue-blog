@@ -56,7 +56,8 @@ export function blogsMessage() {
       `    자동생성 ${b.generator ? '가능' : '없음'} · 통계 ${b.source ? '연동' : '미연동'}`
     );
   });
-  lines.push('', '예) <code>/posts tf</code> · <code>/deploy lf</code>');
+  lines.push('', '예) <code>/posts pc</code> · <code>/deploy pc</code>');
+  lines.push('<i>뭉게(mg)는 WordPress 직접 운영이라 repo 경로 명령(/posts /deploy /generate)이 없습니다 — 발행은 로컬 automation/daily-run.mjs</i>');
   return lines.join('\n');
 }
 
@@ -169,9 +170,10 @@ export async function newPostStep(chatId, state, text) {
     `title: ${JSON.stringify(state.title)}`,
     `description: ${JSON.stringify(desc || state.title)}`,
     `pubDate: ${nowKst}`,
-    `category: ${JSON.stringify(blog.key === 'lf' ? 'lifestyle' : 'AI')}`,
+    // repo 기반 글쓰기가 남아 있는 블로그는 VIP(playcast)뿐이다 — TF/LF 분기는 삭제됨
+    `category: ${JSON.stringify(blog.key === 'pc' ? 'Game' : 'AI')}`,
     'tags: []',
-    `author: ${JSON.stringify(blog.key === 'lf' ? 'LifeFlow' : 'TechFlow')}`,
+    `author: ${JSON.stringify(blog.label.split(' (')[0])}`,
     `draft: ${draft}`,
     '---',
     '',
@@ -212,7 +214,7 @@ export async function editApply(chatId, state, text) {
 }
 
 // ── /generate — 대화형 자동 포스팅 (블로그 선택 → 핫 키워드/직접 입력 → 실행) ──
-// 인자를 직접 준 경우(/generate tf AI 주제)는 즉시 실행
+// 인자를 직접 준 경우(/generate pc 게임 주제)는 즉시 실행
 
 export async function generateDispatch(blog, category, topic) {
   const inputs = { category: category || 'auto', topic: topic || '', count: '1' };
@@ -349,7 +351,11 @@ export async function statusMessage(blogArg) {
   const lines = ['🩺 <b>배포 상태</b>', ''];
   for (const blog of targets) {
     lines.push(`<b>${escapeHtml(blog.label)}</b>`);
-    try {
+    // 뭉게는 WordPress 직접 운영이라 배포(빌드) 개념이 없다. 그냥 조회하면 /repos/null/... 을
+    // 찔러 404 → "⚠️ HTTP 404" 로 찍히고, 그게 장애처럼 읽힌다.
+    if (!blog.repo) {
+      lines.push('  🌐 WordPress 직접 운영 — 빌드/배포 없음 (글 저장 즉시 반영)');
+    } else try {
       if (hasVercelToken()) {
         const d = await latestDeployment(blog);
         if (d) {

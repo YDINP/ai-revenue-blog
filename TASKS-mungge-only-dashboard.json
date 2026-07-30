@@ -1,0 +1,84 @@
+{
+  "name": "mungge-only-dashboard",
+  "prd": "PRD-mungge-only-dashboard.md",
+  "created": "2026-07-30",
+  "goal": "대시보드·봇 리포트 집계를 뭉게(mungge.com) 단독 기준으로 재편하고 소스로서의 TF/LF를 제거",
+  "phases": [
+    {
+      "id": "P1",
+      "title": "뭉게 클릭 트래커 신설",
+      "tasks": [
+        {
+          "id": "P1-1",
+          "title": "scripts/wp-affiliate.js 신규 — coupang_click / paperdoc_click (source='mg')",
+          "detail": "BaseLayout.astro TF 트래커와 metadata 모양 동일. capture:true + sendBeacon. __notrack·크롤러 제외 기준은 wp-track.js와 동일.",
+          "status": "pending"
+        },
+        {
+          "id": "P1-2",
+          "title": "scripts/wp-widget.js 구독 source 를 'mg' 고정으로 변경",
+          "detail": "카테고리 추측(lf ? 'lifeflow' : 'blog') 제거",
+          "status": "pending"
+        },
+        {
+          "id": "P1-3",
+          "title": "scripts/inject-wp-js.mjs 에 MG-AFF 조각 등록",
+          "detail": "PIECES 배열에 { marker:'MG-AFF', file:'wp-affiliate.js' } 추가",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "P2",
+      "title": "구독자 source 마이그레이션",
+      "tasks": [
+        {
+          "id": "P2-1",
+          "title": "scripts/migrate-subscribers-to-mg.mjs 신규",
+          "detail": "newsletter_subscribers·newsletter_sends 의 blog|lifeflow → mg. (source,email) 유니크 충돌 대비 이메일 dedupe. --dry-run 지원.",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "P3",
+      "title": "API 레지스트리·집계 뭉게 단독화",
+      "tasks": [
+        { "id": "P3-1", "title": "api/_blogs.js — tf/lf 삭제, mg에 source/rssPath/communities/newsQueries 이관", "status": "pending" },
+        { "id": "P3-2", "title": "api/_shared.js — SOURCE_META blog/lifeflow 삭제, mg 추가(/<slug>/ 규칙)", "status": "pending" },
+        { "id": "P3-3", "title": "api/_dashboard.js — sourceMessage 삭제, 레거시 블록 삭제, SRC_ABBR 정리", "status": "pending" },
+        { "id": "P3-4", "title": "api/_report.js — collectLegacy 삭제 → 뭉게 기준 댓글·좋아요·클릭 집계", "status": "pending" },
+        { "id": "P3-5", "title": "api/_gsc-view.js — 레거시 한 줄 삭제", "status": "pending" },
+        { "id": "P3-6", "title": "api/telegram-webhook.js — /tf /lf 명령·도움말 삭제", "status": "pending" },
+        { "id": "P3-7", "title": "api/_newsletter.js — rssPath 지원(/feed/), BRAND에 mg 추가", "status": "pending" },
+        { "id": "P3-8", "title": "api/_control.js, api/gsc-sync.js, api/daily-report.js — tf/lf 기본값·분기 정리", "status": "pending" }
+      ]
+    },
+    {
+      "id": "P4",
+      "title": "dashboard.astro 뭉게 단독 재편",
+      "tasks": [
+        { "id": "P4-1", "title": "프론트매터 — TF getCollection·LF RSS fetch 제거, VIP만 상수 유지", "status": "pending" },
+        { "id": "P4-2", "title": "탭바 — TechFlow/LifeFlow 삭제, '🌐 뭉게' 탭 신설", "status": "pending" },
+        { "id": "P4-3", "title": "전체 요약 — KPI 카드·스플릿바·범례를 뭉게+VIP 기준으로", "status": "pending" },
+        { "id": "P4-4", "title": "방문 추이·시간대·히트맵 — TF/LF 2선 → 뭉게+VIP", "status": "pending" },
+        { "id": "P4-5", "title": "Top Pages·Live Activity·유입경로 source 필터 정리", "status": "pending" },
+        { "id": "P4-6", "title": "GSC 탭 source 버튼 — 전체/뭉게/VIP", "status": "pending" },
+        { "id": "P4-7", "title": "쿠팡·페이퍼닥 탭 — 뭉게/VIP 카드로 교체", "status": "pending" },
+        { "id": "P4-8", "title": "도구 탭 — pageview_mg 기준 + mungge.com/tools/ 링크", "status": "pending" },
+        { "id": "P4-9", "title": "댓글 탭 — 필터·배지·링크 뭉게/VIP", "status": "pending" },
+        { "id": "P4-10", "title": "Quick Links·배포 상태·방문 제외 안내 — 뭉게 기준", "status": "pending" }
+      ]
+    },
+    {
+      "id": "P5",
+      "title": "검증·커밋",
+      "tasks": [
+        { "id": "P5-1", "title": "npm run build 통과", "status": "pending" },
+        { "id": "P5-2", "title": "scripts/test-telegram-bot.mjs 갱신·통과", "status": "pending" },
+        { "id": "P5-3", "title": "잔여 TF/LF 문자열 grep 0건 확인", "status": "pending" },
+        { "id": "P5-4", "title": "서브모듈 + 상위 레포 커밋", "status": "pending" }
+      ]
+    }
+  ]
+}

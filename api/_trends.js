@@ -8,7 +8,7 @@
 //   💻 Hacker News — 시드의 영문 searchTerms 에서 만든 필터로 관련 글만
 //   📈 내 인기글 — 유입 있는 글의 후속편 후보
 //
-// 실데이터 확인: GITHUB_TOKEN=$(gh auth token) node scripts/check-hot-keywords.mjs [tf|lf]
+// 실데이터 확인: GITHUB_TOKEN=$(gh auth token) node scripts/check-hot-keywords.mjs [mg|pc]
 
 import { communityHot, toQuery } from './_community.js';
 import { getFileJson, listPosts } from './_github.js';
@@ -109,7 +109,9 @@ const shuffle = (arr) => {
 // ── 이미 쓴 글의 제목 (RSS. 실패 시 slug 로 폴백) ──
 async function publishedTitles(blog) {
   try {
-    const titles = rssTitles(await fetchText(`${blog.site}/rss.xml`));
+    // rssPath 는 블로그마다 다르다 — Astro 는 /rss.xml, WordPress(뭉게)는 /feed/ 다.
+    // 고정 /rss.xml 로 부르면 뭉게에서 404 → 이미 쓴 주제를 못 걸러 중복 글이 나온다.
+    const titles = rssTitles(await fetchText(`${blog.site}${blog.rssPath || '/rss.xml'}`));
     if (titles.length) return titles;
   } catch { /* 폴백 */ }
   try {
@@ -317,7 +319,8 @@ async function myTopPosts(blog) {
     if (!r.ok) return [];
     const rows = await r.json();
     return (Array.isArray(rows) ? rows : [])
-      .filter((p) => (p.source || 'blog') === blog.source)
+      // source 가 비어 있는 옛 행을 'blog'(삭제된 소스)로 가정하면 전부 버려진다 → 그대로 비교
+      .filter((p) => p.source === blog.source)
       .map((p) =>
         p.title && p.title !== 'null' ? String(p.title).split(' | ')[0].split(' - ')[0].trim() : ''
       )

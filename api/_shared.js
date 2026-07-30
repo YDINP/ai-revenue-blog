@@ -9,17 +9,19 @@ export const SUPABASE_ANON_KEY =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5cHJic21hZ3RsemVieHl4c3ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjY4NTQsImV4cCI6MjA4NjA0Mjg1NH0.dajN0n0IWzOgYOSCglxVLzddg7jJFRHNCHwTWMG62uU';
 
 // source 컬럼 → 블로그 표시명/글 URL 매핑
+//
+// 2026-07-30 — blog(TF)·lifeflow(LF) 제거. mungge.com 으로 301 통합돼 그 URL 을 만들어 봐야
+// 리다이렉트만 된다. prefix 가 소스마다 다르다: 뭉게는 WordPress 라 /blog/ 없이 /<slug>/ 다.
 export const SOURCE_META = {
-  blog: { label: 'TechFlow', base: 'https://ai-revenue-blog.vercel.app' },
-  lifeflow: { label: 'LifeFlow', base: 'https://life-revenue-blog.vercel.app' },
+  mg: { label: '뭉게', base: 'https://mungge.com', prefix: '' },
   // analytics·newsletter 소스값은 'playcast'. 'vip'는 별칭(하위호환).
-  playcast: { label: 'VIP (Virtual-in-Playing)', base: 'https://virtual-in-playing.vercel.app' },
-  vip: { label: 'VIP (Virtual-in-Playing)', base: 'https://virtual-in-playing.vercel.app' },
+  playcast: { label: 'VIP (Virtual-in-Playing)', base: 'https://virtual-in-playing.vercel.app', prefix: '/blog' },
+  vip: { label: 'VIP (Virtual-in-Playing)', base: 'https://virtual-in-playing.vercel.app', prefix: '/blog' },
 };
 
 export function postUrl(source, slug) {
   const meta = SOURCE_META[source];
-  return meta ? `${meta.base}/blog/${slug}/` : null;
+  return meta ? `${meta.base}${meta.prefix}/${slug}/` : null;
 }
 
 export function sourceLabel(source) {

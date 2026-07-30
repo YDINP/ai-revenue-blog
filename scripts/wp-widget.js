@@ -274,8 +274,10 @@
 
   // ── ⑤ 뉴스레터 인라인 구독 폼 (글 말미) ──
   if (!document.querySelector('.mg-sub')) {
-    var lf = /생활|재테크|finance|lifestyle|health|money/i.test(document.body.className + ' ' + (document.querySelector('.entry-taxonomies, .breadcrumbs, .cat-links') || {}).textContent || '');
-    var SRC = lf ? 'lifeflow' : 'blog';
+    // 구독 source 는 'mg' 고정. 이전에는 카테고리로 TF/LF 를 추측해 blog|lifeflow 로 보냈는데,
+    // TF·LF 는 뭉게로 통합돼 더 이상 별개 사이트가 아니다 → 구독자가 죽은 소스로 쌓이면
+    // 뉴스레터 발송 대상(blogList 의 source 기준)에서 통째로 빠진다.
+    var SRC = 'mg';
     var box = document.createElement('div'); box.className = 'mg-sub';
     box.innerHTML = '<div class="mg-sub-h">📬 새 글, 이메일로 받아보세요</div>'
       + '<div class="mg-sub-d">테크·재테크 인사이트를 주 1~2회. 스팸 없이, 언제든 구독 취소.</div>'

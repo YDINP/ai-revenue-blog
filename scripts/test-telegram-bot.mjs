@@ -34,14 +34,50 @@ globalThis.fetch = async (url, opts = {}) => {
   calls.push({ url, body: opts.body ? JSON.parse(opts.body) : null });
   if (url.includes('api.telegram.org')) return { json: async () => ({ ok: true }) };
   if (url.includes('/rest/v1/comments?id=eq.')) {
-    return { json: async () => [{ id: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee', post_slug: 'my-post', source: 'blog', nickname: '홍길동', content: '질문요' }] };
+    return { json: async () => [{ id: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee', post_slug: 'my-post', source: 'mg', nickname: '홍길동', content: '질문요' }] };
   }
   if (url.includes('/rpc/admin_reply')) return { status: 200, json: async () => ({ success: true, id: 'new-id' }) };
   if (url.includes('/rpc/admin_delete_comment')) return { status: 200, json: async () => ({ success: true, deleted: 2 }) };
+  // ── 뭉게(mungge) 모킹 ──
+  // 뭉게 수치는 RPC 가 아니라 ga4_daily(배치) + analytics pageview_mg(실시간) + WP REST 다.
+  // 이걸 안 깔면 /stats·/top·/report 가 전부 "조회 실패"로 떨어져 회귀를 못 잡는다.
+  if (url.includes('/rest/v1/ga4_daily') && url.includes('select=updated_at')) {
+    return { ok: true, json: async () => [{ updated_at: new Date().toISOString() }] };
+  }
+  if (url.includes('/rest/v1/ga4_daily')) {
+    const day = (n) => new Date(Date.now() + 9 * 3600e3 - n * 864e5).toISOString().slice(0, 10);
+    const rowsFor = (d, mul) => [
+      { date: d, dim: 'total', key: '(all)', sessions: 30 * mul, users: 25 * mul, views: 40 * mul, engaged: 12 * mul },
+      { date: d, dim: 'source_medium', key: 'naver / referral', sessions: 12 * mul, users: 10 * mul, views: 14 * mul, engaged: 5 * mul },
+      { date: d, dim: 'source_medium', key: 'google / organic', sessions: 8 * mul, users: 7 * mul, views: 9 * mul, engaged: 4 * mul },
+      { date: d, dim: 'source_medium', key: '(direct) / (none)', sessions: 6 * mul, users: 5 * mul, views: 7 * mul, engaged: 3 * mul },
+      { date: d, dim: 'channel', key: 'Organic Search', sessions: 8 * mul, users: 7 * mul, views: 9 * mul, engaged: 4 * mul },
+      { date: d, dim: 'page_all', key: '/mg-hot-post/', sessions: 20 * mul, users: 18 * mul, views: 25 * mul, engaged: 9 * mul },
+    ];
+    // 일일 리포트 기준일(어제) · /stats 기준일(오늘) · 그 전날(전일 대비 계산용)
+    return { ok: true, json: async () => [...rowsFor(day(0), 1), ...rowsFor(day(1), 2), ...rowsFor(day(2), 1)] };
+  }
+  if (url.includes('event_type=eq.pageview_mg')) {
+    return { ok: true, json: async () => [
+      { created_at: new Date().toISOString(), metadata: { path: '/mg-hot-post/', title: '뭉게 인기글', referrer: 'https://search.naver.com/', user_agent: 'UA9' } },
+    ] };
+  }
+  if (url.includes('event_type=eq.naver_index')) {
+    return { ok: true, json: async () => [{ created_at: new Date().toISOString(), metadata: { date: new Date().toISOString().slice(0, 10), indexed: 7, sitemap: 244 } }] };
+  }
+  if (url.includes('mungge.com/wp-json/wp/v2/posts')) {
+    return { ok: true, headers: { get: (k) => (k.toLowerCase() === 'x-wp-total' ? '196' : null) },
+      json: async () => [{ title: { rendered: '뭉게 최근글' }, link: 'https://mungge.com/mg-new/', date: new Date().toISOString().slice(0, 19), slug: 'mg-new' }] };
+  }
+  if (url.includes('mungge.com/wp-json/wp/v2/comments')) {
+    return { ok: true, headers: { get: (k) => (k.toLowerCase() === 'x-wp-total' ? '2' : null) },
+      json: async () => [{ id: 1, author_name: '뭉게독자', content: { rendered: '<p>잘 봤어요</p>' }, date: new Date(Date.now() + 9 * 3600e3 - 864e5).toISOString().slice(0, 19), link: 'https://mungge.com/mg-new/#comment-1' }] };
+  }
+
   // ── 대시보드 조회 RPC 모킹 ──
-  if (url.includes('/rpc/get_traffic_summary')) return { status: 200, json: async () => ({ today_views: 123, yesterday_views: 98, today_clicks: 5, total_clicks: 321, today_likes: 2, total_likes: 45, total_subscribers: 12, today_subscribers: 1, total_views: 12345, tf_today_views: 80, lf_today_views: 43, tf_today_clicks: 3, lf_today_clicks: 2, tf_total_views: 8000, lf_total_views: 4345, tf_total_clicks: 200, lf_total_clicks: 121 }) };
-  if (url.includes('/rpc/get_comment_stats')) return { status: 200, json: async () => ({ total: 57, today: 3, reports: 1, blog_count: 40, lifeflow_count: 17 }) };
-  if (url.includes('/rpc/get_top_pages')) return { ok: true, status: 200, json: async () => [{ path: '/blog/hot-post/', slug: 'hot-post', title: '인기글 | TechFlow - AI', source: 'blog', views: 99 }, { path: '/blog/lf-post/', slug: 'lf-post', title: 'LF글 | LifeFlow', source: 'lifeflow', views: 55 }] };
+  if (url.includes('/rpc/get_traffic_summary')) return { status: 200, json: async () => ({ today_views: 123, yesterday_views: 98, today_clicks: 5, total_clicks: 321, today_likes: 2, total_likes: 45, total_subscribers: 12, today_subscribers: 1, total_views: 12345, mg_today_clicks: 3, mg_total_clicks: 200, mg_today_likes: 1, mg_total_likes: 20, mg_live_today_views: 7, vip_today_views: 43, vip_total_views: 4345, vip_today_clicks: 2, vip_total_clicks: 121 }) };
+  if (url.includes('/rpc/get_comment_stats')) return { status: 200, json: async () => ({ total: 57, today: 3, reports: 1, vip_count: 17 }) };
+  if (url.includes('/rpc/get_top_pages')) return { ok: true, status: 200, json: async () => [{ path: '/blog/vip-post/', slug: 'vip-post', title: 'VIP글 | VIP', source: 'vip', views: 55 }] };
   if (url.includes('/rpc/get_all_comments')) return { status: 200, json: async () => [
     { id: '11111111-2222-3333-4444-555555555555', post_slug: 'p1', source: 'blog', nickname: 'A', content: 'c1', parent_id: null, is_admin: false, created_at: new Date().toISOString(), report_count: 0 },
     { id: '66666666-7777-8888-9999-000000000000', post_slug: 'p2', source: 'lifeflow', nickname: 'B', content: 'c2', parent_id: null, is_admin: false, created_at: new Date().toISOString(), report_count: 1 },
@@ -65,7 +101,8 @@ globalThis.fetch = async (url, opts = {}) => {
   if (url.includes('/rest/v1/card_likes')) return { ok: true, json: async () => [{ slug: 'p1' }, { slug: 'p2' }] };
   // ── 핫 키워드 소스 ──
   // 블로그 RSS = 이미 쓴 글 제목 (시드 미사용 판정 기준)
-  if (url.includes('/rss.xml')) return { ok: true, text: async () => '<rss><channel><item><title>ChatGPT 활용법: 최신 기능과 실전 팁</title></item></channel></rss>' };
+  // 뭉게는 WordPress RSS(/feed/), VIP 는 Astro(/rss.xml) — 두 경로 모두 같은 목으로 받는다
+  if (url.includes('/rss.xml') || url.includes('/feed/')) return { ok: true, text: async () => '<rss><channel><item><title>ChatGPT 활용법: 최신 기능과 실전 팁</title></item></channel></rss>' };
   // 커뮤니티 목: 긱뉴스(Atom) — 'llm 추론'이 두 글에 반복 = 실시간 화제
   // IndexNow 제출 엔드포인트
   if (url.includes('api.indexnow.org')) return { ok: true, status: 200, json: async () => ({}) };
@@ -125,9 +162,10 @@ globalThis.fetch = async (url, opts = {}) => {
       return { ok: true, status: 204, json: async () => null };
     }
     const m = url.match(/\/contents\/([^?]+)/);
-    if (url.includes('/contents/src/blog?')) return { ok: true, status: 200, json: async () => [
-      { type: 'file', name: '2026-07-12-new-post.md', path: 'src/blog/2026-07-12-new-post.md', sha: 'sha1' },
-      { type: 'file', name: '2026-07-11-old-post.md', path: 'src/blog/2026-07-11-old-post.md', sha: 'sha2' },
+    // VIP(playcast)의 contentDir 은 src/videos 다 — 경로를 하나만 받으면 /posts·/index 가 죽는다
+    if (url.includes('/contents/src/blog?') || url.includes('/contents/src/videos?')) return { ok: true, status: 200, json: async () => [
+      { type: 'file', name: '2026-07-12-new-post.md', path: 'src/videos/2026-07-12-new-post.md', sha: 'sha1' },
+      { type: 'file', name: '2026-07-11-old-post.md', path: 'src/videos/2026-07-11-old-post.md', sha: 'sha2' },
     ] };
     if (m && opts.method === undefined) {
       const md = '---\ntitle: "테스트 글"\npubDate: 2026-07-12\ndraft: false\n---\n\n본문입니다.\n';
@@ -181,14 +219,15 @@ calls.length = 0;
 res = mockRes();
 await commentHook({
   method: 'POST', headers: { 'x-webhook-secret': 'testsecret' },
-  body: { type: 'INSERT', table: 'comments', record: { id: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee', post_slug: 'my-post', source: 'blog', nickname: '홍길동', content: '<b>질문</b>요', is_admin: false, parent_id: null } },
+  body: { type: 'INSERT', table: 'comments', record: { id: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee', post_slug: 'my-post', source: 'mg', nickname: '홍길동', content: '<b>질문</b>요', is_admin: false, parent_id: null } },
 }, res);
 const sent = calls.find(c => c.url.includes('sendMessage'));
 assert(res.code === 200 && res.body.ok === true, 'comment-webhook 200 ok');
 assert(sent && sent.body.chat_id === '11111', 'notification goes to admin chat');
 assert(sent.body.text.includes('#c_aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'), 'notification contains #c_ marker');
 assert(sent.body.text.includes('&lt;b&gt;질문&lt;/b&gt;요'), 'content is HTML-escaped');
-assert(sent.body.text.includes('https://ai-revenue-blog.vercel.app/blog/my-post/'), 'notification links to post');
+// 뭉게는 WordPress 라 /blog/ 프리픽스가 없다 — 붙이면 404 로 보낸다
+assert(sent.body.text.includes('https://mungge.com/my-post/'), 'notification links to the mungge post');
 
 // 3. 관리자 답변 INSERT → 알림 스킵
 calls.length = 0;
@@ -205,7 +244,7 @@ await tgHook({
 }, res);
 const rpc = calls.find(c => c.url.includes('/rpc/admin_reply'));
 assert(rpc, 'reply-to-notification calls admin_reply');
-assert(rpc && rpc.body.p_parent_id === 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee' && rpc.body.p_slug === 'my-post' && rpc.body.p_source === 'blog' && rpc.body.p_admin_key === 'testadminkey', 'admin_reply params correct');
+assert(rpc && rpc.body.p_parent_id === 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee' && rpc.body.p_slug === 'my-post' && rpc.body.p_source === 'mg' && rpc.body.p_admin_key === 'testadminkey', 'admin_reply params correct');
 assert(rpc.body.p_content === '안녕하세요, 답변드립니다', 'reply content trimmed');
 assert(calls.some(c => c.url.includes('sendMessage') && c.body.text.includes('✅')), 'success confirmation sent');
 
@@ -241,21 +280,24 @@ const sentTexts = () => calls.filter(c => c.url.includes('sendMessage')).map(c =
 calls.length = 0; res = mockRes();
 await tgHook(tgMsg('/stats'), res);
 let out = sentTexts().join('\n');
-assert(out.includes('전체 요약') && out.includes('123') && out.includes('321'), '/stats shows traffic summary');
+assert(out.includes('전체 요약') && out.includes('뭉게'), '/stats is mungge-first');
+assert(out.includes('321'), '/stats shows cumulative coupang clicks');
 assert(out.includes('57'), '/stats includes comment stats');
+assert(!/TechFlow|LifeFlow|레거시/.test(out), '/stats has no TF/LF legacy block');
 
-// 10. /tf → 소스별 요약, 해당 소스 인기 페이지만
+// 10. /mg → 뭉게 상세 (GA4 + WP REST)
 calls.length = 0; res = mockRes();
-await tgHook(tgMsg('/tf'), res);
+await tgHook(tgMsg('/mg'), res);
 out = sentTexts().join('\n');
-assert(out.includes('TechFlow') && out.includes('인기글'), '/tf shows TF summary with top pages');
-assert(!out.includes('LF글'), '/tf excludes lifeflow pages');
+assert(out.includes('뭉게') && out.includes('유입 경로'), '/mg shows mungge detail with referrers');
+assert(out.includes('196'), '/mg shows WP total post count');
 
-// 11. /top 5 → 소스 배지 + 사이트명 제거된 제목
+// 11. /top → 뭉게 인기 페이지 (GA4 page_all)
 calls.length = 0; res = mockRes();
 await tgHook(tgMsg('/top 5'), res);
 out = sentTexts().join('\n');
-assert(out.includes('인기 페이지') && out.includes('[TF] 인기글') && out.includes('[LF] LF글'), '/top lists pages with source badge');
+assert(out.includes('인기 페이지') && out.includes('뭉게'), '/top is mungge-based');
+assert(!/\[TF\]|\[LF\]/.test(out), '/top has no TF/LF badges');
 
 // 12. /coupang → 어떤 글에서 어떤 링크 상세 (affiliate_click 레거시 포함)
 calls.length = 0; res = mockRes();
@@ -287,35 +329,43 @@ assert(!calls.some(c => c.url.includes('/rpc/get_traffic_summary')), 'non-admin 
 
 // ── 블로그 제어 ──
 
-// 16. /blogs → 3개 블로그
+// 16. /blogs → 뭉게 + Playcast 두 개 (TF/LF 삭제됨)
 calls.length = 0; res = mockRes();
 await tgHook(tgMsg('/blogs'), res);
 out = sentTexts().join('\n');
-assert(out.includes('TechFlow') && out.includes('LifeFlow') && out.includes('Playcast'), '/blogs lists all three blogs');
+assert(out.includes('Mungge') && out.includes('Playcast'), '/blogs lists mungge and playcast');
+assert(!/TechFlow|LifeFlow/.test(out), '/blogs no longer lists TF/LF');
+assert(out.includes('WordPress 직접 운영'), '/blogs marks mungge as WordPress-managed');
 
-// 17. /posts tf → 발행/숨김 표시 + slug
+// 16b. 뭉게는 repo 기반 글 명령을 거부해야 한다 — 허용하면 이관 전 Astro 마크다운을 만진다
 calls.length = 0; res = mockRes();
-await tgHook(tgMsg('/posts tf'), res);
+await tgHook(tgMsg('/posts mg'), res);
+out = sentTexts().join('\n');
+assert(/WordPress|없습니다/.test(out), '/posts mg is refused (no content repo)');
+
+// 17. /posts pc → 발행/숨김 표시 + slug
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/posts pc'), res);
 out = sentTexts().join('\n');
 assert(out.includes('테스트 글') && out.includes('2026-07-12-new-post'), '/posts lists posts with titles and slugs');
 assert(out.includes('✅'), '/posts marks published state');
 
-// 18. /draft tf <slug> → PUT 커밋 (draft: true)
+// 18. /draft pc <slug> → PUT 커밋 (draft: true)
 calls.length = 0; res = mockRes();
-await tgHook(tgMsg('/draft tf 2026-07-12-new-post'), res);
+await tgHook(tgMsg('/draft pc 2026-07-12-new-post'), res);
 const put = calls.find(c => c.url.includes('/contents/') && c.body?.content);
 assert(put, '/draft commits via contents API');
 assert(Buffer.from(put.body.content, 'base64').toString('utf8').includes('draft: true'), '/draft sets draft: true in frontmatter');
 
 // 19. /publish 는 이미 발행 상태면 커밋하지 않음
 calls.length = 0; res = mockRes();
-await tgHook(tgMsg('/publish tf 2026-07-12-new-post'), res);
+await tgHook(tgMsg('/publish pc 2026-07-12-new-post'), res);
 assert(!calls.some(c => c.body?.content), '/publish skips commit when already published');
 assert(sentTexts()[0].includes('이미'), '/publish reports already-published');
 
 // 20. /newpost 흐름: 제목 → 본문 → 커밋
 calls.length = 0; res = mockRes();
-await tgHook(tgMsg('/newpost tf'), res);
+await tgHook(tgMsg('/newpost pc'), res);
 assert(botState?.flow === 'newpost' && botState.step === 'title', '/newpost starts title step');
 calls.length = 0; res = mockRes();
 await tgHook(tgMsg('봇으로 쓴 글'), res);
@@ -331,13 +381,13 @@ assert(botState === null, 'newpost clears state after commit');
 
 // 21. /delpost → 확인 전에는 삭제 안 함, '확인' 후 DELETE
 calls.length = 0; res = mockRes();
-await tgHook(tgMsg('/delpost tf 2026-07-12-new-post'), res);
+await tgHook(tgMsg('/delpost pc 2026-07-12-new-post'), res);
 assert(botState?.flow === 'delete', '/delpost sets confirm state');
 assert(!calls.some(c => c.opts?.method === 'DELETE'), '/delpost does not delete before confirm');
 calls.length = 0; res = mockRes();
 await tgHook(tgMsg('아니오'), res);
 assert(botState === null && sentTexts()[0].includes('취소'), 'non-확인 cancels delete');
-await tgHook(tgMsg('/delpost tf 2026-07-12-new-post'), mockRes());
+await tgHook(tgMsg('/delpost pc 2026-07-12-new-post'), mockRes());
 calls.length = 0; res = mockRes();
 await tgHook(tgMsg('확인'), res);
 assert(sentTexts()[0].includes('삭제 완료'), '확인 performs delete');
@@ -345,7 +395,7 @@ assert(sentTexts()[0].includes('삭제 완료'), '확인 performs delete');
 // 22. /generate tf <카테고리> <주제> → 즉시 workflow_dispatch (인자 직접 지정 경로)
 //     첫 dispatch 는 목에서 "disabled workflow" 422 → 자동 enable 후 재시도해야 성공
 calls.length = 0; res = mockRes();
-await tgHook(tgMsg('/generate tf AI 인디게임 수익화'), res);
+await tgHook(tgMsg('/generate mg AI 인디게임 수익화'), res);
 assert(calls.some(c => c.url.includes('/enable')), 'disabled workflow is auto-enabled on 422');
 const disp = calls.filter(c => c.url.includes('/dispatches')).pop();
 assert(disp, '/generate with args dispatches the workflow');
@@ -358,17 +408,18 @@ await tgHook(tgMsg('/generate'), res);
 const startMsg = calls.find(c => c.url.includes('sendMessage'));
 assert(startMsg?.body.reply_markup, '/generate shows inline keyboard');
 const blogBtns = startMsg.body.reply_markup.inline_keyboard[0];
-assert(blogBtns.some(b => b.callback_data === 'g:blog:tf') && blogBtns.some(b => b.callback_data === 'g:blog:lf'), 'blog buttons offered');
+assert(blogBtns.some(b => b.callback_data === 'g:blog:mg'), 'mungge blog button offered');
 assert(!JSON.stringify(startMsg.body.reply_markup).includes('g:blog:pc'), 'playcast excluded (no generator workflow)');
+assert(!/g:blog:tf|g:blog:lf/.test(JSON.stringify(startMsg.body.reply_markup)), 'TF/LF buttons gone');
 
 // 22c. 블로그 선택 콜백 → 주제 결정 방식 버튼
 const cbUpdate = (data) => ({ method: 'POST', headers: { 'x-telegram-bot-api-secret-token': 'testsecret' }, body: { callback_query: { id: 'cb1', data, message: { message_id: 50, chat: { id: 11111 } } } } });
 calls.length = 0; res = mockRes();
-await tgHook(cbUpdate('g:blog:tf'), res);
+await tgHook(cbUpdate('g:blog:mg'), res);
 let edited = calls.find(c => c.url.includes('editMessageText'));
 assert(calls.some(c => c.url.includes('answerCallbackQuery')), 'callback spinner is cleared');
 assert(edited && JSON.stringify(edited.body.reply_markup).includes('g:hot'), 'blog pick offers hot/manual/auto');
-assert(botState?.flow === 'generate' && botState.blog === 'tf', 'blog stored in state');
+assert(botState?.flow === 'generate' && botState.blog === 'mg', 'blog stored in state');
 
 // 22d. 핫 키워드 → 시드/트렌드/인기글 후보 버튼
 calls.length = 0; res = mockRes();
@@ -415,7 +466,7 @@ assert(disp2 && disp2.body.inputs.topic === picked.topic, 'picked keyword is dis
 assert(botState === null, 'state cleared after dispatch');
 
 // 22f. 직접 입력 → 다음 메시지가 주제로 사용됨
-await tgHook(cbUpdate('g:blog:lf'), mockRes());
+await tgHook(cbUpdate('g:blog:mg'), mockRes());
 calls.length = 0; res = mockRes();
 await tgHook(cbUpdate('g:manual'), res);
 assert(botState?.step === 'await_topic', 'manual step waits for topic');
@@ -423,10 +474,11 @@ calls.length = 0; res = mockRes();
 await tgHook(tgMsg('여름 휴가 가성비 여행지'), res);
 const disp3 = calls.find(c => c.url.includes('/dispatches'));
 assert(disp3 && disp3.body.inputs.topic === '여름 휴가 가성비 여행지', 'manual topic dispatched');
-assert(disp3.url.includes('life-revenue-blog'), 'dispatched to the selected blog repo');
+// 뭉게는 콘텐츠 repo 가 없고 생성 워크플로만 ai-revenue-blog 에 있다(generatorRepo)
+ assert(disp3.url.includes('ai-revenue-blog'), 'dispatched to the generator repo');
 
 // 22g. 자동 선택 → 빈 주제로 dispatch
-await tgHook(cbUpdate('g:blog:tf'), mockRes());
+await tgHook(cbUpdate('g:blog:mg'), mockRes());
 calls.length = 0; res = mockRes();
 await tgHook(cbUpdate('g:auto'), res);
 const disp4 = calls.find(c => c.url.includes('/dispatches'));
@@ -439,43 +491,52 @@ assert(!calls.some(c => c.url.includes('editMessageText')), 'non-admin callback 
 
 // 23. /deploy (VERCEL_TOKEN 없음) → 빈 커밋 폴백
 calls.length = 0; res = mockRes();
-await tgHook(tgMsg('/deploy lf'), res);
-assert(calls.some(c => c.url.includes('/git/refs/heads/main')), '/deploy falls back to empty commit when no VERCEL_TOKEN');
+await tgHook(tgMsg('/deploy pc'), res);
+assert(calls.some(c => c.url.includes('/git/refs/heads/master')), '/deploy falls back to empty commit when no VERCEL_TOKEN');
 
-// 24. /status → Vercel 토큰 없이도 GitHub 배포 기록으로 상태 표시 + Actions 상태
+// 24. /status pc → Vercel 토큰 없이도 GitHub 배포 기록으로 상태 표시
 calls.length = 0; res = mockRes();
-await tgHook(tgMsg('/status tf'), res);
+await tgHook(tgMsg('/status pc'), res);
 out = sentTexts().join('\n');
 assert(calls.some(c => /\/deployments/.test(c.url)), '/status reads deployment state from GitHub (no Vercel token needed)');
 assert(out.includes('success') && out.includes('abc1234'), '/status shows deploy state and commit');
-assert(out.includes('자동생성'), '/status shows generator workflow run');
+
+// 24b. /status mg → 배포 개념이 없다는 걸 밝히고, 생성 워크플로 상태는 보여준다.
+//      /repos/null/... 을 찔러 "⚠️ 404" 로 찍히면 장애처럼 읽힌다.
+calls.length = 0; res = mockRes();
+await tgHook(tgMsg('/status mg'), res);
+out = sentTexts().join('\n');
+assert(out.includes('WordPress 직접 운영'), '/status mg explains there is no deploy step');
+assert(!/⚠️/.test(out), '/status mg does not surface a fake error');
+assert(out.includes('자동생성'), '/status mg shows generator workflow run');
 
 // 25. 알 수 없는 블로그 → 안내
 calls.length = 0; res = mockRes();
 await tgHook(tgMsg('/posts nosuch'), res);
 assert(sentTexts()[0].includes('❌'), 'unknown blog reports error');
 
-// 26. /index tf → IndexNow 제출 (키·keyLocation·URL 목록)
+// 26. /index pc → IndexNow 제출 (키·keyLocation·URL 목록)
+//     뭉게는 indexNowKey 가 없어(WordPress 플러그인 소관) 이 경로 대상이 아니다.
 calls.length = 0; res = mockRes();
-await tgHook(tgMsg('/index tf'), res);
+await tgHook(tgMsg('/index pc'), res);
 const idx = calls.find(c => c.url.includes('api.indexnow.org'));
 assert(idx, '/index submits to IndexNow');
-assert(idx.body.host === 'ai-revenue-blog.vercel.app' && idx.body.key && idx.body.keyLocation.endsWith('.txt'), 'IndexNow payload has host/key/keyLocation');
+assert(idx.body.host === 'virtual-in-playing.vercel.app' && idx.body.key && idx.body.keyLocation.endsWith('.txt'), 'IndexNow payload has host/key/keyLocation');
 assert(idx.body.urlList.some(u => u.includes('/blog/2026-07-12-new-post/')), 'recent posts included in submission');
 assert(sentTexts()[0].includes('색인 요청 완료'), '/index reports success');
 
-// 26b. /index tf <slug> → 해당 글만
+// 26b. /index pc <slug> → 해당 글만
 calls.length = 0; res = mockRes();
-await tgHook(tgMsg('/index tf 2026-07-12-new-post'), res);
+await tgHook(tgMsg('/index pc 2026-07-12-new-post'), res);
 const idx2 = calls.find(c => c.url.includes('api.indexnow.org'));
 assert(idx2.body.urlList.length === 1 && idx2.body.urlList[0].includes('2026-07-12-new-post'), '/index with slug submits only that URL');
 
-// 27. /money → 링크 없는 인기글 탐지 (목: 본문에 쿠팡 링크 없음)
+// 27. /money → 링크 없는 인기글 탐지. 뭉게 기준(GA4 인기글 × WP 본문)으로 재작성됨.
 calls.length = 0; res = mockRes();
 await tgHook(tgMsg('/money'), res);
 out = sentTexts().join('\n');
-assert(out.includes('수익화 커버리지'), '/money reports coverage');
-assert(out.includes('2026-07-12-new-post') || out.includes('링크 있음'), '/money lists posts or confirms coverage');
+assert(out.includes('수익화 커버리지') && out.includes('뭉게'), '/money reports mungge coverage');
+assert(!/life-revenue|ai-revenue-blog\.vercel/.test(out), '/money no longer points at dead TF/LF sites');
 
 // ── 일일 리포트 ──
 const { default: reportHook } = await import('../api/daily-report.js');
@@ -490,10 +551,13 @@ calls.length = 0; res = mockRes();
 await reportHook({ method: 'POST', headers: { authorization: 'Bearer croncron' } }, res);
 out = sentTexts().join('\n');
 assert(res.code === 200, 'daily-report returns 200');
-assert(out.includes('일일 리포트') && out.includes('조회수') && out.includes('방문자') && out.includes('신규 댓글') && out.includes('신규 좋아요') && out.includes('쿠팡 클릭'), 'report covers all requested metrics');
-assert(out.includes('독자') && out.includes('노트북 거치대'), 'report includes new comments and coupang products');
-// 유입 경로 (검색 유입 강조)
-assert(out.includes('유입 경로') && out.includes('구글 검색') && out.includes('직접/북마크'), 'report breaks down referrers');
+assert(out.includes('일일 리포트') && out.includes('뭉게') && out.includes('조회수') && out.includes('방문자'), 'report covers mungge traffic');
+assert(out.includes('상호작용') && out.includes('좋아요') && out.includes('쿠팡클릭') && out.includes('댓글'), 'report covers interactions');
+assert(out.includes('뭉게독자') && out.includes('노트북 거치대'), 'report includes mungge WP comments and coupang products');
+assert(!/레거시|TechFlow|LifeFlow/.test(out), 'report has no TF/LF legacy block');
+// 유입 경로 (검색 유입 강조 — 네이버는 GA4 가 Referral 로 넣으므로 재분류돼야 한다)
+assert(out.includes('유입 경로') && out.includes('네이버 검색') && out.includes('구글 검색') && out.includes('직접/북마크'), 'report breaks down referrers');
+assert(out.includes('전체 글') && out.includes('196'), 'report shows WP post count');
 // 오늘의 추천 주제 (커뮤니티 화제 → /generate 연결)
 assert(out.includes('오늘의 추천 주제') && out.includes('/generate'), 'report suggests topics from community');
 

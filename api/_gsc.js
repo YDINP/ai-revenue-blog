@@ -15,7 +15,7 @@ export const hasGsc = hasGoogleSa;
 
 const accessToken = () => googleToken(SCOPE);
 
-// site: 'https://ai-revenue-blog.vercel.app/' (URL 프리픽스 속성)
+// site: 'https://mungge.com/' (URL 프리픽스 속성 — 도메인 속성이면 sc-domain: 으로 폴백)
 async function query(site, body) {
   const token = await accessToken();
   const call = async (s) => {

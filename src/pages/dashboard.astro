@@ -1,109 +1,18 @@
 ---
 import '../styles/global.css';
-import { getCollection } from 'astro:content';
 
-// TechFlow 실제 블로그 포스트 파일 기반 통계 (빌드 타임)
-const allPosts = await getCollection('blog', ({ data }) => !data.draft);
-const tfPostCount = allPosts.length;
-// 슬러그→현재 제목 맵 — topPages가 analytics에 저장된(옛) 제목 대신 현재 제목을 쓰게(제목 변경 즉시 반영)
-const slugTitles: Record<string, string> = {};
-for (const p of allPosts) slugTitles[String(p.id).replace(/\.mdx?$/, '')] = p.data.title;
-
-// TechFlow 카테고리별 포스트 수
-const tfCategoryMap: Record<string, number> = {};
-for (const post of allPosts) {
-  const cat = post.data.category;
-  tfCategoryMap[cat] = (tfCategoryMap[cat] || 0) + 1;
-}
-
-// 카테고리 고정 색상 (엔티티 기준 — 정렬 순서가 바뀌어도 색은 따라가지 않음)
-// 다크 서피스(#1e293b) 대비 검증 통과 팔레트
-const TF_CAT_COLORS: Record<string, string> = {
-  AI: '#3b82f6',
-  Dev: '#16a34a',
-  Review: '#bf8700',
-  Game: '#a855f7',
-};
-const CAT_FALLBACK_COLORS = ['#ea580c', '#ec4899', '#0891b2'];
-
-const tfCategoryStats = Object.entries(tfCategoryMap)
-  .sort((a, b) => b[1] - a[1])
-  .map(([name, count]) => ({ name, count }));
-
-// 고정 매핑에 없는 카테고리는 이름순으로 폴백 색상 할당 (결정적)
-{
-  const unknown = tfCategoryStats
-    .filter(c => !TF_CAT_COLORS[c.name])
-    .map(c => c.name)
-    .sort();
-  unknown.forEach((name, i) => {
-    TF_CAT_COLORS[name] = CAT_FALLBACK_COLORS[i % CAT_FALLBACK_COLORS.length];
-  });
-}
-const tfCatColor = (name: string) => TF_CAT_COLORS[name] || '#94a3b8';
-
-// TechFlow 최근 포스트 (최신 5개)
-const tfRecentPosts = allPosts
-  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
-  .slice(0, 5)
-  .map(p => ({
-    title: p.data.title,
-    category: p.data.category,
-    pubDate: p.data.pubDate.toISOString().split('T')[0],
-    slug: p.id,
-  }));
-
-// LifeFlow 데이터: 별도 레포/사이트라 파일을 직접 읽을 수 없어 RSS 로 집계한다.
-// 빌드 타임에 한 번 파싱 → 모든 섹션(KPI·도넛·범례)이 실제 편수를 렌더.
-// 빌드 중 RSS 를 못 받으면 0 으로 두고, 브라우저의 fetchLifeFlowRSS() 가 채운다.
-const LF_CAT_COLORS: Record<string, string> = {
-  Lifestyle: '#ec4899',
-  Finance: '#3b82f6',
-  Health: '#16a34a',
-  Education: '#a855f7',
-  Travel: '#ea580c',
-};
-const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-
-type LfPost = { title: string; slug: string; category: string; date: string };
-let lfPosts: LfPost[] = [];
-try {
-  const res = await fetch('https://life-revenue-blog.vercel.app/rss.xml');
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const xml = await res.text();
-  lfPosts = xml.split('<item>').slice(1).map((item) => {
-    const pick = (tag: string) =>
-      item.match(new RegExp(`<${tag}>(?:<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>)?</${tag}>`))?.[1]?.trim() || '';
-    const link = pick('link');
-    return {
-      title: pick('title'),
-      slug: link.split('/').filter(Boolean).pop() || '',
-      // 첫 <category> 만 frontmatter.category, 뒤따르는 것들은 태그다
-      category: cap(pick('category')),
-      date: pick('pubDate'),
-    };
-  });
-} catch (e) {
-  console.warn('[dashboard] LifeFlow RSS 빌드타임 로드 실패 — 클라이언트 로드에 위임:', e);
-}
-
-const lfCategoryMap: Record<string, number> = {};
-for (const p of lfPosts) {
-  if (p.category) lfCategoryMap[p.category] = (lfCategoryMap[p.category] || 0) + 1;
-}
-const lfCategories = Object.entries(lfCategoryMap)
-  .sort((a, b) => b[1] - a[1])
-  .map(([name, count]) => ({ name, count, color: LF_CAT_COLORS[name] || '#94a3b8' }));
-const lfPostCount = lfPosts.length;
-const lfCategoryCount = lfCategories.length;
-
-// 통합 통계 (분모 0 방지 — RSS 실패 시에도 레이아웃이 깨지지 않게)
-// VIP(playcast)는 별도 Vercel 레포라 빌드타임 파일 카운트 불가 → 발행 글 수 수동 상수
+// 이 대시보드가 보는 사이트는 **뭉게(mungge.com)** 와 VIP(playcast) 둘이다.
+//
+// 2026-07-30 — TF(ai-revenue) · LF(life-revenue) 제거. 두 사이트는 뭉게로 301 통합돼
+// 리다이렉트 셸만 남았다. 예전 구조는
+//   · TF = 이 레포의 content collection(getCollection('blog'))
+//   · LF = 빌드 중 life-revenue-blog/rss.xml fetch
+// 였는데, 죽은 사이트에 빌드가 의존하는 구조(RSS 가 죽으면 편수가 0)라 함께 걷어냈다.
+//
+// 뭉게는 WordPress 직접 운영이라 **빌드타임 데이터가 없다** — 글 수·카테고리·최근 글은
+// 전부 런타임에 WP REST 로 읽는다(loadMunggePosts / renderMunggeSection).
+// VIP(playcast)는 별도 Vercel 레포라 빌드타임 파일 카운트 불가 → 발행 글 수 수동 상수.
 const vipPostCount = 12;
-const totalPosts = tfPostCount + lfPostCount + vipPostCount;
-const totalCategories = tfCategoryStats.length + lfCategoryCount;
-const pctBase = totalPosts || 1;
-const lfBase = lfPostCount || 1;
 
 // 라인 아이콘 (Lucide 계열, 24x24 stroke) — set:html로 <svg>에 주입
 const ICONS: Record<string, string> = {
@@ -134,7 +43,7 @@ const ICONS: Record<string, string> = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog Dashboard | TechFlow + LifeFlow</title>
+    <title>Blog Dashboard | 뭉게 (mungge.com)</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
@@ -156,8 +65,7 @@ const ICONS: Record<string, string> = {
         --text-2: #a1a1aa;
         --text-3: #7c7c87;
         --accent: #3b82f6;
-        --tf: #3b82f6;
-        --lf: #16a34a;
+
         /* 뭉게(mungge.com) — TF 파랑·LF 초록·VIP 민트와 안 겹치도록 앰버 */
         --mg: #f59e0b;
         --good: #22c55e;
@@ -174,7 +82,7 @@ const ICONS: Record<string, string> = {
         --dash-text: var(--text);
         --dash-text-dim: var(--text-2);
         --dash-accent: var(--accent);
-        --dash-green: var(--lf);
+        --dash-green: #16a34a;
         --dash-yellow: var(--warn);
         --dash-red: var(--bad);
         --dash-purple: #a855f7;
@@ -229,8 +137,8 @@ const ICONS: Record<string, string> = {
         letter-spacing: -0.01em;
       }
 
-      .logo-tf { color: var(--tf); }
-      .logo-lf { color: #4ade80; }
+      .logo-mg { color: var(--mg); }
+      .logo-vip { color: #57e6c3; }
       .logo-sep { color: var(--text-3); font-weight: 400; }
 
       .dash-header .meta {
@@ -308,8 +216,7 @@ const ICONS: Record<string, string> = {
       .main-tab:hover { color: var(--text); }
 
       .main-tab.active,
-      .main-tab.active-tf,
-      .main-tab.active-lf,
+      .main-tab.active-mg,
       .main-tab.active-coupang,
       .main-tab.active-paperdoc,
       .main-tab.active-comments,
@@ -366,8 +273,7 @@ const ICONS: Record<string, string> = {
       .gsc-table td.num { text-align: right; white-space: nowrap; }
       .gsc-page-cell { max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .gsc-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; padding: 0.05rem 0.3rem; border-radius: 4px; margin-right: 0.35rem; }
-      .gsc-badge-blog { background: rgba(96,165,250,0.16); color: #60a5fa; }
-      .gsc-badge-lifeflow { background: rgba(74,222,128,0.16); color: #4ade80; }
+      .gsc-badge-mg { background: rgba(245,158,11,0.16); color: #fbbf24; }
       .gsc-badge-playcast { background: rgba(87,230,195,0.16); color: #57e6c3; }
       /* 기기·브라우저·OS 3열 — 2열 그리드(gsc-source-grid)에 3장을 넣으면 마지막 장만 아래로 떨어진다 */
       .gsc-source-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
@@ -435,8 +341,7 @@ const ICONS: Record<string, string> = {
         background: var(--surface-2);
       }
 
-      .split-tf { background: var(--tf); }
-      .split-lf { background: var(--lf); margin-left: 2px; }
+
       .split-vip { background: #57e6c3; margin-left: 2px; }
       .split-mg { background: var(--mg); margin-left: 2px; }
 
@@ -516,8 +421,7 @@ const ICONS: Record<string, string> = {
         border-radius: 4px;
       }
 
-      .trend-bar-tf { background: var(--tf); }
-      .trend-bar-lf { background: var(--lf); }
+      .trend-bar-mg { background: var(--mg); }
 
       /* 스택 세그먼트 사이 2px 서피스 갭 */
       .trend-bar-stack > div + div,
@@ -563,11 +467,9 @@ const ICONS: Record<string, string> = {
         border-radius: 2px;
       }
 
-      .trend-legend .leg-tf::before { background: var(--tf); }
-      .trend-legend .leg-lf::before { background: var(--lf); }
+      .trend-legend .leg-mg::before { background: var(--mg); }
+      .trend-legend .leg-vip::before { background: #57e6c3; }
 
-      .dot-tf { width: 7px; height: 7px; border-radius: 50%; background: var(--tf); display: inline-block; }
-      .dot-lf { width: 7px; height: 7px; border-radius: 50%; background: var(--lf); display: inline-block; }
       .dot-vip { width: 7px; height: 7px; border-radius: 50%; background: #57e6c3; display: inline-block; }
       .dot-mg { width: 7px; height: 7px; border-radius: 50%; background: var(--mg); display: inline-block; }
 
@@ -615,7 +517,7 @@ const ICONS: Record<string, string> = {
       .daily-detail-table tr.dd-today td { background: rgba(59, 130, 246, 0.10); font-weight: 700; }
       .dd-views { color: #60a5fa; font-weight: 600; }
       .dd-visitors { color: #4ade80; font-weight: 600; }
-      .dd-minibar { display: inline-block; height: 6px; background: var(--tf); border-radius: 3px; min-width: 2px; }
+      .dd-minibar { display: inline-block; height: 6px; background: var(--mg); border-radius: 3px; min-width: 2px; }
       .dd-bar-col { width: 120px; }
       .dd-note { margin: 8px 2px 0; font-size: 0.72rem; color: var(--text-3); }
 
@@ -805,8 +707,7 @@ const ICONS: Record<string, string> = {
         overflow: hidden;
       }
 
-      .bar-tf { background: var(--tf); }
-      .bar-lf { background: var(--lf); }
+      .bar-mg { background: var(--mg); }
       .bar-vip { background: #57e6c3; }
 
       .chart-bar-label {
@@ -864,8 +765,7 @@ const ICONS: Record<string, string> = {
 
       .source-tab:hover { color: var(--text); }
       .source-tab.active { background: var(--surface-2); border-color: var(--border-strong); color: var(--text); }
-      .source-tab.active-tf { background: rgba(59, 130, 246, 0.15); border-color: var(--tf); color: #93bbfd; }
-      .source-tab.active-lf { background: rgba(22, 163, 74, 0.15); border-color: var(--lf); color: #6ee7a5; }
+      .source-tab.active-mg { background: rgba(245, 158, 11, 0.15); border-color: var(--mg); color: #fbbf24; }
       .source-tab.active-vip { background: rgba(87, 230, 195, 0.15); border-color: #57e6c3; color: #7fe9d0; }
       .source-tab.active-mg { background: rgba(245, 158, 11, 0.15); border-color: var(--mg); color: #fbbf24; }
 
@@ -964,11 +864,10 @@ const ICONS: Record<string, string> = {
         letter-spacing: 0.02em;
       }
 
-      .src-badge.tf { background: rgba(59, 130, 246, 0.15); color: #93bbfd; }
-      .src-badge.lf { background: rgba(22, 163, 74, 0.15); color: #6ee7a5; }
-      .src-badge.gf { background: rgba(168, 85, 247, 0.15); color: #d8b4fe; }
       .src-badge.vip { background: rgba(87, 230, 195, 0.15); color: #7fe9d0; }
       .src-badge.mg { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+      /* 삭제된 소스(구 TF/LF/GF)의 과거 행 — 회색으로 눌러 현재 소스와 시각적으로 구분 */
+      .src-badge.legacy { background: rgba(148, 163, 184, 0.14); color: #94a3b8; }
       .event-ref { font-size: 0.66rem; color: var(--text-3); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .mg-untracked { color: #fbbf24; opacity: 0.85; }
 
@@ -1109,8 +1008,7 @@ const ICONS: Record<string, string> = {
         font-variant-numeric: tabular-nums;
       }
 
-      .badge-tf { background: rgba(59, 130, 246, 0.15); color: #93bbfd; }
-      .badge-lf { background: rgba(22, 163, 74, 0.15); color: #6ee7a5; }
+
 
       .section-body { padding: 1.125rem 1.25rem; }
 
@@ -1475,8 +1373,7 @@ const ICONS: Record<string, string> = {
         min-height: 4px;
       }
 
-      .trend-bar.tf { background: var(--tf); }
-      .trend-bar.lf { background: var(--lf); }
+      .trend-bar.mg { background: var(--mg); }
       .trend-bar.vip { background: #57e6c3; }
 
       .trend-label { font-size: 0.6875rem; color: var(--text-2); }
@@ -1504,8 +1401,8 @@ const ICONS: Record<string, string> = {
         margin-top: 0.125rem;
       }
 
-      .cm-source.tf { background: rgba(59, 130, 246, 0.15); color: #93bbfd; }
-      .cm-source.lf { background: rgba(22, 163, 74, 0.15); color: #6ee7a5; }
+      .cm-source.mg { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+      .cm-source.legacy { background: rgba(148, 163, 184, 0.14); color: #94a3b8; }
 
       .cm-body { flex: 1; min-width: 0; }
 
@@ -1958,7 +1855,7 @@ const ICONS: Record<string, string> = {
       #tp-heatmap-view { height: 400px; display: flex; flex-direction: column; }
       .traffic-list { max-height: 352px; }
 
-      /* 시간대 그룹 막대 (TF/LF 분리) — 2줄로 채움 */
+      /* 시간대 그룹 막대 (뭉게/VIP 분리) — 2줄로 채움 */
       #tp-hourly-view .traffic-chart-wrap { display: flex; flex-direction: column; justify-content: center; }
       .hourly-2row { display: flex; flex-direction: column; gap: 0.5rem; width: 100%; }
       .hourly-2row .chart-bars { height: 128px; padding-bottom: 1.35rem; }
@@ -1966,8 +1863,7 @@ const ICONS: Record<string, string> = {
       .hourly-grouped .chart-bar-col { justify-content: flex-end; }
       .hbar-group { display: flex; align-items: flex-end; justify-content: center; gap: 1px; width: 100%; height: 96px; }
       .hbar { width: 42%; max-width: 11px; border-radius: 2px 2px 0 0; }
-      .hbar.bar-tf { background: var(--tf); }
-      .hbar.bar-lf { background: var(--lf); }
+      .hbar.bar-mg { background: var(--mg); }
       .hbar.bar-vip { background: #57e6c3; }
 
       /* 히트맵 컨트롤 + 고정 프레임(내부 스크롤) */
@@ -2130,15 +2026,15 @@ const ICONS: Record<string, string> = {
 
     <header class="dash-header">
       <h1>
-        <span class="logo-tf">TechFlow</span>
+        <span class="logo-mg">뭉게</span>
         <span class="logo-sep">+</span>
-        <span class="logo-lf">LifeFlow</span>
+        <span class="logo-vip">VIP</span>
         Dashboard
       </h1>
       <div class="meta">
         <span class="live-dot"></span>
         <span id="last-updated">Loading...</span>
-        <a href="/" style="color: var(--dash-accent); text-decoration: none; font-size: 0.8125rem;">Blog &rarr;</a>
+        <a href="https://mungge.com" target="_blank" rel="noopener" style="color: var(--dash-accent); text-decoration: none; font-size: 0.8125rem;">뭉게 &rarr;</a>
         <button id="logout-btn" title="인증 해제">로그아웃</button>
       </div>
     </header>
@@ -2150,8 +2046,7 @@ const ICONS: Record<string, string> = {
       <!-- Main Tabs -->
       <div class="main-tabs">
         <button class="main-tab active" data-tab="all">전체 요약</button>
-        <button class="main-tab" data-tab="techflow">TechFlow</button>
-        <button class="main-tab" data-tab="lifeflow">LifeFlow</button>
+        <button class="main-tab" data-tab="mungge">🌐 뭉게</button>
         <button class="main-tab" data-tab="vip">VIP</button>
         <button class="main-tab" data-tab="gsc">🔍 검색(GSC)</button>
         <button class="main-tab" data-tab="ga4">🌐 뭉게 유입</button>
@@ -2173,7 +2068,7 @@ const ICONS: Record<string, string> = {
         <div class="summary-card accent-blue color-blue">
           <div class="kpi-top">
             <span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['activity']}></svg></span>
-            <div class="label">금일 방문자 <span class="src-badge tf">TF</span><span class="src-badge lf">LF</span><span class="src-badge vip">VIP</span><span class="src-badge mg">뭉게</span></div>
+            <div class="label">금일 방문자 <span class="src-badge mg">뭉게</span><span class="src-badge vip">VIP</span></div>
           </div>
           <div class="kpi-value-row">
             <div class="value" id="kpi-today-visitors">--</div>
@@ -2184,7 +2079,7 @@ const ICONS: Record<string, string> = {
         <div class="summary-card accent-purple color-purple">
           <div class="kpi-top">
             <span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['eye']}></svg></span>
-            <div class="label">금일 조회수 <span class="src-badge tf">TF</span><span class="src-badge lf">LF</span><span class="src-badge vip">VIP</span><span class="src-badge mg">뭉게</span></div>
+            <div class="label">금일 조회수 <span class="src-badge mg">뭉게</span><span class="src-badge vip">VIP</span></div>
           </div>
           <div class="kpi-value-row">
             <div class="value" id="kpi-today-views">--</div>
@@ -2198,21 +2093,18 @@ const ICONS: Record<string, string> = {
             <div class="label">Total Posts</div>
           </div>
           <div class="kpi-value-row">
-            <div class="value" id="total-post-count">{totalPosts}</div>
+            <!-- 뭉게는 WordPress라 빌드시점에 글 수를 알 수 없다 → WP REST로 런타임 주입.
+                 그래서 초기 렌더는 VIP 몫만 보이고 applyMungge() 가 합계로 덮어쓴다. -->
+            <div class="value" id="total-post-count" data-base={vipPostCount}>{vipPostCount}</div>
           </div>
-          <div class="sub" id="total-post-sub">TechFlow {tfPostCount} + LifeFlow {lfPostCount} + VIP {vipPostCount}</div>
+          <div class="sub" id="total-post-sub" data-base={`VIP ${vipPostCount}`}>VIP {vipPostCount}</div>
           <div class="source-split-bar" style="margin-top:0.5rem;">
-            <div class="split-tf" id="total-split-tf" style={`width:${Math.round(tfPostCount / pctBase * 100)}%`}></div>
-            <div class="split-lf" id="total-split-lf" style={`width:${Math.round(lfPostCount / pctBase * 100)}%`}></div>
-            <div class="split-vip" id="total-split-vip" style={`width:${Math.round(vipPostCount / pctBase * 100)}%`}></div>
-            <!-- 뭉게는 WordPress라 빌드시점에 글 수를 알 수 없다 → WP REST로 런타임 주입 -->
             <div class="split-mg" id="total-split-mg" style="width:0%"></div>
+            <div class="split-vip" id="total-split-vip" style="width:100%"></div>
           </div>
           <div class="split-legend">
-            <span id="total-split-tf-pct">TF {Math.round(tfPostCount / pctBase * 100)}%</span>
-            <span id="total-split-lf-pct">LF {Math.round(lfPostCount / pctBase * 100)}%</span>
-            <span id="total-split-vip-pct">VIP {Math.round(vipPostCount / pctBase * 100)}%</span>
             <span id="total-split-mg-pct"></span>
+            <span id="total-split-vip-pct">VIP 100%</span>
           </div>
         </div>
         <div class="summary-card accent-green color-green">
@@ -2221,10 +2113,10 @@ const ICONS: Record<string, string> = {
             <div class="label">Categories</div>
           </div>
           <div class="kpi-value-row">
-            <!-- 뭉게 카테고리는 WP REST 로 런타임에 더해진다(빌드시점에 알 수 없음) -->
-            <div class="value" id="total-cat-count" data-base={totalCategories}>{totalCategories}</div>
+            <!-- 뭉게 카테고리는 WP REST 로 런타임에 채워진다(빌드시점에 알 수 없음) -->
+            <div class="value" id="total-cat-count" data-base="0">--</div>
           </div>
-          <div class="sub" id="total-cat-sub" data-base={`TechFlow ${tfCategoryStats.length} + LifeFlow ${lfCategoryCount}`}>TechFlow {tfCategoryStats.length} + LifeFlow {lfCategoryCount}</div>
+          <div class="sub" id="total-cat-sub" data-base="뭉게">WordPress 조회 중...</div>
         </div>
         <div class="summary-card accent-purple color-purple">
           <div class="kpi-top">
@@ -2237,17 +2129,16 @@ const ICONS: Record<string, string> = {
           </div>
           <div class="sub" id="views-sub">Supabase 로딩 중...</div>
           <div class="source-split-bar" id="views-split-bar">
-            <div class="split-tf" id="views-split-tf" style="width:50%"></div>
-            <div class="split-lf" id="views-split-lf" style="width:50%"></div>
-            <div class="split-vip" id="views-split-vip" style="width:0%"></div>
             <div class="split-mg" id="views-split-mg" style="width:0%"></div>
+            <div class="split-vip" id="views-split-vip" style="width:0%"></div>
           </div>
           <div class="split-legend">
-            <span>TF: <b id="tf-total-views">--</b></span>
-            <span>LF: <b id="lf-total-views">--</b></span>
-            <span>VIP: <b id="vip-total-views">--</b></span>
             <span>뭉게: <b id="mg-total-views">--</b></span>
+            <span>VIP: <b id="vip-total-views">--</b></span>
           </div>
+          <!-- 뭉게 누적은 GA4 수집 시작(2026-07-27) 이후만 존재한다. 이 카드가 갑자기
+               작아 보이는 건 트래픽이 줄어서가 아니라 기준일이 늦어서다. -->
+          <div class="sub mg-untracked">뭉게 누적은 2026-07-27부터</div>
         </div>
         <div class="summary-card accent-purple color-purple">
           <div class="kpi-top">
@@ -2259,8 +2150,8 @@ const ICONS: Record<string, string> = {
             <span class="delta-chip flat" id="pd-summary-delta">--</span>
           </div>
           <div class="sub" id="pd-summary-sub">추적 중...</div>
-          <!-- 뭉게에는 클릭 추적이 없다. 0을 조용히 두면 "뭉게에서 클릭이 없다"로 오해된다. -->
-          <div class="sub mg-untracked">뭉게 미추적</div>
+          <!-- 뭉게 클릭은 2026-07-30 트래커 주입(scripts/wp-affiliate.js) 이후분만 있다 -->
+          <div class="sub mg-untracked">뭉게 추적 07-30부터</div>
         </div>
         <div class="summary-card accent-yellow color-amber">
           <div class="kpi-top">
@@ -2272,7 +2163,7 @@ const ICONS: Record<string, string> = {
             <span class="delta-chip flat" id="clicks-delta-chip">--</span>
           </div>
           <div class="sub" id="clicks-sub">추적 중...</div>
-          <div class="sub mg-untracked">뭉게 미추적</div>
+          <div class="sub mg-untracked">뭉게 추적 07-30부터</div>
         </div>
         <div class="summary-card accent-green color-green" id="gsc-sum-card" style="cursor:pointer;" title="클릭하면 검색(GSC) 상세 탭으로 이동">
           <div class="kpi-top">
@@ -2336,8 +2227,8 @@ const ICONS: Record<string, string> = {
               <div class="no-data">Loading...</div>
             </div>
             <div class="trend-legend" id="traffic-legend">
-              <span class="leg-tf">TechFlow</span>
-              <span class="leg-lf">LifeFlow</span>
+              <span class="leg-mg">뭉게</span>
+              <span class="leg-vip">VIP</span>
             </div>
           </div>
           <div class="traffic-table-wrap">
@@ -2358,8 +2249,8 @@ const ICONS: Record<string, string> = {
                 <div class="hourly-2row" id="hourly-chart"></div>
               </div>
               <div class="trend-legend">
-                <span class="leg-tf">TechFlow</span>
-                <span class="leg-lf">LifeFlow</span>
+                <span class="leg-mg">뭉게</span>
+                <span class="leg-vip">VIP</span>
               </div>
             </div>
             <div class="traffic-table-wrap">
@@ -2390,7 +2281,7 @@ const ICONS: Record<string, string> = {
           </div>
           <div class="hm-tip" id="hm-tip"></div>
         </div>
-        <p class="dd-note" id="traffic-note">※ 방문자 = 고유 브라우저(User-Agent) 기준 추정치. 방문자 TF/LF는 조회 비율로 안분한 추정. 주간·월간은 일자 합산이라 실제 순방문자보다 클 수 있음.</p>
+        <p class="dd-note" id="traffic-note">※ 뭉게 방문자·조회수는 GA4(Site Kit) 실측, VIP는 자체 트래커의 고유 브라우저(User-Agent) 기준 추정치. 주간·월간은 일자 합산이라 실제 순방문자보다 클 수 있음.</p>
       </div>
 
       <!-- ══ Row 3: 오늘 현황 (전폭 4-스탯) ══ -->
@@ -2405,8 +2296,8 @@ const ICONS: Record<string, string> = {
             <div class="metric-value" id="t-today-views">--</div>
             <div class="metric-delta neutral" id="t-views-delta">loading...</div>
             <div class="metric-breakdown" id="t-views-breakdown">
-              <span><i class="dot-tf"></i> TF: --</span>
-              <span><i class="dot-lf"></i> LF: --</span>
+              <span><i class="dot-mg"></i> 뭉게: --</span>
+              <span><i class="dot-vip"></i> VIP: --</span>
             </div>
           </div>
           <div class="metric-box">
@@ -2414,8 +2305,8 @@ const ICONS: Record<string, string> = {
             <div class="metric-value" id="t-today-clicks">--</div>
             <div class="metric-delta neutral" id="t-clicks-delta">loading...</div>
             <div class="metric-breakdown" id="t-clicks-breakdown">
-              <span><i class="dot-tf"></i> TF: --</span>
-              <span><i class="dot-lf"></i> LF: --</span>
+              <span><i class="dot-mg"></i> 뭉게: --</span>
+              <span><i class="dot-vip"></i> VIP: --</span>
             </div>
           </div>
           <div class="metric-box">
@@ -2445,10 +2336,8 @@ const ICONS: Record<string, string> = {
           </div>
           <div class="source-tabs" id="top-pages-tabs">
             <button class="source-tab active" data-filter="all">All</button>
-            <button class="source-tab" data-filter="blog">TechFlow</button>
-            <button class="source-tab" data-filter="lifeflow">LifeFlow</button>
-            <button class="source-tab" data-filter="vip">VIP</button>
             <button class="source-tab" data-filter="mg">뭉게</button>
+            <button class="source-tab" data-filter="vip">VIP</button>
           </div>
           <div class="top-page-list" id="top-pages">
             <div class="no-data">Loading...</div>
@@ -2461,10 +2350,8 @@ const ICONS: Record<string, string> = {
                다만 pageview 는 GA4 라 여기엔 안 잡힌다 — 조회수는 '뭉게 유입' 탭에서 본다. -->
           <div class="source-tabs" id="event-tabs">
             <button class="source-tab active" data-filter="all">All</button>
-            <button class="source-tab" data-filter="blog">TechFlow</button>
-            <button class="source-tab" data-filter="lifeflow">LifeFlow</button>
-            <button class="source-tab" data-filter="vip">VIP</button>
             <button class="source-tab" data-filter="mg">뭉게</button>
+            <button class="source-tab" data-filter="vip">VIP</button>
           </div>
           <div class="event-feed" id="event-feed">
             <div class="no-data">Loading...</div>
@@ -2486,12 +2373,12 @@ const ICONS: Record<string, string> = {
         <div class="panel col-6">
           <div class="panel-head">
             <h4><svg class="ico sec-ico i-cyan" viewBox="0 0 24 24" set:html={ICONS['link']}></svg> 유입경로</h4>
-            <!-- 블로그(TF·LF·VIP)는 analytics 의 referrer, 뭉게는 GA4 채널 — 소스를 섞으면
+            <!-- VIP 는 analytics 의 referrer, 뭉게는 GA4 채널 — 소스를 섞으면
                  분류 기준이 달라 오해를 부른다 → 토글로 분리해서 본다 -->
             <div class="seg-toggle" id="ref-src">
               <button class="seg-btn active" data-rs="all">전체</button>
-              <button class="seg-btn" data-rs="blog">블로그</button>
               <button class="seg-btn" data-rs="mg">뭉게</button>
+              <button class="seg-btn" data-rs="blog">VIP</button>
             </div>
           </div>
           <div class="cat-traffic-bars" id="ref-bars">
@@ -2508,8 +2395,8 @@ const ICONS: Record<string, string> = {
             </div>
             <div class="seg-toggle" id="audience-src">
               <button class="seg-btn active" data-as="all">전체</button>
-              <button class="seg-btn" data-as="blog">블로그</button>
               <button class="seg-btn" data-as="mg">뭉게</button>
+              <button class="seg-btn" data-as="blog">VIP</button>
             </div>
           </div>
           <div id="audience-donut">
@@ -2535,94 +2422,10 @@ const ICONS: Record<string, string> = {
           <b>뭉게는 제외</b> — 뭉게에는 쿠팡·페이퍼닥 클릭 추적이 없어 페이지뷰만 더하면 분모만 커져 전환율이 실제보다 낮게 나온다.</p>
       </div>
 
-      <!-- ══ Row 6: TechFlow(6) + LifeFlow(6) 콘텐츠 구성 ══ -->
+      <!-- ══ Row 6: 콘텐츠 구성 (뭉게 + VIP) ══ -->
+      <!-- TF·LF 섹션은 삭제됐다. 두 사이트의 글은 전부 뭉게로 이관됐고, 편수·카테고리는
+           WordPress 가 SSOT 라 빌드타임이 아니라 WP REST(런타임)로 읽는다. -->
       <div class="blog-sections">
-        <!-- TechFlow Section -->
-        <div class="blog-section">
-          <div class="section-header">
-            <div class="section-title">
-              <svg class="ico sec-ico i-blue" viewBox="0 0 24 24" set:html={ICONS['pie']}></svg>
-              TechFlow
-            </div>
-            <span class="section-badge badge-tf">{tfPostCount}편</span>
-          </div>
-          <div class="section-body">
-            <div class="cat-donut-wrap">
-              <div class="cat-donut" style={`background: conic-gradient(${tfCategoryStats.map((c, i) => {
-                const pctBefore = tfCategoryStats.slice(0, i).reduce((s, x) => s + x.count, 0) / tfPostCount * 100;
-                const pct = c.count / tfPostCount * 100;
-                const g = tfCategoryStats.length > 1 ? Math.min(1, pct / 4) : 0;
-                return `#1e293b ${pctBefore}% ${pctBefore + g}%, ${tfCatColor(c.name)} ${pctBefore + g}% ${pctBefore + pct}%`;
-              }).join(', ')})`}>
-                <div class="cat-donut-hole">
-                  <span class="donut-num">{tfPostCount}</span>
-                  <span class="donut-label">포스트</span>
-                </div>
-              </div>
-              <div class="cat-legend">
-                {tfCategoryStats.map((c) => (
-                  <div class="cat-legend-item">
-                    <span class="cat-legend-dot" style={`background:${tfCatColor(c.name)}`}></span>
-                    <span class="cat-legend-name">{c.name}</span>
-                    <span class="cat-legend-count">{c.count}</span>
-                    <span class="cat-legend-pct">{Math.round(c.count / tfPostCount * 100)}%</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div class="recent-list">
-              {tfRecentPosts.map((p, i) => (
-                <div class="recent-item">
-                  <span class="recent-rank">{i + 1}</span>
-                  <span class="recent-title">{p.title}</span>
-                  <span class={`cat-badge cat-${p.category.toLowerCase()}`}>{p.category}</span>
-                  <span class="recent-date">{p.pubDate}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <!-- LifeFlow Section -->
-        <div class="blog-section">
-          <div class="section-header">
-            <div class="section-title">
-              <svg class="ico sec-ico i-green" viewBox="0 0 24 24" set:html={ICONS['pie']}></svg>
-              LifeFlow
-            </div>
-            <span class="section-badge badge-lf" id="lf-overview-badge">{lfPostCount}편</span>
-          </div>
-          <div class="section-body">
-            <div class="cat-donut-wrap" id="lf-overview-donut-wrap">
-              <div class="cat-donut" style={`background: conic-gradient(${lfCategories.map((c, i) => {
-                const pctBefore = lfCategories.slice(0, i).reduce((s, x) => s + x.count, 0) / lfBase * 100;
-                const pct = c.count / lfBase * 100;
-                const g = lfCategories.length > 1 ? Math.min(1, pct / 4) : 0;
-                return `#1e293b ${pctBefore}% ${pctBefore + g}%, ${c.color} ${pctBefore + g}% ${pctBefore + pct}%`;
-              }).join(', ')})`}>
-                <div class="cat-donut-hole">
-                  <span class="donut-num">{lfPostCount}</span>
-                  <span class="donut-label">포스트</span>
-                </div>
-              </div>
-              <div class="cat-legend" id="lf-overview-cat-legend">
-                {lfCategories.map(c => (
-                  <div class="cat-legend-item">
-                    <span class="cat-legend-dot" style={`background:${c.color}`}></span>
-                    <span class="cat-legend-name">{c.name}</span>
-                    <span class="cat-legend-count">{c.count}</span>
-                    <span class="cat-legend-pct">{Math.round(c.count / lfBase * 100)}%</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div class="recent-list" id="lf-recent-list">
-              <div class="loading"><div class="spinner"></div>정적 데이터</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 뭉게 Section — WordPress라 빌드시점 데이터가 없어 WP REST로 런타임 구성 -->
         <div class="blog-section">
           <div class="section-header">
             <div class="section-title">
@@ -2638,6 +2441,20 @@ const ICONS: Record<string, string> = {
             <div class="recent-list" id="mg-recent-list"></div>
           </div>
         </div>
+
+        <div class="blog-section">
+          <div class="section-header">
+            <div class="section-title">
+              <svg class="ico sec-ico" style="color:#57e6c3" viewBox="0 0 24 24" set:html={ICONS['pie']}></svg>
+              VIP (playcast)
+            </div>
+            <span class="section-badge" id="vip-overview-badge" style="background:rgba(87,230,195,0.15);color:#7fe9d0;">{vipPostCount}편</span>
+          </div>
+          <div class="section-body">
+            <p class="dd-note">게임 소개 영상 채널. 카테고리·쿠팡 없이 조회수만 집계돼요.</p>
+            <div class="recent-list" id="vip-recent-list"></div>
+          </div>
+        </div>
       </div>
 
       <!-- ══ Row 7: 시스템 상태(8) + 바로가기(4) ══ -->
@@ -2646,23 +2463,19 @@ const ICONS: Record<string, string> = {
           <h3><svg class="ico sec-ico i-green" viewBox="0 0 24 24" set:html={ICONS['server']}></svg> System Status</h3>
           <div class="status-grid">
             <div class="status-item">
-              <span>TechFlow (Vercel)</span>
-              <span class="status-badge online">Online</span>
-            </div>
-            <div class="status-item">
-              <span>LifeFlow (Vercel)</span>
-              <span class="status-badge online">Online</span>
-            </div>
-            <div class="status-item">
               <span>뭉게 (WordPress)</span>
               <span class="status-badge" id="mungge-status">Checking...</span>
+            </div>
+            <div class="status-item">
+              <span>VIP (Vercel)</span>
+              <span class="status-badge online">Online</span>
             </div>
             <div class="status-item">
               <span>Supabase DB</span>
               <span class="status-badge" id="supabase-status">Checking...</span>
             </div>
             <div class="status-item">
-              <span>Pageview Tracking</span>
+              <span>뭉게 자체 트래커</span>
               <span class="status-badge online">Active</span>
             </div>
             <div class="status-item">
@@ -2683,21 +2496,9 @@ const ICONS: Record<string, string> = {
         <div class="links-section col-4">
           <h3><svg class="ico sec-ico i-purple" viewBox="0 0 24 24" set:html={ICONS['link']}></svg> Quick Links</h3>
           <div class="links-grid">
-            <a href="https://github.com/YDINP/ai-revenue-blog" target="_blank" rel="noopener" class="link-btn">
-              <span class="link-icon">&#128187;</span>
-              GitHub TechFlow
-            </a>
-            <a href="https://github.com/YDINP/life-revenue-blog" target="_blank" rel="noopener" class="link-btn">
-              <span class="link-icon">&#128187;</span>
-              GitHub LifeFlow
-            </a>
-            <a href="https://ai-revenue-blog.vercel.app" target="_blank" rel="noopener" class="link-btn">
-              <span class="link-icon">&#9650;</span>
-              Vercel TechFlow
-            </a>
-            <a href="https://life-revenue-blog.vercel.app" target="_blank" rel="noopener" class="link-btn">
-              <span class="link-icon">&#9650;</span>
-              Vercel LifeFlow
+            <a href="https://mungge.com" target="_blank" rel="noopener" class="link-btn">
+              <span class="link-icon">&#127760;</span>
+              뭉게 사이트
             </a>
             <a href="https://github.com/YDINP/playcast-blog" target="_blank" rel="noopener" class="link-btn">
               <span class="link-icon">&#128187;</span>
@@ -2748,15 +2549,15 @@ const ICONS: Record<string, string> = {
             <!-- A: 이 브라우저 즉시 제외 (기록 자체를 안 남김) -->
             <div class="exclude-block">
               <div class="exclude-block-title">① 이 브라우저 즉시 제외 <span class="exclude-tag">미래 · 기록 안 남김</span></div>
-              <p class="exclude-desc">이 브라우저(TechFlow 도메인)의 앞으로의 방문을 <b>아예 기록하지 않게</b> 해요. 지금 보는 이 대시보드에 바로 적용.</p>
+              <p class="exclude-desc">이 브라우저(이 대시보드 도메인)의 앞으로의 방문을 <b>아예 기록하지 않게</b> 해요. 지금 보는 이 대시보드에 바로 적용.</p>
               <div class="exclude-actions">
                 <button id="notrack-toggle" class="ex-btn">…</button>
                 <span id="notrack-status" class="exclude-status">확인 중…</span>
               </div>
-              <p class="exclude-desc" style="margin-top:8px">다른 사이트(LifeFlow·VIP)는 도메인이 달라 각각 눌러 켜야 해요:</p>
+              <p class="exclude-desc" style="margin-top:8px">뭉게·VIP는 도메인이 달라 각각 눌러 켜야 해요 (<code>__notrack</code>은 오리진별 localStorage):</p>
               <div class="exclude-links">
-                <a class="ex-link" href="https://life-revenue-blog.vercel.app/?admin=1" target="_blank" rel="noopener">LifeFlow 제외 ON</a>
-                <a class="ex-link off" href="https://life-revenue-blog.vercel.app/?admin=0" target="_blank" rel="noopener">OFF</a>
+                <a class="ex-link" href="https://mungge.com/?admin=1" target="_blank" rel="noopener">뭉게 제외 ON</a>
+                <a class="ex-link off" href="https://mungge.com/?admin=0" target="_blank" rel="noopener">OFF</a>
                 <a class="ex-link" href="https://virtual-in-playing.vercel.app/?admin=1" target="_blank" rel="noopener">VIP 제외 ON</a>
                 <a class="ex-link off" href="https://virtual-in-playing.vercel.app/?admin=0" target="_blank" rel="noopener">OFF</a>
               </div>
@@ -2786,147 +2587,62 @@ const ICONS: Record<string, string> = {
       </div>
       <!-- End Tab: 전체 요약 -->
 
-      <!-- Tab: TechFlow -->
-      <div class="tab-content" id="tab-techflow">
+      <!-- Tab: 뭉게 -->
+      <!-- TF·LF 탭을 대체한다. 뭉게는 WordPress 라 빌드타임 데이터가 없어 KPI·도넛·최근글이
+           전부 런타임(WP REST + GA4 + 자체 트래커)으로 채워진다 → 초기 마크업은 자리만 잡는다. -->
+      <div class="tab-content" id="tab-mungge">
         <div class="summary-grid">
+          <div class="summary-card accent-yellow color-amber">
+            <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['file-text']}></svg></span><div class="label">뭉게 Posts</div></div>
+            <div class="value" id="mg-tab-posts">--</div>
+            <div class="sub" id="mg-tab-cats">WordPress 조회 중...</div>
+          </div>
+          <div class="summary-card accent-purple color-purple">
+            <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['eye']}></svg></span><div class="label">조회수 <span class="src-badge mg">뭉게</span></div></div>
+            <div class="value" id="mg-tab-views">--</div>
+            <div class="sub" id="mg-tab-views-sub">로딩 중...</div>
+          </div>
           <div class="summary-card accent-blue color-blue">
-            <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['file-text']}></svg></span><div class="label">TechFlow Posts</div></div>
-            <div class="value">{tfPostCount}</div>
-            <div class="sub">{tfCategoryStats.length} 카테고리</div>
-          </div>
-          <div class="summary-card accent-purple color-purple">
-            <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['eye']}></svg></span><div class="label">조회수</div></div>
-            <div class="value" id="tf-tab-views">--</div>
-            <div class="sub" id="tf-tab-views-sub">로딩 중...</div>
+            <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['activity']}></svg></span><div class="label">방문자</div></div>
+            <div class="value" id="mg-tab-users">--</div>
+            <div class="sub" id="mg-tab-users-sub">로딩 중...</div>
           </div>
           <div class="summary-card accent-yellow color-amber">
             <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['cart']}></svg></span><div class="label">쿠팡 클릭</div></div>
-            <div class="value" id="tf-tab-clicks">--</div>
-            <div class="sub" id="tf-tab-clicks-sub">로딩 중...</div>
+            <div class="value" id="mg-tab-clicks">--</div>
+            <div class="sub" id="mg-tab-clicks-sub">로딩 중...</div>
           </div>
           <div class="summary-card accent-green color-green">
             <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['percent']}></svg></span><div class="label">전환율</div></div>
-            <div class="value" id="tf-tab-cvr">--</div>
-            <div class="sub">클릭 / 조회</div>
+            <div class="value" id="mg-tab-cvr">--</div>
+            <div class="sub">쿠팡 클릭 / 조회</div>
+          </div>
+          <div class="summary-card accent-red color-red">
+            <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['heart']}></svg></span><div class="label">추천 · 댓글</div></div>
+            <div class="value" id="mg-tab-likes">--</div>
+            <div class="sub" id="mg-tab-likes-sub">추천 / 댓글(WordPress)</div>
           </div>
         </div>
 
         <div class="blog-section">
           <div class="section-header">
-            <div class="section-title"><svg class="ico sec-ico i-blue" viewBox="0 0 24 24" set:html={ICONS['pie']}></svg>TechFlow 콘텐츠</div>
-            <span class="section-badge badge-tf">{tfPostCount}편</span>
+            <div class="section-title"><svg class="ico sec-ico i-amber" viewBox="0 0 24 24" set:html={ICONS['pie']}></svg>뭉게 콘텐츠 구성</div>
+            <span class="section-badge" id="mg-tab-badge" style="background:rgba(245,158,11,0.15);color:#f59e0b;">--편</span>
           </div>
           <div class="section-body">
-            <div class="cat-donut-wrap">
-              <div class="cat-donut" style={`background: conic-gradient(${tfCategoryStats.map((c, i) => {
-                const pctBefore = tfCategoryStats.slice(0, i).reduce((s, x) => s + x.count, 0) / tfPostCount * 100;
-                const pct = c.count / tfPostCount * 100;
-                const g = tfCategoryStats.length > 1 ? Math.min(1, pct / 4) : 0;
-                return `#1e293b ${pctBefore}% ${pctBefore + g}%, ${tfCatColor(c.name)} ${pctBefore + g}% ${pctBefore + pct}%`;
-              }).join(', ')})`}>
-                <div class="cat-donut-hole">
-                  <span class="donut-num">{tfPostCount}</span>
-                  <span class="donut-label">포스트</span>
-                </div>
-              </div>
-              <div class="cat-legend">
-                {tfCategoryStats.map((c) => (
-                  <div class="cat-legend-item">
-                    <span class="cat-legend-dot" style={`background:${tfCatColor(c.name)}`}></span>
-                    <span class="cat-legend-name">{c.name}</span>
-                    <span class="cat-legend-count">{c.count}</span>
-                    <span class="cat-legend-pct">{Math.round(c.count / tfPostCount * 100)}%</span>
-                  </div>
-                ))}
-              </div>
+            <div class="cat-donut-wrap" id="mg-tab-donut-wrap">
+              <div class="loading"><div class="spinner"></div>WordPress 조회 중</div>
             </div>
-            <div class="cat-traffic-section" id="tf-cat-traffic">
-              <div class="cat-traffic-title">카테고리별 트래픽</div>
-              <div class="cat-traffic-bars" id="tf-cat-traffic-bars">
+            <div class="cat-traffic-section" id="mg-cat-traffic">
+              <div class="cat-traffic-title">카테고리별 트래픽 <span style="font-weight:400;color:var(--text-3)">(최근 30일 · GA4 페이지 조회 × WP 카테고리)</span></div>
+              <div class="cat-traffic-bars" id="mg-cat-traffic-bars">
                 <div class="loading"><div class="spinner"></div>로딩 중...</div>
               </div>
             </div>
-            <div class="recent-list">
-              {tfRecentPosts.map((p, i) => (
-                <div class="recent-item">
-                  <span class="recent-rank">{i + 1}</span>
-                  <span class="recent-title">{p.title}</span>
-                  <span class={`cat-badge cat-${p.category.toLowerCase()}`}>{p.category}</span>
-                  <span class="recent-date">{p.pubDate}</span>
-                </div>
-              ))}
-            </div>
+            <div class="recent-list" id="mg-tab-recent-list"></div>
           </div>
         </div>
       </div>
-
-      <!-- Tab: LifeFlow -->
-      <div class="tab-content" id="tab-lifeflow">
-        <div class="summary-grid">
-          <div class="summary-card accent-green color-green">
-            <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['file-text']}></svg></span><div class="label">LifeFlow Posts</div></div>
-            <div class="value" id="lf-post-count">{lfPostCount}</div>
-            <div class="sub">{lfCategoryCount} 카테고리</div>
-          </div>
-          <div class="summary-card accent-purple color-purple">
-            <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['eye']}></svg></span><div class="label">조회수</div></div>
-            <div class="value" id="lf-tab-views">--</div>
-            <div class="sub" id="lf-tab-views-sub">로딩 중...</div>
-          </div>
-          <div class="summary-card accent-yellow color-amber">
-            <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['cart']}></svg></span><div class="label">쿠팡 클릭</div></div>
-            <div class="value" id="lf-tab-clicks">--</div>
-            <div class="sub" id="lf-tab-clicks-sub">로딩 중...</div>
-          </div>
-          <div class="summary-card accent-cyan color-cyan">
-            <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['percent']}></svg></span><div class="label">전환율</div></div>
-            <div class="value" id="lf-tab-cvr">--</div>
-            <div class="sub">클릭 / 조회</div>
-          </div>
-        </div>
-
-        <div class="blog-section">
-          <div class="section-header">
-            <div class="section-title"><svg class="ico sec-ico i-green" viewBox="0 0 24 24" set:html={ICONS['pie']}></svg>LifeFlow 콘텐츠</div>
-            <span class="section-badge badge-lf"><span id="lf-badge-count">{lfPostCount}</span>편</span>
-          </div>
-          <div class="section-body">
-            <div class="cat-donut-wrap" id="lf-donut-wrap">
-              <div class="cat-donut" style={`background: conic-gradient(${lfCategories.map((c, i) => {
-                const pctBefore = lfCategories.slice(0, i).reduce((s, x) => s + x.count, 0) / lfBase * 100;
-                const pct = c.count / lfBase * 100;
-                const g = lfCategories.length > 1 ? Math.min(1, pct / 4) : 0;
-                return `#1e293b ${pctBefore}% ${pctBefore + g}%, ${c.color} ${pctBefore + g}% ${pctBefore + pct}%`;
-              }).join(', ')})`}>
-                <div class="cat-donut-hole">
-                  <span class="donut-num">{lfPostCount}</span>
-                  <span class="donut-label">포스트</span>
-                </div>
-              </div>
-              <div class="cat-legend" id="lf-cat-legend">
-                {lfCategories.map(c => (
-                  <div class="cat-legend-item">
-                    <span class="cat-legend-dot" style={`background:${c.color}`}></span>
-                    <span class="cat-legend-name">{c.name}</span>
-                    <span class="cat-legend-count">{c.count}</span>
-                    <span class="cat-legend-pct">{Math.round(c.count / lfBase * 100)}%</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div class="cat-traffic-section" id="lf-cat-traffic">
-              <div class="cat-traffic-title">카테고리별 트래픽</div>
-              <div class="cat-traffic-bars" id="lf-cat-traffic-bars">
-                <div class="loading"><div class="spinner"></div>로딩 중...</div>
-              </div>
-            </div>
-            <div class="recent-list" id="lf-recent-list-tab">
-              <div class="loading"><div class="spinner"></div>RSS 로딩 중...</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Tab: VIP -->
       <div class="tab-content" id="tab-vip">
         <div class="summary-grid">
@@ -2965,8 +2681,7 @@ const ICONS: Record<string, string> = {
           </div>
           <div class="gsc-seg" id="gsc-source">
             <button data-src="all">전체</button>
-            <button data-src="blog">TechFlow</button>
-            <button data-src="lifeflow">LifeFlow</button>
+            <button data-src="mg">뭉게</button>
             <button data-src="playcast">VIP</button>
           </div>
           <span class="gsc-updated" id="gsc-updated"></span>
@@ -3131,14 +2846,14 @@ const ICONS: Record<string, string> = {
             <div class="sub">조회 대비 클릭 비율</div>
           </div>
           <div class="coupang-card">
-            <h4>TechFlow CTR</h4>
-            <div class="conversion-rate" id="coup-tf-ctr">--%</div>
-            <div class="sub" id="coup-tf-detail">TF 클릭 / 조회</div>
+            <h4>뭉게 CTR</h4>
+            <div class="conversion-rate" id="coup-mg-ctr">--%</div>
+            <div class="sub" id="coup-mg-detail">뭉게 클릭 / 조회</div>
           </div>
           <div class="coupang-card">
-            <h4>LifeFlow CTR</h4>
-            <div class="conversion-rate" id="coup-lf-ctr">--%</div>
-            <div class="sub" id="coup-lf-detail">LF 클릭 / 조회</div>
+            <h4>소스별 클릭</h4>
+            <div class="conversion-rate" id="coup-src-clicks">--</div>
+            <div class="sub" id="coup-src-detail">뭉게 / VIP</div>
           </div>
         </div>
 
@@ -3183,19 +2898,20 @@ const ICONS: Record<string, string> = {
             <div class="sub" id="pd-total-detail">누적 페이퍼닥 클릭</div>
           </div>
           <div class="coupang-card">
-            <h4>TechFlow</h4>
-            <div class="conversion-rate" id="pd-tf-clicks">--</div>
-            <div class="sub" id="pd-tf-detail">TF 클릭</div>
+            <h4>뭉게</h4>
+            <div class="conversion-rate" id="pd-mg-clicks">--</div>
+            <div class="sub" id="pd-mg-detail">뭉게 클릭</div>
           </div>
           <div class="coupang-card">
-            <h4>LifeFlow</h4>
-            <div class="conversion-rate" id="pd-lf-clicks">--</div>
-            <div class="sub" id="pd-lf-detail">LF 클릭</div>
+            <h4>VIP</h4>
+            <div class="conversion-rate" id="pd-vip-clicks">--</div>
+            <div class="sub" id="pd-vip-detail">VIP 클릭</div>
           </div>
           <div class="coupang-card">
-            <h4>GameFlow</h4>
-            <div class="conversion-rate" id="pd-gf-clicks">--</div>
-            <div class="sub" id="pd-gf-detail">GF 클릭</div>
+            <h4>네이버 포스팅</h4>
+            <!-- /go/paperdoc 경유 클릭 — 네이버는 외부 웹사이트가 아니라 별 소스로 잡힌다 -->
+            <div class="conversion-rate" id="pd-naver-clicks">--</div>
+            <div class="sub" id="pd-naver-detail">naver 경유</div>
           </div>
         </div>
 
@@ -3225,7 +2941,7 @@ const ICONS: Record<string, string> = {
       <!-- Tab: 도구(생활 계산기) 페이지별 방문 -->
       <div class="tab-content" id="tab-tools">
         <div class="traffic-header" style="margin-bottom:0.75rem;">
-          <h3 style="margin:0;"><svg class="ico sec-ico i-green" viewBox="0 0 24 24" set:html={ICONS['list']}></svg> LifeFlow 생활 도구 방문 <span class="src-badge lf">LF</span></h3>
+          <h3 style="margin:0;"><svg class="ico sec-ico i-amber" viewBox="0 0 24 24" set:html={ICONS['list']}></svg> 뭉게 생활 도구 방문 <span class="src-badge mg">뭉게</span></h3>
           <div class="seg-toggle seg-sm" id="tools-period">
             <button class="seg-btn active" data-tp="all">전체</button>
             <button class="seg-btn" data-tp="day">일간</button>
@@ -3286,7 +3002,7 @@ const ICONS: Record<string, string> = {
             <div class="summary-card accent-cyan color-cyan">
               <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['message']}></svg></span><div class="label">전체 댓글</div></div>
               <div class="value" id="cm-total">--</div>
-              <div class="sub" id="cm-by-source">TechFlow -- / LifeFlow --</div>
+              <div class="sub" id="cm-by-source">뭉게 -- / VIP --</div>
             </div>
             <div class="summary-card accent-green color-green">
               <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['calendar']}></svg></span><div class="label">오늘 댓글</div></div>
@@ -3298,12 +3014,20 @@ const ICONS: Record<string, string> = {
               <div class="value" id="cm-reports">--</div>
               <div class="sub">사용자 신고 접수</div>
             </div>
+            <!-- 뭉게 댓글은 WordPress 자체 댓글이라 Supabase `comments` 에 안 들어온다.
+                 아래 목록·트렌드는 Supabase 기준이므로 뭉게 몫을 따로 세워야 "댓글 0"으로 오독되지 않는다. -->
+            <div class="summary-card accent-yellow color-amber">
+              <div class="kpi-top"><span class="kpi-chip"><svg class="ico" viewBox="0 0 24 24" set:html={ICONS['message']}></svg></span><div class="label">뭉게 댓글 <span class="src-badge mg">뭉게</span></div></div>
+              <div class="value" id="cm-mg-total">--</div>
+              <div class="sub">WordPress 댓글 · <a href="https://mungge.com/wp-admin/edit-comments.php" target="_blank" rel="noopener" style="color:#fbbf24">wp-admin에서 답글</a></div>
+            </div>
           </div>
+          <div class="mg-recent-wp" id="cm-mg-list"></div>
 
           <!-- 7일 트렌드 차트 -->
           <div class="traffic-section" style="margin-top:1.5rem;">
             <div class="traffic-header">
-              <h3>7일 댓글 트렌드</h3>
+              <h3>7일 댓글 트렌드 <span style="font-weight:400;font-size:0.75rem;color:var(--text-3)">(Supabase 기준 — 뭉게 WP 댓글 제외)</span></h3>
               <button class="refresh-btn" id="refresh-comments">↻ 새로고침</button>
             </div>
             <div class="traffic-body">
@@ -3316,11 +3040,11 @@ const ICONS: Record<string, string> = {
           <!-- 소스 필터 -->
           <div class="traffic-section" style="margin-top:1.5rem;">
             <div class="traffic-header">
-              <h3>전체 댓글 목록</h3>
+              <h3>전체 댓글 목록 <span style="font-weight:400;font-size:0.75rem;color:var(--text-3)">(Supabase — 뭉게 댓글은 위 카드/wp-admin)</span></h3>
               <div class="comment-filters">
                 <button class="filter-btn active" data-source="all">전체</button>
-                <button class="filter-btn" data-source="blog">TechFlow</button>
-                <button class="filter-btn" data-source="lifeflow">LifeFlow</button>
+                <button class="filter-btn" data-source="mg">뭉게</button>
+                <button class="filter-btn" data-source="vip">VIP</button>
                 <button class="filter-btn" data-source="reported">신고</button>
               </div>
             </div>
@@ -3337,15 +3061,10 @@ const ICONS: Record<string, string> = {
     <script define:vars={{
       SUPABASE_URL: 'https://xyprbsmagtlzebxyxsvj.supabase.co',
       SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5cHJic21hZ3RsemVieHl4c3ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjY4NTQsImV4cCI6MjA4NjA0Mjg1NH0.dajN0n0IWzOgYOSCglxVLzddg7jJFRHNCHwTWMG62uU',
-      TF_SLUG_CAT: Object.fromEntries(allPosts.map(p => [p.id, p.data.category])),
-      TF_POST_COUNT: tfPostCount,
-      LF_POST_COUNT: lfPostCount,
       VIP_POST_COUNT: vipPostCount,
-      // 슬러그→현재 제목(TF+LF) — topPages가 옛 제목 대신 현재 제목 표시
-      SLUG_TITLES: { ...slugTitles, ...Object.fromEntries(lfPosts.map(p => [p.slug, p.title])) },
-      // LifeFlow 는 빌드타임 RSS 산출물 — 카테고리 트래픽 매칭은 전체 글의 slug→category 로
-      LF_SLUG_CAT: Object.fromEntries(lfPosts.map(p => [p.slug, p.category])),
-      LF_POSTS: lfPosts.slice(0, 10),
+      // 뭉게가 유일한 본 사이트이고 WordPress 가 콘텐츠 SSOT 다 → 슬러그→제목·카테고리 맵을
+      // 빌드타임에 만들 수 없다. 예전의 TF_SLUG_CAT / LF_SLUG_CAT / SLUG_TITLES 는 삭제하고
+      // 런타임 WP REST 결과(_mgSlugMeta)로 대체한다.
     }}>
       const API = `${SUPABASE_URL}/rest/v1/rpc`;
       const headers = {
@@ -3382,138 +3101,51 @@ const ICONS: Record<string, string> = {
         banner.style.display = 'flex';
       }
 
-      // LifeFlow RSS 피드 파싱
-      let lfRssData = [];
+      // 뭉게 오리진 — 아래 WP REST 호출 전부가 쓴다(선언을 여기로 올려 둔 이유)
+      const MG_URL = 'https://mungge.com';
 
-      async function fetchLifeFlowRSS() {
+      // === 뭉게 슬러그 메타 (제목·카테고리) ===
+      // 예전에는 TF 를 content collection, LF 를 RSS 로 빌드타임에 읽어 slug→제목/카테고리
+      // 맵을 만들었다. 뭉게는 WordPress 가 SSOT 라 그럴 수 없다 → WP REST 로 한 번에 받아 둔다.
+      // Top Pages 제목 보정(analytics 에 저장된 옛 제목 대신 현재 제목)과 카테고리별 트래픽
+      // 집계가 둘 다 이 맵을 쓴다.
+      let _mgSlugMeta = {};        // slug → { title, category, link }
+
+      async function fetchMunggeSlugMeta() {
         try {
-          const res = await fetch('https://life-revenue-blog.vercel.app/rss.xml');
-          const text = await res.text();
-          const parser = new DOMParser();
-          const xml = parser.parseFromString(text, 'text/xml');
-          const items = xml.querySelectorAll('item');
+          // per_page 최대 100 → 글이 196편이라 2페이지. totalPages 를 보고 필요한 만큼만 돈다.
+          const first = await fetch(`${MG_URL}/wp-json/wp/v2/posts?per_page=100&page=1&_fields=slug,link,title,categories`);
+          if (!first.ok) return;
+          const pages = Math.min(Number(first.headers.get('x-wp-totalpages')) || 1, 10);
+          const rest = await Promise.all(
+            Array.from({ length: pages - 1 }, (_, i) =>
+              fetch(`${MG_URL}/wp-json/wp/v2/posts?per_page=100&page=${i + 2}&_fields=slug,link,title,categories`)
+                .then((r) => (r.ok ? r.json() : []))
+                .catch(() => [])
+            )
+          );
+          const cats = await fetch(`${MG_URL}/wp-json/wp/v2/categories?per_page=100&_fields=id,name`)
+            .then((r) => (r.ok ? r.json() : []))
+            .catch(() => []);
+          const catById = {};
+          (Array.isArray(cats) ? cats : []).forEach((c) => { catById[c.id] = c.name; });
 
-          const posts = Array.from(items).map(item => ({
-            title: item.querySelector('title')?.textContent || '',
-            link: item.querySelector('link')?.textContent || '',
-            category: item.querySelector('category')?.textContent || 'Lifestyle',
-            pubDate: item.querySelector('pubDate')?.textContent || '',
-          }));
-
-          lfRssData = posts;
-
-          // 카테고리별 집계
-          const catCounts = {};
-          posts.forEach(p => {
-            catCounts[p.category] = (catCounts[p.category] || 0) + 1;
-          });
-
-          // 도넛 차트 & 범례 업데이트 (엔티티 고정 색, 검증 팔레트)
-          const colors = {
-            'Lifestyle': '#ec4899', 'lifestyle': '#ec4899',
-            'Finance': '#3b82f6', 'finance': '#3b82f6',
-            'Health': '#16a34a', 'health': '#16a34a',
-            'Education': '#a855f7', 'education': '#a855f7',
-            'Travel': '#ea580c', 'travel': '#ea580c',
-          };
-          const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
-          const cats = Object.entries(catCounts).map(([name, count]) => ({ name: capitalize(name), count, color: colors[name] || '#94a3b8' }));
-          const totalLf = posts.length;
-
-          // 포스트 수 업데이트 (LifeFlow 탭 + 전체 요약 탭 + Total Posts KPI)
-          const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-          setText('lf-post-count', totalLf);
-          setText('lf-badge-count', totalLf);
-          setText('lf-overview-badge', `${totalLf}편`);
-
-          const totalAll = TF_POST_COUNT + totalLf + VIP_POST_COUNT;
-          const _base = totalAll || 1;
-          const tfPct = Math.round((TF_POST_COUNT / _base) * 100);
-          const lfPct = Math.round((totalLf / _base) * 100);
-          const vipPct = Math.max(0, 100 - tfPct - lfPct);
-          setText('total-post-count', totalAll);
-          setText('total-post-sub', `TechFlow ${TF_POST_COUNT} + LifeFlow ${totalLf} + VIP ${VIP_POST_COUNT}`);
-          setText('total-split-tf-pct', `TF ${tfPct}%`);
-          setText('total-split-lf-pct', `LF ${lfPct}%`);
-          setText('total-split-vip-pct', `VIP ${vipPct}%`);
-          const splitTf = document.getElementById('total-split-tf');
-          const splitLf = document.getElementById('total-split-lf');
-          const splitVip = document.getElementById('total-split-vip');
-          if (splitTf) splitTf.style.width = `${tfPct}%`;
-          if (splitLf) splitLf.style.width = `${lfPct}%`;
-          if (splitVip) splitVip.style.width = `${vipPct}%`;
-
-          // 도넛 차트 배경 재생성 (세그먼트 사이 서피스 갭 포함)
-          let gradient = 'conic-gradient(';
-          let pctBefore = 0;
-          cats.forEach((c, i) => {
-            const pct = (c.count / totalLf) * 100;
-            const g = cats.length > 1 ? Math.min(1, pct / 4) : 0;
-            gradient += `#1e293b ${pctBefore}% ${pctBefore + g}%, ${c.color} ${pctBefore + g}% ${pctBefore + pct}%`;
-            if (i < cats.length - 1) gradient += ', ';
-            pctBefore += pct;
-          });
-          gradient += ')';
-
-          // LifeFlow 탭 · 전체 요약 탭 두 곳의 도넛/범례를 같은 값으로 갱신
-          ['lf-donut-wrap', 'lf-overview-donut-wrap'].forEach(id => {
-            const wrap = document.getElementById(id);
-            if (!wrap) return;
-            const donutEl = wrap.querySelector('.cat-donut');
-            if (donutEl) donutEl.style.background = gradient;
-            const donutNum = wrap.querySelector('.donut-num');
-            if (donutNum) donutNum.textContent = totalLf;
-          });
-
-          const legendHtml = cats.map(c =>
-            `<div class="cat-legend-item">
-              <span class="cat-legend-dot" style="background:${c.color}"></span>
-              <span class="cat-legend-name">${c.name}</span>
-              <span class="cat-legend-count">${c.count}</span>
-              <span class="cat-legend-pct">${Math.round((c.count / totalLf) * 100)}%</span>
-            </div>`
-          ).join('');
-          ['lf-cat-legend', 'lf-overview-cat-legend'].forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.innerHTML = legendHtml;
-          });
-
-          // 최근 포스트 렌더링 (전체 요약 탭)
-          renderLfRecentPosts(posts.slice(0, 5), 'lf-recent-list');
-          // LifeFlow 탭
-          renderLfRecentPosts(posts.slice(0, 10), 'lf-recent-list-tab');
-
+          const all = [...(await first.json()), ...rest.flat()];
+          for (const p of all) {
+            if (!p.slug) continue;
+            _mgSlugMeta[p.slug] = {
+              title: String(p.title?.rendered || '').replace(/<[^>]*>/g, '').trim(),
+              // 글 하나에 카테고리가 여러 개 붙을 수 있다(f2f1efe) → 대표는 첫 번째
+              category: catById[(p.categories || [])[0]] || '기타',
+              link: p.link,
+            };
+          }
+          // 맵이 늦게 도착하므로 이미 그려진 화면을 다시 칠한다
+          if (typeof renderTopPages === 'function') renderTopPages();
+          if (typeof renderMgCategoryTraffic === 'function') renderMgCategoryTraffic();
         } catch (e) {
-          console.error('Failed to fetch LifeFlow RSS:', e);
-          const containers = ['lf-recent-list', 'lf-recent-list-tab'];
-          containers.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.innerHTML = '<div class="no-data">RSS 로드 실패 (정적 데이터 표시)</div>';
-          });
-          // Fallback to static data
-          renderLfRecentPosts(LF_POSTS, 'lf-recent-list');
-          renderLfRecentPosts(LF_POSTS, 'lf-recent-list-tab');
+          console.error('mungge slug meta:', e);
         }
-      }
-
-      function renderLfRecentPosts(posts, containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const catMap = {
-          'Lifestyle': 'lifestyle', 'Finance': 'finance', 'Health': 'health',
-          'Education': 'education', 'Travel': 'travel'
-        };
-        container.innerHTML = posts.map((p, i) => {
-          const date = p.date || p.pubDate || '';
-          let formattedDate = '';
-          if (date) { const dt = new Date(date); if (!isNaN(dt.getTime())) formattedDate = dt.toISOString().split('T')[0]; }
-          return `<div class="recent-item">
-            <span class="recent-rank">${i + 1}</span>
-            <span class="recent-title">${p.title}</span>
-            <span class="cat-badge cat-${catMap[p.category] || p.category.toLowerCase()}">${p.category}</span>
-            <span class="recent-date">${formattedDate}</span>
-          </div>`;
-        }).join('');
       }
 
       // === VIP(playcast) 영상 목록 + 조회수 (TF/LF 탭과 동일하게) ===
@@ -3537,17 +3169,21 @@ const ICONS: Record<string, string> = {
           const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
           setText('vip-post-count', vipRssData.length);
           setText('vip-badge-count', `${vipRssData.length}편`);
+          setText('vip-overview-badge', `${vipRssData.length}편`);
           renderVipRecentPosts();
         } catch (e) {
           console.error('Failed to fetch VIP RSS:', e);
-          const c = document.getElementById('vip-recent-list-tab');
-          if (c) c.innerHTML = '<div class="no-data">RSS를 불러오지 못했습니다</div>';
+          ['vip-recent-list', 'vip-recent-list-tab'].forEach((id) => {
+            const c = document.getElementById(id);
+            if (c) c.innerHTML = '<div class="no-data">RSS를 불러오지 못했습니다</div>';
+          });
         }
       }
 
       function renderVipRecentPosts() {
-        const container = document.getElementById('vip-recent-list-tab');
-        if (!container || !vipRssData.length) return;
+        const containers = ['vip-recent-list', 'vip-recent-list-tab']
+          .map((id) => document.getElementById(id)).filter(Boolean);
+        if (!containers.length || !vipRssData.length) return;
         // slug별 조회수 (Top Pages 데이터의 vip 소스에서)
         const viewsBySlug = {};
         _topPagesData.filter(p => p.source === 'vip').forEach(p => {
@@ -3556,7 +3192,7 @@ const ICONS: Record<string, string> = {
           const slug = mm ? mm[1] : (p.slug || '');
           if (slug) viewsBySlug[slug] = (viewsBySlug[slug] || 0) + (p.views || 0);
         });
-        container.innerHTML = vipRssData.slice(0, 15).map((p, i) => {
+        const html = vipRssData.slice(0, 15).map((p, i) => {
           let fd = '';
           if (p.pubDate) { const dt = new Date(p.pubDate); if (!isNaN(dt.getTime())) fd = dt.toISOString().split('T')[0]; }
           const views = viewsBySlug[p.slug] || 0;
@@ -3567,6 +3203,7 @@ const ICONS: Record<string, string> = {
             <span class="top-page-views">${fmt(views)}회</span>
           </a>`;
         }).join('');
+        containers.forEach((c) => { c.innerHTML = html; });
       }
 
       // loadDashboard replaced by loadTraffic
@@ -3631,40 +3268,8 @@ const ICONS: Record<string, string> = {
       }
 
       // 날짜별 상세 테이블 (최근 30일)
-      function renderDailyDetail(data) {
-        const body = document.getElementById('daily-detail-body');
-        const totalEl = document.getElementById('daily-detail-total');
-        if (!body) return;
-        if (!data || data.length === 0) {
-          body.innerHTML = '<tr><td colspan="6" class="no-data">데이터 없음</td></tr>';
-          if (totalEl) totalEl.textContent = '0';
-          return;
-        }
-        const todayKst = new Date(Date.now() + 9 * 3600 * 1000).toISOString().split('T')[0];
-        const maxV = Math.max(...data.map(d => Number(d.views) || 0), 1);
-        let sumViews = 0, sumVisitors = 0;
-        body.innerHTML = data.map(d => {
-          const views = Number(d.views) || 0;
-          const visitors = Number(d.visitors) || 0;
-          const tf = Number(d.tf_views) || 0;
-          const lf = Number(d.lf_views) || 0;
-          sumViews += views; sumVisitors += visitors;
-          const dObj = new Date(d.day + 'T00:00:00');
-          const wd = ['일','월','화','수','목','금','토'][dObj.getDay()];
-          const label = `${dObj.getMonth()+1}/${dObj.getDate()} (${wd})`;
-          const barW = Math.max(Math.round((views / maxV) * 110), 2);
-          const isToday = d.day === todayKst;
-          return `<tr class="${isToday ? 'dd-today' : ''}">
-            <td>${label}${isToday ? ' ·오늘' : ''}</td>
-            <td class="dd-views">${fmt(views)}</td>
-            <td class="dd-visitors">${fmt(visitors)}</td>
-            <td>${fmt(tf)}</td>
-            <td>${fmt(lf)}</td>
-            <td class="dd-bar-col"><span class="dd-minibar" style="width:${barW}px"></span></td>
-          </tr>`;
-        }).join('');
-        if (totalEl) totalEl.textContent = `${fmt(sumViews)} 조회 / ${fmt(sumVisitors)} 방문자`;
-      }
+      // renderDailyDetail(): TF/LF 열 기반 일별 상세 표 — 마크업(#daily-detail-body)이 이미
+      // 제거돼 호출부도 없는 죽은 코드였다. 뭉게 기준 일별 수치는 방문 추이 우측 리스트가 담당한다.
 
       // 날짜 x 시간대 히트맵 (최근 14일)
       let _heatmapData = [];
@@ -3721,57 +3326,78 @@ const ICONS: Record<string, string> = {
       }
 
 
-      let _hourlyViews = [];       // get_hourly_views {hour, views, tf_views, lf_views}
-      let _hourlyVisitors = [];    // analytics 계산 {hour, tf, lf}
+      let _hourlyViews = [];       // get_hourly_views {hour, views, vip_views} — VIP 몫만 쓴다
+      let _hourlyVisitors = [];    // analytics 계산 {hour, vip}
 
-      // 오늘(KST) 시간대별 방문자(고유 UA) 소스별 집계 — RPC엔 시간별 방문자가 없어 계산
+      // 오늘(KST) 시간대별 VIP 방문자(고유 UA) — RPC엔 시간별 방문자가 없어 직접 계산
       function computeHourlyVisitors(rows) {
         const todayKst = new Date(Date.now() + 9 * 3600 * 1000).toISOString().split('T')[0];
         const byHour = {};
         (rows || []).forEach(r => {
+          if (r.source !== 'vip' && r.source !== 'playcast') return;
           const t = new Date(new Date(r.created_at).getTime() + 9 * 3600 * 1000);
           if (t.toISOString().split('T')[0] !== todayKst) return;
           const h = t.getUTCHours();
-          if (!byHour[h]) byHour[h] = { tf: new Set(), lf: new Set() };
-          const ua = r.ua || '?';
-          if (r.source === 'lifeflow') byHour[h].lf.add(ua); else byHour[h].tf.add(ua);
+          (byHour[h] ||= new Set()).add(r.ua || '?');
         });
         const arr = [];
-        for (let h = 0; h < 24; h++) { const b = byHour[h]; arr.push({ hour: h, tf: b ? b.tf.size : 0, lf: b ? b.lf.size : 0 }); }
+        for (let h = 0; h < 24; h++) arr.push({ hour: h, vip: byHour[h] ? byHour[h].size : 0 });
         return arr;
       }
 
-      // 시간대 막대 — TF/LF 분리(그룹) + 조회수/방문자 + 핫한 시간대
+      // 오늘(KST) 시간대별 뭉게 — GA4 는 시간 단위를 주지 않으므로 자체 트래커(pageview_mg)만
+      // 쓸 수 있다. 조회수=이벤트 수, 방문자=고유 UA (대시보드의 다른 방문자 추정과 같은 기준).
+      // 그래서 이 막대의 뭉게 합계는 GA4 기준 일일 조회수와 일치하지 않는다 — 아래 안내 문구로 밝힌다.
+      function computeHourlyMg() {
+        const today = kstToday();
+        const byHour = {};
+        for (const e of (_mgLive || [])) {
+          if (mgDayKst(e.created_at) !== today) continue;
+          const h = new Date(new Date(e.created_at).getTime() + 9 * 3600e3).getUTCHours();
+          const b = (byHour[h] ||= { views: 0, ua: new Set() });
+          b.views++; b.ua.add(e.ua || '?');
+        }
+        const arr = [];
+        for (let h = 0; h < 24; h++) {
+          const b = byHour[h];
+          arr.push({ hour: h, views: b ? b.views : 0, users: b ? b.ua.size : 0 });
+        }
+        return arr;
+      }
+
+      // 시간대 막대 — 뭉게/VIP 분리(그룹) + 조회수/방문자 + 핫한 시간대
       function renderHourlyChart() {
         const container = document.getElementById('hourly-chart');
         if (!container) return;
         const metric = _trafficMetric || 'views';
         const map = {};
+        const mgHours = computeHourlyMg();
+        for (let h = 0; h < 24; h++) map[h] = { mg: 0, vip: 0 };
         if (metric === 'visitors') {
-          _hourlyVisitors.forEach(d => { map[d.hour] = { tf: d.tf || 0, lf: d.lf || 0, vip: d.vip || 0 }; });
+          mgHours.forEach(d => { map[d.hour].mg = d.users; });
+          _hourlyVisitors.forEach(d => { map[d.hour].vip = d.vip || 0; });
         } else {
-          _hourlyViews.forEach(d => { map[d.hour] = { tf: d.tf_views || 0, lf: d.lf_views || 0, vip: d.vip_views || 0 }; });
+          mgHours.forEach(d => { map[d.hour].mg = d.views; });
+          _hourlyViews.forEach(d => { map[d.hour].vip = d.vip_views || 0; });
         }
-        const hasData = Object.values(map).some(h => h.tf + h.lf + h.vip > 0);
+        const hasData = Object.values(map).some(h => h.mg + h.vip > 0);
         if (!hasData) {
           container.innerHTML = `<div class="no-data" style="width:100%">오늘 ${metric === 'visitors' ? '방문자' : '조회'} 데이터 없음</div>`;
           renderHourlyHot(map, metric);
           return;
         }
-        const maxV = Math.max(1, ...Object.values(map).flatMap(h => [h.tf, h.lf, h.vip]));
+        const maxV = Math.max(1, ...Object.values(map).flatMap(h => [h.mg, h.vip]));
         const unit = metric === 'visitors' ? '명' : '회';
         const rowHtml = (h0, h1) => {
           let html = '';
           for (let h = h0; h <= h1; h++) {
-            const d = map[h] || { tf: 0, lf: 0, vip: 0 };
-            const tfH = d.tf > 0 ? Math.max(d.tf / maxV * 82, 2) : 0;
-            const lfH = d.lf > 0 ? Math.max(d.lf / maxV * 82, 2) : 0;
+            const d = map[h] || { mg: 0, vip: 0 };
+            const mgH = d.mg > 0 ? Math.max(d.mg / maxV * 82, 2) : 0;
             const vipH = d.vip > 0 ? Math.max(d.vip / maxV * 82, 2) : 0;
             html += `<div class="chart-bar-col">
-              <div class="chart-bar-tooltip">${h}:00 · TF ${fmt(d.tf)} · LF ${fmt(d.lf)} · VIP ${fmt(d.vip)} ${unit}</div>
+              <div class="chart-bar-tooltip">${h}:00 · 뭉게 ${fmt(d.mg)} · VIP ${fmt(d.vip)} ${unit}</div>
               <div class="hbar-group">
-                <div class="hbar bar-tf" style="height:${tfH}px"></div>
-                <div class="hbar bar-lf" style="height:${lfH}px"></div>
+                <div class="hbar bar-mg" style="height:${mgH}px"></div>
                 <div class="hbar bar-vip" style="height:${vipH}px"></div>
               </div>
               <span class="chart-bar-label">${h}</span>
@@ -3790,7 +3416,7 @@ const ICONS: Record<string, string> = {
         if (lbl) lbl.textContent = metric === 'visitors' ? '방문자' : '조회수';
         if (!el) return;
         const arr = [];
-        for (let h = 0; h < 24; h++) { const d = map[h] || { tf: 0, lf: 0 }; arr.push({ h, tf: d.tf, lf: d.lf, total: d.tf + d.lf }); }
+        for (let h = 0; h < 24; h++) { const d = map[h] || { mg: 0, vip: 0 }; arr.push({ h, mg: d.mg, vip: d.vip, total: d.mg + d.vip }); }
         const active = arr.filter(a => a.total > 0).sort((a, b) => b.total - a.total);
         if (!active.length) { el.innerHTML = '<div class="no-data">오늘 데이터 없음</div>'; return; }
         const max = active[0].total;
@@ -3801,7 +3427,7 @@ const ICONS: Record<string, string> = {
           return `<div class="tl-row ${i === 0 ? 'tl-cur' : ''}">
             <div class="tl-top"><span class="tl-date">${medal} ${a.h}:00~${a.h}:59</span><span class="tl-val" style="color:#facc15">${fmt(a.total)}${unit}</span></div>
             <div class="tl-bar"><div class="tl-fill" style="width:${bw}%;background:linear-gradient(90deg,#ea580c,#facc15)"></div></div>
-            <div class="tl-sub"><span style="color:#60a5fa">TF ${fmt(a.tf)}</span> · <span style="color:#4ade80">LF ${fmt(a.lf)}</span></div>
+            <div class="tl-sub"><span style="color:#fbbf24">뭉게 ${fmt(a.mg)}</span> · <span style="color:#57e6c3">VIP ${fmt(a.vip)}</span></div>
           </div>`;
         }).join('');
       }
@@ -3856,15 +3482,13 @@ const ICONS: Record<string, string> = {
             label = `${date.getMonth()+1}/${date.getDate()}`;
             sortKey = key;
           }
-          if (!buckets[key]) buckets[key] = { key, label, views:0, visitors:0, tf:0, lf:0, vip:0, mg:0, mgV:0, web:0, mobile:0, webV:0, mobileV:0, sortKey };
+          if (!buckets[key]) buckets[key] = { key, label, views:0, visitors:0, vip:0, mg:0, mgV:0, web:0, mobile:0, webV:0, mobileV:0, sortKey };
           const b = buckets[key];
           // 뭉게는 analytics RPC 밖(GA4)이라 mergeMgIntoDetail 이 일자 행에 미리 얹어 둔다
           b.mg += Number(d.mg_views)||0;
           b.mgV += Number(d.mg_visitors)||0;
           b.views += (Number(d.views)||0) + (Number(d.mg_views)||0);
           b.visitors += (Number(d.visitors)||0) + (Number(d.mg_visitors)||0);
-          b.tf += Number(d.tf_views)||0;
-          b.lf += Number(d.lf_views)||0;
           b.vip += Number(d.vip_views)||0;
           b.web += Number(d.web_views)||0;
           b.mobile += Number(d.mobile_views)||0;
@@ -3874,17 +3498,9 @@ const ICONS: Record<string, string> = {
         return Object.values(buckets).sort((a,b) => a.sortKey < b.sortKey ? -1 : 1);
       }
 
-      // 방문자를 TF/LF로 안분(조회 비율 추정) — 방문자엔 소스별 원본이 없음
-      // TF/LF 방문자는 조회 비율로 역산한다. b.views·b.visitors 에는 뭉게(GA4)가 합산돼
-      // 있으므로 그대로 나누면 뭉게 방문자가 LF 로 흡수된다 → 블로그 몫만 떼어 계산.
-      function splitVisitors(b) {
-        const bViews = (b.views || 0) - (b.mg || 0);
-        const bVis = (b.visitors || 0) - (b.mgV || 0);
-        if (bViews <= 0 || bVis <= 0) return { tf: 0, lf: 0 };
-        const tf = Math.round(bVis * b.tf / bViews);
-        return { tf, lf: Math.max(0, bVis - tf) };
-      }
-      // VIP 방문자도 같은 이유로 블로그 몫 기준
+      // VIP 방문자 — analytics 에는 소스별 방문자 원본이 없어 조회 비율로 안분 추정한다.
+      // b.views·b.visitors 에 뭉게(GA4 실측)가 합산돼 있으므로 그대로 나누면 뭉게 방문자가
+      // VIP 로 흡수된다 → 뭉게 몫을 떼어낸 analytics 분모로만 계산한다.
       function vipVisitors(b) {
         const bViews = (b.views || 0) - (b.mg || 0);
         const bVis = (b.visitors || 0) - (b.mgV || 0);
@@ -3901,17 +3517,13 @@ const ICONS: Record<string, string> = {
         if (!buckets.length) { container.innerHTML = '<div class="no-data">데이터 없음</div>'; _chartHover = null; return; }
 
         const metric = _trafficMetric || 'views';
-        // 뭉게는 GA4 에서 실제 방문자(totalUsers)를 그대로 받으므로 TF/LF/VIP 처럼
-        // 조회 비율로 추정하지 않고 mgV 를 그대로 쓴다.
+        // 뭉게는 GA4 에서 실제 방문자(totalUsers)를 그대로 받으므로 VIP 처럼 조회 비율로
+        // 추정하지 않고 mgV 를 그대로 쓴다 — 두 선의 방문자 산출 기준이 다르다.
         const series = metric === 'visitors'
-          ? [{ name: 'TechFlow', color: '#3b82f6', vals: buckets.map(b => splitVisitors(b).tf) },
-             { name: 'LifeFlow', color: '#22c55e', vals: buckets.map(b => splitVisitors(b).lf) },
-             { name: 'VIP', color: '#57e6c3', vals: buckets.map(vipVisitors) },
-             { name: '뭉게', color: '#f59e0b', vals: buckets.map(b => b.mgV || 0) }]
-          : [{ name: 'TechFlow', color: '#3b82f6', vals: buckets.map(b => b.tf) },
-             { name: 'LifeFlow', color: '#22c55e', vals: buckets.map(b => b.lf) },
-             { name: 'VIP', color: '#57e6c3', vals: buckets.map(b => b.vip) },
-             { name: '뭉게', color: '#f59e0b', vals: buckets.map(b => b.mg || 0) }];
+          ? [{ name: '뭉게', color: '#f59e0b', vals: buckets.map(b => b.mgV || 0) },
+             { name: 'VIP', color: '#57e6c3', vals: buckets.map(vipVisitors) }]
+          : [{ name: '뭉게', color: '#f59e0b', vals: buckets.map(b => b.mg || 0) },
+             { name: 'VIP', color: '#57e6c3', vals: buckets.map(b => b.vip) }];
         // 버킷에 없는 필드 하나가 NaN 으로 번져 차트 전체를 지우는 사고를 막는 마지막 방어선
         for (const s of series) s.vals = s.vals.map((v) => Number(v) || 0);
         if (legend) {
@@ -3975,7 +3587,6 @@ const ICONS: Record<string, string> = {
           const val = primary(b);
           const barW = Math.max(Math.round(val / maxV * 100), 2);
           const cur = b.key === lastKey;
-          const vis = splitVisitors(b);
           // 웹/모바일 병기 (RPC 설치 시) — 조회수엔 조회 기준, 방문자엔 방문자 기준
           const dw = metric === 'visitors' ? b.webV : b.web;
           const dm = metric === 'visitors' ? b.mobileV : b.mobile;
@@ -3983,11 +3594,10 @@ const ICONS: Record<string, string> = {
             ? ` <span style="color:var(--text-3)">·</span> <span style="color:#f59e0b">🖥 PC ${fmt(dw)}</span> <span style="color:#ec4899">📱 모바일 ${fmt(dm)}</span>`
             : '';
           const vipVis = vipVisitors(b);
-          const mgPart = (metric === 'visitors' ? b.mgV : b.mg)
-            ? ` · <span style="color:#fbbf24">뭉게 ${fmt(metric === 'visitors' ? b.mgV : b.mg)}</span>` : '';
+          const mgVal = metric === 'visitors' ? (b.mgV || 0) : (b.mg || 0);
           const sub = (metric === 'visitors'
-            ? `<span style="color:#60a5fa">TF ${fmt(vis.tf)}</span> · <span style="color:#4ade80">LF ${fmt(vis.lf)}</span> · <span style="color:#57e6c3">VIP ${fmt(vipVis)}</span>${mgPart} <span style="color:var(--text-3)">· 조회 ${fmt(b.views)}</span>`
-            : `<span style="color:#60a5fa">TF ${fmt(b.tf)}</span> · <span style="color:#4ade80">LF ${fmt(b.lf)}</span> · <span style="color:#57e6c3">VIP ${fmt(b.vip)}</span>${mgPart}`) + devSub;
+            ? `<span style="color:#fbbf24">뭉게 ${fmt(mgVal)}</span> · <span style="color:#57e6c3">VIP ${fmt(vipVis)}</span> <span style="color:var(--text-3)">· 조회 ${fmt(b.views)}</span>`
+            : `<span style="color:#fbbf24">뭉게 ${fmt(mgVal)}</span> · <span style="color:#57e6c3">VIP ${fmt(b.vip)}</span>`) + devSub;
           return `<div class="tl-row ${cur ? 'tl-cur' : ''}">
             <div class="tl-top">
               <span class="tl-date">${b.label}${cur ? ' ·현재' : ''}</span>
@@ -4109,7 +3719,7 @@ const ICONS: Record<string, string> = {
             const [, mo, da] = k.split('-');
             // ⚠️ bucketDetail 이 만드는 버킷과 키가 하나라도 어긋나면 그 필드가 undefined 로 남고,
             // maxV = Math.max(...) 가 NaN 이 되어 차트 4개 선이 통째로 사라진다(vip·mg 누락 사고).
-            padded.push(map[k] || { key:k, label:`${+mo}/${+da}`, views:0, visitors:0, tf:0, lf:0, vip:0, mg:0, mgV:0, web:0, mobile:0, webV:0, mobileV:0, sortKey:k });
+            padded.push(map[k] || { key:k, label:`${+mo}/${+da}`, views:0, visitors:0, vip:0, mg:0, mgV:0, web:0, mobile:0, webV:0, mobileV:0, sortKey:k });
           }
           buckets = padded;
           for (let i = 27; i >= 14; i--) { prevSum += (map[kstDay(i)] || {}).views || 0; }
@@ -4152,13 +3762,13 @@ const ICONS: Record<string, string> = {
         }
       }
 
-      // 페이지 제목 가져오기: title 필드 우선, 없으면 slug 디코딩
+      // 페이지 제목 가져오기: WP 현재 제목 우선, 없으면 이벤트에 저장된 title, 그다음 slug 디코딩
       function getPageTitle(item) {
-        // 현재 글 제목(빌드 시점 맵) 우선 — analytics에 저장된 옛 제목보다 정확
+        // 뭉게 WP 의 현재 제목 우선 — analytics/GA4 에 저장된 옛 제목보다 정확(제목 수정 즉시 반영)
         const bare = String(item.slug || item.path || '').replace(/^\/blog\//, '').replace(/^\//, '').replace(/\/$/, '');
-        if (bare && typeof SLUG_TITLES !== 'undefined' && SLUG_TITLES[bare]) return SLUG_TITLES[bare];
-        if (item.title && item.title !== 'null' && !item.title.startsWith('TechFlow') && !item.title.startsWith('LifeFlow')) {
-          // "포스트 제목 | TechFlow - AI & 테크 인사이트" 형태에서 제목만 추출
+        if (bare && _mgSlugMeta[bare]?.title) return _mgSlugMeta[bare].title;
+        if (item.title && item.title !== 'null' && !item.title.startsWith('뭉게')) {
+          // "포스트 제목 – 뭉게" / "제목 | VIP - …" 형태에서 제목만 추출
           return item.title.split(' | ')[0].split(' - ')[0];
         }
         const raw = decodeSlug(item.slug || item.path || '');
@@ -4168,11 +3778,13 @@ const ICONS: Record<string, string> = {
       }
 
       function sourceBadge(source) {
-        if (source === 'blog') return '<span class="src-badge tf">TF</span>';
-        if (source === 'lifeflow') return '<span class="src-badge lf">LF</span>';
-        if (source === 'gameflow') return '<span class="src-badge gf">GF</span>';
-        if (source === 'vip') return '<span class="src-badge vip">VIP</span>';
         if (source === 'mg') return '<span class="src-badge mg">뭉게</span>';
+        if (source === 'vip' || source === 'playcast') return '<span class="src-badge vip">VIP</span>';
+        // 삭제된 소스지만 과거 행에 남아 있다. 라벨이 없으면 원문('blog')이 그대로 노출돼
+        // "blog 라는 사이트가 있나?"로 읽힌다 → 구 소스임을 밝힌다.
+        if (source === 'blog') return '<span class="src-badge legacy">구TF</span>';
+        if (source === 'lifeflow') return '<span class="src-badge legacy">구LF</span>';
+        if (source === 'gameflow') return '<span class="src-badge legacy">구GF</span>';
         return '';
       }
 
@@ -4239,8 +3851,10 @@ const ICONS: Record<string, string> = {
         container.innerHTML = filtered.slice(0, 8).map((p, i) => {
           const title = getPageTitle(p);
           const displayTitle = title.length > 40 ? title.substring(0, 40) + '…' : title;
-          const path = p.path || (p.slug ? `/blog/${p.slug}` : '/');
-          const href = p.source === 'vip' ? `https://virtual-in-playing.vercel.app${path}` : p.source === 'lifeflow' ? `https://life-revenue-blog.vercel.app${path}` : path;
+          // 뭉게(WordPress)는 /blog/ 프리픽스가 없다. VIP 는 별 도메인.
+          const isVip = p.source === 'vip' || p.source === 'playcast';
+          const path = p.path || (p.slug ? (isVip ? `/blog/${p.slug}` : `/${p.slug}/`) : '/');
+          const href = isVip ? `https://virtual-in-playing.vercel.app${path}` : `${MG_URL}${path}`;
           return `<a class="top-page-item" href="${escHtml(safeUrl(href))}" target="_blank" rel="noopener">
             <span class="top-page-rank">${i + 1}</span>
             ${sourceBadge(p.source)}
@@ -4250,8 +3864,9 @@ const ICONS: Record<string, string> = {
         }).join('');
       }
 
-      // === 도구(LifeFlow 생활 계산기) 페이지별 방문 ===
-      // slug → { emoji, name, cat } (life-revenue-blog/src/pages/tools/index.astro 기준, 26종)
+      // === 도구(뭉게 생활 계산기) 페이지별 방문 ===
+      // LF /tools/ 26종은 mungge.com/tools/<slug>/ 로 이식됐다(scripts/port-tools-to-mungge.mjs).
+      // slug → { emoji, name, cat } — 이름·분류는 이식 당시 목록 기준.
       const TOOL_META = {
         'salary-calculator': { emoji: '💰', name: '연봉 실수령액 계산기', cat: '금융' },
         'severance-calculator': { emoji: '📤', name: '퇴직금 계산기', cat: '금융' },
@@ -4295,7 +3910,9 @@ const ICONS: Record<string, string> = {
       async function fetchToolPageviews() {
         try {
           const res = await fetch(
-            `${SUPABASE_URL}/rest/v1/analytics?event_type=eq.pageview&metadata->>path=like./tools/*&metadata->>__probe=is.null&select=created_at,path:metadata->>path&order=created_at.desc&limit=20000`,
+            // 뭉게 자체 트래커는 event_type='pageview_mg' 다 — 'pageview' 로만 조회하면
+            // 이 탭이 이관 전(LF) 데이터에서 멈춘다.
+            `${SUPABASE_URL}/rest/v1/analytics?event_type=eq.pageview_mg&metadata->>path=like./tools/*&metadata->>__probe=is.null&select=created_at,path:metadata->>path&order=created_at.desc&limit=20000`,
             { headers }
           );
           if (!res.ok) return [];
@@ -4358,7 +3975,7 @@ const ICONS: Record<string, string> = {
 
         container.innerHTML = stats.map((t, i) => {
           const meta = TOOL_META[t.slug] || { emoji: '🛠', name: t.slug, cat: '기타' };
-          const href = `https://life-revenue-blog.vercel.app/tools/${t.slug}/`;
+          const href = `${MG_URL}/tools/${t.slug}/`;
           const pct = maxViews ? Math.max(4, Math.round((t.views / maxViews) * 100)) : 0;
           const name = meta.name.length > 22 ? meta.name.slice(0, 22) + '…' : meta.name;
           return `<a class="top-page-item" href="${escHtml(safeUrl(href))}" target="_blank" rel="noopener">
@@ -4440,19 +4057,19 @@ const ICONS: Record<string, string> = {
       let _gscTotals = null;        // _TOTAL_ 90일 (소스별 일별 합계)
       let _gscPageCache = {};       // days → page-level rows (기간별 캐시)
       let _gscDays = 7;
-      let _gscSrc = 'all';          // 'all' | 'blog' | 'lifeflow' | 'playcast'(VIP)
+      let _gscSrc = 'all';          // 'all' | 'mg'(뭉게) | 'playcast'(VIP)
       let _gscMetric = 'clicks';    // clicks | impressions | ctr | position
       let _gscSort = { key: 'clicks', dir: -1 };
       let _gscSearch = '';
       let _gscInit = false;
 
-      const GSC_SRC_META = { blog: 'TechFlow', lifeflow: 'LifeFlow', playcast: 'VIP' };
-      const GSC_SRC_BADGE = { blog: 'TF', lifeflow: 'LF', playcast: 'VIP' };
+      const GSC_SRC_META = { mg: '뭉게', playcast: 'VIP' };
+      const GSC_SRC_BADGE = { mg: '뭉게', playcast: 'VIP' };
       const gscFmt = (n) => Number(n || 0).toLocaleString('en-US');
       const gscPct = (v) => (Number(v || 0) * 100).toFixed(2) + '%';
       const gscPos = (v) => Number(v || 0).toFixed(1);
       const gscSlug = (p) => (p || '').replace(/^\/blog\//, '').replace(/\/$/, '');
-      const gscTitle = (p) => (typeof SLUG_TITLES !== 'undefined' && SLUG_TITLES[gscSlug(p)]) || gscSlug(p) || p;
+      const gscTitle = (p) => _mgSlugMeta[gscSlug(p)]?.title || gscSlug(p) || p;
       const gscCut = (s, n) => { s = String(s || ''); return s.length > n ? s.slice(0, n) + '…' : s; };
       const gscEmpty = () => '<div style="color:var(--text-2);font-size:0.8rem;line-height:1.5;padding:0.5rem 0;">아직 GSC 데이터가 없습니다 — 매일 동기화 후 채워집니다.<br>즉시 채우려면 <code>/api/gsc-sync?days=30&amp;secret=CRON_SECRET</code> 를 호출하세요.</div>';
 
@@ -4613,7 +4230,7 @@ const ICONS: Record<string, string> = {
         const rows = _gscPageCache[_gscDays] || [];
         const cutoff = new Date(Date.now() - _gscDays * 864e5).toISOString().slice(0, 10);
         let html = '';
-        for (const src of ['blog', 'lifeflow', 'playcast']) {
+        for (const src of ['mg', 'playcast']) {
           const rs = rows.filter((r) => r.source === src && r.date >= cutoff);
           const clicks = rs.reduce((a, r) => a + (r.clicks || 0), 0);
           const impr = rs.reduce((a, r) => a + (r.impressions || 0), 0);
@@ -5256,7 +4873,6 @@ const ICONS: Record<string, string> = {
       let _ga4Synced = null;    // ga4_daily 최신 updated_at — "이 수치가 몇 시 기준인가"
       let _traffic = null;      // loadTraffic 이 계산한 analytics 측 수치 스냅샷
 
-      const MG_URL = 'https://mungge.com';
       const kstToday = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
       const kstYday = () => new Date(Date.now() + 9 * 3600e3 - 864e5).toISOString().slice(0, 10);
 
@@ -5394,28 +5010,33 @@ const ICONS: Record<string, string> = {
         } catch { return null; }
       }
 
-      // Row 6 — 뭉게 콘텐츠 구성 (TF/LF 섹션과 같은 도넛+범례+최근글 형식)
+      // 뭉게 콘텐츠 구성 (도넛+범례+최근글) — 전체 요약 Row 6 과 뭉게 탭 두 곳에 같은 값을 그린다.
+      // 두 곳이 서로 다른 수치를 보이면 어느 쪽이 맞는지 알 수 없으므로 렌더 경로를 하나로 둔다.
       function renderMunggeSection() {
-        const badge = document.getElementById('mg-overview-badge');
-        const wrap = document.getElementById('mg-overview-donut-wrap');
-        const list = document.getElementById('mg-recent-list');
+        const WRAPS = ['mg-overview-donut-wrap', 'mg-tab-donut-wrap'];
+        const LISTS = ['mg-recent-list', 'mg-tab-recent-list'];
         if (!_mgPosts) {
-          if (wrap) wrap.innerHTML = '<div class="no-data">WordPress 조회 실패</div>';
+          WRAPS.forEach((id) => {
+            const w = document.getElementById(id);
+            if (w) w.innerHTML = '<div class="no-data">WordPress 조회 실패</div>';
+          });
           return;
         }
-        if (badge) badge.textContent = `${fmt(_mgPosts.total)}편`;
+        ['mg-overview-badge', 'mg-tab-badge'].forEach((id) => {
+          const b = document.getElementById(id);
+          if (b) b.textContent = `${fmt(_mgPosts.total)}편`;
+        });
         const cats = _mgPosts.categories;
         const base = cats.reduce((s, c) => s + c.count, 0) || 1;
-        if (wrap) {
-          let before = 0;
-          const stops = cats.map((c) => {
-            const pct = c.count / base * 100;
-            const g = cats.length > 1 ? Math.min(1, pct / 4) : 0;
-            const s = `#1e293b ${before}% ${before + g}%, ${c.color} ${before + g}% ${before + pct}%`;
-            before += pct;
-            return s;
-          }).join(', ');
-          wrap.innerHTML = `
+        let before = 0;
+        const stops = cats.map((c) => {
+          const pct = c.count / base * 100;
+          const g = cats.length > 1 ? Math.min(1, pct / 4) : 0;
+          const s = `#1e293b ${before}% ${before + g}%, ${c.color} ${before + g}% ${before + pct}%`;
+          before += pct;
+          return s;
+        }).join(', ');
+        const donutHtml = `
             <div class="cat-donut" style="background: conic-gradient(${stops})">
               <div class="cat-donut-hole">
                 <span class="donut-num">${fmt(_mgPosts.total)}</span>
@@ -5425,20 +5046,25 @@ const ICONS: Record<string, string> = {
             <div class="cat-legend">${cats.map((c) => `
               <div class="cat-legend-item">
                 <span class="cat-legend-dot" style="background:${c.color}"></span>
-                <span class="cat-legend-name">${c.name}</span>
+                <span class="cat-legend-name">${escHtml(c.name)}</span>
                 <span class="cat-legend-count">${c.count}</span>
                 <span class="cat-legend-pct">${Math.round(c.count / base * 100)}%</span>
               </div>`).join('')}</div>`;
-        }
-        if (list) {
-          list.innerHTML = _mgPosts.recent.map((p, i) => `
+        WRAPS.forEach((id) => {
+          const w = document.getElementById(id);
+          if (w) w.innerHTML = donutHtml;
+        });
+        const listHtml = _mgPosts.recent.map((p, i) => `
             <div class="recent-item">
               <span class="recent-rank">${i + 1}</span>
-              <span class="recent-title"><a href="${p.link}" target="_blank" rel="noopener" style="color:inherit">${p.title}</a></span>
-              <span class="cat-badge">${p.category}</span>
+              <span class="recent-title"><a href="${escHtml(safeUrl(p.link))}" target="_blank" rel="noopener" style="color:inherit">${escHtml(p.title)}</a></span>
+              <span class="cat-badge">${escHtml(p.category)}</span>
               <span class="recent-date">${p.pubDate}</span>
             </div>`).join('') || '<div class="no-data">글 없음</div>';
-        }
+        LISTS.forEach((id) => {
+          const l = document.getElementById(id);
+          if (l) l.innerHTML = listHtml;
+        });
       }
 
       // Row 1·3·7 — analytics 수치에 뭉게를 합류시킨다. loadTraffic 이 끝난 뒤 호출.
@@ -5464,56 +5090,64 @@ const ICONS: Record<string, string> = {
         const totalV = t.totalViews + all.views;
         setEl('total-views', fmt(totalV));
         setEl('mg-total-views', fmt(all.views) + (today.views ? ` (+${today.views})` : ''));
-        // 카드 값은 뭉게 포함 합계인데 sub 는 loadTraffic 이 TF/LF 만 적어 둔다 → 뭉게도 병기
         const vSub = document.getElementById('views-sub');
         if (vSub) {
           const dayTotal = t.tv + today.views;
           vSub.textContent = dayTotal > 0
-            ? `today +${dayTotal} (TF +${t.tfTv} / LF +${t.lfTv} / VIP +${t.vipTv} / 뭉게 +${today.views})`
+            ? `today +${dayTotal} (뭉게 +${today.views} / VIP +${t.vipTv})`
             : 'Collecting...';
         }
         const pct = (n) => Math.round(n / (totalV || 1) * 100) + '%';
         const setW = (id, n) => { const e = document.getElementById(id); if (e) e.style.width = pct(n); };
-        setW('views-split-tf', t.tfTotal); setW('views-split-lf', t.lfTotal);
-        setW('views-split-vip', t.vipTotal); setW('views-split-mg', all.views);
+        setW('views-split-mg', all.views); setW('views-split-vip', t.vipTotal);
 
-        // Row 1 · Total Posts
+        // Row 1 · Total Posts — 뭉게(WP REST) + VIP(상수)
         if (_mgPosts) {
           const allPosts = t.postBase + _mgPosts.total;
           setEl('total-post-count', fmt(allPosts));
-          const sub = document.getElementById('total-post-sub');
-          if (sub) sub.textContent = `${sub.dataset.base || sub.textContent.split(' + 뭉게')[0]} + 뭉게 ${_mgPosts.total}`;
-          if (sub && !sub.dataset.base) sub.dataset.base = sub.textContent.split(' + 뭉게')[0];
+          setEl('total-post-sub', `뭉게 ${_mgPosts.total} + VIP ${t.postBase}`);
+          const mgPct = Math.round(_mgPosts.total / (allPosts || 1) * 100);
           const mgBar = document.getElementById('total-split-mg');
-          if (mgBar) mgBar.style.width = Math.round(_mgPosts.total / allPosts * 100) + '%';
-          setEl('total-split-mg-pct', `뭉게 ${Math.round(_mgPosts.total / allPosts * 100)}%`);
-          ['tf', 'lf', 'vip'].forEach((k) => {
-            const bar = document.getElementById(`total-split-${k}`);
-            if (bar) bar.style.width = Math.round(t.postCounts[k] / allPosts * 100) + '%';
-            const lab = document.getElementById(`total-split-${k}-pct`);
-            if (lab) lab.textContent = `${k.toUpperCase()} ${Math.round(t.postCounts[k] / allPosts * 100)}%`;
-          });
+          if (mgBar) mgBar.style.width = mgPct + '%';
+          const vipBar = document.getElementById('total-split-vip');
+          if (vipBar) vipBar.style.width = (100 - mgPct) + '%';
+          setEl('total-split-mg-pct', `뭉게 ${mgPct}%`);
+          setEl('total-split-vip-pct', `VIP ${100 - mgPct}%`);
         }
 
-        // Row 3 · Today Views 브레이크다운에 뭉게 추가
+        // Row 3 · Today Views 브레이크다운
         const vbEl = document.getElementById('t-views-breakdown');
         if (vbEl) {
           setEl('t-today-views', fmt(vw));
           vbEl.innerHTML =
-            `<span><i class="dot-tf"></i> TF: ${fmt(t.tfTv)}</span>` +
-            `<span><i class="dot-lf"></i> LF: ${fmt(t.lfTv)}</span>` +
-            `<span><i class="dot-vip"></i> VIP: ${fmt(t.vipTv)}</span>` +
-            `<span><i class="dot-mg"></i> 뭉게: ${fmt(today.views)}</span>`;
+            `<span><i class="dot-mg"></i> 뭉게: ${fmt(today.views)}</span>` +
+            `<span><i class="dot-vip"></i> VIP: ${fmt(t.vipTv)}</span>`;
         }
 
-        // Row 1 · Categories — 뭉게 카테고리 수 합류
+        // Row 1 · Categories — 뭉게 카테고리(WP REST)가 전부다
         if (_mgPosts) {
-          const cEl = document.getElementById('total-cat-count');
-          const cSub = document.getElementById('total-cat-sub');
           const mgCats = _mgPosts.categories.length;
-          if (cEl) cEl.textContent = fmt((Number(cEl.dataset.base) || 0) + mgCats);
-          if (cSub) cSub.textContent = `${cSub.dataset.base} + 뭉게 ${mgCats}`;
+          setEl('total-cat-count', fmt(mgCats));
+          setEl('total-cat-sub', `뭉게 ${mgCats} 카테고리`);
         }
+
+        // 뭉게 탭 KPI — 조회·방문·전환율은 GA4 가 있어야 계산된다
+        setEl('mg-tab-posts', _mgPosts ? fmt(_mgPosts.total) : '--');
+        setEl('mg-tab-cats', _mgPosts ? `${_mgPosts.categories.length} 카테고리` : 'WordPress 조회 실패');
+        setEl('mg-tab-badge', _mgPosts ? `${fmt(_mgPosts.total)}편` : '--편');
+        setEl('mg-tab-views', fmt(all.views));
+        setEl('mg-tab-views-sub',
+          `오늘 +${fmt(today.views)} · 어제 ${fmt(yday.views)}` + (today.live ? ' · 오늘은 자체 트래커' : ''));
+        setEl('mg-tab-users', fmt(today.users));
+        setEl('mg-tab-users-sub', `오늘 · 어제 ${fmt(yday.users)} (GA4 totalUsers — 날짜 합산 불가)`);
+        // 전환율 분모는 뭉게 누적 조회수. 클릭 추적은 07-30부터라 분자가 기간이 짧다 → 라벨로 밝힘
+        setEl('mg-tab-cvr', all.views > 0 ? (t.mgTotalClicks / all.views * 100).toFixed(2) + '%' : '--');
+        setEl('mg-tab-likes', fmt(t.mgTotalLikes));
+
+        // 쿠팡 탭 CTR — 분모에 뭉게 GA4 조회가 들어가야 맞다
+        setEl('coup-ctr', totalV > 0 ? (t.totalClicks / totalV * 100).toFixed(2) + '%' : '--%');
+        setEl('coup-mg-ctr', all.views > 0 ? (t.mgTotalClicks / all.views * 100).toFixed(2) + '%' : '--%');
+        setEl('coup-mg-detail', `${fmt(t.mgTotalClicks)} / ${fmt(all.views)}`);
 
         // Row 1 · Search Clicks (GSC) — 카드 값은 이미 전 소스 합계다(뭉게 포함).
         // 다만 뭉게 몫이 안 보여서 "포함됐는지" 알 수 없으므로 sub 에 병기한다.
@@ -5590,7 +5224,7 @@ const ICONS: Record<string, string> = {
         _trafficDetail.forEach((d) => { if (d.day) idx[d.day] = d; });
         for (const [day, v] of Object.entries(byDay)) {
           if (idx[day]) { idx[day].mg_views = v.views; idx[day].mg_visitors = v.users; }
-          else _trafficDetail.push({ day, views: 0, visitors: 0, tf_views: 0, lf_views: 0, mg_views: v.views, mg_visitors: v.users });
+          else _trafficDetail.push({ day, views: 0, visitors: 0, vip_views: 0, mg_views: v.views, mg_visitors: v.users });
         }
         _trafficDetail.sort((a, b) => (a.day < b.day ? -1 : 1));
       }
@@ -5744,7 +5378,9 @@ const ICONS: Record<string, string> = {
         // 로컬/개발 트래픽
         if (h === 'localhost' || h === '127.0.0.1' || /^192\.168\.|^10\.|^172\.(1[6-9]|2\d|3[01])\./.test(h) || h.endsWith('.local')) return { key: '로컬/개발', kind: 'internal' };
         // 자기 도메인(내부 이동) → 직접 유입으로 합산(GA self-referral 처리)
-        if (h.includes('ai-revenue-blog') || h.includes('life-revenue-blog')) return { key: '사이트 내 이동', kind: 'selfref' };
+        // 구 TF/LF 도메인에서 온 유입은 아직 옛 링크가 돌고 있다는 신호다 → 내부 이동과 구분한다
+        if (h.includes('ai-revenue-blog') || h.includes('life-revenue-blog')) return { key: '구 블로그(301)', kind: 'ref' };
+        if (h.includes('mungge.com')) return { key: '사이트 내 이동', kind: 'selfref' };
         if (h.includes('google')) return { key: 'Google', kind: 'search' };
         if (h.includes('naver')) return { key: 'Naver', kind: 'search' };
         if (h.includes('daum') || h.includes('kakao')) return { key: 'Daum/Kakao', kind: 'search' };
@@ -6023,9 +5659,9 @@ const ICONS: Record<string, string> = {
       function exportTrafficCSV() {
         const buckets = _trafficBuckets || [];
         if (!buckets.length) return;
-        const head = ['기간', '조회수', '방문자', 'TF', 'LF', '웹', '모바일'];
+        const head = ['기간', '조회수', '방문자', '뭉게', 'VIP', '웹', '모바일'];
         const lines = [head.join(',')].concat(
-          buckets.slice().reverse().map(b => [b.label, b.views, b.visitors, b.tf, b.lf, b.web || 0, b.mobile || 0].join(','))
+          buckets.slice().reverse().map(b => [b.label, b.views, b.visitors, b.mg || 0, b.vip || 0, b.web || 0, b.mobile || 0].join(','))
         );
         const blob = new Blob(['﻿' + lines.join('\n')], { type: 'text/csv;charset=utf-8' });
         const a = document.createElement('a');
@@ -6113,7 +5749,7 @@ const ICONS: Record<string, string> = {
           const prod = m.product || '(상품 미상)';
           const postTitle = getPageTitle({ title: m.title, slug: m.slug, path: m.path });
           const path = m.path || (m.slug ? `/blog/${m.slug}/` : '');
-          const src = r.source === 'lifeflow' ? 'lifeflow' : 'blog';
+          const src = r.source || 'mg';
           const prodTxt = escHtml(prod.length > 44 ? prod.slice(0,44)+'…' : prod);
           const safe = safeUrl(m.url);
           const prodEl = safe
@@ -6143,7 +5779,8 @@ const ICONS: Record<string, string> = {
         } catch { return []; }
       }
 
-      const PD_PLACE_LABEL = { popup: '홈 팝업', banner: '가로 배너', side: '사이드 배너', other: '기타' };
+      // 'inline' = 뭉게 본문 안의 텍스트 링크(scripts/wp-affiliate.js) · 'naver' = 네이버 포스팅의 /go/paperdoc 경유
+      const PD_PLACE_LABEL = { popup: '홈 팝업', banner: '가로 배너', side: '사이드 배너', inline: '본문 링크', naver: '네이버 포스팅', other: '기타' };
       const PD_PERIOD_LABEL = { day: '일간', week: '주간', month: '월간', all: '전체' };
       const PD_PERIOD_DETAIL = { day: '오늘', week: '최근 7일', month: '최근 30일', all: '누적' };
 
@@ -6187,20 +5824,27 @@ const ICONS: Record<string, string> = {
       }
 
       function renderPaperdocStats(list) {
-        const bySrc = { blog: 0, lifeflow: 0, gameflow: 0 };
+        // 뭉게(mg) · VIP(vip/playcast) · 네이버 포스팅(placement='naver') 세 갈래로 본다.
+        // 네이버는 소스가 아니라 노출 위치지만 유입 경로가 완전히 달라 따로 세는 게 실용적이다.
+        const bySrc = { mg: 0, vip: 0, naver: 0 };
         let total = 0;
-        (list || []).forEach(r => { total++; if (bySrc[r.source] !== undefined) bySrc[r.source]++; });
+        (list || []).forEach(r => {
+          total++;
+          if ((r.metadata && r.metadata.placement) === 'naver') { bySrc.naver++; return; }
+          if (r.source === 'mg') bySrc.mg++;
+          else if (r.source === 'vip' || r.source === 'playcast') bySrc.vip++;
+        });
         const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
         const share = (n) => total > 0 ? `${Math.round(n / total * 100)}%` : '0%';
         set('pd-total-label', `${PD_PERIOD_LABEL[_paperdocPeriod]} 클릭 수`);
         set('pd-total-detail', `${PD_PERIOD_DETAIL[_paperdocPeriod]} 페이퍼닥 클릭`);
         set('pd-total-clicks', fmt(total));
-        set('pd-tf-clicks', fmt(bySrc.blog));
-        set('pd-lf-clicks', fmt(bySrc.lifeflow));
-        set('pd-gf-clicks', fmt(bySrc.gameflow));
-        set('pd-tf-detail', `비중 ${share(bySrc.blog)}`);
-        set('pd-lf-detail', `비중 ${share(bySrc.lifeflow)}`);
-        set('pd-gf-detail', `비중 ${share(bySrc.gameflow)}`);
+        set('pd-mg-clicks', fmt(bySrc.mg));
+        set('pd-vip-clicks', fmt(bySrc.vip));
+        set('pd-naver-clicks', fmt(bySrc.naver));
+        set('pd-mg-detail', `비중 ${share(bySrc.mg)}`);
+        set('pd-vip-detail', `비중 ${share(bySrc.vip)}`);
+        set('pd-naver-detail', `비중 ${share(bySrc.naver)}`);
       }
 
       function renderPaperdocPlacements(rows) {
@@ -6297,91 +5941,69 @@ const ICONS: Record<string, string> = {
         }).join('');
       }
 
-      // === 카테고리별 트래픽 렌더링 ===
-      function renderCategoryTraffic() {
-        const tfColors = { 'AI': '#3b82f6', 'Dev': '#16a34a', 'Review': '#bf8700', 'Game': '#a855f7' };
-        const lfColors = {
-          'Lifestyle': '#ec4899', 'Finance': '#3b82f6',
-          'Health': '#16a34a', 'Education': '#a855f7', 'Travel': '#ea580c',
-        };
+      // === 카테고리별 트래픽 (뭉게) ===
+      //
+      // 예전에는 TF 를 빌드타임 slug→category 맵으로, LF 를 RSS 로 매칭했다. 뭉게는 WordPress 가
+      // 콘텐츠 SSOT 라 그 맵을 빌드타임에 만들 수 없다 → _mgSlugMeta(WP REST 런타임)로 맞춘다.
+      //
+      // 조회수는 mgTopPages()(GA4 page_all, 없으면 자체 트래커 폴백)에서 가져온다. Top Pages 패널의
+      // _topPagesData 를 쓰면 analytics(pageview) 기준이라 뭉게가 안 잡힌다.
+      //
+      // ⚠️ 글 하나에 카테고리가 여러 개 붙을 수 있는데(커밋 f2f1efe) _mgSlugMeta 는 대표 1개만
+      // 들고 있다. 그래서 이 표는 "대표 카테고리 기준"이고, 합계는 글 조회수 총합과 같다
+      // (한 글을 여러 카테고리에 중복 계상하지 않는다).
+      function renderMgCategoryTraffic() {
+        const container = document.getElementById('mg-cat-traffic-bars');
+        if (!container) return;
+        if (!Array.isArray(_ga4Rows)) {
+          container.innerHTML = '<div class="loading"><div class="spinner"></div>GA4 로딩 중...</div>';
+          return;
+        }
+        if (!Object.keys(_mgSlugMeta).length) {
+          container.innerHTML = '<div class="loading"><div class="spinner"></div>WordPress 조회 중...</div>';
+          return;
+        }
 
-        const tfCatViews = {};
-        const lfCatViews = {};
+        // 카테고리 색은 renderMunggeSection 의 도넛과 같아야 한다 → _mgPosts.categories 팔레트 재사용
+        const colorOf = {};
+        (_mgPosts?.categories || []).forEach((c) => { colorOf[c.name] = c.color; });
 
-        _topPagesData.forEach(p => {
-          const rawSlug = (p.slug || p.path || '').replace(/^\/blog\//, '').replace(/\/$/, '');
-          const slug = decodeURIComponent(rawSlug);
+        const byCat = {};
+        let unmatched = 0;
+        for (const p of mgTopPages('month')) {
+          const slug = decodeURIComponent(String(p.path || '').replace(/^\/+|\/+$/g, ''));
+          const meta = _mgSlugMeta[slug];
+          if (!meta) { unmatched += p.views || 0; continue; }   // 홈·목록·도구 페이지 등
+          byCat[meta.category] = (byCat[meta.category] || 0) + (p.views || 0);
+        }
 
-          // TechFlow 매칭: TF_SLUG_CAT에서 찾기
-          const tfCat = TF_SLUG_CAT[slug] || TF_SLUG_CAT[rawSlug];
-          if (tfCat) {
-            tfCatViews[tfCat] = (tfCatViews[tfCat] || 0) + (p.views || 0);
-            return;
-          }
-
-          // LifeFlow 매칭: 빌드타임 slug→category 맵 우선, 그 뒤 최신 RSS 데이터
-          const rssPost = lfRssData.find(rp => {
-            const rssSlug = (rp.link || '').split('/').filter(Boolean).pop() || '';
-            return slug.includes(rssSlug) || rssSlug.includes(slug);
-          });
-          const lfCat = LF_SLUG_CAT[slug] || LF_SLUG_CAT[rawSlug] || rssPost?.category || '';
-          if (lfCat) {
-            const capCat = lfCat.charAt(0).toUpperCase() + lfCat.slice(1);
-            lfCatViews[capCat] = (lfCatViews[capCat] || 0) + (p.views || 0);
-          }
-        });
-
-        // TechFlow 바 렌더링
-        const tfContainer = document.getElementById('tf-cat-traffic-bars');
-        if (tfContainer) {
-          const tfEntries = Object.entries(tfCatViews).sort((a, b) => b[1] - a[1]);
-          const tfMax = tfEntries.length > 0 ? tfEntries[0][1] : 1;
-          const tfTotal = tfEntries.reduce((s, [, v]) => s + v, 0);
-
-          if (tfEntries.length === 0) {
-            tfContainer.innerHTML = '<div class="no-data">아직 트래픽 데이터가 없습니다</div>';
-          } else {
-            tfContainer.innerHTML = tfEntries.map(([cat, views]) => {
-              const pct = Math.max((views / tfMax) * 100, 8);
-              const color = tfColors[cat] || '#94a3b8';
-              const share = tfTotal > 0 ? Math.round(views / tfTotal * 100) : 0;
-              return `<div class="cat-traffic-row">
-                <span class="cat-traffic-name">${cat}</span>
+        const entries = Object.entries(byCat).sort((a, b) => b[1] - a[1]);
+        if (!entries.length) {
+          container.innerHTML = '<div class="no-data">아직 글 단위 조회 데이터가 없습니다 (GA4 수집 07-27 시작)</div>';
+          return;
+        }
+        const max = entries[0][1] || 1;
+        const total = entries.reduce((s, [, v]) => s + v, 0);
+        container.innerHTML = entries.map(([cat, views]) => {
+          const pct = Math.max((views / max) * 100, 8);
+          const color = colorOf[cat] || '#94a3b8';
+          const share = total > 0 ? Math.round(views / total * 100) : 0;
+          return `<div class="cat-traffic-row">
+                <span class="cat-traffic-name">${escHtml(cat)}</span>
                 <div class="cat-traffic-bar-wrap">
                   <div class="cat-traffic-bar" style="width:${pct}%;background:${color}"></div>
                 </div>
                 <span class="cat-traffic-value">${fmt(views)}회</span>
                 <span class="cat-traffic-share">${share}%</span>
               </div>`;
-            }).join('');
-          }
-        }
-
-        // LifeFlow 바 렌더링
-        const lfContainer = document.getElementById('lf-cat-traffic-bars');
-        if (lfContainer) {
-          const lfEntries = Object.entries(lfCatViews).sort((a, b) => b[1] - a[1]);
-          const lfMax = lfEntries.length > 0 ? lfEntries[0][1] : 1;
-          const lfTotal = lfEntries.reduce((s, [, v]) => s + v, 0);
-
-          if (lfEntries.length === 0) {
-            lfContainer.innerHTML = '<div class="no-data">아직 트래픽 데이터가 없습니다</div>';
-          } else {
-            lfContainer.innerHTML = lfEntries.map(([cat, views]) => {
-              const pct = Math.max((views / lfMax) * 100, 8);
-              const color = lfColors[cat] || '#94a3b8';
-              const share = lfTotal > 0 ? Math.round(views / lfTotal * 100) : 0;
-              return `<div class="cat-traffic-row">
-                <span class="cat-traffic-name">${cat}</span>
-                <div class="cat-traffic-bar-wrap">
-                  <div class="cat-traffic-bar" style="width:${pct}%;background:${color}"></div>
-                </div>
-                <span class="cat-traffic-value">${fmt(views)}회</span>
-                <span class="cat-traffic-share">${share}%</span>
-              </div>`;
-            }).join('');
-          }
-        }
+        }).join('')
+          // 글이 아닌 페이지(홈·/tools/·목록) 몫을 숨기면 합이 안 맞아 보인다 → 명시한다
+          + (unmatched ? `<div class="cat-traffic-row" style="opacity:0.65">
+                <span class="cat-traffic-name">글 외 페이지</span>
+                <div class="cat-traffic-bar-wrap"><div class="cat-traffic-bar" style="width:${Math.max(unmatched / max * 100, 8)}%;background:#64748b"></div></div>
+                <span class="cat-traffic-value">${fmt(unmatched)}회</span>
+                <span class="cat-traffic-share">—</span>
+              </div>` : '');
       }
 
       // === Event Feed 전역 데이터 & 필터 ===
@@ -6390,20 +6012,25 @@ const ICONS: Record<string, string> = {
 
       // 이벤트 → 해당 글 URL. ?admin=1 을 붙여 내 확인 방문이 집계에 잡히지 않게 한다
       // (BaseLayout 트래커가 admin=1 을 보면 localStorage 에 notrack 플래그를 저장)
+      // 과거 이벤트에는 삭제된 소스(blog/lifeflow)가 남아 있다. 그 URL 은 뭉게로 301 되므로
+      // 최종 목적지인 뭉게로 바로 보낸다(리다이렉트 한 번을 아끼고, 죽은 도메인을 노출하지 않음).
       const SITE_BY_SOURCE = {
-        blog: 'https://ai-revenue-blog.vercel.app',
-        lifeflow: 'https://life-revenue-blog.vercel.app',
-        vip: 'https://virtual-in-playing.vercel.app',
         mg: 'https://mungge.com',
+        vip: 'https://virtual-in-playing.vercel.app',
+        playcast: 'https://virtual-in-playing.vercel.app',
+        blog: 'https://mungge.com',
+        lifeflow: 'https://mungge.com',
       };
 
       function eventLink(e) {
-        const base = SITE_BY_SOURCE[e.source] || SITE_BY_SOURCE.blog;
+        const base = SITE_BY_SOURCE[e.source] || SITE_BY_SOURCE.mg;
         const m = e.metadata || {};
         let path = e.path || m.path || '';
         if (!path) {
           const slug = e.slug || m.slug || '';
-          path = slug ? `/blog/${slug}/` : '/';
+          // 뭉게(WordPress)는 /blog/ 프리픽스가 없다 — 붙이면 404 로 보낸다
+          const prefix = e.source === 'vip' || e.source === 'playcast' ? '/blog/' : '/';
+          path = slug ? `${prefix}${slug}/` : '/';
         }
         if (!path.startsWith('/')) path = '/' + path;
         return `${base}${path}${path.includes('?') ? '&' : '?'}admin=1`;
@@ -6475,7 +6102,7 @@ const ICONS: Record<string, string> = {
         if (!btn) return;
         document.querySelectorAll('#top-pages-tabs .source-tab').forEach(b => b.className = 'source-tab');
         const f = btn.dataset.filter;
-        btn.className = 'source-tab ' + (f === 'blog' ? 'active-tf' : f === 'lifeflow' ? 'active-lf' : f === 'vip' ? 'active-vip' : f === 'mg' ? 'active-mg' : 'active');
+        btn.className = 'source-tab ' + (f === 'mg' ? 'active-mg' : f === 'vip' ? 'active-vip' : 'active');
         renderTopPages(undefined, f);
       });
 
@@ -6506,7 +6133,7 @@ const ICONS: Record<string, string> = {
         if (!btn) return;
         document.querySelectorAll('#event-tabs .source-tab').forEach(b => b.className = 'source-tab');
         const f = btn.dataset.filter;
-        btn.className = 'source-tab ' + (f === 'blog' ? 'active-tf' : f === 'lifeflow' ? 'active-lf' : f === 'vip' ? 'active-vip' : f === 'mg' ? 'active-mg' : 'active');
+        btn.className = 'source-tab ' + (f === 'mg' ? 'active-mg' : f === 'vip' ? 'active-vip' : 'active');
         renderEventFeed(undefined, f);
       });
 
@@ -6549,7 +6176,7 @@ const ICONS: Record<string, string> = {
         if (isTime) {
           if (period === 'hourly') {
             if (total) total.textContent = '오늘(KST) 시간대별';
-            if (note) note.textContent = '※ 오늘(KST) 시간대별. TF/LF 막대 분리. 방문자는 고유 UA 기준(당일 계산).';
+            if (note) note.textContent = '※ 오늘(KST) 시간대별. 뭉게/VIP 막대 분리. 뭉게는 GA4가 시간 단위를 주지 않아 자체 트래커(pageview_mg) 기준 — 일일 GA4 합계와 다를 수 있음. 방문자는 고유 UA 기준.';
             renderHourlyChart();
           } else {
             if (total) total.textContent = _heatmapMode === 'weekly' ? '요일 × 시간대 (14일 누적)' : '최근 14일 × 시간대';
@@ -6699,45 +6326,34 @@ const ICONS: Record<string, string> = {
           document.getElementById('t-subscribers').textContent = fmt(Number(summary?.total_subscribers) || 0);
           document.getElementById('t-subs-today').textContent = `today: +${ts}`;
 
-          // Source breakdown
-          const tfTv = Number(summary?.tf_today_views) || 0;
-          const lfTv = Number(summary?.lf_today_views) || 0;
+          // Source breakdown — 살아 있는 소스는 뭉게(mg)와 VIP(playcast) 둘뿐이다.
+          // 뭉게 조회수는 여기서 채우지 않는다: GA4(ga4_daily)가 SSOT 이고 applyMungge() 가 얹는다.
+          // analytics 의 pageview_mg 와 GA4 를 같이 더하면 이중 집계다(_mungge.js 원칙과 동일).
           const vipTv = Number(summary?.vip_today_views) || 0;
           const vipTotal = Number(summary?.vip_total_views) || 0;
-          const tfTc = Number(summary?.tf_today_clicks) || 0;
-          const lfTc = Number(summary?.lf_today_clicks) || 0;
+          const vipTc = Number(summary?.vip_today_clicks) || 0;
+          const mgTc = Number(summary?.mg_today_clicks) || 0;
+          const mgTotalClicks = Number(summary?.mg_total_clicks) || 0;
 
           const vbEl = document.getElementById('t-views-breakdown');
-          if (vbEl) vbEl.innerHTML = `<span><i class="dot-tf"></i> TF: ${fmt(tfTv)}</span><span><i class="dot-lf"></i> LF: ${fmt(lfTv)}</span><span><i class="dot-vip"></i> VIP: ${fmt(vipTv)}</span>`;
+          if (vbEl) vbEl.innerHTML = `<span><i class="dot-mg"></i> 뭉게: --</span><span><i class="dot-vip"></i> VIP: ${fmt(vipTv)}</span>`;
 
           const cbEl = document.getElementById('t-clicks-breakdown');
-          if (cbEl) cbEl.innerHTML = `<span><i class="dot-tf"></i> TF: ${fmt(tfTc)}</span><span><i class="dot-lf"></i> LF: ${fmt(lfTc)}</span>`;
+          if (cbEl) cbEl.innerHTML = `<span><i class="dot-mg"></i> 뭉게: ${fmt(mgTc)}</span><span><i class="dot-vip"></i> VIP: ${fmt(vipTc)}</span>`;
 
-          // Also update summary cards
+          // Also update summary cards (뭉게 몫은 applyMungge 가 더한다)
           document.getElementById('total-views').textContent = fmt(Number(summary?.total_views) || 0);
-          document.getElementById('views-sub').textContent = tv > 0 ? `today +${tv} (TF +${tfTv} / LF +${lfTv})` : 'Collecting...';
+          document.getElementById('views-sub').textContent = tv > 0 ? `today +${tv} (VIP +${vipTv})` : 'Collecting...';
           document.getElementById('total-clicks').textContent = fmt(Number(summary?.total_clicks) || 0);
-          document.getElementById('clicks-sub').textContent = tc > 0 ? `today +${tc}` : 'Waiting...';
+          document.getElementById('clicks-sub').textContent = tc > 0 ? `today +${tc} (뭉게 +${mgTc} / VIP +${vipTc})` : 'Waiting...';
 
           // KPI 델타 칩 (오늘 vs 어제) — 색+화살표 이중 인코딩
           setDeltaChip('views-delta-chip', tv, yv);
           setDeltaChip('clicks-delta-chip', tc, null, tc > 0 ? `+${fmt(tc)} today` : '—');
 
-          // Summary card source split
-          const tfTotal = Number(summary?.tf_total_views) || 0;
-          const lfTotal = Number(summary?.lf_total_views) || 0;
+          // Summary card source split — 분모는 applyMungge 에서 뭉게를 더해 다시 계산한다
           const totalV = Number(summary?.total_views) || 1;
-          const tfTotalEl = document.getElementById('tf-total-views');
-          const lfTotalEl = document.getElementById('lf-total-views');
-          if (tfTotalEl) tfTotalEl.textContent = fmt(tfTotal);
-          if (lfTotalEl) lfTotalEl.textContent = fmt(lfTotal);
-
-          // Animated split bar
-          const splitTfEl = document.getElementById('views-split-tf');
-          const splitLfEl = document.getElementById('views-split-lf');
           const splitVipEl = document.getElementById('views-split-vip');
-          if (splitTfEl) splitTfEl.style.width = Math.round(tfTotal / totalV * 100) + '%';
-          if (splitLfEl) splitLfEl.style.width = Math.round(lfTotal / totalV * 100) + '%';
           if (splitVipEl) splitVipEl.style.width = Math.round(vipTotal / totalV * 100) + '%';
 
           // 뭉게 합류용 스냅샷 — analytics 측 원본 수치를 남겨야 GA4 를 더해도 폴링마다
@@ -6745,10 +6361,10 @@ const ICONS: Record<string, string> = {
           _traffic = {
             todayVis, ydayVis, tv, yv, setKpiDelta,
             totalViews: Number(summary?.total_views) || 0,
-            tfTotal, lfTotal, vipTotal,
-            tfTv, lfTv, vipTv,
-            postBase: (TF_POST_COUNT || 0) + (LF_POST_COUNT || 0) + (VIP_POST_COUNT || 0),
-            postCounts: { tf: TF_POST_COUNT || 0, lf: LF_POST_COUNT || 0, vip: VIP_POST_COUNT || 0 },
+            vipTotal, vipTv, vipTc, mgTc, mgTotalClicks,
+            totalClicks: Number(summary?.total_clicks) || 0,
+            mgTotalLikes: Number(summary?.mg_total_likes) || 0,
+            postBase: VIP_POST_COUNT || 0,
           };
           applyMungge();
 
@@ -6762,61 +6378,19 @@ const ICONS: Record<string, string> = {
           if (vipTabSub) vipTabSub.textContent = vipTv > 0 ? `오늘 +${vipTv}` : `총 ${fmt(vipTotal)}회`;
 
           // === 탭별 데이터 업데이트 ===
-          // TechFlow 탭
-          const tfTabViewsEl = document.getElementById('tf-tab-views');
-          const tfTabClicksEl = document.getElementById('tf-tab-clicks');
-          const tfTabCvrEl = document.getElementById('tf-tab-cvr');
-          if (tfTabViewsEl) tfTabViewsEl.textContent = fmt(tfTotal);
-          if (tfTabClicksEl) tfTabClicksEl.textContent = fmt(Number(summary?.tf_total_clicks) || 0);
-          if (tfTabCvrEl) {
-            const tfCvr = tfTotal > 0 ? ((Number(summary?.tf_total_clicks) || 0) / tfTotal * 100).toFixed(2) : 0;
-            tfTabCvrEl.textContent = tfCvr + '%';
-          }
-          const tfTabViewsSubEl = document.getElementById('tf-tab-views-sub');
-          const tfTabClicksSubEl = document.getElementById('tf-tab-clicks-sub');
-          if (tfTabViewsSubEl) tfTabViewsSubEl.textContent = tfTv > 0 ? `오늘 +${fmt(tfTv)}` : '수집 중...';
-          if (tfTabClicksSubEl) tfTabClicksSubEl.textContent = tfTc > 0 ? `오늘 +${fmt(tfTc)}` : '대기 중...';
-
-          // LifeFlow 탭
-          const lfTabViewsEl = document.getElementById('lf-tab-views');
-          const lfTabClicksEl = document.getElementById('lf-tab-clicks');
-          const lfTabCvrEl = document.getElementById('lf-tab-cvr');
-          if (lfTabViewsEl) lfTabViewsEl.textContent = fmt(lfTotal);
-          if (lfTabClicksEl) lfTabClicksEl.textContent = fmt(Number(summary?.lf_total_clicks) || 0);
-          if (lfTabCvrEl) {
-            const lfCvr = lfTotal > 0 ? ((Number(summary?.lf_total_clicks) || 0) / lfTotal * 100).toFixed(2) : 0;
-            lfTabCvrEl.textContent = lfCvr + '%';
-          }
-          const lfTabViewsSubEl = document.getElementById('lf-tab-views-sub');
-          const lfTabClicksSubEl = document.getElementById('lf-tab-clicks-sub');
-          if (lfTabViewsSubEl) lfTabViewsSubEl.textContent = lfTv > 0 ? `오늘 +${fmt(lfTv)}` : '수집 중...';
-          if (lfTabClicksSubEl) lfTabClicksSubEl.textContent = lfTc > 0 ? `오늘 +${fmt(lfTc)}` : '대기 중...';
+          // 뭉게 탭의 조회·전환은 GA4 가 있어야 계산되므로 applyMungge() 가 채운다.
+          // 여기서는 analytics 만으로 알 수 있는 클릭·좋아요만 먼저 넣는다.
+          const setTxt = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+          setTxt('mg-tab-clicks', fmt(mgTotalClicks));
+          setTxt('mg-tab-clicks-sub', mgTc > 0 ? `오늘 +${fmt(mgTc)}` : '오늘 클릭 없음');
 
           // 쿠팡 탭
-          const coupTotalClicksEl = document.getElementById('coup-total-clicks');
-          const coupTodayClicksEl = document.getElementById('coup-today-clicks');
-          const coupCtrEl = document.getElementById('coup-ctr');
-          const coupTfCtrEl = document.getElementById('coup-tf-ctr');
-          const coupLfCtrEl = document.getElementById('coup-lf-ctr');
           const totalClicks = Number(summary?.total_clicks) || 0;
-          if (coupTotalClicksEl) coupTotalClicksEl.textContent = fmt(totalClicks);
-          if (coupTodayClicksEl) coupTodayClicksEl.textContent = fmt(tc);
-          if (coupCtrEl) {
-            const overallCtr = totalV > 0 ? (totalClicks / totalV * 100).toFixed(2) : 0;
-            coupCtrEl.textContent = overallCtr + '%';
-          }
-          if (coupTfCtrEl) {
-            const tfCtr = tfTotal > 0 ? ((Number(summary?.tf_total_clicks) || 0) / tfTotal * 100).toFixed(2) : 0;
-            coupTfCtrEl.textContent = tfCtr + '%';
-          }
-          if (coupLfCtrEl) {
-            const lfCtr = lfTotal > 0 ? ((Number(summary?.lf_total_clicks) || 0) / lfTotal * 100).toFixed(2) : 0;
-            coupLfCtrEl.textContent = lfCtr + '%';
-          }
-          const coupTfDetailEl = document.getElementById('coup-tf-detail');
-          const coupLfDetailEl = document.getElementById('coup-lf-detail');
-          if (coupTfDetailEl) coupTfDetailEl.textContent = `${fmt(Number(summary?.tf_total_clicks) || 0)} / ${fmt(tfTotal)}`;
-          if (coupLfDetailEl) coupLfDetailEl.textContent = `${fmt(Number(summary?.lf_total_clicks) || 0)} / ${fmt(lfTotal)}`;
+          setTxt('coup-total-clicks', fmt(totalClicks));
+          setTxt('coup-today-clicks', fmt(tc));
+          setTxt('coup-src-clicks', `${fmt(mgTotalClicks)} / ${fmt(Number(summary?.vip_total_clicks) || 0)}`);
+          setTxt('coup-src-detail', `뭉게 ${fmt(mgTotalClicks)} · VIP ${fmt(Number(summary?.vip_total_clicks) || 0)}`);
+          // 전체 CTR·뭉게 CTR 은 분모(조회수)에 뭉게 GA4 가 들어가야 맞다 → applyMungge 가 채운다
 
           // 쿠팡 클릭 피드는 fetchCoupangProducts → renderCoupangFeed 가 전담
           // (get_recent_events 20건 기반 구 렌더링은 상세 피드를 덮어써서 제거)
@@ -6845,7 +6419,7 @@ const ICONS: Record<string, string> = {
           }
           renderTrafficPanel();
           renderHeatmap(heatmap);
-          renderCategoryTraffic();
+          renderMgCategoryTraffic();
           renderTopLikedPosts(topLiked);
           // 오디언스(유입경로·기기) + 쿠팡 + 뉴스레터 → 퍼널·인사이트 일괄 렌더
           _funnelCounts.pageviews = Number(summary?.total_views) || 0;   // 퍼널 분모=실제 총 페이지뷰
@@ -6912,14 +6486,12 @@ const ICONS: Record<string, string> = {
 
           // 모든 탭 비활성화
           mainTabs.forEach(t => {
-            t.classList.remove('active', 'active-tf', 'active-lf', 'active-coupang', 'active-paperdoc', 'active-comments', 'active-vip');
+            t.classList.remove('active', 'active-mg', 'active-coupang', 'active-paperdoc', 'active-comments', 'active-vip');
           });
 
           // 클릭한 탭 활성화
-          if (targetTab === 'techflow') {
-            tab.classList.add('active-tf');
-          } else if (targetTab === 'lifeflow') {
-            tab.classList.add('active-lf');
+          if (targetTab === 'mungge') {
+            tab.classList.add('active-mg');
           } else if (targetTab === 'coupang') {
             tab.classList.add('active-coupang');
           } else if (targetTab === 'paperdoc') {
@@ -7014,23 +6586,71 @@ const ICONS: Record<string, string> = {
         showCommentDashboard();
       }
 
+      // 뭉게 WordPress 댓글 (읽기 전용). 답글·삭제는 wp-admin 에서 — WP 쓰기는 앱 비밀번호가
+      // 필요하고 그걸 클라이언트에 둘 수 없다.
+      async function fetchMunggeComments() {
+        try {
+          const r = await fetch(`${MG_URL}/wp-json/wp/v2/comments?per_page=20&_fields=id,author_name,content,date,link`);
+          if (!r.ok) return { total: 0, recent: [] };
+          const total = Number(r.headers.get('x-wp-total')) || 0;
+          const rows = await r.json();
+          return { total, recent: Array.isArray(rows) ? rows : [] };
+        } catch { return { total: 0, recent: [] }; }
+      }
+
+      function renderMunggeComments(mgc) {
+        const el = document.getElementById('cm-mg-list');
+        const cnt = document.getElementById('cm-mg-total');
+        if (cnt) cnt.textContent = fmt(mgc?.total || 0);
+        if (!el) return;
+        const list = mgc?.recent || [];
+        if (!list.length) {
+          el.innerHTML = '<div class="no-data">뭉게 WordPress 댓글이 아직 없습니다.</div>';
+          return;
+        }
+        // 마크업은 Supabase 댓글 목록(.cm-item)과 같은 구조로 맞춘다 — 두 목록이 서로 다르게
+        // 보이면 "왜 이 댓글엔 답변 버튼이 없나"를 매번 다시 확인해야 한다.
+        // 답변·삭제 버튼은 없다: WP 쓰기는 앱 비밀번호가 필요하고 그걸 클라이언트에 둘 수 없다.
+        el.innerHTML = `<div class="traffic-section" style="margin-top:1.5rem;">
+          <div class="traffic-header"><h3>뭉게 댓글 <span style="font-weight:400;font-size:0.75rem;color:var(--text-3)">(WordPress · 읽기 전용 — 답글은 wp-admin)</span></h3></div>
+          <div class="traffic-body"><div class="comment-list">` +
+          list.map((c) => {
+            const body = String(c.content?.rendered || '').replace(/<[^>]*>/g, '').trim();
+            const href = escHtml(safeUrl(c.link));
+            return `<div class="cm-item">
+              <span class="cm-source mg">뭉게</span>
+              <div class="cm-body">
+                <div class="cm-meta">
+                  <span class="cm-nickname">${escHtml(String(c.author_name || '익명'))}</span>
+                  <span>${escHtml(String(c.date || '').slice(0, 16).replace('T', ' '))}</span>
+                </div>
+                <div class="cm-content">${escHtml(body.length > 300 ? body.slice(0, 300) + '…' : body)}</div>
+                <a class="cm-slug" href="${href}" target="_blank" rel="noopener" title="글로 이동">📄 글 보기 <span class="cm-goto-arrow">↗</span></a>
+              </div>
+            </div>`;
+          }).join('') + '</div></div></div>';
+      }
+
       async function loadCommentData() {
         try {
-          // 통계 + 목록 + 트렌드 병렬 로드
-          const [stats, comments, trend] = await Promise.all([
+          // 통계 + 목록 + 트렌드 병렬 로드.
+          // 뭉게 댓글은 WordPress 자체 댓글이라 Supabase RPC 에 없다 → WP REST 로 따로 읽는다.
+          const [stats, comments, trend, mgc] = await Promise.all([
             rpc('get_comment_stats'),
             rpc('get_all_comments', { p_limit: 100, p_offset: 0 }),
-            rpc('get_comment_trend')
+            rpc('get_comment_trend'),
+            fetchMunggeComments(),
           ]);
 
           // 통계 카드 업데이트
           if (stats && typeof stats === 'object') {
-            document.getElementById('cm-total').textContent = fmt(stats.total || 0);
+            document.getElementById('cm-total').textContent = fmt((stats.total || 0) + (mgc?.total || 0));
             document.getElementById('cm-today').textContent = fmt(stats.today || 0);
             document.getElementById('cm-reports').textContent = fmt(stats.reports || 0);
             document.getElementById('cm-by-source').textContent =
-              `TechFlow ${stats.blog_count || 0} / LifeFlow ${stats.lifeflow_count || 0} / VIP ${stats.vip_count || 0}`;
+              `뭉게 ${mgc?.total || 0} / VIP ${stats.vip_count || 0}`;
           }
+          renderMunggeComments(mgc);
 
           // 댓글 목록 저장 + 렌더
           allComments = Array.isArray(comments) ? comments : [];
@@ -7048,23 +6668,30 @@ const ICONS: Record<string, string> = {
         const container = document.getElementById('comment-list');
         if (!container) return;
 
+        // 'mg' 필터는 이 목록(Supabase)에서 항상 0건이다 — 뭉게 댓글은 WordPress 에 쌓이고
+        // renderMunggeComments() 가 따로 그린다. 필터를 지우면 "뭉게 댓글은 어디?"가 되므로
+        // 남겨 두고, 빈 결과에 그 사실을 안내한다.
         let filtered = allComments;
-        if (currentFilter === 'blog') {
-          filtered = allComments.filter(c => c.source === 'blog');
-        } else if (currentFilter === 'lifeflow') {
-          filtered = allComments.filter(c => c.source === 'lifeflow');
+        if (currentFilter === 'mg') {
+          filtered = allComments.filter(c => c.source === 'mg');
+        } else if (currentFilter === 'vip') {
+          filtered = allComments.filter(c => c.source === 'vip' || c.source === 'playcast');
         } else if (currentFilter === 'reported') {
           filtered = allComments.filter(c => (c.report_count || 0) > 0);
         }
 
         if (filtered.length === 0) {
-          container.innerHTML = '<div class="no-data">표시할 댓글이 없습니다.</div>';
+          container.innerHTML = currentFilter === 'mg'
+            ? '<div class="no-data">뭉게 댓글은 WordPress 에 저장돼 이 목록(Supabase)에 없습니다 — 위 <b>뭉게 댓글</b> 섹션을 보세요.</div>'
+            : '<div class="no-data">표시할 댓글이 없습니다.</div>';
           return;
         }
 
         container.innerHTML = filtered.map(c => {
-          const srcClass = c.source === 'blog' ? 'tf' : 'lf';
-          const srcLabel = c.source === 'blog' ? 'TF' : 'LF';
+          const srcClass = c.source === 'mg' ? 'mg' : (c.source === 'vip' || c.source === 'playcast') ? 'vip' : 'legacy';
+          const srcLabel = c.source === 'mg' ? '뭉게'
+            : (c.source === 'vip' || c.source === 'playcast') ? 'VIP'
+            : c.source === 'blog' ? '구TF' : c.source === 'lifeflow' ? '구LF' : (c.source || '?');
           const date = new Date(c.created_at).toLocaleString('ko-KR', {
             month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
           });
@@ -7075,9 +6702,11 @@ const ICONS: Record<string, string> = {
           const parentNote = c.parent_id
             ? '<span style="color:var(--dash-cyan);">↩ 답글</span>' : '';
 
-          const postHref = c.source === 'vip'
+          // 구 TF/LF 글 링크는 뭉게로 301 되므로 최종 목적지(뭉게)로 바로 보낸다.
+          // 뭉게는 /blog/ 프리픽스가 없다.
+          const postHref = (c.source === 'vip' || c.source === 'playcast')
             ? 'https://virtual-in-playing.vercel.app/watch/' + encodeURIComponent(c.post_slug) + '/'
-            : (c.source === 'lifeflow' ? 'https://life-revenue-blog.vercel.app' : '') + '/blog/' + encodeURIComponent(c.post_slug) + '/';
+            : MG_URL + '/' + encodeURIComponent(c.post_slug) + '/';
           return `
             <div class="cm-item" data-id="${c.id}" data-slug="${escHtml(c.post_slug)}" data-source="${escHtml(c.source)}">
               <span class="cm-source ${srcClass}">${srcLabel}</span>
@@ -7209,17 +6838,17 @@ const ICONS: Record<string, string> = {
         const maxCount = Math.max(...data.map(d => d.count), 1);
         const maxH = 120;
 
+        // 이 RPC(get_comment_trend)는 Supabase comments 기준이라 뭉게(WordPress 댓글)는 없다.
+        // 소스별로 쪼개면 죽은 소스(blog/lifeflow) 막대만 남으므로 총계 + VIP 만 그린다.
         const barsHtml = data.map(d => {
-          const tfH = Math.max((d.blog_count / maxCount) * maxH, 4);
-          const lfH = Math.max((d.lf_count / maxCount) * maxH, 4);
+          const totalH = Math.max((d.count / maxCount) * maxH, 4);
           const vipH = d.vip_count > 0 ? Math.max((d.vip_count / maxCount) * maxH, 4) : 0;
           const dayLabel = new Date(d.day).toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' });
           return `
             <div class="trend-bar-group">
               <div class="trend-count">${d.count}</div>
               <div class="trend-bars">
-                <div class="trend-bar tf" style="height:${tfH}px" title="TF: ${d.blog_count}"></div>
-                <div class="trend-bar lf" style="height:${lfH}px" title="LF: ${d.lf_count}"></div>
+                <div class="trend-bar mg" style="height:${totalH}px" title="전체: ${d.count}"></div>
                 <div class="trend-bar vip" style="height:${vipH}px" title="VIP: ${d.vip_count || 0}"></div>
               </div>
               <div class="trend-label">${dayLabel}</div>
@@ -7228,7 +6857,7 @@ const ICONS: Record<string, string> = {
         }).join('');
 
         container.innerHTML = barsHtml +
-          '<div class="trend-legend"><span class="leg-tf">TechFlow</span><span class="leg-lf">LifeFlow</span></div>';
+          '<div class="trend-legend"><span class="leg-mg">전체</span><span class="leg-vip">VIP</span></div>';
       }
 
       // 필터 버튼
@@ -7254,7 +6883,7 @@ const ICONS: Record<string, string> = {
       function initDashboard() {
         if (_inited) return;
         _inited = true;
-        fetchLifeFlowRSS();
+        fetchMunggeSlugMeta();   // Top Pages 제목 보정·카테고리 트래픽이 이 맵을 쓴다
         fetchVipRSS();
         loadTraffic();
         checkSupabase();
@@ -7280,7 +6909,7 @@ const ICONS: Record<string, string> = {
       }
 
       // ── 내 방문 제외 ─────────────────────────────────────
-      const NOTRACK_KEY = '__notrack';   // BaseLayout 트래커와 동일 키(동일 오리진 = TechFlow)
+      const NOTRACK_KEY = '__notrack';   // 뭉게/VIP 트래커와 동일 키 (localStorage 는 오리진별)
       function initExcludeControls() {
         // A) 이 브라우저 즉시 제외 토글 (localStorage.__notrack)
         const tBtn = document.getElementById('notrack-toggle');
@@ -7289,7 +6918,7 @@ const ICONS: Record<string, string> = {
           let on = false;
           try { on = localStorage.getItem(NOTRACK_KEY) === '1'; } catch {}
           if (tBtn) { tBtn.textContent = on ? '제외 켜짐 — 끄기' : '이 브라우저 제외하기'; tBtn.classList.toggle('on', on); }
-          if (tSt) tSt.textContent = on ? '이 브라우저의 TechFlow 방문은 기록되지 않아요.' : '지금은 이 브라우저 방문도 집계에 잡혀요.';
+          if (tSt) tSt.textContent = on ? '이 브라우저의 이 사이트 방문은 기록되지 않아요.' : '지금은 이 브라우저 방문도 집계에 잡혀요.';
         };
         tBtn?.addEventListener('click', () => {
           try {

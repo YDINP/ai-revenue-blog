@@ -2,7 +2,7 @@
 //   /api/gsc-sync?days=30&secret=<CRON_SECRET>   또는  Authorization: Bearer <CRON_SECRET>
 //
 // 조회 모드(저장 안 함): dim 파라미터를 주면 GSC 원본 행을 그대로 반환한다.
-//   /api/gsc-sync?dim=query&blog=tf&days=28&limit=200&secret=…
+//   /api/gsc-sync?dim=query&blog=mg&days=28&limit=200&secret=…
 //   /api/gsc-sync?dim=query,page&…   (어떤 검색어가 어떤 글로 떨어지는지)
 // gsc_daily 는 date×page 만 저장해서 검색어 단위 진단(CTR·식인)이 불가능하다. 별도 엔드포인트를
 // 만들면 Hobby 플랜 서버리스 함수 12개 상한에 걸리므로 이 핸들러에 조회 모드를 얹는다.
@@ -167,7 +167,7 @@ async function probe(url, res) {
   if (!hasGsc()) return res.status(500).json({ error: 'no-gsc-env' });
 
   const blogs = blogList().filter((b) => b.gscSite);
-  const key = url.searchParams.get('blog') || 'tf';
+  const key = url.searchParams.get('blog') || 'mg';
   const blog = blogs.find((b) => b.key === key);
   if (!blog) {
     return res.status(400).json({ error: `unknown blog '${key}'`, available: blogs.map((b) => b.key) });

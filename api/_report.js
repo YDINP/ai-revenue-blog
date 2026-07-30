@@ -1,17 +1,20 @@
 // 전날(또는 지정일) 종합 리포트 — 뭉게(mungge.com) 기준
 // cron(daily-report.js) 과 봇 /report 명령이 공유
 //
-// 2026-07-30 재편성: TF·LF 는 mungge 로 301 통합돼 자체 조회가 한 자릿수로 떨어졌고,
-// 실제 트래픽은 전부 뭉게로 온다. 그런데 뭉게는 source=null(WP 직접 운영)이라 이 리포트에
-// 아예 안 잡혀서, 매일 아침 "조회수 3, 방문자 2" 같은 빈 사이트 수치만 오고 있었다.
-// → 본문은 뭉게 기준으로 세우고, TF/LF/VIP 잔존 활동은 맨 아래 '레거시' 한 블록으로 접는다.
-// 뭉게 수치의 두 소스와 이중계산 방지 원칙은 _mungge.js 주석 참조.
+// 2026-07-30 재편성: TF·LF 는 mungge 로 301 통합돼 리다이렉트 셸만 남았다. 소스로서의
+// TF/LF 는 제거했고(api/_blogs.js), 이 리포트는 뭉게 하나만 본다.
+// 뭉게 수치의 두 소스(GA4 배치 / 자체 트래커)와 이중계산 방지 원칙은 _mungge.js 주석 참조.
+//
+// 뭉게에서 쌓이는 부가 활동:
+//   · 좋아요  — analytics `like` (source='mg', scripts/wp-like.js)
+//   · 쿠팡클릭 — analytics `coupang_click` (source='mg', scripts/wp-affiliate.js)
+//   · 댓글    — WordPress 자체 댓글이라 Supabase 가 아니라 WP REST 로 읽는다(mgComments)
 
 import { blogList } from './_blogs.js';
 import { communityHot } from './_community.js';
 import { getFileJson } from './_github.js';
 import { gscReportLines } from './_gsc-view.js';
-import { loadMungge, mgNaverIndex, mgPosts } from './_mungge.js';
+import { loadMungge, mgComments, mgNaverIndex, mgPosts } from './_mungge.js';
 import { isSearch } from './_refs.js';
 import {
   SUPABASE_ANON_KEY,
@@ -25,12 +28,8 @@ import {
 const fmt = (n) => Number(n || 0).toLocaleString('en-US');
 const cut = (s, n) => (s = String(s || ''), s.length > n ? s.slice(0, n) + '…' : s);
 
-// 레거시 블로그 source → 표시 약어
-const LEGACY_ABBR = { blog: 'TF', lifeflow: 'LF', playcast: 'VIP', vip: 'VIP' };
-const legacyAbbr = (s) => LEGACY_ABBR[s] || s || '?';
-
 // 홈페이지 조회는 사이트 제목으로 기록된다 → '홈' 으로 표시
-const postTitle = (t) => (/^(TechFlow|LifeFlow|뭉게)/.test(t) ? '홈' : t);
+const postTitle = (t) => (/^뭉게/.test(t) ? '홈' : t);
 
 async function rest(query) {
   const r = await fetch(`${SUPABASE_URL}/rest/v1/${query}`, {
@@ -48,36 +47,24 @@ function delta(cur, prev) {
   return pct > 0 ? ` (전일 대비 ▲${pct}%)` : ` (전일 대비 ▼${Math.abs(pct)}%)`;
 }
 
-// ── 레거시(TF·LF·VIP) 하루치 — 자체 트래커 이벤트 ──
-// 뭉게 이전의 자산이라 조회수는 이제 잔존값이지만, 댓글·좋아요·쿠팡클릭은 아직 여기에만 있다.
-async function collectLegacy(day) {
+// ── 뭉게 하루치 부가 활동 (좋아요·쿠팡클릭) ──
+// 조회수·유입경로는 loadMungge(GA4/자체 트래커)가 담당하고, 여기서는 analytics 이벤트로만
+// 남는 상호작용을 센다. source='mg' 로 좁혀야 VIP·과거 TF/LF 행이 섞이지 않는다.
+async function collectMgEvents(day) {
   const { start, end } = kstRange(day);
   const range = `created_at=gte.${start}&created_at=lt.${end}`;
 
-  const [pv, comments, likes, clicks] = await Promise.all([
-    rest(`analytics?event_type=eq.pageview&${range}&select=source,metadata`),
-    rest(`comments?${range}&select=source,nickname,content,post_slug,is_admin`),
-    rest(`card_likes?${range}&select=slug`),
+  const [likes, clicks] = await Promise.all([
+    rest(`analytics?event_type=eq.like&source=eq.mg&${range}&select=metadata`).catch(() => []),
     rest(
-      `analytics?or=(event_type.eq.coupang_click,event_type.eq.affiliate_click)&${range}&select=source,metadata`
-    ),
+      `analytics?or=(event_type.eq.coupang_click,event_type.eq.affiliate_click)&source=eq.mg&${range}&select=metadata`
+    ).catch(() => []),
   ]);
-
-  // 이전에는 'lifeflow 가 아니면 전부 TF' 로 셌다 → VIP(playcast) 조회가 TF 로 흡수돼
-  // "TF 에 아직 트래픽이 있다"로 오독됐다. source 를 그대로 집계한다.
-  // 유입경로·방문자 분해는 뭉게 블록에서만 낸다 — 레거시는 잔존 규모만 알면 되므로 총량만 센다.
-  const bySrc = {};
-  (pv || []).forEach((r) => {
-    const k = legacyAbbr(r.source);
-    bySrc[k] = (bySrc[k] || 0) + 1;
-  });
 
   return {
     day,
-    views: (pv || []).length,
-    bySrc,
-    comments: (comments || []).filter((c) => !c.is_admin),
     likes: (likes || []).length,
+    // affiliate_click 은 쿠팡 외 대상도 쓰이므로 target 으로 한 번 더 거른다
     clicks: (clicks || []).filter((c) => {
       const m = c.metadata || {};
       return m.target === undefined || m.target === 'coupang';
@@ -129,10 +116,15 @@ function naverIndexLines(idx) {
 
 // ── 오늘 쓸 만한 소재 (커뮤니티 실시간 화제) ──
 async function todaysTopics() {
+  // 예전 필터는 `b.generator && b.communities` 였다 — generator(GitHub Actions 워크플로)는
+  // 뭉게에 없다(WP 직접 발행). generator 로 걸면 추천 주제가 통째로 사라지므로
+  // communities 유무만 본다. 실제 발행은 로컬 automation/daily-run.mjs 가 한다.
   const jobs = blogList()
-    .filter((b) => b.generator && b.communities?.length)
+    .filter((b) => b.communities?.length)
     .map(async (b) => {
       try {
+        // 뭉게는 repo 가 없어(WP 직접 운영) seeds 는 null 이 된다 → 어휘 게이트 없이 동작.
+        // 게이트는 종합 게시판(hn)에만 쓰이므로 추천 품질만 조금 무뎌지고 기능은 살아 있다.
         const seeds = await getFileJson(b, 'scripts/category-seeds.json').catch(() => null);
         const { posts } = await communityHot(b, seeds, 3);
         return posts.slice(0, 2).map((p) => ({ key: b.key, label: b.label.split(' (')[0], post: p }));
@@ -147,11 +139,12 @@ export async function reportMessage(dayArg) {
   const day = dayArg || kstDay(1);                      // 기본 = 어제(KST)
   const prevDay = kstShift(day, 1);
 
-  const [mg, legacy, prevLegacy, posts, naver, topics, gscLines] = await Promise.all([
+  const [mg, ev, prevEv, posts, comments, naver, topics, gscLines] = await Promise.all([
     loadMungge(prevDay, day),
-    collectLegacy(day),
-    collectLegacy(prevDay),
+    collectMgEvents(day),
+    collectMgEvents(prevDay),
     mgPosts(),
+    mgComments({ perPage: 10 }).catch(() => ({ total: 0, recent: [] })),
     mgNaverIndex(),
     todaysTopics().catch(() => []),
     gscReportLines().catch(() => []),   // Search Console 미연동이면 빈 배열
@@ -262,33 +255,26 @@ export async function reportMessage(dayArg) {
   // ── 네이버 색인 (구글 옆에 붙여야 "어느 쪽이 막혔는지"가 한눈에 보인다) ──
   lines.push(...naverIndexLines(naver));
 
-  // ── 레거시 (TF·LF·VIP → 뭉게 301) ──
-  // 조회는 잔존값이라 한 줄로 접고, 댓글·좋아요·쿠팡클릭은 아직 여기에만 있으므로 살려 둔다.
-  const legacyActive =
-    legacy.views || legacy.comments.length || legacy.likes || legacy.clicks.length;
-  if (legacyActive) {
-    const srcTxt = Object.entries(legacy.bySrc)
-      .sort((a, b) => b[1] - a[1])
-      .map(([k, n]) => `${k} ${fmt(n)}`)
-      .join(' · ');
+  // ── 상호작용 (좋아요·쿠팡클릭·댓글) ──
+  // 조회수와 달리 이건 "읽고 나서 뭘 했나"라 별 블록으로 세운다.
+  const dayComments = (comments.recent || []).filter((c) => c.day === day);
+  const hasEvents = ev.likes || ev.clicks.length || dayComments.length;
+  if (hasEvents) {
     lines.push(
       '',
-      '<b>레거시</b> <i>(TF·LF·VIP → 뭉게 301)</i>',
-      `👁 조회 ${fmt(legacy.views)}${srcTxt ? ` (${srcTxt})` : ''}${delta(legacy.views, prevLegacy.views)}`,
-      `💬 댓글 ${fmt(legacy.comments.length)} · ❤️ 좋아요 ${fmt(legacy.likes)} · 🛒 쿠팡클릭 ${fmt(legacy.clicks.length)}`
+      '<b>상호작용</b>',
+      `❤️ 좋아요 ${fmt(ev.likes)} · 🛒 쿠팡클릭 ${fmt(ev.clicks.length)}${delta(ev.clicks.length, prevEv.clicks.length)} · 💬 댓글 ${fmt(dayComments.length)}`
     );
 
-    if (legacy.comments.length) {
-      legacy.comments.slice(0, 3).forEach((c) =>
-        lines.push(`  💬 [${legacyAbbr(c.source)}] <b>${escapeHtml(c.nickname)}</b>: ${escapeHtml(cut(c.content, 34))}`)
+    if (dayComments.length) {
+      dayComments.slice(0, 3).forEach((c) =>
+        lines.push(`  💬 <b>${escapeHtml(c.nickname)}</b>: ${escapeHtml(cut(c.content, 34))}`)
       );
-      if (legacy.comments.length > 3) {
-        lines.push(`  …외 ${legacy.comments.length - 3}개 (<code>/comments</code>)`);
-      }
+      if (dayComments.length > 3) lines.push(`  …외 ${dayComments.length - 3}개`);
     }
-    if (legacy.clicks.length) {
+    if (ev.clicks.length) {
       const by = {};
-      legacy.clicks.forEach((c) => {
+      ev.clicks.forEach((c) => {
         const m = c.metadata || {};
         const p = m.product || m.label || '(상품 미상)';
         by[p] = (by[p] || 0) + 1;
@@ -300,7 +286,7 @@ export async function reportMessage(dayArg) {
     }
   }
 
-  if (!cur.views && !legacyActive) {
+  if (!cur.views && !hasEvents) {
     lines.push('', '<i>해당 날짜의 활동 데이터가 없습니다.</i>');
   }
 

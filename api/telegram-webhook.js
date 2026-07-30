@@ -10,7 +10,6 @@ import {
   paperdocMessage,
   likesMessage,
   recentMessage,
-  sourceMessage,
   statsMessage,
   topPagesMessage,
   trendMessage,
@@ -65,10 +64,9 @@ const HELP = [
   '• /trend — 최근 7일 조회수 추이',
   '• /newsletter [force] — 새 글 뉴스레터 수동 발송 (force=이미 보낸 글도 재발송)',
   '',
-  '<b>🕗 레거시</b> <i>(TF·LF·VIP → 뭉게 301 이관, 잔존 트래픽)</i>',
-  '• /tf · /lf — TechFlow / LifeFlow 잔존 요약',
+  '<b>💰 수익·상호작용</b>',
   '• /coupang — 쿠팡 클릭 상세 (어떤 글→어떤 링크)',
-  '• /paperdoc — 페이퍼닥 클릭 (블로그별·위치별)',
+  '• /paperdoc — 페이퍼닥 클릭 (소스별·위치별)',
   '• /likes · /recent [n] — 추천 Top · 최근 이벤트 피드',
   '',
   '<b>💬 댓글 관리</b>',
@@ -86,7 +84,7 @@ const HELP = [
   '• /money [블로그] [n] — 트래픽 있는데 쿠팡 링크 없는 글',
   '• <code>/index &lt;블로그&gt; [slug]</code> — IndexNow 색인 요청 (빙·네이버)',
   '',
-  '<b>📝 블로그 제어</b> (블로그: <code>tf</code>/<code>lf</code>/<code>pc</code>)',
+  '<b>📝 블로그 제어</b> (블로그: <code>mg</code>=뭉게 · <code>pc</code>=VIP)',
   '• /blogs — 제어 가능한 블로그 목록',
   '• <code>/posts &lt;블로그&gt; [n]</code> — 최근 글 (발행✅/숨김🚫)',
   '• <code>/publish &lt;블로그&gt; &lt;slug&gt;</code> · <code>/draft &lt;블로그&gt; &lt;slug&gt;</code> — 발행/숨김',
@@ -94,7 +92,8 @@ const HELP = [
   '• <code>/edit &lt;블로그&gt; &lt;slug&gt;</code> — 본문 교체',
   '• <code>/delpost &lt;블로그&gt; &lt;slug&gt;</code> — 글 삭제 (확인 필요)',
   '• /generate — AI 자동 포스팅 (블로그 선택 → 🔥핫 키워드 / ✍️직접 입력 / 🎲자동)',
-  '   <code>/generate tf AI 주제</code> 처럼 인자를 주면 바로 실행',
+  '   <code>/generate pc 게임 주제</code> 처럼 인자를 주면 바로 실행',
+  '   <i>※ 뭉게는 WordPress 직접 운영이라 repo 명령이 없어요 — 발행은 로컬 daily-run.mjs</i>',
   '• <code>/deploy &lt;블로그&gt;</code> · <code>/status [블로그]</code>',
   '• /cancel — 진행 중인 작성/수정 취소',
 ].join('\n');
@@ -436,11 +435,9 @@ export default async function handler(req, res) {
       const num = cmdMatch[2] ? parseInt(cmdMatch[2], 10) : undefined;
       const VIEWS = {
         stats: () => statsMessage(),
-        // 뭉게 = 기준 사이트. /tf·/lf 는 301 이관된 레거시 잔존 조회.
+        // 뭉게 = 유일한 기준 사이트. /tf·/lf 는 301 이관으로 삭제됨(2026-07-30).
         mg: () => munggeMessage(num ?? 7),
         mungge: () => munggeMessage(num ?? 7),
-        tf: () => sourceMessage('blog'),
-        lf: () => sourceMessage('lifeflow'),
         top: () => topPagesMessage(num ?? 10),
         trend: () => trendMessage(),
         cstats: () => commentStatsMessage(),
