@@ -88,6 +88,15 @@ faq:
 
 위시리스트를 통한 사전 마케팅 전략이나 개발자 관점의 출시 준비가 궁금하다면 [인디게임 스팀 출시 완벽 가이드 2026](/blog/2026-06-30-game-indie-game-steam-launch-guide-2026-wishlist-to-launch/)을 함께 참고하자. 게이머와 개발자 모두에게 위시리스트가 얼마나 중요한 자산인지 알 수 있다.
 
+## 신작 돌릴 환경 점검
+
+위시리스트를 채웠다면 남은 건 그걸 실제로 돌릴 쪽이다.
+
+- [가성비 핸드헬드 게이밍PC 추천](/blog/budget-handheld-gaming-pc-2026/) — 침대에서도 신작을 돌리고 싶다면
+- [데스크 셋업: 모니터암·스탠딩데스크](/blog/2026-07-12-review-desk-setup-monitor-arm-usb-c-hub-2026/) — 화면 위치가 장시간 플레이의 피로를 가른다
+- [재택 의자 추천: 허리 살리는 체어](/blog/2026-07-12-review-office-gaming-chair-recommendation-2026/) — 하드코어 플레이의 진짜 병목은 허리다
+- [외장 SSD 추천](/blog/2026-07-12-review-external-ssd-recommendation-2026/) — 스팀 라이브러리가 넘칠 때 가장 싼 해법
+
 ## 참고 자료
 
 - [Steam Store - 다가오는 신작](https://store.steampowered.com/explore/upcoming/)

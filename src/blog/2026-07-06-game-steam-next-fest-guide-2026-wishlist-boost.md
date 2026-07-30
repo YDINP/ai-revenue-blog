@@ -184,6 +184,15 @@ Steamworks 공식 문서 기준 확정 일정은 다음과 같다.
 
 ---
 
+## 데모·트레일러 만들 장비
+
+체크리스트를 돌리기 전에, 데모와 트레일러를 실제로 뽑아낼 장비부터 점검하자.
+
+- [웹캠·마이크 추천](/blog/2026-07-12-review-webcam-mic-recommendation-2026/) — 트레일러 나레이션과 페스트 기간 라이브 방송에
+- [가성비 핸드헬드 게이밍PC 추천](/blog/budget-handheld-gaming-pc-2026/) — 스팀덱 호환성은 넥스트 페스트 데모의 실질 필수 항목
+- [데스크 셋업: 모니터암·스탠딩데스크](/blog/2026-07-12-review-desk-setup-monitor-arm-usb-c-hub-2026/) — 게임 화면과 방송 송출을 동시에
+- [외장 SSD 추천](/blog/2026-07-12-review-external-ssd-recommendation-2026/) — 데모 빌드를 버전별로 보관하는 용도
+
 ## 참고 자료
 
 - [Steamworks 공식 문서 — Steam Next Fest: October 2026](https://partner.steamgames.com/doc/marketing/upcoming_events/nextfest/2026october)
