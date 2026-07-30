@@ -464,41 +464,77 @@ async function fetchHeroImageCodex(searchTerm) {
   }
 }
 
+// ⚠️⚠️ 2026-07-30 사고 — 대표이미지가 본문과 전혀 무관하게 붙던 원인 2가지.
+//  ① --topic 으로 발행하면 searchTerm 이 **한국어 제목 그대로**다. Pexels 는 영문 스톡 사이트라
+//     "육아휴직급여 2026 조건·신청방법·상한액 총정리" 같은 질의에 아무거나 돌려준다.
+//  ② 그걸 per_page=1 로 받아 **첫 결과를 무조건 채택**했다. 관련성 검사가 전혀 없었다.
+//  실제 피해: 육아휴직급여 글 → 졸업사진 / AI 코딩 보안 글 → 배달로봇 / 신용카드 글 → 졸업사진.
+// → 한국어 제목에서 영문 검색어를 뽑고, 후보를 여러 개 받아 관련성으로 고른다.
+//   맞는 게 없으면 **아무거나 쓰지 않고 null 을 반환한다**(틀린 대표이미지보다 없는 편이 낫다).
+
+const STOP_WORDS = new Set(["the", "a", "an", "of", "and", "for", "with", "in", "on", "to"]);
+
+// 한국어 주제 → 영문 스톡 검색어 2~3개. LLM 실패 시 원문을 그대로 쓴다(최소한 기존 동작 유지).
+async function deriveImageQueries(searchTerm) {
+  if (!/[가-힣]/.test(searchTerm)) return [searchTerm];
+  try {
+    const raw = await callLLM(
+      `다음 한국어 블로그 주제에 어울리는 **영문 스톡사진 검색어** 3개를 만들어줘.\n` +
+      `- 각 2~4단어, 사진으로 찍힐 수 있는 구체적 장면일 것(추상 개념 금지)\n` +
+      `- 주제의 핵심 대상이 화면에 보여야 함\n` +
+      `- JSON 배열만 출력: ["...","...","..."]\n\n주제: ${searchTerm}`
+    );
+    const m = raw.match(/\[[\s\S]*?\]/);
+    const arr = m ? JSON.parse(m[0]) : null;
+    if (Array.isArray(arr) && arr.length) return arr.filter((x) => typeof x === "string" && x.trim()).slice(0, 3);
+  } catch (e) {
+    console.log(`[Pexels] 영문 검색어 생성 실패(${e.message.slice(0, 60)}) — 원문 사용`);
+  }
+  return [searchTerm];
+}
+
 async function fetchHeroImage(searchTerm) {
   if (!PEXELS_API_KEY) {
     console.log("[Pexels] No API key, skipping hero image");
     return null;
   }
 
-  const query = encodeURIComponent(searchTerm);
-  const url = `${PEXELS_API_URL}?query=${query}&per_page=1&orientation=landscape`;
+  const queries = await deriveImageQueries(searchTerm);
+  console.log(`[Pexels] 검색어: ${queries.join(" | ")}`);
 
-  console.log(`[Pexels] Searching for "${searchTerm}"...`);
-
-  try {
-    const response = await fetch(url, {
-      headers: { Authorization: PEXELS_API_KEY },
-    });
-
-    if (!response.ok) {
-      console.error(`[Pexels] API error ${response.status}`);
-      return null;
+  const candidates = [];
+  for (const q of queries) {
+    try {
+      const res = await fetch(`${PEXELS_API_URL}?query=${encodeURIComponent(q)}&per_page=8&orientation=landscape`, {
+        headers: { Authorization: PEXELS_API_KEY },
+      });
+      if (!res.ok) { console.error(`[Pexels] API error ${res.status} (${q})`); continue; }
+      const data = await res.json();
+      for (const p of data.photos || []) candidates.push({ q, p });
+    } catch (err) {
+      console.error(`[Pexels] Error: ${err.message}`);
     }
-
-    const data = await response.json();
-    if (data.photos && data.photos.length > 0) {
-      const photo = data.photos[0];
-      console.log(`[Pexels] Found image: ${photo.src.large2x}`);
-      return {
-        url: photo.src.large2x,
-        alt: photo.alt || searchTerm,
-        photographer: photo.photographer,
-      };
-    }
-  } catch (err) {
-    console.error(`[Pexels] Error: ${err.message}`);
   }
-  return null;
+  if (!candidates.length) { console.log("[Pexels] 후보 0건 — 대표이미지 없음"); return null; }
+
+  // 관련성 점수: 검색어 토큰이 사진 alt 에 얼마나 들어있나. 0점이면 주제와 무관하다고 본다.
+  const tokens = [...new Set(queries.join(" ").toLowerCase().split(/[^a-z0-9]+/).filter((t) => t.length > 2 && !STOP_WORDS.has(t)))];
+  const scored = candidates.map(({ q, p }) => {
+    const alt = (p.alt || "").toLowerCase();
+    return { p, q, score: tokens.reduce((s, t) => s + (alt.includes(t) ? 1 : 0), 0) };
+  }).sort((a, b) => b.score - a.score);
+
+  const best = scored[0];
+  if (!best || best.score === 0) {
+    console.log(`[Pexels] 관련 후보 없음(${candidates.length}건 모두 0점) — 대표이미지 없이 진행`);
+    return null;
+  }
+  console.log(`[Pexels] 채택(점수 ${best.score}/${tokens.length}): ${best.p.alt?.slice(0, 70)}`);
+  return {
+    url: best.p.src.large2x,
+    alt: best.p.alt || best.q,
+    photographer: best.p.photographer,
+  };
 }
 
 // ─── Coupang Links ────────────────────────────────────────────────────
