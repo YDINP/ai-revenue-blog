@@ -142,6 +142,17 @@ GameDiscoverCo 분석에 따르면 2025년 스팀의 플랫폼 전체 실효 수
 - [인디게임 장르별 수익성 2026: 데이터로 고르는 '팔리는 장르'](/blog/2026-07-11-game-indie-genre-profitability-2026-steam-revenue-by-genre/) — 어떤 장르가 돈이 되나
 - [인디게임 수익 모델 완벽 정리](/blog/2026-07-03-game-indie-game-revenue-models-2026-premium-f2p-subscription/) · [플랫폼 수수료 비교](/blog/2026-07-02-game-game-platform-fees-comparison-2026-steam-epic-mobile-itch/)
 
+## 1인 개발 환경 꾸리기
+
+수익 구조를 정했다면 다음은 그걸 실제로 만들 환경이다. 개발 환경 비용도 결국 순수익 계산에 들어가는 초기 고정비다.
+
+- [가성비 핸드헬드 게이밍PC 추천](/blog/budget-handheld-gaming-pc-2026/) — 스팀덱 호환성 검증과 경쟁작 리서치를 실기로
+- [데스크 셋업: 모니터암·스탠딩데스크](/blog/2026-07-12-review-desk-setup-monitor-arm-usb-c-hub-2026/) — 에디터와 실행 화면을 동시에 띄우는 배치
+- [재택 의자 추천: 허리 살리는 체어](/blog/2026-07-12-review-office-gaming-chair-recommendation-2026/) — 하루 10시간 앉는 일에서 가장 먼저 고장 나는 건 몸이다
+- [로컬 LLM용 GPU·미니PC 추천](/blog/2026-07-11-review-local-llm-gpu-mini-pc-2026/) — 에셋·코드 생성을 로컬로 돌려 구독료를 줄이는 쪽
+- [외장 SSD 추천](/blog/2026-07-12-review-external-ssd-recommendation-2026/) — 빌드 산출물과 에셋 원본 백업용
+- [웹캠·마이크 추천](/blog/2026-07-12-review-webcam-mic-recommendation-2026/) — 트레일러 나레이션과 디스코드 커뮤니티 운영에
+
 ## 참고 자료
 
 - [GameDiscoverCo — 스팀의 실효 수수료 24% 분석](https://newsletter.gamediscover.co/p/revealed-the-numbers-behind-steams)
