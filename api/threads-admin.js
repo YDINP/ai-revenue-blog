@@ -191,6 +191,24 @@ export default async function handler(req, res) {
 
     // 발행 없이 텔레그램 카드만 보내본다 — 카드 문구/버튼/링크 확인용.
     // ⚠️ Threads 에는 아무것도 쓰지 않는다. 실제 발행은 reply-send 다.
+    // Graph API 읽기 전용 진단 — "이 엔드포인트/필드가 되나?" 확인용.
+    // ?action=probe&path=<id 또는 id/replies>&fields=a,b&topic=life
+    // ⚠️ GET 만 한다. 남의 글에 접근 가능한지 등을 실측으로 판정하는 데 쓴다.
+    if (action === 'probe') {
+      const path = String(req.query?.path || b.path || '').replace(/^\/+/, '');
+      if (!path) return res.status(400).json({ error: 'need path' });
+      const topic = req.query?.topic || b.topic || 'life';
+      const acct = (await sb(`threads_accounts?topic=eq.${encodeURIComponent(topic)}&active=eq.true&limit=1`))[0];
+      if (!acct?.access_token) return res.status(400).json({ error: `no token for ${topic}` });
+      const url = new URL(`https://graph.threads.net/v1.0/${path}`);
+      const fields = req.query?.fields || b.fields;
+      if (fields) url.searchParams.set('fields', String(fields));
+      url.searchParams.set('access_token', acct.access_token);
+      const r = await fetch(url);
+      const j = await r.json().catch(() => null);
+      return res.status(200).json({ ok: r.ok, status: r.status, data: j });
+    }
+
     if (action === 'reply-preview') {
       const id = Number(b.id || req.query?.id);
       if (!id) return res.status(400).json({ error: 'need id' });
