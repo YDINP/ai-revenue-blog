@@ -123,9 +123,11 @@ export default async function handler(req, res) {
       //   신규 함수는 못 만든다(Hobby 12/12 만석) → 기존 액션에 파라미터로 얹는다.
       const sentRoot = String(req.query?.sentRoot || b.sentRoot || '').trim();
       if (sentRoot) {
+        // ⚠️ 발송 표시는 status='sent' 다. sent_at 은 auto 발행 캡 계산용이라 항상 채워지지는 않아,
+        //    sent_at 으로 거르면 방금 보낸 답글도 0건으로 나온다(실측).
         const prior = await sb(
-          `threads_replies?root_media_id=eq.${encodeURIComponent(sentRoot)}&sent_at=not.is.null` +
-          `&select=id,comment_user,comment_text,draft,sent_at&order=sent_at.desc&limit=20`
+          `threads_replies?root_media_id=eq.${encodeURIComponent(sentRoot)}&status=eq.sent` +
+          `&select=id,comment_user,comment_text,draft,sent_at&order=id.desc&limit=20`
         );
         return res.status(200).json({ ok: true, count: prior.length, sent: prior });
       }
