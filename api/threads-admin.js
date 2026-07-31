@@ -114,6 +114,22 @@ export default async function handler(req, res) {
     if (action === 'reply-list') {
       const limit = Math.min(Number(req.query?.limit || b.limit || 20), 100);
       const nodraft = req.query?.nodraft === '1' || b.nodraft === true;
+
+      // ⚠️ 같은 글에 이미 내가 단 답글을 조회하는 경로(2026-07-31 추가).
+      //   초안을 댓글 하나만 보고 쓰다 보니 같은 글 댓글창에서 페르소나가 자기모순을 냈다:
+      //   한 댓글엔 "나도 27도 딱 그 세팅", 다른 댓글엔 "우리집도 그래(26/25도)".
+      //   한 사람이 쓴 게 아니라는 티가 바로 난다 → 드래프터에게 자기 발언 이력을 준다.
+      //   Threads API 엔 수정 엔드포인트가 없어 발행 후엔 못 고치므로, 나가기 전에 막아야 한다.
+      //   신규 함수는 못 만든다(Hobby 12/12 만석) → 기존 액션에 파라미터로 얹는다.
+      const sentRoot = String(req.query?.sentRoot || b.sentRoot || '').trim();
+      if (sentRoot) {
+        const prior = await sb(
+          `threads_replies?root_media_id=eq.${encodeURIComponent(sentRoot)}&sent_at=not.is.null` +
+          `&select=id,comment_user,comment_text,draft,sent_at&order=sent_at.desc&limit=20`
+        );
+        return res.status(200).json({ ok: true, count: prior.length, sent: prior });
+      }
+
       const rows = await sb(
         `threads_replies?status=eq.pending${nodraft ? '&draft=is.null' : ''}` +
         `&select=id,account_id,root_media_id,comment_id,comment_text,comment_user,draft,created_at` +
