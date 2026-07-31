@@ -2717,6 +2717,19 @@ const ICONS: Record<string, string> = {
           <input id="gsc-page-search" type="text" placeholder="페이지 제목·URL 검색..." />
           <div class="gsc-table-wrap"><table class="gsc-table" id="gsc-table"></table></div>
         </div>
+
+        <!-- SEO 진단: 문턱 키워드 / 하락 페이지 -->
+        <!-- gsc_daily 는 date×page 라 검색어 차원이 없다 → /api/gsc-sync?diag= 를 직접 부른다.
+             신규 글을 쓰기 전에 이미 노출이 있는 문턱 키워드를 미는 게 회수가 크다. -->
+        <div class="traffic-section">
+          <div class="gsc-sec-title" style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+            SEO 진단 <span>(문턱 키워드 · 하락 페이지 — GSC 실시간 조회)</span>
+            <div class="gsc-seg" style="margin-left:auto;"><button id="gsc-diag-run">진단 실행</button></div>
+          </div>
+          <div id="gsc-diag-out" style="font-size:0.78rem;color:var(--text-2);">
+            버튼을 누르면 GSC 를 직접 조회합니다. (대시보드 비밀번호 필요)
+          </div>
+        </div>
       </div>
 
       <!-- Tab: 뭉게 유입경로 (GA4) -->
@@ -4117,6 +4130,8 @@ const ICONS: Record<string, string> = {
         seg('gsc-metric-tabs', 'm', () => _gscMetric, (v) => { _gscMetric = v; renderGscChart(); });
         const search = document.getElementById('gsc-page-search');
         if (search) search.oninput = () => { _gscSearch = search.value.trim().toLowerCase(); renderGscTable(); };
+        const diag = document.getElementById('gsc-diag-run');
+        if (diag) diag.onclick = runGscDiag;
       }
 
       // _TOTAL_ 기반 일별 시계열 (source 필터·기간 반영). ctr/position=노출 가중.
@@ -4315,6 +4330,78 @@ const ICONS: Record<string, string> = {
         renderGscChart();
         renderGscSources();
         renderGscTable();
+      }
+
+      // ── SEO 진단 (문턱 키워드 / 하락 페이지) ──────────────────────────────
+      // gsc_daily 는 date×page 집계라 검색어 차원이 없다 → 서버의 /api/gsc-sync?diag= 를
+      // 그대로 쓴다. 판정 로직을 여기서 다시 구현하면 서버와 갈라지므로 계산은 서버 몫.
+      // 버튼을 눌러야 도는 이유: GSC API 쿼터를 탭 열 때마다 소모하지 않기 위해서다.
+      async function runGscDiag() {
+        const out = document.getElementById('gsc-diag-out');
+        if (!out) return;
+        if (!adminKey) { out.innerHTML = '<span style="color:var(--warn,#e0a800)">대시보드 비밀번호로 먼저 입장해야 합니다.</span>'; return; }
+        out.textContent = '조회 중…';
+
+        const days = _gscDays || 28;
+        const get = async (qs) => {
+          const r = await fetch(`/api/gsc-sync?${qs}`, { headers: { 'x-admin-key': adminKey } });
+          const j = await r.json().catch(() => ({}));
+          if (!r.ok) throw new Error(j.error || `HTTP ${r.status}`);
+          return j;
+        };
+
+        try {
+          const [st, dc] = await Promise.all([
+            get(`diag=striking&blog=mg&days=${days}&limit=20`),
+            get(`diag=decay&blog=mg&dim=page&days=${days}&limit=20`),
+          ]);
+          out.innerHTML = `${diagStrikingHtml(st)}<div style="height:1rem"></div>${diagDecayHtml(dc)}`;
+        } catch (e) {
+          out.innerHTML = `<span style="color:var(--danger,#e05561)">진단 실패: ${escHtml(e.message)}</span>`;
+        }
+      }
+
+      const diagNote = (t) => `<div class="gsc-help">${escHtml(t)}</div>`;
+
+      function diagStrikingHtml(j) {
+        const head = `<div class="gsc-sec-title" style="font-size:0.82rem;">문턱 키워드 <span>(${j.filter.minPos}~${j.filter.maxPos}위 · 노출 ${j.filter.minImp}↑ · ${j.startDate}~${j.endDate})</span></div>`;
+        if (!j.rows.length) return head + diagNote(j.hint || '해당 없음');
+        const rows = j.rows.map((r) => `<tr>
+          <td>${escHtml(r.query)}</td>
+          <td class="num">${r.position.toFixed(1)}</td>
+          <td class="num">${r.impressions.toLocaleString()}</td>
+          <td class="num">${(r.ctr * 100).toFixed(1)}%</td>
+          <td class="num"><b>+${r.upside.toLocaleString()}</b></td>
+          <td><a href="${escHtml(r.page)}" target="_blank" rel="noopener">글</a></td>
+        </tr>`).join('');
+        return `${head}<div class="gsc-table-wrap"><table class="gsc-table">
+          <thead><tr><th>검색어</th><th class="num">순위</th><th class="num">노출</th><th class="num">CTR</th><th class="num">기대 클릭</th><th></th></tr></thead>
+          <tbody>${rows}</tbody></table></div>
+          ${diagNote('기대 클릭 = 노출 × (10% − 현재 CTR). 3위권까지 밀었을 때의 거친 추정이고, 위치별 CTR 곡선은 사이트마다 달라 예측이 아니라 우선순위용 지표다.')}`;
+      }
+
+      function diagDecayHtml(j) {
+        const CAUSE = {
+          rank: ['순위 하락', '경쟁 글에 밀렸다 — 본문 보강·내부링크'],
+          demand: ['수요 감소', '검색량 자체가 빠졌다 — 시즌성이면 정상'],
+          ctr: ['클릭률 하락', '노출은 그대로인데 안 눌린다 — 제목·설명 손보기'],
+        };
+        const head = `<div class="gsc-sec-title" style="font-size:0.82rem;">하락 페이지 <span>(최근 ${j.window.days}일 vs 직전 ${j.window.days}일 · 클릭 ${j.filter.dropPct}%↑ 감소)</span></div>`;
+        if (!j.rows.length) return head + diagNote(j.hint || '하락으로 판정된 페이지가 없습니다.');
+        const rows = j.rows.map((r) => {
+          const c = CAUSE[r.cause] || [r.cause, ''];
+          return `<tr>
+            <td><a href="${escHtml(r.key)}" target="_blank" rel="noopener">${escHtml(r.key.replace(/^https?:\/\/[^/]+/, ''))}</a></td>
+            <td class="num">${r.clicksBefore} → ${r.clicksAfter}</td>
+            <td class="num"><b>-${r.lossPct}%</b></td>
+            <td class="num">${r.positionBefore} → ${r.positionAfter}</td>
+            <td title="${escHtml(c[1])}">${escHtml(c[0])}</td>
+          </tr>`;
+        }).join('');
+        return `${head}<div class="gsc-table-wrap"><table class="gsc-table">
+          <thead><tr><th>페이지</th><th class="num">클릭</th><th class="num">감소</th><th class="num">순위</th><th>원인</th></tr></thead>
+          <tbody>${rows}</tbody></table></div>
+          ${diagNote('원인별 처방이 다르다 — 순위 하락은 본문·내부링크, 수요 감소는 시즌성 확인, 클릭률 하락은 제목·설명.')}`;
       }
 
       // ═══════════════════════════════════════════════════════════

@@ -33,12 +33,15 @@ export default async function handler(req, res) {
   // 실시간 수치와 비교하면 대시보드가 틀린 것처럼 보인다. 브라우저에서 직접 갱신할 수 있어야
   // 하는데 CRON_SECRET 을 클라이언트에 실을 수는 없다 → 대시보드 입장 비밀번호
   // (COMMENT_ADMIN_KEY, 이미 서버에만 있는 값)를 헤더로 받는다.
-  // 권한은 ga4=sync 하나로만 좁힌다 — GSC 동기화·원본 조회는 여전히 CRON_SECRET 전용.
+  // 권한은 ga4=sync 와 diag(읽기 전용 진단)로만 좁힌다 — GSC 동기화·원본 조회(dim)는
+  // 여전히 CRON_SECRET 전용이다. diag 를 여는 이유: 문턱 키워드는 검색어 차원이라
+  // gsc_daily(date×page)로는 계산할 수 없어 대시보드가 이 API를 직접 불러야 한다.
+  // 아무것도 쓰지 않고 집계만 돌려주므로 대시보드 비밀번호 수준으로 충분하다.
   const adminKey = process.env.COMMENT_ADMIN_KEY;
   const adminOk =
     !!adminKey &&
     (req.headers['x-admin-key'] || '') === adminKey &&
-    url.searchParams.get('ga4') === 'sync';
+    (url.searchParams.get('ga4') === 'sync' || !!url.searchParams.get('diag'));
   if (secret && token !== secret && !adminOk) {
     return res.status(401).json({ error: 'unauthorized' });
   }
