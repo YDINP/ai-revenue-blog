@@ -1,31 +1,38 @@
-# 뭉게 색인 요청 대상 (2026-07-28 생성)
+# 뭉게 색인 요청 대상 — 2026-07-31 실측 갱신 (원본 07-28 생성)
 #
-# TF(ai-revenue-blog.vercel.app) 최근 28일 GSC 노출 상위 20편을 mungge URL로 변환한 것.
-# TF→mungge 301 직후라 mungge는 색인 0건이다. 노출이 큰 순서대로 GSC URL 검사에서
-# 수동 "색인 생성 요청"을 넣는 용도. (Indexing API는 채용공고/라이브만 허용이라 자동화 불가)
-# 하루 요청 할당량이 있으므로 위에서부터 나눠 처리할 것.
+# ⚠️ 07-28에 위에서부터 처리하다 9편에서 멈춘 것으로 보인다(크롤 이력이 목록 상단에만 연속으로
+#    찍혀 있고 07-28 하루에 6건 몰려 있다). 아래 [요청필요] 11편을 이어서 넣으면 된다.
 #
-# 재생성: node scripts/migration-status.mjs 로 진행률 확인 후, GSC dim=page 조회로 갱신
+# 상태는 GSC URL 검사 API 실측이다:
+#   [색인완료] 4편 — 끝. 다시 요청할 필요 없다.
+#   [색인보류] 5편 — 크롤은 됐는데 구글이 색인을 보류했다. **재요청해도 안 풀린다**
+#                    (요청은 크롤을 부르는 것이지 색인을 강제하지 않는다). 도메인 신뢰도가
+#                    쌓이거나 301 통합이 인식되면 자연히 넘어간다. 손대지 말 것.
+#   [요청필요] 11편 — 크롤된 적조차 없다. 여기가 실제로 남은 작업이다.
+#
+# 갱신: node scripts/migration-status.mjs 로 진행률 확인 후 GSC dim=page 로 목록 재생성
 #   /api/gsc-sync?blog=tf&dim=page&days=28&limit=60&secret=$CRON_SECRET
-#
-# 경로 매핑: TF /blog/<slug>/ → mungge /<slug>/  (전부 200 응답 확인함)
-https://mungge.com/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/   # 노출 2401 클릭 135
-https://mungge.com/2026-07-18-game-google-play-appstore-opening-2026-dev-guide/   # 노출 144 클릭 3
-https://mungge.com/2026-07-07-game-steam-upcoming-games-2026-h2-wishlist/   # 노출 98 클릭 9
-https://mungge.com/indie-game-ad-revenue-iaa-ecpm-2026/   # 노출 78 클릭 3
-https://mungge.com/2026-07-06-game-steam-next-fest-guide-2026-wishlist-boost/   # 노출 76 클릭 2
-https://mungge.com/steam-reviews-sales-correlation-2026/   # 노출 70 클릭 2
-https://mungge.com/2026-07-06-game-game-discord-community-building-2026/   # 노출 57 클릭 1
-https://mungge.com/2026-07-02-game-game-platform-fees-comparison-2026-steam-epic-mobile-itch/   # 노출 54 클릭 2
-https://mungge.com/2026-07-11-ai-openai-codex-gpt-5-6-guide-2026/   # 노출 37 클릭 5
-https://mungge.com/2026-07-12-ai-suno-music-generation-guide-2026/   # 노출 31 클릭 1
-https://mungge.com/2026-07-15-game-influencer-streamer-outreach-2026/   # 노출 25 클릭 2
-https://mungge.com/2026-07-12-review-headset-noise-cancelling-recommendation-2026/   # 노출 24 클릭 1
-https://mungge.com/2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers/   # 노출 23 클릭 0
-https://mungge.com/2026-02-24-dev-supabase-practical-guide-2026-realtime-auth/   # 노출 21 클릭 1
-https://mungge.com/2026-07-11-review-galaxy-z-flip8-spec-rumor-2026/   # 노출 21 클릭 0
-https://mungge.com/2026-07-12-review-external-ssd-recommendation-2026/   # 노출 19 클릭 1
-https://mungge.com/2026-07-14-dev-ship-ios-mac-apps-without-xcode-2026/   # 노출 19 클릭 1
-https://mungge.com/2026-07-12-ai-elevenlabs-voice-dubbing-guide-2026/   # 노출 18 클릭 0
-https://mungge.com/2026-07-20-ai-kimi-k3-open-source-2-8t-2026/   # 노출 17 클릭 1
-https://mungge.com/2026-07-15-game-ai-game-development-monetization-2026/   # 노출 15 클릭 2
+
+## 남은 작업 — GSC URL 검사에 아래 11편을 색인 요청 (하루 할당량 ~10건)
+[요청필요] https://mungge.com/2026-07-06-game-game-discord-community-building-2026/   # 노출 57 클릭 1
+[요청필요] https://mungge.com/2026-07-12-ai-suno-music-generation-guide-2026/   # 노출 31 클릭 1
+[요청필요] https://mungge.com/2026-07-15-game-influencer-streamer-outreach-2026/   # 노출 25 클릭 2
+[요청필요] https://mungge.com/2026-07-12-review-headset-noise-cancelling-recommendation-2026/   # 노출 24 클릭 1
+[요청필요] https://mungge.com/2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers/   # 노출 23 클릭 0
+[요청필요] https://mungge.com/2026-07-11-review-galaxy-z-flip8-spec-rumor-2026/   # 노출 21 클릭 0
+[요청필요] https://mungge.com/2026-07-12-review-external-ssd-recommendation-2026/   # 노출 19 클릭 1
+[요청필요] https://mungge.com/2026-07-14-dev-ship-ios-mac-apps-without-xcode-2026/   # 노출 19 클릭 1
+[요청필요] https://mungge.com/2026-07-12-ai-elevenlabs-voice-dubbing-guide-2026/   # 노출 18 클릭 0
+[요청필요] https://mungge.com/2026-07-20-ai-kimi-k3-open-source-2-8t-2026/   # 노출 17 클릭 1
+[요청필요] https://mungge.com/2026-07-15-game-ai-game-development-monetization-2026/   # 노출 15 클릭 2
+
+## 처리 완료 (참고용 · 다시 요청하지 말 것)
+[색인완료] https://mungge.com/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/   # 노출 2401 클릭 135 · 크롤 2026-07-24
+[색인보류] https://mungge.com/2026-07-18-game-google-play-appstore-opening-2026-dev-guide/   # 노출 144 클릭 3 · 크롤 2026-07-28
+[색인보류] https://mungge.com/2026-07-07-game-steam-upcoming-games-2026-h2-wishlist/   # 노출 98 클릭 9 · 크롤 2026-07-28
+[색인보류] https://mungge.com/indie-game-ad-revenue-iaa-ecpm-2026/   # 노출 78 클릭 3 · 크롤 2026-07-28
+[색인보류] https://mungge.com/2026-07-06-game-steam-next-fest-guide-2026-wishlist-boost/   # 노출 76 클릭 2 · 크롤 2026-07-28
+[색인보류] https://mungge.com/steam-reviews-sales-correlation-2026/   # 노출 70 클릭 2 · 크롤 2026-07-28
+[색인완료] https://mungge.com/2026-07-02-game-game-platform-fees-comparison-2026-steam-epic-mobile-itch/   # 노출 54 클릭 2 · 크롤 2026-07-30
+[색인완료] https://mungge.com/2026-07-11-ai-openai-codex-gpt-5-6-guide-2026/   # 노출 37 클릭 5 · 크롤 2026-07-28
+[색인완료] https://mungge.com/2026-02-24-dev-supabase-practical-guide-2026-realtime-auth/   # 노출 21 클릭 1 · 크롤 2026-07-30
