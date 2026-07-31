@@ -184,8 +184,12 @@ async function diagnose(mode, url, res) {
     return res.status(400).json({ error: `unknown blog '${key}'`, available: blogs.map((b) => b.key) });
   }
 
-  const num = (name, dflt, lo, hi) =>
-    Math.min(Math.max(parseFloat(url.searchParams.get(name) ?? dflt) || dflt, lo), hi);
+  // ⚠️ `parseFloat(v) || dflt` 로 쓰면 v='0' 이 falsy 라 기본값으로 되돌아간다.
+  // minImp=0 / minClicks=0 (필터 끄고 전량 보기)이 조용히 무시됐다.
+  const num = (name, dflt, lo, hi) => {
+    const v = parseFloat(url.searchParams.get(name));
+    return Math.min(Math.max(Number.isFinite(v) ? v : dflt, lo), hi);
+  };
   const days = num('days', 28, 7, 180);
 
   try {
