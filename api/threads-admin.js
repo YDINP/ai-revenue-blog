@@ -8,10 +8,12 @@
 //  ?action=reply-list[&nodraft=1&limit=N]  → pending 댓글 조회 (로컬 러너 입력)
 //  ?action=reply-reconcile → 앱에서 이미 답장한 pending 정리(중복 답글 방지)
 //  ?action=reply-draft   body{id,draft}    → 초안 저장
+//  ?action=reply-preview body{id,auto?}  → 발행 없이 텔레그램 카드만 미리보기
 //  ?action=reply-send    body{id,text?,auto?} → 대댓글 발행(text 없으면 저장된 draft)
 //  ?action=set-reply-mode body{mode:'auto'|'review',topic?,cap?} → 대댓글 자동화 전환
-import { sb, publish, publishReply, insertPost, insertQueue, updateQueue, getAccounts, updateAccount, deleteMedia, updateReply, getReply, llmConfigured, getMyUsername, myAnsweredCommentIds } from './_threads.js';
-import { findAndQueue, sendReply } from './_threads-bot.js';
+import { tg } from './_shared.js';
+import { getPermalink, sb, publish, publishReply, insertPost, insertQueue, updateQueue, getAccounts, updateAccount, deleteMedia, updateReply, getReply, llmConfigured, getMyUsername, myAnsweredCommentIds } from './_threads.js';
+import { findAndQueue, sendReply, threadsReplyCard, threadsAutoReplyCard } from './_threads-bot.js';
 
 export default async function handler(req, res) {
   const secret = process.env.CRON_SECRET;
@@ -187,6 +189,26 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true, id, draft });
     }
 
+    // 발행 없이 텔레그램 카드만 보내본다 — 카드 문구/버튼/링크 확인용.
+    // ⚠️ Threads 에는 아무것도 쓰지 않는다. 실제 발행은 reply-send 다.
+    if (action === 'reply-preview') {
+      const id = Number(b.id || req.query?.id);
+      if (!id) return res.status(400).json({ error: 'need id' });
+      const row = await getReply(id);
+      if (!row) return res.status(404).json({ error: 'reply row not found' });
+      const asAuto = b.auto === true || req.query?.auto === '1';
+      const account = (await sb(`threads_accounts?id=eq.${row.account_id}&limit=1`))[0];
+      const permalink = await getPermalink(account, row.root_media_id).catch(() => '');
+      const card = asAuto
+        ? threadsAutoReplyCard(row, { permalink })
+        : threadsReplyCard({ ...row, permalink });
+      const r = await tg('sendMessage', {
+        chat_id: chatId, text: card.text,
+        parse_mode: 'HTML', disable_web_page_preview: true, reply_markup: card.reply_markup,
+      });
+      return res.status(200).json({ ok: !!r?.ok, id, kind: asAuto ? 'auto' : 'notify', hasLink: !!permalink });
+    }
+
     if (action === 'reply-send') {
       const id = Number(b.id || req.query?.id);
       if (!id) return res.status(400).json({ error: 'need id' });
@@ -220,7 +242,7 @@ export default async function handler(req, res) {
     }
 
     return res.status(400).json({
-      error: 'unknown action — post | queue | queue-update | set-mode | find | reply-delete | reply-list | reply-draft | reply-send | set-reply-mode',
+      error: 'unknown action — post | queue | queue-update | set-mode | find | reply-delete | reply-list | reply-reconcile | reply-draft | reply-preview | reply-send | set-reply-mode',
     });
   } catch (e) {
     return res.status(500).json({ error: e.message });
