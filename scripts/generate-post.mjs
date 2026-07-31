@@ -230,6 +230,38 @@ async function generatePostContent(categoryName, keyword, searchTerm, existingTi
   const yyyy = now.getFullYear();
   const dateStr = `${yyyy}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 
+  // 오케스트레이터(automation/post-research.mjs)가 생성 직전에 모아 넘긴 근거.
+  // 이게 없던 시절엔 모델이 자료 없이 인용해 가짜 통계·가짜 링크를 만들었다(2026-07-31 사고).
+  // ⚠️ 뉴스 헤드라인 묶음은 링크가 news.google.com 리다이렉트라 **참고자료로 인용 불가**다.
+  //    인용 가능한 URL 은 INPUT_SOURCES 로 따로 넘어온 것뿐이다.
+  const evidenceRaw = (process.env.INPUT_EVIDENCE || '').trim();
+  let citableSources = [];
+  try { citableSources = JSON.parse(process.env.INPUT_SOURCES || '[]'); } catch { citableSources = []; }
+
+  const evidenceInstruction = evidenceRaw ? `
+━━━ 근거 자료(이 글을 쓰기 직전에 수집한 실제 자료) ━━━
+${evidenceRaw}
+━━━ 근거 자료 끝 ━━━
+
+⛔ **근거 사용 규칙(최우선)**:
+- 본문의 **모든 수치·날짜·고유명사는 위 근거 자료에 있는 것만** 쓰세요. 근거에 없으면 쓰지 마세요.
+  기억에 있는 값이라도, 위 자료가 뒷받침하지 않으면 **그 문장을 빼는 쪽**을 택하세요.
+- 근거가 서로 어긋나면(예: 매체마다 종료 시점이 다름) **단정하지 말고 양쪽을 병기**하고
+  "공식 공지 확인 필요"라고 밝히세요. 하나를 골라 단정하는 것이 가장 큰 사고입니다.
+- 근거의 모호한 표현을 구체적 숫자로 좁히지 마세요("여러 해"→"평균 5년" 금지).
+- **매체명도 근거에 있는 것만** 쓰세요. 위 헤드라인 목록에 없는 매체("연합뉴스가 보도했다" 등)를
+  끌어오지 마세요 — 있을 법한 매체를 적는 것도 날조입니다. 헤드라인에 적힌 매체·보도일 그대로만 인용하세요.
+- 근거에서 **추론한 것**을 사실처럼 쓰지 마세요. 두 날짜가 겹친다고 "병행 사용 가능"이라고
+  단정하는 식은 금지입니다. 추론이면 "~로 보인다", "공식 안내 확인 필요"로 명확히 낮추세요.
+${citableSources.length ? `- "## 참고 자료" 섹션에는 **아래 URL만** 쓰세요. 목록에 없는 URL을 지어내지 마세요.
+${citableSources.map((s) => `  - [${s.title}](${s.url})`).join('\n')}` : `- 인용 가능한 URL이 확보되지 않았습니다. **URL을 지어내지 마세요.**
+  "## 참고 자료" 섹션에는 링크 대신 근거로 삼은 **매체명과 보도일**을 텍스트로 적으세요
+  (예: "- 동아일보 2026-07-30 보도"). 없는 링크를 만드는 것보다 링크가 없는 편이 낫습니다.`}
+` : `
+⚠️ 이번 글은 수집된 근거 자료가 없습니다. 확실하지 않은 수치·날짜는 아예 쓰지 말고,
+   차트는 만들지 마세요. 출처 URL을 지어내는 것은 절대 금지입니다.
+`;
+
   const chartInstruction = `
 시각자료 배치 규칙(필수):
 
@@ -358,6 +390,7 @@ ${dupeGuard}${engagingInstruction}${revenueInstruction}${internalLinkInstruction
 - 실용적이고 구체적인 정보 위주
 - 2026년 최신 트렌드 반영
 - 본문 마지막에 "## 참고 자료" 섹션을 추가하고, 글에서 참고한 공식 사이트·문서·벤치마크 등 2~4개의 출처를 하이퍼링크로 제공하세요. 형식: "- [출처 이름](https://실제URL)"
+${evidenceInstruction}
 ${chartInstruction}
 
 **메타 설명(description) 작성 규칙**:
