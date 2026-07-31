@@ -327,6 +327,22 @@ export const replyExists = (mediaId) => {
   return sb(`threads_replies?or=(comment_id.eq.${v},reply_media_id.eq.${v})&select=id&limit=1`).then((r) => r.length > 0);
 };
 
+// 단건 permalink 조회 — 텔레그램 카드의 '스레드에서 보기' 링크용.
+// ⚠️ Threads 웹 URL 은 숫자 media id 로 조립할 수 없다(퍼머링크는 shortcode 기반).
+//    그래서 반드시 API 가 준 permalink 를 써야 하고, 못 받으면 버튼을 안 다는 게 맞다
+//    (죽은 링크를 다느니 없는 편이 낫다).
+export async function getPermalink(account, mediaId) {
+  if (!mediaId || !account?.access_token) return '';
+  try {
+    const url = new URL(`${GRAPH}/v1.0/${mediaId}`);
+    url.searchParams.set('fields', 'permalink');
+    url.searchParams.set('access_token', account.access_token);
+    const r = await fetch(url);
+    const j = await r.json();
+    return r.ok && j.permalink ? j.permalink : '';
+  } catch { return ''; }
+}
+
 // ── 아웃바운드 인게이지먼트 (키워드 검색 → 남 글에 답글) ──
 export async function keywordSearch(account, q, { searchType = 'TOP', searchMode = 'KEYWORD', limit = 15 } = {}) {
   const url = new URL(`${GRAPH}/v1.0/keyword_search`);

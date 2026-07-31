@@ -180,7 +180,8 @@ export default async function handler(req, res) {
           }
 
           if (chatId && row) {
-            const card = threadsReplyCard(row);
+            // 카드의 '스레드에서 보기' 링크에 계정 핸들이 필요하다(row 에는 없는 필드).
+              const card = threadsReplyCard({ ...row, permalink: p.permalink || '' });
             await tg('sendMessage', {
               chat_id: chatId, text: card.text, parse_mode: 'HTML',
               disable_web_page_preview: true, reply_markup: card.reply_markup,

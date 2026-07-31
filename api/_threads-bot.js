@@ -6,7 +6,7 @@ import {
   getAccounts, sb, getQueue, updateQueue, publishDraft,
   getReply, updateReply, publishReply, publish, insertPost, insertQueue,
   keywordSearch, insertEngage, getEngage, updateEngage, engageExists, draftEngageReply,
-  splitThread, isThreadItem,
+  splitThread, isThreadItem, getPermalink,
 } from './_threads.js';
 import { THREAD_PRESETS, getPreset } from './_threads-presets.js';
 
@@ -458,17 +458,35 @@ export async function handleThreadsCallback(chatId, data) {
   }
 }
 
-// ── 댓글 반자동: 승인카드 ──
+// ── 댓글 알림 카드 ──
+// 2026-07-31 변경: 기존엔 [이대로/답장/무시] 버튼으로 텔레그램에서 처리했는데,
+// 대댓글은 15분 스케줄러가 자동으로 단다. 버튼이 남아 있으면 이미 자동발행된 건에
+// 사람이 또 눌러 중복 답글이 나갈 수 있다 → 조작 버튼을 없애고 **보러 가기 링크**만 둔다.
 export function threadsReplyCard(row) {
   const d = row.draft
-    ? `\n\n<b>추천 답변</b>\n${escapeHtml(row.draft)}`
-    : '\n\n<i>추천 답변 없음 — ✍️로 직접 작성</i>';
+    ? `\n\n<b>자동 답변 예정</b>\n${escapeHtml(row.draft)}`
+    : '\n\n<i>초안 생성 대기 — 스케줄러가 처리합니다</i>';
   const text = `💬 <b>새 댓글</b> @${escapeHtml(row.comment_user || '?')}\n${escapeHtml(row.comment_text || '')}${d}`;
-  const buttons = [];
-  if (row.draft) buttons.push({ text: '✅ 이대로', callback_data: `rpl:send:${row.id}` });
-  buttons.push({ text: '✍️ 답장', callback_data: `rpl:reply:${row.id}` });
-  buttons.push({ text: '🗑 무시', callback_data: `rpl:ign:${row.id}` });
-  return { text, reply_markup: { inline_keyboard: [buttons] } };
+  const url = row.permalink || '';
+  return {
+    text,
+    reply_markup: { inline_keyboard: url ? [[{ text: '🧵 스레드에서 보기', url }]] : [] },
+  };
+}
+
+// ── 자동 대댓글 발행 알림 ──
+// 스케줄러가 조용히 답글을 달면 무엇이 나갔는지 알 수 없다 → 사후 확인용으로 보낸다.
+// 조작 버튼 없음(이미 나간 뒤라 되돌릴 수 없다. Threads API 엔 수정 엔드포인트가 없다).
+export function threadsAutoReplyCard(row, { permalink = '' } = {}) {
+  const text =
+    `🤖 <b>자동 대댓글 발행</b>\n\n` +
+    `<b>받은 댓글</b> @${escapeHtml(row.comment_user || '?')}\n${escapeHtml(row.comment_text || '')}\n\n` +
+    `<b>보낸 답글</b>\n${escapeHtml(row.draft || '')}`;
+  const url = permalink;
+  return {
+    text,
+    reply_markup: { inline_keyboard: url ? [[{ text: '🧵 스레드에서 보기', url }]] : [] },
+  };
 }
 
 // 대댓글 실제 발행 (텔레그램 콜백/플로우 · 크론 자동발행 · admin API 공용)
@@ -482,6 +500,18 @@ export async function sendReply(id, text, { auto = false } = {}) {
   try {
     const mediaId = await publishReply(account, { text, replyToId: row.comment_id });
     await updateReply(id, { status: 'sent', reply_media_id: mediaId, sent_at: new Date().toISOString(), auto });
+    // 자동 발행분은 사람이 본 적이 없다 → 무엇이 나갔는지 사후 통지한다.
+    // 알림 실패가 발행 성공을 뒤집으면 안 되므로 catch 로 삼킨다.
+    if (auto) {
+      try {
+        const permalink = await getPermalink(account, row.root_media_id);
+        const card = threadsAutoReplyCard({ ...row, draft: text }, { permalink });
+        await tg('sendMessage', {
+          chat_id: process.env.TELEGRAM_ADMIN_CHAT_ID, text: card.text,
+          parse_mode: 'HTML', disable_web_page_preview: true, reply_markup: card.reply_markup,
+        });
+      } catch { /* 알림 실패는 무시 */ }
+    }
     return { text: `✅ 대댓글 발행 완료 (#${id})`, ok: true, mediaId };
   } catch (e) {
     await updateReply(id, { status: 'failed', error: e.message });
