@@ -28,7 +28,9 @@ export async function syncGsc({ days = 5 } = {}) {
   const end = gscDay(2);
   const start = gscDay(2 + Math.max(1, days) - 1);
   const out = { start, end };
-  for (const b of blogList().filter((x) => x.gscSite)) {
+  // migrationOnly(구 도메인 TF)는 GSC 조회 통로만 필요하고 gsc_daily 에는 넣지 않는다 —
+  // 넣으면 대시보드가 죽은 사이트를 다시 1급 지표로 세운다(07-30에 엔트리를 지운 이유).
+  for (const b of blogList().filter((x) => x.gscSite && !x.migrationOnly)) {
     // WordPress 직접 운영 블로그(mungge)는 레지스트리 source 가 null 이다 — 일일리포트·뉴스레터·
     // 자동포스팅에서 빠지려면 null 이어야 하지만, gsc_daily.source 는 NOT NULL 이라 그대로 넣으면
     // 매번 23502 로 저장이 통째로 실패한다. 저장용 키만 blog key 로 폴백한다.

@@ -70,7 +70,7 @@ export default async function handler(req, res) {
 // 제출된 사이트맵 현황 — /api/gsc-sync?blog=mg&sitemaps=1&secret=…
 async function sitemaps(url, res) {
   if (!hasGsc()) return res.status(500).json({ error: 'no-gsc-env' });
-  const blogs = blogList().filter((b) => b.gscSite);
+  const blogs = blogList(true).filter((b) => b.gscSite);
   const blog = blogs.find((b) => b.key === (url.searchParams.get('blog') || 'mg'));
   if (!blog) return res.status(400).json({ error: 'unknown blog', available: blogs.map((b) => b.key) });
   try {
@@ -85,7 +85,7 @@ async function sitemaps(url, res) {
 // inspect 는 경로 또는 절대 URL을 콤마로 구분. GSC 쿼터가 낮아 한 번에 최대 10개.
 async function inspect(url, res) {
   if (!hasGsc()) return res.status(500).json({ error: 'no-gsc-env' });
-  const blogs = blogList().filter((b) => b.gscSite);
+  const blogs = blogList(true).filter((b) => b.gscSite);
   const blog = blogs.find((b) => b.key === (url.searchParams.get('blog') || 'mg'));
   if (!blog) return res.status(400).json({ error: 'unknown blog', available: blogs.map((b) => b.key) });
 
@@ -180,7 +180,7 @@ async function ga4(url, res) {
 async function diagnose(mode, url, res) {
   if (!hasGsc()) return res.status(500).json({ error: 'no-gsc-env' });
 
-  const blogs = blogList().filter((b) => b.gscSite);
+  const blogs = blogList(true).filter((b) => b.gscSite);
   const key = url.searchParams.get('blog') || 'mg';
   const blog = blogs.find((b) => b.key === key);
   if (!blog) {
@@ -338,7 +338,7 @@ function index(rows, dim) {
 async function probe(url, res) {
   if (!hasGsc()) return res.status(500).json({ error: 'no-gsc-env' });
 
-  const blogs = blogList().filter((b) => b.gscSite);
+  const blogs = blogList(true).filter((b) => b.gscSite);
   const key = url.searchParams.get('blog') || 'mg';
   const blog = blogs.find((b) => b.key === key);
   if (!blog) {

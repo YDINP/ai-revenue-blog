@@ -54,6 +54,23 @@ export const BLOGS = {
     generatorRepo: 'YDINP/ai-revenue-blog',
     generatorRef: 'master',
   },
+  // TF(구 도메인) — **이전 추적 전용**. 대시보드·리포트·동기화에는 절대 올라오지 않는다.
+  // 07-30에 엔트리를 통째로 지웠더니 scripts/migration-status.mjs 가 'unknown blog tf' 로
+  // 죽었다. 301 이전이 아직 진행 중(07-27 배포)이라 "구글이 구 도메인 canonical 을
+  // mungge 로 바꿨는가"를 재는 수단이 사라지면 이전이 되고 있는지 알 수가 없다.
+  // migrationOnly 플래그로 집계에서만 빼고 GSC 조회 통로는 살려 둔다.
+  tf: {
+    key: 'tf',
+    label: 'TechFlow (이전 전 구 도메인 · 추적 전용)',
+    site: 'https://ai-revenue-blog.vercel.app',
+    gscSite: 'https://ai-revenue-blog.vercel.app/',
+    migrationOnly: true,   // ← gsc_daily 저장·리포트·뉴스레터 제외
+    source: null,
+    repo: null,
+    branch: null,
+    vercel: null,
+    generator: null,
+  },
   pc: {
     key: 'pc',
     label: 'Playcast (virtual-in-playing)',
@@ -85,6 +102,11 @@ export function resolveBlog(input) {
   );
 }
 
-export function blogList() {
-  return Object.values(BLOGS);
+// 기본은 **운영 중인 블로그만**. migrationOnly(구 도메인 TF)는 대시보드·리포트·뉴스레터·
+// 텔레그램 목록 어디에도 나오면 안 된다(07-30에 엔트리를 지운 이유가 그것이다).
+// 이전 추적처럼 죽은 사이트까지 봐야 하는 소수 경로만 blogList(true) 로 명시해서 가져간다.
+// 기본값을 "제외"로 둔 이유: 새 소비처가 생겼을 때 아무것도 안 해도 안전한 쪽으로 틀리게 하려고.
+export function blogList(includeMigrationOnly = false) {
+  const all = Object.values(BLOGS);
+  return includeMigrationOnly ? all : all.filter((b) => !b.migrationOnly);
 }
