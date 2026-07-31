@@ -1,7 +1,7 @@
 // Supabase Database Webhook 수신 → 텔레그램 새 댓글 알림
 // 트리거: supabase/telegram-comment-webhook.sql (comments INSERT)
 
-import { escapeHtml, postUrl, sendToAdmin, sourceLabel } from './_shared.js';
+import { escapeHtml, postUrl, sendToAdmin, sourceLabel, botToken } from './_shared.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -39,6 +39,7 @@ export default async function handler(req, res) {
     '↩️ 이 메시지에 <b>답장</b>하면 관리자 대댓글로 등록됩니다',
   ];
 
-  const result = await sendToAdmin(lines.join('\n'));
+  // VIP(문의·댓글)는 VIP 봇으로, 나머지(블로그/라이프플로우)는 기본(main) 봇으로.
+  const result = await sendToAdmin(lines.join('\n'), {}, record.source === 'vip' ? botToken('vip') : undefined);
   return res.status(200).json({ ok: !!result.ok });
 }

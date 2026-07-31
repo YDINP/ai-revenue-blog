@@ -11,7 +11,7 @@
 //  ?action=reply-preview body{id,auto?}  → 발행 없이 텔레그램 카드만 미리보기
 //  ?action=reply-send    body{id,text?,auto?} → 대댓글 발행(text 없으면 저장된 draft)
 //  ?action=set-reply-mode body{mode:'auto'|'review',topic?,cap?} → 대댓글 자동화 전환
-import { tg } from './_shared.js';
+import { tgThreads as tg } from './_shared.js';
 import { getPermalink, sb, publish, publishReply, insertPost, insertQueue, updateQueue, getAccounts, updateAccount, deleteMedia, updateReply, getReply, llmConfigured, getMyUsername, myAnsweredCommentIds } from './_threads.js';
 import { findAndQueue, sendReply, threadsReplyCard, threadsAutoReplyCard } from './_threads-bot.js';
 

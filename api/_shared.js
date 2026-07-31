@@ -63,10 +63,26 @@ export function escapeHtml(s) {
 }
 
 // 텔레그램 Bot API 호출
-export async function tg(method, payload) {
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  if (!token) throw new Error('TELEGRAM_BOT_TOKEN not set');
-  const r = await fetch(`https://api.telegram.org/bot${token}/${method}`, {
+// ── 봇 라우팅 ────────────────────────────────────────────────
+// 알림 종류별로 다른 텔레그램 봇으로 보낸다:
+//   main    = 블로그/댓글/대시보드 (@ben_dashboard_bot)   env TELEGRAM_BOT_TOKEN
+//   vip     = VIP 문의·댓글        (@ben_vvv_bot)         env TELEGRAM_VIP_BOT_TOKEN
+//   threads = 스레드 알림·큐·기능  (@ben_thread_bot)       env TELEGRAM_THREADS_BOT_TOKEN
+// 미설정 시 main 으로 폴백(회귀 안전).
+export function botToken(kind) {
+  if (kind === 'vip') return process.env.TELEGRAM_VIP_BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN;
+  if (kind === 'threads') return process.env.TELEGRAM_THREADS_BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN;
+  return process.env.TELEGRAM_BOT_TOKEN;
+}
+// 수신 웹훅에서 "이 요청이 어느 봇으로 들어왔는지"를 정해두면, 응답(대댓글 확인 등)도 같은 봇으로 나간다.
+// (텔레그램 웹훅은 저빈도라 요청 간 경합 위험 낮음)
+let _activeToken = null;
+export function setActiveBot(kind) { _activeToken = kind ? botToken(kind) : null; }
+
+export async function tg(method, payload, token) {
+  const t = token || _activeToken || process.env.TELEGRAM_BOT_TOKEN;
+  if (!t) throw new Error('TELEGRAM_BOT_TOKEN not set');
+  const r = await fetch(`https://api.telegram.org/bot${t}/${method}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -76,15 +92,21 @@ export async function tg(method, payload) {
   return json;
 }
 
-export function sendToAdmin(text, extra = {}) {
+export function sendToAdmin(text, extra = {}, token) {
   return tg('sendMessage', {
     chat_id: process.env.TELEGRAM_ADMIN_CHAT_ID,
     text,
     parse_mode: 'HTML',
     disable_web_page_preview: true,
     ...extra,
-  });
+  }, token);
 }
+
+// 종류별 편의 발신자 — 스레드/ VIP 모듈에서 `import { tgThreads as tg }` 식으로 alias 해서 쓴다.
+export function tgThreads(method, payload) { return tg(method, payload, botToken('threads')); }
+export function sendToAdminThreads(text, extra = {}) { return sendToAdmin(text, extra, botToken('threads')); }
+export function tgVip(method, payload) { return tg(method, payload, botToken('vip')); }
+export function sendToAdminVip(text, extra = {}) { return sendToAdmin(text, extra, botToken('vip')); }
 
 // Supabase RPC (anon key + SECURITY DEFINER 함수)
 export async function supabaseRpc(fn, params) {

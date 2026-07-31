@@ -1,7 +1,7 @@
 // 텔레그램 봇 웹훅 — 대시보드 조회 / 댓글 관리 / 블로그 제어(글·배포)
 // setWebhook 시 secret_token=WEBHOOK_SECRET 지정 필수 (SETUP-telegram-comment-bot.md)
 
-import { escapeHtml, getComment, postUrl, sourceLabel, supabaseRpc, tg } from './_shared.js';
+import { escapeHtml, getComment, postUrl, sourceLabel, supabaseRpc, tg, setActiveBot } from './_shared.js';
 import {
   commentStatsMessage,
   commentsMessages,
@@ -107,6 +107,9 @@ export default async function handler(req, res) {
   if (!secret || req.headers['x-telegram-bot-api-secret-token'] !== secret) {
     return res.status(401).json({ error: 'unauthorized' });
   }
+
+  // 어느 봇으로 들어온 업데이트인지(?bot=vip|threads, 없으면 main) → 응답도 같은 봇으로 나가게 한다.
+  setActiveBot(req.query && req.query.bot);
 
   // ── 인라인 버튼(callback_query) — /generate 대화형 플로우 ──
   const cb = req.body?.callback_query;

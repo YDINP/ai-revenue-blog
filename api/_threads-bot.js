@@ -1,5 +1,5 @@
 // Threads 텔레그램 봇 명령/콜백 핸들러
-import { escapeHtml, tg } from './_shared.js';
+import { escapeHtml, tgThreads as tg } from './_shared.js';
 import { dispatchWorkflow } from './_github.js';
 import { setState, getState, clearState } from './_state.js';
 import {

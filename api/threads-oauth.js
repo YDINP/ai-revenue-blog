@@ -4,7 +4,7 @@
 // redirect_uri(THREADS_REDIRECT_URI)는 이 엔드포인트 URL과 정확히 일치해야 함.
 
 import { codeToShortToken, exchangeLongLived, insertAccount, updateAccount, getAccountByTopic } from './_threads.js';
-import { sendToAdmin } from './_shared.js';
+import { sendToAdminThreads as sendToAdmin } from './_shared.js';
 
 const SCOPES = 'threads_basic,threads_content_publish,threads_manage_insights,threads_read_replies,threads_manage_replies,threads_delete,threads_keyword_search';
 

@@ -2054,6 +2054,7 @@ const ICONS: Record<string, string> = {
         <button class="main-tab" data-tab="paperdoc">페이퍼닥</button>
         <button class="main-tab" data-tab="tools">🛠 도구</button>
         <button class="main-tab" data-tab="comments">댓글</button>
+        <button class="main-tab" data-tab="inquiries">📮 문의</button>
       </div>
 
       <!-- Tab: 전체 요약 -->
@@ -2989,6 +2990,19 @@ const ICONS: Record<string, string> = {
             <div class="top-page-list" id="tools-rank">
               <div class="no-data">도구 방문 데이터 로딩 중...</div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: VIP 문의 (Supabase get_inquiries — /admin/inquiries·푸터 폼과 동일 소스로 동기화) -->
+      <div class="tab-content" id="tab-inquiries">
+        <div class="traffic-section">
+          <div class="traffic-header">
+            <h3>📮 VIP 문의 <span id="inq-count" style="font-weight:400;font-size:0.75rem;color:var(--text-3)"></span></h3>
+            <button id="inq-refresh" type="button" style="border:1px solid var(--border);background:var(--surface-2);color:var(--text-2);font-size:0.72rem;font-weight:600;padding:0.3rem 0.65rem;border-radius:999px;cursor:pointer">새로고침</button>
+          </div>
+          <div class="traffic-body">
+            <div id="inq-list" class="comment-list"><div class="no-data">불러오는 중…</div></div>
           </div>
         </div>
       </div>
@@ -6588,6 +6602,9 @@ const ICONS: Record<string, string> = {
           } else if (targetTab === 'comments') {
             tab.classList.add('active-comments');
             loadCommentDashboard();
+          } else if (targetTab === 'inquiries') {
+            tab.classList.add('active-comments');
+            loadInquiries();
           } else if (targetTab === 'vip') {
             tab.classList.add('active-vip');
           } else if (targetTab === 'gsc') {
@@ -6674,6 +6691,49 @@ const ICONS: Record<string, string> = {
       async function loadCommentDashboard() {
         showCommentDashboard();
       }
+
+      // ========== VIP 문의 (Supabase get_inquiries — 관리자 키 게이트) ==========
+      function _inqParse(content) {
+        const lines = String(content || '').split('\n');
+        let contact = '', body = [];
+        for (const l of lines) {
+          if (/^📮\s*\[/.test(l)) continue;
+          const m = l.match(/^\[연락처:\s*(.*?)\]\s*$/);
+          if (m) { contact = m[1].trim(); continue; }
+          body.push(l);
+        }
+        return { contact, body: body.join('\n').trim() };
+      }
+      function _inqContact(c) {
+        if (!c) return '<span style="color:var(--text-3)">연락처 미기재</span>';
+        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c)) return `📧 <a href="mailto:${escHtml(c)}" style="color:var(--accent)">${escHtml(c)}</a>`;
+        return '📧 ' + escHtml(c);
+      }
+      async function loadInquiries() {
+        const list = document.getElementById('inq-list');
+        const cnt = document.getElementById('inq-count');
+        if (!list) return;
+        if (!adminKey) { list.innerHTML = '<div class="no-data">관리자 키 인증이 필요합니다. 댓글 탭에서 먼저 인증해 주세요.</div>'; if (cnt) cnt.textContent = ''; return; }
+        list.innerHTML = '<div class="no-data">불러오는 중…</div>';
+        try {
+          const data = await rpc('get_inquiries', { p_admin_key: adminKey });
+          if (data && data.error) { list.innerHTML = '<div class="no-data">관리자 키가 올바르지 않습니다.</div>'; if (cnt) cnt.textContent = ''; return; }
+          const rows = Array.isArray(data) ? data : [];
+          if (cnt) cnt.textContent = `· 총 ${rows.length}건`;
+          if (!rows.length) { list.innerHTML = '<div class="no-data">아직 접수된 문의가 없습니다.</div>'; return; }
+          list.innerHTML = rows.map((r) => {
+            const p = _inqParse(r.content);
+            let dt = r.created_at;
+            try { dt = new Date(r.created_at).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }); } catch (e) {}
+            return `<div class="cm-item"><span class="cm-source vip">문의</span><div class="cm-body">` +
+              `<div class="cm-meta"><b>${escHtml(r.nickname)}</b> <span style="color:var(--text-3);font-weight:400">${escHtml(dt)}</span></div>` +
+              `<div style="font-size:0.8rem;margin:0.15rem 0 0.4rem">${_inqContact(p.contact)}</div>` +
+              `<div class="cm-text" style="white-space:pre-wrap">${escHtml(p.body)}</div>` +
+              `</div></div>`;
+          }).join('');
+        } catch (e) { list.innerHTML = '<div class="no-data">불러오기 실패. 잠시 후 다시 시도하세요.</div>'; }
+      }
+      document.getElementById('inq-refresh')?.addEventListener('click', loadInquiries);
 
       // 뭉게 WordPress 댓글 (읽기 전용). 답글·삭제는 wp-admin 에서 — WP 쓰기는 앱 비밀번호가
       // 필요하고 그걸 클라이언트에 둘 수 없다.

@@ -5,7 +5,7 @@
 // ?only=posts   → 발행·토큰·인사이트만
 // 없으면 전체 (기존 동작)
 // Hobby 서버리스 함수 12/12 만석이라 답글 전용 엔드포인트를 새로 못 만든다 → 쿼리 파라미터로 분기.
-import { sendToAdmin, tg, escapeHtml } from './_shared.js';
+import { sendToAdminThreads as sendToAdmin, tgThreads as tg, escapeHtml } from './_shared.js';
 import {
   sb, getAccounts, publishDraft, refreshLongLived, updateAccount,
   getInsights, publishedCount24h,

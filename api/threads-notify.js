@@ -1,6 +1,6 @@
 // GH Actions 생성기 → 이 엔드포인트 호출 → 새 초안을 텔레그램 승인카드로 발송.
 // CRON_SECRET 로 보호(생성기가 헤더로 전달). 텔레그램 토큰은 Vercel에만 존재.
-import { tg } from './_shared.js';
+import { tgThreads as tg } from './_shared.js';
 import { sb } from './_threads.js';
 import { threadsCard } from './_threads-bot.js';
 

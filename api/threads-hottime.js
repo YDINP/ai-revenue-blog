@@ -1,7 +1,7 @@
 // 핫타임 알림 — 골든타임에 호출. 큐 초안 안내 + 마커 세팅 + 텔레그램 알림.
 // 10분 뒤 threads-hottime-resolve 가 미상호작용 시 랜덤 자동발행. CRON_SECRET 보호.
 import { sb } from './_threads.js';
-import { tg } from './_shared.js';
+import { tgThreads as tg } from './_shared.js';
 
 export default async function handler(req, res) {
   const secret = process.env.CRON_SECRET;

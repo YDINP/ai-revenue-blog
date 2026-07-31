@@ -1,7 +1,7 @@
 // 핫타임 10분 후 해결 — hottime_started_at 가 아직 set이면(=미상호작용) 큐 랜덤 발행.
 // 사용자가 발행/예약했으면 마커가 null이라 skip. CRON_SECRET 보호.
 import { sb, publishDraft } from './_threads.js';
-import { tg, escapeHtml } from './_shared.js';
+import { tgThreads as tg, escapeHtml } from './_shared.js';
 
 export default async function handler(req, res) {
   const secret = process.env.CRON_SECRET;
