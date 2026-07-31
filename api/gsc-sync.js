@@ -7,6 +7,10 @@
 // gsc_daily 는 date×page 만 저장해서 검색어 단위 진단(CTR·식인)이 불가능하다. 별도 엔드포인트를
 // 만들면 Hobby 플랜 서버리스 함수 12개 상한에 걸리므로 이 핸들러에 조회 모드를 얹는다.
 //
+// 진단 모드(저장 안 함): SEO 개선 대상을 골라낸다. 조회 모드와 마찬가지로 함수 상한 때문에 여기 얹는다.
+//   /api/gsc-sync?diag=striking&blog=mg&days=28&minPos=4&maxPos=20&minImp=50&secret=…
+//   /api/gsc-sync?diag=decay&blog=mg&dim=page&days=28&minClicks=5&drop=30&secret=…
+//
 // GA4(유입경로) 도 같은 서비스 계정을 쓰므로 이 핸들러에 함께 얹는다.
 //   /api/gsc-sync?ga4=whoami&secret=…                 서비스계정 이메일·연동 상태
 //   /api/gsc-sync?ga4=properties&secret=…             접근 가능한 GA4 속성 목록(속성 ID 확인)
@@ -40,6 +44,10 @@ export default async function handler(req, res) {
   }
 
   if (url.searchParams.get('ga4')) return ga4(url, res);
+
+  // diag 는 dim 을 함께 받으므로(decay 의 집계 차원) probe 보다 먼저 갈라야 한다
+  const diag = url.searchParams.get('diag');
+  if (diag) return diagnose(diag, url, res);
 
   const dim = url.searchParams.get('dim');
   if (dim) return probe(url, res);
@@ -160,6 +168,163 @@ async function ga4(url, res) {
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }
+}
+
+// ── SEO 진단 ────────────────────────────────────────────────────────────────
+// gsc_daily 는 date×page 집계라 "몇 위였나"는 남지만 "어떤 검색어가 문턱에 걸려 있나",
+// "어떤 글이 죽어가나"는 알 수 없다. 두 판정을 GSC 원본에서 바로 계산한다.
+// 판정 기준은 ericosiu/ai-marketing-skills 의 seo-ops(MIT)를 참고했다.
+async function diagnose(mode, url, res) {
+  if (!hasGsc()) return res.status(500).json({ error: 'no-gsc-env' });
+
+  const blogs = blogList().filter((b) => b.gscSite);
+  const key = url.searchParams.get('blog') || 'mg';
+  const blog = blogs.find((b) => b.key === key);
+  if (!blog) {
+    return res.status(400).json({ error: `unknown blog '${key}'`, available: blogs.map((b) => b.key) });
+  }
+
+  const num = (name, dflt, lo, hi) =>
+    Math.min(Math.max(parseFloat(url.searchParams.get(name) ?? dflt) || dflt, lo), hi);
+  const days = num('days', 28, 7, 180);
+
+  try {
+    let out;
+    if (mode === 'striking') out = await striking(blog, url, days, num);
+    else if (mode === 'decay') out = await decay(blog, url, days, num);
+    else return res.status(400).json({ error: `unknown diag mode '${mode}'`, modes: ['striking', 'decay'] });
+    return res.status(out.ok === false ? 400 : 200).json(out);
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
+}
+
+// 문턱 키워드 — 4~20위 × 노출 충분. "조금만 밀면 1페이지" 목록이라 신규 집필보다 우선순위가 높다.
+async function striking(blog, url, days, num) {
+  const minPos = num('minPos', 4, 1, 100);
+  const maxPos = num('maxPos', 20, 1, 100);
+  const minImp = num('minImp', 50, 0, 1e6);
+  const limit = Math.round(num('limit', 100, 1, 1000));
+
+  // GSC 는 2~3일 지연 → 종료일을 2일 전으로 잡아야 마지막 날이 0으로 보이지 않는다
+  const endDate = gscDay(2);
+  const startDate = gscDay(1 + days);
+
+  const rows = await gscRaw(blog.gscSite, {
+    startDate,
+    endDate,
+    dimensions: ['query', 'page'],
+    rowLimit: 5000,
+    type: 'web',
+  });
+
+  const hits = rows
+    .filter((r) => r.position >= minPos && r.position <= maxPos && r.impressions >= minImp)
+    .map((r) => ({
+      query: r.keys[0],
+      page: (r.keys[1] || '').split('#')[0],
+      clicks: r.clicks,
+      impressions: r.impressions,
+      ctr: r.ctr,
+      position: r.position,
+      // 3위까지 밀었을 때 추가로 얻는 클릭의 거친 추정. 정렬 기준이자 우선순위다.
+      // 위치별 CTR 곡선은 사이트마다 다르므로 "10% 라면" 이라는 가정치일 뿐 예측이 아니다.
+      upside: Math.round(r.impressions * Math.max(0.1 - (r.ctr || 0), 0)),
+    }))
+    .sort((a, b) => b.upside - a.upside || b.impressions - a.impressions);
+
+  return {
+    ok: true,
+    mode: 'striking',
+    site: blog.gscSite,
+    startDate,
+    endDate,
+    filter: { minPos, maxPos, minImp },
+    scanned: rows.length,
+    count: hits.length,
+    rows: hits.slice(0, limit),
+    ...(hits.length ? {} : {
+      hint: rows.length
+        ? '문턱(4~20위) 안에 든 검색어가 없습니다 — minImp 를 낮추거나 minPos/maxPos 범위를 넓혀 보세요.'
+        : '이 기간 GSC 노출 자체가 0입니다 — 순위 문제가 아니라 색인 문제입니다. ?sitemaps=1 / ?inspect= 로 확인하세요.',
+    }),
+  };
+}
+
+// 하락 페이지 — 최근 창 vs 직전 같은 길이의 창.
+// ⚠️ 원본(seo-ops)은 28일을 90일×(28/90)과 비교하는데, 90일 창이 28일 창을 포함해서
+//    최근 하락분이 기준선에도 섞여 들어간다(하락을 과소평가). 겹치지 않는 인접 창으로 바꿨다.
+async function decay(blog, url, days, num) {
+  const dim = (url.searchParams.get('dim') || 'page').trim();
+  if (dim !== 'page' && dim !== 'query') {
+    return { ok: false, error: `decay 는 dim=page 또는 dim=query 만 지원합니다 (받은 값: '${dim}')` };
+  }
+  const minClicks = num('minClicks', 5, 0, 1e6);
+  const dropPct = num('drop', 30, 1, 99);
+  const limit = Math.round(num('limit', 50, 1, 500));
+
+  const recent = { startDate: gscDay(1 + days), endDate: gscDay(2) };
+  const prior = { startDate: gscDay(1 + days * 2), endDate: gscDay(2 + days) };
+
+  const fetchWindow = (w) =>
+    gscRaw(blog.gscSite, { ...w, dimensions: [dim], rowLimit: 5000, type: 'web' });
+  const [rowsRecent, rowsPrior] = await Promise.all([fetchWindow(recent), fetchWindow(prior)]);
+
+  const a = index(rowsRecent, dim);
+  const b = index(rowsPrior, dim);
+
+  const hits = [];
+  for (const [k, before] of Object.entries(b)) {
+    if (before.clicks < minClicks) continue;          // 기준선이 얇으면 노이즈다
+    const after = a[k] || { clicks: 0, impressions: 0, position: 0 };
+    if (after.clicks >= before.clicks * (1 - dropPct / 100)) continue;
+
+    const impDropPct = before.impressions ? ((before.impressions - after.impressions) / before.impressions) * 100 : 0;
+    const posDelta = after.position && before.position ? after.position - before.position : 0;
+    hits.push({
+      key: k,
+      clicksBefore: before.clicks,
+      clicksAfter: after.clicks,
+      lossPct: +(((before.clicks - after.clicks) / before.clicks) * 100).toFixed(1),
+      impressionsBefore: before.impressions,
+      impressionsAfter: after.impressions,
+      positionBefore: +before.position.toFixed(1),
+      positionAfter: +after.position.toFixed(1),
+      // 같은 "클릭 감소"라도 처방이 다르다: 순위가 밀렸나, 수요가 빠졌나, 제목이 안 먹히나.
+      cause: posDelta >= 2 ? 'rank' : impDropPct >= 30 ? 'demand' : 'ctr',
+    });
+  }
+  hits.sort((x, y) => y.clicksBefore - x.clicksBefore || y.lossPct - x.lossPct);
+
+  return {
+    ok: true,
+    mode: 'decay',
+    site: blog.gscSite,
+    dim,
+    window: { recent, prior, days },
+    filter: { minClicks, dropPct },
+    count: hits.length,
+    causes: hits.reduce((acc, h) => ({ ...acc, [h.cause]: (acc[h.cause] || 0) + 1 }), {}),
+    rows: hits.slice(0, limit),
+    ...(hits.length || rowsPrior.length ? {} : {
+      hint: '직전 창에도 데이터가 없습니다 — 비교할 기준선이 없어 하락 판정이 불가능합니다.',
+    }),
+  };
+}
+
+// 노출 가중 평균 순위로 합산. page 차원은 앵커 URL(#heading)이 별도 행으로 잡히므로 본문 URL로 묶는다.
+function index(rows, dim) {
+  const acc = {};
+  for (const r of rows) {
+    const k = dim === 'page' ? (r.keys[0] || '').split('#')[0] : (r.keys[0] || '').toLowerCase();
+    if (!k) continue;
+    const e = (acc[k] ||= { clicks: 0, impressions: 0, _pos: 0 });
+    e.clicks += r.clicks || 0;
+    e.impressions += r.impressions || 0;
+    e._pos += (r.position || 0) * (r.impressions || 0);
+  }
+  for (const e of Object.values(acc)) e.position = e.impressions ? e._pos / e.impressions : 0;
+  return acc;
 }
 
 // 저장 없이 GSC 원본 행만 반환 — 검색어 진단용
