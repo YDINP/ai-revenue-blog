@@ -1,47 +1,60 @@
-# 뭉게 색인 요청 대상 — 2026-07-31 실측 갱신 (원본 07-28 생성)
+# 색인 작업 목록 — 2026-08-01 갱신
 #
-# ⚠️ 07-28에 위에서부터 처리하다 9편에서 멈춘 것으로 보인다(크롤 이력이 목록 상단에만 연속으로
-#    찍혀 있고 07-28 하루에 6건 몰려 있다). 아래 [요청필요] 11편을 이어서 넣으면 된다.
+# ⚠️ 방향이 바뀐다. 지금까지 색인 요청은 전부 **신 도메인(mungge)** URL에 넣었다.
+#    그 자체는 효과가 확인됐다 — 07-31 요청분 11편 중 8편이 당일 크롤, 6편 색인.
 #
-# 상태는 GSC URL 검사 API 실측이다:
-#   [색인완료] 4편 — 끝. 다시 요청할 필요 없다.
-#   [색인보류] 5편 — 크롤은 됐는데 구글이 색인을 보류했다. **재요청해도 안 풀린다**
-#                    (요청은 크롤을 부르는 것이지 색인을 강제하지 않는다). 도메인 신뢰도가
-#                    쌓이거나 301 통합이 인식되면 자연히 넘어간다. 손대지 말 것.
-#   [요청필요] 11편 — 크롤된 적조차 없다. 여기가 실제로 남은 작업이다.
+#    그런데 같은 날 구 도메인 상위 페이지는 오히려 후퇴했다(신 도메인 색인 2/10 → 1/10.
+#    최대 트래픽 글이 "색인됨" → "크롤됨-색인안됨"). 원인이 데이터로 보인다:
 #
-# 갱신: node scripts/migration-status.mjs 로 진행률 확인 후 GSC dim=page 로 목록 재생성
-#   /api/gsc-sync?blog=tf&dim=page&days=28&limit=60&secret=$CRON_SECRET
+#      · 구 도메인 canonical 이전 : 0/10  — 구글이 아직 구 URL을 정본으로 본다
+#      · 구 도메인이 여전히 노출·클릭을 받는다 (28일 상위글 1,309노출·135클릭)
+#      · TF 사이트맵 마지막 다운로드 2026-02-26. 07-28 재제출 후에도 isPending
+#
+#    → 구글이 **구 URL을 다시 가져오지 않아 308을 못 본다.** 그래서 구 URL이 정본으로
+#      남고, mungge 페이지는 그 중복으로 판정돼 "크롤됨-색인 안 됨"에 머문다.
+#      신 도메인만 계속 요청해도 이 고리는 안 풀린다.
+#
+# 그래서 다음 요청은 **구 도메인(TF) 속성**에서 아래 구 URL에 넣는다.
+# 구글이 이 URL을 fetch하면 308을 보고 canonical을 mungge로 옮기기 시작한다.
+# (12개 전부 308 → mungge 200 도달 확인, 2026-08-01)
 
-## 요청 완료 — 2026-07-31 (아래 11편 색인 요청 넣음) · 검증 대기
+## A. TF 속성(ai-revenue-blog.vercel.app)에서 색인 요청 — 노출 상위순
 
-# 다음 점검(빠르면 08-01, 늦어도 08-03)에 확인할 것:
-#   node scripts/migration-status.mjs
-#   /api/gsc-sync?blog=mg&inspect=<URL 콤마구분 최대10>&secret=# 판정 기준 — lastCrawlTime 이 07-31 이후로 찍혔는가:
-#   찍힘 + 색인    → 성공
-#   찍힘 + 미색인  → 요청은 먹혔고 구글이 보류. 재요청 무의미(위 [색인보류] 5편과 같은 상태)
-#   안 찍힘        → 요청이 큐에 안 들어갔거나 아직 순번 대기. 3일 지나도 그대로면 재요청
-#
-# 요청 직전 기준선: 11편 전부 lastCrawlTime 없음 / coverageState = 알려지지 않은 URL
-[요청필요] https://mungge.com/2026-07-06-game-game-discord-community-building-2026/   # 노출 57 클릭 1
-[요청필요] https://mungge.com/2026-07-12-ai-suno-music-generation-guide-2026/   # 노출 31 클릭 1
-[요청필요] https://mungge.com/2026-07-15-game-influencer-streamer-outreach-2026/   # 노출 25 클릭 2
-[요청필요] https://mungge.com/2026-07-12-review-headset-noise-cancelling-recommendation-2026/   # 노출 24 클릭 1
-[요청필요] https://mungge.com/2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers/   # 노출 23 클릭 0
-[요청필요] https://mungge.com/2026-07-11-review-galaxy-z-flip8-spec-rumor-2026/   # 노출 21 클릭 0
-[요청필요] https://mungge.com/2026-07-12-review-external-ssd-recommendation-2026/   # 노출 19 클릭 1
-[요청필요] https://mungge.com/2026-07-14-dev-ship-ios-mac-apps-without-xcode-2026/   # 노출 19 클릭 1
-[요청필요] https://mungge.com/2026-07-12-ai-elevenlabs-voice-dubbing-guide-2026/   # 노출 18 클릭 0
-[요청필요] https://mungge.com/2026-07-20-ai-kimi-k3-open-source-2-8t-2026/   # 노출 17 클릭 1
-[요청필요] https://mungge.com/2026-07-15-game-ai-game-development-monetization-2026/   # 노출 15 클릭 2
+https://ai-revenue-blog.vercel.app/blog/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/   # 노출 1309 · 클릭 135
+https://ai-revenue-blog.vercel.app/blog/2026-07-18-game-google-play-appstore-opening-2026-dev-guide/   # 노출 258
+https://ai-revenue-blog.vercel.app/blog/2026-07-07-game-steam-upcoming-games-2026-h2-wishlist/   # 노출 127
+https://ai-revenue-blog.vercel.app/blog/2026-07-06-game-steam-next-fest-guide-2026-wishlist-boost/   # 노출 119
+https://ai-revenue-blog.vercel.app/blog/indie-game-ad-revenue-iaa-ecpm-2026/   # 노출 104
+https://ai-revenue-blog.vercel.app/blog/steam-reviews-sales-correlation-2026/   # 노출 102
+https://ai-revenue-blog.vercel.app/blog/2026-07-06-game-game-discord-community-building-2026/   # 노출 80
+https://ai-revenue-blog.vercel.app/blog/2026-07-02-game-game-platform-fees-comparison-2026-steam-epic-mobile-itch/   # 노출 77
+https://ai-revenue-blog.vercel.app/blog/2026-07-11-ai-openai-codex-gpt-5-6-guide-2026/   # 노출 39
+https://ai-revenue-blog.vercel.app/blog/2026-07-15-game-ai-game-development-monetization-2026/   # 노출 27
 
-## 처리 완료 (참고용 · 다시 요청하지 말 것)
-[색인완료] https://mungge.com/2026-02-26-game-2026-indie-game-monetization-reality-5-truths/   # 노출 2401 클릭 135 · 크롤 2026-07-24
-[색인보류] https://mungge.com/2026-07-18-game-google-play-appstore-opening-2026-dev-guide/   # 노출 144 클릭 3 · 크롤 2026-07-28
-[색인보류] https://mungge.com/2026-07-07-game-steam-upcoming-games-2026-h2-wishlist/   # 노출 98 클릭 9 · 크롤 2026-07-28
-[색인보류] https://mungge.com/indie-game-ad-revenue-iaa-ecpm-2026/   # 노출 78 클릭 3 · 크롤 2026-07-28
-[색인보류] https://mungge.com/2026-07-06-game-steam-next-fest-guide-2026-wishlist-boost/   # 노출 76 클릭 2 · 크롤 2026-07-28
-[색인보류] https://mungge.com/steam-reviews-sales-correlation-2026/   # 노출 70 클릭 2 · 크롤 2026-07-28
-[색인완료] https://mungge.com/2026-07-02-game-game-platform-fees-comparison-2026-steam-epic-mobile-itch/   # 노출 54 클릭 2 · 크롤 2026-07-30
-[색인완료] https://mungge.com/2026-07-11-ai-openai-codex-gpt-5-6-guide-2026/   # 노출 37 클릭 5 · 크롤 2026-07-28
-[색인완료] https://mungge.com/2026-02-24-dev-supabase-practical-guide-2026-realtime-auth/   # 노출 21 클릭 1 · 크롤 2026-07-30
+## B. mungge 속성에서 재요청 — 07-31 요청이 큐에 안 들어간 3편
+# (요청했는데 하루가 지나도 lastCrawlTime 이 없다 = 할당량에 걸렸거나 누락)
+
+https://mungge.com/2026-07-06-game-game-discord-community-building-2026/
+https://mungge.com/2026-07-15-game-influencer-streamer-outreach-2026/
+https://mungge.com/2026-07-20-ai-kimi-k3-open-source-2-8t-2026/
+
+## 하지 말 것
+
+# · 07-31에 크롤된 mungge URL 재요청 — 이미 구글이 읽었다. 색인 보류는 요청으로 안 풀린다.
+# · TF 사이트맵 재제출 — 07-28 제출분이 아직 pending 이라 큐만 겹친다.
+# · 구 도메인 301 해제·TF 배포 삭제 — 이전이 끝날 때까지 살려둬야 한다.
+
+## 07-31 요청 결과 (검증 완료, 2026-08-01)
+
+# 11편 중 8편이 요청 당일(07-31) 크롤됨 → 6편 색인 · 2편 크롤됨-색인안됨
+# 3편은 크롤 이력 없음 → 위 B로 재요청
+# 판정 기준: lastCrawlTime 이 요청일 이후로 찍혔는가
+#   찍힘+색인   → 성공
+#   찍힘+미색인 → 구글이 보류. 재요청 무의미(도메인 신뢰도·301 통합이 풀려야 넘어간다)
+#   안 찍힘     → 큐 미진입. 재요청 대상
+
+## 점검 명령
+
+# node scripts/migration-status.mjs
+# /api/gsc-sync?blog=mg&inspect=<URL 콤마구분 최대10>&secret=$CRON_SECRET
+# /api/gsc-sync?blog=tf&dim=page&days=28&limit=20&secret=$CRON_SECRET   (구 도메인 노출 상위)
