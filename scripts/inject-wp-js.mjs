@@ -35,6 +35,9 @@ const BLOCKS = [
   { marker: 'MG-ADMID', file: 'wp-ad-inarticle.js', desc: '본문 한가운데 h2 앞 애드핏 300x250' },
   // 위젯 JS 는 script 하나라 이 블록도 ba.min.js(async) 실행 전에 돈다 → 빈 ins 를 옮겨도 안전
   { marker: 'MG-ADRAIL', file: 'wp-ad-rail.js', desc: '모바일 홈 레일 광고를 피드 3번째 카드 뒤로 이동' },
+  // 광고 블록들 **뒤**에 와야 한다 — ADEND/ADMID/ADRAIL 이 삽입·이동을 끝낸 뒤의
+  // 최종 슬롯 목록을 관찰해야 한다. 앞에 두면 나중에 꽂힌 슬롯을 놓친다.
+  { marker: 'MG-ADOBS', file: 'wp-ad-observe.js', desc: '애드핏 노출/미노출 계측(adfit_slot 이벤트) — 재시도는 안 함' },
 ];
 
 function loadEnv(p) {

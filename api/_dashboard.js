@@ -357,6 +357,52 @@ const PD_SRC_LABEL = { ...SRC_ABBR, gameflow: '(구)GF', paperdoc: '페이퍼닥
 // 'inline' = 뭉게 본문 안의 텍스트 링크(클래스 없음) · 'naver' = 네이버 포스팅의 /go/paperdoc 경유
 const PD_PLACE_LABEL = { popup: '홈 팝업', banner: '가로 배너', side: '사이드 배너', inline: '본문 링크', naver: '네이버 포스팅', other: '기타' };
 
+/* 애드핏 슬롯 충전률 — /adfit
+   "재로드를 붙일까"를 판단할 근거를 만드는 계측이다. 지금까지는 슬롯이 비었는지조차
+   알 수 없었다(애드핏은 재고가 없으면 조용히 아무것도 안 그린다).
+   ⚠️ 이건 **노출 수치가 아니다.** 애드핏 리포트(adfit-xlsx.mjs)와 숫자가 다르며,
+   여기서 보는 건 "우리 페이지에서 슬롯이 채워졌나"라는 클라이언트 관점의 비율이다. */
+export async function adfitMessage() {
+  const rowsRaw = await restGet(
+    'analytics?event_type=eq.adfit_slot&metadata->>unit=neq.__selftest__&select=metadata,created_at&order=created_at.desc&limit=1000'
+  );
+  const rows = Array.isArray(rowsRaw) ? rowsRaw : [];
+  if (!rows.length) return '📐 <b>애드핏 슬롯</b>\n\n아직 수집된 이벤트가 없습니다.';
+
+  const nowMs = Date.now();
+  const byUnit = {}, byDevice = {};
+  let fill = 0, total = 0, day = 0, dayFill = 0;
+  const todayKst = new Date(Date.now() + 9 * 3600 * 1000).toISOString().split('T')[0];
+  const dayOf = (ts) => new Date(new Date(ts).getTime() + 9 * 3600 * 1000).toISOString().split('T')[0];
+
+  rows.forEach((r) => {
+    const m = r.metadata || {};
+    // filled 만 성공. nofill(애드핏이 명시적으로 없다고 응답) 과 empty(무응답·차단) 는 갈라서 본다.
+    const ok = m.result === 'filled';
+    total++; if (ok) fill++;
+    if (dayOf(r.created_at) === todayKst) { day++; if (ok) dayFill++; }
+    const u = (byUnit[m.unit || '?'] ||= { t: 0, f: 0, nofill: 0, empty: 0 });
+    u.t++; if (ok) u.f++; else if (m.result === 'nofill') u.nofill++; else u.empty++;
+    const d = (byDevice[m.device || '?'] ||= { t: 0, f: 0 });
+    d.t++; if (ok) d.f++;
+  });
+
+  const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0);
+  const lines = [
+    `📐 <b>애드핏 슬롯 충전률</b>  <i>${nowKst()}</i>`,
+    '',
+    `<b>전체</b>  ${fmt(fill)}/${fmt(total)} (<b>${pct(fill, total)}%</b>) · 오늘 ${fmt(dayFill)}/${fmt(day)} (${pct(dayFill, day)}%)`,
+    `<b>기기별</b>  ` + Object.entries(byDevice).map(([k, v]) => `${k} ${pct(v.f, v.t)}%`).join(' · '),
+    '',
+    '<b>유닛별</b>',
+  ];
+  Object.entries(byUnit).sort((a, b) => b[1].t - a[1].t).slice(0, 8).forEach(([u, v]) => {
+    lines.push(`· <code>${escapeHtml(u)}</code> ${pct(v.f, v.t)}% <i>(${v.t}건 · 미노출 ${v.nofill} · 무응답 ${v.empty})</i>`);
+  });
+  lines.push('', '<i>미노출=애드핏이 광고 없다고 응답 · 무응답=요청 실패/차단 추정</i>');
+  return lines.join('\n');
+}
+
 export async function paperdocMessage() {
   const rowsRaw = await restGet(
     'analytics?event_type=eq.paperdoc_click&metadata->>__probe=is.null&select=metadata,source,created_at&order=created_at.desc&limit=500'
@@ -440,6 +486,7 @@ const EVENT_LABELS = {
   paperdoc_click: '📄 페이퍼닥',
   tool_click: '🧮 계산기',
   newsletter_subscribe: '📬 구독',
+  adfit_slot: '📐 광고슬롯',
   like: '❤️ 추천',
   comment: '💬 댓글',
 };

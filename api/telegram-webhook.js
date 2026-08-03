@@ -10,6 +10,7 @@ import {
   paperdocMessage,
   likesMessage,
   recentMessage,
+  adfitMessage,
   statsMessage,
   topPagesMessage,
   trendMessage,
@@ -448,6 +449,7 @@ export default async function handler(req, res) {
         paperdoc: () => paperdocMessage(),
         likes: () => likesMessage(num ?? 10),
         recent: () => recentMessage(num ?? 10),
+        adfit: () => adfitMessage(),
       };
       if (VIEWS[cmd]) {
         await reply(await VIEWS[cmd]());
