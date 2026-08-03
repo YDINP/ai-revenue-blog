@@ -364,13 +364,13 @@ const PD_PLACE_LABEL = { popup: '홈 팝업', banner: '가로 배너', side: '�
    여기서 보는 건 "우리 페이지에서 슬롯이 채워졌나"라는 클라이언트 관점의 비율이다. */
 export async function adfitMessage() {
   const rowsRaw = await restGet(
-    'analytics?event_type=eq.adfit_slot&metadata->>unit=neq.__selftest__&select=metadata,created_at&order=created_at.desc&limit=1000'
+    'analytics?event_type=eq.adfit_slot&metadata->>unit=neq.__selftest__&select=metadata,source,created_at&order=created_at.desc&limit=1000'
   );
   const rows = Array.isArray(rowsRaw) ? rowsRaw : [];
   if (!rows.length) return '📐 <b>애드핏 슬롯</b>\n\n아직 수집된 이벤트가 없습니다.';
 
   const nowMs = Date.now();
-  const byUnit = {}, byDevice = {};
+  const byUnit = {}, byDevice = {}, bySrc = {};
   let fill = 0, total = 0, day = 0, dayFill = 0;
   const todayKst = new Date(Date.now() + 9 * 3600 * 1000).toISOString().split('T')[0];
   const dayOf = (ts) => new Date(new Date(ts).getTime() + 9 * 3600 * 1000).toISOString().split('T')[0];
@@ -385,6 +385,11 @@ export async function adfitMessage() {
     u.t++; if (ok) u.f++; else if (m.result === 'nofill') u.nofill++; else u.empty++;
     const d = (byDevice[m.device || '?'] ||= { t: 0, f: 0 });
     d.t++; if (ok) d.f++;
+    // ⚠️ 매체를 합치면 안 된다 — 뭉게는 인아티클, VIP 는 하단 고정 앵커라 서빙 양상이 달라
+    //    합계로 보면 서로 상쇄돼 신호가 지워진다(adfit 실적을 매체로 가르는 것과 같은 이유).
+    // ⚠️ source 는 metadata 안이 아니라 **최상위 컬럼**이다(m.source 로 읽으면 전부 '?').
+    const sv = (bySrc[r.source || '?'] ||= { t: 0, f: 0 });
+    sv.t++; if (ok) sv.f++;
   });
 
   const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0);
@@ -392,6 +397,8 @@ export async function adfitMessage() {
     `📐 <b>애드핏 슬롯 충전률</b>  <i>${nowKst()}</i>`,
     '',
     `<b>전체</b>  ${fmt(fill)}/${fmt(total)} (<b>${pct(fill, total)}%</b>) · 오늘 ${fmt(dayFill)}/${fmt(day)} (${pct(dayFill, day)}%)`,
+    `<b>매체별</b>  ` + Object.entries(bySrc).sort((a, b) => b[1].t - a[1].t)
+      .map(([k, v]) => `${abbr(k)} ${pct(v.f, v.t)}% <i>(${v.t})</i>`).join(' · '),
     `<b>기기별</b>  ` + Object.entries(byDevice).map(([k, v]) => `${k} ${pct(v.f, v.t)}%`).join(' · '),
     '',
     '<b>유닛별</b>',
