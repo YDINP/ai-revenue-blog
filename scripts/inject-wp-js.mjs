@@ -33,6 +33,8 @@ const BLOCKS = [
   // MG-LIKE 뒤에 와야 한다 — 추천 캡션(.mg-like-cap)을 기준으로 삽입 위치를 잡는다
   { marker: 'MG-ADEND', file: 'wp-ad-postend.js', desc: '글 하단 추천 버튼 아래 애드핏 300x250(데스크톱)' },
   { marker: 'MG-ADMID', file: 'wp-ad-inarticle.js', desc: '본문 한가운데 h2 앞 애드핏 300x250' },
+  // 위젯 JS 는 script 하나라 이 블록도 ba.min.js(async) 실행 전에 돈다 → 빈 ins 를 옮겨도 안전
+  { marker: 'MG-ADRAIL', file: 'wp-ad-rail.js', desc: '모바일 홈 레일 광고를 피드 3번째 카드 뒤로 이동' },
 ];
 
 function loadEnv(p) {
