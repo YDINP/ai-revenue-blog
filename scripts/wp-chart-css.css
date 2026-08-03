@@ -2137,6 +2137,15 @@ html[data-mg-theme="dark"] .mobile-toggle-open-container .menu-toggle-icon,
 html[data-mg-theme="dark"] .mobile-toggle-open-container .menu-toggle-icon::before,
 html[data-mg-theme="dark"] .mobile-toggle-open-container .menu-toggle-icon::after{ color:#ece6da !important; border-color:#ece6da !important; }
 html[data-mg-theme="dark"] #masthead .site-title, html[data-mg-theme="dark"] #masthead .site-title a{ color:#ece6da !important; }
+/* 데스크톱 네비 글자: 쿨 슬레이트(#1e293b) → 웜 잉크(타이틀 톤 통일). 호버는 브랜드 인디고. */
+html:not([data-mg-theme="dark"]) #masthead .header-navigation a{ color:#2c2619 !important; }
+html:not([data-mg-theme="dark"]) #masthead .header-navigation a:hover,
+html:not([data-mg-theme="dark"]) #masthead .header-navigation a:focus,
+html:not([data-mg-theme="dark"]) #masthead .header-navigation .current-menu-item > a{ color:#3a53c7 !important; }
+html[data-mg-theme="dark"] #masthead .header-navigation a{ color:#e4ded2 !important; }
+html[data-mg-theme="dark"] #masthead .header-navigation a:hover,
+html[data-mg-theme="dark"] #masthead .header-navigation a:focus,
+html[data-mg-theme="dark"] #masthead .header-navigation .current-menu-item > a{ color:#aab6ff !important; }
 
 /* ── ④ 오로라 배경 제거(홈) ──────────────────────────────────────────────────── */
 body.home::before{ display:none !important; }
