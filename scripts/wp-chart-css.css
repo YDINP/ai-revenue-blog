@@ -3,6 +3,7 @@
    system-ui / Malgun Gothic 폴백이 내장돼 레이아웃은 안전. */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700;900&display=swap');
 
 /* ============================================================================
    뭉게(mungge.com) 통합 컴포넌트 CSS — WordPress footer 위젯 <style> 전역 주입용
@@ -2065,3 +2066,122 @@ html[data-mg-theme="dark"] .mg-filter button[aria-pressed="true"] {
 }
 /* 비활성 칩도 홈 타일 톤(유리 테두리)으로 정돈 */
 .mg-filter button { border-color: var(--hairline); }
+
+/* ============================================================================
+   14. 웜 에디토리얼 전환 (2026-08-03) — 사이트 전체 톤을 크림/세리프로 개편.
+   크림 배경 · 세리프 헤드라인(Noto Serif KR) · 웜 팔레트 · 딥 인디고 + 테라코타 포인트.
+   원칙: 헤드라인만 세리프, 본문은 산세리프(가독성). 이전 글래스/오로라/벤토는 미사용화.
+   ⚠️ 이 섹션이 섹션 9(팔레트)·12(홈 글래스)·13(컴포넌트)보다 뒤 → 오버라이드 승리.
+   ============================================================================ */
+:root{ --serif:'Noto Serif KR', Georgia, 'Times New Roman', serif; --mg-warm:#b5642e; }
+
+/* ── ① 웜 팔레트(라이트) — Kadence 전역 색 재지정 ────────────────────────────── */
+html:root:not([data-wp-dark-mode-active]),
+html:not([data-wp-dark-mode-active]) body{
+  --global-palette1:#3a53c7;  /* accent 딥 인디고 */
+  --global-palette2:#2b3fa0;  /* accent hover */
+  --global-palette3:#241f17;  /* 제목 웜 잉크 */
+  --global-palette4:#3a352b;  /* 보조 제목 */
+  --global-palette5:#4c463a;  /* 본문 */
+  --global-palette6:#8b8271;  /* 흐린 텍스트 */
+  --global-palette7:#f7f3ea;  /* 사이트 배경 크림 */
+  --global-palette8:#efe9db;  /* 옅은 배경 */
+  --global-palette9:#fffdf8;  /* 카드/화이트(웜) */
+}
+:root{ --mg-accent:#3a53c7; --mg-accent2:#5566d6; --mg-grad:linear-gradient(135deg,#3a53c7,#5566d6); }
+html:not([data-wp-dark-mode-active]) body{ background-color:#f7f3ea; }
+.entry-content-wrap{ color:#2c2619; }
+
+/* 웜 다크 팔레트 */
+html[data-wp-dark-mode-active], html[data-mg-theme="dark"] body, :root.dark{
+  --global-palette1:#93a3ff; --global-palette2:#aab6ff;
+  --global-palette3:#ece6da; --global-palette4:#d8d2c4; --global-palette5:#c3bcac; --global-palette6:#948c79;
+  --global-palette7:#17130e; --global-palette8:#1f1a13; --global-palette9:#1f1a13;
+}
+:root.dark, html[data-mg-theme="dark"]{ --mg-accent:#93a3ff; --mg-accent2:#aab6ff; --mg-grad:linear-gradient(135deg,#5566d6,#93a3ff); }
+html[data-wp-dark-mode-active] body, html[data-mg-theme="dark"] body{ background-color:#17130e; }
+html[data-mg-theme="dark"] .entry-content-wrap{ color:#e4ded2; }
+
+/* ── ② 세리프 헤드라인 (헤드라인만, 본문·라벨은 산세리프 유지) ─────────────────── */
+.entry-title, .entry-hero .entry-title,
+.entry-content-wrap h1, .entry-content-wrap h2, .entry-content-wrap h3,
+.site-title, .site-title a,
+.mge-hero__t, .mge-idx .name, .mge-sec h2, .mg-sec-head h2, .mg-cta h2,
+.wp-block-latest-posts__post-title, .mg-hcard__t, .cmp-card-name, .cmp-verdict p strong{
+  font-family:var(--serif);
+  letter-spacing:-.01em;
+}
+.entry-content-wrap h2{ font-weight:700; }
+.entry-content-wrap h3{ font-weight:600; }
+.site-title, .site-title a{ font-weight:700; }
+
+/* ── ③ 헤더: 글래스 제거 → 크림 솔리드 + 얇은 룰(섹션 12 오버라이드) ───────────── */
+html:not([data-wp-dark-mode-active]) #wrapper #masthead.site-header{
+  background-color:#f7f3ea; -webkit-backdrop-filter:none; backdrop-filter:none;
+  border-bottom:1px solid rgba(40,32,20,.14);
+}
+html[data-wp-dark-mode-active] #wrapper #masthead.site-header,
+html[data-mg-theme="dark"] #wrapper #masthead.site-header{
+  background-color:#17130e; -webkit-backdrop-filter:none; backdrop-filter:none;
+  border-bottom:1px solid rgba(236,230,218,.14);
+}
+.site-header.mg-stuck .site-header-row-container-inner{ background-color:transparent !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
+.site-branding .brand::before{ box-shadow:none; border:1px solid rgba(40,32,20,.14); }
+
+/* ── ④ 오로라 배경 제거(홈) ──────────────────────────────────────────────────── */
+body.home::before{ display:none !important; }
+body.home{ background-color:#f7f3ea; }
+html[data-mg-theme="dark"] body.home{ background-color:#17130e; }
+
+/* ── ⑤ 편집형 홈 — [mg_hero] 숏코드 .mge-* ──────────────────────────────────── */
+.mge-home{ margin:0 0 8px; }
+.mge-hero{ display:grid; grid-template-columns:1.08fr .92fr; gap:clamp(28px,5vw,60px); align-items:center;
+  padding:clamp(32px,5vw,60px) 0 clamp(28px,4vw,44px); text-decoration:none !important; color:inherit; }
+.mge-kick{ font-size:.72rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--mg-accent);
+  display:inline-flex; align-items:center; gap:10px; }
+.mge-kick::after{ content:""; width:34px; height:1px; background:var(--mg-warm); }
+.mge-hero__t{ font-family:var(--serif); margin:18px 0 0; font-size:clamp(2rem,4.6vw,3.3rem); font-weight:700; line-height:1.16; letter-spacing:-.02em; color:var(--global-palette3,#241f17); }
+.mge-hero__dek{ font-family:var(--serif); font-style:italic; margin:20px 0 0; font-size:clamp(1.02rem,1.7vw,1.2rem); line-height:1.62; color:var(--global-palette5,#4c463a); max-width:34ch; }
+.mge-hero__meta{ margin-top:22px; display:flex; align-items:center; gap:13px; color:var(--global-palette6,#8b8271); font-size:.8rem; letter-spacing:.02em; }
+.mge-hero__meta .sep{ width:1px; height:12px; background:rgba(40,32,20,.2); }
+.mge-hero__cta{ margin-top:24px; display:inline-flex; align-items:center; gap:8px; font-size:.9rem; font-weight:700; color:var(--global-palette3); border-bottom:2px solid var(--mg-accent); padding-bottom:4px; }
+.mge-hero:hover .mge-hero__cta{ color:var(--mg-accent); }
+.mge-hero__fig{ margin:0; }
+.mge-hero__fig img{ width:100%; aspect-ratio:4/3.1; object-fit:cover; display:block; border-radius:2px; background:var(--global-palette8); }
+html[data-mg-theme="dark"] .mge-hero__meta .sep{ background:rgba(236,230,218,.22); }
+@media(max-width:820px){ .mge-hero{ grid-template-columns:1fr; gap:24px; } .mge-hero__fig{ order:-1; } .mge-hero__dek{ max-width:none; } }
+
+.mge-slab{ display:flex; align-items:center; gap:12px; padding:6px 0 0; }
+.mge-slab .mge-kick{ color:var(--mg-warm); }
+.mge-slab .mge-kick::after{ display:none; }
+.mge-slab .mge-kick::before{ content:""; width:22px; height:1px; background:var(--mg-warm); }
+.mge-slab .ln{ flex:1; height:1px; background:rgba(40,32,20,.14); }
+html[data-mg-theme="dark"] .mge-slab .ln{ background:rgba(236,230,218,.14); }
+
+.mge-idx{ display:grid; grid-template-columns:repeat(4,1fr); margin:16px 0 0; border-top:1px solid rgba(40,32,20,.14); border-bottom:1px solid rgba(40,32,20,.14); }
+.mge-idx a{ padding:24px 22px; border-left:1px solid rgba(40,32,20,.14); display:flex; align-items:baseline; justify-content:space-between; gap:10px; text-decoration:none !important; color:inherit; transition:background-color .15s; }
+.mge-idx a:first-child{ border-left:0; }
+.mge-idx a:hover{ background:var(--global-palette8); }
+.mge-idx .name{ font-family:var(--serif); font-size:1.18rem; font-weight:600; color:var(--global-palette3); }
+.mge-idx a:hover .name{ color:var(--mg-accent); }
+.mge-idx .n{ font-family:var(--serif); font-size:1.35rem; font-weight:600; color:var(--global-palette6); font-variant-numeric:tabular-nums; }
+html[data-mg-theme="dark"] .mge-idx, html[data-mg-theme="dark"] .mge-idx a{ border-color:rgba(236,230,218,.14); }
+@media(max-width:720px){ .mge-idx{ grid-template-columns:repeat(2,1fr); } .mge-idx a:nth-child(3){ border-left:0; } .mge-idx a:nth-child(n+3){ border-top:1px solid rgba(40,32,20,.14); } }
+
+/* ── ⑥ 최신글 그리드 → 웜 카드 + 세리프 제목(그림자 제거·얇은 룰) ───────────────── */
+body.home .wp-block-latest-posts.is-grid > li{
+  background:var(--global-palette9); border:1px solid rgba(40,32,20,.13); border-radius:2px; box-shadow:none;
+}
+html[data-mg-theme="dark"] body.home .wp-block-latest-posts.is-grid > li{ border-color:rgba(236,230,218,.13); }
+body.home .wp-block-latest-posts.is-grid > li:hover{ transform:translateY(-2px); box-shadow:0 14px 30px -20px rgba(40,32,20,.4); }
+.wp-block-latest-posts__post-title{ font-weight:700; }
+.mg-cardchip{ background:var(--global-palette3); box-shadow:none; }
+
+/* ── ⑦ 본문 컴포넌트 토큰 웜 재지정(섹션 13 오버라이드) ───────────────────────── */
+:root{ --color-primary:#3a53c7; --color-bg:#fffdf8; --color-bg-secondary:#f1ebde; --color-text:#2c2619; --color-text-secondary:#4c463a; }
+html[data-mg-theme="dark"], :root.dark{ --color-primary:#93a3ff; --color-bg:#1f1a13; --color-bg-secondary:#241e15; --color-text:#e4ded2; --color-text-secondary:#c3bcac; }
+.callout-info{ background:rgba(58,83,199,.08); }
+.seo-inlink, .mid-related{ background:var(--color-bg-secondary); }
+
+/* ── ⑧ 뉴스레터 CTA(.mg-cta): 인디고 유지, 세리프 제목 ───────────────────────── */
+.mg-cta h2{ font-family:var(--serif); }
