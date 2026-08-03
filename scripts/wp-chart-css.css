@@ -1841,12 +1841,13 @@ html[data-mg-theme="dark"] .cmp-faq p { color: #9aa3b2; }
 html[data-mg-theme="dark"] .chart-col-val { color: #dfe1e5; }
 html[data-mg-theme="dark"] .chart-col-name { color: #9aa3b2; }
 
+
 /* ============================================================================
-   12. 홈 리디자인 v4 — 글래스모피즘 + 벤토 (2026-08-03)
-   시안 B(매거진 히어로) + 구독자 스탯 타일. 색: 파랑 #4f7cff → 보라 #8b7bff.
-   원칙: 글래스는 헤더·타일·CTA에만, 본문 읽기표면은 불투명 고대비 유지.
-   대상 마크업: [mg_hero] 숏코드 출력 .mg-home(.mg-hero + .mg-band[.mg-stat + .mg-cat×4]).
-   다크: html[data-mg-theme="dark"](라이브 토글이 세팅하는 정본 셀렉터).
+   12. 홈 리디자인 v4 — 글래스모피즘 + 벤토 (2026-08-03, rev2)
+   시안 B(매거진 히어로) + 총 글 수 스탯 + 이미지 카테고리. 색: 파랑#4f7cff→보라#8b7bff.
+   원칙: 글래스는 헤더·타일·CTA에만, 본문 읽기표면은 불투명 고대비.
+   대상: [mg_hero] 숏코드 .mg-home(.mg-hero + .mg-band[.mg-stat + .mg-cat×4]).
+   다크: html[data-mg-theme="dark"]. ⚠️오로라는 z-index:-1(콘텐츠·헤더 뒤) — 헤더 fixed 유지.
    ============================================================================ */
 :root {
   --glass: rgba(255, 255, 255, .55);
@@ -1860,10 +1861,11 @@ html[data-mg-theme="dark"] {
   --mg-page: #0a0e17;
 }
 
-/* ── 오로라 배경 (홈 전용, 고정·저투명 — 텍스트 대비 침범 안 함) ─────────────── */
-body.home { position: relative; background-color: var(--mg-page); }
+/* ── 오로라 배경 (홈 전용, 고정·저투명, z-index:-1 = 콘텐츠와 헤더 뒤) ─────────────
+   ⚠️ 콘텐츠/헤더의 position 을 건드리지 않는다 — 건드리면 헤더 fixed(섹션 10)가 깨진다. */
+body.home { background-color: var(--mg-page); }
 body.home::before {
-  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background:
     radial-gradient(45vw 45vw at 8% 2%, rgba(79, 124, 255, .28), transparent 60%),
     radial-gradient(42vw 42vw at 92% 10%, rgba(139, 123, 255, .26), transparent 60%),
@@ -1875,11 +1877,13 @@ html[data-mg-theme="dark"] body.home::before {
     radial-gradient(42vw 42vw at 92% 10%, rgba(139, 123, 255, .18), transparent 60%),
     radial-gradient(40vw 40vw at 55% 108%, rgba(111, 92, 240, .16), transparent 60%);
 }
-/* 콘텐츠·헤더는 오로라 위로 */
-body.home #wrapper, body.home #masthead { position: relative; z-index: 1; }
 
-/* ── 글래스 헤더 (Kadence transparent-header 위에 유리 질감) ──────────────────
-   기존(섹션 10 ①)이 불투명 흰/딥을 강제한다 → 같은 특이도로 뒤에서 유리로 덮는다. */
+/* ── 글래스 헤더 (항상 상단 고정) ────────────────────────────────────────────
+   #masthead 는 섹션 10 에서 position:fixed. 여기선 유리 질감만 덧입힌다.
+   fixed 를 재확인해 어떤 페이지에서도 상단 고정이 보장되게 한다(회귀 방지). */
+#masthead.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 500; }
+body.admin-bar #masthead.site-header { top: 32px; }
+@media (max-width: 782px) { body.admin-bar #masthead.site-header { top: 46px; } }
 html:not([data-wp-dark-mode-active]) #wrapper #masthead.site-header {
   background-color: rgba(255, 255, 255, .72);
   -webkit-backdrop-filter: saturate(1.4) blur(14px);
@@ -1895,8 +1899,7 @@ html[data-mg-theme="dark"] #wrapper #masthead.site-header {
 /* ── 홈 컨테이너 ───────────────────────────────────────────────────────────── */
 .mg-home { font-family: var(--chart-font); margin: 1.5rem 0 0; }
 
-/* ── 매거진 히어로 (대표글 1, 풀폭 이미지 + 하단 스크림 오버레이) ─────────────
-   본문 읽기표면 아님 → 글래스 대신 사진 위 고대비 스크림으로 텍스트 확보. */
+/* ── 매거진 히어로 (대표글 1, 풀폭 이미지 + 하단 스크림 오버레이) ────────────── */
 .mg-hero {
   position: relative; display: flex; align-items: flex-end;
   min-height: 400px; border-radius: 24px; overflow: hidden;
@@ -1913,7 +1916,6 @@ html[data-mg-theme="dark"] #wrapper #masthead.site-header {
     radial-gradient(120% 90% at 82% 12%, rgba(255, 255, 255, .22), transparent 55%),
     linear-gradient(180deg, rgba(9, 12, 20, 0) 28%, rgba(9, 12, 20, .5) 66%, rgba(9, 12, 20, .9));
 }
-.mg-hero__scrim { display: none; }
 .mg-hero__body { position: relative; z-index: 2; display: flex; flex-direction: column; padding: clamp(22px, 4.5vw, 46px); max-width: 660px; }
 .mg-hero__cat {
   align-self: flex-start; font-size: .66rem; font-weight: 800; letter-spacing: .05em;
@@ -1930,45 +1932,44 @@ html[data-mg-theme="dark"] #wrapper #masthead.site-header {
 }
 .mg-hero:hover .mg-hero__cta { transform: translateY(-2px); }
 
-/* ── 스탯 + 카테고리 밴드 (구독자 스탯 span2 + 카테 4) ───────────────────────── */
-.mg-band { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin: 16px 0 0; }
+/* ── 스탯 + 카테고리 밴드 (총 글 수 span2 + 카테 이미지 4) ───────────────────── */
+.mg-band { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 1fr; gap: 16px; margin: 16px 0 0; }
 
+/* 총 글 수 스탯 타일 (그라데이션, 서버 렌더 숫자) */
 .mg-stat {
   grid-column: span 2; display: flex; flex-direction: column; justify-content: center;
-  padding: 20px; border-radius: 18px; color: #fff; background: var(--mg-grad);
+  padding: 22px; border-radius: 18px; color: #fff; background: var(--mg-grad);
   box-shadow: 0 22px 44px -24px rgba(79, 124, 255, .6); position: relative; overflow: hidden;
+  min-height: 150px;
 }
 .mg-stat::after { content: ""; position: absolute; inset: 0; background: radial-gradient(80% 120% at 92% 8%, rgba(255, 255, 255, .22), transparent 55%); pointer-events: none; }
 .mg-stat > * { position: relative; z-index: 1; }
 .mg-stat__eyebrow { font-size: .68rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: rgba(255, 255, 255, .88); }
-.mg-stat__num { font-size: 2.3rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; margin-top: 6px; color: #fff; font-variant-numeric: tabular-nums; min-height: 1.1em; }
-.mg-stat__lbl { font-size: .84rem; font-weight: 600; color: rgba(255, 255, 255, .92); margin-top: 2px; }
-.mg-stat__f { display: flex; gap: 8px; margin-top: 14px; }
-.mg-stat__i { flex: 1; min-width: 0; height: 42px; border: 0; border-radius: 11px; padding: 0 13px; font: inherit; font-size: .88rem; background: rgba(255, 255, 255, .96); color: #26272b; }
-.mg-stat__i::placeholder { color: #8a93a3; }
-.mg-stat__btn { height: 42px; padding: 0 16px; border: 0; border-radius: 11px; background: #0b0e14; color: #fff; font: inherit; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background-color .15s ease; }
-.mg-stat__btn:hover { background: #000; }
-.mg-stat__btn:disabled { opacity: .7; cursor: default; }
-.mg-stat__msg { font-size: .78rem; line-height: 1.5; margin-top: 8px; min-height: 1px; color: rgba(255, 255, 255, .95); }
-.mg-stat__msg.err { color: #ffe08a; }
+.mg-stat__num { font-size: 2.8rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.05; margin-top: 6px; color: #fff; font-variant-numeric: tabular-nums; }
+.mg-stat__num small { font-size: 1rem; font-weight: 700; vertical-align: .5em; margin-left: 2px; opacity: .85; }
+.mg-stat__lbl { font-size: .86rem; font-weight: 600; color: rgba(255, 255, 255, .92); margin-top: 6px; max-width: 24ch; word-break: keep-all; line-height: 1.5; }
 
+/* 카테고리 이미지 카드 (이미지 채움 + 하단 스크림 + 흰 텍스트 오버레이) */
 .mg-cat {
-  grid-column: span 1; display: flex; flex-direction: column; justify-content: space-between;
-  gap: 14px; padding: 20px; border-radius: 18px; position: relative; overflow: hidden;
-  background: var(--glass); border: 1px solid var(--glass-border);
-  -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
-  box-shadow: var(--sh-card); text-decoration: none !important; color: inherit;
+  grid-column: span 1; position: relative; display: flex; align-items: flex-end;
+  min-height: 150px; border-radius: 18px; overflow: hidden;
+  border: 1px solid var(--hairline); box-shadow: var(--sh-card);
+  text-decoration: none !important; color: inherit;
   transition: transform .2s ease, box-shadow .2s ease;
 }
 .mg-cat:hover { transform: translateY(-4px); box-shadow: var(--sh-card-hover); }
-.mg-cat__ic { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; font-size: 1.4rem; background: linear-gradient(135deg, rgba(79, 124, 255, .16), rgba(139, 123, 255, .16)); border: 1px solid var(--glass-border); }
-.mg-cat__b { display: flex; flex-direction: column; gap: 2px; }
-.mg-cat__name { font-size: 1rem; font-weight: 800; letter-spacing: -.01em; color: var(--global-palette3, #0f1420); }
-.mg-cat__cnt { font-size: .76rem; font-weight: 600; color: #6b7488; }
-.mg-cat__go { position: absolute; top: 16px; right: 16px; font-weight: 800; opacity: .4; transition: transform .2s ease, opacity .2s ease; }
-.mg-cat:hover .mg-cat__go { opacity: 1; transform: translateX(3px); }
-html[data-mg-theme="dark"] .mg-cat__name { color: #f1f4fa; }
-html[data-mg-theme="dark"] .mg-cat__cnt { color: #8a93a6; }
+.mg-cat__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
+.mg-cat:hover .mg-cat__img { transform: scale(1.05); }
+.mg-cat::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(9, 12, 20, 0) 32%, rgba(9, 12, 20, .32) 60%, rgba(9, 12, 20, .82));
+}
+.mg-cat__body { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 3px; padding: 14px 16px; }
+.mg-cat__name { font-size: 1.05rem; font-weight: 800; letter-spacing: -.01em; color: #fff; text-shadow: 0 1px 8px rgba(9, 12, 20, .5); }
+.mg-cat__meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.mg-cat__cnt { font-size: .76rem; font-weight: 700; color: rgba(255, 255, 255, .88); }
+.mg-cat__go { flex: none; color: #fff; font-weight: 800; font-size: 1.05rem; opacity: .9; text-shadow: 0 1px 8px rgba(9, 12, 20, .5); transition: transform .2s ease; }
+.mg-cat:hover .mg-cat__go { transform: translateX(3px); }
 
 @media (max-width: 900px) {
   .mg-band { grid-template-columns: repeat(2, 1fr); }
@@ -1978,10 +1979,7 @@ html[data-mg-theme="dark"] .mg-cat__cnt { color: #8a93a6; }
 @media (max-width: 640px) {
   .mg-hero { min-height: 300px; border-radius: 18px; }
   .mg-hero__t { font-size: clamp(1.4rem, 6vw, 1.9rem); }
-}
-@media (max-width: 480px) {
-  .mg-stat__f { flex-direction: column; }
-  .mg-stat__btn { height: 44px; }
+  .mg-stat__num { font-size: 2.3rem; }
 }
 
 /* ── 최신글 카드 — 유리 테두리로 톤 통일(불투명 유지, 가독성 우선) ────────────── */
@@ -1990,7 +1988,7 @@ html[data-mg-theme="dark"] body.home .wp-block-latest-posts.is-grid > li { borde
 
 /* ── 접근성: 모션 축소 시 새 요소의 트랜스폼/트랜지션 무효화 ───────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .mg-hero, .mg-hero__cta, .mg-cat, .mg-cat__go, .mg-stat__btn { transition: none !important; }
+  .mg-hero, .mg-hero__cta, .mg-cat, .mg-cat__img, .mg-cat__go { transition: none !important; }
   .mg-hero:hover, .mg-cat:hover { transform: none; }
-  .mg-hero:hover .mg-hero__cta, .mg-cat:hover .mg-cat__go { transform: none; }
+  .mg-hero:hover .mg-hero__cta, .mg-cat:hover .mg-cat__img, .mg-cat:hover .mg-cat__go { transform: none; }
 }
