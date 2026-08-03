@@ -1,3 +1,15 @@
+# ⚠️ 이 워크플로는 **동작하지 않는다.** 2026-07-14 이후 실행할 때마다
+#    `claude 401: invalid x-api-key` 로 실패했다 — GitHub secrets 의 ANTHROPIC_API_KEY 가 무효다.
+#    실패한 채로 방치되면서 큐가 말라 2026-08-03 발행분이 비었다.
+#
+#    이 프로젝트는 같은 이유로 블로그 발행 LLM 과 대댓글 초안을 이미 로컬 claude CLI 로 옮겼다.
+#    발행 초안도 로컬 러너로 대체한다:
+#
+#        node automation/threads-gen-run.mjs --count 3 --schedule
+#
+#    유효한 ANTHROPIC_API_KEY 를 secrets 에 넣으면 이 워크플로를 다시 살릴 수 있다.
+#    그때까지는 수동 실행해도 실패만 하므로 **켜 두지 않는다**(조용한 실패가 제일 나쁘다).
+
 name: Threads Draft Generator
 
 on:
