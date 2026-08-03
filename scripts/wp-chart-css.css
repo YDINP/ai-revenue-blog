@@ -1793,3 +1793,204 @@ html[data-mg-theme="dark"] .cmp-row-label { background: rgba(255,255,255,.03); }
 html[data-mg-theme="dark"] .cmp-card-tag,
 html[data-mg-theme="dark"] .cmp-updated,
 html[data-mg-theme="dark"] .cmp-faq p { color: #9aa3b2; }
+
+/* ── ⑩ 차트 가독성 3건 (2026-07-30 피드백) ──────────────────────────────────── */
+
+/* (1) 세로막대: 값은 막대 위, 항목명은 막대 아래. 차트 높이는 우측 범례에 맞춘다.
+   기존엔 값/이름이 범례에만 있어 "어느 막대가 무엇인지" 눈으로 이어야 했다.
+   .chart-col-track 이 176px 고정이라 범례가 길어지면 높이가 어긋났다 → 트랙을 flex 로 늘린다. */
+.chart-vbar-wrap { align-items: stretch; }
+.chart-vbar-wrap .chart-columns { align-items: stretch; padding-top: 0; }
+.chart-vbar-wrap .chart-vlegend { align-self: stretch; justify-content: space-evenly; }
+.chart-vbar-wrap .chart-col { justify-content: flex-end; gap: 6px; }
+.chart-vbar-wrap .chart-col-track { height: auto; flex: 1 1 auto; min-height: 120px; }
+.chart-col-val {
+  font-size: 0.9rem; font-weight: 800; line-height: 1.2;
+  font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+  color: var(--color-text, #26272b);
+}
+.chart-col-name {
+  font-size: 0.82rem; font-weight: 600; line-height: 1.35; text-align: center;
+  color: var(--color-text-secondary, #6b7280);
+  max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* (2) 도넛 범례: 글자·색점이 작아 읽기 어려웠다. */
+.donut-legend { gap: 10px 16px; }
+.donut-legend-item { gap: 0.65rem; }
+.donut-legend-dot { width: 15px; height: 15px; }
+.donut-legend-label { font-size: 0.95rem; }
+.donut-legend-value { font-size: 0.95rem; }
+
+/* (3) 레이더(자체 평가) 카드: 행마다 라벨 길이가 달라 막대 시작점이 들쭉날쭉했다
+   (실측 track.left = 127.5 / 105 / 115.6). 카드 간에는 어긋남이 없었고 **카드 안 행 간** 문제였다.
+   .radar-scores 를 3열 그리드로 만들고 행을 display:contents 로 풀어 열을 공유시킨다.
+   ⚠️ wpautop 이 행 안에 빈 <p> 와 값을 감싼 <p> 를 끼워 넣는다. 그대로 두면 이 <p> 가
+      그리드 아이템이 되어 열이 밀린다 → <p> 도 display:contents 로 무력화한다. */
+.radar-scores {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr) max-content;
+  gap: 0.55rem 0.65rem;
+  align-items: center;
+}
+.radar-score-row { display: contents; }
+.radar-score-row > p { display: contents; }
+.radar-score-label { text-align: right; white-space: nowrap; }
+.radar-score-val { justify-self: end; font-variant-numeric: tabular-nums; }
+
+html[data-mg-theme="dark"] .chart-col-val { color: #dfe1e5; }
+html[data-mg-theme="dark"] .chart-col-name { color: #9aa3b2; }
+
+/* ============================================================================
+   12. 홈 리디자인 v4 — 글래스모피즘 + 벤토 (2026-08-03)
+   시안 B(매거진 히어로) + 구독자 스탯 타일. 색: 파랑 #4f7cff → 보라 #8b7bff.
+   원칙: 글래스는 헤더·타일·CTA에만, 본문 읽기표면은 불투명 고대비 유지.
+   대상 마크업: [mg_hero] 숏코드 출력 .mg-home(.mg-hero + .mg-band[.mg-stat + .mg-cat×4]).
+   다크: html[data-mg-theme="dark"](라이브 토글이 세팅하는 정본 셀렉터).
+   ============================================================================ */
+:root {
+  --glass: rgba(255, 255, 255, .55);
+  --glass-border: rgba(255, 255, 255, .75);
+  --glass-blur: saturate(1.4) blur(16px);
+  --mg-page: #eef2fb;
+}
+html[data-mg-theme="dark"] {
+  --glass: rgba(28, 36, 54, .5);
+  --glass-border: rgba(255, 255, 255, .12);
+  --mg-page: #0a0e17;
+}
+
+/* ── 오로라 배경 (홈 전용, 고정·저투명 — 텍스트 대비 침범 안 함) ─────────────── */
+body.home { position: relative; background-color: var(--mg-page); }
+body.home::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(45vw 45vw at 8% 2%, rgba(79, 124, 255, .28), transparent 60%),
+    radial-gradient(42vw 42vw at 92% 10%, rgba(139, 123, 255, .26), transparent 60%),
+    radial-gradient(40vw 40vw at 55% 108%, rgba(111, 92, 240, .20), transparent 60%);
+}
+html[data-mg-theme="dark"] body.home::before {
+  background:
+    radial-gradient(45vw 45vw at 8% 2%, rgba(79, 124, 255, .20), transparent 60%),
+    radial-gradient(42vw 42vw at 92% 10%, rgba(139, 123, 255, .18), transparent 60%),
+    radial-gradient(40vw 40vw at 55% 108%, rgba(111, 92, 240, .16), transparent 60%);
+}
+/* 콘텐츠·헤더는 오로라 위로 */
+body.home #wrapper, body.home #masthead { position: relative; z-index: 1; }
+
+/* ── 글래스 헤더 (Kadence transparent-header 위에 유리 질감) ──────────────────
+   기존(섹션 10 ①)이 불투명 흰/딥을 강제한다 → 같은 특이도로 뒤에서 유리로 덮는다. */
+html:not([data-wp-dark-mode-active]) #wrapper #masthead.site-header {
+  background-color: rgba(255, 255, 255, .72);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+          backdrop-filter: saturate(1.4) blur(14px);
+}
+html[data-wp-dark-mode-active] #wrapper #masthead.site-header,
+html[data-mg-theme="dark"] #wrapper #masthead.site-header {
+  background-color: rgba(16, 21, 33, .62);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+          backdrop-filter: saturate(1.4) blur(14px);
+}
+
+/* ── 홈 컨테이너 ───────────────────────────────────────────────────────────── */
+.mg-home { font-family: var(--chart-font); margin: 1.5rem 0 0; }
+
+/* ── 매거진 히어로 (대표글 1, 풀폭 이미지 + 하단 스크림 오버레이) ─────────────
+   본문 읽기표면 아님 → 글래스 대신 사진 위 고대비 스크림으로 텍스트 확보. */
+.mg-hero {
+  position: relative; display: flex; align-items: flex-end;
+  min-height: 400px; border-radius: 24px; overflow: hidden;
+  border: 1px solid var(--hairline); box-shadow: var(--sh-card);
+  text-decoration: none !important; color: inherit;
+  background: linear-gradient(120deg, #3d63d9, #6f5cf0 55%, #8b7bff);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.mg-hero:hover { transform: translateY(-3px); box-shadow: var(--sh-card-hover); }
+.mg-hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.mg-hero::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(120% 90% at 82% 12%, rgba(255, 255, 255, .22), transparent 55%),
+    linear-gradient(180deg, rgba(9, 12, 20, 0) 28%, rgba(9, 12, 20, .5) 66%, rgba(9, 12, 20, .9));
+}
+.mg-hero__scrim { display: none; }
+.mg-hero__body { position: relative; z-index: 2; display: flex; flex-direction: column; padding: clamp(22px, 4.5vw, 46px); max-width: 660px; }
+.mg-hero__cat {
+  align-self: flex-start; font-size: .66rem; font-weight: 800; letter-spacing: .05em;
+  text-transform: uppercase; color: #fff; padding: .24rem .6rem; border-radius: 999px;
+  background: rgba(255, 255, 255, .18); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.mg-hero__t { margin: .7rem 0 0; font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 800; line-height: 1.2; letter-spacing: -.03em; color: #fff; text-shadow: 0 2px 18px rgba(9, 12, 20, .5); }
+.mg-hero__x { margin: .7rem 0 0; font-size: 1rem; line-height: 1.65; color: #e6ebff; max-width: 46ch; }
+.mg-hero__cta {
+  align-self: flex-start; margin-top: 1.3rem; display: inline-flex; align-items: center; gap: .4rem;
+  min-height: 44px; padding: 0 22px; border-radius: 999px; background: #fff; color: #3d63d9;
+  font-weight: 800; font-size: .92rem; box-shadow: 0 12px 30px -12px rgba(0, 0, 0, .5);
+  transition: transform .2s ease;
+}
+.mg-hero:hover .mg-hero__cta { transform: translateY(-2px); }
+
+/* ── 스탯 + 카테고리 밴드 (구독자 스탯 span2 + 카테 4) ───────────────────────── */
+.mg-band { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin: 16px 0 0; }
+
+.mg-stat {
+  grid-column: span 2; display: flex; flex-direction: column; justify-content: center;
+  padding: 20px; border-radius: 18px; color: #fff; background: var(--mg-grad);
+  box-shadow: 0 22px 44px -24px rgba(79, 124, 255, .6); position: relative; overflow: hidden;
+}
+.mg-stat::after { content: ""; position: absolute; inset: 0; background: radial-gradient(80% 120% at 92% 8%, rgba(255, 255, 255, .22), transparent 55%); pointer-events: none; }
+.mg-stat > * { position: relative; z-index: 1; }
+.mg-stat__eyebrow { font-size: .68rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: rgba(255, 255, 255, .88); }
+.mg-stat__num { font-size: 2.3rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; margin-top: 6px; color: #fff; font-variant-numeric: tabular-nums; min-height: 1.1em; }
+.mg-stat__lbl { font-size: .84rem; font-weight: 600; color: rgba(255, 255, 255, .92); margin-top: 2px; }
+.mg-stat__f { display: flex; gap: 8px; margin-top: 14px; }
+.mg-stat__i { flex: 1; min-width: 0; height: 42px; border: 0; border-radius: 11px; padding: 0 13px; font: inherit; font-size: .88rem; background: rgba(255, 255, 255, .96); color: #26272b; }
+.mg-stat__i::placeholder { color: #8a93a3; }
+.mg-stat__btn { height: 42px; padding: 0 16px; border: 0; border-radius: 11px; background: #0b0e14; color: #fff; font: inherit; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background-color .15s ease; }
+.mg-stat__btn:hover { background: #000; }
+.mg-stat__btn:disabled { opacity: .7; cursor: default; }
+.mg-stat__msg { font-size: .78rem; line-height: 1.5; margin-top: 8px; min-height: 1px; color: rgba(255, 255, 255, .95); }
+.mg-stat__msg.err { color: #ffe08a; }
+
+.mg-cat {
+  grid-column: span 1; display: flex; flex-direction: column; justify-content: space-between;
+  gap: 14px; padding: 20px; border-radius: 18px; position: relative; overflow: hidden;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+  box-shadow: var(--sh-card); text-decoration: none !important; color: inherit;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.mg-cat:hover { transform: translateY(-4px); box-shadow: var(--sh-card-hover); }
+.mg-cat__ic { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; font-size: 1.4rem; background: linear-gradient(135deg, rgba(79, 124, 255, .16), rgba(139, 123, 255, .16)); border: 1px solid var(--glass-border); }
+.mg-cat__b { display: flex; flex-direction: column; gap: 2px; }
+.mg-cat__name { font-size: 1rem; font-weight: 800; letter-spacing: -.01em; color: var(--global-palette3, #0f1420); }
+.mg-cat__cnt { font-size: .76rem; font-weight: 600; color: #6b7488; }
+.mg-cat__go { position: absolute; top: 16px; right: 16px; font-weight: 800; opacity: .4; transition: transform .2s ease, opacity .2s ease; }
+.mg-cat:hover .mg-cat__go { opacity: 1; transform: translateX(3px); }
+html[data-mg-theme="dark"] .mg-cat__name { color: #f1f4fa; }
+html[data-mg-theme="dark"] .mg-cat__cnt { color: #8a93a6; }
+
+@media (max-width: 900px) {
+  .mg-band { grid-template-columns: repeat(2, 1fr); }
+  .mg-stat { grid-column: span 2; }
+  .mg-cat { grid-column: span 1; }
+}
+@media (max-width: 640px) {
+  .mg-hero { min-height: 300px; border-radius: 18px; }
+  .mg-hero__t { font-size: clamp(1.4rem, 6vw, 1.9rem); }
+}
+@media (max-width: 480px) {
+  .mg-stat__f { flex-direction: column; }
+  .mg-stat__btn { height: 44px; }
+}
+
+/* ── 최신글 카드 — 유리 테두리로 톤 통일(불투명 유지, 가독성 우선) ────────────── */
+body.home .wp-block-latest-posts.is-grid > li { border-color: var(--glass-border); }
+html[data-mg-theme="dark"] body.home .wp-block-latest-posts.is-grid > li { border-color: rgba(255, 255, 255, .1); }
+
+/* ── 접근성: 모션 축소 시 새 요소의 트랜스폼/트랜지션 무효화 ───────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .mg-hero, .mg-hero__cta, .mg-cat, .mg-cat__go, .mg-stat__btn { transition: none !important; }
+  .mg-hero:hover, .mg-cat:hover { transform: none; }
+  .mg-hero:hover .mg-hero__cta, .mg-cat:hover .mg-cat__go { transform: none; }
+}
