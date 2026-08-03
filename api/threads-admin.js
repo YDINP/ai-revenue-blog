@@ -2,6 +2,7 @@
 //  ?action=post          body{text,topic?,linkUrl?}  → 즉석 발행
 //  ?action=queue         body{text,topic?,linkUrl?,imageUrl?}  → draft 큐 저장
 //  ?action=queue-update  body{id,text?,linkUrl?,imageUrl?}  → draft 내용 수정(제자리)
+//  ?action=queue-schedule body{id,at?}  → 예약 시각 지정/변경(at 없으면 다음 골든슬롯 KST 08:00/23:00)
 //  ?action=set-mode      body{mode:'auto'|'review',topic?}  → 계정 발행모드 전환(auto=크론 1일1개 자동발행)
 //  ?action=find&q=&topic= → keyword_search 후보 카드 발송
 //  ?action=reply-delete[&rid=N|&media=id]  → 대댓글 삭제(목록/삭제)
@@ -13,7 +14,7 @@
 //  ?action=set-reply-mode body{mode:'auto'|'review',topic?,cap?} → 대댓글 자동화 전환
 import { tgThreads as tg } from './_shared.js';
 import { getPermalink, sb, publish, publishReply, insertPost, insertQueue, updateQueue, getAccounts, updateAccount, deleteMedia, updateReply, getReply, llmConfigured, getMyUsername, myAnsweredCommentIds } from './_threads.js';
-import { findAndQueue, sendReply, threadsReplyCard, threadsAutoReplyCard } from './_threads-bot.js';
+import { findAndQueue, sendReply, threadsReplyCard, threadsAutoReplyCard, nextGoldenSlotUtc } from './_threads-bot.js';
 
 export default async function handler(req, res) {
   const secret = process.env.CRON_SECRET;
@@ -53,6 +54,24 @@ export default async function handler(req, res) {
         status: 'draft',
       });
       return res.status(200).json({ ok: true, id: row.id });
+    }
+
+    /* 예약 시각 재지정. 지금까지 예약은 텔레그램 인라인 버튼(thr:sched)으로만 가능했는데,
+       그건 "다음 골든슬롯"으로만 잡히고 **이미 예약된 글을 옮길 방법이 없었다.**
+       2026-08-03 밤 GitHub Actions 가 threads-cron 예약 실행을 두 번 연속 건너뛰어
+       #20(8/3 22:00 KST)이 발행되지 못한 채 지나갔고, 그때 손으로 옮길 수단이 없었다.
+       at 을 안 주면 다음 골든슬롯(KST 08:00/23:00)으로 잡는다. */
+    if (action === 'queue-schedule') {
+      const id = b.id || req.query?.id;
+      if (!id) return res.status(400).json({ error: 'no id' });
+      const row = (await sb(`threads_queue?id=eq.${id}&limit=1`))[0];
+      if (!row) return res.status(404).json({ error: `queue #${id} not found` });
+      if (row.status === 'published') return res.status(400).json({ error: 'already published' });
+      const at = b.at || req.query?.at || nextGoldenSlotUtc();
+      if (Number.isNaN(new Date(at).getTime())) return res.status(400).json({ error: 'bad at (ISO8601 필요)' });
+      await sb(`threads_queue?id=eq.${id}`, { method: 'PATCH', body: { status: 'scheduled', scheduled_at: at, error: null } });
+      const kst = new Date(new Date(at).getTime() + 9 * 3600 * 1000).toISOString().slice(0, 16).replace('T', ' ');
+      return res.status(200).json({ ok: true, id: Number(id), scheduled_at: at, kst: kst + ' KST' });
     }
 
     if (action === 'queue-update') {

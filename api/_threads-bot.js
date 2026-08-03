@@ -307,7 +307,7 @@ export async function threadsPostNow(rawText, topic = 'life') {
 }
 
 // ── 다음 골든타임(KST 08:00 / 23:00) UTC ISO ──
-function nextGoldenSlotUtc() {
+export function nextGoldenSlotUtc() {
   const now = Date.now();
   const KST = 9 * 3600 * 1000;
   const kstNow = new Date(now + KST);
