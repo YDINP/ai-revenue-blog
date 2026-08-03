@@ -129,6 +129,25 @@ export default async function handler(req, res) {
     }
   }
 
+  // ── 활성 구독자 수 (공개) — mungge.com 홈 스탯 타일이 fetch ──
+  // subscribe 와 같은 CORS 정책. 목록/이메일은 노출하지 않고 개수만 돌려준다.
+  // CDN 캐시로 원본 부하를 낮춘다(5분 s-maxage). source 는 mg/playcast 둘뿐.
+  if (url.searchParams.get('action') === 'sub-count') {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=600');
+    if (req.method === 'OPTIONS') { res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS'); res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); return res.status(204).end(); }
+    const rawSrc = url.searchParams.get('source');
+    const source = rawSrc === 'playcast' || rawSrc === 'vip' ? 'playcast' : 'mg';
+    try {
+      const rows = await sbn(`newsletter_subscribers?source=eq.${source}&is_active=eq.true&select=email`);
+      return res.status(200).json({ ok: true, source, count: rows.length });
+    } catch (e) {
+      console.error('sub-count error:', e);
+      return res.status(500).json({ ok: false, error: 'server' });
+    }
+  }
+
   const secret = process.env.CRON_SECRET;
   if (!secret || req.headers.authorization !== `Bearer ${secret}`) {
     return res.status(401).json({ error: 'unauthorized' });
