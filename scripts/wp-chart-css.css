@@ -2146,6 +2146,11 @@ html[data-mg-theme="dark"] #masthead .header-navigation a{ color:#e4ded2 !import
 html[data-mg-theme="dark"] #masthead .header-navigation a:hover,
 html[data-mg-theme="dark"] #masthead .header-navigation a:focus,
 html[data-mg-theme="dark"] #masthead .header-navigation .current-menu-item > a{ color:#aab6ff !important; }
+/* 모바일 드로어 메뉴: 쿨 near-black(#090c10) → 웜 다크(사이트 톤 통일). 글자 크림, 현재/호버 라이트 인디고. */
+#mobile-drawer .drawer-inner{ background-color:#17130e !important; }
+#mobile-drawer .header-navigation a, #mobile-drawer .menu a, #mobile-drawer .mobile-navigation a{ color:#ece6da !important; }
+#mobile-drawer .current-menu-item > a, #mobile-drawer .header-navigation a:hover, #mobile-drawer .menu a:hover{ color:#aab6ff !important; }
+#mobile-drawer .drawer-header .drawer-toggle, #mobile-drawer .menu-toggle-close{ color:#ece6da !important; }
 
 /* ── ④ 오로라 배경 제거(홈) ──────────────────────────────────────────────────── */
 body.home::before{ display:none !important; }
