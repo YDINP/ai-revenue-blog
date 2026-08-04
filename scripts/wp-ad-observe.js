@@ -72,22 +72,25 @@
     send(unit, ins.querySelector('iframe') ? 'filled' : 'empty', 'timeout' + WAIT_MS);
   }
 
+  /* 관찰 대상은 ins 가 아니라 부모(슬롯 래퍼)다.
+   * ⚠️ ins 는 애드핏이 채우기 전까지 display:none 이라 레이아웃 박스가 없고,
+   *    IntersectionObserver 는 그런 요소에 대해 영영 발화하지 않는다. ins 를 관찰하면
+   *    채워진 슬롯만(=display 가 풀린 뒤에야) 잡히므로 **정작 재려던 '안 채워진 슬롯'이
+   *    통째로 관측 밖으로 빠진다** — 충전률이 항상 100% 로 읽힌다.
+   *    2026-08-03~04 실측: 페이지뷰 77건에 adfit_slot 2건, 둘 다 filled.
+   *    부모 래퍼는 폭에 안 맞아 숨겨진 경우가 아니면 레이아웃을 갖는다(높이 0 이어도 발화한다). */
+  function hostOf(ins) { return ins.parentElement || ins; }
+
   function watch() {
     var slots = document.querySelectorAll('ins.kakao_ad_area');
     if (!slots.length) return;
 
-    // onfail 콜백을 붙인다 — 서버가 렌더한 마크업에는 이 속성이 없다.
-    // ⚠️ 애드핏이 이미 초기화한 슬롯엔 뒤늦게 붙여도 안 먹지만, 실패해도 ②(iframe 검사)가 받는다.
-    for (var i = 0; i < slots.length; i++) {
-      if (!slots[i].getAttribute('data-ad-onfail')) slots[i].setAttribute('data-ad-onfail', 'mgAdFail');
-    }
-
     if (!('IntersectionObserver' in window)) {
-      // 폴백: 관찰을 못 하면 화면 안에 있는 것만 한 번 훑는다.
+      // 폴백: 관찰을 못 하면 화면 안에 있는 것만 한 번 훑는다(위치도 부모로 잰다).
       setTimeout(function () {
         for (var j = 0; j < slots.length; j++) {
-          var r = slots[j].getBoundingClientRect();
-          if (r.top < window.innerHeight && r.bottom > 0) check(slots[j]);
+          var r = hostOf(slots[j]).getBoundingClientRect();
+          if (r.top < window.innerHeight && r.bottom >= 0) check(slots[j]);
         }
       }, WAIT_MS);
       return;
@@ -97,13 +100,29 @@
       entries.forEach(function (en) {
         if (!en.isIntersecting) return;
         io.unobserve(en.target);
+        var ins = en.target.__mgIns;
+        if (!ins) return;
         // 보이기 시작한 시점부터 재야 한다 — 페이지 로드 기준으로 재면
         // 한참 아래 슬롯이 "아직 요청도 안 된 상태"로 실패 처리된다.
-        setTimeout(function () { check(en.target); }, WAIT_MS);
+        setTimeout(function () { check(ins); }, WAIT_MS);
       });
     }, { rootMargin: '0px' });
 
-    for (var k = 0; k < slots.length; k++) io.observe(slots[k]);
+    for (var k = 0; k < slots.length; k++) {
+      var host = hostOf(slots[k]);
+      host.__mgIns = slots[k];
+      io.observe(host);
+    }
+  }
+
+  /* onfail 콜백은 **동기 시점에** 붙인다 — 서버가 렌더한 마크업에는 이 속성이 없다.
+   * ⚠️ DOMContentLoaded 까지 미루면 그 사이 async ba.min.js 가 먼저 슬롯을 초기화해
+   *    뒤늦게 붙인 속성이 안 먹는다(그래서 nofill 이 한 건도 안 잡혔다).
+   *    이 블록은 위젯 script 안에서 광고 블록들 뒤·ba.min.js 실행 전에 동기로 돌기 때문에
+   *    지금이 모든 슬롯이 DOM 에 있으면서 애드핏은 아직 안 훑은 유일한 시점이다. */
+  var initial = document.querySelectorAll('ins.kakao_ad_area');
+  for (var i = 0; i < initial.length; i++) {
+    if (!initial[i].getAttribute('data-ad-onfail')) initial[i].setAttribute('data-ad-onfail', 'mgAdFail');
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watch);
