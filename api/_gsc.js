@@ -9,11 +9,18 @@
 // JWT 서명·토큰 캐시는 GA4 와 공유한다(_google-auth.js). 스코프만 다르다.
 import { googleToken, hasGoogleSa } from './_google-auth.js';
 
+/* 조회는 readonly 스코프로 충분하다 — 쓰기 스코프를 기본으로 쓰면 필요 이상의 권한을
+ * 상시로 들고 있게 된다. 사이트맵 재제출(PUT)만 쓰기 스코프를 따로 받는다.
+ * ⚠️ readonly 토큰으로 PUT 하면 403 "insufficient authentication scopes" 가 난다
+ *    (권한 문제로 오인하기 쉽다 — 실제로는 스코프 문제다).
+ * 토큰 캐시가 스코프별로 나뉘어 있어 둘을 같이 들고 있어도 서로 안 덮는다. */
 const SCOPE = 'https://www.googleapis.com/auth/webmasters.readonly';
+const SCOPE_WRITE = 'https://www.googleapis.com/auth/webmasters';
 
 export const hasGsc = hasGoogleSa;
 
 const accessToken = () => googleToken(SCOPE);
+const writeToken = () => googleToken(SCOPE_WRITE);
 
 // site: 'https://mungge.com/' (URL 프리픽스 속성 — 도메인 속성이면 sc-domain: 으로 폴백)
 async function query(site, body) {
@@ -87,7 +94,7 @@ export async function gscSitemaps(site) {
  *    URL(중복 판정 등)은 이걸로 안 풀린다 — 그건 원본 쪽 재크롤로 풀어야 한다.
  * ⚠️ 성공 시 204(본문 없음)라 r.json() 을 부르면 터진다. */
 export async function gscSubmitSitemap(site, feedpath) {
-  const token = await accessToken();
+  const token = await writeToken();
   const r = await fetch(
     `https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(site)}/sitemaps/${encodeURIComponent(feedpath)}`,
     { method: 'PUT', headers: { Authorization: `Bearer ${token}` } }
