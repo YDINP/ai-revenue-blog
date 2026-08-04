@@ -25,11 +25,32 @@
   var host = location.hostname;
   if (host === 'localhost' || host === '127.0.0.1' || /^192\.168\./.test(host) || /^10\./.test(host)) return;
 
-  // 크롤러 제외. 네이버 Yeti·다음 Daumoa 는 UA 에 bot/spider 가 없어 명시해야 한다.
-  // ⚠️ 'naver' 처럼 넓게 잡으면 네이버앱 인앱브라우저(UA=NAVER(inapp)) 실사용자까지 빠진다.
+  /* 봇 판별 — 다른 트래커(wp-ad-observe.js)가 **같은 기준**을 써야 수치를 나란히 놓을 수 있어
+   * 전역으로 노출한다. 이 블록(MG-TRACK)이 위젯에서 가장 먼저 실행되므로 뒤 블록은 항상 쓸 수 있다.
+   *
+   * ① 자기 신고형 크롤러. 네이버 Yeti·다음 Daumoa 는 UA 에 bot/spider 가 없어 명시해야 한다.
+   *    ⚠️ 'naver' 처럼 넓게 잡으면 네이버앱 인앱브라우저(UA=NAVER(inapp)) 실사용자까지 빠진다.
+   * ② 정상 브라우저를 가장한 UA. 2026-07-27~08-04 자체 트래커 359뷰 중 28뷰(8%)가 여기 해당했고
+   *    08-02 은 30뷰 중 12뷰(40%)였다. 조회수를 부풀리고 애드핏 요청/PV 비율을 무너뜨린다
+   *    (페이지뷰 비콘은 쏘는데 광고 요청은 안 나가므로).
+   *    ⚠️ **물리적으로 불가능하거나 자동화 도구 기본값으로 박제된 조합만** 본다 — 넓은 토큰 금지.
+   *    ⚠️ 이 목록은 서버 쪽 api/_shared.js 의 FAKE_UA_RULES 와 같은 내용이어야 한다.
+   *       (여기는 앞으로 들어올 것을 막고, 서버 쪽은 이미 쌓인 기록을 조회 때 거른다) */
+  window.__mgFakeUA = [
+    /(?:iPhone|iPad)[^)]*\)[^]*AppleWebKit\/537\.36/,   // 실제 iOS 는 AppleWebKit/605.x
+    /Pixel 2 Build\/OPD3\.170816\.012/,
+    /Nexus 5 Build\/MRA58N/,
+    /SM-G900P Build\/LRX21T/,
+    /\(Macintosh; Intel Mac OS X\)/                     // 버전 문자열이 통째로 빠진 맥
+  ];
+  window.__mgBotUA = function (ua) {
+    if (/bot|crawl|spider|headless|lighthouse|playwright|puppeteer|slurp|petalbot|bytespider|yeti|daumoa|googleother|google-inspection/i.test(ua)) return true;
+    for (var i = 0; i < window.__mgFakeUA.length; i++) if (window.__mgFakeUA[i].test(ua)) return true;
+    return false;
+  };
+
   var ua = navigator.userAgent || '';
-  if (navigator.webdriver ||
-      /bot|crawl|spider|headless|lighthouse|playwright|puppeteer|slurp|petalbot|bytespider|yeti|daumoa|googleother|google-inspection/i.test(ua)) return;
+  if (navigator.webdriver || window.__mgBotUA(ua)) return;
 
   var path = location.pathname;
   var slug = path.replace(/^\/+|\/+$/g, '');

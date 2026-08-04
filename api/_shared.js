@@ -131,3 +131,32 @@ export async function getComment(id) {
   const rows = await r.json().catch(() => []);
   return Array.isArray(rows) && rows.length ? rows[0] : null;
 }
+
+/* 위장 UA 판별 — 넓은 토큰(bot/crawl)으로는 안 걸리는 자동화 트래픽.
+ *
+ * 왜 필요한가: 2026-07-27~08-04 자체 트래커 359뷰 중 28뷰(8%)가 정상 브라우저를 가장한
+ * UA 였다. 하루 단위로는 08-02 에 30뷰 중 12뷰(40%)까지 올라간다. 이게 조회수를 부풀리고
+ * 애드핏 요청/PV 비율을 무너뜨린다(페이지뷰 비콘은 쏘는데 광고 요청은 안 나가므로).
+ *
+ * ⚠️ 판정은 **물리적으로 불가능하거나 자동화 도구 기본값으로 알려진 조합**만 본다.
+ *    'naver' 같은 넓은 토큰으로 잡으면 네이버앱 인앱브라우저 실사용자가 통째로 빠진다
+ *    (feedback_bot_filter_naver_inapp 에서 한 번 당했다).
+ *
+ * ⚠️ 이 규칙은 클라이언트(scripts/wp-track.js 의 __mgBotUA)와 **같은 내용이어야 한다.**
+ *    수집 차단은 앞으로 들어올 것만 막고, 이 함수는 이미 쌓인 기록을 조회 시점에 거른다.
+ */
+export const FAKE_UA_RULES = [
+  // 실제 iOS 는 AppleWebKit/605.x 다. iPhone/iPad 가 크롬 엔진 토큰을 쓸 수는 없다.
+  /(?:iPhone|iPad)[^)]*\)[^]*AppleWebKit\/537\.36/,
+  // 자동화 도구·UA 목록에 박제된 기기 빌드 문자열 (실기기 분포로는 나올 수 없는 편중)
+  /Pixel 2 Build\/OPD3\.170816\.012/,
+  /Nexus 5 Build\/MRA58N/,
+  /SM-G900P Build\/LRX21T/,
+  // 버전 문자열이 통째로 빠진 맥 — 실제 사파리·크롬은 항상 10_15_7 같은 값을 넣는다
+  /\(Macintosh; Intel Mac OS X\)/,
+];
+
+export function isFakeUA(ua) {
+  if (!ua) return false;
+  return FAKE_UA_RULES.some((re) => re.test(ua));
+}

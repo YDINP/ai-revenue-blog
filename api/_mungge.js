@@ -13,7 +13,7 @@
 // 자체 트래커로 채운다** — 대시보드(dashboard.astro mgDay/mgTopPages)와 동일한 원칙이고,
 // 폴백이 걸린 날은 live=true 로 표시해 리포트 라벨에 기준을 밝힌다.
 
-import { SUPABASE_ANON_KEY, SUPABASE_URL, kstDayOf } from './_shared.js';
+import { SUPABASE_ANON_KEY, SUPABASE_URL, isFakeUA, kstDayOf } from './_shared.js';
 import { classifyGa4Source, classifyRef, channelKo } from './_refs.js';
 
 export const MG_SITE = 'https://mungge.com';
@@ -64,11 +64,19 @@ export async function loadMungge(from, to, { dims = ['total', 'channel', 'source
 class Mungge {
   constructor(ga4, live, syncedAt) {
     this.ga4 = Array.isArray(ga4) ? ga4 : [];
-    this.live = (Array.isArray(live) ? live : []).map((e) => ({
-      day: kstDayOf(e.created_at),
-      created_at: e.created_at,
-      m: e.metadata || {},
-    }));
+    /* ⚠️ 위장 UA 는 **여기 한 곳에서** 걷어낸다 — liveStats·글별·유입경로가 모두 this.live 를
+     * 보므로, 아래쪽에서 각자 거르면 어느 하나를 빠뜨렸을 때 지표끼리 안 맞는다.
+     * 수집 차단(wp-track.js)은 앞으로 들어올 것만 막으므로, 이미 쌓인 기록은 조회 때 걸러야
+     * 과거 수치도 정리된다(2026-07-27~08-04 구간이 8% 오염돼 있다).
+     * ⚠️ GA4 쪽(this.ga4)은 우리가 못 거른다 — 구글 자체 봇 필터에 맡길 수밖에 없다. */
+    this.liveDropped = (Array.isArray(live) ? live : []).filter((e) => isFakeUA(e.metadata?.user_agent)).length;
+    this.live = (Array.isArray(live) ? live : [])
+      .filter((e) => !isFakeUA(e.metadata?.user_agent))
+      .map((e) => ({
+        day: kstDayOf(e.created_at),
+        created_at: e.created_at,
+        m: e.metadata || {},
+      }));
     this.syncedAt = syncedAt;
   }
 

@@ -27,11 +27,15 @@
   var host = location.hostname;
   if (host === 'localhost' || host === '127.0.0.1' || /^192\.168\./.test(host) || /^10\./.test(host)) return;
 
-  // 봇 제외 — 다른 트래커(wp-track.js)와 **같은 기준**을 쓴다. 기준이 다르면 수치를 나란히 못 놓는다.
-  // ⚠️ 애드핏은 headless 에 아예 서빙하지 않으므로, 봇을 안 빼면 실패율이 통째로 부풀려진다.
+  /* 봇 제외 — 판별은 wp-track.js(MG-TRACK)가 노출한 __mgBotUA 를 쓴다. 규칙을 두 벌로 두면
+   * 갈라지고, 갈라지면 두 트래커 수치를 나란히 못 놓는다. MG-TRACK 이 먼저 실행되므로
+   * 정상적으로는 항상 있다 — 그 블록이 죽은 경우에만 자기 정규식으로 떨어진다.
+   * ⚠️ 애드핏은 headless 에 아예 서빙하지 않으므로, 봇을 안 빼면 실패율이 통째로 부풀려진다. */
   var ua = navigator.userAgent || '';
-  if (navigator.webdriver ||
-      /bot|crawl|spider|headless|lighthouse|playwright|puppeteer|slurp|petalbot|bytespider|yeti|daumoa|googleother|google-inspection/i.test(ua)) return;
+  var isBot = window.__mgBotUA
+    ? window.__mgBotUA(ua)
+    : /bot|crawl|spider|headless|lighthouse|playwright|puppeteer|slurp|petalbot|bytespider|yeti|daumoa|googleother|google-inspection/i.test(ua);
+  if (navigator.webdriver || isBot) return;
 
   var slug = location.pathname.replace(/^\/+|\/+$/g, '');
   var isMobile = window.matchMedia('(max-width: 767px)').matches;
