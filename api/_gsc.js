@@ -76,6 +76,29 @@ export async function gscSitemaps(site) {
   }));
 }
 
+/* 사이트맵 재제출 — 재크롤 큐에 다시 올린다.
+ *
+ * 왜 필요한가: 구글은 한 번 받아간 사이트맵을 알아서 자주 다시 읽지 않는다.
+ * 2026-08-04 실측에서 sitemap-post-type-post.xml 의 lastDownloaded 가 07-30 에 멈춰 있었고,
+ * 그 사이 발행한 글들이 "Google에 아직 알려지지 않은 URL" 로 남아 있었다(발견 경로 자체가 없음).
+ * lastmod 는 정상이라 사이트맵 내용 문제가 아니라 재방문이 안 온 것이다.
+ *
+ * ⚠️ 재제출은 "다시 봐달라"는 신호일 뿐 색인을 보장하지 않는다. 이미 크롤됐는데 색인이 안 된
+ *    URL(중복 판정 등)은 이걸로 안 풀린다 — 그건 원본 쪽 재크롤로 풀어야 한다.
+ * ⚠️ 성공 시 204(본문 없음)라 r.json() 을 부르면 터진다. */
+export async function gscSubmitSitemap(site, feedpath) {
+  const token = await accessToken();
+  const r = await fetch(
+    `https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(site)}/sitemaps/${encodeURIComponent(feedpath)}`,
+    { method: 'PUT', headers: { Authorization: `Bearer ${token}` } }
+  );
+  if (!r.ok) {
+    const t = await r.text().catch(() => '');
+    throw new Error(`사이트맵 재제출 ${r.status}: ${t.slice(0, 200) || 'unknown'}`);
+  }
+  return { feedpath, status: r.status };
+}
+
 // URL 검사 API — 색인 여부/마지막 크롤/구글이 고른 canonical.
 // 301 이전 직후에는 searchAnalytics(노출 0)만으로는 "아직 안 걸린 것"인지 "색인이 안 된 것"인지
 // 구분이 안 된다. 이전 진행률은 이 API로만 확인할 수 있다.

@@ -20,7 +20,7 @@
 import { syncGsc } from './_gsc-sync.js';
 import { syncGa4 } from './_ga4-sync.js';
 import { blogList, resolveBlog } from './_blogs.js';
-import { gscDay, gscInspect, gscRaw, gscSitemaps, hasGsc } from './_gsc.js';
+import { gscDay, gscInspect, gscRaw, gscSitemaps, gscSubmitSitemap, hasGsc } from './_gsc.js';
 import { ga4Day, ga4Properties, ga4Report, hasGa4, saEmail } from './_ga4.js';
 
 export default async function handler(req, res) {
@@ -67,14 +67,44 @@ export default async function handler(req, res) {
   }
 }
 
-// 제출된 사이트맵 현황 — /api/gsc-sync?blog=mg&sitemaps=1&secret=…
+/* 제출된 사이트맵 현황 — /api/gsc-sync?blog=mg&sitemaps=1&secret=…
+ * 재제출(재크롤 요청) — /api/gsc-sync?blog=mg&sitemaps=resubmit&path=/sitemap-post-type-post.xml&secret=…
+ *   path 는 콤마로 여러 개. 생략하면 이미 제출된 사이트맵 전부를 다시 올린다.
+ * ⚠️ 사이트맵 API 의 contents[].indexed 는 구글이 폐기한 필드라 항상 0 이다 — 색인 수로 읽지 말 것.
+ *    실제 색인 여부는 inspect 모드(URL 검사)로만 확인된다. */
 async function sitemaps(url, res) {
   if (!hasGsc()) return res.status(500).json({ error: 'no-gsc-env' });
   const blogs = blogList(true).filter((b) => b.gscSite);
   const blog = blogs.find((b) => b.key === (url.searchParams.get('blog') || 'mg'));
   if (!blog) return res.status(400).json({ error: 'unknown blog', available: blogs.map((b) => b.key) });
   try {
-    return res.status(200).json({ ok: true, site: blog.gscSite, sitemaps: await gscSitemaps(blog.gscSite) });
+    const current = await gscSitemaps(blog.gscSite);
+    if (url.searchParams.get('sitemaps') !== 'resubmit') {
+      return res.status(200).json({ ok: true, site: blog.gscSite, sitemaps: current });
+    }
+
+    const origin = new URL(blog.gscSite).origin;
+    const raw = (url.searchParams.get('path') || '').split(',').map((s) => s.trim()).filter(Boolean);
+    // 경로만 준 경우 절대 URL 로 올린다. 아무것도 안 주면 이미 제출된 것 전부.
+    const targets = raw.length
+      ? raw.map((p) => (/^https?:\/\//.test(p) ? p : origin + (p.startsWith('/') ? p : `/${p}`)))
+      : current.map((s) => s.path);
+
+    const submitted = [];
+    for (const t of targets) {
+      try {
+        submitted.push(await gscSubmitSitemap(blog.gscSite, t));
+      } catch (e) {
+        submitted.push({ feedpath: t, error: e.message });
+      }
+    }
+    // 제출 직후 현황을 다시 읽어 lastSubmitted 가 갱신됐는지 확인할 수 있게 한다
+    return res.status(200).json({
+      ok: true,
+      site: blog.gscSite,
+      submitted,
+      sitemaps: await gscSitemaps(blog.gscSite),
+    });
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }
