@@ -471,14 +471,12 @@ ${chartInstruction}
     }
   }
 
-  // FAQ가 있으면 본문 하단에 "자주 묻는 질문" 섹션 추가
-  if (result.faq && Array.isArray(result.faq) && result.faq.length > 0) {
-    let faqSection = '\n\n---\n\n## 자주 묻는 질문\n\n';
-    for (const item of result.faq) {
-      faqSection += `### ${item.q}\n\n${item.a}\n\n`;
-    }
-    result.content += faqSection;
-  }
+  // ⚠️ FAQ 를 본문 하단에 마크다운 섹션으로 덧붙이지 않는다(2026-08-04 제거).
+  //    publish-wordpress.mjs 가 frontmatter 의 faq 로 `<div class="mg-faq"><h2>자주 묻는 질문</h2>…`
+  //    위젯을 이미 렌더한다. 둘 다 넣으면 발행글에 "자주 묻는 질문" H2 가 2개 생기고
+  //    ez-toc 목차에도 `자주_묻는_질문`, `자주_묻는_질문-2` 로 중복 등재된다.
+  //    (mg-faq 위젯이 도입된 뒤 이 블록만 남아 08-02~08-04 발행분 4편이 중복 렌더됐다.)
+  //    FAQ 는 frontmatter 의 faq 가 SSOT — 위젯과 FAQPage JSON-LD 둘 다 거기서 나온다.
 
   return result;
 }
