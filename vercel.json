@@ -1011,6 +1011,226 @@
       "source": "/blog/tags/:tag*/",
       "destination": "https://mungge.com/",
       "permanent": true
+    },
+    {
+      "source": "/compare/",
+      "destination": "https://mungge.com/compare/",
+      "permanent": true
+    },
+    {
+      "source": "/compare",
+      "destination": "https://mungge.com/compare/",
+      "permanent": true
+    },
+    {
+      "source": "/compare/game-art-inhouse-vs-asset-store-vs-ai-2026/",
+      "destination": "https://mungge.com/compare/game-art-inhouse-vs-asset-store-vs-ai-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/compare/game-art-inhouse-vs-asset-store-vs-ai-2026",
+      "destination": "https://mungge.com/compare/game-art-inhouse-vs-asset-store-vs-ai-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/compare/game-engine-unity-vs-unreal-vs-godot-2026/",
+      "destination": "https://mungge.com/compare/game-engine-unity-vs-unreal-vs-godot-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/compare/game-engine-unity-vs-unreal-vs-godot-2026",
+      "destination": "https://mungge.com/compare/game-engine-unity-vs-unreal-vs-godot-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/compare/game-marketing-wishlist-vs-influencer-vs-ads-2026/",
+      "destination": "https://mungge.com/compare/game-marketing-wishlist-vs-influencer-vs-ads-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/compare/game-marketing-wishlist-vs-influencer-vs-ads-2026",
+      "destination": "https://mungge.com/compare/game-marketing-wishlist-vs-influencer-vs-ads-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/compare/game-monetization-premium-vs-f2p-vs-ads-2026/",
+      "destination": "https://mungge.com/compare/game-monetization-premium-vs-f2p-vs-ads-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/compare/game-monetization-premium-vs-f2p-vs-ads-2026",
+      "destination": "https://mungge.com/compare/game-monetization-premium-vs-f2p-vs-ads-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/compare/game-platform-fees-steam-vs-epic-vs-itch-2026/",
+      "destination": "https://mungge.com/compare/game-platform-fees-steam-vs-epic-vs-itch-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/compare/game-platform-fees-steam-vs-epic-vs-itch-2026",
+      "destination": "https://mungge.com/compare/game-platform-fees-steam-vs-epic-vs-itch-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/compare/mobile-ad-network-admob-vs-applovin-vs-levelplay-2026/",
+      "destination": "https://mungge.com/compare/mobile-ad-network-admob-vs-applovin-vs-levelplay-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/compare/mobile-ad-network-admob-vs-applovin-vs-levelplay-2026",
+      "destination": "https://mungge.com/compare/mobile-ad-network-admob-vs-applovin-vs-levelplay-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/series/",
+      "destination": "https://mungge.com/series/",
+      "permanent": true
+    },
+    {
+      "source": "/series",
+      "destination": "https://mungge.com/series/",
+      "permanent": true
+    },
+    {
+      "source": "/series/indie-roadmap/",
+      "destination": "https://mungge.com/series/indie-roadmap/",
+      "permanent": true
+    },
+    {
+      "source": "/series/indie-roadmap",
+      "destination": "https://mungge.com/series/indie-roadmap/",
+      "permanent": true
+    },
+    {
+      "source": "/privacy/",
+      "destination": "https://mungge.com/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/privacy",
+      "destination": "https://mungge.com/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/about/",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/contact/",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai/",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dev/",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dev",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/game/",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/game",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/review/",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/review",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-07-2026년-개발자-생산성-혁명-ai-페어-프로그래머와-에이전틱-워크플로우-완벽-가이드/",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-07-2026년-개발자-생산성-혁명-ai-페어-프로그래머와-에이전틱-워크플로우-완벽-가이드",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-08-2026년-게이밍-키보드-추천-top-7-기계식-vs-자석축-완벽-비교/",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-08-2026년-게이밍-키보드-추천-top-7-기계식-vs-자석축-완벽-비교",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-10-2026년-최신-코딩-모니터-비교-개발자-필수-선택-가이드/",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-10-2026년-최신-코딩-모니터-비교-개발자-필수-선택-가이드",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-13-개발자-생산성-완전-가이드-20260213/",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-13-개발자-생산성-완전-가이드-20260213",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-13-프로그래밍-입문-2026-초보자를-위한-완벽한-시작-가이드/",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-13-프로그래밍-입문-2026-초보자를-위한-완벽한-시작-가이드",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-13-2026년-최고의-태블릿-추천-가성비성능용도별-완벽-비교/",
+      "destination": "https://mungge.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-13-2026년-최고의-태블릿-추천-가성비성능용도별-완벽-비교",
+      "destination": "https://mungge.com/",
+      "permanent": true
     }
   ]
 }
