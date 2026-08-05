@@ -56,8 +56,16 @@
         path: location.pathname
       }
     });
+    /* ⚠️ Blob 타입은 반드시 CORS 안전목록(text/plain)이어야 한다.
+     * application/json 은 비단순 요청이라 프리플라이트가 필요한데 sendBeacon 은 프리플라이트를
+     * 보내지 못해 요청이 통째로 막힌다. 그런데 **sendBeacon 은 true 를 반환한다**(큐에 넣었다는
+     * 뜻일 뿐 도달 여부가 아니다) → 아래 fetch 폴백을 타지 않고 조용히 버려진다.
+     * 2026-08-04~05 실측: 페이지뷰 57건에 도착한 이벤트 2건. 라이브 대조 실험에서
+     * blob-json 미도달 / blob-text 도달 / fetch 200 으로 갈렸다.
+     * ⚠️ 검증할 때 sendBeacon 을 스텁으로 바꾸면 이 층이 통째로 가려진다 — 실제 전송으로 확인할 것.
+     * 수신측(analytics-ingest)은 content-type 과 무관하게 본문을 JSON 으로 파싱한다. */
     try {
-      if (navigator.sendBeacon(URL_, new Blob([body], { type: 'application/json' }))) return;
+      if (navigator.sendBeacon(URL_, new Blob([body], { type: 'text/plain;charset=UTF-8' }))) return;
     } catch (e) {}
     fetch(URL_, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true })
       .catch(function () {});
