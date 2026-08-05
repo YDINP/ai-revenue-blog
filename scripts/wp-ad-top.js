@@ -64,7 +64,23 @@
     if (at.parentElement.closest('a')) continue;
 
     at.parentElement.insertBefore(ad, at);
-    if (landedWell()) { ad.classList.add('mg-adtop-moved'); return; }
+    if (landedWell()) { ad.classList.add('mg-adtop-moved'); collapseIfEmpty(); return; }
     homeParent.insertBefore(ad, homeNext);   // 원위치
+  }
+
+  /* 자리 예약(min-height:90px)은 광고가 늦게 와도 화면이 안 밀리게 하는 CLS 보호다.
+     그런데 이 슬롯은 이제 **헤더 바로 아래**라, 안 채워지면 첫 화면 맨 위에 빈 띠로 남는다
+     (여백 포함 약 118px — 사용자가 "상단 마진이 크다"고 지적한 바로 그 구간).
+     → 4초까지 기다렸다가 그때도 비어 있으면 예약만 푼다. 숨기지 않는 이유는 레일과 같다:
+       뒤늦게 채워져도 ins 가 펼쳐지며 자리를 되찾아야 늦게 온 광고의 노출을 안 버린다. */
+  function collapseIfEmpty() {
+    var ins = ad.querySelector('ins.kakao_ad_area');
+    if (!ins) return;
+    setTimeout(function () {
+      if (ins.children.length || getComputedStyle(ins).display !== 'none') return;
+      ad.style.minHeight = '0';
+      ad.style.marginTop = '0';
+      ad.style.marginBottom = '0';
+    }, 4000);
   }
 })();

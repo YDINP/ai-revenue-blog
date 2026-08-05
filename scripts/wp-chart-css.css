@@ -1683,7 +1683,7 @@ html[data-wp-dark-mode-active] .mg-chips a { color: #a9b1bd; }
 /* ── ⑥ 광고 슬롯 ──────────────────────────────────────────────────────────── */
 .mg-slot { display: flex; justify-content: center; align-items: center; }
 .mg-slot:empty { display: none; }                    /* 유닛 미삽입 시 빈 여백 제거 */
-.mg-slot--lead { margin: 1.75rem 0 0; }
+.mg-slot--lead { margin: 0.75rem 0 0; }   /* 헤더 바로 아래로 옮겨서 위 여백을 줄였다 */
 .mg-slot--lead:not(:empty) { min-height: 90px; }     /* CLS 방지용 자리 예약 */
 .mg-slot--rail:not(:empty) { min-height: 250px; }
 /* sticky 포기: 조상 .site.wp-site-blocks(overflow:clip)와 body(overflow:auto)가 모두
@@ -2188,12 +2188,19 @@ html[data-mg-theme="dark"] body.home{ background-color:#17130e; }
 
 /* ── ⑤ 편집형 홈 — [mg_hero] 숏코드 .mge-* ──────────────────────────────────── */
 .mge-home{ margin:0 0 8px; }
+/* 위 패딩은 헤더 바로 아래 빈 띠로 보인다 — 1050px 기준 52.5px 였던 걸 24px 로 줄였다.
+   아래 패딩은 다음 섹션과의 구분이라 그대로 둔다. */
 .mge-hero{ display:grid; grid-template-columns:1.08fr .92fr; gap:clamp(28px,5vw,60px); align-items:center;
-  padding:clamp(32px,5vw,60px) 0 clamp(28px,4vw,44px); text-decoration:none !important; color:inherit; }
+  padding:clamp(14px,2vw,26px) 0 clamp(28px,4vw,44px); text-decoration:none !important; color:inherit; }
 .mge-kick{ font-size:.72rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--mg-accent);
   display:inline-flex; align-items:center; gap:10px; }
 .mge-kick::after{ content:""; width:34px; height:1px; background:var(--mg-warm); }
 .mge-hero__t{ font-family:var(--serif); margin:18px 0 0; font-size:clamp(2rem,4.6vw,3.3rem); font-weight:700; line-height:1.16; letter-spacing:-.02em; color:var(--global-palette3,#241f17); }
+/* ⚠️ 위 margin:18px 은 실제로 안 먹는다 — 테마가 제목류에 margin-top:1.5em 을 걸어
+   1050px 기준 72.45px(=1.5×48.3) 로 계산되고 있었다(카테고리 라벨과 제목 사이의 빈 구간).
+   같은 파일 안에서 뒤에 오더라도 특이도가 같으면 테마 쪽이 이기는 경우가 있어
+   `a.mge-hero` 를 앞에 붙여 특이도를 올린다(!important 없이 해결). */
+a.mge-hero .mge-hero__t{ margin-top:14px; }
 .mge-hero__dek{ font-family:var(--serif); font-style:italic; margin:20px 0 0; font-size:clamp(1.02rem,1.7vw,1.2rem); line-height:1.62; color:var(--global-palette5,#4c463a); max-width:34ch; }
 .mge-hero__meta{ margin-top:22px; display:flex; align-items:center; gap:13px; color:var(--global-palette6,#8b8271); font-size:.8rem; letter-spacing:.02em; }
 .mge-hero__meta .sep{ width:1px; height:12px; background:rgba(40,32,20,.2); }
