@@ -62,6 +62,20 @@ async function query(site, body) {
 // 검색어 단위 진단(어떤 쿼리가 어떤 글로 떨어지는지)은 이 통로로만 가능하다.
 export const gscRaw = (site, body) => query(site, body);
 
+// 서비스 계정이 접근 가능한 GSC 속성(사이트) 전체 + 권한 수준.
+// "실데이터가 어느 속성에 있나 / SA 가 도메인 속성(sc-domain:)에 추가돼 있나"를 한 번에 본다.
+// 이전(301) 중에는 구 URL-프리픽스 속성에 데이터가 남고 새 속성은 비어 있는 일이 흔해,
+// 대시보드가 빈 속성을 읽으면 노출 0 으로 오인한다.
+export async function gscSites() {
+  const token = await accessToken();
+  const r = await fetch('https://searchconsole.googleapis.com/webmasters/v3/sites', {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const j = await r.json();
+  if (!r.ok) throw new Error(`sites.list ${r.status}: ${j.error?.message || 'unknown'}`);
+  return (j.siteEntry || []).map((e) => ({ siteUrl: e.siteUrl, permissionLevel: e.permissionLevel }));
+}
+
 // 제출된 사이트맵 목록 + 처리 결과. 이전 직후 "구글이 새 도메인을 아예 모르는" 상태인지
 // 판별하려면 사이트맵 제출 여부부터 봐야 한다.
 export async function gscSitemaps(site) {

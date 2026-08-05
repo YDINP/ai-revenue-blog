@@ -20,7 +20,7 @@
 import { syncGsc } from './_gsc-sync.js';
 import { syncGa4 } from './_ga4-sync.js';
 import { blogList, resolveBlog } from './_blogs.js';
-import { gscDay, gscInspect, gscRaw, gscSitemaps, gscSubmitSitemap, hasGsc } from './_gsc.js';
+import { gscDay, gscInspect, gscRaw, gscSites, gscSitemaps, gscSubmitSitemap, hasGsc } from './_gsc.js';
 import { ga4Day, ga4Properties, ga4Report, hasGa4, saEmail } from './_ga4.js';
 
 export default async function handler(req, res) {
@@ -47,6 +47,7 @@ export default async function handler(req, res) {
   }
 
   if (url.searchParams.get('ga4')) return ga4(url, res);
+  if (url.searchParams.get('gsc')) return gscDiag(url, res);
 
   // diag 는 dim 을 함께 받으므로(decay 의 집계 차원) probe 보다 먼저 갈라야 한다
   const diag = url.searchParams.get('diag');
@@ -198,6 +199,41 @@ async function ga4(url, res) {
     }
 
     return res.status(400).json({ error: `unknown ga4 mode '${mode}'`, modes: ['whoami', 'properties', 'probe', 'sync'] });
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
+}
+
+// ── GSC 속성 진단 ────────────────────────────────────────────────────────────
+// "어느 GSC 속성에 실데이터가 있나 / SA 가 어느 속성에 추가돼 있나"를 판별한다.
+//   /api/gsc-sync?gsc=sites&secret=…                         접근 가능한 속성 전체 + 권한
+//   /api/gsc-sync?gsc=probe&site=sc-domain:mungge.com&secret=…  임의 속성 노출/클릭 합
+//   /api/gsc-sync?gsc=probe&site=https://mungge.com/&dim=page&secret=…  차원별 상위행
+async function gscDiag(url, res) {
+  if (!hasGsc()) return res.status(500).json({ error: 'no-gsc-env' });
+  const mode = url.searchParams.get('gsc');
+  try {
+    if (mode === 'sites') {
+      const sites = await gscSites();
+      return res.status(200).json({ ok: true, serviceAccount: saEmail(), count: sites.length, sites });
+    }
+    if (mode === 'probe') {
+      const site = url.searchParams.get('site');
+      if (!site) {
+        return res.status(400).json({ error: 'site 파라미터 필요 (예: sc-domain:mungge.com 또는 https://mungge.com/)' });
+      }
+      const days = Math.min(Math.max(parseInt(url.searchParams.get('days') || '28', 10) || 28, 1), 400);
+      const dims = (url.searchParams.get('dim') || '').split(',').map((s) => s.trim()).filter(Boolean);
+      const rows = await gscRaw(site, {
+        startDate: gscDay(1 + days),
+        endDate: gscDay(2),
+        dimensions: dims,
+        rowLimit: dims.length ? 25 : 1,
+      });
+      const totals = rows.reduce((a, r) => ({ clicks: a.clicks + (r.clicks || 0), impressions: a.impressions + (r.impressions || 0) }), { clicks: 0, impressions: 0 });
+      return res.status(200).json({ ok: true, site, days, totals, count: rows.length, rows: rows.slice(0, 25) });
+    }
+    return res.status(400).json({ error: `unknown gsc mode '${mode}'`, modes: ['sites', 'probe'] });
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }
