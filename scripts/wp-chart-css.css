@@ -2188,10 +2188,11 @@ html[data-mg-theme="dark"] body.home{ background-color:#17130e; }
 
 /* ── ⑤ 편집형 홈 — [mg_hero] 숏코드 .mge-* ──────────────────────────────────── */
 .mge-home{ margin:0 0 8px; }
-/* 위 패딩은 헤더 바로 아래 빈 띠로 보인다 — 1050px 기준 52.5px 였던 걸 24px 로 줄였다.
+/* 위 패딩은 헤더 바로 아래 빈 띠로 보인다 — 원래 clamp(32px,5vw,60px)(1050px 기준 52.5px)였던 걸
+   0 으로 없앴다. 히어로는 홈 최상단 요소라 위쪽에 띄울 이유가 없다.
    아래 패딩은 다음 섹션과의 구분이라 그대로 둔다. */
 .mge-hero{ display:grid; grid-template-columns:1.08fr .92fr; gap:clamp(28px,5vw,60px); align-items:center;
-  padding:clamp(14px,2vw,26px) 0 clamp(28px,4vw,44px); text-decoration:none !important; color:inherit; }
+  padding:0 0 clamp(28px,4vw,44px); text-decoration:none !important; color:inherit; }
 .mge-kick{ font-size:.72rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--mg-accent);
   display:inline-flex; align-items:center; gap:10px; }
 .mge-kick::after{ content:""; width:34px; height:1px; background:var(--mg-warm); }
