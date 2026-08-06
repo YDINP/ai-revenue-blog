@@ -1291,6 +1291,11 @@
       "source": "/blog/2026-02-13-2026%EB%85%84-%EC%B5%9C%EA%B3%A0%EC%9D%98-%ED%83%9C%EB%B8%94%EB%A6%BF-%EC%B6%94%EC%B2%9C-%EA%B0%80%EC%84%B1%EB%B9%84%EC%84%B1%EB%8A%A5%EC%9A%A9%EB%8F%84%EB%B3%84-%EC%99%84%EB%B2%BD-%EB%B9%84%EA%B5%90",
       "destination": "https://mungge.com/",
       "permanent": true
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "https://mungge.com/:path*",
+      "permanent": true
     }
   ]
 }
