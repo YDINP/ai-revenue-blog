@@ -1293,6 +1293,256 @@
       "permanent": true
     },
     {
+      "source": "/blog/2026-02-14-review-best-developer-keyboards-2026-review",
+      "destination": "https://mungge.com/2026-07-14-review-mechanical-keyboard-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-14-review-best-developer-keyboards-2026-review/",
+      "destination": "https://mungge.com/2026-07-14-review-mechanical-keyboard-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-16-ai-prompt-engineering-advanced-techniques-2026-quality-optimization",
+      "destination": "https://mungge.com/2026-02-20-ai-prompt-engineering-practical-tips-2026-efficiency-triple/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-16-ai-prompt-engineering-advanced-techniques-2026-quality-optimization/",
+      "destination": "https://mungge.com/2026-02-20-ai-prompt-engineering-practical-tips-2026-efficiency-triple/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-18-ai-local-llm-construction-guide-2026-privacy-first-ai",
+      "destination": "https://mungge.com/2026-07-11-review-local-llm-gpu-mini-pc-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-18-ai-local-llm-construction-guide-2026-privacy-first-ai/",
+      "destination": "https://mungge.com/2026-07-11-review-local-llm-gpu-mini-pc-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-03-prompt-engineering-guide-7-techniques",
+      "destination": "https://mungge.com/2026-02-20-ai-prompt-engineering-practical-tips-2026-efficiency-triple/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-03-prompt-engineering-guide-7-techniques/",
+      "destination": "https://mungge.com/2026-02-20-ai-prompt-engineering-practical-tips-2026-efficiency-triple/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-06-developer-keyboard-review-2026",
+      "destination": "https://mungge.com/2026-07-14-review-mechanical-keyboard-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-06-developer-keyboard-review-2026/",
+      "destination": "https://mungge.com/2026-07-14-review-mechanical-keyboard-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-08-gpt-5-3-codex-vs-claude-opus-4-6-ai-coding-showdown",
+      "destination": "https://mungge.com/2026-07-11-ai-gpt-5-6-vs-claude-fable-5-coding-showdown/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-08-gpt-5-3-codex-vs-claude-opus-4-6-ai-coding-showdown/",
+      "destination": "https://mungge.com/2026-07-11-ai-gpt-5-6-vs-claude-fable-5-coding-showdown/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-13-programming-beginner-guide-2026",
+      "destination": "https://mungge.com/2026-04-13-dev-2026-programming-first-language-selection-goal-based-roadmap/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-13-programming-beginner-guide-2026/",
+      "destination": "https://mungge.com/2026-04-13-dev-2026-programming-first-language-selection-goal-based-roadmap/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-16-dev-programming-language-selection-guide-2026",
+      "destination": "https://mungge.com/2026-04-13-dev-2026-programming-first-language-selection-goal-based-roadmap/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-16-dev-programming-language-selection-guide-2026/",
+      "destination": "https://mungge.com/2026-04-13-dev-2026-programming-first-language-selection-goal-based-roadmap/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-04-06-review-best-keyboard-mouse-combo-sets-2026-value-ergonomics",
+      "destination": "https://mungge.com/2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-04-06-review-best-keyboard-mouse-combo-sets-2026-value-ergonomics/",
+      "destination": "https://mungge.com/2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-06-phaser-web-game-guide",
+      "destination": "https://mungge.com/2026-07-23-game-phaser-3-advanced-collision-physics-animation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-06-phaser-web-game-guide/",
+      "destination": "https://mungge.com/2026-07-23-game-phaser-3-advanced-collision-physics-animation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-08-ai-automation-passive-income-guide",
+      "destination": "https://mungge.com/2026-07-14-ai-side-income-systems-2026-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-08-ai-automation-passive-income-guide/",
+      "destination": "https://mungge.com/2026-07-14-ai-side-income-systems-2026-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-14-ai-ai-agents-passive-income-2026-monetization-guide",
+      "destination": "https://mungge.com/2026-07-11-ai-agent-side-income-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-14-ai-ai-agents-passive-income-2026-monetization-guide/",
+      "destination": "https://mungge.com/2026-07-11-ai-agent-side-income-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-18-review-keyboard-mouse-combo-sets-2026-guide",
+      "destination": "https://mungge.com/2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-18-review-keyboard-mouse-combo-sets-2026-guide/",
+      "destination": "https://mungge.com/2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-25-game-phaser-3-physics-engine-mastery-2026-collision-gravity-velocity",
+      "destination": "https://mungge.com/2026-07-23-game-phaser-3-advanced-collision-physics-animation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-25-game-phaser-3-physics-engine-mastery-2026-collision-gravity-velocity/",
+      "destination": "https://mungge.com/2026-07-23-game-phaser-3-advanced-collision-physics-animation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-09-github-copilot-vs-cursor-vs-windsurf-comparison",
+      "destination": "https://mungge.com/2026-07-14-ai-coding-tools-comparison-cursor-copilot-claude-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-09-github-copilot-vs-cursor-vs-windsurf-comparison/",
+      "destination": "https://mungge.com/2026-07-14-ai-coding-tools-comparison-cursor-copilot-claude-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-14-ai-gpt-codex-5-3-spark-2026-update-guide",
+      "destination": "https://mungge.com/2026-07-11-ai-openai-codex-gpt-5-6-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-14-ai-gpt-codex-5-3-spark-2026-update-guide/",
+      "destination": "https://mungge.com/2026-07-11-ai-openai-codex-gpt-5-6-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-15-ai-ai-coding-tools-practical-guide-2026",
+      "destination": "https://mungge.com/2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-15-ai-ai-coding-tools-practical-guide-2026/",
+      "destination": "https://mungge.com/2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-17-dev-python-automation-advanced-techniques-2026",
+      "destination": "https://mungge.com/2026-02-06-python-automation-beginners-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-17-dev-python-automation-advanced-techniques-2026/",
+      "destination": "https://mungge.com/2026-02-06-python-automation-beginners-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-19-ai-ai-api-automation-monetization-2026-10-million-won",
+      "destination": "https://mungge.com/2026-07-14-ai-side-income-systems-2026-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-19-ai-ai-api-automation-monetization-2026-10-million-won/",
+      "destination": "https://mungge.com/2026-07-14-ai-side-income-systems-2026-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-25-review-keyboard-mouse-combo-productivity-sets-2026-top-5",
+      "destination": "https://mungge.com/2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-25-review-keyboard-mouse-combo-productivity-sets-2026-top-5/",
+      "destination": "https://mungge.com/2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-03-02-review-2026-developer-keyboard-switch-guide-membrane-mechanical-capacitive",
+      "destination": "https://mungge.com/2026-07-14-review-mechanical-keyboard-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-03-02-review-2026-developer-keyboard-switch-guide-membrane-mechanical-capacitive/",
+      "destination": "https://mungge.com/2026-07-14-review-mechanical-keyboard-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-06-supabase-free-tier-guide",
+      "destination": "https://mungge.com/2026-02-24-dev-supabase-practical-guide-2026-realtime-auth/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-06-supabase-free-tier-guide/",
+      "destination": "https://mungge.com/2026-02-24-dev-supabase-practical-guide-2026-realtime-auth/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-23-game-phaser-3-web-game-development-2026-practical-guide",
+      "destination": "https://mungge.com/2026-07-23-game-phaser-3-advanced-collision-physics-animation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-23-game-phaser-3-web-game-development-2026-practical-guide/",
+      "destination": "https://mungge.com/2026-07-23-game-phaser-3-advanced-collision-physics-animation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-07-best-ai-coding-tools-2026",
+      "destination": "https://mungge.com/2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-07-best-ai-coding-tools-2026/",
+      "destination": "https://mungge.com/2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-03-16-ai-ai-coding-tools-practical-usage-2026-beginner-to-advanced",
+      "destination": "https://mungge.com/2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-03-16-ai-ai-coding-tools-practical-usage-2026-beginner-to-advanced/",
+      "destination": "https://mungge.com/2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2/",
+      "permanent": true
+    },
+    {
       "source": "/blog/:path*",
       "destination": "https://mungge.com/:path*",
       "permanent": true
