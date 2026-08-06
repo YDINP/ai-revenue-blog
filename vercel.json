@@ -1543,6 +1543,66 @@
       "permanent": true
     },
     {
+      "source": "/blog/2026-02-14-review-gpt-5-3-codex-spark-review-2026",
+      "destination": "https://mungge.com/2026-07-11-ai-openai-codex-gpt-5-6-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-14-review-gpt-5-3-codex-spark-review-2026/",
+      "destination": "https://mungge.com/2026-07-11-ai-openai-codex-gpt-5-6-guide-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-08-claude-opus-4-6-release-features-analysis",
+      "destination": "https://mungge.com/2026-07-26-review-claude-opus-5-complete-guide-performance-usage-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-08-claude-opus-4-6-release-features-analysis/",
+      "destination": "https://mungge.com/2026-07-26-review-claude-opus-5-complete-guide-performance-usage-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-22-ai-local-llm-setup-guide-2026-ollama-lm-studio-private-ai",
+      "destination": "https://mungge.com/2026-07-11-review-local-llm-gpu-mini-pc-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-22-ai-local-llm-setup-guide-2026-ollama-lm-studio-private-ai/",
+      "destination": "https://mungge.com/2026-07-11-review-local-llm-gpu-mini-pc-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-03-ssd-recommendation-samsung-980-pro-developer-storage",
+      "destination": "https://mungge.com/2026-07-12-review-external-ssd-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-03-ssd-recommendation-samsung-980-pro-developer-storage/",
+      "destination": "https://mungge.com/2026-07-12-review-external-ssd-recommendation-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-11-indie-game-development-tools-2026-guide",
+      "destination": "https://mungge.com/2026-07-07-game-ai-coding-tools-indie-game-development-2026-cursor-claude-code/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-11-indie-game-development-tools-2026-guide/",
+      "destination": "https://mungge.com/2026-07-07-game-ai-coding-tools-indie-game-development-2026-cursor-claude-code/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-17-review-developer-mouse-ergonomic-productivity-guide-2026",
+      "destination": "https://mungge.com/2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-02-17-review-developer-mouse-ergonomic-productivity-guide-2026/",
+      "destination": "https://mungge.com/2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers/",
+      "permanent": true
+    },
+    {
       "source": "/blog/:path*",
       "destination": "https://mungge.com/:path*",
       "permanent": true
