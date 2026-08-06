@@ -6132,8 +6132,12 @@ const ICONS: Record<string, string> = {
         mg: 'https://mungge.com',
         vip: 'https://virtual-in-playing.vercel.app',
         playcast: 'https://virtual-in-playing.vercel.app',
-        blog: 'https://mungge.com',
-        lifeflow: 'https://mungge.com',
+        // 구 TF/LF 레거시 이벤트는 구 도메인의 /blog/<slug> 로 보낸다 → vercel 리다이렉트가
+        // 뭉게 대응글로 해소한다. mungge.com 직행은 /blog/ 프리픽스 때문에 404 이고, 슬러그를
+        // 벗겨 mungge.com/<slug> 로 보내도 다른 슬러그로 재발행·재매칭된 글은 404 다(교정
+        // 리다이렉트가 vercel 쪽에만 있으므로). 반드시 구 도메인을 거쳐야 재매칭까지 반영된다.
+        blog: 'https://ai-revenue-blog.vercel.app',
+        lifeflow: 'https://life-revenue-blog.vercel.app',
       };
 
       function eventLink(e) {
@@ -6142,8 +6146,11 @@ const ICONS: Record<string, string> = {
         let path = e.path || m.path || '';
         if (!path) {
           const slug = e.slug || m.slug || '';
-          // 뭉게(WordPress)는 /blog/ 프리픽스가 없다 — 붙이면 404 로 보낸다
-          const prefix = e.source === 'vip' || e.source === 'playcast' ? '/blog/' : '/';
+          // VIP·레거시(구 TF/LF)는 /blog/<slug> 경로로 서빙·리다이렉트된다(base 가 각자 도메인).
+          // 뭉게(mg)만 프리픽스가 없다 — mg 에 /blog/ 를 붙이면 404 로 보낸다.
+          const legacy = e.source === 'blog' || e.source === 'lifeflow' || e.source === 'gameflow';
+          const isVip = e.source === 'vip' || e.source === 'playcast';
+          const prefix = (isVip || legacy) ? '/blog/' : '/';
           path = slug ? `${prefix}${slug}/` : '/';
         }
         if (!path.startsWith('/')) path = '/' + path;
