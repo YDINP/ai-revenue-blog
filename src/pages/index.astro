@@ -33,10 +33,15 @@ feedPosts.forEach((p) => {
 const categories = Object.entries(feedCatMap)
   .sort((a, b) => b[1] - a[1])
   .map(([slug, count]) => ({ slug, label: slug.toUpperCase(), count }));
-const latestDate = new Date(featured.data.pubDate).toLocaleDateString('ko-KR', {
-  month: 'short',
-  day: 'numeric',
-});
+// 구 TF 글(src/blog)을 모두 뭉게로 이전·삭제해 컬렉션이 비면 featured 가 undefined 다.
+// 이 홈은 vercel.json 에서 mungge.com 으로 301 되므로 서빙되지 않지만, static 빌드는
+// 여전히 이 페이지를 렌더하므로 빈 컬렉션에서 죽지 않게 가드한다.
+const latestDate = featured
+  ? new Date(featured.data.pubDate).toLocaleDateString('ko-KR', {
+      month: 'short',
+      day: 'numeric',
+    })
+  : '';
 
 // 커맨드 팔레트용 전체 카테고리 집계
 const paletteCatMap: Record<string, number> = {};
