@@ -868,6 +868,8 @@ const ICONS: Record<string, string> = {
       .src-badge.mg { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
       /* 삭제된 소스(구 TF/LF/GF)의 과거 행 — 회색으로 눌러 현재 소스와 시각적으로 구분 */
       .src-badge.legacy { background: rgba(148, 163, 184, 0.14); color: #94a3b8; }
+      /* SelfHostHub(별개 벤처, 공유 analytics) — 보라로 뭉게/VIP와 구분 */
+      .src-badge.shh { background: rgba(139, 92, 246, 0.15); color: #a78bfa; }
       .event-ref { font-size: 0.66rem; color: var(--text-3); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .mg-untracked { color: #fbbf24; opacity: 0.85; }
 
@@ -3262,13 +3264,16 @@ const ICONS: Record<string, string> = {
         coupang_click: '\uD83D\uDED2',
         paperdoc_click: '\uD83D\uDCC4',
         newsletter_subscribe: '\uD83D\uDCE7',
-        pageview_mg: '\uD83D\uDC41'
+        pageview_mg: '\uD83D\uDC41',
+        shh_pageview: '\uD83D\uDC41'
       };
 
       const EVENT_LABELS = {
         pageview: 'Viewed',
         // 뭉게 방문(자체 트래커). 조회수 집계는 GA4가 하므로 event_type을 분리했다 — scripts/wp-track.js 참조
         pageview_mg: 'Viewed',
+        // SelfHostHub(별개 벤처)가 같은 analytics 테이블에 쏘는 조회. 라벨이 없으면 'shh_pageview' 원문이 노출됐다.
+        shh_pageview: 'Viewed',
         like: 'Liked',
         coupang_click: 'Coupang Click',
         paperdoc_click: 'Paperdoc Click',
@@ -3812,6 +3817,8 @@ const ICONS: Record<string, string> = {
         if (source === 'blog') return '<span class="src-badge legacy">구TF</span>';
         if (source === 'lifeflow') return '<span class="src-badge legacy">구LF</span>';
         if (source === 'gameflow') return '<span class="src-badge legacy">구GF</span>';
+        // SelfHostHub — 뭉게가 아니라 같은 analytics 를 쓰는 별개 벤처. 원문 'selfhosthub' 노출 방지.
+        if (source === 'selfhosthub') return '<span class="src-badge shh">셀프호스트</span>';
         return '';
       }
 
@@ -3881,7 +3888,11 @@ const ICONS: Record<string, string> = {
           // 뭉게(WordPress)는 /blog/ 프리픽스가 없다. VIP 는 별 도메인.
           const isVip = p.source === 'vip' || p.source === 'playcast';
           const path = p.path || (p.slug ? (isVip ? `/blog/${p.slug}` : `/${p.slug}/`) : '/');
-          const href = isVip ? `https://virtual-in-playing.vercel.app${path}` : `${MG_URL}${path}`;
+          // 뭉게(WordPress)엔 /blog/ 프리픽스가 없다. 구 TF/LF 레거시 행의 path 엔 /blog/ 가
+          // 남아 있어 그대로 붙이면 mungge.com/blog/... = 404("없는 페이지")가 된다 →
+          // 구 URL 은 어차피 뭉게로 301 되므로 뭉게 정식 경로로 정규화해 링크가 살아있게 한다.
+          const mgPath = path.replace(/^\/blog\//, '/');
+          const href = isVip ? `https://virtual-in-playing.vercel.app${path}` : `${MG_URL}${mgPath}`;
           return `<a class="top-page-item" href="${escHtml(safeUrl(href))}" target="_blank" rel="noopener">
             <span class="top-page-rank">${i + 1}</span>
             ${sourceBadge(p.source)}

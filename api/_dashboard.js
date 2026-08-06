@@ -18,7 +18,7 @@ const cut = (s, n) => (s = String(s || ''), s.length > n ? s.slice(0, n) + '…'
 // source → 표시 약어. 뭉게가 본 사이트이고 VIP(playcast)만 별개로 운영된다.
 // TF(blog)·LF(lifeflow)는 뭉게로 301 통합돼 소스로 쓰지 않지만, DB 에 남은 과거 행이
 // 라벨 없이 원문(`blog`)으로 노출되는 걸 막기 위해 매핑만 남긴다.
-const SRC_ABBR = { mg: '뭉게', playcast: 'VIP', vip: 'VIP', blog: '(구)TF', lifeflow: '(구)LF' };
+const SRC_ABBR = { mg: '뭉게', playcast: 'VIP', vip: 'VIP', blog: '(구)TF', lifeflow: '(구)LF', selfhosthub: '셀프호스트' };
 const abbr = (s) => SRC_ABBR[s] || s || '?';
 
 async function rpc(fn, params = {}) {
@@ -488,6 +488,7 @@ export async function likesMessage(n = 10) {
 const EVENT_LABELS = {
   pageview: '👁 조회',
   pageview_mg: '👁 조회',          // 뭉게 자체 트래커 — 라벨이 없어 'pageview_mg' 원문이 노출됐다
+  shh_pageview: '👁 조회',         // SelfHostHub(별개 벤처, 공유 analytics) — 라벨 없으면 'shh_pageview' 원문 노출
   coupang_click: '🛒 쿠팡클릭',
   affiliate_click: '🛒 쿠팡클릭',
   paperdoc_click: '📄 페이퍼닥',
