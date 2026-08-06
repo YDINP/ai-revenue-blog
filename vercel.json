@@ -1296,6 +1296,11 @@
       "source": "/blog/:path*",
       "destination": "https://mungge.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/blog/:path*/",
+      "destination": "https://mungge.com/:path*/",
+      "permanent": true
     }
   ]
 }
