@@ -452,9 +452,32 @@ ${chartInstruction}
           ? tagsMatch[1].match(/"([^"]+)"/g).map(t => t.replace(/"/g, ''))
           : ["자동생성"];
         let rawContent = contentMatch[1];
-        const lastQuote = rawContent.lastIndexOf('"');
-        if (lastQuote > 0) rawContent = rawContent.slice(0, lastQuote);
+        // ⚠️ lastIndexOf('"') 로 자르면 content 뒤에 오는 "faq": [...] 가 통째로 본문에
+        //    딸려 들어간다. 발행글 끝에 원시 JSON 이 노출되고 frontmatter faq 는 비어
+        //    FAQ 위젯·FAQPage 스키마가 통째로 빠졌다(2026-08-05 TF, 08-06 LF 연속 발생).
+        //    content 문자열의 진짜 끝 = 닫는 따옴표 뒤에 "," + 다음 키가 오는 지점이다.
+        const endAt = rawContent.search(/"\s*,\s*"[a-zA-Z_][a-zA-Z0-9_]*"\s*:/);
+        if (endAt > 0) rawContent = rawContent.slice(0, endAt);
+        else {
+          const lastQuote = rawContent.lastIndexOf('"');
+          if (lastQuote > 0) rawContent = rawContent.slice(0, lastQuote);
+        }
         rawContent = rawContent.replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+
+        // 잘린 JSON 에서라도 faq 를 살려낸다. 못 살리면 빈 배열 → 위젯만 안 뜨고
+        // 본문에 원시 JSON 이 새는 일은 없다.
+        const recoveredFaq = [];
+        {
+          const src = (jsonStr.split(/"faq"\s*:\s*\[/)[1] || '');
+          const re = /"q"\s*:\s*"((?:[^"\\]|\\.)*)"\s*,\s*"a"\s*:\s*"((?:[^"\\]|\\.)*)"/g;
+          let mm;
+          while ((mm = re.exec(src))) {
+            recoveredFaq.push({
+              q: mm[1].replace(/\\"/g, '"').replace(/\\n/g, ' '),
+              a: mm[2].replace(/\\"/g, '"').replace(/\\n/g, ' '),
+            });
+          }
+        }
 
         result = {
           title: titleMatch[1],
@@ -462,6 +485,7 @@ ${chartInstruction}
           description: descMatch ? descMatch[1] : titleMatch[1],
           tags,
           content: rawContent,
+          faq: recoveredFaq,
         };
       }
     }
