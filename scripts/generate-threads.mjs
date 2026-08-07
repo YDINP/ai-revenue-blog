@@ -69,7 +69,23 @@ async function fetchRecentPosts(site, limit) {
   return [];
 }
 
+// LLM 호출 경로. 기본은 로컬 Claude Code CLI(사용자 구독 세션) — GH secrets 의
+// ANTHROPIC_API_KEY 가 401 로 죽어 이 워크플로가 멈췄던 이력이 있어, generate-post.mjs 와
+// 동일하게 CLI 우선 + HTTP 폴백으로 둔다. BLOG_LLM=http 면 처음부터 HTTP(=GH Actions).
 async function claude(prompt) {
+  if (process.env.BLOG_LLM !== 'http') {
+    try {
+      const cli = await import('../../automation/llm-cli.mjs');
+      if (cli.claudeCliAvailable()) {
+        console.log('[threads-gen][LLM] Claude Code CLI');
+        return await cli.callClaudeCli(prompt, { model: process.env.BLOG_CLAUDE_CLI_MODEL || '' });
+      }
+      console.warn('[threads-gen][LLM] CLI 없음 → HTTP 폴백');
+    } catch (e) {
+      console.warn(`[threads-gen][LLM] CLI 경로 실패(${e.message}) → HTTP 폴백`);
+    }
+  }
+  console.log('[threads-gen][LLM] HTTP API');
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
