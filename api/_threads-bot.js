@@ -323,6 +323,35 @@ export function nextGoldenSlotUtc() {
   return new Date(now + 3600 * 1000).toISOString();
 }
 
+// ── 다음 '빈' 골든슬롯 — 이미 scheduled 인 초안이 점유한 슬롯은 건너뛴다(같은 계정 기준).
+//    N건을 연속 예약하면 08:00 / 23:00 / 다음날 08:00 … 으로 슬롯당 1건씩 분산된다.
+//    (nextGoldenSlotUtc 은 항상 '다음 하나'만 줘서 여러 건이 한 슬롯에 몰렸다 — thr:sched 는 이걸 쓴다.)
+export async function nextFreeGoldenSlotUtc(accountId) {
+  const occupied = new Set();
+  try {
+    const rows = await sb(
+      `threads_queue?status=eq.scheduled&scheduled_at=not.is.null` +
+      `${accountId ? `&account_id=eq.${accountId}` : ''}&select=scheduled_at`
+    );
+    for (const r of rows) if (r.scheduled_at) occupied.add(new Date(r.scheduled_at).toISOString());
+  } catch { /* 조회 실패 시 점유정보 없이 다음 슬롯으로 폴백 */ }
+
+  const now = Date.now();
+  const KST = 9 * 3600 * 1000;
+  const kstNow = new Date(now + KST);
+  const y = kstNow.getUTCFullYear(), mo = kstNow.getUTCMonth(), d = kstNow.getUTCDate();
+  const slots = [8, 23];
+  for (let addDay = 0; addDay < 30; addDay++) {
+    for (const h of slots) {
+      const utcMs = Date.UTC(y, mo, d + addDay, h, 0, 0) - KST;
+      if (utcMs <= now + 60 * 1000) continue;
+      const iso = new Date(utcMs).toISOString();
+      if (!occupied.has(iso)) return iso;
+    }
+  }
+  return new Date(now + 3600 * 1000).toISOString();
+}
+
 // ── 인사이트 요약 ──
 export async function threadsInsightsMessage(days = 7) {
   const since = new Date(Date.now() - days * 24 * 3600 * 1000).toISOString();
@@ -439,7 +468,7 @@ export async function handleThreadsCallback(chatId, data) {
     return { text: `✍️ 초안 #${id} 수정: 새 본문을 답장으로 보내주세요. (취소: /cancel)\n\n현재:\n${escapeHtml(row.text)}` };
   }
   if (action === 'sched') {
-    const at = nextGoldenSlotUtc();
+    const at = await nextFreeGoldenSlotUtc(row.account_id);
     await updateQueue(id, { status: 'scheduled', scheduled_at: at });
     await sb(`threads_accounts?id=eq.${row.account_id}`, { method: 'PATCH', body: { hottime_started_at: null } }).catch(() => {}); // 상호작용함 → 핫타임 자동발행 skip
     const kst = new Date(new Date(at).getTime() + 9 * 3600 * 1000).toISOString().slice(5, 16).replace('T', ' ');

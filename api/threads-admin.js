@@ -14,7 +14,7 @@
 //  ?action=set-reply-mode body{mode:'auto'|'review',topic?,cap?} → 대댓글 자동화 전환
 import { tgThreads as tg } from './_shared.js';
 import { getPermalink, sb, publish, publishReply, insertPost, insertQueue, updateQueue, getAccounts, updateAccount, deleteMedia, updateReply, getReply, llmConfigured, getMyUsername, myAnsweredCommentIds } from './_threads.js';
-import { findAndQueue, sendReply, threadsReplyCard, threadsAutoReplyCard, nextGoldenSlotUtc } from './_threads-bot.js';
+import { findAndQueue, sendReply, threadsReplyCard, threadsAutoReplyCard, nextGoldenSlotUtc, nextFreeGoldenSlotUtc } from './_threads-bot.js';
 
 export default async function handler(req, res) {
   const secret = process.env.CRON_SECRET;
@@ -67,7 +67,7 @@ export default async function handler(req, res) {
       const row = (await sb(`threads_queue?id=eq.${id}&limit=1`))[0];
       if (!row) return res.status(404).json({ error: `queue #${id} not found` });
       if (row.status === 'published') return res.status(400).json({ error: 'already published' });
-      const at = b.at || req.query?.at || nextGoldenSlotUtc();
+      const at = b.at || req.query?.at || (await nextFreeGoldenSlotUtc(row.account_id));
       if (Number.isNaN(new Date(at).getTime())) return res.status(400).json({ error: 'bad at (ISO8601 필요)' });
       await sb(`threads_queue?id=eq.${id}`, { method: 'PATCH', body: { status: 'scheduled', scheduled_at: at, error: null } });
       const kst = new Date(new Date(at).getTime() + 9 * 3600 * 1000).toISOString().slice(0, 16).replace('T', ' ');
