@@ -13,6 +13,7 @@ import {
   autoRepliesSent24h, pendingRepliesForRoot, getMyUsername, myAnsweredCommentIds,
 } from './_threads.js';
 import { threadsReplyCard, sendReply } from './_threads-bot.js';
+import { setState, getState } from './_state.js';
 
 const AUTO_DAILY_CAP = 3;      // 자동모드 계정당 24h 최대 발행(스팸 방지)
 const UNANSWERED_CAP = 20;     // 원글 1개당 pending 상한 — 바이럴 글에서 수집 폭주 방지
@@ -22,6 +23,11 @@ const REPLY_DAILY_CAP = 20;    // 계정 reply_daily_cap 미설정 시 기본값
 //    답글 media엔 likes 카운트조차 없음 — 2026-07-29 실측). 즉 좋아요는 감지할 방법이 아예 없다.
 //    15분 크론이면 새 댓글은 항상 이 창 안에 들어오므로, 이 게이트는 실질적으로 백로그만 막는다.
 const REPLY_FRESH_HOURS = Number(process.env.THREADS_REPLY_FRESH_HOURS || 6);
+// 15분 주기 replies 크론 자기중첩 방지 락(bot_state KV, TTL). 이전 런이 15분 안에 못 끝나면
+// 다음 런이 겹쳐 Supabase 커넥션이 쌓이고 풀이 고갈됐다(2026-08-08 장애). 주기보다 짧은 TTL이라
+// 함수가 락 해제 전에 죽어도 다음 런에서 자동 만료된다.
+const REPLIES_LOCK_KEY = '__lock:replies';
+const REPLIES_LOCK_MS = 13 * 60 * 1000;
 
 export default async function handler(req, res) {
   const secret = process.env.CRON_SECRET;
@@ -110,7 +116,22 @@ export default async function handler(req, res) {
   log.autoReplies = 0;
   log.alreadyAnswered = 0;
   const autoSent = [];
-  if (doReplies) try {
+  // 자기중첩 가드: 다른 replies 런이 진행 중이면(락 유효) 이번 런은 댓글 섹션을 건너뛴다.
+  let repliesLocked = false;   // 다른 런이 락을 쥐고 있음 → skip
+  let repliesLockHeld = false; // 이번 런이 락을 획득함 → 끝나고 해제
+  if (doReplies) {
+    try {
+      const lk = await getState(REPLIES_LOCK_KEY);
+      if (lk && Number(lk.until) > Date.now()) {
+        repliesLocked = true;
+        log.repliesSkipped = 'in-progress';
+      } else {
+        await setState(REPLIES_LOCK_KEY, { until: Date.now() + REPLIES_LOCK_MS });
+        repliesLockHeld = true;
+      }
+    } catch (e) { log.errors.push(`replock:${e.message}`); } // 락 저장 실패 시 그냥 진행(best-effort)
+  }
+  if (doReplies && !repliesLocked) try {
     const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID;
     const cutoff = Date.now() - 48 * 3600 * 1000;
     const CAP = 10; // 런당 새 댓글 처리 상한(폭주 방지)
@@ -192,6 +213,8 @@ export default async function handler(req, res) {
       }
     }
   } catch (e) { log.errors.push(`replies:${e.message}`); }
+  // 획득한 락 해제(TTL로도 만료되지만 즉시 풀어 다음 15분 런이 안 밀리게).
+  if (repliesLockHeld) { try { await setState(REPLIES_LOCK_KEY, { until: 0 }); } catch {} }
 
   // 다음 예정 1건 — 핫타임 알림을 껐으니 "다음에 뭐가 나가는지"를 알려줄 창구가 여기뿐이다.
   let next = null;
