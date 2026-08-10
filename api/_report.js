@@ -213,12 +213,13 @@ async function seoTrendLines() {
     };
     const last = await sum(kstDay(1), kstDay(7));
     const prior = await sum(kstDay(8), kstDay(14));
+    // ▲=개선, ▼=악화 로 통일한다. 순위(position)는 값이 낮을수록 좋으므로 lowerBetter 로 방향을 뒤집는다.
     const dl = (c, p, lowerBetter = false) => {
       if (!p) return '';
       const pct = Math.round(((c - p) / p) * 100);
       if (pct === 0) return ' (±0%)';
-      const arrow = pct > 0 ? '▲' : '▼';
-      return ` (${arrow}${Math.abs(pct)}%)`;
+      const improved = lowerBetter ? c < p : c > p;
+      return ` (${improved ? '▲' : '▼'}${Math.abs(pct)}%)`;
     };
     out.push(
       '🗓 <b>주간 추세</b> (최근7일 vs 직전7일)',
