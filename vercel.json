@@ -2,10 +2,19 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "crons": [
     {
+      "path": "/api/gsc-coverage",
+      "schedule": "40 22 * * *"
+    },
+    {
       "path": "/api/daily-report",
       "schedule": "0 23 * * *"
     }
   ],
+  "functions": {
+    "api/gsc-coverage.js": {
+      "maxDuration": 60
+    }
+  },
   "redirects": [
     {
       "source": "/",

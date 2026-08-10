@@ -135,11 +135,110 @@ async function todaysTopics() {
   return (await Promise.all(jobs)).flat().slice(0, 4);
 }
 
+// ── Ahrefs Site Audit — 기술 SEO 이슈 요약(Vercel env AHREFS_API_KEY 있을 때만) ──
+// 응답 스키마가 확정 전이라 필드명을 방어적으로 탐색한다. 키 없거나 실패하면 [](섹션 생략).
+async function ahrefsAuditLines() {
+  const key = process.env.AHREFS_API_KEY;
+  if (!key) return [];
+  const pid = process.env.AHREFS_PROJECT_ID || '10214302';
+  const date = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
+  let json;
+  try {
+    const r = await fetch(
+      `https://api.ahrefs.com/v3/site-audit/issues?date=${encodeURIComponent(date)}&project_id=${encodeURIComponent(pid)}`,
+      { headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+        signal: AbortSignal.timeout ? AbortSignal.timeout(8000) : undefined }
+    );
+    if (!r.ok) return [];
+    json = await r.json();
+  } catch { return []; }
+  const rows = Array.isArray(json) ? json
+    : Array.isArray(json?.issues) ? json.issues
+    : Array.isArray(json?.data) ? json.data : [];
+  if (!rows.length) return [];
+  const pagesOf = (r) => Number(r.urls_count ?? r.pages ?? r.affected_pages ?? r.count ?? 0) || 0;
+  const sev = {};
+  for (const r of rows) { const s = String(r.severity || r.priority || 'issue').toLowerCase(); sev[s] = (sev[s] || 0) + 1; }
+  const sevTxt = Object.entries(sev).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(' · ');
+  const out = ['', `<b>🔧 Ahrefs 사이트감사</b> — 이슈 ${rows.length}건${sevTxt ? ` (${sevTxt})` : ''}`];
+  for (const r of [...rows].sort((a, b) => pagesOf(b) - pagesOf(a)).slice(0, 3)) {
+    const name = r.name || r.issue || r.title || r.type || '(이슈)';
+    const n = pagesOf(r);
+    out.push(`· ${escapeHtml(cut(String(name), 30))}${n ? ` — ${fmt(n)}p` : ''}`);
+  }
+  return out;
+}
+
+// ── 📈 SEO 추이 (구글 색인 커버리지 · GSC 주간추세 · Bing) ────────────────────
+// gsc-coverage 크론이 쌓은 최신 스냅샷 + gsc_daily 7일 창을 "읽기만" 한다.
+// 느린 URL 검사는 gsc-coverage.js 가 리포트보다 20분 먼저 별도로 돈다(타임아웃 분리).
+async function seoTrendLines() {
+  const out = [];
+  // 1) 구글 색인 커버리지 추이 (오늘 vs 직전 스냅샷)
+  try {
+    const rows = await rest(
+      'gsc_coverage?site=eq.mg&order=date.desc&limit=2&select=date,indexed,crawled_not_indexed,unknown,total,unknown_urls'
+    );
+    if (rows.length) {
+      const cur = rows[0], prev = rows[1];
+      const d = (k) => (prev ? cur[k] - prev[k] : 0);
+      const sign = (n) => (n > 0 ? ` <b>▲${n}</b>` : n < 0 ? ` <b>▼${Math.abs(n)}</b>` : '');
+      out.push(
+        '',
+        `📈 <b>SEO 추이</b> — 구글 색인 (표본 ${cur.total}편 · ${cur.date})`,
+        `색인 <b>${fmt(cur.indexed)}</b>${sign(d('indexed'))} · 크롤·미색인 <b>${fmt(cur.crawled_not_indexed)}</b>${sign(d('crawled_not_indexed'))} · 미발견 <b>${fmt(cur.unknown)}</b>${sign(d('unknown'))}`
+      );
+      const uk = Array.isArray(cur.unknown_urls) ? cur.unknown_urls : [];
+      if (uk.length) {
+        out.push('🔎 <b>미발견</b> (IndexNow 제출됨 · 구글 색인요청 대상):');
+        uk.slice(0, 5).forEach((u) => out.push(`· ${escapeHtml(cut(String(u).replace('https://mungge.com/', ''), 40))}`));
+        if (uk.length > 5) out.push(`  …외 ${uk.length - 5}편`);
+      }
+    } else {
+      out.push('', '📈 <b>SEO 추이</b> — 색인 커버리지 데이터 없음 (gsc-coverage 첫 수집 대기)');
+    }
+  } catch (e) {
+    out.push('', `📈 <b>SEO 추이</b> — 색인 조회 실패: ${escapeHtml(e.message)}`);
+  }
+
+  // 2) GSC 노출·클릭·순위 주간 추세 (최근 7일 vs 직전 7일)
+  try {
+    const sum = async (fromDay, toDay) => {
+      const rows = await rest(
+        `gsc_daily?source=eq.mg&date=gte.${toDay}&date=lte.${fromDay}&select=clicks,impressions,position`
+      );
+      let c = 0, im = 0, pw = 0;
+      for (const r of rows) { c += r.clicks || 0; im += r.impressions || 0; pw += (r.position || 0) * (r.impressions || 0); }
+      return { clicks: c, impressions: im, position: im ? pw / im : 0, ctr: im ? c / im : 0 };
+    };
+    const last = await sum(kstDay(1), kstDay(7));
+    const prior = await sum(kstDay(8), kstDay(14));
+    const dl = (c, p, lowerBetter = false) => {
+      if (!p) return '';
+      const pct = Math.round(((c - p) / p) * 100);
+      if (pct === 0) return ' (±0%)';
+      const arrow = pct > 0 ? '▲' : '▼';
+      return ` (${arrow}${Math.abs(pct)}%)`;
+    };
+    out.push(
+      '🗓 <b>주간 추세</b> (최근7일 vs 직전7일)',
+      `클릭 <b>${fmt(last.clicks)}</b>${dl(last.clicks, prior.clicks)} · 노출 <b>${fmt(last.impressions)}</b>${dl(last.impressions, prior.impressions)}`,
+      `CTR ${(last.ctr * 100).toFixed(1)}% · 평균순위 ${last.position.toFixed(1)}${dl(last.position, prior.position, true)}`
+    );
+  } catch (e) {
+    out.push(`🗓 <b>주간 추세</b> — 조회 실패: ${escapeHtml(e.message)}`);
+  }
+
+  // 3) Bing — 미연동(키 필요). IndexNow 로 제출은 되지만 색인·노출 수치는 Bing Webmaster API 키가 있어야 읽힌다.
+  out.push('🅱️ <b>Bing</b> — 미연동 (색인·노출은 API 키 필요 · IndexNow 제출은 진행 중)');
+  return out;
+}
+
 export async function reportMessage(dayArg) {
   const day = dayArg || kstDay(1);                      // 기본 = 어제(KST)
   const prevDay = kstShift(day, 1);
 
-  const [mg, ev, prevEv, posts, comments, naver, topics, gscLines] = await Promise.all([
+  const [mg, ev, prevEv, posts, comments, naver, topics, gscLines, ahrefsLines] = await Promise.all([
     loadMungge(prevDay, day),
     collectMgEvents(day),
     collectMgEvents(prevDay),
@@ -148,6 +247,7 @@ export async function reportMessage(dayArg) {
     mgNaverIndex(),
     todaysTopics().catch(() => []),
     gscReportLines().catch(() => []),   // Search Console 미연동이면 빈 배열
+    ahrefsAuditLines().catch(() => []), // Ahrefs 키 미설정/실패면 빈 배열
   ]);
 
   const cur = mg.stats(day);
@@ -252,8 +352,14 @@ export async function reportMessage(dayArg) {
   // ── 검색 유입 (Search Console) ──
   lines.push(...gscLines);
 
+  // ── 📈 SEO 추이 (색인 커버리지·주간추세·Bing) ──
+  lines.push(...(await seoTrendLines()));
+
   // ── 네이버 색인 (구글 옆에 붙여야 "어느 쪽이 막혔는지"가 한눈에 보인다) ──
   lines.push(...naverIndexLines(naver));
+
+  // ── Ahrefs 사이트 감사 (기술 SEO 이슈) ──
+  lines.push(...ahrefsLines);
 
   // ── 상호작용 (좋아요·쿠팡클릭·댓글) ──
   // 조회수와 달리 이건 "읽고 나서 뭘 했나"라 별 블록으로 세운다.
