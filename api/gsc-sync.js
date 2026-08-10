@@ -450,11 +450,14 @@ async function probe(url, res) {
 // daily-report 의 '📈 SEO 추이' 블록이 이 스냅샷을 읽는다. 별도 함수로 못 빼는 이유:
 // Hobby 플랜 서버리스 함수 12개 상한 — 새 함수를 추가하면 배포가 깨진다. 그래서 gsc-sync 에 얹는다.
 // URL 검사(느림) 때문에 daily-report 와는 분리하고 GitHub Actions(gsc-coverage.yml)가 20분 먼저 트리거한다.
-const COV_CONCURRENCY = 8;
-const COV_SITEMAP_LATEST = 12;
-const COV_CAP = 64;
+// 실측: 64편·동시성8 = 55s 로 기본 타임아웃(≈60s)에 근접 → 표본을 이전 통합 52편으로 좁히고
+// 동시성을 10으로 올려 ~40s 로 낮춘다. (신규 발행글 추적은 추후 CAP 상향 시 sitemap-latest 로 확장)
+const COV_CONCURRENCY = 10;
+const COV_SITEMAP_LATEST = 0;
+const COV_CAP = 56;
 
 async function covSitemapLatest() {
+  if (COV_SITEMAP_LATEST <= 0) return [];
   try {
     const r = await fetch('https://mungge.com/sitemap-post-type-post.xml', {
       headers: { 'User-Agent': 'mungge-seo-coverage/1.0' },
