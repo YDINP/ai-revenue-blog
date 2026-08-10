@@ -32,7 +32,7 @@ import {
 import { feedbackCards, handleFeedbackCallback } from './_feedback.js';
 import { gscMessage, seoMessage } from './_gsc-view.js';
 import { moneyMessage } from './_money.js';
-import { reportMessage } from './_report.js';
+import { reportMessage, vipReportMessage } from './_report.js';
 import { runNewsletter } from './_newsletter.js';
 import { indexMessage } from './_seo.js';
 import {
@@ -59,7 +59,8 @@ const HELP = [
   '<b>📊 대시보드 조회 (실시간)</b>',
   '• /stats — 전체 요약 (뭉게 조회·방문·검색유입 + 구독·댓글)',
   '• /mg [일수] — 뭉게 상세 (일별 추이·유입경로·인기글·최근발행, 기본 7일)',
-  '• /report [YYYY-MM-DD] — 일일 종합 리포트 (기본 어제, 매일 09시 자동 발송)',
+  '• /report — 뭉게/VIP 선택 메뉴 → 보고서 (버튼으로 뭉게↔VIP 전환)',
+  '   <code>/report mg|pc</code> 바로 열기 · <code>/report YYYY-MM-DD</code> 뭉게 특정일',
   '• /gsc [일수] — 구글 검색 유입 (검색어·노출·CTR·평균순위, 기본 7일)',
   '• /top [n] — 인기 글 (뭉게 최근 30일)',
   '• /trend — 최근 7일 조회수 추이',
@@ -98,6 +99,27 @@ const HELP = [
   '• <code>/deploy &lt;블로그&gt;</code> · <code>/status [블로그]</code>',
   '• /cancel — 진행 중인 작성/수정 취소',
 ].join('\n');
+
+// ── /report 블로그 선택 메뉴 · 보고서 네비 키보드 ──
+const REPORT_MENU = {
+  text: '📊 <b>어느 보고서를 볼까요?</b>',
+  kb: {
+    inline_keyboard: [[
+      { text: '🌐 뭉게', callback_data: 'rep:mg' },
+      { text: '⭐ VIP', callback_data: 'rep:pc' },
+    ]],
+  },
+};
+// 보고서 하단 키보드: 반대편 블로그로 토글 + 메뉴로 돌아가기
+const reportNavKb = (blog) => ({
+  inline_keyboard: [[
+    blog === 'mg'
+      ? { text: '⭐ VIP 보기', callback_data: 'rep:pc' }
+      : { text: '🌐 뭉게 보기', callback_data: 'rep:mg' },
+    { text: '◀ 메뉴', callback_data: 'rep:menu' },
+  ]],
+});
+const blogReportText = (blog) => (blog === 'pc' ? vipReportMessage() : reportMessage());
 
 export default async function handler(req, res) {
   // ── 관리자 진단/복구 (인바운드 명령이 안 먹힐 때) — 웹훅 등록 상태 조회·재등록 ──
@@ -157,6 +179,32 @@ export default async function handler(req, res) {
     }
     // 로딩 스피너 즉시 해제 (텔레그램은 응답 없으면 버튼이 계속 도는 것처럼 보임)
     await tg('answerCallbackQuery', { callback_query_id: cb.id });
+
+    // ── 리포트 메뉴/전환 (rep:menu|mg|pc) — 뭉게↔VIP 를 같은 메시지에서 왔다갔다 ──
+    if ((cb.data || '').startsWith('rep:')) {
+      const which = (cb.data || '').slice(4);
+      try {
+        const edit = (text, reply_markup) =>
+          tg('editMessageText', {
+            chat_id: cbChat,
+            message_id: cb.message.message_id,
+            text,
+            parse_mode: 'HTML',
+            disable_web_page_preview: true,
+            reply_markup,
+          });
+        if (which === 'menu') {
+          await edit(REPORT_MENU.text, REPORT_MENU.kb);
+        } else {
+          const blog = which === 'pc' ? 'pc' : 'mg';
+          await edit(await blogReportText(blog), reportNavKb(blog));
+        }
+      } catch (e) {
+        console.error('report callback error:', e);
+        await tg('sendMessage', { chat_id: cbChat, text: `❌ ${escapeHtml(e.message)}`, parse_mode: 'HTML' });
+      }
+      return res.status(200).json({ ok: true });
+    }
 
     // ── 피드백 콜백 (fb:del|ok|no:ID) — 삭제는 확인 한 단계 거침 ──
     if ((cb.data || '').startsWith('fb:')) {
@@ -393,6 +441,21 @@ export default async function handler(req, res) {
       const [a1, a2, ...more] = rest.split(/\s+/).filter(Boolean);
       const a3 = more.join(' ');
 
+      // ── /report → 블로그 선택 메뉴 (인자로 mg|pc|날짜 주면 바로 해당 보고서) ──
+      if (cmd === 'report') {
+        const blog = /^(pc|vip|playcast)$/i.test(a1 || '') ? 'pc'
+          : /^(mg|mungge|뭉게)$/i.test(a1 || '') ? 'mg' : null;
+        const day = /^\d{4}-\d{2}-\d{2}$/.test(a1 || '') ? a1 : undefined;
+        if (!blog && !day) {
+          await tg('sendMessage', { chat_id: chatId, text: REPORT_MENU.text, parse_mode: 'HTML', reply_markup: REPORT_MENU.kb });
+          return res.status(200).json({ ok: true });
+        }
+        const b = blog || 'mg';
+        const textOut = b === 'pc' ? await vipReportMessage() : await reportMessage(day);
+        await tg('sendMessage', { chat_id: chatId, text: textOut, parse_mode: 'HTML', disable_web_page_preview: true, reply_markup: reportNavKb(b) });
+        return res.status(200).json({ ok: true });
+      }
+
       const CONTROL = {
         blogs: () => blogsMessage(),
         posts: () => postsMessage(a1, a2 ? parseInt(a2, 10) : 10),
@@ -405,7 +468,6 @@ export default async function handler(req, res) {
         generate: () => (a1 ? generateMessage(a1, a2, a3) : null),
         deploy: () => deployMessage(a1),
         status: () => statusMessage(a1),
-        report: () => reportMessage(/^\d{4}-\d{2}-\d{2}$/.test(a1 || '') ? a1 : undefined),
         newsletter: async () => {
           const force = (a1 || '').toLowerCase() === 'force';
           const res = await runNewsletter({ force });

@@ -11,6 +11,8 @@
 //   · 댓글    — WordPress 자체 댓글이라 Supabase 가 아니라 WP REST 로 읽는다(mgComments)
 
 import { gscReportLines } from './_gsc-view.js';
+import { gscSummary, gscDay } from './_gsc.js';
+import { resolveBlog } from './_blogs.js';
 import { loadMungge, mgComments, mgNaverIndex, mgPosts } from './_mungge.js';
 import {
   SUPABASE_ANON_KEY,
@@ -320,5 +322,44 @@ export async function reportMessage(dayArg) {
     lines.push('', '<i>해당 날짜의 활동 데이터가 없습니다.</i>');
   }
 
+  return lines.join('\n');
+}
+
+// ── VIP(Playcast) 리포트 ─────────────────────────────────────────────────────
+// 뭉게와 달리 Playcast(virtual-in-playing)는 이 repo 밖 사이트라 조회수/댓글(GA4·WP)이
+// 안 닿는다. 닿는 건 GSC 검색 실적뿐이라 그걸로 구성한다(트래픽 수치 없음은 명시).
+export async function vipReportMessage() {
+  const pc = resolveBlog('pc');
+  const end = gscDay(3);              // GSC 는 2~3일 지연 → 3일 전까지가 안전한 마지막 날
+  const start = gscDay(3 + 7 - 1);    // 최근 7일
+  const lines = [
+    '📊 <b>VIP 리포트</b> — Playcast',
+    '🎬 virtual-in-playing.vercel.app',
+    `<i>※ GA4 미연동 — GSC 검색 실적 기준 (최근 7일 ${start} ~ ${end})</i>`,
+  ];
+  try {
+    const s = await gscSummary(pc.gscSite, start, end, 5);
+    lines.push(
+      '',
+      '🔍 <b>검색 유입</b>',
+      `클릭 <b>${fmt(s.clicks)}</b> · 노출 <b>${fmt(s.impressions)}</b> · CTR ${(s.ctr * 100).toFixed(1)}% · 평균순위 ${s.position.toFixed(1)}`
+    );
+    if (s.queries.length) {
+      lines.push('', '🔑 <b>검색어</b>');
+      s.queries.forEach((q) =>
+        lines.push(`· ${escapeHtml(cut(q.key, 26))} — 클릭 ${fmt(q.clicks)} / 노출 ${fmt(q.impressions)} (${q.position.toFixed(0)}위)`)
+      );
+    } else {
+      lines.push('<i>검색어 데이터 없음 (색인 초기이거나 노출 부족)</i>');
+    }
+    if (s.pages.length) {
+      lines.push('', '📄 <b>유입 페이지</b>');
+      s.pages.slice(0, 5).forEach((p) =>
+        lines.push(`· ${escapeHtml(cut(p.key.replace(/^https?:\/\/[^/]+/, ''), 30))} — 클릭 ${fmt(p.clicks)} / 노출 ${fmt(p.impressions)}`)
+      );
+    }
+  } catch (e) {
+    lines.push('', `⚠️ GSC 조회 실패: ${escapeHtml(e.message)}`);
+  }
   return lines.join('\n');
 }

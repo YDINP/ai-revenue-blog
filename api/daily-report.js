@@ -5,7 +5,7 @@
 // 수동 확인: 봇에서 /report [YYYY-MM-DD]
 
 import { escapeHtml, sendToAdmin, supabaseRpc, sourceLabel } from './_shared.js';
-import { reportMessage } from './_report.js';
+import { reportMessage, vipReportMessage } from './_report.js';
 import { syncGsc } from './_gsc-sync.js';
 import { syncGa4 } from './_ga4-sync.js';
 import { runNewsletter, unsubscribe, sendCopyLatest, changeEmail, sbn } from './_newsletter.js';
@@ -158,7 +158,9 @@ export default async function handler(req, res) {
   // 봇 /report 와 동일한 본문을 화면에서 확인하려는 용도.
   if (url.searchParams.get('preview')) {
     const pday = url.searchParams.get('day') || undefined;
-    const text = await reportMessage(/^\d{4}-\d{2}-\d{2}$/.test(pday || '') ? pday : undefined);
+    const text = url.searchParams.get('blog') === 'pc'
+      ? await vipReportMessage()
+      : await reportMessage(/^\d{4}-\d{2}-\d{2}$/.test(pday || '') ? pday : undefined);
     return res.status(200).json({ ok: true, text });
   }
 
