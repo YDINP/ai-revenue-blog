@@ -100,6 +100,40 @@ const HELP = [
 ].join('\n');
 
 export default async function handler(req, res) {
+  // ── 관리자 진단/복구 (인바운드 명령이 안 먹힐 때) — 웹훅 등록 상태 조회·재등록 ──
+  //   GET /api/telegram-webhook?action=webhook-info&secret=<CRON_SECRET>
+  //   GET /api/telegram-webhook?action=set-webhook&secret=<CRON_SECRET>[&bot=vip|threads]
+  {
+    const u = new URL(req.url, 'http://x');
+    const action = u.searchParams.get('action');
+    if (action === 'webhook-info' || action === 'set-webhook') {
+      if (!process.env.CRON_SECRET || u.searchParams.get('secret') !== process.env.CRON_SECRET) {
+        return res.status(401).json({ error: 'unauthorized' });
+      }
+      const which = u.searchParams.get('bot') || 'main';
+      const token =
+        which === 'vip' ? process.env.TELEGRAM_VIP_BOT_TOKEN
+        : which === 'threads' ? process.env.TELEGRAM_THREADS_BOT_TOKEN
+        : process.env.TELEGRAM_BOT_TOKEN;
+      if (!token) return res.status(500).json({ error: `no token for bot=${which}` });
+      const api = (m, body) =>
+        fetch(`https://api.telegram.org/bot${token}/${m}`,
+          body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : undefined
+        ).then((r) => r.json());
+      if (action === 'webhook-info') {
+        return res.status(200).json(await api('getWebhookInfo'));
+      }
+      const hookUrl =
+        'https://ai-revenue-blog.vercel.app/api/telegram-webhook' + (which === 'main' ? '' : `?bot=${which}`);
+      const setRes = await api('setWebhook', {
+        url: hookUrl,
+        secret_token: process.env.WEBHOOK_SECRET,
+        allowed_updates: ['message', 'callback_query'],
+      });
+      return res.status(200).json({ bot: which, url: hookUrl, setWebhook: setRes, info: await api('getWebhookInfo') });
+    }
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'method_not_allowed' });
   }
