@@ -153,6 +153,15 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'unauthorized' });
   }
 
+  // ── 리포트 미리보기 (관리자) — /api/daily-report?preview=1[&day=YYYY-MM-DD] ──
+  // 발송·GSC/GA4 동기화·뉴스레터 없이 reportMessage 텍스트만 반환한다(읽기 전용).
+  // 봇 /report 와 동일한 본문을 화면에서 확인하려는 용도.
+  if (url.searchParams.get('preview')) {
+    const pday = url.searchParams.get('day') || undefined;
+    const text = await reportMessage(/^\d{4}-\d{2}-\d{2}$/.test(pday || '') ? pday : undefined);
+    return res.status(200).json({ ok: true, text });
+  }
+
   // ── 구독자 목록 조회 / 삭제 (관리자) ──
   // 배달 불가 주소(테스트로 들어간 @example.com 등)는 매 발송마다 반송메일을 만들고
   // Gmail 발신 평판도 깎으므로 목록에서 실제로 지울 수단이 필요하다.
