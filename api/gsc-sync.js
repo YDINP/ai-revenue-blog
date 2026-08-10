@@ -22,6 +22,8 @@ import { syncGa4 } from './_ga4-sync.js';
 import { blogList, resolveBlog } from './_blogs.js';
 import { gscDay, gscInspect, gscRaw, gscSites, gscSitemaps, gscSubmitSitemap, hasGsc } from './_gsc.js';
 import { ga4Day, ga4Properties, ga4Report, hasGa4, saEmail } from './_ga4.js';
+import { WATCHLIST } from './_seo-watchlist.js';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, kstDay } from './_shared.js';
 
 export default async function handler(req, res) {
   const secret = process.env.CRON_SECRET;
@@ -46,6 +48,7 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'unauthorized' });
   }
 
+  if (url.searchParams.get('coverage')) return coverage(url, res);
   if (url.searchParams.get('ga4')) return ga4(url, res);
   if (url.searchParams.get('gsc')) return gscDiag(url, res);
 
@@ -437,6 +440,98 @@ async function probe(url, res) {
       })),
     });
   } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
+}
+
+// ── 구글 색인 커버리지 스냅샷 — /api/gsc-sync?coverage=run&secret=… ──────────────
+// 워치리스트(_seo-watchlist.js = 뭉게 이전 통합 타겟 + 포스트 사이트맵 최신 몇 편)를
+// URL 검사로 훑어 indexed/crawled_not_indexed/unknown 카운트 + 미발견 URL 을 gsc_coverage 에 upsert.
+// daily-report 의 '📈 SEO 추이' 블록이 이 스냅샷을 읽는다. 별도 함수로 못 빼는 이유:
+// Hobby 플랜 서버리스 함수 12개 상한 — 새 함수를 추가하면 배포가 깨진다. 그래서 gsc-sync 에 얹는다.
+// URL 검사(느림) 때문에 daily-report 와는 분리하고 GitHub Actions(gsc-coverage.yml)가 20분 먼저 트리거한다.
+const COV_CONCURRENCY = 8;
+const COV_SITEMAP_LATEST = 12;
+const COV_CAP = 64;
+
+async function covSitemapLatest() {
+  try {
+    const r = await fetch('https://mungge.com/sitemap-post-type-post.xml', {
+      headers: { 'User-Agent': 'mungge-seo-coverage/1.0' },
+    });
+    if (!r.ok) return [];
+    const xml = await r.text();
+    return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].trim()).slice(0, COV_SITEMAP_LATEST);
+  } catch {
+    return [];
+  }
+}
+
+function covClassify(r) {
+  const cov = r.coverageState || '';
+  if (r.verdict === 'PASS' || /색인이 생성되었|Submitted and indexed|\bindexed\b/i.test(cov)) return 'indexed';
+  if (/알려지지 않은|unknown to Google/i.test(cov)) return 'unknown';
+  return 'crawled_not_indexed';
+}
+
+async function covPool(items, n, fn) {
+  const out = new Array(items.length);
+  let i = 0;
+  await Promise.all(
+    Array.from({ length: Math.min(n, items.length) }, async () => {
+      while (i < items.length) {
+        const idx = i++;
+        try { out[idx] = await fn(items[idx]); } catch (e) { out[idx] = { url: items[idx], error: e.message }; }
+      }
+    })
+  );
+  return out;
+}
+
+async function covUpsert(row) {
+  const r = await fetch(`${SUPABASE_URL}/rest/v1/gsc_coverage?on_conflict=date,site`, {
+    method: 'POST',
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json',
+      Prefer: 'resolution=merge-duplicates,return=minimal',
+    },
+    body: JSON.stringify([row]),
+  });
+  if (!r.ok) throw new Error(`gsc_coverage upsert ${r.status}: ${(await r.text()).slice(0, 200)}`);
+}
+
+async function coverage(url, res) {
+  if (!hasGsc()) return res.status(500).json({ error: 'no-gsc-env' });
+  try {
+    const extra = await covSitemapLatest();
+    const seen = new Set();
+    const list = [...WATCHLIST, ...extra].filter((u) => (seen.has(u) ? false : (seen.add(u), true))).slice(0, COV_CAP);
+
+    const results = await covPool(list, COV_CONCURRENCY, (u) => gscInspect('https://mungge.com/', u));
+    const buckets = { indexed: 0, crawled_not_indexed: 0, unknown: 0 };
+    const unknownUrls = [];
+    let errors = 0;
+    for (const r of results) {
+      if (!r || r.error) { errors++; continue; }
+      const k = covClassify(r);
+      buckets[k]++;
+      if (k === 'unknown') unknownUrls.push(r.url);
+    }
+    const row = {
+      date: kstDay(0),
+      site: 'mg',
+      indexed: buckets.indexed,
+      crawled_not_indexed: buckets.crawled_not_indexed,
+      unknown: buckets.unknown,
+      total: results.length - errors,
+      unknown_urls: unknownUrls,
+    };
+    await covUpsert(row);
+    return res.status(200).json({ ok: true, ...row, errors, watchlist: list.length });
+  } catch (e) {
+    console.error('coverage error:', e);
     return res.status(500).json({ error: e.message });
   }
 }

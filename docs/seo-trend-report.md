@@ -5,12 +5,15 @@
 
 ## 구조
 
-- **수집(분리 크론)** `api/gsc-coverage.js` — 매일 **07:40 KST**(`40 22 * * *`).
-  워치리스트(`api/_seo-watchlist.js` = 뭉게 이전 통합 타겟 52편 + 포스트 사이트맵 최신 15편, 최대 70)를
+- **수집** `api/gsc-sync.js?coverage=run` — GitHub Actions(`gsc-coverage.yml`, **07:30 KST** `30 22 * * *`)가 트리거.
+  워치리스트(`api/_seo-watchlist.js` = 뭉게 이전 통합 타겟 52편 + 포스트 사이트맵 최신 12편, 최대 64)를
   GSC URL 검사(Inspection API)로 훑어 `indexed / crawled_not_indexed / unknown` 카운트 + 미발견 URL 목록을
-  Supabase `gsc_coverage(date, site, ...)` 에 upsert. 동시성 6, `maxDuration=60`.
+  Supabase `gsc_coverage(date, site, ...)` 에 upsert. 동시성 8(기본 함수 타임아웃 안에 들도록).
   - **왜 분리했나**: URL 검사는 호출당 1~3초라 리포트 안에서 인라인으로 돌리면 함수 타임아웃(리포트 자체 실패).
-    수집을 20분 먼저 돌려 스냅샷만 남기고, 리포트는 그걸 "읽기만" 한다.
+    수집을 먼저 돌려 스냅샷만 남기고, 리포트는 그걸 "읽기만" 한다.
+  - **왜 별도 함수가 아니라 gsc-sync 에 얹었나**: Hobby 플랜 **서버리스 함수 12개 상한**. 새 `api/*.js` 를
+    추가하면 배포가 "Deploying outputs" 단계에서 실패한다(빌드는 성공). gsc-sync 헤더 주석의 기존 패턴과 동일.
+  - **왜 Vercel cron 이 아니라 GitHub Actions 인가**: Hobby 는 cron 도 1개만 허용 → daily-report 하나가 이미 쓴다.
 - **표시** `api/_report.js` → `seoTrendLines()` — `reportMessage()` 의 GSC 블록 뒤에 주입.
   1. **구글 색인 커버리지 추이** — 오늘 vs 직전 스냅샷(`gsc_coverage` 최근 2행) 색인/크롤-미색인/미발견 전일 대비 증감
   2. **미발견 액션 목록** — 오늘 미발견 URL 상위 5(IndexNow 제출됨·구글 색인요청 대상)
@@ -25,7 +28,7 @@
 
 ## 트리거 / 미리보기
 
-- 수집 수동: `GET /api/gsc-coverage?secret=CRON_SECRET`
+- 수집 수동: `GET /api/gsc-sync?coverage=run&secret=CRON_SECRET` (또는 GH Actions `gsc-coverage.yml` 수동 실행)
 - 리포트 미리보기(부작용 없음): 텔레그램 봇에 `/report` — 관리자에게만 전송, 뉴스레터 미발송.
   (`daily-report` 직접 호출은 월·수·금 뉴스레터 발송 게이트가 있어 테스트로 쓰지 말 것.)
 

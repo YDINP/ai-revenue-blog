@@ -23,7 +23,8 @@ function bar(a) {
   const VPAL = ['#3b82f6', '#009e73', '#f59e0b', '#d55e00', '#8b5cf6', '#ec4899', '#14b8a6'];
   let h = title ? `<div class="chart-title">${title}</div>` : '';
   if (vertical) {
-    // 세로막대: 바별 색 구분(팔레트) + 우측 범례(항목·점수). 값/라벨은 막대 안이 아닌 범례에.
+    // 세로막대: 바별 색 구분(팔레트) + 우측 범례(항목·점수).
+    // 막대 위에 값, 아래에 항목명을 붙인다 — 범례에만 두면 어느 막대가 무엇인지 눈으로 잇기 어렵다.
     // 정직한 비례 스케일: 최댓값→100%(상단 채움), 나머지는 값에 비례. (증폭 금지 — 돈/수량이 왜곡되면 오해)
     const vScale = (v) => (vMax > 0 ? (v / vMax) * 100 : 0);
     h += '<div class="chart-vbar-wrap"><div class="chart-columns">';
@@ -31,7 +32,11 @@ function bar(a) {
       const pct = vScale(values[i]);
       const color = VPAL[i % VPAL.length];
       const gradV = `linear-gradient(180deg, ${color}, ${rgba(color, 0.72)})`;
-      h += `<div class="chart-col"><div class="chart-col-track"><div class="chart-col-fill" style="height:${pct}%;background:${gradV}"></div></div></div>`;
+      h += `<div class="chart-col">`
+        + `<span class="chart-col-val">${values[i]}${unit}</span>`
+        + `<div class="chart-col-track"><div class="chart-col-fill" style="height:${pct}%;background:${gradV}"></div></div>`
+        + `<span class="chart-col-name" title="${label.trim()}">${label.trim()}</span>`
+        + `</div>`;
     });
     h += '</div><ol class="chart-vlegend">';
     labels.forEach((label, i) => {

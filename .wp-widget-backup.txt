@@ -1,0 +1,2848 @@
+<style id="mg-chart-css">
+/* @import 는 스타일시트 최상단(다른 규칙보다 먼저)이어야 브라우저가 무시하지 않음.
+   footer 위젯 <style> 안에서도 반드시 이 두 줄이 맨 위에 있어야 함. 폰트 로드 실패 시
+   system-ui / Malgun Gothic 폴백이 내장돼 레이아웃은 안전. */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+
+/* ============================================================================
+   뭉게(mungge.com) 통합 컴포넌트 CSS — WordPress footer 위젯 <style> 전역 주입용
+   본문 타이포 · 표 · 콜아웃 · seo-inlink/mid-related · 쿠팡 CTA · 차트 5종 · 히어로.
+   원칙: 단일 토큰 스케일(색/여백/라운드/그림자/폰트) · 플랫 컬러 우선 ·
+        Okabe-Ito 접근성 팔레트 · 명도대비 4.5:1 · 모바일 우선 · 모션 최소화.
+   제약: HTML/인라인 style 불변(fill width·height·색은 인라인). JS 없음(kses).
+   ============================================================================ */
+
+/* ── 통합 디자인 토큰 ──────────────────────────────────────────────────────
+   라운드 4단계: 카드16 / 트랙·막대10 / 배지·알약999 / 범례도트3
+   그림자: 카드용 단일 앰비언트 하나(장식 아님, 깊이용)
+   트랙 틴트: 라이트 #eef1f5 / 다크 #2a3542
+   팔레트: Okabe-Ito(파랑/초록/앰버/주황/보라) — 하드코딩 대신 변수 참조 */
+:root {
+  --r-card: 16px;
+  --r-bar: 10px;
+  --r-pill: 999px;
+  --r-dot: 3px;
+  --sh-card: 0 1px 2px rgba(0, 0, 0, .04), 0 10px 24px -14px rgba(0, 0, 0, .10);
+  --sh-card-hover: 0 2px 4px rgba(0, 0, 0, .05), 0 16px 32px -16px rgba(0, 0, 0, .16);
+  --chart-track: #eef1f5;
+  --hairline: rgba(127, 127, 127, .14);
+  --zebra: rgba(127, 127, 127, .038);
+  /* Okabe-Ito */
+  --ok-blue: #3b82f6;
+  --ok-green: #009e73;
+  --ok-amber: #f59e0b;
+  --ok-orange: #d55e00;
+  --ok-purple: #8b5cf6;
+  /* 쿠팡 브랜드(차트 팔레트와 분리, CTA/라벨 국소 사용만) */
+  --cp-coral: #e8632a;
+  /* 폰트 스택 */
+  --font-kr: 'Pretendard', 'Noto Sans KR', system-ui, -apple-system, 'Segoe UI', Roboto, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --chart-font: 'Noto Sans KR', 'Pretendard', system-ui, -apple-system, 'Segoe UI', Roboto, 'Malgun Gothic', sans-serif;
+}
+:root.dark {
+  --sh-card: 0 1px 2px rgba(0, 0, 0, .12), 0 12px 24px -12px rgba(0, 0, 0, .35);
+  --sh-card-hover: 0 2px 4px rgba(0, 0, 0, .1), 0 16px 32px -16px rgba(0, 0, 0, .4);
+  --chart-track: #2a3542;
+  --hairline: rgba(255, 255, 255, .08);
+  --zebra: rgba(255, 255, 255, .03);
+}
+
+/* ============================================================================
+   1. 한글 본문 타이포그래피 — .entry-content-wrap 전용
+   ============================================================================ */
+.entry-content-wrap {
+  font-family: var(--font-kr);
+  font-size: 1.06rem;          /* 17px — 롱폼 편안함 */
+  line-height: 1.85;           /* 한글 고밀도 대응 */
+  color: #26272b;              /* 순흑 대신 눈부심 완화(WCAG AA↑) */
+  letter-spacing: -0.003em;
+  word-break: keep-all;        /* 어절이 줄 끝에서 안 쪼개짐 */
+  overflow-wrap: anywhere;     /* URL·긴 영문만 넘칠 때 끊김 */
+  text-wrap: pretty;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  max-width: 42rem;            /* 읽기 최적 measure(~40자). 테마 허용 시 가운데 정렬 */
+  margin-inline: auto;
+}
+:root.dark .entry-content-wrap { color: #e6e7ea; }
+
+/* 본문 직계 텍스트만 상속(차트/카드/코드 등 컴포넌트 폰트는 침범 금지) */
+.entry-content-wrap p,
+.entry-content-wrap li,
+.entry-content-wrap blockquote,
+.entry-content-wrap dd,
+.entry-content-wrap dt {
+  font-family: inherit;
+  letter-spacing: inherit;
+}
+
+/* 문단: 간격은 '여백'으로 리듬 */
+.entry-content-wrap p { margin: 0 0 1.5em; }
+.entry-content-wrap > p:last-child { margin-bottom: 0; }
+
+/* 제목 위계: 위 여백 크게 / 아래 여백 작게 = 근접성 시각화 */
+.entry-content-wrap h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: #1a1b1e;
+  margin: 3rem 0 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.16);
+  text-wrap: balance;
+}
+:root.dark .entry-content-wrap h2 { color: #f2f3f5; }
+.entry-content-wrap h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+  color: #1f2023;
+  margin: 2.2rem 0 0.6rem;
+  text-wrap: balance;
+}
+:root.dark .entry-content-wrap h3 { color: #eceef0; }
+.entry-content-wrap h4 {
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  margin: 1.8rem 0 0.5rem;
+}
+.entry-content-wrap > h2:first-child,
+.entry-content-wrap > h3:first-child,
+.entry-content-wrap > *:first-child + h2 { margin-top: 1.5rem; }
+
+/* 링크: 조용한 우아함 — 밑줄 유지, 글자 침범 안 함 */
+.entry-content-wrap a {
+  color: var(--color-primary, var(--ok-blue));
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  transition: text-decoration-thickness 0.15s ease, text-decoration-color 0.15s ease;
+}
+.entry-content-wrap a:hover {
+  text-decoration-thickness: 2px;
+  text-decoration-color: currentColor;
+}
+@supports not (color: color-mix(in srgb, red 40%, transparent)) {
+  .entry-content-wrap a { text-decoration-color: rgba(59, 130, 246, 0.45); }
+}
+
+/* 강조: 색 변경 없이 굵기만. 한글 이탤릭 왜곡 방지 → em도 굵기로 */
+.entry-content-wrap strong,
+.entry-content-wrap b { font-weight: 700; color: inherit; }
+.entry-content-wrap em,
+.entry-content-wrap i { font-style: normal; font-weight: 700; }
+.entry-content-wrap mark {
+  background: color-mix(in srgb, var(--color-primary, var(--ok-blue)) 18%, transparent);
+  color: inherit;
+  padding: 0.05em 0.2em;
+  border-radius: 4px;
+}
+
+/* 인용: 이탤릭 금지, 좌측 accent 바 */
+.entry-content-wrap blockquote {
+  margin: 1.8rem 0;
+  padding: 0.2rem 0 0.2rem 1.15rem;
+  border-left: 3px solid var(--color-primary, var(--ok-blue));
+  border-radius: 0 8px 8px 0;
+  color: var(--color-text-secondary, #55575c);
+  font-style: normal;
+  background: transparent;
+}
+.entry-content-wrap blockquote p:last-child { margin-bottom: 0; }
+:root.dark .entry-content-wrap blockquote { color: var(--color-text-secondary, #a9abb0); }
+
+/* 리스트: ::marker에만 팔레트 색 절제 사용 */
+.entry-content-wrap ul,
+.entry-content-wrap ol { margin: 0 0 1.5em; padding-left: 1.25rem; }
+.entry-content-wrap li { margin: 0.5em 0; line-height: 1.8; }
+.entry-content-wrap li::marker { color: var(--color-primary, var(--ok-blue)); font-weight: 700; }
+.entry-content-wrap li > ul,
+.entry-content-wrap li > ol { margin: 0.4em 0 0.2em; }
+
+/* 구분선 */
+.entry-content-wrap hr {
+  border: 0;
+  border-top: 1px solid rgba(127, 127, 127, 0.16);
+  margin: 2.5rem 0;
+  height: 0;
+}
+
+/* 인라인 코드 · 코드블록 */
+.entry-content-wrap :not(pre) > code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.88em;
+  background: rgba(127, 127, 127, 0.12);
+  padding: 0.12em 0.4em;
+  border-radius: 5px;
+  word-break: break-all;       /* keep-all 상속을 되돌려 긴 코드 넘침 방지 */
+}
+.entry-content-wrap pre {
+  margin: 1.8rem 0;
+  padding: 1rem 1.15rem;
+  border-radius: 10px;
+  overflow-x: auto;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  background: rgba(127, 127, 127, 0.08);
+  border: 1px solid rgba(127, 127, 127, 0.14);
+}
+
+/* 이미지/미디어 */
+.entry-content-wrap img,
+.entry-content-wrap figure img { max-width: 100%; height: auto; border-radius: 12px; }
+.entry-content-wrap figure { margin: 1.8rem 0; }
+.entry-content-wrap figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary, #6b6d72);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ============================================================================
+   2. 비교 표 (Comparison Table) — 카드화. .entry-content-wrap 스코프.
+   원칙: 4방향 격자 제거 → 하나의 라운드 카드 / 헤더 배경+굵기+하단 2px primary /
+        로우 헤어라인 + zebra 병행 / 첫 열 앵커링 / tabular-nums / 모바일 가로 스크롤.
+   ============================================================================ */
+.entry-content-wrap table {
+  width: 100%;
+  margin: 1.75rem 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.92rem;
+  line-height: 1.62;
+  color: var(--color-text, #26272b);
+  background: var(--color-bg, #fff);
+  border: 1px solid var(--color-border, rgba(127, 127, 127, .2));
+  border-radius: 14px;
+  overflow: hidden;            /* 모서리 클리핑 → 셀 라운드 불필요 */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 10px 30px -20px rgba(0, 0, 0, 0.35);
+}
+.entry-content-wrap th,
+.entry-content-wrap td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  border: 0;
+  vertical-align: middle;
+  font-variant-numeric: tabular-nums;
+}
+.entry-content-wrap thead th,
+.entry-content-wrap table > tbody > tr:first-child > th {
+  background: var(--color-bg-secondary, #f4f6f9);
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
+  color: var(--color-text, #26272b);
+  border-bottom: 2px solid var(--color-primary, var(--ok-blue));
+  white-space: nowrap;
+}
+.entry-content-wrap tbody td { border-top: 1px solid var(--hairline); }
+.entry-content-wrap tbody tr:first-child td { border-top: 0; }
+.entry-content-wrap tbody tr:nth-child(even) { background: var(--zebra); }
+.entry-content-wrap tbody tr { transition: background 0.15s ease; }
+.entry-content-wrap tbody tr:hover { background: rgba(59, 130, 246, 0.06); }
+.entry-content-wrap tbody td:first-child { font-weight: 700; color: var(--color-text, #26272b); }
+
+:root.dark .entry-content-wrap table {
+  border-color: #334155;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 10px 30px -20px rgba(0, 0, 0, 0.6);
+}
+:root.dark .entry-content-wrap thead th,
+:root.dark .entry-content-wrap table > tbody > tr:first-child > th { background: #1e293b; }
+:root.dark .entry-content-wrap tbody tr:hover { background: rgba(59, 130, 246, 0.12); }
+
+@media (max-width: 640px) {
+  .entry-content-wrap table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 12px;
+  }
+  .entry-content-wrap th,
+  .entry-content-wrap td {
+    padding: 0.6rem 0.7rem;
+    font-size: 0.85rem;
+    white-space: nowrap;       /* 값 열은 줄바꿈 없이 → 가로 스크롤 성립 */
+  }
+  .entry-content-wrap tbody td:first-child,
+  .entry-content-wrap thead th:first-child {
+    white-space: normal;       /* 첫 열(제품명)만 줄바꿈 허용 */
+    min-width: 7.5rem;
+  }
+}
+
+/* ============================================================================
+   3. 콜아웃 · seo-inlink · mid-related (유지 + 소폭 개선)
+   ============================================================================ */
+.callout-tip,
+.callout-warning,
+.callout-info {
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  border-radius: 10px;
+  border-left: 4px solid;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.callout-tip {
+  background: rgba(0, 158, 115, 0.08);
+  border-left-color: var(--ok-green);
+  color: var(--color-text);
+}
+.callout-warning {
+  background: rgba(245, 158, 11, 0.08);
+  border-left-color: var(--ok-amber);
+  color: var(--color-text);
+}
+.callout-info {
+  background: rgba(59, 130, 246, 0.08);
+  border-left-color: var(--ok-blue);
+  color: var(--color-text);
+}
+:root.dark .callout-tip { background: rgba(0, 158, 115, 0.14); }
+:root.dark .callout-warning { background: rgba(245, 158, 11, 0.14); }
+:root.dark .callout-info { background: rgba(59, 130, 246, 0.14); }
+.callout-tip strong,
+.callout-warning strong,
+.callout-info strong { display: inline; font-weight: 700; }
+
+.callout-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1.5px;
+  font-weight: 700;
+}
+.callout-link:hover { opacity: 0.75; }
+
+.mid-related {
+  margin: 2rem 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(127, 127, 127, 0.18);
+  border-left: 4px solid var(--color-primary, var(--ok-blue));
+  border-radius: 10px;
+  background: rgba(127, 127, 127, 0.05);
+}
+.mid-related-label { display: block; font-weight: 800; font-size: 0.92rem; margin-bottom: 0.5rem; }
+.mid-related ul { margin: 0; padding-left: 1.1rem; }
+.mid-related li { margin: 0.35rem 0; }
+.mid-related a { font-weight: 600; text-decoration: none; }
+.mid-related a:hover { text-decoration: underline; }
+
+.seo-inlink {
+  margin: 1.5rem 0;
+  padding: 0.7rem 1rem;
+  background: var(--color-bg-secondary);
+  border-left: 3px solid var(--color-primary, var(--ok-blue));
+  border-radius: 8px;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+.seo-inlink strong { font-weight: 800; }
+.seo-inlink a { font-weight: 600; }
+
+.mid-coupang-wrap { margin: 2rem 0; }
+
+/* ============================================================================
+   5. 데이터 시각화 차트 (5종) — 공통 카드
+   채움은 트랙 틴트 대비만으로 떠 보이게(그림자·inset·sheen·글로우 전면 제거).
+   fill의 width/height/gradient는 인라인 style 유지(건드리지 않음).
+   ============================================================================ */
+.chart-bar,
+.chart-donut,
+.chart-versus,
+.chart-progress,
+.chart-radar {
+  margin: 1.75rem 0;
+  padding: 22px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  background: var(--color-bg);
+  box-shadow: var(--sh-card);
+  font-family: var(--chart-font);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+/* 레이더 외곽은 껍데기만(내부 radar-item이 카드 → 카드-in-카드 방지) */
+.chart-radar { background: transparent; border: 0; box-shadow: none; padding: 0; }
+
+@media (hover: hover) {
+  .chart-bar:hover,
+  .chart-donut:hover,
+  .chart-versus:hover,
+  .chart-progress:hover { box-shadow: var(--sh-card-hover); }
+}
+
+.chart-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+  text-align: left;
+  color: var(--color-text);
+}
+.chart-value,
+.chart-delta,
+.versus-val,
+.radar-score-val,
+.radar-avg-badge,
+.progress-value,
+.donut-total,
+.donut-legend-value { font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+
+/* ── 가로 막대 ── */
+.chart-bars { display: flex; flex-direction: column; gap: 12px; }
+.chart-row { display: flex; align-items: center; gap: 12px; }
+.chart-label {
+  flex-shrink: 0;
+  min-width: 112px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: right;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* wpautop 이 차트 마크업 안에 끼워 넣는 <p> 무력화.
+   .chart-row 는 flex 라서 빈 <p> 가 아이템으로 잡혀 gap(12px)을 한 칸 더 먹고,
+   값(.chart-value)을 감싼 <p> 는 자기 flex-shrink:0 / min-width 를 못 받는다.
+   display:contents 면 둘 다 박스가 사라져 원래 의도대로 배치된다.
+   근본 수정은 발행 시 차트 블록을 wp:html 로 감싸는 것 — 그건 발행 스크립트 쪽 일. */
+.chart-row > p,
+.progress-circle > p { display: contents; }
+
+.chart-track { flex: 1; height: 28px; background: var(--chart-track); border-radius: var(--r-bar); overflow: hidden; }
+.chart-fill { height: 100%; min-width: 4px; border-radius: var(--r-bar); box-shadow: none; }
+.chart-value { flex-shrink: 0; min-width: 52px; font-size: 0.875rem; font-weight: 700; color: var(--color-text); }
+
+/* ── 세로 막대 ── */
+.chart-columns { display: flex; align-items: flex-end; justify-content: space-around; gap: 12px; padding-top: 4px; }
+.chart-col { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.chart-col .chart-value { min-width: 0; font-size: 0.875rem; }
+.chart-col-track {
+  width: 100%;
+  max-width: 64px;
+  height: 176px;
+  display: flex;
+  align-items: flex-end;
+  background: var(--chart-track);
+  border-radius: var(--r-bar);
+  overflow: hidden;
+}
+.chart-col-fill { width: 100%; min-height: 4px; border-radius: var(--r-bar); box-shadow: none; }
+.chart-col-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.chart-delta {
+  font-size: 0.72em;
+  font-weight: 700;
+  color: var(--ok-orange);
+  background: rgba(213, 94, 0, 0.10);
+  padding: 0.05em 0.4em;
+  border-radius: var(--r-pill);
+  margin-left: 0.2em;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+:root.dark .chart-delta { color: #f0862f; background: rgba(240, 134, 47, 0.16); }
+
+/* ── 레이더 / 점수 카드 ── */
+.chart-radar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.radar-item {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  background: var(--color-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  box-shadow: var(--sh-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+:root.dark .radar-item { background: #1e293b; }
+@media (hover: hover) {
+  .radar-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .05), 0 16px 32px -16px rgba(0, 0, 0, .18);
+  }
+}
+.radar-item-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.radar-name { font-size: 1rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.5rem; text-align: center; }
+.radar-avg { text-align: center; margin-bottom: 16px; }
+.radar-avg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--r-pill);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.radar-scores { display: flex; flex-direction: column; gap: 8px; }
+.radar-score-row { display: flex; align-items: center; gap: 8px; }
+.radar-score-label {
+  flex-shrink: 0;
+  min-width: 68px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: right;
+  color: var(--color-text-secondary);
+}
+.radar-score-track { flex: 1; height: 14px; background: var(--chart-track); border-radius: 8px; overflow: hidden; }
+.radar-score-fill { height: 100%; border-radius: 8px; box-shadow: none; }
+.radar-score-val { flex-shrink: 0; min-width: 34px; font-size: 0.8125rem; font-weight: 700; text-align: right; color: var(--color-text); }
+
+/* ── 도넛 (얇은 링: hole inset 26%) ── */
+.chart-donut-container { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; }
+.donut-ring {
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 6px 20px -12px rgba(0, 0, 0, 0.18);
+}
+.donut-hole {
+  position: absolute;
+  inset: 26%;
+  border-radius: 50%;
+  background: var(--color-bg-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+:root.dark .donut-hole { background: #1e293b; }
+.donut-total { font-size: 1.375rem; font-weight: 700; line-height: 1.1; color: var(--color-text); }
+.donut-total-label { font-size: 0.6875rem; font-weight: 600; color: var(--color-text-secondary); }
+.donut-legend {
+  flex: 1;
+  min-width: 200px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 12px;
+}
+.donut-legend-item { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+.donut-legend-dot { width: 10px; height: 10px; border-radius: var(--r-dot); flex-shrink: 0; }
+.donut-legend-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.donut-legend-value {
+  margin-left: auto;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ── 버서스 ── */
+.versus-header { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-bottom: 18px; }
+.versus-name { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
+.versus-vs {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--r-pill);
+  background: var(--chart-track);
+  letter-spacing: 0.05em;
+}
+.versus-rows { display: flex; flex-direction: column; gap: 10px; }
+.versus-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
+.versus-bar-left { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.versus-bar-right { display: flex; align-items: center; gap: 8px; }
+.versus-track { flex: 1; height: 24px; background: var(--chart-track); border-radius: var(--r-bar); overflow: hidden; }
+.versus-track-left { display: flex; justify-content: flex-end; }
+.versus-fill { height: 100%; min-width: 4px; border-radius: var(--r-bar); box-shadow: none; }
+.versus-label {
+  width: 100px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  padding: 0.2rem 0.5rem;
+  background: var(--chart-track);
+  border-radius: 8px;
+}
+.versus-val { width: 2.8em; box-sizing: border-box; flex-shrink: 0; font-size: 0.875rem; font-weight: 700; color: var(--color-text); }
+.versus-bar-left .versus-val { text-align: right; }
+.versus-val.versus-win { font-weight: 700; color: var(--color-primary); }
+.versus-val.versus-win::after { content: ' ▲'; font-size: 0.62em; vertical-align: 2px; opacity: 0.65; }
+
+/* ── 프로그레스 (원형 게이지) ── */
+.progress-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
+.progress-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.progress-circle { width: 108px; height: 108px; position: relative; }
+.progress-circle svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.progress-bg { fill: none; stroke: var(--chart-track); stroke-width: 8; }
+.progress-ring { fill: none; stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 0.9s cubic-bezier(0.4, 0, 0.2, 1); }
+.progress-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.progress-label { font-size: 0.8125rem; font-weight: 600; color: var(--color-text-secondary); text-align: center; }
+
+/* ── 등장 모션: grow 1회만(정적 렌더는 .animated 미부여 → 인라인 최종값 즉시 표시) ── */
+.chart-fill.animated { animation: chartGrow 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.chart-col-fill.animated { animation: chartGrowVertical 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.radar-score-fill.animated,
+.versus-fill.animated { animation: chartGrow 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+@keyframes chartGrow { from { width: 0 !important; } }
+@keyframes chartGrowVertical { from { height: 0 !important; } }
+
+/* ── 차트 반응형 ── */
+@media (max-width: 640px) {
+  .chart-bar,
+  .chart-donut,
+  .chart-versus,
+  .chart-progress { padding: 18px 16px; margin: 1.5rem 0; }
+  .chart-title { font-size: 1rem; margin-bottom: 16px; }
+  .chart-label { min-width: 84px; }
+  .chart-value { min-width: 46px; }
+  .chart-track { height: 24px; }
+  .chart-columns { gap: 8px; }
+  .chart-col-track { height: 132px; }
+  .chart-radar-grid { grid-template-columns: 1fr; }
+  .radar-score-track { height: 12px; }
+  .chart-donut-container { flex-direction: column; gap: 20px; }
+  .donut-ring { width: 148px; height: 148px; }
+  .donut-legend { width: 100%; }
+  .versus-header { gap: 0.75rem; }
+  .versus-name { font-size: 0.95rem; }
+  .versus-track { height: 20px; }
+  .versus-label { min-width: 52px; }
+  .progress-circle { width: 88px; height: 88px; }
+  .progress-value { font-size: 1.05rem; }
+}
+@media (max-width: 400px) {
+  .donut-legend { grid-template-columns: 1fr; }
+}
+
+/* ============================================================================
+   6. 홈 히어로 섹션 (신규) — .mungge-hero 스코프. 176 기존글과 완전 독립.
+   Aurora mesh-gradient · Big Type · Glassmorphism CTA. 이미지 요청 0.
+   ============================================================================ */
+.mungge-hero {
+  position: relative;
+  max-width: 1080px;
+  margin: 0 auto 2.5rem;
+  padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 3rem);
+  border-radius: 24px;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: #f7f9fc;   /* solid fallback 먼저 */
+  background-image:
+    radial-gradient(120% 120% at 15% 20%, rgba(59, 130, 246, 0.28), transparent 55%),
+    radial-gradient(110% 110% at 85% 30%, rgba(139, 92, 246, 0.24), transparent 50%),
+    radial-gradient(130% 130% at 50% 100%, rgba(0, 158, 115, 0.18), transparent 60%),
+    radial-gradient(100% 100% at 95% 90%, rgba(245, 158, 11, 0.14), transparent 55%);
+  background-attachment: scroll;
+  box-shadow: 0 24px 70px -28px rgba(59, 130, 246, 0.35);
+  font-family: var(--chart-font);
+  text-align: center;
+  color: #0f1420;
+}
+.mungge-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(247, 249, 252, 0.15), rgba(247, 249, 252, 0.35));
+  pointer-events: none;
+}
+.mungge-hero__inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+.mungge-hero__eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b45309;              /* 앰버 진한 톤 — 라이트 배경 대비 확보 */
+}
+.mungge-hero__brand {
+  margin: 0;
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  background: linear-gradient(100deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .mungge-hero__brand { color: #3b82f6; -webkit-text-fill-color: #3b82f6; background: none; }
+}
+.mungge-hero__lede {
+  max-width: 34em;
+  margin: 1rem auto 2rem;
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
+  line-height: 1.7;
+  color: #334155;
+}
+.mungge-hero__cta { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; width: 100%; margin-top: 2rem; }
+.mungge-hero__card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.25rem 1.4rem;
+  border-radius: 18px;
+  border: 1px solid rgba(15, 20, 32, 0.10);
+  border-left: 4px solid transparent;
+  background: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  color: inherit;
+  text-align: left;
+  min-height: 44px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .mungge-hero__card {
+    background: rgba(255, 255, 255, 0.35);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-color: rgba(255, 255, 255, 0.55);
+  }
+}
+.mungge-hero__card-icon { flex-shrink: 0; font-size: 1.6rem; line-height: 1; }
+.mungge-hero__card-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.mungge-hero__card-title { font-size: 1.05rem; font-weight: 700; color: #0f1420; }
+.mungge-hero__card-sub { font-size: 0.85rem; color: #475569; }
+.mungge-hero__card-arrow { flex-shrink: 0; font-size: 1.2rem; font-weight: 700; opacity: 0.6; transition: transform 0.2s ease, opacity 0.2s ease; }
+
+.mungge-hero__card--tech { border-left-color: #3b82f6; }
+.mungge-hero__card--tech .mungge-hero__card-icon,
+.mungge-hero__card--tech .mungge-hero__card-arrow { color: #3b82f6; }
+.mungge-hero__card--money { border-left-color: #009e73; }
+.mungge-hero__card--money .mungge-hero__card-icon,
+.mungge-hero__card--money .mungge-hero__card-arrow { color: #009e73; }
+
+.mungge-hero__card:hover,
+.mungge-hero__card:focus-visible { transform: translateY(-3px); }
+.mungge-hero__card:hover .mungge-hero__card-arrow,
+.mungge-hero__card:focus-visible .mungge-hero__card-arrow { transform: translateX(3px); opacity: 1; }
+.mungge-hero__card--tech:hover,
+.mungge-hero__card--tech:focus-visible { box-shadow: 0 16px 40px -18px rgba(59, 130, 246, 0.45); border-color: #3b82f6; }
+.mungge-hero__card--money:hover,
+.mungge-hero__card--money:focus-visible { box-shadow: 0 16px 40px -18px rgba(0, 158, 115, 0.45); border-color: #009e73; }
+.mungge-hero__card:focus-visible { outline: 3px solid rgba(59, 130, 246, 0.55); outline-offset: 3px; }
+
+:root.dark .mungge-hero {
+  background-color: #0f1420;
+  background-image:
+    radial-gradient(120% 120% at 15% 20%, rgba(59, 130, 246, 0.28), transparent 55%),
+    radial-gradient(110% 110% at 85% 30%, rgba(139, 92, 246, 0.26), transparent 50%),
+    radial-gradient(130% 130% at 50% 100%, rgba(0, 158, 115, 0.20), transparent 60%),
+    radial-gradient(100% 100% at 95% 90%, rgba(245, 158, 11, 0.14), transparent 55%);
+  color: #e2e8f0;
+}
+:root.dark .mungge-hero::before { background: linear-gradient(180deg, rgba(15, 20, 32, 0.20), rgba(15, 20, 32, 0.45)); }
+:root.dark .mungge-hero__eyebrow { color: #f59e0b; }
+:root.dark .mungge-hero__lede { color: #cbd5e1; }
+:root.dark .mungge-hero__card { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.12); }
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  :root.dark .mungge-hero__card { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.12); }
+}
+:root.dark .mungge-hero__card--tech { border-left-color: #3b82f6; }
+:root.dark .mungge-hero__card--money { border-left-color: #009e73; }
+:root.dark .mungge-hero__card-title { color: #f1f5f9; }
+:root.dark .mungge-hero__card-sub { color: #94a3b8; }
+
+@media (max-width: 640px) { .mungge-hero__cta { grid-template-columns: 1fr; } }
+@media (max-width: 480px) {
+  .mungge-hero { padding: clamp(1.5rem, 7vw, 2rem) clamp(1rem, 5vw, 1.5rem); border-radius: 18px; }
+  .mungge-hero__brand { font-size: clamp(2rem, 9vw, 2.6rem); }
+  .mungge-hero__card { padding: 1rem 1.1rem; }
+}
+
+/* ============================================================================
+   7. 본문 타이포 반응형
+   ============================================================================ */
+@media (max-width: 640px) {
+  .entry-content-wrap {
+    font-size: 1rem;            /* 16px 하한 */
+    line-height: 1.8;
+    padding-inline: 1.15rem;
+    letter-spacing: -0.002em;
+  }
+  .entry-content-wrap h2 { font-size: 1.35rem; margin-top: 2.4rem; line-height: 1.32; }
+  .entry-content-wrap h3 { font-size: 1.15rem; margin-top: 1.9rem; }
+  .entry-content-wrap h4 { font-size: 1.02rem; }
+  .entry-content-wrap p { margin-bottom: 1.4em; }
+  .entry-content-wrap blockquote { margin: 1.5rem 0; padding-left: 1rem; }
+}
+
+/* ============================================================================
+   8. 접근성: 모션 완전 무효화
+   ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .entry-content-wrap a,
+  .entry-content-wrap tbody tr,
+  .chart-fill,
+  .chart-col-fill,
+  .radar-score-fill,
+  .versus-fill,
+  .progress-ring,
+  .radar-item,
+  .coupang-inline,
+  .coupang-inline .ci-cta,
+  .chart-bar,
+  .chart-donut,
+  .chart-versus,
+  .chart-progress,
+  .mungge-hero__card,
+  .mungge-hero__card-arrow {
+    animation: none !important;
+    transition: none !important;
+  }
+  .radar-item:hover,
+  .coupang-inline:hover,
+  .coupang-inline:hover .ci-cta,
+  .mungge-hero__card:hover,
+  .mungge-hero__card:focus-visible { transform: none; }
+  .mungge-hero__card:hover .mungge-hero__card-arrow,
+  .mungge-hero__card:focus-visible .mungge-hero__card-arrow { transform: none; }
+}
+/* ============================================================================
+   홈(정적 프론트페이지) 조정 — 페이지 제목 숨김 · 풀폭 · 최신글 카드 그리드
+   ============================================================================ */
+body.home .entry-hero.page-hero-section { display: none !important; }   /* "홈" 제목 배너 숨김 */
+body.home .entry-content-wrap { max-width: none; margin-inline: 0; }    /* 홈은 풀폭(히어로+그리드) */
+
+/* core latest-posts 그리드 → Kadence풍 카드 */
+.wp-block-latest-posts.is-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; list-style: none; padding: 0; margin: 2.5rem 0 0; }
+.wp-block-latest-posts.is-grid > li { background: var(--color-bg, #fff); border: 1px solid var(--hairline); border-radius: var(--r-card); overflow: hidden; box-shadow: var(--sh-card); transition: transform .18s ease, box-shadow .18s ease; display: flex; flex-direction: column; }
+.wp-block-latest-posts.is-grid > li:hover { transform: translateY(-4px); box-shadow: var(--sh-card-hover); }
+.wp-block-latest-posts__featured-image { margin: 0; }
+.wp-block-latest-posts__featured-image img { width: 100%; height: 190px; object-fit: cover; display: block; }
+.wp-block-latest-posts__post-title { display: block; padding: 1rem 1.15rem 0; font-size: 1.1rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
+.wp-block-latest-posts__post-date { display: block; padding: 0.4rem 1.15rem 0; font-size: 0.8rem; color: #8b8d92; }
+.wp-block-latest-posts__post-excerpt { padding: 0.6rem 1.15rem 1.15rem; font-size: 0.9rem; line-height: 1.7; color: #55575c; margin: 0; }
+@media (max-width: 900px){ .wp-block-latest-posts.is-grid { grid-template-columns: repeat(2,1fr);} }
+@media (max-width: 600px){ .wp-block-latest-posts.is-grid { grid-template-columns: 1fr;} }
+
+/* ── 표 셀: 영문 단어 글자단위 끊김 방지(Unreal→Unre al 버그) ── */
+.entry-content-wrap table th,
+.entry-content-wrap table td {
+  overflow-wrap: normal;      /* anywhere 상속 취소 */
+  word-break: keep-all;       /* 단어(영문 포함) 통째 유지, 공백에서만 줄바꿈 */
+}
+.entry-content-wrap table th:first-child,
+.entry-content-wrap table td:first-child {
+  white-space: nowrap;        /* 첫 열(엔진명 등)은 한 줄 유지 */
+}
+
+/* ============================================================================
+   피드백 반영 — 폰트 통일 · 도넛 중앙글자 제거 · 세로막대 바별 색구분
+   ============================================================================ */
+/* ① 전체 폰트 = Pretendard(가시성). 세리프 제목까지 통일 */
+body, input, button, select, textarea,
+h1, h2, h3, h4, h5, h6,
+.entry-title, .site-title, .site-title a, .archive-title, .page-title, .entry-hero .entry-title,
+.wp-block-latest-posts__post-title, .widget-title, .kadence-navigation a,
+.entry-content-wrap h1, .entry-content-wrap h2, .entry-content-wrap h3, .entry-content-wrap h4 {
+  font-family: var(--font-kr) !important;
+}
+
+/* ② 도넛(피자판) 중앙 글자 제거 — 값은 우측 범례로 확인 */
+.donut-hole .donut-total,
+.donut-hole .donut-total-label { display: none !important; }
+
+/* ③ 세로막대 색상은 chart-static 렌더가 인라인 지정(v2) */
+
+/* ── 제목 폰트 세리프→Pretendard 확실히 (Kadence heading 변수 + 직접) ── */
+:root, body {
+  --global-heading-font-family: var(--font-kr) !important;
+  --headingFont: var(--font-kr) !important;
+}
+h1.entry-title, .entry-title, .entry-hero .entry-title, .single-title,
+.wp-site-blocks h1, .wp-site-blocks h2, .wp-site-blocks h3,
+.post-title, .content-title { font-family: var(--font-kr) !important; font-weight: 800 !important; }
+
+/* ── 세로막대 v2: 색막대 + 우측 범례(항목·점수) ── */
+.chart-vbar-wrap { display: flex; align-items: stretch; gap: 1.5rem; flex-wrap: wrap; }
+.chart-vbar-wrap .chart-columns { flex: 1 1 54%; min-width: 240px; align-items: flex-end; margin: 0; }
+.chart-vlegend { flex: 1 1 34%; min-width: 190px; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: center; gap: 0.45rem; align-self: center; }
+.chart-vlegend-item { display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.75rem; border-radius: 10px; background: var(--zebra, rgba(127,127,127,.04)); }
+.chart-vlegend-dot { flex-shrink: 0; width: 12px; height: 12px; border-radius: 4px; }
+.chart-vlegend-name { flex: 1; font-size: 0.92rem; font-weight: 600; color: var(--color-text, #26272b); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chart-vlegend-score { flex-shrink: 0; font-size: 0.95rem; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--color-text, #26272b); }
+:root.dark .chart-vlegend-name, :root.dark .chart-vlegend-score { color: #e6e7ea; }
+@media (max-width: 560px){ .chart-vbar-wrap { flex-direction: column; } .chart-vlegend { width: 100%; flex-basis: auto; } }
+
+/* ── 홈 헤더(투명) 흰글자 → 어둡게 (밝은 히어로 가독성) ── */
+body.home #masthead a, body.home .site-title a, body.home .site-title,
+body.home .header-navigation a, body.home .header-menu-container a { color: #1e293b !important; }
+body.home .header-navigation a:hover, body.home .header-menu-container a:hover { color: #3b82f6 !important; }
+
+/* ── 히어로 도메인 라인 ── */
+.mungge-hero__domain { margin: 0.35rem 0 0; text-align: center; font-size: 1.05rem; font-weight: 800; color: #3b82f6; letter-spacing: 0.01em; }
+
+/* ── 최신글 썸네일: 커버 크롭 확실히(반쪽 잘림/왜곡 방지) ── */
+.wp-block-latest-posts__featured-image { display: block; margin: 0 !important; }
+.wp-block-latest-posts__featured-image img { width: 100% !important; height: 200px !important; object-fit: cover !important; object-position: center !important; display: block; border-radius: 0 !important; }
+
+/* ── 최신글 썸네일 링크 <a> inline → block(카드 풀폭, 잘림/여백 해결) ── */
+.wp-block-latest-posts__featured-image,
+.wp-block-latest-posts__featured-image.aligncenter,
+.wp-block-latest-posts__featured-image a { display: block !important; width: 100% !important; margin: 0 !important; text-align: initial; }
+.wp-block-latest-posts__featured-image a { line-height: 0; }
+.wp-block-latest-posts__featured-image img { width: 100% !important; height: 200px !important; object-fit: cover !important; object-position: center; display: block !important; max-width: none !important; border-radius: 0 !important; }
+
+/* ── 본문 폭 확대 — 42rem 제약 해제 + Kadence narrow 완화(양옆 여백 축소) ── */
+:root { --global-content-width: 850px; --content-width: 850px; }
+.entry-content-wrap { max-width: none !important; margin-inline: 0 !important; }
+.single .content-container.site-container,
+.single.content-width-narrow .content-container,
+body.single .entry-content-wrap { max-width: 850px !important; }
+
+/* ============================================================================
+   폴리시 배치 — 푸터좌정렬 · By ben제거 · 쿠팡배너 · 차트 모던화(2026 트렌드)
+   ============================================================================ */
+/* ① 푸터 위젯 좌정렬 */
+.site-footer .widget, .site-footer .footer-widget, .site-footer-section-wrap,
+.site-footer .widget-title, .site-footer .widget * { text-align: left !important; }
+.site-footer .widget ul { padding-left: 0; }
+
+/* ② By ben(작성자) 제거 — 날짜는 유지 */
+.entry-meta .posted-by, .single .posted-by, .loop-entry .posted-by { display: none !important; }
+
+/* ④ 차트 모던화 — 플랫·여백·뮤트(무거운 그라디언트·그림자 완화) */
+.chart-bar, .chart-versus, .chart-radar, .chart-donut, .chart-progress { box-shadow: 0 1px 2px rgba(0,0,0,.03), 0 8px 20px -16px rgba(0,0,0,.12) !important; border: 1px solid var(--hairline) !important; }
+.chart-col-fill, .chart-fill, .radar-score-fill, .versus-fill { box-shadow: none !important; }
+.chart-title { letter-spacing: -0.01em; }
+.chart-vlegend-item { background: transparent !important; border-bottom: 1px solid var(--hairline); border-radius: 0 !important; padding: 0.55rem 0.2rem !important; }
+.chart-vlegend-item:last-child { border-bottom: 0; }
+
+/* 푸터 위젯 왼쪽으로 정렬(가운데→좌측) */
+.site-footer .site-footer-row-container-inner,
+.site-middle-footer-inner-wrap,
+.footer-widget-area-inner { justify-content: flex-start !important; text-align: left !important; }
+.site-footer .site-container { margin-left: 0 !important; }
+
+/* ============================================================================
+   WP Dark Mode 연동 — 컴포넌트 다크 테마 매핑 (data-wp-dark-mode-active)
+   ============================================================================ */
+html[data-wp-dark-mode-active] { --chart-track:#2a3542; --hairline:rgba(255,255,255,.09); --zebra:rgba(255,255,255,.035); }
+/* 본문 텍스트/제목 */
+html[data-wp-dark-mode-active] .entry-content-wrap { color:#dfe1e5; }
+html[data-wp-dark-mode-active] .entry-content-wrap h2, html[data-wp-dark-mode-active] .entry-content-wrap h3, html[data-wp-dark-mode-active] .entry-content-wrap h4 { color:#f2f3f5; }
+/* 표 */
+html[data-wp-dark-mode-active] .entry-content-wrap table { background:#1a2130 !important; color:#dfe1e5 !important; }
+html[data-wp-dark-mode-active] .entry-content-wrap table thead th { color:#f2f3f5 !important; }
+html[data-wp-dark-mode-active] .entry-content-wrap table td { border-color:var(--hairline) !important; }
+/* 차트 컨테이너 */
+html[data-wp-dark-mode-active] .chart-bar, html[data-wp-dark-mode-active] .chart-versus, html[data-wp-dark-mode-active] .chart-radar, html[data-wp-dark-mode-active] .chart-donut, html[data-wp-dark-mode-active] .chart-progress { background:#1a2130 !important; border-color:var(--hairline) !important; }
+html[data-wp-dark-mode-active] .chart-title, html[data-wp-dark-mode-active] .chart-value, html[data-wp-dark-mode-active] .chart-col-label, html[data-wp-dark-mode-active] .chart-label, html[data-wp-dark-mode-active] .chart-vlegend-name, html[data-wp-dark-mode-active] .chart-vlegend-score, html[data-wp-dark-mode-active] .versus-val, html[data-wp-dark-mode-active] .radar-score-label, html[data-wp-dark-mode-active] .donut-legend-label, html[data-wp-dark-mode-active] .donut-legend-value, html[data-wp-dark-mode-active] .progress-label { color:#dfe1e5 !important; }
+html[data-wp-dark-mode-active] .chart-track, html[data-wp-dark-mode-active] .chart-col-track, html[data-wp-dark-mode-active] .radar-score-track, html[data-wp-dark-mode-active] .versus-track { background:#2a3542 !important; }
+html[data-wp-dark-mode-active] .donut-hole { background:#1a2130 !important; }
+/* 콜아웃 */
+html[data-wp-dark-mode-active] .callout-info, html[data-wp-dark-mode-active] .callout-tip, html[data-wp-dark-mode-active] .callout-warning { color:#dfe1e5 !important; }
+/* 코드블록 */
+html[data-wp-dark-mode-active] .entry-content-wrap pre { background:#0f1621 !important; border-color:var(--hairline) !important; }
+
+/* 다크모드 표 — 헤더/첫열/zebra 배경도 다크로(라이트 잔존 수정) */
+html[data-wp-dark-mode-active] .entry-content-wrap table thead th { background:#232d3f !important; color:#f2f3f5 !important; }
+html[data-wp-dark-mode-active] .entry-content-wrap table td:first-child { background:rgba(255,255,255,.04) !important; color:#eceef0 !important; }
+html[data-wp-dark-mode-active] .entry-content-wrap table tbody tr:nth-child(2n) td { background:rgba(255,255,255,.03) !important; }
+html[data-wp-dark-mode-active] .entry-content-wrap table tbody tr:nth-child(2n) td:first-child { background:rgba(255,255,255,.055) !important; }
+
+/* 본문 폭 추가 확대 — 페이지 대비 덜 찡기게(850→1080) */
+:root { --global-content-width: 1080px !important; --content-width: 1080px !important; }
+.single .content-container.site-container, .single.content-width-narrow .content-container, body.single .entry-content-wrap { max-width: 1080px !important; }
+
+/* ============================================================================
+   쿠팡 제휴 인라인 CTA — .coupang-inline (v4, 단일 정의)
+   이전에 v1(앰버 카드) → v2(트렌디 재디자인) → v3(공격적 배너) → v3.1(컴팩트 카드)
+   네 벌이 같은 선택자를 !important 로 덮어쓰며 누적돼, 마지막 파란 세트가 이겨
+   쿠팡 브랜드색과 무관한 파란 아이콘·파란 CTA 가 노출되고 있었다. 전부 지우고
+   여기 한 벌만 남긴다.
+   설계: 높이 ~56px 컴팩트 1줄 밴드 · 라벨·제목 같은 줄 · 좌측 코럴 액센트 바 ·
+        CTA 는 앰버 필 + 다크 텍스트(대비 15:1) · 글 하단 .cpc 상품 그리드와
+        형태를 달리해 역할이 겹쳐 보이지 않게 한다.
+   마크업 불변: a.coupang-inline > .ci-icon + .ci-body(.ci-label + .ci-title) + .ci-cta
+   ============================================================================ */
+.coupang-inline {
+  display: flex; align-items: center; gap: 0.7rem;
+  margin: 1.5rem 0; padding: 0.55rem 0.8rem;
+  /* 본문 폭이 1080px 라 밴드를 꽉 채우면 제목과 CTA 사이가 텅 빈다. 좌측 정렬은
+     유지(본문 흐름)하되 폭만 조여 시선 이동 거리를 줄인다. */
+  max-width: 760px;
+  min-height: 56px; box-sizing: border-box;
+  background: rgba(232, 99, 42, 0.055);
+  border: 1px solid rgba(232, 99, 42, 0.16);
+  border-left: 3px solid var(--cp-coral);   /* 제휴 링크 표식 */
+  border-radius: 10px;
+  font-family: var(--font-kr);
+  text-decoration: none !important;   /* 테마가 본문 a 에 밑줄 강제 */
+  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+.coupang-inline:hover {
+  background: rgba(232, 99, 42, 0.09);
+  border-color: rgba(232, 99, 42, 0.32);
+  transform: translateY(-1px);
+}
+.coupang-inline:focus-visible { outline: 2px solid var(--cp-coral); outline-offset: 2px; }
+/* wpautop 이 원고의 줄바꿈을 배너 안쪽 <br> 로 바꿔 넣는다. flex 아이템이 된 br 이
+   각 19px 을 먹어 밴드가 부푸는 게 높이 폭주의 실제 원인이었다(모바일 157px→). */
+.coupang-inline br { display: none; }
+.coupang-inline .ci-icon {
+  flex: 0 0 auto; width: 30px; height: 30px;
+  display: grid; place-items: center;
+  font-size: 0.95rem; line-height: 1;
+  border-radius: 8px; background: rgba(232, 99, 42, 0.13);
+}
+/* 라벨→제목 세로 2단이 밴드 높이를 두 배로 만들던 원인 → 한 줄로 */
+.coupang-inline .ci-body {
+  display: flex; flex-direction: row; align-items: center;
+  gap: 0.45rem; flex: 1 1 auto; min-width: 0;
+}
+.coupang-inline .ci-label {
+  flex: 0 0 auto;
+  font-size: 0.66rem; font-weight: 800; letter-spacing: 0.02em;
+  color: #a83409;                            /* on 옅은 코럴 배경 ≈ 6:1 */
+  background: rgba(232, 99, 42, 0.12);
+  padding: 0.2em 0.5em; border-radius: 5px; white-space: nowrap;
+}
+/* color 를 상속시키면 테마 링크색(파란 #3b82f6)이 내려와 대비 3.7:1 로 떨어지고
+   "제휴 배너가 파랗다"는 원래 증상이 그대로 재발한다 → 본문색을 명시 */
+.coupang-inline .ci-title {
+  font-size: 0.95rem; font-weight: 700; line-height: 1.35; color: #1a1b1e;
+  min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.coupang-inline .ci-cta {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 0.25rem;
+  min-height: 36px; padding: 0 0.9em;
+  font-size: 0.8rem; font-weight: 800; white-space: nowrap;
+  color: #241004 !important;                 /* on #ffd400 ≈ 15:1 (AAA) */
+  background: linear-gradient(135deg, #ffd400, #ffb300);
+  border-radius: var(--r-pill, 999px);
+  box-shadow: 0 2px 6px -2px rgba(213, 94, 0, 0.35);
+}
+.coupang-inline:hover .ci-cta { box-shadow: 0 4px 10px -3px rgba(213, 94, 0, 0.5); }
+
+/* 다크 — 라이브에서 실제로 걸리는 건 자체 토글 html[data-mg-theme="dark"] 다.
+   WP Dark Mode 플러그인은 꺼져 있고(켜지면 mg-dark 폴백이 스스로 비활성),
+   :root.dark 는 TF(Astro) 시절 잔재. 셋 다 나열해 어느 쪽이 켜져도 대응한다. */
+html[data-mg-theme="dark"] .coupang-inline,
+:root.dark .coupang-inline,
+html[data-wp-dark-mode-active] .coupang-inline {
+  background: rgba(232, 99, 42, 0.10);
+  border-color: rgba(232, 99, 42, 0.26);
+  border-left-color: #ff8a5c;
+}
+html[data-mg-theme="dark"] .coupang-inline:hover,
+:root.dark .coupang-inline:hover,
+html[data-wp-dark-mode-active] .coupang-inline:hover { background: rgba(232, 99, 42, 0.15); }
+html[data-mg-theme="dark"] .coupang-inline .ci-icon,
+:root.dark .coupang-inline .ci-icon,
+html[data-wp-dark-mode-active] .coupang-inline .ci-icon { background: rgba(255, 179, 0, 0.16); }
+html[data-mg-theme="dark"] .coupang-inline .ci-label,
+:root.dark .coupang-inline .ci-label,
+html[data-wp-dark-mode-active] .coupang-inline .ci-label {
+  color: #ffb08a; background: rgba(232, 99, 42, 0.20);
+}
+html[data-mg-theme="dark"] .coupang-inline .ci-title,
+:root.dark .coupang-inline .ci-title,
+html[data-wp-dark-mode-active] .coupang-inline .ci-title { color: #f2f3f5; }
+
+@media (max-width: 560px) {
+  /* 줄바꿈시키면 아이콘·본문·CTA 가 3단으로 흩어져 밴드가 140px 로 부푼다.
+     한 줄을 유지하고, 대신 아이콘을 접어 좁은 폭의 가로 예산을 제목에 몰아준다
+     (라벨 "쿠팡 추천" 이 이미 브랜드 신호라 아이콘은 중복). */
+  .coupang-inline { flex-wrap: nowrap; gap: 0.6rem; padding: 0.6rem 0.7rem; }
+  .coupang-inline .ci-icon { display: none; }
+  .coupang-inline .ci-body { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .coupang-inline .ci-label { font-size: 0.62rem; }
+  /* 좁은 폭에선 제목을 2줄까지 펼친다(말줄임으로 상품명이 잘리면 클릭 유인이 죽음) */
+  .coupang-inline .ci-title {
+    font-size: 0.9rem; white-space: normal; display: -webkit-box;
+    -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  }
+  .coupang-inline .ci-cta { min-height: 44px; padding: 0 0.8em; font-size: 0.78rem; }   /* 터치 타겟 */
+}
+
+/* ── 데스크톱 세로 사이드 배너(가장자리 고정, 본문 안 겹치게) ── */
+.mg-siderail { position: fixed; top: 100px; width: 160px; z-index: 30; }
+.mg-siderail-left { left: 16px; }
+.mg-siderail-right { right: 16px; }
+/* 콘텐츠 1080 + 배너 좌우 여유 확보되는 넓은 화면(>=1600px)에서만. 짧은 뷰포트도 제외 */
+@media (max-width: 1600px), (max-height: 780px) { .mg-siderail { display: none !important; } }
+
+/* ── 홈 "인기 글" 피처드 섹션 ── */
+.mg-featured { margin: 0 0 2.75rem; }
+.mg-featured__head { font-size: 1.2rem; font-weight: 800; margin: 0 0 1.1rem; display: flex; align-items: center; gap: 0.45rem; letter-spacing: -0.01em; }
+.mg-featured__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.mg-featured__card { display: flex; flex-direction: column; gap: 0.55rem; padding: 1.15rem 1.15rem 1.25rem; border-radius: 14px; background: linear-gradient(135deg,#ffffff,#f6f9ff); border: 1px solid var(--hairline); text-decoration: none !important; color: inherit; transition: transform .18s ease, box-shadow .18s ease; box-shadow: 0 1px 2px rgba(0,0,0,.03); position: relative; overflow: hidden; }
+.mg-featured__card::before { content:""; position:absolute; left:0; top:0; right:0; height:3px; background: linear-gradient(90deg,#3b82f6,#8b5cf6,#e8632a); }
+.mg-featured__card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -18px rgba(0,0,0,.28); }
+.mg-featured__cat { font-size: 0.64rem; font-weight: 800; letter-spacing: 0.04em; color: #3b82f6; text-transform: uppercase; }
+.mg-featured__title { font-size: 0.95rem; font-weight: 700; line-height: 1.42; color: #1a1b1e; letter-spacing: -0.01em; }
+html[data-wp-dark-mode-active] .mg-featured__card { background: linear-gradient(135deg,#1a2130,#141c2e); }
+html[data-wp-dark-mode-active] .mg-featured__title { color: #f2f3f5; }
+@media (max-width: 900px){ .mg-featured__grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 520px){ .mg-featured__grid { grid-template-columns: 1fr; } }
+
+/* ── 팝업(Popup Maker) 모바일 숨김 — 구글 침입형 인터스티셜 패널티 회피 ── */
+@media (max-width: 782px){
+  .pum-overlay { display: none !important; }
+  html.pum-open-overlay, .pum-open-overlay { overflow: auto !important; }
+}
+
+/* ── progress 게이지 5~6개 → 3열(3-2 / 3-3) 강제. 해상도로 4-1 되는 문제 해결 ── */
+.progress-grid:has(.progress-item:nth-child(5)):not(:has(.progress-item:nth-child(7))) {
+  max-width: 430px; margin-left: auto; margin-right: auto;
+}
+
+/* ── 본문 광고 반응형: 데스크톱=728(Ad Inserter .code-block-1), 모바일=320x50 ── */
+.mg-inpost-mo { display: none; }
+@media (max-width: 782px) {
+  .code-block-1 { display: none !important; }   /* 728 배너 모바일 숨김 */
+  .mg-inpost-mo { display: flex !important; }    /* 320x50 모바일 노출 */
+}
+
+/* ── 코드 블록 (Astro 스타일: 다크 + mac 도트 + 언어라벨 + 복사버튼) ── */
+.code-card { margin: 1.6rem 0; border-radius: 12px; overflow: hidden; background: #0f1420; border: 1px solid #1e2740; box-shadow: 0 8px 24px -12px rgba(0,0,0,.55); }
+.cc-head { display: flex; align-items: center; gap: 12px; padding: 9px 14px; background: #171d2e; border-bottom: 1px solid #232c44; }
+.cc-dots { display: inline-flex; gap: 7px; }
+.cc-dots i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+.cc-dots i:nth-child(1){ background:#ff5f56; } .cc-dots i:nth-child(2){ background:#ffbd2e; } .cc-dots i:nth-child(3){ background:#27c93f; }
+.cc-lang { flex: 1; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; color: #8b95ad; }
+.cc-copy { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; font-weight: 600; color: #c5cbd8; background: #232c44; border: 1px solid #333e5c; border-radius: 7px; padding: 4px 11px; cursor: pointer; font-family: inherit; transition: background .15s; }
+.cc-copy:hover { background: #2d374f; }
+.cc-copy::before { content: "\1F4CB"; font-size: 0.9em; }
+.code-card .cc-pre { margin: 0; padding: 15px 18px; overflow-x: auto; background: #0f1420; border: 0; border-radius: 0; }
+.code-card code, .cc-pre code { font-family: 'JetBrains Mono','Fira Code',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size: 0.855rem; line-height: 1.65; color: #c5cbd8; background: none; padding: 0; white-space: pre; tab-size: 2; -webkit-text-size-adjust: 100%; }
+.code-card .token.comment,.code-card .token.prolog,.code-card .token.doctype,.code-card .token.cdata { color:#5c6580; font-style:italic; }
+.code-card .token.punctuation { color:#8b95ad; }
+.code-card .token.keyword,.code-card .token.rule,.code-card .token.important,.code-card .token.atrule { color:#f7768e; }
+.code-card .token.boolean,.code-card .token.number,.code-card .token.constant,.code-card .token.symbol { color:#ff9e64; }
+.code-card .token.string,.code-card .token.char,.code-card .token.attr-value,.code-card .token.regex,.code-card .token.inserted { color:#9ece6a; }
+.code-card .token.function,.code-card .token.method { color:#7aa2f7; }
+.code-card .token.class-name,.code-card .token.builtin,.code-card .token.tag,.code-card .token.selector { color:#2ac3de; }
+.code-card .token.property,.code-card .token.attr-name,.code-card .token.variable { color:#c5cbd8; }
+.code-card .token.operator,.code-card .token.entity,.code-card .token.url { color:#89ddff; }
+
+/* ── 쿠팡 상품 이미지 카드 (.cpc-*) ── */
+.cpc-wrap { margin: 2.2rem 0; padding: 1.1rem 1.15rem 0.95rem; border: 1px solid var(--hairline); border-radius: 14px; background: linear-gradient(180deg, rgba(232,99,42,.045), transparent 55%); }
+.cpc-head { font-size: 0.95rem; font-weight: 800; color: #1a1b1e; margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.5rem; }
+.cpc-badge { font-size: 0.68rem; font-weight: 800; color: #fff; background: var(--cp-coral); padding: 3px 8px; border-radius: 6px; letter-spacing: 0.02em; }
+:root.dark .cpc-head { color: #f2f3f5; }
+.cpc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 0.8rem; }
+.cpc-item { display: flex; flex-direction: column; border: 1px solid var(--hairline); border-radius: 12px; overflow: hidden; text-decoration: none !important; background: #fff; transition: transform .16s ease, box-shadow .16s ease; }
+.cpc-item:hover { transform: translateY(-3px); box-shadow: 0 14px 28px -16px rgba(0,0,0,.28); }
+:root.dark .cpc-item { background: #1a2130; }
+.cpc-thumb { display: block; aspect-ratio: 16/10; overflow: hidden; background: var(--chart-track); }
+.cpc-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0; margin: 0; }
+.cpc-body { display: flex; flex-direction: column; gap: 0.35rem; padding: 0.7rem 0.8rem 0.85rem; }
+.cpc-title { font-size: 0.86rem; font-weight: 600; line-height: 1.4; color: #26272b; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+:root.dark .cpc-title { color: #e6e7ea; }
+.cpc-cta { font-size: 0.8rem; font-weight: 700; color: var(--cp-coral); margin-top: auto; }
+.cpc-item.cpc-noimg { flex-direction: row; align-items: center; }
+.cpc-item.cpc-noimg .cpc-body { padding: 0.85rem 1rem; }
+.cpc-disc { font-size: 0.72rem; color: var(--color-text-secondary, #8b8d92); margin: 0.8rem 0 0.15rem; line-height: 1.5; }
+@media (max-width: 480px){ .cpc-grid { grid-template-columns: 1fr 1fr; } }
+
+/* ── 다크모드: 홈 포스트 리스트 카드(background:#fff 명시라 다크에서 안 덮이던 문제) ── */
+html[data-wp-dark-mode-active] .wp-block-latest-posts.is-grid > li,
+html[data-wp-dark-mode-active] .wp-block-latest-posts__list > li { background: #1a2130 !important; border-color: var(--hairline) !important; }
+html[data-wp-dark-mode-active] .wp-block-latest-posts__post-title,
+html[data-wp-dark-mode-active] .wp-block-latest-posts__post-title a { color: #f2f3f5 !important; }
+html[data-wp-dark-mode-active] .wp-block-latest-posts__post-date { color: #aab1bd !important; }
+html[data-wp-dark-mode-active] .wp-block-latest-posts__post-excerpt { color: #c5cbd8 !important; }
+
+/* ── 본문 상단 핵심요약(TL;DR) 박스 — 스캔성·AEO 추출성 ── */
+.mg-tldr { display: flex; gap: 0.7rem; align-items: flex-start; margin: 0 0 1.9rem; padding: 1rem 1.15rem; background: linear-gradient(180deg, rgba(59,130,246,.06), transparent 90%); border: 1px solid var(--hairline); border-left: 4px solid var(--color-primary, #3b82f6); border-radius: 10px; font-size: 0.97rem; line-height: 1.7; }
+.mg-tldr-badge { flex-shrink: 0; font-weight: 800; color: var(--color-primary, #3b82f6); font-size: 0.9rem; white-space: nowrap; }
+.mg-tldr-text { color: #3a4552; }
+html[data-wp-dark-mode-active] .mg-tldr { background: linear-gradient(180deg, rgba(59,130,246,.1), transparent 90%); }
+html[data-wp-dark-mode-active] .mg-tldr-text { color: #c5cbd8; }
+@media (max-width: 600px){ .mg-tldr { flex-direction: column; gap: 0.3rem; } }
+
+/* ── JS로 끼워 넣는 광고 슬롯(글 하단·본문 중간) ─────────────────────────────
+   ⚠️ .mg-slot--lead 처럼 :not(:empty) 로 자리를 미리 예약하면 안 된다. 광고가 안 채워졌을
+   때(광고차단기·인벤토리 없음) 본문 한가운데 250px 빈 구멍이 남는다 — 실측으로 확인했다.
+   90px 은 넘어가도 250px 은 그냥 고장으로 보인다. 애드핏이 실제로 렌더한 뒤에만
+   .is-filled 가 붙어 자리를 받는다(붙이는 건 각 슬롯 JS 의 MutationObserver). */
+.mg-adslot { display: flex; justify-content: center; margin: 0; min-height: 0; }
+.mg-adslot.is-filled { margin: 2.2rem auto; min-height: 250px; }
+
+/* ── 모바일 하단 앵커 광고(320x100, sticky). 미충전 시 완전 투명 + 닫기버튼 ── */
+.mg-anchor { display: none; }
+@media (max-width: 782px) {
+  .mg-anchor { position: fixed; left: 0; right: 0; bottom: 0; z-index: 9998; display: flex; justify-content: center; align-items: center; padding: 5px 0; background: rgba(255,255,255,.97); border-top: 1px solid rgba(0,0,0,.08); }
+  html[data-wp-dark-mode-active] .mg-anchor { background: rgba(18,23,33,.97); border-top-color: rgba(255,255,255,.08); }
+  .mg-anchor:not(:has(.kakao_ad_area iframe)) { background: transparent; border: 0; padding: 0; pointer-events: none; }
+  .mg-anchor-x { position: absolute; top: -23px; right: 8px; width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(0,0,0,.12); background: #fff; color: #666; font-size: 15px; line-height: 22px; text-align: center; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.15); pointer-events: auto; }
+  .mg-anchor:not(:has(.kakao_ad_area iframe)) .mg-anchor-x { display: none; }
+  body:has(.mg-anchor .kakao_ad_area iframe) { padding-bottom: 116px; }
+}
+.mg-anchor.mg-closed { display: none !important; }
+
+/* ── 목차(TOC) 자동 ── */
+html { scroll-behavior: smooth; }
+.entry-content-wrap h2 { scroll-margin-top: 80px; }
+.mg-toc { margin: 0 0 1.9rem; padding: 1rem 1.2rem 1.1rem; background: #f7f9fb; border: 1px solid var(--hairline); border-radius: 12px; }
+.mg-toc-head { font-weight: 800; font-size: 0.98rem; color: #1a1b1e; letter-spacing: -0.01em; }
+.mg-toc ol { margin: 0.6rem 0 0; padding-left: 1.35rem; }
+.mg-toc li { margin: 0.34rem 0; line-height: 1.5; }
+.mg-toc li::marker { color: var(--color-primary,#3b82f6); font-weight: 700; }
+.mg-toc a { color: #3a4552; text-decoration: none; font-size: 0.93rem; }
+.mg-toc a:hover { color: var(--color-primary,#3b82f6); text-decoration: underline; }
+html[data-wp-dark-mode-active] .mg-toc { background: #161d2b; }
+html[data-wp-dark-mode-active] .mg-toc-head { color: #f2f3f5; }
+html[data-wp-dark-mode-active] .mg-toc a { color: #c5cbd8; }
+@media (max-width: 782px){
+  .mg-toc-head { cursor: pointer; user-select: none; }
+  .mg-toc-head::after { content: ' ▾'; font-size: 0.8em; opacity: 0.6; }
+  .mg-toc.mg-toc-collapsed ol { display: none; }
+  .mg-toc.mg-toc-collapsed .mg-toc-head::after { content: ' ▸'; }
+}
+
+/* ── 뉴스레터 인라인 구독 폼 ── */
+.mg-sub { margin: 2.6rem 0 1rem; padding: 1.5rem 1.4rem; border-radius: 16px; background: linear-gradient(135deg, #eef4ff, #f3eeff); border: 1px solid var(--hairline); text-align: center; }
+html[data-wp-dark-mode-active] .mg-sub { background: linear-gradient(135deg,#141c2e,#1a1730); }
+.mg-sub-h { font-size: 1.15rem; font-weight: 800; color: #1a1b1e; letter-spacing: -0.01em; margin-bottom: 0.4rem; }
+html[data-wp-dark-mode-active] .mg-sub-h { color: #f2f3f5; }
+.mg-sub-d { font-size: 0.9rem; color: #55606e; margin-bottom: 1rem; line-height: 1.6; }
+html[data-wp-dark-mode-active] .mg-sub-d { color: #a9b1bd; }
+.mg-sub-f { display: flex; gap: 0.5rem; max-width: 420px; margin: 0 auto; }
+.mg-sub-i { flex: 1; padding: 0.7rem 0.9rem; border: 1px solid var(--hairline); border-radius: 10px; font-size: 0.95rem; background: #fff; color: #26272b; }
+html[data-wp-dark-mode-active] .mg-sub-i { background: #0f1420; color: #e6e7ea; border-color: rgba(255,255,255,.14); }
+.mg-sub-b { padding: 0.7rem 1.3rem; border: 0; border-radius: 10px; background: var(--color-primary,#3b82f6); color: #fff; font-weight: 700; font-size: 0.95rem; cursor: pointer; white-space: nowrap; transition: opacity .15s; }
+.mg-sub-b:hover { opacity: .9; }
+.mg-sub-b:disabled { opacity: .6; cursor: default; }
+.mg-sub-msg { margin-top: 0.7rem; font-size: 0.9rem; font-weight: 600; min-height: 1em; }
+.mg-sub-msg.ok { color: #059669; }
+.mg-sub-msg.err { color: #dc2626; }
+@media (max-width: 480px){ .mg-sub-f { flex-direction: column; } }
+
+/* ── 모바일 가로넘침 방어 + 광고 클리핑 방지(실기기 애드핏 채움 대비) ── */
+@media (max-width: 640px) {
+  html, body { overflow-x: hidden; max-width: 100%; }
+  .entry-content-wrap { overflow-x: clip; }            /* 본문 가로넘침 차단(표는 자체 스크롤 유지) */
+  .mg-inpost-mo, .mg-anchor { max-width: 100vw; box-sizing: border-box; overflow: hidden; }
+  .mg-inpost-mo ins.kakao_ad_area, .mg-anchor ins.kakao_ad_area { max-width: 100% !important; }
+  .entry-content-wrap img, .entry-content-wrap iframe, .entry-content-wrap video { max-width: 100%; height: auto; }
+}
+
+/* ============================================================================
+   9. 리디자인 v1 — "클라우드 3D" 브랜드 (A안 채택, 2026-07-27)
+   프리뷰 A(3D 렌더풍) 확정 → 라이브 이식.
+   구성: ① Kadence 전역 팔레트 크림/탄 → 블루·바이올렛  ② 헤더 로고마크
+        ③ 히어로 3D 아트 + 카드 아이콘 이미지화  ④ 카테고리 3D 카드
+        ⑤ 최신글 그리드 고급화
+   원칙: 다크모드(WP Dark Mode)는 건드리지 않음 — 팔레트 교체는
+        html:not([data-wp-dark-mode-active])로 한정해 기존 다크 동작 보존.
+   롤백: 이 섹션만 삭제 후 reinject-css.mjs 재실행.
+   ============================================================================ */
+
+/* ── ① 전역 팔레트: 크림/탄(#dbb189) → 클라우드 블루→바이올렛 ──────────────
+   Kadence는 링크·버튼·강조·배경을 전부 --global-paletteN으로 굴린다.
+   :root(0,1,0)보다 높은 html:root(0,1,1)로 선언해 로드 순서와 무관하게 승리. */
+html:root:not([data-wp-dark-mode-active]),
+html:not([data-wp-dark-mode-active]) body {
+  --global-palette1: #4f7cff;   /* accent (링크·버튼·강조) */
+  --global-palette2: #3d63d9;   /* accent hover */
+  --global-palette3: #0f1420;   /* 제목 */
+  --global-palette4: #1b2333;   /* 보조 제목 */
+  --global-palette5: #5c6675;   /* 본문 */
+  --global-palette6: #8a93a3;   /* 흐린 텍스트 */
+  --global-palette7: #f6f7f9;   /* 사이트 배경 */
+  --global-palette8: #f9fafc;   /* 옅은 배경 */
+  --global-palette9: #ffffff;
+}
+:root {
+  --mg-accent: #4f7cff;
+  --mg-accent2: #8b7bff;
+  --mg-grad: linear-gradient(135deg, #4f7cff, #8b7bff);
+  --mg-cdn: 'https://mungge.com/wp-content/uploads/2026/07';
+}
+
+/* ── ② 헤더: 텍스트 "뭉게" 앞에 3D 구름 로고마크 ─────────────────────────── */
+.site-branding .brand { display: flex; align-items: center; gap: 0.55rem; }
+.site-branding .brand::before {
+  content: ""; flex: none; width: 36px; height: 36px; border-radius: 11px;
+  background: url('https://mungge.com/wp-content/uploads/2026/07/mg-logo.jpg') center / cover no-repeat;
+  box-shadow: 0 6px 16px -8px rgba(79, 124, 255, 0.65);
+}
+.site-title, .site-title a { letter-spacing: -0.02em; font-weight: 800; }
+
+/* ── ③ 히어로: 3D 아트 레이어 + 아이콘 이미지화 ──────────────────────────── */
+/* 3D 히어로 아트는 "부분 오버레이"가 아니라 섹션 전체를 덮는 배경 레이어로 쓴다.
+   부분 배치는 이미지 자체 배경 때문에 사각 이음새가 보였음(마스크로도 못 지움).
+   위에 반투명 화이트 레이어를 깔아 텍스트 대비 확보. */
+.mungge-hero {
+  background-color: #f7f9fc;
+  background-image:
+    radial-gradient(120% 120% at 15% 20%, rgba(79, 124, 255, 0.26), transparent 55%),
+    radial-gradient(110% 110% at 85% 25%, rgba(139, 123, 255, 0.22), transparent 52%),
+    linear-gradient(180deg, rgba(248, 250, 253, 0.86), rgba(248, 250, 253, 0.93)),
+    url('https://mungge.com/wp-content/uploads/2026/07/mg-hero.jpg');
+  background-size: auto, auto, auto, cover;
+  background-position: center, center, center, center;
+  background-repeat: no-repeat;
+  box-shadow: 0 26px 72px -30px rgba(79, 124, 255, 0.45);
+}
+
+.mungge-hero__brand { letter-spacing: -0.03em; }
+.mungge-hero__eyebrow { color: var(--mg-accent); }
+
+/* 본문 링크 밑줄 규칙이 히어로/카테고리 카드 내부 텍스트까지 먹어서 제거 */
+.mungge-hero__card, .mungge-hero__card *,
+.mg-cats__card, .mg-cats__card *,
+.mg-featured__card, .mg-featured__card * {
+  text-decoration: none !important;
+  text-underline-offset: unset;
+}
+
+/* 이모지(💻/💰) → 3D 렌더 썸네일. 텍스트 노드는 font-size:0으로 감춤 */
+.mungge-hero__card-icon {
+  width: 46px; height: 46px; border-radius: 13px; font-size: 0 !important;
+  background-color: #eef1f5; background-size: cover; background-position: center;
+  box-shadow: 0 8px 18px -10px rgba(16, 24, 40, 0.55);
+}
+/* 히어로는 상위 카테고리(테크·개발 / 생활·재테크), 아래 .mg-cats는 하위(게임·AI·재테크·리뷰).
+   처음엔 mg-dev / mg-finance를 돌려썼는데 하위 카드와 그림이 그대로 겹쳐서 전용 아트로 분리. */
+.mungge-hero__card--tech .mungge-hero__card-icon {
+  background-image: url('https://mungge.com/wp-content/uploads/2026/07/mg-tech.jpg');
+}
+.mungge-hero__card--money .mungge-hero__card-icon {
+  background-image: url('https://mungge.com/wp-content/uploads/2026/07/mg-life.jpg');
+}
+.mungge-hero__card--tech { border-left-color: var(--mg-accent); }
+.mungge-hero__card--tech .mungge-hero__card-arrow { color: var(--mg-accent); }
+.mungge-hero__card--money { border-left-color: var(--mg-accent2); }
+.mungge-hero__card--money .mungge-hero__card-arrow { color: var(--mg-accent2); }
+.mungge-hero__card--tech:hover, .mungge-hero__card--tech:focus-visible {
+  box-shadow: 0 18px 42px -18px rgba(79, 124, 255, 0.5); border-color: var(--mg-accent);
+}
+.mungge-hero__card--money:hover, .mungge-hero__card--money:focus-visible {
+  box-shadow: 0 18px 42px -18px rgba(139, 123, 255, 0.5); border-color: var(--mg-accent2);
+}
+
+/* ── ④ 카테고리 3D 카드 (.mg-cats) — 홈 히어로 아래 신규 섹션 ────────────── */
+.mg-cats { margin: 0 0 2.75rem; }
+.mg-cats__head {
+  font-size: 1.2rem; font-weight: 800; margin: 0 0 1.1rem;
+  letter-spacing: -0.01em; display: flex; align-items: center; gap: 0.45rem;
+}
+.mg-cats__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.mg-cats__card {
+  display: block; position: relative; overflow: hidden;
+  border-radius: 16px; text-decoration: none !important; color: inherit;
+  border: 1px solid var(--hairline); background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 10px 24px -16px rgba(16,24,40,.30);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.mg-cats__card:hover { transform: translateY(-4px); box-shadow: 0 2px 4px rgba(0,0,0,.05), 0 22px 40px -18px rgba(79,124,255,.45); }
+.mg-cats__art { display: block; width: 100%; aspect-ratio: 8 / 5; object-fit: cover; }
+.mg-cats__card:hover .mg-cats__art { transform: scale(1.04); }
+.mg-cats__art { transition: transform .35s ease; }
+.mg-cats__label { display: block; padding: 0.85rem 1rem 0.35rem; font-size: 1rem; font-weight: 800; letter-spacing: -0.01em; }
+.mg-cats__desc  { display: block; padding: 0 1rem 1rem; font-size: 0.82rem; color: #5c6675; line-height: 1.5; }
+html[data-wp-dark-mode-active] .mg-cats__card { background: #141c2e; }
+html[data-wp-dark-mode-active] .mg-cats__desc { color: #a9b1bd; }
+@media (max-width: 900px) { .mg-cats__grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* 모바일은 카드가 아니라 목록이다 — 8:5 아트를 세로로 4장 쌓으면 카테고리 4개 보는 데
+   스크롤 두 화면이 든다. 아트를 44px 아이콘으로 줄여 왼쪽에 붙이고 한 행씩 나열한다.
+   마크업(<a> 안에 img/label/desc 형제)은 그대로 두고 grid 배치만 바꿔서 처리. */
+@media (max-width: 600px) {
+  .mg-cats__grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 10px 24px -18px rgba(16,24,40,.30);
+  }
+  .mg-cats__card {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 0.8rem;
+    align-content: center;
+    padding: 0.72rem 2rem 0.72rem 0.85rem;
+    border: 0;
+    border-top: 1px solid var(--hairline);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .mg-cats__grid > .mg-cats__card:first-child { border-top: 0; }
+  .mg-cats__art {
+    grid-column: 1; grid-row: 1 / 3; align-self: center;
+    width: 44px; height: 44px; aspect-ratio: 1 / 1;
+    border-radius: 11px;
+  }
+  .mg-cats__label {
+    grid-column: 2; grid-row: 1; align-self: end;
+    padding: 0; font-size: 0.95rem;
+  }
+  .mg-cats__desc {
+    grid-column: 2; grid-row: 2; align-self: start;
+    padding: 0.12rem 0 0; font-size: 0.76rem; line-height: 1.4;
+  }
+  /* 오른쪽 꺾쇠 — 탭 가능한 행이라는 신호. 형제 span 이 아니라 ::after 라 grid 흐름 밖. */
+  .mg-cats__card::after {
+    content: '›';
+    position: absolute; right: 0.85rem; top: 50%; transform: translateY(-50%);
+    font-size: 1.15rem; line-height: 1; color: #9aa3b0;
+  }
+  /* 터치 기기엔 hover 가 탭 후 잔상으로 남는다 — 들림 효과 대신 눌림 배경으로 교체 */
+  .mg-cats__card:hover { transform: none; box-shadow: none; }
+  .mg-cats__card:active { background: rgba(79,124,255,.07); }
+  html[data-wp-dark-mode-active] .mg-cats__grid { background: #141c2e; }
+  html[data-wp-dark-mode-active] .mg-cats__card { background: transparent; }
+}
+
+/* ── ⑤ 인기 글 · 최신글 그리드 — 브랜드 톤 정렬 ──────────────────────────── */
+.mg-featured__card::before { background: var(--mg-grad); }
+.mg-featured__cat { color: var(--mg-accent); }
+.mg-featured__card { background: linear-gradient(135deg, #ffffff, #f4f7ff); }
+
+.wp-block-latest-posts.is-grid > li { border-radius: 16px; }
+.wp-block-latest-posts__featured-image { overflow: hidden; }
+.wp-block-latest-posts__featured-image img { transition: transform .35s ease; }
+.wp-block-latest-posts.is-grid > li:hover .wp-block-latest-posts__featured-image img { transform: scale(1.05); }
+.wp-block-latest-posts.is-grid > li:hover { box-shadow: 0 22px 44px -20px rgba(79, 124, 255, 0.42); }
+.wp-block-latest-posts__post-date { color: var(--mg-accent); font-weight: 700; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mg-cats__card, .mg-cats__art,
+  .wp-block-latest-posts__featured-image img { transition: none !important; }
+  .mg-cats__card:hover { transform: none; }
+  .mg-cats__card:hover .mg-cats__art,
+  .wp-block-latest-posts.is-grid > li:hover .wp-block-latest-posts__featured-image img { transform: none; }
+}
+
+/* ============================================================================
+   10. 리디자인 v2 — 동적 요소 (프리뷰 A의 인터랙션 이식, 2026-07-27)
+   ① 스티키 헤더(축소+그림자)  ② 인기 티커(홈)  ③ 카테고리 필터 칩(홈)
+   ④ 스크롤 리빌
+   원칙: 전부 점진적 향상 — JS 없으면 원래 레이아웃 그대로. reduced-motion 전량 무효화.
+   롤백: 이 섹션 + wp-widget.js의 "홈 동적 요소" 블록 삭제 후 reinject-css.mjs 재실행.
+   ============================================================================ */
+
+/* ── ① 스티키 헤더 ──────────────────────────────────────────────────────────
+   ⚠️ `.site-header{position:sticky}`(0,1,0)는 테마의 `#masthead{position:relative}`(1,0,0)에
+   진다. 그리고 이 헤더는 이미 flow 밖이라(내려오는 콘텐츠가 헤더 높이만큼 이미 확보됨)
+   fixed로 바꿔도 레이아웃 시프트가 0 — 실측 확인. 그래서 sticky 대신 fixed. */
+/* 이 사이트는 Kadence transparent-header 설정이라 `.transparent-header #wrapper #masthead`가
+   배경을 rgba(255,255,255,.08)로 만든다. 헤더가 fixed가 되면 본문이 그대로 비쳐 보이므로
+   (2,1,0)을 이기는 선택자로 불투명 배경을 준다. 다크값 #1d1f27은 실측(html 배경). */
+html:not([data-wp-dark-mode-active]) #wrapper #masthead.site-header { background-color: #ffffff; }
+html[data-wp-dark-mode-active] #wrapper #masthead.site-header { background-color: #1d1f27; }
+#masthead.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 500; transition: box-shadow .22s ease, background-color .22s ease; }
+body.admin-bar #masthead.site-header { top: 32px; }   /* 로그인 시 WP 관리바 아래로 */
+@media (max-width: 782px) { body.admin-bar #masthead.site-header { top: 46px; } }
+/* TOC·앵커가 고정 헤더 밑에 숨지 않도록. scroll-padding만으로는 실측상 안 먹어서
+   (앵커 이동 후 제목 top=0.7px) 대상 요소의 scroll-margin-top을 함께 지정. */
+html { scroll-padding-top: 96px; }
+.entry-content-wrap h2[id], .entry-content-wrap h3[id], .entry-content-wrap h4[id],
+[id^="sec-"] { scroll-margin-top: 96px; }
+.site-header.mg-stuck { box-shadow: 0 8px 28px -16px rgba(16, 24, 40, 0.45); }
+html:not([data-wp-dark-mode-active]) .site-header.mg-stuck .site-header-row-container-inner {
+  background-color: rgba(255, 255, 255, 0.88);
+  -webkit-backdrop-filter: saturate(1.25) blur(10px);
+          backdrop-filter: saturate(1.25) blur(10px);
+}
+/* 스크롤 시 헤더 높이 축소 — 로고마크·패딩만 줄여 레이아웃 점프 최소화 */
+.site-header.mg-stuck .site-branding .brand::before { width: 30px; height: 30px; }
+.site-header .site-branding .brand::before { transition: width .22s ease, height .22s ease; }
+
+/* ── ② 인기 티커 (홈 전용, 헤더 바로 아래) ───────────────────────────────── */
+.mg-ticker {
+  display: flex; align-items: center; gap: 0.85rem;
+  margin: 0 0 1.75rem; padding: 0.55rem 0.9rem;
+  border-radius: 999px; overflow: hidden;
+  background: linear-gradient(135deg, rgba(79,124,255,.10), rgba(139,123,255,.10));
+  border: 1px solid var(--hairline);
+}
+.mg-ticker__label {
+  flex: none; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.02em;
+  padding: 0.22rem 0.6rem; border-radius: 999px; color: #fff;
+  background: var(--mg-grad); white-space: nowrap;
+}
+.mg-ticker__viewport { flex: 1; min-width: 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 3%, #000 92%, transparent); }
+.mg-ticker__track { display: flex; gap: 2.5rem; width: max-content; animation: mg-ticker-roll 46s linear infinite; }
+.mg-ticker:hover .mg-ticker__track, .mg-ticker:focus-within .mg-ticker__track { animation-play-state: paused; }
+.mg-ticker__item { font-size: 0.86rem; font-weight: 600; color: #35405270; white-space: nowrap; text-decoration: none !important; color: #3a4557; }
+.mg-ticker__item:hover { color: var(--mg-accent); }
+@keyframes mg-ticker-roll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+html[data-wp-dark-mode-active] .mg-ticker__item { color: #b8c0cc; }
+@media (max-width: 600px) { .mg-ticker__label { display: none; } }
+
+/* ── ③ 카테고리 필터 칩 (홈 최신글 위) ───────────────────────────────────── */
+.mg-latest-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin: 2.75rem 0 1.1rem; }
+.mg-latest-head h2 { font-size: 1.2rem; font-weight: 800; margin: 0; letter-spacing: -0.01em; display: flex; align-items: center; gap: 0.45rem; }
+.mg-filter { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+.mg-filter button {
+  font: inherit; font-size: 0.82rem; font-weight: 700; cursor: pointer;
+  padding: 0.38rem 0.85rem; border-radius: 999px;
+  border: 1px solid var(--hairline); background: #fff; color: #5c6675;
+  transition: color .16s ease, border-color .16s ease, background-color .16s ease;
+}
+.mg-filter button:hover { color: var(--mg-accent); border-color: var(--mg-accent); }
+.mg-filter button[aria-pressed="true"] { background: var(--mg-grad); border-color: transparent; color: #fff; }
+html[data-wp-dark-mode-active] .mg-filter button { background: #141c2e; color: #a9b1bd; }
+.wp-block-latest-posts.is-grid > li[hidden] { display: none; }
+
+/* ── ④ 스크롤 리빌 — JS 있을 때만 초기 상태 적용(노스크립트 안전) ────────── */
+html.mg-js .mg-reveal { opacity: 0; transform: translateY(14px); }
+html.mg-js .mg-reveal.mg-in { opacity: 1; transform: none; transition: opacity .5s ease, transform .5s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mg-ticker__track { animation: none !important; }
+  .site-header, .site-header .site-branding .brand::before { transition: none !important; }
+  html.mg-js .mg-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
+/* ============================================================================
+   11. 리디자인 v3 — 프리뷰 A 레이아웃 전면 이식 + 광고 슬롯 (2026-07-27)
+   ① 스크롤 진행바  ② 인기 티커(헤더 아래 바)  ③ 매거진 히어로(리드1+미니2)
+   ④ 섹션 헤드  ⑤ 2컬럼(그리드 + 사이드 레일)  ⑥ 광고 슬롯  ⑦ 뉴스레터 CTA
+   ⚠️ 광고: 슬롯 래퍼는 "비었을 때만" 숨긴다(:empty). 유닛이 들어간 뒤 display:none으로
+      감추면 애드핏이 요청 자체를 안 해서 데드락 — 뷰포트별 유닛은 JS가 1개만 삽입한다.
+   ※ .mungge-hero / .mg-featured 는 홈 재구성으로 미사용(구버전 대비 CSS는 유지).
+   ============================================================================ */
+
+/* ── ① 스크롤 진행바 ──────────────────────────────────────────────────────── */
+#mg-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 600; background: var(--mg-grad); transition: width .1s linear; pointer-events: none; }
+
+/* ── ② 인기 티커 — 알약형 → 헤더 아래 바 ─────────────────────────────────── */
+.mg-ticker { border-radius: 12px; margin: 1.25rem 0 0; padding: 0.5rem 0.9rem; }
+
+/* ── ③ 매거진 히어로 — 리드 1(오버레이) + 미니 2 ───────────────────────────
+   처음엔 core latest-posts 블록을 CSS로 비틀었는데, Kadence 블록 CSS가
+   `.wp-block-latest-posts.wp-block-latest-posts__list.is-grid.columns-3`(0,4,0)와
+   `__featured-image:not(.alignleft):not(.alignright)`(0,6,0)로 계속 이겨서
+   특이도 경쟁이 반복됐다. → [mg_hero] 숏코드로 전용 마크업을 서버 렌더하고
+   그 위에 이 CSS만 얹는다(충돌 0, 카테고리 칩·요약·날짜까지 자유롭게 구성). */
+.mg-hero-mag { display: grid; grid-template-columns: 1.7fr 1fr; grid-auto-rows: 1fr; gap: 1.1rem; margin: 1.5rem 0 0; }
+.mg-hcard {
+  position: relative; display: flex; flex-direction: column; justify-content: flex-end;
+  border-radius: 18px; overflow: hidden; background: #fff; border: 1px solid var(--hairline);
+  box-shadow: var(--sh-card); text-decoration: none !important; color: inherit;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.mg-hcard:hover { transform: translateY(-3px); box-shadow: var(--sh-card-hover); }
+.mg-hcard__img { display: block; width: 100%; object-fit: cover; }
+.mg-hcard__body { display: flex; flex-direction: column; gap: 0.35rem; }
+.mg-hcard__cat { align-self: flex-start; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 999px; background: var(--mg-grad); color: #fff; }
+.mg-hcard__t { font-weight: 800; letter-spacing: -0.015em; line-height: 1.34; }
+.mg-hcard__m { font-size: 0.78rem; font-weight: 700; color: var(--mg-accent); }
+
+/* 리드: 이미지를 카드 전체에 깔고 텍스트를 하단에 오버레이 */
+.mg-hcard--lead { grid-row: span 2; min-height: 420px; padding: 1.5rem; }
+.mg-hcard--lead .mg-hcard__img { position: absolute; inset: 0; height: 100%; }
+/* 스크림을 카드 높이 비율(28%→92%)에 묶어놨더니 모바일에서 깨진다 — 제목이 4줄로 접히면
+   텍스트 블록이 카드의 3분의 2까지 올라오는데 그 위쪽 절반은 아직 투명 구간이라
+   밝은 하늘·나뭇잎 위에 흰 글씨가 그대로 얹혔다. 카드 배경 스크림은 옅은 균일 틴트만
+   맡고, 진한 스크림은 .mg-hcard__body 자신이 깔아 텍스트 길이에 따라 같이 늘어나게 한다. */
+.mg-hcard--lead::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(9,12,18,.10), rgba(9,12,18,.34));
+}
+.mg-hcard--lead .mg-hcard__body {
+  position: relative; z-index: 2;
+  margin: 0 -1.5rem -1.5rem;          /* 카드 패딩을 상쇄해 스크림을 좌우·아래 끝까지 */
+  padding: 3.4rem 1.5rem 1.5rem;      /* 위 3.4rem = 스크림이 서서히 올라오는 페이드 구간 */
+  background: linear-gradient(180deg, rgba(9,12,18,0), rgba(9,12,18,.86) 3.4rem, rgba(9,12,18,.95));
+}
+.mg-hcard--lead .mg-hcard__t { font-size: 1.6rem; color: #fff; text-shadow: 0 1px 10px rgba(9,12,18,.5); }
+.mg-hcard--lead .mg-hcard__x { font-size: 0.92rem; line-height: 1.6; color: #dde2ec; }
+.mg-hcard--lead .mg-hcard__m { color: #aab4c6; }
+
+/* 미니: 이미지 위 + 텍스트 아래 */
+/* 미니는 위에서부터 쌓는다 — flex-end는 리드 오버레이 전용 */
+.mg-hcard--mini { justify-content: flex-start; }
+.mg-hcard--mini .mg-hcard__img { height: 132px; }
+.mg-hcard--mini .mg-hcard__body { padding: 0.85rem 1rem 1rem; }
+.mg-hcard--mini .mg-hcard__t { font-size: 1rem; }
+html[data-wp-dark-mode-active] .mg-hcard { background: #141c2e; }
+html[data-wp-dark-mode-active] .mg-hcard--mini .mg-hcard__t { color: #f2f3f5; }
+@media (max-width: 780px) {
+  /* 1열이 되면 행 높이를 lead에 맞추면 안 된다(미니에 거대한 빈 공간 생김) */
+  .mg-hero-mag { grid-template-columns: 1fr; grid-auto-rows: auto; }
+  /* 스크림에 가린 만큼 카드를 키워야 사진이 한 조각이라도 남는다(340px면 105px뿐) */
+  .mg-hcard--lead { grid-row: auto; min-height: 400px; padding: 1.15rem; }
+  .mg-hcard--lead .mg-hcard__body { margin: 0 -1.15rem -1.15rem; padding: 2.8rem 1.15rem 1.15rem; }
+  /* 좁은 폭에서 제목·요약이 통째로 풀리면 사진이 한 조각도 안 남는다 → 줄 수를 묶는다 */
+  .mg-hcard--lead .mg-hcard__t,
+  .mg-hcard--lead .mg-hcard__x {
+    display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .mg-hcard--lead .mg-hcard__t { font-size: 1.3rem; -webkit-line-clamp: 3; }
+  .mg-hcard--lead .mg-hcard__x { font-size: 0.87rem; -webkit-line-clamp: 3; }
+}
+
+/* ── ④ 섹션 헤드 ──────────────────────────────────────────────────────────── */
+.mg-sec-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin: 2.75rem 0 1.1rem; }
+.mg-sec-head h2 { font-size: 1.2rem; font-weight: 800; margin: 0; letter-spacing: -0.01em; display: flex; align-items: center; gap: 0.45rem; border: 0; padding: 0; }
+.mg-more { font-size: 0.85rem; font-weight: 700; color: var(--mg-accent); text-decoration: none !important; }
+
+/* ── ⑤ 2컬럼 + 사이드 레일 ────────────────────────────────────────────────── */
+.mg-cols.wp-block-columns { gap: 1.75rem; align-items: stretch; margin-bottom: 2.5rem; }
+.mg-cols .wp-block-latest-posts.is-grid { grid-template-columns: repeat(2, 1fr); margin-top: 0; }
+@media (max-width: 600px) { .mg-cols .wp-block-latest-posts.is-grid { grid-template-columns: 1fr; } }
+
+.mg-rail { display: flex; flex-direction: column; gap: 1.1rem; }
+/* 레일 통째 sticky는 인기글·카테고리 패널까지 따라와 산만하다 → 컬럼을 그리드 높이만큼
+   늘려두고(align-items:stretch) 광고 패널만 sticky로 이동시킨다. */
+.mg-rail { height: 100%; }
+.mg-panel { background: #fff; border: 1px solid var(--hairline); border-radius: 16px; padding: 1.15rem 1.2rem; box-shadow: var(--sh-card); }
+.mg-panel h3 { font-size: 0.98rem; font-weight: 800; margin: 0 0 0.85rem; letter-spacing: -0.01em; display: flex; align-items: center; gap: 0.4rem; }
+html[data-wp-dark-mode-active] .mg-panel { background: #141c2e; }
+
+.mg-ranks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+.mg-rank a { display: flex; gap: 0.7rem; align-items: flex-start; text-decoration: none !important; color: inherit; }
+.mg-rank__n { flex: none; width: 22px; height: 22px; border-radius: 7px; display: grid; place-items: center; font-size: 0.72rem; font-weight: 800; color: #fff; background: var(--mg-grad); }
+.mg-rank:nth-child(n+4) .mg-rank__n { background: #aeb6c4; }
+.mg-rank__b { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.mg-rank__cat { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.04em; color: var(--mg-accent); text-transform: uppercase; }
+.mg-rank__t { font-size: 0.86rem; font-weight: 600; line-height: 1.45; }
+.mg-rank a:hover .mg-rank__t { color: var(--mg-accent); }
+
+.mg-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.mg-chips a { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.78rem; font-weight: 700; padding: 0.32rem 0.6rem; border-radius: 999px; border: 1px solid var(--hairline); color: #5c6675; text-decoration: none !important; }
+.mg-chips a span { font-size: 0.68rem; font-weight: 800; color: var(--mg-accent); }
+.mg-chips a:hover { border-color: var(--mg-accent); color: var(--mg-accent); }
+html[data-wp-dark-mode-active] .mg-chips a { color: #a9b1bd; }
+
+@media (max-width: 900px) {
+  .mg-cols.wp-block-columns { flex-wrap: wrap; }
+  .mg-cols .wp-block-column { flex-basis: 100%; }
+}
+
+/* ── ⑥ 광고 슬롯 ──────────────────────────────────────────────────────────── */
+.mg-slot { display: flex; justify-content: center; align-items: center; }
+.mg-slot:empty { display: none; }                    /* 유닛 미삽입 시 빈 여백 제거 */
+.mg-slot--lead { margin: 1.75rem 0 0; }
+.mg-slot--lead:not(:empty) { min-height: 90px; }     /* CLS 방지용 자리 예약 */
+.mg-slot--rail:not(:empty) { min-height: 250px; }
+/* sticky 포기: 조상 .site.wp-site-blocks(overflow:clip)와 body(overflow:auto)가 모두
+   스크롤 컨테이너를 만들어 CSS sticky가 무력화된다. 전역 overflow를 건드리는 건
+   가로 넘침 방어와 충돌해 위험 → 정적 배치로 확정. */
+.mg-panel--slot { padding: 0.9rem; }
+
+/* ── 쿠팡 파트너스 다이나믹 배너(레일) ─────────────────────────────────────
+   위젯 스크립트가 삽입 위치에 iframe을 그리므로 JS 주입이 아니라 페이지 콘텐츠에
+   서버 렌더한다. 위젯 ID 미설정 시 패널은 hidden — 빈 박스가 보이지 않게. */
+.mg-panel--coupang { padding: 0.9rem; }
+
+/* ── 추천 상품 회전 패널(쿠팡 파트너스, 레일) ────────────────────────────
+   다이나믹 배너 위젯ID가 없어도 오늘 도는 대체 구현. 기존 글에 저장된 lptag 검색
+   URL·상품이미지만 재사용하고 쿠팡 API는 호출하지 않는다(계정 제한 이력).
+   JS 없으면 첫 상품 1개가 그대로 보인다(점진적 향상). */
+.mg-shop { position: relative; }
+.mg-shop__it { display: none; flex-direction: column; align-items: center; gap: 0.5rem; text-align: center; text-decoration: none !important; color: inherit; }
+.mg-shop__it:first-child { display: flex; }
+.mg-shop__img { width: 120px; height: 120px; object-fit: contain; border-radius: 12px; background: #f6f7f9; }
+.mg-shop__n { font-size: 0.85rem; font-weight: 700; line-height: 1.45; letter-spacing: -0.01em; }
+.mg-shop__c { font-size: 0.76rem; font-weight: 800; color: var(--mg-accent); }
+.mg-shop__it:hover .mg-shop__c { text-decoration: underline !important; }
+html[data-wp-dark-mode-active] .mg-shop__img { background: #1a2130; }
+.mg-panel--coupang[hidden] { display: none; }
+.mg-coupang { display: flex; justify-content: center; min-height: 250px; }
+.mg-coupang iframe { max-width: 100%; }
+/* 공정위 표시·광고 고지 — 배너를 다는 페이지에는 반드시 함께 노출 */
+.mg-partners-note { margin: 0.6rem 0 0; font-size: 0.68rem; line-height: 1.5; color: #8a93a3; text-align: center; }
+html[data-wp-dark-mode-active] .mg-partners-note { color: #7b8494; }
+.mg-panel--slot:has(.mg-slot:empty) { display: none; }
+
+/* ── 최신글 카드 카테고리 칩 (JS 주입) ───────────────────────────────────── */
+.wp-block-latest-posts.is-grid > li { position: relative; }
+.mg-cardchip { position: absolute; top: 10px; left: 10px; z-index: 2; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.03em; text-transform: uppercase; color: #fff; padding: 0.24rem 0.55rem; border-radius: 999px; background: var(--c, #4f7cff); box-shadow: 0 4px 10px -4px rgba(16,24,40,.5); }
+
+/* ── ⑦ 뉴스레터 CTA ──────────────────────────────────────────────────────── */
+.mg-cta { margin: 3rem 0 1rem; padding: clamp(1.75rem, 5vw, 2.75rem); border-radius: 22px; text-align: center; color: #fff; background: var(--mg-grad); box-shadow: 0 26px 60px -30px rgba(79,124,255,.7); }
+.mg-cta__eyebrow { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; opacity: .9; }
+.mg-cta h2 { margin: 0.5rem 0 0.4rem; font-size: clamp(1.3rem, 3.5vw, 1.8rem); font-weight: 800; color: #fff; border: 0; padding: 0; letter-spacing: -0.02em; }
+.mg-cta p { margin: 0 0 1.2rem; font-size: 0.92rem; opacity: .92; }
+.mg-cta .mg-sub { margin: 0; padding: 0; background: none; border: 0; }
+.mg-cta .mg-sub-b { background: #0b0e14; }
+.mg-cta .mg-sub-msg { color: #fff; }
+/* html[data-wp-dark-mode-active] .mg-sub (0,2,1)이 .mg-cta .mg-sub (0,2,0)를 이겨
+   다크에서 CTA 안에 어두운 박스가 남았다. 같은 층위로 올려 무력화. */
+html[data-wp-dark-mode-active] .mg-cta .mg-sub { background: none; border: 0; padding: 0; }
+.mg-cta .mg-sub-f { max-width: 460px; margin: 0 auto; }
+.mg-cta .mg-sub-i, html[data-wp-dark-mode-active] .mg-cta .mg-sub-i { background: #fff; color: #26272b; border-color: transparent; }
+
+/* ── ⑧ 연재 시리즈 허브 (/series/<id>/) ──────────────────────────────────────
+   TF 이관 시 /series/ 경로가 안 옮겨져 본문 7편의 상단 배너 링크가 전부 404 였다.
+   허브 페이지를 mungge 에 새로 만들면서 함께 들어간 스타일.
+   단계 카드는 순번 원형 배지 + 제목 + 한 줄 요약 구조. */
+.mg-series { margin: 0 0 2.5rem; }
+.mg-series__intro { margin: 0 0 1.6rem; font-size: 0.98rem; line-height: 1.8; color: var(--color-text-secondary, #5b6473); }
+.mg-series__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; counter-reset: mgstep; }
+.mg-series__step { position: relative; display: flex; gap: 0.95rem; align-items: flex-start; padding: 0.95rem 1.1rem; border-radius: 14px; background: var(--color-bg-secondary, #f5f7fa); border: 1px solid rgba(16,24,40,.07); transition: transform .16s ease, box-shadow .16s ease; }
+.mg-series__step:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -18px rgba(16,24,40,.55); }
+.mg-series__num { flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 0.85rem; font-weight: 800; color: #fff; background: var(--mg-grad, linear-gradient(135deg,#4f7cff,#8b5cf6)); }
+.mg-series__body { min-width: 0; }
+.mg-series__link { display: block; font-weight: 700; font-size: 1rem; line-height: 1.45; text-decoration: none; letter-spacing: -0.01em; }
+.mg-series__link:hover { text-decoration: underline; }
+.mg-series__blurb { margin: 0.22rem 0 0; font-size: 0.87rem; line-height: 1.6; color: var(--color-text-secondary, #6b7280); }
+@media (max-width: 600px) {
+  .mg-series__step { padding: 0.8rem 0.85rem; gap: 0.75rem; }
+  .mg-series__num { width: 26px; height: 26px; font-size: 0.78rem; }
+  .mg-series__link { font-size: 0.94rem; }
+}
+html[data-wp-dark-mode-active] .mg-series__step { background: #171a21; border-color: rgba(255,255,255,.08); }
+html[data-wp-dark-mode-active] .mg-series__blurb,
+html[data-wp-dark-mode-active] .mg-series__intro { color: #9aa3b2; }
+
+/* ── 다크: 페이지 히어로 제목이 배경에 묻히는 문제 ────────────────────────────
+   .entry-hero h1 은 color: var(--global-palette8) 인데 다크에서 이 값이 어두워져
+   page 에서 제목 대비가 1.05:1(사실상 비가시)이 된다. 글(post)은 14.5:1 로 멀쩡해
+   그동안 안 드러났고, 기존 페이지들은 제목을 숨겨 놔서 아무도 못 봤다.
+   /series/ 허브를 만들며 발견. 글과 같은 톤으로 고정한다. */
+html[data-mg-theme="dark"] .entry-hero .entry-title,
+html[data-mg-theme="dark"] .entry-hero h1 { color: #f2f3f5; }
+
+/* ── ⑨ 비교 페이지 (/compare/<slug>/) ────────────────────────────────────────
+   TF 의 프로그래매틱 비교 6종을 mungge 로 이식하며 함께 들어간 스타일.
+   ⚠️ 표는 반드시 .cmp-table-wrap 의 가로 스크롤 안에 둔다 — 모바일에서 본문 자체가
+      가로로 밀리면 안 된다. */
+.cmp { margin: 0 0 2.5rem; }
+.cmp-updated { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em; color: var(--color-text-secondary, #6b7280); margin: 0 0 0.6rem; }
+.cmp-intro { margin: 0 0 1.8rem; font-size: 0.98rem; line-height: 1.85; }
+
+/* 옵션 카드 */
+.cmp-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.9rem; margin: 0 0 2rem; }
+.cmp-card { padding: 1.1rem 1.15rem; border-radius: 16px; background: var(--color-bg-secondary, #f5f7fa); border: 1px solid rgba(16,24,40,.07); }
+.cmp-card-name { margin: 0; font-size: 1.08rem; font-weight: 800; letter-spacing: -0.01em; }
+.cmp-card-tag { margin: 0.15rem 0 0.85rem; font-size: 0.82rem; color: var(--color-text-secondary, #6b7280); }
+.cmp-pros, .cmp-cons { list-style: none; margin: 0 0 0.6rem; padding: 0; display: grid; gap: 0.3rem; }
+.cmp-pros li, .cmp-cons li { position: relative; padding-left: 1.15rem; font-size: 0.87rem; line-height: 1.6; }
+.cmp-pros li::before { content: "＋"; position: absolute; left: 0; color: #16a34a; font-weight: 800; }
+.cmp-cons li::before { content: "－"; position: absolute; left: 0; color: #dc2626; font-weight: 800; }
+.cmp-best-for { margin: 0.7rem 0 0; padding: 0.55rem 0.7rem; border-radius: 10px; font-size: 0.84rem; line-height: 1.55; background: rgba(79,124,255,.09); }
+.cmp-best-for strong { font-weight: 800; }
+
+/* 비교표 */
+.cmp-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 2rem; border-radius: 14px; border: 1px solid rgba(16,24,40,.09); }
+.cmp-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 0.89rem; }
+.cmp-table th, .cmp-table td { padding: 0.7rem 0.85rem; text-align: left; vertical-align: top; border-bottom: 1px solid rgba(16,24,40,.07); line-height: 1.55; }
+.cmp-table thead th { background: var(--color-bg-secondary, #f5f7fa); font-weight: 800; white-space: nowrap; }
+.cmp-table tbody tr:last-child th, .cmp-table tbody tr:last-child td { border-bottom: 0; }
+.cmp-row-label { font-weight: 700; white-space: nowrap; background: rgba(127,127,127,.035); }
+.cmp-badge { display: inline-block; margin-left: 0.35rem; padding: 0.05rem 0.4rem; border-radius: 999px; font-size: 0.68rem; font-weight: 800; color: #fff; background: #16a34a; vertical-align: middle; }
+
+/* 총평 */
+.cmp-verdict { margin: 0 0 2rem; padding: 1.1rem 1.2rem; border-radius: 16px; border-left: 4px solid var(--color-primary, #4f7cff); background: var(--color-bg-secondary, #f5f7fa); }
+.cmp-verdict-t { margin: 0 0 0.4rem; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; color: var(--color-primary, #4f7cff); }
+.cmp-verdict p { margin: 0; font-size: 0.95rem; line-height: 1.8; }
+
+/* FAQ · 관련 */
+.cmp-faq { margin: 0 0 2rem; display: grid; gap: 0.6rem; }
+.cmp-faq details { padding: 0.8rem 1rem; border-radius: 12px; background: var(--color-bg-secondary, #f5f7fa); border: 1px solid rgba(16,24,40,.07); }
+.cmp-faq summary { cursor: pointer; font-weight: 700; font-size: 0.93rem; line-height: 1.5; }
+.cmp-faq p { margin: 0.6rem 0 0; font-size: 0.89rem; line-height: 1.75; color: var(--color-text-secondary, #4b5563); }
+.cmp-related { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; }
+.cmp-related li { padding-left: 1.1rem; position: relative; font-size: 0.92rem; }
+.cmp-related li::before { content: "→"; position: absolute; left: 0; opacity: .55; }
+
+@media (max-width: 600px) {
+  .cmp-cards { grid-template-columns: 1fr; }
+  .cmp-card { padding: 0.9rem 1rem; }
+}
+html[data-mg-theme="dark"] .cmp-card,
+html[data-mg-theme="dark"] .cmp-verdict,
+html[data-mg-theme="dark"] .cmp-faq details,
+html[data-mg-theme="dark"] .cmp-table thead th { background: #171a21; border-color: rgba(255,255,255,.08); }
+html[data-mg-theme="dark"] .cmp-table-wrap { border-color: rgba(255,255,255,.1); }
+html[data-mg-theme="dark"] .cmp-table th,
+html[data-mg-theme="dark"] .cmp-table td { border-bottom-color: rgba(255,255,255,.07); }
+html[data-mg-theme="dark"] .cmp-row-label { background: rgba(255,255,255,.03); }
+html[data-mg-theme="dark"] .cmp-card-tag,
+html[data-mg-theme="dark"] .cmp-updated,
+html[data-mg-theme="dark"] .cmp-faq p { color: #9aa3b2; }
+
+/* ── ⑩ 차트 가독성 3건 (2026-07-30 피드백) ──────────────────────────────────── */
+
+/* (1) 세로막대: 값은 막대 위, 항목명은 막대 아래. 차트 높이는 우측 범례에 맞춘다.
+   기존엔 값/이름이 범례에만 있어 "어느 막대가 무엇인지" 눈으로 이어야 했다.
+   .chart-col-track 이 176px 고정이라 범례가 길어지면 높이가 어긋났다 → 트랙을 flex 로 늘린다. */
+.chart-vbar-wrap { align-items: stretch; }
+.chart-vbar-wrap .chart-columns { align-items: stretch; padding-top: 0; }
+.chart-vbar-wrap .chart-vlegend { align-self: stretch; justify-content: space-evenly; }
+.chart-vbar-wrap .chart-col { justify-content: flex-end; gap: 6px; }
+.chart-vbar-wrap .chart-col-track { height: auto; flex: 1 1 auto; min-height: 120px; }
+.chart-col-val {
+  font-size: 0.9rem; font-weight: 800; line-height: 1.2;
+  font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+  color: var(--color-text, #26272b);
+}
+.chart-col-name {
+  font-size: 0.82rem; font-weight: 600; line-height: 1.35; text-align: center;
+  color: var(--color-text-secondary, #6b7280);
+  max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* (2) 도넛 범례: 글자·색점이 작아 읽기 어려웠다. */
+.donut-legend { gap: 10px 16px; }
+.donut-legend-item { gap: 0.65rem; }
+.donut-legend-dot { width: 15px; height: 15px; }
+.donut-legend-label { font-size: 0.95rem; }
+.donut-legend-value { font-size: 0.95rem; }
+
+/* (3) 레이더(자체 평가) 카드: 행마다 라벨 길이가 달라 막대 시작점이 들쭉날쭉했다
+   (실측 track.left = 127.5 / 105 / 115.6). 카드 간에는 어긋남이 없었고 **카드 안 행 간** 문제였다.
+   .radar-scores 를 3열 그리드로 만들고 행을 display:contents 로 풀어 열을 공유시킨다.
+   ⚠️ wpautop 이 행 안에 빈 <p> 와 값을 감싼 <p> 를 끼워 넣는다. 그대로 두면 이 <p> 가
+      그리드 아이템이 되어 열이 밀린다 → <p> 도 display:contents 로 무력화한다. */
+.radar-scores {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr) max-content;
+  gap: 0.55rem 0.65rem;
+  align-items: center;
+}
+.radar-score-row { display: contents; }
+.radar-score-row > p { display: contents; }
+.radar-score-label { text-align: right; white-space: nowrap; }
+.radar-score-val { justify-self: end; font-variant-numeric: tabular-nums; }
+
+html[data-mg-theme="dark"] .chart-col-val { color: #dfe1e5; }
+html[data-mg-theme="dark"] .chart-col-name { color: #9aa3b2; }
+</style>
+<div class="mg-anchor"><button class="mg-anchor-x" type="button" aria-label="\uB2EB\uAE30">×</button><ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-NUB10D4cyFtlSIaN" data-ad-width="320" data-ad-height="100"></ins></div>
+<script>
+/* mungge.com 위젯 프론트 JS — footer 위젯에 1회 임베드. (kses: ben=unfiltered_html이라 생존)
+   ① 코드블록 복사버튼 ② 모바일 앵커 닫기 + ba.min.js 중복로드 가드
+   ③ 목차(TOC) 자동생성 ④ FAQPage JSON-LD 스키마 */
+(function () {
+  // ── ① 코드 복사버튼 ──
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('.cc-copy');
+    if (!b) return;
+    var c = b.closest('.code-card'), code = c && c.querySelector('code');
+    if (!code || !navigator.clipboard) return;
+    navigator.clipboard.writeText(code.innerText).then(function () {
+      b.textContent = '복사됨!';
+      setTimeout(function () { b.textContent = '복사'; }, 1400);
+    });
+  });
+
+  // ── ② 앵커 닫기 + ba.min.js 가드 ──
+  try { if (sessionStorage.getItem('mgAnchorClosed')) { var a0 = document.querySelector('.mg-anchor'); if (a0) a0.classList.add('mg-closed'); } } catch (e) {}
+  document.addEventListener('click', function (e) {
+    var x = e.target.closest && e.target.closest('.mg-anchor-x');
+    if (!x) return;
+    var a = x.closest('.mg-anchor'); if (a) a.classList.add('mg-closed');
+    try { sessionStorage.setItem('mgAnchorClosed', '1'); } catch (_) {}
+  });
+  // ── ②-b 광고 슬롯 채우기 ──
+  // ⚠️ 반드시 ba.min.js 로드 "앞"에서 실행한다. 애드핏 스크립트는 로드 시점에 DOM의
+  //    ins.kakao_ad_area를 훑기 때문에, 나중에 붙인 ins는 요청되지 않을 수 있다.
+  // ⚠️ 뷰포트별 유닛을 둘 다 넣고 CSS로 하나를 display:none 하면 그 슬롯은 요청조차
+  //    안 된다(데드락). 그래서 화면 폭에 맞는 유닛 1개만 DOM에 넣는다.
+  var MG_UNITS = {
+    // slot 이름 → [PC유닛, PC폭, PC높이, 모바일유닛, 모바일폭, 모바일높이]
+    'home-lead': ['DAN-5RN4pAjuK5XJ0oHO', 728, 90, 'DAN-FxUxEhp2LCne6gT3', 320, 50],
+    // 레일 300x250은 모바일에서도 그대로 들어간다(레일이 그리드 아래로 내려갈 뿐 폭은 충분)
+    'rail': ['DAN-uWiPfWhdunksUrWW', 300, 250, 'DAN-uWiPfWhdunksUrWW', 300, 250]
+  };
+  [].forEach.call(document.querySelectorAll('.mg-slot[data-slot]'), function (slot) {
+    var u = MG_UNITS[slot.getAttribute('data-slot')];
+    if (!u || slot.children.length) return;
+    var mo = window.innerWidth < 768;
+    var ins = document.createElement('ins');
+    ins.className = 'kakao_ad_area';
+    ins.style.display = 'none';                 // 애드핏 표준 스니펫 형식(스크립트가 해제)
+    ins.setAttribute('data-ad-unit', mo ? u[3] : u[0]);
+    ins.setAttribute('data-ad-width', String(mo ? u[4] : u[1]));
+    ins.setAttribute('data-ad-height', String(mo ? u[5] : u[2]));
+    slot.appendChild(ins);
+  });
+
+  if (!document.querySelector('script[src*="ba.min.js"]')) {
+    var s = document.createElement('script');
+    s.src = '//t1.kakaocdn.net/kas/static/ba.min.js'; s.async = true;
+    document.body.appendChild(s);
+  }
+
+  // ── 홈 동적 요소 (리디자인 v2) ──────────────────────────────────────────
+  // 스티키 헤더 · 스크롤 리빌은 전 페이지, 인기 티커 · 카테고리 필터는 홈 전용.
+  // 전부 점진적 향상: JS 실패/미실행이어도 원래 레이아웃 그대로 남는다.
+  document.documentElement.classList.add('mg-js');
+
+  // (a) 스티키 헤더 — 24px 넘게 스크롤되면 축소 + 그림자
+  var mgHdr = document.querySelector('.site-header');
+  if (mgHdr) {
+    var mgStick = function () { mgHdr.classList.toggle('mg-stuck', window.scrollY > 24); };
+    mgStick();
+    window.addEventListener('scroll', mgStick, { passive: true });
+  }
+
+  // (a-2) 스크롤 진행바
+  var mgBar = document.createElement('div');
+  mgBar.id = 'mg-progress';
+  document.body.appendChild(mgBar);
+  var mgProg = function () {
+    var d = document.documentElement;
+    var max = d.scrollHeight - d.clientHeight;
+    mgBar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+  };
+  mgProg();
+  window.addEventListener('scroll', mgProg, { passive: true });
+
+  // (b) 스크롤 리빌 — 카드류가 뷰포트에 들어올 때 페이드업
+  if ('IntersectionObserver' in window) {
+    var mgIo = new IntersectionObserver(function (ens) {
+      ens.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add('mg-in');
+        mgIo.unobserve(en.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    var mgCards = document.querySelectorAll('.mg-hcard, .mg-cats__card, .mg-featured__card, .mg-cols .wp-block-latest-posts.is-grid > li, .mg-rail .mg-panel');
+    [].forEach.call(mgCards, function (el, i) {
+      el.classList.add('mg-reveal');
+      el.style.transitionDelay = (i % 3) * 60 + 'ms';   // 행 단위 계단식
+      mgIo.observe(el);
+    });
+  }
+
+  if (document.body.classList.contains('home')) {
+    var mgReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // (c) 인기 티커 — 레일의 인기 글 TOP5를 재사용(추가 요청 0). 매거진 히어로 위에 배치
+    var mgFeat = document.querySelectorAll('.mg-ranks .mg-rank a');
+    if (mgFeat.length && !mgReduce) {
+      var mgItems = [].map.call(mgFeat, function (a) {
+        return { href: a.getAttribute('href'), text: ((a.querySelector('.mg-rank__t') || {}).textContent || '').trim() };
+      });
+      var mgMake = function (dup) {
+        return mgItems.map(function (it) {
+          var a = document.createElement('a');
+          a.className = 'mg-ticker__item';
+          a.href = it.href;
+          a.textContent = '🔥 ' + it.text;
+          if (dup) { a.setAttribute('aria-hidden', 'true'); a.tabIndex = -1; }
+          return a;
+        });
+      };
+      var mgTick = document.createElement('div');
+      mgTick.className = 'mg-ticker';
+      mgTick.innerHTML = '<span class="mg-ticker__label">🔥 인기</span><div class="mg-ticker__viewport"><div class="mg-ticker__track"></div></div>';
+      var mgTrack = mgTick.querySelector('.mg-ticker__track');
+      // translateX(-50%) 무한루프가 이음새 없이 돌려면 트랙에 정확히 2벌이 필요
+      mgMake(false).concat(mgMake(true)).forEach(function (n) { mgTrack.appendChild(n); });
+      var mgHero = document.querySelector('.mg-hero-mag');
+      if (mgHero && mgHero.parentNode) mgHero.parentNode.insertBefore(mgTick, mgHero);
+    }
+
+    // (d) 카테고리 필터 — 최신글 그리드를 REST 카테고리로 태깅 후 칩으로 필터.
+    //     ⚠️ 매거진 히어로도 같은 블록(.wp-block-latest-posts.is-grid)이라 2컬럼 안쪽만 잡는다.
+    var mgGrid = document.querySelector('.mg-cols .wp-block-latest-posts.is-grid');
+    // ⚠️ 변수명 주의: 상단 스크롤 진행바가 var mgBar를 쓴다. var는 함수 스코프라
+    //    여기서 mgBar를 재선언하면 진행바가 이 칩 컨테이너에 width를 쓴다(칩이 스크롤마다 재배치됨).
+    var mgChips = document.querySelector('.mg-sec-head--latest .mg-filter');
+    if (mgGrid && mgChips) {
+      var mgLis = [].slice.call(mgGrid.children);
+      // 카테고리명 → 칩 색 (프리뷰 A 팔레트)
+      var MG_CC = { game: '#7c3aed', finance: '#0e9f6e', ai: '#4f7cff', travel: '#f59e0b', lifestyle: '#ec4899', review: '#ef4444', dev: '#0891b2', health: '#10b981', education: '#6366f1' };
+      var mgNorm = function (u) {
+        try { return new URL(u, location.origin).pathname.replace(/\/+$/, ''); } catch (e) { return u; }
+      };
+      Promise.all([
+        fetch('/wp-json/wp/v2/posts?per_page=' + mgLis.length + '&_fields=link,categories').then(function (r) { return r.json(); }),
+        fetch('/wp-json/wp/v2/categories?per_page=50&_fields=id,name').then(function (r) { return r.json(); })
+      ]).then(function (res) {
+        var posts = res[0], cats = res[1];
+        if (!Array.isArray(posts) || !Array.isArray(cats)) return;
+        var mgName = {};
+        cats.forEach(function (c) { mgName[c.id] = c.name; });
+        var mgByPath = {};
+        posts.forEach(function (p) { mgByPath[mgNorm(p.link)] = p.categories || []; });
+        var mgCount = {};
+        mgLis.forEach(function (li) {
+          var a = li.querySelector('a[href]');
+          if (!a) return;
+          var names = (mgByPath[mgNorm(a.getAttribute('href'))] || []).map(function (id) { return mgName[id]; }).filter(Boolean);
+          li.setAttribute('data-cats', names.join('|'));
+          names.forEach(function (n) { mgCount[n] = (mgCount[n] || 0) + 1; });
+          // 카드 좌상단 카테고리 칩 — 상위 카테고리는 변별력이 없어 제외
+          var leaf = names.filter(function (n) { return !/^(테크·개발|생활·재테크)$/.test(n); })[0];
+          if (leaf && !li.querySelector('.mg-cardchip')) {
+            var chip = document.createElement('span');
+            chip.className = 'mg-cardchip';
+            chip.textContent = leaf;
+            chip.style.setProperty('--c', MG_CC[leaf.toLowerCase()] || '#4f7cff');
+            li.appendChild(chip);
+          }
+        });
+        // 상위 카테고리(테크·개발/생활·재테크)와 미분류는 칩에서 제외 — 변별력 없음
+        var mgSkip = /^(테크·개발|생활·재테크|Uncategorized|Blog)$/;
+        var mgTop = Object.keys(mgCount)
+          .filter(function (n) { return !mgSkip.test(n); })
+          .sort(function (a, b) { return mgCount[b] - mgCount[a]; })
+          .slice(0, 5);
+        if (!mgTop.length) return;
+        ['전체'].concat(mgTop).forEach(function (label, i) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.textContent = label;
+          b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+          b.addEventListener('click', function () {
+            [].forEach.call(mgChips.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', 'false'); });
+            b.setAttribute('aria-pressed', 'true');
+            mgLis.forEach(function (li) {
+              var tags = '|' + (li.getAttribute('data-cats') || '') + '|';
+              li.hidden = !(label === '전체' || tags.indexOf('|' + label + '|') >= 0);
+            });
+          });
+          mgChips.appendChild(b);
+        });
+      }).catch(function () {});
+    }
+
+    // (d-2) 추천 상품 회전 — 다이나믹 배너 대체. 로드 시 무작위 1개, 이후 7초 간격 순환.
+    //       인라인 style로 토글해 CSS 특이도 문제를 원천 차단.
+    var mgShop = document.querySelectorAll('.mg-shop .mg-shop__it');
+    if (mgShop.length > 1) {
+      var mgIdx = Math.floor(Math.random() * mgShop.length);
+      var mgShow = function () {
+        [].forEach.call(mgShop, function (el, i) { el.style.display = i === mgIdx ? 'flex' : 'none'; });
+      };
+      mgShow();
+      if (!mgReduce) {
+        setInterval(function () { mgIdx = (mgIdx + 1) % mgShop.length; mgShow(); }, 7000);
+      }
+    }
+
+    // (e) 홈 하단 뉴스레터 CTA — 마크업은 페이지에 서버 렌더돼 있고 제출만 붙인다
+    var mgCta = document.querySelector('.mg-sub--cta');
+    if (mgCta) {
+      mgCta.querySelector('.mg-sub-f').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var email = mgCta.querySelector('.mg-sub-i').value.trim();
+        var msg = mgCta.querySelector('.mg-sub-msg'), btn = mgCta.querySelector('.mg-sub-b');
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { msg.textContent = '올바른 이메일을 입력해주세요.'; msg.className = 'mg-sub-msg err'; return; }
+        btn.disabled = true; btn.textContent = '...';
+        fetch('https://ai-revenue-blog.vercel.app/api/daily-report?action=subscribe&source=blog&email=' + encodeURIComponent(email), { method: 'POST' })
+          .then(function (r) { return r.json(); })
+          .then(function (j) {
+            if (j && j.ok) { mgCta.querySelector('.mg-sub-f').style.display = 'none'; msg.textContent = '✅ 구독 완료! 새 글을 이메일로 보내드릴게요.'; msg.className = 'mg-sub-msg ok'; }
+            else throw new Error();
+          })
+          .catch(function () { msg.textContent = '잠시 후 다시 시도해주세요.'; msg.className = 'mg-sub-msg err'; btn.disabled = false; btn.textContent = '무료 구독'; });
+      });
+    }
+  }
+
+  // ── 단일 글에서만 TOC/FAQ ──
+  if (!document.body.classList.contains('single')) return;
+  var content = document.querySelector('.entry-content-wrap');
+  if (!content) return;
+  var h2s = content.querySelectorAll('h2');
+
+  // ── ③ 목차(TOC) — h2 3개 이상 ──
+  if (h2s.length >= 3) {
+    var toc = document.createElement('nav'); toc.className = 'mg-toc';
+    var head = document.createElement('div'); head.className = 'mg-toc-head'; head.textContent = '📑 목차';
+    var ol = document.createElement('ol');
+    h2s.forEach(function (h, i) {
+      if (!h.id) h.id = 'sec-' + i;
+      var li = document.createElement('li'), an = document.createElement('a');
+      an.href = '#' + h.id; an.textContent = h.textContent;
+      li.appendChild(an); ol.appendChild(li);
+    });
+    toc.appendChild(head); toc.appendChild(ol);
+    var tldr = content.querySelector('.mg-tldr');
+    if (tldr) tldr.parentNode.insertBefore(toc, tldr.nextSibling);
+    else content.insertBefore(toc, h2s[0]);
+    if (window.matchMedia('(max-width:782px)').matches) toc.classList.add('mg-toc-collapsed');
+    head.addEventListener('click', function () { toc.classList.toggle('mg-toc-collapsed'); });
+  }
+
+  // ── ④ FAQPage 스키마 ──
+  var faqH2 = null;
+  h2s.forEach(function (h) { if (/자주\s*묻는\s*질문|FAQ/i.test(h.textContent)) faqH2 = h; });
+  if (faqH2) {
+    var qas = [], el = faqH2.nextElementSibling;
+    while (el && el.tagName !== 'H2') {
+      if (el.tagName === 'H3') {
+        var q = el.textContent.trim(), ans = '', n = el.nextElementSibling;
+        while (n && n.tagName !== 'H3' && n.tagName !== 'H2') {
+          if (n.textContent && n.textContent.trim()) ans += n.textContent.trim() + ' ';
+          n = n.nextElementSibling;
+        }
+        if (q && ans) qas.push([q, ans.trim()]);
+      }
+      el = el.nextElementSibling;
+    }
+    if (qas.length) {
+      var schema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: qas.map(function (x) {
+        return { '@type': 'Question', name: x[0], acceptedAnswer: { '@type': 'Answer', text: x[1] } };
+      }) };
+      var sc = document.createElement('script'); sc.type = 'application/ld+json';
+      sc.textContent = JSON.stringify(schema); document.head.appendChild(sc);
+    }
+  }
+
+  // ── ⑤ 뉴스레터 인라인 구독 폼 (글 말미) ──
+  if (!document.querySelector('.mg-sub')) {
+    var lf = /생활|재테크|finance|lifestyle|health|money/i.test(document.body.className + ' ' + (document.querySelector('.entry-taxonomies, .breadcrumbs, .cat-links') || {}).textContent || '');
+    var SRC = lf ? 'lifeflow' : 'blog';
+    var box = document.createElement('div'); box.className = 'mg-sub';
+    box.innerHTML = '<div class="mg-sub-h">📬 새 글, 이메일로 받아보세요</div>'
+      + '<div class="mg-sub-d">테크·재테크 인사이트를 주 1~2회. 스팸 없이, 언제든 구독 취소.</div>'
+      + '<form class="mg-sub-f"><input type="email" class="mg-sub-i" placeholder="이메일 주소" required autocomplete="email"><button type="submit" class="mg-sub-b">구독</button></form>'
+      + '<div class="mg-sub-msg"></div>';
+    content.appendChild(box);
+    box.querySelector('.mg-sub-f').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = box.querySelector('.mg-sub-i').value.trim();
+      var msg = box.querySelector('.mg-sub-msg'), btn = box.querySelector('.mg-sub-b');
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { msg.textContent = '올바른 이메일을 입력해주세요.'; msg.className = 'mg-sub-msg err'; return; }
+      btn.disabled = true; btn.textContent = '...';
+      fetch('https://ai-revenue-blog.vercel.app/api/daily-report?action=subscribe&source=' + SRC + '&email=' + encodeURIComponent(email), { method: 'POST' })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (j && j.ok) { box.querySelector('.mg-sub-f').style.display = 'none'; msg.textContent = '✅ 구독 완료! 새 글을 이메일로 보내드릴게요.'; msg.className = 'mg-sub-msg ok'; }
+          else throw new Error();
+        })
+        .catch(function () { msg.textContent = '잠시 후 다시 시도해주세요.'; msg.className = 'mg-sub-msg err'; btn.disabled = false; btn.textContent = '구독'; });
+    });
+  }
+})();
+
+
+/* ==== MG-LIKE:BEGIN (scripts/wp-like.js — 자동 주입, 직접 수정 금지) ==== */
+/* 뭉게(mungge.com) 글 하단 추천 버튼 — footer 위젯(custom_html-2)의 script 블록 끝에 append.
+ * (주석에도 script 태그 문자열은 쓰지 않는다 — HTML 파서 상태를 건드릴 여지를 없애려고)
+ *
+ * 왜 새로 만드나: TF 글이 전부 mungge 로 301/308 이전되면서 추천 버튼이 있던 Astro
+ * BlogPostLayout 이 더 이상 서빙되지 않는다. 그래서 analytics 에 like 이벤트가 0건이었다.
+ * 게다가 옛 버튼은 카운트를 localStorage 에만 저장해 브라우저마다 숫자가 달랐다 —
+ * 여기서는 get_like_count RPC 로 실제 집계를 읽는다.
+ *
+ * ⚠️ 라이브 SSOT 는 이 파일이 아니라 footer 위젯이다(CSS 와 동일한 사정).
+ *    수정하면 scripts/inject-wp-like.mjs 로 위젯에 다시 밀어 넣어야 반영된다.
+ */
+(function () {
+  var SB = 'https://xyprbsmagtlzebxyxsvj.supabase.co';
+  var ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5cHJic21hZ3RsemVieHl4c3ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjY4NTQsImV4cCI6MjA4NjA0Mjg1NH0.dajN0n0IWzOgYOSCglxVLzddg7jJFRHNCHwTWMG62uU';
+
+  // 단일 글에서만 — 목록/홈에는 .single-entry 가 없다
+  var article = document.querySelector('article.single-entry');
+  if (!article) return;
+  var content = article.querySelector('.entry-content');
+  if (!content || document.getElementById('mg-like')) return;
+
+  // 슬러그: /2026-07-27-foo/ → 2026-07-27-foo (Astro 시절 analytics 슬러그 표기와 동일)
+  var slug = location.pathname.replace(/^\/+|\/+$/g, '');
+  if (!slug) return;
+  var liked = false;
+  try { liked = localStorage.getItem('mg_liked_' + slug) === '1'; } catch (e) {}
+
+  var css = document.createElement('style');
+  css.textContent =
+    '.mg-like-wrap{display:flex;justify-content:center;margin:2.2rem 0 .5rem}' +
+    '.mg-like{display:inline-flex;align-items:center;gap:.55rem;padding:.7rem 1.4rem;border-radius:999px;' +
+    'border:1px solid rgba(79,124,255,.35);background:#fff;color:#4f7cff;font-size:1rem;font-weight:700;' +
+    'cursor:pointer;transition:transform .12s ease,background .2s ease;font-family:inherit}' +
+    '.mg-like:hover{background:rgba(79,124,255,.07)}' +
+    '.mg-like:active{transform:scale(.96)}' +
+    '.mg-like[disabled]{cursor:default;background:rgba(79,124,255,.1)}' +
+    '.mg-like .mg-heart{font-size:1.1rem;line-height:1}' +
+    '.mg-like.liked{color:#e0245e;border-color:rgba(224,36,94,.4);background:rgba(224,36,94,.07)}' +
+    '.mg-like-cap{display:block;text-align:center;font-size:.8rem;color:#8a8f98;margin-bottom:1.6rem}' +
+    '.mg-pop{animation:mgPop .5s ease}' +
+    '@keyframes mgPop{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}' +
+    'html.wp-dark-mode-active .mg-like{background:#1b1f27;border-color:rgba(79,124,255,.45)}' +
+    'html.wp-dark-mode-active .mg-like.liked{background:rgba(224,36,94,.18)}';
+  document.head.appendChild(css);
+
+  var wrap = document.createElement('div');
+  wrap.className = 'mg-like-wrap';
+  wrap.innerHTML =
+    '<button type="button" class="mg-like' + (liked ? ' liked' : '') + '" id="mg-like"' + (liked ? ' disabled' : '') + ' aria-label="이 글 추천">' +
+    '<span class="mg-heart">' + (liked ? '♥' : '♡') + '</span>' +
+    '<span>도움이 됐어요</span><b id="mg-like-n">–</b></button>';
+  var cap = document.createElement('span');
+  cap.className = 'mg-like-cap';
+  cap.textContent = liked ? '추천해 주셔서 고맙습니다.' : '글이 도움이 됐다면 눌러주세요.';
+  content.appendChild(wrap);
+  content.appendChild(cap);
+
+  var btn = document.getElementById('mg-like');
+  var num = document.getElementById('mg-like-n');
+  var count = 0;
+
+  // 서버 집계 로드 — 실패해도 버튼은 동작해야 하므로 조용히 0 유지
+  fetch(SB + '/rest/v1/rpc/get_like_count', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', apikey: ANON, Authorization: 'Bearer ' + ANON },
+    body: JSON.stringify({ p_slug: slug })
+  }).then(function (r) { return r.ok ? r.json() : 0; })
+    .then(function (n) { count = Number(n) || 0; num.textContent = count; })
+    .catch(function () { num.textContent = count; });
+
+  btn.addEventListener('click', function () {
+    if (liked) return;
+    liked = true;
+    try { localStorage.setItem('mg_liked_' + slug, '1'); } catch (e) {}
+    count++;
+    num.textContent = count;
+    btn.classList.add('liked', 'mg-pop');
+    btn.disabled = true;
+    btn.querySelector('.mg-heart').innerHTML = '♥';
+    cap.textContent = '추천해 주셔서 고맙습니다.';
+    setTimeout(function () { btn.classList.remove('mg-pop'); }, 500);
+    // source='mg' — 대시보드 추천 TOP(get_top_liked_posts)이 slug/path/title/source로 묶는다.
+    // 제목은 h1 에서 읽는다. document.title 은 사이트명이 en-dash(–)로 붙어 있어
+    // 흔한 ' - ' 분리로는 안 떨어지고 "제목 – 뭉게" 가 그대로 저장된다.
+    var h1 = article.querySelector('h1.entry-title, h1');
+    var title = (h1 ? h1.textContent : document.title).replace(/\s*[–-]\s*뭉게\s*$/, '').trim();
+    fetch(SB + '/functions/v1/analytics-ingest', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        event_type: 'like',
+        source: 'mg',
+        metadata: { slug: slug, path: location.pathname, title: title }
+      })
+    }).catch(function () {});
+  });
+})();
+/* ==== MG-LIKE:END ==== */
+
+/* ==== MG-TRACK:BEGIN (scripts/wp-track.js — 자동 주입, 직접 수정 금지) ==== */
+/* 뭉게(mungge.com) 방문 추적 — footer 위젯 script 블록 끝에 append.
+ *
+ * 왜 필요한가: 뭉게는 GA4(Site Kit) 집계만 있어서 "누가 어디서 와서 어느 글을 봤나"가
+ * 개별 이벤트로 안 남는다. 대시보드 Live Activity 는 analytics 테이블의 이벤트를 읽으므로
+ * 뭉게 방문이 아예 안 뜨고, naver_index(사이트 전체 색인 수)만 흘러가 글 단위 확인이 불가능했다.
+ * TF/LF/VIP 가 쓰는 것과 같은 트래커를 심어 referrer 를 원문 그대로 남긴다.
+ *
+ * 봇/관리자 제외 규칙은 BaseLayout.astro 의 트래커와 동일하게 맞춘다 — 기준이 다르면
+ * 소스별 수치를 나란히 못 놓는다.
+ *
+ * ⚠️ 라이브 SSOT 는 footer 위젯이다. 수정 후 scripts/inject-wp-js.mjs 로 다시 밀어 넣을 것.
+ */
+(function () {
+  var SB = 'https://xyprbsmagtlzebxyxsvj.supabase.co';
+  var NOTRACK = '__notrack';
+
+  // 관리자 opt-out: ?admin=1 로 1회 접속하면 이 브라우저는 이후 집계 제외 (?admin=0 해제)
+  try {
+    var q = new URLSearchParams(location.search).get('admin');
+    if (q === '1') localStorage.setItem(NOTRACK, '1');
+    else if (q === '0') localStorage.removeItem(NOTRACK);
+    if (localStorage.getItem(NOTRACK) === '1') return;
+  } catch (e) {}
+
+  var host = location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1' || /^192\.168\./.test(host) || /^10\./.test(host)) return;
+
+  // 크롤러 제외. 네이버 Yeti·다음 Daumoa 는 UA 에 bot/spider 가 없어 명시해야 한다.
+  // ⚠️ 'naver' 처럼 넓게 잡으면 네이버앱 인앱브라우저(UA=NAVER(inapp)) 실사용자까지 빠진다.
+  var ua = navigator.userAgent || '';
+  if (navigator.webdriver ||
+      /bot|crawl|spider|headless|lighthouse|playwright|puppeteer|slurp|petalbot|bytespider|yeti|daumoa|googleother|google-inspection/i.test(ua)) return;
+
+  var path = location.pathname;
+  var slug = path.replace(/^\/+|\/+$/g, '');
+  var h1 = document.querySelector('article h1.entry-title, article h1, h1');
+  var title = (h1 ? h1.textContent : document.title).replace(/\s*[–-]\s*뭉게\s*$/, '').trim();
+  var qs = new URLSearchParams(location.search);
+
+  fetch(SB + '/functions/v1/analytics-ingest', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      // ⚠️ 'pageview' 가 아니라 'pageview_mg' 다.
+      // 대시보드의 뭉게 조회수는 GA4(ga4_daily)에서 합산하는데, get_traffic_summary 가
+      // event_type='pageview' 를 전부 세므로 같은 이름을 쓰면 총계가 이중 집계된다.
+      // 이 이벤트의 목적은 집계가 아니라 "어디서 와서 어느 글을 봤나"의 개별 기록이고,
+      // get_recent_events 는 event_type 을 가리지 않아 Live Activity 에는 그대로 뜬다.
+      event_type: 'pageview_mg',
+      source: 'mg',
+      metadata: {
+        slug: slug,
+        title: title,
+        path: path,
+        // 유입 원문 URL 그대로 — 네이버 블로그 어느 글에서 왔는지가 여기 남는다
+        referrer: document.referrer || 'direct',
+        user_agent: ua,
+        utm_source: qs.get('utm_source') || undefined,
+        utm_medium: qs.get('utm_medium') || undefined,
+        utm_campaign: qs.get('utm_campaign') || undefined
+      }
+    })
+  }).catch(function () {});
+})();
+/* ==== MG-TRACK:END ==== */
+
+/* ==== MG-DARK:BEGIN (scripts/wp-darkmode.js — 자동 주입, 직접 수정 금지) ==== */
+/* 뭉게(mungge.com) 경량 다크모드 — WP Dark Mode 플러그인 대체.
+ *
+ * 왜: 플러그인 5.3.10 이 인라인 202KB(설정 blob 95K + b2a 83K + social_share 24K)를
+ * 매 페이지에 밀어 넣어 DOMContentLoaded 8.5s / 모바일 27.9s 를 만든다(TTFB 0.48s —
+ * 병목은 서버가 아니다). filter 로 화면을 뒤집는 방식이라 색 지정도 불가능하다.
+ *
+ * 왜 이렇게 짧아도 되나: 위젯 CSS 에 다크 규칙이 이미 90개쯤 있다 — `:root.dark`(약 35,
+ * 아무도 .dark 를 안 켜서 死) / `[data-wp-dark-mode-active]`(약 58, 플러그인이 켜주던 속성)
+ * / 계산기 26종의 `html.dark .dpc`. 이 파일은 그 스위치 셋을 같이 켜고 나머지만 메운다.
+ *
+ * ⚠️ 안전 장치: wp_dark_mode_json 이 있으면(=플러그인 활성) 즉시 return. 두 구현이 같은
+ *    속성을 서로 토글하면 깨진다. 플러그인을 끄는 순간 자동으로 인계받는다.
+ * ⚠️ 라이브 SSOT 는 footer 위젯(custom_html-2).
+ *    수정 후 `node scripts/inject-wp-js.mjs --only MG-DARK` 로 다시 밀 것.
+ */
+(function () {
+  var root = document.documentElement;
+
+  if (window.wp_dark_mode_json) return;                 // 플러그인 활성 → 아무것도 안 함
+  if (document.getElementById('mg-dark-css')) return;   // 중복 주입 방지
+
+  var KEY = 'mgTheme';
+  var stored = null;
+  try { stored = localStorage.getItem(KEY); } catch (e) {}
+  var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  var dark = (stored === 'dark' || stored === 'light') ? stored === 'dark' : !!(mq && mq.matches);
+
+  /* @D 는 아래에서 한 번에 치환(접두어 60회 반복이면 그것만으로 3KB). 색 전환에
+     transition 을 주지 않는다(요소마다 보간 속도가 달라 깜빡임). 팔레트는 `:root`(0,1,0)
+     보다 높은 (0,1,1)로 선언해 로드 순서와 무관하게 이긴다.
+     ⚠️ 이 테마는 palette4 를 본문 글자색이자 푸터/히어로 배경으로, palette9 를 콘텐츠
+     배경이자 헤더 글자색으로 겸용한다 — 변수만 뒤집으면 헤더·푸터가 뒤집힌다. */
+  var CSS = [
+    /* 토글: Kadence 맨위로(#kt-scroll-up, 30/30px) 위에 쌓고,
+       모바일 앵커 광고(.mg-anchor)가 채워졌을 때만 더 띄운다. */
+    '.mg-dm-btn{position:fixed;right:22px;bottom:80px;z-index:9999;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;line-height:0;-webkit-appearance:none;appearance:none;border:1px solid rgba(15,20,32,.12);background:#fff;color:#3a4557;box-shadow:0 6px 20px -6px rgba(15,20,32,.35)}',
+    /* ⚠️ Kadence 가 맨 button 의 :hover/:focus/:active 를 palette2 배경으로 칠한다 — html 을 붙여 이긴다 */
+    'html .mg-dm-btn:hover,html .mg-dm-btn:focus,html .mg-dm-btn:active{background:#f1f5ff;color:#4f7cff;border-color:rgba(79,124,255,.4)}',
+    '.mg-dm-btn:active{transform:scale(.94)}',
+    '.mg-dm-btn:focus-visible{outline:3px solid rgba(79,124,255,.65);outline-offset:2px}',
+    '@media (max-width:782px){.mg-dm-btn{right:14px;bottom:74px;width:42px;height:42px}}',
+    'body:has(.mg-anchor .kakao_ad_area iframe) .mg-dm-btn{bottom:196px}',
+    '@media print{.mg-dm-btn{display:none}}',
+    '@D .mg-dm-btn{background:#1c2433;border-color:rgba(255,255,255,.16);color:#e8ebf0;box-shadow:0 6px 20px -6px rgba(0,0,0,.6)}',
+    '@D .mg-dm-btn:hover,@D .mg-dm-btn:focus,@D .mg-dm-btn:active{background:#243049;color:#8fb0ff;border-color:rgba(143,176,255,.4)}',
+
+    /* 1·2=accent(#1a2130 위 6.4:1), 3=h1~h3, 4=본문·h4·h5, 8=body 배경, 9=콘텐츠 배경 */
+    '@D,@D body{--global-palette1:#7aa2ff;--global-palette2:#a5c0ff;--global-palette3:#f2f3f5;',
+    '--global-palette4:#dfe3ea;--global-palette5:#c5cbd8;--global-palette6:#a9b1bd;',
+    '--global-palette7:#161c27;--global-palette8:#12161f;--global-palette9:#1a2130;',
+    '--color-text:#e6e7ea;--color-text-secondary:#a9abb0;color-scheme:dark}',
+    '@D{background-color:#12161f}@D body{color:#dfe3ea}',
+    '@D hr,@D .entry-content-wrap hr{border-color:rgba(255,255,255,.1)}',
+
+    /* 헤더 글자: 테마는 palette9(=이제 어두움), 홈은 위젯 CSS 가 #1e293b !important 를
+       쓴다. !important 끼리는 특정도로 갈리므로 접두어를 붙여 이긴다.
+       (배경 #1d1f27 은 위젯 CSS 의 [data-wp-dark-mode-active] 규칙이 준다) */
+    '@D #masthead .site-title,@D #masthead .site-title a,@D #masthead .site-branding .site-description,',
+    '@D #masthead .header-navigation a,@D #masthead .header-menu-container a,',
+    '@D body.home #masthead a,@D body.home #masthead .site-title,@D body.home #masthead .site-title a,',
+    '@D body.home .header-navigation a,@D body.home .header-menu-container a{color:#e8ebf0 !important}',
+    '@D #masthead .header-navigation a:hover,@D body.home #masthead a:hover,',
+    '@D body.home .header-navigation a:hover{color:#8fb0ff !important}',
+    '@D .mobile-toggle-open-container .menu-toggle-open,@D .search-toggle-open-container .search-toggle-open{color:#e8ebf0}',
+    '@D .site-header.mg-stuck .site-header-row-container-inner{background-color:rgba(29,31,39,.9);-webkit-backdrop-filter:saturate(1.2) blur(10px);backdrop-filter:saturate(1.2) blur(10px)}',
+    '@D .header-navigation .header-menu-container ul ul.sub-menu,@D .header-navigation .header-menu-container ul ul.submenu{background:#1c2433}',
+    '@D .header-navigation .header-menu-container ul ul li.menu-item>a{color:#dfe3ea}',
+    '@D .header-navigation .header-menu-container ul ul li.menu-item>a:hover,',
+    '@D .header-navigation .header-menu-container ul ul li.menu-item.current-menu-item>a{color:#fff;background:#2a3550}',
+    /* 모바일 서랍 링크색이 palette8(=이제 배경색) — 두면 검정 위 검정 */
+    '@D .popup-drawer .drawer-inner{background:#151b26}',
+    '@D .mobile-navigation ul li>a,@D .mobile-navigation ul li.menu-item-has-children>.drawer-nav-drop-wrap{color:#e8ebf0}',
+    '@D #mobile-drawer .drawer-header .drawer-toggle{color:#e8ebf0}',
+
+    /* 히어로 밴드·푸터 — palette4 겸용 되돌리기 */
+    '@D .wp-site-blocks .entry-hero-container-inner{background:#141b28}',
+    '@D #colophon{background:#0d121b}@D #colophon .footer-html{color:#98a2b3}',
+    '@D .site-footer .site-top-footer-wrap .site-footer-row-container-inner,',
+    '@D .site-footer .site-top-footer-wrap a:not(.button):not(.wp-block-button__link):not(.wp-element-button),',
+    '@D .site-top-footer-inner-wrap .widget-area .widget-title{color:#c8cfdb}',
+    '@D .site-footer .site-top-footer-wrap .site-footer-row-container-inner{border-bottom-color:rgba(255,255,255,.08)}',
+
+    /* Easy TOC 목차 상자 — 외부 CSS 가 #f9f9f9, 인라인이 `div#ez-toc-container`(1,0,1)
+       라서 접두어를 붙인 (1,1,1)로 이긴다. 실측상 유일하게 남던 밝은 면. */
+    '@D #ez-toc-container{background:#161d2b;border-color:rgba(255,255,255,.12);box-shadow:none}',
+    '@D #ez-toc-container .ez-toc-title,@D #ez-toc-container a,@D #ez-toc-container li,@D .ez-toc-box-title{color:#dfe3ea}',
+    '@D #ez-toc-container a:hover{color:#8fb0ff}',
+    '@D #ez-toc-container .ez-toc-toggle,@D #ez-toc-container .ez-toc-js-toggle{color:#a9b1bd}',
+
+    /* 폼 — UA 기본 흰 배경이 남으면 입력값이 안 보임 */
+    '@D input:not([type="submit"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]),',
+    '@D select,@D textarea{background-color:#141b28;color:#e8ebf0;border-color:rgba(255,255,255,.14)}',
+    '@D ::placeholder{color:#7d8798;opacity:1}',
+
+    /* /tools/ 인덱스. 계산기(.dpc)는 자체 `html.dark` 팔레트 보유 */
+    '@D .mgt{--mgt-line:#25304a;--mgt-mut:#9fb0c6;--mgt-text:#eef2f8;--mgt-accent:#8fa5ff;--mgt-surface:#151d2c;--mgt-soft:#111825}',
+    '@D .mgt-card:hover{box-shadow:0 6px 18px rgba(0,0,0,.45)}',
+    '@D .mgt-tag{background:rgba(143,165,255,.16)}',
+    '@D .pum-container.popmake{background-color:#151b26;color:#dfe3ea}'
+  ].join('').replace(/@D/g, 'html[data-mg-theme="dark"]');
+
+  var style = document.createElement('style');
+  style.id = 'mg-dark-css';
+  style.textContent = CSS;
+  (document.head || root).appendChild(style);
+
+  var SUN = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.9 4.9M19.1 19.1l-1.4-1.4M17.7 6.3l1.4-1.4M4.9 19.1l1.4-1.4"/></svg>';
+  var MOON = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>';
+  var btn = null;
+
+  function apply(on) {
+    dark = on;
+    // data-mg-theme 이 우리 스위치. 나머지 셋은 기존 규칙용 하위 호환.
+    root.setAttribute('data-mg-theme', on ? 'dark' : 'light');
+    root.classList.toggle('dark', on);
+    root.classList.toggle('wp-dark-mode-active', on);
+    if (on) root.setAttribute('data-wp-dark-mode-active', 'true');
+    else root.removeAttribute('data-wp-dark-mode-active');
+    root.style.colorScheme = on ? 'dark' : 'light';
+    if (btn) {
+      btn.innerHTML = on ? SUN : MOON;
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var label = on ? '라이트 모드로 전환' : '다크 모드로 전환';
+      btn.setAttribute('aria-label', label);
+      btn.title = label;
+    }
+  }
+
+  apply(dark);
+
+  function mount() {
+    if (!document.body || document.getElementById('mg-dm-btn')) return;
+    btn = document.createElement('button');
+    btn.type = 'button';
+    btn.id = 'mg-dm-btn';
+    btn.className = 'mg-dm-btn';
+    btn.setAttribute('role', 'switch');
+    btn.addEventListener('click', function () {
+      var next = !dark;
+      try { localStorage.setItem(KEY, next ? 'dark' : 'light'); } catch (e) {}
+      apply(next);
+    });
+    document.body.appendChild(btn);
+    apply(dark);   // 버튼 아이콘/라벨 채우기
+  }
+
+  if (document.body) mount();
+  else document.addEventListener('DOMContentLoaded', mount);
+
+  // 저장된 선택이 없을 때만 OS 설정을 따라간다
+  if (mq && mq.addEventListener) {
+    mq.addEventListener('change', function (e) {
+      var s = null;
+      try { s = localStorage.getItem(KEY); } catch (err) {}
+      if (s !== 'dark' && s !== 'light') apply(e.matches);
+    });
+  }
+})();
+/* ==== MG-DARK:END ==== */
+
+/* ==== MG-STH:BEGIN (scripts/wp-scroll-highlight.js — 자동 주입, 직접 수정 금지) ==== */
+/* 뭉게(mungge.com) 본문 강조 텍스트(strong) 형광펜 — 스크롤로 들어올 때 마커가 그려진다.
+ * (주석에도 script 태그 문자열은 쓰지 않는다 — HTML 파서 상태를 건드릴 여지를 없애려고)
+ *
+ * 원본은 Originkit `scroll-text-highlight`. 두 군데를 바꿔서 이식했다.
+ *
+ * 1) dim→bright → 형광펜 마커.
+ *    원본은 안 지나간 글자를 흐리게 깔고 밝아지게 한다. 뭉게 본문 배경(거의 흰색)에서
+ *    본문색을 흐리게 하면, 대비 4.5:1 을 지키는 한계가 알파 0.75 다 — 눈에 안 띈다.
+ *    반대로 눈에 띄게 하면 2.8:1 로 떨어진다. 읽는 블로그의 본문을 흐리게 두는 건 안 되므로
+ *    글자색은 건드리지 않고 마커만 그린다. CSS SSOT 의 "강조는 색 변경 없이 굵기만"
+ *    (.entry-content-wrap strong{color:inherit}) 원칙과도 맞는다.
+ *
+ * 2) 문단 전체 단어별 스태거 → 강조 단위.
+ *    원본은 문단을 단어로 쪼개 스크롤 진행도에 스태거를 매핑한다. 본문 전체에 그걸 걸면
+ *    읽는 데 방해가 되고 DOM 도 수천 조각이 된다. 여기서는 이미 인라인 엘리먼트인
+ *    strong 에 클래스만 붙인다 — 텍스트 분해가 없으니 복사·줄바꿈·선택이 원문 그대로다.
+ *
+ * 제외 대상(마커가 시끄럽거나 다른 장식과 충돌하는 자리):
+ *   표 셀 / 제목 / 링크 안 또는 링크를 품은 strong / 핵심요약 박스 / 목차 /
+ *   콜아웃·CTA·구독·내부링크 박스
+ *
+ * ⚠️ 라이브 SSOT 는 이 파일이 아니라 footer 위젯이다.
+ *    수정하면 `node scripts/inject-wp-js.mjs --only MG-STH` 로 위젯에 다시 밀어 넣어야 반영된다.
+ */
+(function () {
+  var STEP = 70; // 한 화면에 여러 개가 동시에 들어올 때 순서대로 켜지는 간격(ms)
+
+  // 단일 글에서만. 홈(page 1761)에는 .entry-content 가 있지만 strong 이 본문 강조가 아니다.
+  var root = document.querySelector('article.single-entry .entry-content');
+  if (!root || !document.querySelector('.mg-tldr')) return;
+  if (root.getAttribute('data-sth')) return;
+  root.setAttribute('data-sth', '1');
+
+  var SKIP = 'td,th,h1,h2,h3,h4,h5,h6,a,.mg-tldr,#ez-toc-container,' +
+    '.callout-tip,.callout-warning,.callout-info,.mg-cta,.mg-sub,.seo-inlink,figcaption';
+
+  var targets = [];
+  var all = root.querySelectorAll('strong');
+  for (var i = 0; i < all.length; i++) {
+    var s = all[i];
+    if (s.closest(SKIP)) continue;      // 위 자리 안에 있으면 건너뛴다
+    if (s.querySelector('a')) continue; // strong 이 링크를 품으면 링크 밑줄과 겹친다
+    if (!s.textContent.trim()) continue;
+    s.className = (s.className ? s.className + ' ' : '') + 'mg-sth-w';
+    targets.push(s);
+  }
+  if (!targets.length) return;
+
+  var css = document.createElement('style');
+  css.textContent =
+    // 마커는 배경 그라디언트의 너비를 0 → 100% 로 키워 형광펜처럼 그린다. 레이아웃 영향 없음.
+    // ⚠️ inline-block 은 쓰지 않는다 — 한국어는 어절 안에서도 줄바꿈되는데 inline-block 이면
+    //    강조구가 통째로 안 쪼개져 긴 강조에서 넘친다.
+    // ⚠️ 그래서 강조가 두 줄로 쪼개지는 일이 생긴다(최대 54자짜리도 있다) —
+    //    box-decoration-break:clone 이 있어야 넘어간 조각도 자기 몫의 마커를 받는다.
+    '.mg-sth-w{background-image:linear-gradient(var(--mg-sth,rgba(79,124,255,.22)),var(--mg-sth,rgba(79,124,255,.22)));' +
+    'background-repeat:no-repeat;background-position:0 88%;background-size:0% .42em;' +
+    '-webkit-box-decoration-break:clone;box-decoration-break:clone;' +
+    'transition:background-size .5s cubic-bezier(.22,.61,.36,1)}' +
+    '.mg-sth-w.on{background-size:100% .42em}' +
+    'html[data-wp-dark-mode-active] .mg-sth-w{--mg-sth:rgba(120,160,255,.26)}' +
+    '@media (prefers-reduced-motion: reduce){.mg-sth-w{transition:none}}';
+  document.head.appendChild(css);
+
+  var reduce = false;
+  try {
+    reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  } catch (e) {}
+
+  function litAll() {
+    for (var i = 0; i < targets.length; i++) targets[i].classList.add('on');
+  }
+  if (reduce || !('IntersectionObserver' in window)) { litAll(); return; }
+
+  // 옵저버는 하나로 전부 관찰한다(글마다 strong 이 최대 65개라 개별 옵저버는 낭비).
+  // 아래쪽 -12% 는 화면 맨 밑 경계가 아니라 읽는 자리에 들어왔을 때 켜지게 하는 여유다.
+  var queue = [];
+  var draining = false;
+  function drain() {
+    if (draining || !queue.length) return;
+    draining = true;
+    var start = 0;
+    var n = 0;
+    var batch = queue;
+    queue = [];
+    function tick(now) {
+      if (!start) start = now;
+      while (n < batch.length && now - start >= n * STEP) {
+        batch[n].classList.add('on');
+        n++;
+      }
+      if (n < batch.length) { requestAnimationFrame(tick); return; }
+      draining = false;
+      drain(); // 스태거 도중 새로 들어온 것들 처리
+    }
+    requestAnimationFrame(tick);
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    // 문서 순서대로 켜려면 화면 위쪽에 있는 것부터 정렬해야 한다
+    var hit = [];
+    for (var i = 0; i < entries.length; i++) {
+      if (!entries[i].isIntersecting) continue;
+      hit.push(entries[i].target);
+      io.unobserve(entries[i].target);
+    }
+    if (!hit.length) return;
+    hit.sort(function (a, b) {
+      return a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+    });
+    queue = queue.concat(hit);
+    drain();
+  }, { threshold: 0.6, rootMargin: '0px 0px -12% 0px' });
+
+  for (var k = 0; k < targets.length; k++) io.observe(targets[k]);
+})();
+/* ==== MG-STH:END ==== */
+
+/* ==== MG-CHARTANIM:BEGIN (scripts/wp-chart-anim.js — 자동 주입, 직접 수정 금지) ==== */
+/* 뭉게(mungge.com) 본문 차트 — 스크롤로 들어올 때 바가 0에서 실제 값까지 자란다.
+ * (주석에도 script 태그 문자열은 쓰지 않는다 — HTML 파서 상태를 건드릴 여지를 없애려고)
+ *
+ * 아이디어만 Originkit(reveal-on-scroll)에서 가져왔고 라이브러리는 안 쓴다 — 뭉게 차트는
+ * 서버 렌더된 정적 HTML/CSS 바(.chart-fill 에 인라인 width:%)라서 관찰자 하나로 끝난다.
+ *
+ * 설계 원칙 셋:
+ * 1) 수치 라벨(.chart-value)은 절대 건드리지 않는다. 바가 차오르는 동안에도 숫자는 처음부터
+ *    읽힌다 — 애니메이션이 데이터 파악을 지연시키면 안 된다.
+ * 2) JS 가 없으면 아무 일도 안 일어난다. 접는 것도 JS 가 하므로(CSS 에 width:0 을 두지 않는다)
+ *    스크립트가 죽거나 차단되면 서버 렌더된 최종 상태가 그대로 보인다.
+ * 3) 이미 화면에 보이는 차트는 손대지 않는다. 접었다 펴면 사용자가 이미 읽고 있는 값이
+ *    0 으로 튀는 게 보인다 — 그건 애니메이션이 아니라 결함이다.
+ *
+ * ⚠️ 라이브 SSOT 는 이 파일이 아니라 footer 위젯이다.
+ *    수정하면 `node scripts/inject-wp-js.mjs --only MG-CHARTANIM` 로 다시 밀어 넣어야 반영된다.
+ */
+(function () {
+  var DUR = 700;  // 바 하나가 차오르는 시간(ms)
+  var STEP = 90;  // 같은 차트 안 행 간 간격 — 순서대로 차올라야 비교가 읽힌다
+
+  var charts = document.querySelectorAll('.chart-bar,.chart-versus,.chart-progress,.chart-radar');
+  if (!charts.length) return;
+
+  // 모션을 원치 않는 사용자에겐 아무것도 하지 않는다(= 서버 렌더 최종 상태)
+  try {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  } catch (e) {}
+  if (!('IntersectionObserver' in window)) return;
+
+  var css = document.createElement('style');
+  css.textContent =
+    '.mg-cba{transition:width ' + DUR + 'ms cubic-bezier(.16,.84,.44,1),' +
+    'height ' + DUR + 'ms cubic-bezier(.16,.84,.44,1)}';
+  document.head.appendChild(css);
+
+  var pending = [];
+
+  for (var c = 0; c < charts.length; c++) {
+    var chart = charts[c];
+    // 이미 뷰포트에 들어와 있으면 건너뛴다(원칙 3)
+    if (chart.getBoundingClientRect().top < window.innerHeight) continue;
+
+    // 세로 컬럼 차트는 height, 가로 바/레이더는 width 로 채운다
+    var fills = chart.querySelectorAll('.chart-fill,.radar-score-fill,.chart-col-fill');
+    var items = [];
+    for (var i = 0; i < fills.length; i++) {
+      var el = fills[i];
+      var vertical = el.classList.contains('chart-col-fill');
+      var prop = vertical ? 'height' : 'width';
+      var target = el.style[prop];
+      if (!target) continue; // 인라인 %가 없으면 애니메이션할 값이 없다
+      // 전환 클래스를 붙이기 *전에* 접는다 — 순서가 바뀌면 접히는 과정이 보인다
+      el.style[prop] = '0%';
+      items.push({ el: el, prop: prop, target: target });
+    }
+    if (!items.length) continue;
+    // 접은 값을 브라우저가 실제로 반영한 뒤에 전환을 켠다
+    void chart.offsetHeight;
+    for (var k = 0; k < items.length; k++) {
+      items[k].el.classList.add('mg-cba');
+      items[k].el.style.transitionDelay = (k * STEP) + 'ms';
+    }
+    pending.push({ chart: chart, items: items });
+  }
+  if (!pending.length) return;
+
+  function release(entry) {
+    for (var i = 0; i < entry.items.length; i++) {
+      entry.items[i].el.style[entry.items[i].prop] = entry.items[i].target;
+    }
+    // 다 차오르면 전환을 걷어낸다 — 이후 리플로우가 폭을 애니메이션하지 않게
+    var total = DUR + entry.items.length * STEP + 80;
+    setTimeout(function () {
+      for (var j = 0; j < entry.items.length; j++) {
+        entry.items[j].el.classList.remove('mg-cba');
+        entry.items[j].el.style.transitionDelay = '';
+      }
+    }, total);
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    for (var i = 0; i < entries.length; i++) {
+      if (!entries[i].isIntersecting) continue;
+      io.unobserve(entries[i].target);
+      for (var j = 0; j < pending.length; j++) {
+        if (pending[j].chart === entries[i].target) { release(pending[j]); break; }
+      }
+    }
+  }, { threshold: 0.35, rootMargin: '0px 0px -8% 0px' });
+
+  for (var q = 0; q < pending.length; q++) io.observe(pending[q].chart);
+})();
+/* ==== MG-CHARTANIM:END ==== */
+
+/* ==== MG-ADEND:BEGIN (scripts/wp-ad-postend.js — 자동 주입, 직접 수정 금지) ==== */
+/* 뭉게(mungge.com) 글 하단 — 추천 버튼("도움이 됐어요") 캡션 아래 애드핏 300x250.
+ * (주석에도 script 태그 문자열은 쓰지 않는다 — HTML 파서 상태를 건드릴 여지를 없애려고)
+ *
+ * 유닛: DAN-0b3JVXVHkcy7SpzY (300x250, 이 자리 전용으로 발급)
+ * 처음엔 홈 레일 유닛을 빌려 썼다 — 애드핏은 같은 유닛을 한 페이지에 두 번 넣으면 하나만
+ * 채우는데, 글 페이지에 이미 728x90·320x50·320x100 이 박혀 있어 빈 유닛이 레일 것뿐이었다.
+ * 전용 유닛이 생겨서 성과를 자리별로 따로 볼 수 있게 됐다.
+ *
+ * ⚠️ 데스크톱 전용이고, 임계값 783px 은 임의 값이 아니라 **앵커 광고의 브레이크포인트**다.
+ *    .mg-anchor(320x100)는 max-width:782px 에서만 화면 바닥에 고정된다. 그 아래 폭에서
+ *    글 하단 300x250 을 넣으면 독자가 글 끝에 멈춰 있는 동안 두 광고가 세로로 붙는다 —
+ *    광고 인접/중첩이라 정책상으로도 UX 상으로도 피해야 한다.
+ *    (본문 중간 슬롯은 스크롤로 지나가는 자리라 모바일에도 넣는다 — wp-ad-inarticle.js)
+ *
+ * ⚠️ 자리(min-height)는 미리 예약하지 않는다 — 사유는 CSS 의 .mg-adslot 주석 참고.
+ * ⚠️ 애드핏은 자동화 브라우저(headless/headed 둘 다)에 서빙하지 않는다. 노출 검증은 사람 몫.
+ *
+ * ⚠️ 라이브 SSOT 는 이 파일이 아니라 footer 위젯이다.
+ *    수정하면 `node scripts/inject-wp-js.mjs --only MG-ADEND` 로 다시 밀어 넣어야 반영된다.
+ */
+(function () {
+  if (!document.body || !document.body.classList.contains('single-post')) return;
+  if (window.innerWidth < 783) return;   // 앵커(≤782px)와 겹치는 구간을 통째로 비운다
+  if (document.querySelector('.mg-adslot--postend')) return;
+
+  // 추천 버튼 캡션 바로 아래 — 버튼과 광고 사이에 캡션 한 줄이 끼어 오조작을 막는다
+  var cap = document.querySelector('.mg-like-cap');
+  if (!cap || !cap.parentNode) return;
+
+  var slot = document.createElement('div');
+  slot.className = 'mg-adslot mg-adslot--postend';
+
+  var ins = document.createElement('ins');
+  ins.className = 'kakao_ad_area';
+  ins.style.display = 'none';            // 애드핏 표준 스니펫 형식(스크립트가 해제한다)
+  ins.setAttribute('data-ad-unit', 'DAN-0b3JVXVHkcy7SpzY');
+  ins.setAttribute('data-ad-width', '300');
+  ins.setAttribute('data-ad-height', '250');
+  slot.appendChild(ins);
+
+  cap.parentNode.insertBefore(slot, cap.nextSibling);
+
+  // 애드핏이 채우면 ins 안에 iframe 이 생기고 display:none 이 풀린다 — 그때만 자리를 준다.
+  function markFilled() {
+    if (slot.classList.contains('is-filled')) return true;
+    if (ins.children.length || getComputedStyle(ins).display !== 'none') {
+      slot.classList.add('is-filled');
+      return true;
+    }
+    return false;
+  }
+  if (!markFilled() && window.MutationObserver) {
+    var mo = new MutationObserver(function () { if (markFilled()) mo.disconnect(); });
+    mo.observe(ins, { childList: true, attributes: true, attributeFilter: ['style'] });
+    setTimeout(function () { mo.disconnect(); }, 15000);
+  }
+
+  // ba.min.js 는 로드 시점에 DOM 을 훑으므로 나중에 붙인 ins 는 놓칠 수 있다 → 한 번 더 로드.
+  // 동적 슬롯이 여러 개라도 킥은 한 번이면 된다(async 라 이 인라인 스크립트가 끝난 뒤 실행돼
+  // 그 시점엔 모든 슬롯이 DOM 에 들어와 있다).
+  if (!window.__mgAdKick) {
+    window.__mgAdKick = 1;
+    var s = document.createElement('script');
+    s.src = '//t1.kakaocdn.net/kas/static/ba.min.js';
+    s.async = true;
+    document.body.appendChild(s);
+  }
+})();
+/* ==== MG-ADEND:END ==== */
+
+/* ==== MG-ADMID:BEGIN (scripts/wp-ad-inarticle.js — 자동 주입, 직접 수정 금지) ==== */
+/* 뭉게(mungge.com) 본문 중간 — 글 한가운데 h2 앞에 애드핏 300x250.
+ * (주석에도 script 태그 문자열은 쓰지 않는다 — HTML 파서 상태를 건드릴 여지를 없애려고)
+ *
+ * 유닛: DAN-oesQNvC9LkoKaVfg (300x250, 이 자리 전용으로 발급)
+ * 왜 필요했나: 글 페이지 광고가 전부 본문 시작 전에 몰려 있었다(728x90 + 320x50 상단,
+ * 320x100 앵커). 글은 h2 가 8~11개에 본문 높이 5,100~9,100px 인데 중간이 통째로 비어 있고,
+ * 그쯤이면 상단 배너는 이미 화면 밖이다.
+ *
+ * 삽입 위치: **본문 높이의 50% 에 가장 가까운 h2 바로 앞**.
+ * - 문단 한가운데가 아니라 섹션 경계라 읽는 흐름을 덜 끊는다.
+ * - 첫 h2 와 마지막 h2 는 후보에서 뺀다 — 첫 h2 는 상단 광고와 너무 가깝고,
+ *   마지막은 대개 "자주 묻는 질문"이라 하단 광고와 붙는다.
+ * - 고른 지점이 30~70% 밖이면 넣지 않는다(치우친 자리에 끼우느니 없는 게 낫다).
+ * - 짧은 글(본문 3000px 미만 또는 h2 4개 미만)에는 넣지 않는다.
+ * 실측 기준 세 글 모두 49~51% 지점에 정확히 붙는다.
+ *
+ * 모바일에도 넣는다 — 앵커(≤782px, 화면 바닥 고정)와 붙는 건 글 *끝*에 멈춰 있을 때가
+ * 문제인데, 중간 슬롯은 스크롤로 지나가는 자리라 기존 본문 상단 광고와 조건이 같다.
+ * (글 하단 슬롯을 데스크톱으로 제한한 이유는 wp-ad-postend.js 주석 참고)
+ *
+ * ⚠️ 자리(min-height)는 미리 예약하지 않는다 — 사유는 CSS 의 .mg-adslot 주석 참고.
+ * ⚠️ 애드핏은 자동화 브라우저(headless/headed 둘 다)에 서빙하지 않는다. 노출 검증은 사람 몫.
+ *
+ * ⚠️ 라이브 SSOT 는 이 파일이 아니라 footer 위젯이다.
+ *    수정하면 `node scripts/inject-wp-js.mjs --only MG-ADMID` 로 다시 밀어 넣어야 반영된다.
+ */
+(function () {
+  if (!document.body || !document.body.classList.contains('single-post')) return;
+  if (document.querySelector('.mg-adslot--mid')) return;
+
+  var ec = document.querySelector('article.single-entry .entry-content');
+  if (!ec) return;
+
+  var hs = ec.querySelectorAll('h2');
+  if (hs.length < 4) return;                 // 섹션이 적으면 중간이랄 게 없다
+  var total = ec.scrollHeight;
+  if (total < 3000) return;                  // 짧은 글엔 넣지 않는다
+
+  var base = ec.offsetTop;
+  var best = null;
+  var bestGap = 1;
+  for (var i = 1; i < hs.length - 1; i++) {  // 첫·마지막 h2 제외
+    var pos = (hs[i].offsetTop - base) / total;
+    var gap = Math.abs(pos - 0.5);
+    if (gap < bestGap) { bestGap = gap; best = hs[i]; }
+  }
+  if (!best || bestGap > 0.2) return;        // 30~70% 밖이면 포기
+
+  var slot = document.createElement('div');
+  slot.className = 'mg-adslot mg-adslot--mid';
+
+  var ins = document.createElement('ins');
+  ins.className = 'kakao_ad_area';
+  ins.style.display = 'none';                // 애드핏 표준 스니펫 형식(스크립트가 해제한다)
+  ins.setAttribute('data-ad-unit', 'DAN-oesQNvC9LkoKaVfg');
+  ins.setAttribute('data-ad-width', '300');
+  ins.setAttribute('data-ad-height', '250');
+  slot.appendChild(ins);
+
+  best.parentNode.insertBefore(slot, best);
+
+  function markFilled() {
+    if (slot.classList.contains('is-filled')) return true;
+    if (ins.children.length || getComputedStyle(ins).display !== 'none') {
+      slot.classList.add('is-filled');
+      return true;
+    }
+    return false;
+  }
+  if (!markFilled() && window.MutationObserver) {
+    var mo = new MutationObserver(function () { if (markFilled()) mo.disconnect(); });
+    mo.observe(ins, { childList: true, attributes: true, attributeFilter: ['style'] });
+    setTimeout(function () { mo.disconnect(); }, 15000);
+  }
+
+  if (!window.__mgAdKick) {
+    window.__mgAdKick = 1;
+    var s = document.createElement('script');
+    s.src = '//t1.kakaocdn.net/kas/static/ba.min.js';
+    s.async = true;
+    document.body.appendChild(s);
+  }
+})();
+/* ==== MG-ADMID:END ==== */
+</script>

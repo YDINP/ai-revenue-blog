@@ -18,7 +18,7 @@ jobs:
         env:
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
         run: |
-          URL="https://ai-revenue-blog.vercel.app/api/gsc-coverage"
+          URL="https://ai-revenue-blog.vercel.app/api/gsc-sync?coverage=run"
           echo "GET $URL"
           code=$(curl -s -o /tmp/out.json -w '%{http_code}' --max-time 90 "$URL" \
             -H "Authorization: Bearer $CRON_SECRET")
