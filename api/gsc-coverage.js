@@ -14,9 +14,11 @@ import { WATCHLIST } from './_seo-watchlist.js';
 import { SUPABASE_URL, SUPABASE_ANON_KEY, kstDay } from './_shared.js';
 
 const SITE = 'https://mungge.com/';
-const CONCURRENCY = 6;
-const SITEMAP_LATEST = 15;
-const CAP = 70;
+// functions maxDuration 오버라이드가 이 프로젝트(Astro 어댑터+루트 /api)에서 배포를 깨뜨려
+// 기본 타임아웃 안에 끝내야 한다 → 동시성을 높여 벽시계 시간을 줄인다(52편≈13s).
+const CONCURRENCY = 8;
+const SITEMAP_LATEST = 12;
+const CAP = 64;
 
 // 포스트 사이트맵에서 최신 글 URL 몇 개를 끌어와 신규 발행 색인도 추적한다.
 async function latestFromSitemap() {
