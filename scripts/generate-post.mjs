@@ -542,6 +542,39 @@ async function fetchHeroImageCodex(searchTerm) {
 
 const STOP_WORDS = new Set(["the", "a", "an", "of", "and", "for", "with", "in", "on", "to"]);
 
+// ⚠️ 2026-08-11 사고 — 서로 다른 두 글이 같은 대표이미지로 나갔다(pexels 4386366).
+//    후보를 여러 개 받아도 **사이트가 이미 쓴 사진을 거르지 않으면** 인기 사진이 계속 재선택된다.
+//    mungge 미디어 slug 가 `pexels-photo-<id>-<ts>` 라 거기서 기사용 id 를 역추적한다.
+//    자격증명/네트워크가 없으면 빈 Set → 중복 검사 없이 기존 동작으로 degrade.
+let _usedPexelsIds = null;
+async function usedPexelsIds() {
+  if (_usedPexelsIds) return _usedPexelsIds;
+  const used = new Set();
+  const { WP_URL, WP_USER, WP_APP_PASS } = process.env;
+  if (WP_URL && WP_USER && WP_APP_PASS) {
+    const auth = "Basic " + Buffer.from(`${WP_USER}:${WP_APP_PASS}`).toString("base64");
+    try {
+      for (let page = 1; page <= 10; page++) {
+        const res = await fetch(`${WP_URL}/wp-json/wp/v2/media?per_page=100&page=${page}&_fields=slug`, {
+          headers: { Authorization: auth },
+        });
+        if (!res.ok) break;
+        const items = await res.json();
+        if (!Array.isArray(items) || !items.length) break;
+        for (const m of items) {
+          const hit = (m.slug || "").match(/pexels-photo-(\d+)/);
+          if (hit) used.add(hit[1]);
+        }
+        if (items.length < 100) break;
+      }
+    } catch (e) {
+      console.log(`[Pexels] 기사용 목록 조회 실패(${e.message.slice(0, 60)}) — 중복 검사 없이 진행`);
+    }
+  }
+  _usedPexelsIds = used;
+  return used;
+}
+
 // 한국어 주제 → 영문 스톡 검색어 2~3개. LLM 실패 시 원문을 그대로 쓴다(최소한 기존 동작 유지).
 async function deriveImageQueries(searchTerm) {
   if (!/[가-힣]/.test(searchTerm)) return [searchTerm];
@@ -570,15 +603,19 @@ async function fetchHeroImage(searchTerm) {
   const queries = await deriveImageQueries(searchTerm);
   console.log(`[Pexels] 검색어: ${queries.join(" | ")}`);
 
+  const used = await usedPexelsIds();
   const candidates = [];
   for (const q of queries) {
     try {
-      const res = await fetch(`${PEXELS_API_URL}?query=${encodeURIComponent(q)}&per_page=8&orientation=landscape`, {
+      const res = await fetch(`${PEXELS_API_URL}?query=${encodeURIComponent(q)}&per_page=20&orientation=landscape`, {
         headers: { Authorization: PEXELS_API_KEY },
       });
       if (!res.ok) { console.error(`[Pexels] API error ${res.status} (${q})`); continue; }
       const data = await res.json();
-      for (const p of data.photos || []) candidates.push({ q, p });
+      for (const p of data.photos || []) {
+        if (used.has(String(p.id))) continue; // 이미 다른 글이 쓴 사진 (2026-08-11 중복 사고)
+        candidates.push({ q, p });
+      }
     } catch (err) {
       console.error(`[Pexels] Error: ${err.message}`);
     }
