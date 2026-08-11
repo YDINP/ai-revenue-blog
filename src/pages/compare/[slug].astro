@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CompareVisual from '../../components/CompareVisual.astro';
 import { comparisons } from '../../data/comparisons';
 
 export function getStaticPaths() {
@@ -77,9 +76,6 @@ const jsonLd = {
       <p class="cmp-intro">{c.intro}</p>
       <p class="cmp-updated">업데이트: {c.updated}</p>
     </header>
-
-    <!-- 시각 요약 (표 위에 얹기 — 값은 아래 표에 그대로 남아 색인) -->
-    <CompareVisual options={c.options} rows={c.rows} />
 
     <!-- 한눈 비교표 -->
     <div class="cmp-table-wrap">
