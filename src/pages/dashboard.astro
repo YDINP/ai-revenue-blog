@@ -6165,6 +6165,9 @@ const ICONS: Record<string, string> = {
         if (!container) return;
 
         let filtered = _eventsData;
+        // 애드핏 광고슬롯 이벤트(adfit_slot)는 방문 활동이 아니라 광고 노출 로그라 Live Activity 에서 제외
+        // (라벨도 없어 'adfit_slot' 원문이 그대로 찍혔다). 광고 수치는 애드핏 패널에서 따로 본다.
+        filtered = filtered.filter(e => e.event_type !== 'adfit_slot');
         if (_eventsFilter !== 'all') {
           filtered = filtered.filter(e => e.source === _eventsFilter);
         }
@@ -6395,7 +6398,7 @@ const ICONS: Record<string, string> = {
             rpc('get_traffic_summary'),
             rpc('get_hourly_views'),
             rpc('get_top_pages', { p_limit: 50 }),
-            rpc('get_recent_events', { p_limit: 20 }),
+            rpc('get_recent_events', { p_limit: 40 }),
             rpc('get_top_liked_posts', { p_limit: 10 }),
             rpc('get_daily_detail', { p_days: 180 }),
             rpc('get_daily_hourly_heatmap', { p_days: 14 }),
