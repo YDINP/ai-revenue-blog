@@ -1,0 +1,140 @@
+---
+// 비교 데이터(comparisons.ts)의 rows 를 자동 판별해 표 위 "시각 요약"으로 렌더한다.
+// - 순수 숫자 행 → 막대(highlight 로 유리한 쪽을 길게+강조)
+// - 정도 어휘(최상/중/낮음/방대 등) 행 → 점 미터(문자의 크기 자체를 표시, 승패 판정 아님)
+// - 그 외(자유 텍스트) → 시각 생략(값은 아래 표에 그대로 남아 색인됨)
+// 표를 대체하지 않고 위에 얹는다 — canvas 가 아니라 값이 실제 DOM 텍스트로 남아 SEO 유지.
+interface Opt {
+  name: string;
+  tagline?: string;
+}
+interface Row {
+  label: string;
+  values: string[];
+  highlight?: 'min' | 'max';
+}
+const { options, rows } = Astro.props as { options: Opt[]; rows: Row[] };
+
+// 선행 숫자만으로 판단하지 않는다 — 뒤 괄호주석 제거 후 "거의 숫자"일 때만 숫자로 취급.
+// ("10%(조정 가능)" → 10 / "$1M 초과분 5%" → 텍스트 유지)
+const numOf = (s: string): number => {
+  const cleaned = String(s)
+    .replace(/\([^)]*\)\s*$/, '')
+    .trim();
+  return /^-?\d+(\.\d+)?\s*[%배원xX]?$/.test(cleaned) ? parseFloat(cleaned) : NaN;
+};
+
+// 정도 어휘 → 가중치(문자 자체의 크기이지 좋고 나쁨이 아니다). 행 안에서 상대 순위로 1~3점 환산.
+const SCALE: Record<string, number> = {
+  '최상': 5, '최고': 5, '매우 방대': 5, '매우 높음': 5,
+  '상': 4, '높음': 4, '많음': 4, '강함': 4, '방대': 4, '풍부': 4, '빠름': 4,
+  '중': 3, '보통': 3, '중간': 3,
+  '성장 중': 2, '있음': 2, '하': 2, '느림': 2,
+  '낮음': 1, '적음': 1, '약함': 1, '최하': 1, '없음': 1,
+};
+
+type Enc =
+  | { kind: 'num'; label: string; cells: { v: string; pct: number; win: boolean }[] }
+  | { kind: 'scale'; label: string; cells: { v: string; dots: number }[] };
+
+const encoded: Enc[] = [];
+for (const row of rows) {
+  const nums = row.values.map(numOf);
+  if (nums.every((n) => !Number.isNaN(n))) {
+    const min = Math.min(...nums);
+    const max = Math.max(...nums);
+    const span = max - min || 1;
+    let win = -1;
+    if (row.highlight) win = nums.indexOf(row.highlight === 'min' ? min : max);
+    const cells = row.values.map((v, i) => {
+      // goodness 정규화 → 유리한 쪽이 가장 길게. highlight 없으면 크기 비례.
+      let g: number;
+      if (row.highlight === 'min') g = (max - nums[i]) / span;
+      else if (row.highlight === 'max') g = (nums[i] - min) / span;
+      else g = max ? nums[i] / max : 0;
+      return { v, pct: Math.round(15 + g * 85), win: i === win };
+    });
+    encoded.push({ kind: 'num', label: row.label, cells });
+    continue;
+  }
+  const ws = row.values.map((v) => SCALE[String(v).trim()]);
+  if (ws.every((w) => w !== undefined)) {
+    const mn = Math.min(...ws);
+    const mx = Math.max(...ws);
+    const sp = mx - mn || 1;
+    const cells = row.values.map((v, i) => ({
+      v,
+      dots: Math.max(1, Math.min(3, Math.round(1 + (2 * (ws[i] - mn)) / sp))),
+    }));
+    encoded.push({ kind: 'scale', label: row.label, cells });
+  }
+}
+const show = encoded.length > 0;
+---
+
+{
+  show && (
+    <section class="cv" aria-label="시각 요약">
+      <h2 class="cv-h">
+        한눈 비교 <span>시각 요약</span>
+      </h2>
+      <div class="cv-grid" style={`--cv-cols:${options.length}`}>
+        {options.map((o, i) => (
+          <div class="cv-col">
+            <div class="cv-nm">{o.name}</div>
+            {o.tagline && <div class="cv-tl">{o.tagline}</div>}
+            {encoded.map((e) => (
+              <div class="cv-m">
+                <div class="cv-k">{e.label}</div>
+                {e.kind === 'num' ? (
+                  <>
+                    <div class={e.cells[i].win ? 'cv-bar win' : 'cv-bar'}>
+                      <span style={`width:${e.cells[i].pct}%`} />
+                    </div>
+                    <div class="cv-v">
+                      {e.cells[i].v}
+                      {e.cells[i].win && <em>유리</em>}
+                    </div>
+                  </>
+                ) : (
+                  <div class="cv-dots">
+                    {[1, 2, 3].map((d) => (
+                      <i class={d <= e.cells[i].dots ? 'on' : ''} />
+                    ))}
+                    <span class="cv-dv">{e.cells[i].v}</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      <p class="cv-note">
+        숫자 항목은 막대(유리한 쪽이 길고 강조), 정도 항목은 점으로 표시. 전체 항목·수치는 아래 표에서 확인하세요.
+      </p>
+    </section>
+  )
+}
+
+<style>
+  .cv { margin: 1.75rem 0; }
+  .cv-h { font-size: 1.15rem; margin: 0 0 0.9rem; }
+  .cv-h span { font-size: 0.72rem; font-weight: 600; color: var(--color-text-muted); margin-left: 0.35rem; }
+  .cv-grid { display: grid; grid-template-columns: repeat(var(--cv-cols), minmax(0, 1fr)); gap: 0.7rem; }
+  @media (max-width: 640px) { .cv-grid { grid-template-columns: 1fr; } }
+  .cv-col { border: 1px solid var(--color-border); border-radius: var(--radius, 12px); padding: 0.85rem; background: var(--color-bg-secondary); }
+  .cv-nm { font-weight: 800; font-size: 1rem; }
+  .cv-tl { font-size: 0.7rem; color: var(--color-text-muted); margin-bottom: 0.6rem; min-height: 2.1em; }
+  .cv-m { margin: 0.55rem 0; }
+  .cv-k { font-size: 0.66rem; color: var(--color-text-muted); margin-bottom: 0.25rem; }
+  .cv-bar { height: 7px; border-radius: 5px; background: color-mix(in srgb, var(--color-text-muted) 20%, transparent); overflow: hidden; }
+  .cv-bar > span { display: block; height: 100%; border-radius: 5px; background: color-mix(in srgb, var(--color-text-muted) 55%, transparent); }
+  .cv-bar.win > span { background: var(--color-primary); }
+  .cv-v { font-size: 0.8rem; font-weight: 700; margin-top: 0.2rem; }
+  .cv-v em { font-style: normal; font-size: 0.6rem; color: var(--color-primary); border: 1px solid var(--color-primary); border-radius: 999px; padding: 0 0.3rem; margin-left: 0.3rem; }
+  .cv-dots { display: flex; align-items: center; gap: 3px; }
+  .cv-dots i { width: 8px; height: 8px; border-radius: 50%; background: color-mix(in srgb, var(--color-text-muted) 25%, transparent); }
+  .cv-dots i.on { background: var(--color-primary); }
+  .cv-dv { font-size: 0.72rem; color: var(--color-text-secondary); margin-left: 0.4rem; }
+  .cv-note { font-size: 0.72rem; color: var(--color-text-muted); margin: 0.8rem 0 0; }
+</style>
