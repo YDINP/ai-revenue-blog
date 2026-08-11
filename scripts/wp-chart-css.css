@@ -1775,19 +1775,20 @@ html[data-mg-theme="dark"] .entry-hero h1 { color: #f2f3f5; }
 
 /* 옵션 카드 */
 .cmp-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.9rem; margin: 0 0 2rem; }
-.cmp-card { padding: 1.1rem 1.15rem; border-radius: 16px; background: var(--color-bg-secondary, #f5f7fa); border: 1px solid rgba(16,24,40,.07); }
+.cmp-card { display: flex; flex-direction: column; padding: 1.1rem 1.15rem; border-radius: 16px; background: var(--color-bg-secondary, #f5f7fa); border: 1px solid rgba(16,24,40,.07); }
 .cmp-card-name { margin: 0; font-size: 1.08rem; font-weight: 800; letter-spacing: -0.01em; }
 .cmp-card-tag { margin: 0.15rem 0 0.85rem; font-size: 0.82rem; color: var(--color-text-secondary, #6b7280); }
 .cmp-pros, .cmp-cons { list-style: none; margin: 0 0 0.6rem; padding: 0; display: grid; gap: 0.3rem; }
 .cmp-pros li, .cmp-cons li { position: relative; padding-left: 1.15rem; font-size: 0.87rem; line-height: 1.6; }
 .cmp-pros li::before { content: "＋"; position: absolute; left: 0; color: #16a34a; font-weight: 800; }
 .cmp-cons li::before { content: "－"; position: absolute; left: 0; color: #dc2626; font-weight: 800; }
-.cmp-best-for { margin: 0.7rem 0 0; padding: 0.55rem 0.7rem; border-radius: 10px; font-size: 0.84rem; line-height: 1.55; background: rgba(79,124,255,.09); }
+.cmp-best-for { margin: auto 0 0; padding: 0.55rem 0.7rem; border-radius: 10px; font-size: 0.84rem; line-height: 1.55; background: rgba(79,124,255,.09); }
 .cmp-best-for strong { font-weight: 800; }
 
 /* 비교표 */
 .cmp-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 2rem; border-radius: 14px; border: 1px solid rgba(16,24,40,.09); }
-.cmp-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 0.89rem; }
+.cmp-table { width: 100%; min-width: 520px; table-layout: fixed; border-collapse: collapse; font-size: 0.89rem; }
+.cmp-table thead th:first-child, .cmp-table .cmp-row-label { width: 20%; }
 .cmp-table th, .cmp-table td { padding: 0.7rem 0.85rem; text-align: left; vertical-align: top; border-bottom: 1px solid rgba(16,24,40,.07); line-height: 1.55; }
 .cmp-table thead th { background: var(--color-bg-secondary, #f5f7fa); font-weight: 800; white-space: nowrap; }
 .cmp-table tbody tr:last-child th, .cmp-table tbody tr:last-child td { border-bottom: 0; }
@@ -2250,6 +2251,8 @@ html[data-mg-theme="dark"], :root.dark{ --color-primary:#93a3ff; --color-bg:#1f1
 .mg-cta h2{ font-family:var(--serif); }
 
 /* ── 비교 시각 요약 (CompareVisual : sync-mungge-pages.mjs 렌더) ───────────── */
+/* 단어 중간에서 줄바꿈 끊김 방지 — 한국어 어절 단위로만 줄바꿈 */
+.cmp, .cv{ word-break: keep-all; overflow-wrap: break-word; }
 .cv{ margin:1.5rem 0; }
 .cv-h{ margin:0 0 .9rem; font-size:1.15rem; font-weight:800; }
 .cv-h span{ margin-left:.35rem; font-size:.72rem; font-weight:600; color:var(--color-text-secondary,#6b7280); }
