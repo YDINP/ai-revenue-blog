@@ -2248,3 +2248,31 @@ html[data-mg-theme="dark"], :root.dark{ --color-primary:#93a3ff; --color-bg:#1f1
 
 /* ── ⑧ 뉴스레터 CTA(.mg-cta): 인디고 유지, 세리프 제목 ───────────────────────── */
 .mg-cta h2{ font-family:var(--serif); }
+
+/* ── 비교 시각 요약 (CompareVisual : sync-mungge-pages.mjs 렌더) ───────────── */
+.cv{ margin:1.5rem 0; }
+.cv-h{ margin:0 0 .9rem; font-size:1.15rem; font-weight:800; }
+.cv-h span{ margin-left:.35rem; font-size:.72rem; font-weight:600; color:var(--color-text-secondary,#6b7280); }
+.cv-grid{ display:grid; grid-template-columns:repeat(var(--cv-cols,3),minmax(0,1fr)); gap:.7rem; }
+@media(max-width:640px){ .cv-grid{ grid-template-columns:1fr; } }
+.cv-col{ padding:.85rem; border-radius:16px; background:var(--color-bg-secondary,#f5f7fa); border:1px solid rgba(16,24,40,.07); }
+.cv-nm{ margin:0; font-size:1rem; font-weight:800; }
+.cv-tl{ margin:.1rem 0 .6rem; min-height:2.1em; font-size:.72rem; color:var(--color-text-secondary,#6b7280); }
+.cv-m{ margin:.55rem 0; }
+.cv-k{ display:block; margin-bottom:.28rem; font-size:.68rem; color:var(--color-text-secondary,#6b7280); }
+.cv-bar{ display:block; height:7px; border-radius:5px; background:rgba(16,24,40,.10); overflow:hidden; }
+.cv-bar > span{ display:block; height:100%; border-radius:5px; background:rgba(16,24,40,.32); }
+.cv-bar.win > span{ background:#16a34a; }
+.cv-v{ display:block; margin-top:.22rem; font-size:.82rem; font-weight:700; }
+.cv-v em{ margin-left:.3rem; padding:.02rem .38rem; border-radius:999px; font-size:.62rem; font-weight:800; font-style:normal; color:#fff; background:#16a34a; }
+.cv-dots{ display:flex; align-items:center; gap:3px; }
+.cv-dots i{ width:8px; height:8px; border-radius:50%; background:rgba(16,24,40,.15); }
+.cv-dots i.on{ background:var(--color-primary,#4f7cff); }
+.cv-dv{ margin-left:.4rem; font-size:.74rem; color:var(--color-text-secondary,#6b7280); }
+.cv-note{ margin:.85rem 0 0; font-size:.72rem; color:var(--color-text-secondary,#6b7280); }
+html[data-mg-theme="dark"] .cv-col{ border-color:rgba(255,255,255,.08); }
+html[data-mg-theme="dark"] .cv-bar{ background:rgba(255,255,255,.12); }
+html[data-mg-theme="dark"] .cv-bar > span{ background:rgba(255,255,255,.40); }
+html[data-mg-theme="dark"] .cv-dots i{ background:rgba(255,255,255,.15); }
+html[data-mg-theme="dark"] .cv-dots i.on{ background:var(--color-primary,#93a3ff); }
+html[data-mg-theme="dark"] .cv-bar.win > span{ background:#16a34a; }
