@@ -4,12 +4,16 @@
  * ⚠️ 이름에 banner/ad/sponsor 를 쓰지 않는다. 광고차단기가 EasyList 규칙으로 클래스·경로
  *    문자열을 매칭해 **네트워크 차단**한다(자사 프로모도 오차단된다). → 클래스는 mg-dock-*.
  *
- * ── 왜 1600px 인가 (임의 값 아님) ─────────────────────────────────────────
- * 뭉게는 사이드바가 없는 단일 컬럼이고 컨테이너가 --global-content-width: 1290px 다.
- * 그래서 좌우 여백은 (100vw - 1290) / 2 로, 화면이 좁으면 레일이 들어갈 자리가 아예 없다.
- *     1920 → 315px   1600 → 155px   1440 → 75px
- * 1440 이하에서는 어떤 폭으로도 본문을 덮지 않고는 못 들어간다 → 그 구간은 통째로 비운다.
- * 폭도 고정하지 않고 남는 여백에서 계산한다(1600 에서 ~123px, 1920 에서 240px).
+ * ── 임계값 근거 (실측. 처음에 틀렸던 곳) ──────────────────────────────────
+ * ⚠️ 처음엔 CSS 변수 --global-content-width: 1290px 를 본문 폭으로 보고 1600px 을 하한으로
+ *    잡았다. **틀렸다.** 그건 겉 컨테이너 값이고, 실제로 배경이 칠해진 판은
+ *    `article.entry.content-bg` = **1032px**, 그 바깥 박스가 `.content-container` = 1080px 다.
+ *    (읽는 칼럼 `.entry-content` 는 968px.) 그래서 진짜 여백은 훨씬 넓다:
+ *        1920 → 420px   1600 → 260px   1440 → 180px
+ *    1440 을 "자리 없음"으로 잘라내고 있었는데 실제로는 180px 이 남는다.
+ *    → 기준을 1080px 판 기준으로 다시 잡고 하한을 1400px 로 내렸다.
+ *    교훈: 레이아웃 폭은 CSS 변수 이름을 믿지 말고 **렌더된 박스를 재라.**
+ * 폭은 고정하지 않고 남는 여백에서 계산한다(1440 에서 148px, 1920 에서 260px).
  *
  * ⚠️ 자리가 없을 때 display:none 으로 숨기지 않고 **아예 만들지 않는다.** 지금은 내부 링크뿐이라
  *    상관없지만, 나중에 이 자리에 애드핏을 넣으면 숨겨진 ins 는 요청조차 안 나가서
@@ -25,14 +29,15 @@
   if (!document.body || !document.body.classList.contains('single-post')) return;
   if (document.querySelector('.mg-dock')) return;
 
-  var CONTENT = 1290;          // --global-content-width
-  var GAP = 16;                // 본문과 레일 사이
-  var MIN_W = 120;             // 이보다 좁아지면 글자가 뭉개진다 → 안 띄운다
-  var MAX_W = 240;
+  var CONTENT = 1080;          // .content-container 실측 폭(판 = article.entry 1032 + 여백)
+  var GAP = 20;                // 판과 레일 사이
+  var EDGE = 12;               // 화면 끝 여유
+  var MIN_W = 130;             // 이보다 좁아지면 글자가 뭉개진다 → 안 띄운다
+  var MAX_W = 260;
 
   function railWidth() {
     var margin = (window.innerWidth - CONTENT) / 2;
-    return Math.min(MAX_W, Math.floor(margin - GAP - 8));   // 8 = 화면 끝 여유
+    return Math.min(MAX_W, Math.floor(margin - GAP - EDGE));
   }
   if (railWidth() < MIN_W) return;
 
@@ -75,7 +80,7 @@
     st.textContent = [
       '.mg-dock,.mg-dock *{box-sizing:border-box;}',
       '.mg-dock{position:fixed;z-index:60;top:120px;',
-      'left:calc(50% + ' + (CONTENT / 2) + 'px + ' + GAP + 'px);',
+      'left:calc(50% + ' + (CONTENT / 2 + GAP) + 'px);',
       'max-height:calc(100vh - 160px);overflow-y:auto;',
       'padding:14px 12px;border-radius:14px;',
       'background:#fff;border:1px solid rgba(0,0,0,.10);',
@@ -95,7 +100,8 @@
       'html[data-mg-theme="dark"] .mg-dock a{border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.05);}',
       'html[data-mg-theme="dark"] .mg-dock a:hover{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.09);}',
       // 자리가 없어지는 구간은 CSS 로도 한 번 더 막는다(리사이즈 중 한 프레임이라도 겹치지 않게)
-      '@media (max-width:1599px){.mg-dock{display:none;}}',
+      // 하한 = CONTENT + 2*(MIN_W + GAP + EDGE) = 1080 + 2*162 = 1404
+      '@media (max-width:1403px){.mg-dock{display:none;}}',
       '@media (prefers-reduced-motion:reduce){.mg-dock a{transition:none;}}',
     ].join('');
     document.head.appendChild(st);
