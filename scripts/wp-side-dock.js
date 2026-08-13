@@ -41,10 +41,19 @@
   if (document.querySelector('.mg-dock')) return;
 
   var CONTENT = 1080;          // .content-container 실측 폭
-  var GAP = 20;                // 판과 레일 사이
-  var EDGE = 12;               // 화면 끝 여유
+  /* GAP+EDGE 를 32 → 20 으로 좁힌 이유: 1440 의 여백이 180px 인데 160x600 광고를 넣으려면
+     160 + GAP + EDGE ≤ 180 이어야 한다. 12+8 로 딱 맞춘 값이다. 임의로 줄인 게 아니다. */
+  var GAP = 12;                // 판과 레일 사이
+  var EDGE = 8;                // 화면 끝 여유
   var MIN_W = 130;             // 이보다 좁아지면 글자가 뭉개진다 → 안 띄운다
   var MAX_W = 260;
+
+  /* ⚠️ 애드핏 160x600 유닛 ID. **비어 있으면 광고를 아예 만들지 않는다.**
+     플레이스홀더 문자열(DAN-...-REPLACE-ME 류)을 넣어두면 안 된다 — 과거 VIP 에서 그걸
+     그대로 라이브에 내보낸 적이 있다. 발급받은 실제 ID 로 이 한 줄만 채우고
+     `node scripts/inject-wp-js.mjs --only MG-DOCK` 로 다시 밀면 켜진다. */
+  var AD_UNIT = 'DAN-3Kk2u6ueNQHXmcr7';
+  var AD_W = 160, AD_H = 600;
 
   function railWidth() {
     return Math.min(MAX_W, Math.floor((window.innerWidth - CONTENT) / 2 - GAP - EDGE));
@@ -112,6 +121,9 @@
       'transition:transform .12s ease,border-color .12s ease,background .12s ease;}',
       '.mg-dock--r a:last-child{margin-bottom:0;}',
       '.mg-dock--r a:hover{transform:translateY(-1px);border-color:rgba(0,0,0,.26);background:rgba(0,0,0,.06);}',
+      // 광고 자리 — 채워지기 전에는 높이를 예약하지 않는다(빈 칸이 남지 않게)
+      '.mg-dock-slot{display:flex;justify-content:center;margin:0 0 10px;}',
+      '.mg-dock-slot.is-filled{margin-bottom:12px;}',
       '.mg-dock--r b{display:block;font-weight:600;}',
       '.mg-dock--r span{display:block;margin-top:2px;font-size:11px;opacity:.6;}',
       // 목차 — 왼쪽 세로선 + 현재 위치 강조
@@ -129,8 +141,8 @@
       'html[data-mg-theme="dark"] .mg-dock--l a:hover{background:rgba(255,255,255,.08);}',
       'html[data-mg-theme="dark"] .mg-dock--l a.is-now{background:rgba(255,255,255,.10);}',
       // 자리가 없어지는 구간은 CSS 로도 한 번 더 막는다(리사이즈 중 한 프레임이라도 겹치지 않게)
-      // 하한 = CONTENT + 2*(MIN_W + GAP + EDGE) = 1080 + 2*162 = 1404
-      '@media (max-width:1403px){.mg-dock{display:none;}}',
+      // 하한 = CONTENT + 2*(MIN_W + GAP + EDGE) = 1080 + 2*150 = 1380
+      '@media (max-width:1379px){.mg-dock{display:none;}}',
       '@media (prefers-reduced-motion:reduce){.mg-dock--r a{transition:none;}}',
     ].join('');
     document.head.appendChild(st);
@@ -151,9 +163,49 @@
     return el;
   }
 
-  // ── 오른쪽: 내부 유도 ──
+  // ── 오른쪽: 광고(자리가 될 때만) + 내부 유도 ──
   var right = mkRail('r', '이 주제 더 보기');
   right.setAttribute('aria-label', '관련 모음');
+
+  /* 애드핏 160x600. **레일이 160px 을 확보했을 때만 만든다**(1440 이상).
+     좁을 때 display:none 으로 숨기면 요청은 나가는데 화면엔 없어서 노출 0 으로 잡힌다
+     — 애드핏은 숨겨진 ins 에 서빙하지 않는다. 처음부터 안 만드는 편이 정확하다. */
+  if (AD_UNIT && railWidth() >= AD_W) {
+    var slot = document.createElement('div');
+    slot.className = 'mg-dock-slot';
+    var ins = document.createElement('ins');
+    ins.className = 'kakao_ad_area';
+    ins.style.display = 'none';               // 애드핏 표준 스니펫 형식(스크립트가 해제한다)
+    ins.setAttribute('data-ad-unit', AD_UNIT);
+    ins.setAttribute('data-ad-width', String(AD_W));
+    ins.setAttribute('data-ad-height', String(AD_H));
+    slot.appendChild(ins);
+    right.insertBefore(slot, right.firstChild.nextSibling);   // 제목 바로 아래
+
+    // 채워졌을 때만 자리를 준다(빈 회색칸이 남지 않게)
+    function markFilled() {
+      if (slot.classList.contains('is-filled')) return true;
+      if (ins.children.length || getComputedStyle(ins).display !== 'none') {
+        slot.classList.add('is-filled');
+        return true;
+      }
+      return false;
+    }
+    if (!markFilled() && window.MutationObserver) {
+      var mo = new MutationObserver(function () { if (markFilled()) mo.disconnect(); });
+      mo.observe(ins, { childList: true, attributes: true, attributeFilter: ['style'] });
+      setTimeout(function () { mo.disconnect(); }, 15000);
+    }
+    // ba.min.js 는 로드 시점에 DOM 을 훑으므로 나중에 붙인 ins 는 놓칠 수 있다 → 한 번 더 로드.
+    if (!window.__mgAdKick) {
+      window.__mgAdKick = 1;
+      var s = document.createElement('script');
+      s.src = '//t1.kakaocdn.net/kas/static/ba.min.js';
+      s.async = true;
+      document.body.appendChild(s);
+    }
+  }
+
   links.forEach(function (l) {
     var a = document.createElement('a');
     a.href = l.href;
