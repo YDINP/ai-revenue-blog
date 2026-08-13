@@ -115,35 +115,40 @@
       '.mg-dock--l{right:calc(50% + ' + HALF + 'px);}',
       '.mg-dock-t{font-size:11px;font-weight:700;letter-spacing:.04em;opacity:.55;',
       'margin:0 0 10px;padding:0 2px;}',
+      /* ⚠️ 셀렉터를 좌/우가 아니라 **역할**(--links / --toc)로 건다. 광고가 오른쪽을
+         가져가면 내부 유도가 왼쪽으로 넘어가는데, 좌우로 걸어두면 그때 스타일이 통째로
+         빠진다(2026-08-13 실측에서 밟을 뻔한 곳). */
       '.mg-dock a{display:block;text-decoration:none;color:inherit;}',
-      '.mg-dock--r a{padding:9px 10px;margin-bottom:6px;border-radius:9px;',
-      'border:1px solid rgba(0,0,0,.08);background:rgba(0,0,0,.03);',
+      '.mg-dock--links .mg-dock-l{padding:9px 10px;margin-bottom:6px;border-radius:9px;',
+      'display:block;border:1px solid rgba(0,0,0,.08);background:rgba(0,0,0,.03);',
       'transition:transform .12s ease,border-color .12s ease,background .12s ease;}',
-      '.mg-dock--r a:last-child{margin-bottom:0;}',
-      '.mg-dock--r a:hover{transform:translateY(-1px);border-color:rgba(0,0,0,.26);background:rgba(0,0,0,.06);}',
+      '.mg-dock--links .mg-dock-l:last-child{margin-bottom:0;}',
+      '.mg-dock--links .mg-dock-l:hover{transform:translateY(-1px);border-color:rgba(0,0,0,.26);background:rgba(0,0,0,.06);}',
       // 광고 자리 — 채워지기 전에는 높이를 예약하지 않는다(빈 칸이 남지 않게)
-      '.mg-dock-slot{display:flex;justify-content:center;margin:0 0 10px;}',
-      '.mg-dock-slot.is-filled{margin-bottom:12px;}',
-      '.mg-dock--r b{display:block;font-weight:600;}',
-      '.mg-dock--r span{display:block;margin-top:2px;font-size:11px;opacity:.6;}',
+      '.mg-dock-slot{display:flex;justify-content:center;margin:0;}',
+      '.mg-dock-slot.is-filled{margin-bottom:0;}',
+      '.mg-dock-l b{display:block;font-weight:600;}',
+      '.mg-dock-l span{display:block;margin-top:2px;font-size:11px;opacity:.6;}',
       // 목차 — 왼쪽 세로선 + 현재 위치 강조
-      '.mg-dock--l ol{list-style:none;margin:0;padding:0 0 0 10px;border-left:2px solid rgba(0,0,0,.10);}',
-      '.mg-dock--l li{margin:0 0 2px;}',
-      '.mg-dock--l a{padding:5px 6px;border-radius:7px;font-size:12px;opacity:.72;',
+      '.mg-dock--toc ol{list-style:none;margin:0;padding:0 0 0 10px;border-left:2px solid rgba(0,0,0,.10);}',
+      '.mg-dock--toc li{margin:0 0 2px;}',
+      '.mg-dock--toc ol a{padding:5px 6px;border-radius:7px;font-size:12px;opacity:.72;',
       'transition:background .12s ease,opacity .12s ease;}',
-      '.mg-dock--l a:hover{background:rgba(0,0,0,.05);opacity:1;}',
-      '.mg-dock--l a.is-now{opacity:1;font-weight:700;background:rgba(0,0,0,.06);}',
+      '.mg-dock--toc ol a:hover{background:rgba(0,0,0,.05);opacity:1;}',
+      '.mg-dock--toc ol a.is-now{opacity:1;font-weight:700;background:rgba(0,0,0,.06);}',
+      '.mg-dock-sep{margin:12px 0 10px;border-top:1px solid rgba(0,0,0,.10);}',
       'html[data-mg-theme="dark"] .mg-dock{background:#1b1e24;border-color:rgba(255,255,255,.12);',
       'color:#e6e8ea;box-shadow:0 6px 24px rgba(0,0,0,.45);}',
-      'html[data-mg-theme="dark"] .mg-dock--r a{border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.05);}',
-      'html[data-mg-theme="dark"] .mg-dock--r a:hover{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.09);}',
-      'html[data-mg-theme="dark"] .mg-dock--l ol{border-left-color:rgba(255,255,255,.16);}',
-      'html[data-mg-theme="dark"] .mg-dock--l a:hover{background:rgba(255,255,255,.08);}',
-      'html[data-mg-theme="dark"] .mg-dock--l a.is-now{background:rgba(255,255,255,.10);}',
+      'html[data-mg-theme="dark"] .mg-dock--links .mg-dock-l{border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.05);}',
+      'html[data-mg-theme="dark"] .mg-dock--links .mg-dock-l:hover{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.09);}',
+      'html[data-mg-theme="dark"] .mg-dock--toc ol{border-left-color:rgba(255,255,255,.16);}',
+      'html[data-mg-theme="dark"] .mg-dock--toc ol a:hover{background:rgba(255,255,255,.08);}',
+      'html[data-mg-theme="dark"] .mg-dock--toc ol a.is-now{background:rgba(255,255,255,.10);}',
+      'html[data-mg-theme="dark"] .mg-dock-sep{border-top-color:rgba(255,255,255,.14);}',
       // 자리가 없어지는 구간은 CSS 로도 한 번 더 막는다(리사이즈 중 한 프레임이라도 겹치지 않게)
       // 하한 = CONTENT + 2*(MIN_W + GAP + EDGE) = 1080 + 2*150 = 1380
       '@media (max-width:1379px){.mg-dock{display:none;}}',
-      '@media (prefers-reduced-motion:reduce){.mg-dock--r a{transition:none;}}',
+      '@media (prefers-reduced-motion:reduce){.mg-dock a{transition:none;}}',
     ].join('');
     document.head.appendChild(st);
   }
@@ -163,14 +168,22 @@
     return el;
   }
 
-  // ── 오른쪽: 광고(자리가 될 때만) + 내부 유도 ──
-  var right = mkRail('r', '이 주제 더 보기');
-  right.setAttribute('aria-label', '관련 모음');
+  /* ── 세로 예산 ─────────────────────────────────────────────────────────
+     ⚠️ 광고가 실제로 채워지고 나서야 드러난 문제: 160x600 은 **600px 짜리**라
+     제목 + 광고 + 링크 3장을 한 판에 넣으면 화면 높이를 넘어 레일 안에 스크롤바가 생긴다
+     (2026-08-13 실측). 고정 레일에 내부 스크롤바가 생기면 링크는 잘려서 안 보이고
+     보기도 흉하다. → 폭뿐 아니라 **높이도 예산으로 잡고**, 광고가 들어가면 그 레일은
+     광고만 담는다. 내부 유도는 반대쪽 레일로 보낸다. */
+  var TOP = 120, BOTTOM = 40;
+  var vBudget = window.innerHeight - TOP - BOTTOM;
+  var CHROME = 28 + 26;                       // 패널 상하 패딩 + 제목 줄
+  var adFits = !!AD_UNIT && railWidth() >= AD_W && vBudget >= AD_H + CHROME;
 
-  /* 애드핏 160x600. **레일이 160px 을 확보했을 때만 만든다**(1440 이상).
-     좁을 때 display:none 으로 숨기면 요청은 나가는데 화면엔 없어서 노출 0 으로 잡힌다
-     — 애드핏은 숨겨진 ins 에 서빙하지 않는다. 처음부터 안 만드는 편이 정확하다. */
-  if (AD_UNIT && railWidth() >= AD_W) {
+  // ── 오른쪽: 광고가 들어가면 광고만, 아니면 내부 유도 ──
+  var right = mkRail('r', adFits ? '광고' : '이 주제 더 보기');
+  right.setAttribute('aria-label', adFits ? '광고' : '관련 모음');
+
+  if (adFits) {
     var slot = document.createElement('div');
     slot.className = 'mg-dock-slot';
     var ins = document.createElement('ins');
@@ -206,20 +219,26 @@
     }
   }
 
-  links.forEach(function (l) {
-    var a = document.createElement('a');
-    a.href = l.href;
-    var b = document.createElement('b'); b.textContent = l.label;
-    var s = document.createElement('span'); s.textContent = l.sub;
-    a.appendChild(b); a.appendChild(s);
-    right.appendChild(a);
-  });
+  function addLinks(rail) {
+    rail.classList.add('mg-dock--links');
+    links.forEach(function (l) {
+      var a = document.createElement('a');
+      a.className = 'mg-dock-l';
+      a.href = l.href;
+      var b = document.createElement('b'); b.textContent = l.label;
+      var s = document.createElement('span'); s.textContent = l.sub;
+      a.appendChild(b); a.appendChild(s);
+      rail.appendChild(a);
+    });
+  }
+  if (!adFits) addLinks(right);   // 광고가 없으면 이 레일이 내부 유도를 맡는다
 
-  // ── 왼쪽: 목차 (글에서만, 본문 목차가 실제로 있을 때만) ──
+  // ── 왼쪽: 목차(글) / 내부 유도(목록 페이지) ──
   if (isPost) {
     var srcLinks = [].slice.call(document.querySelectorAll('.mg-toc a[href^="#"]'));
     if (srcLinks.length >= 3) {
       var left = mkRail('l', '목차');
+      left.classList.add('mg-dock--toc');
       left.setAttribute('aria-label', '목차');
       var ol = document.createElement('ol');
       var items = [];
@@ -232,6 +251,16 @@
         items.push({ a: a, id: a.getAttribute('href').slice(1) });
       });
       left.appendChild(ol);
+
+      /* 광고가 오른쪽을 가져간 글에서는 내부 유도가 갈 곳이 없어진다.
+         목차 아래가 남으면 거기에 붙인다 — **남을 때만.** 억지로 넣으면 이 레일에도
+         스크롤바가 생겨서 오른쪽에서 방금 고친 문제를 왼쪽에 다시 만드는 꼴이 된다. */
+      if (adFits && (vBudget - CHROME - ol.offsetHeight) >= 190) {
+        var sep = document.createElement('div');
+        sep.className = 'mg-dock-sep';
+        left.appendChild(sep);
+        addLinks(left);
+      }
 
       // 현재 위치 강조. 화면 상단 30% 선을 지난 마지막 제목을 '지금'으로 본다 —
       // IntersectionObserver 만 쓰면 섹션이 길 때 아무것도 안 걸리는 구간이 생긴다.
@@ -259,6 +288,11 @@
       }, { passive: true });
       spy();
     }
+  } else if (adFits) {
+    // 목록 페이지: 오른쪽을 광고가 가져갔으니 내부 유도는 왼쪽으로 보낸다.
+    var lf = mkRail('l', '이 주제 더 보기');
+    lf.setAttribute('aria-label', '관련 모음');
+    addLinks(lf);
   }
 
   // 리사이즈로 폭이 바뀌면 다시 잡는다(제거는 안 한다 — CSS 미디어쿼리가 숨긴다).
