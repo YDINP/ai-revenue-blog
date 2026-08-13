@@ -41,6 +41,8 @@ const BLOCKS = [
   // 광고 블록들 **뒤**에 와야 한다 — ADEND/ADMID/ADRAIL 이 삽입·이동을 끝낸 뒤의
   // 최종 슬롯 목록을 관찰해야 한다. 앞에 두면 나중에 꽂힌 슬롯을 놓친다.
   { marker: 'MG-ADOBS', file: 'wp-ad-observe.js', desc: '애드핏 노출/미노출 계측(adfit_slot 이벤트) — 재시도는 안 함' },
+  // 광고가 아니라 내부 유도다(애드핏 슬롯이 아니므로 ADOBS 계측 대상도 아니다) → 광고 묶음 뒤.
+  { marker: 'MG-DOCK', file: 'wp-side-dock.js', desc: '글 우측 여백 고정 레일(가이드·도구 유도, 1600px 이상)' },
 ];
 
 function loadEnv(p) {
