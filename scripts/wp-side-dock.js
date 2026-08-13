@@ -95,6 +95,10 @@
   links.push({ href: '/guide/', label: '가이드 전체', sub: '의도별 큐레이션 7종' });
   links.push({ href: '/tools/', label: '무료 계산기', sub: '연봉·대출·전기요금 등' });
 
+  /* 제목은 허브가 잡혔을 때만 "이 주제". 홈에는 주제가 없어서 "이 주제 더 보기" 가
+     아래 링크(가이드 전체·계산기)와 안 맞는다 — 카테고리를 못 읽은 글에서도 마찬가지다. */
+  var LINKS_TITLE = hub ? '이 주제 더 보기' : '둘러보기';
+
   // ── 스타일 (이 블록 안에서 자급자족한다 — CSS SSOT 를 건드리지 않으려고) ──
   /* ⚠️ 반투명 카드로 만들었다가 한 번 갈아엎었다. 이 레일은 top 고정인데 글 첫 화면은
      **전면 히어로 이미지**라, 배경이 비치는 카드는 사진 위에서 글자가 통째로 안 읽혔다
@@ -180,8 +184,8 @@
   var adFits = !!AD_UNIT && railWidth() >= AD_W && vBudget >= AD_H + CHROME;
 
   // ── 오른쪽: 광고가 들어가면 광고만, 아니면 내부 유도 ──
-  var right = mkRail('r', adFits ? '광고' : '이 주제 더 보기');
-  right.setAttribute('aria-label', adFits ? '광고' : '관련 모음');
+  var right = mkRail('r', adFits ? '광고' : LINKS_TITLE);
+  right.setAttribute('aria-label', adFits ? '광고' : LINKS_TITLE);
 
   if (adFits) {
     var slot = document.createElement('div');
@@ -290,8 +294,8 @@
     }
   } else if (adFits) {
     // 목록 페이지: 오른쪽을 광고가 가져갔으니 내부 유도는 왼쪽으로 보낸다.
-    var lf = mkRail('l', '이 주제 더 보기');
-    lf.setAttribute('aria-label', '관련 모음');
+    var lf = mkRail('l', LINKS_TITLE);
+    lf.setAttribute('aria-label', LINKS_TITLE);
     addLinks(lf);
   }
 
