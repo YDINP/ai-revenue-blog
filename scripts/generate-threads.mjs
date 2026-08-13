@@ -14,8 +14,14 @@ const SB = 'https://xyprbsmagtlzebxyxsvj.supabase.co';
 const SRK = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 const TOPIC = {
-  life: { site: 'https://life-revenue-blog.vercel.app', niche: '돈·건강·생활 꿀팁' },
-  ai: { site: 'https://ai-revenue-blog.vercel.app', niche: '개발·AI·수익화·부업' },
+  /* ⚠️ 2026-08-13 수정. TF/LF 는 mungge.com 단독 발행으로 옮겼는데 여기만 **옛 Astro 도메인**을
+     보고 있었다. life-revenue-blog.vercel.app/rss.xml 이 아직 200 을 주는데(154건에서 얼어붙음)
+     내용이 이관 시점에 멈춰 있어, 스레드가 몇 주째 낡은 글만 소개했다. 실측: 그 RSS 최신 3건이
+     그날 뽑힌 draft 3건과 정확히 일치(자동차보험·건강보험료·소상공인정책자금).
+     링크는 301 로 살아 있어서 "안 깨진 채로" 조용히 낡는 유형이라 더 안 보였다.
+     → 뭉게 **실루별 카테고리 피드**로 건다(뭉게는 TF+LF 통합이라 전체 피드를 쓰면 계정 니치가 섞인다). */
+  life: { site: 'https://mungge.com/category/%ec%83%9d%ed%99%9c%c2%b7%ec%9e%ac%ed%85%8c%ed%81%ac', niche: '돈·건강·생활 꿀팁' },
+  ai: { site: 'https://mungge.com/category/%ed%85%8c%ed%81%ac%c2%b7%ea%b0%9c%eb%b0%9c', niche: '개발·AI·수익화·부업' },
   game: { site: 'https://gameflow-blog.vercel.app', niche: '게임 소개·추천' },
   coupang: { site: null, niche: '쿠팡 상품 큐레이션(가성비·꿀템)' },
 };
@@ -52,7 +58,9 @@ async function sb(path, { method = 'GET', body, prefer } = {}) {
 
 // 블로그 RSS에서 최근 글 [{title, url}] (실패 시 빈 배열 → 홈 링크로 폴백)
 async function fetchRecentPosts(site, limit) {
-  for (const p of ['/rss.xml', '/rss', '/feed.xml']) {
+  // ⚠️ 워드프레스(뭉게)는 `/feed/` 다. `/rss.xml` 은 404 인데 **본문이 있는 404 페이지**를 주므로
+  //    앞에 두면 파싱만 실패하고 조용히 다음으로 넘어간다 → `/feed/` 를 1순위로 둔다.
+  for (const p of ['/feed/', '/rss.xml', '/rss', '/feed.xml']) {
     try {
       const r = await fetch(site + p);
       if (!r.ok) continue;
