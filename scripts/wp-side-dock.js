@@ -1,4 +1,6 @@
-/* 뭉게(mungge.com) 글 페이지 우측 여백에 고정되는 내부 유도 레일.
+/* 뭉게(mungge.com) 본문 좌우 여백에 고정되는 레일 두 개.
+ *   오른쪽 = 내부 유도(가이드 허브·무료 계산기)  — 글·홈·카테고리 목록
+ *   왼쪽   = 목차(현재 위치 강조)                — 글에서만, 본문 목차가 있을 때만
  * (주석에도 script 태그 문자열은 쓰지 않는다 — HTML 파서 상태를 건드릴 여지를 없애려고)
  *
  * ⚠️ 이름에 banner/ad/sponsor 를 쓰지 않는다. 광고차단기가 EasyList 규칙으로 클래스·경로
@@ -13,31 +15,39 @@
  *    1440 을 "자리 없음"으로 잘라내고 있었는데 실제로는 180px 이 남는다.
  *    → 기준을 1080px 판 기준으로 다시 잡고 하한을 1400px 로 내렸다.
  *    교훈: 레이아웃 폭은 CSS 변수 이름을 믿지 말고 **렌더된 박스를 재라.**
- * 폭은 고정하지 않고 남는 여백에서 계산한다(1440 에서 148px, 1920 에서 260px).
+ *    홈·카테고리 목록도 같은 1080px / left 420 기하다(실측) → 같은 계산을 그대로 쓴다.
  *
  * ⚠️ 자리가 없을 때 display:none 으로 숨기지 않고 **아예 만들지 않는다.** 지금은 내부 링크뿐이라
  *    상관없지만, 나중에 이 자리에 애드핏을 넣으면 숨겨진 ins 는 요청조차 안 나가서
  *    "노출 0" 의 원인이 된다(reference_adfit_serving_rules). 처음부터 안 만드는 편이 안전하다.
  *
- * ⚠️ 카테고리는 body 클래스에 없다(Kadence 가 안 넣는다). 대신 **슬러그 접두**를 쓴다 —
- *    daily-run 이 `YYYY-MM-DD-<카테고리>-...` 로 슬러그를 만든다. 못 읽으면 가이드 첫 화면으로 보낸다.
+ * ⚠️ 카테고리는 글 페이지 body 클래스에 없다(Kadence 가 안 넣는다). 글은 **슬러그 접두**로 읽고
+ *    (daily-run 이 `YYYY-MM-DD-<카테고리>-...` 로 만든다), 카테고리 목록은 body 의
+ *    `category-<슬러그>` 를 쓴다. 둘 다 못 읽으면 가이드 첫 화면으로 보낸다.
+ *
+ * ⚠️ 목차는 새로 만들지 않고 본문의 `.mg-toc` 를 **읽어서 복제**한다. 목차 생성은
+ *    wp-widget.js 에 인라인으로 박혀 있고 그건 관리 블록이 아니라 로컬 수정이 반영되지 않는다
+ *    (reference_mungge_footer_widget_blocks). 원본을 건드리지 않는 편이 안전하다.
  *
  * ⚠️ 라이브 SSOT 는 이 파일이 아니라 footer 위젯이다.
  *    수정하면 `node scripts/inject-wp-js.mjs --only MG-DOCK` 로 다시 밀어야 반영된다.
  */
 (function () {
-  if (!document.body || !document.body.classList.contains('single-post')) return;
+  if (!document.body) return;
+  var cls = document.body.classList;
+  var isPost = cls.contains('single-post');
+  var isList = cls.contains('home') || cls.contains('archive');
+  if (!isPost && !isList) return;
   if (document.querySelector('.mg-dock')) return;
 
-  var CONTENT = 1080;          // .content-container 실측 폭(판 = article.entry 1032 + 여백)
+  var CONTENT = 1080;          // .content-container 실측 폭
   var GAP = 20;                // 판과 레일 사이
   var EDGE = 12;               // 화면 끝 여유
   var MIN_W = 130;             // 이보다 좁아지면 글자가 뭉개진다 → 안 띄운다
   var MAX_W = 260;
 
   function railWidth() {
-    var margin = (window.innerWidth - CONTENT) / 2;
-    return Math.min(MAX_W, Math.floor(margin - GAP - EDGE));
+    return Math.min(MAX_W, Math.floor((window.innerWidth - CONTENT) / 2 - GAP - EDGE));
   }
   if (railWidth() < MIN_W) return;
 
@@ -56,11 +66,18 @@
   // 정부지원금 성격의 글은 asset 보다 gov-money 가 맞다 — 슬러그에 신호가 있으면 갈아탄다.
   var GOV = /(지원금|보조금|장려금|수당|바우처|subsidy|support|benefit|incentive|allowance)/i;
 
-  var canon = document.querySelector('link[rel="canonical"]');
-  var slug = '';
-  try { slug = decodeURIComponent((canon && canon.href || location.href).split('/').filter(Boolean).pop() || ''); } catch (e) { slug = ''; }
-  var m = slug.match(/^\d{4}-\d{2}-\d{2}-([a-z]+)-/);
-  var cat = m ? m[1] : '';
+  var cat = '', slug = '';
+  if (isPost) {
+    var canon = document.querySelector('link[rel="canonical"]');
+    try { slug = decodeURIComponent((canon && canon.href || location.href).split('/').filter(Boolean).pop() || ''); } catch (e) { slug = ''; }
+    var m = slug.match(/^\d{4}-\d{2}-\d{2}-([a-z]+)-/);
+    cat = m ? m[1] : '';
+  } else {
+    for (var i = 0; i < cls.length; i++) {
+      var c = cls[i].match(/^category-([a-z-]+)$/);
+      if (c && HUB[c[1]]) { cat = c[1]; break; }
+    }
+  }
   var hub = HUB[cat] || null;
   if (hub && cat === 'finance' && GOV.test(slug)) hub = ['gov-money', '받을 수 있는 돈 받아내기'];
 
@@ -70,71 +87,135 @@
   links.push({ href: '/tools/', label: '무료 계산기', sub: '연봉·대출·전기요금 등' });
 
   // ── 스타일 (이 블록 안에서 자급자족한다 — CSS SSOT 를 건드리지 않으려고) ──
+  /* ⚠️ 반투명 카드로 만들었다가 한 번 갈아엎었다. 이 레일은 top 고정인데 글 첫 화면은
+     **전면 히어로 이미지**라, 배경이 비치는 카드는 사진 위에서 글자가 통째로 안 읽혔다
+     (실측 스크린샷). 어떤 배경 위에 놓일지 모르는 고정 요소는 **자기 판을 갖고 있어야 한다.** */
   if (!document.getElementById('mg-dock-css')) {
     var st = document.createElement('style');
     st.id = 'mg-dock-css';
-    /* ⚠️ 반투명 카드로 만들었다가 한 번 갈아엎었다. 이 레일은 top:120px 에 고정되는데
-       글 첫 화면은 **전면 히어로 이미지**라, 배경이 비치는 카드는 사진 위에서 글자가 통째로
-       안 읽혔다(실측 스크린샷). 어떤 배경 위에 놓일지 모르는 고정 요소는 **자기 판을 갖고
-       있어야 한다** → 불투명 패널 + 그림자. */
+    var HALF = CONTENT / 2 + GAP;
     st.textContent = [
       '.mg-dock,.mg-dock *{box-sizing:border-box;}',
       '.mg-dock{position:fixed;z-index:60;top:120px;',
-      'left:calc(50% + ' + (CONTENT / 2 + GAP) + 'px);',
-      'max-height:calc(100vh - 160px);overflow-y:auto;',
+      'max-height:calc(100vh - 160px);overflow-y:auto;overscroll-behavior:contain;',
       'padding:14px 12px;border-radius:14px;',
       'background:#fff;border:1px solid rgba(0,0,0,.10);',
       'box-shadow:0 6px 24px rgba(0,0,0,.12);',
       'font-size:13px;line-height:1.45;color:#1f2328;}',
+      '.mg-dock--r{left:calc(50% + ' + HALF + 'px);}',
+      '.mg-dock--l{right:calc(50% + ' + HALF + 'px);}',
       '.mg-dock-t{font-size:11px;font-weight:700;letter-spacing:.04em;opacity:.55;',
       'margin:0 0 10px;padding:0 2px;}',
-      '.mg-dock a{display:block;padding:9px 10px;margin-bottom:6px;border-radius:9px;',
-      'text-decoration:none;border:1px solid rgba(0,0,0,.08);background:rgba(0,0,0,.03);',
-      'color:inherit;transition:transform .12s ease,border-color .12s ease,background .12s ease;}',
-      '.mg-dock a:last-child{margin-bottom:0;}',
-      '.mg-dock a:hover{transform:translateY(-1px);border-color:rgba(0,0,0,.26);background:rgba(0,0,0,.06);}',
-      '.mg-dock b{display:block;font-weight:600;}',
-      '.mg-dock span{display:block;margin-top:2px;font-size:11px;opacity:.6;}',
+      '.mg-dock a{display:block;text-decoration:none;color:inherit;}',
+      '.mg-dock--r a{padding:9px 10px;margin-bottom:6px;border-radius:9px;',
+      'border:1px solid rgba(0,0,0,.08);background:rgba(0,0,0,.03);',
+      'transition:transform .12s ease,border-color .12s ease,background .12s ease;}',
+      '.mg-dock--r a:last-child{margin-bottom:0;}',
+      '.mg-dock--r a:hover{transform:translateY(-1px);border-color:rgba(0,0,0,.26);background:rgba(0,0,0,.06);}',
+      '.mg-dock--r b{display:block;font-weight:600;}',
+      '.mg-dock--r span{display:block;margin-top:2px;font-size:11px;opacity:.6;}',
+      // 목차 — 왼쪽 세로선 + 현재 위치 강조
+      '.mg-dock--l ol{list-style:none;margin:0;padding:0 0 0 10px;border-left:2px solid rgba(0,0,0,.10);}',
+      '.mg-dock--l li{margin:0 0 2px;}',
+      '.mg-dock--l a{padding:5px 6px;border-radius:7px;font-size:12px;opacity:.72;',
+      'transition:background .12s ease,opacity .12s ease;}',
+      '.mg-dock--l a:hover{background:rgba(0,0,0,.05);opacity:1;}',
+      '.mg-dock--l a.is-now{opacity:1;font-weight:700;background:rgba(0,0,0,.06);}',
       'html[data-mg-theme="dark"] .mg-dock{background:#1b1e24;border-color:rgba(255,255,255,.12);',
       'color:#e6e8ea;box-shadow:0 6px 24px rgba(0,0,0,.45);}',
-      'html[data-mg-theme="dark"] .mg-dock a{border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.05);}',
-      'html[data-mg-theme="dark"] .mg-dock a:hover{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.09);}',
+      'html[data-mg-theme="dark"] .mg-dock--r a{border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.05);}',
+      'html[data-mg-theme="dark"] .mg-dock--r a:hover{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.09);}',
+      'html[data-mg-theme="dark"] .mg-dock--l ol{border-left-color:rgba(255,255,255,.16);}',
+      'html[data-mg-theme="dark"] .mg-dock--l a:hover{background:rgba(255,255,255,.08);}',
+      'html[data-mg-theme="dark"] .mg-dock--l a.is-now{background:rgba(255,255,255,.10);}',
       // 자리가 없어지는 구간은 CSS 로도 한 번 더 막는다(리사이즈 중 한 프레임이라도 겹치지 않게)
       // 하한 = CONTENT + 2*(MIN_W + GAP + EDGE) = 1080 + 2*162 = 1404
       '@media (max-width:1403px){.mg-dock{display:none;}}',
-      '@media (prefers-reduced-motion:reduce){.mg-dock a{transition:none;}}',
+      '@media (prefers-reduced-motion:reduce){.mg-dock--r a{transition:none;}}',
     ].join('');
     document.head.appendChild(st);
   }
 
-  var el = document.createElement('aside');
-  el.className = 'mg-dock';
-  el.setAttribute('aria-label', '관련 모음');
-  el.style.width = railWidth() + 'px';
+  var made = [];
 
-  var h = document.createElement('p');
-  h.className = 'mg-dock-t';
-  h.textContent = '이 주제 더 보기';
-  el.appendChild(h);
+  function mkRail(side, title) {
+    var el = document.createElement('aside');
+    el.className = 'mg-dock mg-dock--' + side;
+    el.style.width = railWidth() + 'px';
+    var h = document.createElement('p');
+    h.className = 'mg-dock-t';
+    h.textContent = title;
+    el.appendChild(h);
+    document.body.appendChild(el);
+    made.push(el);
+    return el;
+  }
 
+  // ── 오른쪽: 내부 유도 ──
+  var right = mkRail('r', '이 주제 더 보기');
+  right.setAttribute('aria-label', '관련 모음');
   links.forEach(function (l) {
     var a = document.createElement('a');
     a.href = l.href;
     var b = document.createElement('b'); b.textContent = l.label;
     var s = document.createElement('span'); s.textContent = l.sub;
     a.appendChild(b); a.appendChild(s);
-    el.appendChild(a);
+    right.appendChild(a);
   });
 
-  document.body.appendChild(el);
+  // ── 왼쪽: 목차 (글에서만, 본문 목차가 실제로 있을 때만) ──
+  if (isPost) {
+    var srcLinks = [].slice.call(document.querySelectorAll('.mg-toc a[href^="#"]'));
+    if (srcLinks.length >= 3) {
+      var left = mkRail('l', '목차');
+      left.setAttribute('aria-label', '목차');
+      var ol = document.createElement('ol');
+      var items = [];
+      srcLinks.forEach(function (src) {
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = src.getAttribute('href');
+        a.textContent = (src.textContent || '').trim();
+        li.appendChild(a); ol.appendChild(li);
+        items.push({ a: a, id: a.getAttribute('href').slice(1) });
+      });
+      left.appendChild(ol);
 
-  // 리사이즈로 자리가 사라지면 폭만 다시 잡는다(제거는 안 한다 — CSS 미디어쿼리가 숨긴다).
+      // 현재 위치 강조. 화면 상단 30% 선을 지난 마지막 제목을 '지금'으로 본다 —
+      // IntersectionObserver 만 쓰면 섹션이 길 때 아무것도 안 걸리는 구간이 생긴다.
+      var heads = items.map(function (it) { return document.getElementById(it.id); });
+      var cur = -1;
+      function spy() {
+        var line = window.innerHeight * 0.3, idx = 0;
+        for (var i = 0; i < heads.length; i++) {
+          if (heads[i] && heads[i].getBoundingClientRect().top <= line) idx = i;
+        }
+        if (idx === cur) return;
+        if (cur >= 0) items[cur].a.classList.remove('is-now');
+        cur = idx;
+        items[cur].a.classList.add('is-now');
+        // 목차가 길면 활성 항목을 보이는 곳으로 끌어온다(레일 안에서만 스크롤)
+        var r = items[cur].a.getBoundingClientRect(), lr = left.getBoundingClientRect();
+        if (r.top < lr.top + 8 || r.bottom > lr.bottom - 8) {
+          left.scrollTop += (r.top - lr.top) - lr.height / 3;
+        }
+      }
+      var raf = 0;
+      window.addEventListener('scroll', function () {
+        if (raf) return;
+        raf = requestAnimationFrame(function () { raf = 0; spy(); });
+      }, { passive: true });
+      spy();
+    }
+  }
+
+  // 리사이즈로 폭이 바뀌면 다시 잡는다(제거는 안 한다 — CSS 미디어쿼리가 숨긴다).
   var t;
   window.addEventListener('resize', function () {
     clearTimeout(t);
     t = setTimeout(function () {
       var w = railWidth();
-      if (w >= MIN_W) el.style.width = w + 'px';
+      if (w >= MIN_W) made.forEach(function (el) { el.style.width = w + 'px'; });
     }, 150);
   });
 })();
