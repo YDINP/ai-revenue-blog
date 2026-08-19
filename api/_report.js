@@ -14,6 +14,7 @@ import { gscReportLines } from './_gsc-view.js';
 import { gscSummary, gscDay } from './_gsc.js';
 import { resolveBlog } from './_blogs.js';
 import { loadMungge, mgComments, mgNaverIndex, mgPosts } from './_mungge.js';
+import { sb } from './_threads.js';
 import {
   SUPABASE_ANON_KEY,
   SUPABASE_URL,
@@ -68,6 +69,67 @@ async function collectMgEvents(day) {
       return m.target === undefined || m.target === 'coupang';
     }),
   };
+}
+
+/* ── 🧵 스레드: 조회 → 세션 → 글별 ──
+   스레드는 조회(플랫폼)와 세션(우리 사이트)이 다른 시스템에 쌓여 여태 따로 놀았다.
+   2026-08-19 실측에서 CTR 0.45%(조회 11,890 → 세션 53)가 드러났는데, 그걸 알아내는 데
+   수동 조인이 필요했다. 매일 한 줄로 보이게 한다.
+
+   ⚠ 두 창을 섞지 않는다 — 「어제 발행/어제 세션」과 「7일 누적 조회/세션」을 각각 닫아서 쓴다.
+     인사이트 동기화가 발행 후 7일까지만 돌기 때문에 어제 발행분의 조회는 아직 덜 찼고,
+     그 값으로 CTR 을 만들면 매일 과대평가된다.
+   ⚠ threads_* 는 RLS 차단이라 anon(rest) 이 아니라 service_role(sb) 로 읽어야 한다. */
+const THREADS_REF = /thread|ig_text_post/i;
+
+export async function threadsLines(day) {
+  const acct = (await sb('threads_accounts?select=handle&active=eq.true&limit=1'))[0];
+  if (!acct) return [];
+
+  const d1 = kstRange(day);
+  const d7 = kstRange(kstShift(day, 6));
+
+  const [dayPosts, weekPosts, ga] = await Promise.all([
+    sb(`threads_posts?select=views&published_at=gte.${d1.start}&published_at=lt.${d1.end}`),
+    sb(`threads_posts?select=views&published_at=gte.${d7.start}&published_at=lt.${d1.end}`),
+    rest(
+      `ga4_daily?select=date,dim,key,sessions&dim=in.(source_medium,page_source)` +
+        `&date=gte.${kstShift(day, 6)}&date=lte.${day}`
+    ),
+  ]);
+
+  const sess = (rows, onDay) =>
+    rows
+      .filter((r) => THREADS_REF.test(r.key) && (!onDay || r.date === day))
+      .reduce((s, r) => s + Number(r.sessions || 0), 0);
+
+  const sm = ga.filter((r) => r.dim === 'source_medium');
+  const daySess = sess(sm, true);
+  const weekSess = sess(sm, false);
+  const weekViews = weekPosts.reduce((s, p) => s + Number(p.views || 0), 0);
+  const ctr = weekViews ? ((weekSess / weekViews) * 100).toFixed(2) : null;
+
+  if (!dayPosts.length && !daySess && !weekViews) return [];
+
+  const out = [
+    '',
+    `🧵 <b>스레드</b> <i>(@${escapeHtml(acct.handle || '')})</i>`,
+    `발행 <b>${fmt(dayPosts.length)}</b>편 · 유입 <b>${fmt(daySess)}</b>세션`,
+    `<i>7일: 조회 ${fmt(weekViews)} → 세션 ${fmt(weekSess)}${ctr ? ` (CTR ${ctr}%)` : ''}</i>`,
+  ];
+
+  // 글별 — page_source 의 key 는 "<랜딩경로>\t<소스/매체>"
+  const byPath = Object.create(null);
+  ga.filter((r) => r.dim === 'page_source' && THREADS_REF.test(r.key)).forEach((r) => {
+    const path = String(r.key).split('\t')[0].split('?')[0];
+    byPath[path] = (byPath[path] || 0) + Number(r.sessions || 0);
+  });
+  Object.entries(byPath)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .forEach(([p, n]) => out.push(`  🔗 ${escapeHtml(cut(p.replace(/^\//, ''), 32))} — ${fmt(n)}세션`));
+
+  return out;
 }
 
 // ── 전일 대비 급상승/급락 글 (뭉게 기준) ──
@@ -274,6 +336,9 @@ export async function reportMessage(dayArg) {
     );
     if (withViews.length > 5) lines.push(`  …외 ${withViews.length - 5}편`);
   }
+
+  // ── 🧵 스레드 (검색 유입 바로 위 — 유입 채널끼리 붙여야 비중이 읽힌다) ──
+  lines.push(...(await threadsLines(day).catch(() => [])));
 
   // ── 검색 유입 (Search Console) ──
   lines.push(...gscLines);

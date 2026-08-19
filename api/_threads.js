@@ -199,20 +199,47 @@ export async function publishThread(account, segments, { linkUrl, imageUrl } = {
   return rootId;
 }
 
+/* 스레드에서 온 유입을 글 단위로 계측하기 위한 UTM.
+   여기(발행 직전)에 붙이는 이유: 예약·수동·랜덤·타래가 전부 publishDraft 를 지나므로
+   한 곳만 고치면 모든 경로가 태깅된다. 생성기에서 붙이면 큐 id 가 아직 없고(insert 후 발급),
+   텔레그램에서 손으로 올린 글은 영영 안 붙는다.
+
+   ⚠ 우리 도메인만 건드린다 — link_url 에는 쿠팡 제휴 검색 URL 도 들어오는데(lptag 등
+   파라미터가 이미 붙어 있다) 거기에 utm 을 얹을 이유가 없다.
+   ⚠ 이미 utm_source 가 있으면 덮지 않는다(과거 nochimyon 캠페인 링크 보존). */
+const OWN_HOST = /(^|\.)mungge\.com$|(^|\.)(ai|life)-revenue-blog\.vercel\.app$/;
+
+export function withUtm(raw, queueId) {
+  try {
+    const u = new URL(raw);
+    if (u.protocol !== 'https:' && u.protocol !== 'http:') return raw;
+    if (!OWN_HOST.test(u.hostname)) return raw;
+    if (!u.searchParams.has('utm_source')) {
+      u.searchParams.set('utm_source', 'threads');
+      u.searchParams.set('utm_medium', 'social');
+    }
+    if (!u.searchParams.has('utm_content')) u.searchParams.set('utm_content', `q${queueId}`);
+    return u.toString();
+  } catch {
+    return raw; // URL 로 못 읽는 값이면 원문 그대로 — 링크를 잃는 것보다 낫다
+  }
+}
+
 // 큐 항목 발행 오케스트레이션 — 타래면 체인 발행, 아니면 단일 글.
 // (본문 → 링크는 첫 댓글 자답 → 기록)
 export async function publishDraft(account, item) {
   let mediaId;
+  const linkUrl = item.link_url ? withUtm(item.link_url, item.id) : null;
   if (isThreadItem(item)) {
     mediaId = await publishThread(account, splitThread(item.text), {
-      linkUrl: item.link_url,
+      linkUrl,
       imageUrl: item.image_url,
     });
   } else {
     mediaId = await publish(account, { text: item.text, imageUrl: item.image_url });
-    if (item.link_url) {
+    if (linkUrl) {
       try {
-        await publishReply(account, { text: `전문 👇\n${item.link_url}`, replyToId: mediaId });
+        await publishReply(account, { text: `전문 👇\n${linkUrl}`, replyToId: mediaId });
       } catch (e) {
         console.error('link reply failed (본문은 정상 발행됨):', e.message);
       }
