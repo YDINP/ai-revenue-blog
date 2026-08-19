@@ -12,7 +12,7 @@ import {
   getReplies, insertReply, replyExists, draftReply, getMyRecentMedia,
   autoRepliesSent24h, pendingRepliesForRoot, getMyUsername, myAnsweredCommentIds,
 } from './_threads.js';
-import { threadsReplyCard, sendReply } from './_threads-bot.js';
+import { threadsReplyCard, sendReply, findAndQueue } from './_threads-bot.js';
 import { setState, getState } from './_state.js';
 
 const AUTO_DAILY_CAP = 3;      // 자동모드 계정당 24h 최대 발행(스팸 방지)
@@ -28,6 +28,26 @@ const REPLY_FRESH_HOURS = Number(process.env.THREADS_REPLY_FRESH_HOURS || 6);
 // 함수가 락 해제 전에 죽어도 다음 런에서 자동 만료된다.
 const REPLIES_LOCK_KEY = '__lock:replies';
 const REPLIES_LOCK_MS = 13 * 60 * 1000;
+
+/* ── 아웃바운드 인게이지먼트 자동 배차 ──
+   2026-08-19 진단: 이 계정은 팔로워가 5명이다. 스레드 도달은 팔로워에게 가는 연결 도달과
+   추천 피드로 가는 비연결 도달로 갈리는데, 팔로워 5명이면 연결 도달이 사실상 0이고
+   메타는 2024-11 에 비연결(추천) 도달을 의도적으로 줄였다. 즉 발행만 해서는 상한이 있다.
+
+   남의 글에 답글을 다는 기능(/find → threads_engage)은 이미 다 만들어져 있는데
+   **사람이 손으로 /find 를 쳐야만 돌아서** 기록이 2건뿐이고 07-15 이후 멈춰 있었다.
+   빠진 건 기능이 아니라 배차다. 그래서 여기서 하루 한 번 후보를 물어다 카드로 보낸다.
+
+   ⚠ 자동으로 답글을 달지 않는다 — 후보를 카드로 보낼 뿐이고 발송은 사람이 고른다.
+     자동 대량 답글은 스팸이고 계정을 태운다.
+   ⚠ 새 엔드포인트를 만들지 않고 여기 붙인 이유: Vercel Hobby 함수 상한 12개를 이미 다 썼다. */
+const ENGAGE_KEYWORDS = [
+  '재테크', '생활비', '절약', '지원금', '청약', '전세', '대출', '카드추천',
+  '보험료', '연말정산', '월세', '공과금', '전기세', '실업급여',
+];
+const ENGAGE_DAY_KEY = '__engage:day';
+const ENGAGE_PER_KEYWORD = 5;   // 키워드 2개 × 5 = 하루 최대 10건
+const ENGAGE_HOURS = [8, 20];   // KST 이 구간에서만 배차(새벽에 카드 10장이 쏟아지지 않게)
 
 export default async function handler(req, res) {
   const secret = process.env.CRON_SECRET;
@@ -222,6 +242,39 @@ export default async function handler(req, res) {
     const p = await sb(`threads_queue?status=eq.scheduled&select=id,text,scheduled_at&order=scheduled_at.asc&limit=1`);
     if (p.length) next = p[0];
   } catch (e) { log.errors.push(`next:${e.message}`); }
+  // ── 6) 아웃바운드 인게이지먼트 후보 배차 (KST 하루 1회) ──
+  if (doPosts) try {
+    const kstNow = new Date(Date.now() + 9 * 3600 * 1000);
+    const kstToday = kstNow.toISOString().slice(0, 10);
+    const kstHour = kstNow.getUTCHours();
+    const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID;
+    const seen = await getState(ENGAGE_DAY_KEY).catch(() => null);
+
+    if (!chatId) {
+      log.engageSkipped = 'no-chat';
+    } else if (kstHour < ENGAGE_HOURS[0] || kstHour > ENGAGE_HOURS[1]) {
+      log.engageSkipped = `hour:${kstHour}`;
+    } else if (seen?.day === kstToday) {
+      log.engageSkipped = 'done-today';
+    } else {
+      // 먼저 표시하고 시작한다 — 도중에 죽어도 같은 날 두 번 쏟아지지 않게(과잉보다 결손이 낫다).
+      await setState(ENGAGE_DAY_KEY, { day: kstToday });
+      // 날짜로 키워드를 굴린다. 목록 길이와 서로소인 보폭이면 전 키워드를 고르게 돈다.
+      const n = Math.floor(new Date(`${kstToday}T00:00:00Z`).getTime() / 86400000);
+      const kws = [
+        ENGAGE_KEYWORDS[n % ENGAGE_KEYWORDS.length],
+        ENGAGE_KEYWORDS[(n * 5 + 7) % ENGAGE_KEYWORDS.length],
+      ].filter((v, i, a) => a.indexOf(v) === i);
+
+      log.engage = [];
+      for (const kw of kws) {
+        const msg = await findAndQueue(kw, chatId, 'life', { max: ENGAGE_PER_KEYWORD })
+          .catch((e) => `실패: ${e.message}`);
+        log.engage.push(`${kw} → ${String(msg).slice(0, 60)}`);
+      }
+    }
+  } catch (e) { log.errors.push(`engage:${e.message}`); }
+
   log.posted = posted.map((p) => p.id);
   log.next = next ? { id: next.id, at: next.scheduled_at } : null;
 

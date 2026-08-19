@@ -6,7 +6,7 @@ import {
   getAccounts, sb, getQueue, updateQueue, publishDraft,
   getReply, updateReply, publishReply, publish, insertPost, insertQueue,
   keywordSearch, insertEngage, getEngage, updateEngage, engageExists, draftEngageReply,
-  splitThread, isThreadItem, getPermalink,
+  splitThread, isThreadItem, getPermalink, getMyUsername,
 } from './_threads.js';
 import { THREAD_PRESETS, getPreset } from './_threads-presets.js';
 
@@ -187,7 +187,7 @@ export async function handleEngageCallback(chatId, data) {
 }
 
 // /find <키워드> — 키워드로 공개글 검색 → 후보 카드 발송(사람이 골라 답글)
-export async function findAndQueue(keyword, chatId, topic = 'life') {
+export async function findAndQueue(keyword, chatId, topic = 'life', { max = 8 } = {}) {
   const kw = String(keyword || '').trim();
   if (!kw) return '사용법: <code>/find 키워드</code> (예: <code>/find 재테크</code>)';
   const acct = (await sb(`threads_accounts?topic=eq.${encodeURIComponent(topic)}&active=eq.true&limit=1`))[0];
@@ -199,9 +199,22 @@ export async function findAndQueue(keyword, chatId, topic = 'life') {
     if (!results.length) results = await keywordSearch(acct, kw, { searchMode: 'KEYWORD', searchType: 'RECENT', limit: 20 });
     if (!results.length) results = await keywordSearch(acct, kw, { searchMode: 'KEYWORD', searchType: 'TOP', limit: 20 });
   } catch (e) { return `❌ 검색 실패: ${escapeHtml(e.message)}`; }
-  if (!results.length) return `'${escapeHtml(kw)}' 검색 결과 없음.`;
+  /* ⚠️ 내 글은 후보에서 뺀다. 인게이지먼트는 남을 만나는 행동인데 자기 글에 자답을 다는 건
+     아무것도 아니고, 링크 자답과도 뒤섞인다.
+
+     그리고 이 필터가 대부분을 걷어낼 것이다 — keyword_search 는 `threads_keyword_search`
+     권한이 App Review 로 승인되기 전까지 **인증된 사용자 본인의 글만** 돌려준다(공식 문서 명시,
+     2026-08-19 실측에서도 커피·날씨·점심·아이폰·주식 전부 0건이고 우리 글만 나왔다).
+     승인 전에는 후보가 0이 나오는 게 정상이고, 승인되면 이 경로가 그대로 살아난다. */
+  const me = (await getMyUsername(acct).catch(() => '')) || '';
+  const foreign = results.filter((p) => String(p.username || '').toLowerCase() !== me);
+  if (!foreign.length) {
+    return results.length
+      ? `'${escapeHtml(kw)}' — 내 글만 ${results.length}건 나옴. keyword_search 는 threads_keyword_search 승인 전까지 남의 글을 안 준다.`
+      : `'${escapeHtml(kw)}' 검색 결과 없음.`;
+  }
   let sent = 0;
-  for (const p of results) {
+  for (const p of foreign) {
     if (!p.id || !p.text) continue;
     if (await engageExists(p.id)) continue;
     const draft = await draftEngageReply(p.text).catch(() => '');
@@ -211,7 +224,7 @@ export async function findAndQueue(keyword, chatId, topic = 'life') {
     const card = engageCard(row);
     await tg('sendMessage', { chat_id: chatId, text: card.text, parse_mode: 'HTML', disable_web_page_preview: true, reply_markup: card.reply_markup }).catch(() => {});
     sent++;
-    if (sent >= 8) break; // 한 번에 8개까지(도배 방지)
+    if (sent >= max) break; // 한 번에 max 개까지(도배 방지)
   }
   return sent
     ? `🔎 '${escapeHtml(kw)}' — 후보 ${sent}개 보냈어. 골라서 ✍️ 답글 달아줘 (스팸 X, 진심 답글만 🐶)`
