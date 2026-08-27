@@ -684,11 +684,25 @@ function fixChartLabels(md) {
   );
 }
 
-function selectCoupangLinks(coupangData, categoryKey) {
+// 카테고리 고정 표에서 **본문이 실제로 언급한 상품만** 고른다.
+// ⚠️ 예전 구현은 무작위로 2~3개를 뽑아 본문과 무관한 제휴 목록을 만들었다(러스트 취약점 기사에
+//    「러스트 프로그래밍」 도서, AI 기사에 「아이패드 에어 M2」). 레이아웃이 앞 2개를 본문
+//    중간 인라인 CTA 로 강제 삽입하므로 기사 한복판에 무관한 배너가 뜬다.
+//    하나도 안 맞으면 빈 배열 — 무관한 링크를 다느니 안 다는 게 낫다.
+function selectCoupangLinks(coupangData, categoryKey, body = '') {
   const links = coupangData[categoryKey];
   if (!links || links.length === 0) return [];
-  const count = Math.min(links.length, Math.random() < 0.5 ? 2 : 3);
-  return pickRandom(links, count);
+  const hay = String(body).replace(/s+/g, ' ');
+  if (!hay) return [];
+  const keysOf = (title) => {
+    const t = String(title || '').trim();
+    if (!t) return [];
+    const ko = t.split(/s+/).filter((w) => /[가-힣]{2,}/.test(w) && !/d/.test(w));
+    const keys = [t, ko.join(' ')];
+    if (ko.length) keys.push(ko.slice().sort((a, b) => b.length - a.length)[0]);
+    return [...new Set(keys.filter((k) => k && k.length >= 2))];
+  };
+  return links.filter((l) => keysOf(l.title).some((k) => hay.includes(k))).slice(0, 3);
 }
 
 // ─── Frontmatter + File Assembly ──────────────────────────────────────
@@ -891,7 +905,7 @@ async function main() {
 
       // Select coupang links
       const categoryKey = categoryName.toLowerCase();
-      const coupangLinks = revenue ? selectCoupangLinks(coupangData, categoryKey) : [];
+      const coupangLinks = revenue ? selectCoupangLinks(coupangData, categoryKey, post.content || post.body || '') : [];
       console.log(`[Coupang] Selected ${coupangLinks.length} product links`);
 
       // Assemble markdown file
