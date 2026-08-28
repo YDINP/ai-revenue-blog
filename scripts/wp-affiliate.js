@@ -15,7 +15,8 @@
  */
 (function () {
   var SB = 'https://xyprbsmagtlzebxyxsvj.supabase.co';
-  var URL_ = SB + '/functions/v1/analytics-ingest';
+  var ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5cHJic21hZ3RsemVieHl4c3ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjY4NTQsImV4cCI6MjA4NjA0Mjg1NH0.dajN0n0IWzOgYOSCglxVLzddg7jJFRHNCHwTWMG62uU';
+  var URL_ = SB + '/rest/v1/analytics';
   var NOTRACK = '__notrack';
 
   // 제외 규칙은 wp-track.js(방문 추적)와 같은 기준을 쓴다 — 기준이 다르면 조회수 대비
@@ -36,16 +37,27 @@
   var h1 = document.querySelector('article h1.entry-title, article h1, h1');
   var title = (h1 ? h1.textContent : document.title).replace(/\s*[–-]\s*뭉게\s*$/, '').trim();
 
-  // 링크 클릭은 곧 페이지 이탈이다 → fetch 는 중간에 끊긴다. sendBeacon 우선.
+  /* ⚠️ 2026-08-28: Edge Function(analytics-ingest) 우회.
+   *    그 함수가 HTTP 200 {"success":true} 를 주면서 INSERT 를 하지 않는 상태가 됐고
+   *    (08-26 07:37 KST 이후 브라우저發 이벤트 전멸), 실패를 성공으로 보고하는 탓에
+   *    이틀 넘게 아무도 못 알아챘다. PostgREST 직접 INSERT 는 anon 키로 201 이 확인됐고
+   *    함수가 하던 일이 단순 통과였으므로(행 컬럼이 전부 클라이언트 값) 중간 계층을 없앤다.
+   *    ANON 은 이미 위젯에 들어 있는 공개키다 — 새로 노출되는 비밀은 없다. */
+  /* ⚠️ sendBeacon 을 뺐다. PostgREST 는 apikey·Authorization 헤더를 요구하는데 sendBeacon 은
+   *    헤더를 실을 수 없다. 게다가 여기 있던 blob 타입이 'application/json' 이라 프리플라이트가
+   *    필요한 비단순 요청이 되는데 sendBeacon 은 프리플라이트를 못 보낸다 — 즉 true 를 돌려주고
+   *    조용히 버려지던 경로였다(wp-ad-observe.js 의 실측 주석과 같은 함정).
+   *    이탈 중 전송은 fetch keepalive 로 커버한다. */
   function send(payload) {
-    var body = JSON.stringify(payload);
-    try {
-      if (navigator.sendBeacon(URL_, new Blob([body], { type: 'application/json' }))) return;
-    } catch (e) {}
     fetch(URL_, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: body,
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: ANON,
+        Authorization: 'Bearer ' + ANON,
+        Prefer: 'return=minimal'
+      },
+      body: JSON.stringify(payload),
       keepalive: true
     }).catch(function () {});
   }

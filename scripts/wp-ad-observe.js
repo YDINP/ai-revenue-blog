@@ -18,7 +18,8 @@
  *    `node scripts/inject-wp-js.mjs --only MG-ADOBS` 로 다시 밀어 넣어야 반영된다.
  */
 (function () {
-  var URL_ = 'https://xyprbsmagtlzebxyxsvj.supabase.co/functions/v1/analytics-ingest';
+  var ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5cHJic21hZ3RsemVieHl4c3ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjY4NTQsImV4cCI6MjA4NjA0Mjg1NH0.dajN0n0IWzOgYOSCglxVLzddg7jJFRHNCHwTWMG62uU';
+  var URL_ = 'https://xyprbsmagtlzebxyxsvj.supabase.co/rest/v1/analytics';
   var NOTRACK = '__notrack';
   var WAIT_MS = 4000;        // 애드핏이 그릴 시간. 너무 짧으면 정상 노출을 실패로 센다.
 
@@ -56,19 +57,26 @@
         path: location.pathname
       }
     });
-    /* ⚠️ Blob 타입은 반드시 CORS 안전목록(text/plain)이어야 한다.
-     * application/json 은 비단순 요청이라 프리플라이트가 필요한데 sendBeacon 은 프리플라이트를
-     * 보내지 못해 요청이 통째로 막힌다. 그런데 **sendBeacon 은 true 를 반환한다**(큐에 넣었다는
-     * 뜻일 뿐 도달 여부가 아니다) → 아래 fetch 폴백을 타지 않고 조용히 버려진다.
-     * 2026-08-04~05 실측: 페이지뷰 57건에 도착한 이벤트 2건. 라이브 대조 실험에서
-     * blob-json 미도달 / blob-text 도달 / fetch 200 으로 갈렸다.
-     * ⚠️ 검증할 때 sendBeacon 을 스텁으로 바꾸면 이 층이 통째로 가려진다 — 실제 전송으로 확인할 것.
-     * 수신측(analytics-ingest)은 content-type 과 무관하게 본문을 JSON 으로 파싱한다. */
-    try {
-      if (navigator.sendBeacon(URL_, new Blob([body], { type: 'text/plain;charset=UTF-8' }))) return;
-    } catch (e) {}
-    fetch(URL_, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true })
-      .catch(function () {});
+    /* ⚠️ 2026-08-28: Edge Function(analytics-ingest) 우회.
+     *    그 함수가 HTTP 200 {"success":true} 를 주면서 INSERT 를 하지 않는 상태가 됐고
+     *    (08-26 07:37 KST 이후 브라우저發 이벤트 전멸), 실패를 성공으로 보고하는 탓에
+     *    이틀 넘게 아무도 못 알아챘다. PostgREST 직접 INSERT 는 anon 키로 201 이 확인됐고
+     *    함수가 하던 일이 단순 통과였으므로(행 컬럼이 전부 클라이언트 값) 중간 계층을 없앤다.
+     *    ANON 은 이미 위젯에 들어 있는 공개키다 — 새로 노출되는 비밀은 없다. */
+    /* ⚠️ sendBeacon 제거. 예전엔 프리플라이트를 피하려고 text/plain Blob 으로 보냈지만,
+     *    PostgREST 는 apikey·Authorization 헤더가 필수라 sendBeacon 으로는 애초에 불가능하다.
+     *    fetch keepalive 로 단일화한다(이 경로는 이미 폴백으로 200 이 확인돼 있던 층이다). */
+    fetch(URL_, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: ANON,
+        Authorization: 'Bearer ' + ANON,
+        Prefer: 'return=minimal'
+      },
+      body: body,
+      keepalive: true
+    }).catch(function () {});
   }
 
   /* 애드핏 onfail 콜백. <ins data-ad-onfail="mgAdFail"> 로 연결한다.

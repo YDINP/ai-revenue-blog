@@ -12,6 +12,7 @@
  */
 (function () {
   var SB = 'https://xyprbsmagtlzebxyxsvj.supabase.co';
+  var ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5cHJic21hZ3RsemVieHl4c3ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjY4NTQsImV4cCI6MjA4NjA0Mjg1NH0.dajN0n0IWzOgYOSCglxVLzddg7jJFRHNCHwTWMG62uU';
   var NOTRACK = '__notrack';
 
   // 관리자 opt-out: ?admin=1 로 1회 접속하면 이 브라우저는 이후 집계 제외 (?admin=0 해제)
@@ -58,9 +59,20 @@
   var title = (h1 ? h1.textContent : document.title).replace(/\s*[–-]\s*뭉게\s*$/, '').trim();
   var qs = new URLSearchParams(location.search);
 
-  fetch(SB + '/functions/v1/analytics-ingest', {
+  /* ⚠️ 2026-08-28: Edge Function(analytics-ingest) 우회.
+   *    그 함수가 HTTP 200 {"success":true} 를 주면서 INSERT 를 하지 않는 상태가 됐고
+   *    (08-26 07:37 KST 이후 브라우저發 이벤트 전멸), 실패를 성공으로 보고하는 탓에
+   *    이틀 넘게 아무도 못 알아챘다. PostgREST 직접 INSERT 는 anon 키로 201 이 확인됐고
+   *    함수가 하던 일이 단순 통과였으므로(행 컬럼이 전부 클라이언트 값) 중간 계층을 없앤다.
+   *    ANON 은 이미 위젯에 들어 있는 공개키다 — 새로 노출되는 비밀은 없다. */
+  fetch(SB + '/rest/v1/analytics', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      apikey: ANON,
+      Authorization: 'Bearer ' + ANON,
+      Prefer: 'return=minimal'
+    },
     body: JSON.stringify({
       // ⚠️ 'pageview' 가 아니라 'pageview_mg' 다.
       // 대시보드의 뭉게 조회수는 GA4(ga4_daily)에서 합산하는데, get_traffic_summary 가
