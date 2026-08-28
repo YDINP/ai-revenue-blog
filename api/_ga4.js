@@ -10,6 +10,7 @@
 //   - Google Analytics Admin API  (analyticsadmin.googleapis.com, 속성 탐색용)
 
 import { googleToken, hasGoogleSa, saEmail } from './_google-auth.js';
+import { kstDay } from './_shared.js';
 
 const SCOPE = 'https://www.googleapis.com/auth/analytics.readonly';
 
@@ -82,8 +83,12 @@ export async function ga4Report(propertyId, { startDate, endDate, dimensions = [
 export const ga4Date = (s) => `${s.slice(0, 4)}-${s.slice(4, 6)}-${s.slice(6, 8)}`;
 
 // N일 전 날짜(YYYY-MM-DD). GA4 는 상대표기('7daysAgo')도 받지만 저장 키를 만들려면 절대날짜가 낫다.
-export const ga4Day = (offsetDays) =>
-  new Date(Date.now() - offsetDays * 86400000).toISOString().split('T')[0];
+// ⚠️ 반드시 KST 기준이어야 한다. GA4 속성 타임존이 Asia/Seoul 이고 대시보드도 kstDay 로 '오늘'을
+//    판정하는데 여기만 UTC 였다. 동기화 크론은 23:00 UTC(=08:00 KST)에 도는 탓에 그 시각의 UTC
+//    날짜는 KST 로는 이미 어제다 → end 가 매일 하루씩 밀려 ga4_daily 에 'KST 오늘' 행이 아예
+//    안 생겼고, 대시보드 '오늘 조회수·유입'이 하루 종일 0 으로 보였다(2026-08-28 진단).
+//    kstDay 를 그대로 쓰면 동기화 범위와 대시보드의 오늘 판정이 같은 함수로 묶인다.
+export const ga4Day = (offsetDays = 0) => kstDay(offsetDays);
 
 const MET = ['sessions', 'totalUsers', 'screenPageViews', 'engagedSessions'];
 
