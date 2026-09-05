@@ -396,5 +396,131 @@
   "target": "2026-07-11-ai-gpt-5-6-vs-claude-fable-5-coding-showdown",
   "confidence": "high",
   "why": "400cdb5 가 이 링크를 고친 대상(체인 해소)"
+ },
+ {
+  "orphan": "2026-02-03-prompt-engineering-guide-7-techniques",
+  "target": "2026-02-20-ai-prompt-engineering-practical-tips-2026-efficiency-triple",
+  "confidence": "high",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-02-16-ai-prompt-engineering-advanced-techniques-2026-quality-optimization",
+  "target": "2026-02-20-ai-prompt-engineering-practical-tips-2026-efficiency-triple",
+  "confidence": "high",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-02-06-supabase-free-tier-guide",
+  "target": "2026-02-24-dev-supabase-practical-guide-2026-realtime-auth",
+  "confidence": "high",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-02-07-best-ai-coding-tools-2026",
+  "target": "2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2",
+  "confidence": "high",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-02-09-github-copilot-vs-cursor-vs-windsurf-comparison",
+  "target": "2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2",
+  "confidence": "high",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-02-15-ai-ai-coding-tools-practical-guide-2026",
+  "target": "2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2",
+  "confidence": "high",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-03-16-ai-ai-coding-tools-practical-usage-2026-beginner-to-advanced",
+  "target": "2026-07-11-dev-ai-coding-tools-top5-comparison-2026-h2",
+  "confidence": "high",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-02-11-indie-game-development-tools-2026-guide",
+  "target": "2026-07-15-game-free-game-assets-tools-2026",
+  "confidence": "med",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-02-25-review-keyboard-mouse-combo-productivity-sets-2026-top-5",
+  "target": "2026-03-30-review-2026-wireless-keyboard-mouse-combo-ergonomic-guide-office-workers",
+  "confidence": "high",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-03-02-review-2026-developer-keyboard-switch-guide-membrane-mechanical-capacitive",
+  "target": "2026-07-14-review-mechanical-keyboard-recommendation-2026",
+  "confidence": "high",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "ai-automation-side-income-2026",
+  "target": "2026-07-14-ai-side-income-systems-2026-guide",
+  "confidence": "high",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "ai-api-automation-1000-won-2026",
+  "target": "2026-07-14-ai-side-income-systems-2026-guide",
+  "confidence": "med",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "javascript-game-framework-comparison-2026",
+  "target": "2026-07-23-game-phaser-3-advanced-collision-physics-animation-2026",
+  "confidence": "med",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "phaser-3-web-game-performance-optimization-2026",
+  "target": "2026-07-23-game-phaser-3-advanced-collision-physics-animation-2026",
+  "confidence": "high",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-02-07-self-learning-strategies-2026",
+  "target": "2026-07-15-education-professional-self-development-routine-2026",
+  "confidence": "med",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-02-08-online-course-platform-comparison",
+  "target": "2026-07-14-education-private-education-cost-saving-2026",
+  "confidence": "med",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-02-26-education-2026-online-course-selection-guide-job-goal-matching-platform",
+  "target": "2026-07-14-education-private-education-cost-saving-2026",
+  "confidence": "med",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-02-08-nutrition-guide-healthy-eating",
+  "target": "2026-02-16-health-2026-gi-based-nutrition-guide-blood-sugar-management",
+  "confidence": "med",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-02-26-finance-2026-personal-finance-books-top-10-must-read-beginners-guide",
+  "target": "2026-03-23-education-2026-self-development-books-top-12-life-changing-must-read-guide",
+  "confidence": "med",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-02-14-finance-saving-habits-guide-2026",
+  "target": "2026-02-20-lifestyle-2026-single-household-budget-saving-items-top-15",
+  "confidence": "med",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
+ },
+ {
+  "orphan": "2026-02-14-finance-double-savings-2026-psychological-spending-hack",
+  "target": "2026-02-20-lifestyle-2026-single-household-budget-saving-items-top-15",
+  "confidence": "med",
+  "why": "라이브 발행글이 걸고 있던 깨진 내부링크(마이그레이션 누락 원문)"
  }
 ]
