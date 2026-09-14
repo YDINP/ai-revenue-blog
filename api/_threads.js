@@ -14,9 +14,21 @@ function serviceKey() {
 }
 
 // ── Supabase REST (service_role) ──
+/* 게이트웨이가 잠깐 넘어지는 경우(504 Gateway Timeout 등)에 한 번의 실패로 크론 작업이
+   통째로 취소되지 않게 한다. 2026-09-14·09-15 에 각각
+   `threads_queue?status=eq.draft…` 와 `threads_accounts?active=eq.true…` 가 504 를 맞았는데,
+   둘 다 행이 100건 남짓인 표의 단순 SELECT 였고 직후 재시도는 0.2초에 200 이었다
+   — 질의 비용이 아니라 순간적인 인프라 문제다.
+
+   ⚠️ **GET 만 재시도한다.** 504 는 "요청이 서버에 닿았는지"를 말해주지 않으므로, 쓰기를
+   다시 보내면 이미 반영된 INSERT 를 한 번 더 넣을 수 있다(발행 기록 중복 등). 읽기는 멱등이라
+   안전하고, 실제로 보고된 두 건도 전부 읽기였다. */
+const TRANSIENT = new Set([408, 429, 502, 503, 504]);
+const RETRY_DELAYS_MS = [400, 1200];
+
 export async function sb(path, { method = 'GET', body, prefer } = {}) {
   const key = serviceKey();
-  const r = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+  const send = () => fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
     method,
     headers: {
       apikey: key,
@@ -26,6 +38,20 @@ export async function sb(path, { method = 'GET', body, prefer } = {}) {
     },
     ...(body ? { body: JSON.stringify(body) } : {}),
   });
+
+  const retryable = method === 'GET';
+  let r;
+  for (let attempt = 0; ; attempt++) {
+    try {
+      r = await send();
+      if (r.ok || !retryable || !TRANSIENT.has(r.status) || attempt >= RETRY_DELAYS_MS.length) break;
+    } catch (e) {
+      // 네트워크 단계 실패(DNS·연결 끊김). 재시도 여지가 없으면 원인 그대로 올린다.
+      if (!retryable || attempt >= RETRY_DELAYS_MS.length) throw e;
+    }
+    await new Promise((ok) => setTimeout(ok, RETRY_DELAYS_MS[attempt]));
+  }
+
   const data = await r.json().catch(() => null);
   if (!r.ok) throw new Error(`supabase ${method} ${path} ${r.status}: ${JSON.stringify(data)}`);
   return data;
